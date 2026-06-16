@@ -172,388 +172,388 @@ module Aws::Chatbot
     UpdateTeamsChannelConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationRequest", name: "UpdateTeamsChannelConfigurationRequest")
     UpdateTeamsChannelConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationResult", name: "UpdateTeamsChannelConfigurationResult")
 
-    AccountPreferences.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
-    AccountPreferences.add_member(:training_data_collection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "TrainingDataCollectionEnabled"))
+    AccountPreferences.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    AccountPreferences.add_member(:training_data_collection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "TrainingDataCollectionEnabled"))
     AccountPreferences.type = Types::AccountPreferences
-    AssociateToConfigurationRequest.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Resource", traits: {"smithy.api#required" => {}}))
-    AssociateToConfigurationRequest.add_member(:chat_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfiguration", traits: {"smithy.api#required" => {}}))
+    AssociateToConfigurationRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "Resource", traits: {"smithy.api#required" => {}}))
+    AssociateToConfigurationRequest.add_member(:chat_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfiguration", traits: {"smithy.api#required" => {}}))
     AssociateToConfigurationRequest.type = Types::AssociateToConfigurationRequest
     AssociateToConfigurationResult.type = Types::AssociateToConfigurationResult
-    AssociationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationListing)
-    AssociationListing.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Resource", traits: {"smithy.api#required" => {}}))
+    AssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationListing)
+    AssociationListing.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Resource", traits: {"smithy.api#required" => {}}))
     AssociationListing.type = Types::AssociationListing
-    ChimeWebhookConfiguration.add_member(:webhook_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookDescription, location_name: "WebhookDescription", traits: {"smithy.api#required" => {}}))
-    ChimeWebhookConfiguration.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    ChimeWebhookConfiguration.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    ChimeWebhookConfiguration.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
-    ChimeWebhookConfiguration.add_member(:configuration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName"))
-    ChimeWebhookConfiguration.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    ChimeWebhookConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    ChimeWebhookConfiguration.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
-    ChimeWebhookConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
+    ChimeWebhookConfiguration.add_member(:webhook_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookDescription, location_name: "WebhookDescription", traits: {"smithy.api#required" => {}}))
+    ChimeWebhookConfiguration.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    ChimeWebhookConfiguration.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    ChimeWebhookConfiguration.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
+    ChimeWebhookConfiguration.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, location_name: "ConfigurationName"))
+    ChimeWebhookConfiguration.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    ChimeWebhookConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    ChimeWebhookConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, location_name: "State"))
+    ChimeWebhookConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StateReason"))
     ChimeWebhookConfiguration.type = Types::ChimeWebhookConfiguration
-    ChimeWebhookConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration)
-    ConfiguredTeam.add_member(:tenant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TenantId", traits: {"smithy.api#required" => {}}))
-    ConfiguredTeam.add_member(:team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
-    ConfiguredTeam.add_member(:team_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamName"))
-    ConfiguredTeam.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
-    ConfiguredTeam.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
+    ChimeWebhookConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookConfiguration)
+    ConfiguredTeam.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TenantId", traits: {"smithy.api#required" => {}}))
+    ConfiguredTeam.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
+    ConfiguredTeam.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamName"))
+    ConfiguredTeam.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, location_name: "State"))
+    ConfiguredTeam.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StateReason"))
     ConfiguredTeam.type = Types::ConfiguredTeam
-    ConfiguredTeamsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfiguredTeam)
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConfiguredTeamsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTeam)
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CreateChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     CreateChimeWebhookConfigurationException.type = Types::CreateChimeWebhookConfigurationException
-    CreateChimeWebhookConfigurationRequest.add_member(:webhook_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookDescription, location_name: "WebhookDescription", traits: {"smithy.api#required" => {}}))
-    CreateChimeWebhookConfigurationRequest.add_member(:webhook_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookUrl, location_name: "WebhookUrl", traits: {"smithy.api#required" => {}}))
-    CreateChimeWebhookConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
-    CreateChimeWebhookConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateChimeWebhookConfigurationRequest.add_member(:configuration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName", traits: {"smithy.api#required" => {}}))
-    CreateChimeWebhookConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    CreateChimeWebhookConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateChimeWebhookConfigurationRequest.add_member(:webhook_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookDescription, location_name: "WebhookDescription", traits: {"smithy.api#required" => {}}))
+    CreateChimeWebhookConfigurationRequest.add_member(:webhook_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookUrl, location_name: "WebhookUrl", traits: {"smithy.api#required" => {}}))
+    CreateChimeWebhookConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
+    CreateChimeWebhookConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateChimeWebhookConfigurationRequest.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, location_name: "ConfigurationName", traits: {"smithy.api#required" => {}}))
+    CreateChimeWebhookConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    CreateChimeWebhookConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateChimeWebhookConfigurationRequest.type = Types::CreateChimeWebhookConfigurationRequest
-    CreateChimeWebhookConfigurationResult.add_member(:webhook_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration, location_name: "WebhookConfiguration"))
+    CreateChimeWebhookConfigurationResult.add_member(:webhook_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookConfiguration, location_name: "WebhookConfiguration"))
     CreateChimeWebhookConfigurationResult.type = Types::CreateChimeWebhookConfigurationResult
-    CreateCustomActionRequest.add_member(:definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionDefinition, location_name: "Definition", traits: {"smithy.api#required" => {}}))
-    CreateCustomActionRequest.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAliasName, location_name: "AliasName"))
-    CreateCustomActionRequest.add_member(:attachments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentList, location_name: "Attachments"))
-    CreateCustomActionRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateCustomActionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateCustomActionRequest.add_member(:action_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionName, location_name: "ActionName", traits: {"smithy.api#required" => {}}))
+    CreateCustomActionRequest.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionDefinition, location_name: "Definition", traits: {"smithy.api#required" => {}}))
+    CreateCustomActionRequest.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAliasName, location_name: "AliasName"))
+    CreateCustomActionRequest.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentList, location_name: "Attachments"))
+    CreateCustomActionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateCustomActionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateCustomActionRequest.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionName, location_name: "ActionName", traits: {"smithy.api#required" => {}}))
     CreateCustomActionRequest.type = Types::CreateCustomActionRequest
-    CreateCustomActionResult.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
+    CreateCustomActionResult.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
     CreateCustomActionResult.type = Types::CreateCustomActionResult
-    CreateSlackChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CreateSlackChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     CreateSlackChannelConfigurationException.type = Types::CreateSlackChannelConfigurationException
-    CreateSlackChannelConfigurationRequest.add_member(:slack_team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
-    CreateSlackChannelConfigurationRequest.add_member(:slack_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelId, location_name: "SlackChannelId", traits: {"smithy.api#required" => {}}))
-    CreateSlackChannelConfigurationRequest.add_member(:slack_channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelDisplayName, location_name: "SlackChannelName"))
-    CreateSlackChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns"))
-    CreateSlackChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateSlackChannelConfigurationRequest.add_member(:configuration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName", traits: {"smithy.api#required" => {}}))
-    CreateSlackChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    CreateSlackChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
-    CreateSlackChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
-    CreateSlackChannelConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSlackChannelConfigurationRequest.add_member(:slack_team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationRequest.add_member(:slack_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelId, location_name: "SlackChannelId", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationRequest.add_member(:slack_channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelDisplayName, location_name: "SlackChannelName"))
+    CreateSlackChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns"))
+    CreateSlackChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationRequest.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, location_name: "ConfigurationName", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    CreateSlackChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
+    CreateSlackChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    CreateSlackChannelConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateSlackChannelConfigurationRequest.type = Types::CreateSlackChannelConfigurationRequest
-    CreateSlackChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelConfiguration, location_name: "ChannelConfiguration"))
+    CreateSlackChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration, location_name: "ChannelConfiguration"))
     CreateSlackChannelConfigurationResult.type = Types::CreateSlackChannelConfigurationResult
-    CreateTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CreateTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     CreateTeamsChannelConfigurationException.type = Types::CreateTeamsChannelConfigurationException
-    CreateTeamsChannelConfigurationRequest.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelId, location_name: "ChannelId", traits: {"smithy.api#required" => {}}))
-    CreateTeamsChannelConfigurationRequest.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelName, location_name: "ChannelName"))
-    CreateTeamsChannelConfigurationRequest.add_member(:team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
-    CreateTeamsChannelConfigurationRequest.add_member(:team_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamName, location_name: "TeamName"))
-    CreateTeamsChannelConfigurationRequest.add_member(:tenant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TenantId", traits: {"smithy.api#required" => {}}))
-    CreateTeamsChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns"))
-    CreateTeamsChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateTeamsChannelConfigurationRequest.add_member(:configuration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName", traits: {"smithy.api#required" => {}}))
-    CreateTeamsChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    CreateTeamsChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
-    CreateTeamsChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
-    CreateTeamsChannelConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateTeamsChannelConfigurationRequest.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelId, location_name: "ChannelId", traits: {"smithy.api#required" => {}}))
+    CreateTeamsChannelConfigurationRequest.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelName, location_name: "ChannelName"))
+    CreateTeamsChannelConfigurationRequest.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
+    CreateTeamsChannelConfigurationRequest.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamName, location_name: "TeamName"))
+    CreateTeamsChannelConfigurationRequest.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TenantId", traits: {"smithy.api#required" => {}}))
+    CreateTeamsChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns"))
+    CreateTeamsChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateTeamsChannelConfigurationRequest.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, location_name: "ConfigurationName", traits: {"smithy.api#required" => {}}))
+    CreateTeamsChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    CreateTeamsChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
+    CreateTeamsChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    CreateTeamsChannelConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateTeamsChannelConfigurationRequest.type = Types::CreateTeamsChannelConfigurationRequest
-    CreateTeamsChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
+    CreateTeamsChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
     CreateTeamsChannelConfigurationResult.type = Types::CreateTeamsChannelConfigurationResult
-    CustomAction.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
-    CustomAction.add_member(:definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionDefinition, location_name: "Definition", traits: {"smithy.api#required" => {}}))
-    CustomAction.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAliasName, location_name: "AliasName"))
-    CustomAction.add_member(:attachments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentList, location_name: "Attachments"))
-    CustomAction.add_member(:action_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionName, location_name: "ActionName"))
+    CustomAction.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
+    CustomAction.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionDefinition, location_name: "Definition", traits: {"smithy.api#required" => {}}))
+    CustomAction.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAliasName, location_name: "AliasName"))
+    CustomAction.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentList, location_name: "Attachments"))
+    CustomAction.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionName, location_name: "ActionName"))
     CustomAction.type = Types::CustomAction
-    CustomActionArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArn)
-    CustomActionAttachment.add_member(:notification_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentNotificationType, location_name: "NotificationType"))
-    CustomActionAttachment.add_member(:button_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionButtonText, location_name: "ButtonText"))
-    CustomActionAttachment.add_member(:criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentCriteriaList, location_name: "Criteria"))
-    CustomActionAttachment.add_member(:variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentVariables, location_name: "Variables"))
+    CustomActionArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn)
+    CustomActionAttachment.add_member(:notification_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentNotificationType, location_name: "NotificationType"))
+    CustomActionAttachment.add_member(:button_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionButtonText, location_name: "ButtonText"))
+    CustomActionAttachment.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentCriteriaList, location_name: "Criteria"))
+    CustomActionAttachment.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentVariables, location_name: "Variables"))
     CustomActionAttachment.type = Types::CustomActionAttachment
-    CustomActionAttachmentCriteria.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentCriteriaOperator, location_name: "Operator", traits: {"smithy.api#required" => {}}))
-    CustomActionAttachmentCriteria.add_member(:variable_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VariableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$", "smithy.api#required" => {}}))
-    CustomActionAttachmentCriteria.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]+$"}))
+    CustomActionAttachmentCriteria.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentCriteriaOperator, location_name: "Operator", traits: {"smithy.api#required" => {}}))
+    CustomActionAttachmentCriteria.add_member(:variable_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VariableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$", "smithy.api#required" => {}}))
+    CustomActionAttachmentCriteria.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]+$"}))
     CustomActionAttachmentCriteria.type = Types::CustomActionAttachmentCriteria
-    CustomActionAttachmentCriteriaList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentCriteria)
-    CustomActionAttachmentCriteriaOperator.add_member(:has_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HAS_VALUE", traits: {"smithy.api#enumValue" => "HAS_VALUE"}))
-    CustomActionAttachmentCriteriaOperator.add_member(:equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
-    CustomActionAttachmentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachment)
-    CustomActionAttachmentVariables.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$"})
-    CustomActionAttachmentVariables.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\x21-\\x7F]+$"})
-    CustomActionDefinition.add_member(:command_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "CommandText", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\S\\s]+$", "smithy.api#required" => {}}))
+    CustomActionAttachmentCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentCriteria)
+    CustomActionAttachmentCriteriaOperator.add_member(:has_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HAS_VALUE", traits: {"smithy.api#enumValue" => "HAS_VALUE"}))
+    CustomActionAttachmentCriteriaOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    CustomActionAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachment)
+    CustomActionAttachmentVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$"})
+    CustomActionAttachmentVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\x21-\\x7F]+$"})
+    CustomActionDefinition.add_member(:command_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "CommandText", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\S\\s]+$", "smithy.api#required" => {}}))
     CustomActionDefinition.type = Types::CustomActionDefinition
-    DeleteChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeleteChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DeleteChimeWebhookConfigurationException.type = Types::DeleteChimeWebhookConfigurationException
-    DeleteChimeWebhookConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteChimeWebhookConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
     DeleteChimeWebhookConfigurationRequest.type = Types::DeleteChimeWebhookConfigurationRequest
     DeleteChimeWebhookConfigurationResult.type = Types::DeleteChimeWebhookConfigurationResult
-    DeleteCustomActionRequest.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
+    DeleteCustomActionRequest.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
     DeleteCustomActionRequest.type = Types::DeleteCustomActionRequest
     DeleteCustomActionResult.type = Types::DeleteCustomActionResult
-    DeleteMicrosoftTeamsUserIdentityException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeleteMicrosoftTeamsUserIdentityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DeleteMicrosoftTeamsUserIdentityException.type = Types::DeleteMicrosoftTeamsUserIdentityException
-    DeleteMicrosoftTeamsUserIdentityRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    DeleteMicrosoftTeamsUserIdentityRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    DeleteMicrosoftTeamsUserIdentityRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteMicrosoftTeamsUserIdentityRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "UserId", traits: {"smithy.api#required" => {}}))
     DeleteMicrosoftTeamsUserIdentityRequest.type = Types::DeleteMicrosoftTeamsUserIdentityRequest
     DeleteMicrosoftTeamsUserIdentityResult.type = Types::DeleteMicrosoftTeamsUserIdentityResult
-    DeleteSlackChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeleteSlackChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DeleteSlackChannelConfigurationException.type = Types::DeleteSlackChannelConfigurationException
-    DeleteSlackChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteSlackChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
     DeleteSlackChannelConfigurationRequest.type = Types::DeleteSlackChannelConfigurationRequest
     DeleteSlackChannelConfigurationResult.type = Types::DeleteSlackChannelConfigurationResult
-    DeleteSlackUserIdentityException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeleteSlackUserIdentityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DeleteSlackUserIdentityException.type = Types::DeleteSlackUserIdentityException
-    DeleteSlackUserIdentityRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    DeleteSlackUserIdentityRequest.add_member(:slack_team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
-    DeleteSlackUserIdentityRequest.add_member(:slack_user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackUserId, location_name: "SlackUserId", traits: {"smithy.api#required" => {}}))
+    DeleteSlackUserIdentityRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteSlackUserIdentityRequest.add_member(:slack_team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
+    DeleteSlackUserIdentityRequest.add_member(:slack_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackUserId, location_name: "SlackUserId", traits: {"smithy.api#required" => {}}))
     DeleteSlackUserIdentityRequest.type = Types::DeleteSlackUserIdentityRequest
     DeleteSlackUserIdentityResult.type = Types::DeleteSlackUserIdentityResult
-    DeleteSlackWorkspaceAuthorizationFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeleteSlackWorkspaceAuthorizationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DeleteSlackWorkspaceAuthorizationFault.type = Types::DeleteSlackWorkspaceAuthorizationFault
-    DeleteSlackWorkspaceAuthorizationRequest.add_member(:slack_team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
+    DeleteSlackWorkspaceAuthorizationRequest.add_member(:slack_team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
     DeleteSlackWorkspaceAuthorizationRequest.type = Types::DeleteSlackWorkspaceAuthorizationRequest
     DeleteSlackWorkspaceAuthorizationResult.type = Types::DeleteSlackWorkspaceAuthorizationResult
-    DeleteTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeleteTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DeleteTeamsChannelConfigurationException.type = Types::DeleteTeamsChannelConfigurationException
-    DeleteTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
     DeleteTeamsChannelConfigurationRequest.type = Types::DeleteTeamsChannelConfigurationRequest
     DeleteTeamsChannelConfigurationResult.type = Types::DeleteTeamsChannelConfigurationResult
-    DeleteTeamsConfiguredTeamException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeleteTeamsConfiguredTeamException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DeleteTeamsConfiguredTeamException.type = Types::DeleteTeamsConfiguredTeamException
-    DeleteTeamsConfiguredTeamRequest.add_member(:team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
+    DeleteTeamsConfiguredTeamRequest.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
     DeleteTeamsConfiguredTeamRequest.type = Types::DeleteTeamsConfiguredTeamRequest
     DeleteTeamsConfiguredTeamResult.type = Types::DeleteTeamsConfiguredTeamResult
-    DescribeChimeWebhookConfigurationsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DescribeChimeWebhookConfigurationsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DescribeChimeWebhookConfigurationsException.type = Types::DescribeChimeWebhookConfigurationsException
-    DescribeChimeWebhookConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeChimeWebhookConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    DescribeChimeWebhookConfigurationsRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
+    DescribeChimeWebhookConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeChimeWebhookConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    DescribeChimeWebhookConfigurationsRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
     DescribeChimeWebhookConfigurationsRequest.type = Types::DescribeChimeWebhookConfigurationsRequest
-    DescribeChimeWebhookConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    DescribeChimeWebhookConfigurationsResult.add_member(:webhook_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookConfigurationList, location_name: "WebhookConfigurations"))
+    DescribeChimeWebhookConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    DescribeChimeWebhookConfigurationsResult.add_member(:webhook_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookConfigurationList, location_name: "WebhookConfigurations"))
     DescribeChimeWebhookConfigurationsResult.type = Types::DescribeChimeWebhookConfigurationsResult
-    DescribeSlackChannelConfigurationsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DescribeSlackChannelConfigurationsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DescribeSlackChannelConfigurationsException.type = Types::DescribeSlackChannelConfigurationsException
-    DescribeSlackChannelConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeSlackChannelConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    DescribeSlackChannelConfigurationsRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
+    DescribeSlackChannelConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeSlackChannelConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    DescribeSlackChannelConfigurationsRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
     DescribeSlackChannelConfigurationsRequest.type = Types::DescribeSlackChannelConfigurationsRequest
-    DescribeSlackChannelConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    DescribeSlackChannelConfigurationsResult.add_member(:slack_channel_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelConfigurationList, location_name: "SlackChannelConfigurations"))
+    DescribeSlackChannelConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    DescribeSlackChannelConfigurationsResult.add_member(:slack_channel_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfigurationList, location_name: "SlackChannelConfigurations"))
     DescribeSlackChannelConfigurationsResult.type = Types::DescribeSlackChannelConfigurationsResult
-    DescribeSlackUserIdentitiesException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DescribeSlackUserIdentitiesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DescribeSlackUserIdentitiesException.type = Types::DescribeSlackUserIdentitiesException
-    DescribeSlackUserIdentitiesRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
-    DescribeSlackUserIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    DescribeSlackUserIdentitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSlackUserIdentitiesRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
+    DescribeSlackUserIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    DescribeSlackUserIdentitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeSlackUserIdentitiesRequest.type = Types::DescribeSlackUserIdentitiesRequest
-    DescribeSlackUserIdentitiesResult.add_member(:slack_user_identities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackUserIdentitiesList, location_name: "SlackUserIdentities"))
-    DescribeSlackUserIdentitiesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeSlackUserIdentitiesResult.add_member(:slack_user_identities, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackUserIdentitiesList, location_name: "SlackUserIdentities"))
+    DescribeSlackUserIdentitiesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     DescribeSlackUserIdentitiesResult.type = Types::DescribeSlackUserIdentitiesResult
-    DescribeSlackWorkspacesException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DescribeSlackWorkspacesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DescribeSlackWorkspacesException.type = Types::DescribeSlackWorkspacesException
-    DescribeSlackWorkspacesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeSlackWorkspacesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeSlackWorkspacesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeSlackWorkspacesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     DescribeSlackWorkspacesRequest.type = Types::DescribeSlackWorkspacesRequest
-    DescribeSlackWorkspacesResult.add_member(:slack_workspaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackWorkspacesList, location_name: "SlackWorkspaces"))
-    DescribeSlackWorkspacesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeSlackWorkspacesResult.add_member(:slack_workspaces, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspacesList, location_name: "SlackWorkspaces"))
+    DescribeSlackWorkspacesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     DescribeSlackWorkspacesResult.type = Types::DescribeSlackWorkspacesResult
-    DisassociateFromConfigurationRequest.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Resource", traits: {"smithy.api#required" => {}}))
-    DisassociateFromConfigurationRequest.add_member(:chat_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfiguration", traits: {"smithy.api#required" => {}}))
+    DisassociateFromConfigurationRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "Resource", traits: {"smithy.api#required" => {}}))
+    DisassociateFromConfigurationRequest.add_member(:chat_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfiguration", traits: {"smithy.api#required" => {}}))
     DisassociateFromConfigurationRequest.type = Types::DisassociateFromConfigurationRequest
     DisassociateFromConfigurationResult.type = Types::DisassociateFromConfigurationResult
-    GetAccountPreferencesException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    GetAccountPreferencesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     GetAccountPreferencesException.type = Types::GetAccountPreferencesException
     GetAccountPreferencesRequest.type = Types::GetAccountPreferencesRequest
-    GetAccountPreferencesResult.add_member(:account_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountPreferences, location_name: "AccountPreferences"))
+    GetAccountPreferencesResult.add_member(:account_preferences, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPreferences, location_name: "AccountPreferences"))
     GetAccountPreferencesResult.type = Types::GetAccountPreferencesResult
-    GetCustomActionRequest.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
+    GetCustomActionRequest.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
     GetCustomActionRequest.type = Types::GetCustomActionRequest
-    GetCustomActionResult.add_member(:custom_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomAction, location_name: "CustomAction", traits: {"smithy.api#nestedProperties" => {}}))
+    GetCustomActionResult.add_member(:custom_action, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAction, location_name: "CustomAction", traits: {"smithy.api#nestedProperties" => {}}))
     GetCustomActionResult.type = Types::GetCustomActionResult
-    GetTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    GetTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     GetTeamsChannelConfigurationException.type = Types::GetTeamsChannelConfigurationException
-    GetTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    GetTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
     GetTeamsChannelConfigurationRequest.type = Types::GetTeamsChannelConfigurationRequest
-    GetTeamsChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
+    GetTeamsChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
     GetTeamsChannelConfigurationResult.type = Types::GetTeamsChannelConfigurationResult
-    GuardrailPolicyArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailPolicyArn)
-    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    GuardrailPolicyArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArn)
+    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServiceError.type = Types::InternalServiceError
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListAssociationsRequest.add_member(:chat_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfiguration", traits: {"smithy.api#required" => {}}))
-    ListAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
+    ListAssociationsRequest.add_member(:chat_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfiguration", traits: {"smithy.api#required" => {}}))
+    ListAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
     ListAssociationsRequest.type = Types::ListAssociationsRequest
-    ListAssociationsResult.add_member(:associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationList, location_name: "Associations", traits: {"smithy.api#required" => {}}))
-    ListAssociationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
+    ListAssociationsResult.add_member(:associations, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationList, location_name: "Associations", traits: {"smithy.api#required" => {}}))
+    ListAssociationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
     ListAssociationsResult.type = Types::ListAssociationsResult
-    ListCustomActionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListCustomActionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
+    ListCustomActionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListCustomActionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
     ListCustomActionsRequest.type = Types::ListCustomActionsRequest
-    ListCustomActionsResult.add_member(:custom_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArnList, location_name: "CustomActions", traits: {"smithy.api#required" => {}}))
-    ListCustomActionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
+    ListCustomActionsResult.add_member(:custom_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArnList, location_name: "CustomActions", traits: {"smithy.api#required" => {}}))
+    ListCustomActionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\x20-\\x7F]+$"}))
     ListCustomActionsResult.type = Types::ListCustomActionsResult
-    ListMicrosoftTeamsConfiguredTeamsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ListMicrosoftTeamsConfiguredTeamsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ListMicrosoftTeamsConfiguredTeamsException.type = Types::ListMicrosoftTeamsConfiguredTeamsException
-    ListMicrosoftTeamsConfiguredTeamsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListMicrosoftTeamsConfiguredTeamsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMicrosoftTeamsConfiguredTeamsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListMicrosoftTeamsConfiguredTeamsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListMicrosoftTeamsConfiguredTeamsRequest.type = Types::ListMicrosoftTeamsConfiguredTeamsRequest
-    ListMicrosoftTeamsConfiguredTeamsResult.add_member(:configured_teams, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfiguredTeamsList, location_name: "ConfiguredTeams"))
-    ListMicrosoftTeamsConfiguredTeamsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMicrosoftTeamsConfiguredTeamsResult.add_member(:configured_teams, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTeamsList, location_name: "ConfiguredTeams"))
+    ListMicrosoftTeamsConfiguredTeamsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListMicrosoftTeamsConfiguredTeamsResult.type = Types::ListMicrosoftTeamsConfiguredTeamsResult
-    ListMicrosoftTeamsUserIdentitiesException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ListMicrosoftTeamsUserIdentitiesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ListMicrosoftTeamsUserIdentitiesException.type = Types::ListMicrosoftTeamsUserIdentitiesException
-    ListMicrosoftTeamsUserIdentitiesRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
-    ListMicrosoftTeamsUserIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListMicrosoftTeamsUserIdentitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMicrosoftTeamsUserIdentitiesRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
+    ListMicrosoftTeamsUserIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListMicrosoftTeamsUserIdentitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListMicrosoftTeamsUserIdentitiesRequest.type = Types::ListMicrosoftTeamsUserIdentitiesRequest
-    ListMicrosoftTeamsUserIdentitiesResult.add_member(:teams_user_identities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsUserIdentitiesList, location_name: "TeamsUserIdentities"))
-    ListMicrosoftTeamsUserIdentitiesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMicrosoftTeamsUserIdentitiesResult.add_member(:teams_user_identities, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsUserIdentitiesList, location_name: "TeamsUserIdentities"))
+    ListMicrosoftTeamsUserIdentitiesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListMicrosoftTeamsUserIdentitiesResult.type = Types::ListMicrosoftTeamsUserIdentitiesResult
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTeamsChannelConfigurationsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ListTeamsChannelConfigurationsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ListTeamsChannelConfigurationsException.type = Types::ListTeamsChannelConfigurationsException
-    ListTeamsChannelConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListTeamsChannelConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListTeamsChannelConfigurationsRequest.add_member(:team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId"))
+    ListTeamsChannelConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListTeamsChannelConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListTeamsChannelConfigurationsRequest.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamId"))
     ListTeamsChannelConfigurationsRequest.type = Types::ListTeamsChannelConfigurationsRequest
-    ListTeamsChannelConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListTeamsChannelConfigurationsResult.add_member(:team_channel_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamChannelConfigurationsList, location_name: "TeamChannelConfigurations"))
+    ListTeamsChannelConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListTeamsChannelConfigurationsResult.add_member(:team_channel_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamChannelConfigurationsList, location_name: "TeamChannelConfigurations"))
     ListTeamsChannelConfigurationsResult.type = Types::ListTeamsChannelConfigurationsResult
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    SlackChannelConfiguration.add_member(:slack_team_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamName, location_name: "SlackTeamName", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:slack_team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:slack_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelId, location_name: "SlackChannelId", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:slack_channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelDisplayName, location_name: "SlackChannelName", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:configuration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName"))
-    SlackChannelConfiguration.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    SlackChannelConfiguration.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
-    SlackChannelConfiguration.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
-    SlackChannelConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    SlackChannelConfiguration.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
-    SlackChannelConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
+    SlackChannelConfiguration.add_member(:slack_team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamName, location_name: "SlackTeamName", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:slack_team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:slack_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelId, location_name: "SlackChannelId", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:slack_channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelDisplayName, location_name: "SlackChannelName", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, location_name: "ConfigurationName"))
+    SlackChannelConfiguration.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    SlackChannelConfiguration.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
+    SlackChannelConfiguration.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    SlackChannelConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    SlackChannelConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, location_name: "State"))
+    SlackChannelConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StateReason"))
     SlackChannelConfiguration.type = Types::SlackChannelConfiguration
-    SlackChannelConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelConfiguration)
-    SlackUserIdentitiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackUserIdentity)
-    SlackUserIdentity.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    SlackUserIdentity.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    SlackUserIdentity.add_member(:slack_team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
-    SlackUserIdentity.add_member(:slack_user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackUserId, location_name: "SlackUserId", traits: {"smithy.api#required" => {}}))
-    SlackUserIdentity.add_member(:aws_user_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserIdentity, location_name: "AwsUserIdentity"))
+    SlackChannelConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration)
+    SlackUserIdentitiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackUserIdentity)
+    SlackUserIdentity.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    SlackUserIdentity.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    SlackUserIdentity.add_member(:slack_team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
+    SlackUserIdentity.add_member(:slack_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackUserId, location_name: "SlackUserId", traits: {"smithy.api#required" => {}}))
+    SlackUserIdentity.add_member(:aws_user_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserIdentity, location_name: "AwsUserIdentity"))
     SlackUserIdentity.type = Types::SlackUserIdentity
-    SlackWorkspace.add_member(:slack_team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
-    SlackWorkspace.add_member(:slack_team_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackTeamName, location_name: "SlackTeamName", traits: {"smithy.api#required" => {}}))
-    SlackWorkspace.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
-    SlackWorkspace.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
+    SlackWorkspace.add_member(:slack_team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamId, location_name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
+    SlackWorkspace.add_member(:slack_team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamName, location_name: "SlackTeamName", traits: {"smithy.api#required" => {}}))
+    SlackWorkspace.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, location_name: "State"))
+    SlackWorkspace.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StateReason"))
     SlackWorkspace.type = Types::SlackWorkspace
-    SlackWorkspacesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackWorkspace)
-    SnsTopicArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    Tag.add_member(:tag_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:tag_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "TagValue", traits: {"smithy.api#required" => {}}))
+    SlackWorkspacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspace)
+    SnsTopicArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    Tag.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "TagKey", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "TagValue", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"aws.api#data" => "tagging", "smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"aws.api#data" => "tagging", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TeamChannelConfigurationsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelConfiguration)
-    TeamsChannelConfiguration.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelId, location_name: "ChannelId", traits: {"smithy.api#required" => {}}))
-    TeamsChannelConfiguration.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelName, location_name: "ChannelName"))
-    TeamsChannelConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
-    TeamsChannelConfiguration.add_member(:team_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamName, location_name: "TeamName"))
-    TeamsChannelConfiguration.add_member(:tenant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TenantId", traits: {"smithy.api#required" => {}}))
-    TeamsChannelConfiguration.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    TeamsChannelConfiguration.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    TeamsChannelConfiguration.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
-    TeamsChannelConfiguration.add_member(:configuration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName"))
-    TeamsChannelConfiguration.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    TeamsChannelConfiguration.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
-    TeamsChannelConfiguration.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
-    TeamsChannelConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    TeamsChannelConfiguration.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
-    TeamsChannelConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
+    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TeamChannelConfigurationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelConfiguration)
+    TeamsChannelConfiguration.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelId, location_name: "ChannelId", traits: {"smithy.api#required" => {}}))
+    TeamsChannelConfiguration.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelName, location_name: "ChannelName"))
+    TeamsChannelConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
+    TeamsChannelConfiguration.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamName, location_name: "TeamName"))
+    TeamsChannelConfiguration.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TenantId", traits: {"smithy.api#required" => {}}))
+    TeamsChannelConfiguration.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    TeamsChannelConfiguration.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    TeamsChannelConfiguration.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns", traits: {"smithy.api#required" => {}}))
+    TeamsChannelConfiguration.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, location_name: "ConfigurationName"))
+    TeamsChannelConfiguration.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    TeamsChannelConfiguration.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
+    TeamsChannelConfiguration.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    TeamsChannelConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    TeamsChannelConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, location_name: "State"))
+    TeamsChannelConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StateReason"))
     TeamsChannelConfiguration.type = Types::TeamsChannelConfiguration
-    TeamsUserIdentitiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsUserIdentity)
-    TeamsUserIdentity.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    TeamsUserIdentity.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    TeamsUserIdentity.add_member(:team_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
-    TeamsUserIdentity.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "UserId"))
-    TeamsUserIdentity.add_member(:aws_user_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserIdentity, location_name: "AwsUserIdentity"))
-    TeamsUserIdentity.add_member(:teams_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelId, location_name: "TeamsChannelId"))
-    TeamsUserIdentity.add_member(:teams_tenant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "TeamsTenantId"))
+    TeamsUserIdentitiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsUserIdentity)
+    TeamsUserIdentity.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    TeamsUserIdentity.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    TeamsUserIdentity.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamId", traits: {"smithy.api#required" => {}}))
+    TeamsUserIdentity.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "UserId"))
+    TeamsUserIdentity.add_member(:aws_user_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserIdentity, location_name: "AwsUserIdentity"))
+    TeamsUserIdentity.add_member(:teams_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelId, location_name: "TeamsChannelId"))
+    TeamsUserIdentity.add_member(:teams_tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "TeamsTenantId"))
     TeamsUserIdentity.type = Types::TeamsUserIdentity
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     UnauthorizedException.type = Types::UnauthorizedException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"aws.api#data" => "tagging", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"aws.api#data" => "tagging", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateAccountPreferencesException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UpdateAccountPreferencesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UpdateAccountPreferencesException.type = Types::UpdateAccountPreferencesException
-    UpdateAccountPreferencesRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
-    UpdateAccountPreferencesRequest.add_member(:training_data_collection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "TrainingDataCollectionEnabled"))
+    UpdateAccountPreferencesRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    UpdateAccountPreferencesRequest.add_member(:training_data_collection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "TrainingDataCollectionEnabled"))
     UpdateAccountPreferencesRequest.type = Types::UpdateAccountPreferencesRequest
-    UpdateAccountPreferencesResult.add_member(:account_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountPreferences, location_name: "AccountPreferences"))
+    UpdateAccountPreferencesResult.add_member(:account_preferences, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPreferences, location_name: "AccountPreferences"))
     UpdateAccountPreferencesResult.type = Types::UpdateAccountPreferencesResult
-    UpdateChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UpdateChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UpdateChimeWebhookConfigurationException.type = Types::UpdateChimeWebhookConfigurationException
-    UpdateChimeWebhookConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    UpdateChimeWebhookConfigurationRequest.add_member(:webhook_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookDescription, location_name: "WebhookDescription"))
-    UpdateChimeWebhookConfigurationRequest.add_member(:webhook_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookUrl, location_name: "WebhookUrl"))
-    UpdateChimeWebhookConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns"))
-    UpdateChimeWebhookConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
-    UpdateChimeWebhookConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    UpdateChimeWebhookConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    UpdateChimeWebhookConfigurationRequest.add_member(:webhook_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookDescription, location_name: "WebhookDescription"))
+    UpdateChimeWebhookConfigurationRequest.add_member(:webhook_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookUrl, location_name: "WebhookUrl"))
+    UpdateChimeWebhookConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns"))
+    UpdateChimeWebhookConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn"))
+    UpdateChimeWebhookConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
     UpdateChimeWebhookConfigurationRequest.type = Types::UpdateChimeWebhookConfigurationRequest
-    UpdateChimeWebhookConfigurationResult.add_member(:webhook_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration, location_name: "WebhookConfiguration"))
+    UpdateChimeWebhookConfigurationResult.add_member(:webhook_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookConfiguration, location_name: "WebhookConfiguration"))
     UpdateChimeWebhookConfigurationResult.type = Types::UpdateChimeWebhookConfigurationResult
-    UpdateCustomActionRequest.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
-    UpdateCustomActionRequest.add_member(:definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionDefinition, location_name: "Definition", traits: {"smithy.api#required" => {}}))
-    UpdateCustomActionRequest.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAliasName, location_name: "AliasName"))
-    UpdateCustomActionRequest.add_member(:attachments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionAttachmentList, location_name: "Attachments"))
+    UpdateCustomActionRequest.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
+    UpdateCustomActionRequest.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionDefinition, location_name: "Definition", traits: {"smithy.api#required" => {}}))
+    UpdateCustomActionRequest.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAliasName, location_name: "AliasName"))
+    UpdateCustomActionRequest.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentList, location_name: "Attachments"))
     UpdateCustomActionRequest.type = Types::UpdateCustomActionRequest
-    UpdateCustomActionResult.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
+    UpdateCustomActionResult.add_member(:custom_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, location_name: "CustomActionArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CustomActionArn"}))
     UpdateCustomActionResult.type = Types::UpdateCustomActionResult
-    UpdateSlackChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UpdateSlackChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UpdateSlackChannelConfigurationException.type = Types::UpdateSlackChannelConfigurationException
-    UpdateSlackChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    UpdateSlackChannelConfigurationRequest.add_member(:slack_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelId, location_name: "SlackChannelId", traits: {"smithy.api#required" => {}}))
-    UpdateSlackChannelConfigurationRequest.add_member(:slack_channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelDisplayName, location_name: "SlackChannelName"))
-    UpdateSlackChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns"))
-    UpdateSlackChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
-    UpdateSlackChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    UpdateSlackChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
-    UpdateSlackChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    UpdateSlackChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    UpdateSlackChannelConfigurationRequest.add_member(:slack_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelId, location_name: "SlackChannelId", traits: {"smithy.api#required" => {}}))
+    UpdateSlackChannelConfigurationRequest.add_member(:slack_channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelDisplayName, location_name: "SlackChannelName"))
+    UpdateSlackChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns"))
+    UpdateSlackChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn"))
+    UpdateSlackChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    UpdateSlackChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
+    UpdateSlackChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
     UpdateSlackChannelConfigurationRequest.type = Types::UpdateSlackChannelConfigurationRequest
-    UpdateSlackChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlackChannelConfiguration, location_name: "ChannelConfiguration"))
+    UpdateSlackChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration, location_name: "ChannelConfiguration"))
     UpdateSlackChannelConfigurationResult.type = Types::UpdateSlackChannelConfigurationResult
-    UpdateTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UpdateTeamsChannelConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UpdateTeamsChannelConfigurationException.type = Types::UpdateTeamsChannelConfigurationException
-    UpdateTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
-    UpdateTeamsChannelConfigurationRequest.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelId, location_name: "ChannelId", traits: {"smithy.api#required" => {}}))
-    UpdateTeamsChannelConfigurationRequest.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelName, location_name: "ChannelName"))
-    UpdateTeamsChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArnList, location_name: "SnsTopicArns"))
-    UpdateTeamsChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
-    UpdateTeamsChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
-    UpdateTeamsChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
-    UpdateTeamsChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    UpdateTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, location_name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
+    UpdateTeamsChannelConfigurationRequest.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelId, location_name: "ChannelId", traits: {"smithy.api#required" => {}}))
+    UpdateTeamsChannelConfigurationRequest.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelName, location_name: "ChannelName"))
+    UpdateTeamsChannelConfigurationRequest.add_member(:sns_topic_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArnList, location_name: "SnsTopicArns"))
+    UpdateTeamsChannelConfigurationRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "IamRoleArn"))
+    UpdateTeamsChannelConfigurationRequest.add_member(:logging_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    UpdateTeamsChannelConfigurationRequest.add_member(:guardrail_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
+    UpdateTeamsChannelConfigurationRequest.add_member(:user_authorization_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
     UpdateTeamsChannelConfigurationRequest.type = Types::UpdateTeamsChannelConfigurationRequest
-    UpdateTeamsChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
+    UpdateTeamsChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
     UpdateTeamsChannelConfigurationResult.type = Types::UpdateTeamsChannelConfigurationResult
 
     WheatleyOrchestration20171011 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -564,362 +564,362 @@ module Aws::Chatbot
       service.add_operation(:associate_to_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#AssociateToConfiguration"
         operation.name = "AssociateToConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateToConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateToConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = AssociateToConfigurationRequest
+        operation.output = AssociateToConfigurationResult
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << UnauthorizedException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to associate a resource with a configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}, "custom-action" => {}}}}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/associate-to-configuration"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_chime_webhook_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#CreateChimeWebhookConfiguration"
         operation.name = "CreateChimeWebhookConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChimeWebhookConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChimeWebhookConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChimeWebhookConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = CreateChimeWebhookConfigurationRequest
+        operation.output = CreateChimeWebhookConfigurationResult
+        operation.errors << ConflictException
+        operation.errors << CreateChimeWebhookConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create an AWS Chatbot Chime Webhook Configuration", "createsResources" => ["ChatbotConfiguration"]}, "smithy.api#http" => {"method" => "POST", "uri" => "/create-chime-webhook-configuration", "code" => 201}}
       end)
       service.add_operation(:create_custom_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#CreateCustomAction"
         operation.name = "CreateCustomAction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCustomActionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCustomActionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = CreateCustomActionRequest
+        operation.output = CreateCustomActionResult
+        operation.errors << ConflictException
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << UnauthorizedException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a custom action"}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/create-custom-action"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_microsoft_teams_channel_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#CreateMicrosoftTeamsChannelConfiguration"
         operation.name = "CreateMicrosoftTeamsChannelConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTeamsChannelConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTeamsChannelConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTeamsChannelConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = CreateTeamsChannelConfigurationRequest
+        operation.output = CreateTeamsChannelConfigurationResult
+        operation.errors << ConflictException
+        operation.errors << CreateTeamsChannelConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create an AWS Chatbot Microsoft Teams Channel Configuration", "createsResources" => ["ChatbotConfiguration"]}, "smithy.api#http" => {"method" => "POST", "uri" => "/create-ms-teams-channel-configuration", "code" => 201}, "smithy.api#suppress" => ["OperationInputOutputName.input", "OperationInputOutputName.output"]}
       end)
       service.add_operation(:create_slack_channel_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#CreateSlackChannelConfiguration"
         operation.name = "CreateSlackChannelConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSlackChannelConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSlackChannelConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSlackChannelConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = CreateSlackChannelConfigurationRequest
+        operation.output = CreateSlackChannelConfigurationResult
+        operation.errors << ConflictException
+        operation.errors << CreateSlackChannelConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create an AWS Chatbot Slack Channel Configuration", "createsResources" => ["ChatbotConfiguration"]}, "smithy.api#http" => {"method" => "POST", "uri" => "/create-slack-channel-configuration", "code" => 201}}
       end)
       service.add_operation(:delete_chime_webhook_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteChimeWebhookConfiguration"
         operation.name = "DeleteChimeWebhookConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteChimeWebhookConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteChimeWebhookConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteChimeWebhookConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteChimeWebhookConfigurationRequest
+        operation.output = DeleteChimeWebhookConfigurationResult
+        operation.errors << DeleteChimeWebhookConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an AWS Chatbot Chime Webhook Configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/delete-chime-webhook-configuration", "code" => 204}}
       end)
       service.add_operation(:delete_custom_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteCustomAction"
         operation.name = "DeleteCustomAction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCustomActionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCustomActionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteCustomActionRequest
+        operation.output = DeleteCustomActionResult
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UnauthorizedException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a custom action"}, "smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/delete-custom-action"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_microsoft_teams_channel_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteMicrosoftTeamsChannelConfiguration"
         operation.name = "DeleteMicrosoftTeamsChannelConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTeamsChannelConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTeamsChannelConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTeamsChannelConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteTeamsChannelConfigurationRequest
+        operation.output = DeleteTeamsChannelConfigurationResult
+        operation.errors << DeleteTeamsChannelConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an AWS Chatbot Microsoft Teams Channel Configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/delete-ms-teams-channel-configuration", "code" => 204}, "smithy.api#suppress" => ["OperationInputOutputName.input", "OperationInputOutputName.output"]}
       end)
       service.add_operation(:delete_microsoft_teams_configured_team, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteMicrosoftTeamsConfiguredTeam"
         operation.name = "DeleteMicrosoftTeamsConfiguredTeam"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTeamsConfiguredTeamRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTeamsConfiguredTeamResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTeamsConfiguredTeamException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.input = DeleteTeamsConfiguredTeamRequest
+        operation.output = DeleteTeamsConfiguredTeamResult
+        operation.errors << DeleteTeamsConfiguredTeamException
+        operation.errors << InvalidParameterException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the Microsoft Teams configured with AWS Chatbot in an AWS account"}, "smithy.api#http" => {"method" => "POST", "uri" => "/delete-ms-teams-configured-teams", "code" => 204}, "smithy.api#suppress" => ["OperationInputOutputName.input", "OperationInputOutputName.output"]}
       end)
       service.add_operation(:delete_microsoft_teams_user_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentity"
         operation.name = "DeleteMicrosoftTeamsUserIdentity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMicrosoftTeamsUserIdentityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMicrosoftTeamsUserIdentityResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMicrosoftTeamsUserIdentityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteMicrosoftTeamsUserIdentityRequest
+        operation.output = DeleteMicrosoftTeamsUserIdentityResult
+        operation.errors << DeleteMicrosoftTeamsUserIdentityException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an AWS Chatbot Microsoft Teams User Identity"}, "smithy.api#http" => {"method" => "POST", "uri" => "/delete-ms-teams-user-identity", "code" => 204}}
       end)
       service.add_operation(:delete_slack_channel_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteSlackChannelConfiguration"
         operation.name = "DeleteSlackChannelConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackChannelConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackChannelConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackChannelConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteSlackChannelConfigurationRequest
+        operation.output = DeleteSlackChannelConfigurationResult
+        operation.errors << DeleteSlackChannelConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an AWS Chatbot Slack Channel Configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/delete-slack-channel-configuration", "code" => 204}}
       end)
       service.add_operation(:delete_slack_user_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteSlackUserIdentity"
         operation.name = "DeleteSlackUserIdentity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackUserIdentityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackUserIdentityResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackUserIdentityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteSlackUserIdentityRequest
+        operation.output = DeleteSlackUserIdentityResult
+        operation.errors << DeleteSlackUserIdentityException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an AWS Chatbot Slack User Identity"}, "smithy.api#http" => {"method" => "POST", "uri" => "/delete-slack-user-identity", "code" => 204}}
       end)
       service.add_operation(:delete_slack_workspace_authorization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorization"
         operation.name = "DeleteSlackWorkspaceAuthorization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackWorkspaceAuthorizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackWorkspaceAuthorizationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlackWorkspaceAuthorizationFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.input = DeleteSlackWorkspaceAuthorizationRequest
+        operation.output = DeleteSlackWorkspaceAuthorizationResult
+        operation.errors << DeleteSlackWorkspaceAuthorizationFault
+        operation.errors << InvalidParameterException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the Slack workspace authorization with AWS Chatbot, associated with an AWS account"}, "smithy.api#http" => {"method" => "POST", "uri" => "/delete-slack-workspace-authorization", "code" => 204}}
       end)
       service.add_operation(:describe_chime_webhook_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DescribeChimeWebhookConfigurations"
         operation.name = "DescribeChimeWebhookConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeChimeWebhookConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeChimeWebhookConfigurationsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeChimeWebhookConfigurationsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeChimeWebhookConfigurationsRequest
+        operation.output = DescribeChimeWebhookConfigurationsResult
+        operation.errors << DescribeChimeWebhookConfigurationsException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list all AWS Chatbot Chime Webhook Configurations in an AWS Account"}, "smithy.api#http" => {"method" => "POST", "uri" => "/describe-chime-webhook-configurations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::DescribeChimeWebhookConfigurations.new
       end)
       service.add_operation(:describe_slack_channel_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DescribeSlackChannelConfigurations"
         operation.name = "DescribeSlackChannelConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackChannelConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackChannelConfigurationsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackChannelConfigurationsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeSlackChannelConfigurationsRequest
+        operation.output = DescribeSlackChannelConfigurationsResult
+        operation.errors << DescribeSlackChannelConfigurationsException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list all AWS Chatbot Slack Channel Configurations in an AWS account"}, "smithy.api#http" => {"method" => "POST", "uri" => "/describe-slack-channel-configurations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::DescribeSlackChannelConfigurations.new
       end)
       service.add_operation(:describe_slack_user_identities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DescribeSlackUserIdentities"
         operation.name = "DescribeSlackUserIdentities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackUserIdentitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackUserIdentitiesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackUserIdentitiesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeSlackUserIdentitiesRequest
+        operation.output = DescribeSlackUserIdentitiesResult
+        operation.errors << DescribeSlackUserIdentitiesException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe AWS Chatbot Slack User Identities"}, "smithy.api#http" => {"method" => "POST", "uri" => "/describe-slack-user-identities", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::DescribeSlackUserIdentities.new
       end)
       service.add_operation(:describe_slack_workspaces, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DescribeSlackWorkspaces"
         operation.name = "DescribeSlackWorkspaces"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackWorkspacesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackWorkspacesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSlackWorkspacesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeSlackWorkspacesRequest
+        operation.output = DescribeSlackWorkspacesResult
+        operation.errors << DescribeSlackWorkspacesException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list all authorized Slack workspaces connected to the AWS Account onboarded with AWS Chatbot service"}, "smithy.api#http" => {"method" => "POST", "uri" => "/describe-slack-workspaces", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::DescribeSlackWorkspaces.new
       end)
       service.add_operation(:disassociate_from_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#DisassociateFromConfiguration"
         operation.name = "DisassociateFromConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFromConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFromConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DisassociateFromConfigurationRequest
+        operation.output = DisassociateFromConfigurationResult
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << UnauthorizedException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to disassociate a resource from a configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}, "custom-action" => {}}}}, "smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/disassociate-from-configuration"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_account_preferences, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#GetAccountPreferences"
         operation.name = "GetAccountPreferences"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountPreferencesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountPreferencesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountPreferencesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = GetAccountPreferencesRequest
+        operation.output = GetAccountPreferencesResult
+        operation.errors << GetAccountPreferencesException
+        operation.errors << InvalidRequestException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve AWS Chatbot account preferences"}, "smithy.api#http" => {"method" => "POST", "uri" => "/get-account-preferences", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_custom_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#GetCustomAction"
         operation.name = "GetCustomAction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCustomActionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCustomActionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = GetCustomActionRequest
+        operation.output = GetCustomActionResult
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UnauthorizedException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a custom action"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/get-custom-action"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_microsoft_teams_channel_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#GetMicrosoftTeamsChannelConfiguration"
         operation.name = "GetMicrosoftTeamsChannelConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTeamsChannelConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTeamsChannelConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTeamsChannelConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = GetTeamsChannelConfigurationRequest
+        operation.output = GetTeamsChannelConfigurationResult
+        operation.errors << GetTeamsChannelConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a single AWS Chatbot Microsoft Teams Channel Configurations in an AWS account"}, "smithy.api#http" => {"method" => "POST", "uri" => "/get-ms-teams-channel-configuration", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["OperationInputOutputName.input", "OperationInputOutputName.output"]}
       end)
       service.add_operation(:list_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#ListAssociations"
         operation.name = "ListAssociations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociationsResult)
+        operation.input = ListAssociationsRequest
+        operation.output = ListAssociationsResult
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list resources associated with a configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-associations"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAssociations.new
       end)
       service.add_operation(:list_custom_actions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#ListCustomActions"
         operation.name = "ListCustomActions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCustomActionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCustomActionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListCustomActionsRequest
+        operation.output = ListCustomActionsResult
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << UnauthorizedException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list custom actions"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-custom-actions"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListCustomActions.new
       end)
       service.add_operation(:list_microsoft_teams_channel_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#ListMicrosoftTeamsChannelConfigurations"
         operation.name = "ListMicrosoftTeamsChannelConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTeamsChannelConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTeamsChannelConfigurationsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTeamsChannelConfigurationsException)
+        operation.input = ListTeamsChannelConfigurationsRequest
+        operation.output = ListTeamsChannelConfigurationsResult
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ListTeamsChannelConfigurationsException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list all AWS Chatbot Microsoft Teams Channel Configurations in an AWS account"}, "smithy.api#http" => {"method" => "POST", "uri" => "/list-ms-teams-channel-configurations", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["OperationInputOutputName.input", "OperationInputOutputName.output"]}
         operation[:paginator] = Paginators::ListMicrosoftTeamsChannelConfigurations.new
       end)
       service.add_operation(:list_microsoft_teams_configured_teams, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeams"
         operation.name = "ListMicrosoftTeamsConfiguredTeams"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMicrosoftTeamsConfiguredTeamsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMicrosoftTeamsConfiguredTeamsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMicrosoftTeamsConfiguredTeamsException)
+        operation.input = ListMicrosoftTeamsConfiguredTeamsRequest
+        operation.output = ListMicrosoftTeamsConfiguredTeamsResult
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ListMicrosoftTeamsConfiguredTeamsException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list all Microsoft Teams connected to the AWS Account onboarded with AWS Chatbot service"}, "smithy.api#http" => {"method" => "POST", "uri" => "/list-ms-teams-configured-teams", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListMicrosoftTeamsConfiguredTeams.new
       end)
       service.add_operation(:list_microsoft_teams_user_identities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentities"
         operation.name = "ListMicrosoftTeamsUserIdentities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMicrosoftTeamsUserIdentitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMicrosoftTeamsUserIdentitiesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMicrosoftTeamsUserIdentitiesException)
+        operation.input = ListMicrosoftTeamsUserIdentitiesRequest
+        operation.output = ListMicrosoftTeamsUserIdentitiesResult
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ListMicrosoftTeamsUserIdentitiesException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe AWS Chatbot Microsoft Teams User Identities"}, "smithy.api#http" => {"method" => "POST", "uri" => "/list-ms-teams-user-identities", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListMicrosoftTeamsUserIdentities.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServiceError
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to List all tags associated with the AWS Chatbot Channel Configuration"}, "smithy.api#http" => {"method" => "POST", "uri" => "/list-tags-for-resource", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServiceError
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyTagsException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create tags on AWS Chatbot Channel Configuration"}, "smithy.api#http" => {"method" => "POST", "uri" => "/tag-resource", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServiceError
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to remove tags on AWS Chatbot Channel Configuration"}, "smithy.api#http" => {"method" => "POST", "uri" => "/untag-resource", "code" => 200}}
       end)
       service.add_operation(:update_account_preferences, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#UpdateAccountPreferences"
         operation.name = "UpdateAccountPreferences"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAccountPreferencesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAccountPreferencesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAccountPreferencesException)
+        operation.input = UpdateAccountPreferencesRequest
+        operation.output = UpdateAccountPreferencesResult
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << UpdateAccountPreferencesException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update AWS Chatbot account preferences"}, "smithy.api#http" => {"method" => "POST", "uri" => "/update-account-preferences", "code" => 200}}
       end)
       service.add_operation(:update_chime_webhook_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#UpdateChimeWebhookConfiguration"
         operation.name = "UpdateChimeWebhookConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChimeWebhookConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChimeWebhookConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChimeWebhookConfigurationException)
+        operation.input = UpdateChimeWebhookConfigurationRequest
+        operation.output = UpdateChimeWebhookConfigurationResult
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UpdateChimeWebhookConfigurationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update an AWS Chatbot Chime Webhook Configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/update-chime-webhook-configuration", "code" => 200}}
       end)
       service.add_operation(:update_custom_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#UpdateCustomAction"
         operation.name = "UpdateCustomAction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCustomActionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCustomActionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = UpdateCustomActionRequest
+        operation.output = UpdateCustomActionResult
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UnauthorizedException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a custom action"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/update-custom-action"}}
       end)
       service.add_operation(:update_microsoft_teams_channel_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#UpdateMicrosoftTeamsChannelConfiguration"
         operation.name = "UpdateMicrosoftTeamsChannelConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTeamsChannelConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTeamsChannelConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTeamsChannelConfigurationException)
+        operation.input = UpdateTeamsChannelConfigurationRequest
+        operation.output = UpdateTeamsChannelConfigurationResult
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UpdateTeamsChannelConfigurationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update an AWS Chatbot Microsoft Teams Channel Configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/update-ms-teams-channel-configuration", "code" => 200}, "smithy.api#suppress" => ["OperationInputOutputName.input", "OperationInputOutputName.output"]}
       end)
       service.add_operation(:update_slack_channel_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chatbot#UpdateSlackChannelConfiguration"
         operation.name = "UpdateSlackChannelConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSlackChannelConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSlackChannelConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSlackChannelConfigurationException)
+        operation.input = UpdateSlackChannelConfigurationRequest
+        operation.output = UpdateSlackChannelConfigurationResult
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UpdateSlackChannelConfigurationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update an AWS Chatbot Slack Channel Configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/update-slack-channel-configuration", "code" => 200}}
       end)
     end

@@ -124,213 +124,213 @@ module Aws::Scheduler
     UpdateScheduleOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.scheduler#UpdateScheduleOperationOutput", name: "UpdateScheduleOperationOutput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.scheduler#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AwsVpcConfiguration.add_member(:subnets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets", traits: {"smithy.api#required" => {}}))
-    AwsVpcConfiguration.add_member(:security_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
-    AwsVpcConfiguration.add_member(:assign_public_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "AssignPublicIp"))
+    AwsVpcConfiguration.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets", traits: {"smithy.api#required" => {}}))
+    AwsVpcConfiguration.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, location_name: "SecurityGroups"))
+    AwsVpcConfiguration.add_member(:assign_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignPublicIp, location_name: "AssignPublicIp"))
     AwsVpcConfiguration.type = Types::AwsVpcConfiguration
-    CapacityProviderStrategy.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityProviderStrategyItem)
-    CapacityProviderStrategyItem.add_member(:capacity_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityProvider, location_name: "capacityProvider", traits: {"smithy.api#required" => {}}))
-    CapacityProviderStrategyItem.add_member(:weight, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemWeight, location_name: "weight", traits: {"smithy.api#default" => 0}))
-    CapacityProviderStrategyItem.add_member(:base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemBase, location_name: "base", traits: {"smithy.api#default" => 0}))
+    CapacityProviderStrategy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem)
+    CapacityProviderStrategyItem.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, location_name: "capacityProvider", traits: {"smithy.api#required" => {}}))
+    CapacityProviderStrategyItem.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemWeight, location_name: "weight", traits: {"smithy.api#default" => 0}))
+    CapacityProviderStrategyItem.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemBase, location_name: "base", traits: {"smithy.api#default" => 0}))
     CapacityProviderStrategyItem.type = Types::CapacityProviderStrategyItem
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateScheduleGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateScheduleGroupOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateScheduleGroupOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateScheduleGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateScheduleGroupOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateScheduleGroupOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateScheduleGroupOperationInput.type = Types::CreateScheduleGroupOperationInput
-    CreateScheduleGroupOperationOutput.add_member(:schedule_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupArn, location_name: "ScheduleGroupArn", traits: {"smithy.api#required" => {}}))
+    CreateScheduleGroupOperationOutput.add_member(:schedule_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupArn, location_name: "ScheduleGroupArn", traits: {"smithy.api#required" => {}}))
     CreateScheduleGroupOperationOutput.type = Types::CreateScheduleGroupOperationOutput
-    CreateScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    CreateScheduleOperationInput.add_member(:schedule_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
-    CreateScheduleOperationInput.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDate, location_name: "StartDate"))
-    CreateScheduleOperationInput.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
-    CreateScheduleOperationInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateScheduleOperationInput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
-    CreateScheduleOperationInput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
-    CreateScheduleOperationInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
-    CreateScheduleOperationInput.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target", traits: {"smithy.api#required" => {}}))
-    CreateScheduleOperationInput.add_member(:flexible_time_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlexibleTimeWindow, location_name: "FlexibleTimeWindow", traits: {"smithy.api#required" => {}}))
-    CreateScheduleOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateScheduleOperationInput.add_member(:action_after_completion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
+    CreateScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "GroupName"))
+    CreateScheduleOperationInput.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, location_name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
+    CreateScheduleOperationInput.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: StartDate, location_name: "StartDate"))
+    CreateScheduleOperationInput.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: EndDate, location_name: "EndDate"))
+    CreateScheduleOperationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateScheduleOperationInput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
+    CreateScheduleOperationInput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleState, location_name: "State"))
+    CreateScheduleOperationInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn"))
+    CreateScheduleOperationInput.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target", traits: {"smithy.api#required" => {}}))
+    CreateScheduleOperationInput.add_member(:flexible_time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: FlexibleTimeWindow, location_name: "FlexibleTimeWindow", traits: {"smithy.api#required" => {}}))
+    CreateScheduleOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateScheduleOperationInput.add_member(:action_after_completion, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     CreateScheduleOperationInput.type = Types::CreateScheduleOperationInput
-    CreateScheduleOperationOutput.add_member(:schedule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleArn, location_name: "ScheduleArn", traits: {"smithy.api#required" => {}}))
+    CreateScheduleOperationOutput.add_member(:schedule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleArn, location_name: "ScheduleArn", traits: {"smithy.api#required" => {}}))
     CreateScheduleOperationOutput.type = Types::CreateScheduleOperationOutput
-    DeadLetterConfig.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn", traits: {"smithy.api#pattern" => "^arn:aws(-[a-z]+)?:sqs:[a-z0-9\\-]+:\\d{12}:[a-zA-Z0-9\\-_]+$"}))
+    DeadLetterConfig.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "Arn", traits: {"smithy.api#pattern" => "^arn:aws(-[a-z]+)?:sqs:[a-z0-9\\-]+:\\d{12}:[a-zA-Z0-9\\-_]+$"}))
     DeadLetterConfig.type = Types::DeadLetterConfig
-    DeleteScheduleGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Name"}))
-    DeleteScheduleGroupOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
+    DeleteScheduleGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Name"}))
+    DeleteScheduleGroupOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteScheduleGroupOperationInput.type = Types::DeleteScheduleGroupOperationInput
     DeleteScheduleGroupOperationOutput.type = Types::DeleteScheduleGroupOperationOutput
-    DeleteScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName", traits: {"smithy.api#httpQuery" => "groupName"}))
-    DeleteScheduleOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
+    DeleteScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "GroupName", traits: {"smithy.api#httpQuery" => "groupName"}))
+    DeleteScheduleOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteScheduleOperationInput.type = Types::DeleteScheduleOperationInput
     DeleteScheduleOperationOutput.type = Types::DeleteScheduleOperationOutput
-    EcsParameters.add_member(:task_definition_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskDefinitionArn, location_name: "TaskDefinitionArn", traits: {"smithy.api#required" => {}}))
-    EcsParameters.add_member(:task_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskCount, location_name: "TaskCount"))
-    EcsParameters.add_member(:launch_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchType, location_name: "LaunchType"))
-    EcsParameters.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
-    EcsParameters.add_member(:platform_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "PlatformVersion"))
-    EcsParameters.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
-    EcsParameters.add_member(:capacity_provider_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "CapacityProviderStrategy"))
-    EcsParameters.add_member(:enable_ecs_managed_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableECSManagedTags, location_name: "EnableECSManagedTags"))
-    EcsParameters.add_member(:enable_execute_command, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableExecuteCommand, location_name: "EnableExecuteCommand"))
-    EcsParameters.add_member(:placement_constraints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementConstraints, location_name: "PlacementConstraints"))
-    EcsParameters.add_member(:placement_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "PlacementStrategy"))
-    EcsParameters.add_member(:propagate_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropagateTags, location_name: "PropagateTags"))
-    EcsParameters.add_member(:reference_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceId, location_name: "ReferenceId"))
-    EcsParameters.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    EcsParameters.add_member(:task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionArn, location_name: "TaskDefinitionArn", traits: {"smithy.api#required" => {}}))
+    EcsParameters.add_member(:task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskCount, location_name: "TaskCount"))
+    EcsParameters.add_member(:launch_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchType, location_name: "LaunchType"))
+    EcsParameters.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    EcsParameters.add_member(:platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformVersion, location_name: "PlatformVersion"))
+    EcsParameters.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, location_name: "Group"))
+    EcsParameters.add_member(:capacity_provider_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategy, location_name: "CapacityProviderStrategy"))
+    EcsParameters.add_member(:enable_ecs_managed_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableECSManagedTags, location_name: "EnableECSManagedTags"))
+    EcsParameters.add_member(:enable_execute_command, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableExecuteCommand, location_name: "EnableExecuteCommand"))
+    EcsParameters.add_member(:placement_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraints, location_name: "PlacementConstraints"))
+    EcsParameters.add_member(:placement_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategies, location_name: "PlacementStrategy"))
+    EcsParameters.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateTags, location_name: "PropagateTags"))
+    EcsParameters.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, location_name: "ReferenceId"))
+    EcsParameters.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     EcsParameters.type = Types::EcsParameters
-    EventBridgeParameters.add_member(:detail_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailType, location_name: "DetailType", traits: {"smithy.api#required" => {}}))
-    EventBridgeParameters.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "Source", traits: {"smithy.api#required" => {}}))
+    EventBridgeParameters.add_member(:detail_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailType, location_name: "DetailType", traits: {"smithy.api#required" => {}}))
+    EventBridgeParameters.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "Source", traits: {"smithy.api#required" => {}}))
     EventBridgeParameters.type = Types::EventBridgeParameters
-    FlexibleTimeWindow.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlexibleTimeWindowMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
-    FlexibleTimeWindow.add_member(:maximum_window_in_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumWindowInMinutes, location_name: "MaximumWindowInMinutes"))
+    FlexibleTimeWindow.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FlexibleTimeWindowMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
+    FlexibleTimeWindow.add_member(:maximum_window_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumWindowInMinutes, location_name: "MaximumWindowInMinutes"))
     FlexibleTimeWindow.type = Types::FlexibleTimeWindow
-    GetScheduleGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetScheduleGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetScheduleGroupOperationInput.type = Types::GetScheduleGroupOperationInput
-    GetScheduleGroupOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupArn, location_name: "Arn"))
-    GetScheduleGroupOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "Name"))
-    GetScheduleGroupOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupState, location_name: "State"))
-    GetScheduleGroupOperationOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    GetScheduleGroupOperationOutput.add_member(:last_modification_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
+    GetScheduleGroupOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupArn, location_name: "Arn"))
+    GetScheduleGroupOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "Name"))
+    GetScheduleGroupOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupState, location_name: "State"))
+    GetScheduleGroupOperationOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "CreationDate"))
+    GetScheduleGroupOperationOutput.add_member(:last_modification_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModificationDate, location_name: "LastModificationDate"))
     GetScheduleGroupOperationOutput.type = Types::GetScheduleGroupOperationOutput
-    GetScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName", traits: {"smithy.api#httpQuery" => "groupName"}))
+    GetScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "GroupName", traits: {"smithy.api#httpQuery" => "groupName"}))
     GetScheduleOperationInput.type = Types::GetScheduleOperationInput
-    GetScheduleOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleArn, location_name: "Arn"))
-    GetScheduleOperationOutput.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    GetScheduleOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    GetScheduleOperationOutput.add_member(:schedule_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
-    GetScheduleOperationOutput.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDate, location_name: "StartDate"))
-    GetScheduleOperationOutput.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
-    GetScheduleOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    GetScheduleOperationOutput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
-    GetScheduleOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
-    GetScheduleOperationOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    GetScheduleOperationOutput.add_member(:last_modification_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    GetScheduleOperationOutput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
-    GetScheduleOperationOutput.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target"))
-    GetScheduleOperationOutput.add_member(:flexible_time_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlexibleTimeWindow, location_name: "FlexibleTimeWindow"))
-    GetScheduleOperationOutput.add_member(:action_after_completion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
+    GetScheduleOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleArn, location_name: "Arn"))
+    GetScheduleOperationOutput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "GroupName"))
+    GetScheduleOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    GetScheduleOperationOutput.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, location_name: "ScheduleExpression"))
+    GetScheduleOperationOutput.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: StartDate, location_name: "StartDate"))
+    GetScheduleOperationOutput.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: EndDate, location_name: "EndDate"))
+    GetScheduleOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    GetScheduleOperationOutput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
+    GetScheduleOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleState, location_name: "State"))
+    GetScheduleOperationOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "CreationDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    GetScheduleOperationOutput.add_member(:last_modification_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModificationDate, location_name: "LastModificationDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    GetScheduleOperationOutput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn"))
+    GetScheduleOperationOutput.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target"))
+    GetScheduleOperationOutput.add_member(:flexible_time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: FlexibleTimeWindow, location_name: "FlexibleTimeWindow"))
+    GetScheduleOperationOutput.add_member(:action_after_completion, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     GetScheduleOperationOutput.type = Types::GetScheduleOperationOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    KinesisParameters.add_member(:partition_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetPartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
+    KinesisParameters.add_member(:partition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetPartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
     KinesisParameters.type = Types::KinesisParameters
-    ListScheduleGroupsOperationInput.add_member(:name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupNamePrefix, location_name: "NamePrefix", traits: {"smithy.api#httpQuery" => "NamePrefix"}))
-    ListScheduleGroupsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListScheduleGroupsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListScheduleGroupsOperationInput.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupNamePrefix, location_name: "NamePrefix", traits: {"smithy.api#httpQuery" => "NamePrefix"}))
+    ListScheduleGroupsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListScheduleGroupsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListScheduleGroupsOperationInput.type = Types::ListScheduleGroupsOperationInput
-    ListScheduleGroupsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListScheduleGroupsOperationOutput.add_member(:schedule_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupList, location_name: "ScheduleGroups", traits: {"smithy.api#required" => {}}))
+    ListScheduleGroupsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListScheduleGroupsOperationOutput.add_member(:schedule_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupList, location_name: "ScheduleGroups", traits: {"smithy.api#required" => {}}))
     ListScheduleGroupsOperationOutput.type = Types::ListScheduleGroupsOperationOutput
-    ListSchedulesOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName", traits: {"smithy.api#httpQuery" => "ScheduleGroup"}))
-    ListSchedulesOperationInput.add_member(:name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamePrefix, location_name: "NamePrefix", traits: {"smithy.api#httpQuery" => "NamePrefix"}))
-    ListSchedulesOperationInput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State", traits: {"smithy.api#httpQuery" => "State"}))
-    ListSchedulesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListSchedulesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListSchedulesOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "GroupName", traits: {"smithy.api#httpQuery" => "ScheduleGroup"}))
+    ListSchedulesOperationInput.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: NamePrefix, location_name: "NamePrefix", traits: {"smithy.api#httpQuery" => "NamePrefix"}))
+    ListSchedulesOperationInput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleState, location_name: "State", traits: {"smithy.api#httpQuery" => "State"}))
+    ListSchedulesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListSchedulesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListSchedulesOperationInput.type = Types::ListSchedulesOperationInput
-    ListSchedulesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListSchedulesOperationOutput.add_member(:schedules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleList, location_name: "Schedules", traits: {"smithy.api#required" => {}}))
+    ListSchedulesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListSchedulesOperationOutput.add_member(:schedules, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleList, location_name: "Schedules", traits: {"smithy.api#required" => {}}))
     ListSchedulesOperationOutput.type = Types::ListSchedulesOperationOutput
-    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceOperationInput.type = Types::ListTagsForResourceOperationInput
-    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceOperationOutput.type = Types::ListTagsForResourceOperationOutput
-    NetworkConfiguration.add_member(:awsvpc_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
+    NetworkConfiguration.add_member(:awsvpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
     NetworkConfiguration.type = Types::NetworkConfiguration
-    PlacementConstraint.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementConstraintType, location_name: "type"))
-    PlacementConstraint.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementConstraintExpression, location_name: "expression"))
+    PlacementConstraint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintType, location_name: "type"))
+    PlacementConstraint.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintExpression, location_name: "expression"))
     PlacementConstraint.type = Types::PlacementConstraint
-    PlacementConstraints.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementConstraint)
-    PlacementStrategies.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementStrategy)
-    PlacementStrategy.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementStrategyType, location_name: "type"))
-    PlacementStrategy.add_member(:field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementStrategyField, location_name: "field"))
+    PlacementConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint)
+    PlacementStrategies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy)
+    PlacementStrategy.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyType, location_name: "type"))
+    PlacementStrategy.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyField, location_name: "field"))
     PlacementStrategy.type = Types::PlacementStrategy
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RetryPolicy.add_member(:maximum_event_age_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumEventAgeInSeconds, location_name: "MaximumEventAgeInSeconds"))
-    RetryPolicy.add_member(:maximum_retry_attempts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumRetryAttempts, location_name: "MaximumRetryAttempts"))
+    RetryPolicy.add_member(:maximum_event_age_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumEventAgeInSeconds, location_name: "MaximumEventAgeInSeconds"))
+    RetryPolicy.add_member(:maximum_retry_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumRetryAttempts, location_name: "MaximumRetryAttempts"))
     RetryPolicy.type = Types::RetryPolicy
-    SageMakerPipelineParameter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SageMakerPipelineParameterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    SageMakerPipelineParameter.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SageMakerPipelineParameterValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    SageMakerPipelineParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    SageMakerPipelineParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     SageMakerPipelineParameter.type = Types::SageMakerPipelineParameter
-    SageMakerPipelineParameterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SageMakerPipelineParameter)
-    SageMakerPipelineParameters.add_member(:pipeline_parameter_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SageMakerPipelineParameterList, location_name: "PipelineParameterList"))
+    SageMakerPipelineParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameter)
+    SageMakerPipelineParameters.add_member(:pipeline_parameter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterList, location_name: "PipelineParameterList"))
     SageMakerPipelineParameters.type = Types::SageMakerPipelineParameters
-    ScheduleGroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupSummary)
-    ScheduleGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupArn, location_name: "Arn"))
-    ScheduleGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "Name"))
-    ScheduleGroupSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupState, location_name: "State"))
-    ScheduleGroupSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    ScheduleGroupSummary.add_member(:last_modification_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
+    ScheduleGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupSummary)
+    ScheduleGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupArn, location_name: "Arn"))
+    ScheduleGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "Name"))
+    ScheduleGroupSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupState, location_name: "State"))
+    ScheduleGroupSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "CreationDate"))
+    ScheduleGroupSummary.add_member(:last_modification_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModificationDate, location_name: "LastModificationDate"))
     ScheduleGroupSummary.type = Types::ScheduleGroupSummary
-    ScheduleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleSummary)
-    ScheduleSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleArn, location_name: "Arn"))
-    ScheduleSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    ScheduleSummary.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    ScheduleSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
-    ScheduleSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    ScheduleSummary.add_member(:last_modification_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
-    ScheduleSummary.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetSummary, location_name: "Target"))
+    ScheduleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleSummary)
+    ScheduleSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleArn, location_name: "Arn"))
+    ScheduleSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    ScheduleSummary.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "GroupName"))
+    ScheduleSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleState, location_name: "State"))
+    ScheduleSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "CreationDate"))
+    ScheduleSummary.add_member(:last_modification_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModificationDate, location_name: "LastModificationDate"))
+    ScheduleSummary.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, location_name: "Target"))
     ScheduleSummary.type = Types::ScheduleSummary
-    SecurityGroups.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroup)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SqsParameters.add_member(:message_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
+    SqsParameters.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageGroupId, location_name: "MessageGroupId"))
     SqsParameters.type = Types::SqsParameters
-    Subnets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subnet)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    Tags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap)
-    Target.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    Target.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
-    Target.add_member(:dead_letter_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
-    Target.add_member(:retry_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "RetryPolicy"))
-    Target.add_member(:input, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetInput, location_name: "Input"))
-    Target.add_member(:ecs_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EcsParameters, location_name: "EcsParameters"))
-    Target.add_member(:event_bridge_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventBridgeParameters, location_name: "EventBridgeParameters"))
-    Target.add_member(:kinesis_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KinesisParameters, location_name: "KinesisParameters"))
-    Target.add_member(:sage_maker_pipeline_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SageMakerPipelineParameters, location_name: "SageMakerPipelineParameters"))
-    Target.add_member(:sqs_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqsParameters, location_name: "SqsParameters"))
+    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap)
+    Target.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    Target.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    Target.add_member(:dead_letter_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    Target.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryPolicy, location_name: "RetryPolicy"))
+    Target.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInput, location_name: "Input"))
+    Target.add_member(:ecs_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsParameters, location_name: "EcsParameters"))
+    Target.add_member(:event_bridge_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeParameters, location_name: "EventBridgeParameters"))
+    Target.add_member(:kinesis_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisParameters, location_name: "KinesisParameters"))
+    Target.add_member(:sage_maker_pipeline_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameters, location_name: "SageMakerPipelineParameters"))
+    Target.add_member(:sqs_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SqsParameters, location_name: "SqsParameters"))
     Target.type = Types::Target
-    TargetSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    TargetSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
     TargetSummary.type = Types::TargetSummary
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "TagKeys", "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "TagKeys", "smithy.api#required" => {}}))
     UntagResourceOperationInput.type = Types::UntagResourceOperationInput
     UntagResourceOperationOutput.type = Types::UntagResourceOperationOutput
-    UpdateScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    UpdateScheduleOperationInput.add_member(:schedule_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
-    UpdateScheduleOperationInput.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDate, location_name: "StartDate"))
-    UpdateScheduleOperationInput.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
-    UpdateScheduleOperationInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateScheduleOperationInput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
-    UpdateScheduleOperationInput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
-    UpdateScheduleOperationInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
-    UpdateScheduleOperationInput.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target", traits: {"smithy.api#required" => {}}))
-    UpdateScheduleOperationInput.add_member(:flexible_time_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlexibleTimeWindow, location_name: "FlexibleTimeWindow", traits: {"smithy.api#required" => {}}))
-    UpdateScheduleOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateScheduleOperationInput.add_member(:action_after_completion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
+    UpdateScheduleOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateScheduleOperationInput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, location_name: "GroupName"))
+    UpdateScheduleOperationInput.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, location_name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
+    UpdateScheduleOperationInput.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: StartDate, location_name: "StartDate"))
+    UpdateScheduleOperationInput.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: EndDate, location_name: "EndDate"))
+    UpdateScheduleOperationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateScheduleOperationInput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
+    UpdateScheduleOperationInput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleState, location_name: "State"))
+    UpdateScheduleOperationInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn"))
+    UpdateScheduleOperationInput.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target", traits: {"smithy.api#required" => {}}))
+    UpdateScheduleOperationInput.add_member(:flexible_time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: FlexibleTimeWindow, location_name: "FlexibleTimeWindow", traits: {"smithy.api#required" => {}}))
+    UpdateScheduleOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateScheduleOperationInput.add_member(:action_after_completion, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     UpdateScheduleOperationInput.type = Types::UpdateScheduleOperationInput
-    UpdateScheduleOperationOutput.add_member(:schedule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleArn, location_name: "ScheduleArn", traits: {"smithy.api#required" => {}}))
+    UpdateScheduleOperationOutput.add_member(:schedule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleArn, location_name: "ScheduleArn", traits: {"smithy.api#required" => {}}))
     UpdateScheduleOperationOutput.type = Types::UpdateScheduleOperationOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
 
     AWSChronosService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -341,142 +341,142 @@ module Aws::Scheduler
       service.add_operation(:create_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#CreateSchedule"
         operation.name = "CreateSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateScheduleOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateScheduleOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateScheduleOperationInput
+        operation.output = CreateScheduleOperationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/schedules/{Name}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_schedule_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#CreateScheduleGroup"
         operation.name = "CreateScheduleGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateScheduleGroupOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateScheduleGroupOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateScheduleGroupOperationInput
+        operation.output = CreateScheduleGroupOperationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/schedule-groups/{Name}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#DeleteSchedule"
         operation.name = "DeleteSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScheduleOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScheduleOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteScheduleOperationInput
+        operation.output = DeleteScheduleOperationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/schedules/{Name}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_schedule_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#DeleteScheduleGroup"
         operation.name = "DeleteScheduleGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScheduleGroupOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScheduleGroupOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteScheduleGroupOperationInput
+        operation.output = DeleteScheduleGroupOperationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/schedule-groups/{Name}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#GetSchedule"
         operation.name = "GetSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetScheduleOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetScheduleOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetScheduleOperationInput
+        operation.output = GetScheduleOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/schedules/{Name}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_schedule_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#GetScheduleGroup"
         operation.name = "GetScheduleGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetScheduleGroupOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetScheduleGroupOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetScheduleGroupOperationInput
+        operation.output = GetScheduleGroupOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/schedule-groups/{Name}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_schedule_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#ListScheduleGroups"
         operation.name = "ListScheduleGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListScheduleGroupsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListScheduleGroupsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListScheduleGroupsOperationInput
+        operation.output = ListScheduleGroupsOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/schedule-groups"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListScheduleGroups.new
       end)
       service.add_operation(:list_schedules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#ListSchedules"
         operation.name = "ListSchedules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchedulesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchedulesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSchedulesOperationInput
+        operation.output = ListSchedulesOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/schedules"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSchedules.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceOperationInput
+        operation.output = ListTagsForResourceOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/tags/{ResourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceOperationInput
+        operation.output = TagResourceOperationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/tags/{ResourceArn}"}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceOperationInput
+        operation.output = UntagResourceOperationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/tags/{ResourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.scheduler#UpdateSchedule"
         operation.name = "UpdateSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateScheduleOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateScheduleOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateScheduleOperationInput
+        operation.output = UpdateScheduleOperationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#requiredActions" => ["scheduler:TagResource", "scheduler:UntagResource"], "smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/schedules/{Name}"}, "smithy.api#idempotent" => {}}
       end)
     end

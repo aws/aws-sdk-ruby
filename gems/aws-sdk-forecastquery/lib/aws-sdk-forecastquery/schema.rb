@@ -31,42 +31,42 @@ module Aws::Forecastquery
     TimeSeries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.forecastquery#TimeSeries", name: "TimeSeries")
     Timestamp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.forecastquery#Timestamp", name: "Timestamp")
 
-    DataPoint.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
-    DataPoint.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Value"))
+    DataPoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp"))
+    DataPoint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Value"))
     DataPoint.type = Types::DataPoint
-    Filters.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeName)
-    Filters.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValue)
-    Forecast.add_member(:predictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Predictions, location_name: "Predictions"))
+    Filters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName)
+    Filters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
+    Forecast.add_member(:predictions, ::Smithy::Schema::Shapes::MemberShape.new(target: Predictions, location_name: "Predictions"))
     Forecast.type = Types::Forecast
-    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidInputException.type = Types::InvalidInputException
-    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    Predictions.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statistic)
-    Predictions.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeSeries)
-    QueryForecastRequest.add_member(:forecast_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ForecastArn", traits: {"smithy.api#required" => {}}))
-    QueryForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartDate"))
-    QueryForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndDate"))
-    QueryForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", traits: {"smithy.api#required" => {}}))
-    QueryForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    Predictions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic)
+    Predictions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeries)
+    QueryForecastRequest.add_member(:forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ForecastArn", traits: {"smithy.api#required" => {}}))
+    QueryForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartDate"))
+    QueryForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndDate"))
+    QueryForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters", traits: {"smithy.api#required" => {}}))
+    QueryForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     QueryForecastRequest.type = Types::QueryForecastRequest
-    QueryForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Forecast, location_name: "Forecast"))
+    QueryForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: Forecast, location_name: "Forecast"))
     QueryForecastResponse.type = Types::QueryForecastResponse
-    QueryWhatIfForecastRequest.add_member(:what_if_forecast_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongArn, location_name: "WhatIfForecastArn", traits: {"smithy.api#required" => {}}))
-    QueryWhatIfForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartDate"))
-    QueryWhatIfForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndDate"))
-    QueryWhatIfForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", traits: {"smithy.api#required" => {}}))
-    QueryWhatIfForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    QueryWhatIfForecastRequest.add_member(:what_if_forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, location_name: "WhatIfForecastArn", traits: {"smithy.api#required" => {}}))
+    QueryWhatIfForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartDate"))
+    QueryWhatIfForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndDate"))
+    QueryWhatIfForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters", traits: {"smithy.api#required" => {}}))
+    QueryWhatIfForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     QueryWhatIfForecastRequest.type = Types::QueryWhatIfForecastRequest
-    QueryWhatIfForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Forecast, location_name: "Forecast"))
+    QueryWhatIfForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: Forecast, location_name: "Forecast"))
     QueryWhatIfForecastResponse.type = Types::QueryWhatIfForecastResponse
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    TimeSeries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataPoint)
+    TimeSeries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataPoint)
 
     AmazonForecastRuntime = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.forecastquery#AmazonForecastRuntime"
@@ -76,25 +76,25 @@ module Aws::Forecastquery
       service.add_operation(:query_forecast, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.forecastquery#QueryForecast"
         operation.name = "QueryForecast"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryForecastRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryForecastResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = QueryForecastRequest
+        operation.output = QueryForecastResponse
+        operation.errors << InvalidInputException
+        operation.errors << InvalidNextTokenException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:query_what_if_forecast, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.forecastquery#QueryWhatIfForecast"
         operation.name = "QueryWhatIfForecast"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryWhatIfForecastRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryWhatIfForecastResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = QueryWhatIfForecastRequest
+        operation.output = QueryWhatIfForecastResponse
+        operation.errors << InvalidInputException
+        operation.errors << InvalidNextTokenException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
     end

@@ -88,262 +88,262 @@ module Aws::ARCZonalShift
     ZonalShiftSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arczonalshift#ZonalShiftSummary", name: "ZonalShiftSummary")
     ZonalShiftsInResource = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arczonalshift#ZonalShiftsInResource", name: "ZonalShiftsInResource")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AllowedWindows.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedWindow)
-    AppliedStatus.add_member(:applied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
-    AppliedStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "NOT_APPLIED"}))
-    AppliedWeights.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone)
-    AppliedWeights.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Weight)
-    AutoshiftAppliedStatus.add_member(:applied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
-    AutoshiftAppliedStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "NOT_APPLIED"}))
-    AutoshiftExecutionStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    AutoshiftExecutionStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    AutoshiftInResource.add_member(:applied_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftAppliedStatus, location_name: "appliedStatus", traits: {"smithy.api#required" => {}}))
-    AutoshiftInResource.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    AutoshiftInResource.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    AllowedWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedWindow)
+    AppliedStatus.add_member(:applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
+    AppliedStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "NOT_APPLIED"}))
+    AppliedWeights.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone)
+    AppliedWeights.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Weight)
+    AutoshiftAppliedStatus.add_member(:applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
+    AutoshiftAppliedStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "NOT_APPLIED"}))
+    AutoshiftExecutionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    AutoshiftExecutionStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    AutoshiftInResource.add_member(:applied_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftAppliedStatus, location_name: "appliedStatus", traits: {"smithy.api#required" => {}}))
+    AutoshiftInResource.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    AutoshiftInResource.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
     AutoshiftInResource.type = Types::AutoshiftInResource
-    AutoshiftObserverNotificationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    AutoshiftObserverNotificationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    AutoshiftSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftSummary)
-    AutoshiftSummary.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    AutoshiftSummary.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "endTime"))
-    AutoshiftSummary.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    AutoshiftSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftExecutionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    AutoshiftObserverNotificationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    AutoshiftObserverNotificationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    AutoshiftSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftSummary)
+    AutoshiftSummary.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    AutoshiftSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "endTime"))
+    AutoshiftSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    AutoshiftSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftExecutionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     AutoshiftSummary.type = Types::AutoshiftSummary
-    AutoshiftsInResource.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftInResource)
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone)
-    BlockedDates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedDate)
-    BlockedWindows.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedWindow)
-    BlockingAlarms.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlCondition)
-    CancelPracticeRunRequest.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AutoshiftsInResource.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftInResource)
+    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone)
+    BlockedDates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedDate)
+    BlockedWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedWindow)
+    BlockingAlarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlCondition)
+    CancelPracticeRunRequest.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelPracticeRunRequest.type = Types::CancelPracticeRunRequest
-    CancelPracticeRunResponse.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
-    CancelPracticeRunResponse.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    CancelPracticeRunResponse.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    CancelPracticeRunResponse.add_member(:expiry_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
-    CancelPracticeRunResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    CancelPracticeRunResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    CancelPracticeRunResponse.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    CancelPracticeRunResponse.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
+    CancelPracticeRunResponse.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    CancelPracticeRunResponse.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    CancelPracticeRunResponse.add_member(:expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
+    CancelPracticeRunResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    CancelPracticeRunResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    CancelPracticeRunResponse.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
     CancelPracticeRunResponse.type = Types::CancelPracticeRunResponse
-    CancelZonalShiftOutput.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
-    CancelZonalShiftOutput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    CancelZonalShiftOutput.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    CancelZonalShiftOutput.add_member(:expiry_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
-    CancelZonalShiftOutput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    CancelZonalShiftOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    CancelZonalShiftOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    CancelZonalShiftOutput.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
+    CancelZonalShiftOutput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    CancelZonalShiftOutput.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    CancelZonalShiftOutput.add_member(:expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
+    CancelZonalShiftOutput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    CancelZonalShiftOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    CancelZonalShiftOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
     CancelZonalShiftOutput.type = Types::CancelZonalShiftOutput
-    CancelZonalShiftRequest.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelZonalShiftRequest.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelZonalShiftRequest.type = Types::CancelZonalShiftRequest
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "zonalShiftId"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "zonalShiftId"))
     ConflictException.type = Types::ConflictException
-    ConflictExceptionReason.add_member(:zonal_shift_already_exists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_SHIFT_ALREADY_EXISTS", traits: {"smithy.api#enumValue" => "ZonalShiftAlreadyExists"}))
-    ConflictExceptionReason.add_member(:zonal_shift_status_not_active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_SHIFT_STATUS_NOT_ACTIVE", traits: {"smithy.api#enumValue" => "ZonalShiftStatusNotActive"}))
-    ConflictExceptionReason.add_member(:simultaneous_zonal_shifts_conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT", traits: {"smithy.api#enumValue" => "SimultaneousZonalShiftsConflict"}))
-    ConflictExceptionReason.add_member(:practice_configuration_already_exists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_CONFIGURATION_ALREADY_EXISTS", traits: {"smithy.api#enumValue" => "PracticeConfigurationAlreadyExists"}))
-    ConflictExceptionReason.add_member(:autoshift_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOSHIFT_ENABLED", traits: {"smithy.api#enumValue" => "AutoShiftEnabled"}))
-    ConflictExceptionReason.add_member(:practice_configuration_does_not_exist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_CONFIGURATION_DOES_NOT_EXIST", traits: {"smithy.api#enumValue" => "PracticeConfigurationDoesNotExist"}))
-    ConflictExceptionReason.add_member(:zonal_autoshift_active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_AUTOSHIFT_ACTIVE", traits: {"smithy.api#enumValue" => "ZonalAutoshiftActive"}))
-    ConflictExceptionReason.add_member(:practice_outcome_alarms_red, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_OUTCOME_ALARMS_RED", traits: {"smithy.api#enumValue" => "PracticeOutcomeAlarmsRed"}))
-    ConflictExceptionReason.add_member(:practice_blocking_alarms_red, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_BLOCKING_ALARMS_RED", traits: {"smithy.api#enumValue" => "PracticeBlockingAlarmsRed"}))
-    ConflictExceptionReason.add_member(:practice_in_blocked_dates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_IN_BLOCKED_DATES", traits: {"smithy.api#enumValue" => "PracticeInBlockedDates"}))
-    ConflictExceptionReason.add_member(:practice_in_blocked_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_IN_BLOCKED_WINDOWS", traits: {"smithy.api#enumValue" => "PracticeInBlockedWindows"}))
-    ConflictExceptionReason.add_member(:practice_outside_allowed_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_OUTSIDE_ALLOWED_WINDOWS", traits: {"smithy.api#enumValue" => "PracticeOutsideAllowedWindows"}))
-    ControlCondition.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlConditionType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    ControlCondition.add_member(:alarm_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricIdentifier, location_name: "alarmIdentifier", traits: {"smithy.api#required" => {}}))
+    ConflictExceptionReason.add_member(:zonal_shift_already_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_SHIFT_ALREADY_EXISTS", traits: {"smithy.api#enumValue" => "ZonalShiftAlreadyExists"}))
+    ConflictExceptionReason.add_member(:zonal_shift_status_not_active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_SHIFT_STATUS_NOT_ACTIVE", traits: {"smithy.api#enumValue" => "ZonalShiftStatusNotActive"}))
+    ConflictExceptionReason.add_member(:simultaneous_zonal_shifts_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT", traits: {"smithy.api#enumValue" => "SimultaneousZonalShiftsConflict"}))
+    ConflictExceptionReason.add_member(:practice_configuration_already_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_CONFIGURATION_ALREADY_EXISTS", traits: {"smithy.api#enumValue" => "PracticeConfigurationAlreadyExists"}))
+    ConflictExceptionReason.add_member(:autoshift_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOSHIFT_ENABLED", traits: {"smithy.api#enumValue" => "AutoShiftEnabled"}))
+    ConflictExceptionReason.add_member(:practice_configuration_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_CONFIGURATION_DOES_NOT_EXIST", traits: {"smithy.api#enumValue" => "PracticeConfigurationDoesNotExist"}))
+    ConflictExceptionReason.add_member(:zonal_autoshift_active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_AUTOSHIFT_ACTIVE", traits: {"smithy.api#enumValue" => "ZonalAutoshiftActive"}))
+    ConflictExceptionReason.add_member(:practice_outcome_alarms_red, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_OUTCOME_ALARMS_RED", traits: {"smithy.api#enumValue" => "PracticeOutcomeAlarmsRed"}))
+    ConflictExceptionReason.add_member(:practice_blocking_alarms_red, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_BLOCKING_ALARMS_RED", traits: {"smithy.api#enumValue" => "PracticeBlockingAlarmsRed"}))
+    ConflictExceptionReason.add_member(:practice_in_blocked_dates, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_IN_BLOCKED_DATES", traits: {"smithy.api#enumValue" => "PracticeInBlockedDates"}))
+    ConflictExceptionReason.add_member(:practice_in_blocked_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_IN_BLOCKED_WINDOWS", traits: {"smithy.api#enumValue" => "PracticeInBlockedWindows"}))
+    ConflictExceptionReason.add_member(:practice_outside_allowed_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_OUTSIDE_ALLOWED_WINDOWS", traits: {"smithy.api#enumValue" => "PracticeOutsideAllowedWindows"}))
+    ControlCondition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlConditionType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    ControlCondition.add_member(:alarm_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricIdentifier, location_name: "alarmIdentifier", traits: {"smithy.api#required" => {}}))
     ControlCondition.type = Types::ControlCondition
-    ControlConditionType.add_member(:cloudwatch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUDWATCH", traits: {"smithy.api#enumValue" => "CLOUDWATCH"}))
-    CreatePracticeRunConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    CreatePracticeRunConfigurationRequest.add_member(:blocked_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
-    CreatePracticeRunConfigurationRequest.add_member(:blocked_dates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
-    CreatePracticeRunConfigurationRequest.add_member(:blocking_alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockingAlarms, location_name: "blockingAlarms"))
-    CreatePracticeRunConfigurationRequest.add_member(:allowed_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedWindows, location_name: "allowedWindows"))
-    CreatePracticeRunConfigurationRequest.add_member(:outcome_alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutcomeAlarms, location_name: "outcomeAlarms", traits: {"smithy.api#required" => {}}))
+    ControlConditionType.add_member(:cloudwatch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUDWATCH", traits: {"smithy.api#enumValue" => "CLOUDWATCH"}))
+    CreatePracticeRunConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    CreatePracticeRunConfigurationRequest.add_member(:blocked_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedWindows, location_name: "blockedWindows"))
+    CreatePracticeRunConfigurationRequest.add_member(:blocked_dates, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedDates, location_name: "blockedDates"))
+    CreatePracticeRunConfigurationRequest.add_member(:blocking_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockingAlarms, location_name: "blockingAlarms"))
+    CreatePracticeRunConfigurationRequest.add_member(:allowed_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedWindows, location_name: "allowedWindows"))
+    CreatePracticeRunConfigurationRequest.add_member(:outcome_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: OutcomeAlarms, location_name: "outcomeAlarms", traits: {"smithy.api#required" => {}}))
     CreatePracticeRunConfigurationRequest.type = Types::CreatePracticeRunConfigurationRequest
-    CreatePracticeRunConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    CreatePracticeRunConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreatePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
-    CreatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PracticeRunConfiguration, location_name: "practiceRunConfiguration", traits: {"smithy.api#required" => {}}))
+    CreatePracticeRunConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    CreatePracticeRunConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreatePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
+    CreatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PracticeRunConfiguration, location_name: "practiceRunConfiguration", traits: {"smithy.api#required" => {}}))
     CreatePracticeRunConfigurationResponse.type = Types::CreatePracticeRunConfigurationResponse
-    DeletePracticeRunConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePracticeRunConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeletePracticeRunConfigurationRequest.type = Types::DeletePracticeRunConfigurationRequest
-    DeletePracticeRunConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    DeletePracticeRunConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    DeletePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
+    DeletePracticeRunConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    DeletePracticeRunConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    DeletePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
     DeletePracticeRunConfigurationResponse.type = Types::DeletePracticeRunConfigurationResponse
     GetAutoshiftObserverNotificationStatusRequest.type = Types::GetAutoshiftObserverNotificationStatusRequest
-    GetAutoshiftObserverNotificationStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftObserverNotificationStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetAutoshiftObserverNotificationStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftObserverNotificationStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     GetAutoshiftObserverNotificationStatusResponse.type = Types::GetAutoshiftObserverNotificationStatusResponse
-    GetManagedResourceRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetManagedResourceRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetManagedResourceRequest.type = Types::GetManagedResourceRequest
-    GetManagedResourceResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    GetManagedResourceResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    GetManagedResourceResponse.add_member(:applied_weights, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedWeights, location_name: "appliedWeights", traits: {"smithy.api#required" => {}}))
-    GetManagedResourceResponse.add_member(:zonal_shifts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftsInResource, location_name: "zonalShifts", traits: {"smithy.api#required" => {}}))
-    GetManagedResourceResponse.add_member(:autoshifts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftsInResource, location_name: "autoshifts"))
-    GetManagedResourceResponse.add_member(:practice_run_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PracticeRunConfiguration, location_name: "practiceRunConfiguration"))
-    GetManagedResourceResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus"))
+    GetManagedResourceResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    GetManagedResourceResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name"))
+    GetManagedResourceResponse.add_member(:applied_weights, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedWeights, location_name: "appliedWeights", traits: {"smithy.api#required" => {}}))
+    GetManagedResourceResponse.add_member(:zonal_shifts, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftsInResource, location_name: "zonalShifts", traits: {"smithy.api#required" => {}}))
+    GetManagedResourceResponse.add_member(:autoshifts, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftsInResource, location_name: "autoshifts"))
+    GetManagedResourceResponse.add_member(:practice_run_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PracticeRunConfiguration, location_name: "practiceRunConfiguration"))
+    GetManagedResourceResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus"))
     GetManagedResourceResponse.type = Types::GetManagedResourceResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    ListAutoshiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListAutoshiftsRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftExecutionStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
-    ListAutoshiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAutoshiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAutoshiftsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftExecutionStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListAutoshiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAutoshiftsRequest.type = Types::ListAutoshiftsRequest
-    ListAutoshiftsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftSummaries, location_name: "items"))
-    ListAutoshiftsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListAutoshiftsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftSummaries, location_name: "items"))
+    ListAutoshiftsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListAutoshiftsResponse.type = Types::ListAutoshiftsResponse
-    ListManagedResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListManagedResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListManagedResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListManagedResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListManagedResourcesRequest.type = Types::ListManagedResourcesRequest
-    ListManagedResourcesResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedResourceSummaries, location_name: "items", traits: {"smithy.api#required" => {}}))
-    ListManagedResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListManagedResourcesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummaries, location_name: "items", traits: {"smithy.api#required" => {}}))
+    ListManagedResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListManagedResourcesResponse.type = Types::ListManagedResourcesResponse
-    ListZonalShiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListZonalShiftsRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
-    ListZonalShiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListZonalShiftsRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpQuery" => "resourceIdentifier"}))
+    ListZonalShiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListZonalShiftsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListZonalShiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListZonalShiftsRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpQuery" => "resourceIdentifier"}))
     ListZonalShiftsRequest.type = Types::ListZonalShiftsRequest
-    ListZonalShiftsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftSummaries, location_name: "items"))
-    ListZonalShiftsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListZonalShiftsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftSummaries, location_name: "items"))
+    ListZonalShiftsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListZonalShiftsResponse.type = Types::ListZonalShiftsResponse
-    ManagedResourceSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedResourceSummary)
-    ManagedResourceSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    ManagedResourceSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    ManagedResourceSummary.add_member(:availability_zones, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "availabilityZones", traits: {"smithy.api#required" => {}}))
-    ManagedResourceSummary.add_member(:applied_weights, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedWeights, location_name: "appliedWeights"))
-    ManagedResourceSummary.add_member(:zonal_shifts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftsInResource, location_name: "zonalShifts"))
-    ManagedResourceSummary.add_member(:autoshifts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftsInResource, location_name: "autoshifts"))
-    ManagedResourceSummary.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus"))
-    ManagedResourceSummary.add_member(:practice_run_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "practiceRunStatus"))
+    ManagedResourceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummary)
+    ManagedResourceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    ManagedResourceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name"))
+    ManagedResourceSummary.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "availabilityZones", traits: {"smithy.api#required" => {}}))
+    ManagedResourceSummary.add_member(:applied_weights, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedWeights, location_name: "appliedWeights"))
+    ManagedResourceSummary.add_member(:zonal_shifts, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftsInResource, location_name: "zonalShifts"))
+    ManagedResourceSummary.add_member(:autoshifts, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftsInResource, location_name: "autoshifts"))
+    ManagedResourceSummary.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus"))
+    ManagedResourceSummary.add_member(:practice_run_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "practiceRunStatus"))
     ManagedResourceSummary.type = Types::ManagedResourceSummary
-    OutcomeAlarms.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlCondition)
-    PracticeRunConfiguration.add_member(:blocking_alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockingAlarms, location_name: "blockingAlarms"))
-    PracticeRunConfiguration.add_member(:outcome_alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutcomeAlarms, location_name: "outcomeAlarms", traits: {"smithy.api#required" => {}}))
-    PracticeRunConfiguration.add_member(:blocked_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
-    PracticeRunConfiguration.add_member(:allowed_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedWindows, location_name: "allowedWindows"))
-    PracticeRunConfiguration.add_member(:blocked_dates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates", traits: {"smithy.api#default" => []}))
+    OutcomeAlarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlCondition)
+    PracticeRunConfiguration.add_member(:blocking_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockingAlarms, location_name: "blockingAlarms"))
+    PracticeRunConfiguration.add_member(:outcome_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: OutcomeAlarms, location_name: "outcomeAlarms", traits: {"smithy.api#required" => {}}))
+    PracticeRunConfiguration.add_member(:blocked_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedWindows, location_name: "blockedWindows"))
+    PracticeRunConfiguration.add_member(:allowed_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedWindows, location_name: "allowedWindows"))
+    PracticeRunConfiguration.add_member(:blocked_dates, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedDates, location_name: "blockedDates", traits: {"smithy.api#default" => []}))
     PracticeRunConfiguration.type = Types::PracticeRunConfiguration
-    PracticeRunOutcome.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    PracticeRunOutcome.add_member(:interrupted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERRUPTED", traits: {"smithy.api#enumValue" => "INTERRUPTED"}))
-    PracticeRunOutcome.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    PracticeRunOutcome.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    PracticeRunOutcome.add_member(:capacity_check_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CAPACITY_CHECK_FAILED", traits: {"smithy.api#enumValue" => "CAPACITY_CHECK_FAILED"}))
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    PracticeRunOutcome.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    PracticeRunOutcome.add_member(:interrupted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERRUPTED", traits: {"smithy.api#enumValue" => "INTERRUPTED"}))
+    PracticeRunOutcome.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    PracticeRunOutcome.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    PracticeRunOutcome.add_member(:capacity_check_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CAPACITY_CHECK_FAILED", traits: {"smithy.api#enumValue" => "CAPACITY_CHECK_FAILED"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ShiftType.add_member(:zonal_shift, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_SHIFT", traits: {"smithy.api#enumValue" => "ZONAL_SHIFT"}))
-    ShiftType.add_member(:practice_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_RUN", traits: {"smithy.api#enumValue" => "PRACTICE_RUN"}))
-    ShiftType.add_member(:fis_experiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIS_EXPERIMENT", traits: {"smithy.api#enumValue" => "FIS_EXPERIMENT"}))
-    ShiftType.add_member(:zonal_autoshift, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_AUTOSHIFT", traits: {"smithy.api#enumValue" => "ZONAL_AUTOSHIFT"}))
-    StartPracticeRunRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunRequest.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunRequest.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    ShiftType.add_member(:zonal_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_SHIFT", traits: {"smithy.api#enumValue" => "ZONAL_SHIFT"}))
+    ShiftType.add_member(:practice_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRACTICE_RUN", traits: {"smithy.api#enumValue" => "PRACTICE_RUN"}))
+    ShiftType.add_member(:fis_experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIS_EXPERIMENT", traits: {"smithy.api#enumValue" => "FIS_EXPERIMENT"}))
+    ShiftType.add_member(:zonal_autoshift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZONAL_AUTOSHIFT", traits: {"smithy.api#enumValue" => "ZONAL_AUTOSHIFT"}))
+    StartPracticeRunRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunRequest.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunRequest.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
     StartPracticeRunRequest.type = Types::StartPracticeRunRequest
-    StartPracticeRunResponse.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunResponse.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunResponse.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunResponse.add_member(:expiry_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    StartPracticeRunResponse.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunResponse.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunResponse.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunResponse.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunResponse.add_member(:expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    StartPracticeRunResponse.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
     StartPracticeRunResponse.type = Types::StartPracticeRunResponse
-    StartZonalShiftOutput.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftOutput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftOutput.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftOutput.add_member(:expiry_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftOutput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftOutput.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftOutput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftOutput.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftOutput.add_member(:expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftOutput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
     StartZonalShiftOutput.type = Types::StartZonalShiftOutput
-    StartZonalShiftRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftRequest.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftRequest.add_member(:expires_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiresIn, location_name: "expiresIn", traits: {"smithy.api#required" => {}}))
-    StartZonalShiftRequest.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftRequest.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftRequest.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresIn, location_name: "expiresIn", traits: {"smithy.api#required" => {}}))
+    StartZonalShiftRequest.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
     StartZonalShiftRequest.type = Types::StartZonalShiftRequest
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    UpdateAutoshiftObserverNotificationStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftObserverNotificationStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateAutoshiftObserverNotificationStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftObserverNotificationStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     UpdateAutoshiftObserverNotificationStatusRequest.type = Types::UpdateAutoshiftObserverNotificationStatusRequest
-    UpdateAutoshiftObserverNotificationStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoshiftObserverNotificationStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateAutoshiftObserverNotificationStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftObserverNotificationStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     UpdateAutoshiftObserverNotificationStatusResponse.type = Types::UpdateAutoshiftObserverNotificationStatusResponse
-    UpdatePracticeRunConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdatePracticeRunConfigurationRequest.add_member(:blocked_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
-    UpdatePracticeRunConfigurationRequest.add_member(:blocked_dates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
-    UpdatePracticeRunConfigurationRequest.add_member(:blocking_alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockingAlarms, location_name: "blockingAlarms"))
-    UpdatePracticeRunConfigurationRequest.add_member(:allowed_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedWindows, location_name: "allowedWindows"))
-    UpdatePracticeRunConfigurationRequest.add_member(:outcome_alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutcomeAlarms, location_name: "outcomeAlarms"))
+    UpdatePracticeRunConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePracticeRunConfigurationRequest.add_member(:blocked_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedWindows, location_name: "blockedWindows"))
+    UpdatePracticeRunConfigurationRequest.add_member(:blocked_dates, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedDates, location_name: "blockedDates"))
+    UpdatePracticeRunConfigurationRequest.add_member(:blocking_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockingAlarms, location_name: "blockingAlarms"))
+    UpdatePracticeRunConfigurationRequest.add_member(:allowed_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedWindows, location_name: "allowedWindows"))
+    UpdatePracticeRunConfigurationRequest.add_member(:outcome_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: OutcomeAlarms, location_name: "outcomeAlarms"))
     UpdatePracticeRunConfigurationRequest.type = Types::UpdatePracticeRunConfigurationRequest
-    UpdatePracticeRunConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    UpdatePracticeRunConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    UpdatePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
-    UpdatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PracticeRunConfiguration, location_name: "practiceRunConfiguration", traits: {"smithy.api#required" => {}}))
+    UpdatePracticeRunConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    UpdatePracticeRunConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    UpdatePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
+    UpdatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PracticeRunConfiguration, location_name: "practiceRunConfiguration", traits: {"smithy.api#required" => {}}))
     UpdatePracticeRunConfigurationResponse.type = Types::UpdatePracticeRunConfigurationResponse
-    UpdateZonalAutoshiftConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateZonalAutoshiftConfigurationRequest.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
+    UpdateZonalAutoshiftConfigurationRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateZonalAutoshiftConfigurationRequest.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
     UpdateZonalAutoshiftConfigurationRequest.type = Types::UpdateZonalAutoshiftConfigurationRequest
-    UpdateZonalAutoshiftConfigurationResponse.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    UpdateZonalAutoshiftConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
+    UpdateZonalAutoshiftConfigurationResponse.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    UpdateZonalAutoshiftConfigurationResponse.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus", traits: {"smithy.api#required" => {}}))
     UpdateZonalAutoshiftConfigurationResponse.type = Types::UpdateZonalAutoshiftConfigurationResponse
-    UpdateZonalShiftOutput.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
-    UpdateZonalShiftOutput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    UpdateZonalShiftOutput.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    UpdateZonalShiftOutput.add_member(:expiry_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
-    UpdateZonalShiftOutput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    UpdateZonalShiftOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    UpdateZonalShiftOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    UpdateZonalShiftOutput.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
+    UpdateZonalShiftOutput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    UpdateZonalShiftOutput.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    UpdateZonalShiftOutput.add_member(:expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
+    UpdateZonalShiftOutput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    UpdateZonalShiftOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateZonalShiftOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
     UpdateZonalShiftOutput.type = Types::UpdateZonalShiftOutput
-    UpdateZonalShiftRequest.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateZonalShiftRequest.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment"))
-    UpdateZonalShiftRequest.add_member(:expires_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiresIn, location_name: "expiresIn"))
+    UpdateZonalShiftRequest.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateZonalShiftRequest.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment"))
+    UpdateZonalShiftRequest.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresIn, location_name: "expiresIn"))
     UpdateZonalShiftRequest.type = Types::UpdateZonalShiftRequest
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionReason.add_member(:invalid_expires_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_EXPIRES_IN", traits: {"smithy.api#enumValue" => "InvalidExpiresIn"}))
-    ValidationExceptionReason.add_member(:invalid_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_STATUS", traits: {"smithy.api#enumValue" => "InvalidStatus"}))
-    ValidationExceptionReason.add_member(:missing_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISSING_VALUE", traits: {"smithy.api#enumValue" => "MissingValue"}))
-    ValidationExceptionReason.add_member(:invalid_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_TOKEN", traits: {"smithy.api#enumValue" => "InvalidToken"}))
-    ValidationExceptionReason.add_member(:invalid_resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_RESOURCE_IDENTIFIER", traits: {"smithy.api#enumValue" => "InvalidResourceIdentifier"}))
-    ValidationExceptionReason.add_member(:invalid_az, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_AZ", traits: {"smithy.api#enumValue" => "InvalidAz"}))
-    ValidationExceptionReason.add_member(:unsupported_az, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED_AZ", traits: {"smithy.api#enumValue" => "UnsupportedAz"}))
-    ValidationExceptionReason.add_member(:invalid_alarm_condition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ALARM_CONDITION", traits: {"smithy.api#enumValue" => "InvalidAlarmCondition"}))
-    ValidationExceptionReason.add_member(:invalid_condition_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_CONDITION_TYPE", traits: {"smithy.api#enumValue" => "InvalidConditionType"}))
-    ValidationExceptionReason.add_member(:invalid_practice_blocker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PRACTICE_BLOCKER", traits: {"smithy.api#enumValue" => "InvalidPracticeBlocker"}))
-    ValidationExceptionReason.add_member(:fis_experiment_update_not_allowed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIS_EXPERIMENT_UPDATE_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "FISExperimentUpdateNotAllowed"}))
-    ValidationExceptionReason.add_member(:autoshift_update_not_allowed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOSHIFT_UPDATE_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "AutoshiftUpdateNotAllowed"}))
-    ValidationExceptionReason.add_member(:unsupported_practice_cancel_shift_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE", traits: {"smithy.api#enumValue" => "UnsupportedPracticeCancelShiftType"}))
-    ValidationExceptionReason.add_member(:invalid_practice_allowed_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PRACTICE_ALLOWED_WINDOW", traits: {"smithy.api#enumValue" => "InvalidPracticeAllowedWindow"}))
-    ValidationExceptionReason.add_member(:conflicting_practice_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICTING_PRACTICE_WINDOWS", traits: {"smithy.api#enumValue" => "InvalidPracticeWindows"}))
-    ZonalAutoshiftStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    ZonalAutoshiftStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ZonalShiftInResource.add_member(:applied_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedStatus, location_name: "appliedStatus", traits: {"smithy.api#required" => {}}))
-    ZonalShiftInResource.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
-    ZonalShiftInResource.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    ZonalShiftInResource.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    ZonalShiftInResource.add_member(:expiry_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
-    ZonalShiftInResource.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    ZonalShiftInResource.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
-    ZonalShiftInResource.add_member(:shift_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
-    ZonalShiftInResource.add_member(:practice_run_outcome, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
+    ValidationExceptionReason.add_member(:invalid_expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_EXPIRES_IN", traits: {"smithy.api#enumValue" => "InvalidExpiresIn"}))
+    ValidationExceptionReason.add_member(:invalid_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_STATUS", traits: {"smithy.api#enumValue" => "InvalidStatus"}))
+    ValidationExceptionReason.add_member(:missing_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISSING_VALUE", traits: {"smithy.api#enumValue" => "MissingValue"}))
+    ValidationExceptionReason.add_member(:invalid_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_TOKEN", traits: {"smithy.api#enumValue" => "InvalidToken"}))
+    ValidationExceptionReason.add_member(:invalid_resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_RESOURCE_IDENTIFIER", traits: {"smithy.api#enumValue" => "InvalidResourceIdentifier"}))
+    ValidationExceptionReason.add_member(:invalid_az, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_AZ", traits: {"smithy.api#enumValue" => "InvalidAz"}))
+    ValidationExceptionReason.add_member(:unsupported_az, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED_AZ", traits: {"smithy.api#enumValue" => "UnsupportedAz"}))
+    ValidationExceptionReason.add_member(:invalid_alarm_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ALARM_CONDITION", traits: {"smithy.api#enumValue" => "InvalidAlarmCondition"}))
+    ValidationExceptionReason.add_member(:invalid_condition_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_CONDITION_TYPE", traits: {"smithy.api#enumValue" => "InvalidConditionType"}))
+    ValidationExceptionReason.add_member(:invalid_practice_blocker, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PRACTICE_BLOCKER", traits: {"smithy.api#enumValue" => "InvalidPracticeBlocker"}))
+    ValidationExceptionReason.add_member(:fis_experiment_update_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIS_EXPERIMENT_UPDATE_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "FISExperimentUpdateNotAllowed"}))
+    ValidationExceptionReason.add_member(:autoshift_update_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOSHIFT_UPDATE_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "AutoshiftUpdateNotAllowed"}))
+    ValidationExceptionReason.add_member(:unsupported_practice_cancel_shift_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE", traits: {"smithy.api#enumValue" => "UnsupportedPracticeCancelShiftType"}))
+    ValidationExceptionReason.add_member(:invalid_practice_allowed_window, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PRACTICE_ALLOWED_WINDOW", traits: {"smithy.api#enumValue" => "InvalidPracticeAllowedWindow"}))
+    ValidationExceptionReason.add_member(:conflicting_practice_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICTING_PRACTICE_WINDOWS", traits: {"smithy.api#enumValue" => "InvalidPracticeWindows"}))
+    ZonalAutoshiftStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ZonalAutoshiftStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ZonalShiftInResource.add_member(:applied_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedStatus, location_name: "appliedStatus", traits: {"smithy.api#required" => {}}))
+    ZonalShiftInResource.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
+    ZonalShiftInResource.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    ZonalShiftInResource.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    ZonalShiftInResource.add_member(:expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
+    ZonalShiftInResource.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    ZonalShiftInResource.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    ZonalShiftInResource.add_member(:shift_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftType, location_name: "shiftType"))
+    ZonalShiftInResource.add_member(:practice_run_outcome, ::Smithy::Schema::Shapes::MemberShape.new(target: PracticeRunOutcome, location_name: "practiceRunOutcome"))
     ZonalShiftInResource.type = Types::ZonalShiftInResource
-    ZonalShiftStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ZonalShiftStatus.add_member(:expired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
-    ZonalShiftStatus.add_member(:canceled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
-    ZonalShiftSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftSummary)
-    ZonalShiftSummary.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
-    ZonalShiftSummary.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
-    ZonalShiftSummary.add_member(:away_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
-    ZonalShiftSummary.add_member(:expiry_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
-    ZonalShiftSummary.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    ZonalShiftSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ZonalShiftSummary.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
-    ZonalShiftSummary.add_member(:shift_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
-    ZonalShiftSummary.add_member(:practice_run_outcome, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
+    ZonalShiftStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ZonalShiftStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
+    ZonalShiftStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    ZonalShiftSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftSummary)
+    ZonalShiftSummary.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, location_name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
+    ZonalShiftSummary.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
+    ZonalShiftSummary.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "awayFrom", traits: {"smithy.api#required" => {}}))
+    ZonalShiftSummary.add_member(:expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, location_name: "expiryTime", traits: {"smithy.api#required" => {}}))
+    ZonalShiftSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    ZonalShiftSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ZonalShiftSummary.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftComment, location_name: "comment", traits: {"smithy.api#required" => {}}))
+    ZonalShiftSummary.add_member(:shift_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftType, location_name: "shiftType"))
+    ZonalShiftSummary.add_member(:practice_run_outcome, ::Smithy::Schema::Shapes::MemberShape.new(target: PracticeRunOutcome, location_name: "practiceRunOutcome"))
     ZonalShiftSummary.type = Types::ZonalShiftSummary
-    ZonalShiftsInResource.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalShiftInResource)
+    ZonalShiftsInResource.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftInResource)
 
     PercDataPlane = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.arczonalshift#PercDataPlane"
@@ -353,187 +353,187 @@ module Aws::ARCZonalShift
       service.add_operation(:cancel_practice_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#CancelPracticeRun"
         operation.name = "CancelPracticeRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelPracticeRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelPracticeRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelPracticeRunRequest
+        operation.output = CancelPracticeRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/practiceruns/{zonalShiftId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:cancel_zonal_shift, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#CancelZonalShift"
         operation.name = "CancelZonalShift"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelZonalShiftRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelZonalShiftOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelZonalShiftRequest
+        operation.output = CancelZonalShiftOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/zonalshifts/{zonalShiftId}", "code" => 200}}
       end)
       service.add_operation(:create_practice_run_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#CreatePracticeRunConfiguration"
         operation.name = "CreatePracticeRunConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePracticeRunConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePracticeRunConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreatePracticeRunConfigurationRequest
+        operation.output = CreatePracticeRunConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/configuration", "code" => 201}}
       end)
       service.add_operation(:delete_practice_run_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#DeletePracticeRunConfiguration"
         operation.name = "DeletePracticeRunConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePracticeRunConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePracticeRunConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeletePracticeRunConfigurationRequest
+        operation.output = DeletePracticeRunConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/configuration/{resourceIdentifier}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_autoshift_observer_notification_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#GetAutoshiftObserverNotificationStatus"
         operation.name = "GetAutoshiftObserverNotificationStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAutoshiftObserverNotificationStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAutoshiftObserverNotificationStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetAutoshiftObserverNotificationStatusRequest
+        operation.output = GetAutoshiftObserverNotificationStatusResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/autoshift-observer-notification", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_managed_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#GetManagedResource"
         operation.name = "GetManagedResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetManagedResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetManagedResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetManagedResourceRequest
+        operation.output = GetManagedResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/managedresources/{resourceIdentifier}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_autoshifts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#ListAutoshifts"
         operation.name = "ListAutoshifts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAutoshiftsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAutoshiftsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAutoshiftsRequest
+        operation.output = ListAutoshiftsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/autoshifts", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAutoshifts.new
       end)
       service.add_operation(:list_managed_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#ListManagedResources"
         operation.name = "ListManagedResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListManagedResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListManagedResourcesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListManagedResourcesRequest
+        operation.output = ListManagedResourcesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/managedresources", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListManagedResources.new
       end)
       service.add_operation(:list_zonal_shifts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#ListZonalShifts"
         operation.name = "ListZonalShifts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListZonalShiftsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListZonalShiftsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListZonalShiftsRequest
+        operation.output = ListZonalShiftsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/zonalshifts", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListZonalShifts.new
       end)
       service.add_operation(:start_practice_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#StartPracticeRun"
         operation.name = "StartPracticeRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartPracticeRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartPracticeRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartPracticeRunRequest
+        operation.output = StartPracticeRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/practiceruns", "code" => 200}}
       end)
       service.add_operation(:start_zonal_shift, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#StartZonalShift"
         operation.name = "StartZonalShift"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartZonalShiftRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartZonalShiftOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartZonalShiftRequest
+        operation.output = StartZonalShiftOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/zonalshifts", "code" => 201}}
       end)
       service.add_operation(:update_autoshift_observer_notification_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#UpdateAutoshiftObserverNotificationStatus"
         operation.name = "UpdateAutoshiftObserverNotificationStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAutoshiftObserverNotificationStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAutoshiftObserverNotificationStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateAutoshiftObserverNotificationStatusRequest
+        operation.output = UpdateAutoshiftObserverNotificationStatusResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/autoshift-observer-notification", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_practice_run_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#UpdatePracticeRunConfiguration"
         operation.name = "UpdatePracticeRunConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePracticeRunConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePracticeRunConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdatePracticeRunConfigurationRequest
+        operation.output = UpdatePracticeRunConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/configuration/{resourceIdentifier}", "code" => 200}}
       end)
       service.add_operation(:update_zonal_autoshift_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#UpdateZonalAutoshiftConfiguration"
         operation.name = "UpdateZonalAutoshiftConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateZonalAutoshiftConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateZonalAutoshiftConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateZonalAutoshiftConfigurationRequest
+        operation.output = UpdateZonalAutoshiftConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/managedresources/{resourceIdentifier}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_zonal_shift, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arczonalshift#UpdateZonalShift"
         operation.name = "UpdateZonalShift"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateZonalShiftRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateZonalShiftOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateZonalShiftRequest
+        operation.output = UpdateZonalShiftOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/zonalshifts/{zonalShiftId}", "code" => 200}}
       end)
     end

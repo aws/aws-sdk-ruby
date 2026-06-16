@@ -77,122 +77,122 @@ module Aws::ResourceGroupsTaggingAPI
     UntagResourcesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#UntagResourcesInput", name: "UntagResourcesInput")
     UntagResourcesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#UntagResourcesOutput", name: "UntagResourcesOutput")
 
-    ComplianceDetails.add_member(:noncompliant_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "NoncompliantKeys"))
-    ComplianceDetails.add_member(:keys_with_noncompliant_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "KeysWithNoncompliantValues"))
-    ComplianceDetails.add_member(:compliance_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "ComplianceStatus"))
+    ComplianceDetails.add_member(:noncompliant_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "NoncompliantKeys"))
+    ComplianceDetails.add_member(:keys_with_noncompliant_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "KeysWithNoncompliantValues"))
+    ComplianceDetails.add_member(:compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceStatus, location_name: "ComplianceStatus"))
     ComplianceDetails.type = Types::ComplianceDetails
-    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ConstraintViolationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ConstraintViolationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ConstraintViolationException.type = Types::ConstraintViolationException
     DescribeReportCreationInput.type = Types::DescribeReportCreationInput
-    DescribeReportCreationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
-    DescribeReportCreationOutput.add_member(:s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "S3Location"))
-    DescribeReportCreationOutput.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDate, location_name: "StartDate"))
-    DescribeReportCreationOutput.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeReportCreationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "Status"))
+    DescribeReportCreationOutput.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "S3Location"))
+    DescribeReportCreationOutput.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: StartDate, location_name: "StartDate"))
+    DescribeReportCreationOutput.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "ErrorMessage"))
     DescribeReportCreationOutput.type = Types::DescribeReportCreationOutput
-    ErrorCode.add_member(:internal_service_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVICE_EXCEPTION", traits: {"smithy.api#enumValue" => "InternalServiceException"}))
-    ErrorCode.add_member(:invalid_parameter_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PARAMETER_EXCEPTION", traits: {"smithy.api#enumValue" => "InvalidParameterException"}))
-    FailedResourcesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN)
-    FailedResourcesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureInfo)
-    FailureInfo.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: "StatusCode", traits: {"smithy.api#default" => 0}))
-    FailureInfo.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    FailureInfo.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ErrorCode.add_member(:internal_service_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVICE_EXCEPTION", traits: {"smithy.api#enumValue" => "InternalServiceException"}))
+    ErrorCode.add_member(:invalid_parameter_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PARAMETER_EXCEPTION", traits: {"smithy.api#enumValue" => "InvalidParameterException"}))
+    FailedResourcesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN)
+    FailedResourcesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureInfo)
+    FailureInfo.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, location_name: "StatusCode", traits: {"smithy.api#default" => 0}))
+    FailureInfo.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    FailureInfo.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "ErrorMessage"))
     FailureInfo.type = Types::FailureInfo
-    GetComplianceSummaryInput.add_member(:target_id_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetIdFilterList, location_name: "TargetIdFilters"))
-    GetComplianceSummaryInput.add_member(:region_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionFilterList, location_name: "RegionFilters"))
-    GetComplianceSummaryInput.add_member(:resource_type_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeFilterList, location_name: "ResourceTypeFilters"))
-    GetComplianceSummaryInput.add_member(:tag_key_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyFilterList, location_name: "TagKeyFilters"))
-    GetComplianceSummaryInput.add_member(:group_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupBy, location_name: "GroupBy"))
-    GetComplianceSummaryInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsGetComplianceSummary, location_name: "MaxResults"))
-    GetComplianceSummaryInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
+    GetComplianceSummaryInput.add_member(:target_id_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIdFilterList, location_name: "TargetIdFilters"))
+    GetComplianceSummaryInput.add_member(:region_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionFilterList, location_name: "RegionFilters"))
+    GetComplianceSummaryInput.add_member(:resource_type_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeFilterList, location_name: "ResourceTypeFilters"))
+    GetComplianceSummaryInput.add_member(:tag_key_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyFilterList, location_name: "TagKeyFilters"))
+    GetComplianceSummaryInput.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupBy, location_name: "GroupBy"))
+    GetComplianceSummaryInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsGetComplianceSummary, location_name: "MaxResults"))
+    GetComplianceSummaryInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
     GetComplianceSummaryInput.type = Types::GetComplianceSummaryInput
-    GetComplianceSummaryOutput.add_member(:summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SummaryList, location_name: "SummaryList"))
-    GetComplianceSummaryOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
+    GetComplianceSummaryOutput.add_member(:summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryList, location_name: "SummaryList"))
+    GetComplianceSummaryOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
     GetComplianceSummaryOutput.type = Types::GetComplianceSummaryOutput
-    GetResourcesInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
-    GetResourcesInput.add_member(:tag_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagFilterList, location_name: "TagFilters"))
-    GetResourcesInput.add_member(:resources_per_page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcesPerPage, location_name: "ResourcesPerPage"))
-    GetResourcesInput.add_member(:tags_per_page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsPerPage, location_name: "TagsPerPage"))
-    GetResourcesInput.add_member(:resource_type_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeFilterList, location_name: "ResourceTypeFilters"))
-    GetResourcesInput.add_member(:include_compliance_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeComplianceDetails, location_name: "IncludeComplianceDetails"))
-    GetResourcesInput.add_member(:exclude_compliant_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeCompliantResources, location_name: "ExcludeCompliantResources"))
-    GetResourcesInput.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARNListForGet, location_name: "ResourceARNList"))
+    GetResourcesInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
+    GetResourcesInput.add_member(:tag_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilterList, location_name: "TagFilters"))
+    GetResourcesInput.add_member(:resources_per_page, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesPerPage, location_name: "ResourcesPerPage"))
+    GetResourcesInput.add_member(:tags_per_page, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsPerPage, location_name: "TagsPerPage"))
+    GetResourcesInput.add_member(:resource_type_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeFilterList, location_name: "ResourceTypeFilters"))
+    GetResourcesInput.add_member(:include_compliance_details, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeComplianceDetails, location_name: "IncludeComplianceDetails"))
+    GetResourcesInput.add_member(:exclude_compliant_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeCompliantResources, location_name: "ExcludeCompliantResources"))
+    GetResourcesInput.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARNListForGet, location_name: "ResourceARNList"))
     GetResourcesInput.type = Types::GetResourcesInput
-    GetResourcesOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
-    GetResourcesOutput.add_member(:resource_tag_mapping_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagMappingList, location_name: "ResourceTagMappingList"))
+    GetResourcesOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
+    GetResourcesOutput.add_member(:resource_tag_mapping_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagMappingList, location_name: "ResourceTagMappingList"))
     GetResourcesOutput.type = Types::GetResourcesOutput
-    GetTagKeysInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
+    GetTagKeysInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
     GetTagKeysInput.type = Types::GetTagKeysInput
-    GetTagKeysOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
-    GetTagKeysOutput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
+    GetTagKeysOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
+    GetTagKeysOutput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys"))
     GetTagKeysOutput.type = Types::GetTagKeysOutput
-    GetTagValuesInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
-    GetTagValuesInput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    GetTagValuesInput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
+    GetTagValuesInput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
     GetTagValuesInput.type = Types::GetTagValuesInput
-    GetTagValuesOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
-    GetTagValuesOutput.add_member(:tag_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValuesOutputList, location_name: "TagValues"))
+    GetTagValuesOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "PaginationToken"))
+    GetTagValuesOutput.add_member(:tag_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValuesOutputList, location_name: "TagValues"))
     GetTagValuesOutput.type = Types::GetTagValuesOutput
-    GroupBy.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupByAttribute)
-    GroupByAttribute.add_member(:target_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TARGET_ID", traits: {"smithy.api#enumValue" => "TARGET_ID"}))
-    GroupByAttribute.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGION", traits: {"smithy.api#enumValue" => "REGION"}))
-    GroupByAttribute.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "RESOURCE_TYPE"}))
-    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    GroupBy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAttribute)
+    GroupByAttribute.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TARGET_ID", traits: {"smithy.api#enumValue" => "TARGET_ID"}))
+    GroupByAttribute.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGION", traits: {"smithy.api#enumValue" => "REGION"}))
+    GroupByAttribute.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "RESOURCE_TYPE"}))
+    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     InternalServiceException.type = Types::InternalServiceException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    PaginationTokenExpiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PaginationTokenExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     PaginationTokenExpiredException.type = Types::PaginationTokenExpiredException
-    RegionFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
-    ResourceARNListForGet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN)
-    ResourceARNListForTagUntag.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN)
-    ResourceTagMapping.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    ResourceTagMapping.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    ResourceTagMapping.add_member(:compliance_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceDetails, location_name: "ComplianceDetails"))
+    RegionFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region)
+    ResourceARNListForGet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN)
+    ResourceARNListForTagUntag.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN)
+    ResourceTagMapping.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    ResourceTagMapping.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    ResourceTagMapping.add_member(:compliance_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceDetails, location_name: "ComplianceDetails"))
     ResourceTagMapping.type = Types::ResourceTagMapping
-    ResourceTagMappingList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagMapping)
-    ResourceTypeFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceType)
-    StartReportCreationInput.add_member(:s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket", traits: {"smithy.api#required" => {}}))
+    ResourceTagMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagMapping)
+    ResourceTypeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceType)
+    StartReportCreationInput.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, location_name: "S3Bucket", traits: {"smithy.api#required" => {}}))
     StartReportCreationInput.type = Types::StartReportCreationInput
     StartReportCreationOutput.type = Types::StartReportCreationOutput
-    Summary.add_member(:last_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdated"))
-    Summary.add_member(:target_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetId, location_name: "TargetId"))
-    Summary.add_member(:target_id_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetIdType, location_name: "TargetIdType"))
-    Summary.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
-    Summary.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceType, location_name: "ResourceType"))
-    Summary.add_member(:non_compliant_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonCompliantResources, location_name: "NonCompliantResources", traits: {"smithy.api#default" => 0}))
+    Summary.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdated, location_name: "LastUpdated"))
+    Summary.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, location_name: "TargetId"))
+    Summary.add_member(:target_id_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIdType, location_name: "TargetIdType"))
+    Summary.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "Region"))
+    Summary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceType, location_name: "ResourceType"))
+    Summary.add_member(:non_compliant_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: NonCompliantResources, location_name: "NonCompliantResources", traits: {"smithy.api#default" => 0}))
     Summary.type = Types::Summary
-    SummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Summary)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    SummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Summary)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagFilter.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    TagFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValueList, location_name: "Values"))
+    TagFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key"))
+    TagFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueList, location_name: "Values"))
     TagFilter.type = Types::TagFilter
-    TagFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagFilter)
-    TagKeyFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagKeyListForUntag.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourcesInput.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARNListForTagUntag, location_name: "ResourceARNList", traits: {"smithy.api#required" => {}}))
-    TagResourcesInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter)
+    TagKeyFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagKeyListForUntag.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourcesInput.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARNListForTagUntag, location_name: "ResourceARNList", traits: {"smithy.api#required" => {}}))
+    TagResourcesInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourcesInput.type = Types::TagResourcesInput
-    TagResourcesOutput.add_member(:failed_resources_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedResourcesMap, location_name: "FailedResourcesMap"))
+    TagResourcesOutput.add_member(:failed_resources_map, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedResourcesMap, location_name: "FailedResourcesMap"))
     TagResourcesOutput.type = Types::TagResourcesOutput
-    TagValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagValuesOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TargetIdFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetId)
-    TargetIdType.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
-    TargetIdType.add_member(:ou, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OU", traits: {"smithy.api#enumValue" => "OU"}))
-    TargetIdType.add_member(:root, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROOT", traits: {"smithy.api#enumValue" => "ROOT"}))
-    ThrottledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TagValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagValuesOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TargetIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId)
+    TargetIdType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
+    TargetIdType.add_member(:ou, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OU", traits: {"smithy.api#enumValue" => "OU"}))
+    TargetIdType.add_member(:root, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROOT", traits: {"smithy.api#enumValue" => "ROOT"}))
+    ThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ThrottledException.type = Types::ThrottledException
-    UntagResourcesInput.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARNListForTagUntag, location_name: "ResourceARNList", traits: {"smithy.api#required" => {}}))
-    UntagResourcesInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyListForUntag, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourcesInput.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARNListForTagUntag, location_name: "ResourceARNList", traits: {"smithy.api#required" => {}}))
+    UntagResourcesInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyListForUntag, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourcesInput.type = Types::UntagResourcesInput
-    UntagResourcesOutput.add_member(:failed_resources_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedResourcesMap, location_name: "FailedResourcesMap"))
+    UntagResourcesOutput.add_member(:failed_resources_map, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedResourcesMap, location_name: "FailedResourcesMap"))
     UntagResourcesOutput.type = Types::UntagResourcesOutput
 
     ResourceGroupsTaggingAPI20170126 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -203,92 +203,92 @@ module Aws::ResourceGroupsTaggingAPI
       service.add_operation(:describe_report_creation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreation"
         operation.name = "DescribeReportCreation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReportCreationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReportCreationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConstraintViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = DescribeReportCreationInput
+        operation.output = DescribeReportCreationOutput
+        operation.errors << ConstraintViolationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << ThrottledException
         operation.traits = {}
       end)
       service.add_operation(:get_compliance_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummary"
         operation.name = "GetComplianceSummary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceSummaryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceSummaryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConstraintViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = GetComplianceSummaryInput
+        operation.output = GetComplianceSummaryOutput
+        operation.errors << ConstraintViolationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << ThrottledException
         operation.traits = {}
         operation[:paginator] = Paginators::GetComplianceSummary.new
       end)
       service.add_operation(:get_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#GetResources"
         operation.name = "GetResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationTokenExpiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = GetResourcesInput
+        operation.output = GetResourcesOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << PaginationTokenExpiredException
+        operation.errors << ThrottledException
         operation.traits = {}
         operation[:paginator] = Paginators::GetResources.new
       end)
       service.add_operation(:get_tag_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#GetTagKeys"
         operation.name = "GetTagKeys"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTagKeysInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTagKeysOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationTokenExpiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = GetTagKeysInput
+        operation.output = GetTagKeysOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << PaginationTokenExpiredException
+        operation.errors << ThrottledException
         operation.traits = {}
         operation[:paginator] = Paginators::GetTagKeys.new
       end)
       service.add_operation(:get_tag_values, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#GetTagValues"
         operation.name = "GetTagValues"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTagValuesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTagValuesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationTokenExpiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = GetTagValuesInput
+        operation.output = GetTagValuesOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << PaginationTokenExpiredException
+        operation.errors << ThrottledException
         operation.traits = {}
         operation[:paginator] = Paginators::GetTagValues.new
       end)
       service.add_operation(:start_report_creation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#StartReportCreation"
         operation.name = "StartReportCreation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReportCreationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReportCreationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConstraintViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = StartReportCreationInput
+        operation.output = StartReportCreationOutput
+        operation.errors << ConcurrentModificationException
+        operation.errors << ConstraintViolationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << ThrottledException
         operation.traits = {}
       end)
       service.add_operation(:tag_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#TagResources"
         operation.name = "TagResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourcesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourcesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = TagResourcesInput
+        operation.output = TagResourcesOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << ThrottledException
         operation.traits = {}
       end)
       service.add_operation(:untag_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#UntagResources"
         operation.name = "UntagResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourcesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourcesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
+        operation.input = UntagResourcesInput
+        operation.output = UntagResourcesOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << ThrottledException
         operation.traits = {}
       end)
     end

@@ -237,732 +237,732 @@ module Aws::LexModelBuildingService
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#Version", name: "Version", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^\\$LATEST|[0-9]+$"})
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#roleArn", name: "RoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws:iam::[0-9]{12}:role/"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     BadRequestException.type = Types::BadRequestException
-    BotAliasMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "name"))
-    BotAliasMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    BotAliasMetadata.add_member(:bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "botVersion"))
-    BotAliasMetadata.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName"))
-    BotAliasMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    BotAliasMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    BotAliasMetadata.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    BotAliasMetadata.add_member(:conversation_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConversationLogsResponse, location_name: "conversationLogs"))
+    BotAliasMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "name"))
+    BotAliasMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    BotAliasMetadata.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "botVersion"))
+    BotAliasMetadata.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName"))
+    BotAliasMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    BotAliasMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    BotAliasMetadata.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    BotAliasMetadata.add_member(:conversation_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLogsResponse, location_name: "conversationLogs"))
     BotAliasMetadata.type = Types::BotAliasMetadata
-    BotAliasMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotAliasMetadata)
-    BotChannelAssociation.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotChannelName, location_name: "name"))
-    BotChannelAssociation.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    BotChannelAssociation.add_member(:bot_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "botAlias"))
-    BotChannelAssociation.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName"))
-    BotChannelAssociation.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    BotChannelAssociation.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
-    BotChannelAssociation.add_member(:bot_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelConfigurationMap, location_name: "botConfiguration"))
-    BotChannelAssociation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelStatus, location_name: "status"))
-    BotChannelAssociation.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    BotAliasMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasMetadata)
+    BotChannelAssociation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelName, location_name: "name"))
+    BotChannelAssociation.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    BotChannelAssociation.add_member(:bot_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "botAlias"))
+    BotChannelAssociation.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName"))
+    BotChannelAssociation.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    BotChannelAssociation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "type"))
+    BotChannelAssociation.add_member(:bot_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelConfigurationMap, location_name: "botConfiguration"))
+    BotChannelAssociation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelStatus, location_name: "status"))
+    BotChannelAssociation.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "failureReason"))
     BotChannelAssociation.type = Types::BotChannelAssociation
-    BotChannelAssociationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotChannelAssociation)
-    BotMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name"))
-    BotMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    BotMetadata.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    BotMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    BotMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    BotMetadata.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    BotChannelAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelAssociation)
+    BotMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name"))
+    BotMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    BotMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "status"))
+    BotMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    BotMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    BotMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
     BotMetadata.type = Types::BotMetadata
-    BotMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotMetadata)
-    BotVersions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version)
-    BuiltinIntentMetadata.add_member(:signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "signature"))
-    BuiltinIntentMetadata.add_member(:supported_locales, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocaleList, location_name: "supportedLocales"))
+    BotMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotMetadata)
+    BotVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Version)
+    BuiltinIntentMetadata.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, location_name: "signature"))
+    BuiltinIntentMetadata.add_member(:supported_locales, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleList, location_name: "supportedLocales"))
     BuiltinIntentMetadata.type = Types::BuiltinIntentMetadata
-    BuiltinIntentMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentMetadata)
-    BuiltinIntentSlot.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    BuiltinIntentMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentMetadata)
+    BuiltinIntentSlot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
     BuiltinIntentSlot.type = Types::BuiltinIntentSlot
-    BuiltinIntentSlotList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSlot)
-    BuiltinSlotTypeMetadata.add_member(:signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinSlotTypeSignature, location_name: "signature"))
-    BuiltinSlotTypeMetadata.add_member(:supported_locales, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocaleList, location_name: "supportedLocales"))
+    BuiltinIntentSlotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSlot)
+    BuiltinSlotTypeMetadata.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinSlotTypeSignature, location_name: "signature"))
+    BuiltinSlotTypeMetadata.add_member(:supported_locales, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleList, location_name: "supportedLocales"))
     BuiltinSlotTypeMetadata.type = Types::BuiltinSlotTypeMetadata
-    BuiltinSlotTypeMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinSlotTypeMetadata)
-    ChannelConfigurationMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ChannelConfigurationMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ChannelStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ChannelStatus.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
-    ChannelStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ChannelType.add_member(:facebook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FACEBOOK", traits: {"smithy.api#enumValue" => "Facebook"}))
-    ChannelType.add_member(:slack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SLACK", traits: {"smithy.api#enumValue" => "Slack"}))
-    ChannelType.add_member(:twilio_sms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TWILIO_SMS", traits: {"smithy.api#enumValue" => "Twilio-Sms"}))
-    ChannelType.add_member(:kik, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KIK", traits: {"smithy.api#enumValue" => "Kik"}))
-    CodeHook.add_member(:uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaARN, location_name: "uri", traits: {"smithy.api#required" => {}}))
-    CodeHook.add_member(:message_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageVersion, location_name: "messageVersion", traits: {"smithy.api#required" => {}}))
+    BuiltinSlotTypeMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinSlotTypeMetadata)
+    ChannelConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ChannelConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ChannelStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ChannelStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    ChannelStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ChannelType.add_member(:facebook, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FACEBOOK", traits: {"smithy.api#enumValue" => "Facebook"}))
+    ChannelType.add_member(:slack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SLACK", traits: {"smithy.api#enumValue" => "Slack"}))
+    ChannelType.add_member(:twilio_sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TWILIO_SMS", traits: {"smithy.api#enumValue" => "Twilio-Sms"}))
+    ChannelType.add_member(:kik, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KIK", traits: {"smithy.api#enumValue" => "Kik"}))
+    CodeHook.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaARN, location_name: "uri", traits: {"smithy.api#required" => {}}))
+    CodeHook.add_member(:message_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageVersion, location_name: "messageVersion", traits: {"smithy.api#required" => {}}))
     CodeHook.type = Types::CodeHook
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    ContentType.add_member(:plain_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PlainText"}))
-    ContentType.add_member(:ssml, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSML", traits: {"smithy.api#enumValue" => "SSML"}))
-    ContentType.add_member(:custom_payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_PAYLOAD", traits: {"smithy.api#enumValue" => "CustomPayload"}))
-    ConversationLogsRequest.add_member(:log_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSettingsRequestList, location_name: "logSettings", traits: {"smithy.api#required" => {}}))
-    ConversationLogsRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "iamRoleArn", traits: {"smithy.api#required" => {}}))
+    ContentType.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PlainText"}))
+    ContentType.add_member(:ssml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSML", traits: {"smithy.api#enumValue" => "SSML"}))
+    ContentType.add_member(:custom_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_PAYLOAD", traits: {"smithy.api#enumValue" => "CustomPayload"}))
+    ConversationLogsRequest.add_member(:log_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsRequestList, location_name: "logSettings", traits: {"smithy.api#required" => {}}))
+    ConversationLogsRequest.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "iamRoleArn", traits: {"smithy.api#required" => {}}))
     ConversationLogsRequest.type = Types::ConversationLogsRequest
-    ConversationLogsResponse.add_member(:log_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSettingsResponseList, location_name: "logSettings"))
-    ConversationLogsResponse.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "iamRoleArn"))
+    ConversationLogsResponse.add_member(:log_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsResponseList, location_name: "logSettings"))
+    ConversationLogsResponse.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "iamRoleArn"))
     ConversationLogsResponse.type = Types::ConversationLogsResponse
-    CreateBotVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateBotVersionRequest.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    CreateBotVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateBotVersionRequest.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
     CreateBotVersionRequest.type = Types::CreateBotVersionRequest
-    CreateBotVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name"))
-    CreateBotVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateBotVersionResponse.add_member(:intents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentList, location_name: "intents"))
-    CreateBotVersionResponse.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "clarificationPrompt"))
-    CreateBotVersionResponse.add_member(:abort_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "abortStatement"))
-    CreateBotVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    CreateBotVersionResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
-    CreateBotVersionResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    CreateBotVersionResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    CreateBotVersionResponse.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
-    CreateBotVersionResponse.add_member(:voice_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "voiceId"))
-    CreateBotVersionResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    CreateBotVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    CreateBotVersionResponse.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
-    CreateBotVersionResponse.add_member(:child_directed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
-    CreateBotVersionResponse.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enableModelImprovements"))
-    CreateBotVersionResponse.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
+    CreateBotVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name"))
+    CreateBotVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateBotVersionResponse.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentList, location_name: "intents"))
+    CreateBotVersionResponse.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "clarificationPrompt"))
+    CreateBotVersionResponse.add_member(:abort_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "abortStatement"))
+    CreateBotVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "status"))
+    CreateBotVersionResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "failureReason"))
+    CreateBotVersionResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    CreateBotVersionResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    CreateBotVersionResponse.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTTL, location_name: "idleSessionTTLInSeconds"))
+    CreateBotVersionResponse.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "voiceId"))
+    CreateBotVersionResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    CreateBotVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    CreateBotVersionResponse.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "locale"))
+    CreateBotVersionResponse.add_member(:child_directed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "childDirected"))
+    CreateBotVersionResponse.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enableModelImprovements"))
+    CreateBotVersionResponse.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "detectSentiment"))
     CreateBotVersionResponse.type = Types::CreateBotVersionResponse
-    CreateIntentVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateIntentVersionRequest.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    CreateIntentVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateIntentVersionRequest.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
     CreateIntentVersionRequest.type = Types::CreateIntentVersionRequest
-    CreateIntentVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name"))
-    CreateIntentVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateIntentVersionResponse.add_member(:slots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotList, location_name: "slots"))
-    CreateIntentVersionResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentUtteranceList, location_name: "sampleUtterances"))
-    CreateIntentVersionResponse.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "confirmationPrompt"))
-    CreateIntentVersionResponse.add_member(:rejection_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "rejectionStatement"))
-    CreateIntentVersionResponse.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FollowUpPrompt, location_name: "followUpPrompt"))
-    CreateIntentVersionResponse.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "conclusionStatement"))
-    CreateIntentVersionResponse.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHook, location_name: "dialogCodeHook"))
-    CreateIntentVersionResponse.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FulfillmentActivity, location_name: "fulfillmentActivity"))
-    CreateIntentVersionResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "parentIntentSignature"))
-    CreateIntentVersionResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    CreateIntentVersionResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    CreateIntentVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    CreateIntentVersionResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    CreateIntentVersionResponse.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
-    CreateIntentVersionResponse.add_member(:input_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
-    CreateIntentVersionResponse.add_member(:output_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
+    CreateIntentVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name"))
+    CreateIntentVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateIntentVersionResponse.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotList, location_name: "slots"))
+    CreateIntentVersionResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentUtteranceList, location_name: "sampleUtterances"))
+    CreateIntentVersionResponse.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "confirmationPrompt"))
+    CreateIntentVersionResponse.add_member(:rejection_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "rejectionStatement"))
+    CreateIntentVersionResponse.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: FollowUpPrompt, location_name: "followUpPrompt"))
+    CreateIntentVersionResponse.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "conclusionStatement"))
+    CreateIntentVersionResponse.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeHook, location_name: "dialogCodeHook"))
+    CreateIntentVersionResponse.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: FulfillmentActivity, location_name: "fulfillmentActivity"))
+    CreateIntentVersionResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, location_name: "parentIntentSignature"))
+    CreateIntentVersionResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    CreateIntentVersionResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    CreateIntentVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    CreateIntentVersionResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    CreateIntentVersionResponse.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraConfiguration, location_name: "kendraConfiguration"))
+    CreateIntentVersionResponse.add_member(:input_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContextList, location_name: "inputContexts"))
+    CreateIntentVersionResponse.add_member(:output_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContextList, location_name: "outputContexts"))
     CreateIntentVersionResponse.type = Types::CreateIntentVersionResponse
-    CreateSlotTypeVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateSlotTypeVersionRequest.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    CreateSlotTypeVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateSlotTypeVersionRequest.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
     CreateSlotTypeVersionRequest.type = Types::CreateSlotTypeVersionRequest
-    CreateSlotTypeVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
-    CreateSlotTypeVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateSlotTypeVersionResponse.add_member(:enumeration_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnumerationValues, location_name: "enumerationValues"))
-    CreateSlotTypeVersionResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    CreateSlotTypeVersionResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    CreateSlotTypeVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    CreateSlotTypeVersionResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    CreateSlotTypeVersionResponse.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
-    CreateSlotTypeVersionResponse.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
-    CreateSlotTypeVersionResponse.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
+    CreateSlotTypeVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name"))
+    CreateSlotTypeVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateSlotTypeVersionResponse.add_member(:enumeration_values, ::Smithy::Schema::Shapes::MemberShape.new(target: EnumerationValues, location_name: "enumerationValues"))
+    CreateSlotTypeVersionResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    CreateSlotTypeVersionResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    CreateSlotTypeVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    CreateSlotTypeVersionResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    CreateSlotTypeVersionResponse.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    CreateSlotTypeVersionResponse.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    CreateSlotTypeVersionResponse.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     CreateSlotTypeVersionResponse.type = Types::CreateSlotTypeVersionResponse
-    DeleteBotAliasRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteBotAliasRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotAliasRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotAliasRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteBotAliasRequest.type = Types::DeleteBotAliasRequest
-    DeleteBotChannelAssociationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotChannelName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteBotChannelAssociationRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteBotChannelAssociationRequest.add_member(:bot_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "botAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotChannelAssociationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotChannelAssociationRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotChannelAssociationRequest.add_member(:bot_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "botAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteBotChannelAssociationRequest.type = Types::DeleteBotChannelAssociationRequest
-    DeleteBotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteBotRequest.type = Types::DeleteBotRequest
-    DeleteBotVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteBotVersionRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumericalVersion, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotVersionRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericalVersion, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteBotVersionRequest.type = Types::DeleteBotVersionRequest
-    DeleteIntentRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteIntentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteIntentRequest.type = Types::DeleteIntentRequest
-    DeleteIntentVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteIntentVersionRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumericalVersion, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteIntentVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteIntentVersionRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericalVersion, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteIntentVersionRequest.type = Types::DeleteIntentVersionRequest
-    DeleteSlotTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSlotTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSlotTypeRequest.type = Types::DeleteSlotTypeRequest
-    DeleteSlotTypeVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteSlotTypeVersionRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumericalVersion, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSlotTypeVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSlotTypeVersionRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericalVersion, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSlotTypeVersionRequest.type = Types::DeleteSlotTypeVersionRequest
-    DeleteUtterancesRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteUtterancesRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "userId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteUtterancesRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteUtterancesRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "userId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteUtterancesRequest.type = Types::DeleteUtterancesRequest
-    Destination.add_member(:cloudwatch_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUDWATCH_LOGS", traits: {"smithy.api#enumValue" => "CLOUDWATCH_LOGS"}))
-    Destination.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
-    EnumerationValue.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "value", traits: {"smithy.api#required" => {}}))
-    EnumerationValue.add_member(:synonyms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynonymList, location_name: "synonyms"))
+    Destination.add_member(:cloudwatch_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUDWATCH_LOGS", traits: {"smithy.api#enumValue" => "CLOUDWATCH_LOGS"}))
+    Destination.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
+    EnumerationValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "value", traits: {"smithy.api#required" => {}}))
+    EnumerationValue.add_member(:synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: SynonymList, location_name: "synonyms"))
     EnumerationValue.type = Types::EnumerationValue
-    EnumerationValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnumerationValue)
-    ExportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ExportStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
-    ExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ExportType.add_member(:alexa_skills_kit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALEXA_SKILLS_KIT", traits: {"smithy.api#enumValue" => "ALEXA_SKILLS_KIT"}))
-    ExportType.add_member(:lex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LEX", traits: {"smithy.api#enumValue" => "LEX"}))
-    FollowUpPrompt.add_member(:prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "prompt", traits: {"smithy.api#required" => {}}))
-    FollowUpPrompt.add_member(:rejection_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "rejectionStatement", traits: {"smithy.api#required" => {}}))
+    EnumerationValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnumerationValue)
+    ExportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ExportStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
+    ExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ExportType.add_member(:alexa_skills_kit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALEXA_SKILLS_KIT", traits: {"smithy.api#enumValue" => "ALEXA_SKILLS_KIT"}))
+    ExportType.add_member(:lex, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LEX", traits: {"smithy.api#enumValue" => "LEX"}))
+    FollowUpPrompt.add_member(:prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "prompt", traits: {"smithy.api#required" => {}}))
+    FollowUpPrompt.add_member(:rejection_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "rejectionStatement", traits: {"smithy.api#required" => {}}))
     FollowUpPrompt.type = Types::FollowUpPrompt
-    FulfillmentActivity.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FulfillmentActivityType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    FulfillmentActivity.add_member(:code_hook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHook, location_name: "codeHook"))
+    FulfillmentActivity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FulfillmentActivityType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    FulfillmentActivity.add_member(:code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeHook, location_name: "codeHook"))
     FulfillmentActivity.type = Types::FulfillmentActivity
-    FulfillmentActivityType.add_member(:return_intent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RETURN_INTENT", traits: {"smithy.api#enumValue" => "ReturnIntent"}))
-    FulfillmentActivityType.add_member(:code_hook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_HOOK", traits: {"smithy.api#enumValue" => "CodeHook"}))
-    GetBotAliasRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotAliasRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    FulfillmentActivityType.add_member(:return_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RETURN_INTENT", traits: {"smithy.api#enumValue" => "ReturnIntent"}))
+    FulfillmentActivityType.add_member(:code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_HOOK", traits: {"smithy.api#enumValue" => "CodeHook"}))
+    GetBotAliasRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotAliasRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetBotAliasRequest.type = Types::GetBotAliasRequest
-    GetBotAliasResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "name"))
-    GetBotAliasResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetBotAliasResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "botVersion"))
-    GetBotAliasResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName"))
-    GetBotAliasResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    GetBotAliasResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    GetBotAliasResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    GetBotAliasResponse.add_member(:conversation_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConversationLogsResponse, location_name: "conversationLogs"))
+    GetBotAliasResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "name"))
+    GetBotAliasResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    GetBotAliasResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "botVersion"))
+    GetBotAliasResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName"))
+    GetBotAliasResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    GetBotAliasResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    GetBotAliasResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    GetBotAliasResponse.add_member(:conversation_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLogsResponse, location_name: "conversationLogs"))
     GetBotAliasResponse.type = Types::GetBotAliasResponse
-    GetBotAliasesRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotAliasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetBotAliasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    GetBotAliasesRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
+    GetBotAliasesRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotAliasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetBotAliasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetBotAliasesRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
     GetBotAliasesRequest.type = Types::GetBotAliasesRequest
-    GetBotAliasesResponse.add_member(:bot_aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotAliasMetadataList, location_name: "BotAliases"))
-    GetBotAliasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetBotAliasesResponse.add_member(:bot_aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasMetadataList, location_name: "BotAliases"))
+    GetBotAliasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetBotAliasesResponse.type = Types::GetBotAliasesResponse
-    GetBotChannelAssociationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotChannelName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotChannelAssociationRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotChannelAssociationRequest.add_member(:bot_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "botAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotChannelAssociationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotChannelAssociationRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotChannelAssociationRequest.add_member(:bot_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "botAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetBotChannelAssociationRequest.type = Types::GetBotChannelAssociationRequest
-    GetBotChannelAssociationResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotChannelName, location_name: "name"))
-    GetBotChannelAssociationResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetBotChannelAssociationResponse.add_member(:bot_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "botAlias"))
-    GetBotChannelAssociationResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName"))
-    GetBotChannelAssociationResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    GetBotChannelAssociationResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
-    GetBotChannelAssociationResponse.add_member(:bot_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelConfigurationMap, location_name: "botConfiguration"))
-    GetBotChannelAssociationResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelStatus, location_name: "status"))
-    GetBotChannelAssociationResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    GetBotChannelAssociationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelName, location_name: "name"))
+    GetBotChannelAssociationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    GetBotChannelAssociationResponse.add_member(:bot_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "botAlias"))
+    GetBotChannelAssociationResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName"))
+    GetBotChannelAssociationResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    GetBotChannelAssociationResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "type"))
+    GetBotChannelAssociationResponse.add_member(:bot_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelConfigurationMap, location_name: "botConfiguration"))
+    GetBotChannelAssociationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelStatus, location_name: "status"))
+    GetBotChannelAssociationResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "failureReason"))
     GetBotChannelAssociationResponse.type = Types::GetBotChannelAssociationResponse
-    GetBotChannelAssociationsRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotChannelAssociationsRequest.add_member(:bot_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasNameOrListAll, location_name: "botAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotChannelAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetBotChannelAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    GetBotChannelAssociationsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotChannelName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
+    GetBotChannelAssociationsRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotChannelAssociationsRequest.add_member(:bot_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasNameOrListAll, location_name: "botAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotChannelAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetBotChannelAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetBotChannelAssociationsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
     GetBotChannelAssociationsRequest.type = Types::GetBotChannelAssociationsRequest
-    GetBotChannelAssociationsResponse.add_member(:bot_channel_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotChannelAssociationList, location_name: "botChannelAssociations"))
-    GetBotChannelAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetBotChannelAssociationsResponse.add_member(:bot_channel_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelAssociationList, location_name: "botChannelAssociations"))
+    GetBotChannelAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetBotChannelAssociationsResponse.type = Types::GetBotChannelAssociationsResponse
-    GetBotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotRequest.add_member(:version_or_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "versionOrAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotRequest.add_member(:version_or_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "versionOrAlias", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetBotRequest.type = Types::GetBotRequest
-    GetBotResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name"))
-    GetBotResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetBotResponse.add_member(:intents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentList, location_name: "intents"))
-    GetBotResponse.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enableModelImprovements"))
-    GetBotResponse.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
-    GetBotResponse.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "clarificationPrompt"))
-    GetBotResponse.add_member(:abort_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "abortStatement"))
-    GetBotResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    GetBotResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
-    GetBotResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    GetBotResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    GetBotResponse.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
-    GetBotResponse.add_member(:voice_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "voiceId"))
-    GetBotResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    GetBotResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    GetBotResponse.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
-    GetBotResponse.add_member(:child_directed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
-    GetBotResponse.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
+    GetBotResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name"))
+    GetBotResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    GetBotResponse.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentList, location_name: "intents"))
+    GetBotResponse.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enableModelImprovements"))
+    GetBotResponse.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
+    GetBotResponse.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "clarificationPrompt"))
+    GetBotResponse.add_member(:abort_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "abortStatement"))
+    GetBotResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "status"))
+    GetBotResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "failureReason"))
+    GetBotResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    GetBotResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    GetBotResponse.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTTL, location_name: "idleSessionTTLInSeconds"))
+    GetBotResponse.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "voiceId"))
+    GetBotResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    GetBotResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    GetBotResponse.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "locale"))
+    GetBotResponse.add_member(:child_directed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "childDirected"))
+    GetBotResponse.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "detectSentiment"))
     GetBotResponse.type = Types::GetBotResponse
-    GetBotVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetBotVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetBotVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetBotVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBotVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetBotVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetBotVersionsRequest.type = Types::GetBotVersionsRequest
-    GetBotVersionsResponse.add_member(:bots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotMetadataList, location_name: "bots"))
-    GetBotVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetBotVersionsResponse.add_member(:bots, ::Smithy::Schema::Shapes::MemberShape.new(target: BotMetadataList, location_name: "bots"))
+    GetBotVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetBotVersionsResponse.type = Types::GetBotVersionsResponse
-    GetBotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetBotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    GetBotsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
+    GetBotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetBotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetBotsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
     GetBotsRequest.type = Types::GetBotsRequest
-    GetBotsResponse.add_member(:bots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotMetadataList, location_name: "bots"))
-    GetBotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetBotsResponse.add_member(:bots, ::Smithy::Schema::Shapes::MemberShape.new(target: BotMetadataList, location_name: "bots"))
+    GetBotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetBotsResponse.type = Types::GetBotsResponse
-    GetBuiltinIntentRequest.add_member(:signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "signature", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBuiltinIntentRequest.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, location_name: "signature", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetBuiltinIntentRequest.type = Types::GetBuiltinIntentRequest
-    GetBuiltinIntentResponse.add_member(:signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "signature"))
-    GetBuiltinIntentResponse.add_member(:supported_locales, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocaleList, location_name: "supportedLocales"))
-    GetBuiltinIntentResponse.add_member(:slots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSlotList, location_name: "slots"))
+    GetBuiltinIntentResponse.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, location_name: "signature"))
+    GetBuiltinIntentResponse.add_member(:supported_locales, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleList, location_name: "supportedLocales"))
+    GetBuiltinIntentResponse.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSlotList, location_name: "slots"))
     GetBuiltinIntentResponse.type = Types::GetBuiltinIntentResponse
-    GetBuiltinIntentsRequest.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "locale", traits: {"smithy.api#httpQuery" => "locale"}))
-    GetBuiltinIntentsRequest.add_member(:signature_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "signatureContains", traits: {"smithy.api#httpQuery" => "signatureContains"}))
-    GetBuiltinIntentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetBuiltinIntentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetBuiltinIntentsRequest.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "locale", traits: {"smithy.api#httpQuery" => "locale"}))
+    GetBuiltinIntentsRequest.add_member(:signature_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "signatureContains", traits: {"smithy.api#httpQuery" => "signatureContains"}))
+    GetBuiltinIntentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetBuiltinIntentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetBuiltinIntentsRequest.type = Types::GetBuiltinIntentsRequest
-    GetBuiltinIntentsResponse.add_member(:intents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentMetadataList, location_name: "intents"))
-    GetBuiltinIntentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetBuiltinIntentsResponse.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentMetadataList, location_name: "intents"))
+    GetBuiltinIntentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetBuiltinIntentsResponse.type = Types::GetBuiltinIntentsResponse
-    GetBuiltinSlotTypesRequest.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "locale", traits: {"smithy.api#httpQuery" => "locale"}))
-    GetBuiltinSlotTypesRequest.add_member(:signature_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "signatureContains", traits: {"smithy.api#httpQuery" => "signatureContains"}))
-    GetBuiltinSlotTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetBuiltinSlotTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetBuiltinSlotTypesRequest.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "locale", traits: {"smithy.api#httpQuery" => "locale"}))
+    GetBuiltinSlotTypesRequest.add_member(:signature_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "signatureContains", traits: {"smithy.api#httpQuery" => "signatureContains"}))
+    GetBuiltinSlotTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetBuiltinSlotTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetBuiltinSlotTypesRequest.type = Types::GetBuiltinSlotTypesRequest
-    GetBuiltinSlotTypesResponse.add_member(:slot_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinSlotTypeMetadataList, location_name: "slotTypes"))
-    GetBuiltinSlotTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetBuiltinSlotTypesResponse.add_member(:slot_types, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinSlotTypeMetadataList, location_name: "slotTypes"))
+    GetBuiltinSlotTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetBuiltinSlotTypesResponse.type = Types::GetBuiltinSlotTypesResponse
-    GetExportRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name", traits: {"smithy.api#httpQuery" => "name", "smithy.api#required" => {}}))
-    GetExportRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumericalVersion, location_name: "version", traits: {"smithy.api#httpQuery" => "version", "smithy.api#required" => {}}))
-    GetExportRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpQuery" => "resourceType", "smithy.api#required" => {}}))
-    GetExportRequest.add_member(:export_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportType, location_name: "exportType", traits: {"smithy.api#httpQuery" => "exportType", "smithy.api#required" => {}}))
+    GetExportRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name", traits: {"smithy.api#httpQuery" => "name", "smithy.api#required" => {}}))
+    GetExportRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericalVersion, location_name: "version", traits: {"smithy.api#httpQuery" => "version", "smithy.api#required" => {}}))
+    GetExportRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpQuery" => "resourceType", "smithy.api#required" => {}}))
+    GetExportRequest.add_member(:export_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportType, location_name: "exportType", traits: {"smithy.api#httpQuery" => "exportType", "smithy.api#required" => {}}))
     GetExportRequest.type = Types::GetExportRequest
-    GetExportResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    GetExportResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumericalVersion, location_name: "version"))
-    GetExportResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    GetExportResponse.add_member(:export_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportType, location_name: "exportType"))
-    GetExportResponse.add_member(:export_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportStatus, location_name: "exportStatus"))
-    GetExportResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
-    GetExportResponse.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    GetExportResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    GetExportResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericalVersion, location_name: "version"))
+    GetExportResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    GetExportResponse.add_member(:export_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportType, location_name: "exportType"))
+    GetExportResponse.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, location_name: "exportStatus"))
+    GetExportResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "failureReason"))
+    GetExportResponse.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "url"))
     GetExportResponse.type = Types::GetExportResponse
-    GetImportRequest.add_member(:import_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "importId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetImportRequest.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "importId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetImportRequest.type = Types::GetImportRequest
-    GetImportResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    GetImportResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    GetImportResponse.add_member(:merge_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
-    GetImportResponse.add_member(:import_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "importId"))
-    GetImportResponse.add_member(:import_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
-    GetImportResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "failureReason"))
-    GetImportResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
+    GetImportResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    GetImportResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    GetImportResponse.add_member(:merge_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeStrategy, location_name: "mergeStrategy"))
+    GetImportResponse.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "importId"))
+    GetImportResponse.add_member(:import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, location_name: "importStatus"))
+    GetImportResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "failureReason"))
+    GetImportResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
     GetImportResponse.type = Types::GetImportResponse
-    GetIntentRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetIntentRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIntentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIntentRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetIntentRequest.type = Types::GetIntentRequest
-    GetIntentResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name"))
-    GetIntentResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetIntentResponse.add_member(:slots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotList, location_name: "slots"))
-    GetIntentResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentUtteranceList, location_name: "sampleUtterances"))
-    GetIntentResponse.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "confirmationPrompt"))
-    GetIntentResponse.add_member(:rejection_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "rejectionStatement"))
-    GetIntentResponse.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FollowUpPrompt, location_name: "followUpPrompt"))
-    GetIntentResponse.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "conclusionStatement"))
-    GetIntentResponse.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHook, location_name: "dialogCodeHook"))
-    GetIntentResponse.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FulfillmentActivity, location_name: "fulfillmentActivity"))
-    GetIntentResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "parentIntentSignature"))
-    GetIntentResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    GetIntentResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    GetIntentResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    GetIntentResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    GetIntentResponse.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
-    GetIntentResponse.add_member(:input_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
-    GetIntentResponse.add_member(:output_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
+    GetIntentResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name"))
+    GetIntentResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    GetIntentResponse.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotList, location_name: "slots"))
+    GetIntentResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentUtteranceList, location_name: "sampleUtterances"))
+    GetIntentResponse.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "confirmationPrompt"))
+    GetIntentResponse.add_member(:rejection_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "rejectionStatement"))
+    GetIntentResponse.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: FollowUpPrompt, location_name: "followUpPrompt"))
+    GetIntentResponse.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "conclusionStatement"))
+    GetIntentResponse.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeHook, location_name: "dialogCodeHook"))
+    GetIntentResponse.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: FulfillmentActivity, location_name: "fulfillmentActivity"))
+    GetIntentResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, location_name: "parentIntentSignature"))
+    GetIntentResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    GetIntentResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    GetIntentResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    GetIntentResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    GetIntentResponse.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraConfiguration, location_name: "kendraConfiguration"))
+    GetIntentResponse.add_member(:input_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContextList, location_name: "inputContexts"))
+    GetIntentResponse.add_member(:output_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContextList, location_name: "outputContexts"))
     GetIntentResponse.type = Types::GetIntentResponse
-    GetIntentVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetIntentVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetIntentVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetIntentVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIntentVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetIntentVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetIntentVersionsRequest.type = Types::GetIntentVersionsRequest
-    GetIntentVersionsResponse.add_member(:intents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentMetadataList, location_name: "intents"))
-    GetIntentVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetIntentVersionsResponse.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentMetadataList, location_name: "intents"))
+    GetIntentVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetIntentVersionsResponse.type = Types::GetIntentVersionsResponse
-    GetIntentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetIntentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    GetIntentsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
+    GetIntentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetIntentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetIntentsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
     GetIntentsRequest.type = Types::GetIntentsRequest
-    GetIntentsResponse.add_member(:intents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentMetadataList, location_name: "intents"))
-    GetIntentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetIntentsResponse.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentMetadataList, location_name: "intents"))
+    GetIntentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetIntentsResponse.type = Types::GetIntentsResponse
-    GetMigrationRequest.add_member(:migration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationId, location_name: "migrationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetMigrationRequest.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationId, location_name: "migrationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetMigrationRequest.type = Types::GetMigrationRequest
-    GetMigrationResponse.add_member(:migration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationId, location_name: "migrationId"))
-    GetMigrationResponse.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotName"))
-    GetMigrationResponse.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "v1BotVersion"))
-    GetMigrationResponse.add_member(:v1_bot_locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "v1BotLocale"))
-    GetMigrationResponse.add_member(:v2_bot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: V2BotId, location_name: "v2BotId"))
-    GetMigrationResponse.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "v2BotRole"))
-    GetMigrationResponse.add_member(:migration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationStatus, location_name: "migrationStatus"))
-    GetMigrationResponse.add_member(:migration_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationStrategy, location_name: "migrationStrategy"))
-    GetMigrationResponse.add_member(:migration_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "migrationTimestamp"))
-    GetMigrationResponse.add_member(:alerts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlerts, location_name: "alerts"))
+    GetMigrationResponse.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationId, location_name: "migrationId"))
+    GetMigrationResponse.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "v1BotName"))
+    GetMigrationResponse.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "v1BotVersion"))
+    GetMigrationResponse.add_member(:v1_bot_locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "v1BotLocale"))
+    GetMigrationResponse.add_member(:v2_bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: V2BotId, location_name: "v2BotId"))
+    GetMigrationResponse.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "v2BotRole"))
+    GetMigrationResponse.add_member(:migration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStatus, location_name: "migrationStatus"))
+    GetMigrationResponse.add_member(:migration_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStrategy, location_name: "migrationStrategy"))
+    GetMigrationResponse.add_member(:migration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "migrationTimestamp"))
+    GetMigrationResponse.add_member(:alerts, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlerts, location_name: "alerts"))
     GetMigrationResponse.type = Types::GetMigrationResponse
-    GetMigrationsRequest.add_member(:sort_by_attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationSortAttribute, location_name: "sortByAttribute", traits: {"smithy.api#httpQuery" => "sortByAttribute"}))
-    GetMigrationsRequest.add_member(:sort_by_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortByOrder", traits: {"smithy.api#httpQuery" => "sortByOrder"}))
-    GetMigrationsRequest.add_member(:v1_bot_name_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotNameContains", traits: {"smithy.api#httpQuery" => "v1BotNameContains"}))
-    GetMigrationsRequest.add_member(:migration_status_equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationStatus, location_name: "migrationStatusEquals", traits: {"smithy.api#httpQuery" => "migrationStatusEquals"}))
-    GetMigrationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    GetMigrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetMigrationsRequest.add_member(:sort_by_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSortAttribute, location_name: "sortByAttribute", traits: {"smithy.api#httpQuery" => "sortByAttribute"}))
+    GetMigrationsRequest.add_member(:sort_by_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "sortByOrder", traits: {"smithy.api#httpQuery" => "sortByOrder"}))
+    GetMigrationsRequest.add_member(:v1_bot_name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "v1BotNameContains", traits: {"smithy.api#httpQuery" => "v1BotNameContains"}))
+    GetMigrationsRequest.add_member(:migration_status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStatus, location_name: "migrationStatusEquals", traits: {"smithy.api#httpQuery" => "migrationStatusEquals"}))
+    GetMigrationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetMigrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     GetMigrationsRequest.type = Types::GetMigrationsRequest
-    GetMigrationsResponse.add_member(:migration_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationSummaryList, location_name: "migrationSummaries"))
-    GetMigrationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetMigrationsResponse.add_member(:migration_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSummaryList, location_name: "migrationSummaries"))
+    GetMigrationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetMigrationsResponse.type = Types::GetMigrationsResponse
-    GetSlotTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetSlotTypeRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSlotTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSlotTypeRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSlotTypeRequest.type = Types::GetSlotTypeRequest
-    GetSlotTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
-    GetSlotTypeResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetSlotTypeResponse.add_member(:enumeration_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnumerationValues, location_name: "enumerationValues"))
-    GetSlotTypeResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    GetSlotTypeResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    GetSlotTypeResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    GetSlotTypeResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    GetSlotTypeResponse.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
-    GetSlotTypeResponse.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
-    GetSlotTypeResponse.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
+    GetSlotTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name"))
+    GetSlotTypeResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    GetSlotTypeResponse.add_member(:enumeration_values, ::Smithy::Schema::Shapes::MemberShape.new(target: EnumerationValues, location_name: "enumerationValues"))
+    GetSlotTypeResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    GetSlotTypeResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    GetSlotTypeResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    GetSlotTypeResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    GetSlotTypeResponse.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    GetSlotTypeResponse.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    GetSlotTypeResponse.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     GetSlotTypeResponse.type = Types::GetSlotTypeResponse
-    GetSlotTypeVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetSlotTypeVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetSlotTypeVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetSlotTypeVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSlotTypeVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetSlotTypeVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetSlotTypeVersionsRequest.type = Types::GetSlotTypeVersionsRequest
-    GetSlotTypeVersionsResponse.add_member(:slot_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeMetadataList, location_name: "slotTypes"))
-    GetSlotTypeVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetSlotTypeVersionsResponse.add_member(:slot_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeMetadataList, location_name: "slotTypes"))
+    GetSlotTypeVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetSlotTypeVersionsResponse.type = Types::GetSlotTypeVersionsResponse
-    GetSlotTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetSlotTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    GetSlotTypesRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
+    GetSlotTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetSlotTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetSlotTypesRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "nameContains", traits: {"smithy.api#httpQuery" => "nameContains"}))
     GetSlotTypesRequest.type = Types::GetSlotTypesRequest
-    GetSlotTypesResponse.add_member(:slot_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeMetadataList, location_name: "slotTypes"))
-    GetSlotTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetSlotTypesResponse.add_member(:slot_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeMetadataList, location_name: "slotTypes"))
+    GetSlotTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetSlotTypesResponse.type = Types::GetSlotTypesResponse
-    GetUtterancesViewRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetUtterancesViewRequest.add_member(:bot_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotVersions, location_name: "botVersions", traits: {"smithy.api#httpQuery" => "bot_versions", "smithy.api#required" => {}}))
-    GetUtterancesViewRequest.add_member(:status_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusType, location_name: "statusType", traits: {"smithy.api#httpQuery" => "status_type", "smithy.api#required" => {}}))
+    GetUtterancesViewRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetUtterancesViewRequest.add_member(:bot_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersions, location_name: "botVersions", traits: {"smithy.api#httpQuery" => "bot_versions", "smithy.api#required" => {}}))
+    GetUtterancesViewRequest.add_member(:status_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, location_name: "statusType", traits: {"smithy.api#httpQuery" => "status_type", "smithy.api#required" => {}}))
     GetUtterancesViewRequest.type = Types::GetUtterancesViewRequest
-    GetUtterancesViewResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName"))
-    GetUtterancesViewResponse.add_member(:utterances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListsOfUtterances, location_name: "utterances"))
+    GetUtterancesViewResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName"))
+    GetUtterancesViewResponse.add_member(:utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: ListsOfUtterances, location_name: "utterances"))
     GetUtterancesViewResponse.type = Types::GetUtterancesViewResponse
-    ImportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ImportStatus.add_member(:complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
-    ImportStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    InputContext.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputContextName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ImportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ImportStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
+    ImportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    InputContext.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContextName, location_name: "name", traits: {"smithy.api#required" => {}}))
     InputContext.type = Types::InputContext
-    InputContextList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputContext)
-    Intent.add_member(:intent_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "intentName", traits: {"smithy.api#required" => {}}))
-    Intent.add_member(:intent_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "intentVersion", traits: {"smithy.api#required" => {}}))
+    InputContextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputContext)
+    Intent.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "intentName", traits: {"smithy.api#required" => {}}))
+    Intent.add_member(:intent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "intentVersion", traits: {"smithy.api#required" => {}}))
     Intent.type = Types::Intent
-    IntentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Intent)
-    IntentMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name"))
-    IntentMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    IntentMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    IntentMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    IntentMetadata.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    IntentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Intent)
+    IntentMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name"))
+    IntentMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    IntentMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    IntentMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    IntentMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
     IntentMetadata.type = Types::IntentMetadata
-    IntentMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentMetadata)
-    IntentUtteranceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Utterance)
-    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    IntentMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntentMetadata)
+    IntentUtteranceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Utterance)
+    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     InternalFailureException.type = Types::InternalFailureException
-    KendraConfiguration.add_member(:kendra_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KendraIndexArn, location_name: "kendraIndex", traits: {"smithy.api#required" => {}}))
-    KendraConfiguration.add_member(:query_filter_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryFilterString, location_name: "queryFilterString"))
-    KendraConfiguration.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "role", traits: {"smithy.api#required" => {}}))
+    KendraConfiguration.add_member(:kendra_index, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraIndexArn, location_name: "kendraIndex", traits: {"smithy.api#required" => {}}))
+    KendraConfiguration.add_member(:query_filter_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterString, location_name: "queryFilterString"))
+    KendraConfiguration.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "role", traits: {"smithy.api#required" => {}}))
     KendraConfiguration.type = Types::KendraConfiguration
-    LimitExceededException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListOfUtterance.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UtteranceData)
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListOfUtterance.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceData)
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListsOfUtterances.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UtteranceList)
-    Locale.add_member(:de_de, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE_DE", traits: {"smithy.api#enumValue" => "de-DE"}))
-    Locale.add_member(:en_au, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_AU", traits: {"smithy.api#enumValue" => "en-AU"}))
-    Locale.add_member(:en_gb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_GB", traits: {"smithy.api#enumValue" => "en-GB"}))
-    Locale.add_member(:en_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_IN", traits: {"smithy.api#enumValue" => "en-IN"}))
-    Locale.add_member(:en_us, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_US", traits: {"smithy.api#enumValue" => "en-US"}))
-    Locale.add_member(:es_419, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES_419", traits: {"smithy.api#enumValue" => "es-419"}))
-    Locale.add_member(:es_es, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES_ES", traits: {"smithy.api#enumValue" => "es-ES"}))
-    Locale.add_member(:es_us, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES_US", traits: {"smithy.api#enumValue" => "es-US"}))
-    Locale.add_member(:fr_fr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR_FR", traits: {"smithy.api#enumValue" => "fr-FR"}))
-    Locale.add_member(:fr_ca, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR_CA", traits: {"smithy.api#enumValue" => "fr-CA"}))
-    Locale.add_member(:it_it, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT_IT", traits: {"smithy.api#enumValue" => "it-IT"}))
-    Locale.add_member(:ja_jp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JA_JP", traits: {"smithy.api#enumValue" => "ja-JP"}))
-    Locale.add_member(:ko_kr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KO_KR", traits: {"smithy.api#enumValue" => "ko-KR"}))
-    LocaleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale)
-    LogSettingsRequest.add_member(:log_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogType, location_name: "logType", traits: {"smithy.api#required" => {}}))
-    LogSettingsRequest.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    LogSettingsRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    LogSettingsRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    ListsOfUtterances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceList)
+    Locale.add_member(:de_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE_DE", traits: {"smithy.api#enumValue" => "de-DE"}))
+    Locale.add_member(:en_au, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_AU", traits: {"smithy.api#enumValue" => "en-AU"}))
+    Locale.add_member(:en_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_GB", traits: {"smithy.api#enumValue" => "en-GB"}))
+    Locale.add_member(:en_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_IN", traits: {"smithy.api#enumValue" => "en-IN"}))
+    Locale.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_US", traits: {"smithy.api#enumValue" => "en-US"}))
+    Locale.add_member(:es_419, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES_419", traits: {"smithy.api#enumValue" => "es-419"}))
+    Locale.add_member(:es_es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES_ES", traits: {"smithy.api#enumValue" => "es-ES"}))
+    Locale.add_member(:es_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES_US", traits: {"smithy.api#enumValue" => "es-US"}))
+    Locale.add_member(:fr_fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR_FR", traits: {"smithy.api#enumValue" => "fr-FR"}))
+    Locale.add_member(:fr_ca, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR_CA", traits: {"smithy.api#enumValue" => "fr-CA"}))
+    Locale.add_member(:it_it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT_IT", traits: {"smithy.api#enumValue" => "it-IT"}))
+    Locale.add_member(:ja_jp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JA_JP", traits: {"smithy.api#enumValue" => "ja-JP"}))
+    Locale.add_member(:ko_kr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KO_KR", traits: {"smithy.api#enumValue" => "ko-KR"}))
+    LocaleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Locale)
+    LogSettingsRequest.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, location_name: "logType", traits: {"smithy.api#required" => {}}))
+    LogSettingsRequest.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    LogSettingsRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "kmsKeyArn"))
+    LogSettingsRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
     LogSettingsRequest.type = Types::LogSettingsRequest
-    LogSettingsRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSettingsRequest)
-    LogSettingsResponse.add_member(:log_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogType, location_name: "logType"))
-    LogSettingsResponse.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
-    LogSettingsResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    LogSettingsResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
-    LogSettingsResponse.add_member(:resource_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePrefix, location_name: "resourcePrefix"))
+    LogSettingsRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsRequest)
+    LogSettingsResponse.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, location_name: "logType"))
+    LogSettingsResponse.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination"))
+    LogSettingsResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "kmsKeyArn"))
+    LogSettingsResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn"))
+    LogSettingsResponse.add_member(:resource_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePrefix, location_name: "resourcePrefix"))
     LogSettingsResponse.type = Types::LogSettingsResponse
-    LogSettingsResponseList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSettingsResponse)
-    LogType.add_member(:audio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUDIO", traits: {"smithy.api#enumValue" => "AUDIO"}))
-    LogType.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXT", traits: {"smithy.api#enumValue" => "TEXT"}))
-    MergeStrategy.add_member(:overwrite_latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERWRITE_LATEST", traits: {"smithy.api#enumValue" => "OVERWRITE_LATEST"}))
-    MergeStrategy.add_member(:fail_on_conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAIL_ON_CONFLICT", traits: {"smithy.api#enumValue" => "FAIL_ON_CONFLICT"}))
-    Message.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "contentType", traits: {"smithy.api#required" => {}}))
-    Message.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentString, location_name: "content", traits: {"smithy.api#required" => {}}))
-    Message.add_member(:group_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNumber, location_name: "groupNumber"))
+    LogSettingsResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsResponse)
+    LogType.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUDIO", traits: {"smithy.api#enumValue" => "AUDIO"}))
+    LogType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXT", traits: {"smithy.api#enumValue" => "TEXT"}))
+    MergeStrategy.add_member(:overwrite_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERWRITE_LATEST", traits: {"smithy.api#enumValue" => "OVERWRITE_LATEST"}))
+    MergeStrategy.add_member(:fail_on_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAIL_ON_CONFLICT", traits: {"smithy.api#enumValue" => "FAIL_ON_CONFLICT"}))
+    Message.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, location_name: "contentType", traits: {"smithy.api#required" => {}}))
+    Message.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentString, location_name: "content", traits: {"smithy.api#required" => {}}))
+    Message.add_member(:group_number, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNumber, location_name: "groupNumber"))
     Message.type = Types::Message
-    MessageList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message)
-    MigrationAlert.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlertType, location_name: "type"))
-    MigrationAlert.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlertMessage, location_name: "message"))
-    MigrationAlert.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlertDetails, location_name: "details"))
-    MigrationAlert.add_member(:reference_ur_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlertReferenceURLs, location_name: "referenceURLs"))
+    MessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message)
+    MigrationAlert.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertType, location_name: "type"))
+    MigrationAlert.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertMessage, location_name: "message"))
+    MigrationAlert.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertDetails, location_name: "details"))
+    MigrationAlert.add_member(:reference_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertReferenceURLs, location_name: "referenceURLs"))
     MigrationAlert.type = Types::MigrationAlert
-    MigrationAlertDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlertDetail)
-    MigrationAlertReferenceURLs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlertReferenceURL)
-    MigrationAlertType.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    MigrationAlertType.add_member(:warn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WARN", traits: {"smithy.api#enumValue" => "WARN"}))
-    MigrationAlerts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationAlert)
-    MigrationSortAttribute.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_BOT_NAME", traits: {"smithy.api#enumValue" => "V1_BOT_NAME"}))
-    MigrationSortAttribute.add_member(:migration_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIGRATION_DATE_TIME", traits: {"smithy.api#enumValue" => "MIGRATION_DATE_TIME"}))
-    MigrationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    MigrationStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    MigrationStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    MigrationStrategy.add_member(:create_new, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_NEW", traits: {"smithy.api#enumValue" => "CREATE_NEW"}))
-    MigrationStrategy.add_member(:update_existing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_EXISTING", traits: {"smithy.api#enumValue" => "UPDATE_EXISTING"}))
-    MigrationSummary.add_member(:migration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationId, location_name: "migrationId"))
-    MigrationSummary.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotName"))
-    MigrationSummary.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "v1BotVersion"))
-    MigrationSummary.add_member(:v1_bot_locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "v1BotLocale"))
-    MigrationSummary.add_member(:v2_bot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: V2BotId, location_name: "v2BotId"))
-    MigrationSummary.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "v2BotRole"))
-    MigrationSummary.add_member(:migration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationStatus, location_name: "migrationStatus"))
-    MigrationSummary.add_member(:migration_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationStrategy, location_name: "migrationStrategy"))
-    MigrationSummary.add_member(:migration_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "migrationTimestamp"))
+    MigrationAlertDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertDetail)
+    MigrationAlertReferenceURLs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertReferenceURL)
+    MigrationAlertType.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    MigrationAlertType.add_member(:warn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WARN", traits: {"smithy.api#enumValue" => "WARN"}))
+    MigrationAlerts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlert)
+    MigrationSortAttribute.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_BOT_NAME", traits: {"smithy.api#enumValue" => "V1_BOT_NAME"}))
+    MigrationSortAttribute.add_member(:migration_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIGRATION_DATE_TIME", traits: {"smithy.api#enumValue" => "MIGRATION_DATE_TIME"}))
+    MigrationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    MigrationStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    MigrationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    MigrationStrategy.add_member(:create_new, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_NEW", traits: {"smithy.api#enumValue" => "CREATE_NEW"}))
+    MigrationStrategy.add_member(:update_existing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_EXISTING", traits: {"smithy.api#enumValue" => "UPDATE_EXISTING"}))
+    MigrationSummary.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationId, location_name: "migrationId"))
+    MigrationSummary.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "v1BotName"))
+    MigrationSummary.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "v1BotVersion"))
+    MigrationSummary.add_member(:v1_bot_locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "v1BotLocale"))
+    MigrationSummary.add_member(:v2_bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: V2BotId, location_name: "v2BotId"))
+    MigrationSummary.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "v2BotRole"))
+    MigrationSummary.add_member(:migration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStatus, location_name: "migrationStatus"))
+    MigrationSummary.add_member(:migration_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStrategy, location_name: "migrationStrategy"))
+    MigrationSummary.add_member(:migration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "migrationTimestamp"))
     MigrationSummary.type = Types::MigrationSummary
-    MigrationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationSummary)
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    MigrationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSummary)
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     NotFoundException.type = Types::NotFoundException
-    ObfuscationSetting.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    ObfuscationSetting.add_member(:default_obfuscation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEFAULT_OBFUSCATION", traits: {"smithy.api#enumValue" => "DEFAULT_OBFUSCATION"}))
-    OutputContext.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputContextName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    OutputContext.add_member(:time_to_live_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextTimeToLiveInSeconds, location_name: "timeToLiveInSeconds", traits: {"smithy.api#required" => {}}))
-    OutputContext.add_member(:turns_to_live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextTurnsToLive, location_name: "turnsToLive", traits: {"smithy.api#required" => {}}))
+    ObfuscationSetting.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    ObfuscationSetting.add_member(:default_obfuscation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEFAULT_OBFUSCATION", traits: {"smithy.api#enumValue" => "DEFAULT_OBFUSCATION"}))
+    OutputContext.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContextName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    OutputContext.add_member(:time_to_live_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextTimeToLiveInSeconds, location_name: "timeToLiveInSeconds", traits: {"smithy.api#required" => {}}))
+    OutputContext.add_member(:turns_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextTurnsToLive, location_name: "turnsToLive", traits: {"smithy.api#required" => {}}))
     OutputContext.type = Types::OutputContext
-    OutputContextList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputContext)
-    PreconditionFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    OutputContextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContext)
+    PreconditionFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     PreconditionFailedException.type = Types::PreconditionFailedException
-    ProcessBehavior.add_member(:save, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAVE", traits: {"smithy.api#enumValue" => "SAVE"}))
-    ProcessBehavior.add_member(:build, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BUILD", traits: {"smithy.api#enumValue" => "BUILD"}))
-    Prompt.add_member(:messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageList, location_name: "messages", traits: {"smithy.api#required" => {}}))
-    Prompt.add_member(:max_attempts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptMaxAttempts, location_name: "maxAttempts", traits: {"smithy.api#required" => {}}))
-    Prompt.add_member(:response_card, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
+    ProcessBehavior.add_member(:save, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAVE", traits: {"smithy.api#enumValue" => "SAVE"}))
+    ProcessBehavior.add_member(:build, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BUILD", traits: {"smithy.api#enumValue" => "BUILD"}))
+    Prompt.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageList, location_name: "messages", traits: {"smithy.api#required" => {}}))
+    Prompt.add_member(:max_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptMaxAttempts, location_name: "maxAttempts", traits: {"smithy.api#required" => {}}))
+    Prompt.add_member(:response_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseCard, location_name: "responseCard"))
     Prompt.type = Types::Prompt
-    PutBotAliasRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutBotAliasRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutBotAliasRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "botVersion", traits: {"smithy.api#required" => {}}))
-    PutBotAliasRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutBotAliasRequest.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutBotAliasRequest.add_member(:conversation_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConversationLogsRequest, location_name: "conversationLogs"))
-    PutBotAliasRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    PutBotAliasRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutBotAliasRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutBotAliasRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "botVersion", traits: {"smithy.api#required" => {}}))
+    PutBotAliasRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutBotAliasRequest.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutBotAliasRequest.add_member(:conversation_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLogsRequest, location_name: "conversationLogs"))
+    PutBotAliasRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     PutBotAliasRequest.type = Types::PutBotAliasRequest
-    PutBotAliasResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "name"))
-    PutBotAliasResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutBotAliasResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "botVersion"))
-    PutBotAliasResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "botName"))
-    PutBotAliasResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    PutBotAliasResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    PutBotAliasResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutBotAliasResponse.add_member(:conversation_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConversationLogsResponse, location_name: "conversationLogs"))
-    PutBotAliasResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    PutBotAliasResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "name"))
+    PutBotAliasResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutBotAliasResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "botVersion"))
+    PutBotAliasResponse.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "botName"))
+    PutBotAliasResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    PutBotAliasResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    PutBotAliasResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutBotAliasResponse.add_member(:conversation_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLogsResponse, location_name: "conversationLogs"))
+    PutBotAliasResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     PutBotAliasResponse.type = Types::PutBotAliasResponse
-    PutBotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutBotRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutBotRequest.add_member(:intents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentList, location_name: "intents"))
-    PutBotRequest.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enableModelImprovements"))
-    PutBotRequest.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
-    PutBotRequest.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "clarificationPrompt"))
-    PutBotRequest.add_member(:abort_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "abortStatement"))
-    PutBotRequest.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
-    PutBotRequest.add_member(:voice_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "voiceId"))
-    PutBotRequest.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutBotRequest.add_member(:process_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProcessBehavior, location_name: "processBehavior"))
-    PutBotRequest.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "locale", traits: {"smithy.api#required" => {}}))
-    PutBotRequest.add_member(:child_directed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected", traits: {"smithy.api#required" => {}}))
-    PutBotRequest.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
-    PutBotRequest.add_member(:create_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
-    PutBotRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    PutBotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutBotRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutBotRequest.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentList, location_name: "intents"))
+    PutBotRequest.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enableModelImprovements"))
+    PutBotRequest.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
+    PutBotRequest.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "clarificationPrompt"))
+    PutBotRequest.add_member(:abort_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "abortStatement"))
+    PutBotRequest.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTTL, location_name: "idleSessionTTLInSeconds"))
+    PutBotRequest.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "voiceId"))
+    PutBotRequest.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutBotRequest.add_member(:process_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessBehavior, location_name: "processBehavior"))
+    PutBotRequest.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "locale", traits: {"smithy.api#required" => {}}))
+    PutBotRequest.add_member(:child_directed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "childDirected", traits: {"smithy.api#required" => {}}))
+    PutBotRequest.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "detectSentiment"))
+    PutBotRequest.add_member(:create_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "createVersion"))
+    PutBotRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     PutBotRequest.type = Types::PutBotRequest
-    PutBotResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "name"))
-    PutBotResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutBotResponse.add_member(:intents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentList, location_name: "intents"))
-    PutBotResponse.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enableModelImprovements"))
-    PutBotResponse.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
-    PutBotResponse.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "clarificationPrompt"))
-    PutBotResponse.add_member(:abort_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "abortStatement"))
-    PutBotResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    PutBotResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
-    PutBotResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    PutBotResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    PutBotResponse.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
-    PutBotResponse.add_member(:voice_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "voiceId"))
-    PutBotResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutBotResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    PutBotResponse.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
-    PutBotResponse.add_member(:child_directed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
-    PutBotResponse.add_member(:create_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
-    PutBotResponse.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
-    PutBotResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    PutBotResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "name"))
+    PutBotResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutBotResponse.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentList, location_name: "intents"))
+    PutBotResponse.add_member(:enable_model_improvements, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enableModelImprovements"))
+    PutBotResponse.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
+    PutBotResponse.add_member(:clarification_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "clarificationPrompt"))
+    PutBotResponse.add_member(:abort_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "abortStatement"))
+    PutBotResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "status"))
+    PutBotResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "failureReason"))
+    PutBotResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    PutBotResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    PutBotResponse.add_member(:idle_session_ttl_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTTL, location_name: "idleSessionTTLInSeconds"))
+    PutBotResponse.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "voiceId"))
+    PutBotResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutBotResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    PutBotResponse.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "locale"))
+    PutBotResponse.add_member(:child_directed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "childDirected"))
+    PutBotResponse.add_member(:create_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "createVersion"))
+    PutBotResponse.add_member(:detect_sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "detectSentiment"))
+    PutBotResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     PutBotResponse.type = Types::PutBotResponse
-    PutIntentRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutIntentRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutIntentRequest.add_member(:slots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotList, location_name: "slots"))
-    PutIntentRequest.add_member(:sample_utterances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentUtteranceList, location_name: "sampleUtterances"))
-    PutIntentRequest.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "confirmationPrompt"))
-    PutIntentRequest.add_member(:rejection_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "rejectionStatement"))
-    PutIntentRequest.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FollowUpPrompt, location_name: "followUpPrompt"))
-    PutIntentRequest.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "conclusionStatement"))
-    PutIntentRequest.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHook, location_name: "dialogCodeHook"))
-    PutIntentRequest.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FulfillmentActivity, location_name: "fulfillmentActivity"))
-    PutIntentRequest.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "parentIntentSignature"))
-    PutIntentRequest.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutIntentRequest.add_member(:create_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
-    PutIntentRequest.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
-    PutIntentRequest.add_member(:input_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
-    PutIntentRequest.add_member(:output_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
+    PutIntentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutIntentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutIntentRequest.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotList, location_name: "slots"))
+    PutIntentRequest.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentUtteranceList, location_name: "sampleUtterances"))
+    PutIntentRequest.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "confirmationPrompt"))
+    PutIntentRequest.add_member(:rejection_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "rejectionStatement"))
+    PutIntentRequest.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: FollowUpPrompt, location_name: "followUpPrompt"))
+    PutIntentRequest.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "conclusionStatement"))
+    PutIntentRequest.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeHook, location_name: "dialogCodeHook"))
+    PutIntentRequest.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: FulfillmentActivity, location_name: "fulfillmentActivity"))
+    PutIntentRequest.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, location_name: "parentIntentSignature"))
+    PutIntentRequest.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutIntentRequest.add_member(:create_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "createVersion"))
+    PutIntentRequest.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraConfiguration, location_name: "kendraConfiguration"))
+    PutIntentRequest.add_member(:input_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContextList, location_name: "inputContexts"))
+    PutIntentRequest.add_member(:output_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContextList, location_name: "outputContexts"))
     PutIntentRequest.type = Types::PutIntentRequest
-    PutIntentResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentName, location_name: "name"))
-    PutIntentResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutIntentResponse.add_member(:slots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotList, location_name: "slots"))
-    PutIntentResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentUtteranceList, location_name: "sampleUtterances"))
-    PutIntentResponse.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "confirmationPrompt"))
-    PutIntentResponse.add_member(:rejection_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "rejectionStatement"))
-    PutIntentResponse.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FollowUpPrompt, location_name: "followUpPrompt"))
-    PutIntentResponse.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statement, location_name: "conclusionStatement"))
-    PutIntentResponse.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHook, location_name: "dialogCodeHook"))
-    PutIntentResponse.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FulfillmentActivity, location_name: "fulfillmentActivity"))
-    PutIntentResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "parentIntentSignature"))
-    PutIntentResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    PutIntentResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    PutIntentResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    PutIntentResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutIntentResponse.add_member(:create_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
-    PutIntentResponse.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
-    PutIntentResponse.add_member(:input_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputContextList, location_name: "inputContexts"))
-    PutIntentResponse.add_member(:output_contexts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputContextList, location_name: "outputContexts"))
+    PutIntentResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, location_name: "name"))
+    PutIntentResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutIntentResponse.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotList, location_name: "slots"))
+    PutIntentResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentUtteranceList, location_name: "sampleUtterances"))
+    PutIntentResponse.add_member(:confirmation_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "confirmationPrompt"))
+    PutIntentResponse.add_member(:rejection_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "rejectionStatement"))
+    PutIntentResponse.add_member(:follow_up_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: FollowUpPrompt, location_name: "followUpPrompt"))
+    PutIntentResponse.add_member(:conclusion_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "conclusionStatement"))
+    PutIntentResponse.add_member(:dialog_code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeHook, location_name: "dialogCodeHook"))
+    PutIntentResponse.add_member(:fulfillment_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: FulfillmentActivity, location_name: "fulfillmentActivity"))
+    PutIntentResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, location_name: "parentIntentSignature"))
+    PutIntentResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    PutIntentResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    PutIntentResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    PutIntentResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutIntentResponse.add_member(:create_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "createVersion"))
+    PutIntentResponse.add_member(:kendra_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraConfiguration, location_name: "kendraConfiguration"))
+    PutIntentResponse.add_member(:input_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContextList, location_name: "inputContexts"))
+    PutIntentResponse.add_member(:output_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContextList, location_name: "outputContexts"))
     PutIntentResponse.type = Types::PutIntentResponse
-    PutSlotTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutSlotTypeRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutSlotTypeRequest.add_member(:enumeration_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnumerationValues, location_name: "enumerationValues"))
-    PutSlotTypeRequest.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutSlotTypeRequest.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
-    PutSlotTypeRequest.add_member(:create_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
-    PutSlotTypeRequest.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
-    PutSlotTypeRequest.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
+    PutSlotTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutSlotTypeRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutSlotTypeRequest.add_member(:enumeration_values, ::Smithy::Schema::Shapes::MemberShape.new(target: EnumerationValues, location_name: "enumerationValues"))
+    PutSlotTypeRequest.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutSlotTypeRequest.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    PutSlotTypeRequest.add_member(:create_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "createVersion"))
+    PutSlotTypeRequest.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    PutSlotTypeRequest.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     PutSlotTypeRequest.type = Types::PutSlotTypeRequest
-    PutSlotTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
-    PutSlotTypeResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PutSlotTypeResponse.add_member(:enumeration_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnumerationValues, location_name: "enumerationValues"))
-    PutSlotTypeResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    PutSlotTypeResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    PutSlotTypeResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    PutSlotTypeResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    PutSlotTypeResponse.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
-    PutSlotTypeResponse.add_member(:create_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
-    PutSlotTypeResponse.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
-    PutSlotTypeResponse.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
+    PutSlotTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name"))
+    PutSlotTypeResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PutSlotTypeResponse.add_member(:enumeration_values, ::Smithy::Schema::Shapes::MemberShape.new(target: EnumerationValues, location_name: "enumerationValues"))
+    PutSlotTypeResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    PutSlotTypeResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    PutSlotTypeResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    PutSlotTypeResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum"))
+    PutSlotTypeResponse.add_member(:value_selection_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    PutSlotTypeResponse.add_member(:create_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "createVersion"))
+    PutSlotTypeResponse.add_member(:parent_slot_type_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    PutSlotTypeResponse.add_member(:slot_type_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     PutSlotTypeResponse.type = Types::PutSlotTypeResponse
-    ReferenceType.add_member(:intent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTENT", traits: {"smithy.api#enumValue" => "Intent"}))
-    ReferenceType.add_member(:bot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOT", traits: {"smithy.api#enumValue" => "Bot"}))
-    ReferenceType.add_member(:botalias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTALIAS", traits: {"smithy.api#enumValue" => "BotAlias"}))
-    ReferenceType.add_member(:botchannel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTCHANNEL", traits: {"smithy.api#enumValue" => "BotChannel"}))
-    ResourceInUseException.add_member(:reference_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceType, location_name: "referenceType"))
-    ResourceInUseException.add_member(:example_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceReference, location_name: "exampleReference"))
+    ReferenceType.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTENT", traits: {"smithy.api#enumValue" => "Intent"}))
+    ReferenceType.add_member(:bot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOT", traits: {"smithy.api#enumValue" => "Bot"}))
+    ReferenceType.add_member(:botalias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTALIAS", traits: {"smithy.api#enumValue" => "BotAlias"}))
+    ReferenceType.add_member(:botchannel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTCHANNEL", traits: {"smithy.api#enumValue" => "BotChannel"}))
+    ResourceInUseException.add_member(:reference_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceType, location_name: "referenceType"))
+    ResourceInUseException.add_member(:example_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceReference, location_name: "exampleReference"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceReference.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    ResourceReference.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    ResourceReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    ResourceReference.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
     ResourceReference.type = Types::ResourceReference
-    ResourceType.add_member(:bot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOT", traits: {"smithy.api#enumValue" => "BOT"}))
-    ResourceType.add_member(:intent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTENT", traits: {"smithy.api#enumValue" => "INTENT"}))
-    ResourceType.add_member(:slot_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SLOT_TYPE", traits: {"smithy.api#enumValue" => "SLOT_TYPE"}))
-    Slot.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    Slot.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    Slot.add_member(:slot_constraint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotConstraint, location_name: "slotConstraint", traits: {"smithy.api#required" => {}}))
-    Slot.add_member(:slot_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "slotType"))
-    Slot.add_member(:slot_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "slotTypeVersion"))
-    Slot.add_member(:value_elicitation_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: "valueElicitationPrompt"))
-    Slot.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Priority, location_name: "priority"))
-    Slot.add_member(:sample_utterances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotUtteranceList, location_name: "sampleUtterances"))
-    Slot.add_member(:response_card, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
-    Slot.add_member(:obfuscation_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObfuscationSetting, location_name: "obfuscationSetting"))
-    Slot.add_member(:default_value_spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotDefaultValueSpec, location_name: "defaultValueSpec"))
+    ResourceType.add_member(:bot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOT", traits: {"smithy.api#enumValue" => "BOT"}))
+    ResourceType.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTENT", traits: {"smithy.api#enumValue" => "INTENT"}))
+    ResourceType.add_member(:slot_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SLOT_TYPE", traits: {"smithy.api#enumValue" => "SLOT_TYPE"}))
+    Slot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    Slot.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    Slot.add_member(:slot_constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotConstraint, location_name: "slotConstraint", traits: {"smithy.api#required" => {}}))
+    Slot.add_member(:slot_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOrBuiltinSlotTypeName, location_name: "slotType"))
+    Slot.add_member(:slot_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "slotTypeVersion"))
+    Slot.add_member(:value_elicitation_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, location_name: "valueElicitationPrompt"))
+    Slot.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, location_name: "priority"))
+    Slot.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotUtteranceList, location_name: "sampleUtterances"))
+    Slot.add_member(:response_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseCard, location_name: "responseCard"))
+    Slot.add_member(:obfuscation_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: ObfuscationSetting, location_name: "obfuscationSetting"))
+    Slot.add_member(:default_value_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueSpec, location_name: "defaultValueSpec"))
     Slot.type = Types::Slot
-    SlotConstraint.add_member(:required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRED", traits: {"smithy.api#enumValue" => "Required"}))
-    SlotConstraint.add_member(:optional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "Optional"}))
-    SlotDefaultValue.add_member(:default_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotDefaultValueString, location_name: "defaultValue", traits: {"smithy.api#required" => {}}))
+    SlotConstraint.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRED", traits: {"smithy.api#enumValue" => "Required"}))
+    SlotConstraint.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "Optional"}))
+    SlotDefaultValue.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueString, location_name: "defaultValue", traits: {"smithy.api#required" => {}}))
     SlotDefaultValue.type = Types::SlotDefaultValue
-    SlotDefaultValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotDefaultValue)
-    SlotDefaultValueSpec.add_member(:default_value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotDefaultValueList, location_name: "defaultValueList", traits: {"smithy.api#required" => {}}))
+    SlotDefaultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValue)
+    SlotDefaultValueSpec.add_member(:default_value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueList, location_name: "defaultValueList", traits: {"smithy.api#required" => {}}))
     SlotDefaultValueSpec.type = Types::SlotDefaultValueSpec
-    SlotList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Slot)
-    SlotTypeConfiguration.add_member(:regex_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeRegexConfiguration, location_name: "regexConfiguration"))
+    SlotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Slot)
+    SlotTypeConfiguration.add_member(:regex_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeRegexConfiguration, location_name: "regexConfiguration"))
     SlotTypeConfiguration.type = Types::SlotTypeConfiguration
-    SlotTypeConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeConfiguration)
-    SlotTypeMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
-    SlotTypeMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    SlotTypeMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
-    SlotTypeMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
-    SlotTypeMetadata.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    SlotTypeConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeConfiguration)
+    SlotTypeMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, location_name: "name"))
+    SlotTypeMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    SlotTypeMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdatedDate"))
+    SlotTypeMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
+    SlotTypeMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
     SlotTypeMetadata.type = Types::SlotTypeMetadata
-    SlotTypeMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotTypeMetadata)
-    SlotTypeRegexConfiguration.add_member(:pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegexPattern, location_name: "pattern", traits: {"smithy.api#required" => {}}))
+    SlotTypeMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeMetadata)
+    SlotTypeRegexConfiguration.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPattern, location_name: "pattern", traits: {"smithy.api#required" => {}}))
     SlotTypeRegexConfiguration.type = Types::SlotTypeRegexConfiguration
-    SlotUtteranceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Utterance)
-    SlotValueSelectionStrategy.add_member(:original_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORIGINAL_VALUE", traits: {"smithy.api#enumValue" => "ORIGINAL_VALUE"}))
-    SlotValueSelectionStrategy.add_member(:top_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOP_RESOLUTION", traits: {"smithy.api#enumValue" => "TOP_RESOLUTION"}))
-    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
-    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
-    StartImportRequest.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blob, location_name: "payload", traits: {"smithy.api#required" => {}}))
-    StartImportRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    StartImportRequest.add_member(:merge_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy", traits: {"smithy.api#required" => {}}))
-    StartImportRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    SlotUtteranceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Utterance)
+    SlotValueSelectionStrategy.add_member(:original_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORIGINAL_VALUE", traits: {"smithy.api#enumValue" => "ORIGINAL_VALUE"}))
+    SlotValueSelectionStrategy.add_member(:top_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOP_RESOLUTION", traits: {"smithy.api#enumValue" => "TOP_RESOLUTION"}))
+    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
+    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
+    StartImportRequest.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, location_name: "payload", traits: {"smithy.api#required" => {}}))
+    StartImportRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    StartImportRequest.add_member(:merge_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeStrategy, location_name: "mergeStrategy", traits: {"smithy.api#required" => {}}))
+    StartImportRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     StartImportRequest.type = Types::StartImportRequest
-    StartImportResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    StartImportResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    StartImportResponse.add_member(:merge_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
-    StartImportResponse.add_member(:import_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "importId"))
-    StartImportResponse.add_member(:import_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
-    StartImportResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    StartImportResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
+    StartImportResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    StartImportResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    StartImportResponse.add_member(:merge_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeStrategy, location_name: "mergeStrategy"))
+    StartImportResponse.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "importId"))
+    StartImportResponse.add_member(:import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, location_name: "importStatus"))
+    StartImportResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    StartImportResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdDate"))
     StartImportResponse.type = Types::StartImportResponse
-    StartMigrationRequest.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotName", traits: {"smithy.api#required" => {}}))
-    StartMigrationRequest.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "v1BotVersion", traits: {"smithy.api#required" => {}}))
-    StartMigrationRequest.add_member(:v2_bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: V2BotName, location_name: "v2BotName", traits: {"smithy.api#required" => {}}))
-    StartMigrationRequest.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "v2BotRole", traits: {"smithy.api#required" => {}}))
-    StartMigrationRequest.add_member(:migration_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationStrategy, location_name: "migrationStrategy", traits: {"smithy.api#required" => {}}))
+    StartMigrationRequest.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "v1BotName", traits: {"smithy.api#required" => {}}))
+    StartMigrationRequest.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "v1BotVersion", traits: {"smithy.api#required" => {}}))
+    StartMigrationRequest.add_member(:v2_bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: V2BotName, location_name: "v2BotName", traits: {"smithy.api#required" => {}}))
+    StartMigrationRequest.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "v2BotRole", traits: {"smithy.api#required" => {}}))
+    StartMigrationRequest.add_member(:migration_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStrategy, location_name: "migrationStrategy", traits: {"smithy.api#required" => {}}))
     StartMigrationRequest.type = Types::StartMigrationRequest
-    StartMigrationResponse.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotName"))
-    StartMigrationResponse.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "v1BotVersion"))
-    StartMigrationResponse.add_member(:v1_bot_locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "v1BotLocale"))
-    StartMigrationResponse.add_member(:v2_bot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: V2BotId, location_name: "v2BotId"))
-    StartMigrationResponse.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "v2BotRole"))
-    StartMigrationResponse.add_member(:migration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationId, location_name: "migrationId"))
-    StartMigrationResponse.add_member(:migration_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationStrategy, location_name: "migrationStrategy"))
-    StartMigrationResponse.add_member(:migration_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "migrationTimestamp"))
+    StartMigrationResponse.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, location_name: "v1BotName"))
+    StartMigrationResponse.add_member(:v1_bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "v1BotVersion"))
+    StartMigrationResponse.add_member(:v1_bot_locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "v1BotLocale"))
+    StartMigrationResponse.add_member(:v2_bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: V2BotId, location_name: "v2BotId"))
+    StartMigrationResponse.add_member(:v2_bot_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "v2BotRole"))
+    StartMigrationResponse.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationId, location_name: "migrationId"))
+    StartMigrationResponse.add_member(:migration_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStrategy, location_name: "migrationStrategy"))
+    StartMigrationResponse.add_member(:migration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "migrationTimestamp"))
     StartMigrationResponse.type = Types::StartMigrationResponse
-    Statement.add_member(:messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageList, location_name: "messages", traits: {"smithy.api#required" => {}}))
-    Statement.add_member(:response_card, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
+    Statement.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageList, location_name: "messages", traits: {"smithy.api#required" => {}}))
+    Statement.add_member(:response_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseCard, location_name: "responseCard"))
     Statement.type = Types::Statement
-    Status.add_member(:building, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BUILDING", traits: {"smithy.api#enumValue" => "BUILDING"}))
-    Status.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
-    Status.add_member(:ready_basic_testing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY_BASIC_TESTING", traits: {"smithy.api#enumValue" => "READY_BASIC_TESTING"}))
-    Status.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    Status.add_member(:not_built, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_BUILT", traits: {"smithy.api#enumValue" => "NOT_BUILT"}))
-    StatusType.add_member(:detected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DETECTED", traits: {"smithy.api#enumValue" => "Detected"}))
-    StatusType.add_member(:missed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISSED", traits: {"smithy.api#enumValue" => "Missed"}))
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    SynonymList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    Status.add_member(:building, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BUILDING", traits: {"smithy.api#enumValue" => "BUILDING"}))
+    Status.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
+    Status.add_member(:ready_basic_testing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY_BASIC_TESTING", traits: {"smithy.api#enumValue" => "READY_BASIC_TESTING"}))
+    Status.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    Status.add_member(:not_built, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_BUILT", traits: {"smithy.api#enumValue" => "NOT_BUILT"}))
+    StatusType.add_member(:detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DETECTED", traits: {"smithy.api#enumValue" => "Detected"}))
+    StatusType.add_member(:missed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISSED", traits: {"smithy.api#enumValue" => "Missed"}))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    SynonymList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UtteranceData.add_member(:utterance_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UtteranceString, location_name: "utteranceString"))
-    UtteranceData.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: "count"))
-    UtteranceData.add_member(:distinct_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: "distinctUsers"))
-    UtteranceData.add_member(:first_uttered_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "firstUtteredDate"))
-    UtteranceData.add_member(:last_uttered_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUtteredDate"))
+    UtteranceData.add_member(:utterance_string, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceString, location_name: "utteranceString"))
+    UtteranceData.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, location_name: "count"))
+    UtteranceData.add_member(:distinct_users, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, location_name: "distinctUsers"))
+    UtteranceData.add_member(:first_uttered_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "firstUtteredDate"))
+    UtteranceData.add_member(:last_uttered_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUtteredDate"))
     UtteranceData.type = Types::UtteranceData
-    UtteranceList.add_member(:bot_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "botVersion"))
-    UtteranceList.add_member(:utterances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfUtterance, location_name: "utterances"))
+    UtteranceList.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "botVersion"))
+    UtteranceList.add_member(:utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfUtterance, location_name: "utterances"))
     UtteranceList.type = Types::UtteranceList
 
     AWSDeepSenseModelBuildingService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -973,495 +973,495 @@ module Aws::LexModelBuildingService
       service.add_operation(:create_bot_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#CreateBotVersion"
         operation.name = "CreateBotVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBotVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBotVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        operation.input = CreateBotVersionRequest
+        operation.output = CreateBotVersionResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << PreconditionFailedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{name}/versions", "code" => 201}}
       end)
       service.add_operation(:create_intent_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#CreateIntentVersion"
         operation.name = "CreateIntentVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIntentVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIntentVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        operation.input = CreateIntentVersionRequest
+        operation.output = CreateIntentVersionResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << PreconditionFailedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/intents/{name}/versions", "code" => 201}}
       end)
       service.add_operation(:create_slot_type_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersion"
         operation.name = "CreateSlotTypeVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSlotTypeVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSlotTypeVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        operation.input = CreateSlotTypeVersionRequest
+        operation.output = CreateSlotTypeVersionResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << PreconditionFailedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/slottypes/{name}/versions", "code" => 201}}
       end)
       service.add_operation(:delete_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBot"
         operation.name = "DeleteBot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteBotRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_bot_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBotAlias"
         operation.name = "DeleteBotAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBotAliasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteBotAliasRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/aliases/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_bot_channel_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBotChannelAssociation"
         operation.name = "DeleteBotChannelAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBotChannelAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = DeleteBotChannelAssociationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/aliases/{botAlias}/channels/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_bot_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBotVersion"
         operation.name = "DeleteBotVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBotVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteBotVersionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{name}/versions/{version}", "code" => 204}}
       end)
       service.add_operation(:delete_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteIntent"
         operation.name = "DeleteIntent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIntentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteIntentRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/intents/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_intent_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteIntentVersion"
         operation.name = "DeleteIntentVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIntentVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteIntentVersionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/intents/{name}/versions/{version}", "code" => 204}}
       end)
       service.add_operation(:delete_slot_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteSlotType"
         operation.name = "DeleteSlotType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlotTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteSlotTypeRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/slottypes/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_slot_type_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeVersion"
         operation.name = "DeleteSlotTypeVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSlotTypeVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteSlotTypeVersionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/slottypes/{name}/version/{version}", "code" => 204}}
       end)
       service.add_operation(:delete_utterances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteUtterances"
         operation.name = "DeleteUtterances"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUtterancesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = DeleteUtterancesRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/utterances/{userId}", "code" => 204}}
       end)
       service.add_operation(:get_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBot"
         operation.name = "GetBot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetBotRequest
+        operation.output = GetBotResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{name}/versions/{versionOrAlias}", "code" => 200}}
       end)
       service.add_operation(:get_bot_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotAlias"
         operation.name = "GetBotAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotAliasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotAliasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetBotAliasRequest
+        operation.output = GetBotAliasResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{name}", "code" => 200}}
       end)
       service.add_operation(:get_bot_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotAliases"
         operation.name = "GetBotAliases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotAliasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotAliasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = GetBotAliasesRequest
+        operation.output = GetBotAliasesResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases", "code" => 200}}
         operation[:paginator] = Paginators::GetBotAliases.new
       end)
       service.add_operation(:get_bot_channel_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociation"
         operation.name = "GetBotChannelAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotChannelAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotChannelAssociationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetBotChannelAssociationRequest
+        operation.output = GetBotChannelAssociationResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{botAlias}/channels/{name}", "code" => 200}}
       end)
       service.add_operation(:get_bot_channel_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociations"
         operation.name = "GetBotChannelAssociations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotChannelAssociationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotChannelAssociationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = GetBotChannelAssociationsRequest
+        operation.output = GetBotChannelAssociationsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{botAlias}/channels", "code" => 200}}
         operation[:paginator] = Paginators::GetBotChannelAssociations.new
       end)
       service.add_operation(:get_bot_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotVersions"
         operation.name = "GetBotVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetBotVersionsRequest
+        operation.output = GetBotVersionsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{name}/versions", "code" => 200}}
         operation[:paginator] = Paginators::GetBotVersions.new
       end)
       service.add_operation(:get_bots, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBots"
         operation.name = "GetBots"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBotsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetBotsRequest
+        operation.output = GetBotsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots", "code" => 200}}
         operation[:paginator] = Paginators::GetBots.new
       end)
       service.add_operation(:get_builtin_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntent"
         operation.name = "GetBuiltinIntent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBuiltinIntentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBuiltinIntentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetBuiltinIntentRequest
+        operation.output = GetBuiltinIntentResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/builtins/intents/{signature}", "code" => 200}}
       end)
       service.add_operation(:get_builtin_intents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntents"
         operation.name = "GetBuiltinIntents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBuiltinIntentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBuiltinIntentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = GetBuiltinIntentsRequest
+        operation.output = GetBuiltinIntentsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/builtins/intents", "code" => 200}}
         operation[:paginator] = Paginators::GetBuiltinIntents.new
       end)
       service.add_operation(:get_builtin_slot_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBuiltinSlotTypes"
         operation.name = "GetBuiltinSlotTypes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBuiltinSlotTypesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBuiltinSlotTypesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = GetBuiltinSlotTypesRequest
+        operation.output = GetBuiltinSlotTypesResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/builtins/slottypes", "code" => 200}}
         operation[:paginator] = Paginators::GetBuiltinSlotTypes.new
       end)
       service.add_operation(:get_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetExport"
         operation.name = "GetExport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetExportRequest
+        operation.output = GetExportResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/exports", "code" => 200}}
       end)
       service.add_operation(:get_import, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetImport"
         operation.name = "GetImport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetImportRequest
+        operation.output = GetImportResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/imports/{importId}", "code" => 200}}
       end)
       service.add_operation(:get_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetIntent"
         operation.name = "GetIntent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIntentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIntentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetIntentRequest
+        operation.output = GetIntentResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/intents/{name}/versions/{version}", "code" => 200}}
       end)
       service.add_operation(:get_intent_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetIntentVersions"
         operation.name = "GetIntentVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIntentVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIntentVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetIntentVersionsRequest
+        operation.output = GetIntentVersionsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/intents/{name}/versions", "code" => 200}}
         operation[:paginator] = Paginators::GetIntentVersions.new
       end)
       service.add_operation(:get_intents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetIntents"
         operation.name = "GetIntents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIntentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIntentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetIntentsRequest
+        operation.output = GetIntentsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/intents", "code" => 200}}
         operation[:paginator] = Paginators::GetIntents.new
       end)
       service.add_operation(:get_migration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetMigration"
         operation.name = "GetMigration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMigrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMigrationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetMigrationRequest
+        operation.output = GetMigrationResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/migrations/{migrationId}", "code" => 200}}
       end)
       service.add_operation(:get_migrations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetMigrations"
         operation.name = "GetMigrations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMigrationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMigrationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = GetMigrationsRequest
+        operation.output = GetMigrationsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/migrations", "code" => 200}}
         operation[:paginator] = Paginators::GetMigrations.new
       end)
       service.add_operation(:get_slot_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetSlotType"
         operation.name = "GetSlotType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSlotTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSlotTypeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetSlotTypeRequest
+        operation.output = GetSlotTypeResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/slottypes/{name}/versions/{version}", "code" => 200}}
       end)
       service.add_operation(:get_slot_type_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersions"
         operation.name = "GetSlotTypeVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSlotTypeVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSlotTypeVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetSlotTypeVersionsRequest
+        operation.output = GetSlotTypeVersionsResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/slottypes/{name}/versions", "code" => 200}}
         operation[:paginator] = Paginators::GetSlotTypeVersions.new
       end)
       service.add_operation(:get_slot_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetSlotTypes"
         operation.name = "GetSlotTypes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSlotTypesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSlotTypesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = GetSlotTypesRequest
+        operation.output = GetSlotTypesResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/slottypes", "code" => 200}}
         operation[:paginator] = Paginators::GetSlotTypes.new
       end)
       service.add_operation(:get_utterances_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetUtterancesView"
         operation.name = "GetUtterancesView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUtterancesViewRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUtterancesViewResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = GetUtterancesViewRequest
+        operation.output = GetUtterancesViewResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/utterances?view=aggregation", "code" => 200}}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:put_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutBot"
         operation.name = "PutBot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        operation.input = PutBotRequest
+        operation.output = PutBotResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << PreconditionFailedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/bots/{name}/versions/$LATEST", "code" => 200}}
       end)
       service.add_operation(:put_bot_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutBotAlias"
         operation.name = "PutBotAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBotAliasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBotAliasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        operation.input = PutBotAliasRequest
+        operation.output = PutBotAliasResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << PreconditionFailedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/bots/{botName}/aliases/{name}", "code" => 200}}
       end)
       service.add_operation(:put_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutIntent"
         operation.name = "PutIntent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutIntentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutIntentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        operation.input = PutIntentRequest
+        operation.output = PutIntentResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << PreconditionFailedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/intents/{name}/versions/$LATEST", "code" => 200}}
       end)
       service.add_operation(:put_slot_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutSlotType"
         operation.name = "PutSlotType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutSlotTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutSlotTypeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        operation.input = PutSlotTypeRequest
+        operation.output = PutSlotTypeResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << PreconditionFailedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/slottypes/{name}/versions/$LATEST", "code" => 200}}
       end)
       service.add_operation(:start_import, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#StartImport"
         operation.name = "StartImport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = StartImportRequest
+        operation.output = StartImportResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/imports", "code" => 201}}
       end)
       service.add_operation(:start_migration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#StartMigration"
         operation.name = "StartMigration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartMigrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartMigrationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = StartMigrationRequest
+        operation.output = StartMigrationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/migrations", "code" => 202}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 204}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 204}}
       end)
     end

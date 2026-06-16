@@ -114,279 +114,279 @@ module Aws::ServiceCatalogAppRegistry
     UpdateAttributeGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroupResponse", name: "UpdateAttributeGroupResponse")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.servicecatalogappregistry#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AppRegistryConfiguration.add_member(:tag_query_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQueryConfiguration, location_name: "tagQueryConfiguration"))
+    AppRegistryConfiguration.add_member(:tag_query_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TagQueryConfiguration, location_name: "tagQueryConfiguration"))
     AppRegistryConfiguration.type = Types::AppRegistryConfiguration
-    Application.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "id"))
-    Application.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "arn"))
-    Application.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    Application.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    Application.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    Application.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    Application.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    Application.add_member(:application_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationTagDefinition, location_name: "applicationTag"))
+    Application.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "id"))
+    Application.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "arn"))
+    Application.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    Application.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    Application.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    Application.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
+    Application.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    Application.add_member(:application_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagDefinition, location_name: "applicationTag"))
     Application.type = Types::Application
-    ApplicationSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSummary)
-    ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "id"))
-    ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "arn"))
-    ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    ApplicationSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    ApplicationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    ApplicationSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    ApplicationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary)
+    ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "id"))
+    ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "arn"))
+    ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    ApplicationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    ApplicationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    ApplicationSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
     ApplicationSummary.type = Types::ApplicationSummary
-    ApplicationTagDefinition.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    ApplicationTagDefinition.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    ApplicationTagResult.add_member(:application_tag_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationTagStatus, location_name: "applicationTagStatus"))
-    ApplicationTagResult.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
-    ApplicationTagResult.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcesList, location_name: "resources"))
-    ApplicationTagResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ApplicationTagDefinition.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    ApplicationTagDefinition.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    ApplicationTagResult.add_member(:application_tag_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagStatus, location_name: "applicationTagStatus"))
+    ApplicationTagResult.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "errorMessage"))
+    ApplicationTagResult.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesList, location_name: "resources"))
+    ApplicationTagResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ApplicationTagResult.type = Types::ApplicationTagResult
-    ApplicationTagStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ApplicationTagStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    ApplicationTagStatus.add_member(:failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILURE", traits: {"smithy.api#enumValue" => "FAILURE"}))
-    AssociateAttributeGroupRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AssociateAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ApplicationTagStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ApplicationTagStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    ApplicationTagStatus.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILURE", traits: {"smithy.api#enumValue" => "FAILURE"}))
+    AssociateAttributeGroupRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateAttributeGroupRequest.type = Types::AssociateAttributeGroupRequest
-    AssociateAttributeGroupResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "applicationArn"))
-    AssociateAttributeGroupResponse.add_member(:attribute_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "attributeGroupArn"))
+    AssociateAttributeGroupResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "applicationArn"))
+    AssociateAttributeGroupResponse.add_member(:attribute_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupArn, location_name: "attributeGroupArn"))
     AssociateAttributeGroupResponse.type = Types::AssociateAttributeGroupResponse
-    AssociateResourceRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AssociateResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AssociateResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AssociateResourceRequest.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "options"))
+    AssociateResourceRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateResourceRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "options"))
     AssociateResourceRequest.type = Types::AssociateResourceRequest
-    AssociateResourceResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "applicationArn"))
-    AssociateResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
-    AssociateResourceResponse.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "options"))
+    AssociateResourceResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "applicationArn"))
+    AssociateResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn"))
+    AssociateResourceResponse.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "options"))
     AssociateResourceResponse.type = Types::AssociateResourceResponse
-    AssociationOption.add_member(:apply_application_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLY_APPLICATION_TAG", traits: {"smithy.api#enumValue" => "APPLY_APPLICATION_TAG"}))
-    AssociationOption.add_member(:skip_application_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIP_APPLICATION_TAG", traits: {"smithy.api#enumValue" => "SKIP_APPLICATION_TAG"}))
-    AttributeGroup.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupId, location_name: "id"))
-    AttributeGroup.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "arn"))
-    AttributeGroup.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    AttributeGroup.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AttributeGroup.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    AttributeGroup.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    AttributeGroup.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AssociationOption.add_member(:apply_application_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLY_APPLICATION_TAG", traits: {"smithy.api#enumValue" => "APPLY_APPLICATION_TAG"}))
+    AssociationOption.add_member(:skip_application_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIP_APPLICATION_TAG", traits: {"smithy.api#enumValue" => "SKIP_APPLICATION_TAG"}))
+    AttributeGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId, location_name: "id"))
+    AttributeGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupArn, location_name: "arn"))
+    AttributeGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    AttributeGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    AttributeGroup.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    AttributeGroup.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
+    AttributeGroup.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     AttributeGroup.type = Types::AttributeGroup
-    AttributeGroupDetails.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupId, location_name: "id"))
-    AttributeGroupDetails.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "arn"))
-    AttributeGroupDetails.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    AttributeGroupDetails.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    AttributeGroupDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId, location_name: "id"))
+    AttributeGroupDetails.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupArn, location_name: "arn"))
+    AttributeGroupDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    AttributeGroupDetails.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, location_name: "createdBy"))
     AttributeGroupDetails.type = Types::AttributeGroupDetails
-    AttributeGroupDetailsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupDetails)
-    AttributeGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupId)
-    AttributeGroupSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSummary)
-    AttributeGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupId, location_name: "id"))
-    AttributeGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "arn"))
-    AttributeGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    AttributeGroupSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AttributeGroupSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    AttributeGroupSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    AttributeGroupSummary.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    AttributeGroupDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupDetails)
+    AttributeGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId)
+    AttributeGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSummary)
+    AttributeGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId, location_name: "id"))
+    AttributeGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupArn, location_name: "arn"))
+    AttributeGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    AttributeGroupSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    AttributeGroupSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    AttributeGroupSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
+    AttributeGroupSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, location_name: "createdBy"))
     AttributeGroupSummary.type = Types::AttributeGroupSummary
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateApplicationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateApplicationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateApplicationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateApplicationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateApplicationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    CreateApplicationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateApplicationRequest.type = Types::CreateApplicationRequest
-    CreateApplicationResponse.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Application, location_name: "application"))
+    CreateApplicationResponse.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, location_name: "application"))
     CreateApplicationResponse.type = Types::CreateApplicationResponse
-    CreateAttributeGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateAttributeGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateAttributeGroupRequest.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes", traits: {"smithy.api#required" => {}}))
-    CreateAttributeGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateAttributeGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateAttributeGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateAttributeGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateAttributeGroupRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "attributes", traits: {"smithy.api#required" => {}}))
+    CreateAttributeGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    CreateAttributeGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateAttributeGroupRequest.type = Types::CreateAttributeGroupRequest
-    CreateAttributeGroupResponse.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroup, location_name: "attributeGroup"))
+    CreateAttributeGroupResponse.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroup, location_name: "attributeGroup"))
     CreateAttributeGroupResponse.type = Types::CreateAttributeGroupResponse
-    DeleteApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteApplicationRequest.type = Types::DeleteApplicationRequest
-    DeleteApplicationResponse.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSummary, location_name: "application"))
+    DeleteApplicationResponse.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, location_name: "application"))
     DeleteApplicationResponse.type = Types::DeleteApplicationResponse
-    DeleteAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAttributeGroupRequest.type = Types::DeleteAttributeGroupRequest
-    DeleteAttributeGroupResponse.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSummary, location_name: "attributeGroup"))
+    DeleteAttributeGroupResponse.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSummary, location_name: "attributeGroup"))
     DeleteAttributeGroupResponse.type = Types::DeleteAttributeGroupResponse
-    DisassociateAttributeGroupRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DisassociateAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateAttributeGroupRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateAttributeGroupRequest.type = Types::DisassociateAttributeGroupRequest
-    DisassociateAttributeGroupResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "applicationArn"))
-    DisassociateAttributeGroupResponse.add_member(:attribute_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "attributeGroupArn"))
+    DisassociateAttributeGroupResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "applicationArn"))
+    DisassociateAttributeGroupResponse.add_member(:attribute_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupArn, location_name: "attributeGroupArn"))
     DisassociateAttributeGroupResponse.type = Types::DisassociateAttributeGroupResponse
-    DisassociateResourceRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DisassociateResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DisassociateResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateResourceRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateResourceRequest.type = Types::DisassociateResourceRequest
-    DisassociateResourceResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "applicationArn"))
-    DisassociateResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
+    DisassociateResourceResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "applicationArn"))
+    DisassociateResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn"))
     DisassociateResourceResponse.type = Types::DisassociateResourceResponse
-    GetApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetApplicationRequest.type = Types::GetApplicationRequest
-    GetApplicationResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "id"))
-    GetApplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "arn"))
-    GetApplicationResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    GetApplicationResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetApplicationResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    GetApplicationResponse.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    GetApplicationResponse.add_member(:associated_resource_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationCount, location_name: "associatedResourceCount", traits: {"smithy.api#default" => 0}))
-    GetApplicationResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    GetApplicationResponse.add_member(:integrations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integrations, location_name: "integrations"))
-    GetApplicationResponse.add_member(:application_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationTagDefinition, location_name: "applicationTag"))
+    GetApplicationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "id"))
+    GetApplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "arn"))
+    GetApplicationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    GetApplicationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    GetApplicationResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    GetApplicationResponse.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
+    GetApplicationResponse.add_member(:associated_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationCount, location_name: "associatedResourceCount", traits: {"smithy.api#default" => 0}))
+    GetApplicationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    GetApplicationResponse.add_member(:integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: Integrations, location_name: "integrations"))
+    GetApplicationResponse.add_member(:application_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagDefinition, location_name: "applicationTag"))
     GetApplicationResponse.type = Types::GetApplicationResponse
-    GetAssociatedResourceFilter.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceItemStatus)
-    GetAssociatedResourceRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetAssociatedResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetAssociatedResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetAssociatedResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetAssociatedResourceRequest.add_member(:resource_tag_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAssociatedResourceFilter, location_name: "resourceTagStatus", traits: {"smithy.api#httpQuery" => "resourceTagStatus"}))
-    GetAssociatedResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetAssociatedResourceFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceItemStatus)
+    GetAssociatedResourceRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAssociatedResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAssociatedResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAssociatedResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetAssociatedResourceRequest.add_member(:resource_tag_status, ::Smithy::Schema::Shapes::MemberShape.new(target: GetAssociatedResourceFilter, location_name: "resourceTagStatus", traits: {"smithy.api#httpQuery" => "resourceTagStatus"}))
+    GetAssociatedResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetAssociatedResourceRequest.type = Types::GetAssociatedResourceRequest
-    GetAssociatedResourceResponse.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
-    GetAssociatedResourceResponse.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "options"))
-    GetAssociatedResourceResponse.add_member(:application_tag_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationTagResult, location_name: "applicationTagResult"))
+    GetAssociatedResourceResponse.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, location_name: "resource"))
+    GetAssociatedResourceResponse.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "options"))
+    GetAssociatedResourceResponse.add_member(:application_tag_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagResult, location_name: "applicationTagResult"))
     GetAssociatedResourceResponse.type = Types::GetAssociatedResourceResponse
-    GetAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAttributeGroupRequest.type = Types::GetAttributeGroupRequest
-    GetAttributeGroupResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupId, location_name: "id"))
-    GetAttributeGroupResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "arn"))
-    GetAttributeGroupResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    GetAttributeGroupResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetAttributeGroupResponse.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
-    GetAttributeGroupResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    GetAttributeGroupResponse.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    GetAttributeGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    GetAttributeGroupResponse.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    GetAttributeGroupResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId, location_name: "id"))
+    GetAttributeGroupResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupArn, location_name: "arn"))
+    GetAttributeGroupResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    GetAttributeGroupResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    GetAttributeGroupResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "attributes"))
+    GetAttributeGroupResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    GetAttributeGroupResponse.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
+    GetAttributeGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    GetAttributeGroupResponse.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, location_name: "createdBy"))
     GetAttributeGroupResponse.type = Types::GetAttributeGroupResponse
-    GetConfigurationResponse.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppRegistryConfiguration, location_name: "configuration"))
+    GetConfigurationResponse.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRegistryConfiguration, location_name: "configuration"))
     GetConfigurationResponse.type = Types::GetConfigurationResponse
-    Integrations.add_member(:resource_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceGroup, location_name: "resourceGroup"))
-    Integrations.add_member(:application_tag_resource_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceGroup, location_name: "applicationTagResourceGroup"))
+    Integrations.add_member(:resource_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroup, location_name: "resourceGroup"))
+    Integrations.add_member(:application_tag_resource_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroup, location_name: "applicationTagResourceGroup"))
     Integrations.type = Types::Integrations
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    ListApplicationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListApplicationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListApplicationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListApplicationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListApplicationsRequest.type = Types::ListApplicationsRequest
-    ListApplicationsResponse.add_member(:applications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSummaries, location_name: "applications"))
-    ListApplicationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListApplicationsResponse.add_member(:applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummaries, location_name: "applications"))
+    ListApplicationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListApplicationsResponse.type = Types::ListApplicationsResponse
-    ListAssociatedAttributeGroupsRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListAssociatedAttributeGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListAssociatedAttributeGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAssociatedAttributeGroupsRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAssociatedAttributeGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAssociatedAttributeGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAssociatedAttributeGroupsRequest.type = Types::ListAssociatedAttributeGroupsRequest
-    ListAssociatedAttributeGroupsResponse.add_member(:attribute_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupIds, location_name: "attributeGroups"))
-    ListAssociatedAttributeGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssociatedAttributeGroupsResponse.add_member(:attribute_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupIds, location_name: "attributeGroups"))
+    ListAssociatedAttributeGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListAssociatedAttributeGroupsResponse.type = Types::ListAssociatedAttributeGroupsResponse
-    ListAssociatedResourcesRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListAssociatedResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListAssociatedResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAssociatedResourcesRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAssociatedResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAssociatedResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAssociatedResourcesRequest.type = Types::ListAssociatedResourcesRequest
-    ListAssociatedResourcesResponse.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Resources, location_name: "resources"))
-    ListAssociatedResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssociatedResourcesResponse.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Resources, location_name: "resources"))
+    ListAssociatedResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListAssociatedResourcesResponse.type = Types::ListAssociatedResourcesResponse
-    ListAttributeGroupsForApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListAttributeGroupsForApplicationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListAttributeGroupsForApplicationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAttributeGroupsForApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAttributeGroupsForApplicationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAttributeGroupsForApplicationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAttributeGroupsForApplicationRequest.type = Types::ListAttributeGroupsForApplicationRequest
-    ListAttributeGroupsForApplicationResponse.add_member(:attribute_groups_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupDetailsList, location_name: "attributeGroupsDetails"))
-    ListAttributeGroupsForApplicationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAttributeGroupsForApplicationResponse.add_member(:attribute_groups_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupDetailsList, location_name: "attributeGroupsDetails"))
+    ListAttributeGroupsForApplicationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListAttributeGroupsForApplicationResponse.type = Types::ListAttributeGroupsForApplicationResponse
-    ListAttributeGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListAttributeGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAttributeGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAttributeGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAttributeGroupsRequest.type = Types::ListAttributeGroupsRequest
-    ListAttributeGroupsResponse.add_member(:attribute_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSummaries, location_name: "attributeGroups"))
-    ListAttributeGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAttributeGroupsResponse.add_member(:attribute_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSummaries, location_name: "attributeGroups"))
+    ListAttributeGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListAttributeGroupsResponse.type = Types::ListAttributeGroupsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    Options.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationOption)
-    PutConfigurationRequest.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppRegistryConfiguration, location_name: "configuration", traits: {"smithy.api#required" => {}}))
+    Options.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationOption)
+    PutConfigurationRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRegistryConfiguration, location_name: "configuration", traits: {"smithy.api#required" => {}}))
     PutConfigurationRequest.type = Types::PutConfigurationRequest
-    Resource.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "name"))
-    Resource.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    Resource.add_member(:association_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "associationTime"))
-    Resource.add_member(:integrations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIntegrations, location_name: "integrations"))
+    Resource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, location_name: "name"))
+    Resource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn"))
+    Resource.add_member(:association_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "associationTime"))
+    Resource.add_member(:integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIntegrations, location_name: "integrations"))
     Resource.type = Types::Resource
-    ResourceDetails.add_member(:tag_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "tagValue"))
+    ResourceDetails.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "tagValue"))
     ResourceDetails.type = Types::ResourceDetails
-    ResourceGroup.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceGroupState, location_name: "state"))
-    ResourceGroup.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    ResourceGroup.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    ResourceGroup.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupState, location_name: "state"))
+    ResourceGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn"))
+    ResourceGroup.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "errorMessage"))
     ResourceGroup.type = Types::ResourceGroup
-    ResourceGroupState.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    ResourceGroupState.add_member(:create_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_COMPLETE", traits: {"smithy.api#enumValue" => "CREATE_COMPLETE"}))
-    ResourceGroupState.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    ResourceGroupState.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    ResourceGroupState.add_member(:update_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_COMPLETE", traits: {"smithy.api#enumValue" => "UPDATE_COMPLETE"}))
-    ResourceGroupState.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    ResourceInfo.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "name"))
-    ResourceInfo.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    ResourceInfo.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    ResourceInfo.add_member(:resource_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "resourceDetails"))
-    ResourceInfo.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "options"))
+    ResourceGroupState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ResourceGroupState.add_member(:create_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_COMPLETE", traits: {"smithy.api#enumValue" => "CREATE_COMPLETE"}))
+    ResourceGroupState.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    ResourceGroupState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    ResourceGroupState.add_member(:update_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_COMPLETE", traits: {"smithy.api#enumValue" => "UPDATE_COMPLETE"}))
+    ResourceGroupState.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    ResourceInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, location_name: "name"))
+    ResourceInfo.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn"))
+    ResourceInfo.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    ResourceInfo.add_member(:resource_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDetails, location_name: "resourceDetails"))
+    ResourceInfo.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "options"))
     ResourceInfo.type = Types::ResourceInfo
-    ResourceIntegrations.add_member(:resource_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceGroup, location_name: "resourceGroup"))
+    ResourceIntegrations.add_member(:resource_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroup, location_name: "resourceGroup"))
     ResourceIntegrations.type = Types::ResourceIntegrations
-    ResourceItemStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    ResourceItemStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ResourceItemStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ResourceItemStatus.add_member(:skipped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIPPED", traits: {"smithy.api#enumValue" => "SKIPPED"}))
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceItemStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    ResourceItemStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ResourceItemStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ResourceItemStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIPPED", traits: {"smithy.api#enumValue" => "SKIPPED"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceType.add_member(:cfn_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFN_STACK", traits: {"smithy.api#enumValue" => "CFN_STACK"}))
-    ResourceType.add_member(:resource_tag_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_TAG_VALUE", traits: {"smithy.api#enumValue" => "RESOURCE_TAG_VALUE"}))
-    Resources.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInfo)
-    ResourcesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcesListItem)
-    ResourcesListItem.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
-    ResourcesListItem.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcesListItemErrorMessage, location_name: "errorMessage"))
-    ResourcesListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "status"))
-    ResourcesListItem.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceItemType, location_name: "resourceType"))
+    ResourceType.add_member(:cfn_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFN_STACK", traits: {"smithy.api#enumValue" => "CFN_STACK"}))
+    ResourceType.add_member(:resource_tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_TAG_VALUE", traits: {"smithy.api#enumValue" => "RESOURCE_TAG_VALUE"}))
+    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInfo)
+    ResourcesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesListItem)
+    ResourcesListItem.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn"))
+    ResourcesListItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesListItemErrorMessage, location_name: "errorMessage"))
+    ResourcesListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "status"))
+    ResourcesListItem.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceItemType, location_name: "resourceType"))
     ResourcesListItem.type = Types::ResourcesListItem
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SyncAction.add_member(:start_sync, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "START_SYNC", traits: {"smithy.api#enumValue" => "START_SYNC"}))
-    SyncAction.add_member(:no_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_ACTION", traits: {"smithy.api#enumValue" => "NO_ACTION"}))
-    SyncResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SyncResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SyncAction.add_member(:start_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "START_SYNC", traits: {"smithy.api#enumValue" => "START_SYNC"}))
+    SyncAction.add_member(:no_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_ACTION", traits: {"smithy.api#enumValue" => "NO_ACTION"}))
+    SyncResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SyncResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, location_name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SyncResourceRequest.type = Types::SyncResourceRequest
-    SyncResourceResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "applicationArn"))
-    SyncResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
-    SyncResourceResponse.add_member(:action_taken, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SyncAction, location_name: "actionTaken"))
+    SyncResourceResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "applicationArn"))
+    SyncResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn"))
+    SyncResourceResponse.add_member(:action_taken, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncAction, location_name: "actionTaken"))
     SyncResourceResponse.type = Types::SyncResourceResponse
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagQueryConfiguration.add_member(:tag_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyConfig, location_name: "tagKey"))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagQueryConfiguration.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyConfig, location_name: "tagKey"))
     TagQueryConfiguration.type = Types::TagQueryConfiguration
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "serviceCode"))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name", traits: {"smithy.api#deprecated" => {"message" => "Name update for application is deprecated."}}))
-    UpdateApplicationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateApplicationRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, location_name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name", traits: {"smithy.api#deprecated" => {"message" => "Name update for application is deprecated."}}))
+    UpdateApplicationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
     UpdateApplicationRequest.type = Types::UpdateApplicationRequest
-    UpdateApplicationResponse.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Application, location_name: "application"))
+    UpdateApplicationResponse.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, location_name: "application"))
     UpdateApplicationResponse.type = Types::UpdateApplicationResponse
-    UpdateAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAttributeGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name", traits: {"smithy.api#deprecated" => {"message" => "Name update for attribute group is deprecated."}}))
-    UpdateAttributeGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateAttributeGroupRequest.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
+    UpdateAttributeGroupRequest.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSpecifier, location_name: "attributeGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAttributeGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name", traits: {"smithy.api#deprecated" => {"message" => "Name update for attribute group is deprecated."}}))
+    UpdateAttributeGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    UpdateAttributeGroupRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "attributes"))
     UpdateAttributeGroupRequest.type = Types::UpdateAttributeGroupRequest
-    UpdateAttributeGroupResponse.add_member(:attribute_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeGroup, location_name: "attributeGroup"))
+    UpdateAttributeGroupResponse.add_member(:attribute_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroup, location_name: "attributeGroup"))
     UpdateAttributeGroupResponse.type = Types::UpdateAttributeGroupResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     AWS242AppRegistry = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -397,258 +397,258 @@ module Aws::ServiceCatalogAppRegistry
       service.add_operation(:associate_attribute_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroup"
         operation.name = "AssociateAttributeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateAttributeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateAttributeGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateAttributeGroupRequest
+        operation.output = AssociateAttributeGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/applications/{application}/attribute-groups/{attributeGroup}", "code" => 200}}
       end)
       service.add_operation(:associate_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#AssociateResource"
         operation.name = "AssociateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateResourceRequest
+        operation.output = AssociateResourceResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/applications/{application}/resources/{resourceType}/{resource}", "code" => 200}}
       end)
       service.add_operation(:create_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#CreateApplication"
         operation.name = "CreateApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateApplicationRequest
+        operation.output = CreateApplicationResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications", "code" => 201}}
       end)
       service.add_operation(:create_attribute_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#CreateAttributeGroup"
         operation.name = "CreateAttributeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAttributeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAttributeGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateAttributeGroupRequest
+        operation.output = CreateAttributeGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/attribute-groups", "code" => 201}}
       end)
       service.add_operation(:delete_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#DeleteApplication"
         operation.name = "DeleteApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteApplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteApplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteApplicationRequest
+        operation.output = DeleteApplicationResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{application}", "code" => 200}}
       end)
       service.add_operation(:delete_attribute_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroup"
         operation.name = "DeleteAttributeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAttributeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAttributeGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteAttributeGroupRequest
+        operation.output = DeleteAttributeGroupResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/attribute-groups/{attributeGroup}", "code" => 200}}
       end)
       service.add_operation(:disassociate_attribute_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroup"
         operation.name = "DisassociateAttributeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateAttributeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateAttributeGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateAttributeGroupRequest
+        operation.output = DisassociateAttributeGroupResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{application}/attribute-groups/{attributeGroup}", "code" => 200}}
       end)
       service.add_operation(:disassociate_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#DisassociateResource"
         operation.name = "DisassociateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateResourceRequest
+        operation.output = DisassociateResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{application}/resources/{resourceType}/{resource}", "code" => 200}}
       end)
       service.add_operation(:get_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#GetApplication"
         operation.name = "GetApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetApplicationRequest
+        operation.output = GetApplicationResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{application}", "code" => 200}}
       end)
       service.add_operation(:get_associated_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#GetAssociatedResource"
         operation.name = "GetAssociatedResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAssociatedResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAssociatedResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAssociatedResourceRequest
+        operation.output = GetAssociatedResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{application}/resources/{resourceType}/{resource}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_attribute_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#GetAttributeGroup"
         operation.name = "GetAttributeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAttributeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAttributeGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAttributeGroupRequest
+        operation.output = GetAttributeGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/attribute-groups/{attributeGroup}", "code" => 200}}
       end)
       service.add_operation(:get_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#GetConfiguration"
         operation.name = "GetConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = GetConfigurationResponse
+        operation.errors << InternalServerException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/configuration", "code" => 200}}
       end)
       service.add_operation(:list_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#ListApplications"
         operation.name = "ListApplications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListApplicationsRequest
+        operation.output = ListApplicationsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications", "code" => 200}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListApplications.new
       end)
       service.add_operation(:list_associated_attribute_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroups"
         operation.name = "ListAssociatedAttributeGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedAttributeGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedAttributeGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAssociatedAttributeGroupsRequest
+        operation.output = ListAssociatedAttributeGroupsResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{application}/attribute-groups", "code" => 200}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListAssociatedAttributeGroups.new
       end)
       service.add_operation(:list_associated_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#ListAssociatedResources"
         operation.name = "ListAssociatedResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedResourcesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAssociatedResourcesRequest
+        operation.output = ListAssociatedResourcesResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{application}/resources", "code" => 200}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListAssociatedResources.new
       end)
       service.add_operation(:list_attribute_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#ListAttributeGroups"
         operation.name = "ListAttributeGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttributeGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttributeGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAttributeGroupsRequest
+        operation.output = ListAttributeGroupsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/attribute-groups", "code" => 200}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListAttributeGroups.new
       end)
       service.add_operation(:list_attribute_groups_for_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsForApplication"
         operation.name = "ListAttributeGroupsForApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttributeGroupsForApplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttributeGroupsForApplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAttributeGroupsForApplicationRequest
+        operation.output = ListAttributeGroupsForApplicationResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{application}/attribute-group-details", "code" => 200}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListAttributeGroupsForApplication.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:put_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#PutConfiguration"
         operation.name = "PutConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutConfigurationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/configuration", "code" => 200}}
       end)
       service.add_operation(:sync_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#SyncResource"
         operation.name = "SyncResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SyncResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SyncResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SyncResourceRequest
+        operation.output = SyncResourceResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/sync/{resourceType}/{resource}", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:update_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#UpdateApplication"
         operation.name = "UpdateApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateApplicationRequest
+        operation.output = UpdateApplicationResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/applications/{application}", "code" => 200}}
       end)
       service.add_operation(:update_attribute_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroup"
         operation.name = "UpdateAttributeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAttributeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAttributeGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateAttributeGroupRequest
+        operation.output = UpdateAttributeGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/attribute-groups/{attributeGroup}", "code" => 200}}
       end)
     end

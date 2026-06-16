@@ -451,1071 +451,1071 @@ module Aws::DirectoryService
     VerifyTrustResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directoryservice#VerifyTrustResult", name: "VerifyTrustResult")
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directoryservice#VpcId", name: "VpcId", traits: {"smithy.api#pattern" => "^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$"})
 
-    ADAssessmentLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    ADAssessmentLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ADAssessmentLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    ADAssessmentLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     ADAssessmentLimitExceededException.type = Types::ADAssessmentLimitExceededException
-    AcceptSharedDirectoryRequest.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId", traits: {"smithy.api#required" => {}}))
+    AcceptSharedDirectoryRequest.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "SharedDirectoryId", traits: {"smithy.api#required" => {}}))
     AcceptSharedDirectoryRequest.type = Types::AcceptSharedDirectoryRequest
-    AcceptSharedDirectoryResult.add_member(:shared_directory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SharedDirectory, location_name: "SharedDirectory"))
+    AcceptSharedDirectoryResult.add_member(:shared_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDirectory, location_name: "SharedDirectory"))
     AcceptSharedDirectoryResult.type = Types::AcceptSharedDirectoryResult
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    AccessDeniedException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    AddIpRoutesRequest.add_member(:ip_routes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRoutes, location_name: "IpRoutes", traits: {"smithy.api#required" => {}}))
-    AddIpRoutesRequest.add_member(:update_security_group_for_directory_controllers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSecurityGroupForDirectoryControllers, location_name: "UpdateSecurityGroupForDirectoryControllers", traits: {"smithy.api#default" => false}))
+    AddIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    AddIpRoutesRequest.add_member(:ip_routes, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRoutes, location_name: "IpRoutes", traits: {"smithy.api#required" => {}}))
+    AddIpRoutesRequest.add_member(:update_security_group_for_directory_controllers, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateSecurityGroupForDirectoryControllers, location_name: "UpdateSecurityGroupForDirectoryControllers", traits: {"smithy.api#default" => false}))
     AddIpRoutesRequest.type = Types::AddIpRoutesRequest
     AddIpRoutesResult.type = Types::AddIpRoutesResult
-    AddRegionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    AddRegionRequest.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName", traits: {"smithy.api#required" => {}}))
-    AddRegionRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VPCSettings", traits: {"smithy.api#required" => {}}))
+    AddRegionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    AddRegionRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, location_name: "RegionName", traits: {"smithy.api#required" => {}}))
+    AddRegionRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryVpcSettings, location_name: "VPCSettings", traits: {"smithy.api#required" => {}}))
     AddRegionRequest.type = Types::AddRegionRequest
     AddRegionResult.type = Types::AddRegionResult
-    AddTagsToResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    AddTagsToResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    AddTagsToResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    AddTagsToResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceRequest.type = Types::AddTagsToResourceRequest
     AddTagsToResourceResult.type = Types::AddTagsToResourceResult
-    AdditionalRegions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName)
-    Assessment.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
-    Assessment.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    Assessment.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DnsName"))
-    Assessment.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentStartTime, location_name: "StartTime"))
-    Assessment.add_member(:last_update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
-    Assessment.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "Status"))
-    Assessment.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentStatusCode, location_name: "StatusCode"))
-    Assessment.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentStatusReason, location_name: "StatusReason"))
-    Assessment.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "CustomerDnsIps"))
-    Assessment.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    Assessment.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    Assessment.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
-    Assessment.add_member(:self_managed_instance_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "SelfManagedInstanceIds"))
-    Assessment.add_member(:report_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentReportType, location_name: "ReportType"))
-    Assessment.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentVersion, location_name: "Version"))
+    AdditionalRegions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName)
+    Assessment.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId"))
+    Assessment.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    Assessment.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, location_name: "DnsName"))
+    Assessment.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStartTime, location_name: "StartTime"))
+    Assessment.add_member(:last_update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
+    Assessment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStatus, location_name: "Status"))
+    Assessment.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStatusCode, location_name: "StatusCode"))
+    Assessment.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStatusReason, location_name: "StatusReason"))
+    Assessment.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerDnsIps, location_name: "CustomerDnsIps"))
+    Assessment.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    Assessment.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    Assessment.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    Assessment.add_member(:self_managed_instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceIds, location_name: "SelfManagedInstanceIds"))
+    Assessment.add_member(:report_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportType, location_name: "ReportType"))
+    Assessment.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentVersion, location_name: "Version"))
     Assessment.type = Types::Assessment
-    AssessmentConfiguration.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "CustomerDnsIps", traits: {"smithy.api#required" => {}}))
-    AssessmentConfiguration.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DnsName", traits: {"smithy.api#required" => {}}))
-    AssessmentConfiguration.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings", traits: {"smithy.api#required" => {}}))
-    AssessmentConfiguration.add_member(:instance_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "InstanceIds", traits: {"smithy.api#required" => {}}))
-    AssessmentConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    AssessmentConfiguration.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerDnsIps, location_name: "CustomerDnsIps", traits: {"smithy.api#required" => {}}))
+    AssessmentConfiguration.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, location_name: "DnsName", traits: {"smithy.api#required" => {}}))
+    AssessmentConfiguration.add_member(:vpc_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryVpcSettings, location_name: "VpcSettings", traits: {"smithy.api#required" => {}}))
+    AssessmentConfiguration.add_member(:instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceIds, location_name: "InstanceIds", traits: {"smithy.api#required" => {}}))
+    AssessmentConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds"))
     AssessmentConfiguration.type = Types::AssessmentConfiguration
-    AssessmentInstanceIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentInstanceId)
-    AssessmentReport.add_member(:domain_controller_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr, location_name: "DomainControllerIp"))
-    AssessmentReport.add_member(:validations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidations, location_name: "Validations"))
+    AssessmentInstanceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceId)
+    AssessmentReport.add_member(:domain_controller_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, location_name: "DomainControllerIp"))
+    AssessmentReport.add_member(:validations, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidations, location_name: "Validations"))
     AssessmentReport.type = Types::AssessmentReport
-    AssessmentReports.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentReport)
-    AssessmentSummary.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
-    AssessmentSummary.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    AssessmentSummary.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DnsName"))
-    AssessmentSummary.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentStartTime, location_name: "StartTime"))
-    AssessmentSummary.add_member(:last_update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
-    AssessmentSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "Status"))
-    AssessmentSummary.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "CustomerDnsIps"))
-    AssessmentSummary.add_member(:report_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentReportType, location_name: "ReportType"))
+    AssessmentReports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReport)
+    AssessmentSummary.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId"))
+    AssessmentSummary.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    AssessmentSummary.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, location_name: "DnsName"))
+    AssessmentSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStartTime, location_name: "StartTime"))
+    AssessmentSummary.add_member(:last_update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
+    AssessmentSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStatus, location_name: "Status"))
+    AssessmentSummary.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerDnsIps, location_name: "CustomerDnsIps"))
+    AssessmentSummary.add_member(:report_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportType, location_name: "ReportType"))
     AssessmentSummary.type = Types::AssessmentSummary
-    AssessmentValidation.add_member(:category, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidationCategory, location_name: "Category"))
-    AssessmentValidation.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidationName, location_name: "Name"))
-    AssessmentValidation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidationStatus, location_name: "Status"))
-    AssessmentValidation.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidationStatusCode, location_name: "StatusCode"))
-    AssessmentValidation.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidationStatusReason, location_name: "StatusReason"))
-    AssessmentValidation.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidationTimeStamp, location_name: "StartTime"))
-    AssessmentValidation.add_member(:last_update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidationTimeStamp, location_name: "LastUpdateDateTime"))
+    AssessmentValidation.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationCategory, location_name: "Category"))
+    AssessmentValidation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationName, location_name: "Name"))
+    AssessmentValidation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationStatus, location_name: "Status"))
+    AssessmentValidation.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationStatusCode, location_name: "StatusCode"))
+    AssessmentValidation.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationStatusReason, location_name: "StatusReason"))
+    AssessmentValidation.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationTimeStamp, location_name: "StartTime"))
+    AssessmentValidation.add_member(:last_update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationTimeStamp, location_name: "LastUpdateDateTime"))
     AssessmentValidation.type = Types::AssessmentValidation
-    AssessmentValidations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentValidation)
-    Assessments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentSummary)
-    Attribute.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
-    Attribute.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Value"))
+    AssessmentValidations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidation)
+    Assessments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentSummary)
+    Attribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, location_name: "Name"))
+    Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "Value"))
     Attribute.type = Types::Attribute
-    Attributes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attribute)
-    AuthenticationFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    AuthenticationFailedException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    Attributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute)
+    AuthenticationFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    AuthenticationFailedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     AuthenticationFailedException.type = Types::AuthenticationFailedException
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone)
-    CaEnrollmentPolicyStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
-    CaEnrollmentPolicyStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
-    CaEnrollmentPolicyStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    CaEnrollmentPolicyStatus.add_member(:disabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLING", traits: {"smithy.api#enumValue" => "Disabling"}))
-    CaEnrollmentPolicyStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
-    CaEnrollmentPolicyStatus.add_member(:impaired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPAIRED", traits: {"smithy.api#enumValue" => "Impaired"}))
-    CancelSchemaExtensionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    CancelSchemaExtensionRequest.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionId, location_name: "SchemaExtensionId", traits: {"smithy.api#required" => {}}))
+    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone)
+    CaEnrollmentPolicyStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    CaEnrollmentPolicyStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
+    CaEnrollmentPolicyStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    CaEnrollmentPolicyStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLING", traits: {"smithy.api#enumValue" => "Disabling"}))
+    CaEnrollmentPolicyStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
+    CaEnrollmentPolicyStatus.add_member(:impaired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPAIRED", traits: {"smithy.api#enumValue" => "Impaired"}))
+    CancelSchemaExtensionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    CancelSchemaExtensionRequest.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionId, location_name: "SchemaExtensionId", traits: {"smithy.api#required" => {}}))
     CancelSchemaExtensionRequest.type = Types::CancelSchemaExtensionRequest
     CancelSchemaExtensionResult.type = Types::CancelSchemaExtensionResult
-    Certificate.add_member(:certificate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId"))
-    Certificate.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateState, location_name: "State"))
-    Certificate.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateStateReason, location_name: "StateReason"))
-    Certificate.add_member(:common_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateCN, location_name: "CommonName"))
-    Certificate.add_member(:registered_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateRegisteredDateTime, location_name: "RegisteredDateTime"))
-    Certificate.add_member(:expiry_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateExpiryDateTime, location_name: "ExpiryDateTime"))
-    Certificate.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
-    Certificate.add_member(:client_cert_auth_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientCertAuthSettings, location_name: "ClientCertAuthSettings"))
+    Certificate.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, location_name: "CertificateId"))
+    Certificate.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateState, location_name: "State"))
+    Certificate.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateStateReason, location_name: "StateReason"))
+    Certificate.add_member(:common_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateCN, location_name: "CommonName"))
+    Certificate.add_member(:registered_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateRegisteredDateTime, location_name: "RegisteredDateTime"))
+    Certificate.add_member(:expiry_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateExpiryDateTime, location_name: "ExpiryDateTime"))
+    Certificate.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "Type"))
+    Certificate.add_member(:client_cert_auth_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientCertAuthSettings, location_name: "ClientCertAuthSettings"))
     Certificate.type = Types::Certificate
-    CertificateAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    CertificateAlreadyExistsException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    CertificateAlreadyExistsException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     CertificateAlreadyExistsException.type = Types::CertificateAlreadyExistsException
-    CertificateDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    CertificateDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    CertificateDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     CertificateDoesNotExistException.type = Types::CertificateDoesNotExistException
-    CertificateInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    CertificateInUseException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    CertificateInUseException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     CertificateInUseException.type = Types::CertificateInUseException
-    CertificateInfo.add_member(:certificate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId"))
-    CertificateInfo.add_member(:common_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateCN, location_name: "CommonName"))
-    CertificateInfo.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateState, location_name: "State"))
-    CertificateInfo.add_member(:expiry_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateExpiryDateTime, location_name: "ExpiryDateTime"))
-    CertificateInfo.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
+    CertificateInfo.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, location_name: "CertificateId"))
+    CertificateInfo.add_member(:common_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateCN, location_name: "CommonName"))
+    CertificateInfo.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateState, location_name: "State"))
+    CertificateInfo.add_member(:expiry_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateExpiryDateTime, location_name: "ExpiryDateTime"))
+    CertificateInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "Type"))
     CertificateInfo.type = Types::CertificateInfo
-    CertificateLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    CertificateLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    CertificateLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     CertificateLimitExceededException.type = Types::CertificateLimitExceededException
-    CertificateState.add_member(:registering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTERING", traits: {"smithy.api#enumValue" => "Registering"}))
-    CertificateState.add_member(:registered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTERED", traits: {"smithy.api#enumValue" => "Registered"}))
-    CertificateState.add_member(:register_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTER_FAILED", traits: {"smithy.api#enumValue" => "RegisterFailed"}))
-    CertificateState.add_member(:deregistering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTERING", traits: {"smithy.api#enumValue" => "Deregistering"}))
-    CertificateState.add_member(:deregistered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTERED", traits: {"smithy.api#enumValue" => "Deregistered"}))
-    CertificateState.add_member(:deregister_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTER_FAILED", traits: {"smithy.api#enumValue" => "DeregisterFailed"}))
-    CertificateType.add_member(:client_cert_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT_CERT_AUTH", traits: {"smithy.api#enumValue" => "ClientCertAuth"}))
-    CertificateType.add_member(:client_ldaps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT_LDAPS", traits: {"smithy.api#enumValue" => "ClientLDAPS"}))
-    CertificatesInfo.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateInfo)
-    CidrIps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIp)
-    CidrIpv6s.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6)
-    ClientAuthenticationSettingInfo.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: "Type"))
-    ClientAuthenticationSettingInfo.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationStatus, location_name: "Status"))
-    ClientAuthenticationSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    CertificateState.add_member(:registering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTERING", traits: {"smithy.api#enumValue" => "Registering"}))
+    CertificateState.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTERED", traits: {"smithy.api#enumValue" => "Registered"}))
+    CertificateState.add_member(:register_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTER_FAILED", traits: {"smithy.api#enumValue" => "RegisterFailed"}))
+    CertificateState.add_member(:deregistering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTERING", traits: {"smithy.api#enumValue" => "Deregistering"}))
+    CertificateState.add_member(:deregistered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTERED", traits: {"smithy.api#enumValue" => "Deregistered"}))
+    CertificateState.add_member(:deregister_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTER_FAILED", traits: {"smithy.api#enumValue" => "DeregisterFailed"}))
+    CertificateType.add_member(:client_cert_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT_CERT_AUTH", traits: {"smithy.api#enumValue" => "ClientCertAuth"}))
+    CertificateType.add_member(:client_ldaps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT_LDAPS", traits: {"smithy.api#enumValue" => "ClientLDAPS"}))
+    CertificatesInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateInfo)
+    CidrIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIp)
+    CidrIpv6s.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6)
+    ClientAuthenticationSettingInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationType, location_name: "Type"))
+    ClientAuthenticationSettingInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationStatus, location_name: "Status"))
+    ClientAuthenticationSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
     ClientAuthenticationSettingInfo.type = Types::ClientAuthenticationSettingInfo
-    ClientAuthenticationSettingsInfo.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationSettingInfo)
-    ClientAuthenticationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
-    ClientAuthenticationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
-    ClientAuthenticationType.add_member(:smart_card, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMART_CARD", traits: {"smithy.api#enumValue" => "SmartCard"}))
-    ClientAuthenticationType.add_member(:smart_card_or_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMART_CARD_OR_PASSWORD", traits: {"smithy.api#enumValue" => "SmartCardOrPassword"}))
-    ClientCertAuthSettings.add_member(:ocsp_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OCSPUrl, location_name: "OCSPUrl"))
+    ClientAuthenticationSettingsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationSettingInfo)
+    ClientAuthenticationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ClientAuthenticationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
+    ClientAuthenticationType.add_member(:smart_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMART_CARD", traits: {"smithy.api#enumValue" => "SmartCard"}))
+    ClientAuthenticationType.add_member(:smart_card_or_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMART_CARD_OR_PASSWORD", traits: {"smithy.api#enumValue" => "SmartCardOrPassword"}))
+    ClientCertAuthSettings.add_member(:ocsp_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OCSPUrl, location_name: "OCSPUrl"))
     ClientCertAuthSettings.type = Types::ClientCertAuthSettings
-    ClientException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    ClientException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    ClientException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     ClientException.type = Types::ClientException
-    Computer.add_member(:computer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "ComputerId"))
-    Computer.add_member(:computer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputerName, location_name: "ComputerName"))
-    Computer.add_member(:computer_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "ComputerAttributes"))
+    Computer.add_member(:computer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "ComputerId"))
+    Computer.add_member(:computer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputerName, location_name: "ComputerName"))
+    Computer.add_member(:computer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "ComputerAttributes"))
     Computer.type = Types::Computer
-    ConditionalForwarder.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: "RemoteDomainName"))
-    ConditionalForwarder.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
-    ConditionalForwarder.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
-    ConditionalForwarder.add_member(:replication_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationScope, location_name: "ReplicationScope"))
+    ConditionalForwarder.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, location_name: "RemoteDomainName"))
+    ConditionalForwarder.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    ConditionalForwarder.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
+    ConditionalForwarder.add_member(:replication_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationScope, location_name: "ReplicationScope"))
     ConditionalForwarder.type = Types::ConditionalForwarder
-    ConditionalForwarders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConditionalForwarder)
-    ConnectDirectoryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ConnectDirectoryRequest.add_member(:short_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryShortName, location_name: "ShortName"))
-    ConnectDirectoryRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    ConnectDirectoryRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    ConnectDirectoryRequest.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySize, location_name: "Size", traits: {"smithy.api#required" => {}}))
-    ConnectDirectoryRequest.add_member(:connect_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConnectSettings, location_name: "ConnectSettings", traits: {"smithy.api#required" => {}}))
-    ConnectDirectoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    ConnectDirectoryRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    ConditionalForwarders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalForwarder)
+    ConnectDirectoryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ConnectDirectoryRequest.add_member(:short_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryShortName, location_name: "ShortName"))
+    ConnectDirectoryRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    ConnectDirectoryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    ConnectDirectoryRequest.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectorySize, location_name: "Size", traits: {"smithy.api#required" => {}}))
+    ConnectDirectoryRequest.add_member(:connect_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConnectSettings, location_name: "ConnectSettings", traits: {"smithy.api#required" => {}}))
+    ConnectDirectoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    ConnectDirectoryRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     ConnectDirectoryRequest.type = Types::ConnectDirectoryRequest
-    ConnectDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    ConnectDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
     ConnectDirectoryResult.type = Types::ConnectDirectoryResult
-    CreateAliasRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    CreateAliasRequest.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "Alias", traits: {"smithy.api#required" => {}}))
+    CreateAliasRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    CreateAliasRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "Alias", traits: {"smithy.api#required" => {}}))
     CreateAliasRequest.type = Types::CreateAliasRequest
-    CreateAliasResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    CreateAliasResult.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "Alias"))
+    CreateAliasResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    CreateAliasResult.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "Alias"))
     CreateAliasResult.type = Types::CreateAliasResult
-    CreateComputerRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    CreateComputerRequest.add_member(:computer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputerName, location_name: "ComputerName", traits: {"smithy.api#required" => {}}))
-    CreateComputerRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputerPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    CreateComputerRequest.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitDN, location_name: "OrganizationalUnitDistinguishedName"))
-    CreateComputerRequest.add_member(:computer_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "ComputerAttributes"))
+    CreateComputerRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    CreateComputerRequest.add_member(:computer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputerName, location_name: "ComputerName", traits: {"smithy.api#required" => {}}))
+    CreateComputerRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputerPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    CreateComputerRequest.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitDN, location_name: "OrganizationalUnitDistinguishedName"))
+    CreateComputerRequest.add_member(:computer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "ComputerAttributes"))
     CreateComputerRequest.type = Types::CreateComputerRequest
-    CreateComputerResult.add_member(:computer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Computer, location_name: "Computer"))
+    CreateComputerResult.add_member(:computer, ::Smithy::Schema::Shapes::MemberShape.new(target: Computer, location_name: "Computer"))
     CreateComputerResult.type = Types::CreateComputerResult
-    CreateConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    CreateConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
-    CreateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
-    CreateConditionalForwarderRequest.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
+    CreateConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    CreateConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
+    CreateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, location_name: "DnsIpAddrs", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    CreateConditionalForwarderRequest.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
     CreateConditionalForwarderRequest.type = Types::CreateConditionalForwarderRequest
     CreateConditionalForwarderResult.type = Types::CreateConditionalForwarderResult
-    CreateDirectoryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateDirectoryRequest.add_member(:short_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryShortName, location_name: "ShortName"))
-    CreateDirectoryRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Password, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    CreateDirectoryRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateDirectoryRequest.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySize, location_name: "Size", traits: {"smithy.api#required" => {}}))
-    CreateDirectoryRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings"))
-    CreateDirectoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateDirectoryRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateDirectoryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateDirectoryRequest.add_member(:short_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryShortName, location_name: "ShortName"))
+    CreateDirectoryRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    CreateDirectoryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateDirectoryRequest.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectorySize, location_name: "Size", traits: {"smithy.api#required" => {}}))
+    CreateDirectoryRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryVpcSettings, location_name: "VpcSettings"))
+    CreateDirectoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateDirectoryRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     CreateDirectoryRequest.type = Types::CreateDirectoryRequest
-    CreateDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    CreateDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
     CreateDirectoryResult.type = Types::CreateDirectoryResult
-    CreateHybridADRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn", traits: {"smithy.api#required" => {}}))
-    CreateHybridADRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId", traits: {"smithy.api#required" => {}}))
-    CreateHybridADRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateHybridADRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn", traits: {"smithy.api#required" => {}}))
+    CreateHybridADRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId", traits: {"smithy.api#required" => {}}))
+    CreateHybridADRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateHybridADRequest.type = Types::CreateHybridADRequest
-    CreateHybridADResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    CreateHybridADResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
     CreateHybridADResult.type = Types::CreateHybridADResult
-    CreateLogSubscriptionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    CreateLogSubscriptionRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupName, location_name: "LogGroupName", traits: {"smithy.api#required" => {}}))
+    CreateLogSubscriptionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    CreateLogSubscriptionRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, location_name: "LogGroupName", traits: {"smithy.api#required" => {}}))
     CreateLogSubscriptionRequest.type = Types::CreateLogSubscriptionRequest
     CreateLogSubscriptionResult.type = Types::CreateLogSubscriptionResult
-    CreateMicrosoftADRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateMicrosoftADRequest.add_member(:short_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryShortName, location_name: "ShortName"))
-    CreateMicrosoftADRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Password, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    CreateMicrosoftADRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateMicrosoftADRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings", traits: {"smithy.api#required" => {}}))
-    CreateMicrosoftADRequest.add_member(:edition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: "Edition"))
-    CreateMicrosoftADRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateMicrosoftADRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateMicrosoftADRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateMicrosoftADRequest.add_member(:short_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryShortName, location_name: "ShortName"))
+    CreateMicrosoftADRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    CreateMicrosoftADRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateMicrosoftADRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryVpcSettings, location_name: "VpcSettings", traits: {"smithy.api#required" => {}}))
+    CreateMicrosoftADRequest.add_member(:edition, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryEdition, location_name: "Edition"))
+    CreateMicrosoftADRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateMicrosoftADRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     CreateMicrosoftADRequest.type = Types::CreateMicrosoftADRequest
-    CreateMicrosoftADResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    CreateMicrosoftADResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
     CreateMicrosoftADResult.type = Types::CreateMicrosoftADResult
-    CreateSnapshotRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    CreateSnapshotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name"))
+    CreateSnapshotRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotName, location_name: "Name"))
     CreateSnapshotRequest.type = Types::CreateSnapshotRequest
-    CreateSnapshotResult.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    CreateSnapshotResult.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
     CreateSnapshotResult.type = Types::CreateSnapshotResult
-    CreateTrustRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    CreateTrustRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
-    CreateTrustRequest.add_member(:trust_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustPassword, location_name: "TrustPassword", traits: {"smithy.api#required" => {}}))
-    CreateTrustRequest.add_member(:trust_direction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustDirection, location_name: "TrustDirection", traits: {"smithy.api#required" => {}}))
-    CreateTrustRequest.add_member(:trust_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustType, location_name: "TrustType"))
-    CreateTrustRequest.add_member(:conditional_forwarder_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "ConditionalForwarderIpAddrs"))
-    CreateTrustRequest.add_member(:conditional_forwarder_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "ConditionalForwarderIpv6Addrs"))
-    CreateTrustRequest.add_member(:selective_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: "SelectiveAuth"))
+    CreateTrustRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    CreateTrustRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
+    CreateTrustRequest.add_member(:trust_password, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustPassword, location_name: "TrustPassword", traits: {"smithy.api#required" => {}}))
+    CreateTrustRequest.add_member(:trust_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustDirection, location_name: "TrustDirection", traits: {"smithy.api#required" => {}}))
+    CreateTrustRequest.add_member(:trust_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustType, location_name: "TrustType"))
+    CreateTrustRequest.add_member(:conditional_forwarder_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, location_name: "ConditionalForwarderIpAddrs"))
+    CreateTrustRequest.add_member(:conditional_forwarder_ipv6_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "ConditionalForwarderIpv6Addrs"))
+    CreateTrustRequest.add_member(:selective_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveAuth, location_name: "SelectiveAuth"))
     CreateTrustRequest.type = Types::CreateTrustRequest
-    CreateTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
+    CreateTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId"))
     CreateTrustResult.type = Types::CreateTrustResult
-    CustomerDnsIps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr)
-    DataAccessStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
-    DataAccessStatus.add_member(:disabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLING", traits: {"smithy.api#enumValue" => "Disabling"}))
-    DataAccessStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
-    DataAccessStatus.add_member(:enabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLING", traits: {"smithy.api#enumValue" => "Enabling"}))
-    DataAccessStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    DeleteADAssessmentRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId", traits: {"smithy.api#required" => {}}))
+    CustomerDnsIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr)
+    DataAccessStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
+    DataAccessStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLING", traits: {"smithy.api#enumValue" => "Disabling"}))
+    DataAccessStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
+    DataAccessStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLING", traits: {"smithy.api#enumValue" => "Enabling"}))
+    DataAccessStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    DeleteADAssessmentRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId", traits: {"smithy.api#required" => {}}))
     DeleteADAssessmentRequest.type = Types::DeleteADAssessmentRequest
-    DeleteADAssessmentResult.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    DeleteADAssessmentResult.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId"))
     DeleteADAssessmentResult.type = Types::DeleteADAssessmentResult
-    DeleteConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DeleteConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
+    DeleteConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DeleteConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
     DeleteConditionalForwarderRequest.type = Types::DeleteConditionalForwarderRequest
     DeleteConditionalForwarderResult.type = Types::DeleteConditionalForwarderResult
-    DeleteDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DeleteDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     DeleteDirectoryRequest.type = Types::DeleteDirectoryRequest
-    DeleteDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    DeleteDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
     DeleteDirectoryResult.type = Types::DeleteDirectoryResult
-    DeleteLogSubscriptionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DeleteLogSubscriptionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     DeleteLogSubscriptionRequest.type = Types::DeleteLogSubscriptionRequest
     DeleteLogSubscriptionResult.type = Types::DeleteLogSubscriptionResult
-    DeleteSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#required" => {}}))
+    DeleteSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#required" => {}}))
     DeleteSnapshotRequest.type = Types::DeleteSnapshotRequest
-    DeleteSnapshotResult.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    DeleteSnapshotResult.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
     DeleteSnapshotResult.type = Types::DeleteSnapshotResult
-    DeleteTrustRequest.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId", traits: {"smithy.api#required" => {}}))
-    DeleteTrustRequest.add_member(:delete_associated_conditional_forwarder, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAssociatedConditionalForwarder, location_name: "DeleteAssociatedConditionalForwarder", traits: {"smithy.api#default" => false}))
+    DeleteTrustRequest.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId", traits: {"smithy.api#required" => {}}))
+    DeleteTrustRequest.add_member(:delete_associated_conditional_forwarder, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteAssociatedConditionalForwarder, location_name: "DeleteAssociatedConditionalForwarder", traits: {"smithy.api#default" => false}))
     DeleteTrustRequest.type = Types::DeleteTrustRequest
-    DeleteTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
+    DeleteTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId"))
     DeleteTrustResult.type = Types::DeleteTrustResult
-    DeregisterCertificateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DeregisterCertificateRequest.add_member(:certificate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId", traits: {"smithy.api#required" => {}}))
+    DeregisterCertificateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DeregisterCertificateRequest.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, location_name: "CertificateId", traits: {"smithy.api#required" => {}}))
     DeregisterCertificateRequest.type = Types::DeregisterCertificateRequest
     DeregisterCertificateResult.type = Types::DeregisterCertificateResult
-    DeregisterEventTopicRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DeregisterEventTopicRequest.add_member(:topic_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicName, location_name: "TopicName", traits: {"smithy.api#required" => {}}))
+    DeregisterEventTopicRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DeregisterEventTopicRequest.add_member(:topic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, location_name: "TopicName", traits: {"smithy.api#required" => {}}))
     DeregisterEventTopicRequest.type = Types::DeregisterEventTopicRequest
     DeregisterEventTopicResult.type = Types::DeregisterEventTopicResult
-    DescribeADAssessmentRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId", traits: {"smithy.api#required" => {}}))
+    DescribeADAssessmentRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId", traits: {"smithy.api#required" => {}}))
     DescribeADAssessmentRequest.type = Types::DescribeADAssessmentRequest
-    DescribeADAssessmentResult.add_member(:assessment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Assessment, location_name: "Assessment"))
-    DescribeADAssessmentResult.add_member(:assessment_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentReports, location_name: "AssessmentReports"))
+    DescribeADAssessmentResult.add_member(:assessment, ::Smithy::Schema::Shapes::MemberShape.new(target: Assessment, location_name: "Assessment"))
+    DescribeADAssessmentResult.add_member(:assessment_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReports, location_name: "AssessmentReports"))
     DescribeADAssessmentResult.type = Types::DescribeADAssessmentResult
-    DescribeCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     DescribeCAEnrollmentPolicyRequest.type = Types::DescribeCAEnrollmentPolicyRequest
-    DescribeCAEnrollmentPolicyResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DescribeCAEnrollmentPolicyResult.add_member(:pca_connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PcaConnectorArn, location_name: "PcaConnectorArn"))
-    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaEnrollmentPolicyStatus, location_name: "CaEnrollmentPolicyStatus"))
-    DescribeCAEnrollmentPolicyResult.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
-    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaEnrollmentPolicyStatusReason, location_name: "CaEnrollmentPolicyStatusReason"))
+    DescribeCAEnrollmentPolicyResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DescribeCAEnrollmentPolicyResult.add_member(:pca_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PcaConnectorArn, location_name: "PcaConnectorArn"))
+    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CaEnrollmentPolicyStatus, location_name: "CaEnrollmentPolicyStatus"))
+    DescribeCAEnrollmentPolicyResult.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CaEnrollmentPolicyStatusReason, location_name: "CaEnrollmentPolicyStatusReason"))
     DescribeCAEnrollmentPolicyResult.type = Types::DescribeCAEnrollmentPolicyResult
-    DescribeCertificateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeCertificateRequest.add_member(:certificate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId", traits: {"smithy.api#required" => {}}))
+    DescribeCertificateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeCertificateRequest.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, location_name: "CertificateId", traits: {"smithy.api#required" => {}}))
     DescribeCertificateRequest.type = Types::DescribeCertificateRequest
-    DescribeCertificateResult.add_member(:certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+    DescribeCertificateResult.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, location_name: "Certificate"))
     DescribeCertificateResult.type = Types::DescribeCertificateResult
-    DescribeClientAuthenticationSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeClientAuthenticationSettingsRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: "Type"))
-    DescribeClientAuthenticationSettingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeClientAuthenticationSettingsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeClientAuthenticationSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeClientAuthenticationSettingsRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationType, location_name: "Type"))
+    DescribeClientAuthenticationSettingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeClientAuthenticationSettingsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "Limit"))
     DescribeClientAuthenticationSettingsRequest.type = Types::DescribeClientAuthenticationSettingsRequest
-    DescribeClientAuthenticationSettingsResult.add_member(:client_authentication_settings_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationSettingsInfo, location_name: "ClientAuthenticationSettingsInfo"))
-    DescribeClientAuthenticationSettingsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientAuthenticationSettingsResult.add_member(:client_authentication_settings_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationSettingsInfo, location_name: "ClientAuthenticationSettingsInfo"))
+    DescribeClientAuthenticationSettingsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeClientAuthenticationSettingsResult.type = Types::DescribeClientAuthenticationSettingsResult
-    DescribeConditionalForwardersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeConditionalForwardersRequest.add_member(:remote_domain_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainNames, location_name: "RemoteDomainNames"))
+    DescribeConditionalForwardersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeConditionalForwardersRequest.add_member(:remote_domain_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainNames, location_name: "RemoteDomainNames"))
     DescribeConditionalForwardersRequest.type = Types::DescribeConditionalForwardersRequest
-    DescribeConditionalForwardersResult.add_member(:conditional_forwarders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConditionalForwarders, location_name: "ConditionalForwarders"))
+    DescribeConditionalForwardersResult.add_member(:conditional_forwarders, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalForwarders, location_name: "ConditionalForwarders"))
     DescribeConditionalForwardersResult.type = Types::DescribeConditionalForwardersResult
-    DescribeDirectoriesRequest.add_member(:directory_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryIds, location_name: "DirectoryIds"))
-    DescribeDirectoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeDirectoriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeDirectoriesRequest.add_member(:directory_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryIds, location_name: "DirectoryIds"))
+    DescribeDirectoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeDirectoriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     DescribeDirectoriesRequest.type = Types::DescribeDirectoriesRequest
-    DescribeDirectoriesResult.add_member(:directory_descriptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDescriptions, location_name: "DirectoryDescriptions"))
-    DescribeDirectoriesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDirectoriesResult.add_member(:directory_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryDescriptions, location_name: "DirectoryDescriptions"))
+    DescribeDirectoriesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDirectoriesResult.type = Types::DescribeDirectoriesResult
-    DescribeDirectoryDataAccessRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeDirectoryDataAccessRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     DescribeDirectoryDataAccessRequest.type = Types::DescribeDirectoryDataAccessRequest
-    DescribeDirectoryDataAccessResult.add_member(:data_access_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataAccessStatus, location_name: "DataAccessStatus"))
+    DescribeDirectoryDataAccessResult.add_member(:data_access_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessStatus, location_name: "DataAccessStatus"))
     DescribeDirectoryDataAccessResult.type = Types::DescribeDirectoryDataAccessResult
-    DescribeDomainControllersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeDomainControllersRequest.add_member(:domain_controller_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllerIds, location_name: "DomainControllerIds"))
-    DescribeDomainControllersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeDomainControllersRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeDomainControllersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeDomainControllersRequest.add_member(:domain_controller_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerIds, location_name: "DomainControllerIds"))
+    DescribeDomainControllersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeDomainControllersRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     DescribeDomainControllersRequest.type = Types::DescribeDomainControllersRequest
-    DescribeDomainControllersResult.add_member(:domain_controllers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllers, location_name: "DomainControllers"))
-    DescribeDomainControllersResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDomainControllersResult.add_member(:domain_controllers, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllers, location_name: "DomainControllers"))
+    DescribeDomainControllersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDomainControllersResult.type = Types::DescribeDomainControllersResult
-    DescribeEventTopicsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DescribeEventTopicsRequest.add_member(:topic_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicNames, location_name: "TopicNames"))
+    DescribeEventTopicsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DescribeEventTopicsRequest.add_member(:topic_names, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicNames, location_name: "TopicNames"))
     DescribeEventTopicsRequest.type = Types::DescribeEventTopicsRequest
-    DescribeEventTopicsResult.add_member(:event_topics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTopics, location_name: "EventTopics"))
+    DescribeEventTopicsResult.add_member(:event_topics, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTopics, location_name: "EventTopics"))
     DescribeEventTopicsResult.type = Types::DescribeEventTopicsResult
-    DescribeHybridADUpdateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeHybridADUpdateRequest.add_member(:update_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridUpdateType, location_name: "UpdateType"))
-    DescribeHybridADUpdateRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeHybridADUpdateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeHybridADUpdateRequest.add_member(:update_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateType, location_name: "UpdateType"))
+    DescribeHybridADUpdateRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeHybridADUpdateRequest.type = Types::DescribeHybridADUpdateRequest
-    DescribeHybridADUpdateResult.add_member(:update_activities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridUpdateActivities, location_name: "UpdateActivities"))
-    DescribeHybridADUpdateResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeHybridADUpdateResult.add_member(:update_activities, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateActivities, location_name: "UpdateActivities"))
+    DescribeHybridADUpdateResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeHybridADUpdateResult.type = Types::DescribeHybridADUpdateResult
-    DescribeLDAPSSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeLDAPSSettingsRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type"))
-    DescribeLDAPSSettingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeLDAPSSettingsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeLDAPSSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeLDAPSSettingsRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSType, location_name: "Type"))
+    DescribeLDAPSSettingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeLDAPSSettingsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "Limit"))
     DescribeLDAPSSettingsRequest.type = Types::DescribeLDAPSSettingsRequest
-    DescribeLDAPSSettingsResult.add_member(:ldaps_settings_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSSettingsInfo, location_name: "LDAPSSettingsInfo"))
-    DescribeLDAPSSettingsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeLDAPSSettingsResult.add_member(:ldaps_settings_info, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSSettingsInfo, location_name: "LDAPSSettingsInfo"))
+    DescribeLDAPSSettingsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeLDAPSSettingsResult.type = Types::DescribeLDAPSSettingsResult
-    DescribeRegionsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeRegionsRequest.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
-    DescribeRegionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegionsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeRegionsRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, location_name: "RegionName"))
+    DescribeRegionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegionsRequest.type = Types::DescribeRegionsRequest
-    DescribeRegionsResult.add_member(:regions_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionsDescription, location_name: "RegionsDescription"))
-    DescribeRegionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegionsResult.add_member(:regions_description, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionsDescription, location_name: "RegionsDescription"))
+    DescribeRegionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegionsResult.type = Types::DescribeRegionsResult
-    DescribeSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeSettingsRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationStatus, location_name: "Status"))
-    DescribeSettingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeSettingsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationStatus, location_name: "Status"))
+    DescribeSettingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeSettingsRequest.type = Types::DescribeSettingsRequest
-    DescribeSettingsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DescribeSettingsResult.add_member(:setting_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SettingEntries, location_name: "SettingEntries"))
-    DescribeSettingsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSettingsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DescribeSettingsResult.add_member(:setting_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: SettingEntries, location_name: "SettingEntries"))
+    DescribeSettingsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeSettingsResult.type = Types::DescribeSettingsResult
-    DescribeSharedDirectoriesRequest.add_member(:owner_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "OwnerDirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeSharedDirectoriesRequest.add_member(:shared_directory_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryIds, location_name: "SharedDirectoryIds"))
-    DescribeSharedDirectoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeSharedDirectoriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeSharedDirectoriesRequest.add_member(:owner_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "OwnerDirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeSharedDirectoriesRequest.add_member(:shared_directory_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryIds, location_name: "SharedDirectoryIds"))
+    DescribeSharedDirectoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeSharedDirectoriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     DescribeSharedDirectoriesRequest.type = Types::DescribeSharedDirectoriesRequest
-    DescribeSharedDirectoriesResult.add_member(:shared_directories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SharedDirectories, location_name: "SharedDirectories"))
-    DescribeSharedDirectoriesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSharedDirectoriesResult.add_member(:shared_directories, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDirectories, location_name: "SharedDirectories"))
+    DescribeSharedDirectoriesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeSharedDirectoriesResult.type = Types::DescribeSharedDirectoriesResult
-    DescribeSnapshotsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DescribeSnapshotsRequest.add_member(:snapshot_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotIds, location_name: "SnapshotIds"))
-    DescribeSnapshotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeSnapshotsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeSnapshotsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DescribeSnapshotsRequest.add_member(:snapshot_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotIds, location_name: "SnapshotIds"))
+    DescribeSnapshotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeSnapshotsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     DescribeSnapshotsRequest.type = Types::DescribeSnapshotsRequest
-    DescribeSnapshotsResult.add_member(:snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshots, location_name: "Snapshots"))
-    DescribeSnapshotsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapshotsResult.add_member(:snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshots, location_name: "Snapshots"))
+    DescribeSnapshotsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeSnapshotsResult.type = Types::DescribeSnapshotsResult
-    DescribeTrustsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DescribeTrustsRequest.add_member(:trust_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustIds, location_name: "TrustIds"))
-    DescribeTrustsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeTrustsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeTrustsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DescribeTrustsRequest.add_member(:trust_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustIds, location_name: "TrustIds"))
+    DescribeTrustsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeTrustsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     DescribeTrustsRequest.type = Types::DescribeTrustsRequest
-    DescribeTrustsResult.add_member(:trusts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Trusts, location_name: "Trusts"))
-    DescribeTrustsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeTrustsResult.add_member(:trusts, ::Smithy::Schema::Shapes::MemberShape.new(target: Trusts, location_name: "Trusts"))
+    DescribeTrustsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeTrustsResult.type = Types::DescribeTrustsResult
-    DescribeUpdateDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DescribeUpdateDirectoryRequest.add_member(:update_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateType, location_name: "UpdateType", traits: {"smithy.api#required" => {}}))
-    DescribeUpdateDirectoryRequest.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
-    DescribeUpdateDirectoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeUpdateDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DescribeUpdateDirectoryRequest.add_member(:update_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateType, location_name: "UpdateType", traits: {"smithy.api#required" => {}}))
+    DescribeUpdateDirectoryRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, location_name: "RegionName"))
+    DescribeUpdateDirectoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeUpdateDirectoryRequest.type = Types::DescribeUpdateDirectoryRequest
-    DescribeUpdateDirectoryResult.add_member(:update_activities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateActivities, location_name: "UpdateActivities"))
-    DescribeUpdateDirectoryResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeUpdateDirectoryResult.add_member(:update_activities, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActivities, location_name: "UpdateActivities"))
+    DescribeUpdateDirectoryResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeUpdateDirectoryResult.type = Types::DescribeUpdateDirectoryResult
-    DirectoryAlreadyInRegionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryAlreadyInRegionException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryAlreadyInRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryAlreadyInRegionException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DirectoryAlreadyInRegionException.type = Types::DirectoryAlreadyInRegionException
-    DirectoryAlreadySharedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryAlreadySharedException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryAlreadySharedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryAlreadySharedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DirectoryAlreadySharedException.type = Types::DirectoryAlreadySharedException
-    DirectoryConfigurationSettingRequestDetailedStatus.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName)
-    DirectoryConfigurationSettingRequestDetailedStatus.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationStatus)
-    DirectoryConfigurationStatus.add_member(:requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUESTED", traits: {"smithy.api#enumValue" => "Requested"}))
-    DirectoryConfigurationStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
-    DirectoryConfigurationStatus.add_member(:updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
-    DirectoryConfigurationStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    DirectoryConfigurationStatus.add_member(:default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEFAULT", traits: {"smithy.api#enumValue" => "Default"}))
-    DirectoryConnectSettings.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId", traits: {"smithy.api#required" => {}}))
-    DirectoryConnectSettings.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#required" => {}}))
-    DirectoryConnectSettings.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "CustomerDnsIps", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
-    DirectoryConnectSettings.add_member(:customer_dns_ips_v6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "CustomerDnsIpsV6"))
-    DirectoryConnectSettings.add_member(:customer_user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "CustomerUserName", traits: {"smithy.api#required" => {}}))
+    DirectoryConfigurationSettingRequestDetailedStatus.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName)
+    DirectoryConfigurationSettingRequestDetailedStatus.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationStatus)
+    DirectoryConfigurationStatus.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUESTED", traits: {"smithy.api#enumValue" => "Requested"}))
+    DirectoryConfigurationStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
+    DirectoryConfigurationStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
+    DirectoryConfigurationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    DirectoryConfigurationStatus.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEFAULT", traits: {"smithy.api#enumValue" => "Default"}))
+    DirectoryConnectSettings.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId", traits: {"smithy.api#required" => {}}))
+    DirectoryConnectSettings.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#required" => {}}))
+    DirectoryConnectSettings.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, location_name: "CustomerDnsIps", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    DirectoryConnectSettings.add_member(:customer_dns_ips_v6, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "CustomerDnsIpsV6"))
+    DirectoryConnectSettings.add_member(:customer_user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "CustomerUserName", traits: {"smithy.api#required" => {}}))
     DirectoryConnectSettings.type = Types::DirectoryConnectSettings
-    DirectoryConnectSettingsDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    DirectoryConnectSettingsDescription.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    DirectoryConnectSettingsDescription.add_member(:customer_user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "CustomerUserName"))
-    DirectoryConnectSettingsDescription.add_member(:security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId"))
-    DirectoryConnectSettingsDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
-    DirectoryConnectSettingsDescription.add_member(:connect_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddrs, location_name: "ConnectIps"))
-    DirectoryConnectSettingsDescription.add_member(:connect_ips_v6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpV6Addrs, location_name: "ConnectIpsV6"))
+    DirectoryConnectSettingsDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    DirectoryConnectSettingsDescription.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    DirectoryConnectSettingsDescription.add_member(:customer_user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "CustomerUserName"))
+    DirectoryConnectSettingsDescription.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, location_name: "SecurityGroupId"))
+    DirectoryConnectSettingsDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones"))
+    DirectoryConnectSettingsDescription.add_member(:connect_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddrs, location_name: "ConnectIps"))
+    DirectoryConnectSettingsDescription.add_member(:connect_ips_v6, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV6Addrs, location_name: "ConnectIpsV6"))
     DirectoryConnectSettingsDescription.type = Types::DirectoryConnectSettingsDescription
-    DirectoryDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DirectoryDescription.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: "Name"))
-    DirectoryDescription.add_member(:short_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryShortName, location_name: "ShortName"))
-    DirectoryDescription.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySize, location_name: "Size"))
-    DirectoryDescription.add_member(:edition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: "Edition"))
-    DirectoryDescription.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "Alias"))
-    DirectoryDescription.add_member(:access_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessUrl, location_name: "AccessUrl"))
-    DirectoryDescription.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DirectoryDescription.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
-    DirectoryDescription.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
-    DirectoryDescription.add_member(:stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryStage, location_name: "Stage"))
-    DirectoryDescription.add_member(:share_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
-    DirectoryDescription.add_member(:share_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareMethod, location_name: "ShareMethod"))
-    DirectoryDescription.add_member(:share_notes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Notes, location_name: "ShareNotes"))
-    DirectoryDescription.add_member(:launch_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchTime, location_name: "LaunchTime"))
-    DirectoryDescription.add_member(:stage_last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "StageLastUpdatedDateTime"))
-    DirectoryDescription.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryType, location_name: "Type"))
-    DirectoryDescription.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettingsDescription, location_name: "VpcSettings"))
-    DirectoryDescription.add_member(:connect_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConnectSettingsDescription, location_name: "ConnectSettings"))
-    DirectoryDescription.add_member(:radius_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusSettings, location_name: "RadiusSettings"))
-    DirectoryDescription.add_member(:radius_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusStatus, location_name: "RadiusStatus"))
-    DirectoryDescription.add_member(:stage_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StageReason, location_name: "StageReason"))
-    DirectoryDescription.add_member(:sso_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsoEnabled, location_name: "SsoEnabled", traits: {"smithy.api#default" => false}))
-    DirectoryDescription.add_member(:desired_number_of_domain_controllers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
-    DirectoryDescription.add_member(:owner_directory_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerDirectoryDescription, location_name: "OwnerDirectoryDescription"))
-    DirectoryDescription.add_member(:regions_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionsInfo, location_name: "RegionsInfo"))
-    DirectoryDescription.add_member(:os_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSVersion, location_name: "OsVersion"))
-    DirectoryDescription.add_member(:hybrid_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridSettingsDescription, location_name: "HybridSettings"))
-    DirectoryDescription.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    DirectoryDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DirectoryDescription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, location_name: "Name"))
+    DirectoryDescription.add_member(:short_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryShortName, location_name: "ShortName"))
+    DirectoryDescription.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectorySize, location_name: "Size"))
+    DirectoryDescription.add_member(:edition, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryEdition, location_name: "Edition"))
+    DirectoryDescription.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "Alias"))
+    DirectoryDescription.add_member(:access_url, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessUrl, location_name: "AccessUrl"))
+    DirectoryDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DirectoryDescription.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    DirectoryDescription.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
+    DirectoryDescription.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryStage, location_name: "Stage"))
+    DirectoryDescription.add_member(:share_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, location_name: "ShareStatus"))
+    DirectoryDescription.add_member(:share_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareMethod, location_name: "ShareMethod"))
+    DirectoryDescription.add_member(:share_notes, ::Smithy::Schema::Shapes::MemberShape.new(target: Notes, location_name: "ShareNotes"))
+    DirectoryDescription.add_member(:launch_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTime, location_name: "LaunchTime"))
+    DirectoryDescription.add_member(:stage_last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "StageLastUpdatedDateTime"))
+    DirectoryDescription.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryType, location_name: "Type"))
+    DirectoryDescription.add_member(:vpc_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryVpcSettingsDescription, location_name: "VpcSettings"))
+    DirectoryDescription.add_member(:connect_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConnectSettingsDescription, location_name: "ConnectSettings"))
+    DirectoryDescription.add_member(:radius_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusSettings, location_name: "RadiusSettings"))
+    DirectoryDescription.add_member(:radius_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusStatus, location_name: "RadiusStatus"))
+    DirectoryDescription.add_member(:stage_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StageReason, location_name: "StageReason"))
+    DirectoryDescription.add_member(:sso_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SsoEnabled, location_name: "SsoEnabled", traits: {"smithy.api#default" => false}))
+    DirectoryDescription.add_member(:desired_number_of_domain_controllers, ::Smithy::Schema::Shapes::MemberShape.new(target: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
+    DirectoryDescription.add_member(:owner_directory_description, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerDirectoryDescription, location_name: "OwnerDirectoryDescription"))
+    DirectoryDescription.add_member(:regions_info, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionsInfo, location_name: "RegionsInfo"))
+    DirectoryDescription.add_member(:os_version, ::Smithy::Schema::Shapes::MemberShape.new(target: OSVersion, location_name: "OsVersion"))
+    DirectoryDescription.add_member(:hybrid_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridSettingsDescription, location_name: "HybridSettings"))
+    DirectoryDescription.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     DirectoryDescription.type = Types::DirectoryDescription
-    DirectoryDescriptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDescription)
-    DirectoryDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryDescription)
+    DirectoryDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DirectoryDoesNotExistException.type = Types::DirectoryDoesNotExistException
-    DirectoryEdition.add_member(:enterprise, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENTERPRISE", traits: {"smithy.api#enumValue" => "Enterprise"}))
-    DirectoryEdition.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "Standard"}))
-    DirectoryEdition.add_member(:hybrid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HYBRID", traits: {"smithy.api#enumValue" => "Hybrid"}))
-    DirectoryIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId)
-    DirectoryInDesiredStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryInDesiredStateException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryEdition.add_member(:enterprise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENTERPRISE", traits: {"smithy.api#enumValue" => "Enterprise"}))
+    DirectoryEdition.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "Standard"}))
+    DirectoryEdition.add_member(:hybrid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HYBRID", traits: {"smithy.api#enumValue" => "Hybrid"}))
+    DirectoryIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId)
+    DirectoryInDesiredStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryInDesiredStateException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DirectoryInDesiredStateException.type = Types::DirectoryInDesiredStateException
-    DirectoryLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DirectoryLimitExceededException.type = Types::DirectoryLimitExceededException
-    DirectoryLimits.add_member(:cloud_only_directories_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "CloudOnlyDirectoriesLimit"))
-    DirectoryLimits.add_member(:cloud_only_directories_current_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "CloudOnlyDirectoriesCurrentCount"))
-    DirectoryLimits.add_member(:cloud_only_directories_limit_reached, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudOnlyDirectoriesLimitReached, location_name: "CloudOnlyDirectoriesLimitReached", traits: {"smithy.api#default" => false}))
-    DirectoryLimits.add_member(:cloud_only_microsoft_ad_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "CloudOnlyMicrosoftADLimit"))
-    DirectoryLimits.add_member(:cloud_only_microsoft_ad_current_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "CloudOnlyMicrosoftADCurrentCount"))
-    DirectoryLimits.add_member(:cloud_only_microsoft_ad_limit_reached, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudOnlyDirectoriesLimitReached, location_name: "CloudOnlyMicrosoftADLimitReached", traits: {"smithy.api#default" => false}))
-    DirectoryLimits.add_member(:connected_directories_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "ConnectedDirectoriesLimit"))
-    DirectoryLimits.add_member(:connected_directories_current_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "ConnectedDirectoriesCurrentCount"))
-    DirectoryLimits.add_member(:connected_directories_limit_reached, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectedDirectoriesLimitReached, location_name: "ConnectedDirectoriesLimitReached", traits: {"smithy.api#default" => false}))
+    DirectoryLimits.add_member(:cloud_only_directories_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "CloudOnlyDirectoriesLimit"))
+    DirectoryLimits.add_member(:cloud_only_directories_current_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "CloudOnlyDirectoriesCurrentCount"))
+    DirectoryLimits.add_member(:cloud_only_directories_limit_reached, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudOnlyDirectoriesLimitReached, location_name: "CloudOnlyDirectoriesLimitReached", traits: {"smithy.api#default" => false}))
+    DirectoryLimits.add_member(:cloud_only_microsoft_ad_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "CloudOnlyMicrosoftADLimit"))
+    DirectoryLimits.add_member(:cloud_only_microsoft_ad_current_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "CloudOnlyMicrosoftADCurrentCount"))
+    DirectoryLimits.add_member(:cloud_only_microsoft_ad_limit_reached, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudOnlyDirectoriesLimitReached, location_name: "CloudOnlyMicrosoftADLimitReached", traits: {"smithy.api#default" => false}))
+    DirectoryLimits.add_member(:connected_directories_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "ConnectedDirectoriesLimit"))
+    DirectoryLimits.add_member(:connected_directories_current_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "ConnectedDirectoriesCurrentCount"))
+    DirectoryLimits.add_member(:connected_directories_limit_reached, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectedDirectoriesLimitReached, location_name: "ConnectedDirectoriesLimitReached", traits: {"smithy.api#default" => false}))
     DirectoryLimits.type = Types::DirectoryLimits
-    DirectoryNotSharedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryNotSharedException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryNotSharedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryNotSharedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DirectoryNotSharedException.type = Types::DirectoryNotSharedException
-    DirectorySize.add_member(:small, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMALL", traits: {"smithy.api#enumValue" => "Small"}))
-    DirectorySize.add_member(:large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LARGE", traits: {"smithy.api#enumValue" => "Large"}))
-    DirectorySizeUpdateSettings.add_member(:directory_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySize, location_name: "DirectorySize"))
+    DirectorySize.add_member(:small, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMALL", traits: {"smithy.api#enumValue" => "Small"}))
+    DirectorySize.add_member(:large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LARGE", traits: {"smithy.api#enumValue" => "Large"}))
+    DirectorySizeUpdateSettings.add_member(:directory_size, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectorySize, location_name: "DirectorySize"))
     DirectorySizeUpdateSettings.type = Types::DirectorySizeUpdateSettings
-    DirectoryStage.add_member(:requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUESTED", traits: {"smithy.api#enumValue" => "Requested"}))
-    DirectoryStage.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
-    DirectoryStage.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
-    DirectoryStage.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
-    DirectoryStage.add_member(:inoperable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INOPERABLE", traits: {"smithy.api#enumValue" => "Inoperable"}))
-    DirectoryStage.add_member(:impaired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPAIRED", traits: {"smithy.api#enumValue" => "Impaired"}))
-    DirectoryStage.add_member(:restoring, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTORING", traits: {"smithy.api#enumValue" => "Restoring"}))
-    DirectoryStage.add_member(:restorefailed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTOREFAILED", traits: {"smithy.api#enumValue" => "RestoreFailed"}))
-    DirectoryStage.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    DirectoryStage.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
-    DirectoryStage.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    DirectoryStage.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
-    DirectoryType.add_member(:simple_ad, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLE_AD", traits: {"smithy.api#enumValue" => "SimpleAD"}))
-    DirectoryType.add_member(:ad_connector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AD_CONNECTOR", traits: {"smithy.api#enumValue" => "ADConnector"}))
-    DirectoryType.add_member(:microsoft_ad, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSOFT_AD", traits: {"smithy.api#enumValue" => "MicrosoftAD"}))
-    DirectoryType.add_member(:shared_microsoft_ad, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARED_MICROSOFT_AD", traits: {"smithy.api#enumValue" => "SharedMicrosoftAD"}))
-    DirectoryUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryUnavailableException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryStage.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUESTED", traits: {"smithy.api#enumValue" => "Requested"}))
+    DirectoryStage.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
+    DirectoryStage.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
+    DirectoryStage.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
+    DirectoryStage.add_member(:inoperable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INOPERABLE", traits: {"smithy.api#enumValue" => "Inoperable"}))
+    DirectoryStage.add_member(:impaired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPAIRED", traits: {"smithy.api#enumValue" => "Impaired"}))
+    DirectoryStage.add_member(:restoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTORING", traits: {"smithy.api#enumValue" => "Restoring"}))
+    DirectoryStage.add_member(:restorefailed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTOREFAILED", traits: {"smithy.api#enumValue" => "RestoreFailed"}))
+    DirectoryStage.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    DirectoryStage.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
+    DirectoryStage.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    DirectoryStage.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
+    DirectoryType.add_member(:simple_ad, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLE_AD", traits: {"smithy.api#enumValue" => "SimpleAD"}))
+    DirectoryType.add_member(:ad_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AD_CONNECTOR", traits: {"smithy.api#enumValue" => "ADConnector"}))
+    DirectoryType.add_member(:microsoft_ad, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSOFT_AD", traits: {"smithy.api#enumValue" => "MicrosoftAD"}))
+    DirectoryType.add_member(:shared_microsoft_ad, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARED_MICROSOFT_AD", traits: {"smithy.api#enumValue" => "SharedMicrosoftAD"}))
+    DirectoryUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryUnavailableException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DirectoryUnavailableException.type = Types::DirectoryUnavailableException
-    DirectoryVpcSettings.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId", traits: {"smithy.api#required" => {}}))
-    DirectoryVpcSettings.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#required" => {}}))
+    DirectoryVpcSettings.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId", traits: {"smithy.api#required" => {}}))
+    DirectoryVpcSettings.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#required" => {}}))
     DirectoryVpcSettings.type = Types::DirectoryVpcSettings
-    DirectoryVpcSettingsDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    DirectoryVpcSettingsDescription.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    DirectoryVpcSettingsDescription.add_member(:security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId"))
-    DirectoryVpcSettingsDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
+    DirectoryVpcSettingsDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    DirectoryVpcSettingsDescription.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    DirectoryVpcSettingsDescription.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, location_name: "SecurityGroupId"))
+    DirectoryVpcSettingsDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones"))
     DirectoryVpcSettingsDescription.type = Types::DirectoryVpcSettingsDescription
-    DisableAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DisableAlreadyInProgressException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DisableAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DisableAlreadyInProgressException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DisableAlreadyInProgressException.type = Types::DisableAlreadyInProgressException
-    DisableCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DisableCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     DisableCAEnrollmentPolicyRequest.type = Types::DisableCAEnrollmentPolicyRequest
     DisableCAEnrollmentPolicyResult.type = Types::DisableCAEnrollmentPolicyResult
-    DisableClientAuthenticationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DisableClientAuthenticationRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    DisableClientAuthenticationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DisableClientAuthenticationRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     DisableClientAuthenticationRequest.type = Types::DisableClientAuthenticationRequest
     DisableClientAuthenticationResult.type = Types::DisableClientAuthenticationResult
-    DisableDirectoryDataAccessRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DisableDirectoryDataAccessRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     DisableDirectoryDataAccessRequest.type = Types::DisableDirectoryDataAccessRequest
     DisableDirectoryDataAccessResult.type = Types::DisableDirectoryDataAccessResult
-    DisableLDAPSRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DisableLDAPSRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    DisableLDAPSRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DisableLDAPSRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     DisableLDAPSRequest.type = Types::DisableLDAPSRequest
     DisableLDAPSResult.type = Types::DisableLDAPSResult
-    DisableRadiusRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DisableRadiusRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     DisableRadiusRequest.type = Types::DisableRadiusRequest
     DisableRadiusResult.type = Types::DisableRadiusResult
-    DisableSsoRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    DisableSsoRequest.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
-    DisableSsoRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectPassword, location_name: "Password"))
+    DisableSsoRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    DisableSsoRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "UserName"))
+    DisableSsoRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPassword, location_name: "Password"))
     DisableSsoRequest.type = Types::DisableSsoRequest
     DisableSsoResult.type = Types::DisableSsoResult
-    DnsIpAddrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr)
-    DnsIpv6Addrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6Addr)
-    DomainController.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DomainController.add_member(:domain_controller_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllerId, location_name: "DomainControllerId"))
-    DomainController.add_member(:dns_ip_addr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr, location_name: "DnsIpAddr"))
-    DomainController.add_member(:dns_ipv6_addr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6Addr, location_name: "DnsIpv6Addr"))
-    DomainController.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    DomainController.add_member(:subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
-    DomainController.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
-    DomainController.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllerStatus, location_name: "Status"))
-    DomainController.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllerStatusReason, location_name: "StatusReason"))
-    DomainController.add_member(:launch_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchTime, location_name: "LaunchTime"))
-    DomainController.add_member(:status_last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "StatusLastUpdatedDateTime"))
+    DnsIpAddrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr)
+    DnsIpv6Addrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addr)
+    DomainController.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DomainController.add_member(:domain_controller_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerId, location_name: "DomainControllerId"))
+    DomainController.add_member(:dns_ip_addr, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, location_name: "DnsIpAddr"))
+    DomainController.add_member(:dns_ipv6_addr, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addr, location_name: "DnsIpv6Addr"))
+    DomainController.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    DomainController.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "SubnetId"))
+    DomainController.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "AvailabilityZone"))
+    DomainController.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerStatus, location_name: "Status"))
+    DomainController.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerStatusReason, location_name: "StatusReason"))
+    DomainController.add_member(:launch_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTime, location_name: "LaunchTime"))
+    DomainController.add_member(:status_last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "StatusLastUpdatedDateTime"))
     DomainController.type = Types::DomainController
-    DomainControllerIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllerId)
-    DomainControllerLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DomainControllerLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DomainControllerIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerId)
+    DomainControllerLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DomainControllerLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     DomainControllerLimitExceededException.type = Types::DomainControllerLimitExceededException
-    DomainControllerStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
-    DomainControllerStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
-    DomainControllerStatus.add_member(:impaired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPAIRED", traits: {"smithy.api#enumValue" => "Impaired"}))
-    DomainControllerStatus.add_member(:restoring, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTORING", traits: {"smithy.api#enumValue" => "Restoring"}))
-    DomainControllerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    DomainControllerStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
-    DomainControllerStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    DomainControllerStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
-    DomainControllers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainController)
-    EnableAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    EnableAlreadyInProgressException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DomainControllerStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
+    DomainControllerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
+    DomainControllerStatus.add_member(:impaired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPAIRED", traits: {"smithy.api#enumValue" => "Impaired"}))
+    DomainControllerStatus.add_member(:restoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTORING", traits: {"smithy.api#enumValue" => "Restoring"}))
+    DomainControllerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    DomainControllerStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
+    DomainControllerStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    DomainControllerStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
+    DomainControllers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainController)
+    EnableAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    EnableAlreadyInProgressException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     EnableAlreadyInProgressException.type = Types::EnableAlreadyInProgressException
-    EnableCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    EnableCAEnrollmentPolicyRequest.add_member(:pca_connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PcaConnectorArn, location_name: "PcaConnectorArn", traits: {"smithy.api#required" => {}}))
+    EnableCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    EnableCAEnrollmentPolicyRequest.add_member(:pca_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PcaConnectorArn, location_name: "PcaConnectorArn", traits: {"smithy.api#required" => {}}))
     EnableCAEnrollmentPolicyRequest.type = Types::EnableCAEnrollmentPolicyRequest
     EnableCAEnrollmentPolicyResult.type = Types::EnableCAEnrollmentPolicyResult
-    EnableClientAuthenticationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    EnableClientAuthenticationRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    EnableClientAuthenticationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    EnableClientAuthenticationRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     EnableClientAuthenticationRequest.type = Types::EnableClientAuthenticationRequest
     EnableClientAuthenticationResult.type = Types::EnableClientAuthenticationResult
-    EnableDirectoryDataAccessRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    EnableDirectoryDataAccessRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     EnableDirectoryDataAccessRequest.type = Types::EnableDirectoryDataAccessRequest
     EnableDirectoryDataAccessResult.type = Types::EnableDirectoryDataAccessResult
-    EnableLDAPSRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    EnableLDAPSRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    EnableLDAPSRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    EnableLDAPSRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     EnableLDAPSRequest.type = Types::EnableLDAPSRequest
     EnableLDAPSResult.type = Types::EnableLDAPSResult
-    EnableRadiusRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    EnableRadiusRequest.add_member(:radius_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusSettings, location_name: "RadiusSettings", traits: {"smithy.api#required" => {}}))
+    EnableRadiusRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    EnableRadiusRequest.add_member(:radius_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusSettings, location_name: "RadiusSettings", traits: {"smithy.api#required" => {}}))
     EnableRadiusRequest.type = Types::EnableRadiusRequest
     EnableRadiusResult.type = Types::EnableRadiusResult
-    EnableSsoRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    EnableSsoRequest.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
-    EnableSsoRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectPassword, location_name: "Password"))
+    EnableSsoRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    EnableSsoRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "UserName"))
+    EnableSsoRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPassword, location_name: "Password"))
     EnableSsoRequest.type = Types::EnableSsoRequest
     EnableSsoResult.type = Types::EnableSsoResult
-    EntityAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    EntityAlreadyExistsException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    EntityAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    EntityAlreadyExistsException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     EntityAlreadyExistsException.type = Types::EntityAlreadyExistsException
-    EntityDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    EntityDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    EntityDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    EntityDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     EntityDoesNotExistException.type = Types::EntityDoesNotExistException
-    EventTopic.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    EventTopic.add_member(:topic_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicName, location_name: "TopicName"))
-    EventTopic.add_member(:topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicArn, location_name: "TopicArn"))
-    EventTopic.add_member(:created_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDateTime, location_name: "CreatedDateTime"))
-    EventTopic.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicStatus, location_name: "Status"))
+    EventTopic.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    EventTopic.add_member(:topic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, location_name: "TopicName"))
+    EventTopic.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicArn, location_name: "TopicArn"))
+    EventTopic.add_member(:created_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateTime, location_name: "CreatedDateTime"))
+    EventTopic.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicStatus, location_name: "Status"))
     EventTopic.type = Types::EventTopic
-    EventTopics.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTopic)
+    EventTopics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventTopic)
     GetDirectoryLimitsRequest.type = Types::GetDirectoryLimitsRequest
-    GetDirectoryLimitsResult.add_member(:directory_limits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryLimits, location_name: "DirectoryLimits"))
+    GetDirectoryLimitsResult.add_member(:directory_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryLimits, location_name: "DirectoryLimits"))
     GetDirectoryLimitsResult.type = Types::GetDirectoryLimitsResult
-    GetSnapshotLimitsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    GetSnapshotLimitsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     GetSnapshotLimitsRequest.type = Types::GetSnapshotLimitsRequest
-    GetSnapshotLimitsResult.add_member(:snapshot_limits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotLimits, location_name: "SnapshotLimits"))
+    GetSnapshotLimitsResult.add_member(:snapshot_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotLimits, location_name: "SnapshotLimits"))
     GetSnapshotLimitsResult.type = Types::GetSnapshotLimitsResult
-    HybridAdministratorAccountUpdate.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn", traits: {"smithy.api#required" => {}}))
+    HybridAdministratorAccountUpdate.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn", traits: {"smithy.api#required" => {}}))
     HybridAdministratorAccountUpdate.type = Types::HybridAdministratorAccountUpdate
-    HybridCustomerInstancesSettings.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "CustomerDnsIps", traits: {"smithy.api#required" => {}}))
-    HybridCustomerInstancesSettings.add_member(:instance_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "InstanceIds", traits: {"smithy.api#required" => {}}))
+    HybridCustomerInstancesSettings.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerDnsIps, location_name: "CustomerDnsIps", traits: {"smithy.api#required" => {}}))
+    HybridCustomerInstancesSettings.add_member(:instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceIds, location_name: "InstanceIds", traits: {"smithy.api#required" => {}}))
     HybridCustomerInstancesSettings.type = Types::HybridCustomerInstancesSettings
-    HybridSettingsDescription.add_member(:self_managed_dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddrs, location_name: "SelfManagedDnsIpAddrs"))
-    HybridSettingsDescription.add_member(:self_managed_instance_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "SelfManagedInstanceIds"))
+    HybridSettingsDescription.add_member(:self_managed_dns_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddrs, location_name: "SelfManagedDnsIpAddrs"))
+    HybridSettingsDescription.add_member(:self_managed_instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceIds, location_name: "SelfManagedInstanceIds"))
     HybridSettingsDescription.type = Types::HybridSettingsDescription
-    HybridUpdateActivities.add_member(:self_managed_instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridUpdateInfoEntries, location_name: "SelfManagedInstances"))
-    HybridUpdateActivities.add_member(:hybrid_administrator_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridUpdateInfoEntries, location_name: "HybridAdministratorAccount"))
+    HybridUpdateActivities.add_member(:self_managed_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateInfoEntries, location_name: "SelfManagedInstances"))
+    HybridUpdateActivities.add_member(:hybrid_administrator_account, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateInfoEntries, location_name: "HybridAdministratorAccount"))
     HybridUpdateActivities.type = Types::HybridUpdateActivities
-    HybridUpdateInfoEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridUpdateInfoEntry)
-    HybridUpdateInfoEntry.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
-    HybridUpdateInfoEntry.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStatusReason, location_name: "StatusReason"))
-    HybridUpdateInfoEntry.add_member(:initiated_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
-    HybridUpdateInfoEntry.add_member(:new_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridUpdateValue, location_name: "NewValue"))
-    HybridUpdateInfoEntry.add_member(:previous_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridUpdateValue, location_name: "PreviousValue"))
-    HybridUpdateInfoEntry.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDateTime, location_name: "StartTime"))
-    HybridUpdateInfoEntry.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
-    HybridUpdateInfoEntry.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    HybridUpdateInfoEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateInfoEntry)
+    HybridUpdateInfoEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatus, location_name: "Status"))
+    HybridUpdateInfoEntry.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatusReason, location_name: "StatusReason"))
+    HybridUpdateInfoEntry.add_member(:initiated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: InitiatedBy, location_name: "InitiatedBy"))
+    HybridUpdateInfoEntry.add_member(:new_value, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateValue, location_name: "NewValue"))
+    HybridUpdateInfoEntry.add_member(:previous_value, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateValue, location_name: "PreviousValue"))
+    HybridUpdateInfoEntry.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartDateTime, location_name: "StartTime"))
+    HybridUpdateInfoEntry.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    HybridUpdateInfoEntry.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId"))
     HybridUpdateInfoEntry.type = Types::HybridUpdateInfoEntry
-    HybridUpdateType.add_member(:self_managed_instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELF_MANAGED_INSTANCES", traits: {"smithy.api#enumValue" => "SelfManagedInstances"}))
-    HybridUpdateType.add_member(:hybrid_administrator_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HYBRID_ADMINISTRATOR_ACCOUNT", traits: {"smithy.api#enumValue" => "HybridAdministratorAccount"}))
-    HybridUpdateValue.add_member(:instance_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "InstanceIds"))
-    HybridUpdateValue.add_member(:dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "DnsIps"))
+    HybridUpdateType.add_member(:self_managed_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELF_MANAGED_INSTANCES", traits: {"smithy.api#enumValue" => "SelfManagedInstances"}))
+    HybridUpdateType.add_member(:hybrid_administrator_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HYBRID_ADMINISTRATOR_ACCOUNT", traits: {"smithy.api#enumValue" => "HybridAdministratorAccount"}))
+    HybridUpdateValue.add_member(:instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceIds, location_name: "InstanceIds"))
+    HybridUpdateValue.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerDnsIps, location_name: "DnsIps"))
     HybridUpdateValue.type = Types::HybridUpdateValue
-    IncompatibleSettingsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    IncompatibleSettingsException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    IncompatibleSettingsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    IncompatibleSettingsException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     IncompatibleSettingsException.type = Types::IncompatibleSettingsException
-    InsufficientPermissionsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InsufficientPermissionsException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InsufficientPermissionsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InsufficientPermissionsException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InsufficientPermissionsException.type = Types::InsufficientPermissionsException
-    InvalidCertificateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InvalidCertificateException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidCertificateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InvalidCertificateException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InvalidCertificateException.type = Types::InvalidCertificateException
-    InvalidClientAuthStatusException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InvalidClientAuthStatusException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidClientAuthStatusException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InvalidClientAuthStatusException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InvalidClientAuthStatusException.type = Types::InvalidClientAuthStatusException
-    InvalidLDAPSStatusException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InvalidLDAPSStatusException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidLDAPSStatusException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InvalidLDAPSStatusException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InvalidLDAPSStatusException.type = Types::InvalidLDAPSStatusException
-    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InvalidNextTokenException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InvalidNextTokenException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InvalidParameterException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InvalidParameterException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidPasswordException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InvalidPasswordException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidPasswordException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InvalidPasswordException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InvalidPasswordException.type = Types::InvalidPasswordException
-    InvalidTargetException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    InvalidTargetException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidTargetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    InvalidTargetException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     InvalidTargetException.type = Types::InvalidTargetException
-    IpAddrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr)
-    IpRoute.add_member(:cidr_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIp, location_name: "CidrIp"))
-    IpRoute.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6, location_name: "CidrIpv6"))
-    IpRoute.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    IpAddrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr)
+    IpRoute.add_member(:cidr_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIp, location_name: "CidrIp"))
+    IpRoute.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6, location_name: "CidrIpv6"))
+    IpRoute.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
     IpRoute.type = Types::IpRoute
-    IpRouteInfo.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    IpRouteInfo.add_member(:cidr_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIp, location_name: "CidrIp"))
-    IpRouteInfo.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6, location_name: "CidrIpv6"))
-    IpRouteInfo.add_member(:ip_route_status_msg, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRouteStatusMsg, location_name: "IpRouteStatusMsg"))
-    IpRouteInfo.add_member(:added_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddedDateTime, location_name: "AddedDateTime"))
-    IpRouteInfo.add_member(:ip_route_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRouteStatusReason, location_name: "IpRouteStatusReason"))
-    IpRouteInfo.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    IpRouteInfo.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    IpRouteInfo.add_member(:cidr_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIp, location_name: "CidrIp"))
+    IpRouteInfo.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6, location_name: "CidrIpv6"))
+    IpRouteInfo.add_member(:ip_route_status_msg, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRouteStatusMsg, location_name: "IpRouteStatusMsg"))
+    IpRouteInfo.add_member(:added_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AddedDateTime, location_name: "AddedDateTime"))
+    IpRouteInfo.add_member(:ip_route_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRouteStatusReason, location_name: "IpRouteStatusReason"))
+    IpRouteInfo.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
     IpRouteInfo.type = Types::IpRouteInfo
-    IpRouteLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    IpRouteLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    IpRouteLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    IpRouteLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     IpRouteLimitExceededException.type = Types::IpRouteLimitExceededException
-    IpRouteStatusMsg.add_member(:adding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDING", traits: {"smithy.api#enumValue" => "Adding"}))
-    IpRouteStatusMsg.add_member(:added, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDED", traits: {"smithy.api#enumValue" => "Added"}))
-    IpRouteStatusMsg.add_member(:removing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVING", traits: {"smithy.api#enumValue" => "Removing"}))
-    IpRouteStatusMsg.add_member(:removed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVED", traits: {"smithy.api#enumValue" => "Removed"}))
-    IpRouteStatusMsg.add_member(:add_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADD_FAILED", traits: {"smithy.api#enumValue" => "AddFailed"}))
-    IpRouteStatusMsg.add_member(:remove_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVE_FAILED", traits: {"smithy.api#enumValue" => "RemoveFailed"}))
-    IpRoutes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRoute)
-    IpRoutesInfo.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRouteInfo)
-    IpV6Addrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6Addr)
-    LDAPSSettingInfo.add_member(:ldaps_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSStatus, location_name: "LDAPSStatus"))
-    LDAPSSettingInfo.add_member(:ldaps_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSStatusReason, location_name: "LDAPSStatusReason"))
-    LDAPSSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    IpRouteStatusMsg.add_member(:adding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDING", traits: {"smithy.api#enumValue" => "Adding"}))
+    IpRouteStatusMsg.add_member(:added, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDED", traits: {"smithy.api#enumValue" => "Added"}))
+    IpRouteStatusMsg.add_member(:removing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVING", traits: {"smithy.api#enumValue" => "Removing"}))
+    IpRouteStatusMsg.add_member(:removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVED", traits: {"smithy.api#enumValue" => "Removed"}))
+    IpRouteStatusMsg.add_member(:add_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADD_FAILED", traits: {"smithy.api#enumValue" => "AddFailed"}))
+    IpRouteStatusMsg.add_member(:remove_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVE_FAILED", traits: {"smithy.api#enumValue" => "RemoveFailed"}))
+    IpRoutes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRoute)
+    IpRoutesInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRouteInfo)
+    IpV6Addrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addr)
+    LDAPSSettingInfo.add_member(:ldaps_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSStatus, location_name: "LDAPSStatus"))
+    LDAPSSettingInfo.add_member(:ldaps_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSStatusReason, location_name: "LDAPSStatusReason"))
+    LDAPSSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
     LDAPSSettingInfo.type = Types::LDAPSSettingInfo
-    LDAPSSettingsInfo.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSSettingInfo)
-    LDAPSStatus.add_member(:enabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLING", traits: {"smithy.api#enumValue" => "Enabling"}))
-    LDAPSStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
-    LDAPSStatus.add_member(:enable_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLE_FAILED", traits: {"smithy.api#enumValue" => "EnableFailed"}))
-    LDAPSStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
-    LDAPSType.add_member(:client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT", traits: {"smithy.api#enumValue" => "Client"}))
-    ListADAssessmentsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    ListADAssessmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListADAssessmentsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentLimit, location_name: "Limit"))
+    LDAPSSettingsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSSettingInfo)
+    LDAPSStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLING", traits: {"smithy.api#enumValue" => "Enabling"}))
+    LDAPSStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
+    LDAPSStatus.add_member(:enable_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLE_FAILED", traits: {"smithy.api#enumValue" => "EnableFailed"}))
+    LDAPSStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
+    LDAPSType.add_member(:client, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT", traits: {"smithy.api#enumValue" => "Client"}))
+    ListADAssessmentsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    ListADAssessmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListADAssessmentsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentLimit, location_name: "Limit"))
     ListADAssessmentsRequest.type = Types::ListADAssessmentsRequest
-    ListADAssessmentsResult.add_member(:assessments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Assessments, location_name: "Assessments"))
-    ListADAssessmentsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListADAssessmentsResult.add_member(:assessments, ::Smithy::Schema::Shapes::MemberShape.new(target: Assessments, location_name: "Assessments"))
+    ListADAssessmentsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListADAssessmentsResult.type = Types::ListADAssessmentsResult
-    ListCertificatesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    ListCertificatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListCertificatesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    ListCertificatesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    ListCertificatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListCertificatesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "Limit"))
     ListCertificatesRequest.type = Types::ListCertificatesRequest
-    ListCertificatesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListCertificatesResult.add_member(:certificates_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificatesInfo, location_name: "CertificatesInfo"))
+    ListCertificatesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListCertificatesResult.add_member(:certificates_info, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatesInfo, location_name: "CertificatesInfo"))
     ListCertificatesResult.type = Types::ListCertificatesResult
-    ListIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    ListIpRoutesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListIpRoutesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    ListIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    ListIpRoutesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListIpRoutesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     ListIpRoutesRequest.type = Types::ListIpRoutesRequest
-    ListIpRoutesResult.add_member(:ip_routes_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRoutesInfo, location_name: "IpRoutesInfo"))
-    ListIpRoutesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListIpRoutesResult.add_member(:ip_routes_info, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRoutesInfo, location_name: "IpRoutesInfo"))
+    ListIpRoutesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListIpRoutesResult.type = Types::ListIpRoutesResult
-    ListLogSubscriptionsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    ListLogSubscriptionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListLogSubscriptionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    ListLogSubscriptionsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    ListLogSubscriptionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListLogSubscriptionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     ListLogSubscriptionsRequest.type = Types::ListLogSubscriptionsRequest
-    ListLogSubscriptionsResult.add_member(:log_subscriptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSubscriptions, location_name: "LogSubscriptions"))
-    ListLogSubscriptionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLogSubscriptionsResult.add_member(:log_subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSubscriptions, location_name: "LogSubscriptions"))
+    ListLogSubscriptionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListLogSubscriptionsResult.type = Types::ListLogSubscriptionsResult
-    ListSchemaExtensionsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    ListSchemaExtensionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListSchemaExtensionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    ListSchemaExtensionsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    ListSchemaExtensionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListSchemaExtensionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     ListSchemaExtensionsRequest.type = Types::ListSchemaExtensionsRequest
-    ListSchemaExtensionsResult.add_member(:schema_extensions_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionsInfo, location_name: "SchemaExtensionsInfo"))
-    ListSchemaExtensionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSchemaExtensionsResult.add_member(:schema_extensions_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionsInfo, location_name: "SchemaExtensionsInfo"))
+    ListSchemaExtensionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListSchemaExtensionsResult.type = Types::ListSchemaExtensionsResult
-    ListTagsForResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListTagsForResourceRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    ListTagsForResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListTagsForResourceRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    ListTagsForResourceResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    ListTagsForResourceResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceResult.type = Types::ListTagsForResourceResult
-    LogSubscription.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    LogSubscription.add_member(:log_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupName, location_name: "LogGroupName"))
-    LogSubscription.add_member(:subscription_created_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionCreatedDateTime, location_name: "SubscriptionCreatedDateTime"))
+    LogSubscription.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    LogSubscription.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, location_name: "LogGroupName"))
+    LogSubscription.add_member(:subscription_created_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionCreatedDateTime, location_name: "SubscriptionCreatedDateTime"))
     LogSubscription.type = Types::LogSubscription
-    LogSubscriptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSubscription)
-    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "Dual-stack"}))
-    NetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4_ONLY", traits: {"smithy.api#enumValue" => "IPv4"}))
-    NetworkType.add_member(:ipv6_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6_ONLY", traits: {"smithy.api#enumValue" => "IPv6"}))
-    NetworkUpdateSettings.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
-    NetworkUpdateSettings.add_member(:customer_dns_ips_v6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "CustomerDnsIpsV6"))
+    LogSubscriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSubscription)
+    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "Dual-stack"}))
+    NetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4_ONLY", traits: {"smithy.api#enumValue" => "IPv4"}))
+    NetworkType.add_member(:ipv6_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6_ONLY", traits: {"smithy.api#enumValue" => "IPv6"}))
+    NetworkUpdateSettings.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
+    NetworkUpdateSettings.add_member(:customer_dns_ips_v6, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "CustomerDnsIpsV6"))
     NetworkUpdateSettings.type = Types::NetworkUpdateSettings
-    NoAvailableCertificateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    NoAvailableCertificateException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    NoAvailableCertificateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    NoAvailableCertificateException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     NoAvailableCertificateException.type = Types::NoAvailableCertificateException
-    OSUpdateSettings.add_member(:os_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSVersion, location_name: "OSVersion"))
+    OSUpdateSettings.add_member(:os_version, ::Smithy::Schema::Shapes::MemberShape.new(target: OSVersion, location_name: "OSVersion"))
     OSUpdateSettings.type = Types::OSUpdateSettings
-    OSVersion.add_member(:version_2012, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERSION_2012", traits: {"smithy.api#enumValue" => "SERVER_2012"}))
-    OSVersion.add_member(:version_2019, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERSION_2019", traits: {"smithy.api#enumValue" => "SERVER_2019"}))
-    OrganizationsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    OrganizationsException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    OSVersion.add_member(:version_2012, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERSION_2012", traits: {"smithy.api#enumValue" => "SERVER_2012"}))
+    OSVersion.add_member(:version_2019, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERSION_2019", traits: {"smithy.api#enumValue" => "SERVER_2019"}))
+    OrganizationsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    OrganizationsException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     OrganizationsException.type = Types::OrganizationsException
-    OwnerDirectoryDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    OwnerDirectoryDescription.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerId, location_name: "AccountId"))
-    OwnerDirectoryDescription.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
-    OwnerDirectoryDescription.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
-    OwnerDirectoryDescription.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettingsDescription, location_name: "VpcSettings"))
-    OwnerDirectoryDescription.add_member(:radius_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusSettings, location_name: "RadiusSettings"))
-    OwnerDirectoryDescription.add_member(:radius_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusStatus, location_name: "RadiusStatus"))
-    OwnerDirectoryDescription.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    OwnerDirectoryDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    OwnerDirectoryDescription.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, location_name: "AccountId"))
+    OwnerDirectoryDescription.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    OwnerDirectoryDescription.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
+    OwnerDirectoryDescription.add_member(:vpc_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryVpcSettingsDescription, location_name: "VpcSettings"))
+    OwnerDirectoryDescription.add_member(:radius_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusSettings, location_name: "RadiusSettings"))
+    OwnerDirectoryDescription.add_member(:radius_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusStatus, location_name: "RadiusStatus"))
+    OwnerDirectoryDescription.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     OwnerDirectoryDescription.type = Types::OwnerDirectoryDescription
-    RadiusAuthenticationProtocol.add_member(:pap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAP", traits: {"smithy.api#enumValue" => "PAP"}))
-    RadiusAuthenticationProtocol.add_member(:chap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHAP", traits: {"smithy.api#enumValue" => "CHAP"}))
-    RadiusAuthenticationProtocol.add_member(:mschapv1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSCHAPV1", traits: {"smithy.api#enumValue" => "MS-CHAPv1"}))
-    RadiusAuthenticationProtocol.add_member(:mschapv2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSCHAPV2", traits: {"smithy.api#enumValue" => "MS-CHAPv2"}))
-    RadiusSettings.add_member(:radius_servers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Servers, location_name: "RadiusServers"))
-    RadiusSettings.add_member(:radius_servers_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Servers, location_name: "RadiusServersIpv6"))
-    RadiusSettings.add_member(:radius_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: "RadiusPort"))
-    RadiusSettings.add_member(:radius_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusTimeout, location_name: "RadiusTimeout"))
-    RadiusSettings.add_member(:radius_retries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusRetries, location_name: "RadiusRetries", traits: {"smithy.api#default" => 0}))
-    RadiusSettings.add_member(:shared_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusSharedSecret, location_name: "SharedSecret"))
-    RadiusSettings.add_member(:authentication_protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusAuthenticationProtocol, location_name: "AuthenticationProtocol"))
-    RadiusSettings.add_member(:display_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusDisplayLabel, location_name: "DisplayLabel"))
-    RadiusSettings.add_member(:use_same_username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UseSameUsername, location_name: "UseSameUsername", traits: {"smithy.api#default" => false}))
+    RadiusAuthenticationProtocol.add_member(:pap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAP", traits: {"smithy.api#enumValue" => "PAP"}))
+    RadiusAuthenticationProtocol.add_member(:chap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHAP", traits: {"smithy.api#enumValue" => "CHAP"}))
+    RadiusAuthenticationProtocol.add_member(:mschapv1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSCHAPV1", traits: {"smithy.api#enumValue" => "MS-CHAPv1"}))
+    RadiusAuthenticationProtocol.add_member(:mschapv2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSCHAPV2", traits: {"smithy.api#enumValue" => "MS-CHAPv2"}))
+    RadiusSettings.add_member(:radius_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: Servers, location_name: "RadiusServers"))
+    RadiusSettings.add_member(:radius_servers_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: Servers, location_name: "RadiusServersIpv6"))
+    RadiusSettings.add_member(:radius_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, location_name: "RadiusPort"))
+    RadiusSettings.add_member(:radius_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusTimeout, location_name: "RadiusTimeout"))
+    RadiusSettings.add_member(:radius_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusRetries, location_name: "RadiusRetries", traits: {"smithy.api#default" => 0}))
+    RadiusSettings.add_member(:shared_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusSharedSecret, location_name: "SharedSecret"))
+    RadiusSettings.add_member(:authentication_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusAuthenticationProtocol, location_name: "AuthenticationProtocol"))
+    RadiusSettings.add_member(:display_label, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusDisplayLabel, location_name: "DisplayLabel"))
+    RadiusSettings.add_member(:use_same_username, ::Smithy::Schema::Shapes::MemberShape.new(target: UseSameUsername, location_name: "UseSameUsername", traits: {"smithy.api#default" => false}))
     RadiusSettings.type = Types::RadiusSettings
-    RadiusStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
-    RadiusStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
-    RadiusStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    RegionDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    RegionDescription.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
-    RegionDescription.add_member(:region_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionType, location_name: "RegionType"))
-    RegionDescription.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryStage, location_name: "Status"))
-    RegionDescription.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings"))
-    RegionDescription.add_member(:desired_number_of_domain_controllers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
-    RegionDescription.add_member(:launch_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchTime, location_name: "LaunchTime"))
-    RegionDescription.add_member(:status_last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateLastUpdatedDateTime, location_name: "StatusLastUpdatedDateTime"))
-    RegionDescription.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    RadiusStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
+    RadiusStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    RadiusStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    RegionDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    RegionDescription.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, location_name: "RegionName"))
+    RegionDescription.add_member(:region_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, location_name: "RegionType"))
+    RegionDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryStage, location_name: "Status"))
+    RegionDescription.add_member(:vpc_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryVpcSettings, location_name: "VpcSettings"))
+    RegionDescription.add_member(:desired_number_of_domain_controllers, ::Smithy::Schema::Shapes::MemberShape.new(target: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
+    RegionDescription.add_member(:launch_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTime, location_name: "LaunchTime"))
+    RegionDescription.add_member(:status_last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StateLastUpdatedDateTime, location_name: "StatusLastUpdatedDateTime"))
+    RegionDescription.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
     RegionDescription.type = Types::RegionDescription
-    RegionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    RegionLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    RegionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    RegionLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     RegionLimitExceededException.type = Types::RegionLimitExceededException
-    RegionType.add_member(:primary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIMARY", traits: {"smithy.api#enumValue" => "Primary"}))
-    RegionType.add_member(:additional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDITIONAL", traits: {"smithy.api#enumValue" => "Additional"}))
-    RegionsDescription.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionDescription)
-    RegionsInfo.add_member(:primary_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: "PrimaryRegion"))
-    RegionsInfo.add_member(:additional_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdditionalRegions, location_name: "AdditionalRegions"))
+    RegionType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIMARY", traits: {"smithy.api#enumValue" => "Primary"}))
+    RegionType.add_member(:additional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDITIONAL", traits: {"smithy.api#enumValue" => "Additional"}))
+    RegionsDescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionDescription)
+    RegionsInfo.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, location_name: "PrimaryRegion"))
+    RegionsInfo.add_member(:additional_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalRegions, location_name: "AdditionalRegions"))
     RegionsInfo.type = Types::RegionsInfo
-    RegisterCertificateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    RegisterCertificateRequest.add_member(:certificate_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateData, location_name: "CertificateData", traits: {"smithy.api#required" => {}}))
-    RegisterCertificateRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
-    RegisterCertificateRequest.add_member(:client_cert_auth_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientCertAuthSettings, location_name: "ClientCertAuthSettings"))
+    RegisterCertificateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    RegisterCertificateRequest.add_member(:certificate_data, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateData, location_name: "CertificateData", traits: {"smithy.api#required" => {}}))
+    RegisterCertificateRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "Type"))
+    RegisterCertificateRequest.add_member(:client_cert_auth_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientCertAuthSettings, location_name: "ClientCertAuthSettings"))
     RegisterCertificateRequest.type = Types::RegisterCertificateRequest
-    RegisterCertificateResult.add_member(:certificate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId"))
+    RegisterCertificateResult.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, location_name: "CertificateId"))
     RegisterCertificateResult.type = Types::RegisterCertificateResult
-    RegisterEventTopicRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    RegisterEventTopicRequest.add_member(:topic_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicName, location_name: "TopicName", traits: {"smithy.api#required" => {}}))
+    RegisterEventTopicRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    RegisterEventTopicRequest.add_member(:topic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, location_name: "TopicName", traits: {"smithy.api#required" => {}}))
     RegisterEventTopicRequest.type = Types::RegisterEventTopicRequest
     RegisterEventTopicResult.type = Types::RegisterEventTopicResult
-    RejectSharedDirectoryRequest.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId", traits: {"smithy.api#required" => {}}))
+    RejectSharedDirectoryRequest.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "SharedDirectoryId", traits: {"smithy.api#required" => {}}))
     RejectSharedDirectoryRequest.type = Types::RejectSharedDirectoryRequest
-    RejectSharedDirectoryResult.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
+    RejectSharedDirectoryResult.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "SharedDirectoryId"))
     RejectSharedDirectoryResult.type = Types::RejectSharedDirectoryResult
-    RemoteDomainNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName)
-    RemoveIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    RemoveIpRoutesRequest.add_member(:cidr_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIps, location_name: "CidrIps", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
-    RemoveIpRoutesRequest.add_member(:cidr_ipv6s, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6s, location_name: "CidrIpv6s"))
+    RemoteDomainNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName)
+    RemoveIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    RemoveIpRoutesRequest.add_member(:cidr_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIps, location_name: "CidrIps", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    RemoveIpRoutesRequest.add_member(:cidr_ipv6s, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6s, location_name: "CidrIpv6s"))
     RemoveIpRoutesRequest.type = Types::RemoveIpRoutesRequest
     RemoveIpRoutesResult.type = Types::RemoveIpRoutesResult
-    RemoveRegionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    RemoveRegionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     RemoveRegionRequest.type = Types::RemoveRegionRequest
     RemoveRegionResult.type = Types::RemoveRegionResult
-    RemoveTagsFromResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    RemoveTagsFromResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    RemoveTagsFromResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    RemoveTagsFromResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     RemoveTagsFromResourceRequest.type = Types::RemoveTagsFromResourceRequest
     RemoveTagsFromResourceResult.type = Types::RemoveTagsFromResourceResult
-    ReplicationScope.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Domain", traits: {"smithy.api#enumValue" => "Domain"}))
-    ResetUserPasswordRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    ResetUserPasswordRequest.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerUserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
-    ResetUserPasswordRequest.add_member(:new_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPassword, location_name: "NewPassword", traits: {"smithy.api#required" => {}}))
+    ReplicationScope.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Domain", traits: {"smithy.api#enumValue" => "Domain"}))
+    ResetUserPasswordRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    ResetUserPasswordRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerUserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
+    ResetUserPasswordRequest.add_member(:new_password, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPassword, location_name: "NewPassword", traits: {"smithy.api#required" => {}}))
     ResetUserPasswordRequest.type = Types::ResetUserPasswordRequest
     ResetUserPasswordResult.type = Types::ResetUserPasswordResult
-    RestoreFromSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#required" => {}}))
+    RestoreFromSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#required" => {}}))
     RestoreFromSnapshotRequest.type = Types::RestoreFromSnapshotRequest
     RestoreFromSnapshotResult.type = Types::RestoreFromSnapshotResult
-    SchemaExtensionInfo.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    SchemaExtensionInfo.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionId, location_name: "SchemaExtensionId"))
-    SchemaExtensionInfo.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    SchemaExtensionInfo.add_member(:schema_extension_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionStatus, location_name: "SchemaExtensionStatus"))
-    SchemaExtensionInfo.add_member(:schema_extension_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionStatusReason, location_name: "SchemaExtensionStatusReason"))
-    SchemaExtensionInfo.add_member(:start_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDateTime, location_name: "StartDateTime"))
-    SchemaExtensionInfo.add_member(:end_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndDateTime, location_name: "EndDateTime"))
+    SchemaExtensionInfo.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    SchemaExtensionInfo.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionId, location_name: "SchemaExtensionId"))
+    SchemaExtensionInfo.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    SchemaExtensionInfo.add_member(:schema_extension_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionStatus, location_name: "SchemaExtensionStatus"))
+    SchemaExtensionInfo.add_member(:schema_extension_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionStatusReason, location_name: "SchemaExtensionStatusReason"))
+    SchemaExtensionInfo.add_member(:start_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartDateTime, location_name: "StartDateTime"))
+    SchemaExtensionInfo.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EndDateTime, location_name: "EndDateTime"))
     SchemaExtensionInfo.type = Types::SchemaExtensionInfo
-    SchemaExtensionStatus.add_member(:initializing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INITIALIZING", traits: {"smithy.api#enumValue" => "Initializing"}))
-    SchemaExtensionStatus.add_member(:creating_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING_SNAPSHOT", traits: {"smithy.api#enumValue" => "CreatingSnapshot"}))
-    SchemaExtensionStatus.add_member(:updating_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING_SCHEMA", traits: {"smithy.api#enumValue" => "UpdatingSchema"}))
-    SchemaExtensionStatus.add_member(:replicating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLICATING", traits: {"smithy.api#enumValue" => "Replicating"}))
-    SchemaExtensionStatus.add_member(:cancel_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCEL_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CancelInProgress"}))
-    SchemaExtensionStatus.add_member(:rollback_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROLLBACK_IN_PROGRESS", traits: {"smithy.api#enumValue" => "RollbackInProgress"}))
-    SchemaExtensionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "Cancelled"}))
-    SchemaExtensionStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    SchemaExtensionStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
-    SchemaExtensionsInfo.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionInfo)
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId)
-    SelectiveAuth.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
-    SelectiveAuth.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
-    Servers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Server)
-    ServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    ServiceException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    SchemaExtensionStatus.add_member(:initializing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INITIALIZING", traits: {"smithy.api#enumValue" => "Initializing"}))
+    SchemaExtensionStatus.add_member(:creating_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING_SNAPSHOT", traits: {"smithy.api#enumValue" => "CreatingSnapshot"}))
+    SchemaExtensionStatus.add_member(:updating_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING_SCHEMA", traits: {"smithy.api#enumValue" => "UpdatingSchema"}))
+    SchemaExtensionStatus.add_member(:replicating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLICATING", traits: {"smithy.api#enumValue" => "Replicating"}))
+    SchemaExtensionStatus.add_member(:cancel_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCEL_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CancelInProgress"}))
+    SchemaExtensionStatus.add_member(:rollback_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROLLBACK_IN_PROGRESS", traits: {"smithy.api#enumValue" => "RollbackInProgress"}))
+    SchemaExtensionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "Cancelled"}))
+    SchemaExtensionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    SchemaExtensionStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    SchemaExtensionsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionInfo)
+    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId)
+    SelectiveAuth.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
+    SelectiveAuth.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
+    Servers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Server)
+    ServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    ServiceException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     ServiceException.type = Types::ServiceException
-    Setting.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Setting.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Setting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Setting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Setting.type = Types::Setting
-    SettingEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SettingEntry)
-    SettingEntry.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingType, location_name: "Type"))
-    SettingEntry.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingName, location_name: "Name"))
-    SettingEntry.add_member(:allowed_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingAllowedValues, location_name: "AllowedValues"))
-    SettingEntry.add_member(:applied_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingValue, location_name: "AppliedValue"))
-    SettingEntry.add_member(:requested_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingValue, location_name: "RequestedValue"))
-    SettingEntry.add_member(:request_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationStatus, location_name: "RequestStatus"))
-    SettingEntry.add_member(:request_detailed_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingRequestDetailedStatus, location_name: "RequestDetailedStatus"))
-    SettingEntry.add_member(:request_status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingRequestStatusMessage, location_name: "RequestStatusMessage"))
-    SettingEntry.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingLastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
-    SettingEntry.add_member(:last_requested_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingLastRequestedDateTime, location_name: "LastRequestedDateTime"))
-    SettingEntry.add_member(:data_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingDataType, location_name: "DataType"))
+    SettingEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SettingEntry)
+    SettingEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingType, location_name: "Type"))
+    SettingEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingName, location_name: "Name"))
+    SettingEntry.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingAllowedValues, location_name: "AllowedValues"))
+    SettingEntry.add_member(:applied_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingValue, location_name: "AppliedValue"))
+    SettingEntry.add_member(:requested_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingValue, location_name: "RequestedValue"))
+    SettingEntry.add_member(:request_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationStatus, location_name: "RequestStatus"))
+    SettingEntry.add_member(:request_detailed_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingRequestDetailedStatus, location_name: "RequestDetailedStatus"))
+    SettingEntry.add_member(:request_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingRequestStatusMessage, location_name: "RequestStatusMessage"))
+    SettingEntry.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingLastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    SettingEntry.add_member(:last_requested_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingLastRequestedDateTime, location_name: "LastRequestedDateTime"))
+    SettingEntry.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingDataType, location_name: "DataType"))
     SettingEntry.type = Types::SettingEntry
-    Settings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Setting)
-    ShareDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    ShareDirectoryRequest.add_member(:share_notes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Notes, location_name: "ShareNotes"))
-    ShareDirectoryRequest.add_member(:share_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareTarget, location_name: "ShareTarget", traits: {"smithy.api#required" => {}}))
-    ShareDirectoryRequest.add_member(:share_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareMethod, location_name: "ShareMethod", traits: {"smithy.api#required" => {}}))
+    Settings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Setting)
+    ShareDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    ShareDirectoryRequest.add_member(:share_notes, ::Smithy::Schema::Shapes::MemberShape.new(target: Notes, location_name: "ShareNotes"))
+    ShareDirectoryRequest.add_member(:share_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareTarget, location_name: "ShareTarget", traits: {"smithy.api#required" => {}}))
+    ShareDirectoryRequest.add_member(:share_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareMethod, location_name: "ShareMethod", traits: {"smithy.api#required" => {}}))
     ShareDirectoryRequest.type = Types::ShareDirectoryRequest
-    ShareDirectoryResult.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
+    ShareDirectoryResult.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "SharedDirectoryId"))
     ShareDirectoryResult.type = Types::ShareDirectoryResult
-    ShareLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    ShareLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ShareLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    ShareLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     ShareLimitExceededException.type = Types::ShareLimitExceededException
-    ShareMethod.add_member(:organizations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATIONS", traits: {"smithy.api#enumValue" => "ORGANIZATIONS"}))
-    ShareMethod.add_member(:handshake, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HANDSHAKE", traits: {"smithy.api#enumValue" => "HANDSHAKE"}))
-    ShareStatus.add_member(:shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARED", traits: {"smithy.api#enumValue" => "Shared"}))
-    ShareStatus.add_member(:pending_acceptance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_ACCEPTANCE", traits: {"smithy.api#enumValue" => "PendingAcceptance"}))
-    ShareStatus.add_member(:rejected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "Rejected"}))
-    ShareStatus.add_member(:rejecting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTING", traits: {"smithy.api#enumValue" => "Rejecting"}))
-    ShareStatus.add_member(:reject_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECT_FAILED", traits: {"smithy.api#enumValue" => "RejectFailed"}))
-    ShareStatus.add_member(:sharing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARING", traits: {"smithy.api#enumValue" => "Sharing"}))
-    ShareStatus.add_member(:share_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARE_FAILED", traits: {"smithy.api#enumValue" => "ShareFailed"}))
-    ShareStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
-    ShareStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    ShareTarget.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetId, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    ShareTarget.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    ShareMethod.add_member(:organizations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATIONS", traits: {"smithy.api#enumValue" => "ORGANIZATIONS"}))
+    ShareMethod.add_member(:handshake, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HANDSHAKE", traits: {"smithy.api#enumValue" => "HANDSHAKE"}))
+    ShareStatus.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARED", traits: {"smithy.api#enumValue" => "Shared"}))
+    ShareStatus.add_member(:pending_acceptance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_ACCEPTANCE", traits: {"smithy.api#enumValue" => "PendingAcceptance"}))
+    ShareStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "Rejected"}))
+    ShareStatus.add_member(:rejecting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTING", traits: {"smithy.api#enumValue" => "Rejecting"}))
+    ShareStatus.add_member(:reject_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECT_FAILED", traits: {"smithy.api#enumValue" => "RejectFailed"}))
+    ShareStatus.add_member(:sharing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARING", traits: {"smithy.api#enumValue" => "Sharing"}))
+    ShareStatus.add_member(:share_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARE_FAILED", traits: {"smithy.api#enumValue" => "ShareFailed"}))
+    ShareStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
+    ShareStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    ShareTarget.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    ShareTarget.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     ShareTarget.type = Types::ShareTarget
-    SharedDirectories.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SharedDirectory)
-    SharedDirectory.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerId, location_name: "OwnerAccountId"))
-    SharedDirectory.add_member(:owner_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "OwnerDirectoryId"))
-    SharedDirectory.add_member(:share_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareMethod, location_name: "ShareMethod"))
-    SharedDirectory.add_member(:shared_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerId, location_name: "SharedAccountId"))
-    SharedDirectory.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
-    SharedDirectory.add_member(:share_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
-    SharedDirectory.add_member(:share_notes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Notes, location_name: "ShareNotes"))
-    SharedDirectory.add_member(:created_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDateTime, location_name: "CreatedDateTime"))
-    SharedDirectory.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    SharedDirectories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDirectory)
+    SharedDirectory.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, location_name: "OwnerAccountId"))
+    SharedDirectory.add_member(:owner_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "OwnerDirectoryId"))
+    SharedDirectory.add_member(:share_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareMethod, location_name: "ShareMethod"))
+    SharedDirectory.add_member(:shared_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, location_name: "SharedAccountId"))
+    SharedDirectory.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "SharedDirectoryId"))
+    SharedDirectory.add_member(:share_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, location_name: "ShareStatus"))
+    SharedDirectory.add_member(:share_notes, ::Smithy::Schema::Shapes::MemberShape.new(target: Notes, location_name: "ShareNotes"))
+    SharedDirectory.add_member(:created_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateTime, location_name: "CreatedDateTime"))
+    SharedDirectory.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
     SharedDirectory.type = Types::SharedDirectory
-    Snapshot.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    Snapshot.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
-    Snapshot.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotType, location_name: "Type"))
-    Snapshot.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name"))
-    Snapshot.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotStatus, location_name: "Status"))
-    Snapshot.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
+    Snapshot.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    Snapshot.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
+    Snapshot.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotType, location_name: "Type"))
+    Snapshot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotName, location_name: "Name"))
+    Snapshot.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotStatus, location_name: "Status"))
+    Snapshot.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "StartTime"))
     Snapshot.type = Types::Snapshot
-    SnapshotIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId)
-    SnapshotLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    SnapshotLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    SnapshotIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId)
+    SnapshotLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    SnapshotLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     SnapshotLimitExceededException.type = Types::SnapshotLimitExceededException
-    SnapshotLimits.add_member(:manual_snapshots_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "ManualSnapshotsLimit"))
-    SnapshotLimits.add_member(:manual_snapshots_current_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "ManualSnapshotsCurrentCount"))
-    SnapshotLimits.add_member(:manual_snapshots_limit_reached, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualSnapshotsLimitReached, location_name: "ManualSnapshotsLimitReached", traits: {"smithy.api#default" => false}))
+    SnapshotLimits.add_member(:manual_snapshots_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "ManualSnapshotsLimit"))
+    SnapshotLimits.add_member(:manual_snapshots_current_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "ManualSnapshotsCurrentCount"))
+    SnapshotLimits.add_member(:manual_snapshots_limit_reached, ::Smithy::Schema::Shapes::MemberShape.new(target: ManualSnapshotsLimitReached, location_name: "ManualSnapshotsLimitReached", traits: {"smithy.api#default" => false}))
     SnapshotLimits.type = Types::SnapshotLimits
-    SnapshotStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
-    SnapshotStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
-    SnapshotStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    SnapshotType.add_member(:auto, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO", traits: {"smithy.api#enumValue" => "Auto"}))
-    SnapshotType.add_member(:manual, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MANUAL", traits: {"smithy.api#enumValue" => "Manual"}))
-    Snapshots.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot)
-    StartADAssessmentRequest.add_member(:assessment_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentConfiguration, location_name: "AssessmentConfiguration"))
-    StartADAssessmentRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    SnapshotStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
+    SnapshotStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    SnapshotStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    SnapshotType.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO", traits: {"smithy.api#enumValue" => "Auto"}))
+    SnapshotType.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MANUAL", traits: {"smithy.api#enumValue" => "Manual"}))
+    Snapshots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot)
+    StartADAssessmentRequest.add_member(:assessment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentConfiguration, location_name: "AssessmentConfiguration"))
+    StartADAssessmentRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
     StartADAssessmentRequest.type = Types::StartADAssessmentRequest
-    StartADAssessmentResult.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    StartADAssessmentResult.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId"))
     StartADAssessmentResult.type = Types::StartADAssessmentResult
-    StartSchemaExtensionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    StartSchemaExtensionRequest.add_member(:create_snapshot_before_schema_extension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotBeforeSchemaExtension, location_name: "CreateSnapshotBeforeSchemaExtension", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    StartSchemaExtensionRequest.add_member(:ldif_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LdifContent, location_name: "LdifContent", traits: {"smithy.api#required" => {}}))
-    StartSchemaExtensionRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    StartSchemaExtensionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    StartSchemaExtensionRequest.add_member(:create_snapshot_before_schema_extension, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateSnapshotBeforeSchemaExtension, location_name: "CreateSnapshotBeforeSchemaExtension", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    StartSchemaExtensionRequest.add_member(:ldif_content, ::Smithy::Schema::Shapes::MemberShape.new(target: LdifContent, location_name: "LdifContent", traits: {"smithy.api#required" => {}}))
+    StartSchemaExtensionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description", traits: {"smithy.api#required" => {}}))
     StartSchemaExtensionRequest.type = Types::StartSchemaExtensionRequest
-    StartSchemaExtensionResult.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionId, location_name: "SchemaExtensionId"))
+    StartSchemaExtensionResult.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionId, location_name: "SchemaExtensionId"))
     StartSchemaExtensionResult.type = Types::StartSchemaExtensionResult
-    SubnetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    TagLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    TagLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     TagLimitExceededException.type = Types::TagLimitExceededException
-    Tags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TargetType.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
-    TopicNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicName)
-    TopicStatus.add_member(:registered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTERED", traits: {"smithy.api#enumValue" => "Registered"}))
-    TopicStatus.add_member(:topic_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOPIC_NOT_FOUND", traits: {"smithy.api#enumValue" => "Topic not found"}))
-    TopicStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    TopicStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
-    Trust.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    Trust.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
-    Trust.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: "RemoteDomainName"))
-    Trust.add_member(:trust_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustType, location_name: "TrustType"))
-    Trust.add_member(:trust_direction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustDirection, location_name: "TrustDirection"))
-    Trust.add_member(:trust_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustState, location_name: "TrustState"))
-    Trust.add_member(:created_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDateTime, location_name: "CreatedDateTime"))
-    Trust.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
-    Trust.add_member(:state_last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateLastUpdatedDateTime, location_name: "StateLastUpdatedDateTime"))
-    Trust.add_member(:trust_state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustStateReason, location_name: "TrustStateReason"))
-    Trust.add_member(:selective_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: "SelectiveAuth"))
+    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TargetType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
+    TopicNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName)
+    TopicStatus.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTERED", traits: {"smithy.api#enumValue" => "Registered"}))
+    TopicStatus.add_member(:topic_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOPIC_NOT_FOUND", traits: {"smithy.api#enumValue" => "Topic not found"}))
+    TopicStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    TopicStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
+    Trust.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    Trust.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId"))
+    Trust.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, location_name: "RemoteDomainName"))
+    Trust.add_member(:trust_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustType, location_name: "TrustType"))
+    Trust.add_member(:trust_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustDirection, location_name: "TrustDirection"))
+    Trust.add_member(:trust_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustState, location_name: "TrustState"))
+    Trust.add_member(:created_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateTime, location_name: "CreatedDateTime"))
+    Trust.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    Trust.add_member(:state_last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StateLastUpdatedDateTime, location_name: "StateLastUpdatedDateTime"))
+    Trust.add_member(:trust_state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStateReason, location_name: "TrustStateReason"))
+    Trust.add_member(:selective_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveAuth, location_name: "SelectiveAuth"))
     Trust.type = Types::Trust
-    TrustDirection.add_member(:one_way_outgoing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_WAY_OUTGOING", traits: {"smithy.api#enumValue" => "One-Way: Outgoing"}))
-    TrustDirection.add_member(:one_way_incoming, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_WAY_INCOMING", traits: {"smithy.api#enumValue" => "One-Way: Incoming"}))
-    TrustDirection.add_member(:two_way, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TWO_WAY", traits: {"smithy.api#enumValue" => "Two-Way"}))
-    TrustIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId)
-    TrustState.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
-    TrustState.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
-    TrustState.add_member(:verifying, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFYING", traits: {"smithy.api#enumValue" => "Verifying"}))
-    TrustState.add_member(:verify_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFY_FAILED", traits: {"smithy.api#enumValue" => "VerifyFailed"}))
-    TrustState.add_member(:verified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED", traits: {"smithy.api#enumValue" => "Verified"}))
-    TrustState.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
-    TrustState.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UpdateFailed"}))
-    TrustState.add_member(:updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
-    TrustState.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    TrustState.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
-    TrustState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    TrustType.add_member(:forest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FOREST", traits: {"smithy.api#enumValue" => "Forest"}))
-    TrustType.add_member(:external, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXTERNAL", traits: {"smithy.api#enumValue" => "External"}))
-    Trusts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Trust)
-    UnshareDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    UnshareDirectoryRequest.add_member(:unshare_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnshareTarget, location_name: "UnshareTarget", traits: {"smithy.api#required" => {}}))
+    TrustDirection.add_member(:one_way_outgoing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_WAY_OUTGOING", traits: {"smithy.api#enumValue" => "One-Way: Outgoing"}))
+    TrustDirection.add_member(:one_way_incoming, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_WAY_INCOMING", traits: {"smithy.api#enumValue" => "One-Way: Incoming"}))
+    TrustDirection.add_member(:two_way, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TWO_WAY", traits: {"smithy.api#enumValue" => "Two-Way"}))
+    TrustIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId)
+    TrustState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
+    TrustState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
+    TrustState.add_member(:verifying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFYING", traits: {"smithy.api#enumValue" => "Verifying"}))
+    TrustState.add_member(:verify_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFY_FAILED", traits: {"smithy.api#enumValue" => "VerifyFailed"}))
+    TrustState.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED", traits: {"smithy.api#enumValue" => "Verified"}))
+    TrustState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
+    TrustState.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UpdateFailed"}))
+    TrustState.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
+    TrustState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    TrustState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
+    TrustState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    TrustType.add_member(:forest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FOREST", traits: {"smithy.api#enumValue" => "Forest"}))
+    TrustType.add_member(:external, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXTERNAL", traits: {"smithy.api#enumValue" => "External"}))
+    Trusts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trust)
+    UnshareDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    UnshareDirectoryRequest.add_member(:unshare_target, ::Smithy::Schema::Shapes::MemberShape.new(target: UnshareTarget, location_name: "UnshareTarget", traits: {"smithy.api#required" => {}}))
     UnshareDirectoryRequest.type = Types::UnshareDirectoryRequest
-    UnshareDirectoryResult.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "SharedDirectoryId"))
+    UnshareDirectoryResult.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "SharedDirectoryId"))
     UnshareDirectoryResult.type = Types::UnshareDirectoryResult
-    UnshareTarget.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetId, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    UnshareTarget.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    UnshareTarget.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    UnshareTarget.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     UnshareTarget.type = Types::UnshareTarget
-    UnsupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    UnsupportedOperationException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    UnsupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    UnsupportedOperationException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     UnsupportedOperationException.type = Types::UnsupportedOperationException
-    UnsupportedSettingsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    UnsupportedSettingsException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    UnsupportedSettingsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    UnsupportedSettingsException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     UnsupportedSettingsException.type = Types::UnsupportedSettingsException
-    UpdateActivities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateInfoEntry)
-    UpdateConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    UpdateConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
-    UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
-    UpdateConditionalForwarderRequest.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
+    UpdateActivities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateInfoEntry)
+    UpdateConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    UpdateConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, location_name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
+    UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, location_name: "DnsIpAddrs", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    UpdateConditionalForwarderRequest.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
     UpdateConditionalForwarderRequest.type = Types::UpdateConditionalForwarderRequest
     UpdateConditionalForwarderResult.type = Types::UpdateConditionalForwarderResult
-    UpdateDirectorySetupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    UpdateDirectorySetupRequest.add_member(:update_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateType, location_name: "UpdateType", traits: {"smithy.api#required" => {}}))
-    UpdateDirectorySetupRequest.add_member(:os_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSUpdateSettings, location_name: "OSUpdateSettings"))
-    UpdateDirectorySetupRequest.add_member(:directory_size_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySizeUpdateSettings, location_name: "DirectorySizeUpdateSettings"))
-    UpdateDirectorySetupRequest.add_member(:network_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkUpdateSettings, location_name: "NetworkUpdateSettings"))
-    UpdateDirectorySetupRequest.add_member(:create_snapshot_before_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotBeforeUpdate, location_name: "CreateSnapshotBeforeUpdate", traits: {"smithy.api#default" => nil}))
+    UpdateDirectorySetupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    UpdateDirectorySetupRequest.add_member(:update_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateType, location_name: "UpdateType", traits: {"smithy.api#required" => {}}))
+    UpdateDirectorySetupRequest.add_member(:os_update_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: OSUpdateSettings, location_name: "OSUpdateSettings"))
+    UpdateDirectorySetupRequest.add_member(:directory_size_update_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectorySizeUpdateSettings, location_name: "DirectorySizeUpdateSettings"))
+    UpdateDirectorySetupRequest.add_member(:network_update_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkUpdateSettings, location_name: "NetworkUpdateSettings"))
+    UpdateDirectorySetupRequest.add_member(:create_snapshot_before_update, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateSnapshotBeforeUpdate, location_name: "CreateSnapshotBeforeUpdate", traits: {"smithy.api#default" => nil}))
     UpdateDirectorySetupRequest.type = Types::UpdateDirectorySetupRequest
     UpdateDirectorySetupResult.type = Types::UpdateDirectorySetupResult
-    UpdateHybridADRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    UpdateHybridADRequest.add_member(:hybrid_administrator_account_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridAdministratorAccountUpdate, location_name: "HybridAdministratorAccountUpdate"))
-    UpdateHybridADRequest.add_member(:self_managed_instances_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridCustomerInstancesSettings, location_name: "SelfManagedInstancesSettings"))
+    UpdateHybridADRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    UpdateHybridADRequest.add_member(:hybrid_administrator_account_update, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridAdministratorAccountUpdate, location_name: "HybridAdministratorAccountUpdate"))
+    UpdateHybridADRequest.add_member(:self_managed_instances_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridCustomerInstancesSettings, location_name: "SelfManagedInstancesSettings"))
     UpdateHybridADRequest.type = Types::UpdateHybridADRequest
-    UpdateHybridADResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    UpdateHybridADResult.add_member(:assessment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    UpdateHybridADResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    UpdateHybridADResult.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, location_name: "AssessmentId"))
     UpdateHybridADResult.type = Types::UpdateHybridADResult
-    UpdateInfoEntry.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: "Region"))
-    UpdateInfoEntry.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
-    UpdateInfoEntry.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStatusReason, location_name: "StatusReason"))
-    UpdateInfoEntry.add_member(:initiated_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
-    UpdateInfoEntry.add_member(:new_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateValue, location_name: "NewValue"))
-    UpdateInfoEntry.add_member(:previous_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateValue, location_name: "PreviousValue"))
-    UpdateInfoEntry.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDateTime, location_name: "StartTime"))
-    UpdateInfoEntry.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    UpdateInfoEntry.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, location_name: "Region"))
+    UpdateInfoEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatus, location_name: "Status"))
+    UpdateInfoEntry.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatusReason, location_name: "StatusReason"))
+    UpdateInfoEntry.add_member(:initiated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: InitiatedBy, location_name: "InitiatedBy"))
+    UpdateInfoEntry.add_member(:new_value, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateValue, location_name: "NewValue"))
+    UpdateInfoEntry.add_member(:previous_value, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateValue, location_name: "PreviousValue"))
+    UpdateInfoEntry.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartDateTime, location_name: "StartTime"))
+    UpdateInfoEntry.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
     UpdateInfoEntry.type = Types::UpdateInfoEntry
-    UpdateNumberOfDomainControllersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    UpdateNumberOfDomainControllersRequest.add_member(:desired_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, location_name: "DesiredNumber", traits: {"smithy.api#required" => {}}))
+    UpdateNumberOfDomainControllersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    UpdateNumberOfDomainControllersRequest.add_member(:desired_number, ::Smithy::Schema::Shapes::MemberShape.new(target: DesiredNumberOfDomainControllers, location_name: "DesiredNumber", traits: {"smithy.api#required" => {}}))
     UpdateNumberOfDomainControllersRequest.type = Types::UpdateNumberOfDomainControllersRequest
     UpdateNumberOfDomainControllersResult.type = Types::UpdateNumberOfDomainControllersResult
-    UpdateRadiusRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    UpdateRadiusRequest.add_member(:radius_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusSettings, location_name: "RadiusSettings", traits: {"smithy.api#required" => {}}))
+    UpdateRadiusRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    UpdateRadiusRequest.add_member(:radius_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RadiusSettings, location_name: "RadiusSettings", traits: {"smithy.api#required" => {}}))
     UpdateRadiusRequest.type = Types::UpdateRadiusRequest
     UpdateRadiusResult.type = Types::UpdateRadiusResult
-    UpdateSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
-    UpdateSettingsRequest.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Settings, location_name: "Settings", traits: {"smithy.api#required" => {}}))
+    UpdateSettingsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#required" => {}}))
+    UpdateSettingsRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Settings, location_name: "Settings", traits: {"smithy.api#required" => {}}))
     UpdateSettingsRequest.type = Types::UpdateSettingsRequest
-    UpdateSettingsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    UpdateSettingsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
     UpdateSettingsResult.type = Types::UpdateSettingsResult
-    UpdateStatus.add_member(:updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
-    UpdateStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
-    UpdateStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UpdateFailed"}))
-    UpdateTrustRequest.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId", traits: {"smithy.api#required" => {}}))
-    UpdateTrustRequest.add_member(:selective_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: "SelectiveAuth"))
+    UpdateStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
+    UpdateStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
+    UpdateStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UpdateFailed"}))
+    UpdateTrustRequest.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId", traits: {"smithy.api#required" => {}}))
+    UpdateTrustRequest.add_member(:selective_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveAuth, location_name: "SelectiveAuth"))
     UpdateTrustRequest.type = Types::UpdateTrustRequest
-    UpdateTrustResult.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
-    UpdateTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
+    UpdateTrustResult.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
+    UpdateTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId"))
     UpdateTrustResult.type = Types::UpdateTrustResult
-    UpdateType.add_member(:os, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OS", traits: {"smithy.api#enumValue" => "OS"}))
-    UpdateType.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NETWORK", traits: {"smithy.api#enumValue" => "NETWORK"}))
-    UpdateType.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIZE", traits: {"smithy.api#enumValue" => "SIZE"}))
-    UpdateValue.add_member(:os_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSUpdateSettings, location_name: "OSUpdateSettings"))
+    UpdateType.add_member(:os, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OS", traits: {"smithy.api#enumValue" => "OS"}))
+    UpdateType.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NETWORK", traits: {"smithy.api#enumValue" => "NETWORK"}))
+    UpdateType.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIZE", traits: {"smithy.api#enumValue" => "SIZE"}))
+    UpdateValue.add_member(:os_update_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: OSUpdateSettings, location_name: "OSUpdateSettings"))
     UpdateValue.type = Types::UpdateValue
-    UserDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    UserDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    UserDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    UserDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
     UserDoesNotExistException.type = Types::UserDoesNotExistException
-    VerifyTrustRequest.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId", traits: {"smithy.api#required" => {}}))
+    VerifyTrustRequest.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId", traits: {"smithy.api#required" => {}}))
     VerifyTrustRequest.type = Types::VerifyTrustRequest
-    VerifyTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
+    VerifyTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, location_name: "TrustId"))
     VerifyTrustResult.type = Types::VerifyTrustResult
 
     DirectoryService20150416 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -1526,1029 +1526,1029 @@ module Aws::DirectoryService
       service.add_operation(:accept_shared_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#AcceptSharedDirectory"
         operation.name = "AcceptSharedDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptSharedDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptSharedDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryAlreadySharedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = AcceptSharedDirectoryRequest
+        operation.output = AcceptSharedDirectoryResult
+        operation.errors << ClientException
+        operation.errors << DirectoryAlreadySharedException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:add_ip_routes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#AddIpRoutes"
         operation.name = "AddIpRoutes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddIpRoutesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddIpRoutesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRouteLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = AddIpRoutesRequest
+        operation.output = AddIpRoutesResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << IpRouteLimitExceededException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:add_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#AddRegion"
         operation.name = "AddRegion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddRegionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddRegionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryAlreadyInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = AddRegionRequest
+        operation.output = AddRegionResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryAlreadyInRegionException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << RegionLimitExceededException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:add_tags_to_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#AddTagsToResource"
         operation.name = "AddTagsToResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsToResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsToResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagLimitExceededException)
+        operation.input = AddTagsToResourceRequest
+        operation.output = AddTagsToResourceResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << TagLimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:cancel_schema_extension, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CancelSchemaExtension"
         operation.name = "CancelSchemaExtension"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelSchemaExtensionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelSchemaExtensionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = CancelSchemaExtensionRequest
+        operation.output = CancelSchemaExtensionResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:connect_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ConnectDirectory"
         operation.name = "ConnectDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = ConnectDirectoryRequest
+        operation.output = ConnectDirectoryResult
+        operation.errors << ClientException
+        operation.errors << DirectoryLimitExceededException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:create_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateAlias"
         operation.name = "CreateAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAliasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAliasResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = CreateAliasRequest
+        operation.output = CreateAliasResult
+        operation.errors << ClientException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:create_computer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateComputer"
         operation.name = "CreateComputer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateComputerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateComputerResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateComputerRequest
+        operation.output = CreateComputerResult
+        operation.errors << AuthenticationFailedException
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:create_conditional_forwarder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateConditionalForwarder"
         operation.name = "CreateConditionalForwarder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConditionalForwarderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConditionalForwarderResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateConditionalForwarderRequest
+        operation.output = CreateConditionalForwarderResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:create_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateDirectory"
         operation.name = "CreateDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = CreateDirectoryRequest
+        operation.output = CreateDirectoryResult
+        operation.errors << ClientException
+        operation.errors << DirectoryLimitExceededException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:create_hybrid_ad, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateHybridAD"
         operation.name = "CreateHybridAD"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateHybridADRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateHybridADResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ADAssessmentLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateHybridADRequest
+        operation.output = CreateHybridADResult
+        operation.errors << ADAssessmentLimitExceededException
+        operation.errors << ClientException
+        operation.errors << DirectoryLimitExceededException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:create_log_subscription, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateLogSubscription"
         operation.name = "CreateLogSubscription"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLogSubscriptionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLogSubscriptionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateLogSubscriptionRequest
+        operation.output = CreateLogSubscriptionResult
+        operation.errors << ClientException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InsufficientPermissionsException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:create_microsoft_ad, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateMicrosoftAD"
         operation.name = "CreateMicrosoftAD"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMicrosoftADRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMicrosoftADResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateMicrosoftADRequest
+        operation.output = CreateMicrosoftADResult
+        operation.errors << ClientException
+        operation.errors << DirectoryLimitExceededException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:create_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateSnapshot"
         operation.name = "CreateSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotLimitExceededException)
+        operation.input = CreateSnapshotRequest
+        operation.output = CreateSnapshotResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << SnapshotLimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:create_trust, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#CreateTrust"
         operation.name = "CreateTrust"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTrustRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTrustResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateTrustRequest
+        operation.output = CreateTrustResult
+        operation.errors << ClientException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:delete_ad_assessment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeleteADAssessment"
         operation.name = "DeleteADAssessment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteADAssessmentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteADAssessmentResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeleteADAssessmentRequest
+        operation.output = DeleteADAssessmentResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:delete_conditional_forwarder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeleteConditionalForwarder"
         operation.name = "DeleteConditionalForwarder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConditionalForwarderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConditionalForwarderResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeleteConditionalForwarderRequest
+        operation.output = DeleteConditionalForwarderResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:delete_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeleteDirectory"
         operation.name = "DeleteDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DeleteDirectoryRequest
+        operation.output = DeleteDirectoryResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:delete_log_subscription, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeleteLogSubscription"
         operation.name = "DeleteLogSubscription"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLogSubscriptionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLogSubscriptionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeleteLogSubscriptionRequest
+        operation.output = DeleteLogSubscriptionResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:delete_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeleteSnapshot"
         operation.name = "DeleteSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DeleteSnapshotRequest
+        operation.output = DeleteSnapshotResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:delete_trust, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeleteTrust"
         operation.name = "DeleteTrust"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTrustRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTrustResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeleteTrustRequest
+        operation.output = DeleteTrustResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:deregister_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeregisterCertificate"
         operation.name = "DeregisterCertificate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterCertificateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterCertificateResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeregisterCertificateRequest
+        operation.output = DeregisterCertificateResult
+        operation.errors << CertificateDoesNotExistException
+        operation.errors << CertificateInUseException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:deregister_event_topic, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DeregisterEventTopic"
         operation.name = "DeregisterEventTopic"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterEventTopicRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterEventTopicResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DeregisterEventTopicRequest
+        operation.output = DeregisterEventTopicResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:describe_ad_assessment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeADAssessment"
         operation.name = "DescribeADAssessment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeADAssessmentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeADAssessmentResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeADAssessmentRequest
+        operation.output = DescribeADAssessmentResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:describe_ca_enrollment_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicy"
         operation.name = "DescribeCAEnrollmentPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCAEnrollmentPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCAEnrollmentPolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeCAEnrollmentPolicyRequest
+        operation.output = DescribeCAEnrollmentPolicyResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:describe_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeCertificate"
         operation.name = "DescribeCertificate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCertificateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCertificateResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeCertificateRequest
+        operation.output = DescribeCertificateResult
+        operation.errors << CertificateDoesNotExistException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:describe_client_authentication_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeClientAuthenticationSettings"
         operation.name = "DescribeClientAuthenticationSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeClientAuthenticationSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeClientAuthenticationSettingsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeClientAuthenticationSettingsRequest
+        operation.output = DescribeClientAuthenticationSettingsResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeClientAuthenticationSettings.new
       end)
       service.add_operation(:describe_conditional_forwarders, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeConditionalForwarders"
         operation.name = "DescribeConditionalForwarders"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConditionalForwardersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConditionalForwardersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeConditionalForwardersRequest
+        operation.output = DescribeConditionalForwardersResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:describe_directories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeDirectories"
         operation.name = "DescribeDirectories"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDirectoriesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDirectoriesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DescribeDirectoriesRequest
+        operation.output = DescribeDirectoriesResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "DescribeDirectoriesSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::DescribeDirectories.new
       end)
       service.add_operation(:describe_directory_data_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeDirectoryDataAccess"
         operation.name = "DescribeDirectoryDataAccess"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDirectoryDataAccessRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDirectoryDataAccessResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeDirectoryDataAccessRequest
+        operation.output = DescribeDirectoryDataAccessResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:describe_domain_controllers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeDomainControllers"
         operation.name = "DescribeDomainControllers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDomainControllersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDomainControllersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeDomainControllersRequest
+        operation.output = DescribeDomainControllersResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeDomainControllers.new
       end)
       service.add_operation(:describe_event_topics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeEventTopics"
         operation.name = "DescribeEventTopics"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventTopicsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventTopicsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DescribeEventTopicsRequest
+        operation.output = DescribeEventTopicsResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:describe_hybrid_ad_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeHybridADUpdate"
         operation.name = "DescribeHybridADUpdate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeHybridADUpdateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeHybridADUpdateResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeHybridADUpdateRequest
+        operation.output = DescribeHybridADUpdateResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:describe_ldaps_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeLDAPSSettings"
         operation.name = "DescribeLDAPSSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLDAPSSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLDAPSSettingsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeLDAPSSettingsRequest
+        operation.output = DescribeLDAPSSettingsResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeLDAPSSettings.new
       end)
       service.add_operation(:describe_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeRegions"
         operation.name = "DescribeRegions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeRegionsRequest
+        operation.output = DescribeRegionsResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegions.new
       end)
       service.add_operation(:describe_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeSettings"
         operation.name = "DescribeSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSettingsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeSettingsRequest
+        operation.output = DescribeSettingsResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:describe_shared_directories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeSharedDirectories"
         operation.name = "DescribeSharedDirectories"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSharedDirectoriesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSharedDirectoriesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeSharedDirectoriesRequest
+        operation.output = DescribeSharedDirectoriesResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeSharedDirectories.new
       end)
       service.add_operation(:describe_snapshots, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeSnapshots"
         operation.name = "DescribeSnapshots"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DescribeSnapshotsRequest
+        operation.output = DescribeSnapshotsResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeSnapshots.new
       end)
       service.add_operation(:describe_trusts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeTrusts"
         operation.name = "DescribeTrusts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTrustsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTrustsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeTrustsRequest
+        operation.output = DescribeTrustsResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeTrusts.new
       end)
       service.add_operation(:describe_update_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeUpdateDirectory"
         operation.name = "DescribeUpdateDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUpdateDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUpdateDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DescribeUpdateDirectoryRequest
+        operation.output = DescribeUpdateDirectoryResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeUpdateDirectory.new
       end)
       service.add_operation(:disable_ca_enrollment_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DisableCAEnrollmentPolicy"
         operation.name = "DisableCAEnrollmentPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableCAEnrollmentPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableCAEnrollmentPolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableAlreadyInProgressException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DisableCAEnrollmentPolicyRequest
+        operation.output = DisableCAEnrollmentPolicyResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << DisableAlreadyInProgressException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:disable_client_authentication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DisableClientAuthentication"
         operation.name = "DisableClientAuthentication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableClientAuthenticationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableClientAuthenticationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClientAuthStatusException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DisableClientAuthenticationRequest
+        operation.output = DisableClientAuthenticationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidClientAuthStatusException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:disable_directory_data_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DisableDirectoryDataAccess"
         operation.name = "DisableDirectoryDataAccess"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableDirectoryDataAccessRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableDirectoryDataAccessResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryInDesiredStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DisableDirectoryDataAccessRequest
+        operation.output = DisableDirectoryDataAccessResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryInDesiredStateException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:disable_ldaps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DisableLDAPS"
         operation.name = "DisableLDAPS"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableLDAPSRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableLDAPSResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLDAPSStatusException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DisableLDAPSRequest
+        operation.output = DisableLDAPSResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidLDAPSStatusException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:disable_radius, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DisableRadius"
         operation.name = "DisableRadius"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableRadiusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableRadiusResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DisableRadiusRequest
+        operation.output = DisableRadiusResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:disable_sso, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DisableSso"
         operation.name = "DisableSso"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableSsoRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableSsoResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = DisableSsoRequest
+        operation.output = DisableSsoResult
+        operation.errors << AuthenticationFailedException
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InsufficientPermissionsException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:enable_ca_enrollment_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#EnableCAEnrollmentPolicy"
         operation.name = "EnableCAEnrollmentPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableCAEnrollmentPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableCAEnrollmentPolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableAlreadyInProgressException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = EnableCAEnrollmentPolicyRequest
+        operation.output = EnableCAEnrollmentPolicyResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EnableAlreadyInProgressException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:enable_client_authentication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#EnableClientAuthentication"
         operation.name = "EnableClientAuthentication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableClientAuthenticationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableClientAuthenticationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClientAuthStatusException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableCertificateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = EnableClientAuthenticationRequest
+        operation.output = EnableClientAuthenticationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidClientAuthStatusException
+        operation.errors << NoAvailableCertificateException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:enable_directory_data_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#EnableDirectoryDataAccess"
         operation.name = "EnableDirectoryDataAccess"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableDirectoryDataAccessRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableDirectoryDataAccessResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryInDesiredStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = EnableDirectoryDataAccessRequest
+        operation.output = EnableDirectoryDataAccessResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryInDesiredStateException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:enable_ldaps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#EnableLDAPS"
         operation.name = "EnableLDAPS"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableLDAPSRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableLDAPSResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLDAPSStatusException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableCertificateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = EnableLDAPSRequest
+        operation.output = EnableLDAPSResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidLDAPSStatusException
+        operation.errors << InvalidParameterException
+        operation.errors << NoAvailableCertificateException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:enable_radius, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#EnableRadius"
         operation.name = "EnableRadius"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableRadiusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableRadiusResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = EnableRadiusRequest
+        operation.output = EnableRadiusResult
+        operation.errors << ClientException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:enable_sso, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#EnableSso"
         operation.name = "EnableSso"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableSsoRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableSsoResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = EnableSsoRequest
+        operation.output = EnableSsoResult
+        operation.errors << AuthenticationFailedException
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InsufficientPermissionsException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:get_directory_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#GetDirectoryLimits"
         operation.name = "GetDirectoryLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDirectoryLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDirectoryLimitsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = GetDirectoryLimitsRequest
+        operation.output = GetDirectoryLimitsResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:get_snapshot_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#GetSnapshotLimits"
         operation.name = "GetSnapshotLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSnapshotLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSnapshotLimitsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = GetSnapshotLimitsRequest
+        operation.output = GetSnapshotLimitsResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:list_ad_assessments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ListADAssessments"
         operation.name = "ListADAssessments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListADAssessmentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListADAssessmentsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = ListADAssessmentsRequest
+        operation.output = ListADAssessmentsResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListADAssessments.new
       end)
       service.add_operation(:list_certificates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ListCertificates"
         operation.name = "ListCertificates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCertificatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCertificatesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = ListCertificatesRequest
+        operation.output = ListCertificatesResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListCertificates.new
       end)
       service.add_operation(:list_ip_routes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ListIpRoutes"
         operation.name = "ListIpRoutes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIpRoutesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIpRoutesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = ListIpRoutesRequest
+        operation.output = ListIpRoutesResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
         operation[:paginator] = Paginators::ListIpRoutes.new
       end)
       service.add_operation(:list_log_subscriptions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ListLogSubscriptions"
         operation.name = "ListLogSubscriptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLogSubscriptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLogSubscriptionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = ListLogSubscriptionsRequest
+        operation.output = ListLogSubscriptionsResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ServiceException
         operation.traits = {}
         operation[:paginator] = Paginators::ListLogSubscriptions.new
       end)
       service.add_operation(:list_schema_extensions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ListSchemaExtensions"
         operation.name = "ListSchemaExtensions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchemaExtensionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchemaExtensionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = ListSchemaExtensionsRequest
+        operation.output = ListSchemaExtensionsResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ServiceException
         operation.traits = {}
         operation[:paginator] = Paginators::ListSchemaExtensions.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:register_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#RegisterCertificate"
         operation.name = "RegisterCertificate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterCertificateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterCertificateResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCertificateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = RegisterCertificateRequest
+        operation.output = RegisterCertificateResult
+        operation.errors << CertificateAlreadyExistsException
+        operation.errors << CertificateLimitExceededException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidCertificateException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:register_event_topic, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#RegisterEventTopic"
         operation.name = "RegisterEventTopic"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterEventTopicRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterEventTopicResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = RegisterEventTopicRequest
+        operation.output = RegisterEventTopicResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:reject_shared_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#RejectSharedDirectory"
         operation.name = "RejectSharedDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RejectSharedDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RejectSharedDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryAlreadySharedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = RejectSharedDirectoryRequest
+        operation.output = RejectSharedDirectoryResult
+        operation.errors << ClientException
+        operation.errors << DirectoryAlreadySharedException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:remove_ip_routes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#RemoveIpRoutes"
         operation.name = "RemoveIpRoutes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveIpRoutesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveIpRoutesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = RemoveIpRoutesRequest
+        operation.output = RemoveIpRoutesResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:remove_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#RemoveRegion"
         operation.name = "RemoveRegion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveRegionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveRegionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = RemoveRegionRequest
+        operation.output = RemoveRegionResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:remove_tags_from_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#RemoveTagsFromResource"
         operation.name = "RemoveTagsFromResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsFromResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsFromResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = RemoveTagsFromResourceRequest
+        operation.output = RemoveTagsFromResourceResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:reset_user_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ResetUserPassword"
         operation.name = "ResetUserPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetUserPasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetUserPasswordResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserDoesNotExistException)
+        operation.input = ResetUserPasswordRequest
+        operation.output = ResetUserPasswordResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidPasswordException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
+        operation.errors << UserDoesNotExistException
         operation.traits = {}
       end)
       service.add_operation(:restore_from_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#RestoreFromSnapshot"
         operation.name = "RestoreFromSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreFromSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreFromSnapshotResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = RestoreFromSnapshotRequest
+        operation.output = RestoreFromSnapshotResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:share_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#ShareDirectory"
         operation.name = "ShareDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryAlreadySharedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTargetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = ShareDirectoryRequest
+        operation.output = ShareDirectoryResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryAlreadySharedException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidTargetException
+        operation.errors << OrganizationsException
+        operation.errors << ServiceException
+        operation.errors << ShareLimitExceededException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:start_ad_assessment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#StartADAssessment"
         operation.name = "StartADAssessment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartADAssessmentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartADAssessmentResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ADAssessmentLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = StartADAssessmentRequest
+        operation.output = StartADAssessmentResult
+        operation.errors << ADAssessmentLimitExceededException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:start_schema_extension, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#StartSchemaExtension"
         operation.name = "StartSchemaExtension"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSchemaExtensionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSchemaExtensionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotLimitExceededException)
+        operation.input = StartSchemaExtensionRequest
+        operation.output = StartSchemaExtensionResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << SnapshotLimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:unshare_directory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UnshareDirectory"
         operation.name = "UnshareDirectory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnshareDirectoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnshareDirectoryResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryNotSharedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTargetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = UnshareDirectoryRequest
+        operation.output = UnshareDirectoryResult
+        operation.errors << ClientException
+        operation.errors << DirectoryNotSharedException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidTargetException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:update_conditional_forwarder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UpdateConditionalForwarder"
         operation.name = "UpdateConditionalForwarder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateConditionalForwarderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateConditionalForwarderResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdateConditionalForwarderRequest
+        operation.output = UpdateConditionalForwarderResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:update_directory_setup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UpdateDirectorySetup"
         operation.name = "UpdateDirectorySetup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDirectorySetupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDirectorySetupResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryInDesiredStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdateDirectorySetupRequest
+        operation.output = UpdateDirectorySetupResult
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryInDesiredStateException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << SnapshotLimitExceededException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:update_hybrid_ad, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UpdateHybridAD"
         operation.name = "UpdateHybridAD"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateHybridADRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateHybridADResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ADAssessmentLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdateHybridADRequest
+        operation.output = UpdateHybridADResult
+        operation.errors << ADAssessmentLimitExceededException
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:update_number_of_domain_controllers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UpdateNumberOfDomainControllers"
         operation.name = "UpdateNumberOfDomainControllers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateNumberOfDomainControllersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateNumberOfDomainControllersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllerLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdateNumberOfDomainControllersRequest
+        operation.output = UpdateNumberOfDomainControllersResult
+        operation.errors << ClientException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << DomainControllerLimitExceededException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
       service.add_operation(:update_radius, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UpdateRadius"
         operation.name = "UpdateRadius"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRadiusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRadiusResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = UpdateRadiusRequest
+        operation.output = UpdateRadiusResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:update_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UpdateSettings"
         operation.name = "UpdateSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSettingsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleSettingsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedSettingsException)
+        operation.input = UpdateSettingsRequest
+        operation.output = UpdateSettingsResult
+        operation.errors << ClientException
+        operation.errors << DirectoryDoesNotExistException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << IncompatibleSettingsException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
+        operation.errors << UnsupportedSettingsException
         operation.traits = {}
       end)
       service.add_operation(:update_trust, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#UpdateTrust"
         operation.name = "UpdateTrust"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTrustRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTrustResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.input = UpdateTrustRequest
+        operation.output = UpdateTrustResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
         operation.traits = {}
       end)
       service.add_operation(:verify_trust, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#VerifyTrust"
         operation.name = "VerifyTrust"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyTrustRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyTrustResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = VerifyTrustRequest
+        operation.output = VerifyTrustResult
+        operation.errors << ClientException
+        operation.errors << EntityDoesNotExistException
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceException
+        operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
     end

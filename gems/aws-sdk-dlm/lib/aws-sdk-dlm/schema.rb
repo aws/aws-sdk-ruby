@@ -136,271 +136,271 @@ module Aws::DLM
     VariableTagsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dlm#VariableTagsList", name: "VariableTagsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 45}})
     VolumeTypeValues = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dlm#VolumeTypeValues", name: "VolumeTypeValues")
 
-    Action.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Action.add_member(:cross_region_copy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyActionList, location_name: "CrossRegionCopy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Action.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Action.add_member(:cross_region_copy, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyActionList, location_name: "CrossRegionCopy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Action.type = Types::Action
-    ActionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Action)
-    ArchiveRetainRule.add_member(:retention_archive_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionArchiveTier, location_name: "RetentionArchiveTier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action)
+    ArchiveRetainRule.add_member(:retention_archive_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionArchiveTier, location_name: "RetentionArchiveTier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ArchiveRetainRule.type = Types::ArchiveRetainRule
-    ArchiveRule.add_member(:retain_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchiveRetainRule, location_name: "RetainRule", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ArchiveRule.add_member(:retain_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveRetainRule, location_name: "RetainRule", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ArchiveRule.type = Types::ArchiveRule
-    AvailabilityZoneList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone)
-    CreateLifecyclePolicyRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateLifecyclePolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateLifecyclePolicyRequest.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SettablePolicyStateValues, location_name: "State", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateLifecyclePolicyRequest.add_member(:policy_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDetails, location_name: "PolicyDetails"))
-    CreateLifecyclePolicyRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    CreateLifecyclePolicyRequest.add_member(:default_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultPolicyTypeValues, location_name: "DefaultPolicy"))
-    CreateLifecyclePolicyRequest.add_member(:create_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateInterval, location_name: "CreateInterval"))
-    CreateLifecyclePolicyRequest.add_member(:retain_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetainInterval, location_name: "RetainInterval"))
-    CreateLifecyclePolicyRequest.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
-    CreateLifecyclePolicyRequest.add_member(:extend_deletion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExtendDeletion, location_name: "ExtendDeletion"))
-    CreateLifecyclePolicyRequest.add_member(:cross_region_copy_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
-    CreateLifecyclePolicyRequest.add_member(:exclusions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Exclusions, location_name: "Exclusions"))
+    AvailabilityZoneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone)
+    CreateLifecyclePolicyRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateLifecyclePolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription, location_name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateLifecyclePolicyRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SettablePolicyStateValues, location_name: "State", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateLifecyclePolicyRequest.add_member(:policy_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDetails, location_name: "PolicyDetails"))
+    CreateLifecyclePolicyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    CreateLifecyclePolicyRequest.add_member(:default_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultPolicyTypeValues, location_name: "DefaultPolicy"))
+    CreateLifecyclePolicyRequest.add_member(:create_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateInterval, location_name: "CreateInterval"))
+    CreateLifecyclePolicyRequest.add_member(:retain_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainInterval, location_name: "RetainInterval"))
+    CreateLifecyclePolicyRequest.add_member(:copy_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyTagsNullable, location_name: "CopyTags"))
+    CreateLifecyclePolicyRequest.add_member(:extend_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendDeletion, location_name: "ExtendDeletion"))
+    CreateLifecyclePolicyRequest.add_member(:cross_region_copy_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
+    CreateLifecyclePolicyRequest.add_member(:exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: Exclusions, location_name: "Exclusions"))
     CreateLifecyclePolicyRequest.type = Types::CreateLifecyclePolicyRequest
-    CreateLifecyclePolicyResponse.add_member(:policy_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
+    CreateLifecyclePolicyResponse.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, location_name: "PolicyId"))
     CreateLifecyclePolicyResponse.type = Types::CreateLifecyclePolicyResponse
-    CreateRule.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationValues, location_name: "Location"))
-    CreateRule.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
-    CreateRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntervalUnitValues, location_name: "IntervalUnit"))
-    CreateRule.add_member(:times, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimesList, location_name: "Times"))
-    CreateRule.add_member(:cron_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CronExpression, location_name: "CronExpression"))
-    CreateRule.add_member(:scripts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScriptsList, location_name: "Scripts"))
+    CreateRule.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationValues, location_name: "Location"))
+    CreateRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, location_name: "Interval"))
+    CreateRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: IntervalUnitValues, location_name: "IntervalUnit"))
+    CreateRule.add_member(:times, ::Smithy::Schema::Shapes::MemberShape.new(target: TimesList, location_name: "Times"))
+    CreateRule.add_member(:cron_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: CronExpression, location_name: "CronExpression"))
+    CreateRule.add_member(:scripts, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptsList, location_name: "Scripts"))
     CreateRule.type = Types::CreateRule
-    CrossRegionCopyAction.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CrossRegionCopyAction.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CrossRegionCopyAction.add_member(:retain_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyRetainRule, location_name: "RetainRule"))
+    CrossRegionCopyAction.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CrossRegionCopyAction.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, location_name: "EncryptionConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CrossRegionCopyAction.add_member(:retain_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRetainRule, location_name: "RetainRule"))
     CrossRegionCopyAction.type = Types::CrossRegionCopyAction
-    CrossRegionCopyActionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyAction)
-    CrossRegionCopyDeprecateRule.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
-    CrossRegionCopyDeprecateRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    CrossRegionCopyActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyAction)
+    CrossRegionCopyDeprecateRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, location_name: "Interval"))
+    CrossRegionCopyDeprecateRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     CrossRegionCopyDeprecateRule.type = Types::CrossRegionCopyDeprecateRule
-    CrossRegionCopyRetainRule.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
-    CrossRegionCopyRetainRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    CrossRegionCopyRetainRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, location_name: "Interval"))
+    CrossRegionCopyRetainRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     CrossRegionCopyRetainRule.type = Types::CrossRegionCopyRetainRule
-    CrossRegionCopyRule.add_member(:target_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetRegion, location_name: "TargetRegion"))
-    CrossRegionCopyRule.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target"))
-    CrossRegionCopyRule.add_member(:encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CrossRegionCopyRule.add_member(:cmk_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkArn, location_name: "CmkArn"))
-    CrossRegionCopyRule.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
-    CrossRegionCopyRule.add_member(:retain_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyRetainRule, location_name: "RetainRule"))
-    CrossRegionCopyRule.add_member(:deprecate_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyDeprecateRule, location_name: "DeprecateRule"))
+    CrossRegionCopyRule.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetRegion, location_name: "TargetRegion"))
+    CrossRegionCopyRule.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target"))
+    CrossRegionCopyRule.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Encrypted, location_name: "Encrypted", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CrossRegionCopyRule.add_member(:cmk_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkArn, location_name: "CmkArn"))
+    CrossRegionCopyRule.add_member(:copy_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyTagsNullable, location_name: "CopyTags"))
+    CrossRegionCopyRule.add_member(:retain_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRetainRule, location_name: "RetainRule"))
+    CrossRegionCopyRule.add_member(:deprecate_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyDeprecateRule, location_name: "DeprecateRule"))
     CrossRegionCopyRule.type = Types::CrossRegionCopyRule
-    CrossRegionCopyRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyRule)
-    CrossRegionCopyTarget.add_member(:target_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetRegion, location_name: "TargetRegion"))
+    CrossRegionCopyRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRule)
+    CrossRegionCopyTarget.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetRegion, location_name: "TargetRegion"))
     CrossRegionCopyTarget.type = Types::CrossRegionCopyTarget
-    CrossRegionCopyTargetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyTarget)
-    DefaultPoliciesTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
-    DefaultPoliciesTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
-    DefaultPoliciesTypeValues.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    DefaultPolicyTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
-    DefaultPolicyTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
-    DeleteLifecyclePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CrossRegionCopyTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyTarget)
+    DefaultPoliciesTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
+    DefaultPoliciesTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
+    DefaultPoliciesTypeValues.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    DefaultPolicyTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
+    DefaultPolicyTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
+    DeleteLifecyclePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, location_name: "PolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteLifecyclePolicyRequest.type = Types::DeleteLifecyclePolicyRequest
     DeleteLifecyclePolicyResponse.type = Types::DeleteLifecyclePolicyResponse
-    DeprecateRule.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
-    DeprecateRule.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
-    DeprecateRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    DeprecateRule.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, location_name: "Count"))
+    DeprecateRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, location_name: "Interval"))
+    DeprecateRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     DeprecateRule.type = Types::DeprecateRule
-    EncryptionConfiguration.add_member(:encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    EncryptionConfiguration.add_member(:cmk_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkArn, location_name: "CmkArn"))
+    EncryptionConfiguration.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Encrypted, location_name: "Encrypted", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    EncryptionConfiguration.add_member(:cmk_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkArn, location_name: "CmkArn"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
-    EventParameters.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeValues, location_name: "EventType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    EventParameters.add_member(:snapshot_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotOwnerList, location_name: "SnapshotOwner", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    EventParameters.add_member(:description_regex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionRegex, location_name: "DescriptionRegex", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    EventParameters.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeValues, location_name: "EventType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    EventParameters.add_member(:snapshot_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotOwnerList, location_name: "SnapshotOwner", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    EventParameters.add_member(:description_regex, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionRegex, location_name: "DescriptionRegex", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EventParameters.type = Types::EventParameters
-    EventSource.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventSourceValues, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    EventSource.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventParameters, location_name: "Parameters"))
+    EventSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceValues, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    EventSource.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EventParameters, location_name: "Parameters"))
     EventSource.type = Types::EventSource
-    EventSourceValues.add_member(:managed_cwe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MANAGED_CWE", traits: {"smithy.api#enumValue" => "MANAGED_CWE"}))
-    EventTypeValues.add_member(:share_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARE_SNAPSHOT", traits: {"smithy.api#enumValue" => "shareSnapshot"}))
-    ExcludeDataVolumeTagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    ExcludeTagsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    ExcludeVolumeTypesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeTypeValues)
-    Exclusions.add_member(:exclude_boot_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeBootVolumes, location_name: "ExcludeBootVolumes"))
-    Exclusions.add_member(:exclude_volume_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeVolumeTypesList, location_name: "ExcludeVolumeTypes"))
-    Exclusions.add_member(:exclude_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeTagsList, location_name: "ExcludeTags"))
+    EventSourceValues.add_member(:managed_cwe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MANAGED_CWE", traits: {"smithy.api#enumValue" => "MANAGED_CWE"}))
+    EventTypeValues.add_member(:share_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARE_SNAPSHOT", traits: {"smithy.api#enumValue" => "shareSnapshot"}))
+    ExcludeDataVolumeTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    ExcludeTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    ExcludeVolumeTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeTypeValues)
+    Exclusions.add_member(:exclude_boot_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeBootVolumes, location_name: "ExcludeBootVolumes"))
+    Exclusions.add_member(:exclude_volume_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeVolumeTypesList, location_name: "ExcludeVolumeTypes"))
+    Exclusions.add_member(:exclude_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeTagsList, location_name: "ExcludeTags"))
     Exclusions.type = Types::Exclusions
-    ExecutionHandlerServiceValues.add_member(:aws_systems_manager, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_SYSTEMS_MANAGER", traits: {"smithy.api#enumValue" => "AWS_SYSTEMS_MANAGER"}))
-    FastRestoreRule.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
-    FastRestoreRule.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
-    FastRestoreRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
-    FastRestoreRule.add_member(:availability_zones, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZoneList, location_name: "AvailabilityZones", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExecutionHandlerServiceValues.add_member(:aws_systems_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_SYSTEMS_MANAGER", traits: {"smithy.api#enumValue" => "AWS_SYSTEMS_MANAGER"}))
+    FastRestoreRule.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, location_name: "Count"))
+    FastRestoreRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, location_name: "Interval"))
+    FastRestoreRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    FastRestoreRule.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneList, location_name: "AvailabilityZones", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     FastRestoreRule.type = Types::FastRestoreRule
-    GetLifecyclePoliciesRequest.add_member(:policy_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyIdList, location_name: "PolicyIds", traits: {"smithy.api#httpQuery" => "policyIds"}))
-    GetLifecyclePoliciesRequest.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location_name: "State", traits: {"smithy.api#httpQuery" => "state"}))
-    GetLifecyclePoliciesRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeValuesList, location_name: "ResourceTypes", traits: {"smithy.api#httpQuery" => "resourceTypes"}))
-    GetLifecyclePoliciesRequest.add_member(:target_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTagsFilterList, location_name: "TargetTags", traits: {"smithy.api#httpQuery" => "targetTags"}))
-    GetLifecyclePoliciesRequest.add_member(:tags_to_add, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsToAddFilterList, location_name: "TagsToAdd", traits: {"smithy.api#httpQuery" => "tagsToAdd"}))
-    GetLifecyclePoliciesRequest.add_member(:default_policy_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultPoliciesTypeValues, location_name: "DefaultPolicyType", traits: {"smithy.api#httpQuery" => "defaultPolicyType"}))
+    GetLifecyclePoliciesRequest.add_member(:policy_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyIdList, location_name: "PolicyIds", traits: {"smithy.api#httpQuery" => "policyIds"}))
+    GetLifecyclePoliciesRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: GettablePolicyStateValues, location_name: "State", traits: {"smithy.api#httpQuery" => "state"}))
+    GetLifecyclePoliciesRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValuesList, location_name: "ResourceTypes", traits: {"smithy.api#httpQuery" => "resourceTypes"}))
+    GetLifecyclePoliciesRequest.add_member(:target_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTagsFilterList, location_name: "TargetTags", traits: {"smithy.api#httpQuery" => "targetTags"}))
+    GetLifecyclePoliciesRequest.add_member(:tags_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsToAddFilterList, location_name: "TagsToAdd", traits: {"smithy.api#httpQuery" => "tagsToAdd"}))
+    GetLifecyclePoliciesRequest.add_member(:default_policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultPoliciesTypeValues, location_name: "DefaultPolicyType", traits: {"smithy.api#httpQuery" => "defaultPolicyType"}))
     GetLifecyclePoliciesRequest.type = Types::GetLifecyclePoliciesRequest
-    GetLifecyclePoliciesResponse.add_member(:policies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecyclePolicySummaryList, location_name: "Policies"))
+    GetLifecyclePoliciesResponse.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummaryList, location_name: "Policies"))
     GetLifecyclePoliciesResponse.type = Types::GetLifecyclePoliciesResponse
-    GetLifecyclePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetLifecyclePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, location_name: "PolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetLifecyclePolicyRequest.type = Types::GetLifecyclePolicyRequest
-    GetLifecyclePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecyclePolicy, location_name: "Policy"))
+    GetLifecyclePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, location_name: "Policy"))
     GetLifecyclePolicyResponse.type = Types::GetLifecyclePolicyResponse
-    GettablePolicyStateValues.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    GettablePolicyStateValues.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    GettablePolicyStateValues.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    InternalServerException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    GettablePolicyStateValues.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    GettablePolicyStateValues.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    GettablePolicyStateValues.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    InternalServerException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
     InternalServerException.type = Types::InternalServerException
-    IntervalUnitValues.add_member(:hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    InvalidRequestException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    InvalidRequestException.add_member(:required_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterList, location_name: "RequiredParameters"))
-    InvalidRequestException.add_member(:mutually_exclusive_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterList, location_name: "MutuallyExclusiveParameters"))
+    IntervalUnitValues.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    InvalidRequestException.add_member(:required_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterList, location_name: "RequiredParameters"))
+    InvalidRequestException.add_member(:mutually_exclusive_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterList, location_name: "MutuallyExclusiveParameters"))
     InvalidRequestException.type = Types::InvalidRequestException
-    LifecyclePolicy.add_member(:policy_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
-    LifecyclePolicy.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
-    LifecyclePolicy.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location_name: "State"))
-    LifecyclePolicy.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
-    LifecyclePolicy.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
-    LifecyclePolicy.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    LifecyclePolicy.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
-    LifecyclePolicy.add_member(:policy_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDetails, location_name: "PolicyDetails"))
-    LifecyclePolicy.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    LifecyclePolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyArn, location_name: "PolicyArn"))
-    LifecyclePolicy.add_member(:default_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultPolicy, location_name: "DefaultPolicy"))
+    LifecyclePolicy.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, location_name: "PolicyId"))
+    LifecyclePolicy.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription, location_name: "Description"))
+    LifecyclePolicy.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: GettablePolicyStateValues, location_name: "State"))
+    LifecyclePolicy.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "StatusMessage"))
+    LifecyclePolicy.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
+    LifecyclePolicy.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    LifecyclePolicy.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
+    LifecyclePolicy.add_member(:policy_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDetails, location_name: "PolicyDetails"))
+    LifecyclePolicy.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    LifecyclePolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, location_name: "PolicyArn"))
+    LifecyclePolicy.add_member(:default_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultPolicy, location_name: "DefaultPolicy"))
     LifecyclePolicy.type = Types::LifecyclePolicy
-    LifecyclePolicySummary.add_member(:policy_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
-    LifecyclePolicySummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
-    LifecyclePolicySummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location_name: "State"))
-    LifecyclePolicySummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    LifecyclePolicySummary.add_member(:policy_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))
-    LifecyclePolicySummary.add_member(:default_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultPolicy, location_name: "DefaultPolicy"))
+    LifecyclePolicySummary.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, location_name: "PolicyId"))
+    LifecyclePolicySummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription, location_name: "Description"))
+    LifecyclePolicySummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: GettablePolicyStateValues, location_name: "State"))
+    LifecyclePolicySummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    LifecyclePolicySummary.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeValues, location_name: "PolicyType"))
+    LifecyclePolicySummary.add_member(:default_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultPolicy, location_name: "DefaultPolicy"))
     LifecyclePolicySummary.type = Types::LifecyclePolicySummary
-    LifecyclePolicySummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    LimitExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    LifecyclePolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummary)
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    LimitExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType"))
     LimitExceededException.type = Types::LimitExceededException
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LocationValues.add_member(:cloud, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
-    LocationValues.add_member(:outpost_local, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOST_LOCAL", traits: {"smithy.api#enumValue" => "OUTPOST_LOCAL"}))
-    LocationValues.add_member(:local_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCAL_ZONE", traits: {"smithy.api#enumValue" => "LOCAL_ZONE"}))
-    ParameterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Parameter)
-    Parameters.add_member(:exclude_boot_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeBootVolume, location_name: "ExcludeBootVolume"))
-    Parameters.add_member(:no_reboot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoReboot, location_name: "NoReboot"))
-    Parameters.add_member(:exclude_data_volume_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeDataVolumeTagList, location_name: "ExcludeDataVolumeTags"))
+    LocationValues.add_member(:cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
+    LocationValues.add_member(:outpost_local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOST_LOCAL", traits: {"smithy.api#enumValue" => "OUTPOST_LOCAL"}))
+    LocationValues.add_member(:local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCAL_ZONE", traits: {"smithy.api#enumValue" => "LOCAL_ZONE"}))
+    ParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter)
+    Parameters.add_member(:exclude_boot_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeBootVolume, location_name: "ExcludeBootVolume"))
+    Parameters.add_member(:no_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: NoReboot, location_name: "NoReboot"))
+    Parameters.add_member(:exclude_data_volume_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeDataVolumeTagList, location_name: "ExcludeDataVolumeTags"))
     Parameters.type = Types::Parameters
-    PolicyDetails.add_member(:policy_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))
-    PolicyDetails.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeValuesList, location_name: "ResourceTypes"))
-    PolicyDetails.add_member(:resource_locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLocationList, location_name: "ResourceLocations"))
-    PolicyDetails.add_member(:target_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTagList, location_name: "TargetTags"))
-    PolicyDetails.add_member(:schedules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleList, location_name: "Schedules"))
-    PolicyDetails.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
-    PolicyDetails.add_member(:event_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventSource, location_name: "EventSource"))
-    PolicyDetails.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionList, location_name: "Actions"))
-    PolicyDetails.add_member(:policy_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyLanguageValues, location_name: "PolicyLanguage"))
-    PolicyDetails.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeValues, location_name: "ResourceType"))
-    PolicyDetails.add_member(:create_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateInterval, location_name: "CreateInterval"))
-    PolicyDetails.add_member(:retain_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetainInterval, location_name: "RetainInterval"))
-    PolicyDetails.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
-    PolicyDetails.add_member(:cross_region_copy_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
-    PolicyDetails.add_member(:extend_deletion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExtendDeletion, location_name: "ExtendDeletion"))
-    PolicyDetails.add_member(:exclusions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Exclusions, location_name: "Exclusions"))
+    PolicyDetails.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeValues, location_name: "PolicyType"))
+    PolicyDetails.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValuesList, location_name: "ResourceTypes"))
+    PolicyDetails.add_member(:resource_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLocationList, location_name: "ResourceLocations"))
+    PolicyDetails.add_member(:target_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTagList, location_name: "TargetTags"))
+    PolicyDetails.add_member(:schedules, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleList, location_name: "Schedules"))
+    PolicyDetails.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, location_name: "Parameters"))
+    PolicyDetails.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSource, location_name: "EventSource"))
+    PolicyDetails.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, location_name: "Actions"))
+    PolicyDetails.add_member(:policy_language, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyLanguageValues, location_name: "PolicyLanguage"))
+    PolicyDetails.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValues, location_name: "ResourceType"))
+    PolicyDetails.add_member(:create_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateInterval, location_name: "CreateInterval"))
+    PolicyDetails.add_member(:retain_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainInterval, location_name: "RetainInterval"))
+    PolicyDetails.add_member(:copy_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyTagsNullable, location_name: "CopyTags"))
+    PolicyDetails.add_member(:cross_region_copy_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
+    PolicyDetails.add_member(:extend_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendDeletion, location_name: "ExtendDeletion"))
+    PolicyDetails.add_member(:exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: Exclusions, location_name: "Exclusions"))
     PolicyDetails.type = Types::PolicyDetails
-    PolicyIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId)
-    PolicyLanguageValues.add_member(:simplified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLIFIED", traits: {"smithy.api#enumValue" => "SIMPLIFIED"}))
-    PolicyLanguageValues.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
-    PolicyTypeValues.add_member(:ebs_snapshot_management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EBS_SNAPSHOT_MANAGEMENT", traits: {"smithy.api#enumValue" => "EBS_SNAPSHOT_MANAGEMENT"}))
-    PolicyTypeValues.add_member(:image_management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMAGE_MANAGEMENT", traits: {"smithy.api#enumValue" => "IMAGE_MANAGEMENT"}))
-    PolicyTypeValues.add_member(:event_based_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVENT_BASED_POLICY", traits: {"smithy.api#enumValue" => "EVENT_BASED_POLICY"}))
-    ResourceLocationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLocationValues)
-    ResourceLocationValues.add_member(:cloud, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
-    ResourceLocationValues.add_member(:outpost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOST", traits: {"smithy.api#enumValue" => "OUTPOST"}))
-    ResourceLocationValues.add_member(:local_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCAL_ZONE", traits: {"smithy.api#enumValue" => "LOCAL_ZONE"}))
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
-    ResourceNotFoundException.add_member(:resource_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyIdList, location_name: "ResourceIds"))
+    PolicyIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId)
+    PolicyLanguageValues.add_member(:simplified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLIFIED", traits: {"smithy.api#enumValue" => "SIMPLIFIED"}))
+    PolicyLanguageValues.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    PolicyTypeValues.add_member(:ebs_snapshot_management, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EBS_SNAPSHOT_MANAGEMENT", traits: {"smithy.api#enumValue" => "EBS_SNAPSHOT_MANAGEMENT"}))
+    PolicyTypeValues.add_member(:image_management, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMAGE_MANAGEMENT", traits: {"smithy.api#enumValue" => "IMAGE_MANAGEMENT"}))
+    PolicyTypeValues.add_member(:event_based_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVENT_BASED_POLICY", traits: {"smithy.api#enumValue" => "EVENT_BASED_POLICY"}))
+    ResourceLocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLocationValues)
+    ResourceLocationValues.add_member(:cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
+    ResourceLocationValues.add_member(:outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOST", traits: {"smithy.api#enumValue" => "OUTPOST"}))
+    ResourceLocationValues.add_member(:local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCAL_ZONE", traits: {"smithy.api#enumValue" => "LOCAL_ZONE"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyIdList, location_name: "ResourceIds"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
-    ResourceTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
-    ResourceTypeValuesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeValues)
-    RetainRule.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StandardTierRetainRuleCount, location_name: "Count"))
-    RetainRule.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StandardTierRetainRuleInterval, location_name: "Interval"))
-    RetainRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    ResourceTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
+    ResourceTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
+    ResourceTypeValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValues)
+    RetainRule.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardTierRetainRuleCount, location_name: "Count"))
+    RetainRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardTierRetainRuleInterval, location_name: "Interval"))
+    RetainRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     RetainRule.type = Types::RetainRule
-    RetentionArchiveTier.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
-    RetentionArchiveTier.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
-    RetentionArchiveTier.add_member(:interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    RetentionArchiveTier.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, location_name: "Count"))
+    RetentionArchiveTier.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, location_name: "Interval"))
+    RetentionArchiveTier.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     RetentionArchiveTier.type = Types::RetentionArchiveTier
-    RetentionIntervalUnitValues.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
-    RetentionIntervalUnitValues.add_member(:weeks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEKS", traits: {"smithy.api#enumValue" => "WEEKS"}))
-    RetentionIntervalUnitValues.add_member(:months, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHS", traits: {"smithy.api#enumValue" => "MONTHS"}))
-    RetentionIntervalUnitValues.add_member(:years, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "YEARS", traits: {"smithy.api#enumValue" => "YEARS"}))
-    Schedule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleName, location_name: "Name"))
-    Schedule.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyTags, location_name: "CopyTags"))
-    Schedule.add_member(:tags_to_add, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsToAddList, location_name: "TagsToAdd"))
-    Schedule.add_member(:variable_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableTagsList, location_name: "VariableTags"))
-    Schedule.add_member(:create_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRule, location_name: "CreateRule"))
-    Schedule.add_member(:retain_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetainRule, location_name: "RetainRule"))
-    Schedule.add_member(:fast_restore_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FastRestoreRule, location_name: "FastRestoreRule"))
-    Schedule.add_member(:cross_region_copy_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyRules, location_name: "CrossRegionCopyRules"))
-    Schedule.add_member(:share_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareRules, location_name: "ShareRules"))
-    Schedule.add_member(:deprecate_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeprecateRule, location_name: "DeprecateRule"))
-    Schedule.add_member(:archive_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchiveRule, location_name: "ArchiveRule"))
+    RetentionIntervalUnitValues.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
+    RetentionIntervalUnitValues.add_member(:weeks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEKS", traits: {"smithy.api#enumValue" => "WEEKS"}))
+    RetentionIntervalUnitValues.add_member(:months, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHS", traits: {"smithy.api#enumValue" => "MONTHS"}))
+    RetentionIntervalUnitValues.add_member(:years, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "YEARS", traits: {"smithy.api#enumValue" => "YEARS"}))
+    Schedule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleName, location_name: "Name"))
+    Schedule.add_member(:copy_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyTags, location_name: "CopyTags"))
+    Schedule.add_member(:tags_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsToAddList, location_name: "TagsToAdd"))
+    Schedule.add_member(:variable_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableTagsList, location_name: "VariableTags"))
+    Schedule.add_member(:create_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateRule, location_name: "CreateRule"))
+    Schedule.add_member(:retain_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainRule, location_name: "RetainRule"))
+    Schedule.add_member(:fast_restore_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: FastRestoreRule, location_name: "FastRestoreRule"))
+    Schedule.add_member(:cross_region_copy_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRules, location_name: "CrossRegionCopyRules"))
+    Schedule.add_member(:share_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareRules, location_name: "ShareRules"))
+    Schedule.add_member(:deprecate_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: DeprecateRule, location_name: "DeprecateRule"))
+    Schedule.add_member(:archive_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveRule, location_name: "ArchiveRule"))
     Schedule.type = Types::Schedule
-    ScheduleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedule)
-    Script.add_member(:stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StagesList, location_name: "Stages"))
-    Script.add_member(:execution_handler_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionHandlerServiceValues, location_name: "ExecutionHandlerService"))
-    Script.add_member(:execution_handler, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionHandler, location_name: "ExecutionHandler", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Script.add_member(:execute_operation_on_script_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecuteOperationOnScriptFailure, location_name: "ExecuteOperationOnScriptFailure"))
-    Script.add_member(:execution_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScriptExecutionTimeout, location_name: "ExecutionTimeout"))
-    Script.add_member(:maximum_retry_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScriptMaximumRetryCount, location_name: "MaximumRetryCount"))
+    ScheduleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule)
+    Script.add_member(:stages, ::Smithy::Schema::Shapes::MemberShape.new(target: StagesList, location_name: "Stages"))
+    Script.add_member(:execution_handler_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionHandlerServiceValues, location_name: "ExecutionHandlerService"))
+    Script.add_member(:execution_handler, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionHandler, location_name: "ExecutionHandler", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Script.add_member(:execute_operation_on_script_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteOperationOnScriptFailure, location_name: "ExecuteOperationOnScriptFailure"))
+    Script.add_member(:execution_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptExecutionTimeout, location_name: "ExecutionTimeout"))
+    Script.add_member(:maximum_retry_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptMaximumRetryCount, location_name: "MaximumRetryCount"))
     Script.type = Types::Script
-    ScriptsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Script)
-    SettablePolicyStateValues.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    SettablePolicyStateValues.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ShareRule.add_member(:target_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareTargetAccountList, location_name: "TargetAccounts", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ShareRule.add_member(:unshare_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interval, location_name: "UnshareInterval"))
-    ShareRule.add_member(:unshare_interval_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "UnshareIntervalUnit"))
+    ScriptsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Script)
+    SettablePolicyStateValues.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    SettablePolicyStateValues.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ShareRule.add_member(:target_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareTargetAccountList, location_name: "TargetAccounts", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ShareRule.add_member(:unshare_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, location_name: "UnshareInterval"))
+    ShareRule.add_member(:unshare_interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, location_name: "UnshareIntervalUnit"))
     ShareRule.type = Types::ShareRule
-    ShareRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareRule)
-    ShareTargetAccountList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId)
-    SnapshotOwnerList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId)
-    StageValues.add_member(:pre, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRE", traits: {"smithy.api#enumValue" => "PRE"}))
-    StageValues.add_member(:post, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POST", traits: {"smithy.api#enumValue" => "POST"}))
-    StagesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StageValues)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ShareRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareRule)
+    ShareTargetAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId)
+    SnapshotOwnerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId)
+    StageValues.add_member(:pre, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRE", traits: {"smithy.api#enumValue" => "PRE"}))
+    StageValues.add_member(:post, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POST", traits: {"smithy.api#enumValue" => "POST"}))
+    StagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StageValues)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TagsToAddFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagFilter)
-    TagsToAddList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TargetTagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TargetTagsFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagFilter)
-    TimesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time)
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    TagsToAddFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter)
+    TagsToAddList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TargetTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TargetTagsFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter)
+    TimesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Time)
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateLifecyclePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateLifecyclePolicyRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
-    UpdateLifecyclePolicyRequest.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SettablePolicyStateValues, location_name: "State"))
-    UpdateLifecyclePolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
-    UpdateLifecyclePolicyRequest.add_member(:policy_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDetails, location_name: "PolicyDetails"))
-    UpdateLifecyclePolicyRequest.add_member(:create_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateInterval, location_name: "CreateInterval"))
-    UpdateLifecyclePolicyRequest.add_member(:retain_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetainInterval, location_name: "RetainInterval"))
-    UpdateLifecyclePolicyRequest.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
-    UpdateLifecyclePolicyRequest.add_member(:extend_deletion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExtendDeletion, location_name: "ExtendDeletion"))
-    UpdateLifecyclePolicyRequest.add_member(:cross_region_copy_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
-    UpdateLifecyclePolicyRequest.add_member(:exclusions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Exclusions, location_name: "Exclusions"))
+    UpdateLifecyclePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, location_name: "PolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateLifecyclePolicyRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
+    UpdateLifecyclePolicyRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SettablePolicyStateValues, location_name: "State"))
+    UpdateLifecyclePolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription, location_name: "Description"))
+    UpdateLifecyclePolicyRequest.add_member(:policy_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDetails, location_name: "PolicyDetails"))
+    UpdateLifecyclePolicyRequest.add_member(:create_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateInterval, location_name: "CreateInterval"))
+    UpdateLifecyclePolicyRequest.add_member(:retain_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainInterval, location_name: "RetainInterval"))
+    UpdateLifecyclePolicyRequest.add_member(:copy_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyTagsNullable, location_name: "CopyTags"))
+    UpdateLifecyclePolicyRequest.add_member(:extend_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendDeletion, location_name: "ExtendDeletion"))
+    UpdateLifecyclePolicyRequest.add_member(:cross_region_copy_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
+    UpdateLifecyclePolicyRequest.add_member(:exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: Exclusions, location_name: "Exclusions"))
     UpdateLifecyclePolicyRequest.type = Types::UpdateLifecyclePolicyRequest
     UpdateLifecyclePolicyResponse.type = Types::UpdateLifecyclePolicyResponse
-    VariableTagsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
+    VariableTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
 
     Dlm20180112 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.dlm#dlm_20180112"
@@ -410,83 +410,83 @@ module Aws::DLM
       service.add_operation(:create_lifecycle_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#CreateLifecyclePolicy"
         operation.name = "CreateLifecyclePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLifecyclePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLifecyclePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = CreateLifecyclePolicyRequest
+        operation.output = CreateLifecyclePolicyResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/policies", "code" => 200}}
       end)
       service.add_operation(:delete_lifecycle_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#DeleteLifecyclePolicy"
         operation.name = "DeleteLifecyclePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteLifecyclePolicyRequest
+        operation.output = DeleteLifecyclePolicyResponse
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/policies/{PolicyId}", "code" => 200}}
       end)
       service.add_operation(:get_lifecycle_policies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#GetLifecyclePolicies"
         operation.name = "GetLifecyclePolicies"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLifecyclePoliciesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLifecyclePoliciesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetLifecyclePoliciesRequest
+        operation.output = GetLifecyclePoliciesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/policies", "code" => 200}}
       end)
       service.add_operation(:get_lifecycle_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#GetLifecyclePolicy"
         operation.name = "GetLifecyclePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLifecyclePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLifecyclePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetLifecyclePolicyRequest
+        operation.output = GetLifecyclePolicyResponse
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/policies/{PolicyId}", "code" => 200}}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:update_lifecycle_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dlm#UpdateLifecyclePolicy"
         operation.name = "UpdateLifecyclePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLifecyclePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLifecyclePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateLifecyclePolicyRequest
+        operation.output = UpdateLifecyclePolicyResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/policies/{PolicyId}", "code" => 200}}
       end)
     end

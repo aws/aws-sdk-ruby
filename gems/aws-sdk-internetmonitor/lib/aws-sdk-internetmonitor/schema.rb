@@ -107,276 +107,276 @@ module Aws::InternetMonitor
     UpdateMonitorOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.internetmonitor#UpdateMonitorOutput", name: "UpdateMonitorOutput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.internetmonitor#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AvailabilityMeasurement.add_member(:experience_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "ExperienceScore"))
-    AvailabilityMeasurement.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
-    AvailabilityMeasurement.add_member(:percent_of_client_location_impacted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfClientLocationImpacted"))
+    AvailabilityMeasurement.add_member(:experience_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "ExperienceScore"))
+    AvailabilityMeasurement.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
+    AvailabilityMeasurement.add_member(:percent_of_client_location_impacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfClientLocationImpacted"))
     AvailabilityMeasurement.type = Types::AvailabilityMeasurement
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     BadRequestException.type = Types::BadRequestException
-    ClientLocation.add_member(:as_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ASName", traits: {"smithy.api#required" => {}}))
-    ClientLocation.add_member(:as_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "ASNumber", traits: {"smithy.api#required" => {}}))
-    ClientLocation.add_member(:country, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Country", traits: {"smithy.api#required" => {}}))
-    ClientLocation.add_member(:subdivision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Subdivision"))
-    ClientLocation.add_member(:metro, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Metro"))
-    ClientLocation.add_member(:city, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "City", traits: {"smithy.api#required" => {}}))
-    ClientLocation.add_member(:latitude, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Latitude", traits: {"smithy.api#required" => {}}))
-    ClientLocation.add_member(:longitude, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Longitude", traits: {"smithy.api#required" => {}}))
+    ClientLocation.add_member(:as_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ASName", traits: {"smithy.api#required" => {}}))
+    ClientLocation.add_member(:as_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "ASNumber", traits: {"smithy.api#required" => {}}))
+    ClientLocation.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Country", traits: {"smithy.api#required" => {}}))
+    ClientLocation.add_member(:subdivision, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Subdivision"))
+    ClientLocation.add_member(:metro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Metro"))
+    ClientLocation.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "City", traits: {"smithy.api#required" => {}}))
+    ClientLocation.add_member(:latitude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Latitude", traits: {"smithy.api#required" => {}}))
+    ClientLocation.add_member(:longitude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Longitude", traits: {"smithy.api#required" => {}}))
     ClientLocation.type = Types::ClientLocation
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#required" => {}}))
-    CreateMonitorInput.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "Resources"))
-    CreateMonitorInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateMonitorInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    CreateMonitorInput.add_member(:max_city_networks_to_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
-    CreateMonitorInput.add_member(:internet_measurements_log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
-    CreateMonitorInput.add_member(:traffic_percentage_to_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
-    CreateMonitorInput.add_member(:health_events_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventsConfig, location_name: "HealthEventsConfig"))
+    CreateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#required" => {}}))
+    CreateMonitorInput.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: SetOfARNs, location_name: "Resources"))
+    CreateMonitorInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateMonitorInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    CreateMonitorInput.add_member(:max_city_networks_to_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
+    CreateMonitorInput.add_member(:internet_measurements_log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
+    CreateMonitorInput.add_member(:traffic_percentage_to_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
+    CreateMonitorInput.add_member(:health_events_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventsConfig, location_name: "HealthEventsConfig"))
     CreateMonitorInput.type = Types::CreateMonitorInput
-    CreateMonitorOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    CreateMonitorOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateMonitorOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    CreateMonitorOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
     CreateMonitorOutput.type = Types::CreateMonitorOutput
-    DeleteMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteMonitorInput.type = Types::DeleteMonitorInput
     DeleteMonitorOutput.type = Types::DeleteMonitorOutput
-    FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    FilterParameter.add_member(:field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Field"))
-    FilterParameter.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operator, location_name: "Operator"))
-    FilterParameter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Values"))
+    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    FilterParameter.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Field"))
+    FilterParameter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, location_name: "Operator"))
+    FilterParameter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Values"))
     FilterParameter.type = Types::FilterParameter
-    FilterParameters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterParameter)
-    GetHealthEventOperationInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetHealthEventOperationInput.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventName, location_name: "EventId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetHealthEventOperationInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "LinkedAccountId", traits: {"smithy.api#httpQuery" => "LinkedAccountId"}))
+    FilterParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterParameter)
+    GetHealthEventOperationInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetHealthEventOperationInput.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventName, location_name: "EventId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetHealthEventOperationInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "LinkedAccountId", traits: {"smithy.api#httpQuery" => "LinkedAccountId"}))
     GetHealthEventOperationInput.type = Types::GetHealthEventOperationInput
-    GetHealthEventOperationOutput.add_member(:event_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
-    GetHealthEventOperationOutput.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventName, location_name: "EventId", traits: {"smithy.api#required" => {}}))
-    GetHealthEventOperationOutput.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetHealthEventOperationOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetHealthEventOperationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetHealthEventOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetHealthEventOperationOutput.add_member(:impacted_locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpactedLocationsList, location_name: "ImpactedLocations", traits: {"smithy.api#required" => {}}))
-    GetHealthEventOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    GetHealthEventOperationOutput.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
-    GetHealthEventOperationOutput.add_member(:impact_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventImpactType, location_name: "ImpactType", traits: {"smithy.api#required" => {}}))
-    GetHealthEventOperationOutput.add_member(:health_score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "HealthScoreThreshold", traits: {"smithy.api#default" => 0}))
+    GetHealthEventOperationOutput.add_member(:event_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
+    GetHealthEventOperationOutput.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventName, location_name: "EventId", traits: {"smithy.api#required" => {}}))
+    GetHealthEventOperationOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetHealthEventOperationOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetHealthEventOperationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetHealthEventOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetHealthEventOperationOutput.add_member(:impacted_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpactedLocationsList, location_name: "ImpactedLocations", traits: {"smithy.api#required" => {}}))
+    GetHealthEventOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    GetHealthEventOperationOutput.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
+    GetHealthEventOperationOutput.add_member(:impact_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventImpactType, location_name: "ImpactType", traits: {"smithy.api#required" => {}}))
+    GetHealthEventOperationOutput.add_member(:health_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "HealthScoreThreshold", traits: {"smithy.api#default" => 0}))
     GetHealthEventOperationOutput.type = Types::GetHealthEventOperationOutput
-    GetInternetEventInput.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventId, location_name: "EventId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetInternetEventInput.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventId, location_name: "EventId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetInternetEventInput.type = Types::GetInternetEventInput
-    GetInternetEventOutput.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventId, location_name: "EventId", traits: {"smithy.api#required" => {}}))
-    GetInternetEventOutput.add_member(:event_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
-    GetInternetEventOutput.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetInternetEventOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetInternetEventOutput.add_member(:client_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLocation, location_name: "ClientLocation", traits: {"smithy.api#required" => {}}))
-    GetInternetEventOutput.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventType, location_name: "EventType", traits: {"smithy.api#required" => {}}))
-    GetInternetEventOutput.add_member(:event_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventStatus, location_name: "EventStatus", traits: {"smithy.api#required" => {}}))
+    GetInternetEventOutput.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventId, location_name: "EventId", traits: {"smithy.api#required" => {}}))
+    GetInternetEventOutput.add_member(:event_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
+    GetInternetEventOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetInternetEventOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetInternetEventOutput.add_member(:client_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientLocation, location_name: "ClientLocation", traits: {"smithy.api#required" => {}}))
+    GetInternetEventOutput.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventType, location_name: "EventType", traits: {"smithy.api#required" => {}}))
+    GetInternetEventOutput.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventStatus, location_name: "EventStatus", traits: {"smithy.api#required" => {}}))
     GetInternetEventOutput.type = Types::GetInternetEventOutput
-    GetMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetMonitorInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "LinkedAccountId", traits: {"smithy.api#httpQuery" => "LinkedAccountId"}))
+    GetMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetMonitorInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "LinkedAccountId", traits: {"smithy.api#httpQuery" => "LinkedAccountId"}))
     GetMonitorInput.type = Types::GetMonitorInput
-    GetMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "MonitorArn", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "Resources", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetMonitorOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ModifiedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetMonitorOutput.add_member(:processing_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorProcessingStatusCode, location_name: "ProcessingStatus"))
-    GetMonitorOutput.add_member(:processing_status_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ProcessingStatusInfo"))
-    GetMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    GetMonitorOutput.add_member(:max_city_networks_to_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
-    GetMonitorOutput.add_member(:internet_measurements_log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
-    GetMonitorOutput.add_member(:traffic_percentage_to_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
-    GetMonitorOutput.add_member(:health_events_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventsConfig, location_name: "HealthEventsConfig"))
+    GetMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "MonitorArn", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: SetOfARNs, location_name: "Resources", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetMonitorOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ModifiedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetMonitorOutput.add_member(:processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorProcessingStatusCode, location_name: "ProcessingStatus"))
+    GetMonitorOutput.add_member(:processing_status_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ProcessingStatusInfo"))
+    GetMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    GetMonitorOutput.add_member(:max_city_networks_to_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
+    GetMonitorOutput.add_member(:internet_measurements_log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
+    GetMonitorOutput.add_member(:traffic_percentage_to_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
+    GetMonitorOutput.add_member(:health_events_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventsConfig, location_name: "HealthEventsConfig"))
     GetMonitorOutput.type = Types::GetMonitorOutput
-    GetQueryResultsInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetQueryResultsInput.add_member(:query_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetQueryResultsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    GetQueryResultsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    GetQueryResultsInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetQueryResultsInput.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetQueryResultsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    GetQueryResultsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     GetQueryResultsInput.type = Types::GetQueryResultsInput
-    GetQueryResultsOutput.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryFields, location_name: "Fields", traits: {"smithy.api#required" => {}}))
-    GetQueryResultsOutput.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryData, location_name: "Data", traits: {"smithy.api#required" => {}}))
-    GetQueryResultsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    GetQueryResultsOutput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFields, location_name: "Fields", traits: {"smithy.api#required" => {}}))
+    GetQueryResultsOutput.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryData, location_name: "Data", traits: {"smithy.api#required" => {}}))
+    GetQueryResultsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     GetQueryResultsOutput.type = Types::GetQueryResultsOutput
-    GetQueryStatusInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetQueryStatusInput.add_member(:query_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetQueryStatusInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetQueryStatusInput.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetQueryStatusInput.type = Types::GetQueryStatusInput
-    GetQueryStatusOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    GetQueryStatusOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
     GetQueryStatusOutput.type = Types::GetQueryStatusOutput
-    HealthEvent.add_member(:event_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
-    HealthEvent.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventName, location_name: "EventId", traits: {"smithy.api#required" => {}}))
-    HealthEvent.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    HealthEvent.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    HealthEvent.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    HealthEvent.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    HealthEvent.add_member(:impacted_locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpactedLocationsList, location_name: "ImpactedLocations", traits: {"smithy.api#required" => {}}))
-    HealthEvent.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    HealthEvent.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
-    HealthEvent.add_member(:impact_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventImpactType, location_name: "ImpactType", traits: {"smithy.api#required" => {}}))
-    HealthEvent.add_member(:health_score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "HealthScoreThreshold", traits: {"smithy.api#default" => 0}))
+    HealthEvent.add_member(:event_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
+    HealthEvent.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventName, location_name: "EventId", traits: {"smithy.api#required" => {}}))
+    HealthEvent.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    HealthEvent.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    HealthEvent.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    HealthEvent.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    HealthEvent.add_member(:impacted_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpactedLocationsList, location_name: "ImpactedLocations", traits: {"smithy.api#required" => {}}))
+    HealthEvent.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    HealthEvent.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
+    HealthEvent.add_member(:impact_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventImpactType, location_name: "ImpactType", traits: {"smithy.api#required" => {}}))
+    HealthEvent.add_member(:health_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "HealthScoreThreshold", traits: {"smithy.api#default" => 0}))
     HealthEvent.type = Types::HealthEvent
-    HealthEventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEvent)
-    HealthEventsConfig.add_member(:availability_score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "AvailabilityScoreThreshold", traits: {"smithy.api#default" => 0}))
-    HealthEventsConfig.add_member(:performance_score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "PerformanceScoreThreshold", traits: {"smithy.api#default" => 0}))
-    HealthEventsConfig.add_member(:availability_local_health_events_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalHealthEventsConfig, location_name: "AvailabilityLocalHealthEventsConfig"))
-    HealthEventsConfig.add_member(:performance_local_health_events_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalHealthEventsConfig, location_name: "PerformanceLocalHealthEventsConfig"))
+    HealthEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEvent)
+    HealthEventsConfig.add_member(:availability_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "AvailabilityScoreThreshold", traits: {"smithy.api#default" => 0}))
+    HealthEventsConfig.add_member(:performance_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "PerformanceScoreThreshold", traits: {"smithy.api#default" => 0}))
+    HealthEventsConfig.add_member(:availability_local_health_events_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalHealthEventsConfig, location_name: "AvailabilityLocalHealthEventsConfig"))
+    HealthEventsConfig.add_member(:performance_local_health_events_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalHealthEventsConfig, location_name: "PerformanceLocalHealthEventsConfig"))
     HealthEventsConfig.type = Types::HealthEventsConfig
-    ImpactedLocation.add_member(:as_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ASName", traits: {"smithy.api#required" => {}}))
-    ImpactedLocation.add_member(:as_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "ASNumber", traits: {"smithy.api#required" => {}}))
-    ImpactedLocation.add_member(:country, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Country", traits: {"smithy.api#required" => {}}))
-    ImpactedLocation.add_member(:subdivision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Subdivision"))
-    ImpactedLocation.add_member(:metro, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Metro"))
-    ImpactedLocation.add_member(:city, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "City"))
-    ImpactedLocation.add_member(:latitude, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Latitude"))
-    ImpactedLocation.add_member(:longitude, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Longitude"))
-    ImpactedLocation.add_member(:country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "CountryCode"))
-    ImpactedLocation.add_member(:subdivision_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubdivisionCode"))
-    ImpactedLocation.add_member(:service_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServiceLocation"))
-    ImpactedLocation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    ImpactedLocation.add_member(:caused_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkImpairment, location_name: "CausedBy"))
-    ImpactedLocation.add_member(:internet_health, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetHealth, location_name: "InternetHealth"))
-    ImpactedLocation.add_member(:ipv4_prefixes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv4PrefixList, location_name: "Ipv4Prefixes"))
+    ImpactedLocation.add_member(:as_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ASName", traits: {"smithy.api#required" => {}}))
+    ImpactedLocation.add_member(:as_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "ASNumber", traits: {"smithy.api#required" => {}}))
+    ImpactedLocation.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Country", traits: {"smithy.api#required" => {}}))
+    ImpactedLocation.add_member(:subdivision, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Subdivision"))
+    ImpactedLocation.add_member(:metro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Metro"))
+    ImpactedLocation.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "City"))
+    ImpactedLocation.add_member(:latitude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Latitude"))
+    ImpactedLocation.add_member(:longitude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Longitude"))
+    ImpactedLocation.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "CountryCode"))
+    ImpactedLocation.add_member(:subdivision_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubdivisionCode"))
+    ImpactedLocation.add_member(:service_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServiceLocation"))
+    ImpactedLocation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ImpactedLocation.add_member(:caused_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkImpairment, location_name: "CausedBy"))
+    ImpactedLocation.add_member(:internet_health, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetHealth, location_name: "InternetHealth"))
+    ImpactedLocation.add_member(:ipv4_prefixes, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4PrefixList, location_name: "Ipv4Prefixes"))
     ImpactedLocation.type = Types::ImpactedLocation
-    ImpactedLocationsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpactedLocation)
-    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ImpactedLocationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpactedLocation)
+    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerErrorException.type = Types::InternalServerErrorException
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    InternetEventSummary.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventId, location_name: "EventId", traits: {"smithy.api#required" => {}}))
-    InternetEventSummary.add_member(:event_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
-    InternetEventSummary.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    InternetEventSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    InternetEventSummary.add_member(:client_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLocation, location_name: "ClientLocation", traits: {"smithy.api#required" => {}}))
-    InternetEventSummary.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventType, location_name: "EventType", traits: {"smithy.api#required" => {}}))
-    InternetEventSummary.add_member(:event_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventStatus, location_name: "EventStatus", traits: {"smithy.api#required" => {}}))
+    InternetEventSummary.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventId, location_name: "EventId", traits: {"smithy.api#required" => {}}))
+    InternetEventSummary.add_member(:event_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "EventArn", traits: {"smithy.api#required" => {}}))
+    InternetEventSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    InternetEventSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    InternetEventSummary.add_member(:client_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientLocation, location_name: "ClientLocation", traits: {"smithy.api#required" => {}}))
+    InternetEventSummary.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventType, location_name: "EventType", traits: {"smithy.api#required" => {}}))
+    InternetEventSummary.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventStatus, location_name: "EventStatus", traits: {"smithy.api#required" => {}}))
     InternetEventSummary.type = Types::InternetEventSummary
-    InternetEventsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventSummary)
-    InternetHealth.add_member(:availability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityMeasurement, location_name: "Availability"))
-    InternetHealth.add_member(:performance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerformanceMeasurement, location_name: "Performance"))
+    InternetEventsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventSummary)
+    InternetHealth.add_member(:availability, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityMeasurement, location_name: "Availability"))
+    InternetHealth.add_member(:performance, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceMeasurement, location_name: "Performance"))
     InternetHealth.type = Types::InternetHealth
-    InternetMeasurementsLogDelivery.add_member(:s3_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
+    InternetMeasurementsLogDelivery.add_member(:s3_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Config, location_name: "S3Config"))
     InternetMeasurementsLogDelivery.type = Types::InternetMeasurementsLogDelivery
-    Ipv4PrefixList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    Ipv4PrefixList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListHealthEventsOperationInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListHealthEventsOperationInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#timestampFormat" => "date-time"}))
-    ListHealthEventsOperationInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#timestampFormat" => "date-time"}))
-    ListHealthEventsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListHealthEventsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListHealthEventsOperationInput.add_member(:event_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventStatus, location_name: "EventStatus", traits: {"smithy.api#httpQuery" => "EventStatus"}))
-    ListHealthEventsOperationInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "LinkedAccountId", traits: {"smithy.api#httpQuery" => "LinkedAccountId"}))
+    ListHealthEventsOperationInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListHealthEventsOperationInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#timestampFormat" => "date-time"}))
+    ListHealthEventsOperationInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#timestampFormat" => "date-time"}))
+    ListHealthEventsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListHealthEventsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListHealthEventsOperationInput.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventStatus, location_name: "EventStatus", traits: {"smithy.api#httpQuery" => "EventStatus"}))
+    ListHealthEventsOperationInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "LinkedAccountId", traits: {"smithy.api#httpQuery" => "LinkedAccountId"}))
     ListHealthEventsOperationInput.type = Types::ListHealthEventsOperationInput
-    ListHealthEventsOperationOutput.add_member(:health_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventList, location_name: "HealthEvents", traits: {"smithy.api#required" => {}}))
-    ListHealthEventsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListHealthEventsOperationOutput.add_member(:health_events, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventList, location_name: "HealthEvents", traits: {"smithy.api#required" => {}}))
+    ListHealthEventsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListHealthEventsOperationOutput.type = Types::ListHealthEventsOperationOutput
-    ListInternetEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListInternetEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "InternetEventMaxResults"}))
-    ListInternetEventsInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#timestampFormat" => "date-time"}))
-    ListInternetEventsInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#timestampFormat" => "date-time"}))
-    ListInternetEventsInput.add_member(:event_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "EventStatus", traits: {"smithy.api#httpQuery" => "EventStatus"}))
-    ListInternetEventsInput.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "EventType", traits: {"smithy.api#httpQuery" => "EventType"}))
+    ListInternetEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListInternetEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "InternetEventMaxResults"}))
+    ListInternetEventsInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#timestampFormat" => "date-time"}))
+    ListInternetEventsInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#timestampFormat" => "date-time"}))
+    ListInternetEventsInput.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "EventStatus", traits: {"smithy.api#httpQuery" => "EventStatus"}))
+    ListInternetEventsInput.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "EventType", traits: {"smithy.api#httpQuery" => "EventType"}))
     ListInternetEventsInput.type = Types::ListInternetEventsInput
-    ListInternetEventsOutput.add_member(:internet_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetEventsList, location_name: "InternetEvents", traits: {"smithy.api#required" => {}}))
-    ListInternetEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListInternetEventsOutput.add_member(:internet_events, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventsList, location_name: "InternetEvents", traits: {"smithy.api#required" => {}}))
+    ListInternetEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListInternetEventsOutput.type = Types::ListInternetEventsOutput
-    ListMonitorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListMonitorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListMonitorsInput.add_member(:monitor_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonitorStatus", traits: {"smithy.api#httpQuery" => "MonitorStatus"}))
-    ListMonitorsInput.add_member(:include_linked_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "IncludeLinkedAccounts", traits: {"smithy.api#httpQuery" => "IncludeLinkedAccounts"}))
+    ListMonitorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListMonitorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListMonitorsInput.add_member(:monitor_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonitorStatus", traits: {"smithy.api#httpQuery" => "MonitorStatus"}))
+    ListMonitorsInput.add_member(:include_linked_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "IncludeLinkedAccounts", traits: {"smithy.api#httpQuery" => "IncludeLinkedAccounts"}))
     ListMonitorsInput.type = Types::ListMonitorsInput
-    ListMonitorsOutput.add_member(:monitors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorList, location_name: "Monitors", traits: {"smithy.api#required" => {}}))
-    ListMonitorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListMonitorsOutput.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, location_name: "Monitors", traits: {"smithy.api#required" => {}}))
+    ListMonitorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListMonitorsOutput.type = Types::ListMonitorsOutput
-    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceOperationInput.type = Types::ListTagsForResourceOperationInput
-    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceOperationOutput.type = Types::ListTagsForResourceOperationOutput
-    LocalHealthEventsConfig.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalHealthEventsConfigStatus, location_name: "Status"))
-    LocalHealthEventsConfig.add_member(:health_score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "HealthScoreThreshold", traits: {"smithy.api#default" => 0}))
-    LocalHealthEventsConfig.add_member(:min_traffic_impact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "MinTrafficImpact", traits: {"smithy.api#default" => 0}))
+    LocalHealthEventsConfig.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalHealthEventsConfigStatus, location_name: "Status"))
+    LocalHealthEventsConfig.add_member(:health_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "HealthScoreThreshold", traits: {"smithy.api#default" => 0}))
+    LocalHealthEventsConfig.add_member(:min_traffic_impact, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "MinTrafficImpact", traits: {"smithy.api#default" => 0}))
     LocalHealthEventsConfig.type = Types::LocalHealthEventsConfig
-    Monitor.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#required" => {}}))
-    Monitor.add_member(:monitor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "MonitorArn", traits: {"smithy.api#required" => {}}))
-    Monitor.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    Monitor.add_member(:processing_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorProcessingStatusCode, location_name: "ProcessingStatus"))
+    Monitor.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#required" => {}}))
+    Monitor.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "MonitorArn", traits: {"smithy.api#required" => {}}))
+    Monitor.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    Monitor.add_member(:processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorProcessingStatusCode, location_name: "ProcessingStatus"))
     Monitor.type = Types::Monitor
-    MonitorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Monitor)
-    Network.add_member(:as_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ASName", traits: {"smithy.api#required" => {}}))
-    Network.add_member(:as_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "ASNumber", traits: {"smithy.api#required" => {}}))
+    MonitorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Monitor)
+    Network.add_member(:as_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ASName", traits: {"smithy.api#required" => {}}))
+    Network.add_member(:as_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "ASNumber", traits: {"smithy.api#required" => {}}))
     Network.type = Types::Network
-    NetworkImpairment.add_member(:networks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkList, location_name: "Networks", traits: {"smithy.api#required" => {}}))
-    NetworkImpairment.add_member(:as_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkList, location_name: "AsPath", traits: {"smithy.api#required" => {}}))
-    NetworkImpairment.add_member(:network_event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TriangulationEventType, location_name: "NetworkEventType", traits: {"smithy.api#required" => {}}))
+    NetworkImpairment.add_member(:networks, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkList, location_name: "Networks", traits: {"smithy.api#required" => {}}))
+    NetworkImpairment.add_member(:as_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkList, location_name: "AsPath", traits: {"smithy.api#required" => {}}))
+    NetworkImpairment.add_member(:network_event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TriangulationEventType, location_name: "NetworkEventType", traits: {"smithy.api#required" => {}}))
     NetworkImpairment.type = Types::NetworkImpairment
-    NetworkList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Network)
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    NetworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Network)
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     NotFoundException.type = Types::NotFoundException
-    PerformanceMeasurement.add_member(:experience_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "ExperienceScore"))
-    PerformanceMeasurement.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
-    PerformanceMeasurement.add_member(:percent_of_client_location_impacted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfClientLocationImpacted"))
-    PerformanceMeasurement.add_member(:round_trip_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoundTripTime, location_name: "RoundTripTime"))
+    PerformanceMeasurement.add_member(:experience_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "ExperienceScore"))
+    PerformanceMeasurement.add_member(:percent_of_total_traffic_impacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfTotalTrafficImpacted"))
+    PerformanceMeasurement.add_member(:percent_of_client_location_impacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "PercentOfClientLocationImpacted"))
+    PerformanceMeasurement.add_member(:round_trip_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RoundTripTime, location_name: "RoundTripTime"))
     PerformanceMeasurement.type = Types::PerformanceMeasurement
-    QueryData.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryRow)
-    QueryField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
-    QueryField.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type"))
+    QueryData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRow)
+    QueryField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
+    QueryField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type"))
     QueryField.type = Types::QueryField
-    QueryFields.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryField)
-    QueryRow.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    QueryFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryField)
+    QueryRow.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoundTripTime.add_member(:p50, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "P50"))
-    RoundTripTime.add_member(:p90, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "P90"))
-    RoundTripTime.add_member(:p95, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "P95"))
+    RoundTripTime.add_member(:p50, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "P50"))
+    RoundTripTime.add_member(:p90, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "P90"))
+    RoundTripTime.add_member(:p95, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "P95"))
     RoundTripTime.type = Types::RoundTripTime
-    S3Config.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "BucketName", traits: {"smithy.api#length" => {"min" => 3}}))
-    S3Config.add_member(:bucket_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "BucketPrefix"))
-    S3Config.add_member(:log_delivery_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDeliveryStatus, location_name: "LogDeliveryStatus"))
+    S3Config.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "BucketName", traits: {"smithy.api#length" => {"min" => 3}}))
+    S3Config.add_member(:bucket_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "BucketPrefix"))
+    S3Config.add_member(:log_delivery_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryStatus, location_name: "LogDeliveryStatus"))
     S3Config.type = Types::S3Config
-    SetOfARNs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    StartQueryInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartQueryInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    StartQueryInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    StartQueryInput.add_member(:query_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryType, location_name: "QueryType", traits: {"smithy.api#required" => {}}))
-    StartQueryInput.add_member(:filter_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterParameters, location_name: "FilterParameters"))
-    StartQueryInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "LinkedAccountId"))
+    SetOfARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    StartQueryInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartQueryInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartQueryInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartQueryInput.add_member(:query_type, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryType, location_name: "QueryType", traits: {"smithy.api#required" => {}}))
+    StartQueryInput.add_member(:filter_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterParameters, location_name: "FilterParameters"))
+    StartQueryInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "LinkedAccountId"))
     StartQueryInput.type = Types::StartQueryInput
-    StartQueryOutput.add_member(:query_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#required" => {}}))
+    StartQueryOutput.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#required" => {}}))
     StartQueryOutput.type = Types::StartQueryOutput
-    StopQueryInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StopQueryInput.add_member(:query_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopQueryInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopQueryInput.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QueryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopQueryInput.type = Types::StopQueryInput
     StopQueryOutput.type = Types::StopQueryOutput
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceOperationInput.type = Types::UntagResourceOperationInput
     UntagResourceOperationOutput.type = Types::UntagResourceOperationOutput
-    UpdateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateMonitorInput.add_member(:resources_to_add, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "ResourcesToAdd"))
-    UpdateMonitorInput.add_member(:resources_to_remove, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "ResourcesToRemove"))
-    UpdateMonitorInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorConfigState, location_name: "Status"))
-    UpdateMonitorInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateMonitorInput.add_member(:max_city_networks_to_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
-    UpdateMonitorInput.add_member(:internet_measurements_log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
-    UpdateMonitorInput.add_member(:traffic_percentage_to_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
-    UpdateMonitorInput.add_member(:health_events_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthEventsConfig, location_name: "HealthEventsConfig"))
+    UpdateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateMonitorInput.add_member(:resources_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: SetOfARNs, location_name: "ResourcesToAdd"))
+    UpdateMonitorInput.add_member(:resources_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: SetOfARNs, location_name: "ResourcesToRemove"))
+    UpdateMonitorInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorConfigState, location_name: "Status"))
+    UpdateMonitorInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateMonitorInput.add_member(:max_city_networks_to_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
+    UpdateMonitorInput.add_member(:internet_measurements_log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
+    UpdateMonitorInput.add_member(:traffic_percentage_to_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
+    UpdateMonitorInput.add_member(:health_events_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventsConfig, location_name: "HealthEventsConfig"))
     UpdateMonitorInput.type = Types::UpdateMonitorInput
-    UpdateMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "MonitorArn", traits: {"smithy.api#required" => {}}))
-    UpdateMonitorOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdateMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "MonitorArn", traits: {"smithy.api#required" => {}}))
+    UpdateMonitorOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorConfigState, location_name: "Status", traits: {"smithy.api#required" => {}}))
     UpdateMonitorOutput.type = Types::UpdateMonitorOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     InternetMonitor20210603 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -387,192 +387,192 @@ module Aws::InternetMonitor
       service.add_operation(:create_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#CreateMonitor"
         operation.name = "CreateMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateMonitorInput
+        operation.output = CreateMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "smithy.api#http" => {"uri" => "/v20210603/Monitors", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#DeleteMonitor"
         operation.name = "DeleteMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteMonitorInput
+        operation.output = DeleteMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_health_event, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#GetHealthEvent"
         operation.name = "GetHealthEvent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetHealthEventOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetHealthEventOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetHealthEventOperationInput
+        operation.output = GetHealthEventOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}/HealthEvents/{EventId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_internet_event, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#GetInternetEvent"
         operation.name = "GetInternetEvent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInternetEventInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInternetEventOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetInternetEventInput
+        operation.output = GetInternetEventOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/InternetEvents/{EventId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#GetMonitor"
         operation.name = "GetMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetMonitorInput
+        operation.output = GetMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_query_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#GetQueryResults"
         operation.name = "GetQueryResults"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetQueryResultsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetQueryResultsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetQueryResultsInput
+        operation.output = GetQueryResultsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Results", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::GetQueryResults.new
       end)
       service.add_operation(:get_query_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#GetQueryStatus"
         operation.name = "GetQueryStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetQueryStatusInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetQueryStatusOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetQueryStatusInput
+        operation.output = GetQueryStatusOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Status", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_health_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#ListHealthEvents"
         operation.name = "ListHealthEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListHealthEventsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListHealthEventsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListHealthEventsOperationInput
+        operation.output = ListHealthEventsOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}/HealthEvents", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListHealthEvents.new
       end)
       service.add_operation(:list_internet_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#ListInternetEvents"
         operation.name = "ListInternetEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListInternetEventsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListInternetEventsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListInternetEventsInput
+        operation.output = ListInternetEventsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/InternetEvents", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListInternetEvents.new
       end)
       service.add_operation(:list_monitors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#ListMonitors"
         operation.name = "ListMonitors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMonitorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMonitorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListMonitorsInput
+        operation.output = ListMonitorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListMonitors.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTagsForResourceOperationInput
+        operation.output = ListTagsForResourceOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:start_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#StartQuery"
         operation.name = "StartQuery"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartQueryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartQueryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartQueryInput
+        operation.output = StartQueryOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}/Queries", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:stop_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#StopQuery"
         operation.name = "StopQuery"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopQueryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopQueryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopQueryInput
+        operation.output = StopQueryOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}", "method" => "DELETE"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = TagResourceOperationInput
+        operation.output = TagResourceOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UntagResourceOperationInput
+        operation.output = UntagResourceOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys"], "smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.internetmonitor#UpdateMonitor"
         operation.name = "UpdateMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateMonitorInput
+        operation.output = UpdateMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
     end

@@ -35,50 +35,50 @@ module Aws::SSO
     TooManyRequestsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sso#TooManyRequestsException", name: "TooManyRequestsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sso#UnauthorizedException", name: "UnauthorizedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
 
-    AccountInfo.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdType, location_name: "accountId"))
-    AccountInfo.add_member(:account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountNameType, location_name: "accountName"))
-    AccountInfo.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressType, location_name: "emailAddress"))
+    AccountInfo.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, location_name: "accountId"))
+    AccountInfo.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountNameType, location_name: "accountName"))
+    AccountInfo.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressType, location_name: "emailAddress"))
     AccountInfo.type = Types::AccountInfo
-    AccountListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountInfo)
-    GetRoleCredentialsRequest.add_member(:role_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleNameType, location_name: "roleName", traits: {"smithy.api#httpQuery" => "role_name", "smithy.api#required" => {}}))
-    GetRoleCredentialsRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdType, location_name: "accountId", traits: {"smithy.api#httpQuery" => "account_id", "smithy.api#required" => {}}))
-    GetRoleCredentialsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
+    AccountListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountInfo)
+    GetRoleCredentialsRequest.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNameType, location_name: "roleName", traits: {"smithy.api#httpQuery" => "role_name", "smithy.api#required" => {}}))
+    GetRoleCredentialsRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, location_name: "accountId", traits: {"smithy.api#httpQuery" => "account_id", "smithy.api#required" => {}}))
+    GetRoleCredentialsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
     GetRoleCredentialsRequest.type = Types::GetRoleCredentialsRequest
-    GetRoleCredentialsResponse.add_member(:role_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleCredentials, location_name: "roleCredentials"))
+    GetRoleCredentialsResponse.add_member(:role_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleCredentials, location_name: "roleCredentials"))
     GetRoleCredentialsResponse.type = Types::GetRoleCredentialsResponse
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    ListAccountRolesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
-    ListAccountRolesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultType, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "max_result"}))
-    ListAccountRolesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
-    ListAccountRolesRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdType, location_name: "accountId", traits: {"smithy.api#httpQuery" => "account_id", "smithy.api#required" => {}}))
+    ListAccountRolesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
+    ListAccountRolesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultType, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "max_result"}))
+    ListAccountRolesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
+    ListAccountRolesRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, location_name: "accountId", traits: {"smithy.api#httpQuery" => "account_id", "smithy.api#required" => {}}))
     ListAccountRolesRequest.type = Types::ListAccountRolesRequest
-    ListAccountRolesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "nextToken"))
-    ListAccountRolesResponse.add_member(:role_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleListType, location_name: "roleList"))
+    ListAccountRolesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "nextToken"))
+    ListAccountRolesResponse.add_member(:role_list, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleListType, location_name: "roleList"))
     ListAccountRolesResponse.type = Types::ListAccountRolesResponse
-    ListAccountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
-    ListAccountsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultType, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "max_result"}))
-    ListAccountsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
+    ListAccountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
+    ListAccountsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultType, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "max_result"}))
+    ListAccountsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
     ListAccountsRequest.type = Types::ListAccountsRequest
-    ListAccountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "nextToken"))
-    ListAccountsResponse.add_member(:account_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountListType, location_name: "accountList"))
+    ListAccountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "nextToken"))
+    ListAccountsResponse.add_member(:account_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountListType, location_name: "accountList"))
     ListAccountsResponse.type = Types::ListAccountsResponse
-    LogoutRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
+    LogoutRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenType, location_name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
     LogoutRequest.type = Types::LogoutRequest
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoleCredentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessKeyType, location_name: "accessKeyId"))
-    RoleCredentials.add_member(:secret_access_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretAccessKeyType, location_name: "secretAccessKey"))
-    RoleCredentials.add_member(:session_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionTokenType, location_name: "sessionToken"))
-    RoleCredentials.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationTimestampType, location_name: "expiration", traits: {"smithy.api#default" => 0}))
+    RoleCredentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKeyType, location_name: "accessKeyId"))
+    RoleCredentials.add_member(:secret_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretAccessKeyType, location_name: "secretAccessKey"))
+    RoleCredentials.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTokenType, location_name: "sessionToken"))
+    RoleCredentials.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationTimestampType, location_name: "expiration", traits: {"smithy.api#default" => 0}))
     RoleCredentials.type = Types::RoleCredentials
-    RoleInfo.add_member(:role_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleNameType, location_name: "roleName"))
-    RoleInfo.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdType, location_name: "accountId"))
+    RoleInfo.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNameType, location_name: "roleName"))
+    RoleInfo.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, location_name: "accountId"))
     RoleInfo.type = Types::RoleInfo
-    RoleListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleInfo)
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "message"))
+    RoleListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleInfo)
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "message"))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "message"))
     UnauthorizedException.type = Types::UnauthorizedException
 
     SWBPortalService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -89,46 +89,46 @@ module Aws::SSO
       service.add_operation(:get_role_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sso#GetRoleCredentials"
         operation.name = "GetRoleCredentials"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRoleCredentialsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRoleCredentialsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = GetRoleCredentialsRequest
+        operation.output = GetRoleCredentialsResponse
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "GET", "uri" => "/federation/credentials", "code" => 200}, "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:list_account_roles, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sso#ListAccountRoles"
         operation.name = "ListAccountRoles"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAccountRolesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAccountRolesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListAccountRolesRequest
+        operation.output = ListAccountRolesResponse
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "GET", "uri" => "/assignment/roles", "code" => 200}, "smithy.api#optionalAuth" => {}}
         operation[:paginator] = Paginators::ListAccountRoles.new
       end)
       service.add_operation(:list_accounts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sso#ListAccounts"
         operation.name = "ListAccounts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAccountsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAccountsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListAccountsRequest
+        operation.output = ListAccountsResponse
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "GET", "uri" => "/assignment/accounts", "code" => 200}, "smithy.api#optionalAuth" => {}}
         operation[:paginator] = Paginators::ListAccounts.new
       end)
       service.add_operation(:logout, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sso#Logout"
         operation.name = "Logout"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogoutRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = LogoutRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/logout", "code" => 200}, "smithy.api#optionalAuth" => {}}
       end)
     end

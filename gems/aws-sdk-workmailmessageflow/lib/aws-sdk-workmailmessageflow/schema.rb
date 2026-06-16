@@ -23,29 +23,29 @@ module Aws::WorkMailMessageFlow
     S3KeyIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workmailmessageflow#s3KeyIdType", name: "S3KeyIdType", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-/]*$"})
     S3VersionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workmailmessageflow#s3VersionType", name: "S3VersionType", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^.+$"})
 
-    GetRawMessageContentRequest.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageIdType, location_name: "messageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRawMessageContentRequest.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageIdType, location_name: "messageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRawMessageContentRequest.type = Types::GetRawMessageContentRequest
-    GetRawMessageContentResponse.add_member(:message_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageContentBlob, location_name: "messageContent", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    GetRawMessageContentResponse.add_member(:message_content, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageContentBlob, location_name: "messageContent", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     GetRawMessageContentResponse[:http_payload] = :message_content
     GetRawMessageContentResponse[:http_payload_member] = GetRawMessageContentResponse.member(:message_content)
     GetRawMessageContentResponse.type = Types::GetRawMessageContentResponse
-    InvalidContentLocation.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidContentLocation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidContentLocation.type = Types::InvalidContentLocation
-    MessageFrozen.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MessageFrozen.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MessageFrozen.type = Types::MessageFrozen
-    MessageRejected.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MessageRejected.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MessageRejected.type = Types::MessageRejected
-    PutRawMessageContentRequest.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageIdType, location_name: "messageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutRawMessageContentRequest.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RawMessageContent, location_name: "content", traits: {"smithy.api#required" => {}}))
+    PutRawMessageContentRequest.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageIdType, location_name: "messageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutRawMessageContentRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMessageContent, location_name: "content", traits: {"smithy.api#required" => {}}))
     PutRawMessageContentRequest.type = Types::PutRawMessageContentRequest
     PutRawMessageContentResponse.type = Types::PutRawMessageContentResponse
-    RawMessageContent.add_member(:s3_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Reference, location_name: "s3Reference", traits: {"smithy.api#required" => {}}))
+    RawMessageContent.add_member(:s3_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Reference, location_name: "s3Reference", traits: {"smithy.api#required" => {}}))
     RawMessageContent.type = Types::RawMessageContent
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    S3Reference.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketIdType, location_name: "bucket", traits: {"smithy.api#required" => {}}))
-    S3Reference.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3KeyIdType, location_name: "key", traits: {"smithy.api#required" => {}}))
-    S3Reference.add_member(:object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3VersionType, location_name: "objectVersion"))
+    S3Reference.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketIdType, location_name: "bucket", traits: {"smithy.api#required" => {}}))
+    S3Reference.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyIdType, location_name: "key", traits: {"smithy.api#required" => {}}))
+    S3Reference.add_member(:object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3VersionType, location_name: "objectVersion"))
     S3Reference.type = Types::S3Reference
 
     GiraffeMessageInTransitService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -56,20 +56,20 @@ module Aws::WorkMailMessageFlow
       service.add_operation(:get_raw_message_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmailmessageflow#GetRawMessageContent"
         operation.name = "GetRawMessageContent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRawMessageContentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRawMessageContentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetRawMessageContentRequest
+        operation.output = GetRawMessageContentResponse
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/messages/{messageId}", "code" => 200}}
       end)
       service.add_operation(:put_raw_message_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmailmessageflow#PutRawMessageContent"
         operation.name = "PutRawMessageContent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRawMessageContentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRawMessageContentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContentLocation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageFrozen)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageRejected)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutRawMessageContentRequest
+        operation.output = PutRawMessageContentResponse
+        operation.errors << InvalidContentLocation
+        operation.errors << MessageFrozen
+        operation.errors << MessageRejected
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/messages/{messageId}", "code" => 200}}
       end)
     end

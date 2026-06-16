@@ -25,38 +25,38 @@ module Aws::KinesisVideoMedia
     StreamName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideomedia#StreamName", name: "StreamName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.kinesisvideomedia#Timestamp", name: "Timestamp")
 
-    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ClientLimitExceededException.type = Types::ClientLimitExceededException
-    ConnectionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConnectionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConnectionLimitExceededException.type = Types::ConnectionLimitExceededException
-    GetMediaInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    GetMediaInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    GetMediaInput.add_member(:start_selector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSelector, location_name: "StartSelector", traits: {"smithy.api#required" => {}}))
+    GetMediaInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    GetMediaInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "StreamARN"))
+    GetMediaInput.add_member(:start_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSelector, location_name: "StartSelector", traits: {"smithy.api#required" => {}}))
     GetMediaInput.type = Types::GetMediaInput
-    GetMediaOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
-    GetMediaOutput.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Payload, location_name: "Payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetMediaOutput.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    GetMediaOutput.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Payload, location_name: "Payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     GetMediaOutput[:http_payload] = :payload
     GetMediaOutput[:http_payload_member] = GetMediaOutput.member(:payload)
     GetMediaOutput.type = Types::GetMediaOutput
-    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
-    InvalidEndpointException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidEndpointException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidEndpointException.type = Types::InvalidEndpointException
-    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotAuthorizedException.type = Types::NotAuthorizedException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    StartSelector.add_member(:start_selector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSelectorType, location_name: "StartSelectorType", traits: {"smithy.api#required" => {}}))
-    StartSelector.add_member(:after_fragment_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FragmentNumberString, location_name: "AfterFragmentNumber"))
-    StartSelector.add_member(:start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
-    StartSelector.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "ContinuationToken"))
+    StartSelector.add_member(:start_selector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSelectorType, location_name: "StartSelectorType", traits: {"smithy.api#required" => {}}))
+    StartSelector.add_member(:after_fragment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberString, location_name: "AfterFragmentNumber"))
+    StartSelector.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTimestamp"))
+    StartSelector.add_member(:continuation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuationToken, location_name: "ContinuationToken"))
     StartSelector.type = Types::StartSelector
-    StartSelectorType.add_member(:fragment_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRAGMENT_NUMBER", traits: {"smithy.api#enumValue" => "FRAGMENT_NUMBER"}))
-    StartSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
-    StartSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
-    StartSelectorType.add_member(:now, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOW", traits: {"smithy.api#enumValue" => "NOW"}))
-    StartSelectorType.add_member(:earliest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EARLIEST", traits: {"smithy.api#enumValue" => "EARLIEST"}))
-    StartSelectorType.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTINUATION_TOKEN", traits: {"smithy.api#enumValue" => "CONTINUATION_TOKEN"}))
+    StartSelectorType.add_member(:fragment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRAGMENT_NUMBER", traits: {"smithy.api#enumValue" => "FRAGMENT_NUMBER"}))
+    StartSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
+    StartSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
+    StartSelectorType.add_member(:now, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOW", traits: {"smithy.api#enumValue" => "NOW"}))
+    StartSelectorType.add_member(:earliest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EARLIEST", traits: {"smithy.api#enumValue" => "EARLIEST"}))
+    StartSelectorType.add_member(:continuation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTINUATION_TOKEN", traits: {"smithy.api#enumValue" => "CONTINUATION_TOKEN"}))
 
     AWSAcuityInletService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.kinesisvideomedia#AWSAcuityInletService"
@@ -66,14 +66,14 @@ module Aws::KinesisVideoMedia
       service.add_operation(:get_media, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideomedia#GetMedia"
         operation.name = "GetMedia"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMediaInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMediaOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetMediaInput
+        operation.output = GetMediaOutput
+        operation.errors << ClientLimitExceededException
+        operation.errors << ConnectionLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << InvalidEndpointException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/getMedia", "code" => 200}}
       end)
     end

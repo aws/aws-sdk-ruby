@@ -115,282 +115,282 @@ module Aws::RolesAnywhere
     Uuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rolesanywhere#Uuid", name: "Uuid", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rolesanywhere#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AttributeMapping.add_member(:certificate_field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateField, location_name: "certificateField"))
-    AttributeMapping.add_member(:mapping_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MappingRules, location_name: "mappingRules"))
+    AttributeMapping.add_member(:certificate_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateField, location_name: "certificateField"))
+    AttributeMapping.add_member(:mapping_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRules, location_name: "mappingRules"))
     AttributeMapping.type = Types::AttributeMapping
-    AttributeMappings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMapping)
-    CreateProfileInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateProfileInput.add_member(:require_instance_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "requireInstanceProperties"))
-    CreateProfileInput.add_member(:session_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionPolicy"))
-    CreateProfileInput.add_member(:role_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns", traits: {"smithy.api#required" => {}}))
-    CreateProfileInput.add_member(:managed_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
-    CreateProfileInput.add_member(:duration_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "durationSeconds", traits: {"smithy.api#range" => {"min" => 900, "max" => 43200}}))
-    CreateProfileInput.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    CreateProfileInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateProfileInput.add_member(:accept_role_session_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "acceptRoleSessionName"))
+    AttributeMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMapping)
+    CreateProfileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateProfileInput.add_member(:require_instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "requireInstanceProperties"))
+    CreateProfileInput.add_member(:session_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionPolicy"))
+    CreateProfileInput.add_member(:role_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArnList, location_name: "roleArns", traits: {"smithy.api#required" => {}}))
+    CreateProfileInput.add_member(:managed_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyList, location_name: "managedPolicyArns"))
+    CreateProfileInput.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "durationSeconds", traits: {"smithy.api#range" => {"min" => 900, "max" => 43200}}))
+    CreateProfileInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    CreateProfileInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CreateProfileInput.add_member(:accept_role_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "acceptRoleSessionName"))
     CreateProfileInput.type = Types::CreateProfileInput
-    CreateProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
+    CreateProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile"))
     CreateProfileOutput.type = Types::CreateProfileOutput
-    CreateTrustAnchorInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateTrustAnchorInput.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "source", traits: {"smithy.api#required" => {}}))
-    CreateTrustAnchorInput.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    CreateTrustAnchorInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateTrustAnchorInput.add_member(:notification_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationSettings, location_name: "notificationSettings"))
+    CreateTrustAnchorInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateTrustAnchorInput.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "source", traits: {"smithy.api#required" => {}}))
+    CreateTrustAnchorInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    CreateTrustAnchorInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CreateTrustAnchorInput.add_member(:notification_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettings, location_name: "notificationSettings"))
     CreateTrustAnchorInput.type = Types::CreateTrustAnchorInput
-    CreateTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    CreateTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     CreateTrustAnchorOutput.type = Types::CreateTrustAnchorOutput
-    CredentialSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CredentialSummary)
-    CredentialSummary.add_member(:seen_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "seenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    CredentialSummary.add_member(:serial_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serialNumber"))
-    CredentialSummary.add_member(:issuer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "issuer"))
-    CredentialSummary.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    CredentialSummary.add_member(:x509_certificate_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509CertificateData"))
-    CredentialSummary.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "failed"))
+    CredentialSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialSummary)
+    CredentialSummary.add_member(:seen_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "seenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    CredentialSummary.add_member(:serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serialNumber"))
+    CredentialSummary.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "issuer"))
+    CredentialSummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    CredentialSummary.add_member(:x509_certificate_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509CertificateData"))
+    CredentialSummary.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "failed"))
     CredentialSummary.type = Types::CredentialSummary
-    CrlDetail.add_member(:crl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId"))
-    CrlDetail.add_member(:crl_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "crlArn"))
-    CrlDetail.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name"))
-    CrlDetail.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    CrlDetail.add_member(:crl_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "crlData"))
-    CrlDetail.add_member(:trust_anchor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "trustAnchorArn"))
-    CrlDetail.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    CrlDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    CrlDetail.add_member(:crl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "crlId"))
+    CrlDetail.add_member(:crl_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "crlArn"))
+    CrlDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name"))
+    CrlDetail.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    CrlDetail.add_member(:crl_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "crlData"))
+    CrlDetail.add_member(:trust_anchor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "trustAnchorArn"))
+    CrlDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    CrlDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CrlDetail.type = Types::CrlDetail
-    CrlDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetail)
-    DeleteAttributeMappingRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteAttributeMappingRequest.add_member(:certificate_field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateField, location_name: "certificateField", traits: {"smithy.api#httpQuery" => "certificateField", "smithy.api#required" => {}}))
-    DeleteAttributeMappingRequest.add_member(:specifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpecifierList, location_name: "specifiers", traits: {"smithy.api#httpQuery" => "specifiers"}))
+    CrlDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail)
+    DeleteAttributeMappingRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAttributeMappingRequest.add_member(:certificate_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateField, location_name: "certificateField", traits: {"smithy.api#httpQuery" => "certificateField", "smithy.api#required" => {}}))
+    DeleteAttributeMappingRequest.add_member(:specifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecifierList, location_name: "specifiers", traits: {"smithy.api#httpQuery" => "specifiers"}))
     DeleteAttributeMappingRequest.type = Types::DeleteAttributeMappingRequest
-    DeleteAttributeMappingResponse.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile", traits: {"smithy.api#required" => {}}))
+    DeleteAttributeMappingResponse.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile", traits: {"smithy.api#required" => {}}))
     DeleteAttributeMappingResponse.type = Types::DeleteAttributeMappingResponse
-    DeleteCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCrlInput.type = Types::DeleteCrlInput
-    DeleteCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
+    DeleteCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
     DeleteCrlOutput.type = Types::DeleteCrlOutput
-    DeleteProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProfileInput.type = Types::DeleteProfileInput
-    DeleteProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
+    DeleteProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile"))
     DeleteProfileOutput.type = Types::DeleteProfileOutput
-    DeleteTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteTrustAnchorInput.type = Types::DeleteTrustAnchorInput
-    DeleteTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    DeleteTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     DeleteTrustAnchorOutput.type = Types::DeleteTrustAnchorOutput
-    DisableCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisableCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisableCrlInput.type = Types::DisableCrlInput
-    DisableCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
+    DisableCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
     DisableCrlOutput.type = Types::DisableCrlOutput
-    DisableProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisableProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisableProfileInput.type = Types::DisableProfileInput
-    DisableProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
+    DisableProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile"))
     DisableProfileOutput.type = Types::DisableProfileOutput
-    DisableTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisableTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisableTrustAnchorInput.type = Types::DisableTrustAnchorInput
-    DisableTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    DisableTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     DisableTrustAnchorOutput.type = Types::DisableTrustAnchorOutput
-    EnableCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EnableCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     EnableCrlInput.type = Types::EnableCrlInput
-    EnableCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
+    EnableCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
     EnableCrlOutput.type = Types::EnableCrlOutput
-    EnableProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EnableProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     EnableProfileInput.type = Types::EnableProfileInput
-    EnableProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
+    EnableProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile"))
     EnableProfileOutput.type = Types::EnableProfileOutput
-    EnableTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EnableTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     EnableTrustAnchorInput.type = Types::EnableTrustAnchorInput
-    EnableTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    EnableTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     EnableTrustAnchorOutput.type = Types::EnableTrustAnchorOutput
-    GetCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetCrlInput.type = Types::GetCrlInput
-    GetCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
+    GetCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
     GetCrlOutput.type = Types::GetCrlOutput
-    GetProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProfileInput.type = Types::GetProfileInput
-    GetProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
+    GetProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile"))
     GetProfileOutput.type = Types::GetProfileOutput
-    GetSubjectInput.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "subjectId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSubjectInput.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "subjectId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSubjectInput.type = Types::GetSubjectInput
-    GetSubjectOutput.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectDetail, location_name: "subject"))
+    GetSubjectOutput.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectDetail, location_name: "subject"))
     GetSubjectOutput.type = Types::GetSubjectOutput
-    GetTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetTrustAnchorInput.type = Types::GetTrustAnchorInput
-    GetTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    GetTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     GetTrustAnchorOutput.type = Types::GetTrustAnchorOutput
-    ImportCrlInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ImportCrlInput.add_member(:crl_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "crlData", traits: {"smithy.api#length" => {"min" => 1, "max" => 300000}, "smithy.api#required" => {}}))
-    ImportCrlInput.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    ImportCrlInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    ImportCrlInput.add_member(:trust_anchor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorArn, location_name: "trustAnchorArn", traits: {"smithy.api#required" => {}}))
+    ImportCrlInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ImportCrlInput.add_member(:crl_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "crlData", traits: {"smithy.api#length" => {"min" => 1, "max" => 300000}, "smithy.api#required" => {}}))
+    ImportCrlInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    ImportCrlInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    ImportCrlInput.add_member(:trust_anchor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorArn, location_name: "trustAnchorArn", traits: {"smithy.api#required" => {}}))
     ImportCrlInput.type = Types::ImportCrlInput
-    ImportCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
+    ImportCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
     ImportCrlOutput.type = Types::ImportCrlOutput
-    InstanceProperties.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceProperty)
-    InstanceProperty.add_member(:seen_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "seenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    InstanceProperty.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstancePropertyMap, location_name: "properties"))
-    InstanceProperty.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "failed"))
+    InstanceProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProperty)
+    InstanceProperty.add_member(:seen_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "seenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    InstanceProperty.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePropertyMap, location_name: "properties"))
+    InstanceProperty.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "failed"))
     InstanceProperty.type = Types::InstanceProperty
-    InstancePropertyMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
-    InstancePropertyMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
-    ListCrlsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListCrlsInput.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
+    InstancePropertyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    InstancePropertyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    ListCrlsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListCrlsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
     ListCrlsInput.type = Types::ListCrlsInput
-    ListCrlsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
-    ListCrlsOutput.add_member(:crls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetails, location_name: "crls"))
+    ListCrlsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListCrlsOutput.add_member(:crls, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetails, location_name: "crls"))
     ListCrlsOutput.type = Types::ListCrlsOutput
-    ListProfilesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListProfilesInput.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
+    ListProfilesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListProfilesInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
     ListProfilesInput.type = Types::ListProfilesInput
-    ListProfilesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
-    ListProfilesOutput.add_member(:profiles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetails, location_name: "profiles"))
+    ListProfilesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListProfilesOutput.add_member(:profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetails, location_name: "profiles"))
     ListProfilesOutput.type = Types::ListProfilesOutput
-    ListSubjectsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListSubjectsInput.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
+    ListSubjectsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListSubjectsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
     ListSubjectsInput.type = Types::ListSubjectsInput
-    ListSubjectsOutput.add_member(:subjects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectSummaries, location_name: "subjects"))
-    ListSubjectsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListSubjectsOutput.add_member(:subjects, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectSummaries, location_name: "subjects"))
+    ListSubjectsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListSubjectsOutput.type = Types::ListSubjectsOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListTrustAnchorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListTrustAnchorsInput.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
+    ListTrustAnchorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListTrustAnchorsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
     ListTrustAnchorsInput.type = Types::ListTrustAnchorsInput
-    ListTrustAnchorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
-    ListTrustAnchorsOutput.add_member(:trust_anchors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetails, location_name: "trustAnchors"))
+    ListTrustAnchorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListTrustAnchorsOutput.add_member(:trust_anchors, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetails, location_name: "trustAnchors"))
     ListTrustAnchorsOutput.type = Types::ListTrustAnchorsOutput
-    ManagedPolicyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
-    MappingRule.add_member(:specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "specifier", traits: {"smithy.api#length" => {"max" => 60}, "smithy.api#required" => {}}))
+    ManagedPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    MappingRule.add_member(:specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "specifier", traits: {"smithy.api#length" => {"max" => 60}, "smithy.api#required" => {}}))
     MappingRule.type = Types::MappingRule
-    MappingRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MappingRule)
-    NotificationSetting.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled", traits: {"smithy.api#required" => {}}))
-    NotificationSetting.add_member(:event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEvent, location_name: "event", traits: {"smithy.api#required" => {}}))
-    NotificationSetting.add_member(:threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "threshold", traits: {"smithy.api#range" => {"min" => 1, "max" => 360}}))
-    NotificationSetting.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
+    MappingRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRule)
+    NotificationSetting.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled", traits: {"smithy.api#required" => {}}))
+    NotificationSetting.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEvent, location_name: "event", traits: {"smithy.api#required" => {}}))
+    NotificationSetting.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "threshold", traits: {"smithy.api#range" => {"min" => 1, "max" => 360}}))
+    NotificationSetting.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannel, location_name: "channel"))
     NotificationSetting.type = Types::NotificationSetting
-    NotificationSettingDetail.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled", traits: {"smithy.api#required" => {}}))
-    NotificationSettingDetail.add_member(:event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEvent, location_name: "event", traits: {"smithy.api#required" => {}}))
-    NotificationSettingDetail.add_member(:threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "threshold", traits: {"smithy.api#range" => {"min" => 1, "max" => 360}}))
-    NotificationSettingDetail.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
-    NotificationSettingDetail.add_member(:configured_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "configuredBy", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}}))
+    NotificationSettingDetail.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled", traits: {"smithy.api#required" => {}}))
+    NotificationSettingDetail.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEvent, location_name: "event", traits: {"smithy.api#required" => {}}))
+    NotificationSettingDetail.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "threshold", traits: {"smithy.api#range" => {"min" => 1, "max" => 360}}))
+    NotificationSettingDetail.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannel, location_name: "channel"))
+    NotificationSettingDetail.add_member(:configured_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "configuredBy", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}}))
     NotificationSettingDetail.type = Types::NotificationSettingDetail
-    NotificationSettingDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationSettingDetail)
-    NotificationSettingKey.add_member(:event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEvent, location_name: "event", traits: {"smithy.api#required" => {}}))
-    NotificationSettingKey.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
+    NotificationSettingDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingDetail)
+    NotificationSettingKey.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEvent, location_name: "event", traits: {"smithy.api#required" => {}}))
+    NotificationSettingKey.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannel, location_name: "channel"))
     NotificationSettingKey.type = Types::NotificationSettingKey
-    NotificationSettingKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationSettingKey)
-    NotificationSettings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationSetting)
-    ProfileDetail.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId"))
-    ProfileDetail.add_member(:profile_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileArn, location_name: "profileArn"))
-    ProfileDetail.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    ProfileDetail.add_member(:require_instance_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "requireInstanceProperties"))
-    ProfileDetail.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    ProfileDetail.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "createdBy"))
-    ProfileDetail.add_member(:session_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionPolicy"))
-    ProfileDetail.add_member(:role_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns"))
-    ProfileDetail.add_member(:managed_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
-    ProfileDetail.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ProfileDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ProfileDetail.add_member(:duration_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "durationSeconds"))
-    ProfileDetail.add_member(:accept_role_session_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "acceptRoleSessionName"))
-    ProfileDetail.add_member(:attribute_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMappings, location_name: "attributeMappings"))
+    NotificationSettingKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingKey)
+    NotificationSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSetting)
+    ProfileDetail.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId"))
+    ProfileDetail.add_member(:profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileArn, location_name: "profileArn"))
+    ProfileDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name"))
+    ProfileDetail.add_member(:require_instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "requireInstanceProperties"))
+    ProfileDetail.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    ProfileDetail.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "createdBy"))
+    ProfileDetail.add_member(:session_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionPolicy"))
+    ProfileDetail.add_member(:role_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArnList, location_name: "roleArns"))
+    ProfileDetail.add_member(:managed_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyList, location_name: "managedPolicyArns"))
+    ProfileDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ProfileDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ProfileDetail.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "durationSeconds"))
+    ProfileDetail.add_member(:accept_role_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "acceptRoleSessionName"))
+    ProfileDetail.add_member(:attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappings, location_name: "attributeMappings"))
     ProfileDetail.type = Types::ProfileDetail
-    ProfileDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail)
-    PutAttributeMappingRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutAttributeMappingRequest.add_member(:certificate_field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateField, location_name: "certificateField", traits: {"smithy.api#required" => {}}))
-    PutAttributeMappingRequest.add_member(:mapping_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MappingRules, location_name: "mappingRules", traits: {"smithy.api#required" => {}}))
+    ProfileDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail)
+    PutAttributeMappingRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutAttributeMappingRequest.add_member(:certificate_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateField, location_name: "certificateField", traits: {"smithy.api#required" => {}}))
+    PutAttributeMappingRequest.add_member(:mapping_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRules, location_name: "mappingRules", traits: {"smithy.api#required" => {}}))
     PutAttributeMappingRequest.type = Types::PutAttributeMappingRequest
-    PutAttributeMappingResponse.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile", traits: {"smithy.api#required" => {}}))
+    PutAttributeMappingResponse.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile", traits: {"smithy.api#required" => {}}))
     PutAttributeMappingResponse.type = Types::PutAttributeMappingResponse
-    PutNotificationSettingsRequest.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#required" => {}}))
-    PutNotificationSettingsRequest.add_member(:notification_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationSettings, location_name: "notificationSettings", traits: {"smithy.api#required" => {}}))
+    PutNotificationSettingsRequest.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#required" => {}}))
+    PutNotificationSettingsRequest.add_member(:notification_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettings, location_name: "notificationSettings", traits: {"smithy.api#required" => {}}))
     PutNotificationSettingsRequest.type = Types::PutNotificationSettingsRequest
-    PutNotificationSettingsResponse.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    PutNotificationSettingsResponse.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     PutNotificationSettingsResponse.type = Types::PutNotificationSettingsResponse
-    ResetNotificationSettingsRequest.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#required" => {}}))
-    ResetNotificationSettingsRequest.add_member(:notification_setting_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationSettingKeys, location_name: "notificationSettingKeys", traits: {"smithy.api#required" => {}}))
+    ResetNotificationSettingsRequest.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#required" => {}}))
+    ResetNotificationSettingsRequest.add_member(:notification_setting_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingKeys, location_name: "notificationSettingKeys", traits: {"smithy.api#required" => {}}))
     ResetNotificationSettingsRequest.type = Types::ResetNotificationSettingsRequest
-    ResetNotificationSettingsResponse.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    ResetNotificationSettingsResponse.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     ResetNotificationSettingsResponse.type = Types::ResetNotificationSettingsResponse
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoleArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn)
-    Source.add_member(:source_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorType, location_name: "sourceType"))
-    Source.add_member(:source_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceData, location_name: "sourceData"))
+    RoleArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn)
+    Source.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorType, location_name: "sourceType"))
+    Source.add_member(:source_data, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceData, location_name: "sourceData"))
     Source.type = Types::Source
-    SourceData.add_member(:x509_certificate_data, Types::SourceData::X509CertificateData, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509CertificateData", traits: {"smithy.api#length" => {"min" => 1, "max" => 8000}}))
-    SourceData.add_member(:acm_pca_arn, Types::SourceData::AcmPcaArn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "acmPcaArn"))
-    SourceData.add_member(:unknown, Types::SourceData::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SourceData.add_member(:x509_certificate_data, Types::SourceData::X509CertificateData, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509CertificateData", traits: {"smithy.api#length" => {"min" => 1, "max" => 8000}}))
+    SourceData.add_member(:acm_pca_arn, Types::SourceData::AcmPcaArn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "acmPcaArn"))
+    SourceData.add_member(:unknown, Types::SourceData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SourceData.type = Types::SourceData
-    SpecifierList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    SubjectDetail.add_member(:subject_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "subjectArn"))
-    SubjectDetail.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "subjectId"))
-    SubjectDetail.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    SubjectDetail.add_member(:x509_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509Subject"))
-    SubjectDetail.add_member(:last_seen_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastSeenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SubjectDetail.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SubjectDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SubjectDetail.add_member(:credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CredentialSummaries, location_name: "credentials"))
-    SubjectDetail.add_member(:instance_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceProperties, location_name: "instanceProperties"))
+    SpecifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    SubjectDetail.add_member(:subject_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "subjectArn"))
+    SubjectDetail.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "subjectId"))
+    SubjectDetail.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    SubjectDetail.add_member(:x509_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509Subject"))
+    SubjectDetail.add_member(:last_seen_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastSeenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SubjectDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SubjectDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SubjectDetail.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialSummaries, location_name: "credentials"))
+    SubjectDetail.add_member(:instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProperties, location_name: "instanceProperties"))
     SubjectDetail.type = Types::SubjectDetail
-    SubjectSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectSummary)
-    SubjectSummary.add_member(:subject_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "subjectArn"))
-    SubjectSummary.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "subjectId"))
-    SubjectSummary.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    SubjectSummary.add_member(:x509_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509Subject"))
-    SubjectSummary.add_member(:last_seen_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastSeenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SubjectSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SubjectSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SubjectSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectSummary)
+    SubjectSummary.add_member(:subject_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "subjectArn"))
+    SubjectSummary.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "subjectId"))
+    SubjectSummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    SubjectSummary.add_member(:x509_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "x509Subject"))
+    SubjectSummary.add_member(:last_seen_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastSeenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SubjectSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SubjectSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     SubjectSummary.type = Types::SubjectSummary
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    TrustAnchorDetail.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId"))
-    TrustAnchorDetail.add_member(:trust_anchor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "trustAnchorArn"))
-    TrustAnchorDetail.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    TrustAnchorDetail.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "source"))
-    TrustAnchorDetail.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    TrustAnchorDetail.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    TrustAnchorDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    TrustAnchorDetail.add_member(:notification_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationSettingDetails, location_name: "notificationSettings"))
+    TrustAnchorDetail.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId"))
+    TrustAnchorDetail.add_member(:trust_anchor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "trustAnchorArn"))
+    TrustAnchorDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name"))
+    TrustAnchorDetail.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "source"))
+    TrustAnchorDetail.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    TrustAnchorDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    TrustAnchorDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    TrustAnchorDetail.add_member(:notification_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingDetails, location_name: "notificationSettings"))
     TrustAnchorDetail.type = Types::TrustAnchorDetail
-    TrustAnchorDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail)
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
+    TrustAnchorDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail)
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCrlInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    UpdateCrlInput.add_member(:crl_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "crlData", traits: {"smithy.api#length" => {"min" => 1, "max" => 300000}}))
+    UpdateCrlInput.add_member(:crl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "crlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCrlInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name"))
+    UpdateCrlInput.add_member(:crl_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "crlData", traits: {"smithy.api#length" => {"min" => 1, "max" => 300000}}))
     UpdateCrlInput.type = Types::UpdateCrlInput
-    UpdateCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
+    UpdateCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, location_name: "crl", traits: {"smithy.api#required" => {}}))
     UpdateCrlOutput.type = Types::UpdateCrlOutput
-    UpdateProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateProfileInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    UpdateProfileInput.add_member(:session_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionPolicy", traits: {"smithy.api#length" => {"min" => 1, "max" => 100000}}))
-    UpdateProfileInput.add_member(:role_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns"))
-    UpdateProfileInput.add_member(:managed_policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
-    UpdateProfileInput.add_member(:duration_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "durationSeconds", traits: {"smithy.api#range" => {"min" => 900, "max" => 43200}}))
-    UpdateProfileInput.add_member(:accept_role_session_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "acceptRoleSessionName"))
+    UpdateProfileInput.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProfileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name"))
+    UpdateProfileInput.add_member(:session_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionPolicy", traits: {"smithy.api#length" => {"min" => 1, "max" => 100000}}))
+    UpdateProfileInput.add_member(:role_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArnList, location_name: "roleArns"))
+    UpdateProfileInput.add_member(:managed_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyList, location_name: "managedPolicyArns"))
+    UpdateProfileInput.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "durationSeconds", traits: {"smithy.api#range" => {"min" => 900, "max" => 43200}}))
+    UpdateProfileInput.add_member(:accept_role_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "acceptRoleSessionName"))
     UpdateProfileInput.type = Types::UpdateProfileInput
-    UpdateProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
+    UpdateProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, location_name: "profile"))
     UpdateProfileOutput.type = Types::UpdateProfileOutput
-    UpdateTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateTrustAnchorInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    UpdateTrustAnchorInput.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    UpdateTrustAnchorInput.add_member(:trust_anchor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "trustAnchorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateTrustAnchorInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "name"))
+    UpdateTrustAnchorInput.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "source"))
     UpdateTrustAnchorInput.type = Types::UpdateTrustAnchorInput
-    UpdateTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
+    UpdateTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, location_name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     UpdateTrustAnchorOutput.type = Types::UpdateTrustAnchorOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     RolesAnywhere = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -401,286 +401,286 @@ module Aws::RolesAnywhere
       service.add_operation(:create_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#CreateProfile"
         operation.name = "CreateProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateProfileInput
+        operation.output = CreateProfileOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/profiles", "method" => "POST", "code" => 201}}
       end)
       service.add_operation(:create_trust_anchor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#CreateTrustAnchor"
         operation.name = "CreateTrustAnchor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTrustAnchorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTrustAnchorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateTrustAnchorInput
+        operation.output = CreateTrustAnchorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/trustanchors", "method" => "POST", "code" => 201}}
       end)
       service.add_operation(:delete_attribute_mapping, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#DeleteAttributeMapping"
         operation.name = "DeleteAttributeMapping"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAttributeMappingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAttributeMappingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteAttributeMappingRequest
+        operation.output = DeleteAttributeMappingResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/profiles/{profileId}/mappings", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_crl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#DeleteCrl"
         operation.name = "DeleteCrl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCrlInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCrlOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteCrlInput
+        operation.output = DeleteCrlOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/crl/{crlId}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#DeleteProfile"
         operation.name = "DeleteProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteProfileInput
+        operation.output = DeleteProfileOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/profile/{profileId}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_trust_anchor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#DeleteTrustAnchor"
         operation.name = "DeleteTrustAnchor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTrustAnchorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTrustAnchorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteTrustAnchorInput
+        operation.output = DeleteTrustAnchorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/trustanchor/{trustAnchorId}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:disable_crl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#DisableCrl"
         operation.name = "DisableCrl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableCrlInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableCrlOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DisableCrlInput
+        operation.output = DisableCrlOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/crl/{crlId}/disable", "method" => "POST"}}
       end)
       service.add_operation(:disable_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#DisableProfile"
         operation.name = "DisableProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DisableProfileInput
+        operation.output = DisableProfileOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/profile/{profileId}/disable", "method" => "POST"}}
       end)
       service.add_operation(:disable_trust_anchor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#DisableTrustAnchor"
         operation.name = "DisableTrustAnchor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableTrustAnchorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableTrustAnchorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DisableTrustAnchorInput
+        operation.output = DisableTrustAnchorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/trustanchor/{trustAnchorId}/disable", "method" => "POST"}}
       end)
       service.add_operation(:enable_crl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#EnableCrl"
         operation.name = "EnableCrl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableCrlInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableCrlOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = EnableCrlInput
+        operation.output = EnableCrlOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/crl/{crlId}/enable", "method" => "POST"}}
       end)
       service.add_operation(:enable_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#EnableProfile"
         operation.name = "EnableProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = EnableProfileInput
+        operation.output = EnableProfileOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/profile/{profileId}/enable", "method" => "POST"}}
       end)
       service.add_operation(:enable_trust_anchor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#EnableTrustAnchor"
         operation.name = "EnableTrustAnchor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableTrustAnchorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableTrustAnchorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = EnableTrustAnchorInput
+        operation.output = EnableTrustAnchorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/trustanchor/{trustAnchorId}/enable", "method" => "POST"}}
       end)
       service.add_operation(:get_crl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#GetCrl"
         operation.name = "GetCrl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCrlInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCrlOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetCrlInput
+        operation.output = GetCrlOutput
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/crl/{crlId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#GetProfile"
         operation.name = "GetProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetProfileInput
+        operation.output = GetProfileOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/profile/{profileId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_subject, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#GetSubject"
         operation.name = "GetSubject"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSubjectInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSubjectOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetSubjectInput
+        operation.output = GetSubjectOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"uri" => "/subject/{subjectId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_trust_anchor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#GetTrustAnchor"
         operation.name = "GetTrustAnchor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTrustAnchorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTrustAnchorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTrustAnchorInput
+        operation.output = GetTrustAnchorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/trustanchor/{trustAnchorId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:import_crl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#ImportCrl"
         operation.name = "ImportCrl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportCrlInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportCrlOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ImportCrlInput
+        operation.output = ImportCrlOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/crls", "method" => "POST", "code" => 201}}
       end)
       service.add_operation(:list_crls, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#ListCrls"
         operation.name = "ListCrls"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCrlsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCrlsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListCrlsInput
+        operation.output = ListCrlsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/crls", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListCrls.new
       end)
       service.add_operation(:list_profiles, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#ListProfiles"
         operation.name = "ListProfiles"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfilesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfilesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListProfilesInput
+        operation.output = ListProfilesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/profiles", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListProfiles.new
       end)
       service.add_operation(:list_subjects, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#ListSubjects"
         operation.name = "ListSubjects"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSubjectsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSubjectsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSubjectsInput
+        operation.output = ListSubjectsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/subjects", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSubjects.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/ListTagsForResource", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_trust_anchors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#ListTrustAnchors"
         operation.name = "ListTrustAnchors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTrustAnchorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTrustAnchorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTrustAnchorsInput
+        operation.output = ListTrustAnchorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/trustanchors", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTrustAnchors.new
       end)
       service.add_operation(:put_attribute_mapping, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#PutAttributeMapping"
         operation.name = "PutAttributeMapping"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAttributeMappingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAttributeMappingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutAttributeMappingRequest
+        operation.output = PutAttributeMappingResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/profiles/{profileId}/mappings", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_notification_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#PutNotificationSettings"
         operation.name = "PutNotificationSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutNotificationSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutNotificationSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutNotificationSettingsRequest
+        operation.output = PutNotificationSettingsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/put-notifications-settings", "method" => "PATCH"}}
       end)
       service.add_operation(:reset_notification_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#ResetNotificationSettings"
         operation.name = "ResetNotificationSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetNotificationSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetNotificationSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ResetNotificationSettingsRequest
+        operation.output = ResetNotificationSettingsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/reset-notifications-settings", "method" => "PATCH"}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/TagResource", "method" => "POST", "code" => 201}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/UntagResource", "method" => "POST", "code" => 200}}
       end)
       service.add_operation(:update_crl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#UpdateCrl"
         operation.name = "UpdateCrl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCrlInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCrlOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCrlInput
+        operation.output = UpdateCrlOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/crl/{crlId}", "method" => "PATCH"}}
       end)
       service.add_operation(:update_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#UpdateProfile"
         operation.name = "UpdateProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateProfileInput
+        operation.output = UpdateProfileOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/profile/{profileId}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_trust_anchor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rolesanywhere#UpdateTrustAnchor"
         operation.name = "UpdateTrustAnchor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTrustAnchorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTrustAnchorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateTrustAnchorInput
+        operation.output = UpdateTrustAnchorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/trustanchor/{trustAnchorId}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
     end

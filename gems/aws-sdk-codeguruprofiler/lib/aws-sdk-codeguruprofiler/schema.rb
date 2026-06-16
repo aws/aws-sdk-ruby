@@ -131,292 +131,292 @@ module Aws::CodeGuruProfiler
     UserFeedback = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codeguruprofiler#UserFeedback", name: "UserFeedback")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codeguruprofiler#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AddNotificationChannelsInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AddNotificationChannelsInput.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channels, location_name: "channels", traits: {"smithy.api#required" => {}}))
+    AddNotificationChannelsInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AddNotificationChannelsInput.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, location_name: "channels", traits: {"smithy.api#required" => {}}))
     AddNotificationChannelsInput.type = Types::AddNotificationChannelsInput
-    AddNotificationChannelsOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "notificationConfiguration"))
+    AddNotificationChannelsOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfiguration, location_name: "notificationConfiguration"))
     AddNotificationChannelsOutput.type = Types::AddNotificationChannelsOutput
-    AgentConfiguration.add_member(:should_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "shouldProfile", traits: {"smithy.api#required" => {}}))
-    AgentConfiguration.add_member(:period_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "periodInSeconds", traits: {"smithy.api#required" => {}}))
-    AgentConfiguration.add_member(:agent_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentParameters, location_name: "agentParameters"))
+    AgentConfiguration.add_member(:should_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "shouldProfile", traits: {"smithy.api#required" => {}}))
+    AgentConfiguration.add_member(:period_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "periodInSeconds", traits: {"smithy.api#required" => {}}))
+    AgentConfiguration.add_member(:agent_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentParameters, location_name: "agentParameters"))
     AgentConfiguration.type = Types::AgentConfiguration
-    AgentOrchestrationConfig.add_member(:profiling_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "profilingEnabled", traits: {"smithy.api#required" => {}}))
+    AgentOrchestrationConfig.add_member(:profiling_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "profilingEnabled", traits: {"smithy.api#required" => {}}))
     AgentOrchestrationConfig.type = Types::AgentOrchestrationConfig
-    AgentParameters.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentParameterField)
-    AgentParameters.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    AggregatedProfileTime.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "start"))
-    AggregatedProfileTime.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "period"))
+    AgentParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentParameterField)
+    AgentParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    AggregatedProfileTime.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "start"))
+    AggregatedProfileTime.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "period"))
     AggregatedProfileTime.type = Types::AggregatedProfileTime
-    Anomalies.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Anomaly)
-    Anomaly.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metric, location_name: "metric", traits: {"smithy.api#required" => {}}))
-    Anomaly.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "reason", traits: {"smithy.api#required" => {}}))
-    Anomaly.add_member(:instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnomalyInstances, location_name: "instances", traits: {"smithy.api#required" => {}}))
+    Anomalies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly)
+    Anomaly.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, location_name: "metric", traits: {"smithy.api#required" => {}}))
+    Anomaly.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "reason", traits: {"smithy.api#required" => {}}))
+    Anomaly.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyInstances, location_name: "instances", traits: {"smithy.api#required" => {}}))
     Anomaly.type = Types::Anomaly
-    AnomalyInstance.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id", traits: {"smithy.api#required" => {}}))
-    AnomalyInstance.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    AnomalyInstance.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
-    AnomalyInstance.add_member(:user_feedback, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserFeedback, location_name: "userFeedback"))
+    AnomalyInstance.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id", traits: {"smithy.api#required" => {}}))
+    AnomalyInstance.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    AnomalyInstance.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime"))
+    AnomalyInstance.add_member(:user_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: UserFeedback, location_name: "userFeedback"))
     AnomalyInstance.type = Types::AnomalyInstance
-    AnomalyInstances.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnomalyInstance)
-    BatchGetFrameMetricDataInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    BatchGetFrameMetricDataInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime"}))
-    BatchGetFrameMetricDataInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime"}))
-    BatchGetFrameMetricDataInput.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Period, location_name: "period", traits: {"smithy.api#httpQuery" => "period"}))
-    BatchGetFrameMetricDataInput.add_member(:target_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "targetResolution", traits: {"smithy.api#httpQuery" => "targetResolution"}))
-    BatchGetFrameMetricDataInput.add_member(:frame_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameMetrics, location_name: "frameMetrics"))
+    AnomalyInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyInstance)
+    BatchGetFrameMetricDataInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchGetFrameMetricDataInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime"}))
+    BatchGetFrameMetricDataInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime"}))
+    BatchGetFrameMetricDataInput.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: Period, location_name: "period", traits: {"smithy.api#httpQuery" => "period"}))
+    BatchGetFrameMetricDataInput.add_member(:target_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "targetResolution", traits: {"smithy.api#httpQuery" => "targetResolution"}))
+    BatchGetFrameMetricDataInput.add_member(:frame_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetrics, location_name: "frameMetrics"))
     BatchGetFrameMetricDataInput.type = Types::BatchGetFrameMetricDataInput
-    BatchGetFrameMetricDataOutput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    BatchGetFrameMetricDataOutput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime", traits: {"smithy.api#required" => {}}))
-    BatchGetFrameMetricDataOutput.add_member(:resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "resolution", traits: {"smithy.api#required" => {}}))
-    BatchGetFrameMetricDataOutput.add_member(:end_times, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfTimestamps, location_name: "endTimes", traits: {"smithy.api#required" => {}}))
-    BatchGetFrameMetricDataOutput.add_member(:unprocessed_end_times, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessedEndTimeMap, location_name: "unprocessedEndTimes", traits: {"smithy.api#required" => {}}))
-    BatchGetFrameMetricDataOutput.add_member(:frame_metric_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameMetricData, location_name: "frameMetricData", traits: {"smithy.api#required" => {}}))
+    BatchGetFrameMetricDataOutput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    BatchGetFrameMetricDataOutput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime", traits: {"smithy.api#required" => {}}))
+    BatchGetFrameMetricDataOutput.add_member(:resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "resolution", traits: {"smithy.api#required" => {}}))
+    BatchGetFrameMetricDataOutput.add_member(:end_times, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTimestamps, location_name: "endTimes", traits: {"smithy.api#required" => {}}))
+    BatchGetFrameMetricDataOutput.add_member(:unprocessed_end_times, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedEndTimeMap, location_name: "unprocessedEndTimes", traits: {"smithy.api#required" => {}}))
+    BatchGetFrameMetricDataOutput.add_member(:frame_metric_data, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricData, location_name: "frameMetricData", traits: {"smithy.api#required" => {}}))
     BatchGetFrameMetricDataOutput.type = Types::BatchGetFrameMetricDataOutput
-    Channel.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "id"))
-    Channel.add_member(:uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelUri, location_name: "uri", traits: {"smithy.api#required" => {}}))
-    Channel.add_member(:event_publishers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventPublishers, location_name: "eventPublishers", traits: {"smithy.api#required" => {}}))
+    Channel.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "id"))
+    Channel.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelUri, location_name: "uri", traits: {"smithy.api#required" => {}}))
+    Channel.add_member(:event_publishers, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPublishers, location_name: "eventPublishers", traits: {"smithy.api#required" => {}}))
     Channel.type = Types::Channel
-    Channels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel)
-    ConfigureAgentInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ConfigureAgentInput.add_member(:fleet_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FleetInstanceId, location_name: "fleetInstanceId"))
-    ConfigureAgentInput.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel)
+    ConfigureAgentInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ConfigureAgentInput.add_member(:fleet_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetInstanceId, location_name: "fleetInstanceId"))
+    ConfigureAgentInput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "metadata"))
     ConfigureAgentInput.type = Types::ConfigureAgentInput
-    ConfigureAgentOutput.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentConfiguration, location_name: "configuration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    ConfigureAgentOutput.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentConfiguration, location_name: "configuration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     ConfigureAgentOutput[:http_payload] = :configuration
     ConfigureAgentOutput[:http_payload_member] = ConfigureAgentOutput.member(:configuration)
     ConfigureAgentOutput.type = Types::ConfigureAgentOutput
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#required" => {}}))
-    CreateProfilingGroupInput.add_member(:compute_platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
-    CreateProfilingGroupInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateProfilingGroupInput.add_member(:agent_orchestration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentOrchestrationConfig, location_name: "agentOrchestrationConfig"))
-    CreateProfilingGroupInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#required" => {}}))
+    CreateProfilingGroupInput.add_member(:compute_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputePlatform, location_name: "computePlatform"))
+    CreateProfilingGroupInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateProfilingGroupInput.add_member(:agent_orchestration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentOrchestrationConfig, location_name: "agentOrchestrationConfig"))
+    CreateProfilingGroupInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags"))
     CreateProfilingGroupInput.type = Types::CreateProfilingGroupInput
-    CreateProfilingGroupOutput.add_member(:profiling_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupDescription, location_name: "profilingGroup", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateProfilingGroupOutput.add_member(:profiling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupDescription, location_name: "profilingGroup", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateProfilingGroupOutput[:http_payload] = :profiling_group
     CreateProfilingGroupOutput[:http_payload_member] = CreateProfilingGroupOutput.member(:profiling_group)
     CreateProfilingGroupOutput.type = Types::CreateProfilingGroupOutput
-    DeleteProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProfilingGroupInput.type = Types::DeleteProfilingGroupInput
     DeleteProfilingGroupOutput.type = Types::DeleteProfilingGroupOutput
-    DescribeProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeProfilingGroupInput.type = Types::DescribeProfilingGroupInput
-    DescribeProfilingGroupOutput.add_member(:profiling_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupDescription, location_name: "profilingGroup", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeProfilingGroupOutput.add_member(:profiling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupDescription, location_name: "profilingGroup", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeProfilingGroupOutput[:http_payload] = :profiling_group
     DescribeProfilingGroupOutput[:http_payload_member] = DescribeProfilingGroupOutput.member(:profiling_group)
     DescribeProfilingGroupOutput.type = Types::DescribeProfilingGroupOutput
-    EventPublishers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventPublisher)
-    FindingsReportSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingsReportSummary)
-    FindingsReportSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingsReportId, location_name: "id"))
-    FindingsReportSummary.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "profilingGroupName"))
-    FindingsReportSummary.add_member(:profile_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "profileStartTime"))
-    FindingsReportSummary.add_member(:profile_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "profileEndTime"))
-    FindingsReportSummary.add_member(:total_number_of_findings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "totalNumberOfFindings"))
+    EventPublishers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventPublisher)
+    FindingsReportSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportSummary)
+    FindingsReportSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportId, location_name: "id"))
+    FindingsReportSummary.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "profilingGroupName"))
+    FindingsReportSummary.add_member(:profile_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "profileStartTime"))
+    FindingsReportSummary.add_member(:profile_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "profileEndTime"))
+    FindingsReportSummary.add_member(:total_number_of_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "totalNumberOfFindings"))
     FindingsReportSummary.type = Types::FindingsReportSummary
-    FrameMetric.add_member(:frame_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "frameName", traits: {"smithy.api#required" => {}}))
-    FrameMetric.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    FrameMetric.add_member(:thread_states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThreadStates, location_name: "threadStates", traits: {"smithy.api#required" => {}}))
+    FrameMetric.add_member(:frame_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "frameName", traits: {"smithy.api#required" => {}}))
+    FrameMetric.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    FrameMetric.add_member(:thread_states, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreadStates, location_name: "threadStates", traits: {"smithy.api#required" => {}}))
     FrameMetric.type = Types::FrameMetric
-    FrameMetricData.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameMetricDatum)
-    FrameMetricDatum.add_member(:frame_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameMetric, location_name: "frameMetric", traits: {"smithy.api#required" => {}}))
-    FrameMetricDatum.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameMetricValues, location_name: "values", traits: {"smithy.api#required" => {}}))
+    FrameMetricData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricDatum)
+    FrameMetricDatum.add_member(:frame_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetric, location_name: "frameMetric", traits: {"smithy.api#required" => {}}))
+    FrameMetricDatum.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricValues, location_name: "values", traits: {"smithy.api#required" => {}}))
     FrameMetricDatum.type = Types::FrameMetricDatum
-    FrameMetricValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameMetricValue)
-    FrameMetrics.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameMetric)
-    GetFindingsReportAccountSummaryInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    GetFindingsReportAccountSummaryInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    GetFindingsReportAccountSummaryInput.add_member(:daily_reports_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "dailyReportsOnly", traits: {"smithy.api#httpQuery" => "dailyReportsOnly"}))
+    FrameMetricValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricValue)
+    FrameMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetric)
+    GetFindingsReportAccountSummaryInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetFindingsReportAccountSummaryInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetFindingsReportAccountSummaryInput.add_member(:daily_reports_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "dailyReportsOnly", traits: {"smithy.api#httpQuery" => "dailyReportsOnly"}))
     GetFindingsReportAccountSummaryInput.type = Types::GetFindingsReportAccountSummaryInput
-    GetFindingsReportAccountSummaryOutput.add_member(:report_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingsReportSummaries, location_name: "reportSummaries", traits: {"smithy.api#required" => {}}))
-    GetFindingsReportAccountSummaryOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    GetFindingsReportAccountSummaryOutput.add_member(:report_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportSummaries, location_name: "reportSummaries", traits: {"smithy.api#required" => {}}))
+    GetFindingsReportAccountSummaryOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     GetFindingsReportAccountSummaryOutput.type = Types::GetFindingsReportAccountSummaryOutput
-    GetNotificationConfigurationInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetNotificationConfigurationInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetNotificationConfigurationInput.type = Types::GetNotificationConfigurationInput
-    GetNotificationConfigurationOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "notificationConfiguration", traits: {"smithy.api#required" => {}}))
+    GetNotificationConfigurationOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfiguration, location_name: "notificationConfiguration", traits: {"smithy.api#required" => {}}))
     GetNotificationConfigurationOutput.type = Types::GetNotificationConfigurationOutput
-    GetPolicyInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetPolicyInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetPolicyInput.type = Types::GetPolicyInput
-    GetPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "policy", traits: {"smithy.api#required" => {}}))
-    GetPolicyOutput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    GetPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "policy", traits: {"smithy.api#required" => {}}))
+    GetPolicyOutput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
     GetPolicyOutput.type = Types::GetPolicyOutput
-    GetProfileInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetProfileInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime"}))
-    GetProfileInput.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Period, location_name: "period", traits: {"smithy.api#httpQuery" => "period"}))
-    GetProfileInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime"}))
-    GetProfileInput.add_member(:max_depth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxDepth, location_name: "maxDepth", traits: {"smithy.api#httpQuery" => "maxDepth"}))
-    GetProfileInput.add_member(:accept, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "accept", traits: {"smithy.api#httpHeader" => "Accept"}))
+    GetProfileInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProfileInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime"}))
+    GetProfileInput.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: Period, location_name: "period", traits: {"smithy.api#httpQuery" => "period"}))
+    GetProfileInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime"}))
+    GetProfileInput.add_member(:max_depth, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxDepth, location_name: "maxDepth", traits: {"smithy.api#httpQuery" => "maxDepth"}))
+    GetProfileInput.add_member(:accept, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "accept", traits: {"smithy.api#httpHeader" => "Accept"}))
     GetProfileInput.type = Types::GetProfileInput
-    GetProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedProfile, location_name: "profile", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
-    GetProfileOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
-    GetProfileOutput.add_member(:content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "contentEncoding", traits: {"smithy.api#httpHeader" => "Content-Encoding"}))
+    GetProfileOutput.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedProfile, location_name: "profile", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    GetProfileOutput.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
+    GetProfileOutput.add_member(:content_encoding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "contentEncoding", traits: {"smithy.api#httpHeader" => "Content-Encoding"}))
     GetProfileOutput[:http_payload] = :profile
     GetProfileOutput[:http_payload_member] = GetProfileOutput.member(:profile)
     GetProfileOutput.type = Types::GetProfileOutput
-    GetRecommendationsInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetRecommendationsInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime", "smithy.api#required" => {}}))
-    GetRecommendationsInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime", "smithy.api#required" => {}}))
-    GetRecommendationsInput.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Locale, location_name: "locale", traits: {"smithy.api#httpQuery" => "locale"}))
+    GetRecommendationsInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommendationsInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime", "smithy.api#required" => {}}))
+    GetRecommendationsInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime", "smithy.api#required" => {}}))
+    GetRecommendationsInput.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, location_name: "locale", traits: {"smithy.api#httpQuery" => "locale"}))
     GetRecommendationsInput.type = Types::GetRecommendationsInput
-    GetRecommendationsOutput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#required" => {}}))
-    GetRecommendationsOutput.add_member(:profile_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "profileStartTime", traits: {"smithy.api#required" => {}}))
-    GetRecommendationsOutput.add_member(:profile_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "profileEndTime", traits: {"smithy.api#required" => {}}))
-    GetRecommendationsOutput.add_member(:recommendations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Recommendations, location_name: "recommendations", traits: {"smithy.api#required" => {}}))
-    GetRecommendationsOutput.add_member(:anomalies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Anomalies, location_name: "anomalies", traits: {"smithy.api#required" => {}}))
+    GetRecommendationsOutput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#required" => {}}))
+    GetRecommendationsOutput.add_member(:profile_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "profileStartTime", traits: {"smithy.api#required" => {}}))
+    GetRecommendationsOutput.add_member(:profile_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "profileEndTime", traits: {"smithy.api#required" => {}}))
+    GetRecommendationsOutput.add_member(:recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendations, location_name: "recommendations", traits: {"smithy.api#required" => {}}))
+    GetRecommendationsOutput.add_member(:anomalies, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomalies, location_name: "anomalies", traits: {"smithy.api#required" => {}}))
     GetRecommendationsOutput.type = Types::GetRecommendationsOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    ListFindingsReportsInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListFindingsReportsInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime", "smithy.api#required" => {}}))
-    ListFindingsReportsInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime", "smithy.api#required" => {}}))
-    ListFindingsReportsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListFindingsReportsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListFindingsReportsInput.add_member(:daily_reports_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "dailyReportsOnly", traits: {"smithy.api#httpQuery" => "dailyReportsOnly"}))
+    ListFindingsReportsInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListFindingsReportsInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime", "smithy.api#required" => {}}))
+    ListFindingsReportsInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime", "smithy.api#required" => {}}))
+    ListFindingsReportsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListFindingsReportsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListFindingsReportsInput.add_member(:daily_reports_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "dailyReportsOnly", traits: {"smithy.api#httpQuery" => "dailyReportsOnly"}))
     ListFindingsReportsInput.type = Types::ListFindingsReportsInput
-    ListFindingsReportsOutput.add_member(:findings_report_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingsReportSummaries, location_name: "findingsReportSummaries", traits: {"smithy.api#required" => {}}))
-    ListFindingsReportsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListFindingsReportsOutput.add_member(:findings_report_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportSummaries, location_name: "findingsReportSummaries", traits: {"smithy.api#required" => {}}))
+    ListFindingsReportsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListFindingsReportsOutput.type = Types::ListFindingsReportsOutput
-    ListOfTimestamps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampStructure)
-    ListProfileTimesInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListProfileTimesInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime", "smithy.api#required" => {}}))
-    ListProfileTimesInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime", "smithy.api#required" => {}}))
-    ListProfileTimesInput.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "period", traits: {"smithy.api#httpQuery" => "period", "smithy.api#required" => {}}))
-    ListProfileTimesInput.add_member(:order_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy", traits: {"smithy.api#httpQuery" => "orderBy"}))
-    ListProfileTimesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListProfileTimesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListOfTimestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampStructure)
+    ListProfileTimesInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListProfileTimesInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#httpQuery" => "startTime", "smithy.api#required" => {}}))
+    ListProfileTimesInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime", traits: {"smithy.api#httpQuery" => "endTime", "smithy.api#required" => {}}))
+    ListProfileTimesInput.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "period", traits: {"smithy.api#httpQuery" => "period", "smithy.api#required" => {}}))
+    ListProfileTimesInput.add_member(:order_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderBy, location_name: "orderBy", traits: {"smithy.api#httpQuery" => "orderBy"}))
+    ListProfileTimesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListProfileTimesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListProfileTimesInput.type = Types::ListProfileTimesInput
-    ListProfileTimesOutput.add_member(:profile_times, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileTimes, location_name: "profileTimes", traits: {"smithy.api#required" => {}}))
-    ListProfileTimesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListProfileTimesOutput.add_member(:profile_times, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileTimes, location_name: "profileTimes", traits: {"smithy.api#required" => {}}))
+    ListProfileTimesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListProfileTimesOutput.type = Types::ListProfileTimesOutput
-    ListProfilingGroupsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListProfilingGroupsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListProfilingGroupsInput.add_member(:include_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "includeDescription", traits: {"smithy.api#httpQuery" => "includeDescription"}))
+    ListProfilingGroupsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListProfilingGroupsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListProfilingGroupsInput.add_member(:include_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "includeDescription", traits: {"smithy.api#httpQuery" => "includeDescription"}))
     ListProfilingGroupsInput.type = Types::ListProfilingGroupsInput
-    ListProfilingGroupsOutput.add_member(:profiling_group_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupNames, location_name: "profilingGroupNames", traits: {"smithy.api#required" => {}}))
-    ListProfilingGroupsOutput.add_member(:profiling_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupDescriptions, location_name: "profilingGroups"))
-    ListProfilingGroupsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListProfilingGroupsOutput.add_member(:profiling_group_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupNames, location_name: "profilingGroupNames", traits: {"smithy.api#required" => {}}))
+    ListProfilingGroupsOutput.add_member(:profiling_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupDescriptions, location_name: "profilingGroups"))
+    ListProfilingGroupsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListProfilingGroupsOutput.type = Types::ListProfilingGroupsOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    Match.add_member(:target_frames_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "targetFramesIndex"))
-    Match.add_member(:frame_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "frameAddress"))
-    Match.add_member(:threshold_breach_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "thresholdBreachValue"))
+    Match.add_member(:target_frames_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "targetFramesIndex"))
+    Match.add_member(:frame_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "frameAddress"))
+    Match.add_member(:threshold_breach_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "thresholdBreachValue"))
     Match.type = Types::Match
-    Matches.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Match)
-    Metadata.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataField)
-    Metadata.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    Metric.add_member(:frame_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "frameName", traits: {"smithy.api#required" => {}}))
-    Metric.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    Metric.add_member(:thread_states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Strings, location_name: "threadStates", traits: {"smithy.api#required" => {}}))
+    Matches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Match)
+    Metadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataField)
+    Metadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    Metric.add_member(:frame_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "frameName", traits: {"smithy.api#required" => {}}))
+    Metric.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    Metric.add_member(:thread_states, ::Smithy::Schema::Shapes::MemberShape.new(target: Strings, location_name: "threadStates", traits: {"smithy.api#required" => {}}))
     Metric.type = Types::Metric
-    NotificationConfiguration.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channels, location_name: "channels"))
+    NotificationConfiguration.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, location_name: "channels"))
     NotificationConfiguration.type = Types::NotificationConfiguration
-    Pattern.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id"))
-    Pattern.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name"))
-    Pattern.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "description"))
-    Pattern.add_member(:resolution_steps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resolutionSteps"))
-    Pattern.add_member(:target_frames, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetFrames, location_name: "targetFrames"))
-    Pattern.add_member(:threshold_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "thresholdPercent", traits: {"smithy.api#default" => 0}))
-    Pattern.add_member(:counters_to_aggregate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Strings, location_name: "countersToAggregate"))
+    Pattern.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id"))
+    Pattern.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name"))
+    Pattern.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "description"))
+    Pattern.add_member(:resolution_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resolutionSteps"))
+    Pattern.add_member(:target_frames, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFrames, location_name: "targetFrames"))
+    Pattern.add_member(:threshold_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "thresholdPercent", traits: {"smithy.api#default" => 0}))
+    Pattern.add_member(:counters_to_aggregate, ::Smithy::Schema::Shapes::MemberShape.new(target: Strings, location_name: "countersToAggregate"))
     Pattern.type = Types::Pattern
-    PostAgentProfileInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PostAgentProfileInput.add_member(:agent_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentProfile, location_name: "agentProfile", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
-    PostAgentProfileInput.add_member(:profile_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "profileToken", traits: {"smithy.api#httpQuery" => "profileToken", "smithy.api#idempotencyToken" => {}}))
-    PostAgentProfileInput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
+    PostAgentProfileInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PostAgentProfileInput.add_member(:agent_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentProfile, location_name: "agentProfile", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    PostAgentProfileInput.add_member(:profile_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "profileToken", traits: {"smithy.api#httpQuery" => "profileToken", "smithy.api#idempotencyToken" => {}}))
+    PostAgentProfileInput.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
     PostAgentProfileInput[:http_payload] = :agent_profile
     PostAgentProfileInput[:http_payload_member] = PostAgentProfileInput.member(:agent_profile)
     PostAgentProfileInput.type = Types::PostAgentProfileInput
     PostAgentProfileOutput.type = Types::PostAgentProfileOutput
-    Principals.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Principal)
-    ProfileTime.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "start"))
+    Principals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal)
+    ProfileTime.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "start"))
     ProfileTime.type = Types::ProfileTime
-    ProfileTimes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileTime)
-    ProfilingGroupDescription.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "name"))
-    ProfilingGroupDescription.add_member(:agent_orchestration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentOrchestrationConfig, location_name: "agentOrchestrationConfig"))
-    ProfilingGroupDescription.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupArn, location_name: "arn"))
-    ProfilingGroupDescription.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
-    ProfilingGroupDescription.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
-    ProfilingGroupDescription.add_member(:profiling_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingStatus, location_name: "profilingStatus"))
-    ProfilingGroupDescription.add_member(:compute_platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
-    ProfilingGroupDescription.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ProfileTimes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileTime)
+    ProfilingGroupDescription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "name"))
+    ProfilingGroupDescription.add_member(:agent_orchestration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentOrchestrationConfig, location_name: "agentOrchestrationConfig"))
+    ProfilingGroupDescription.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupArn, location_name: "arn"))
+    ProfilingGroupDescription.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "createdAt"))
+    ProfilingGroupDescription.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "updatedAt"))
+    ProfilingGroupDescription.add_member(:profiling_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingStatus, location_name: "profilingStatus"))
+    ProfilingGroupDescription.add_member(:compute_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputePlatform, location_name: "computePlatform"))
+    ProfilingGroupDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags"))
     ProfilingGroupDescription.type = Types::ProfilingGroupDescription
-    ProfilingGroupDescriptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupDescription)
-    ProfilingGroupNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName)
-    ProfilingStatus.add_member(:latest_agent_profile_reported_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "latestAgentProfileReportedAt"))
-    ProfilingStatus.add_member(:latest_aggregated_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedProfileTime, location_name: "latestAggregatedProfile"))
-    ProfilingStatus.add_member(:latest_agent_orchestrated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "latestAgentOrchestratedAt"))
+    ProfilingGroupDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupDescription)
+    ProfilingGroupNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName)
+    ProfilingStatus.add_member(:latest_agent_profile_reported_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "latestAgentProfileReportedAt"))
+    ProfilingStatus.add_member(:latest_aggregated_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedProfileTime, location_name: "latestAggregatedProfile"))
+    ProfilingStatus.add_member(:latest_agent_orchestrated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "latestAgentOrchestratedAt"))
     ProfilingStatus.type = Types::ProfilingStatus
-    PutPermissionInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutPermissionInput.add_member(:action_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionGroup, location_name: "actionGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutPermissionInput.add_member(:principals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Principals, location_name: "principals", traits: {"smithy.api#required" => {}}))
-    PutPermissionInput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    PutPermissionInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutPermissionInput.add_member(:action_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionGroup, location_name: "actionGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutPermissionInput.add_member(:principals, ::Smithy::Schema::Shapes::MemberShape.new(target: Principals, location_name: "principals", traits: {"smithy.api#required" => {}}))
+    PutPermissionInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId"))
     PutPermissionInput.type = Types::PutPermissionInput
-    PutPermissionOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "policy", traits: {"smithy.api#required" => {}}))
-    PutPermissionOutput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    PutPermissionOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "policy", traits: {"smithy.api#required" => {}}))
+    PutPermissionOutput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
     PutPermissionOutput.type = Types::PutPermissionOutput
-    Recommendation.add_member(:all_matches_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "allMatchesCount", traits: {"smithy.api#required" => {}}))
-    Recommendation.add_member(:all_matches_sum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "allMatchesSum", traits: {"smithy.api#required" => {}}))
-    Recommendation.add_member(:pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pattern, location_name: "pattern", traits: {"smithy.api#required" => {}}))
-    Recommendation.add_member(:top_matches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Matches, location_name: "topMatches", traits: {"smithy.api#required" => {}}))
-    Recommendation.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    Recommendation.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:all_matches_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "allMatchesCount", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:all_matches_sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "allMatchesSum", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: Pattern, location_name: "pattern", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:top_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: Matches, location_name: "topMatches", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "endTime", traits: {"smithy.api#required" => {}}))
     Recommendation.type = Types::Recommendation
-    Recommendations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Recommendation)
-    RemoveNotificationChannelInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RemoveNotificationChannelInput.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    Recommendations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation)
+    RemoveNotificationChannelInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RemoveNotificationChannelInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RemoveNotificationChannelInput.type = Types::RemoveNotificationChannelInput
-    RemoveNotificationChannelOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "notificationConfiguration"))
+    RemoveNotificationChannelOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfiguration, location_name: "notificationConfiguration"))
     RemoveNotificationChannelOutput.type = Types::RemoveNotificationChannelOutput
-    RemovePermissionInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RemovePermissionInput.add_member(:action_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionGroup, location_name: "actionGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RemovePermissionInput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#httpQuery" => "revisionId", "smithy.api#required" => {}}))
+    RemovePermissionInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RemovePermissionInput.add_member(:action_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionGroup, location_name: "actionGroup", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RemovePermissionInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#httpQuery" => "revisionId", "smithy.api#required" => {}}))
     RemovePermissionInput.type = Types::RemovePermissionInput
-    RemovePermissionOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "policy", traits: {"smithy.api#required" => {}}))
-    RemovePermissionOutput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    RemovePermissionOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "policy", traits: {"smithy.api#required" => {}}))
+    RemovePermissionOutput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
     RemovePermissionOutput.type = Types::RemovePermissionOutput
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Strings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    SubmitFeedbackInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SubmitFeedbackInput.add_member(:anomaly_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnomalyInstanceId, location_name: "anomalyInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SubmitFeedbackInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeedbackType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    SubmitFeedbackInput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "comment"))
+    Strings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    SubmitFeedbackInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SubmitFeedbackInput.add_member(:anomaly_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyInstanceId, location_name: "anomalyInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SubmitFeedbackInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    SubmitFeedbackInput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "comment"))
     SubmitFeedbackInput.type = Types::SubmitFeedbackInput
     SubmitFeedbackOutput.type = Types::SubmitFeedbackOutput
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TagsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TargetFrame.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TargetFrames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetFrame)
-    ThreadStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TargetFrame.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TargetFrames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFrame)
+    ThreadStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    TimestampStructure.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "value", traits: {"smithy.api#required" => {}}))
+    TimestampStructure.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "value", traits: {"smithy.api#required" => {}}))
     TimestampStructure.type = Types::TimestampStructure
-    UnprocessedEndTimeMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    UnprocessedEndTimeMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfTimestamps)
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UnprocessedEndTimeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    UnprocessedEndTimeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTimestamps)
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateProfilingGroupInput.add_member(:agent_orchestration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentOrchestrationConfig, location_name: "agentOrchestrationConfig", traits: {"smithy.api#required" => {}}))
+    UpdateProfilingGroupInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, location_name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProfilingGroupInput.add_member(:agent_orchestration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentOrchestrationConfig, location_name: "agentOrchestrationConfig", traits: {"smithy.api#required" => {}}))
     UpdateProfilingGroupInput.type = Types::UpdateProfilingGroupInput
-    UpdateProfilingGroupOutput.add_member(:profiling_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfilingGroupDescription, location_name: "profilingGroup", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateProfilingGroupOutput.add_member(:profiling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupDescription, location_name: "profilingGroup", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateProfilingGroupOutput[:http_payload] = :profiling_group
     UpdateProfilingGroupOutput[:http_payload_member] = UpdateProfilingGroupOutput.member(:profiling_group)
     UpdateProfilingGroupOutput.type = Types::UpdateProfilingGroupOutput
-    UserFeedback.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeedbackType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    UserFeedback.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackType, location_name: "type", traits: {"smithy.api#required" => {}}))
     UserFeedback.type = Types::UserFeedback
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
 
     CodeGuruProfiler = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -427,258 +427,258 @@ module Aws::CodeGuruProfiler
       service.add_operation(:add_notification_channels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#AddNotificationChannels"
         operation.name = "AddNotificationChannels"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddNotificationChannelsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddNotificationChannelsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AddNotificationChannelsInput
+        operation.output = AddNotificationChannelsOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/profilingGroups/{profilingGroupName}/notificationConfiguration", "code" => 200}}
       end)
       service.add_operation(:batch_get_frame_metric_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#BatchGetFrameMetricData"
         operation.name = "BatchGetFrameMetricData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetFrameMetricDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetFrameMetricDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchGetFrameMetricDataInput
+        operation.output = BatchGetFrameMetricDataOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/profilingGroups/{profilingGroupName}/frames/-/metrics", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:configure_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#ConfigureAgent"
         operation.name = "ConfigureAgent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigureAgentInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigureAgentOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ConfigureAgentInput
+        operation.output = ConfigureAgentOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/profilingGroups/{profilingGroupName}/configureAgent", "code" => 200}, "smithy.api#tags" => ["dataplane"]}
       end)
       service.add_operation(:create_profiling_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#CreateProfilingGroup"
         operation.name = "CreateProfilingGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProfilingGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProfilingGroupOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateProfilingGroupInput
+        operation.output = CreateProfilingGroupOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/profilingGroups", "code" => 201}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_profiling_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#DeleteProfilingGroup"
         operation.name = "DeleteProfilingGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProfilingGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProfilingGroupOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteProfilingGroupInput
+        operation.output = DeleteProfilingGroupOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/profilingGroups/{profilingGroupName}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_profiling_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#DescribeProfilingGroup"
         operation.name = "DescribeProfilingGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeProfilingGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeProfilingGroupOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeProfilingGroupInput
+        operation.output = DescribeProfilingGroupOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/profilingGroups/{profilingGroupName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_findings_report_account_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#GetFindingsReportAccountSummary"
         operation.name = "GetFindingsReportAccountSummary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetFindingsReportAccountSummaryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetFindingsReportAccountSummaryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetFindingsReportAccountSummaryInput
+        operation.output = GetFindingsReportAccountSummaryOutput
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/internal/findingsReports", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::GetFindingsReportAccountSummary.new
       end)
       service.add_operation(:get_notification_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#GetNotificationConfiguration"
         operation.name = "GetNotificationConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetNotificationConfigurationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetNotificationConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetNotificationConfigurationInput
+        operation.output = GetNotificationConfigurationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/profilingGroups/{profilingGroupName}/notificationConfiguration", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#GetPolicy"
         operation.name = "GetPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetPolicyInput
+        operation.output = GetPolicyOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/profilingGroups/{profilingGroupName}/policy", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#GetProfile"
         operation.name = "GetProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetProfileInput
+        operation.output = GetProfileOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/profilingGroups/{profilingGroupName}/profile", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_recommendations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#GetRecommendations"
         operation.name = "GetRecommendations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecommendationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecommendationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRecommendationsInput
+        operation.output = GetRecommendationsOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/internal/profilingGroups/{profilingGroupName}/recommendations", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_findings_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#ListFindingsReports"
         operation.name = "ListFindingsReports"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFindingsReportsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFindingsReportsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListFindingsReportsInput
+        operation.output = ListFindingsReportsOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/internal/profilingGroups/{profilingGroupName}/findingsReports", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListFindingsReports.new
       end)
       service.add_operation(:list_profile_times, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#ListProfileTimes"
         operation.name = "ListProfileTimes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfileTimesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfileTimesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListProfileTimesInput
+        operation.output = ListProfileTimesOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/profilingGroups/{profilingGroupName}/profileTimes", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListProfileTimes.new
       end)
       service.add_operation(:list_profiling_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#ListProfilingGroups"
         operation.name = "ListProfilingGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfilingGroupsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfilingGroupsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListProfilingGroupsInput
+        operation.output = ListProfilingGroupsOutput
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/profilingGroups", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListProfilingGroups.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:post_agent_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#PostAgentProfile"
         operation.name = "PostAgentProfile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostAgentProfileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostAgentProfileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PostAgentProfileInput
+        operation.output = PostAgentProfileOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/profilingGroups/{profilingGroupName}/agentProfile", "code" => 204}, "smithy.api#tags" => ["dataplane"]}
       end)
       service.add_operation(:put_permission, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#PutPermission"
         operation.name = "PutPermission"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutPermissionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutPermissionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutPermissionInput
+        operation.output = PutPermissionOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/profilingGroups/{profilingGroupName}/policy/{actionGroup}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:remove_notification_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#RemoveNotificationChannel"
         operation.name = "RemoveNotificationChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveNotificationChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveNotificationChannelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RemoveNotificationChannelInput
+        operation.output = RemoveNotificationChannelOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/profilingGroups/{profilingGroupName}/notificationConfiguration/{channelId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:remove_permission, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#RemovePermission"
         operation.name = "RemovePermission"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemovePermissionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemovePermissionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RemovePermissionInput
+        operation.output = RemovePermissionOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/profilingGroups/{profilingGroupName}/policy/{actionGroup}", "code" => 200}}
       end)
       service.add_operation(:submit_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#SubmitFeedback"
         operation.name = "SubmitFeedback"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubmitFeedbackInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubmitFeedbackOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SubmitFeedbackInput
+        operation.output = SubmitFeedbackOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/internal/profilingGroups/{profilingGroupName}/anomalies/{anomalyInstanceId}/feedback", "code" => 204}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 204}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_profiling_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codeguruprofiler#UpdateProfilingGroup"
         operation.name = "UpdateProfilingGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProfilingGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProfilingGroupOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateProfilingGroupInput
+        operation.output = UpdateProfilingGroupOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/profilingGroups/{profilingGroupName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end

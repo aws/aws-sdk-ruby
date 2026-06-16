@@ -136,311 +136,311 @@ module Aws::CodeGuruReviewer
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codegurureviewer#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VendorName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.codegurureviewer#VendorName", name: "VendorName")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AnalysisType.add_member(:security, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY", traits: {"smithy.api#enumValue" => "Security"}))
-    AnalysisType.add_member(:code_quality, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_QUALITY", traits: {"smithy.api#enumValue" => "CodeQuality"}))
-    AnalysisTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisType)
-    AssociateRepositoryRequest.add_member(:repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Repository, location_name: "Repository", traits: {"smithy.api#required" => {}}))
-    AssociateRepositoryRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    AssociateRepositoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    AssociateRepositoryRequest.add_member(:kms_key_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKeyDetails, location_name: "KMSKeyDetails"))
+    AnalysisType.add_member(:security, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY", traits: {"smithy.api#enumValue" => "Security"}))
+    AnalysisType.add_member(:code_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_QUALITY", traits: {"smithy.api#enumValue" => "CodeQuality"}))
+    AnalysisTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisType)
+    AssociateRepositoryRequest.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, location_name: "Repository", traits: {"smithy.api#required" => {}}))
+    AssociateRepositoryRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    AssociateRepositoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    AssociateRepositoryRequest.add_member(:kms_key_details, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyDetails, location_name: "KMSKeyDetails"))
     AssociateRepositoryRequest.type = Types::AssociateRepositoryRequest
-    AssociateRepositoryResponse.add_member(:repository_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociation, location_name: "RepositoryAssociation"))
-    AssociateRepositoryResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    AssociateRepositoryResponse.add_member(:repository_association, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociation, location_name: "RepositoryAssociation"))
+    AssociateRepositoryResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     AssociateRepositoryResponse.type = Types::AssociateRepositoryResponse
-    BranchDiffSourceCodeType.add_member(:source_branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "SourceBranchName", traits: {"smithy.api#required" => {}}))
-    BranchDiffSourceCodeType.add_member(:destination_branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "DestinationBranchName", traits: {"smithy.api#required" => {}}))
+    BranchDiffSourceCodeType.add_member(:source_branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "SourceBranchName", traits: {"smithy.api#required" => {}}))
+    BranchDiffSourceCodeType.add_member(:destination_branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "DestinationBranchName", traits: {"smithy.api#required" => {}}))
     BranchDiffSourceCodeType.type = Types::BranchDiffSourceCodeType
-    CodeArtifacts.add_member(:source_code_artifacts_object_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceCodeArtifactsObjectKey, location_name: "SourceCodeArtifactsObjectKey", traits: {"smithy.api#required" => {}}))
-    CodeArtifacts.add_member(:build_artifacts_object_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BuildArtifactsObjectKey, location_name: "BuildArtifactsObjectKey"))
+    CodeArtifacts.add_member(:source_code_artifacts_object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeArtifactsObjectKey, location_name: "SourceCodeArtifactsObjectKey", traits: {"smithy.api#required" => {}}))
+    CodeArtifacts.add_member(:build_artifacts_object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: BuildArtifactsObjectKey, location_name: "BuildArtifactsObjectKey"))
     CodeArtifacts.type = Types::CodeArtifacts
-    CodeCommitRepository.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CodeCommitRepository.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
     CodeCommitRepository.type = Types::CodeCommitRepository
-    CodeReview.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    CodeReview.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn"))
-    CodeReview.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "RepositoryName"))
-    CodeReview.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
-    CodeReview.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderType, location_name: "ProviderType"))
-    CodeReview.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobState, location_name: "State"))
-    CodeReview.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateReason, location_name: "StateReason"))
-    CodeReview.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CreatedTimeStamp"))
-    CodeReview.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTimeStamp"))
-    CodeReview.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
-    CodeReview.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "PullRequestId"))
-    CodeReview.add_member(:source_code_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceCodeType, location_name: "SourceCodeType"))
-    CodeReview.add_member(:association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationArn, location_name: "AssociationArn"))
-    CodeReview.add_member(:metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
-    CodeReview.add_member(:analysis_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTypes, location_name: "AnalysisTypes"))
-    CodeReview.add_member(:config_file_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigFileState, location_name: "ConfigFileState"))
+    CodeReview.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    CodeReview.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn"))
+    CodeReview.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "RepositoryName"))
+    CodeReview.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
+    CodeReview.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, location_name: "ProviderType"))
+    CodeReview.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JobState, location_name: "State"))
+    CodeReview.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StateReason, location_name: "StateReason"))
+    CodeReview.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "CreatedTimeStamp"))
+    CodeReview.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LastUpdatedTimeStamp"))
+    CodeReview.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type"))
+    CodeReview.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "PullRequestId"))
+    CodeReview.add_member(:source_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeType, location_name: "SourceCodeType"))
+    CodeReview.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, location_name: "AssociationArn"))
+    CodeReview.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: Metrics, location_name: "Metrics"))
+    CodeReview.add_member(:analysis_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTypes, location_name: "AnalysisTypes"))
+    CodeReview.add_member(:config_file_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigFileState, location_name: "ConfigFileState"))
     CodeReview.type = Types::CodeReview
-    CodeReviewSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeReviewSummary)
-    CodeReviewSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    CodeReviewSummary.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn"))
-    CodeReviewSummary.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "RepositoryName"))
-    CodeReviewSummary.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
-    CodeReviewSummary.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderType, location_name: "ProviderType"))
-    CodeReviewSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobState, location_name: "State"))
-    CodeReviewSummary.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CreatedTimeStamp"))
-    CodeReviewSummary.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTimeStamp"))
-    CodeReviewSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
-    CodeReviewSummary.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "PullRequestId"))
-    CodeReviewSummary.add_member(:metrics_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsSummary, location_name: "MetricsSummary"))
-    CodeReviewSummary.add_member(:source_code_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceCodeType, location_name: "SourceCodeType"))
+    CodeReviewSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReviewSummary)
+    CodeReviewSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    CodeReviewSummary.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn"))
+    CodeReviewSummary.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "RepositoryName"))
+    CodeReviewSummary.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
+    CodeReviewSummary.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, location_name: "ProviderType"))
+    CodeReviewSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JobState, location_name: "State"))
+    CodeReviewSummary.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "CreatedTimeStamp"))
+    CodeReviewSummary.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LastUpdatedTimeStamp"))
+    CodeReviewSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type"))
+    CodeReviewSummary.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "PullRequestId"))
+    CodeReviewSummary.add_member(:metrics_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsSummary, location_name: "MetricsSummary"))
+    CodeReviewSummary.add_member(:source_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeType, location_name: "SourceCodeType"))
     CodeReviewSummary.type = Types::CodeReviewSummary
-    CodeReviewType.add_member(:repository_analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAnalysis, location_name: "RepositoryAnalysis", traits: {"smithy.api#required" => {}}))
-    CodeReviewType.add_member(:analysis_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTypes, location_name: "AnalysisTypes"))
+    CodeReviewType.add_member(:repository_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAnalysis, location_name: "RepositoryAnalysis", traits: {"smithy.api#required" => {}}))
+    CodeReviewType.add_member(:analysis_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTypes, location_name: "AnalysisTypes"))
     CodeReviewType.type = Types::CodeReviewType
-    CommitDiffSourceCodeType.add_member(:source_commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "SourceCommit"))
-    CommitDiffSourceCodeType.add_member(:destination_commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "DestinationCommit"))
-    CommitDiffSourceCodeType.add_member(:merge_base_commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "MergeBaseCommit"))
+    CommitDiffSourceCodeType.add_member(:source_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "SourceCommit"))
+    CommitDiffSourceCodeType.add_member(:destination_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "DestinationCommit"))
+    CommitDiffSourceCodeType.add_member(:merge_base_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "MergeBaseCommit"))
     CommitDiffSourceCodeType.type = Types::CommitDiffSourceCodeType
-    ConfigFileState.add_member(:present, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESENT", traits: {"smithy.api#enumValue" => "Present"}))
-    ConfigFileState.add_member(:absent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ABSENT", traits: {"smithy.api#enumValue" => "Absent"}))
-    ConfigFileState.add_member(:present_with_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESENT_WITH_ERRORS", traits: {"smithy.api#enumValue" => "PresentWithErrors"}))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConfigFileState.add_member(:present, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESENT", traits: {"smithy.api#enumValue" => "Present"}))
+    ConfigFileState.add_member(:absent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ABSENT", traits: {"smithy.api#enumValue" => "Absent"}))
+    ConfigFileState.add_member(:present_with_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESENT_WITH_ERRORS", traits: {"smithy.api#enumValue" => "PresentWithErrors"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateCodeReviewRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeReviewName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateCodeReviewRequest.add_member(:repository_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationArn, location_name: "RepositoryAssociationArn", traits: {"smithy.api#required" => {}}))
-    CreateCodeReviewRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeReviewType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    CreateCodeReviewRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateCodeReviewRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReviewName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateCodeReviewRequest.add_member(:repository_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, location_name: "RepositoryAssociationArn", traits: {"smithy.api#required" => {}}))
+    CreateCodeReviewRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReviewType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    CreateCodeReviewRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateCodeReviewRequest.type = Types::CreateCodeReviewRequest
-    CreateCodeReviewResponse.add_member(:code_review, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeReview, location_name: "CodeReview"))
+    CreateCodeReviewResponse.add_member(:code_review, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReview, location_name: "CodeReview"))
     CreateCodeReviewResponse.type = Types::CreateCodeReviewResponse
-    DescribeCodeReviewRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeCodeReviewRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeCodeReviewRequest.type = Types::DescribeCodeReviewRequest
-    DescribeCodeReviewResponse.add_member(:code_review, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeReview, location_name: "CodeReview"))
+    DescribeCodeReviewResponse.add_member(:code_review, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReview, location_name: "CodeReview"))
     DescribeCodeReviewResponse.type = Types::DescribeCodeReviewResponse
-    DescribeRecommendationFeedbackRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeRecommendationFeedbackRequest.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId, location_name: "RecommendationId", traits: {"smithy.api#httpQuery" => "RecommendationId", "smithy.api#required" => {}}))
-    DescribeRecommendationFeedbackRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "UserId", traits: {"smithy.api#httpQuery" => "UserId"}))
+    DescribeRecommendationFeedbackRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeRecommendationFeedbackRequest.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, location_name: "RecommendationId", traits: {"smithy.api#httpQuery" => "RecommendationId", "smithy.api#required" => {}}))
+    DescribeRecommendationFeedbackRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "UserId", traits: {"smithy.api#httpQuery" => "UserId"}))
     DescribeRecommendationFeedbackRequest.type = Types::DescribeRecommendationFeedbackRequest
-    DescribeRecommendationFeedbackResponse.add_member(:recommendation_feedback, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationFeedback, location_name: "RecommendationFeedback"))
+    DescribeRecommendationFeedbackResponse.add_member(:recommendation_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationFeedback, location_name: "RecommendationFeedback"))
     DescribeRecommendationFeedbackResponse.type = Types::DescribeRecommendationFeedbackResponse
-    DescribeRepositoryAssociationRequest.add_member(:association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationArn, location_name: "AssociationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeRepositoryAssociationRequest.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, location_name: "AssociationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeRepositoryAssociationRequest.type = Types::DescribeRepositoryAssociationRequest
-    DescribeRepositoryAssociationResponse.add_member(:repository_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociation, location_name: "RepositoryAssociation"))
-    DescribeRepositoryAssociationResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    DescribeRepositoryAssociationResponse.add_member(:repository_association, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociation, location_name: "RepositoryAssociation"))
+    DescribeRepositoryAssociationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     DescribeRepositoryAssociationResponse.type = Types::DescribeRepositoryAssociationResponse
-    DisassociateRepositoryRequest.add_member(:association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationArn, location_name: "AssociationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateRepositoryRequest.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, location_name: "AssociationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateRepositoryRequest.type = Types::DisassociateRepositoryRequest
-    DisassociateRepositoryResponse.add_member(:repository_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociation, location_name: "RepositoryAssociation"))
-    DisassociateRepositoryResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    DisassociateRepositoryResponse.add_member(:repository_association, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociation, location_name: "RepositoryAssociation"))
+    DisassociateRepositoryResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     DisassociateRepositoryResponse.type = Types::DisassociateRepositoryResponse
-    EncryptionOption.add_member(:ao_cmk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AoCmk", traits: {"smithy.api#enumValue" => "AWS_OWNED_CMK"}))
-    EncryptionOption.add_member(:cm_cmk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CmCmk", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED_CMK"}))
-    EventInfo.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventName, location_name: "Name"))
-    EventInfo.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventState, location_name: "State"))
+    EncryptionOption.add_member(:ao_cmk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AoCmk", traits: {"smithy.api#enumValue" => "AWS_OWNED_CMK"}))
+    EncryptionOption.add_member(:cm_cmk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CmCmk", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED_CMK"}))
+    EventInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventName, location_name: "Name"))
+    EventInfo.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EventState, location_name: "State"))
     EventInfo.type = Types::EventInfo
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    JobState.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
-    JobState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
-    JobState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    JobState.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    JobStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobState)
-    KMSKeyDetails.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
-    KMSKeyDetails.add_member(:encryption_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionOption, location_name: "EncryptionOption"))
+    JobState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    JobState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
+    JobState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    JobState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    JobStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobState)
+    KMSKeyDetails.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyId, location_name: "KMSKeyId"))
+    KMSKeyDetails.add_member(:encryption_option, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionOption, location_name: "EncryptionOption"))
     KMSKeyDetails.type = Types::KMSKeyDetails
-    ListCodeReviewsRequest.add_member(:provider_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderTypes, location_name: "ProviderTypes", traits: {"smithy.api#httpQuery" => "ProviderTypes"}))
-    ListCodeReviewsRequest.add_member(:states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStates, location_name: "States", traits: {"smithy.api#httpQuery" => "States"}))
-    ListCodeReviewsRequest.add_member(:repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNames, location_name: "RepositoryNames", traits: {"smithy.api#httpQuery" => "RepositoryNames"}))
-    ListCodeReviewsRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type", traits: {"smithy.api#httpQuery" => "Type", "smithy.api#required" => {}}))
-    ListCodeReviewsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCodeReviewsMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListCodeReviewsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListCodeReviewsRequest.add_member(:provider_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderTypes, location_name: "ProviderTypes", traits: {"smithy.api#httpQuery" => "ProviderTypes"}))
+    ListCodeReviewsRequest.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStates, location_name: "States", traits: {"smithy.api#httpQuery" => "States"}))
+    ListCodeReviewsRequest.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNames, location_name: "RepositoryNames", traits: {"smithy.api#httpQuery" => "RepositoryNames"}))
+    ListCodeReviewsRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type", traits: {"smithy.api#httpQuery" => "Type", "smithy.api#required" => {}}))
+    ListCodeReviewsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCodeReviewsMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListCodeReviewsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListCodeReviewsRequest.type = Types::ListCodeReviewsRequest
-    ListCodeReviewsResponse.add_member(:code_review_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeReviewSummaries, location_name: "CodeReviewSummaries"))
-    ListCodeReviewsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCodeReviewsResponse.add_member(:code_review_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReviewSummaries, location_name: "CodeReviewSummaries"))
+    ListCodeReviewsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListCodeReviewsResponse.type = Types::ListCodeReviewsResponse
-    ListRecommendationFeedbackRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListRecommendationFeedbackRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListRecommendationFeedbackRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListRecommendationFeedbackRequest.add_member(:user_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIds, location_name: "UserIds", traits: {"smithy.api#httpQuery" => "UserIds"}))
-    ListRecommendationFeedbackRequest.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationIds, location_name: "RecommendationIds", traits: {"smithy.api#httpQuery" => "RecommendationIds"}))
+    ListRecommendationFeedbackRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListRecommendationFeedbackRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListRecommendationFeedbackRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRecommendationFeedbackRequest.add_member(:user_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIds, location_name: "UserIds", traits: {"smithy.api#httpQuery" => "UserIds"}))
+    ListRecommendationFeedbackRequest.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationIds, location_name: "RecommendationIds", traits: {"smithy.api#httpQuery" => "RecommendationIds"}))
     ListRecommendationFeedbackRequest.type = Types::ListRecommendationFeedbackRequest
-    ListRecommendationFeedbackResponse.add_member(:recommendation_feedback_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationFeedbackSummaries, location_name: "RecommendationFeedbackSummaries"))
-    ListRecommendationFeedbackResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRecommendationFeedbackResponse.add_member(:recommendation_feedback_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationFeedbackSummaries, location_name: "RecommendationFeedbackSummaries"))
+    ListRecommendationFeedbackResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRecommendationFeedbackResponse.type = Types::ListRecommendationFeedbackResponse
-    ListRecommendationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListRecommendationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRecommendationsMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListRecommendationsRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRecommendationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListRecommendationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListRecommendationsMaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListRecommendationsRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListRecommendationsRequest.type = Types::ListRecommendationsRequest
-    ListRecommendationsResponse.add_member(:recommendation_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationSummaries, location_name: "RecommendationSummaries"))
-    ListRecommendationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRecommendationsResponse.add_member(:recommendation_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummaries, location_name: "RecommendationSummaries"))
+    ListRecommendationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRecommendationsResponse.type = Types::ListRecommendationsResponse
-    ListRepositoryAssociationsRequest.add_member(:provider_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderTypes, location_name: "ProviderTypes", traits: {"smithy.api#httpQuery" => "ProviderType"}))
-    ListRepositoryAssociationsRequest.add_member(:states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociationStates, location_name: "States", traits: {"smithy.api#httpQuery" => "State"}))
-    ListRepositoryAssociationsRequest.add_member(:names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Names, location_name: "Names", traits: {"smithy.api#httpQuery" => "Name"}))
-    ListRepositoryAssociationsRequest.add_member(:owners, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owners, location_name: "Owners", traits: {"smithy.api#httpQuery" => "Owner"}))
-    ListRepositoryAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListRepositoryAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListRepositoryAssociationsRequest.add_member(:provider_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderTypes, location_name: "ProviderTypes", traits: {"smithy.api#httpQuery" => "ProviderType"}))
+    ListRepositoryAssociationsRequest.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationStates, location_name: "States", traits: {"smithy.api#httpQuery" => "State"}))
+    ListRepositoryAssociationsRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: Names, location_name: "Names", traits: {"smithy.api#httpQuery" => "Name"}))
+    ListRepositoryAssociationsRequest.add_member(:owners, ::Smithy::Schema::Shapes::MemberShape.new(target: Owners, location_name: "Owners", traits: {"smithy.api#httpQuery" => "Owner"}))
+    ListRepositoryAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListRepositoryAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListRepositoryAssociationsRequest.type = Types::ListRepositoryAssociationsRequest
-    ListRepositoryAssociationsResponse.add_member(:repository_association_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociationSummaries, location_name: "RepositoryAssociationSummaries"))
-    ListRepositoryAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRepositoryAssociationsResponse.add_member(:repository_association_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationSummaries, location_name: "RepositoryAssociationSummaries"))
+    ListRepositoryAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRepositoryAssociationsResponse.type = Types::ListRepositoryAssociationsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    Metrics.add_member(:metered_lines_of_code_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
-    Metrics.add_member(:suppressed_lines_of_code_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "SuppressedLinesOfCodeCount"))
-    Metrics.add_member(:findings_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingsCount, location_name: "FindingsCount"))
+    Metrics.add_member(:metered_lines_of_code_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
+    Metrics.add_member(:suppressed_lines_of_code_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LinesOfCodeCount, location_name: "SuppressedLinesOfCodeCount"))
+    Metrics.add_member(:findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsCount, location_name: "FindingsCount"))
     Metrics.type = Types::Metrics
-    MetricsSummary.add_member(:metered_lines_of_code_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
-    MetricsSummary.add_member(:suppressed_lines_of_code_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinesOfCodeCount, location_name: "SuppressedLinesOfCodeCount"))
-    MetricsSummary.add_member(:findings_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingsCount, location_name: "FindingsCount"))
+    MetricsSummary.add_member(:metered_lines_of_code_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LinesOfCodeCount, location_name: "MeteredLinesOfCodeCount"))
+    MetricsSummary.add_member(:suppressed_lines_of_code_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LinesOfCodeCount, location_name: "SuppressedLinesOfCodeCount"))
+    MetricsSummary.add_member(:findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsCount, location_name: "FindingsCount"))
     MetricsSummary.type = Types::MetricsSummary
-    Names.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name)
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    Names.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name)
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotFoundException.type = Types::NotFoundException
-    Owners.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner)
-    ProviderType.add_member(:code_commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_COMMIT", traits: {"smithy.api#enumValue" => "CodeCommit"}))
-    ProviderType.add_member(:git_hub, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIT_HUB", traits: {"smithy.api#enumValue" => "GitHub"}))
-    ProviderType.add_member(:bitbucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITBUCKET", traits: {"smithy.api#enumValue" => "Bitbucket"}))
-    ProviderType.add_member(:git_hub_enterprise_server, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIT_HUB_ENTERPRISE_SERVER", traits: {"smithy.api#enumValue" => "GitHubEnterpriseServer"}))
-    ProviderType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3_BUCKET", traits: {"smithy.api#enumValue" => "S3Bucket"}))
-    ProviderTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderType)
-    PutRecommendationFeedbackRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#required" => {}}))
-    PutRecommendationFeedbackRequest.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId, location_name: "RecommendationId", traits: {"smithy.api#required" => {}}))
-    PutRecommendationFeedbackRequest.add_member(:reactions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reactions, location_name: "Reactions", traits: {"smithy.api#required" => {}}))
+    Owners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Owner)
+    ProviderType.add_member(:code_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_COMMIT", traits: {"smithy.api#enumValue" => "CodeCommit"}))
+    ProviderType.add_member(:git_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIT_HUB", traits: {"smithy.api#enumValue" => "GitHub"}))
+    ProviderType.add_member(:bitbucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITBUCKET", traits: {"smithy.api#enumValue" => "Bitbucket"}))
+    ProviderType.add_member(:git_hub_enterprise_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIT_HUB_ENTERPRISE_SERVER", traits: {"smithy.api#enumValue" => "GitHubEnterpriseServer"}))
+    ProviderType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3_BUCKET", traits: {"smithy.api#enumValue" => "S3Bucket"}))
+    ProviderTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType)
+    PutRecommendationFeedbackRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn", traits: {"smithy.api#required" => {}}))
+    PutRecommendationFeedbackRequest.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, location_name: "RecommendationId", traits: {"smithy.api#required" => {}}))
+    PutRecommendationFeedbackRequest.add_member(:reactions, ::Smithy::Schema::Shapes::MemberShape.new(target: Reactions, location_name: "Reactions", traits: {"smithy.api#required" => {}}))
     PutRecommendationFeedbackRequest.type = Types::PutRecommendationFeedbackRequest
     PutRecommendationFeedbackResponse.type = Types::PutRecommendationFeedbackResponse
-    Reaction.add_member(:thumbs_up, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THUMBS_UP", traits: {"smithy.api#enumValue" => "ThumbsUp"}))
-    Reaction.add_member(:thumbs_down, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THUMBS_DOWN", traits: {"smithy.api#enumValue" => "ThumbsDown"}))
-    Reactions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reaction)
-    RecommendationCategory.add_member(:aws_best_practices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_BEST_PRACTICES", traits: {"smithy.api#enumValue" => "AWSBestPractices"}))
-    RecommendationCategory.add_member(:aws_cloudformation_issues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_CLOUDFORMATION_ISSUES", traits: {"smithy.api#enumValue" => "AWSCloudFormationIssues"}))
-    RecommendationCategory.add_member(:duplicate_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUPLICATE_CODE", traits: {"smithy.api#enumValue" => "DuplicateCode"}))
-    RecommendationCategory.add_member(:code_maintenance_issues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_MAINTENANCE_ISSUES", traits: {"smithy.api#enumValue" => "CodeMaintenanceIssues"}))
-    RecommendationCategory.add_member(:concurrency_issues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONCURRENCY_ISSUES", traits: {"smithy.api#enumValue" => "ConcurrencyIssues"}))
-    RecommendationCategory.add_member(:input_validations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INPUT_VALIDATIONS", traits: {"smithy.api#enumValue" => "InputValidations"}))
-    RecommendationCategory.add_member(:python_best_practices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PYTHON_BEST_PRACTICES", traits: {"smithy.api#enumValue" => "PythonBestPractices"}))
-    RecommendationCategory.add_member(:java_best_practices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JAVA_BEST_PRACTICES", traits: {"smithy.api#enumValue" => "JavaBestPractices"}))
-    RecommendationCategory.add_member(:resource_leaks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_LEAKS", traits: {"smithy.api#enumValue" => "ResourceLeaks"}))
-    RecommendationCategory.add_member(:security_issues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY_ISSUES", traits: {"smithy.api#enumValue" => "SecurityIssues"}))
-    RecommendationCategory.add_member(:code_inconsistencies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_INCONSISTENCIES", traits: {"smithy.api#enumValue" => "CodeInconsistencies"}))
-    RecommendationFeedback.add_member(:code_review_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "CodeReviewArn"))
-    RecommendationFeedback.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId, location_name: "RecommendationId"))
-    RecommendationFeedback.add_member(:reactions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reactions, location_name: "Reactions"))
-    RecommendationFeedback.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
-    RecommendationFeedback.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CreatedTimeStamp"))
-    RecommendationFeedback.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTimeStamp"))
+    Reaction.add_member(:thumbs_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THUMBS_UP", traits: {"smithy.api#enumValue" => "ThumbsUp"}))
+    Reaction.add_member(:thumbs_down, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THUMBS_DOWN", traits: {"smithy.api#enumValue" => "ThumbsDown"}))
+    Reactions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Reaction)
+    RecommendationCategory.add_member(:aws_best_practices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_BEST_PRACTICES", traits: {"smithy.api#enumValue" => "AWSBestPractices"}))
+    RecommendationCategory.add_member(:aws_cloudformation_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_CLOUDFORMATION_ISSUES", traits: {"smithy.api#enumValue" => "AWSCloudFormationIssues"}))
+    RecommendationCategory.add_member(:duplicate_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUPLICATE_CODE", traits: {"smithy.api#enumValue" => "DuplicateCode"}))
+    RecommendationCategory.add_member(:code_maintenance_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_MAINTENANCE_ISSUES", traits: {"smithy.api#enumValue" => "CodeMaintenanceIssues"}))
+    RecommendationCategory.add_member(:concurrency_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONCURRENCY_ISSUES", traits: {"smithy.api#enumValue" => "ConcurrencyIssues"}))
+    RecommendationCategory.add_member(:input_validations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INPUT_VALIDATIONS", traits: {"smithy.api#enumValue" => "InputValidations"}))
+    RecommendationCategory.add_member(:python_best_practices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PYTHON_BEST_PRACTICES", traits: {"smithy.api#enumValue" => "PythonBestPractices"}))
+    RecommendationCategory.add_member(:java_best_practices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JAVA_BEST_PRACTICES", traits: {"smithy.api#enumValue" => "JavaBestPractices"}))
+    RecommendationCategory.add_member(:resource_leaks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_LEAKS", traits: {"smithy.api#enumValue" => "ResourceLeaks"}))
+    RecommendationCategory.add_member(:security_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY_ISSUES", traits: {"smithy.api#enumValue" => "SecurityIssues"}))
+    RecommendationCategory.add_member(:code_inconsistencies, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CODE_INCONSISTENCIES", traits: {"smithy.api#enumValue" => "CodeInconsistencies"}))
+    RecommendationFeedback.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "CodeReviewArn"))
+    RecommendationFeedback.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, location_name: "RecommendationId"))
+    RecommendationFeedback.add_member(:reactions, ::Smithy::Schema::Shapes::MemberShape.new(target: Reactions, location_name: "Reactions"))
+    RecommendationFeedback.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "UserId"))
+    RecommendationFeedback.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "CreatedTimeStamp"))
+    RecommendationFeedback.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LastUpdatedTimeStamp"))
     RecommendationFeedback.type = Types::RecommendationFeedback
-    RecommendationFeedbackSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationFeedbackSummary)
-    RecommendationFeedbackSummary.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId, location_name: "RecommendationId"))
-    RecommendationFeedbackSummary.add_member(:reactions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reactions, location_name: "Reactions"))
-    RecommendationFeedbackSummary.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
+    RecommendationFeedbackSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationFeedbackSummary)
+    RecommendationFeedbackSummary.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, location_name: "RecommendationId"))
+    RecommendationFeedbackSummary.add_member(:reactions, ::Smithy::Schema::Shapes::MemberShape.new(target: Reactions, location_name: "Reactions"))
+    RecommendationFeedbackSummary.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "UserId"))
     RecommendationFeedbackSummary.type = Types::RecommendationFeedbackSummary
-    RecommendationIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId)
-    RecommendationSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationSummary)
-    RecommendationSummary.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "FilePath"))
-    RecommendationSummary.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId, location_name: "RecommendationId"))
-    RecommendationSummary.add_member(:start_line, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LineNumber, location_name: "StartLine"))
-    RecommendationSummary.add_member(:end_line, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LineNumber, location_name: "EndLine"))
-    RecommendationSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Text, location_name: "Description"))
-    RecommendationSummary.add_member(:recommendation_category, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationCategory, location_name: "RecommendationCategory"))
-    RecommendationSummary.add_member(:rule_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleMetadata, location_name: "RuleMetadata"))
-    RecommendationSummary.add_member(:severity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
+    RecommendationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId)
+    RecommendationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummary)
+    RecommendationSummary.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "FilePath"))
+    RecommendationSummary.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, location_name: "RecommendationId"))
+    RecommendationSummary.add_member(:start_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, location_name: "StartLine"))
+    RecommendationSummary.add_member(:end_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, location_name: "EndLine"))
+    RecommendationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, location_name: "Description"))
+    RecommendationSummary.add_member(:recommendation_category, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationCategory, location_name: "RecommendationCategory"))
+    RecommendationSummary.add_member(:rule_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleMetadata, location_name: "RuleMetadata"))
+    RecommendationSummary.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, location_name: "Severity"))
     RecommendationSummary.type = Types::RecommendationSummary
-    Repository.add_member(:code_commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeCommitRepository, location_name: "CodeCommit"))
-    Repository.add_member(:bitbucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThirdPartySourceRepository, location_name: "Bitbucket"))
-    Repository.add_member(:git_hub_enterprise_server, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThirdPartySourceRepository, location_name: "GitHubEnterpriseServer"))
-    Repository.add_member(:s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Repository, location_name: "S3Bucket"))
+    Repository.add_member(:code_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeCommitRepository, location_name: "CodeCommit"))
+    Repository.add_member(:bitbucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartySourceRepository, location_name: "Bitbucket"))
+    Repository.add_member(:git_hub_enterprise_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartySourceRepository, location_name: "GitHubEnterpriseServer"))
+    Repository.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Repository, location_name: "S3Bucket"))
     Repository.type = Types::Repository
-    RepositoryAnalysis.add_member(:repository_head, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryHeadSourceCodeType, location_name: "RepositoryHead"))
-    RepositoryAnalysis.add_member(:source_code_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceCodeType, location_name: "SourceCodeType"))
+    RepositoryAnalysis.add_member(:repository_head, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryHeadSourceCodeType, location_name: "RepositoryHead"))
+    RepositoryAnalysis.add_member(:source_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeType, location_name: "SourceCodeType"))
     RepositoryAnalysis.type = Types::RepositoryAnalysis
-    RepositoryAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
-    RepositoryAssociation.add_member(:association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "AssociationArn"))
-    RepositoryAssociation.add_member(:connection_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn"))
-    RepositoryAssociation.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    RepositoryAssociation.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
-    RepositoryAssociation.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderType, location_name: "ProviderType"))
-    RepositoryAssociation.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociationState, location_name: "State"))
-    RepositoryAssociation.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateReason, location_name: "StateReason"))
-    RepositoryAssociation.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTimeStamp"))
-    RepositoryAssociation.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CreatedTimeStamp"))
-    RepositoryAssociation.add_member(:kms_key_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKeyDetails, location_name: "KMSKeyDetails"))
-    RepositoryAssociation.add_member(:s3_repository_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3RepositoryDetails, location_name: "S3RepositoryDetails"))
+    RepositoryAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationId, location_name: "AssociationId"))
+    RepositoryAssociation.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "AssociationArn"))
+    RepositoryAssociation.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, location_name: "ConnectionArn"))
+    RepositoryAssociation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    RepositoryAssociation.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
+    RepositoryAssociation.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, location_name: "ProviderType"))
+    RepositoryAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationState, location_name: "State"))
+    RepositoryAssociation.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StateReason, location_name: "StateReason"))
+    RepositoryAssociation.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LastUpdatedTimeStamp"))
+    RepositoryAssociation.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "CreatedTimeStamp"))
+    RepositoryAssociation.add_member(:kms_key_details, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyDetails, location_name: "KMSKeyDetails"))
+    RepositoryAssociation.add_member(:s3_repository_details, ::Smithy::Schema::Shapes::MemberShape.new(target: S3RepositoryDetails, location_name: "S3RepositoryDetails"))
     RepositoryAssociation.type = Types::RepositoryAssociation
-    RepositoryAssociationState.add_member(:associated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "Associated"}))
-    RepositoryAssociationState.add_member(:associating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASSOCIATING", traits: {"smithy.api#enumValue" => "Associating"}))
-    RepositoryAssociationState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    RepositoryAssociationState.add_member(:disassociating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISASSOCIATING", traits: {"smithy.api#enumValue" => "Disassociating"}))
-    RepositoryAssociationState.add_member(:disassociated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "Disassociated"}))
-    RepositoryAssociationStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociationState)
-    RepositoryAssociationSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociationSummary)
-    RepositoryAssociationSummary.add_member(:association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "AssociationArn"))
-    RepositoryAssociationSummary.add_member(:connection_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn"))
-    RepositoryAssociationSummary.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTimeStamp"))
-    RepositoryAssociationSummary.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
-    RepositoryAssociationSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    RepositoryAssociationSummary.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
-    RepositoryAssociationSummary.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderType, location_name: "ProviderType"))
-    RepositoryAssociationSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAssociationState, location_name: "State"))
+    RepositoryAssociationState.add_member(:associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "Associated"}))
+    RepositoryAssociationState.add_member(:associating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASSOCIATING", traits: {"smithy.api#enumValue" => "Associating"}))
+    RepositoryAssociationState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    RepositoryAssociationState.add_member(:disassociating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISASSOCIATING", traits: {"smithy.api#enumValue" => "Disassociating"}))
+    RepositoryAssociationState.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "Disassociated"}))
+    RepositoryAssociationStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationState)
+    RepositoryAssociationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationSummary)
+    RepositoryAssociationSummary.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "AssociationArn"))
+    RepositoryAssociationSummary.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, location_name: "ConnectionArn"))
+    RepositoryAssociationSummary.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LastUpdatedTimeStamp"))
+    RepositoryAssociationSummary.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationId, location_name: "AssociationId"))
+    RepositoryAssociationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    RepositoryAssociationSummary.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
+    RepositoryAssociationSummary.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, location_name: "ProviderType"))
+    RepositoryAssociationSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationState, location_name: "State"))
     RepositoryAssociationSummary.type = Types::RepositoryAssociationSummary
-    RepositoryHeadSourceCodeType.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "BranchName", traits: {"smithy.api#required" => {}}))
+    RepositoryHeadSourceCodeType.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "BranchName", traits: {"smithy.api#required" => {}}))
     RepositoryHeadSourceCodeType.type = Types::RepositoryHeadSourceCodeType
-    RepositoryNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name)
-    RequestMetadata.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
-    RequestMetadata.add_member(:requester, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Requester, location_name: "Requester"))
-    RequestMetadata.add_member(:event_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventInfo, location_name: "EventInfo"))
-    RequestMetadata.add_member(:vendor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VendorName, location_name: "VendorName"))
+    RepositoryNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name)
+    RequestMetadata.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
+    RequestMetadata.add_member(:requester, ::Smithy::Schema::Shapes::MemberShape.new(target: Requester, location_name: "Requester"))
+    RequestMetadata.add_member(:event_info, ::Smithy::Schema::Shapes::MemberShape.new(target: EventInfo, location_name: "EventInfo"))
+    RequestMetadata.add_member(:vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VendorName, location_name: "VendorName"))
     RequestMetadata.type = Types::RequestMetadata
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RuleMetadata.add_member(:rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleId, location_name: "RuleId"))
-    RuleMetadata.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
-    RuleMetadata.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortDescription, location_name: "ShortDescription"))
-    RuleMetadata.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongDescription, location_name: "LongDescription"))
-    RuleMetadata.add_member(:rule_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleTags, location_name: "RuleTags"))
+    RuleMetadata.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleId, location_name: "RuleId"))
+    RuleMetadata.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, location_name: "RuleName"))
+    RuleMetadata.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortDescription, location_name: "ShortDescription"))
+    RuleMetadata.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LongDescription, location_name: "LongDescription"))
+    RuleMetadata.add_member(:rule_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTags, location_name: "RuleTags"))
     RuleMetadata.type = Types::RuleMetadata
-    RuleTags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleTag)
-    S3BucketRepository.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    S3BucketRepository.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3RepositoryDetails, location_name: "Details"))
+    RuleTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTag)
+    S3BucketRepository.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    S3BucketRepository.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: S3RepositoryDetails, location_name: "Details"))
     S3BucketRepository.type = Types::S3BucketRepository
-    S3Repository.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    S3Repository.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
+    S3Repository.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    S3Repository.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
     S3Repository.type = Types::S3Repository
-    S3RepositoryDetails.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "BucketName"))
-    S3RepositoryDetails.add_member(:code_artifacts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeArtifacts, location_name: "CodeArtifacts"))
+    S3RepositoryDetails.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "BucketName"))
+    S3RepositoryDetails.add_member(:code_artifacts, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeArtifacts, location_name: "CodeArtifacts"))
     S3RepositoryDetails.type = Types::S3RepositoryDetails
-    Severity.add_member(:info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFO", traits: {"smithy.api#enumValue" => "Info"}))
-    Severity.add_member(:low, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOW", traits: {"smithy.api#enumValue" => "Low"}))
-    Severity.add_member(:medium, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
-    Severity.add_member(:high, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
-    Severity.add_member(:critical, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CRITICAL", traits: {"smithy.api#enumValue" => "Critical"}))
-    SourceCodeType.add_member(:commit_diff, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDiffSourceCodeType, location_name: "CommitDiff"))
-    SourceCodeType.add_member(:repository_head, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryHeadSourceCodeType, location_name: "RepositoryHead"))
-    SourceCodeType.add_member(:branch_diff, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDiffSourceCodeType, location_name: "BranchDiff"))
-    SourceCodeType.add_member(:s3_bucket_repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketRepository, location_name: "S3BucketRepository"))
-    SourceCodeType.add_member(:request_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestMetadata, location_name: "RequestMetadata"))
+    Severity.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFO", traits: {"smithy.api#enumValue" => "Info"}))
+    Severity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOW", traits: {"smithy.api#enumValue" => "Low"}))
+    Severity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
+    Severity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
+    Severity.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CRITICAL", traits: {"smithy.api#enumValue" => "Critical"}))
+    SourceCodeType.add_member(:commit_diff, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitDiffSourceCodeType, location_name: "CommitDiff"))
+    SourceCodeType.add_member(:repository_head, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryHeadSourceCodeType, location_name: "RepositoryHead"))
+    SourceCodeType.add_member(:branch_diff, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchDiffSourceCodeType, location_name: "BranchDiff"))
+    SourceCodeType.add_member(:s3_bucket_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketRepository, location_name: "S3BucketRepository"))
+    SourceCodeType.add_member(:request_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMetadata, location_name: "RequestMetadata"))
     SourceCodeType.type = Types::SourceCodeType
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ThirdPartySourceRepository.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ThirdPartySourceRepository.add_member(:connection_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn", traits: {"smithy.api#required" => {}}))
-    ThirdPartySourceRepository.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner", traits: {"smithy.api#required" => {}}))
+    ThirdPartySourceRepository.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ThirdPartySourceRepository.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, location_name: "ConnectionArn", traits: {"smithy.api#required" => {}}))
+    ThirdPartySourceRepository.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner", traits: {"smithy.api#required" => {}}))
     ThirdPartySourceRepository.type = Types::ThirdPartySourceRepository
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    Type.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST", traits: {"smithy.api#enumValue" => "PullRequest"}))
-    Type.add_member(:repository_analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPOSITORY_ANALYSIS", traits: {"smithy.api#enumValue" => "RepositoryAnalysis"}))
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    Type.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST", traits: {"smithy.api#enumValue" => "PullRequest"}))
+    Type.add_member(:repository_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPOSITORY_ANALYSIS", traits: {"smithy.api#enumValue" => "RepositoryAnalysis"}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UserIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId)
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UserIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserId)
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ValidationException.type = Types::ValidationException
-    VendorName.add_member(:github, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GITHUB", traits: {"smithy.api#enumValue" => "GitHub"}))
-    VendorName.add_member(:gitlab, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GITLAB", traits: {"smithy.api#enumValue" => "GitLab"}))
-    VendorName.add_member(:native_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NATIVE_S3", traits: {"smithy.api#enumValue" => "NativeS3"}))
+    VendorName.add_member(:github, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GITHUB", traits: {"smithy.api#enumValue" => "GitHub"}))
+    VendorName.add_member(:gitlab, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GITLAB", traits: {"smithy.api#enumValue" => "GitLab"}))
+    VendorName.add_member(:native_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NATIVE_S3", traits: {"smithy.api#enumValue" => "NativeS3"}))
 
     AWSGuruFrontendService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.codegurureviewer#AWSGuruFrontendService"
@@ -450,166 +450,166 @@ module Aws::CodeGuruReviewer
       service.add_operation(:associate_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#AssociateRepository"
         operation.name = "AssociateRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateRepositoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateRepositoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateRepositoryRequest
+        operation.output = AssociateRepositoryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/associations", "code" => 200}}
       end)
       service.add_operation(:create_code_review, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#CreateCodeReview"
         operation.name = "CreateCodeReview"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCodeReviewRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCodeReviewResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateCodeReviewRequest
+        operation.output = CreateCodeReviewResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/codereviews", "code" => 200}}
       end)
       service.add_operation(:describe_code_review, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#DescribeCodeReview"
         operation.name = "DescribeCodeReview"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCodeReviewRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCodeReviewResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeCodeReviewRequest
+        operation.output = DescribeCodeReviewResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/codereviews/{CodeReviewArn}", "code" => 200}}
       end)
       service.add_operation(:describe_recommendation_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#DescribeRecommendationFeedback"
         operation.name = "DescribeRecommendationFeedback"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRecommendationFeedbackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRecommendationFeedbackResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRecommendationFeedbackRequest
+        operation.output = DescribeRecommendationFeedbackResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/feedback/{CodeReviewArn}", "code" => 200}}
       end)
       service.add_operation(:describe_repository_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#DescribeRepositoryAssociation"
         operation.name = "DescribeRepositoryAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRepositoryAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRepositoryAssociationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRepositoryAssociationRequest
+        operation.output = DescribeRepositoryAssociationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/associations/{AssociationArn}", "code" => 200}}
       end)
       service.add_operation(:disassociate_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#DisassociateRepository"
         operation.name = "DisassociateRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateRepositoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateRepositoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateRepositoryRequest
+        operation.output = DisassociateRepositoryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << NotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/associations/{AssociationArn}", "code" => 200}}
       end)
       service.add_operation(:list_code_reviews, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#ListCodeReviews"
         operation.name = "ListCodeReviews"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCodeReviewsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCodeReviewsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListCodeReviewsRequest
+        operation.output = ListCodeReviewsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/codereviews", "code" => 200}}
         operation[:paginator] = Paginators::ListCodeReviews.new
       end)
       service.add_operation(:list_recommendation_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#ListRecommendationFeedback"
         operation.name = "ListRecommendationFeedback"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRecommendationFeedbackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRecommendationFeedbackResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRecommendationFeedbackRequest
+        operation.output = ListRecommendationFeedbackResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/feedback/{CodeReviewArn}/RecommendationFeedback", "code" => 200}}
         operation[:paginator] = Paginators::ListRecommendationFeedback.new
       end)
       service.add_operation(:list_recommendations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#ListRecommendations"
         operation.name = "ListRecommendations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRecommendationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRecommendationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRecommendationsRequest
+        operation.output = ListRecommendationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/codereviews/{CodeReviewArn}/Recommendations", "code" => 200}}
         operation[:paginator] = Paginators::ListRecommendations.new
       end)
       service.add_operation(:list_repository_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#ListRepositoryAssociations"
         operation.name = "ListRepositoryAssociations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRepositoryAssociationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRepositoryAssociationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRepositoryAssociationsRequest
+        operation.output = ListRepositoryAssociationsResponse
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/associations", "code" => 200}}
         operation[:paginator] = Paginators::ListRepositoryAssociations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:put_recommendation_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#PutRecommendationFeedback"
         operation.name = "PutRecommendationFeedback"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecommendationFeedbackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecommendationFeedbackResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutRecommendationFeedbackRequest
+        operation.output = PutRecommendationFeedbackResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/feedback", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codegurureviewer#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
     end

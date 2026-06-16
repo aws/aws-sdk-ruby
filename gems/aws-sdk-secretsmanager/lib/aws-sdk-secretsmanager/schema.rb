@@ -140,311 +140,311 @@ module Aws::SecretsManager
     ValidationErrorsEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#ValidationErrorsEntry", name: "ValidationErrorsEntry")
     ValidationErrorsType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.secretsmanager#ValidationErrorsType", name: "ValidationErrorsType")
 
-    APIErrorListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: APIErrorType)
-    APIErrorType.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId"))
-    APIErrorType.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    APIErrorType.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    APIErrorListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: APIErrorType)
+    APIErrorType.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId"))
+    APIErrorType.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    APIErrorType.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     APIErrorType.type = Types::APIErrorType
-    AddReplicaRegionListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaRegionType)
-    BatchGetSecretValueRequest.add_member(:secret_id_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdListType, location_name: "SecretIdList"))
-    BatchGetSecretValueRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FiltersListType, location_name: "Filters"))
-    BatchGetSecretValueRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsBatchType, location_name: "MaxResults"))
-    BatchGetSecretValueRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
+    AddReplicaRegionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaRegionType)
+    BatchGetSecretValueRequest.add_member(:secret_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdListType, location_name: "SecretIdList"))
+    BatchGetSecretValueRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FiltersListType, location_name: "Filters"))
+    BatchGetSecretValueRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsBatchType, location_name: "MaxResults"))
+    BatchGetSecretValueRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "NextToken"))
     BatchGetSecretValueRequest.type = Types::BatchGetSecretValueRequest
-    BatchGetSecretValueResponse.add_member(:secret_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretValuesType, location_name: "SecretValues"))
-    BatchGetSecretValueResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
-    BatchGetSecretValueResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: APIErrorListType, location_name: "Errors"))
+    BatchGetSecretValueResponse.add_member(:secret_values, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretValuesType, location_name: "SecretValues"))
+    BatchGetSecretValueResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "NextToken"))
+    BatchGetSecretValueResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: APIErrorListType, location_name: "Errors"))
     BatchGetSecretValueResponse.type = Types::BatchGetSecretValueResponse
-    CancelRotateSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    CancelRotateSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
     CancelRotateSecretRequest.type = Types::CancelRotateSecretRequest
-    CancelRotateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    CancelRotateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    CancelRotateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
+    CancelRotateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    CancelRotateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    CancelRotateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
     CancelRotateSecretResponse.type = Types::CancelRotateSecretResponse
-    CreateSecretRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateSecretRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateSecretRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
-    CreateSecretRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
-    CreateSecretRequest.add_member(:secret_binary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretBinaryType, location_name: "SecretBinary"))
-    CreateSecretRequest.add_member(:secret_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretStringType, location_name: "SecretString"))
-    CreateSecretRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
-    CreateSecretRequest.add_member(:add_replica_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddReplicaRegionListType, location_name: "AddReplicaRegions"))
-    CreateSecretRequest.add_member(:force_overwrite_replica_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceOverwriteReplicaSecret", traits: {"smithy.api#default" => false}))
+    CreateSecretRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateSecretRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateSecretRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, location_name: "Description"))
+    CreateSecretRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, location_name: "KmsKeyId"))
+    CreateSecretRequest.add_member(:secret_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretBinaryType, location_name: "SecretBinary"))
+    CreateSecretRequest.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretStringType, location_name: "SecretString"))
+    CreateSecretRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, location_name: "Tags"))
+    CreateSecretRequest.add_member(:add_replica_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AddReplicaRegionListType, location_name: "AddReplicaRegions"))
+    CreateSecretRequest.add_member(:force_overwrite_replica_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "ForceOverwriteReplicaSecret", traits: {"smithy.api#default" => false}))
     CreateSecretRequest.type = Types::CreateSecretRequest
-    CreateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    CreateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    CreateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
-    CreateSecretResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
+    CreateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    CreateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    CreateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
+    CreateSecretResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusListType, location_name: "ReplicationStatus"))
     CreateSecretResponse.type = Types::CreateSecretResponse
-    DecryptionFailure.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DecryptionFailure.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DecryptionFailure.type = Types::DecryptionFailure
-    DeleteResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    DeleteResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
-    DeleteResourcePolicyResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    DeleteResourcePolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
+    DeleteResourcePolicyResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    DeleteResourcePolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, location_name: "Name"))
     DeleteResourcePolicyResponse.type = Types::DeleteResourcePolicyResponse
-    DeleteSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    DeleteSecretRequest.add_member(:recovery_window_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecoveryWindowInDaysType, location_name: "RecoveryWindowInDays", traits: {"smithy.api#default" => nil}))
-    DeleteSecretRequest.add_member(:force_delete_without_recovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceDeleteWithoutRecovery", traits: {"smithy.api#default" => nil}))
+    DeleteSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    DeleteSecretRequest.add_member(:recovery_window_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryWindowInDaysType, location_name: "RecoveryWindowInDays", traits: {"smithy.api#default" => nil}))
+    DeleteSecretRequest.add_member(:force_delete_without_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "ForceDeleteWithoutRecovery", traits: {"smithy.api#default" => nil}))
     DeleteSecretRequest.type = Types::DeleteSecretRequest
-    DeleteSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    DeleteSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    DeleteSecretResponse.add_member(:deletion_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletionDateType, location_name: "DeletionDate"))
+    DeleteSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    DeleteSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    DeleteSecretResponse.add_member(:deletion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionDateType, location_name: "DeletionDate"))
     DeleteSecretResponse.type = Types::DeleteSecretResponse
-    DescribeSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    DescribeSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
     DescribeSecretRequest.type = Types::DescribeSecretRequest
-    DescribeSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    DescribeSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    DescribeSecretResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
-    DescribeSecretResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
-    DescribeSecretResponse.add_member(:rotation_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationEnabledType, location_name: "RotationEnabled", traits: {"smithy.api#default" => nil}))
-    DescribeSecretResponse.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationLambdaARNType, location_name: "RotationLambdaARN"))
-    DescribeSecretResponse.add_member(:rotation_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationRulesType, location_name: "RotationRules"))
-    DescribeSecretResponse.add_member(:last_rotated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastRotatedDateType, location_name: "LastRotatedDate"))
-    DescribeSecretResponse.add_member(:last_changed_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastChangedDateType, location_name: "LastChangedDate"))
-    DescribeSecretResponse.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate"))
-    DescribeSecretResponse.add_member(:deleted_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate"))
-    DescribeSecretResponse.add_member(:next_rotation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextRotationDateType, location_name: "NextRotationDate"))
-    DescribeSecretResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
-    DescribeSecretResponse.add_member(:version_ids_to_stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "VersionIdsToStages"))
-    DescribeSecretResponse.add_member(:owning_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
-    DescribeSecretResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedDate"))
-    DescribeSecretResponse.add_member(:primary_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionType, location_name: "PrimaryRegion"))
-    DescribeSecretResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
+    DescribeSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    DescribeSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    DescribeSecretResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, location_name: "Description"))
+    DescribeSecretResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, location_name: "KmsKeyId"))
+    DescribeSecretResponse.add_member(:rotation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationEnabledType, location_name: "RotationEnabled", traits: {"smithy.api#default" => nil}))
+    DescribeSecretResponse.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationLambdaARNType, location_name: "RotationLambdaARN"))
+    DescribeSecretResponse.add_member(:rotation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationRulesType, location_name: "RotationRules"))
+    DescribeSecretResponse.add_member(:last_rotated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastRotatedDateType, location_name: "LastRotatedDate"))
+    DescribeSecretResponse.add_member(:last_changed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastChangedDateType, location_name: "LastChangedDate"))
+    DescribeSecretResponse.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessedDateType, location_name: "LastAccessedDate"))
+    DescribeSecretResponse.add_member(:deleted_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletedDateType, location_name: "DeletedDate"))
+    DescribeSecretResponse.add_member(:next_rotation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NextRotationDateType, location_name: "NextRotationDate"))
+    DescribeSecretResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, location_name: "Tags"))
+    DescribeSecretResponse.add_member(:version_ids_to_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionsToStagesMapType, location_name: "VersionIdsToStages"))
+    DescribeSecretResponse.add_member(:owning_service, ::Smithy::Schema::Shapes::MemberShape.new(target: OwningServiceType, location_name: "OwningService"))
+    DescribeSecretResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "CreatedDate"))
+    DescribeSecretResponse.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, location_name: "PrimaryRegion"))
+    DescribeSecretResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusListType, location_name: "ReplicationStatus"))
     DescribeSecretResponse.type = Types::DescribeSecretResponse
-    EncryptionFailure.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    EncryptionFailure.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     EncryptionFailure.type = Types::EncryptionFailure
-    Filter.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterNameStringType, location_name: "Key"))
-    Filter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValuesStringList, location_name: "Values"))
+    Filter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterNameStringType, location_name: "Key"))
+    Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValuesStringList, location_name: "Values"))
     Filter.type = Types::Filter
-    FilterNameStringType.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "description", traits: {"smithy.api#enumValue" => "description"}))
-    FilterNameStringType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "name", traits: {"smithy.api#enumValue" => "name"}))
-    FilterNameStringType.add_member(:tag_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "tag_key", traits: {"smithy.api#enumValue" => "tag-key"}))
-    FilterNameStringType.add_member(:tag_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "tag_value", traits: {"smithy.api#enumValue" => "tag-value"}))
-    FilterNameStringType.add_member(:primary_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "primary_region", traits: {"smithy.api#enumValue" => "primary-region"}))
-    FilterNameStringType.add_member(:owning_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "owning_service", traits: {"smithy.api#enumValue" => "owning-service"}))
-    FilterNameStringType.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "all", traits: {"smithy.api#enumValue" => "all"}))
-    FilterValuesStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueStringType)
-    FiltersListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    GetRandomPasswordRequest.add_member(:password_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordLengthType, location_name: "PasswordLength"))
-    GetRandomPasswordRequest.add_member(:exclude_characters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeCharactersType, location_name: "ExcludeCharacters"))
-    GetRandomPasswordRequest.add_member(:exclude_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeNumbersType, location_name: "ExcludeNumbers", traits: {"smithy.api#default" => nil}))
-    GetRandomPasswordRequest.add_member(:exclude_punctuation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludePunctuationType, location_name: "ExcludePunctuation", traits: {"smithy.api#default" => nil}))
-    GetRandomPasswordRequest.add_member(:exclude_uppercase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeUppercaseType, location_name: "ExcludeUppercase", traits: {"smithy.api#default" => nil}))
-    GetRandomPasswordRequest.add_member(:exclude_lowercase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeLowercaseType, location_name: "ExcludeLowercase", traits: {"smithy.api#default" => nil}))
-    GetRandomPasswordRequest.add_member(:include_space, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeSpaceType, location_name: "IncludeSpace", traits: {"smithy.api#default" => nil}))
-    GetRandomPasswordRequest.add_member(:require_each_included_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequireEachIncludedTypeType, location_name: "RequireEachIncludedType", traits: {"smithy.api#default" => nil}))
+    FilterNameStringType.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "description", traits: {"smithy.api#enumValue" => "description"}))
+    FilterNameStringType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "name", traits: {"smithy.api#enumValue" => "name"}))
+    FilterNameStringType.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "tag_key", traits: {"smithy.api#enumValue" => "tag-key"}))
+    FilterNameStringType.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "tag_value", traits: {"smithy.api#enumValue" => "tag-value"}))
+    FilterNameStringType.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "primary_region", traits: {"smithy.api#enumValue" => "primary-region"}))
+    FilterNameStringType.add_member(:owning_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "owning_service", traits: {"smithy.api#enumValue" => "owning-service"}))
+    FilterNameStringType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "all", traits: {"smithy.api#enumValue" => "all"}))
+    FilterValuesStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueStringType)
+    FiltersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    GetRandomPasswordRequest.add_member(:password_length, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordLengthType, location_name: "PasswordLength"))
+    GetRandomPasswordRequest.add_member(:exclude_characters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeCharactersType, location_name: "ExcludeCharacters"))
+    GetRandomPasswordRequest.add_member(:exclude_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeNumbersType, location_name: "ExcludeNumbers", traits: {"smithy.api#default" => nil}))
+    GetRandomPasswordRequest.add_member(:exclude_punctuation, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludePunctuationType, location_name: "ExcludePunctuation", traits: {"smithy.api#default" => nil}))
+    GetRandomPasswordRequest.add_member(:exclude_uppercase, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeUppercaseType, location_name: "ExcludeUppercase", traits: {"smithy.api#default" => nil}))
+    GetRandomPasswordRequest.add_member(:exclude_lowercase, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeLowercaseType, location_name: "ExcludeLowercase", traits: {"smithy.api#default" => nil}))
+    GetRandomPasswordRequest.add_member(:include_space, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeSpaceType, location_name: "IncludeSpace", traits: {"smithy.api#default" => nil}))
+    GetRandomPasswordRequest.add_member(:require_each_included_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RequireEachIncludedTypeType, location_name: "RequireEachIncludedType", traits: {"smithy.api#default" => nil}))
     GetRandomPasswordRequest.type = Types::GetRandomPasswordRequest
-    GetRandomPasswordResponse.add_member(:random_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RandomPasswordType, location_name: "RandomPassword"))
+    GetRandomPasswordResponse.add_member(:random_password, ::Smithy::Schema::Shapes::MemberShape.new(target: RandomPasswordType, location_name: "RandomPassword"))
     GetRandomPasswordResponse.type = Types::GetRandomPasswordResponse
-    GetResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    GetResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
     GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
-    GetResourcePolicyResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    GetResourcePolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
-    GetResourcePolicyResponse.add_member(:resource_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, location_name: "ResourcePolicy"))
+    GetResourcePolicyResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    GetResourcePolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, location_name: "Name"))
+    GetResourcePolicyResponse.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourcePolicyType, location_name: "ResourcePolicy"))
     GetResourcePolicyResponse.type = Types::GetResourcePolicyResponse
-    GetSecretValueRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    GetSecretValueRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
-    GetSecretValueRequest.add_member(:version_stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStageType, location_name: "VersionStage"))
+    GetSecretValueRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    GetSecretValueRequest.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
+    GetSecretValueRequest.add_member(:version_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStageType, location_name: "VersionStage"))
     GetSecretValueRequest.type = Types::GetSecretValueRequest
-    GetSecretValueResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    GetSecretValueResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    GetSecretValueResponse.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
-    GetSecretValueResponse.add_member(:secret_binary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretBinaryType, location_name: "SecretBinary"))
-    GetSecretValueResponse.add_member(:secret_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretStringType, location_name: "SecretString"))
-    GetSecretValueResponse.add_member(:version_stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
-    GetSecretValueResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDateType, location_name: "CreatedDate"))
+    GetSecretValueResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    GetSecretValueResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    GetSecretValueResponse.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
+    GetSecretValueResponse.add_member(:secret_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretBinaryType, location_name: "SecretBinary"))
+    GetSecretValueResponse.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretStringType, location_name: "SecretString"))
+    GetSecretValueResponse.add_member(:version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, location_name: "VersionStages"))
+    GetSecretValueResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateType, location_name: "CreatedDate"))
     GetSecretValueResponse.type = Types::GetSecretValueResponse
-    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServiceError.type = Types::InternalServiceError
-    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    KmsKeyIdListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdType)
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    KmsKeyIdListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType)
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListSecretVersionIdsRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    ListSecretVersionIdsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "MaxResults"))
-    ListSecretVersionIdsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
-    ListSecretVersionIdsRequest.add_member(:include_deprecated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "IncludeDeprecated", traits: {"smithy.api#default" => nil}))
+    ListSecretVersionIdsRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    ListSecretVersionIdsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, location_name: "MaxResults"))
+    ListSecretVersionIdsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "NextToken"))
+    ListSecretVersionIdsRequest.add_member(:include_deprecated, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "IncludeDeprecated", traits: {"smithy.api#default" => nil}))
     ListSecretVersionIdsRequest.type = Types::ListSecretVersionIdsRequest
-    ListSecretVersionIdsResponse.add_member(:versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionsListType, location_name: "Versions"))
-    ListSecretVersionIdsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
-    ListSecretVersionIdsResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    ListSecretVersionIdsResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
+    ListSecretVersionIdsResponse.add_member(:versions, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionsListType, location_name: "Versions"))
+    ListSecretVersionIdsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "NextToken"))
+    ListSecretVersionIdsResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    ListSecretVersionIdsResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
     ListSecretVersionIdsResponse.type = Types::ListSecretVersionIdsResponse
-    ListSecretsRequest.add_member(:include_planned_deletion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "IncludePlannedDeletion", traits: {"smithy.api#default" => nil}))
-    ListSecretsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "MaxResults"))
-    ListSecretsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
-    ListSecretsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FiltersListType, location_name: "Filters"))
-    ListSecretsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrderType, location_name: "SortOrder"))
+    ListSecretsRequest.add_member(:include_planned_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "IncludePlannedDeletion", traits: {"smithy.api#default" => nil}))
+    ListSecretsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, location_name: "MaxResults"))
+    ListSecretsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "NextToken"))
+    ListSecretsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FiltersListType, location_name: "Filters"))
+    ListSecretsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrderType, location_name: "SortOrder"))
     ListSecretsRequest.type = Types::ListSecretsRequest
-    ListSecretsResponse.add_member(:secret_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretListType, location_name: "SecretList"))
-    ListSecretsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
+    ListSecretsResponse.add_member(:secret_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretListType, location_name: "SecretList"))
+    ListSecretsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, location_name: "NextToken"))
     ListSecretsResponse.type = Types::ListSecretsResponse
-    MalformedPolicyDocumentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MalformedPolicyDocumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     MalformedPolicyDocumentException.type = Types::MalformedPolicyDocumentException
-    PreconditionNotMetException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PreconditionNotMetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     PreconditionNotMetException.type = Types::PreconditionNotMetException
-    PublicPolicyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PublicPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     PublicPolicyException.type = Types::PublicPolicyException
-    PutResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    PutResourcePolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, location_name: "ResourcePolicy", traits: {"smithy.api#required" => {}}))
-    PutResourcePolicyRequest.add_member(:block_public_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "BlockPublicPolicy", traits: {"smithy.api#default" => nil}))
+    PutResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourcePolicyType, location_name: "ResourcePolicy", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:block_public_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "BlockPublicPolicy", traits: {"smithy.api#default" => nil}))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
-    PutResourcePolicyResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    PutResourcePolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
+    PutResourcePolicyResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    PutResourcePolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, location_name: "Name"))
     PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
-    PutSecretValueRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    PutSecretValueRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    PutSecretValueRequest.add_member(:secret_binary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretBinaryType, location_name: "SecretBinary"))
-    PutSecretValueRequest.add_member(:secret_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretStringType, location_name: "SecretString"))
-    PutSecretValueRequest.add_member(:version_stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
-    PutSecretValueRequest.add_member(:rotation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationTokenType, location_name: "RotationToken"))
+    PutSecretValueRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    PutSecretValueRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutSecretValueRequest.add_member(:secret_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretBinaryType, location_name: "SecretBinary"))
+    PutSecretValueRequest.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretStringType, location_name: "SecretString"))
+    PutSecretValueRequest.add_member(:version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, location_name: "VersionStages"))
+    PutSecretValueRequest.add_member(:rotation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationTokenType, location_name: "RotationToken"))
     PutSecretValueRequest.type = Types::PutSecretValueRequest
-    PutSecretValueResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    PutSecretValueResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    PutSecretValueResponse.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
-    PutSecretValueResponse.add_member(:version_stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
+    PutSecretValueResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    PutSecretValueResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    PutSecretValueResponse.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
+    PutSecretValueResponse.add_member(:version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, location_name: "VersionStages"))
     PutSecretValueResponse.type = Types::PutSecretValueResponse
-    RemoveRegionsFromReplicationRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    RemoveRegionsFromReplicationRequest.add_member(:remove_replica_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveReplicaRegionListType, location_name: "RemoveReplicaRegions", traits: {"smithy.api#required" => {}}))
+    RemoveRegionsFromReplicationRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    RemoveRegionsFromReplicationRequest.add_member(:remove_replica_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveReplicaRegionListType, location_name: "RemoveReplicaRegions", traits: {"smithy.api#required" => {}}))
     RemoveRegionsFromReplicationRequest.type = Types::RemoveRegionsFromReplicationRequest
-    RemoveRegionsFromReplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    RemoveRegionsFromReplicationResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
+    RemoveRegionsFromReplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    RemoveRegionsFromReplicationResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusListType, location_name: "ReplicationStatus"))
     RemoveRegionsFromReplicationResponse.type = Types::RemoveRegionsFromReplicationResponse
-    RemoveReplicaRegionListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionType)
-    ReplicaRegionType.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionType, location_name: "Region"))
-    ReplicaRegionType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
+    RemoveReplicaRegionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType)
+    ReplicaRegionType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, location_name: "Region"))
+    ReplicaRegionType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, location_name: "KmsKeyId"))
     ReplicaRegionType.type = Types::ReplicaRegionType
-    ReplicateSecretToRegionsRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    ReplicateSecretToRegionsRequest.add_member(:add_replica_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddReplicaRegionListType, location_name: "AddReplicaRegions", traits: {"smithy.api#required" => {}}))
-    ReplicateSecretToRegionsRequest.add_member(:force_overwrite_replica_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceOverwriteReplicaSecret", traits: {"smithy.api#default" => false}))
+    ReplicateSecretToRegionsRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    ReplicateSecretToRegionsRequest.add_member(:add_replica_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AddReplicaRegionListType, location_name: "AddReplicaRegions", traits: {"smithy.api#required" => {}}))
+    ReplicateSecretToRegionsRequest.add_member(:force_overwrite_replica_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "ForceOverwriteReplicaSecret", traits: {"smithy.api#default" => false}))
     ReplicateSecretToRegionsRequest.type = Types::ReplicateSecretToRegionsRequest
-    ReplicateSecretToRegionsResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    ReplicateSecretToRegionsResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
+    ReplicateSecretToRegionsResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    ReplicateSecretToRegionsResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusListType, location_name: "ReplicationStatus"))
     ReplicateSecretToRegionsResponse.type = Types::ReplicateSecretToRegionsResponse
-    ReplicationStatusListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatusType)
-    ReplicationStatusType.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionType, location_name: "Region"))
-    ReplicationStatusType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
-    ReplicationStatusType.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusType, location_name: "Status"))
-    ReplicationStatusType.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessageType, location_name: "StatusMessage"))
-    ReplicationStatusType.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate"))
+    ReplicationStatusListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusType)
+    ReplicationStatusType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, location_name: "Region"))
+    ReplicationStatusType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, location_name: "KmsKeyId"))
+    ReplicationStatusType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, location_name: "Status"))
+    ReplicationStatusType.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessageType, location_name: "StatusMessage"))
+    ReplicationStatusType.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessedDateType, location_name: "LastAccessedDate"))
     ReplicationStatusType.type = Types::ReplicationStatusType
-    ResourceExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceExistsException.type = Types::ResourceExistsException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RestoreSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    RestoreSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
     RestoreSecretRequest.type = Types::RestoreSecretRequest
-    RestoreSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    RestoreSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
+    RestoreSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    RestoreSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
     RestoreSecretResponse.type = Types::RestoreSecretResponse
-    RotateSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    RotateSecretRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    RotateSecretRequest.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationLambdaARNType, location_name: "RotationLambdaARN"))
-    RotateSecretRequest.add_member(:rotation_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationRulesType, location_name: "RotationRules"))
-    RotateSecretRequest.add_member(:rotate_immediately, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "RotateImmediately", traits: {"smithy.api#default" => nil}))
+    RotateSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    RotateSecretRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    RotateSecretRequest.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationLambdaARNType, location_name: "RotationLambdaARN"))
+    RotateSecretRequest.add_member(:rotation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationRulesType, location_name: "RotationRules"))
+    RotateSecretRequest.add_member(:rotate_immediately, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "RotateImmediately", traits: {"smithy.api#default" => nil}))
     RotateSecretRequest.type = Types::RotateSecretRequest
-    RotateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    RotateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    RotateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
+    RotateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    RotateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    RotateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
     RotateSecretResponse.type = Types::RotateSecretResponse
-    RotationRulesType.add_member(:automatically_after_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticallyRotateAfterDaysType, location_name: "AutomaticallyAfterDays"))
-    RotationRulesType.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DurationType, location_name: "Duration"))
-    RotationRulesType.add_member(:schedule_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpressionType, location_name: "ScheduleExpression"))
+    RotationRulesType.add_member(:automatically_after_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticallyRotateAfterDaysType, location_name: "AutomaticallyAfterDays"))
+    RotationRulesType.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationType, location_name: "Duration"))
+    RotationRulesType.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpressionType, location_name: "ScheduleExpression"))
     RotationRulesType.type = Types::RotationRulesType
-    SecretIdListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType)
-    SecretListEntry.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    SecretListEntry.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    SecretListEntry.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
-    SecretListEntry.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
-    SecretListEntry.add_member(:rotation_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationEnabledType, location_name: "RotationEnabled", traits: {"smithy.api#default" => nil}))
-    SecretListEntry.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationLambdaARNType, location_name: "RotationLambdaARN"))
-    SecretListEntry.add_member(:rotation_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationRulesType, location_name: "RotationRules"))
-    SecretListEntry.add_member(:last_rotated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastRotatedDateType, location_name: "LastRotatedDate"))
-    SecretListEntry.add_member(:last_changed_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastChangedDateType, location_name: "LastChangedDate"))
-    SecretListEntry.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate"))
-    SecretListEntry.add_member(:deleted_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate"))
-    SecretListEntry.add_member(:next_rotation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextRotationDateType, location_name: "NextRotationDate"))
-    SecretListEntry.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
-    SecretListEntry.add_member(:secret_versions_to_stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "SecretVersionsToStages"))
-    SecretListEntry.add_member(:owning_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
-    SecretListEntry.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedDate"))
-    SecretListEntry.add_member(:primary_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionType, location_name: "PrimaryRegion"))
+    SecretIdListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType)
+    SecretListEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    SecretListEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    SecretListEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, location_name: "Description"))
+    SecretListEntry.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, location_name: "KmsKeyId"))
+    SecretListEntry.add_member(:rotation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationEnabledType, location_name: "RotationEnabled", traits: {"smithy.api#default" => nil}))
+    SecretListEntry.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationLambdaARNType, location_name: "RotationLambdaARN"))
+    SecretListEntry.add_member(:rotation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationRulesType, location_name: "RotationRules"))
+    SecretListEntry.add_member(:last_rotated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastRotatedDateType, location_name: "LastRotatedDate"))
+    SecretListEntry.add_member(:last_changed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastChangedDateType, location_name: "LastChangedDate"))
+    SecretListEntry.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessedDateType, location_name: "LastAccessedDate"))
+    SecretListEntry.add_member(:deleted_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletedDateType, location_name: "DeletedDate"))
+    SecretListEntry.add_member(:next_rotation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NextRotationDateType, location_name: "NextRotationDate"))
+    SecretListEntry.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, location_name: "Tags"))
+    SecretListEntry.add_member(:secret_versions_to_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionsToStagesMapType, location_name: "SecretVersionsToStages"))
+    SecretListEntry.add_member(:owning_service, ::Smithy::Schema::Shapes::MemberShape.new(target: OwningServiceType, location_name: "OwningService"))
+    SecretListEntry.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "CreatedDate"))
+    SecretListEntry.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, location_name: "PrimaryRegion"))
     SecretListEntry.type = Types::SecretListEntry
-    SecretListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretListEntry)
-    SecretValueEntry.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    SecretValueEntry.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    SecretValueEntry.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
-    SecretValueEntry.add_member(:secret_binary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretBinaryType, location_name: "SecretBinary"))
-    SecretValueEntry.add_member(:secret_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretStringType, location_name: "SecretString"))
-    SecretValueEntry.add_member(:version_stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
-    SecretValueEntry.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDateType, location_name: "CreatedDate"))
+    SecretListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretListEntry)
+    SecretValueEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    SecretValueEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    SecretValueEntry.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
+    SecretValueEntry.add_member(:secret_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretBinaryType, location_name: "SecretBinary"))
+    SecretValueEntry.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretStringType, location_name: "SecretString"))
+    SecretValueEntry.add_member(:version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, location_name: "VersionStages"))
+    SecretValueEntry.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateType, location_name: "CreatedDate"))
     SecretValueEntry.type = Types::SecretValueEntry
-    SecretValuesType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretValueEntry)
-    SecretVersionStagesType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStageType)
-    SecretVersionsListEntry.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
-    SecretVersionsListEntry.add_member(:version_stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
-    SecretVersionsListEntry.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate"))
-    SecretVersionsListEntry.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDateType, location_name: "CreatedDate"))
-    SecretVersionsListEntry.add_member(:kms_key_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdListType, location_name: "KmsKeyIds"))
+    SecretValuesType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretValueEntry)
+    SecretVersionStagesType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStageType)
+    SecretVersionsListEntry.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
+    SecretVersionsListEntry.add_member(:version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, location_name: "VersionStages"))
+    SecretVersionsListEntry.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessedDateType, location_name: "LastAccessedDate"))
+    SecretVersionsListEntry.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateType, location_name: "CreatedDate"))
+    SecretVersionsListEntry.add_member(:kms_key_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdListType, location_name: "KmsKeyIds"))
     SecretVersionsListEntry.type = Types::SecretVersionsListEntry
-    SecretVersionsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionsListEntry)
-    SecretVersionsToStagesMapType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType)
-    SecretVersionsToStagesMapType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStagesType)
-    SortOrderType.add_member(:asc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "asc", traits: {"smithy.api#enumValue" => "asc"}))
-    SortOrderType.add_member(:desc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "desc", traits: {"smithy.api#enumValue" => "desc"}))
-    StatusType.add_member(:in_sync, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InSync", traits: {"smithy.api#enumValue" => "InSync"}))
-    StatusType.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
-    StatusType.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
-    StopReplicationToReplicaRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    SecretVersionsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionsListEntry)
+    SecretVersionsToStagesMapType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType)
+    SecretVersionsToStagesMapType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType)
+    SortOrderType.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "asc", traits: {"smithy.api#enumValue" => "asc"}))
+    SortOrderType.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "desc", traits: {"smithy.api#enumValue" => "desc"}))
+    StatusType.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InSync", traits: {"smithy.api#enumValue" => "InSync"}))
+    StatusType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
+    StatusType.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
+    StopReplicationToReplicaRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
     StopReplicationToReplicaRequest.type = Types::StopReplicationToReplicaRequest
-    StopReplicationToReplicaResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
+    StopReplicationToReplicaResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
     StopReplicationToReplicaResponse.type = Types::StopReplicationToReplicaResponse
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyType, location_name: "Key"))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValueType, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, location_name: "Key"))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyType)
-    TagListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType)
+    TagListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    UntagResourceRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyListType, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyListType, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    UpdateSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    UpdateSecretRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateSecretRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
-    UpdateSecretRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
-    UpdateSecretRequest.add_member(:secret_binary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretBinaryType, location_name: "SecretBinary"))
-    UpdateSecretRequest.add_member(:secret_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretStringType, location_name: "SecretString"))
+    UpdateSecretRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    UpdateSecretRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenType, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateSecretRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, location_name: "Description"))
+    UpdateSecretRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, location_name: "KmsKeyId"))
+    UpdateSecretRequest.add_member(:secret_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretBinaryType, location_name: "SecretBinary"))
+    UpdateSecretRequest.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretStringType, location_name: "SecretString"))
     UpdateSecretRequest.type = Types::UpdateSecretRequest
-    UpdateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    UpdateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
-    UpdateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
+    UpdateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    UpdateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
+    UpdateSecretResponse.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "VersionId"))
     UpdateSecretResponse.type = Types::UpdateSecretResponse
-    UpdateSecretVersionStageRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
-    UpdateSecretVersionStageRequest.add_member(:version_stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionStageType, location_name: "VersionStage", traits: {"smithy.api#required" => {}}))
-    UpdateSecretVersionStageRequest.add_member(:remove_from_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "RemoveFromVersionId"))
-    UpdateSecretVersionStageRequest.add_member(:move_to_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "MoveToVersionId"))
+    UpdateSecretVersionStageRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId", traits: {"smithy.api#required" => {}}))
+    UpdateSecretVersionStageRequest.add_member(:version_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStageType, location_name: "VersionStage", traits: {"smithy.api#required" => {}}))
+    UpdateSecretVersionStageRequest.add_member(:remove_from_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "RemoveFromVersionId"))
+    UpdateSecretVersionStageRequest.add_member(:move_to_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, location_name: "MoveToVersionId"))
     UpdateSecretVersionStageRequest.type = Types::UpdateSecretVersionStageRequest
-    UpdateSecretVersionStageResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
-    UpdateSecretVersionStageResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
+    UpdateSecretVersionStageResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, location_name: "ARN"))
+    UpdateSecretVersionStageResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, location_name: "Name"))
     UpdateSecretVersionStageResponse.type = Types::UpdateSecretVersionStageResponse
-    ValidateResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId"))
-    ValidateResourcePolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, location_name: "ResourcePolicy", traits: {"smithy.api#required" => {}}))
+    ValidateResourcePolicyRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, location_name: "SecretId"))
+    ValidateResourcePolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourcePolicyType, location_name: "ResourcePolicy", traits: {"smithy.api#required" => {}}))
     ValidateResourcePolicyRequest.type = Types::ValidateResourcePolicyRequest
-    ValidateResourcePolicyResponse.add_member(:policy_validation_passed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "PolicyValidationPassed", traits: {"smithy.api#default" => false}))
-    ValidateResourcePolicyResponse.add_member(:validation_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationErrorsType, location_name: "ValidationErrors"))
+    ValidateResourcePolicyResponse.add_member(:policy_validation_passed, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "PolicyValidationPassed", traits: {"smithy.api#default" => false}))
+    ValidateResourcePolicyResponse.add_member(:validation_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationErrorsType, location_name: "ValidationErrors"))
     ValidateResourcePolicyResponse.type = Types::ValidateResourcePolicyResponse
-    ValidationErrorsEntry.add_member(:check_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: "CheckName"))
-    ValidationErrorsEntry.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ValidationErrorsEntry.add_member(:check_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, location_name: "CheckName"))
+    ValidationErrorsEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "ErrorMessage"))
     ValidationErrorsEntry.type = Types::ValidationErrorsEntry
-    ValidationErrorsType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationErrorsEntry)
+    ValidationErrorsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationErrorsEntry)
 
     Secretsmanager = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.secretsmanager#secretsmanager"
@@ -454,278 +454,278 @@ module Aws::SecretsManager
       service.add_operation(:batch_get_secret_value, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#BatchGetSecretValue"
         operation.name = "BatchGetSecretValue"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetSecretValueRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetSecretValueResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = BatchGetSecretValueRequest
+        operation.output = BatchGetSecretValueResponse
+        operation.errors << DecryptionFailure
+        operation.errors << InternalServiceError
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
         operation[:paginator] = Paginators::BatchGetSecretValue.new
       end)
       service.add_operation(:cancel_rotate_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#CancelRotateSecret"
         operation.name = "CancelRotateSecret"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelRotateSecretRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelRotateSecretResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = CancelRotateSecretRequest
+        operation.output = CancelRotateSecretResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:create_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#CreateSecret"
         operation.name = "CreateSecret"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSecretRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSecretResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionNotMetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = CreateSecretRequest
+        operation.output = CreateSecretResponse
+        operation.errors << DecryptionFailure
+        operation.errors << EncryptionFailure
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << MalformedPolicyDocumentException
+        operation.errors << PreconditionNotMetException
+        operation.errors << ResourceExistsException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#DeleteResourcePolicy"
         operation.name = "DeleteResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteResourcePolicyRequest
+        operation.output = DeleteResourcePolicyResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#DeleteSecret"
         operation.name = "DeleteSecret"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSecretRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSecretResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteSecretRequest
+        operation.output = DeleteSecretResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:describe_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#DescribeSecret"
         operation.name = "DescribeSecret"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSecretRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSecretResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeSecretRequest
+        operation.output = DescribeSecretResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "DescribeSecretFailure", "params" => {"SecretId" => "fake-secret-id"}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"failure" => {}}}]}
       end)
       service.add_operation(:get_random_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#GetRandomPassword"
         operation.name = "GetRandomPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRandomPasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRandomPasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = GetRandomPasswordRequest
+        operation.output = GetRandomPasswordResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#GetResourcePolicy"
         operation.name = "GetResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetResourcePolicyRequest
+        operation.output = GetResourcePolicyResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_secret_value, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#GetSecretValue"
         operation.name = "GetSecretValue"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSecretValueRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSecretValueResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetSecretValueRequest
+        operation.output = GetSecretValueResponse
+        operation.errors << DecryptionFailure
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:list_secret_version_ids, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#ListSecretVersionIds"
         operation.name = "ListSecretVersionIds"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSecretVersionIdsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSecretVersionIdsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListSecretVersionIdsRequest
+        operation.output = ListSecretVersionIdsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
         operation[:paginator] = Paginators::ListSecretVersionIds.new
       end)
       service.add_operation(:list_secrets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#ListSecrets"
         operation.name = "ListSecrets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSecretsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSecretsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ListSecretsRequest
+        operation.output = ListSecretsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListSecretsSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::ListSecrets.new
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#PutResourcePolicy"
         operation.name = "PutResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutResourcePolicyRequest
+        operation.output = PutResourcePolicyResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << MalformedPolicyDocumentException
+        operation.errors << PublicPolicyException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:put_secret_value, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#PutSecretValue"
         operation.name = "PutSecretValue"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutSecretValueRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutSecretValueResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutSecretValueRequest
+        operation.output = PutSecretValueResponse
+        operation.errors << DecryptionFailure
+        operation.errors << EncryptionFailure
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceExistsException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:remove_regions_from_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#RemoveRegionsFromReplication"
         operation.name = "RemoveRegionsFromReplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveRegionsFromReplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveRegionsFromReplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = RemoveRegionsFromReplicationRequest
+        operation.output = RemoveRegionsFromReplicationResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:replicate_secret_to_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#ReplicateSecretToRegions"
         operation.name = "ReplicateSecretToRegions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicateSecretToRegionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicateSecretToRegionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ReplicateSecretToRegionsRequest
+        operation.output = ReplicateSecretToRegionsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:restore_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#RestoreSecret"
         operation.name = "RestoreSecret"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreSecretRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreSecretResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = RestoreSecretRequest
+        operation.output = RestoreSecretResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:rotate_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#RotateSecret"
         operation.name = "RotateSecret"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotateSecretRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotateSecretResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = RotateSecretRequest
+        operation.output = RotateSecretResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_replication_to_replica, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#StopReplicationToReplica"
         operation.name = "StopReplicationToReplica"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopReplicationToReplicaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopReplicationToReplicaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = StopReplicationToReplicaRequest
+        operation.output = StopReplicationToReplicaResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = TagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#UpdateSecret"
         operation.name = "UpdateSecret"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSecretRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSecretResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionFailure)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionNotMetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateSecretRequest
+        operation.output = UpdateSecretResponse
+        operation.errors << DecryptionFailure
+        operation.errors << EncryptionFailure
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << MalformedPolicyDocumentException
+        operation.errors << PreconditionNotMetException
+        operation.errors << ResourceExistsException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_secret_version_stage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#UpdateSecretVersionStage"
         operation.name = "UpdateSecretVersionStage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSecretVersionStageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSecretVersionStageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateSecretVersionStageRequest
+        operation.output = UpdateSecretVersionStageResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:validate_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#ValidateResourcePolicy"
         operation.name = "ValidateResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidateResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidateResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ValidateResourcePolicyRequest
+        operation.output = ValidateResourcePolicyResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
+        operation.errors << MalformedPolicyDocumentException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
     end

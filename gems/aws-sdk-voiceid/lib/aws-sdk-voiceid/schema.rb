@@ -157,375 +157,375 @@ module Aws::VoiceID
     WatchlistSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.voiceid#WatchlistSummaries", name: "WatchlistSummaries")
     WatchlistSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.voiceid#WatchlistSummary", name: "WatchlistSummary")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AssociateFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    AssociateFraudsterInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
-    AssociateFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
+    AssociateFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    AssociateFraudsterInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
+    AssociateFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
     AssociateFraudsterInput.type = Types::AssociateFraudsterInput
-    AssociateFraudsterOutput.add_member(:fraudster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Fraudster, location_name: "Fraudster"))
+    AssociateFraudsterOutput.add_member(:fraudster, ::Smithy::Schema::Shapes::MemberShape.new(target: Fraudster, location_name: "Fraudster"))
     AssociateFraudsterOutput.type = Types::AssociateFraudsterOutput
-    AuthenticationConfiguration.add_member(:acceptance_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "AcceptanceThreshold", traits: {"smithy.api#required" => {}}))
+    AuthenticationConfiguration.add_member(:acceptance_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "AcceptanceThreshold", traits: {"smithy.api#required" => {}}))
     AuthenticationConfiguration.type = Types::AuthenticationConfiguration
-    AuthenticationResult.add_member(:authentication_result_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UniqueIdLarge, location_name: "AuthenticationResultId"))
-    AuthenticationResult.add_member(:audio_aggregation_started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "AudioAggregationStartedAt"))
-    AuthenticationResult.add_member(:audio_aggregation_ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "AudioAggregationEndedAt"))
-    AuthenticationResult.add_member(:customer_speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
-    AuthenticationResult.add_member(:generated_speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
-    AuthenticationResult.add_member(:decision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationDecision, location_name: "Decision"))
-    AuthenticationResult.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "Score"))
-    AuthenticationResult.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationConfiguration, location_name: "Configuration"))
+    AuthenticationResult.add_member(:authentication_result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueIdLarge, location_name: "AuthenticationResultId"))
+    AuthenticationResult.add_member(:audio_aggregation_started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "AudioAggregationStartedAt"))
+    AuthenticationResult.add_member(:audio_aggregation_ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "AudioAggregationEndedAt"))
+    AuthenticationResult.add_member(:customer_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
+    AuthenticationResult.add_member(:generated_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
+    AuthenticationResult.add_member(:decision, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationDecision, location_name: "Decision"))
+    AuthenticationResult.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "Score"))
+    AuthenticationResult.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationConfiguration, location_name: "Configuration"))
     AuthenticationResult.type = Types::AuthenticationResult
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    ConflictException.add_member(:conflict_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictType, location_name: "ConflictType"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    ConflictException.add_member(:conflict_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictType, location_name: "ConflictType"))
     ConflictException.type = Types::ConflictException
-    CreateDomainInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateDomainInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateDomainInput.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateDomainInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateDomainInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateDomainInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateDomainInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateDomainInput.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateDomainInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, location_name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateDomainInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateDomainInput.type = Types::CreateDomainInput
-    CreateDomainOutput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
+    CreateDomainOutput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, location_name: "Domain"))
     CreateDomainOutput.type = Types::CreateDomainOutput
-    CreateWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    CreateWatchlistInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateWatchlistInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
-    CreateWatchlistInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    CreateWatchlistInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateWatchlistInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistDescription, location_name: "Description"))
+    CreateWatchlistInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateWatchlistInput.type = Types::CreateWatchlistInput
-    CreateWatchlistOutput.add_member(:watchlist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Watchlist, location_name: "Watchlist"))
+    CreateWatchlistOutput.add_member(:watchlist, ::Smithy::Schema::Shapes::MemberShape.new(target: Watchlist, location_name: "Watchlist"))
     CreateWatchlistOutput.type = Types::CreateWatchlistOutput
-    DeleteDomainInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DeleteDomainInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
     DeleteDomainInput.type = Types::DeleteDomainInput
-    DeleteFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DeleteFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
+    DeleteFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DeleteFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
     DeleteFraudsterInput.type = Types::DeleteFraudsterInput
-    DeleteSpeakerInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DeleteSpeakerInput.add_member(:speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerId, location_name: "SpeakerId", traits: {"smithy.api#required" => {}}))
+    DeleteSpeakerInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DeleteSpeakerInput.add_member(:speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerId, location_name: "SpeakerId", traits: {"smithy.api#required" => {}}))
     DeleteSpeakerInput.type = Types::DeleteSpeakerInput
-    DeleteWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DeleteWatchlistInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
+    DeleteWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DeleteWatchlistInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
     DeleteWatchlistInput.type = Types::DeleteWatchlistInput
-    DescribeDomainInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DescribeDomainInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
     DescribeDomainInput.type = Types::DescribeDomainInput
-    DescribeDomainOutput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domain, location_name: "Domain", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    DescribeDomainOutput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, location_name: "Domain", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     DescribeDomainOutput.type = Types::DescribeDomainOutput
-    DescribeFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DescribeFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
+    DescribeFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DescribeFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
     DescribeFraudsterInput.type = Types::DescribeFraudsterInput
-    DescribeFraudsterOutput.add_member(:fraudster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Fraudster, location_name: "Fraudster"))
+    DescribeFraudsterOutput.add_member(:fraudster, ::Smithy::Schema::Shapes::MemberShape.new(target: Fraudster, location_name: "Fraudster"))
     DescribeFraudsterOutput.type = Types::DescribeFraudsterOutput
-    DescribeFraudsterRegistrationJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DescribeFraudsterRegistrationJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeFraudsterRegistrationJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DescribeFraudsterRegistrationJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeFraudsterRegistrationJobInput.type = Types::DescribeFraudsterRegistrationJobInput
-    DescribeFraudsterRegistrationJobOutput.add_member(:job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterRegistrationJob, location_name: "Job"))
+    DescribeFraudsterRegistrationJobOutput.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJob, location_name: "Job"))
     DescribeFraudsterRegistrationJobOutput.type = Types::DescribeFraudsterRegistrationJobOutput
-    DescribeSpeakerEnrollmentJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DescribeSpeakerEnrollmentJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeSpeakerEnrollmentJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DescribeSpeakerEnrollmentJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeSpeakerEnrollmentJobInput.type = Types::DescribeSpeakerEnrollmentJobInput
-    DescribeSpeakerEnrollmentJobOutput.add_member(:job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerEnrollmentJob, location_name: "Job"))
+    DescribeSpeakerEnrollmentJobOutput.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJob, location_name: "Job"))
     DescribeSpeakerEnrollmentJobOutput.type = Types::DescribeSpeakerEnrollmentJobOutput
-    DescribeSpeakerInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DescribeSpeakerInput.add_member(:speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerId, location_name: "SpeakerId", traits: {"smithy.api#required" => {}}))
+    DescribeSpeakerInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DescribeSpeakerInput.add_member(:speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerId, location_name: "SpeakerId", traits: {"smithy.api#required" => {}}))
     DescribeSpeakerInput.type = Types::DescribeSpeakerInput
-    DescribeSpeakerOutput.add_member(:speaker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Speaker, location_name: "Speaker"))
+    DescribeSpeakerOutput.add_member(:speaker, ::Smithy::Schema::Shapes::MemberShape.new(target: Speaker, location_name: "Speaker"))
     DescribeSpeakerOutput.type = Types::DescribeSpeakerOutput
-    DescribeWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DescribeWatchlistInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
+    DescribeWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DescribeWatchlistInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
     DescribeWatchlistInput.type = Types::DescribeWatchlistInput
-    DescribeWatchlistOutput.add_member(:watchlist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Watchlist, location_name: "Watchlist"))
+    DescribeWatchlistOutput.add_member(:watchlist, ::Smithy::Schema::Shapes::MemberShape.new(target: Watchlist, location_name: "Watchlist"))
     DescribeWatchlistOutput.type = Types::DescribeWatchlistOutput
-    DisassociateFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    DisassociateFraudsterInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
-    DisassociateFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
+    DisassociateFraudsterInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    DisassociateFraudsterInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
+    DisassociateFraudsterInput.add_member(:fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterId, location_name: "FraudsterId", traits: {"smithy.api#required" => {}}))
     DisassociateFraudsterInput.type = Types::DisassociateFraudsterInput
-    DisassociateFraudsterOutput.add_member(:fraudster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Fraudster, location_name: "Fraudster"))
+    DisassociateFraudsterOutput.add_member(:fraudster, ::Smithy::Schema::Shapes::MemberShape.new(target: Fraudster, location_name: "Fraudster"))
     DisassociateFraudsterOutput.type = Types::DisassociateFraudsterOutput
-    Domain.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    Domain.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    Domain.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "Name"))
-    Domain.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    Domain.add_member(:domain_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
-    Domain.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
-    Domain.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    Domain.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
-    Domain.add_member(:server_side_encryption_update_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
-    Domain.add_member(:watchlist_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistDetails, location_name: "WatchlistDetails"))
+    Domain.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    Domain.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    Domain.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "Name"))
+    Domain.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    Domain.add_member(:domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, location_name: "DomainStatus"))
+    Domain.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    Domain.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    Domain.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
+    Domain.add_member(:server_side_encryption_update_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
+    Domain.add_member(:watchlist_details, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistDetails, location_name: "WatchlistDetails"))
     Domain.type = Types::Domain
-    DomainSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainSummary)
-    DomainSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    DomainSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    DomainSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "Name"))
-    DomainSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DomainSummary.add_member(:domain_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
-    DomainSummary.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
-    DomainSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    DomainSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
-    DomainSummary.add_member(:server_side_encryption_update_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
-    DomainSummary.add_member(:watchlist_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistDetails, location_name: "WatchlistDetails"))
+    DomainSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummary)
+    DomainSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    DomainSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    DomainSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "Name"))
+    DomainSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DomainSummary.add_member(:domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, location_name: "DomainStatus"))
+    DomainSummary.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    DomainSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    DomainSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
+    DomainSummary.add_member(:server_side_encryption_update_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
+    DomainSummary.add_member(:watchlist_details, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistDetails, location_name: "WatchlistDetails"))
     DomainSummary.type = Types::DomainSummary
-    EnrollmentConfig.add_member(:existing_enrollment_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExistingEnrollmentAction, location_name: "ExistingEnrollmentAction"))
-    EnrollmentConfig.add_member(:fraud_detection_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnrollmentJobFraudDetectionConfig, location_name: "FraudDetectionConfig"))
+    EnrollmentConfig.add_member(:existing_enrollment_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingEnrollmentAction, location_name: "ExistingEnrollmentAction"))
+    EnrollmentConfig.add_member(:fraud_detection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrollmentJobFraudDetectionConfig, location_name: "FraudDetectionConfig"))
     EnrollmentConfig.type = Types::EnrollmentConfig
-    EnrollmentJobFraudDetectionConfig.add_member(:fraud_detection_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudDetectionAction, location_name: "FraudDetectionAction"))
-    EnrollmentJobFraudDetectionConfig.add_member(:risk_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "RiskThreshold"))
-    EnrollmentJobFraudDetectionConfig.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnrollmentJobFraudDetectionConfigWatchlistIds, location_name: "WatchlistIds"))
+    EnrollmentJobFraudDetectionConfig.add_member(:fraud_detection_action, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionAction, location_name: "FraudDetectionAction"))
+    EnrollmentJobFraudDetectionConfig.add_member(:risk_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "RiskThreshold"))
+    EnrollmentJobFraudDetectionConfig.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrollmentJobFraudDetectionConfigWatchlistIds, location_name: "WatchlistIds"))
     EnrollmentJobFraudDetectionConfig.type = Types::EnrollmentJobFraudDetectionConfig
-    EnrollmentJobFraudDetectionConfigWatchlistIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId)
-    EvaluateSessionInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    EvaluateSessionInput.add_member(:session_name_or_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionNameOrId, location_name: "SessionNameOrId", traits: {"smithy.api#required" => {}}))
+    EnrollmentJobFraudDetectionConfigWatchlistIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId)
+    EvaluateSessionInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    EvaluateSessionInput.add_member(:session_name_or_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionNameOrId, location_name: "SessionNameOrId", traits: {"smithy.api#required" => {}}))
     EvaluateSessionInput.type = Types::EvaluateSessionInput
-    EvaluateSessionOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    EvaluateSessionOutput.add_member(:session_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
-    EvaluateSessionOutput.add_member(:session_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionName, location_name: "SessionName"))
-    EvaluateSessionOutput.add_member(:streaming_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamingStatus, location_name: "StreamingStatus"))
-    EvaluateSessionOutput.add_member(:authentication_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationResult, location_name: "AuthenticationResult"))
-    EvaluateSessionOutput.add_member(:fraud_detection_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudDetectionResult, location_name: "FraudDetectionResult"))
+    EvaluateSessionOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    EvaluateSessionOutput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, location_name: "SessionId"))
+    EvaluateSessionOutput.add_member(:session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionName, location_name: "SessionName"))
+    EvaluateSessionOutput.add_member(:streaming_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingStatus, location_name: "StreamingStatus"))
+    EvaluateSessionOutput.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResult, location_name: "AuthenticationResult"))
+    EvaluateSessionOutput.add_member(:fraud_detection_result, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionResult, location_name: "FraudDetectionResult"))
     EvaluateSessionOutput.type = Types::EvaluateSessionOutput
-    FailureDetails.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "StatusCode"))
-    FailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    FailureDetails.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "StatusCode"))
+    FailureDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     FailureDetails.type = Types::FailureDetails
-    FraudDetectionConfiguration.add_member(:risk_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "RiskThreshold"))
-    FraudDetectionConfiguration.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
+    FraudDetectionConfiguration.add_member(:risk_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "RiskThreshold"))
+    FraudDetectionConfiguration.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId"))
     FraudDetectionConfiguration.type = Types::FraudDetectionConfiguration
-    FraudDetectionReasons.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudDetectionReason)
-    FraudDetectionResult.add_member(:fraud_detection_result_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UniqueIdLarge, location_name: "FraudDetectionResultId"))
-    FraudDetectionResult.add_member(:audio_aggregation_started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "AudioAggregationStartedAt"))
-    FraudDetectionResult.add_member(:audio_aggregation_ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "AudioAggregationEndedAt"))
-    FraudDetectionResult.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudDetectionConfiguration, location_name: "Configuration"))
-    FraudDetectionResult.add_member(:decision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudDetectionDecision, location_name: "Decision"))
-    FraudDetectionResult.add_member(:reasons, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudDetectionReasons, location_name: "Reasons"))
-    FraudDetectionResult.add_member(:risk_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudRiskDetails, location_name: "RiskDetails"))
+    FraudDetectionReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionReason)
+    FraudDetectionResult.add_member(:fraud_detection_result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueIdLarge, location_name: "FraudDetectionResultId"))
+    FraudDetectionResult.add_member(:audio_aggregation_started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "AudioAggregationStartedAt"))
+    FraudDetectionResult.add_member(:audio_aggregation_ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "AudioAggregationEndedAt"))
+    FraudDetectionResult.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionConfiguration, location_name: "Configuration"))
+    FraudDetectionResult.add_member(:decision, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionDecision, location_name: "Decision"))
+    FraudDetectionResult.add_member(:reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionReasons, location_name: "Reasons"))
+    FraudDetectionResult.add_member(:risk_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudRiskDetails, location_name: "RiskDetails"))
     FraudDetectionResult.type = Types::FraudDetectionResult
-    FraudRiskDetails.add_member(:known_fraudster_risk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KnownFraudsterRisk, location_name: "KnownFraudsterRisk", traits: {"smithy.api#required" => {}}))
-    FraudRiskDetails.add_member(:voice_spoofing_risk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceSpoofingRisk, location_name: "VoiceSpoofingRisk", traits: {"smithy.api#required" => {}}))
+    FraudRiskDetails.add_member(:known_fraudster_risk, ::Smithy::Schema::Shapes::MemberShape.new(target: KnownFraudsterRisk, location_name: "KnownFraudsterRisk", traits: {"smithy.api#required" => {}}))
+    FraudRiskDetails.add_member(:voice_spoofing_risk, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceSpoofingRisk, location_name: "VoiceSpoofingRisk", traits: {"smithy.api#required" => {}}))
     FraudRiskDetails.type = Types::FraudRiskDetails
-    Fraudster.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    Fraudster.add_member(:generated_fraudster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
-    Fraudster.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    Fraudster.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseWatchlistIds, location_name: "WatchlistIds"))
+    Fraudster.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    Fraudster.add_member(:generated_fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
+    Fraudster.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    Fraudster.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseWatchlistIds, location_name: "WatchlistIds"))
     Fraudster.type = Types::Fraudster
-    FraudsterRegistrationJob.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    FraudsterRegistrationJob.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    FraudsterRegistrationJob.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterRegistrationJobStatus, location_name: "JobStatus"))
-    FraudsterRegistrationJob.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    FraudsterRegistrationJob.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    FraudsterRegistrationJob.add_member(:registration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationConfig, location_name: "RegistrationConfig"))
-    FraudsterRegistrationJob.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    FraudsterRegistrationJob.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    FraudsterRegistrationJob.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    FraudsterRegistrationJob.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
-    FraudsterRegistrationJob.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
-    FraudsterRegistrationJob.add_member(:job_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobProgress, location_name: "JobProgress"))
+    FraudsterRegistrationJob.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    FraudsterRegistrationJob.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    FraudsterRegistrationJob.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobStatus, location_name: "JobStatus"))
+    FraudsterRegistrationJob.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    FraudsterRegistrationJob.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    FraudsterRegistrationJob.add_member(:registration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationConfig, location_name: "RegistrationConfig"))
+    FraudsterRegistrationJob.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    FraudsterRegistrationJob.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    FraudsterRegistrationJob.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    FraudsterRegistrationJob.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndedAt"))
+    FraudsterRegistrationJob.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, location_name: "FailureDetails"))
+    FraudsterRegistrationJob.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, location_name: "JobProgress"))
     FraudsterRegistrationJob.type = Types::FraudsterRegistrationJob
-    FraudsterRegistrationJobSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterRegistrationJobSummary)
-    FraudsterRegistrationJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    FraudsterRegistrationJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    FraudsterRegistrationJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterRegistrationJobStatus, location_name: "JobStatus"))
-    FraudsterRegistrationJobSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    FraudsterRegistrationJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    FraudsterRegistrationJobSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
-    FraudsterRegistrationJobSummary.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
-    FraudsterRegistrationJobSummary.add_member(:job_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobProgress, location_name: "JobProgress"))
+    FraudsterRegistrationJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobSummary)
+    FraudsterRegistrationJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    FraudsterRegistrationJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    FraudsterRegistrationJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobStatus, location_name: "JobStatus"))
+    FraudsterRegistrationJobSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    FraudsterRegistrationJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    FraudsterRegistrationJobSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndedAt"))
+    FraudsterRegistrationJobSummary.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, location_name: "FailureDetails"))
+    FraudsterRegistrationJobSummary.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, location_name: "JobProgress"))
     FraudsterRegistrationJobSummary.type = Types::FraudsterRegistrationJobSummary
-    FraudsterSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterSummary)
-    FraudsterSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    FraudsterSummary.add_member(:generated_fraudster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
-    FraudsterSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    FraudsterSummary.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseWatchlistIds, location_name: "WatchlistIds"))
+    FraudsterSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterSummary)
+    FraudsterSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    FraudsterSummary.add_member(:generated_fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
+    FraudsterSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    FraudsterSummary.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseWatchlistIds, location_name: "WatchlistIds"))
     FraudsterSummary.type = Types::FraudsterSummary
-    InputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    InputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
     InputDataConfig.type = Types::InputDataConfig
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    JobProgress.add_member(:percent_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "PercentComplete"))
+    JobProgress.add_member(:percent_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "PercentComplete"))
     JobProgress.type = Types::JobProgress
-    KnownFraudsterRisk.add_member(:risk_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "RiskScore", traits: {"smithy.api#required" => {}}))
-    KnownFraudsterRisk.add_member(:generated_fraudster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
+    KnownFraudsterRisk.add_member(:risk_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "RiskScore", traits: {"smithy.api#required" => {}}))
+    KnownFraudsterRisk.add_member(:generated_fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
     KnownFraudsterRisk.type = Types::KnownFraudsterRisk
-    ListDomainsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsForListDomainFe, location_name: "MaxResults"))
-    ListDomainsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDomainsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsForListDomainFe, location_name: "MaxResults"))
+    ListDomainsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListDomainsInput.type = Types::ListDomainsInput
-    ListDomainsOutput.add_member(:domain_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainSummaries, location_name: "DomainSummaries"))
-    ListDomainsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDomainsOutput.add_member(:domain_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummaries, location_name: "DomainSummaries"))
+    ListDomainsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDomainsOutput.type = Types::ListDomainsOutput
-    ListFraudsterRegistrationJobsInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    ListFraudsterRegistrationJobsInput.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterRegistrationJobStatus, location_name: "JobStatus"))
-    ListFraudsterRegistrationJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
-    ListFraudsterRegistrationJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFraudsterRegistrationJobsInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    ListFraudsterRegistrationJobsInput.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobStatus, location_name: "JobStatus"))
+    ListFraudsterRegistrationJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsForList, location_name: "MaxResults"))
+    ListFraudsterRegistrationJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListFraudsterRegistrationJobsInput.type = Types::ListFraudsterRegistrationJobsInput
-    ListFraudsterRegistrationJobsOutput.add_member(:job_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterRegistrationJobSummaries, location_name: "JobSummaries"))
-    ListFraudsterRegistrationJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFraudsterRegistrationJobsOutput.add_member(:job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobSummaries, location_name: "JobSummaries"))
+    ListFraudsterRegistrationJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListFraudsterRegistrationJobsOutput.type = Types::ListFraudsterRegistrationJobsOutput
-    ListFraudstersInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    ListFraudstersInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
-    ListFraudstersInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
-    ListFraudstersInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFraudstersInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    ListFraudstersInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId"))
+    ListFraudstersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsForList, location_name: "MaxResults"))
+    ListFraudstersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListFraudstersInput.type = Types::ListFraudstersInput
-    ListFraudstersOutput.add_member(:fraudster_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterSummaries, location_name: "FraudsterSummaries"))
-    ListFraudstersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFraudstersOutput.add_member(:fraudster_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterSummaries, location_name: "FraudsterSummaries"))
+    ListFraudstersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListFraudstersOutput.type = Types::ListFraudstersOutput
-    ListSpeakerEnrollmentJobsInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    ListSpeakerEnrollmentJobsInput.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerEnrollmentJobStatus, location_name: "JobStatus"))
-    ListSpeakerEnrollmentJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
-    ListSpeakerEnrollmentJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSpeakerEnrollmentJobsInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    ListSpeakerEnrollmentJobsInput.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobStatus, location_name: "JobStatus"))
+    ListSpeakerEnrollmentJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsForList, location_name: "MaxResults"))
+    ListSpeakerEnrollmentJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListSpeakerEnrollmentJobsInput.type = Types::ListSpeakerEnrollmentJobsInput
-    ListSpeakerEnrollmentJobsOutput.add_member(:job_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerEnrollmentJobSummaries, location_name: "JobSummaries"))
-    ListSpeakerEnrollmentJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListSpeakerEnrollmentJobsOutput.add_member(:job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobSummaries, location_name: "JobSummaries"))
+    ListSpeakerEnrollmentJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListSpeakerEnrollmentJobsOutput.type = Types::ListSpeakerEnrollmentJobsOutput
-    ListSpeakersInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    ListSpeakersInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
-    ListSpeakersInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSpeakersInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    ListSpeakersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsForList, location_name: "MaxResults"))
+    ListSpeakersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListSpeakersInput.type = Types::ListSpeakersInput
-    ListSpeakersOutput.add_member(:speaker_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerSummaries, location_name: "SpeakerSummaries"))
-    ListSpeakersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListSpeakersOutput.add_member(:speaker_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSummaries, location_name: "SpeakerSummaries"))
+    ListSpeakersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListSpeakersOutput.type = Types::ListSpeakersOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListWatchlistsInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    ListWatchlistsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
-    ListWatchlistsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWatchlistsInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    ListWatchlistsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsForList, location_name: "MaxResults"))
+    ListWatchlistsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListWatchlistsInput.type = Types::ListWatchlistsInput
-    ListWatchlistsOutput.add_member(:watchlist_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistSummaries, location_name: "WatchlistSummaries"))
-    ListWatchlistsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListWatchlistsOutput.add_member(:watchlist_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistSummaries, location_name: "WatchlistSummaries"))
+    ListWatchlistsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListWatchlistsOutput.type = Types::ListWatchlistsOutput
-    OptOutSpeakerInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    OptOutSpeakerInput.add_member(:speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerId, location_name: "SpeakerId", traits: {"smithy.api#required" => {}}))
+    OptOutSpeakerInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    OptOutSpeakerInput.add_member(:speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerId, location_name: "SpeakerId", traits: {"smithy.api#required" => {}}))
     OptOutSpeakerInput.type = Types::OptOutSpeakerInput
-    OptOutSpeakerOutput.add_member(:speaker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Speaker, location_name: "Speaker"))
+    OptOutSpeakerOutput.add_member(:speaker, ::Smithy::Schema::Shapes::MemberShape.new(target: Speaker, location_name: "Speaker"))
     OptOutSpeakerOutput.type = Types::OptOutSpeakerOutput
-    OutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    OutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    OutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    OutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
     OutputDataConfig.type = Types::OutputDataConfig
-    RegistrationConfig.add_member(:duplicate_registration_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRegistrationAction, location_name: "DuplicateRegistrationAction"))
-    RegistrationConfig.add_member(:fraudster_similarity_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "FraudsterSimilarityThreshold"))
-    RegistrationConfig.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationConfigWatchlistIds, location_name: "WatchlistIds"))
+    RegistrationConfig.add_member(:duplicate_registration_action, ::Smithy::Schema::Shapes::MemberShape.new(target: DuplicateRegistrationAction, location_name: "DuplicateRegistrationAction"))
+    RegistrationConfig.add_member(:fraudster_similarity_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "FraudsterSimilarityThreshold"))
+    RegistrationConfig.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationConfigWatchlistIds, location_name: "WatchlistIds"))
     RegistrationConfig.type = Types::RegistrationConfig
-    RegistrationConfigWatchlistIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    RegistrationConfigWatchlistIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResponseWatchlistIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId)
-    ServerSideEncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId", traits: {"smithy.api#required" => {}}))
+    ResponseWatchlistIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId)
+    ServerSideEncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId", traits: {"smithy.api#required" => {}}))
     ServerSideEncryptionConfiguration.type = Types::ServerSideEncryptionConfiguration
-    ServerSideEncryptionUpdateDetails.add_member(:old_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "OldKmsKeyId"))
-    ServerSideEncryptionUpdateDetails.add_member(:update_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateStatus, location_name: "UpdateStatus"))
-    ServerSideEncryptionUpdateDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServerSideEncryptionUpdateDetails.add_member(:old_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "OldKmsKeyId"))
+    ServerSideEncryptionUpdateDetails.add_member(:update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionUpdateStatus, location_name: "UpdateStatus"))
+    ServerSideEncryptionUpdateDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ServerSideEncryptionUpdateDetails.type = Types::ServerSideEncryptionUpdateDetails
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Speaker.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    Speaker.add_member(:customer_speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
-    Speaker.add_member(:generated_speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
-    Speaker.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerStatus, location_name: "Status"))
-    Speaker.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    Speaker.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
-    Speaker.add_member(:last_accessed_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessedAt"))
+    Speaker.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    Speaker.add_member(:customer_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
+    Speaker.add_member(:generated_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
+    Speaker.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerStatus, location_name: "Status"))
+    Speaker.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    Speaker.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
+    Speaker.add_member(:last_accessed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastAccessedAt"))
     Speaker.type = Types::Speaker
-    SpeakerEnrollmentJob.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    SpeakerEnrollmentJob.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    SpeakerEnrollmentJob.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerEnrollmentJobStatus, location_name: "JobStatus"))
-    SpeakerEnrollmentJob.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    SpeakerEnrollmentJob.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    SpeakerEnrollmentJob.add_member(:enrollment_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnrollmentConfig, location_name: "EnrollmentConfig"))
-    SpeakerEnrollmentJob.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    SpeakerEnrollmentJob.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    SpeakerEnrollmentJob.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    SpeakerEnrollmentJob.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
-    SpeakerEnrollmentJob.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
-    SpeakerEnrollmentJob.add_member(:job_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobProgress, location_name: "JobProgress"))
+    SpeakerEnrollmentJob.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    SpeakerEnrollmentJob.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    SpeakerEnrollmentJob.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobStatus, location_name: "JobStatus"))
+    SpeakerEnrollmentJob.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    SpeakerEnrollmentJob.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    SpeakerEnrollmentJob.add_member(:enrollment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrollmentConfig, location_name: "EnrollmentConfig"))
+    SpeakerEnrollmentJob.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    SpeakerEnrollmentJob.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    SpeakerEnrollmentJob.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    SpeakerEnrollmentJob.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndedAt"))
+    SpeakerEnrollmentJob.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, location_name: "FailureDetails"))
+    SpeakerEnrollmentJob.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, location_name: "JobProgress"))
     SpeakerEnrollmentJob.type = Types::SpeakerEnrollmentJob
-    SpeakerEnrollmentJobSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerEnrollmentJobSummary)
-    SpeakerEnrollmentJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    SpeakerEnrollmentJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    SpeakerEnrollmentJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerEnrollmentJobStatus, location_name: "JobStatus"))
-    SpeakerEnrollmentJobSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    SpeakerEnrollmentJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    SpeakerEnrollmentJobSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
-    SpeakerEnrollmentJobSummary.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
-    SpeakerEnrollmentJobSummary.add_member(:job_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobProgress, location_name: "JobProgress"))
+    SpeakerEnrollmentJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobSummary)
+    SpeakerEnrollmentJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    SpeakerEnrollmentJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    SpeakerEnrollmentJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobStatus, location_name: "JobStatus"))
+    SpeakerEnrollmentJobSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    SpeakerEnrollmentJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    SpeakerEnrollmentJobSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndedAt"))
+    SpeakerEnrollmentJobSummary.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, location_name: "FailureDetails"))
+    SpeakerEnrollmentJobSummary.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, location_name: "JobProgress"))
     SpeakerEnrollmentJobSummary.type = Types::SpeakerEnrollmentJobSummary
-    SpeakerSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerSummary)
-    SpeakerSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    SpeakerSummary.add_member(:customer_speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
-    SpeakerSummary.add_member(:generated_speaker_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
-    SpeakerSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerStatus, location_name: "Status"))
-    SpeakerSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    SpeakerSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
-    SpeakerSummary.add_member(:last_accessed_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessedAt"))
+    SpeakerSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSummary)
+    SpeakerSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    SpeakerSummary.add_member(:customer_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
+    SpeakerSummary.add_member(:generated_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
+    SpeakerSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerStatus, location_name: "Status"))
+    SpeakerSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    SpeakerSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
+    SpeakerSummary.add_member(:last_accessed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastAccessedAt"))
     SpeakerSummary.type = Types::SpeakerSummary
-    StartFraudsterRegistrationJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartFraudsterRegistrationJobInput.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartFraudsterRegistrationJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    StartFraudsterRegistrationJobInput.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartFraudsterRegistrationJobInput.add_member(:registration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationConfig, location_name: "RegistrationConfig"))
-    StartFraudsterRegistrationJobInput.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartFraudsterRegistrationJobInput.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartFraudsterRegistrationJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartFraudsterRegistrationJobInput.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartFraudsterRegistrationJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    StartFraudsterRegistrationJobInput.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartFraudsterRegistrationJobInput.add_member(:registration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationConfig, location_name: "RegistrationConfig"))
+    StartFraudsterRegistrationJobInput.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartFraudsterRegistrationJobInput.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
     StartFraudsterRegistrationJobInput.type = Types::StartFraudsterRegistrationJobInput
-    StartFraudsterRegistrationJobOutput.add_member(:job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FraudsterRegistrationJob, location_name: "Job"))
+    StartFraudsterRegistrationJobOutput.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJob, location_name: "Job"))
     StartFraudsterRegistrationJobOutput.type = Types::StartFraudsterRegistrationJobOutput
-    StartSpeakerEnrollmentJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartSpeakerEnrollmentJobInput.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartSpeakerEnrollmentJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    StartSpeakerEnrollmentJobInput.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartSpeakerEnrollmentJobInput.add_member(:enrollment_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnrollmentConfig, location_name: "EnrollmentConfig"))
-    StartSpeakerEnrollmentJobInput.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartSpeakerEnrollmentJobInput.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartSpeakerEnrollmentJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartSpeakerEnrollmentJobInput.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartSpeakerEnrollmentJobInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    StartSpeakerEnrollmentJobInput.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartSpeakerEnrollmentJobInput.add_member(:enrollment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrollmentConfig, location_name: "EnrollmentConfig"))
+    StartSpeakerEnrollmentJobInput.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartSpeakerEnrollmentJobInput.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
     StartSpeakerEnrollmentJobInput.type = Types::StartSpeakerEnrollmentJobInput
-    StartSpeakerEnrollmentJobOutput.add_member(:job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerEnrollmentJob, location_name: "Job"))
+    StartSpeakerEnrollmentJobOutput.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJob, location_name: "Job"))
     StartSpeakerEnrollmentJobOutput.type = Types::StartSpeakerEnrollmentJobOutput
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateDomainInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    UpdateDomainInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateDomainInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateDomainInput.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration", traits: {"smithy.api#required" => {}}))
+    UpdateDomainInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    UpdateDomainInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateDomainInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateDomainInput.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration", traits: {"smithy.api#required" => {}}))
     UpdateDomainInput.type = Types::UpdateDomainInput
-    UpdateDomainOutput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
+    UpdateDomainOutput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, location_name: "Domain"))
     UpdateDomainOutput.type = Types::UpdateDomainOutput
-    UpdateWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
-    UpdateWatchlistInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
-    UpdateWatchlistInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistName, location_name: "Name"))
-    UpdateWatchlistInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
+    UpdateWatchlistInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId", traits: {"smithy.api#required" => {}}))
+    UpdateWatchlistInput.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId", traits: {"smithy.api#required" => {}}))
+    UpdateWatchlistInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistName, location_name: "Name"))
+    UpdateWatchlistInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistDescription, location_name: "Description"))
     UpdateWatchlistInput.type = Types::UpdateWatchlistInput
-    UpdateWatchlistOutput.add_member(:watchlist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Watchlist, location_name: "Watchlist"))
+    UpdateWatchlistOutput.add_member(:watchlist, ::Smithy::Schema::Shapes::MemberShape.new(target: Watchlist, location_name: "Watchlist"))
     UpdateWatchlistOutput.type = Types::UpdateWatchlistOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ValidationException.type = Types::ValidationException
-    VoiceSpoofingRisk.add_member(:risk_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "RiskScore", traits: {"smithy.api#required" => {}}))
+    VoiceSpoofingRisk.add_member(:risk_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "RiskScore", traits: {"smithy.api#required" => {}}))
     VoiceSpoofingRisk.type = Types::VoiceSpoofingRisk
-    Watchlist.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    Watchlist.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
-    Watchlist.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistName, location_name: "Name"))
-    Watchlist.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
-    Watchlist.add_member(:default_watchlist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultWatchlist", traits: {"smithy.api#default" => false}))
-    Watchlist.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    Watchlist.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    Watchlist.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    Watchlist.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId"))
+    Watchlist.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistName, location_name: "Name"))
+    Watchlist.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistDescription, location_name: "Description"))
+    Watchlist.add_member(:default_watchlist, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DefaultWatchlist", traits: {"smithy.api#default" => false}))
+    Watchlist.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    Watchlist.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
     Watchlist.type = Types::Watchlist
-    WatchlistDetails.add_member(:default_watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "DefaultWatchlistId", traits: {"smithy.api#required" => {}}))
+    WatchlistDetails.add_member(:default_watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "DefaultWatchlistId", traits: {"smithy.api#required" => {}}))
     WatchlistDetails.type = Types::WatchlistDetails
-    WatchlistSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistSummary)
-    WatchlistSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
-    WatchlistSummary.add_member(:watchlist_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
-    WatchlistSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistName, location_name: "Name"))
-    WatchlistSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
-    WatchlistSummary.add_member(:default_watchlist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultWatchlist", traits: {"smithy.api#default" => false}))
-    WatchlistSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    WatchlistSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    WatchlistSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistSummary)
+    WatchlistSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, location_name: "DomainId"))
+    WatchlistSummary.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, location_name: "WatchlistId"))
+    WatchlistSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistName, location_name: "Name"))
+    WatchlistSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistDescription, location_name: "Description"))
+    WatchlistSummary.add_member(:default_watchlist, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DefaultWatchlist", traits: {"smithy.api#default" => false}))
+    WatchlistSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    WatchlistSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
     WatchlistSummary.type = Types::WatchlistSummary
 
     VoiceID = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -536,376 +536,376 @@ module Aws::VoiceID
       service.add_operation(:associate_fraudster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#AssociateFraudster"
         operation.name = "AssociateFraudster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateFraudsterInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateFraudsterOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateFraudsterInput
+        operation.output = AssociateFraudsterOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#CreateDomain"
         operation.name = "CreateDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDomainInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDomainOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateDomainInput
+        operation.output = CreateDomainOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_watchlist, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#CreateWatchlist"
         operation.name = "CreateWatchlist"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWatchlistInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWatchlistOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateWatchlistInput
+        operation.output = CreateWatchlistOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DeleteDomain"
         operation.name = "DeleteDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDomainInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteDomainInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_fraudster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DeleteFraudster"
         operation.name = "DeleteFraudster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFraudsterInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteFraudsterInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_speaker, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DeleteSpeaker"
         operation.name = "DeleteSpeaker"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSpeakerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteSpeakerInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_watchlist, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DeleteWatchlist"
         operation.name = "DeleteWatchlist"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWatchlistInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteWatchlistInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DescribeDomain"
         operation.name = "DescribeDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDomainInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDomainOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeDomainInput
+        operation.output = DescribeDomainOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_fraudster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DescribeFraudster"
         operation.name = "DescribeFraudster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFraudsterInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFraudsterOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeFraudsterInput
+        operation.output = DescribeFraudsterOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_fraudster_registration_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DescribeFraudsterRegistrationJob"
         operation.name = "DescribeFraudsterRegistrationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFraudsterRegistrationJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFraudsterRegistrationJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeFraudsterRegistrationJobInput
+        operation.output = DescribeFraudsterRegistrationJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_speaker, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DescribeSpeaker"
         operation.name = "DescribeSpeaker"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSpeakerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSpeakerOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeSpeakerInput
+        operation.output = DescribeSpeakerOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_speaker_enrollment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DescribeSpeakerEnrollmentJob"
         operation.name = "DescribeSpeakerEnrollmentJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSpeakerEnrollmentJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSpeakerEnrollmentJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeSpeakerEnrollmentJobInput
+        operation.output = DescribeSpeakerEnrollmentJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_watchlist, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DescribeWatchlist"
         operation.name = "DescribeWatchlist"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeWatchlistInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeWatchlistOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeWatchlistInput
+        operation.output = DescribeWatchlistOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:disassociate_fraudster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#DisassociateFraudster"
         operation.name = "DisassociateFraudster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFraudsterInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFraudsterOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateFraudsterInput
+        operation.output = DisassociateFraudsterOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:evaluate_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#EvaluateSession"
         operation.name = "EvaluateSession"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluateSessionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluateSessionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = EvaluateSessionInput
+        operation.output = EvaluateSessionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_domains, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#ListDomains"
         operation.name = "ListDomains"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDomainsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDomainsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListDomainsInput
+        operation.output = ListDomainsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListDomains.new
       end)
       service.add_operation(:list_fraudster_registration_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#ListFraudsterRegistrationJobs"
         operation.name = "ListFraudsterRegistrationJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFraudsterRegistrationJobsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFraudsterRegistrationJobsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListFraudsterRegistrationJobsInput
+        operation.output = ListFraudsterRegistrationJobsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFraudsterRegistrationJobs.new
       end)
       service.add_operation(:list_fraudsters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#ListFraudsters"
         operation.name = "ListFraudsters"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFraudstersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFraudstersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListFraudstersInput
+        operation.output = ListFraudstersOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFraudsters.new
       end)
       service.add_operation(:list_speaker_enrollment_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#ListSpeakerEnrollmentJobs"
         operation.name = "ListSpeakerEnrollmentJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSpeakerEnrollmentJobsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSpeakerEnrollmentJobsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSpeakerEnrollmentJobsInput
+        operation.output = ListSpeakerEnrollmentJobsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListSpeakerEnrollmentJobs.new
       end)
       service.add_operation(:list_speakers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#ListSpeakers"
         operation.name = "ListSpeakers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSpeakersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSpeakersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSpeakersInput
+        operation.output = ListSpeakersOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListSpeakers.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_watchlists, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#ListWatchlists"
         operation.name = "ListWatchlists"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWatchlistsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWatchlistsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListWatchlistsInput
+        operation.output = ListWatchlistsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListWatchlists.new
       end)
       service.add_operation(:opt_out_speaker, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#OptOutSpeaker"
         operation.name = "OptOutSpeaker"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutSpeakerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutSpeakerOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = OptOutSpeakerInput
+        operation.output = OptOutSpeakerOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:start_fraudster_registration_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#StartFraudsterRegistrationJob"
         operation.name = "StartFraudsterRegistrationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartFraudsterRegistrationJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartFraudsterRegistrationJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartFraudsterRegistrationJobInput
+        operation.output = StartFraudsterRegistrationJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_speaker_enrollment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#StartSpeakerEnrollmentJob"
         operation.name = "StartSpeakerEnrollmentJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSpeakerEnrollmentJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSpeakerEnrollmentJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartSpeakerEnrollmentJobInput
+        operation.output = StartSpeakerEnrollmentJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#UpdateDomain"
         operation.name = "UpdateDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDomainInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDomainOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateDomainInput
+        operation.output = UpdateDomainOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_watchlist, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.voiceid#UpdateWatchlist"
         operation.name = "UpdateWatchlist"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateWatchlistInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateWatchlistOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateWatchlistInput
+        operation.output = UpdateWatchlistOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

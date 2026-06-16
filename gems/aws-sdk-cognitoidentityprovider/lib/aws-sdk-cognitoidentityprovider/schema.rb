@@ -582,1620 +582,1620 @@ module Aws::CognitoIdentityProvider
     WrappedBooleanType = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cognitoidentityprovider#WrappedBooleanType", name: "WrappedBooleanType")
     WrappedIntegerType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#WrappedIntegerType", name: "WrappedIntegerType")
 
-    AccountRecoverySettingType.add_member(:recovery_mechanisms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecoveryMechanismsType, location_name: "RecoveryMechanisms"))
+    AccountRecoverySettingType.add_member(:recovery_mechanisms, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMechanismsType, location_name: "RecoveryMechanisms"))
     AccountRecoverySettingType.type = Types::AccountRecoverySettingType
-    AccountTakeoverActionType.add_member(:notify, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverActionNotifyType, location_name: "Notify", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    AccountTakeoverActionType.add_member(:event_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverEventActionType, location_name: "EventAction", traits: {"smithy.api#required" => {}}))
+    AccountTakeoverActionType.add_member(:notify, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverActionNotifyType, location_name: "Notify", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    AccountTakeoverActionType.add_member(:event_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverEventActionType, location_name: "EventAction", traits: {"smithy.api#required" => {}}))
     AccountTakeoverActionType.type = Types::AccountTakeoverActionType
-    AccountTakeoverActionsType.add_member(:low_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverActionType, location_name: "LowAction"))
-    AccountTakeoverActionsType.add_member(:medium_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverActionType, location_name: "MediumAction"))
-    AccountTakeoverActionsType.add_member(:high_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverActionType, location_name: "HighAction"))
+    AccountTakeoverActionsType.add_member(:low_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverActionType, location_name: "LowAction"))
+    AccountTakeoverActionsType.add_member(:medium_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverActionType, location_name: "MediumAction"))
+    AccountTakeoverActionsType.add_member(:high_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverActionType, location_name: "HighAction"))
     AccountTakeoverActionsType.type = Types::AccountTakeoverActionsType
-    AccountTakeoverEventActionType.add_member(:block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BLOCK", traits: {"smithy.api#enumValue" => "BLOCK"}))
-    AccountTakeoverEventActionType.add_member(:mfa_if_configured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MFA_IF_CONFIGURED", traits: {"smithy.api#enumValue" => "MFA_IF_CONFIGURED"}))
-    AccountTakeoverEventActionType.add_member(:mfa_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MFA_REQUIRED", traits: {"smithy.api#enumValue" => "MFA_REQUIRED"}))
-    AccountTakeoverEventActionType.add_member(:no_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_ACTION", traits: {"smithy.api#enumValue" => "NO_ACTION"}))
-    AccountTakeoverRiskConfigurationType.add_member(:notify_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyConfigurationType, location_name: "NotifyConfiguration"))
-    AccountTakeoverRiskConfigurationType.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverActionsType, location_name: "Actions", traits: {"smithy.api#required" => {}}))
+    AccountTakeoverEventActionType.add_member(:block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BLOCK", traits: {"smithy.api#enumValue" => "BLOCK"}))
+    AccountTakeoverEventActionType.add_member(:mfa_if_configured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MFA_IF_CONFIGURED", traits: {"smithy.api#enumValue" => "MFA_IF_CONFIGURED"}))
+    AccountTakeoverEventActionType.add_member(:mfa_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MFA_REQUIRED", traits: {"smithy.api#enumValue" => "MFA_REQUIRED"}))
+    AccountTakeoverEventActionType.add_member(:no_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_ACTION", traits: {"smithy.api#enumValue" => "NO_ACTION"}))
+    AccountTakeoverRiskConfigurationType.add_member(:notify_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationType, location_name: "NotifyConfiguration"))
+    AccountTakeoverRiskConfigurationType.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverActionsType, location_name: "Actions", traits: {"smithy.api#required" => {}}))
     AccountTakeoverRiskConfigurationType.type = Types::AccountTakeoverRiskConfigurationType
-    AddCustomAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AddCustomAttributesRequest.add_member(:custom_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomAttributesListType, location_name: "CustomAttributes", traits: {"smithy.api#required" => {}}))
+    AddCustomAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AddCustomAttributesRequest.add_member(:custom_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAttributesListType, location_name: "CustomAttributes", traits: {"smithy.api#required" => {}}))
     AddCustomAttributesRequest.type = Types::AddCustomAttributesRequest
     AddCustomAttributesResponse.type = Types::AddCustomAttributesResponse
-    AdminAddUserToGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminAddUserToGroupRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminAddUserToGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    AdminAddUserToGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminAddUserToGroupRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminAddUserToGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
     AdminAddUserToGroupRequest.type = Types::AdminAddUserToGroupRequest
-    AdminConfirmSignUpRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminConfirmSignUpRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminConfirmSignUpRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    AdminConfirmSignUpRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminConfirmSignUpRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminConfirmSignUpRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     AdminConfirmSignUpRequest.type = Types::AdminConfirmSignUpRequest
     AdminConfirmSignUpResponse.type = Types::AdminConfirmSignUpResponse
-    AdminCreateUserConfigType.add_member(:allow_admin_create_user_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowAdminCreateUserOnly", traits: {"smithy.api#default" => false}))
-    AdminCreateUserConfigType.add_member(:unused_account_validity_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminCreateUserUnusedAccountValidityDaysType, location_name: "UnusedAccountValidityDays", traits: {"smithy.api#default" => 0}))
-    AdminCreateUserConfigType.add_member(:invite_message_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTemplateType, location_name: "InviteMessageTemplate"))
+    AdminCreateUserConfigType.add_member(:allow_admin_create_user_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "AllowAdminCreateUserOnly", traits: {"smithy.api#default" => false}))
+    AdminCreateUserConfigType.add_member(:unused_account_validity_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminCreateUserUnusedAccountValidityDaysType, location_name: "UnusedAccountValidityDays", traits: {"smithy.api#default" => 0}))
+    AdminCreateUserConfigType.add_member(:invite_message_template, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateType, location_name: "InviteMessageTemplate"))
     AdminCreateUserConfigType.type = Types::AdminCreateUserConfigType
-    AdminCreateUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminCreateUserRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminCreateUserRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "UserAttributes"))
-    AdminCreateUserRequest.add_member(:validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "ValidationData"))
-    AdminCreateUserRequest.add_member(:temporary_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordType, location_name: "TemporaryPassword"))
-    AdminCreateUserRequest.add_member(:force_alias_creation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForceAliasCreation, location_name: "ForceAliasCreation", traits: {"smithy.api#default" => false}))
-    AdminCreateUserRequest.add_member(:message_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageActionType, location_name: "MessageAction"))
-    AdminCreateUserRequest.add_member(:desired_delivery_mediums, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryMediumListType, location_name: "DesiredDeliveryMediums"))
-    AdminCreateUserRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    AdminCreateUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminCreateUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminCreateUserRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "UserAttributes"))
+    AdminCreateUserRequest.add_member(:validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "ValidationData"))
+    AdminCreateUserRequest.add_member(:temporary_password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, location_name: "TemporaryPassword"))
+    AdminCreateUserRequest.add_member(:force_alias_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: ForceAliasCreation, location_name: "ForceAliasCreation", traits: {"smithy.api#default" => false}))
+    AdminCreateUserRequest.add_member(:message_action, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageActionType, location_name: "MessageAction"))
+    AdminCreateUserRequest.add_member(:desired_delivery_mediums, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumListType, location_name: "DesiredDeliveryMediums"))
+    AdminCreateUserRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     AdminCreateUserRequest.type = Types::AdminCreateUserRequest
-    AdminCreateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserType, location_name: "User"))
+    AdminCreateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, location_name: "User"))
     AdminCreateUserResponse.type = Types::AdminCreateUserResponse
-    AdminDeleteUserAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminDeleteUserAttributesRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminDeleteUserAttributesRequest.add_member(:user_attribute_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameListType, location_name: "UserAttributeNames", traits: {"smithy.api#required" => {}}))
+    AdminDeleteUserAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminDeleteUserAttributesRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminDeleteUserAttributesRequest.add_member(:user_attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameListType, location_name: "UserAttributeNames", traits: {"smithy.api#required" => {}}))
     AdminDeleteUserAttributesRequest.type = Types::AdminDeleteUserAttributesRequest
     AdminDeleteUserAttributesResponse.type = Types::AdminDeleteUserAttributesResponse
-    AdminDeleteUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminDeleteUserRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminDeleteUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminDeleteUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
     AdminDeleteUserRequest.type = Types::AdminDeleteUserRequest
-    AdminDisableProviderForUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminDisableProviderForUserRequest.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderUserIdentifierType, location_name: "User", traits: {"smithy.api#required" => {}}))
+    AdminDisableProviderForUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminDisableProviderForUserRequest.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderUserIdentifierType, location_name: "User", traits: {"smithy.api#required" => {}}))
     AdminDisableProviderForUserRequest.type = Types::AdminDisableProviderForUserRequest
     AdminDisableProviderForUserResponse.type = Types::AdminDisableProviderForUserResponse
-    AdminDisableUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminDisableUserRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminDisableUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminDisableUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
     AdminDisableUserRequest.type = Types::AdminDisableUserRequest
     AdminDisableUserResponse.type = Types::AdminDisableUserResponse
-    AdminEnableUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminEnableUserRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminEnableUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminEnableUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
     AdminEnableUserRequest.type = Types::AdminEnableUserRequest
     AdminEnableUserResponse.type = Types::AdminEnableUserResponse
-    AdminForgetDeviceRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminForgetDeviceRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminForgetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
+    AdminForgetDeviceRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminForgetDeviceRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminForgetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
     AdminForgetDeviceRequest.type = Types::AdminForgetDeviceRequest
-    AdminGetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
-    AdminGetDeviceRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminGetDeviceRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminGetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
+    AdminGetDeviceRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminGetDeviceRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
     AdminGetDeviceRequest.type = Types::AdminGetDeviceRequest
-    AdminGetDeviceResponse.add_member(:device, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceType, location_name: "Device", traits: {"smithy.api#required" => {}}))
+    AdminGetDeviceResponse.add_member(:device, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, location_name: "Device", traits: {"smithy.api#required" => {}}))
     AdminGetDeviceResponse.type = Types::AdminGetDeviceResponse
-    AdminGetUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminGetUserRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminGetUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminGetUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
     AdminGetUserRequest.type = Types::AdminGetUserRequest
-    AdminGetUserResponse.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminGetUserResponse.add_member(:user_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "UserAttributes"))
-    AdminGetUserResponse.add_member(:user_create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "UserCreateDate"))
-    AdminGetUserResponse.add_member(:user_last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "UserLastModifiedDate"))
-    AdminGetUserResponse.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
-    AdminGetUserResponse.add_member(:user_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserStatusType, location_name: "UserStatus"))
-    AdminGetUserResponse.add_member(:mfa_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions"))
-    AdminGetUserResponse.add_member(:preferred_mfa_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "PreferredMfaSetting"))
-    AdminGetUserResponse.add_member(:user_mfa_setting_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserMFASettingListType, location_name: "UserMFASettingList"))
+    AdminGetUserResponse.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminGetUserResponse.add_member(:user_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "UserAttributes"))
+    AdminGetUserResponse.add_member(:user_create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "UserCreateDate"))
+    AdminGetUserResponse.add_member(:user_last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "UserLastModifiedDate"))
+    AdminGetUserResponse.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    AdminGetUserResponse.add_member(:user_status, ::Smithy::Schema::Shapes::MemberShape.new(target: UserStatusType, location_name: "UserStatus"))
+    AdminGetUserResponse.add_member(:mfa_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionListType, location_name: "MFAOptions"))
+    AdminGetUserResponse.add_member(:preferred_mfa_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "PreferredMfaSetting"))
+    AdminGetUserResponse.add_member(:user_mfa_setting_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMFASettingListType, location_name: "UserMFASettingList"))
     AdminGetUserResponse.type = Types::AdminGetUserResponse
-    AdminInitiateAuthRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminInitiateAuthRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    AdminInitiateAuthRequest.add_member(:auth_flow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthFlowType, location_name: "AuthFlow", traits: {"smithy.api#required" => {}}))
-    AdminInitiateAuthRequest.add_member(:auth_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthParametersType, location_name: "AuthParameters"))
-    AdminInitiateAuthRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
-    AdminInitiateAuthRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    AdminInitiateAuthRequest.add_member(:context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextDataType, location_name: "ContextData"))
-    AdminInitiateAuthRequest.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    AdminInitiateAuthRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminInitiateAuthRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    AdminInitiateAuthRequest.add_member(:auth_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFlowType, location_name: "AuthFlow", traits: {"smithy.api#required" => {}}))
+    AdminInitiateAuthRequest.add_member(:auth_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthParametersType, location_name: "AuthParameters"))
+    AdminInitiateAuthRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
+    AdminInitiateAuthRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    AdminInitiateAuthRequest.add_member(:context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextDataType, location_name: "ContextData"))
+    AdminInitiateAuthRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     AdminInitiateAuthRequest.type = Types::AdminInitiateAuthRequest
-    AdminInitiateAuthResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeNameType, location_name: "ChallengeName"))
-    AdminInitiateAuthResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
-    AdminInitiateAuthResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeParametersType, location_name: "ChallengeParameters"))
-    AdminInitiateAuthResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
-    AdminInitiateAuthResponse.add_member(:available_challenges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailableChallengeListType, location_name: "AvailableChallenges"))
+    AdminInitiateAuthResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, location_name: "ChallengeName"))
+    AdminInitiateAuthResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
+    AdminInitiateAuthResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeParametersType, location_name: "ChallengeParameters"))
+    AdminInitiateAuthResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResultType, location_name: "AuthenticationResult"))
+    AdminInitiateAuthResponse.add_member(:available_challenges, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableChallengeListType, location_name: "AvailableChallenges"))
     AdminInitiateAuthResponse.type = Types::AdminInitiateAuthResponse
-    AdminLinkProviderForUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminLinkProviderForUserRequest.add_member(:destination_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderUserIdentifierType, location_name: "DestinationUser", traits: {"smithy.api#required" => {}}))
-    AdminLinkProviderForUserRequest.add_member(:source_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderUserIdentifierType, location_name: "SourceUser", traits: {"smithy.api#required" => {}}))
+    AdminLinkProviderForUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminLinkProviderForUserRequest.add_member(:destination_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderUserIdentifierType, location_name: "DestinationUser", traits: {"smithy.api#required" => {}}))
+    AdminLinkProviderForUserRequest.add_member(:source_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderUserIdentifierType, location_name: "SourceUser", traits: {"smithy.api#required" => {}}))
     AdminLinkProviderForUserRequest.type = Types::AdminLinkProviderForUserRequest
     AdminLinkProviderForUserResponse.type = Types::AdminLinkProviderForUserResponse
-    AdminListDevicesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminListDevicesRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminListDevicesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "Limit"))
-    AdminListDevicesRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
+    AdminListDevicesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminListDevicesRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminListDevicesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, location_name: "Limit"))
+    AdminListDevicesRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPaginationTokenType, location_name: "PaginationToken"))
     AdminListDevicesRequest.type = Types::AdminListDevicesRequest
-    AdminListDevicesResponse.add_member(:devices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceListType, location_name: "Devices"))
-    AdminListDevicesResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
+    AdminListDevicesResponse.add_member(:devices, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceListType, location_name: "Devices"))
+    AdminListDevicesResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPaginationTokenType, location_name: "PaginationToken"))
     AdminListDevicesResponse.type = Types::AdminListDevicesResponse
-    AdminListGroupsForUserRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminListGroupsForUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminListGroupsForUserRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "Limit"))
-    AdminListGroupsForUserRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    AdminListGroupsForUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminListGroupsForUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminListGroupsForUserRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, location_name: "Limit"))
+    AdminListGroupsForUserRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     AdminListGroupsForUserRequest.type = Types::AdminListGroupsForUserRequest
-    AdminListGroupsForUserResponse.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupListType, location_name: "Groups"))
-    AdminListGroupsForUserResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    AdminListGroupsForUserResponse.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupListType, location_name: "Groups"))
+    AdminListGroupsForUserResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     AdminListGroupsForUserResponse.type = Types::AdminListGroupsForUserResponse
-    AdminListUserAuthEventsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminListUserAuthEventsRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminListUserAuthEventsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "MaxResults"))
-    AdminListUserAuthEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    AdminListUserAuthEventsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminListUserAuthEventsRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminListUserAuthEventsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, location_name: "MaxResults"))
+    AdminListUserAuthEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     AdminListUserAuthEventsRequest.type = Types::AdminListUserAuthEventsRequest
-    AdminListUserAuthEventsResponse.add_member(:auth_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthEventsType, location_name: "AuthEvents"))
-    AdminListUserAuthEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    AdminListUserAuthEventsResponse.add_member(:auth_events, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthEventsType, location_name: "AuthEvents"))
+    AdminListUserAuthEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     AdminListUserAuthEventsResponse.type = Types::AdminListUserAuthEventsResponse
-    AdminRemoveUserFromGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminRemoveUserFromGroupRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminRemoveUserFromGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    AdminRemoveUserFromGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminRemoveUserFromGroupRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminRemoveUserFromGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
     AdminRemoveUserFromGroupRequest.type = Types::AdminRemoveUserFromGroupRequest
-    AdminResetUserPasswordRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminResetUserPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminResetUserPasswordRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    AdminResetUserPasswordRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminResetUserPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminResetUserPasswordRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     AdminResetUserPasswordRequest.type = Types::AdminResetUserPasswordRequest
     AdminResetUserPasswordResponse.type = Types::AdminResetUserPasswordResponse
-    AdminRespondToAuthChallengeRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminRespondToAuthChallengeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    AdminRespondToAuthChallengeRequest.add_member(:challenge_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeNameType, location_name: "ChallengeName", traits: {"smithy.api#required" => {}}))
-    AdminRespondToAuthChallengeRequest.add_member(:challenge_responses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeResponsesType, location_name: "ChallengeResponses"))
-    AdminRespondToAuthChallengeRequest.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
-    AdminRespondToAuthChallengeRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    AdminRespondToAuthChallengeRequest.add_member(:context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextDataType, location_name: "ContextData"))
-    AdminRespondToAuthChallengeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    AdminRespondToAuthChallengeRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminRespondToAuthChallengeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    AdminRespondToAuthChallengeRequest.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, location_name: "ChallengeName", traits: {"smithy.api#required" => {}}))
+    AdminRespondToAuthChallengeRequest.add_member(:challenge_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponsesType, location_name: "ChallengeResponses"))
+    AdminRespondToAuthChallengeRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
+    AdminRespondToAuthChallengeRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    AdminRespondToAuthChallengeRequest.add_member(:context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextDataType, location_name: "ContextData"))
+    AdminRespondToAuthChallengeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     AdminRespondToAuthChallengeRequest.type = Types::AdminRespondToAuthChallengeRequest
-    AdminRespondToAuthChallengeResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeNameType, location_name: "ChallengeName"))
-    AdminRespondToAuthChallengeResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
-    AdminRespondToAuthChallengeResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeParametersType, location_name: "ChallengeParameters"))
-    AdminRespondToAuthChallengeResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
+    AdminRespondToAuthChallengeResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, location_name: "ChallengeName"))
+    AdminRespondToAuthChallengeResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
+    AdminRespondToAuthChallengeResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeParametersType, location_name: "ChallengeParameters"))
+    AdminRespondToAuthChallengeResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResultType, location_name: "AuthenticationResult"))
     AdminRespondToAuthChallengeResponse.type = Types::AdminRespondToAuthChallengeResponse
-    AdminSetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMSMfaSettingsType, location_name: "SMSMfaSettings"))
-    AdminSetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMfaSettingsType, location_name: "SoftwareTokenMfaSettings"))
-    AdminSetUserMFAPreferenceRequest.add_member(:email_mfa_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailMfaSettingsType, location_name: "EmailMfaSettings"))
-    AdminSetUserMFAPreferenceRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminSetUserMFAPreferenceRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminSetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSMfaSettingsType, location_name: "SMSMfaSettings"))
+    AdminSetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMfaSettingsType, location_name: "SoftwareTokenMfaSettings"))
+    AdminSetUserMFAPreferenceRequest.add_member(:email_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaSettingsType, location_name: "EmailMfaSettings"))
+    AdminSetUserMFAPreferenceRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminSetUserMFAPreferenceRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     AdminSetUserMFAPreferenceRequest.type = Types::AdminSetUserMFAPreferenceRequest
     AdminSetUserMFAPreferenceResponse.type = Types::AdminSetUserMFAPreferenceResponse
-    AdminSetUserPasswordRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminSetUserPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminSetUserPasswordRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordType, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    AdminSetUserPasswordRequest.add_member(:permanent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Permanent", traits: {"smithy.api#default" => false}))
+    AdminSetUserPasswordRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminSetUserPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminSetUserPasswordRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    AdminSetUserPasswordRequest.add_member(:permanent, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Permanent", traits: {"smithy.api#default" => false}))
     AdminSetUserPasswordRequest.type = Types::AdminSetUserPasswordRequest
     AdminSetUserPasswordResponse.type = Types::AdminSetUserPasswordResponse
-    AdminSetUserSettingsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminSetUserSettingsRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminSetUserSettingsRequest.add_member(:mfa_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions", traits: {"smithy.api#required" => {}}))
+    AdminSetUserSettingsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminSetUserSettingsRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminSetUserSettingsRequest.add_member(:mfa_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionListType, location_name: "MFAOptions", traits: {"smithy.api#required" => {}}))
     AdminSetUserSettingsRequest.type = Types::AdminSetUserSettingsRequest
     AdminSetUserSettingsResponse.type = Types::AdminSetUserSettingsResponse
-    AdminUpdateAuthEventFeedbackRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminUpdateAuthEventFeedbackRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminUpdateAuthEventFeedbackRequest.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventIdType, location_name: "EventId", traits: {"smithy.api#required" => {}}))
-    AdminUpdateAuthEventFeedbackRequest.add_member(:feedback_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeedbackValueType, location_name: "FeedbackValue", traits: {"smithy.api#required" => {}}))
+    AdminUpdateAuthEventFeedbackRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminUpdateAuthEventFeedbackRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminUpdateAuthEventFeedbackRequest.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventIdType, location_name: "EventId", traits: {"smithy.api#required" => {}}))
+    AdminUpdateAuthEventFeedbackRequest.add_member(:feedback_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackValueType, location_name: "FeedbackValue", traits: {"smithy.api#required" => {}}))
     AdminUpdateAuthEventFeedbackRequest.type = Types::AdminUpdateAuthEventFeedbackRequest
     AdminUpdateAuthEventFeedbackResponse.type = Types::AdminUpdateAuthEventFeedbackResponse
-    AdminUpdateDeviceStatusRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminUpdateDeviceStatusRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminUpdateDeviceStatusRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
-    AdminUpdateDeviceStatusRequest.add_member(:device_remembered_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceRememberedStatusType, location_name: "DeviceRememberedStatus"))
+    AdminUpdateDeviceStatusRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminUpdateDeviceStatusRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminUpdateDeviceStatusRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
+    AdminUpdateDeviceStatusRequest.add_member(:device_remembered_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceRememberedStatusType, location_name: "DeviceRememberedStatus"))
     AdminUpdateDeviceStatusRequest.type = Types::AdminUpdateDeviceStatusRequest
     AdminUpdateDeviceStatusResponse.type = Types::AdminUpdateDeviceStatusResponse
-    AdminUpdateUserAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminUpdateUserAttributesRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    AdminUpdateUserAttributesRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "UserAttributes", traits: {"smithy.api#required" => {}}))
-    AdminUpdateUserAttributesRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    AdminUpdateUserAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminUpdateUserAttributesRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminUpdateUserAttributesRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "UserAttributes", traits: {"smithy.api#required" => {}}))
+    AdminUpdateUserAttributesRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     AdminUpdateUserAttributesRequest.type = Types::AdminUpdateUserAttributesRequest
     AdminUpdateUserAttributesResponse.type = Types::AdminUpdateUserAttributesResponse
-    AdminUserGlobalSignOutRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    AdminUserGlobalSignOutRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminUserGlobalSignOutRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminUserGlobalSignOutRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
     AdminUserGlobalSignOutRequest.type = Types::AdminUserGlobalSignOutRequest
     AdminUserGlobalSignOutResponse.type = Types::AdminUserGlobalSignOutResponse
-    AdvancedSecurityAdditionalFlowsType.add_member(:custom_auth_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdvancedSecurityEnabledModeType, location_name: "CustomAuthMode"))
+    AdvancedSecurityAdditionalFlowsType.add_member(:custom_auth_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedSecurityEnabledModeType, location_name: "CustomAuthMode"))
     AdvancedSecurityAdditionalFlowsType.type = Types::AdvancedSecurityAdditionalFlowsType
-    AdvancedSecurityEnabledModeType.add_member(:audit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUDIT", traits: {"smithy.api#enumValue" => "AUDIT"}))
-    AdvancedSecurityEnabledModeType.add_member(:enforced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENFORCED", traits: {"smithy.api#enumValue" => "ENFORCED"}))
-    AdvancedSecurityModeType.add_member(:off, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
-    AdvancedSecurityModeType.add_member(:audit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUDIT", traits: {"smithy.api#enumValue" => "AUDIT"}))
-    AdvancedSecurityModeType.add_member(:enforced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENFORCED", traits: {"smithy.api#enumValue" => "ENFORCED"}))
-    AliasAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
-    AliasAttributeType.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
-    AliasAttributeType.add_member(:preferred_username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREFERRED_USERNAME", traits: {"smithy.api#enumValue" => "preferred_username"}))
-    AliasAttributesListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasAttributeType)
-    AliasExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    AdvancedSecurityEnabledModeType.add_member(:audit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUDIT", traits: {"smithy.api#enumValue" => "AUDIT"}))
+    AdvancedSecurityEnabledModeType.add_member(:enforced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENFORCED", traits: {"smithy.api#enumValue" => "ENFORCED"}))
+    AdvancedSecurityModeType.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
+    AdvancedSecurityModeType.add_member(:audit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUDIT", traits: {"smithy.api#enumValue" => "AUDIT"}))
+    AdvancedSecurityModeType.add_member(:enforced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENFORCED", traits: {"smithy.api#enumValue" => "ENFORCED"}))
+    AliasAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
+    AliasAttributeType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
+    AliasAttributeType.add_member(:preferred_username, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREFERRED_USERNAME", traits: {"smithy.api#enumValue" => "preferred_username"}))
+    AliasAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AliasAttributeType)
+    AliasExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     AliasExistsException.type = Types::AliasExistsException
-    AllowedFirstAuthFactorsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthFactorType)
-    AnalyticsConfigurationType.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexStringType, location_name: "ApplicationId"))
-    AnalyticsConfigurationType.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "ApplicationArn"))
-    AnalyticsConfigurationType.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "RoleArn"))
-    AnalyticsConfigurationType.add_member(:external_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "ExternalId"))
-    AnalyticsConfigurationType.add_member(:user_data_shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "UserDataShared", traits: {"smithy.api#default" => false}))
+    AllowedFirstAuthFactorsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFactorType)
+    AnalyticsConfigurationType.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HexStringType, location_name: "ApplicationId"))
+    AnalyticsConfigurationType.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "ApplicationArn"))
+    AnalyticsConfigurationType.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "RoleArn"))
+    AnalyticsConfigurationType.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "ExternalId"))
+    AnalyticsConfigurationType.add_member(:user_data_shared, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "UserDataShared", traits: {"smithy.api#default" => false}))
     AnalyticsConfigurationType.type = Types::AnalyticsConfigurationType
-    AnalyticsMetadataType.add_member(:analytics_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "AnalyticsEndpointId"))
+    AnalyticsMetadataType.add_member(:analytics_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "AnalyticsEndpointId"))
     AnalyticsMetadataType.type = Types::AnalyticsMetadataType
-    AssetCategoryType.add_member(:favicon_ico, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAVICON_ICO", traits: {"smithy.api#enumValue" => "FAVICON_ICO"}))
-    AssetCategoryType.add_member(:favicon_svg, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAVICON_SVG", traits: {"smithy.api#enumValue" => "FAVICON_SVG"}))
-    AssetCategoryType.add_member(:email_graphic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_GRAPHIC", traits: {"smithy.api#enumValue" => "EMAIL_GRAPHIC"}))
-    AssetCategoryType.add_member(:sms_graphic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_GRAPHIC", traits: {"smithy.api#enumValue" => "SMS_GRAPHIC"}))
-    AssetCategoryType.add_member(:auth_app_graphic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTH_APP_GRAPHIC", traits: {"smithy.api#enumValue" => "AUTH_APP_GRAPHIC"}))
-    AssetCategoryType.add_member(:password_graphic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_GRAPHIC", traits: {"smithy.api#enumValue" => "PASSWORD_GRAPHIC"}))
-    AssetCategoryType.add_member(:passkey_graphic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSKEY_GRAPHIC", traits: {"smithy.api#enumValue" => "PASSKEY_GRAPHIC"}))
-    AssetCategoryType.add_member(:page_header_logo, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_HEADER_LOGO", traits: {"smithy.api#enumValue" => "PAGE_HEADER_LOGO"}))
-    AssetCategoryType.add_member(:page_header_background, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_HEADER_BACKGROUND", traits: {"smithy.api#enumValue" => "PAGE_HEADER_BACKGROUND"}))
-    AssetCategoryType.add_member(:page_footer_logo, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_FOOTER_LOGO", traits: {"smithy.api#enumValue" => "PAGE_FOOTER_LOGO"}))
-    AssetCategoryType.add_member(:page_footer_background, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_FOOTER_BACKGROUND", traits: {"smithy.api#enumValue" => "PAGE_FOOTER_BACKGROUND"}))
-    AssetCategoryType.add_member(:page_background, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_BACKGROUND", traits: {"smithy.api#enumValue" => "PAGE_BACKGROUND"}))
-    AssetCategoryType.add_member(:form_background, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORM_BACKGROUND", traits: {"smithy.api#enumValue" => "FORM_BACKGROUND"}))
-    AssetCategoryType.add_member(:form_logo, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORM_LOGO", traits: {"smithy.api#enumValue" => "FORM_LOGO"}))
-    AssetCategoryType.add_member(:idp_button_icon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IDP_BUTTON_ICON", traits: {"smithy.api#enumValue" => "IDP_BUTTON_ICON"}))
-    AssetExtensionType.add_member(:ico, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ICO", traits: {"smithy.api#enumValue" => "ICO"}))
-    AssetExtensionType.add_member(:jpeg, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JPEG", traits: {"smithy.api#enumValue" => "JPEG"}))
-    AssetExtensionType.add_member(:png, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PNG", traits: {"smithy.api#enumValue" => "PNG"}))
-    AssetExtensionType.add_member(:svg, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SVG", traits: {"smithy.api#enumValue" => "SVG"}))
-    AssetExtensionType.add_member(:webp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEBP", traits: {"smithy.api#enumValue" => "WEBP"}))
-    AssetListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetType)
-    AssetType.add_member(:category, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetCategoryType, location_name: "Category", traits: {"smithy.api#required" => {}}))
-    AssetType.add_member(:color_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColorSchemeModeType, location_name: "ColorMode", traits: {"smithy.api#required" => {}}))
-    AssetType.add_member(:extension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetExtensionType, location_name: "Extension", traits: {"smithy.api#required" => {}}))
-    AssetType.add_member(:bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetBytesType, location_name: "Bytes"))
-    AssetType.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "ResourceId"))
+    AssetCategoryType.add_member(:favicon_ico, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAVICON_ICO", traits: {"smithy.api#enumValue" => "FAVICON_ICO"}))
+    AssetCategoryType.add_member(:favicon_svg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAVICON_SVG", traits: {"smithy.api#enumValue" => "FAVICON_SVG"}))
+    AssetCategoryType.add_member(:email_graphic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_GRAPHIC", traits: {"smithy.api#enumValue" => "EMAIL_GRAPHIC"}))
+    AssetCategoryType.add_member(:sms_graphic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_GRAPHIC", traits: {"smithy.api#enumValue" => "SMS_GRAPHIC"}))
+    AssetCategoryType.add_member(:auth_app_graphic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTH_APP_GRAPHIC", traits: {"smithy.api#enumValue" => "AUTH_APP_GRAPHIC"}))
+    AssetCategoryType.add_member(:password_graphic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_GRAPHIC", traits: {"smithy.api#enumValue" => "PASSWORD_GRAPHIC"}))
+    AssetCategoryType.add_member(:passkey_graphic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSKEY_GRAPHIC", traits: {"smithy.api#enumValue" => "PASSKEY_GRAPHIC"}))
+    AssetCategoryType.add_member(:page_header_logo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_HEADER_LOGO", traits: {"smithy.api#enumValue" => "PAGE_HEADER_LOGO"}))
+    AssetCategoryType.add_member(:page_header_background, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_HEADER_BACKGROUND", traits: {"smithy.api#enumValue" => "PAGE_HEADER_BACKGROUND"}))
+    AssetCategoryType.add_member(:page_footer_logo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_FOOTER_LOGO", traits: {"smithy.api#enumValue" => "PAGE_FOOTER_LOGO"}))
+    AssetCategoryType.add_member(:page_footer_background, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_FOOTER_BACKGROUND", traits: {"smithy.api#enumValue" => "PAGE_FOOTER_BACKGROUND"}))
+    AssetCategoryType.add_member(:page_background, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_BACKGROUND", traits: {"smithy.api#enumValue" => "PAGE_BACKGROUND"}))
+    AssetCategoryType.add_member(:form_background, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORM_BACKGROUND", traits: {"smithy.api#enumValue" => "FORM_BACKGROUND"}))
+    AssetCategoryType.add_member(:form_logo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORM_LOGO", traits: {"smithy.api#enumValue" => "FORM_LOGO"}))
+    AssetCategoryType.add_member(:idp_button_icon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IDP_BUTTON_ICON", traits: {"smithy.api#enumValue" => "IDP_BUTTON_ICON"}))
+    AssetExtensionType.add_member(:ico, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ICO", traits: {"smithy.api#enumValue" => "ICO"}))
+    AssetExtensionType.add_member(:jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JPEG", traits: {"smithy.api#enumValue" => "JPEG"}))
+    AssetExtensionType.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PNG", traits: {"smithy.api#enumValue" => "PNG"}))
+    AssetExtensionType.add_member(:svg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SVG", traits: {"smithy.api#enumValue" => "SVG"}))
+    AssetExtensionType.add_member(:webp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEBP", traits: {"smithy.api#enumValue" => "WEBP"}))
+    AssetListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetType)
+    AssetType.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCategoryType, location_name: "Category", traits: {"smithy.api#required" => {}}))
+    AssetType.add_member(:color_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorSchemeModeType, location_name: "ColorMode", traits: {"smithy.api#required" => {}}))
+    AssetType.add_member(:extension, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetExtensionType, location_name: "Extension", traits: {"smithy.api#required" => {}}))
+    AssetType.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBytesType, location_name: "Bytes"))
+    AssetType.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdType, location_name: "ResourceId"))
     AssetType.type = Types::AssetType
-    AssociateSoftwareTokenRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
-    AssociateSoftwareTokenRequest.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    AssociateSoftwareTokenRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken"))
+    AssociateSoftwareTokenRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     AssociateSoftwareTokenRequest.type = Types::AssociateSoftwareTokenRequest
-    AssociateSoftwareTokenResponse.add_member(:secret_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretCodeType, location_name: "SecretCode"))
-    AssociateSoftwareTokenResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    AssociateSoftwareTokenResponse.add_member(:secret_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretCodeType, location_name: "SecretCode"))
+    AssociateSoftwareTokenResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     AssociateSoftwareTokenResponse.type = Types::AssociateSoftwareTokenResponse
-    AttributeDataType.add_member(:string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STRING", traits: {"smithy.api#enumValue" => "String"}))
-    AttributeDataType.add_member(:number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NUMBER", traits: {"smithy.api#enumValue" => "Number"}))
-    AttributeDataType.add_member(:datetime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATETIME", traits: {"smithy.api#enumValue" => "DateTime"}))
-    AttributeDataType.add_member(:boolean, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOLEAN", traits: {"smithy.api#enumValue" => "Boolean"}))
-    AttributeListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeType)
-    AttributeMappingType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMappingKeyType)
-    AttributeMappingType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    AttributeNameListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameType)
-    AttributeType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    AttributeType.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValueType, location_name: "Value"))
+    AttributeDataType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STRING", traits: {"smithy.api#enumValue" => "String"}))
+    AttributeDataType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NUMBER", traits: {"smithy.api#enumValue" => "Number"}))
+    AttributeDataType.add_member(:datetime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATETIME", traits: {"smithy.api#enumValue" => "DateTime"}))
+    AttributeDataType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOLEAN", traits: {"smithy.api#enumValue" => "Boolean"}))
+    AttributeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType)
+    AttributeMappingType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingKeyType)
+    AttributeMappingType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    AttributeNameListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType)
+    AttributeType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    AttributeType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueType, location_name: "Value"))
     AttributeType.type = Types::AttributeType
-    AttributesRequireVerificationBeforeUpdateType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedAttributeType)
-    AuthEventType.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "EventId"))
-    AuthEventType.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventType, location_name: "EventType"))
-    AuthEventType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
-    AuthEventType.add_member(:event_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventResponseType, location_name: "EventResponse"))
-    AuthEventType.add_member(:event_risk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventRiskType, location_name: "EventRisk"))
-    AuthEventType.add_member(:challenge_responses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeResponseListType, location_name: "ChallengeResponses"))
-    AuthEventType.add_member(:event_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventContextDataType, location_name: "EventContextData"))
-    AuthEventType.add_member(:event_feedback, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventFeedbackType, location_name: "EventFeedback"))
+    AttributesRequireVerificationBeforeUpdateType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributeType)
+    AuthEventType.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "EventId"))
+    AuthEventType.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, location_name: "EventType"))
+    AuthEventType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
+    AuthEventType.add_member(:event_response, ::Smithy::Schema::Shapes::MemberShape.new(target: EventResponseType, location_name: "EventResponse"))
+    AuthEventType.add_member(:event_risk, ::Smithy::Schema::Shapes::MemberShape.new(target: EventRiskType, location_name: "EventRisk"))
+    AuthEventType.add_member(:challenge_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponseListType, location_name: "ChallengeResponses"))
+    AuthEventType.add_member(:event_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: EventContextDataType, location_name: "EventContextData"))
+    AuthEventType.add_member(:event_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: EventFeedbackType, location_name: "EventFeedback"))
     AuthEventType.type = Types::AuthEventType
-    AuthEventsType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthEventType)
-    AuthFactorType.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
-    AuthFactorType.add_member(:email_otp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_OTP", traits: {"smithy.api#enumValue" => "EMAIL_OTP"}))
-    AuthFactorType.add_member(:sms_otp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_OTP", traits: {"smithy.api#enumValue" => "SMS_OTP"}))
-    AuthFactorType.add_member(:web_authn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEB_AUTHN", traits: {"smithy.api#enumValue" => "WEB_AUTHN"}))
-    AuthFlowType.add_member(:user_srp_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_SRP_AUTH", traits: {"smithy.api#enumValue" => "USER_SRP_AUTH"}))
-    AuthFlowType.add_member(:refresh_token_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFRESH_TOKEN_AUTH", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN_AUTH"}))
-    AuthFlowType.add_member(:refresh_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN"}))
-    AuthFlowType.add_member(:custom_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_AUTH", traits: {"smithy.api#enumValue" => "CUSTOM_AUTH"}))
-    AuthFlowType.add_member(:admin_no_srp_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_NO_SRP_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_NO_SRP_AUTH"}))
-    AuthFlowType.add_member(:user_password_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "USER_PASSWORD_AUTH"}))
-    AuthFlowType.add_member(:admin_user_password_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_USER_PASSWORD_AUTH"}))
-    AuthFlowType.add_member(:user_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_AUTH", traits: {"smithy.api#enumValue" => "USER_AUTH"}))
-    AuthParametersType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    AuthParametersType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    AuthenticationResultType.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
-    AuthenticationResultType.add_member(:expires_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerType, location_name: "ExpiresIn", traits: {"smithy.api#default" => 0}))
-    AuthenticationResultType.add_member(:token_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "TokenType"))
-    AuthenticationResultType.add_member(:refresh_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "RefreshToken"))
-    AuthenticationResultType.add_member(:id_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "IdToken"))
-    AuthenticationResultType.add_member(:new_device_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NewDeviceMetadataType, location_name: "NewDeviceMetadata"))
+    AuthEventsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthEventType)
+    AuthFactorType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
+    AuthFactorType.add_member(:email_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_OTP", traits: {"smithy.api#enumValue" => "EMAIL_OTP"}))
+    AuthFactorType.add_member(:sms_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_OTP", traits: {"smithy.api#enumValue" => "SMS_OTP"}))
+    AuthFactorType.add_member(:web_authn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEB_AUTHN", traits: {"smithy.api#enumValue" => "WEB_AUTHN"}))
+    AuthFlowType.add_member(:user_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_SRP_AUTH", traits: {"smithy.api#enumValue" => "USER_SRP_AUTH"}))
+    AuthFlowType.add_member(:refresh_token_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFRESH_TOKEN_AUTH", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN_AUTH"}))
+    AuthFlowType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN"}))
+    AuthFlowType.add_member(:custom_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_AUTH", traits: {"smithy.api#enumValue" => "CUSTOM_AUTH"}))
+    AuthFlowType.add_member(:admin_no_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_NO_SRP_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_NO_SRP_AUTH"}))
+    AuthFlowType.add_member(:user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "USER_PASSWORD_AUTH"}))
+    AuthFlowType.add_member(:admin_user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_USER_PASSWORD_AUTH"}))
+    AuthFlowType.add_member(:user_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_AUTH", traits: {"smithy.api#enumValue" => "USER_AUTH"}))
+    AuthParametersType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    AuthParametersType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    AuthenticationResultType.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken"))
+    AuthenticationResultType.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, location_name: "ExpiresIn", traits: {"smithy.api#default" => 0}))
+    AuthenticationResultType.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "TokenType"))
+    AuthenticationResultType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "RefreshToken"))
+    AuthenticationResultType.add_member(:id_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "IdToken"))
+    AuthenticationResultType.add_member(:new_device_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: NewDeviceMetadataType, location_name: "NewDeviceMetadata"))
     AuthenticationResultType.type = Types::AuthenticationResultType
-    AvailableChallengeListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeNameType)
-    BlockedIPRangeListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    CallbackURLsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectUrlType)
-    ChallengeName.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Password", traits: {"smithy.api#enumValue" => "Password"}))
-    ChallengeName.add_member(:mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Mfa", traits: {"smithy.api#enumValue" => "Mfa"}))
-    ChallengeNameType.add_member(:sms_mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_MFA", traits: {"smithy.api#enumValue" => "SMS_MFA"}))
-    ChallengeNameType.add_member(:email_otp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_OTP", traits: {"smithy.api#enumValue" => "EMAIL_OTP"}))
-    ChallengeNameType.add_member(:software_token_mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SOFTWARE_TOKEN_MFA", traits: {"smithy.api#enumValue" => "SOFTWARE_TOKEN_MFA"}))
-    ChallengeNameType.add_member(:select_mfa_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELECT_MFA_TYPE", traits: {"smithy.api#enumValue" => "SELECT_MFA_TYPE"}))
-    ChallengeNameType.add_member(:mfa_setup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MFA_SETUP", traits: {"smithy.api#enumValue" => "MFA_SETUP"}))
-    ChallengeNameType.add_member(:password_verifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_VERIFIER", traits: {"smithy.api#enumValue" => "PASSWORD_VERIFIER"}))
-    ChallengeNameType.add_member(:custom_challenge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_CHALLENGE", traits: {"smithy.api#enumValue" => "CUSTOM_CHALLENGE"}))
-    ChallengeNameType.add_member(:select_challenge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELECT_CHALLENGE", traits: {"smithy.api#enumValue" => "SELECT_CHALLENGE"}))
-    ChallengeNameType.add_member(:device_srp_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVICE_SRP_AUTH", traits: {"smithy.api#enumValue" => "DEVICE_SRP_AUTH"}))
-    ChallengeNameType.add_member(:device_password_verifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVICE_PASSWORD_VERIFIER", traits: {"smithy.api#enumValue" => "DEVICE_PASSWORD_VERIFIER"}))
-    ChallengeNameType.add_member(:admin_no_srp_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_NO_SRP_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_NO_SRP_AUTH"}))
-    ChallengeNameType.add_member(:new_password_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_PASSWORD_REQUIRED", traits: {"smithy.api#enumValue" => "NEW_PASSWORD_REQUIRED"}))
-    ChallengeNameType.add_member(:sms_otp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_OTP", traits: {"smithy.api#enumValue" => "SMS_OTP"}))
-    ChallengeNameType.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
-    ChallengeNameType.add_member(:web_authn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEB_AUTHN", traits: {"smithy.api#enumValue" => "WEB_AUTHN"}))
-    ChallengeNameType.add_member(:password_srp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_SRP", traits: {"smithy.api#enumValue" => "PASSWORD_SRP"}))
-    ChallengeParametersType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ChallengeParametersType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ChallengeResponse.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
-    ChallengeResponse.add_member(:failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failure", traits: {"smithy.api#enumValue" => "Failure"}))
-    ChallengeResponseListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeResponseType)
-    ChallengeResponseType.add_member(:challenge_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeName, location_name: "ChallengeName"))
-    ChallengeResponseType.add_member(:challenge_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeResponse, location_name: "ChallengeResponse"))
+    AvailableChallengeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType)
+    BlockedIPRangeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    CallbackURLsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType)
+    ChallengeName.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Password", traits: {"smithy.api#enumValue" => "Password"}))
+    ChallengeName.add_member(:mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Mfa", traits: {"smithy.api#enumValue" => "Mfa"}))
+    ChallengeNameType.add_member(:sms_mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_MFA", traits: {"smithy.api#enumValue" => "SMS_MFA"}))
+    ChallengeNameType.add_member(:email_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_OTP", traits: {"smithy.api#enumValue" => "EMAIL_OTP"}))
+    ChallengeNameType.add_member(:software_token_mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SOFTWARE_TOKEN_MFA", traits: {"smithy.api#enumValue" => "SOFTWARE_TOKEN_MFA"}))
+    ChallengeNameType.add_member(:select_mfa_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELECT_MFA_TYPE", traits: {"smithy.api#enumValue" => "SELECT_MFA_TYPE"}))
+    ChallengeNameType.add_member(:mfa_setup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MFA_SETUP", traits: {"smithy.api#enumValue" => "MFA_SETUP"}))
+    ChallengeNameType.add_member(:password_verifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_VERIFIER", traits: {"smithy.api#enumValue" => "PASSWORD_VERIFIER"}))
+    ChallengeNameType.add_member(:custom_challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_CHALLENGE", traits: {"smithy.api#enumValue" => "CUSTOM_CHALLENGE"}))
+    ChallengeNameType.add_member(:select_challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELECT_CHALLENGE", traits: {"smithy.api#enumValue" => "SELECT_CHALLENGE"}))
+    ChallengeNameType.add_member(:device_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVICE_SRP_AUTH", traits: {"smithy.api#enumValue" => "DEVICE_SRP_AUTH"}))
+    ChallengeNameType.add_member(:device_password_verifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVICE_PASSWORD_VERIFIER", traits: {"smithy.api#enumValue" => "DEVICE_PASSWORD_VERIFIER"}))
+    ChallengeNameType.add_member(:admin_no_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_NO_SRP_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_NO_SRP_AUTH"}))
+    ChallengeNameType.add_member(:new_password_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_PASSWORD_REQUIRED", traits: {"smithy.api#enumValue" => "NEW_PASSWORD_REQUIRED"}))
+    ChallengeNameType.add_member(:sms_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS_OTP", traits: {"smithy.api#enumValue" => "SMS_OTP"}))
+    ChallengeNameType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
+    ChallengeNameType.add_member(:web_authn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEB_AUTHN", traits: {"smithy.api#enumValue" => "WEB_AUTHN"}))
+    ChallengeNameType.add_member(:password_srp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_SRP", traits: {"smithy.api#enumValue" => "PASSWORD_SRP"}))
+    ChallengeParametersType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ChallengeParametersType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ChallengeResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
+    ChallengeResponse.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failure", traits: {"smithy.api#enumValue" => "Failure"}))
+    ChallengeResponseListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponseType)
+    ChallengeResponseType.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeName, location_name: "ChallengeName"))
+    ChallengeResponseType.add_member(:challenge_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponse, location_name: "ChallengeResponse"))
     ChallengeResponseType.type = Types::ChallengeResponseType
-    ChallengeResponsesType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ChallengeResponsesType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ChangePasswordRequest.add_member(:previous_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordType, location_name: "PreviousPassword"))
-    ChangePasswordRequest.add_member(:proposed_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordType, location_name: "ProposedPassword", traits: {"smithy.api#required" => {}}))
-    ChangePasswordRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    ChallengeResponsesType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ChallengeResponsesType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ChangePasswordRequest.add_member(:previous_password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, location_name: "PreviousPassword"))
+    ChangePasswordRequest.add_member(:proposed_password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, location_name: "ProposedPassword", traits: {"smithy.api#required" => {}}))
+    ChangePasswordRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     ChangePasswordRequest.type = Types::ChangePasswordRequest
     ChangePasswordResponse.type = Types::ChangePasswordResponse
-    ClientMetadataType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ClientMetadataType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ClientPermissionListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPermissionType)
-    CloudWatchLogsConfigurationType.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "LogGroupArn"))
+    ClientMetadataType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ClientMetadataType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ClientPermissionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionType)
+    CloudWatchLogsConfigurationType.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "LogGroupArn"))
     CloudWatchLogsConfigurationType.type = Types::CloudWatchLogsConfigurationType
-    CodeDeliveryDetailsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType)
-    CodeDeliveryDetailsType.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "Destination"))
-    CodeDeliveryDetailsType.add_member(:delivery_medium, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryMediumType, location_name: "DeliveryMedium"))
-    CodeDeliveryDetailsType.add_member(:attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameType, location_name: "AttributeName"))
+    CodeDeliveryDetailsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType)
+    CodeDeliveryDetailsType.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "Destination"))
+    CodeDeliveryDetailsType.add_member(:delivery_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumType, location_name: "DeliveryMedium"))
+    CodeDeliveryDetailsType.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, location_name: "AttributeName"))
     CodeDeliveryDetailsType.type = Types::CodeDeliveryDetailsType
-    CodeDeliveryFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    CodeDeliveryFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     CodeDeliveryFailureException.type = Types::CodeDeliveryFailureException
-    CodeMismatchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    CodeMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     CodeMismatchException.type = Types::CodeMismatchException
-    ColorSchemeModeType.add_member(:light, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIGHT", traits: {"smithy.api#enumValue" => "LIGHT"}))
-    ColorSchemeModeType.add_member(:dark, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DARK", traits: {"smithy.api#enumValue" => "DARK"}))
-    ColorSchemeModeType.add_member(:dynamic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DYNAMIC", traits: {"smithy.api#enumValue" => "DYNAMIC"}))
-    CompleteWebAuthnRegistrationRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    CompleteWebAuthnRegistrationRequest.add_member(:credential, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Document, location_name: "Credential", traits: {"smithy.api#required" => {}}))
+    ColorSchemeModeType.add_member(:light, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIGHT", traits: {"smithy.api#enumValue" => "LIGHT"}))
+    ColorSchemeModeType.add_member(:dark, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DARK", traits: {"smithy.api#enumValue" => "DARK"}))
+    ColorSchemeModeType.add_member(:dynamic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DYNAMIC", traits: {"smithy.api#enumValue" => "DYNAMIC"}))
+    CompleteWebAuthnRegistrationRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    CompleteWebAuthnRegistrationRequest.add_member(:credential, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, location_name: "Credential", traits: {"smithy.api#required" => {}}))
     CompleteWebAuthnRegistrationRequest.type = Types::CompleteWebAuthnRegistrationRequest
     CompleteWebAuthnRegistrationResponse.type = Types::CompleteWebAuthnRegistrationResponse
-    CompromisedCredentialsActionsType.add_member(:event_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompromisedCredentialsEventActionType, location_name: "EventAction", traits: {"smithy.api#required" => {}}))
+    CompromisedCredentialsActionsType.add_member(:event_action, ::Smithy::Schema::Shapes::MemberShape.new(target: CompromisedCredentialsEventActionType, location_name: "EventAction", traits: {"smithy.api#required" => {}}))
     CompromisedCredentialsActionsType.type = Types::CompromisedCredentialsActionsType
-    CompromisedCredentialsEventActionType.add_member(:block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BLOCK", traits: {"smithy.api#enumValue" => "BLOCK"}))
-    CompromisedCredentialsEventActionType.add_member(:no_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_ACTION", traits: {"smithy.api#enumValue" => "NO_ACTION"}))
-    CompromisedCredentialsRiskConfigurationType.add_member(:event_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventFiltersType, location_name: "EventFilter"))
-    CompromisedCredentialsRiskConfigurationType.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompromisedCredentialsActionsType, location_name: "Actions", traits: {"smithy.api#required" => {}}))
+    CompromisedCredentialsEventActionType.add_member(:block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BLOCK", traits: {"smithy.api#enumValue" => "BLOCK"}))
+    CompromisedCredentialsEventActionType.add_member(:no_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_ACTION", traits: {"smithy.api#enumValue" => "NO_ACTION"}))
+    CompromisedCredentialsRiskConfigurationType.add_member(:event_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EventFiltersType, location_name: "EventFilter"))
+    CompromisedCredentialsRiskConfigurationType.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: CompromisedCredentialsActionsType, location_name: "Actions", traits: {"smithy.api#required" => {}}))
     CompromisedCredentialsRiskConfigurationType.type = Types::CompromisedCredentialsRiskConfigurationType
-    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ConfiguredUserAuthFactorsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthFactorType)
-    ConfirmDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    ConfirmDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
-    ConfirmDeviceRequest.add_member(:device_secret_verifier_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceSecretVerifierConfigType, location_name: "DeviceSecretVerifierConfig"))
-    ConfirmDeviceRequest.add_member(:device_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceNameType, location_name: "DeviceName"))
+    ConfiguredUserAuthFactorsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFactorType)
+    ConfirmDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    ConfirmDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
+    ConfirmDeviceRequest.add_member(:device_secret_verifier_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSecretVerifierConfigType, location_name: "DeviceSecretVerifierConfig"))
+    ConfirmDeviceRequest.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceNameType, location_name: "DeviceName"))
     ConfirmDeviceRequest.type = Types::ConfirmDeviceRequest
-    ConfirmDeviceResponse.add_member(:user_confirmation_necessary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "UserConfirmationNecessary", traits: {"smithy.api#default" => false}))
+    ConfirmDeviceResponse.add_member(:user_confirmation_necessary, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "UserConfirmationNecessary", traits: {"smithy.api#default" => false}))
     ConfirmDeviceResponse.type = Types::ConfirmDeviceResponse
-    ConfirmForgotPasswordRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    ConfirmForgotPasswordRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretHashType, location_name: "SecretHash"))
-    ConfirmForgotPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    ConfirmForgotPasswordRequest.add_member(:confirmation_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationCodeType, location_name: "ConfirmationCode", traits: {"smithy.api#required" => {}}))
-    ConfirmForgotPasswordRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordType, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    ConfirmForgotPasswordRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    ConfirmForgotPasswordRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
-    ConfirmForgotPasswordRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    ConfirmForgotPasswordRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    ConfirmForgotPasswordRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretHashType, location_name: "SecretHash"))
+    ConfirmForgotPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    ConfirmForgotPasswordRequest.add_member(:confirmation_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationCodeType, location_name: "ConfirmationCode", traits: {"smithy.api#required" => {}}))
+    ConfirmForgotPasswordRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    ConfirmForgotPasswordRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    ConfirmForgotPasswordRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, location_name: "UserContextData"))
+    ConfirmForgotPasswordRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     ConfirmForgotPasswordRequest.type = Types::ConfirmForgotPasswordRequest
     ConfirmForgotPasswordResponse.type = Types::ConfirmForgotPasswordResponse
-    ConfirmSignUpRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    ConfirmSignUpRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretHashType, location_name: "SecretHash"))
-    ConfirmSignUpRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    ConfirmSignUpRequest.add_member(:confirmation_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationCodeType, location_name: "ConfirmationCode", traits: {"smithy.api#required" => {}}))
-    ConfirmSignUpRequest.add_member(:force_alias_creation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForceAliasCreation, location_name: "ForceAliasCreation", traits: {"smithy.api#default" => false}))
-    ConfirmSignUpRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    ConfirmSignUpRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
-    ConfirmSignUpRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
-    ConfirmSignUpRequest.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    ConfirmSignUpRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    ConfirmSignUpRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretHashType, location_name: "SecretHash"))
+    ConfirmSignUpRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    ConfirmSignUpRequest.add_member(:confirmation_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationCodeType, location_name: "ConfirmationCode", traits: {"smithy.api#required" => {}}))
+    ConfirmSignUpRequest.add_member(:force_alias_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: ForceAliasCreation, location_name: "ForceAliasCreation", traits: {"smithy.api#default" => false}))
+    ConfirmSignUpRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    ConfirmSignUpRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, location_name: "UserContextData"))
+    ConfirmSignUpRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
+    ConfirmSignUpRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     ConfirmSignUpRequest.type = Types::ConfirmSignUpRequest
-    ConfirmSignUpResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    ConfirmSignUpResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     ConfirmSignUpResponse.type = Types::ConfirmSignUpResponse
-    ContextDataType.add_member(:ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "IpAddress", traits: {"smithy.api#required" => {}}))
-    ContextDataType.add_member(:server_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "ServerName", traits: {"smithy.api#required" => {}}))
-    ContextDataType.add_member(:server_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "ServerPath", traits: {"smithy.api#required" => {}}))
-    ContextDataType.add_member(:http_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpHeaderList, location_name: "HttpHeaders", traits: {"smithy.api#required" => {}}))
-    ContextDataType.add_member(:encoded_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "EncodedData"))
+    ContextDataType.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "IpAddress", traits: {"smithy.api#required" => {}}))
+    ContextDataType.add_member(:server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "ServerName", traits: {"smithy.api#required" => {}}))
+    ContextDataType.add_member(:server_path, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "ServerPath", traits: {"smithy.api#required" => {}}))
+    ContextDataType.add_member(:http_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeaderList, location_name: "HttpHeaders", traits: {"smithy.api#required" => {}}))
+    ContextDataType.add_member(:encoded_data, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "EncodedData"))
     ContextDataType.type = Types::ContextDataType
-    CreateGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    CreateGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
-    CreateGroupRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "RoleArn"))
-    CreateGroupRequest.add_member(:precedence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrecedenceType, location_name: "Precedence"))
+    CreateGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    CreateGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, location_name: "Description"))
+    CreateGroupRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "RoleArn"))
+    CreateGroupRequest.add_member(:precedence, ::Smithy::Schema::Shapes::MemberShape.new(target: PrecedenceType, location_name: "Precedence"))
     CreateGroupRequest.type = Types::CreateGroupRequest
-    CreateGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "Group"))
+    CreateGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "Group"))
     CreateGroupResponse.type = Types::CreateGroupResponse
-    CreateIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameTypeV2, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
-    CreateIdentityProviderRequest.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderTypeType, location_name: "ProviderType", traits: {"smithy.api#required" => {}}))
-    CreateIdentityProviderRequest.add_member(:provider_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderDetailsType, location_name: "ProviderDetails", traits: {"smithy.api#required" => {}}))
-    CreateIdentityProviderRequest.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
-    CreateIdentityProviderRequest.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    CreateIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameTypeV2, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
+    CreateIdentityProviderRequest.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderTypeType, location_name: "ProviderType", traits: {"smithy.api#required" => {}}))
+    CreateIdentityProviderRequest.add_member(:provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailsType, location_name: "ProviderDetails", traits: {"smithy.api#required" => {}}))
+    CreateIdentityProviderRequest.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingType, location_name: "AttributeMapping"))
+    CreateIdentityProviderRequest.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
     CreateIdentityProviderRequest.type = Types::CreateIdentityProviderRequest
-    CreateIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
+    CreateIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
     CreateIdentityProviderResponse.type = Types::CreateIdentityProviderResponse
-    CreateManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateManagedLoginBrandingRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    CreateManagedLoginBrandingRequest.add_member(:use_cognito_provided_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "UseCognitoProvidedValues", traits: {"smithy.api#default" => false}))
-    CreateManagedLoginBrandingRequest.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Document, location_name: "Settings"))
-    CreateManagedLoginBrandingRequest.add_member(:assets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetListType, location_name: "Assets"))
+    CreateManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateManagedLoginBrandingRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    CreateManagedLoginBrandingRequest.add_member(:use_cognito_provided_values, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "UseCognitoProvidedValues", traits: {"smithy.api#default" => false}))
+    CreateManagedLoginBrandingRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, location_name: "Settings"))
+    CreateManagedLoginBrandingRequest.add_member(:assets, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetListType, location_name: "Assets"))
     CreateManagedLoginBrandingRequest.type = Types::CreateManagedLoginBrandingRequest
-    CreateManagedLoginBrandingResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
+    CreateManagedLoginBrandingResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
     CreateManagedLoginBrandingResponse.type = Types::CreateManagedLoginBrandingResponse
-    CreateResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    CreateResourceServerRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateResourceServerRequest.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerScopeListType, location_name: "Scopes"))
+    CreateResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    CreateResourceServerRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateResourceServerRequest.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeListType, location_name: "Scopes"))
     CreateResourceServerRequest.type = Types::CreateResourceServerRequest
-    CreateResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerType, location_name: "ResourceServer", traits: {"smithy.api#required" => {}}))
+    CreateResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerType, location_name: "ResourceServer", traits: {"smithy.api#required" => {}}))
     CreateResourceServerResponse.type = Types::CreateResourceServerResponse
-    CreateTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateTermsRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    CreateTermsRequest.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: "TermsName", traits: {"smithy.api#required" => {}}))
-    CreateTermsRequest.add_member(:terms_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsSourceType, location_name: "TermsSource", traits: {"smithy.api#required" => {}}))
-    CreateTermsRequest.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: "Enforcement", traits: {"smithy.api#required" => {}}))
-    CreateTermsRequest.add_member(:links, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinksType, location_name: "Links"))
+    CreateTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:terms_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsNameType, location_name: "TermsName", traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:terms_source, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsSourceType, location_name: "TermsSource", traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsEnforcementType, location_name: "Enforcement", traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:links, ::Smithy::Schema::Shapes::MemberShape.new(target: LinksType, location_name: "Links"))
     CreateTermsRequest.type = Types::CreateTermsRequest
-    CreateTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsType, location_name: "Terms"))
+    CreateTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsType, location_name: "Terms"))
     CreateTermsResponse.type = Types::CreateTermsResponse
-    CreateUserImportJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobNameType, location_name: "JobName", traits: {"smithy.api#required" => {}}))
-    CreateUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateUserImportJobRequest.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "CloudWatchLogsRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateUserImportJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobNameType, location_name: "JobName", traits: {"smithy.api#required" => {}}))
+    CreateUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateUserImportJobRequest.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "CloudWatchLogsRoleArn", traits: {"smithy.api#required" => {}}))
     CreateUserImportJobRequest.type = Types::CreateUserImportJobRequest
-    CreateUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobType, location_name: "UserImportJob"))
+    CreateUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, location_name: "UserImportJob"))
     CreateUserImportJobResponse.type = Types::CreateUserImportJobResponse
-    CreateUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateUserPoolClientRequest.add_member(:client_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientNameType, location_name: "ClientName", traits: {"smithy.api#required" => {}}))
-    CreateUserPoolClientRequest.add_member(:generate_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerateSecret, location_name: "GenerateSecret", traits: {"smithy.api#default" => false}))
-    CreateUserPoolClientRequest.add_member(:refresh_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshTokenValidityType, location_name: "RefreshTokenValidity", traits: {"smithy.api#default" => 0}))
-    CreateUserPoolClientRequest.add_member(:access_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessTokenValidityType, location_name: "AccessTokenValidity"))
-    CreateUserPoolClientRequest.add_member(:id_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdTokenValidityType, location_name: "IdTokenValidity"))
-    CreateUserPoolClientRequest.add_member(:token_validity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenValidityUnitsType, location_name: "TokenValidityUnits"))
-    CreateUserPoolClientRequest.add_member(:read_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "ReadAttributes"))
-    CreateUserPoolClientRequest.add_member(:write_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "WriteAttributes"))
-    CreateUserPoolClientRequest.add_member(:explicit_auth_flows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
-    CreateUserPoolClientRequest.add_member(:supported_identity_providers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
-    CreateUserPoolClientRequest.add_member(:callback_ur_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CallbackURLsListType, location_name: "CallbackURLs"))
-    CreateUserPoolClientRequest.add_member(:logout_ur_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogoutURLsListType, location_name: "LogoutURLs"))
-    CreateUserPoolClientRequest.add_member(:default_redirect_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectUrlType, location_name: "DefaultRedirectURI"))
-    CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
-    CreateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
-    CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", traits: {"smithy.api#default" => false}))
-    CreateUserPoolClientRequest.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
-    CreateUserPoolClientRequest.add_member(:prevent_user_existence_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
-    CreateUserPoolClientRequest.add_member(:enable_token_revocation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
-    CreateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
-    CreateUserPoolClientRequest.add_member(:auth_session_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
-    CreateUserPoolClientRequest.add_member(:refresh_token_rotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
+    CreateUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateUserPoolClientRequest.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNameType, location_name: "ClientName", traits: {"smithy.api#required" => {}}))
+    CreateUserPoolClientRequest.add_member(:generate_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerateSecret, location_name: "GenerateSecret", traits: {"smithy.api#default" => false}))
+    CreateUserPoolClientRequest.add_member(:refresh_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshTokenValidityType, location_name: "RefreshTokenValidity", traits: {"smithy.api#default" => 0}))
+    CreateUserPoolClientRequest.add_member(:access_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenValidityType, location_name: "AccessTokenValidity"))
+    CreateUserPoolClientRequest.add_member(:id_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: IdTokenValidityType, location_name: "IdTokenValidity"))
+    CreateUserPoolClientRequest.add_member(:token_validity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenValidityUnitsType, location_name: "TokenValidityUnits"))
+    CreateUserPoolClientRequest.add_member(:read_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionListType, location_name: "ReadAttributes"))
+    CreateUserPoolClientRequest.add_member(:write_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionListType, location_name: "WriteAttributes"))
+    CreateUserPoolClientRequest.add_member(:explicit_auth_flows, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
+    CreateUserPoolClientRequest.add_member(:supported_identity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
+    CreateUserPoolClientRequest.add_member(:callback_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: CallbackURLsListType, location_name: "CallbackURLs"))
+    CreateUserPoolClientRequest.add_member(:logout_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: LogoutURLsListType, location_name: "LogoutURLs"))
+    CreateUserPoolClientRequest.add_member(:default_redirect_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, location_name: "DefaultRedirectURI"))
+    CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
+    CreateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeListType, location_name: "AllowedOAuthScopes"))
+    CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", traits: {"smithy.api#default" => false}))
+    CreateUserPoolClientRequest.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
+    CreateUserPoolClientRequest.add_member(:prevent_user_existence_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
+    CreateUserPoolClientRequest.add_member(:enable_token_revocation, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "EnableTokenRevocation"))
+    CreateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
+    CreateUserPoolClientRequest.add_member(:auth_session_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthSessionValidityType, location_name: "AuthSessionValidity"))
+    CreateUserPoolClientRequest.add_member(:refresh_token_rotation, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
     CreateUserPoolClientRequest.type = Types::CreateUserPoolClientRequest
-    CreateUserPoolClientResponse.add_member(:user_pool_client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
+    CreateUserPoolClientResponse.add_member(:user_pool_client, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientType, location_name: "UserPoolClient"))
     CreateUserPoolClientResponse.type = Types::CreateUserPoolClientResponse
-    CreateUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
-    CreateUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    CreateUserPoolDomainRequest.add_member(:managed_login_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedIntegerType, location_name: "ManagedLoginVersion"))
-    CreateUserPoolDomainRequest.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomDomainConfigType, location_name: "CustomDomainConfig"))
+    CreateUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
+    CreateUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateUserPoolDomainRequest.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, location_name: "ManagedLoginVersion"))
+    CreateUserPoolDomainRequest.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainConfigType, location_name: "CustomDomainConfig"))
     CreateUserPoolDomainRequest.type = Types::CreateUserPoolDomainRequest
-    CreateUserPoolDomainResponse.add_member(:managed_login_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedIntegerType, location_name: "ManagedLoginVersion"))
-    CreateUserPoolDomainResponse.add_member(:cloud_front_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "CloudFrontDomain"))
+    CreateUserPoolDomainResponse.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, location_name: "ManagedLoginVersion"))
+    CreateUserPoolDomainResponse.add_member(:cloud_front_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "CloudFrontDomain"))
     CreateUserPoolDomainResponse.type = Types::CreateUserPoolDomainResponse
-    CreateUserPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolNameType, location_name: "PoolName", traits: {"smithy.api#required" => {}}))
-    CreateUserPoolRequest.add_member(:policies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolPolicyType, location_name: "Policies"))
-    CreateUserPoolRequest.add_member(:deletion_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletionProtectionType, location_name: "DeletionProtection"))
-    CreateUserPoolRequest.add_member(:lambda_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
-    CreateUserPoolRequest.add_member(:auto_verified_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
-    CreateUserPoolRequest.add_member(:alias_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasAttributesListType, location_name: "AliasAttributes"))
-    CreateUserPoolRequest.add_member(:username_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameAttributesListType, location_name: "UsernameAttributes"))
-    CreateUserPoolRequest.add_member(:sms_verification_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
-    CreateUserPoolRequest.add_member(:email_verification_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
-    CreateUserPoolRequest.add_member(:email_verification_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
-    CreateUserPoolRequest.add_member(:verification_message_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
-    CreateUserPoolRequest.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
-    CreateUserPoolRequest.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
-    CreateUserPoolRequest.add_member(:user_attribute_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
-    CreateUserPoolRequest.add_member(:device_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
-    CreateUserPoolRequest.add_member(:email_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailConfigurationType, location_name: "EmailConfiguration"))
-    CreateUserPoolRequest.add_member(:sms_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
-    CreateUserPoolRequest.add_member(:user_pool_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "UserPoolTags"))
-    CreateUserPoolRequest.add_member(:admin_create_user_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
-    CreateUserPoolRequest.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaAttributesListType, location_name: "Schema"))
-    CreateUserPoolRequest.add_member(:user_pool_add_ons, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
-    CreateUserPoolRequest.add_member(:username_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameConfigurationType, location_name: "UsernameConfiguration"))
-    CreateUserPoolRequest.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
-    CreateUserPoolRequest.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
+    CreateUserPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolNameType, location_name: "PoolName", traits: {"smithy.api#required" => {}}))
+    CreateUserPoolRequest.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolPolicyType, location_name: "Policies"))
+    CreateUserPoolRequest.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionType, location_name: "DeletionProtection"))
+    CreateUserPoolRequest.add_member(:lambda_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaConfigType, location_name: "LambdaConfig"))
+    CreateUserPoolRequest.add_member(:auto_verified_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
+    CreateUserPoolRequest.add_member(:alias_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasAttributesListType, location_name: "AliasAttributes"))
+    CreateUserPoolRequest.add_member(:username_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameAttributesListType, location_name: "UsernameAttributes"))
+    CreateUserPoolRequest.add_member(:sms_verification_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
+    CreateUserPoolRequest.add_member(:email_verification_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
+    CreateUserPoolRequest.add_member(:email_verification_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
+    CreateUserPoolRequest.add_member(:verification_message_template, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
+    CreateUserPoolRequest.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
+    CreateUserPoolRequest.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolMfaType, location_name: "MfaConfiguration"))
+    CreateUserPoolRequest.add_member(:user_attribute_update_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
+    CreateUserPoolRequest.add_member(:device_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceConfigurationType, location_name: "DeviceConfiguration"))
+    CreateUserPoolRequest.add_member(:email_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailConfigurationType, location_name: "EmailConfiguration"))
+    CreateUserPoolRequest.add_member(:sms_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsConfigurationType, location_name: "SmsConfiguration"))
+    CreateUserPoolRequest.add_member(:user_pool_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, location_name: "UserPoolTags"))
+    CreateUserPoolRequest.add_member(:admin_create_user_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
+    CreateUserPoolRequest.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributesListType, location_name: "Schema"))
+    CreateUserPoolRequest.add_member(:user_pool_add_ons, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    CreateUserPoolRequest.add_member(:username_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameConfigurationType, location_name: "UsernameConfiguration"))
+    CreateUserPoolRequest.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
+    CreateUserPoolRequest.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTierType, location_name: "UserPoolTier"))
     CreateUserPoolRequest.type = Types::CreateUserPoolRequest
-    CreateUserPoolResponse.add_member(:user_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolType, location_name: "UserPool"))
+    CreateUserPoolResponse.add_member(:user_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolType, location_name: "UserPool"))
     CreateUserPoolResponse.type = Types::CreateUserPoolResponse
-    CustomAttributesListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaAttributeType)
-    CustomDomainConfigType.add_member(:certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "CertificateArn", traits: {"smithy.api#required" => {}}))
+    CustomAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributeType)
+    CustomDomainConfigType.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "CertificateArn", traits: {"smithy.api#required" => {}}))
     CustomDomainConfigType.type = Types::CustomDomainConfigType
-    CustomEmailLambdaVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomEmailSenderLambdaVersionType, location_name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
-    CustomEmailLambdaVersionConfigType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
+    CustomEmailLambdaVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomEmailSenderLambdaVersionType, location_name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
+    CustomEmailLambdaVersionConfigType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
     CustomEmailLambdaVersionConfigType.type = Types::CustomEmailLambdaVersionConfigType
-    CustomEmailSenderLambdaVersionType.add_member(:v1_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_0", traits: {"smithy.api#enumValue" => "V1_0"}))
-    CustomSMSLambdaVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSMSSenderLambdaVersionType, location_name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
-    CustomSMSLambdaVersionConfigType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
+    CustomEmailSenderLambdaVersionType.add_member(:v1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_0", traits: {"smithy.api#enumValue" => "V1_0"}))
+    CustomSMSLambdaVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSMSSenderLambdaVersionType, location_name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
+    CustomSMSLambdaVersionConfigType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
     CustomSMSLambdaVersionConfigType.type = Types::CustomSMSLambdaVersionConfigType
-    CustomSMSSenderLambdaVersionType.add_member(:v1_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_0", traits: {"smithy.api#enumValue" => "V1_0"}))
-    DefaultEmailOptionType.add_member(:confirm_with_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIRM_WITH_LINK", traits: {"smithy.api#enumValue" => "CONFIRM_WITH_LINK"}))
-    DefaultEmailOptionType.add_member(:confirm_with_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIRM_WITH_CODE", traits: {"smithy.api#enumValue" => "CONFIRM_WITH_CODE"}))
-    DeleteGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    DeleteGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CustomSMSSenderLambdaVersionType.add_member(:v1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_0", traits: {"smithy.api#enumValue" => "V1_0"}))
+    DefaultEmailOptionType.add_member(:confirm_with_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIRM_WITH_LINK", traits: {"smithy.api#enumValue" => "CONFIRM_WITH_LINK"}))
+    DefaultEmailOptionType.add_member(:confirm_with_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIRM_WITH_CODE", traits: {"smithy.api#enumValue" => "CONFIRM_WITH_CODE"}))
+    DeleteGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    DeleteGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteGroupRequest.type = Types::DeleteGroupRequest
-    DeleteIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DeleteIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
+    DeleteIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
     DeleteIdentityProviderRequest.type = Types::DeleteIdentityProviderRequest
-    DeleteManagedLoginBrandingRequest.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId", traits: {"smithy.api#required" => {}}))
-    DeleteManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteManagedLoginBrandingRequest.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId", traits: {"smithy.api#required" => {}}))
+    DeleteManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteManagedLoginBrandingRequest.type = Types::DeleteManagedLoginBrandingRequest
-    DeleteResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DeleteResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    DeleteResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
     DeleteResourceServerRequest.type = Types::DeleteResourceServerRequest
-    DeleteTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
-    DeleteTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
+    DeleteTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteTermsRequest.type = Types::DeleteTermsRequest
-    DeleteUserAttributesRequest.add_member(:user_attribute_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameListType, location_name: "UserAttributeNames", traits: {"smithy.api#required" => {}}))
-    DeleteUserAttributesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    DeleteUserAttributesRequest.add_member(:user_attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameListType, location_name: "UserAttributeNames", traits: {"smithy.api#required" => {}}))
+    DeleteUserAttributesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     DeleteUserAttributesRequest.type = Types::DeleteUserAttributesRequest
     DeleteUserAttributesResponse.type = Types::DeleteUserAttributesResponse
-    DeleteUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DeleteUserPoolClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolClientRequest.type = Types::DeleteUserPoolClientRequest
-    DeleteUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
-    DeleteUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolDomainRequest.type = Types::DeleteUserPoolDomainRequest
     DeleteUserPoolDomainResponse.type = Types::DeleteUserPoolDomainResponse
-    DeleteUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolRequest.type = Types::DeleteUserPoolRequest
-    DeleteUserRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    DeleteUserRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     DeleteUserRequest.type = Types::DeleteUserRequest
-    DeleteWebAuthnCredentialRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    DeleteWebAuthnCredentialRequest.add_member(:credential_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "CredentialId", traits: {"smithy.api#required" => {}}))
+    DeleteWebAuthnCredentialRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    DeleteWebAuthnCredentialRequest.add_member(:credential_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "CredentialId", traits: {"smithy.api#required" => {}}))
     DeleteWebAuthnCredentialRequest.type = Types::DeleteWebAuthnCredentialRequest
     DeleteWebAuthnCredentialResponse.type = Types::DeleteWebAuthnCredentialResponse
-    DeletionProtectionType.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    DeletionProtectionType.add_member(:inactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    DeliveryMediumListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryMediumType)
-    DeliveryMediumType.add_member(:sms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
-    DeliveryMediumType.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
-    DescribeIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DescribeIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
+    DeletionProtectionType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    DeletionProtectionType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    DeliveryMediumListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumType)
+    DeliveryMediumType.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
+    DeliveryMediumType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
+    DescribeIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
     DescribeIdentityProviderRequest.type = Types::DescribeIdentityProviderRequest
-    DescribeIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
+    DescribeIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
     DescribeIdentityProviderResponse.type = Types::DescribeIdentityProviderResponse
-    DescribeManagedLoginBrandingByClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DescribeManagedLoginBrandingByClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    DescribeManagedLoginBrandingByClientRequest.add_member(:return_merged_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "ReturnMergedResources", traits: {"smithy.api#default" => false}))
+    DescribeManagedLoginBrandingByClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeManagedLoginBrandingByClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    DescribeManagedLoginBrandingByClientRequest.add_member(:return_merged_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "ReturnMergedResources", traits: {"smithy.api#default" => false}))
     DescribeManagedLoginBrandingByClientRequest.type = Types::DescribeManagedLoginBrandingByClientRequest
-    DescribeManagedLoginBrandingByClientResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
+    DescribeManagedLoginBrandingByClientResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
     DescribeManagedLoginBrandingByClientResponse.type = Types::DescribeManagedLoginBrandingByClientResponse
-    DescribeManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DescribeManagedLoginBrandingRequest.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId", traits: {"smithy.api#required" => {}}))
-    DescribeManagedLoginBrandingRequest.add_member(:return_merged_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "ReturnMergedResources", traits: {"smithy.api#default" => false}))
+    DescribeManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeManagedLoginBrandingRequest.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId", traits: {"smithy.api#required" => {}}))
+    DescribeManagedLoginBrandingRequest.add_member(:return_merged_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "ReturnMergedResources", traits: {"smithy.api#default" => false}))
     DescribeManagedLoginBrandingRequest.type = Types::DescribeManagedLoginBrandingRequest
-    DescribeManagedLoginBrandingResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
+    DescribeManagedLoginBrandingResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
     DescribeManagedLoginBrandingResponse.type = Types::DescribeManagedLoginBrandingResponse
-    DescribeResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DescribeResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    DescribeResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
     DescribeResourceServerRequest.type = Types::DescribeResourceServerRequest
-    DescribeResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerType, location_name: "ResourceServer", traits: {"smithy.api#required" => {}}))
+    DescribeResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerType, location_name: "ResourceServer", traits: {"smithy.api#required" => {}}))
     DescribeResourceServerResponse.type = Types::DescribeResourceServerResponse
-    DescribeRiskConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DescribeRiskConfigurationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
+    DescribeRiskConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeRiskConfigurationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
     DescribeRiskConfigurationRequest.type = Types::DescribeRiskConfigurationRequest
-    DescribeRiskConfigurationResponse.add_member(:risk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RiskConfigurationType, location_name: "RiskConfiguration", traits: {"smithy.api#required" => {}}))
+    DescribeRiskConfigurationResponse.add_member(:risk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskConfigurationType, location_name: "RiskConfiguration", traits: {"smithy.api#required" => {}}))
     DescribeRiskConfigurationResponse.type = Types::DescribeRiskConfigurationResponse
-    DescribeTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
-    DescribeTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
+    DescribeTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DescribeTermsRequest.type = Types::DescribeTermsRequest
-    DescribeTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsType, location_name: "Terms"))
+    DescribeTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsType, location_name: "Terms"))
     DescribeTermsResponse.type = Types::DescribeTermsResponse
-    DescribeUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DescribeUserImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobIdType, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeUserImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobIdType, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeUserImportJobRequest.type = Types::DescribeUserImportJobRequest
-    DescribeUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobType, location_name: "UserImportJob"))
+    DescribeUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, location_name: "UserImportJob"))
     DescribeUserImportJobResponse.type = Types::DescribeUserImportJobResponse
-    DescribeUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    DescribeUserPoolClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    DescribeUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeUserPoolClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
     DescribeUserPoolClientRequest.type = Types::DescribeUserPoolClientRequest
-    DescribeUserPoolClientResponse.add_member(:user_pool_client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
+    DescribeUserPoolClientResponse.add_member(:user_pool_client, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientType, location_name: "UserPoolClient"))
     DescribeUserPoolClientResponse.type = Types::DescribeUserPoolClientResponse
-    DescribeUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
+    DescribeUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
     DescribeUserPoolDomainRequest.type = Types::DescribeUserPoolDomainRequest
-    DescribeUserPoolDomainResponse.add_member(:domain_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDescriptionType, location_name: "DomainDescription"))
+    DescribeUserPoolDomainResponse.add_member(:domain_description, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDescriptionType, location_name: "DomainDescription"))
     DescribeUserPoolDomainResponse.type = Types::DescribeUserPoolDomainResponse
-    DescribeUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DescribeUserPoolRequest.type = Types::DescribeUserPoolRequest
-    DescribeUserPoolResponse.add_member(:user_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolType, location_name: "UserPool"))
+    DescribeUserPoolResponse.add_member(:user_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolType, location_name: "UserPool"))
     DescribeUserPoolResponse.type = Types::DescribeUserPoolResponse
-    DeviceConfigurationType.add_member(:challenge_required_on_new_device, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "ChallengeRequiredOnNewDevice", traits: {"smithy.api#default" => false}))
-    DeviceConfigurationType.add_member(:device_only_remembered_on_user_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "DeviceOnlyRememberedOnUserPrompt", traits: {"smithy.api#default" => false}))
+    DeviceConfigurationType.add_member(:challenge_required_on_new_device, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "ChallengeRequiredOnNewDevice", traits: {"smithy.api#default" => false}))
+    DeviceConfigurationType.add_member(:device_only_remembered_on_user_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "DeviceOnlyRememberedOnUserPrompt", traits: {"smithy.api#default" => false}))
     DeviceConfigurationType.type = Types::DeviceConfigurationType
-    DeviceKeyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    DeviceKeyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     DeviceKeyExistsException.type = Types::DeviceKeyExistsException
-    DeviceListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceType)
-    DeviceRememberedStatusType.add_member(:remembered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMEMBERED", traits: {"smithy.api#enumValue" => "remembered"}))
-    DeviceRememberedStatusType.add_member(:not_remembered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_REMEMBERED", traits: {"smithy.api#enumValue" => "not_remembered"}))
-    DeviceSecretVerifierConfigType.add_member(:password_verifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "PasswordVerifier"))
-    DeviceSecretVerifierConfigType.add_member(:salt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "Salt"))
+    DeviceListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType)
+    DeviceRememberedStatusType.add_member(:remembered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMEMBERED", traits: {"smithy.api#enumValue" => "remembered"}))
+    DeviceRememberedStatusType.add_member(:not_remembered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_REMEMBERED", traits: {"smithy.api#enumValue" => "not_remembered"}))
+    DeviceSecretVerifierConfigType.add_member(:password_verifier, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "PasswordVerifier"))
+    DeviceSecretVerifierConfigType.add_member(:salt, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "Salt"))
     DeviceSecretVerifierConfigType.type = Types::DeviceSecretVerifierConfigType
-    DeviceType.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey"))
-    DeviceType.add_member(:device_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "DeviceAttributes"))
-    DeviceType.add_member(:device_create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "DeviceCreateDate"))
-    DeviceType.add_member(:device_last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "DeviceLastModifiedDate"))
-    DeviceType.add_member(:device_last_authenticated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "DeviceLastAuthenticatedDate"))
+    DeviceType.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey"))
+    DeviceType.add_member(:device_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "DeviceAttributes"))
+    DeviceType.add_member(:device_create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "DeviceCreateDate"))
+    DeviceType.add_member(:device_last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "DeviceLastModifiedDate"))
+    DeviceType.add_member(:device_last_authenticated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "DeviceLastAuthenticatedDate"))
     DeviceType.type = Types::DeviceType
-    DomainDescriptionType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    DomainDescriptionType.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountIdType, location_name: "AWSAccountId"))
-    DomainDescriptionType.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
-    DomainDescriptionType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketType, location_name: "S3Bucket"))
-    DomainDescriptionType.add_member(:cloud_front_distribution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "CloudFrontDistribution"))
-    DomainDescriptionType.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainVersionType, location_name: "Version"))
-    DomainDescriptionType.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainStatusType, location_name: "Status"))
-    DomainDescriptionType.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomDomainConfigType, location_name: "CustomDomainConfig"))
-    DomainDescriptionType.add_member(:managed_login_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedIntegerType, location_name: "ManagedLoginVersion"))
+    DomainDescriptionType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    DomainDescriptionType.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountIdType, location_name: "AWSAccountId"))
+    DomainDescriptionType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "Domain"))
+    DomainDescriptionType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketType, location_name: "S3Bucket"))
+    DomainDescriptionType.add_member(:cloud_front_distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "CloudFrontDistribution"))
+    DomainDescriptionType.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVersionType, location_name: "Version"))
+    DomainDescriptionType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatusType, location_name: "Status"))
+    DomainDescriptionType.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainConfigType, location_name: "CustomDomainConfig"))
+    DomainDescriptionType.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, location_name: "ManagedLoginVersion"))
     DomainDescriptionType.type = Types::DomainDescriptionType
-    DomainStatusType.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    DomainStatusType.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    DomainStatusType.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    DomainStatusType.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    DomainStatusType.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DuplicateProviderException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    DomainStatusType.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    DomainStatusType.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    DomainStatusType.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    DomainStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    DomainStatusType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DuplicateProviderException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     DuplicateProviderException.type = Types::DuplicateProviderException
-    EmailConfigurationType.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "SourceArn"))
-    EmailConfigurationType.add_member(:reply_to_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressType, location_name: "ReplyToEmailAddress"))
-    EmailConfigurationType.add_member(:email_sending_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailSendingAccountType, location_name: "EmailSendingAccount"))
-    EmailConfigurationType.add_member(:from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "From"))
-    EmailConfigurationType.add_member(:configuration_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SESConfigurationSet, location_name: "ConfigurationSet"))
+    EmailConfigurationType.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "SourceArn"))
+    EmailConfigurationType.add_member(:reply_to_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressType, location_name: "ReplyToEmailAddress"))
+    EmailConfigurationType.add_member(:email_sending_account, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailSendingAccountType, location_name: "EmailSendingAccount"))
+    EmailConfigurationType.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "From"))
+    EmailConfigurationType.add_member(:configuration_set, ::Smithy::Schema::Shapes::MemberShape.new(target: SESConfigurationSet, location_name: "ConfigurationSet"))
     EmailConfigurationType.type = Types::EmailConfigurationType
-    EmailMfaConfigType.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailMfaMessageType, location_name: "Message"))
-    EmailMfaConfigType.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailMfaSubjectType, location_name: "Subject"))
+    EmailMfaConfigType.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaMessageType, location_name: "Message"))
+    EmailMfaConfigType.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaSubjectType, location_name: "Subject"))
     EmailMfaConfigType.type = Types::EmailMfaConfigType
-    EmailMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
-    EmailMfaSettingsType.add_member(:preferred_mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "PreferredMfa", traits: {"smithy.api#default" => false}))
+    EmailMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    EmailMfaSettingsType.add_member(:preferred_mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "PreferredMfa", traits: {"smithy.api#default" => false}))
     EmailMfaSettingsType.type = Types::EmailMfaSettingsType
-    EmailSendingAccountType.add_member(:cognito_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COGNITO_DEFAULT", traits: {"smithy.api#enumValue" => "COGNITO_DEFAULT"}))
-    EmailSendingAccountType.add_member(:developer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVELOPER", traits: {"smithy.api#enumValue" => "DEVELOPER"}))
-    EnableSoftwareTokenMFAException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    EmailSendingAccountType.add_member(:cognito_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COGNITO_DEFAULT", traits: {"smithy.api#enumValue" => "COGNITO_DEFAULT"}))
+    EmailSendingAccountType.add_member(:developer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVELOPER", traits: {"smithy.api#enumValue" => "DEVELOPER"}))
+    EnableSoftwareTokenMFAException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     EnableSoftwareTokenMFAException.type = Types::EnableSoftwareTokenMFAException
-    EventContextDataType.add_member(:ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "IpAddress"))
-    EventContextDataType.add_member(:device_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "DeviceName"))
-    EventContextDataType.add_member(:timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "Timezone"))
-    EventContextDataType.add_member(:city, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "City"))
-    EventContextDataType.add_member(:country, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "Country"))
+    EventContextDataType.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "IpAddress"))
+    EventContextDataType.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "DeviceName"))
+    EventContextDataType.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "Timezone"))
+    EventContextDataType.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "City"))
+    EventContextDataType.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "Country"))
     EventContextDataType.type = Types::EventContextDataType
-    EventFeedbackType.add_member(:feedback_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeedbackValueType, location_name: "FeedbackValue", traits: {"smithy.api#required" => {}}))
-    EventFeedbackType.add_member(:provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "Provider", traits: {"smithy.api#required" => {}}))
-    EventFeedbackType.add_member(:feedback_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "FeedbackDate"))
+    EventFeedbackType.add_member(:feedback_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackValueType, location_name: "FeedbackValue", traits: {"smithy.api#required" => {}}))
+    EventFeedbackType.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "Provider", traits: {"smithy.api#required" => {}}))
+    EventFeedbackType.add_member(:feedback_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "FeedbackDate"))
     EventFeedbackType.type = Types::EventFeedbackType
-    EventFilterType.add_member(:sign_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIGN_IN", traits: {"smithy.api#enumValue" => "SIGN_IN"}))
-    EventFilterType.add_member(:password_change, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_CHANGE", traits: {"smithy.api#enumValue" => "PASSWORD_CHANGE"}))
-    EventFilterType.add_member(:sign_up, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIGN_UP", traits: {"smithy.api#enumValue" => "SIGN_UP"}))
-    EventFiltersType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventFilterType)
-    EventResponseType.add_member(:pass, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pass", traits: {"smithy.api#enumValue" => "Pass"}))
-    EventResponseType.add_member(:fail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Fail", traits: {"smithy.api#enumValue" => "Fail"}))
-    EventResponseType.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
-    EventRiskType.add_member(:risk_decision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RiskDecisionType, location_name: "RiskDecision"))
-    EventRiskType.add_member(:risk_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RiskLevelType, location_name: "RiskLevel"))
-    EventRiskType.add_member(:compromised_credentials_detected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "CompromisedCredentialsDetected"))
+    EventFilterType.add_member(:sign_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIGN_IN", traits: {"smithy.api#enumValue" => "SIGN_IN"}))
+    EventFilterType.add_member(:password_change, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD_CHANGE", traits: {"smithy.api#enumValue" => "PASSWORD_CHANGE"}))
+    EventFilterType.add_member(:sign_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIGN_UP", traits: {"smithy.api#enumValue" => "SIGN_UP"}))
+    EventFiltersType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventFilterType)
+    EventResponseType.add_member(:pass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pass", traits: {"smithy.api#enumValue" => "Pass"}))
+    EventResponseType.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Fail", traits: {"smithy.api#enumValue" => "Fail"}))
+    EventResponseType.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
+    EventRiskType.add_member(:risk_decision, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskDecisionType, location_name: "RiskDecision"))
+    EventRiskType.add_member(:risk_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskLevelType, location_name: "RiskLevel"))
+    EventRiskType.add_member(:compromised_credentials_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "CompromisedCredentialsDetected"))
     EventRiskType.type = Types::EventRiskType
-    EventSourceName.add_member(:user_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_NOTIFICATION", traits: {"smithy.api#enumValue" => "userNotification"}))
-    EventSourceName.add_member(:user_auth_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_AUTH_EVENTS", traits: {"smithy.api#enumValue" => "userAuthEvents"}))
-    EventType.add_member(:sign_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignIn", traits: {"smithy.api#enumValue" => "SignIn"}))
-    EventType.add_member(:sign_up, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignUp", traits: {"smithy.api#enumValue" => "SignUp"}))
-    EventType.add_member(:forgot_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForgotPassword", traits: {"smithy.api#enumValue" => "ForgotPassword"}))
-    EventType.add_member(:password_change, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PasswordChange", traits: {"smithy.api#enumValue" => "PasswordChange"}))
-    EventType.add_member(:resend_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResendCode", traits: {"smithy.api#enumValue" => "ResendCode"}))
-    ExpiredCodeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    EventSourceName.add_member(:user_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_NOTIFICATION", traits: {"smithy.api#enumValue" => "userNotification"}))
+    EventSourceName.add_member(:user_auth_events, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_AUTH_EVENTS", traits: {"smithy.api#enumValue" => "userAuthEvents"}))
+    EventType.add_member(:sign_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignIn", traits: {"smithy.api#enumValue" => "SignIn"}))
+    EventType.add_member(:sign_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignUp", traits: {"smithy.api#enumValue" => "SignUp"}))
+    EventType.add_member(:forgot_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForgotPassword", traits: {"smithy.api#enumValue" => "ForgotPassword"}))
+    EventType.add_member(:password_change, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PasswordChange", traits: {"smithy.api#enumValue" => "PasswordChange"}))
+    EventType.add_member(:resend_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResendCode", traits: {"smithy.api#enumValue" => "ResendCode"}))
+    ExpiredCodeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     ExpiredCodeException.type = Types::ExpiredCodeException
-    ExplicitAuthFlowsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExplicitAuthFlowsType)
-    ExplicitAuthFlowsType.add_member(:admin_no_srp_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_NO_SRP_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_NO_SRP_AUTH"}))
-    ExplicitAuthFlowsType.add_member(:custom_auth_flow_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_AUTH_FLOW_ONLY", traits: {"smithy.api#enumValue" => "CUSTOM_AUTH_FLOW_ONLY"}))
-    ExplicitAuthFlowsType.add_member(:user_password_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "USER_PASSWORD_AUTH"}))
-    ExplicitAuthFlowsType.add_member(:allow_admin_user_password_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_ADMIN_USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_ADMIN_USER_PASSWORD_AUTH"}))
-    ExplicitAuthFlowsType.add_member(:allow_custom_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_CUSTOM_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_CUSTOM_AUTH"}))
-    ExplicitAuthFlowsType.add_member(:allow_user_password_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_PASSWORD_AUTH"}))
-    ExplicitAuthFlowsType.add_member(:allow_user_srp_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_USER_SRP_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_SRP_AUTH"}))
-    ExplicitAuthFlowsType.add_member(:allow_refresh_token_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_REFRESH_TOKEN_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_REFRESH_TOKEN_AUTH"}))
-    ExplicitAuthFlowsType.add_member(:allow_user_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_USER_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_AUTH"}))
-    FeatureType.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    FeatureType.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    FeatureUnavailableInTierException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    ExplicitAuthFlowsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitAuthFlowsType)
+    ExplicitAuthFlowsType.add_member(:admin_no_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_NO_SRP_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_NO_SRP_AUTH"}))
+    ExplicitAuthFlowsType.add_member(:custom_auth_flow_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_AUTH_FLOW_ONLY", traits: {"smithy.api#enumValue" => "CUSTOM_AUTH_FLOW_ONLY"}))
+    ExplicitAuthFlowsType.add_member(:user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "USER_PASSWORD_AUTH"}))
+    ExplicitAuthFlowsType.add_member(:allow_admin_user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_ADMIN_USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_ADMIN_USER_PASSWORD_AUTH"}))
+    ExplicitAuthFlowsType.add_member(:allow_custom_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_CUSTOM_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_CUSTOM_AUTH"}))
+    ExplicitAuthFlowsType.add_member(:allow_user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_PASSWORD_AUTH"}))
+    ExplicitAuthFlowsType.add_member(:allow_user_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_USER_SRP_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_SRP_AUTH"}))
+    ExplicitAuthFlowsType.add_member(:allow_refresh_token_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_REFRESH_TOKEN_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_REFRESH_TOKEN_AUTH"}))
+    ExplicitAuthFlowsType.add_member(:allow_user_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW_USER_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_AUTH"}))
+    FeatureType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    FeatureType.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    FeatureUnavailableInTierException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     FeatureUnavailableInTierException.type = Types::FeatureUnavailableInTierException
-    FeedbackValueType.add_member(:valid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALID", traits: {"smithy.api#enumValue" => "Valid"}))
-    FeedbackValueType.add_member(:invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID", traits: {"smithy.api#enumValue" => "Invalid"}))
-    FirehoseConfigurationType.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "StreamArn"))
+    FeedbackValueType.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALID", traits: {"smithy.api#enumValue" => "Valid"}))
+    FeedbackValueType.add_member(:invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID", traits: {"smithy.api#enumValue" => "Invalid"}))
+    FirehoseConfigurationType.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "StreamArn"))
     FirehoseConfigurationType.type = Types::FirehoseConfigurationType
-    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     ForbiddenException.type = Types::ForbiddenException
-    ForgetDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
-    ForgetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
+    ForgetDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken"))
+    ForgetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
     ForgetDeviceRequest.type = Types::ForgetDeviceRequest
-    ForgotPasswordRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    ForgotPasswordRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretHashType, location_name: "SecretHash"))
-    ForgotPasswordRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
-    ForgotPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    ForgotPasswordRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    ForgotPasswordRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    ForgotPasswordRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    ForgotPasswordRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretHashType, location_name: "SecretHash"))
+    ForgotPasswordRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, location_name: "UserContextData"))
+    ForgotPasswordRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    ForgotPasswordRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    ForgotPasswordRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     ForgotPasswordRequest.type = Types::ForgotPasswordRequest
-    ForgotPasswordResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
+    ForgotPasswordResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
     ForgotPasswordResponse.type = Types::ForgotPasswordResponse
-    GetCSVHeaderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    GetCSVHeaderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     GetCSVHeaderRequest.type = Types::GetCSVHeaderRequest
-    GetCSVHeaderResponse.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    GetCSVHeaderResponse.add_member(:csv_header, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfStringTypes, location_name: "CSVHeader"))
+    GetCSVHeaderResponse.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    GetCSVHeaderResponse.add_member(:csv_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfStringTypes, location_name: "CSVHeader"))
     GetCSVHeaderResponse.type = Types::GetCSVHeaderResponse
-    GetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
-    GetDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    GetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
+    GetDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken"))
     GetDeviceRequest.type = Types::GetDeviceRequest
-    GetDeviceResponse.add_member(:device, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceType, location_name: "Device", traits: {"smithy.api#required" => {}}))
+    GetDeviceResponse.add_member(:device, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, location_name: "Device", traits: {"smithy.api#required" => {}}))
     GetDeviceResponse.type = Types::GetDeviceResponse
-    GetGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    GetGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    GetGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    GetGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     GetGroupRequest.type = Types::GetGroupRequest
-    GetGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "Group"))
+    GetGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "Group"))
     GetGroupResponse.type = Types::GetGroupResponse
-    GetIdentityProviderByIdentifierRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    GetIdentityProviderByIdentifierRequest.add_member(:idp_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdpIdentifierType, location_name: "IdpIdentifier", traits: {"smithy.api#required" => {}}))
+    GetIdentityProviderByIdentifierRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    GetIdentityProviderByIdentifierRequest.add_member(:idp_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifierType, location_name: "IdpIdentifier", traits: {"smithy.api#required" => {}}))
     GetIdentityProviderByIdentifierRequest.type = Types::GetIdentityProviderByIdentifierRequest
-    GetIdentityProviderByIdentifierResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
+    GetIdentityProviderByIdentifierResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
     GetIdentityProviderByIdentifierResponse.type = Types::GetIdentityProviderByIdentifierResponse
-    GetLogDeliveryConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    GetLogDeliveryConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     GetLogDeliveryConfigurationRequest.type = Types::GetLogDeliveryConfigurationRequest
-    GetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDeliveryConfigurationType, location_name: "LogDeliveryConfiguration"))
+    GetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfigurationType, location_name: "LogDeliveryConfiguration"))
     GetLogDeliveryConfigurationResponse.type = Types::GetLogDeliveryConfigurationResponse
-    GetSigningCertificateRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    GetSigningCertificateRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     GetSigningCertificateRequest.type = Types::GetSigningCertificateRequest
-    GetSigningCertificateResponse.add_member(:certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "Certificate"))
+    GetSigningCertificateResponse.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "Certificate"))
     GetSigningCertificateResponse.type = Types::GetSigningCertificateResponse
-    GetTokensFromRefreshTokenRequest.add_member(:refresh_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "RefreshToken", traits: {"smithy.api#required" => {}}))
-    GetTokensFromRefreshTokenRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    GetTokensFromRefreshTokenRequest.add_member(:client_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
-    GetTokensFromRefreshTokenRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey"))
-    GetTokensFromRefreshTokenRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    GetTokensFromRefreshTokenRequest.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "RefreshToken", traits: {"smithy.api#required" => {}}))
+    GetTokensFromRefreshTokenRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    GetTokensFromRefreshTokenRequest.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, location_name: "ClientSecret"))
+    GetTokensFromRefreshTokenRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey"))
+    GetTokensFromRefreshTokenRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     GetTokensFromRefreshTokenRequest.type = Types::GetTokensFromRefreshTokenRequest
-    GetTokensFromRefreshTokenResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
+    GetTokensFromRefreshTokenResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResultType, location_name: "AuthenticationResult"))
     GetTokensFromRefreshTokenResponse.type = Types::GetTokensFromRefreshTokenResponse
-    GetUICustomizationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    GetUICustomizationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
+    GetUICustomizationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    GetUICustomizationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
     GetUICustomizationRequest.type = Types::GetUICustomizationRequest
-    GetUICustomizationResponse.add_member(:ui_customization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UICustomizationType, location_name: "UICustomization", traits: {"smithy.api#required" => {}}))
+    GetUICustomizationResponse.add_member(:ui_customization, ::Smithy::Schema::Shapes::MemberShape.new(target: UICustomizationType, location_name: "UICustomization", traits: {"smithy.api#required" => {}}))
     GetUICustomizationResponse.type = Types::GetUICustomizationResponse
-    GetUserAttributeVerificationCodeRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    GetUserAttributeVerificationCodeRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameType, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
-    GetUserAttributeVerificationCodeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    GetUserAttributeVerificationCodeRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    GetUserAttributeVerificationCodeRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
+    GetUserAttributeVerificationCodeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     GetUserAttributeVerificationCodeRequest.type = Types::GetUserAttributeVerificationCodeRequest
-    GetUserAttributeVerificationCodeResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
+    GetUserAttributeVerificationCodeResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
     GetUserAttributeVerificationCodeResponse.type = Types::GetUserAttributeVerificationCodeResponse
-    GetUserAuthFactorsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    GetUserAuthFactorsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     GetUserAuthFactorsRequest.type = Types::GetUserAuthFactorsRequest
-    GetUserAuthFactorsResponse.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    GetUserAuthFactorsResponse.add_member(:preferred_mfa_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "PreferredMfaSetting"))
-    GetUserAuthFactorsResponse.add_member(:user_mfa_setting_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserMFASettingListType, location_name: "UserMFASettingList"))
-    GetUserAuthFactorsResponse.add_member(:configured_user_auth_factors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfiguredUserAuthFactorsListType, location_name: "ConfiguredUserAuthFactors"))
+    GetUserAuthFactorsResponse.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    GetUserAuthFactorsResponse.add_member(:preferred_mfa_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "PreferredMfaSetting"))
+    GetUserAuthFactorsResponse.add_member(:user_mfa_setting_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMFASettingListType, location_name: "UserMFASettingList"))
+    GetUserAuthFactorsResponse.add_member(:configured_user_auth_factors, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredUserAuthFactorsListType, location_name: "ConfiguredUserAuthFactors"))
     GetUserAuthFactorsResponse.type = Types::GetUserAuthFactorsResponse
-    GetUserPoolMfaConfigRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    GetUserPoolMfaConfigRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     GetUserPoolMfaConfigRequest.type = Types::GetUserPoolMfaConfigRequest
-    GetUserPoolMfaConfigResponse.add_member(:sms_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
-    GetUserPoolMfaConfigResponse.add_member(:software_token_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
-    GetUserPoolMfaConfigResponse.add_member(:email_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
-    GetUserPoolMfaConfigResponse.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
-    GetUserPoolMfaConfigResponse.add_member(:web_authn_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnConfigurationType, location_name: "WebAuthnConfiguration"))
+    GetUserPoolMfaConfigResponse.add_member(:sms_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
+    GetUserPoolMfaConfigResponse.add_member(:software_token_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
+    GetUserPoolMfaConfigResponse.add_member(:email_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
+    GetUserPoolMfaConfigResponse.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolMfaType, location_name: "MfaConfiguration"))
+    GetUserPoolMfaConfigResponse.add_member(:web_authn_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnConfigurationType, location_name: "WebAuthnConfiguration"))
     GetUserPoolMfaConfigResponse.type = Types::GetUserPoolMfaConfigResponse
-    GetUserRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    GetUserRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     GetUserRequest.type = Types::GetUserRequest
-    GetUserResponse.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    GetUserResponse.add_member(:user_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "UserAttributes", traits: {"smithy.api#required" => {}}))
-    GetUserResponse.add_member(:mfa_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions"))
-    GetUserResponse.add_member(:preferred_mfa_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "PreferredMfaSetting"))
-    GetUserResponse.add_member(:user_mfa_setting_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserMFASettingListType, location_name: "UserMFASettingList"))
+    GetUserResponse.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    GetUserResponse.add_member(:user_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "UserAttributes", traits: {"smithy.api#required" => {}}))
+    GetUserResponse.add_member(:mfa_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionListType, location_name: "MFAOptions"))
+    GetUserResponse.add_member(:preferred_mfa_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "PreferredMfaSetting"))
+    GetUserResponse.add_member(:user_mfa_setting_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMFASettingListType, location_name: "UserMFASettingList"))
     GetUserResponse.type = Types::GetUserResponse
-    GlobalSignOutRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    GlobalSignOutRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     GlobalSignOutRequest.type = Types::GlobalSignOutRequest
     GlobalSignOutResponse.type = Types::GlobalSignOutResponse
-    GroupExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    GroupExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     GroupExistsException.type = Types::GroupExistsException
-    GroupListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType)
-    GroupType.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName"))
-    GroupType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    GroupType.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
-    GroupType.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "RoleArn"))
-    GroupType.add_member(:precedence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrecedenceType, location_name: "Precedence"))
-    GroupType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
-    GroupType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    GroupListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType)
+    GroupType.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName"))
+    GroupType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    GroupType.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, location_name: "Description"))
+    GroupType.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "RoleArn"))
+    GroupType.add_member(:precedence, ::Smithy::Schema::Shapes::MemberShape.new(target: PrecedenceType, location_name: "Precedence"))
+    GroupType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
+    GroupType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
     GroupType.type = Types::GroupType
-    HttpHeader.add_member(:header_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "headerName"))
-    HttpHeader.add_member(:header_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "headerValue"))
+    HttpHeader.add_member(:header_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "headerName"))
+    HttpHeader.add_member(:header_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "headerValue"))
     HttpHeader.type = Types::HttpHeader
-    HttpHeaderList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpHeader)
-    IdentityProviderType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    IdentityProviderType.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName"))
-    IdentityProviderType.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderTypeType, location_name: "ProviderType"))
-    IdentityProviderType.add_member(:provider_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderDetailsType, location_name: "ProviderDetails"))
-    IdentityProviderType.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
-    IdentityProviderType.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
-    IdentityProviderType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
-    IdentityProviderType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    HttpHeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeader)
+    IdentityProviderType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    IdentityProviderType.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, location_name: "ProviderName"))
+    IdentityProviderType.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderTypeType, location_name: "ProviderType"))
+    IdentityProviderType.add_member(:provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailsType, location_name: "ProviderDetails"))
+    IdentityProviderType.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingType, location_name: "AttributeMapping"))
+    IdentityProviderType.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    IdentityProviderType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
+    IdentityProviderType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
     IdentityProviderType.type = Types::IdentityProviderType
-    IdentityProviderTypeType.add_member(:saml, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAML", traits: {"smithy.api#enumValue" => "SAML"}))
-    IdentityProviderTypeType.add_member(:facebook, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Facebook", traits: {"smithy.api#enumValue" => "Facebook"}))
-    IdentityProviderTypeType.add_member(:google, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Google", traits: {"smithy.api#enumValue" => "Google"}))
-    IdentityProviderTypeType.add_member(:login_with_amazon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LoginWithAmazon", traits: {"smithy.api#enumValue" => "LoginWithAmazon"}))
-    IdentityProviderTypeType.add_member(:sign_in_with_apple, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignInWithApple", traits: {"smithy.api#enumValue" => "SignInWithApple"}))
-    IdentityProviderTypeType.add_member(:oidc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OIDC", traits: {"smithy.api#enumValue" => "OIDC"}))
-    IdpIdentifiersListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdpIdentifierType)
-    InitiateAuthRequest.add_member(:auth_flow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthFlowType, location_name: "AuthFlow", traits: {"smithy.api#required" => {}}))
-    InitiateAuthRequest.add_member(:auth_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthParametersType, location_name: "AuthParameters"))
-    InitiateAuthRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
-    InitiateAuthRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    InitiateAuthRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    InitiateAuthRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
-    InitiateAuthRequest.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    IdentityProviderTypeType.add_member(:saml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAML", traits: {"smithy.api#enumValue" => "SAML"}))
+    IdentityProviderTypeType.add_member(:facebook, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Facebook", traits: {"smithy.api#enumValue" => "Facebook"}))
+    IdentityProviderTypeType.add_member(:google, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Google", traits: {"smithy.api#enumValue" => "Google"}))
+    IdentityProviderTypeType.add_member(:login_with_amazon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LoginWithAmazon", traits: {"smithy.api#enumValue" => "LoginWithAmazon"}))
+    IdentityProviderTypeType.add_member(:sign_in_with_apple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignInWithApple", traits: {"smithy.api#enumValue" => "SignInWithApple"}))
+    IdentityProviderTypeType.add_member(:oidc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OIDC", traits: {"smithy.api#enumValue" => "OIDC"}))
+    IdpIdentifiersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifierType)
+    InitiateAuthRequest.add_member(:auth_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFlowType, location_name: "AuthFlow", traits: {"smithy.api#required" => {}}))
+    InitiateAuthRequest.add_member(:auth_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthParametersType, location_name: "AuthParameters"))
+    InitiateAuthRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
+    InitiateAuthRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    InitiateAuthRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    InitiateAuthRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, location_name: "UserContextData"))
+    InitiateAuthRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     InitiateAuthRequest.type = Types::InitiateAuthRequest
-    InitiateAuthResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeNameType, location_name: "ChallengeName"))
-    InitiateAuthResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
-    InitiateAuthResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeParametersType, location_name: "ChallengeParameters"))
-    InitiateAuthResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
-    InitiateAuthResponse.add_member(:available_challenges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailableChallengeListType, location_name: "AvailableChallenges"))
+    InitiateAuthResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, location_name: "ChallengeName"))
+    InitiateAuthResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
+    InitiateAuthResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeParametersType, location_name: "ChallengeParameters"))
+    InitiateAuthResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResultType, location_name: "AuthenticationResult"))
+    InitiateAuthResponse.add_member(:available_challenges, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableChallengeListType, location_name: "AvailableChallenges"))
     InitiateAuthResponse.type = Types::InitiateAuthResponse
-    InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InternalErrorException.type = Types::InternalErrorException
-    InvalidEmailRoleAccessPolicyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InvalidEmailRoleAccessPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InvalidEmailRoleAccessPolicyException.type = Types::InvalidEmailRoleAccessPolicyException
-    InvalidLambdaResponseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InvalidLambdaResponseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InvalidLambdaResponseException.type = Types::InvalidLambdaResponseException
-    InvalidOAuthFlowException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InvalidOAuthFlowException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InvalidOAuthFlowException.type = Types::InvalidOAuthFlowException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
-    InvalidParameterException.add_member(:reason_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterExceptionReasonCodeType, location_name: "reasonCode"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
+    InvalidParameterException.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidParameterExceptionReasonCodeType, location_name: "reasonCode"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidPasswordException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InvalidPasswordException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InvalidPasswordException.type = Types::InvalidPasswordException
-    InvalidSmsRoleAccessPolicyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InvalidSmsRoleAccessPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InvalidSmsRoleAccessPolicyException.type = Types::InvalidSmsRoleAccessPolicyException
-    InvalidSmsRoleTrustRelationshipException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InvalidSmsRoleTrustRelationshipException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InvalidSmsRoleTrustRelationshipException.type = Types::InvalidSmsRoleTrustRelationshipException
-    InvalidUserPoolConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    InvalidUserPoolConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     InvalidUserPoolConfigurationException.type = Types::InvalidUserPoolConfigurationException
-    LambdaConfigType.add_member(:pre_sign_up, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "PreSignUp"))
-    LambdaConfigType.add_member(:custom_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "CustomMessage"))
-    LambdaConfigType.add_member(:post_confirmation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "PostConfirmation"))
-    LambdaConfigType.add_member(:pre_authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "PreAuthentication"))
-    LambdaConfigType.add_member(:post_authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "PostAuthentication"))
-    LambdaConfigType.add_member(:define_auth_challenge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "DefineAuthChallenge"))
-    LambdaConfigType.add_member(:create_auth_challenge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "CreateAuthChallenge"))
-    LambdaConfigType.add_member(:verify_auth_challenge_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "VerifyAuthChallengeResponse"))
-    LambdaConfigType.add_member(:pre_token_generation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "PreTokenGeneration"))
-    LambdaConfigType.add_member(:user_migration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "UserMigration"))
-    LambdaConfigType.add_member(:pre_token_generation_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreTokenGenerationVersionConfigType, location_name: "PreTokenGenerationConfig"))
-    LambdaConfigType.add_member(:custom_sms_sender, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSMSLambdaVersionConfigType, location_name: "CustomSMSSender"))
-    LambdaConfigType.add_member(:custom_email_sender, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomEmailLambdaVersionConfigType, location_name: "CustomEmailSender"))
-    LambdaConfigType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "KMSKeyID"))
+    LambdaConfigType.add_member(:pre_sign_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "PreSignUp"))
+    LambdaConfigType.add_member(:custom_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "CustomMessage"))
+    LambdaConfigType.add_member(:post_confirmation, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "PostConfirmation"))
+    LambdaConfigType.add_member(:pre_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "PreAuthentication"))
+    LambdaConfigType.add_member(:post_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "PostAuthentication"))
+    LambdaConfigType.add_member(:define_auth_challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "DefineAuthChallenge"))
+    LambdaConfigType.add_member(:create_auth_challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "CreateAuthChallenge"))
+    LambdaConfigType.add_member(:verify_auth_challenge_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "VerifyAuthChallengeResponse"))
+    LambdaConfigType.add_member(:pre_token_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "PreTokenGeneration"))
+    LambdaConfigType.add_member(:user_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "UserMigration"))
+    LambdaConfigType.add_member(:pre_token_generation_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PreTokenGenerationVersionConfigType, location_name: "PreTokenGenerationConfig"))
+    LambdaConfigType.add_member(:custom_sms_sender, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSMSLambdaVersionConfigType, location_name: "CustomSMSSender"))
+    LambdaConfigType.add_member(:custom_email_sender, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomEmailLambdaVersionConfigType, location_name: "CustomEmailSender"))
+    LambdaConfigType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "KMSKeyID"))
     LambdaConfigType.type = Types::LambdaConfigType
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    LinksType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageIdType)
-    LinksType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinkUrlType)
-    ListDevicesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    ListDevicesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "Limit"))
-    ListDevicesRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
+    LinksType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageIdType)
+    LinksType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkUrlType)
+    ListDevicesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    ListDevicesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, location_name: "Limit"))
+    ListDevicesRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPaginationTokenType, location_name: "PaginationToken"))
     ListDevicesRequest.type = Types::ListDevicesRequest
-    ListDevicesResponse.add_member(:devices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceListType, location_name: "Devices"))
-    ListDevicesResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
+    ListDevicesResponse.add_member(:devices, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceListType, location_name: "Devices"))
+    ListDevicesResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPaginationTokenType, location_name: "PaginationToken"))
     ListDevicesResponse.type = Types::ListDevicesResponse
-    ListGroupsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListGroupsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "Limit"))
-    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListGroupsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListGroupsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, location_name: "Limit"))
+    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     ListGroupsRequest.type = Types::ListGroupsRequest
-    ListGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupListType, location_name: "Groups"))
-    ListGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupListType, location_name: "Groups"))
+    ListGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     ListGroupsResponse.type = Types::ListGroupsResponse
-    ListIdentityProvidersRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListIdentityProvidersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProvidersLimitType, location_name: "MaxResults"))
-    ListIdentityProvidersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListIdentityProvidersRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListIdentityProvidersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListProvidersLimitType, location_name: "MaxResults"))
+    ListIdentityProvidersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "NextToken"))
     ListIdentityProvidersRequest.type = Types::ListIdentityProvidersRequest
-    ListIdentityProvidersResponse.add_member(:providers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvidersListType, location_name: "Providers", traits: {"smithy.api#required" => {}}))
-    ListIdentityProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListIdentityProvidersResponse.add_member(:providers, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvidersListType, location_name: "Providers", traits: {"smithy.api#required" => {}}))
+    ListIdentityProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "NextToken"))
     ListIdentityProvidersResponse.type = Types::ListIdentityProvidersResponse
-    ListOfStringTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ListResourceServersRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListResourceServersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceServersLimitType, location_name: "MaxResults"))
-    ListResourceServersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListOfStringTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ListResourceServersRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListResourceServersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourceServersLimitType, location_name: "MaxResults"))
+    ListResourceServersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "NextToken"))
     ListResourceServersRequest.type = Types::ListResourceServersRequest
-    ListResourceServersResponse.add_member(:resource_servers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServersListType, location_name: "ResourceServers", traits: {"smithy.api#required" => {}}))
-    ListResourceServersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListResourceServersResponse.add_member(:resource_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServersListType, location_name: "ResourceServers", traits: {"smithy.api#required" => {}}))
+    ListResourceServersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "NextToken"))
     ListResourceServersResponse.type = Types::ListResourceServersResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListTermsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTermsRequestMaxResultsInteger, location_name: "MaxResults"))
-    ListTermsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
+    ListTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListTermsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTermsRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListTermsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
     ListTermsRequest.type = Types::ListTermsRequest
-    ListTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsDescriptionListType, location_name: "Terms", traits: {"smithy.api#required" => {}}))
-    ListTermsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
+    ListTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsDescriptionListType, location_name: "Terms", traits: {"smithy.api#required" => {}}))
+    ListTermsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
     ListTermsResponse.type = Types::ListTermsResponse
-    ListUserImportJobsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListUserImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolQueryLimitType, location_name: "MaxResults", traits: {"smithy.api#required" => {}}))
-    ListUserImportJobsRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "PaginationToken"))
+    ListUserImportJobsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListUserImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolQueryLimitType, location_name: "MaxResults", traits: {"smithy.api#required" => {}}))
+    ListUserImportJobsRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "PaginationToken"))
     ListUserImportJobsRequest.type = Types::ListUserImportJobsRequest
-    ListUserImportJobsResponse.add_member(:user_import_jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobsListType, location_name: "UserImportJobs"))
-    ListUserImportJobsResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "PaginationToken"))
+    ListUserImportJobsResponse.add_member(:user_import_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobsListType, location_name: "UserImportJobs"))
+    ListUserImportJobsResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "PaginationToken"))
     ListUserImportJobsResponse.type = Types::ListUserImportJobsResponse
-    ListUserPoolClientsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListUserPoolClientsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimit, location_name: "MaxResults"))
-    ListUserPoolClientsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListUserPoolClientsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListUserPoolClientsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimit, location_name: "MaxResults"))
+    ListUserPoolClientsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     ListUserPoolClientsRequest.type = Types::ListUserPoolClientsRequest
-    ListUserPoolClientsResponse.add_member(:user_pool_clients, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolClientListType, location_name: "UserPoolClients"))
-    ListUserPoolClientsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListUserPoolClientsResponse.add_member(:user_pool_clients, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientListType, location_name: "UserPoolClients"))
+    ListUserPoolClientsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     ListUserPoolClientsResponse.type = Types::ListUserPoolClientsResponse
-    ListUserPoolsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
-    ListUserPoolsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolQueryLimitType, location_name: "MaxResults", traits: {"smithy.api#required" => {}}))
+    ListUserPoolsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "NextToken"))
+    ListUserPoolsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolQueryLimitType, location_name: "MaxResults", traits: {"smithy.api#required" => {}}))
     ListUserPoolsRequest.type = Types::ListUserPoolsRequest
-    ListUserPoolsResponse.add_member(:user_pools, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolListType, location_name: "UserPools"))
-    ListUserPoolsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListUserPoolsResponse.add_member(:user_pools, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolListType, location_name: "UserPools"))
+    ListUserPoolsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, location_name: "NextToken"))
     ListUserPoolsResponse.type = Types::ListUserPoolsResponse
-    ListUsersInGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListUsersInGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    ListUsersInGroupRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "Limit"))
-    ListUsersInGroupRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListUsersInGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListUsersInGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    ListUsersInGroupRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, location_name: "Limit"))
+    ListUsersInGroupRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     ListUsersInGroupRequest.type = Types::ListUsersInGroupRequest
-    ListUsersInGroupResponse.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsersListType, location_name: "Users"))
-    ListUsersInGroupResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListUsersInGroupResponse.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UsersListType, location_name: "Users"))
+    ListUsersInGroupResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     ListUsersInGroupResponse.type = Types::ListUsersInGroupResponse
-    ListUsersRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    ListUsersRequest.add_member(:attributes_to_get, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchedAttributeNamesListType, location_name: "AttributesToGet"))
-    ListUsersRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "Limit"))
-    ListUsersRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
-    ListUsersRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserFilterType, location_name: "Filter"))
+    ListUsersRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListUsersRequest.add_member(:attributes_to_get, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchedAttributeNamesListType, location_name: "AttributesToGet"))
+    ListUsersRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, location_name: "Limit"))
+    ListUsersRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPaginationTokenType, location_name: "PaginationToken"))
+    ListUsersRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: UserFilterType, location_name: "Filter"))
     ListUsersRequest.type = Types::ListUsersRequest
-    ListUsersResponse.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsersListType, location_name: "Users"))
-    ListUsersResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
+    ListUsersResponse.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UsersListType, location_name: "Users"))
+    ListUsersResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPaginationTokenType, location_name: "PaginationToken"))
     ListUsersResponse.type = Types::ListUsersResponse
-    ListWebAuthnCredentialsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    ListWebAuthnCredentialsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
-    ListWebAuthnCredentialsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnCredentialsQueryLimitType, location_name: "MaxResults"))
+    ListWebAuthnCredentialsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    ListWebAuthnCredentialsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
+    ListWebAuthnCredentialsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnCredentialsQueryLimitType, location_name: "MaxResults"))
     ListWebAuthnCredentialsRequest.type = Types::ListWebAuthnCredentialsRequest
-    ListWebAuthnCredentialsResponse.add_member(:credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnCredentialDescriptionListType, location_name: "Credentials", traits: {"smithy.api#required" => {}}))
-    ListWebAuthnCredentialsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListWebAuthnCredentialsResponse.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnCredentialDescriptionListType, location_name: "Credentials", traits: {"smithy.api#required" => {}}))
+    ListWebAuthnCredentialsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, location_name: "NextToken"))
     ListWebAuthnCredentialsResponse.type = Types::ListWebAuthnCredentialsResponse
-    LogConfigurationListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogConfigurationType)
-    LogConfigurationType.add_member(:log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel", traits: {"smithy.api#required" => {}}))
-    LogConfigurationType.add_member(:event_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventSourceName, location_name: "EventSource", traits: {"smithy.api#required" => {}}))
-    LogConfigurationType.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogsConfigurationType, location_name: "CloudWatchLogsConfiguration"))
-    LogConfigurationType.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ConfigurationType, location_name: "S3Configuration"))
-    LogConfigurationType.add_member(:firehose_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FirehoseConfigurationType, location_name: "FirehoseConfiguration"))
+    LogConfigurationListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationType)
+    LogConfigurationType.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, location_name: "LogLevel", traits: {"smithy.api#required" => {}}))
+    LogConfigurationType.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceName, location_name: "EventSource", traits: {"smithy.api#required" => {}}))
+    LogConfigurationType.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsConfigurationType, location_name: "CloudWatchLogsConfiguration"))
+    LogConfigurationType.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ConfigurationType, location_name: "S3Configuration"))
+    LogConfigurationType.add_member(:firehose_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FirehoseConfigurationType, location_name: "FirehoseConfiguration"))
     LogConfigurationType.type = Types::LogConfigurationType
-    LogDeliveryConfigurationType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    LogDeliveryConfigurationType.add_member(:log_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogConfigurationListType, location_name: "LogConfigurations", traits: {"smithy.api#required" => {}}))
+    LogDeliveryConfigurationType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    LogDeliveryConfigurationType.add_member(:log_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationListType, location_name: "LogConfigurations", traits: {"smithy.api#required" => {}}))
     LogDeliveryConfigurationType.type = Types::LogDeliveryConfigurationType
-    LogLevel.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    LogLevel.add_member(:info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
-    LogoutURLsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectUrlType)
-    MFAMethodNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    LogLevel.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    LogLevel.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
+    LogoutURLsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType)
+    MFAMethodNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     MFAMethodNotFoundException.type = Types::MFAMethodNotFoundException
-    MFAOptionListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAOptionType)
-    MFAOptionType.add_member(:delivery_medium, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryMediumType, location_name: "DeliveryMedium"))
-    MFAOptionType.add_member(:attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameType, location_name: "AttributeName"))
+    MFAOptionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionType)
+    MFAOptionType.add_member(:delivery_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumType, location_name: "DeliveryMedium"))
+    MFAOptionType.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, location_name: "AttributeName"))
     MFAOptionType.type = Types::MFAOptionType
-    ManagedLoginBrandingExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    ManagedLoginBrandingExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     ManagedLoginBrandingExistsException.type = Types::ManagedLoginBrandingExistsException
-    ManagedLoginBrandingType.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId"))
-    ManagedLoginBrandingType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    ManagedLoginBrandingType.add_member(:use_cognito_provided_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "UseCognitoProvidedValues", traits: {"smithy.api#default" => false}))
-    ManagedLoginBrandingType.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Document, location_name: "Settings"))
-    ManagedLoginBrandingType.add_member(:assets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetListType, location_name: "Assets"))
-    ManagedLoginBrandingType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
-    ManagedLoginBrandingType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
+    ManagedLoginBrandingType.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId"))
+    ManagedLoginBrandingType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    ManagedLoginBrandingType.add_member(:use_cognito_provided_values, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "UseCognitoProvidedValues", traits: {"smithy.api#default" => false}))
+    ManagedLoginBrandingType.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, location_name: "Settings"))
+    ManagedLoginBrandingType.add_member(:assets, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetListType, location_name: "Assets"))
+    ManagedLoginBrandingType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
+    ManagedLoginBrandingType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
     ManagedLoginBrandingType.type = Types::ManagedLoginBrandingType
-    MessageActionType.add_member(:resend, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESEND", traits: {"smithy.api#enumValue" => "RESEND"}))
-    MessageActionType.add_member(:suppress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUPPRESS", traits: {"smithy.api#enumValue" => "SUPPRESS"}))
-    MessageTemplateType.add_member(:sms_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsInviteMessageType, location_name: "SMSMessage"))
-    MessageTemplateType.add_member(:email_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailInviteMessageType, location_name: "EmailMessage"))
-    MessageTemplateType.add_member(:email_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailSubject"))
+    MessageActionType.add_member(:resend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESEND", traits: {"smithy.api#enumValue" => "RESEND"}))
+    MessageActionType.add_member(:suppress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUPPRESS", traits: {"smithy.api#enumValue" => "SUPPRESS"}))
+    MessageTemplateType.add_member(:sms_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsInviteMessageType, location_name: "SMSMessage"))
+    MessageTemplateType.add_member(:email_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailInviteMessageType, location_name: "EmailMessage"))
+    MessageTemplateType.add_member(:email_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationSubjectType, location_name: "EmailSubject"))
     MessageTemplateType.type = Types::MessageTemplateType
-    NewDeviceMetadataType.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey"))
-    NewDeviceMetadataType.add_member(:device_group_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "DeviceGroupKey"))
+    NewDeviceMetadataType.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey"))
+    NewDeviceMetadataType.add_member(:device_group_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "DeviceGroupKey"))
     NewDeviceMetadataType.type = Types::NewDeviceMetadataType
-    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     NotAuthorizedException.type = Types::NotAuthorizedException
-    NotifyConfigurationType.add_member(:from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "From"))
-    NotifyConfigurationType.add_member(:reply_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "ReplyTo"))
-    NotifyConfigurationType.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "SourceArn", traits: {"smithy.api#required" => {}}))
-    NotifyConfigurationType.add_member(:block_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyEmailType, location_name: "BlockEmail"))
-    NotifyConfigurationType.add_member(:no_action_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyEmailType, location_name: "NoActionEmail"))
-    NotifyConfigurationType.add_member(:mfa_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyEmailType, location_name: "MfaEmail"))
+    NotifyConfigurationType.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "From"))
+    NotifyConfigurationType.add_member(:reply_to, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "ReplyTo"))
+    NotifyConfigurationType.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationType.add_member(:block_email, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEmailType, location_name: "BlockEmail"))
+    NotifyConfigurationType.add_member(:no_action_email, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEmailType, location_name: "NoActionEmail"))
+    NotifyConfigurationType.add_member(:mfa_email, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEmailType, location_name: "MfaEmail"))
     NotifyConfigurationType.type = Types::NotifyConfigurationType
-    NotifyEmailType.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailNotificationSubjectType, location_name: "Subject", traits: {"smithy.api#required" => {}}))
-    NotifyEmailType.add_member(:html_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailNotificationBodyType, location_name: "HtmlBody"))
-    NotifyEmailType.add_member(:text_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailNotificationBodyType, location_name: "TextBody"))
+    NotifyEmailType.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailNotificationSubjectType, location_name: "Subject", traits: {"smithy.api#required" => {}}))
+    NotifyEmailType.add_member(:html_body, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailNotificationBodyType, location_name: "HtmlBody"))
+    NotifyEmailType.add_member(:text_body, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailNotificationBodyType, location_name: "TextBody"))
     NotifyEmailType.type = Types::NotifyEmailType
-    NumberAttributeConstraintsType.add_member(:min_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "MinValue"))
-    NumberAttributeConstraintsType.add_member(:max_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "MaxValue"))
+    NumberAttributeConstraintsType.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "MinValue"))
+    NumberAttributeConstraintsType.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "MaxValue"))
     NumberAttributeConstraintsType.type = Types::NumberAttributeConstraintsType
-    OAuthFlowType.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "code", traits: {"smithy.api#enumValue" => "code"}))
-    OAuthFlowType.add_member(:implicit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "implicit", traits: {"smithy.api#enumValue" => "implicit"}))
-    OAuthFlowType.add_member(:client_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "client_credentials", traits: {"smithy.api#enumValue" => "client_credentials"}))
-    OAuthFlowsType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuthFlowType)
-    PasswordHistoryPolicyViolationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    OAuthFlowType.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "code", traits: {"smithy.api#enumValue" => "code"}))
+    OAuthFlowType.add_member(:implicit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "implicit", traits: {"smithy.api#enumValue" => "implicit"}))
+    OAuthFlowType.add_member(:client_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "client_credentials", traits: {"smithy.api#enumValue" => "client_credentials"}))
+    OAuthFlowsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthFlowType)
+    PasswordHistoryPolicyViolationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     PasswordHistoryPolicyViolationException.type = Types::PasswordHistoryPolicyViolationException
-    PasswordPolicyType.add_member(:minimum_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordPolicyMinLengthType, location_name: "MinimumLength"))
-    PasswordPolicyType.add_member(:require_uppercase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireUppercase", traits: {"smithy.api#default" => false}))
-    PasswordPolicyType.add_member(:require_lowercase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireLowercase", traits: {"smithy.api#default" => false}))
-    PasswordPolicyType.add_member(:require_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireNumbers", traits: {"smithy.api#default" => false}))
-    PasswordPolicyType.add_member(:require_symbols, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireSymbols", traits: {"smithy.api#default" => false}))
-    PasswordPolicyType.add_member(:password_history_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordHistorySizeType, location_name: "PasswordHistorySize"))
-    PasswordPolicyType.add_member(:temporary_password_validity_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemporaryPasswordValidityDaysType, location_name: "TemporaryPasswordValidityDays", traits: {"smithy.api#default" => 0}))
+    PasswordPolicyType.add_member(:minimum_length, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordPolicyMinLengthType, location_name: "MinimumLength"))
+    PasswordPolicyType.add_member(:require_uppercase, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "RequireUppercase", traits: {"smithy.api#default" => false}))
+    PasswordPolicyType.add_member(:require_lowercase, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "RequireLowercase", traits: {"smithy.api#default" => false}))
+    PasswordPolicyType.add_member(:require_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "RequireNumbers", traits: {"smithy.api#default" => false}))
+    PasswordPolicyType.add_member(:require_symbols, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "RequireSymbols", traits: {"smithy.api#default" => false}))
+    PasswordPolicyType.add_member(:password_history_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordHistorySizeType, location_name: "PasswordHistorySize"))
+    PasswordPolicyType.add_member(:temporary_password_validity_days, ::Smithy::Schema::Shapes::MemberShape.new(target: TemporaryPasswordValidityDaysType, location_name: "TemporaryPasswordValidityDays", traits: {"smithy.api#default" => 0}))
     PasswordPolicyType.type = Types::PasswordPolicyType
-    PasswordResetRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    PasswordResetRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     PasswordResetRequiredException.type = Types::PasswordResetRequiredException
-    PreTokenGenerationLambdaVersionType.add_member(:v1_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_0", traits: {"smithy.api#enumValue" => "V1_0"}))
-    PreTokenGenerationLambdaVersionType.add_member(:v2_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V2_0", traits: {"smithy.api#enumValue" => "V2_0"}))
-    PreTokenGenerationLambdaVersionType.add_member(:v3_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V3_0", traits: {"smithy.api#enumValue" => "V3_0"}))
-    PreTokenGenerationVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreTokenGenerationLambdaVersionType, location_name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
-    PreTokenGenerationVersionConfigType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
+    PreTokenGenerationLambdaVersionType.add_member(:v1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V1_0", traits: {"smithy.api#enumValue" => "V1_0"}))
+    PreTokenGenerationLambdaVersionType.add_member(:v2_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V2_0", traits: {"smithy.api#enumValue" => "V2_0"}))
+    PreTokenGenerationLambdaVersionType.add_member(:v3_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V3_0", traits: {"smithy.api#enumValue" => "V3_0"}))
+    PreTokenGenerationVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PreTokenGenerationLambdaVersionType, location_name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
+    PreTokenGenerationVersionConfigType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
     PreTokenGenerationVersionConfigType.type = Types::PreTokenGenerationVersionConfigType
-    PreconditionNotMetException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    PreconditionNotMetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     PreconditionNotMetException.type = Types::PreconditionNotMetException
-    PreventUserExistenceErrorTypes.add_member(:legacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LEGACY", traits: {"smithy.api#enumValue" => "LEGACY"}))
-    PreventUserExistenceErrorTypes.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    ProviderDescription.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName"))
-    ProviderDescription.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderTypeType, location_name: "ProviderType"))
-    ProviderDescription.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
-    ProviderDescription.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    PreventUserExistenceErrorTypes.add_member(:legacy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LEGACY", traits: {"smithy.api#enumValue" => "LEGACY"}))
+    PreventUserExistenceErrorTypes.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ProviderDescription.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, location_name: "ProviderName"))
+    ProviderDescription.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderTypeType, location_name: "ProviderType"))
+    ProviderDescription.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
+    ProviderDescription.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
     ProviderDescription.type = Types::ProviderDescription
-    ProviderDetailsType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ProviderDetailsType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    ProviderUserIdentifierType.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName"))
-    ProviderUserIdentifierType.add_member(:provider_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "ProviderAttributeName"))
-    ProviderUserIdentifierType.add_member(:provider_attribute_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "ProviderAttributeValue"))
+    ProviderDetailsType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ProviderDetailsType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    ProviderUserIdentifierType.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, location_name: "ProviderName"))
+    ProviderUserIdentifierType.add_member(:provider_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "ProviderAttributeName"))
+    ProviderUserIdentifierType.add_member(:provider_attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "ProviderAttributeValue"))
     ProviderUserIdentifierType.type = Types::ProviderUserIdentifierType
-    ProvidersListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderDescription)
-    RecoveryMechanismsType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecoveryOptionType)
-    RecoveryOptionNameType.add_member(:verified_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED_EMAIL", traits: {"smithy.api#enumValue" => "verified_email"}))
-    RecoveryOptionNameType.add_member(:verified_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED_PHONE_NUMBER", traits: {"smithy.api#enumValue" => "verified_phone_number"}))
-    RecoveryOptionNameType.add_member(:admin_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_ONLY", traits: {"smithy.api#enumValue" => "admin_only"}))
-    RecoveryOptionType.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PriorityType, location_name: "Priority", traits: {"smithy.api#required" => {}}))
-    RecoveryOptionType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecoveryOptionNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ProvidersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDescription)
+    RecoveryMechanismsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryOptionType)
+    RecoveryOptionNameType.add_member(:verified_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED_EMAIL", traits: {"smithy.api#enumValue" => "verified_email"}))
+    RecoveryOptionNameType.add_member(:verified_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED_PHONE_NUMBER", traits: {"smithy.api#enumValue" => "verified_phone_number"}))
+    RecoveryOptionNameType.add_member(:admin_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMIN_ONLY", traits: {"smithy.api#enumValue" => "admin_only"}))
+    RecoveryOptionType.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: PriorityType, location_name: "Priority", traits: {"smithy.api#required" => {}}))
+    RecoveryOptionType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryOptionNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
     RecoveryOptionType.type = Types::RecoveryOptionType
-    RefreshTokenReuseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    RefreshTokenReuseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     RefreshTokenReuseException.type = Types::RefreshTokenReuseException
-    RefreshTokenRotationType.add_member(:feature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureType, location_name: "Feature", traits: {"smithy.api#required" => {}}))
-    RefreshTokenRotationType.add_member(:retry_grace_period_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryGracePeriodSecondsType, location_name: "RetryGracePeriodSeconds"))
+    RefreshTokenRotationType.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, location_name: "Feature", traits: {"smithy.api#required" => {}}))
+    RefreshTokenRotationType.add_member(:retry_grace_period_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryGracePeriodSecondsType, location_name: "RetryGracePeriodSeconds"))
     RefreshTokenRotationType.type = Types::RefreshTokenRotationType
-    ResendConfirmationCodeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    ResendConfirmationCodeRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretHashType, location_name: "SecretHash"))
-    ResendConfirmationCodeRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
-    ResendConfirmationCodeRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    ResendConfirmationCodeRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    ResendConfirmationCodeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    ResendConfirmationCodeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    ResendConfirmationCodeRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretHashType, location_name: "SecretHash"))
+    ResendConfirmationCodeRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, location_name: "UserContextData"))
+    ResendConfirmationCodeRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    ResendConfirmationCodeRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    ResendConfirmationCodeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     ResendConfirmationCodeRequest.type = Types::ResendConfirmationCodeRequest
-    ResendConfirmationCodeResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
+    ResendConfirmationCodeResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
     ResendConfirmationCodeResponse.type = Types::ResendConfirmationCodeResponse
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceServerScopeListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerScopeType)
-    ResourceServerScopeType.add_member(:scope_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerScopeNameType, location_name: "ScopeName", traits: {"smithy.api#required" => {}}))
-    ResourceServerScopeType.add_member(:scope_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerScopeDescriptionType, location_name: "ScopeDescription", traits: {"smithy.api#required" => {}}))
+    ResourceServerScopeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeType)
+    ResourceServerScopeType.add_member(:scope_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeNameType, location_name: "ScopeName", traits: {"smithy.api#required" => {}}))
+    ResourceServerScopeType.add_member(:scope_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeDescriptionType, location_name: "ScopeDescription", traits: {"smithy.api#required" => {}}))
     ResourceServerScopeType.type = Types::ResourceServerScopeType
-    ResourceServerType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    ResourceServerType.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, location_name: "Identifier"))
-    ResourceServerType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerNameType, location_name: "Name"))
-    ResourceServerType.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerScopeListType, location_name: "Scopes"))
+    ResourceServerType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    ResourceServerType.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerIdentifierType, location_name: "Identifier"))
+    ResourceServerType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerNameType, location_name: "Name"))
+    ResourceServerType.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeListType, location_name: "Scopes"))
     ResourceServerType.type = Types::ResourceServerType
-    ResourceServersListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerType)
-    RespondToAuthChallengeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    RespondToAuthChallengeRequest.add_member(:challenge_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeNameType, location_name: "ChallengeName", traits: {"smithy.api#required" => {}}))
-    RespondToAuthChallengeRequest.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
-    RespondToAuthChallengeRequest.add_member(:challenge_responses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeResponsesType, location_name: "ChallengeResponses"))
-    RespondToAuthChallengeRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    RespondToAuthChallengeRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
-    RespondToAuthChallengeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    ResourceServersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerType)
+    RespondToAuthChallengeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    RespondToAuthChallengeRequest.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, location_name: "ChallengeName", traits: {"smithy.api#required" => {}}))
+    RespondToAuthChallengeRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
+    RespondToAuthChallengeRequest.add_member(:challenge_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponsesType, location_name: "ChallengeResponses"))
+    RespondToAuthChallengeRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    RespondToAuthChallengeRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, location_name: "UserContextData"))
+    RespondToAuthChallengeRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     RespondToAuthChallengeRequest.type = Types::RespondToAuthChallengeRequest
-    RespondToAuthChallengeResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeNameType, location_name: "ChallengeName"))
-    RespondToAuthChallengeResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
-    RespondToAuthChallengeResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeParametersType, location_name: "ChallengeParameters"))
-    RespondToAuthChallengeResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
+    RespondToAuthChallengeResponse.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, location_name: "ChallengeName"))
+    RespondToAuthChallengeResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
+    RespondToAuthChallengeResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeParametersType, location_name: "ChallengeParameters"))
+    RespondToAuthChallengeResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResultType, location_name: "AuthenticationResult"))
     RespondToAuthChallengeResponse.type = Types::RespondToAuthChallengeResponse
-    RevokeTokenRequest.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "Token", traits: {"smithy.api#required" => {}}))
-    RevokeTokenRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    RevokeTokenRequest.add_member(:client_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
+    RevokeTokenRequest.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "Token", traits: {"smithy.api#required" => {}}))
+    RevokeTokenRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    RevokeTokenRequest.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, location_name: "ClientSecret"))
     RevokeTokenRequest.type = Types::RevokeTokenRequest
     RevokeTokenResponse.type = Types::RevokeTokenResponse
-    RiskConfigurationType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    RiskConfigurationType.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
-    RiskConfigurationType.add_member(:compromised_credentials_risk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompromisedCredentialsRiskConfigurationType, location_name: "CompromisedCredentialsRiskConfiguration"))
-    RiskConfigurationType.add_member(:account_takeover_risk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverRiskConfigurationType, location_name: "AccountTakeoverRiskConfiguration"))
-    RiskConfigurationType.add_member(:risk_exception_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RiskExceptionConfigurationType, location_name: "RiskExceptionConfiguration"))
-    RiskConfigurationType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
+    RiskConfigurationType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    RiskConfigurationType.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
+    RiskConfigurationType.add_member(:compromised_credentials_risk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CompromisedCredentialsRiskConfigurationType, location_name: "CompromisedCredentialsRiskConfiguration"))
+    RiskConfigurationType.add_member(:account_takeover_risk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverRiskConfigurationType, location_name: "AccountTakeoverRiskConfiguration"))
+    RiskConfigurationType.add_member(:risk_exception_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskExceptionConfigurationType, location_name: "RiskExceptionConfiguration"))
+    RiskConfigurationType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
     RiskConfigurationType.type = Types::RiskConfigurationType
-    RiskDecisionType.add_member(:no_risk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NoRisk", traits: {"smithy.api#enumValue" => "NoRisk"}))
-    RiskDecisionType.add_member(:account_takeover, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccountTakeover", traits: {"smithy.api#enumValue" => "AccountTakeover"}))
-    RiskDecisionType.add_member(:block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Block", traits: {"smithy.api#enumValue" => "Block"}))
-    RiskExceptionConfigurationType.add_member(:blocked_ip_range_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockedIPRangeListType, location_name: "BlockedIPRangeList"))
-    RiskExceptionConfigurationType.add_member(:skipped_ip_range_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SkippedIPRangeListType, location_name: "SkippedIPRangeList"))
+    RiskDecisionType.add_member(:no_risk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NoRisk", traits: {"smithy.api#enumValue" => "NoRisk"}))
+    RiskDecisionType.add_member(:account_takeover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccountTakeover", traits: {"smithy.api#enumValue" => "AccountTakeover"}))
+    RiskDecisionType.add_member(:block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Block", traits: {"smithy.api#enumValue" => "Block"}))
+    RiskExceptionConfigurationType.add_member(:blocked_ip_range_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedIPRangeListType, location_name: "BlockedIPRangeList"))
+    RiskExceptionConfigurationType.add_member(:skipped_ip_range_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SkippedIPRangeListType, location_name: "SkippedIPRangeList"))
     RiskExceptionConfigurationType.type = Types::RiskExceptionConfigurationType
-    RiskLevelType.add_member(:low, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Low", traits: {"smithy.api#enumValue" => "Low"}))
-    RiskLevelType.add_member(:medium, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Medium", traits: {"smithy.api#enumValue" => "Medium"}))
-    RiskLevelType.add_member(:high, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "High", traits: {"smithy.api#enumValue" => "High"}))
-    S3ConfigurationType.add_member(:bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ArnType, location_name: "BucketArn"))
+    RiskLevelType.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Low", traits: {"smithy.api#enumValue" => "Low"}))
+    RiskLevelType.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Medium", traits: {"smithy.api#enumValue" => "Medium"}))
+    RiskLevelType.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "High", traits: {"smithy.api#enumValue" => "High"}))
+    S3ConfigurationType.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ArnType, location_name: "BucketArn"))
     S3ConfigurationType.type = Types::S3ConfigurationType
-    SMSMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
-    SMSMfaSettingsType.add_member(:preferred_mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "PreferredMfa", traits: {"smithy.api#default" => false}))
+    SMSMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    SMSMfaSettingsType.add_member(:preferred_mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "PreferredMfa", traits: {"smithy.api#default" => false}))
     SMSMfaSettingsType.type = Types::SMSMfaSettingsType
-    SchemaAttributeType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomAttributeNameType, location_name: "Name"))
-    SchemaAttributeType.add_member(:attribute_data_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeDataType, location_name: "AttributeDataType"))
-    SchemaAttributeType.add_member(:developer_only_attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "DeveloperOnlyAttribute", traits: {"smithy.api#default" => nil}))
-    SchemaAttributeType.add_member(:mutable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Mutable", traits: {"smithy.api#default" => nil}))
-    SchemaAttributeType.add_member(:required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Required", traits: {"smithy.api#default" => nil}))
-    SchemaAttributeType.add_member(:number_attribute_constraints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberAttributeConstraintsType, location_name: "NumberAttributeConstraints"))
-    SchemaAttributeType.add_member(:string_attribute_constraints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringAttributeConstraintsType, location_name: "StringAttributeConstraints"))
+    SchemaAttributeType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAttributeNameType, location_name: "Name"))
+    SchemaAttributeType.add_member(:attribute_data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDataType, location_name: "AttributeDataType"))
+    SchemaAttributeType.add_member(:developer_only_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "DeveloperOnlyAttribute", traits: {"smithy.api#default" => nil}))
+    SchemaAttributeType.add_member(:mutable, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Mutable", traits: {"smithy.api#default" => nil}))
+    SchemaAttributeType.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Required", traits: {"smithy.api#default" => nil}))
+    SchemaAttributeType.add_member(:number_attribute_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeConstraintsType, location_name: "NumberAttributeConstraints"))
+    SchemaAttributeType.add_member(:string_attribute_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeConstraintsType, location_name: "StringAttributeConstraints"))
     SchemaAttributeType.type = Types::SchemaAttributeType
-    SchemaAttributesListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaAttributeType)
-    ScopeDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    SchemaAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributeType)
+    ScopeDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     ScopeDoesNotExistException.type = Types::ScopeDoesNotExistException
-    ScopeListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScopeType)
-    SearchedAttributeNamesListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameType)
-    SetLogDeliveryConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    SetLogDeliveryConfigurationRequest.add_member(:log_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogConfigurationListType, location_name: "LogConfigurations", traits: {"smithy.api#required" => {}}))
+    ScopeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType)
+    SearchedAttributeNamesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType)
+    SetLogDeliveryConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    SetLogDeliveryConfigurationRequest.add_member(:log_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationListType, location_name: "LogConfigurations", traits: {"smithy.api#required" => {}}))
     SetLogDeliveryConfigurationRequest.type = Types::SetLogDeliveryConfigurationRequest
-    SetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDeliveryConfigurationType, location_name: "LogDeliveryConfiguration"))
+    SetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfigurationType, location_name: "LogDeliveryConfiguration"))
     SetLogDeliveryConfigurationResponse.type = Types::SetLogDeliveryConfigurationResponse
-    SetRiskConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    SetRiskConfigurationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
-    SetRiskConfigurationRequest.add_member(:compromised_credentials_risk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompromisedCredentialsRiskConfigurationType, location_name: "CompromisedCredentialsRiskConfiguration"))
-    SetRiskConfigurationRequest.add_member(:account_takeover_risk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTakeoverRiskConfigurationType, location_name: "AccountTakeoverRiskConfiguration"))
-    SetRiskConfigurationRequest.add_member(:risk_exception_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RiskExceptionConfigurationType, location_name: "RiskExceptionConfiguration"))
+    SetRiskConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    SetRiskConfigurationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
+    SetRiskConfigurationRequest.add_member(:compromised_credentials_risk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CompromisedCredentialsRiskConfigurationType, location_name: "CompromisedCredentialsRiskConfiguration"))
+    SetRiskConfigurationRequest.add_member(:account_takeover_risk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverRiskConfigurationType, location_name: "AccountTakeoverRiskConfiguration"))
+    SetRiskConfigurationRequest.add_member(:risk_exception_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskExceptionConfigurationType, location_name: "RiskExceptionConfiguration"))
     SetRiskConfigurationRequest.type = Types::SetRiskConfigurationRequest
-    SetRiskConfigurationResponse.add_member(:risk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RiskConfigurationType, location_name: "RiskConfiguration", traits: {"smithy.api#required" => {}}))
+    SetRiskConfigurationResponse.add_member(:risk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskConfigurationType, location_name: "RiskConfiguration", traits: {"smithy.api#required" => {}}))
     SetRiskConfigurationResponse.type = Types::SetRiskConfigurationResponse
-    SetUICustomizationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    SetUICustomizationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
-    SetUICustomizationRequest.add_member(:css, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CSSType, location_name: "CSS"))
-    SetUICustomizationRequest.add_member(:image_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageFileType, location_name: "ImageFile"))
+    SetUICustomizationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    SetUICustomizationRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
+    SetUICustomizationRequest.add_member(:css, ::Smithy::Schema::Shapes::MemberShape.new(target: CSSType, location_name: "CSS"))
+    SetUICustomizationRequest.add_member(:image_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFileType, location_name: "ImageFile"))
     SetUICustomizationRequest.type = Types::SetUICustomizationRequest
-    SetUICustomizationResponse.add_member(:ui_customization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UICustomizationType, location_name: "UICustomization", traits: {"smithy.api#required" => {}}))
+    SetUICustomizationResponse.add_member(:ui_customization, ::Smithy::Schema::Shapes::MemberShape.new(target: UICustomizationType, location_name: "UICustomization", traits: {"smithy.api#required" => {}}))
     SetUICustomizationResponse.type = Types::SetUICustomizationResponse
-    SetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMSMfaSettingsType, location_name: "SMSMfaSettings"))
-    SetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMfaSettingsType, location_name: "SoftwareTokenMfaSettings"))
-    SetUserMFAPreferenceRequest.add_member(:email_mfa_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailMfaSettingsType, location_name: "EmailMfaSettings"))
-    SetUserMFAPreferenceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    SetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSMfaSettingsType, location_name: "SMSMfaSettings"))
+    SetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMfaSettingsType, location_name: "SoftwareTokenMfaSettings"))
+    SetUserMFAPreferenceRequest.add_member(:email_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaSettingsType, location_name: "EmailMfaSettings"))
+    SetUserMFAPreferenceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     SetUserMFAPreferenceRequest.type = Types::SetUserMFAPreferenceRequest
     SetUserMFAPreferenceResponse.type = Types::SetUserMFAPreferenceResponse
-    SetUserPoolMfaConfigRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    SetUserPoolMfaConfigRequest.add_member(:sms_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
-    SetUserPoolMfaConfigRequest.add_member(:software_token_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
-    SetUserPoolMfaConfigRequest.add_member(:email_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
-    SetUserPoolMfaConfigRequest.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
-    SetUserPoolMfaConfigRequest.add_member(:web_authn_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnConfigurationType, location_name: "WebAuthnConfiguration"))
+    SetUserPoolMfaConfigRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    SetUserPoolMfaConfigRequest.add_member(:sms_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
+    SetUserPoolMfaConfigRequest.add_member(:software_token_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
+    SetUserPoolMfaConfigRequest.add_member(:email_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
+    SetUserPoolMfaConfigRequest.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolMfaType, location_name: "MfaConfiguration"))
+    SetUserPoolMfaConfigRequest.add_member(:web_authn_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnConfigurationType, location_name: "WebAuthnConfiguration"))
     SetUserPoolMfaConfigRequest.type = Types::SetUserPoolMfaConfigRequest
-    SetUserPoolMfaConfigResponse.add_member(:sms_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
-    SetUserPoolMfaConfigResponse.add_member(:software_token_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
-    SetUserPoolMfaConfigResponse.add_member(:email_mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
-    SetUserPoolMfaConfigResponse.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
-    SetUserPoolMfaConfigResponse.add_member(:web_authn_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnConfigurationType, location_name: "WebAuthnConfiguration"))
+    SetUserPoolMfaConfigResponse.add_member(:sms_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
+    SetUserPoolMfaConfigResponse.add_member(:software_token_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
+    SetUserPoolMfaConfigResponse.add_member(:email_mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
+    SetUserPoolMfaConfigResponse.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolMfaType, location_name: "MfaConfiguration"))
+    SetUserPoolMfaConfigResponse.add_member(:web_authn_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnConfigurationType, location_name: "WebAuthnConfiguration"))
     SetUserPoolMfaConfigResponse.type = Types::SetUserPoolMfaConfigResponse
-    SetUserSettingsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    SetUserSettingsRequest.add_member(:mfa_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions", traits: {"smithy.api#required" => {}}))
+    SetUserSettingsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    SetUserSettingsRequest.add_member(:mfa_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionListType, location_name: "MFAOptions", traits: {"smithy.api#required" => {}}))
     SetUserSettingsRequest.type = Types::SetUserSettingsRequest
     SetUserSettingsResponse.type = Types::SetUserSettingsResponse
-    SignInPolicyType.add_member(:allowed_first_auth_factors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedFirstAuthFactorsListType, location_name: "AllowedFirstAuthFactors"))
+    SignInPolicyType.add_member(:allowed_first_auth_factors, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedFirstAuthFactorsListType, location_name: "AllowedFirstAuthFactors"))
     SignInPolicyType.type = Types::SignInPolicyType
-    SignUpRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    SignUpRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretHashType, location_name: "SecretHash"))
-    SignUpRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    SignUpRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordType, location_name: "Password"))
-    SignUpRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "UserAttributes"))
-    SignUpRequest.add_member(:validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "ValidationData"))
-    SignUpRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
-    SignUpRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
-    SignUpRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    SignUpRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    SignUpRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretHashType, location_name: "SecretHash"))
+    SignUpRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    SignUpRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, location_name: "Password"))
+    SignUpRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "UserAttributes"))
+    SignUpRequest.add_member(:validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "ValidationData"))
+    SignUpRequest.add_member(:analytics_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetadataType, location_name: "AnalyticsMetadata"))
+    SignUpRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, location_name: "UserContextData"))
+    SignUpRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     SignUpRequest.type = Types::SignUpRequest
-    SignUpResponse.add_member(:user_confirmed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "UserConfirmed", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    SignUpResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
-    SignUpResponse.add_member(:user_sub, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "UserSub", traits: {"smithy.api#required" => {}}))
-    SignUpResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    SignUpResponse.add_member(:user_confirmed, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "UserConfirmed", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    SignUpResponse.add_member(:code_delivery_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
+    SignUpResponse.add_member(:user_sub, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "UserSub", traits: {"smithy.api#required" => {}}))
+    SignUpResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     SignUpResponse.type = Types::SignUpResponse
-    SkippedIPRangeListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    SmsConfigurationType.add_member(:sns_caller_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "SnsCallerArn", traits: {"smithy.api#required" => {}}))
-    SmsConfigurationType.add_member(:external_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "ExternalId"))
-    SmsConfigurationType.add_member(:sns_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionCodeType, location_name: "SnsRegion"))
+    SkippedIPRangeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    SmsConfigurationType.add_member(:sns_caller_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "SnsCallerArn", traits: {"smithy.api#required" => {}}))
+    SmsConfigurationType.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "ExternalId"))
+    SmsConfigurationType.add_member(:sns_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCodeType, location_name: "SnsRegion"))
     SmsConfigurationType.type = Types::SmsConfigurationType
-    SmsMfaConfigType.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
-    SmsMfaConfigType.add_member(:sms_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
+    SmsMfaConfigType.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
+    SmsMfaConfigType.add_member(:sms_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsConfigurationType, location_name: "SmsConfiguration"))
     SmsMfaConfigType.type = Types::SmsMfaConfigType
-    SoftwareTokenMFANotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    SoftwareTokenMFANotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     SoftwareTokenMFANotFoundException.type = Types::SoftwareTokenMFANotFoundException
-    SoftwareTokenMfaConfigType.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    SoftwareTokenMfaConfigType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
     SoftwareTokenMfaConfigType.type = Types::SoftwareTokenMfaConfigType
-    SoftwareTokenMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
-    SoftwareTokenMfaSettingsType.add_member(:preferred_mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "PreferredMfa", traits: {"smithy.api#default" => false}))
+    SoftwareTokenMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    SoftwareTokenMfaSettingsType.add_member(:preferred_mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "PreferredMfa", traits: {"smithy.api#default" => false}))
     SoftwareTokenMfaSettingsType.type = Types::SoftwareTokenMfaSettingsType
-    StartUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    StartUserImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobIdType, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StartUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    StartUserImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobIdType, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StartUserImportJobRequest.type = Types::StartUserImportJobRequest
-    StartUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobType, location_name: "UserImportJob"))
+    StartUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, location_name: "UserImportJob"))
     StartUserImportJobResponse.type = Types::StartUserImportJobResponse
-    StartWebAuthnRegistrationRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    StartWebAuthnRegistrationRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
     StartWebAuthnRegistrationRequest.type = Types::StartWebAuthnRegistrationRequest
-    StartWebAuthnRegistrationResponse.add_member(:credential_creation_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Document, location_name: "CredentialCreationOptions", traits: {"smithy.api#required" => {}}))
+    StartWebAuthnRegistrationResponse.add_member(:credential_creation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, location_name: "CredentialCreationOptions", traits: {"smithy.api#required" => {}}))
     StartWebAuthnRegistrationResponse.type = Types::StartWebAuthnRegistrationResponse
-    StatusType.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
-    StatusType.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    StopUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    StopUserImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobIdType, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StatusType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    StatusType.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    StopUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    StopUserImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobIdType, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopUserImportJobRequest.type = Types::StopUserImportJobRequest
-    StopUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobType, location_name: "UserImportJob"))
+    StopUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, location_name: "UserImportJob"))
     StopUserImportJobResponse.type = Types::StopUserImportJobResponse
-    StringAttributeConstraintsType.add_member(:min_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "MinLength"))
-    StringAttributeConstraintsType.add_member(:max_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "MaxLength"))
+    StringAttributeConstraintsType.add_member(:min_length, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "MinLength"))
+    StringAttributeConstraintsType.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "MaxLength"))
     StringAttributeConstraintsType.type = Types::StringAttributeConstraintsType
-    SupportedIdentityProvidersListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameType)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    SupportedIdentityProvidersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TermsDescriptionListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsDescriptionType)
-    TermsDescriptionType.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
-    TermsDescriptionType.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: "TermsName", traits: {"smithy.api#required" => {}}))
-    TermsDescriptionType.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: "Enforcement", traits: {"smithy.api#required" => {}}))
-    TermsDescriptionType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate", traits: {"smithy.api#required" => {}}))
-    TermsDescriptionType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate", traits: {"smithy.api#required" => {}}))
+    TermsDescriptionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TermsDescriptionType)
+    TermsDescriptionType.add_member(:terms_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:terms_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsNameType, location_name: "TermsName", traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsEnforcementType, location_name: "Enforcement", traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate", traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate", traits: {"smithy.api#required" => {}}))
     TermsDescriptionType.type = Types::TermsDescriptionType
-    TermsEnforcementType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    TermsExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    TermsEnforcementType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    TermsExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     TermsExistsException.type = Types::TermsExistsException
-    TermsSourceType.add_member(:link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINK", traits: {"smithy.api#enumValue" => "LINK"}))
-    TermsType.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: "TermsName", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:terms_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsSourceType, location_name: "TermsSource", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: "Enforcement", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:links, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinksType, location_name: "Links", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate", traits: {"smithy.api#required" => {}}))
-    TermsType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate", traits: {"smithy.api#required" => {}}))
+    TermsSourceType.add_member(:link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINK", traits: {"smithy.api#enumValue" => "LINK"}))
+    TermsType.add_member(:terms_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:terms_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsNameType, location_name: "TermsName", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:terms_source, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsSourceType, location_name: "TermsSource", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsEnforcementType, location_name: "Enforcement", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:links, ::Smithy::Schema::Shapes::MemberShape.new(target: LinksType, location_name: "Links", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate", traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate", traits: {"smithy.api#required" => {}}))
     TermsType.type = Types::TermsType
-    TierChangeNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    TierChangeNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     TierChangeNotAllowedException.type = Types::TierChangeNotAllowedException
-    TimeUnitsType.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "seconds"}))
-    TimeUnitsType.add_member(:minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTES", traits: {"smithy.api#enumValue" => "minutes"}))
-    TimeUnitsType.add_member(:hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "hours"}))
-    TimeUnitsType.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "days"}))
-    TokenValidityUnitsType.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeUnitsType, location_name: "AccessToken"))
-    TokenValidityUnitsType.add_member(:id_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeUnitsType, location_name: "IdToken"))
-    TokenValidityUnitsType.add_member(:refresh_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeUnitsType, location_name: "RefreshToken"))
+    TimeUnitsType.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "seconds"}))
+    TimeUnitsType.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTES", traits: {"smithy.api#enumValue" => "minutes"}))
+    TimeUnitsType.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "hours"}))
+    TimeUnitsType.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "days"}))
+    TokenValidityUnitsType.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeUnitsType, location_name: "AccessToken"))
+    TokenValidityUnitsType.add_member(:id_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeUnitsType, location_name: "IdToken"))
+    TokenValidityUnitsType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeUnitsType, location_name: "RefreshToken"))
     TokenValidityUnitsType.type = Types::TokenValidityUnitsType
-    TooManyFailedAttemptsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    TooManyFailedAttemptsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     TooManyFailedAttemptsException.type = Types::TooManyFailedAttemptsException
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    UICustomizationType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    UICustomizationType.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
-    UICustomizationType.add_member(:image_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUrlType, location_name: "ImageUrl"))
-    UICustomizationType.add_member(:css, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CSSType, location_name: "CSS"))
-    UICustomizationType.add_member(:css_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CSSVersionType, location_name: "CSSVersion"))
-    UICustomizationType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
-    UICustomizationType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    UICustomizationType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    UICustomizationType.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
+    UICustomizationType.add_member(:image_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUrlType, location_name: "ImageUrl"))
+    UICustomizationType.add_member(:css, ::Smithy::Schema::Shapes::MemberShape.new(target: CSSType, location_name: "CSS"))
+    UICustomizationType.add_member(:css_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CSSVersionType, location_name: "CSSVersion"))
+    UICustomizationType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
+    UICustomizationType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
     UICustomizationType.type = Types::UICustomizationType
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UnauthorizedException.type = Types::UnauthorizedException
-    UnexpectedLambdaException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnexpectedLambdaException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UnexpectedLambdaException.type = Types::UnexpectedLambdaException
-    UnsupportedIdentityProviderException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnsupportedIdentityProviderException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UnsupportedIdentityProviderException.type = Types::UnsupportedIdentityProviderException
-    UnsupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnsupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UnsupportedOperationException.type = Types::UnsupportedOperationException
-    UnsupportedTokenTypeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnsupportedTokenTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UnsupportedTokenTypeException.type = Types::UnsupportedTokenTypeException
-    UnsupportedUserStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnsupportedUserStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UnsupportedUserStateException.type = Types::UnsupportedUserStateException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsListType, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsListType, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateAuthEventFeedbackRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateAuthEventFeedbackRequest.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    UpdateAuthEventFeedbackRequest.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventIdType, location_name: "EventId", traits: {"smithy.api#required" => {}}))
-    UpdateAuthEventFeedbackRequest.add_member(:feedback_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "FeedbackToken", traits: {"smithy.api#required" => {}}))
-    UpdateAuthEventFeedbackRequest.add_member(:feedback_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeedbackValueType, location_name: "FeedbackValue", traits: {"smithy.api#required" => {}}))
+    UpdateAuthEventFeedbackRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateAuthEventFeedbackRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    UpdateAuthEventFeedbackRequest.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventIdType, location_name: "EventId", traits: {"smithy.api#required" => {}}))
+    UpdateAuthEventFeedbackRequest.add_member(:feedback_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "FeedbackToken", traits: {"smithy.api#required" => {}}))
+    UpdateAuthEventFeedbackRequest.add_member(:feedback_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackValueType, location_name: "FeedbackValue", traits: {"smithy.api#required" => {}}))
     UpdateAuthEventFeedbackRequest.type = Types::UpdateAuthEventFeedbackRequest
     UpdateAuthEventFeedbackResponse.type = Types::UpdateAuthEventFeedbackResponse
-    UpdateDeviceStatusRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    UpdateDeviceStatusRequest.add_member(:device_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
-    UpdateDeviceStatusRequest.add_member(:device_remembered_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceRememberedStatusType, location_name: "DeviceRememberedStatus"))
+    UpdateDeviceStatusRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    UpdateDeviceStatusRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, location_name: "DeviceKey", traits: {"smithy.api#required" => {}}))
+    UpdateDeviceStatusRequest.add_member(:device_remembered_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceRememberedStatusType, location_name: "DeviceRememberedStatus"))
     UpdateDeviceStatusRequest.type = Types::UpdateDeviceStatusRequest
     UpdateDeviceStatusResponse.type = Types::UpdateDeviceStatusResponse
-    UpdateGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    UpdateGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
-    UpdateGroupRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "RoleArn"))
-    UpdateGroupRequest.add_member(:precedence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrecedenceType, location_name: "Precedence"))
+    UpdateGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    UpdateGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, location_name: "Description"))
+    UpdateGroupRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "RoleArn"))
+    UpdateGroupRequest.add_member(:precedence, ::Smithy::Schema::Shapes::MemberShape.new(target: PrecedenceType, location_name: "Precedence"))
     UpdateGroupRequest.type = Types::UpdateGroupRequest
-    UpdateGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "Group"))
+    UpdateGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "Group"))
     UpdateGroupResponse.type = Types::UpdateGroupResponse
-    UpdateIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
-    UpdateIdentityProviderRequest.add_member(:provider_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderDetailsType, location_name: "ProviderDetails"))
-    UpdateIdentityProviderRequest.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
-    UpdateIdentityProviderRequest.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    UpdateIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateIdentityProviderRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, location_name: "ProviderName", traits: {"smithy.api#required" => {}}))
+    UpdateIdentityProviderRequest.add_member(:provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailsType, location_name: "ProviderDetails"))
+    UpdateIdentityProviderRequest.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingType, location_name: "AttributeMapping"))
+    UpdateIdentityProviderRequest.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
     UpdateIdentityProviderRequest.type = Types::UpdateIdentityProviderRequest
-    UpdateIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
+    UpdateIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, location_name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
     UpdateIdentityProviderResponse.type = Types::UpdateIdentityProviderResponse
-    UpdateManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    UpdateManagedLoginBrandingRequest.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId"))
-    UpdateManagedLoginBrandingRequest.add_member(:use_cognito_provided_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "UseCognitoProvidedValues", traits: {"smithy.api#default" => false}))
-    UpdateManagedLoginBrandingRequest.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Document, location_name: "Settings"))
-    UpdateManagedLoginBrandingRequest.add_member(:assets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetListType, location_name: "Assets"))
+    UpdateManagedLoginBrandingRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    UpdateManagedLoginBrandingRequest.add_member(:managed_login_branding_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingIdType, location_name: "ManagedLoginBrandingId"))
+    UpdateManagedLoginBrandingRequest.add_member(:use_cognito_provided_values, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "UseCognitoProvidedValues", traits: {"smithy.api#default" => false}))
+    UpdateManagedLoginBrandingRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, location_name: "Settings"))
+    UpdateManagedLoginBrandingRequest.add_member(:assets, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetListType, location_name: "Assets"))
     UpdateManagedLoginBrandingRequest.type = Types::UpdateManagedLoginBrandingRequest
-    UpdateManagedLoginBrandingResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
+    UpdateManagedLoginBrandingResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
     UpdateManagedLoginBrandingResponse.type = Types::UpdateManagedLoginBrandingResponse
-    UpdateResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    UpdateResourceServerRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateResourceServerRequest.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerScopeListType, location_name: "Scopes"))
+    UpdateResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerIdentifierType, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    UpdateResourceServerRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerNameType, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateResourceServerRequest.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeListType, location_name: "Scopes"))
     UpdateResourceServerRequest.type = Types::UpdateResourceServerRequest
-    UpdateResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerType, location_name: "ResourceServer", traits: {"smithy.api#required" => {}}))
+    UpdateResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerType, location_name: "ResourceServer", traits: {"smithy.api#required" => {}}))
     UpdateResourceServerResponse.type = Types::UpdateResourceServerResponse
-    UpdateTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
-    UpdateTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateTermsRequest.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: "TermsName"))
-    UpdateTermsRequest.add_member(:terms_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsSourceType, location_name: "TermsSource"))
-    UpdateTermsRequest.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: "Enforcement"))
-    UpdateTermsRequest.add_member(:links, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinksType, location_name: "Links"))
+    UpdateTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsIdType, location_name: "TermsId", traits: {"smithy.api#required" => {}}))
+    UpdateTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateTermsRequest.add_member(:terms_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsNameType, location_name: "TermsName"))
+    UpdateTermsRequest.add_member(:terms_source, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsSourceType, location_name: "TermsSource"))
+    UpdateTermsRequest.add_member(:enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsEnforcementType, location_name: "Enforcement"))
+    UpdateTermsRequest.add_member(:links, ::Smithy::Schema::Shapes::MemberShape.new(target: LinksType, location_name: "Links"))
     UpdateTermsRequest.type = Types::UpdateTermsRequest
-    UpdateTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsType, location_name: "Terms"))
+    UpdateTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsType, location_name: "Terms"))
     UpdateTermsResponse.type = Types::UpdateTermsResponse
-    UpdateUserAttributesRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "UserAttributes", traits: {"smithy.api#required" => {}}))
-    UpdateUserAttributesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    UpdateUserAttributesRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    UpdateUserAttributesRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "UserAttributes", traits: {"smithy.api#required" => {}}))
+    UpdateUserAttributesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    UpdateUserAttributesRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, location_name: "ClientMetadata"))
     UpdateUserAttributesRequest.type = Types::UpdateUserAttributesRequest
-    UpdateUserAttributesResponse.add_member(:code_delivery_details_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryDetailsListType, location_name: "CodeDeliveryDetailsList"))
+    UpdateUserAttributesResponse.add_member(:code_delivery_details_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsListType, location_name: "CodeDeliveryDetailsList"))
     UpdateUserAttributesResponse.type = Types::UpdateUserAttributesResponse
-    UpdateUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateUserPoolClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
-    UpdateUserPoolClientRequest.add_member(:client_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientNameType, location_name: "ClientName"))
-    UpdateUserPoolClientRequest.add_member(:refresh_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshTokenValidityType, location_name: "RefreshTokenValidity", traits: {"smithy.api#default" => 0}))
-    UpdateUserPoolClientRequest.add_member(:access_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessTokenValidityType, location_name: "AccessTokenValidity"))
-    UpdateUserPoolClientRequest.add_member(:id_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdTokenValidityType, location_name: "IdTokenValidity"))
-    UpdateUserPoolClientRequest.add_member(:token_validity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenValidityUnitsType, location_name: "TokenValidityUnits"))
-    UpdateUserPoolClientRequest.add_member(:read_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "ReadAttributes"))
-    UpdateUserPoolClientRequest.add_member(:write_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "WriteAttributes"))
-    UpdateUserPoolClientRequest.add_member(:explicit_auth_flows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
-    UpdateUserPoolClientRequest.add_member(:supported_identity_providers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
-    UpdateUserPoolClientRequest.add_member(:callback_ur_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CallbackURLsListType, location_name: "CallbackURLs"))
-    UpdateUserPoolClientRequest.add_member(:logout_ur_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogoutURLsListType, location_name: "LogoutURLs"))
-    UpdateUserPoolClientRequest.add_member(:default_redirect_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectUrlType, location_name: "DefaultRedirectURI"))
-    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
-    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
-    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", traits: {"smithy.api#default" => false}))
-    UpdateUserPoolClientRequest.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
-    UpdateUserPoolClientRequest.add_member(:prevent_user_existence_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
-    UpdateUserPoolClientRequest.add_member(:enable_token_revocation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
-    UpdateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
-    UpdateUserPoolClientRequest.add_member(:auth_session_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
-    UpdateUserPoolClientRequest.add_member(:refresh_token_rotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
+    UpdateUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolClientRequest.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNameType, location_name: "ClientName"))
+    UpdateUserPoolClientRequest.add_member(:refresh_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshTokenValidityType, location_name: "RefreshTokenValidity", traits: {"smithy.api#default" => 0}))
+    UpdateUserPoolClientRequest.add_member(:access_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenValidityType, location_name: "AccessTokenValidity"))
+    UpdateUserPoolClientRequest.add_member(:id_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: IdTokenValidityType, location_name: "IdTokenValidity"))
+    UpdateUserPoolClientRequest.add_member(:token_validity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenValidityUnitsType, location_name: "TokenValidityUnits"))
+    UpdateUserPoolClientRequest.add_member(:read_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionListType, location_name: "ReadAttributes"))
+    UpdateUserPoolClientRequest.add_member(:write_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionListType, location_name: "WriteAttributes"))
+    UpdateUserPoolClientRequest.add_member(:explicit_auth_flows, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
+    UpdateUserPoolClientRequest.add_member(:supported_identity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
+    UpdateUserPoolClientRequest.add_member(:callback_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: CallbackURLsListType, location_name: "CallbackURLs"))
+    UpdateUserPoolClientRequest.add_member(:logout_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: LogoutURLsListType, location_name: "LogoutURLs"))
+    UpdateUserPoolClientRequest.add_member(:default_redirect_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, location_name: "DefaultRedirectURI"))
+    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
+    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeListType, location_name: "AllowedOAuthScopes"))
+    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", traits: {"smithy.api#default" => false}))
+    UpdateUserPoolClientRequest.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
+    UpdateUserPoolClientRequest.add_member(:prevent_user_existence_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
+    UpdateUserPoolClientRequest.add_member(:enable_token_revocation, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "EnableTokenRevocation"))
+    UpdateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
+    UpdateUserPoolClientRequest.add_member(:auth_session_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthSessionValidityType, location_name: "AuthSessionValidity"))
+    UpdateUserPoolClientRequest.add_member(:refresh_token_rotation, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
     UpdateUserPoolClientRequest.type = Types::UpdateUserPoolClientRequest
-    UpdateUserPoolClientResponse.add_member(:user_pool_client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
+    UpdateUserPoolClientResponse.add_member(:user_pool_client, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientType, location_name: "UserPoolClient"))
     UpdateUserPoolClientResponse.type = Types::UpdateUserPoolClientResponse
-    UpdateUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
-    UpdateUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateUserPoolDomainRequest.add_member(:managed_login_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedIntegerType, location_name: "ManagedLoginVersion"))
-    UpdateUserPoolDomainRequest.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomDomainConfigType, location_name: "CustomDomainConfig"))
+    UpdateUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "Domain", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolDomainRequest.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, location_name: "ManagedLoginVersion"))
+    UpdateUserPoolDomainRequest.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainConfigType, location_name: "CustomDomainConfig"))
     UpdateUserPoolDomainRequest.type = Types::UpdateUserPoolDomainRequest
-    UpdateUserPoolDomainResponse.add_member(:managed_login_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedIntegerType, location_name: "ManagedLoginVersion"))
-    UpdateUserPoolDomainResponse.add_member(:cloud_front_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "CloudFrontDomain"))
+    UpdateUserPoolDomainResponse.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, location_name: "ManagedLoginVersion"))
+    UpdateUserPoolDomainResponse.add_member(:cloud_front_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "CloudFrontDomain"))
     UpdateUserPoolDomainResponse.type = Types::UpdateUserPoolDomainResponse
-    UpdateUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
-    UpdateUserPoolRequest.add_member(:policies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolPolicyType, location_name: "Policies"))
-    UpdateUserPoolRequest.add_member(:deletion_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletionProtectionType, location_name: "DeletionProtection"))
-    UpdateUserPoolRequest.add_member(:lambda_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
-    UpdateUserPoolRequest.add_member(:auto_verified_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
-    UpdateUserPoolRequest.add_member(:sms_verification_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
-    UpdateUserPoolRequest.add_member(:email_verification_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
-    UpdateUserPoolRequest.add_member(:email_verification_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
-    UpdateUserPoolRequest.add_member(:verification_message_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
-    UpdateUserPoolRequest.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
-    UpdateUserPoolRequest.add_member(:user_attribute_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
-    UpdateUserPoolRequest.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
-    UpdateUserPoolRequest.add_member(:device_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
-    UpdateUserPoolRequest.add_member(:email_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailConfigurationType, location_name: "EmailConfiguration"))
-    UpdateUserPoolRequest.add_member(:sms_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
-    UpdateUserPoolRequest.add_member(:user_pool_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "UserPoolTags"))
-    UpdateUserPoolRequest.add_member(:admin_create_user_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
-    UpdateUserPoolRequest.add_member(:user_pool_add_ons, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
-    UpdateUserPoolRequest.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
-    UpdateUserPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolNameType, location_name: "PoolName"))
-    UpdateUserPoolRequest.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
+    UpdateUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolRequest.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolPolicyType, location_name: "Policies"))
+    UpdateUserPoolRequest.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionType, location_name: "DeletionProtection"))
+    UpdateUserPoolRequest.add_member(:lambda_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaConfigType, location_name: "LambdaConfig"))
+    UpdateUserPoolRequest.add_member(:auto_verified_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
+    UpdateUserPoolRequest.add_member(:sms_verification_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
+    UpdateUserPoolRequest.add_member(:email_verification_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
+    UpdateUserPoolRequest.add_member(:email_verification_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
+    UpdateUserPoolRequest.add_member(:verification_message_template, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
+    UpdateUserPoolRequest.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
+    UpdateUserPoolRequest.add_member(:user_attribute_update_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
+    UpdateUserPoolRequest.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolMfaType, location_name: "MfaConfiguration"))
+    UpdateUserPoolRequest.add_member(:device_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceConfigurationType, location_name: "DeviceConfiguration"))
+    UpdateUserPoolRequest.add_member(:email_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailConfigurationType, location_name: "EmailConfiguration"))
+    UpdateUserPoolRequest.add_member(:sms_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsConfigurationType, location_name: "SmsConfiguration"))
+    UpdateUserPoolRequest.add_member(:user_pool_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, location_name: "UserPoolTags"))
+    UpdateUserPoolRequest.add_member(:admin_create_user_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
+    UpdateUserPoolRequest.add_member(:user_pool_add_ons, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    UpdateUserPoolRequest.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
+    UpdateUserPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolNameType, location_name: "PoolName"))
+    UpdateUserPoolRequest.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTierType, location_name: "UserPoolTier"))
     UpdateUserPoolRequest.type = Types::UpdateUserPoolRequest
     UpdateUserPoolResponse.type = Types::UpdateUserPoolResponse
-    UserAttributeUpdateSettingsType.add_member(:attributes_require_verification_before_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributesRequireVerificationBeforeUpdateType, location_name: "AttributesRequireVerificationBeforeUpdate"))
+    UserAttributeUpdateSettingsType.add_member(:attributes_require_verification_before_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributesRequireVerificationBeforeUpdateType, location_name: "AttributesRequireVerificationBeforeUpdate"))
     UserAttributeUpdateSettingsType.type = Types::UserAttributeUpdateSettingsType
-    UserContextDataType.add_member(:ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "IpAddress"))
-    UserContextDataType.add_member(:encoded_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "EncodedData"))
+    UserContextDataType.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "IpAddress"))
+    UserContextDataType.add_member(:encoded_data, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "EncodedData"))
     UserContextDataType.type = Types::UserContextDataType
-    UserImportInProgressException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UserImportInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UserImportInProgressException.type = Types::UserImportInProgressException
-    UserImportJobStatusType.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Created", traits: {"smithy.api#enumValue" => "Created"}))
-    UserImportJobStatusType.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
-    UserImportJobStatusType.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
-    UserImportJobStatusType.add_member(:stopping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stopping", traits: {"smithy.api#enumValue" => "Stopping"}))
-    UserImportJobStatusType.add_member(:expired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Expired", traits: {"smithy.api#enumValue" => "Expired"}))
-    UserImportJobStatusType.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stopped", traits: {"smithy.api#enumValue" => "Stopped"}))
-    UserImportJobStatusType.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
-    UserImportJobStatusType.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Succeeded", traits: {"smithy.api#enumValue" => "Succeeded"}))
-    UserImportJobType.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobNameType, location_name: "JobName"))
-    UserImportJobType.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobIdType, location_name: "JobId"))
-    UserImportJobType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    UserImportJobType.add_member(:pre_signed_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreSignedUrlType, location_name: "PreSignedUrl"))
-    UserImportJobType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
-    UserImportJobType.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "StartDate"))
-    UserImportJobType.add_member(:completion_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CompletionDate"))
-    UserImportJobType.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobStatusType, location_name: "Status"))
-    UserImportJobType.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "CloudWatchLogsRoleArn"))
-    UserImportJobType.add_member(:imported_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ImportedUsers", traits: {"smithy.api#default" => 0}))
-    UserImportJobType.add_member(:skipped_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "SkippedUsers", traits: {"smithy.api#default" => 0}))
-    UserImportJobType.add_member(:failed_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "FailedUsers", traits: {"smithy.api#default" => 0}))
-    UserImportJobType.add_member(:completion_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletionMessageType, location_name: "CompletionMessage"))
+    UserImportJobStatusType.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Created", traits: {"smithy.api#enumValue" => "Created"}))
+    UserImportJobStatusType.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
+    UserImportJobStatusType.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
+    UserImportJobStatusType.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stopping", traits: {"smithy.api#enumValue" => "Stopping"}))
+    UserImportJobStatusType.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Expired", traits: {"smithy.api#enumValue" => "Expired"}))
+    UserImportJobStatusType.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stopped", traits: {"smithy.api#enumValue" => "Stopped"}))
+    UserImportJobStatusType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
+    UserImportJobStatusType.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Succeeded", traits: {"smithy.api#enumValue" => "Succeeded"}))
+    UserImportJobType.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobNameType, location_name: "JobName"))
+    UserImportJobType.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobIdType, location_name: "JobId"))
+    UserImportJobType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    UserImportJobType.add_member(:pre_signed_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PreSignedUrlType, location_name: "PreSignedUrl"))
+    UserImportJobType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
+    UserImportJobType.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "StartDate"))
+    UserImportJobType.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CompletionDate"))
+    UserImportJobType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobStatusType, location_name: "Status"))
+    UserImportJobType.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "CloudWatchLogsRoleArn"))
+    UserImportJobType.add_member(:imported_users, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ImportedUsers", traits: {"smithy.api#default" => 0}))
+    UserImportJobType.add_member(:skipped_users, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "SkippedUsers", traits: {"smithy.api#default" => 0}))
+    UserImportJobType.add_member(:failed_users, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "FailedUsers", traits: {"smithy.api#default" => 0}))
+    UserImportJobType.add_member(:completion_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionMessageType, location_name: "CompletionMessage"))
     UserImportJobType.type = Types::UserImportJobType
-    UserImportJobsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobType)
-    UserLambdaValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UserImportJobsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType)
+    UserLambdaValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UserLambdaValidationException.type = Types::UserLambdaValidationException
-    UserMFASettingListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    UserNotConfirmedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UserMFASettingListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    UserNotConfirmedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UserNotConfirmedException.type = Types::UserNotConfirmedException
-    UserNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UserNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UserNotFoundException.type = Types::UserNotFoundException
-    UserPoolAddOnNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UserPoolAddOnNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UserPoolAddOnNotEnabledException.type = Types::UserPoolAddOnNotEnabledException
-    UserPoolAddOnsType.add_member(:advanced_security_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdvancedSecurityModeType, location_name: "AdvancedSecurityMode", traits: {"smithy.api#required" => {}}))
-    UserPoolAddOnsType.add_member(:advanced_security_additional_flows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdvancedSecurityAdditionalFlowsType, location_name: "AdvancedSecurityAdditionalFlows"))
+    UserPoolAddOnsType.add_member(:advanced_security_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedSecurityModeType, location_name: "AdvancedSecurityMode", traits: {"smithy.api#required" => {}}))
+    UserPoolAddOnsType.add_member(:advanced_security_additional_flows, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedSecurityAdditionalFlowsType, location_name: "AdvancedSecurityAdditionalFlows"))
     UserPoolAddOnsType.type = Types::UserPoolAddOnsType
-    UserPoolClientDescription.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
-    UserPoolClientDescription.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    UserPoolClientDescription.add_member(:client_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientNameType, location_name: "ClientName"))
+    UserPoolClientDescription.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
+    UserPoolClientDescription.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    UserPoolClientDescription.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNameType, location_name: "ClientName"))
     UserPoolClientDescription.type = Types::UserPoolClientDescription
-    UserPoolClientListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolClientDescription)
-    UserPoolClientType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
-    UserPoolClientType.add_member(:client_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientNameType, location_name: "ClientName"))
-    UserPoolClientType.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
-    UserPoolClientType.add_member(:client_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
-    UserPoolClientType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
-    UserPoolClientType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
-    UserPoolClientType.add_member(:refresh_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshTokenValidityType, location_name: "RefreshTokenValidity", traits: {"smithy.api#default" => 0}))
-    UserPoolClientType.add_member(:access_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessTokenValidityType, location_name: "AccessTokenValidity"))
-    UserPoolClientType.add_member(:id_token_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdTokenValidityType, location_name: "IdTokenValidity"))
-    UserPoolClientType.add_member(:token_validity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenValidityUnitsType, location_name: "TokenValidityUnits"))
-    UserPoolClientType.add_member(:read_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "ReadAttributes"))
-    UserPoolClientType.add_member(:write_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "WriteAttributes"))
-    UserPoolClientType.add_member(:explicit_auth_flows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
-    UserPoolClientType.add_member(:supported_identity_providers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
-    UserPoolClientType.add_member(:callback_ur_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CallbackURLsListType, location_name: "CallbackURLs"))
-    UserPoolClientType.add_member(:logout_ur_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogoutURLsListType, location_name: "LogoutURLs"))
-    UserPoolClientType.add_member(:default_redirect_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectUrlType, location_name: "DefaultRedirectURI"))
-    UserPoolClientType.add_member(:allowed_o_auth_flows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
-    UserPoolClientType.add_member(:allowed_o_auth_scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
-    UserPoolClientType.add_member(:allowed_o_auth_flows_user_pool_client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", traits: {"smithy.api#default" => nil}))
-    UserPoolClientType.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
-    UserPoolClientType.add_member(:prevent_user_existence_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
-    UserPoolClientType.add_member(:enable_token_revocation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
-    UserPoolClientType.add_member(:enable_propagate_additional_user_context_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
-    UserPoolClientType.add_member(:auth_session_validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
-    UserPoolClientType.add_member(:refresh_token_rotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
+    UserPoolClientListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientDescription)
+    UserPoolClientType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "UserPoolId"))
+    UserPoolClientType.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNameType, location_name: "ClientName"))
+    UserPoolClientType.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, location_name: "ClientId"))
+    UserPoolClientType.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, location_name: "ClientSecret"))
+    UserPoolClientType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
+    UserPoolClientType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
+    UserPoolClientType.add_member(:refresh_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshTokenValidityType, location_name: "RefreshTokenValidity", traits: {"smithy.api#default" => 0}))
+    UserPoolClientType.add_member(:access_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenValidityType, location_name: "AccessTokenValidity"))
+    UserPoolClientType.add_member(:id_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: IdTokenValidityType, location_name: "IdTokenValidity"))
+    UserPoolClientType.add_member(:token_validity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenValidityUnitsType, location_name: "TokenValidityUnits"))
+    UserPoolClientType.add_member(:read_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionListType, location_name: "ReadAttributes"))
+    UserPoolClientType.add_member(:write_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionListType, location_name: "WriteAttributes"))
+    UserPoolClientType.add_member(:explicit_auth_flows, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
+    UserPoolClientType.add_member(:supported_identity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
+    UserPoolClientType.add_member(:callback_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: CallbackURLsListType, location_name: "CallbackURLs"))
+    UserPoolClientType.add_member(:logout_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: LogoutURLsListType, location_name: "LogoutURLs"))
+    UserPoolClientType.add_member(:default_redirect_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, location_name: "DefaultRedirectURI"))
+    UserPoolClientType.add_member(:allowed_o_auth_flows, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
+    UserPoolClientType.add_member(:allowed_o_auth_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeListType, location_name: "AllowedOAuthScopes"))
+    UserPoolClientType.add_member(:allowed_o_auth_flows_user_pool_client, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", traits: {"smithy.api#default" => nil}))
+    UserPoolClientType.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
+    UserPoolClientType.add_member(:prevent_user_existence_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
+    UserPoolClientType.add_member(:enable_token_revocation, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "EnableTokenRevocation"))
+    UserPoolClientType.add_member(:enable_propagate_additional_user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
+    UserPoolClientType.add_member(:auth_session_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthSessionValidityType, location_name: "AuthSessionValidity"))
+    UserPoolClientType.add_member(:refresh_token_rotation, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
     UserPoolClientType.type = Types::UserPoolClientType
-    UserPoolDescriptionType.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))
-    UserPoolDescriptionType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolNameType, location_name: "Name"))
-    UserPoolDescriptionType.add_member(:lambda_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
-    UserPoolDescriptionType.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusType, location_name: "Status", traits: {"smithy.api#deprecated" => {"message" => "This property is no longer available."}}))
-    UserPoolDescriptionType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
-    UserPoolDescriptionType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    UserPoolDescriptionType.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "Id"))
+    UserPoolDescriptionType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolNameType, location_name: "Name"))
+    UserPoolDescriptionType.add_member(:lambda_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaConfigType, location_name: "LambdaConfig"))
+    UserPoolDescriptionType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, location_name: "Status", traits: {"smithy.api#deprecated" => {"message" => "This property is no longer available."}}))
+    UserPoolDescriptionType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
+    UserPoolDescriptionType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
     UserPoolDescriptionType.type = Types::UserPoolDescriptionType
-    UserPoolListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolDescriptionType)
-    UserPoolMfaType.add_member(:off, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
-    UserPoolMfaType.add_member(:on, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
-    UserPoolMfaType.add_member(:optional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
-    UserPoolPolicyType.add_member(:password_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordPolicyType, location_name: "PasswordPolicy"))
-    UserPoolPolicyType.add_member(:sign_in_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignInPolicyType, location_name: "SignInPolicy"))
+    UserPoolListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolDescriptionType)
+    UserPoolMfaType.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
+    UserPoolMfaType.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
+    UserPoolMfaType.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
+    UserPoolPolicyType.add_member(:password_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordPolicyType, location_name: "PasswordPolicy"))
+    UserPoolPolicyType.add_member(:sign_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SignInPolicyType, location_name: "SignInPolicy"))
     UserPoolPolicyType.type = Types::UserPoolPolicyType
-    UserPoolTaggingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UserPoolTaggingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UserPoolTaggingException.type = Types::UserPoolTaggingException
-    UserPoolTagsListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeysType)
-    UserPoolTagsType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeysType)
-    UserPoolTagsType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValueType)
-    UserPoolTierType.add_member(:lite, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LITE", traits: {"smithy.api#enumValue" => "LITE"}))
-    UserPoolTierType.add_member(:essentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ESSENTIALS", traits: {"smithy.api#enumValue" => "ESSENTIALS"}))
-    UserPoolTierType.add_member(:plus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLUS", traits: {"smithy.api#enumValue" => "PLUS"}))
-    UserPoolType.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))
-    UserPoolType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolNameType, location_name: "Name"))
-    UserPoolType.add_member(:policies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolPolicyType, location_name: "Policies"))
-    UserPoolType.add_member(:deletion_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletionProtectionType, location_name: "DeletionProtection"))
-    UserPoolType.add_member(:lambda_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
-    UserPoolType.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusType, location_name: "Status", traits: {"smithy.api#deprecated" => {"message" => "This property is no longer available."}}))
-    UserPoolType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
-    UserPoolType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
-    UserPoolType.add_member(:schema_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaAttributesListType, location_name: "SchemaAttributes"))
-    UserPoolType.add_member(:auto_verified_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
-    UserPoolType.add_member(:alias_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasAttributesListType, location_name: "AliasAttributes"))
-    UserPoolType.add_member(:username_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameAttributesListType, location_name: "UsernameAttributes"))
-    UserPoolType.add_member(:sms_verification_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
-    UserPoolType.add_member(:email_verification_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
-    UserPoolType.add_member(:email_verification_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
-    UserPoolType.add_member(:verification_message_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
-    UserPoolType.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
-    UserPoolType.add_member(:user_attribute_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
-    UserPoolType.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
-    UserPoolType.add_member(:device_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
-    UserPoolType.add_member(:estimated_number_of_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerType, location_name: "EstimatedNumberOfUsers", traits: {"smithy.api#default" => 0}))
-    UserPoolType.add_member(:email_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailConfigurationType, location_name: "EmailConfiguration"))
-    UserPoolType.add_member(:sms_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
-    UserPoolType.add_member(:user_pool_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "UserPoolTags"))
-    UserPoolType.add_member(:sms_configuration_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "SmsConfigurationFailure"))
-    UserPoolType.add_member(:email_configuration_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "EmailConfigurationFailure"))
-    UserPoolType.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
-    UserPoolType.add_member(:custom_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainType, location_name: "CustomDomain"))
-    UserPoolType.add_member(:admin_create_user_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
-    UserPoolType.add_member(:user_pool_add_ons, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
-    UserPoolType.add_member(:username_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameConfigurationType, location_name: "UsernameConfiguration"))
-    UserPoolType.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: "Arn"))
-    UserPoolType.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
-    UserPoolType.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
+    UserPoolTagsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType)
+    UserPoolTagsType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType)
+    UserPoolTagsType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType)
+    UserPoolTierType.add_member(:lite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LITE", traits: {"smithy.api#enumValue" => "LITE"}))
+    UserPoolTierType.add_member(:essentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ESSENTIALS", traits: {"smithy.api#enumValue" => "ESSENTIALS"}))
+    UserPoolTierType.add_member(:plus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLUS", traits: {"smithy.api#enumValue" => "PLUS"}))
+    UserPoolType.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, location_name: "Id"))
+    UserPoolType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolNameType, location_name: "Name"))
+    UserPoolType.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolPolicyType, location_name: "Policies"))
+    UserPoolType.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionType, location_name: "DeletionProtection"))
+    UserPoolType.add_member(:lambda_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaConfigType, location_name: "LambdaConfig"))
+    UserPoolType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, location_name: "Status", traits: {"smithy.api#deprecated" => {"message" => "This property is no longer available."}}))
+    UserPoolType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "LastModifiedDate"))
+    UserPoolType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreationDate"))
+    UserPoolType.add_member(:schema_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributesListType, location_name: "SchemaAttributes"))
+    UserPoolType.add_member(:auto_verified_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
+    UserPoolType.add_member(:alias_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasAttributesListType, location_name: "AliasAttributes"))
+    UserPoolType.add_member(:username_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameAttributesListType, location_name: "UsernameAttributes"))
+    UserPoolType.add_member(:sms_verification_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
+    UserPoolType.add_member(:email_verification_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
+    UserPoolType.add_member(:email_verification_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
+    UserPoolType.add_member(:verification_message_template, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
+    UserPoolType.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
+    UserPoolType.add_member(:user_attribute_update_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
+    UserPoolType.add_member(:mfa_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolMfaType, location_name: "MfaConfiguration"))
+    UserPoolType.add_member(:device_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceConfigurationType, location_name: "DeviceConfiguration"))
+    UserPoolType.add_member(:estimated_number_of_users, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, location_name: "EstimatedNumberOfUsers", traits: {"smithy.api#default" => 0}))
+    UserPoolType.add_member(:email_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailConfigurationType, location_name: "EmailConfiguration"))
+    UserPoolType.add_member(:sms_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsConfigurationType, location_name: "SmsConfiguration"))
+    UserPoolType.add_member(:user_pool_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, location_name: "UserPoolTags"))
+    UserPoolType.add_member(:sms_configuration_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "SmsConfigurationFailure"))
+    UserPoolType.add_member(:email_configuration_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "EmailConfigurationFailure"))
+    UserPoolType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "Domain"))
+    UserPoolType.add_member(:custom_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, location_name: "CustomDomain"))
+    UserPoolType.add_member(:admin_create_user_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
+    UserPoolType.add_member(:user_pool_add_ons, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    UserPoolType.add_member(:username_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameConfigurationType, location_name: "UsernameConfiguration"))
+    UserPoolType.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, location_name: "Arn"))
+    UserPoolType.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
+    UserPoolType.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTierType, location_name: "UserPoolTier"))
     UserPoolType.type = Types::UserPoolType
-    UserStatusType.add_member(:unconfirmed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNCONFIRMED", traits: {"smithy.api#enumValue" => "UNCONFIRMED"}))
-    UserStatusType.add_member(:confirmed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIRMED", traits: {"smithy.api#enumValue" => "CONFIRMED"}))
-    UserStatusType.add_member(:archived, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
-    UserStatusType.add_member(:compromised, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPROMISED", traits: {"smithy.api#enumValue" => "COMPROMISED"}))
-    UserStatusType.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    UserStatusType.add_member(:reset_required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESET_REQUIRED", traits: {"smithy.api#enumValue" => "RESET_REQUIRED"}))
-    UserStatusType.add_member(:force_change_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORCE_CHANGE_PASSWORD", traits: {"smithy.api#enumValue" => "FORCE_CHANGE_PASSWORD"}))
-    UserStatusType.add_member(:external_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXTERNAL_PROVIDER", traits: {"smithy.api#enumValue" => "EXTERNAL_PROVIDER"}))
-    UserType.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username"))
-    UserType.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: "Attributes"))
-    UserType.add_member(:user_create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "UserCreateDate"))
-    UserType.add_member(:user_last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "UserLastModifiedDate"))
-    UserType.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
-    UserType.add_member(:user_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserStatusType, location_name: "UserStatus"))
-    UserType.add_member(:mfa_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions"))
+    UserStatusType.add_member(:unconfirmed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNCONFIRMED", traits: {"smithy.api#enumValue" => "UNCONFIRMED"}))
+    UserStatusType.add_member(:confirmed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIRMED", traits: {"smithy.api#enumValue" => "CONFIRMED"}))
+    UserStatusType.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
+    UserStatusType.add_member(:compromised, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPROMISED", traits: {"smithy.api#enumValue" => "COMPROMISED"}))
+    UserStatusType.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    UserStatusType.add_member(:reset_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESET_REQUIRED", traits: {"smithy.api#enumValue" => "RESET_REQUIRED"}))
+    UserStatusType.add_member(:force_change_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORCE_CHANGE_PASSWORD", traits: {"smithy.api#enumValue" => "FORCE_CHANGE_PASSWORD"}))
+    UserStatusType.add_member(:external_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXTERNAL_PROVIDER", traits: {"smithy.api#enumValue" => "EXTERNAL_PROVIDER"}))
+    UserType.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, location_name: "Username"))
+    UserType.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeListType, location_name: "Attributes"))
+    UserType.add_member(:user_create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "UserCreateDate"))
+    UserType.add_member(:user_last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "UserLastModifiedDate"))
+    UserType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    UserType.add_member(:user_status, ::Smithy::Schema::Shapes::MemberShape.new(target: UserStatusType, location_name: "UserStatus"))
+    UserType.add_member(:mfa_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionListType, location_name: "MFAOptions"))
     UserType.type = Types::UserType
-    UserVerificationType.add_member(:required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRED", traits: {"smithy.api#enumValue" => "required"}))
-    UserVerificationType.add_member(:preferred, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREFERRED", traits: {"smithy.api#enumValue" => "preferred"}))
-    UsernameAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
-    UsernameAttributeType.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
-    UsernameAttributesListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameAttributeType)
-    UsernameConfigurationType.add_member(:case_sensitive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "CaseSensitive", traits: {"smithy.api#required" => {}}))
+    UserVerificationType.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRED", traits: {"smithy.api#enumValue" => "required"}))
+    UserVerificationType.add_member(:preferred, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREFERRED", traits: {"smithy.api#enumValue" => "preferred"}))
+    UsernameAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
+    UsernameAttributeType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
+    UsernameAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameAttributeType)
+    UsernameConfigurationType.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, location_name: "CaseSensitive", traits: {"smithy.api#required" => {}}))
     UsernameConfigurationType.type = Types::UsernameConfigurationType
-    UsernameExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UsernameExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     UsernameExistsException.type = Types::UsernameExistsException
-    UsersListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserType)
-    VerificationMessageTemplateType.add_member(:sms_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsMessage"))
-    VerificationMessageTemplateType.add_member(:email_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationMessageType, location_name: "EmailMessage"))
-    VerificationMessageTemplateType.add_member(:email_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailSubject"))
-    VerificationMessageTemplateType.add_member(:email_message_by_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationMessageByLinkType, location_name: "EmailMessageByLink"))
-    VerificationMessageTemplateType.add_member(:email_subject_by_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailVerificationSubjectByLinkType, location_name: "EmailSubjectByLink"))
-    VerificationMessageTemplateType.add_member(:default_email_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultEmailOptionType, location_name: "DefaultEmailOption"))
+    UsersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserType)
+    VerificationMessageTemplateType.add_member(:sms_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, location_name: "SmsMessage"))
+    VerificationMessageTemplateType.add_member(:email_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationMessageType, location_name: "EmailMessage"))
+    VerificationMessageTemplateType.add_member(:email_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationSubjectType, location_name: "EmailSubject"))
+    VerificationMessageTemplateType.add_member(:email_message_by_link, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationMessageByLinkType, location_name: "EmailMessageByLink"))
+    VerificationMessageTemplateType.add_member(:email_subject_by_link, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationSubjectByLinkType, location_name: "EmailSubjectByLink"))
+    VerificationMessageTemplateType.add_member(:default_email_option, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultEmailOptionType, location_name: "DefaultEmailOption"))
     VerificationMessageTemplateType.type = Types::VerificationMessageTemplateType
-    VerifiedAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
-    VerifiedAttributeType.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
-    VerifiedAttributesListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedAttributeType)
-    VerifySoftwareTokenRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
-    VerifySoftwareTokenRequest.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
-    VerifySoftwareTokenRequest.add_member(:user_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMFAUserCodeType, location_name: "UserCode", traits: {"smithy.api#required" => {}}))
-    VerifySoftwareTokenRequest.add_member(:friendly_device_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "FriendlyDeviceName"))
+    VerifiedAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
+    VerifiedAttributeType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
+    VerifiedAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributeType)
+    VerifySoftwareTokenRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken"))
+    VerifySoftwareTokenRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
+    VerifySoftwareTokenRequest.add_member(:user_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMFAUserCodeType, location_name: "UserCode", traits: {"smithy.api#required" => {}}))
+    VerifySoftwareTokenRequest.add_member(:friendly_device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "FriendlyDeviceName"))
     VerifySoftwareTokenRequest.type = Types::VerifySoftwareTokenRequest
-    VerifySoftwareTokenResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifySoftwareTokenResponseType, location_name: "Status"))
-    VerifySoftwareTokenResponse.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
+    VerifySoftwareTokenResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifySoftwareTokenResponseType, location_name: "Status"))
+    VerifySoftwareTokenResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, location_name: "Session"))
     VerifySoftwareTokenResponse.type = Types::VerifySoftwareTokenResponse
-    VerifySoftwareTokenResponseType.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    VerifySoftwareTokenResponseType.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    VerifyUserAttributeRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
-    VerifyUserAttributeRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameType, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
-    VerifyUserAttributeRequest.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationCodeType, location_name: "Code", traits: {"smithy.api#required" => {}}))
+    VerifySoftwareTokenResponseType.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    VerifySoftwareTokenResponseType.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    VerifyUserAttributeRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, location_name: "AccessToken", traits: {"smithy.api#required" => {}}))
+    VerifyUserAttributeRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
+    VerifyUserAttributeRequest.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationCodeType, location_name: "Code", traits: {"smithy.api#required" => {}}))
     VerifyUserAttributeRequest.type = Types::VerifyUserAttributeRequest
     VerifyUserAttributeResponse.type = Types::VerifyUserAttributeResponse
-    WebAuthnAuthenticatorTransportsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnAuthenticatorTransportType)
-    WebAuthnChallengeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    WebAuthnAuthenticatorTransportsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnAuthenticatorTransportType)
+    WebAuthnChallengeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     WebAuthnChallengeNotFoundException.type = Types::WebAuthnChallengeNotFoundException
-    WebAuthnClientMismatchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    WebAuthnClientMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     WebAuthnClientMismatchException.type = Types::WebAuthnClientMismatchException
-    WebAuthnConfigurationMissingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    WebAuthnConfigurationMissingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     WebAuthnConfigurationMissingException.type = Types::WebAuthnConfigurationMissingException
-    WebAuthnConfigurationType.add_member(:relying_party_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelyingPartyIdType, location_name: "RelyingPartyId"))
-    WebAuthnConfigurationType.add_member(:user_verification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserVerificationType, location_name: "UserVerification"))
+    WebAuthnConfigurationType.add_member(:relying_party_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RelyingPartyIdType, location_name: "RelyingPartyId"))
+    WebAuthnConfigurationType.add_member(:user_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: UserVerificationType, location_name: "UserVerification"))
     WebAuthnConfigurationType.type = Types::WebAuthnConfigurationType
-    WebAuthnCredentialDescription.add_member(:credential_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "CredentialId", traits: {"smithy.api#required" => {}}))
-    WebAuthnCredentialDescription.add_member(:friendly_credential_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "FriendlyCredentialName", traits: {"smithy.api#required" => {}}))
-    WebAuthnCredentialDescription.add_member(:relying_party_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "RelyingPartyId", traits: {"smithy.api#required" => {}}))
-    WebAuthnCredentialDescription.add_member(:authenticator_attachment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnAuthenticatorAttachmentType, location_name: "AuthenticatorAttachment"))
-    WebAuthnCredentialDescription.add_member(:authenticator_transports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnAuthenticatorTransportsList, location_name: "AuthenticatorTransports", traits: {"smithy.api#required" => {}}))
-    WebAuthnCredentialDescription.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    WebAuthnCredentialDescription.add_member(:credential_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "CredentialId", traits: {"smithy.api#required" => {}}))
+    WebAuthnCredentialDescription.add_member(:friendly_credential_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "FriendlyCredentialName", traits: {"smithy.api#required" => {}}))
+    WebAuthnCredentialDescription.add_member(:relying_party_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "RelyingPartyId", traits: {"smithy.api#required" => {}}))
+    WebAuthnCredentialDescription.add_member(:authenticator_attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnAuthenticatorAttachmentType, location_name: "AuthenticatorAttachment"))
+    WebAuthnCredentialDescription.add_member(:authenticator_transports, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnAuthenticatorTransportsList, location_name: "AuthenticatorTransports", traits: {"smithy.api#required" => {}}))
+    WebAuthnCredentialDescription.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, location_name: "CreatedAt", traits: {"smithy.api#required" => {}}))
     WebAuthnCredentialDescription.type = Types::WebAuthnCredentialDescription
-    WebAuthnCredentialDescriptionListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnCredentialDescription)
-    WebAuthnCredentialNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    WebAuthnCredentialDescriptionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnCredentialDescription)
+    WebAuthnCredentialNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     WebAuthnCredentialNotSupportedException.type = Types::WebAuthnCredentialNotSupportedException
-    WebAuthnNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    WebAuthnNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     WebAuthnNotEnabledException.type = Types::WebAuthnNotEnabledException
-    WebAuthnOriginNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    WebAuthnOriginNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     WebAuthnOriginNotAllowedException.type = Types::WebAuthnOriginNotAllowedException
-    WebAuthnRelyingPartyMismatchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    WebAuthnRelyingPartyMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "message"))
     WebAuthnRelyingPartyMismatchException.type = Types::WebAuthnRelyingPartyMismatchException
 
     AWSCognitoIdentityProviderService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -2206,1799 +2206,1799 @@ module Aws::CognitoIdentityProvider
       service.add_operation(:add_custom_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AddCustomAttributes"
         operation.name = "AddCustomAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddCustomAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddCustomAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportInProgressException)
+        operation.input = AddCustomAttributesRequest
+        operation.output = AddCustomAttributesResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserImportInProgressException
         operation.traits = {}
       end)
       service.add_operation(:admin_add_user_to_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminAddUserToGroup"
         operation.name = "AdminAddUserToGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminAddUserToGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminAddUserToGroupRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_confirm_sign_up, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminConfirmSignUp"
         operation.name = "AdminConfirmSignUp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminConfirmSignUpRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminConfirmSignUpResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyFailedAttemptsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminConfirmSignUpRequest
+        operation.output = AdminConfirmSignUpResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyFailedAttemptsException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_create_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminCreateUser"
         operation.name = "AdminCreateUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminCreateUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminCreateUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionNotMetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedUserStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminCreateUserRequest
+        operation.output = AdminCreateUserResponse
+        operation.errors << CodeDeliveryFailureException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << NotAuthorizedException
+        operation.errors << PreconditionNotMetException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UnsupportedUserStateException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UsernameExistsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_delete_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminDeleteUser"
         operation.name = "AdminDeleteUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminDeleteUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminDeleteUserRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_delete_user_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminDeleteUserAttributes"
         operation.name = "AdminDeleteUserAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminDeleteUserAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminDeleteUserAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminDeleteUserAttributesRequest
+        operation.output = AdminDeleteUserAttributesResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_disable_provider_for_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminDisableProviderForUser"
         operation.name = "AdminDisableProviderForUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminDisableProviderForUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminDisableProviderForUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminDisableProviderForUserRequest
+        operation.output = AdminDisableProviderForUserResponse
+        operation.errors << AliasExistsException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_disable_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminDisableUser"
         operation.name = "AdminDisableUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminDisableUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminDisableUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminDisableUserRequest
+        operation.output = AdminDisableUserResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_enable_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminEnableUser"
         operation.name = "AdminEnableUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminEnableUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminEnableUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminEnableUserRequest
+        operation.output = AdminEnableUserResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_forget_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminForgetDevice"
         operation.name = "AdminForgetDevice"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminForgetDeviceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminForgetDeviceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_get_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminGetDevice"
         operation.name = "AdminGetDevice"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminGetDeviceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminGetDeviceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = AdminGetDeviceRequest
+        operation.output = AdminGetDeviceResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:admin_get_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminGetUser"
         operation.name = "AdminGetUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminGetUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminGetUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminGetUserRequest
+        operation.output = AdminGetUserResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_initiate_auth, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminInitiateAuth"
         operation.name = "AdminInitiateAuth"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminInitiateAuthRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminInitiateAuthResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAMethodNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminInitiateAuthRequest
+        operation.output = AdminInitiateAuthResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << MFAMethodNotFoundException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UnsupportedOperationException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_link_provider_for_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminLinkProviderForUser"
         operation.name = "AdminLinkProviderForUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminLinkProviderForUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminLinkProviderForUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminLinkProviderForUserRequest
+        operation.output = AdminLinkProviderForUserResponse
+        operation.errors << AliasExistsException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_list_devices, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminListDevices"
         operation.name = "AdminListDevices"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminListDevicesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminListDevicesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = AdminListDevicesRequest
+        operation.output = AdminListDevicesResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:admin_list_groups_for_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminListGroupsForUser"
         operation.name = "AdminListGroupsForUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminListGroupsForUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminListGroupsForUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminListGroupsForUserRequest
+        operation.output = AdminListGroupsForUserResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
         operation[:paginator] = Paginators::AdminListGroupsForUser.new
       end)
       service.add_operation(:admin_list_user_auth_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminListUserAuthEvents"
         operation.name = "AdminListUserAuthEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminListUserAuthEventsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminListUserAuthEventsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
+        operation.input = AdminListUserAuthEventsRequest
+        operation.output = AdminListUserAuthEventsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
+        operation.errors << UserPoolAddOnNotEnabledException
         operation.traits = {}
         operation[:paginator] = Paginators::AdminListUserAuthEvents.new
       end)
       service.add_operation(:admin_remove_user_from_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminRemoveUserFromGroup"
         operation.name = "AdminRemoveUserFromGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminRemoveUserFromGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminRemoveUserFromGroupRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_reset_user_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminResetUserPassword"
         operation.name = "AdminResetUserPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminResetUserPasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminResetUserPasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminResetUserPasswordRequest
+        operation.output = AdminResetUserPasswordResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_respond_to_auth_challenge, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminRespondToAuthChallenge"
         operation.name = "AdminRespondToAuthChallenge"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminRespondToAuthChallengeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminRespondToAuthChallengeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredCodeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAMethodNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMFANotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminRespondToAuthChallengeRequest
+        operation.output = AdminRespondToAuthChallengeResponse
+        operation.errors << AliasExistsException
+        operation.errors << CodeMismatchException
+        operation.errors << ExpiredCodeException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << MFAMethodNotFoundException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordHistoryPolicyViolationException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << SoftwareTokenMFANotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_set_user_mfa_preference, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminSetUserMFAPreference"
         operation.name = "AdminSetUserMFAPreference"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminSetUserMFAPreferenceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminSetUserMFAPreferenceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminSetUserMFAPreferenceRequest
+        operation.output = AdminSetUserMFAPreferenceResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_set_user_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminSetUserPassword"
         operation.name = "AdminSetUserPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminSetUserPasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminSetUserPasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminSetUserPasswordRequest
+        operation.output = AdminSetUserPasswordResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordHistoryPolicyViolationException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_set_user_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminSetUserSettings"
         operation.name = "AdminSetUserSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminSetUserSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminSetUserSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminSetUserSettingsRequest
+        operation.output = AdminSetUserSettingsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_update_auth_event_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminUpdateAuthEventFeedback"
         operation.name = "AdminUpdateAuthEventFeedback"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUpdateAuthEventFeedbackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUpdateAuthEventFeedbackResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
+        operation.input = AdminUpdateAuthEventFeedbackRequest
+        operation.output = AdminUpdateAuthEventFeedbackResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
+        operation.errors << UserPoolAddOnNotEnabledException
         operation.traits = {}
       end)
       service.add_operation(:admin_update_device_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminUpdateDeviceStatus"
         operation.name = "AdminUpdateDeviceStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUpdateDeviceStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUpdateDeviceStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminUpdateDeviceStatusRequest
+        operation.output = AdminUpdateDeviceStatusResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_update_user_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminUpdateUserAttributes"
         operation.name = "AdminUpdateUserAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUpdateUserAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUpdateUserAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminUpdateUserAttributesRequest
+        operation.output = AdminUpdateUserAttributesResponse
+        operation.errors << AliasExistsException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:admin_user_global_sign_out, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AdminUserGlobalSignOut"
         operation.name = "AdminUserGlobalSignOut"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUserGlobalSignOutRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminUserGlobalSignOutResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = AdminUserGlobalSignOutRequest
+        operation.output = AdminUserGlobalSignOutResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:associate_software_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AssociateSoftwareToken"
         operation.name = "AssociateSoftwareToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateSoftwareTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateSoftwareTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMFANotFoundException)
+        operation.input = AssociateSoftwareTokenRequest
+        operation.output = AssociateSoftwareTokenResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << SoftwareTokenMFANotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:change_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ChangePassword"
         operation.name = "ChangePassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangePasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangePasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ChangePasswordRequest
+        operation.output = ChangePasswordResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordHistoryPolicyViolationException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:complete_web_authn_registration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CompleteWebAuthnRegistration"
         operation.name = "CompleteWebAuthnRegistration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteWebAuthnRegistrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteWebAuthnRegistrationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnChallengeNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnClientMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnCredentialNotSupportedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnOriginNotAllowedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnRelyingPartyMismatchException)
+        operation.input = CompleteWebAuthnRegistrationRequest
+        operation.output = CompleteWebAuthnRegistrationResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << TooManyRequestsException
+        operation.errors << WebAuthnChallengeNotFoundException
+        operation.errors << WebAuthnClientMismatchException
+        operation.errors << WebAuthnCredentialNotSupportedException
+        operation.errors << WebAuthnNotEnabledException
+        operation.errors << WebAuthnOriginNotAllowedException
+        operation.errors << WebAuthnRelyingPartyMismatchException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:confirm_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ConfirmDevice"
         operation.name = "ConfirmDevice"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmDeviceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmDeviceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceKeyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ConfirmDeviceRequest
+        operation.output = ConfirmDeviceResponse
+        operation.errors << DeviceKeyExistsException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UsernameExistsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:confirm_forgot_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ConfirmForgotPassword"
         operation.name = "ConfirmForgotPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmForgotPasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmForgotPasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredCodeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyFailedAttemptsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ConfirmForgotPasswordRequest
+        operation.output = ConfirmForgotPasswordResponse
+        operation.errors << CodeMismatchException
+        operation.errors << ExpiredCodeException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordHistoryPolicyViolationException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyFailedAttemptsException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:confirm_sign_up, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ConfirmSignUp"
         operation.name = "ConfirmSignUp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmSignUpRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmSignUpResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredCodeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyFailedAttemptsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ConfirmSignUpRequest
+        operation.output = ConfirmSignUpResponse
+        operation.errors << AliasExistsException
+        operation.errors << CodeMismatchException
+        operation.errors << ExpiredCodeException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyFailedAttemptsException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:create_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateGroup"
         operation.name = "CreateGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateGroupRequest
+        operation.output = CreateGroupResponse
+        operation.errors << GroupExistsException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_identity_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateIdentityProvider"
         operation.name = "CreateIdentityProvider"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIdentityProviderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIdentityProviderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateProviderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateIdentityProviderRequest
+        operation.output = CreateIdentityProviderResponse
+        operation.errors << DuplicateProviderException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_managed_login_branding, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateManagedLoginBranding"
         operation.name = "CreateManagedLoginBranding"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateManagedLoginBrandingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateManagedLoginBrandingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLoginBrandingExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateManagedLoginBrandingRequest
+        operation.output = CreateManagedLoginBrandingResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << ManagedLoginBrandingExistsException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_resource_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateResourceServer"
         operation.name = "CreateResourceServer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceServerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceServerResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateResourceServerRequest
+        operation.output = CreateResourceServerResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateTerms"
         operation.name = "CreateTerms"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTermsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTermsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateTermsRequest
+        operation.output = CreateTermsResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TermsExistsException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_user_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateUserImportJob"
         operation.name = "CreateUserImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionNotMetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateUserImportJobRequest
+        operation.output = CreateUserImportJobResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << PreconditionNotMetException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_user_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateUserPool"
         operation.name = "CreateUserPool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserPoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserPoolResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TierChangeNotAllowedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTaggingException)
+        operation.input = CreateUserPoolRequest
+        operation.output = CreateUserPoolResponse
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << TierChangeNotAllowedException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserPoolTaggingException
         operation.traits = {}
       end)
       service.add_operation(:create_user_pool_client, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateUserPoolClient"
         operation.name = "CreateUserPoolClient"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserPoolClientRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserPoolClientResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidOAuthFlowException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScopeDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateUserPoolClientRequest
+        operation.output = CreateUserPoolClientResponse
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidOAuthFlowException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ScopeDoesNotExistException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_user_pool_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateUserPoolDomain"
         operation.name = "CreateUserPoolDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserPoolDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserPoolDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = CreateUserPoolDomainRequest
+        operation.output = CreateUserPoolDomainResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteGroup"
         operation.name = "DeleteGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteGroupRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_identity_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteIdentityProvider"
         operation.name = "DeleteIdentityProvider"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIdentityProviderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedIdentityProviderException)
+        operation.input = DeleteIdentityProviderRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedIdentityProviderException
         operation.traits = {}
       end)
       service.add_operation(:delete_managed_login_branding, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteManagedLoginBranding"
         operation.name = "DeleteManagedLoginBranding"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteManagedLoginBrandingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteManagedLoginBrandingRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_resource_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteResourceServer"
         operation.name = "DeleteResourceServer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourceServerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteResourceServerRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteTerms"
         operation.name = "DeleteTerms"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTermsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteTermsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteUser"
         operation.name = "DeleteUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = DeleteUserRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:delete_user_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteUserAttributes"
         operation.name = "DeleteUserAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = DeleteUserAttributesRequest
+        operation.output = DeleteUserAttributesResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:delete_user_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteUserPool"
         operation.name = "DeleteUserPool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserPoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportInProgressException)
+        operation.input = DeleteUserPoolRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserImportInProgressException
         operation.traits = {}
       end)
       service.add_operation(:delete_user_pool_client, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClient"
         operation.name = "DeleteUserPoolClient"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserPoolClientRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteUserPoolClientRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_user_pool_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomain"
         operation.name = "DeleteUserPoolDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserPoolDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserPoolDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteUserPoolDomainRequest
+        operation.output = DeleteUserPoolDomainResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_web_authn_credential, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DeleteWebAuthnCredential"
         operation.name = "DeleteWebAuthnCredential"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWebAuthnCredentialRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWebAuthnCredentialResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteWebAuthnCredentialRequest
+        operation.output = DeleteWebAuthnCredentialResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:describe_identity_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeIdentityProvider"
         operation.name = "DescribeIdentityProvider"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeIdentityProviderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeIdentityProviderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeIdentityProviderRequest
+        operation.output = DescribeIdentityProviderResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_managed_login_branding, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeManagedLoginBranding"
         operation.name = "DescribeManagedLoginBranding"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeManagedLoginBrandingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeManagedLoginBrandingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeManagedLoginBrandingRequest
+        operation.output = DescribeManagedLoginBrandingResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_managed_login_branding_by_client, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeManagedLoginBrandingByClient"
         operation.name = "DescribeManagedLoginBrandingByClient"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeManagedLoginBrandingByClientRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeManagedLoginBrandingByClientResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeManagedLoginBrandingByClientRequest
+        operation.output = DescribeManagedLoginBrandingByClientResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_resource_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeResourceServer"
         operation.name = "DescribeResourceServer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourceServerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourceServerResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeResourceServerRequest
+        operation.output = DescribeResourceServerResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_risk_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeRiskConfiguration"
         operation.name = "DescribeRiskConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRiskConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRiskConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
+        operation.input = DescribeRiskConfigurationRequest
+        operation.output = DescribeRiskConfigurationResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserPoolAddOnNotEnabledException
         operation.traits = {}
       end)
       service.add_operation(:describe_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeTerms"
         operation.name = "DescribeTerms"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTermsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTermsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeTermsRequest
+        operation.output = DescribeTermsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_user_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeUserImportJob"
         operation.name = "DescribeUserImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeUserImportJobRequest
+        operation.output = DescribeUserImportJobResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_user_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeUserPool"
         operation.name = "DescribeUserPool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserPoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserPoolResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTaggingException)
+        operation.input = DescribeUserPoolRequest
+        operation.output = DescribeUserPoolResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserPoolTaggingException
         operation.traits = {}
       end)
       service.add_operation(:describe_user_pool_client, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeUserPoolClient"
         operation.name = "DescribeUserPoolClient"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserPoolClientRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserPoolClientResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeUserPoolClientRequest
+        operation.output = DescribeUserPoolClientResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_user_pool_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#DescribeUserPoolDomain"
         operation.name = "DescribeUserPoolDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserPoolDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserPoolDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeUserPoolDomainRequest
+        operation.output = DescribeUserPoolDomainResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:forget_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ForgetDevice"
         operation.name = "ForgetDevice"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForgetDeviceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ForgetDeviceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:forgot_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ForgotPassword"
         operation.name = "ForgotPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForgotPasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForgotPasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ForgotPasswordRequest
+        operation.output = ForgotPasswordResponse
+        operation.errors << CodeDeliveryFailureException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:get_csv_header, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetCSVHeader"
         operation.name = "GetCSVHeader"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCSVHeaderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCSVHeaderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetCSVHeaderRequest
+        operation.output = GetCSVHeaderResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetDevice"
         operation.name = "GetDevice"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeviceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeviceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = GetDeviceRequest
+        operation.output = GetDeviceResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:get_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetGroup"
         operation.name = "GetGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetGroupRequest
+        operation.output = GetGroupResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_identity_provider_by_identifier, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetIdentityProviderByIdentifier"
         operation.name = "GetIdentityProviderByIdentifier"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIdentityProviderByIdentifierRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIdentityProviderByIdentifierResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetIdentityProviderByIdentifierRequest
+        operation.output = GetIdentityProviderByIdentifierResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_log_delivery_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetLogDeliveryConfiguration"
         operation.name = "GetLogDeliveryConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLogDeliveryConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLogDeliveryConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetLogDeliveryConfigurationRequest
+        operation.output = GetLogDeliveryConfigurationResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_signing_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetSigningCertificate"
         operation.name = "GetSigningCertificate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSigningCertificateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSigningCertificateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetSigningCertificateRequest
+        operation.output = GetSigningCertificateResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_tokens_from_refresh_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshToken"
         operation.name = "GetTokensFromRefreshToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTokensFromRefreshTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTokensFromRefreshTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshTokenReuseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = GetTokensFromRefreshTokenRequest
+        operation.output = GetTokensFromRefreshTokenResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << RefreshTokenReuseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:get_ui_customization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetUICustomization"
         operation.name = "GetUICustomization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUICustomizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUICustomizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetUICustomizationRequest
+        operation.output = GetUICustomizationResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetUser"
         operation.name = "GetUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = GetUserRequest
+        operation.output = GetUserResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:get_user_attribute_verification_code, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetUserAttributeVerificationCode"
         operation.name = "GetUserAttributeVerificationCode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserAttributeVerificationCodeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserAttributeVerificationCodeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = GetUserAttributeVerificationCodeRequest
+        operation.output = GetUserAttributeVerificationCodeResponse
+        operation.errors << CodeDeliveryFailureException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:get_user_auth_factors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetUserAuthFactors"
         operation.name = "GetUserAuthFactors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserAuthFactorsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserAuthFactorsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = GetUserAuthFactorsRequest
+        operation.output = GetUserAuthFactorsResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:get_user_pool_mfa_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetUserPoolMfaConfig"
         operation.name = "GetUserPoolMfaConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserPoolMfaConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUserPoolMfaConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetUserPoolMfaConfigRequest
+        operation.output = GetUserPoolMfaConfigResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:global_sign_out, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GlobalSignOut"
         operation.name = "GlobalSignOut"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlobalSignOutRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlobalSignOutResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
+        operation.input = GlobalSignOutRequest
+        operation.output = GlobalSignOutResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:initiate_auth, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#InitiateAuth"
         operation.name = "InitiateAuth"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateAuthRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateAuthResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = InitiateAuthRequest
+        operation.output = InitiateAuthResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UnsupportedOperationException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:list_devices, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListDevices"
         operation.name = "ListDevices"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDevicesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDevicesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ListDevicesRequest
+        operation.output = ListDevicesResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:list_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListGroups"
         operation.name = "ListGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListGroupsRequest
+        operation.output = ListGroupsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListGroups.new
       end)
       service.add_operation(:list_identity_providers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListIdentityProviders"
         operation.name = "ListIdentityProviders"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIdentityProvidersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIdentityProvidersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListIdentityProvidersRequest
+        operation.output = ListIdentityProvidersResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListIdentityProviders.new
       end)
       service.add_operation(:list_resource_servers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListResourceServers"
         operation.name = "ListResourceServers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceServersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceServersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListResourceServersRequest
+        operation.output = ListResourceServersResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListResourceServers.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:list_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListTerms"
         operation.name = "ListTerms"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTermsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTermsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTermsRequest
+        operation.output = ListTermsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:list_user_import_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListUserImportJobs"
         operation.name = "ListUserImportJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUserImportJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUserImportJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListUserImportJobsRequest
+        operation.output = ListUserImportJobsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:list_user_pool_clients, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListUserPoolClients"
         operation.name = "ListUserPoolClients"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUserPoolClientsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUserPoolClientsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListUserPoolClientsRequest
+        operation.output = ListUserPoolClientsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListUserPoolClients.new
       end)
       service.add_operation(:list_user_pools, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListUserPools"
         operation.name = "ListUserPools"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUserPoolsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUserPoolsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListUserPoolsRequest
+        operation.output = ListUserPoolsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListUserPoolsSuccess", "params" => {"MaxResults" => 10}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::ListUserPools.new
       end)
       service.add_operation(:list_users, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListUsers"
         operation.name = "ListUsers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListUsersRequest
+        operation.output = ListUsersResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListUsers.new
       end)
       service.add_operation(:list_users_in_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListUsersInGroup"
         operation.name = "ListUsersInGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersInGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersInGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListUsersInGroupRequest
+        operation.output = ListUsersInGroupResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListUsersInGroup.new
       end)
       service.add_operation(:list_web_authn_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListWebAuthnCredentials"
         operation.name = "ListWebAuthnCredentials"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWebAuthnCredentialsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWebAuthnCredentialsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListWebAuthnCredentialsRequest
+        operation.output = ListWebAuthnCredentialsResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:resend_confirmation_code, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ResendConfirmationCode"
         operation.name = "ResendConfirmationCode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResendConfirmationCodeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResendConfirmationCodeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = ResendConfirmationCodeRequest
+        operation.output = ResendConfirmationCodeResponse
+        operation.errors << CodeDeliveryFailureException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:respond_to_auth_challenge, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#RespondToAuthChallenge"
         operation.name = "RespondToAuthChallenge"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RespondToAuthChallengeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RespondToAuthChallengeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredCodeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFAMethodNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMFANotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = RespondToAuthChallengeRequest
+        operation.output = RespondToAuthChallengeResponse
+        operation.errors << AliasExistsException
+        operation.errors << CodeMismatchException
+        operation.errors << ExpiredCodeException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << MFAMethodNotFoundException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordHistoryPolicyViolationException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << SoftwareTokenMFANotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:revoke_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#RevokeToken"
         operation.name = "RevokeToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevokeTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevokeTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedTokenTypeException)
+        operation.input = RevokeTokenRequest
+        operation.output = RevokeTokenResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
+        operation.errors << UnsupportedOperationException
+        operation.errors << UnsupportedTokenTypeException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:set_log_delivery_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#SetLogDeliveryConfiguration"
         operation.name = "SetLogDeliveryConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetLogDeliveryConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetLogDeliveryConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = SetLogDeliveryConfigurationRequest
+        operation.output = SetLogDeliveryConfigurationResponse
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:set_risk_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#SetRiskConfiguration"
         operation.name = "SetRiskConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetRiskConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetRiskConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
+        operation.input = SetRiskConfigurationRequest
+        operation.output = SetRiskConfigurationResponse
+        operation.errors << CodeDeliveryFailureException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserPoolAddOnNotEnabledException
         operation.traits = {}
       end)
       service.add_operation(:set_ui_customization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#SetUICustomization"
         operation.name = "SetUICustomization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUICustomizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUICustomizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = SetUICustomizationRequest
+        operation.output = SetUICustomizationResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:set_user_mfa_preference, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#SetUserMFAPreference"
         operation.name = "SetUserMFAPreference"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUserMFAPreferenceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUserMFAPreferenceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = SetUserMFAPreferenceRequest
+        operation.output = SetUserMFAPreferenceResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:set_user_pool_mfa_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#SetUserPoolMfaConfig"
         operation.name = "SetUserPoolMfaConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUserPoolMfaConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUserPoolMfaConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = SetUserPoolMfaConfigRequest
+        operation.output = SetUserPoolMfaConfigResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:set_user_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#SetUserSettings"
         operation.name = "SetUserSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUserSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetUserSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = SetUserSettingsRequest
+        operation.output = SetUserSettingsResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:sign_up, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#SignUp"
         operation.name = "SignUp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignUpRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignUpResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernameExistsException)
+        operation.input = SignUpRequest
+        operation.output = SignUpResponse
+        operation.errors << CodeDeliveryFailureException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UsernameExistsException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:start_user_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#StartUserImportJob"
         operation.name = "StartUserImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartUserImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartUserImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionNotMetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = StartUserImportJobRequest
+        operation.output = StartUserImportJobResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PreconditionNotMetException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:start_web_authn_registration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#StartWebAuthnRegistration"
         operation.name = "StartWebAuthnRegistration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartWebAuthnRegistrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartWebAuthnRegistrationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnConfigurationMissingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebAuthnNotEnabledException)
+        operation.input = StartWebAuthnRegistrationRequest
+        operation.output = StartWebAuthnRegistrationResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << TooManyRequestsException
+        operation.errors << WebAuthnConfigurationMissingException
+        operation.errors << WebAuthnNotEnabledException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:stop_user_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#StopUserImportJob"
         operation.name = "StopUserImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopUserImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopUserImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionNotMetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = StopUserImportJobRequest
+        operation.output = StopUserImportJobResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << PreconditionNotMetException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:update_auth_event_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateAuthEventFeedback"
         operation.name = "UpdateAuthEventFeedback"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAuthEventFeedbackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAuthEventFeedbackResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
+        operation.input = UpdateAuthEventFeedbackRequest
+        operation.output = UpdateAuthEventFeedbackResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
+        operation.errors << UserPoolAddOnNotEnabledException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:update_device_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateDeviceStatus"
         operation.name = "UpdateDeviceStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDeviceStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDeviceStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = UpdateDeviceStatusRequest
+        operation.output = UpdateDeviceStatusResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:update_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateGroup"
         operation.name = "UpdateGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateGroupRequest
+        operation.output = UpdateGroupResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:update_identity_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateIdentityProvider"
         operation.name = "UpdateIdentityProvider"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateIdentityProviderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateIdentityProviderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedIdentityProviderException)
+        operation.input = UpdateIdentityProviderRequest
+        operation.output = UpdateIdentityProviderResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedIdentityProviderException
         operation.traits = {}
       end)
       service.add_operation(:update_managed_login_branding, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateManagedLoginBranding"
         operation.name = "UpdateManagedLoginBranding"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateManagedLoginBrandingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateManagedLoginBrandingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateManagedLoginBrandingRequest
+        operation.output = UpdateManagedLoginBrandingResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:update_resource_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateResourceServer"
         operation.name = "UpdateResourceServer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResourceServerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResourceServerResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateResourceServerRequest
+        operation.output = UpdateResourceServerResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:update_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateTerms"
         operation.name = "UpdateTerms"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTermsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTermsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateTermsRequest
+        operation.output = UpdateTermsResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TermsExistsException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:update_user_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateUserAttributes"
         operation.name = "UpdateUserAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredCodeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserLambdaValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = UpdateUserAttributesRequest
+        operation.output = UpdateUserAttributesResponse
+        operation.errors << AliasExistsException
+        operation.errors << CodeDeliveryFailureException
+        operation.errors << CodeMismatchException
+        operation.errors << ExpiredCodeException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidLambdaResponseException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnexpectedLambdaException
+        operation.errors << UserLambdaValidationException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:update_user_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateUserPool"
         operation.name = "UpdateUserPool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserPoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserPoolResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TierChangeNotAllowedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportInProgressException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTaggingException)
+        operation.input = UpdateUserPoolRequest
+        operation.output = UpdateUserPoolResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidEmailRoleAccessPolicyException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidSmsRoleAccessPolicyException
+        operation.errors << InvalidSmsRoleTrustRelationshipException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TierChangeNotAllowedException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserImportInProgressException
+        operation.errors << UserPoolTaggingException
         operation.traits = {}
       end)
       service.add_operation(:update_user_pool_client, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateUserPoolClient"
         operation.name = "UpdateUserPoolClient"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserPoolClientRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserPoolClientResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidOAuthFlowException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScopeDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateUserPoolClientRequest
+        operation.output = UpdateUserPoolClientResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidOAuthFlowException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ScopeDoesNotExistException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:update_user_pool_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#UpdateUserPoolDomain"
         operation.name = "UpdateUserPoolDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserPoolDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserPoolDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateUserPoolDomainRequest
+        operation.output = UpdateUserPoolDomainResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:verify_software_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#VerifySoftwareToken"
         operation.name = "VerifySoftwareToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifySoftwareTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifySoftwareTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableSoftwareTokenMFAException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareTokenMFANotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = VerifySoftwareTokenRequest
+        operation.output = VerifySoftwareTokenResponse
+        operation.errors << CodeMismatchException
+        operation.errors << EnableSoftwareTokenMFAException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidUserPoolConfigurationException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << SoftwareTokenMFANotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
       service.add_operation(:verify_user_attribute, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#VerifyUserAttribute"
         operation.name = "VerifyUserAttribute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyUserAttributeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyUserAttributeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredCodeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotConfirmedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundException)
+        operation.input = VerifyUserAttributeRequest
+        operation.output = VerifyUserAttributeResponse
+        operation.errors << AliasExistsException
+        operation.errors << CodeMismatchException
+        operation.errors << ExpiredCodeException
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << PasswordResetRequiredException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
+        operation.errors << UserNotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
     end

@@ -151,395 +151,395 @@ module Aws::Kinesis
     UpdateStreamModeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesis#UpdateStreamModeInput", name: "UpdateStreamModeInput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesis#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddTagsToStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    AddTagsToStreamInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
-    AddTagsToStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    AddTagsToStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    AddTagsToStreamInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    AddTagsToStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     AddTagsToStreamInput.type = Types::AddTagsToStreamInput
-    ChildShard.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
-    ChildShard.add_member(:parent_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIdList, location_name: "ParentShards", traits: {"smithy.api#required" => {}}))
-    ChildShard.add_member(:hash_key_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HashKeyRange, location_name: "HashKeyRange", traits: {"smithy.api#required" => {}}))
+    ChildShard.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
+    ChildShard.add_member(:parent_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIdList, location_name: "ParentShards", traits: {"smithy.api#required" => {}}))
+    ChildShard.add_member(:hash_key_range, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKeyRange, location_name: "HashKeyRange", traits: {"smithy.api#required" => {}}))
     ChildShard.type = Types::ChildShard
-    ChildShardList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChildShard)
-    Consumer.add_member(:consumer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName", traits: {"smithy.api#required" => {}}))
-    Consumer.add_member(:consumer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.api#required" => {}}))
-    Consumer.add_member(:consumer_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerStatus, location_name: "ConsumerStatus", traits: {"smithy.api#required" => {}}))
-    Consumer.add_member(:consumer_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ConsumerCreationTimestamp", traits: {"smithy.api#required" => {}}))
+    ChildShardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChildShard)
+    Consumer.add_member(:consumer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerName, location_name: "ConsumerName", traits: {"smithy.api#required" => {}}))
+    Consumer.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.api#required" => {}}))
+    Consumer.add_member(:consumer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerStatus, location_name: "ConsumerStatus", traits: {"smithy.api#required" => {}}))
+    Consumer.add_member(:consumer_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ConsumerCreationTimestamp", traits: {"smithy.api#required" => {}}))
     Consumer.type = Types::Consumer
-    ConsumerDescription.add_member(:consumer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName", traits: {"smithy.api#required" => {}}))
-    ConsumerDescription.add_member(:consumer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.api#required" => {}}))
-    ConsumerDescription.add_member(:consumer_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerStatus, location_name: "ConsumerStatus", traits: {"smithy.api#required" => {}}))
-    ConsumerDescription.add_member(:consumer_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ConsumerCreationTimestamp", traits: {"smithy.api#required" => {}}))
-    ConsumerDescription.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
+    ConsumerDescription.add_member(:consumer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerName, location_name: "ConsumerName", traits: {"smithy.api#required" => {}}))
+    ConsumerDescription.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.api#required" => {}}))
+    ConsumerDescription.add_member(:consumer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerStatus, location_name: "ConsumerStatus", traits: {"smithy.api#required" => {}}))
+    ConsumerDescription.add_member(:consumer_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ConsumerCreationTimestamp", traits: {"smithy.api#required" => {}}))
+    ConsumerDescription.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
     ConsumerDescription.type = Types::ConsumerDescription
-    ConsumerList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Consumer)
-    ConsumerStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    ConsumerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ConsumerStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    CreateStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
-    CreateStreamInput.add_member(:shard_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "ShardCount"))
-    CreateStreamInput.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
-    CreateStreamInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ConsumerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Consumer)
+    ConsumerStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ConsumerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ConsumerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    CreateStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
+    CreateStreamInput.add_member(:shard_count, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerObject, location_name: "ShardCount"))
+    CreateStreamInput.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamModeDetails, location_name: "StreamModeDetails"))
+    CreateStreamInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     CreateStreamInput.type = Types::CreateStreamInput
-    DecreaseStreamRetentionPeriodInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    DecreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
-    DecreaseStreamRetentionPeriodInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    DecreaseStreamRetentionPeriodInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    DecreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
+    DecreaseStreamRetentionPeriodInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     DecreaseStreamRetentionPeriodInput.type = Types::DecreaseStreamRetentionPeriodInput
-    DeleteResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
+    DeleteResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
     DeleteResourcePolicyInput.type = Types::DeleteResourcePolicyInput
-    DeleteStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    DeleteStreamInput.add_member(:enforce_consumer_deletion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnforceConsumerDeletion"))
-    DeleteStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    DeleteStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    DeleteStreamInput.add_member(:enforce_consumer_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "EnforceConsumerDeletion"))
+    DeleteStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     DeleteStreamInput.type = Types::DeleteStreamInput
-    DeregisterStreamConsumerInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
-    DeregisterStreamConsumerInput.add_member(:consumer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName"))
-    DeregisterStreamConsumerInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.rules#contextParam" => {"name" => "ConsumerARN"}}))
+    DeregisterStreamConsumerInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    DeregisterStreamConsumerInput.add_member(:consumer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerName, location_name: "ConsumerName"))
+    DeregisterStreamConsumerInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.rules#contextParam" => {"name" => "ConsumerARN"}}))
     DeregisterStreamConsumerInput.type = Types::DeregisterStreamConsumerInput
     DescribeLimitsInput.type = Types::DescribeLimitsInput
-    DescribeLimitsOutput.add_member(:shard_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardCountObject, location_name: "ShardLimit", traits: {"smithy.api#required" => {}}))
-    DescribeLimitsOutput.add_member(:open_shard_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardCountObject, location_name: "OpenShardCount", traits: {"smithy.api#required" => {}}))
-    DescribeLimitsOutput.add_member(:on_demand_stream_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnDemandStreamCountObject, location_name: "OnDemandStreamCount", traits: {"smithy.api#required" => {}}))
-    DescribeLimitsOutput.add_member(:on_demand_stream_count_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnDemandStreamCountLimitObject, location_name: "OnDemandStreamCountLimit", traits: {"smithy.api#required" => {}}))
+    DescribeLimitsOutput.add_member(:shard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardCountObject, location_name: "ShardLimit", traits: {"smithy.api#required" => {}}))
+    DescribeLimitsOutput.add_member(:open_shard_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardCountObject, location_name: "OpenShardCount", traits: {"smithy.api#required" => {}}))
+    DescribeLimitsOutput.add_member(:on_demand_stream_count, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandStreamCountObject, location_name: "OnDemandStreamCount", traits: {"smithy.api#required" => {}}))
+    DescribeLimitsOutput.add_member(:on_demand_stream_count_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandStreamCountLimitObject, location_name: "OnDemandStreamCountLimit", traits: {"smithy.api#required" => {}}))
     DescribeLimitsOutput.type = Types::DescribeLimitsOutput
-    DescribeStreamConsumerInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
-    DescribeStreamConsumerInput.add_member(:consumer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName"))
-    DescribeStreamConsumerInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.rules#contextParam" => {"name" => "ConsumerARN"}}))
+    DescribeStreamConsumerInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    DescribeStreamConsumerInput.add_member(:consumer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerName, location_name: "ConsumerName"))
+    DescribeStreamConsumerInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.rules#contextParam" => {"name" => "ConsumerARN"}}))
     DescribeStreamConsumerInput.type = Types::DescribeStreamConsumerInput
-    DescribeStreamConsumerOutput.add_member(:consumer_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerDescription, location_name: "ConsumerDescription", traits: {"smithy.api#required" => {}}))
+    DescribeStreamConsumerOutput.add_member(:consumer_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerDescription, location_name: "ConsumerDescription", traits: {"smithy.api#required" => {}}))
     DescribeStreamConsumerOutput.type = Types::DescribeStreamConsumerOutput
-    DescribeStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    DescribeStreamInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStreamInputLimit, location_name: "Limit"))
-    DescribeStreamInput.add_member(:exclusive_start_shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ExclusiveStartShardId"))
-    DescribeStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    DescribeStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    DescribeStreamInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeStreamInputLimit, location_name: "Limit"))
+    DescribeStreamInput.add_member(:exclusive_start_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ExclusiveStartShardId"))
+    DescribeStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     DescribeStreamInput.type = Types::DescribeStreamInput
-    DescribeStreamOutput.add_member(:stream_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamDescription, location_name: "StreamDescription", traits: {"smithy.api#required" => {}}))
+    DescribeStreamOutput.add_member(:stream_description, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamDescription, location_name: "StreamDescription", traits: {"smithy.api#required" => {}}))
     DescribeStreamOutput.type = Types::DescribeStreamOutput
-    DescribeStreamSummaryInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    DescribeStreamSummaryInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    DescribeStreamSummaryInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    DescribeStreamSummaryInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     DescribeStreamSummaryInput.type = Types::DescribeStreamSummaryInput
-    DescribeStreamSummaryOutput.add_member(:stream_description_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamDescriptionSummary, location_name: "StreamDescriptionSummary", traits: {"smithy.api#required" => {}}))
+    DescribeStreamSummaryOutput.add_member(:stream_description_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamDescriptionSummary, location_name: "StreamDescriptionSummary", traits: {"smithy.api#required" => {}}))
     DescribeStreamSummaryOutput.type = Types::DescribeStreamSummaryOutput
-    DisableEnhancedMonitoringInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    DisableEnhancedMonitoringInput.add_member(:shard_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "ShardLevelMetrics", traits: {"smithy.api#required" => {}}))
-    DisableEnhancedMonitoringInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    DisableEnhancedMonitoringInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    DisableEnhancedMonitoringInput.add_member(:shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, location_name: "ShardLevelMetrics", traits: {"smithy.api#required" => {}}))
+    DisableEnhancedMonitoringInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     DisableEnhancedMonitoringInput.type = Types::DisableEnhancedMonitoringInput
-    DisableEnhancedMonitoringOutput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    DisableEnhancedMonitoringOutput.add_member(:current_shard_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "CurrentShardLevelMetrics"))
-    DisableEnhancedMonitoringOutput.add_member(:desired_shard_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "DesiredShardLevelMetrics"))
-    DisableEnhancedMonitoringOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN"))
+    DisableEnhancedMonitoringOutput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    DisableEnhancedMonitoringOutput.add_member(:current_shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, location_name: "CurrentShardLevelMetrics"))
+    DisableEnhancedMonitoringOutput.add_member(:desired_shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, location_name: "DesiredShardLevelMetrics"))
+    DisableEnhancedMonitoringOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN"))
     DisableEnhancedMonitoringOutput.type = Types::DisableEnhancedMonitoringOutput
-    EnableEnhancedMonitoringInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    EnableEnhancedMonitoringInput.add_member(:shard_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "ShardLevelMetrics", traits: {"smithy.api#required" => {}}))
-    EnableEnhancedMonitoringInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    EnableEnhancedMonitoringInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    EnableEnhancedMonitoringInput.add_member(:shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, location_name: "ShardLevelMetrics", traits: {"smithy.api#required" => {}}))
+    EnableEnhancedMonitoringInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     EnableEnhancedMonitoringInput.type = Types::EnableEnhancedMonitoringInput
-    EnableEnhancedMonitoringOutput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    EnableEnhancedMonitoringOutput.add_member(:current_shard_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "CurrentShardLevelMetrics"))
-    EnableEnhancedMonitoringOutput.add_member(:desired_shard_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "DesiredShardLevelMetrics"))
-    EnableEnhancedMonitoringOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN"))
+    EnableEnhancedMonitoringOutput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    EnableEnhancedMonitoringOutput.add_member(:current_shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, location_name: "CurrentShardLevelMetrics"))
+    EnableEnhancedMonitoringOutput.add_member(:desired_shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, location_name: "DesiredShardLevelMetrics"))
+    EnableEnhancedMonitoringOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN"))
     EnableEnhancedMonitoringOutput.type = Types::EnableEnhancedMonitoringOutput
-    EncryptionType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    EncryptionType.add_member(:kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMS", traits: {"smithy.api#enumValue" => "KMS"}))
-    EnhancedMetrics.add_member(:shard_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "ShardLevelMetrics"))
+    EncryptionType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    EncryptionType.add_member(:kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMS", traits: {"smithy.api#enumValue" => "KMS"}))
+    EnhancedMetrics.add_member(:shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, location_name: "ShardLevelMetrics"))
     EnhancedMetrics.type = Types::EnhancedMetrics
-    EnhancedMonitoringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnhancedMetrics)
-    ExpiredIteratorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    EnhancedMonitoringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedMetrics)
+    ExpiredIteratorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ExpiredIteratorException.type = Types::ExpiredIteratorException
-    ExpiredNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExpiredNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ExpiredNextTokenException.type = Types::ExpiredNextTokenException
-    GetRecordsInput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIterator, location_name: "ShardIterator", traits: {"smithy.api#required" => {}}))
-    GetRecordsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecordsInputLimit, location_name: "Limit"))
-    GetRecordsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    GetRecordsInput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIterator, location_name: "ShardIterator", traits: {"smithy.api#required" => {}}))
+    GetRecordsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: GetRecordsInputLimit, location_name: "Limit"))
+    GetRecordsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     GetRecordsInput.type = Types::GetRecordsInput
-    GetRecordsOutput.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordList, location_name: "Records", traits: {"smithy.api#required" => {}}))
-    GetRecordsOutput.add_member(:next_shard_iterator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIterator, location_name: "NextShardIterator"))
-    GetRecordsOutput.add_member(:millis_behind_latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MillisBehindLatest, location_name: "MillisBehindLatest"))
-    GetRecordsOutput.add_member(:child_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChildShardList, location_name: "ChildShards"))
+    GetRecordsOutput.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordList, location_name: "Records", traits: {"smithy.api#required" => {}}))
+    GetRecordsOutput.add_member(:next_shard_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIterator, location_name: "NextShardIterator"))
+    GetRecordsOutput.add_member(:millis_behind_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: MillisBehindLatest, location_name: "MillisBehindLatest"))
+    GetRecordsOutput.add_member(:child_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildShardList, location_name: "ChildShards"))
     GetRecordsOutput.type = Types::GetRecordsOutput
-    GetResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
+    GetResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
     GetResourcePolicyInput.type = Types::GetResourcePolicyInput
-    GetResourcePolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    GetResourcePolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     GetResourcePolicyOutput.type = Types::GetResourcePolicyOutput
-    GetShardIteratorInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    GetShardIteratorInput.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
-    GetShardIteratorInput.add_member(:shard_iterator_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIteratorType, location_name: "ShardIteratorType", traits: {"smithy.api#required" => {}}))
-    GetShardIteratorInput.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "StartingSequenceNumber"))
-    GetShardIteratorInput.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
-    GetShardIteratorInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    GetShardIteratorInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    GetShardIteratorInput.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
+    GetShardIteratorInput.add_member(:shard_iterator_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIteratorType, location_name: "ShardIteratorType", traits: {"smithy.api#required" => {}}))
+    GetShardIteratorInput.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "StartingSequenceNumber"))
+    GetShardIteratorInput.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp"))
+    GetShardIteratorInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     GetShardIteratorInput.type = Types::GetShardIteratorInput
-    GetShardIteratorOutput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIterator, location_name: "ShardIterator"))
+    GetShardIteratorOutput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIterator, location_name: "ShardIterator"))
     GetShardIteratorOutput.type = Types::GetShardIteratorOutput
-    HashKeyRange.add_member(:starting_hash_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HashKey, location_name: "StartingHashKey", traits: {"smithy.api#required" => {}}))
-    HashKeyRange.add_member(:ending_hash_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HashKey, location_name: "EndingHashKey", traits: {"smithy.api#required" => {}}))
+    HashKeyRange.add_member(:starting_hash_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKey, location_name: "StartingHashKey", traits: {"smithy.api#required" => {}}))
+    HashKeyRange.add_member(:ending_hash_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKey, location_name: "EndingHashKey", traits: {"smithy.api#required" => {}}))
     HashKeyRange.type = Types::HashKeyRange
-    IncreaseStreamRetentionPeriodInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    IncreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
-    IncreaseStreamRetentionPeriodInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    IncreaseStreamRetentionPeriodInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    IncreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
+    IncreaseStreamRetentionPeriodInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     IncreaseStreamRetentionPeriodInput.type = Types::IncreaseStreamRetentionPeriodInput
-    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InternalFailureException.type = Types::InternalFailureException
-    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
-    KMSAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     KMSAccessDeniedException.type = Types::KMSAccessDeniedException
-    KMSDisabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     KMSDisabledException.type = Types::KMSDisabledException
-    KMSInvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSInvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     KMSInvalidStateException.type = Types::KMSInvalidStateException
-    KMSNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     KMSNotFoundException.type = Types::KMSNotFoundException
-    KMSOptInRequired.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSOptInRequired.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     KMSOptInRequired.type = Types::KMSOptInRequired
-    KMSThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KMSThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     KMSThrottlingException.type = Types::KMSThrottlingException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListShardsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    ListShardsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListShardsInput.add_member(:exclusive_start_shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ExclusiveStartShardId"))
-    ListShardsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListShardsInputLimit, location_name: "MaxResults"))
-    ListShardsInput.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
-    ListShardsInput.add_member(:shard_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardFilter, location_name: "ShardFilter"))
-    ListShardsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    ListShardsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    ListShardsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListShardsInput.add_member(:exclusive_start_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ExclusiveStartShardId"))
+    ListShardsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListShardsInputLimit, location_name: "MaxResults"))
+    ListShardsInput.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StreamCreationTimestamp"))
+    ListShardsInput.add_member(:shard_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardFilter, location_name: "ShardFilter"))
+    ListShardsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     ListShardsInput.type = Types::ListShardsInput
-    ListShardsOutput.add_member(:shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardList, location_name: "Shards"))
-    ListShardsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListShardsOutput.add_member(:shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardList, location_name: "Shards"))
+    ListShardsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListShardsOutput.type = Types::ListShardsOutput
-    ListStreamConsumersInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "StreamARN"}}))
-    ListStreamConsumersInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListStreamConsumersInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamConsumersInputLimit, location_name: "MaxResults"))
-    ListStreamConsumersInput.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
+    ListStreamConsumersInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    ListStreamConsumersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListStreamConsumersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListStreamConsumersInputLimit, location_name: "MaxResults"))
+    ListStreamConsumersInput.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StreamCreationTimestamp"))
     ListStreamConsumersInput.type = Types::ListStreamConsumersInput
-    ListStreamConsumersOutput.add_member(:consumers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerList, location_name: "Consumers"))
-    ListStreamConsumersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamConsumersOutput.add_member(:consumers, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerList, location_name: "Consumers"))
+    ListStreamConsumersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListStreamConsumersOutput.type = Types::ListStreamConsumersOutput
-    ListStreamsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamsInputLimit, location_name: "Limit"))
-    ListStreamsInput.add_member(:exclusive_start_stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "ExclusiveStartStreamName"))
-    ListStreamsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListStreamsInputLimit, location_name: "Limit"))
+    ListStreamsInput.add_member(:exclusive_start_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "ExclusiveStartStreamName"))
+    ListStreamsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListStreamsInput.type = Types::ListStreamsInput
-    ListStreamsOutput.add_member(:stream_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamNameList, location_name: "StreamNames", traits: {"smithy.api#required" => {}}))
-    ListStreamsOutput.add_member(:has_more_streams, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "HasMoreStreams", traits: {"smithy.api#required" => {}}))
-    ListStreamsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListStreamsOutput.add_member(:stream_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSummaryList, location_name: "StreamSummaries"))
+    ListStreamsOutput.add_member(:stream_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamNameList, location_name: "StreamNames", traits: {"smithy.api#required" => {}}))
+    ListStreamsOutput.add_member(:has_more_streams, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "HasMoreStreams", traits: {"smithy.api#required" => {}}))
+    ListStreamsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListStreamsOutput.add_member(:stream_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummaryList, location_name: "StreamSummaries"))
     ListStreamsOutput.type = Types::ListStreamsOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListTagsForStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    ListTagsForStreamInput.add_member(:exclusive_start_tag_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "ExclusiveStartTagKey"))
-    ListTagsForStreamInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForStreamInputLimit, location_name: "Limit"))
-    ListTagsForStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    ListTagsForStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    ListTagsForStreamInput.add_member(:exclusive_start_tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "ExclusiveStartTagKey"))
+    ListTagsForStreamInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTagsForStreamInputLimit, location_name: "Limit"))
+    ListTagsForStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     ListTagsForStreamInput.type = Types::ListTagsForStreamInput
-    ListTagsForStreamOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
-    ListTagsForStreamOutput.add_member(:has_more_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "HasMoreTags", traits: {"smithy.api#required" => {}}))
+    ListTagsForStreamOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    ListTagsForStreamOutput.add_member(:has_more_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "HasMoreTags", traits: {"smithy.api#required" => {}}))
     ListTagsForStreamOutput.type = Types::ListTagsForStreamOutput
-    MergeShardsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    MergeShardsInput.add_member(:shard_to_merge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardToMerge", traits: {"smithy.api#required" => {}}))
-    MergeShardsInput.add_member(:adjacent_shard_to_merge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "AdjacentShardToMerge", traits: {"smithy.api#required" => {}}))
-    MergeShardsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    MergeShardsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    MergeShardsInput.add_member(:shard_to_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardToMerge", traits: {"smithy.api#required" => {}}))
+    MergeShardsInput.add_member(:adjacent_shard_to_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "AdjacentShardToMerge", traits: {"smithy.api#required" => {}}))
+    MergeShardsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     MergeShardsInput.type = Types::MergeShardsInput
-    MetricsName.add_member(:incoming_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCOMING_BYTES", traits: {"smithy.api#enumValue" => "IncomingBytes"}))
-    MetricsName.add_member(:incoming_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCOMING_RECORDS", traits: {"smithy.api#enumValue" => "IncomingRecords"}))
-    MetricsName.add_member(:outgoing_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTGOING_BYTES", traits: {"smithy.api#enumValue" => "OutgoingBytes"}))
-    MetricsName.add_member(:outgoing_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTGOING_RECORDS", traits: {"smithy.api#enumValue" => "OutgoingRecords"}))
-    MetricsName.add_member(:write_provisioned_throughput_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE_PROVISIONED_THROUGHPUT_EXCEEDED", traits: {"smithy.api#enumValue" => "WriteProvisionedThroughputExceeded"}))
-    MetricsName.add_member(:read_provisioned_throughput_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_PROVISIONED_THROUGHPUT_EXCEEDED", traits: {"smithy.api#enumValue" => "ReadProvisionedThroughputExceeded"}))
-    MetricsName.add_member(:iterator_age_milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ITERATOR_AGE_MILLISECONDS", traits: {"smithy.api#enumValue" => "IteratorAgeMilliseconds"}))
-    MetricsName.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    MetricsNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsName)
-    ProvisionedThroughputExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MetricsName.add_member(:incoming_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCOMING_BYTES", traits: {"smithy.api#enumValue" => "IncomingBytes"}))
+    MetricsName.add_member(:incoming_records, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCOMING_RECORDS", traits: {"smithy.api#enumValue" => "IncomingRecords"}))
+    MetricsName.add_member(:outgoing_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTGOING_BYTES", traits: {"smithy.api#enumValue" => "OutgoingBytes"}))
+    MetricsName.add_member(:outgoing_records, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTGOING_RECORDS", traits: {"smithy.api#enumValue" => "OutgoingRecords"}))
+    MetricsName.add_member(:write_provisioned_throughput_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE_PROVISIONED_THROUGHPUT_EXCEEDED", traits: {"smithy.api#enumValue" => "WriteProvisionedThroughputExceeded"}))
+    MetricsName.add_member(:read_provisioned_throughput_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_PROVISIONED_THROUGHPUT_EXCEEDED", traits: {"smithy.api#enumValue" => "ReadProvisionedThroughputExceeded"}))
+    MetricsName.add_member(:iterator_age_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ITERATOR_AGE_MILLISECONDS", traits: {"smithy.api#enumValue" => "IteratorAgeMilliseconds"}))
+    MetricsName.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    MetricsNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsName)
+    ProvisionedThroughputExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ProvisionedThroughputExceededException.type = Types::ProvisionedThroughputExceededException
-    PutRecordInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    PutRecordInput.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Data, location_name: "Data", traits: {"smithy.api#required" => {}}))
-    PutRecordInput.add_member(:partition_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
-    PutRecordInput.add_member(:explicit_hash_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HashKey, location_name: "ExplicitHashKey"))
-    PutRecordInput.add_member(:sequence_number_for_ordering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumberForOrdering"))
-    PutRecordInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    PutRecordInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    PutRecordInput.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, location_name: "Data", traits: {"smithy.api#required" => {}}))
+    PutRecordInput.add_member(:partition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
+    PutRecordInput.add_member(:explicit_hash_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKey, location_name: "ExplicitHashKey"))
+    PutRecordInput.add_member(:sequence_number_for_ordering, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "SequenceNumberForOrdering"))
+    PutRecordInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     PutRecordInput.type = Types::PutRecordInput
-    PutRecordOutput.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
-    PutRecordOutput.add_member(:sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumber", traits: {"smithy.api#required" => {}}))
-    PutRecordOutput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
+    PutRecordOutput.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
+    PutRecordOutput.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "SequenceNumber", traits: {"smithy.api#required" => {}}))
+    PutRecordOutput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
     PutRecordOutput.type = Types::PutRecordOutput
-    PutRecordsInput.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordsRequestEntryList, location_name: "Records", traits: {"smithy.api#required" => {}}))
-    PutRecordsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    PutRecordsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    PutRecordsInput.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsRequestEntryList, location_name: "Records", traits: {"smithy.api#required" => {}}))
+    PutRecordsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    PutRecordsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     PutRecordsInput.type = Types::PutRecordsInput
-    PutRecordsOutput.add_member(:failed_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "FailedRecordCount"))
-    PutRecordsOutput.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordsResultEntryList, location_name: "Records", traits: {"smithy.api#required" => {}}))
-    PutRecordsOutput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
+    PutRecordsOutput.add_member(:failed_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerObject, location_name: "FailedRecordCount"))
+    PutRecordsOutput.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsResultEntryList, location_name: "Records", traits: {"smithy.api#required" => {}}))
+    PutRecordsOutput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
     PutRecordsOutput.type = Types::PutRecordsOutput
-    PutRecordsRequestEntry.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Data, location_name: "Data", traits: {"smithy.api#required" => {}}))
-    PutRecordsRequestEntry.add_member(:explicit_hash_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HashKey, location_name: "ExplicitHashKey"))
-    PutRecordsRequestEntry.add_member(:partition_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
+    PutRecordsRequestEntry.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, location_name: "Data", traits: {"smithy.api#required" => {}}))
+    PutRecordsRequestEntry.add_member(:explicit_hash_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKey, location_name: "ExplicitHashKey"))
+    PutRecordsRequestEntry.add_member(:partition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
     PutRecordsRequestEntry.type = Types::PutRecordsRequestEntry
-    PutRecordsRequestEntryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordsRequestEntry)
-    PutRecordsResultEntry.add_member(:sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumber"))
-    PutRecordsResultEntry.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId"))
-    PutRecordsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    PutRecordsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    PutRecordsRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsRequestEntry)
+    PutRecordsResultEntry.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "SequenceNumber"))
+    PutRecordsResultEntry.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardId"))
+    PutRecordsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    PutRecordsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "ErrorMessage"))
     PutRecordsResultEntry.type = Types::PutRecordsResultEntry
-    PutRecordsResultEntryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordsResultEntry)
-    PutResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
-    PutResourcePolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutRecordsResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsResultEntry)
+    PutResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
+    PutResourcePolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyInput.type = Types::PutResourcePolicyInput
-    Record.add_member(:sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumber", traits: {"smithy.api#required" => {}}))
-    Record.add_member(:approximate_arrival_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApproximateArrivalTimestamp"))
-    Record.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Data, location_name: "Data", traits: {"smithy.api#required" => {}}))
-    Record.add_member(:partition_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
-    Record.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
+    Record.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "SequenceNumber", traits: {"smithy.api#required" => {}}))
+    Record.add_member(:approximate_arrival_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ApproximateArrivalTimestamp"))
+    Record.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, location_name: "Data", traits: {"smithy.api#required" => {}}))
+    Record.add_member(:partition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, location_name: "PartitionKey", traits: {"smithy.api#required" => {}}))
+    Record.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
     Record.type = Types::Record
-    RecordList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Record)
-    RegisterStreamConsumerInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "StreamARN"}}))
-    RegisterStreamConsumerInput.add_member(:consumer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName", traits: {"smithy.api#required" => {}}))
-    RegisterStreamConsumerInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    RecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record)
+    RegisterStreamConsumerInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    RegisterStreamConsumerInput.add_member(:consumer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerName, location_name: "ConsumerName", traits: {"smithy.api#required" => {}}))
+    RegisterStreamConsumerInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     RegisterStreamConsumerInput.type = Types::RegisterStreamConsumerInput
-    RegisterStreamConsumerOutput.add_member(:consumer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Consumer, location_name: "Consumer", traits: {"smithy.api#required" => {}}))
+    RegisterStreamConsumerOutput.add_member(:consumer, ::Smithy::Schema::Shapes::MemberShape.new(target: Consumer, location_name: "Consumer", traits: {"smithy.api#required" => {}}))
     RegisterStreamConsumerOutput.type = Types::RegisterStreamConsumerOutput
-    RemoveTagsFromStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    RemoveTagsFromStreamInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
-    RemoveTagsFromStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    RemoveTagsFromStreamInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    RemoveTagsFromStreamInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    RemoveTagsFromStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     RemoveTagsFromStreamInput.type = Types::RemoveTagsFromStreamInput
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ScalingType.add_member(:uniform_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIFORM_SCALING", traits: {"smithy.api#enumValue" => "UNIFORM_SCALING"}))
-    SequenceNumberRange.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "StartingSequenceNumber", traits: {"smithy.api#required" => {}}))
-    SequenceNumberRange.add_member(:ending_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "EndingSequenceNumber"))
+    ScalingType.add_member(:uniform_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIFORM_SCALING", traits: {"smithy.api#enumValue" => "UNIFORM_SCALING"}))
+    SequenceNumberRange.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "StartingSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SequenceNumberRange.add_member(:ending_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "EndingSequenceNumber"))
     SequenceNumberRange.type = Types::SequenceNumberRange
-    Shard.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
-    Shard.add_member(:parent_shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ParentShardId"))
-    Shard.add_member(:adjacent_parent_shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "AdjacentParentShardId"))
-    Shard.add_member(:hash_key_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HashKeyRange, location_name: "HashKeyRange", traits: {"smithy.api#required" => {}}))
-    Shard.add_member(:sequence_number_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumberRange, location_name: "SequenceNumberRange", traits: {"smithy.api#required" => {}}))
+    Shard.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
+    Shard.add_member(:parent_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ParentShardId"))
+    Shard.add_member(:adjacent_parent_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "AdjacentParentShardId"))
+    Shard.add_member(:hash_key_range, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKeyRange, location_name: "HashKeyRange", traits: {"smithy.api#required" => {}}))
+    Shard.add_member(:sequence_number_range, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumberRange, location_name: "SequenceNumberRange", traits: {"smithy.api#required" => {}}))
     Shard.type = Types::Shard
-    ShardFilter.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardFilterType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    ShardFilter.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId"))
-    ShardFilter.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    ShardFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardFilterType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    ShardFilter.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardId"))
+    ShardFilter.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp"))
     ShardFilter.type = Types::ShardFilter
-    ShardFilterType.add_member(:after_shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_SHARD_ID", traits: {"smithy.api#enumValue" => "AFTER_SHARD_ID"}))
-    ShardFilterType.add_member(:at_trim_horizon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_TRIM_HORIZON", traits: {"smithy.api#enumValue" => "AT_TRIM_HORIZON"}))
-    ShardFilterType.add_member(:from_trim_horizon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FROM_TRIM_HORIZON", traits: {"smithy.api#enumValue" => "FROM_TRIM_HORIZON"}))
-    ShardFilterType.add_member(:at_latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_LATEST", traits: {"smithy.api#enumValue" => "AT_LATEST"}))
-    ShardFilterType.add_member(:at_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_TIMESTAMP", traits: {"smithy.api#enumValue" => "AT_TIMESTAMP"}))
-    ShardFilterType.add_member(:from_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FROM_TIMESTAMP", traits: {"smithy.api#enumValue" => "FROM_TIMESTAMP"}))
-    ShardIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId)
-    ShardIteratorType.add_member(:at_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AT_SEQUENCE_NUMBER"}))
-    ShardIteratorType.add_member(:after_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AFTER_SEQUENCE_NUMBER"}))
-    ShardIteratorType.add_member(:trim_horizon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRIM_HORIZON", traits: {"smithy.api#enumValue" => "TRIM_HORIZON"}))
-    ShardIteratorType.add_member(:latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LATEST", traits: {"smithy.api#enumValue" => "LATEST"}))
-    ShardIteratorType.add_member(:at_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_TIMESTAMP", traits: {"smithy.api#enumValue" => "AT_TIMESTAMP"}))
-    ShardList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Shard)
-    SplitShardInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    SplitShardInput.add_member(:shard_to_split, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardToSplit", traits: {"smithy.api#required" => {}}))
-    SplitShardInput.add_member(:new_starting_hash_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HashKey, location_name: "NewStartingHashKey", traits: {"smithy.api#required" => {}}))
-    SplitShardInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    ShardFilterType.add_member(:after_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_SHARD_ID", traits: {"smithy.api#enumValue" => "AFTER_SHARD_ID"}))
+    ShardFilterType.add_member(:at_trim_horizon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_TRIM_HORIZON", traits: {"smithy.api#enumValue" => "AT_TRIM_HORIZON"}))
+    ShardFilterType.add_member(:from_trim_horizon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FROM_TRIM_HORIZON", traits: {"smithy.api#enumValue" => "FROM_TRIM_HORIZON"}))
+    ShardFilterType.add_member(:at_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_LATEST", traits: {"smithy.api#enumValue" => "AT_LATEST"}))
+    ShardFilterType.add_member(:at_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_TIMESTAMP", traits: {"smithy.api#enumValue" => "AT_TIMESTAMP"}))
+    ShardFilterType.add_member(:from_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FROM_TIMESTAMP", traits: {"smithy.api#enumValue" => "FROM_TIMESTAMP"}))
+    ShardIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId)
+    ShardIteratorType.add_member(:at_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AT_SEQUENCE_NUMBER"}))
+    ShardIteratorType.add_member(:after_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AFTER_SEQUENCE_NUMBER"}))
+    ShardIteratorType.add_member(:trim_horizon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRIM_HORIZON", traits: {"smithy.api#enumValue" => "TRIM_HORIZON"}))
+    ShardIteratorType.add_member(:latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LATEST", traits: {"smithy.api#enumValue" => "LATEST"}))
+    ShardIteratorType.add_member(:at_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_TIMESTAMP", traits: {"smithy.api#enumValue" => "AT_TIMESTAMP"}))
+    ShardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard)
+    SplitShardInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    SplitShardInput.add_member(:shard_to_split, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardToSplit", traits: {"smithy.api#required" => {}}))
+    SplitShardInput.add_member(:new_starting_hash_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKey, location_name: "NewStartingHashKey", traits: {"smithy.api#required" => {}}))
+    SplitShardInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     SplitShardInput.type = Types::SplitShardInput
-    StartStreamEncryptionInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    StartStreamEncryptionInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType", traits: {"smithy.api#required" => {}}))
-    StartStreamEncryptionInput.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId", traits: {"smithy.api#required" => {}}))
-    StartStreamEncryptionInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    StartStreamEncryptionInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    StartStreamEncryptionInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType", traits: {"smithy.api#required" => {}}))
+    StartStreamEncryptionInput.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyId, location_name: "KeyId", traits: {"smithy.api#required" => {}}))
+    StartStreamEncryptionInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     StartStreamEncryptionInput.type = Types::StartStreamEncryptionInput
-    StartingPosition.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIteratorType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    StartingPosition.add_member(:sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumber"))
-    StartingPosition.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    StartingPosition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIteratorType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    StartingPosition.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "SequenceNumber"))
+    StartingPosition.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp"))
     StartingPosition.type = Types::StartingPosition
-    StopStreamEncryptionInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    StopStreamEncryptionInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType", traits: {"smithy.api#required" => {}}))
-    StopStreamEncryptionInput.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId", traits: {"smithy.api#required" => {}}))
-    StopStreamEncryptionInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    StopStreamEncryptionInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    StopStreamEncryptionInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType", traits: {"smithy.api#required" => {}}))
+    StopStreamEncryptionInput.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyId, location_name: "KeyId", traits: {"smithy.api#required" => {}}))
+    StopStreamEncryptionInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     StopStreamEncryptionInput.type = Types::StopStreamEncryptionInput
-    StreamDescription.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:stream_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamStatus, location_name: "StreamStatus", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
-    StreamDescription.add_member(:shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardList, location_name: "Shards", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:has_more_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "HasMoreShards", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:enhanced_monitoring, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnhancedMonitoringList, location_name: "EnhancedMonitoring", traits: {"smithy.api#required" => {}}))
-    StreamDescription.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    StreamDescription.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
+    StreamDescription.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:stream_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStatus, location_name: "StreamStatus", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamModeDetails, location_name: "StreamModeDetails"))
+    StreamDescription.add_member(:shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardList, location_name: "Shards", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:has_more_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "HasMoreShards", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StreamCreationTimestamp", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:enhanced_monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedMonitoringList, location_name: "EnhancedMonitoring", traits: {"smithy.api#required" => {}}))
+    StreamDescription.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    StreamDescription.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyId, location_name: "KeyId"))
     StreamDescription.type = Types::StreamDescription
-    StreamDescriptionSummary.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
-    StreamDescriptionSummary.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
-    StreamDescriptionSummary.add_member(:stream_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamStatus, location_name: "StreamStatus", traits: {"smithy.api#required" => {}}))
-    StreamDescriptionSummary.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
-    StreamDescriptionSummary.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
-    StreamDescriptionSummary.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp", traits: {"smithy.api#required" => {}}))
-    StreamDescriptionSummary.add_member(:enhanced_monitoring, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnhancedMonitoringList, location_name: "EnhancedMonitoring", traits: {"smithy.api#required" => {}}))
-    StreamDescriptionSummary.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    StreamDescriptionSummary.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
-    StreamDescriptionSummary.add_member(:open_shard_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardCountObject, location_name: "OpenShardCount", traits: {"smithy.api#required" => {}}))
-    StreamDescriptionSummary.add_member(:consumer_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerCountObject, location_name: "ConsumerCount"))
+    StreamDescriptionSummary.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
+    StreamDescriptionSummary.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
+    StreamDescriptionSummary.add_member(:stream_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStatus, location_name: "StreamStatus", traits: {"smithy.api#required" => {}}))
+    StreamDescriptionSummary.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamModeDetails, location_name: "StreamModeDetails"))
+    StreamDescriptionSummary.add_member(:retention_period_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodHours, location_name: "RetentionPeriodHours", traits: {"smithy.api#required" => {}}))
+    StreamDescriptionSummary.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StreamCreationTimestamp", traits: {"smithy.api#required" => {}}))
+    StreamDescriptionSummary.add_member(:enhanced_monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedMonitoringList, location_name: "EnhancedMonitoring", traits: {"smithy.api#required" => {}}))
+    StreamDescriptionSummary.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    StreamDescriptionSummary.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyId, location_name: "KeyId"))
+    StreamDescriptionSummary.add_member(:open_shard_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardCountObject, location_name: "OpenShardCount", traits: {"smithy.api#required" => {}}))
+    StreamDescriptionSummary.add_member(:consumer_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerCountObject, location_name: "ConsumerCount"))
     StreamDescriptionSummary.type = Types::StreamDescriptionSummary
-    StreamMode.add_member(:provisioned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROVISIONED", traits: {"smithy.api#enumValue" => "PROVISIONED"}))
-    StreamMode.add_member(:on_demand, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
-    StreamModeDetails.add_member(:stream_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamMode, location_name: "StreamMode", traits: {"smithy.api#required" => {}}))
+    StreamMode.add_member(:provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROVISIONED", traits: {"smithy.api#enumValue" => "PROVISIONED"}))
+    StreamMode.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
+    StreamModeDetails.add_member(:stream_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamMode, location_name: "StreamMode", traits: {"smithy.api#required" => {}}))
     StreamModeDetails.type = Types::StreamModeDetails
-    StreamNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName)
-    StreamStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    StreamStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    StreamStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    StreamStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    StreamSummary.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
-    StreamSummary.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
-    StreamSummary.add_member(:stream_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamStatus, location_name: "StreamStatus", traits: {"smithy.api#required" => {}}))
-    StreamSummary.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
-    StreamSummary.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
+    StreamNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName)
+    StreamStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    StreamStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    StreamStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    StreamStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    StreamSummary.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName", traits: {"smithy.api#required" => {}}))
+    StreamSummary.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}}))
+    StreamSummary.add_member(:stream_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStatus, location_name: "StreamStatus", traits: {"smithy.api#required" => {}}))
+    StreamSummary.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamModeDetails, location_name: "StreamModeDetails"))
+    StreamSummary.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StreamCreationTimestamp"))
     StreamSummary.type = Types::StreamSummary
-    StreamSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSummary)
-    SubscribeToShardEvent.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordList, location_name: "Records", traits: {"smithy.api#required" => {}}))
-    SubscribeToShardEvent.add_member(:continuation_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "ContinuationSequenceNumber", traits: {"smithy.api#required" => {}}))
-    SubscribeToShardEvent.add_member(:millis_behind_latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MillisBehindLatest, location_name: "MillisBehindLatest", traits: {"smithy.api#required" => {}}))
-    SubscribeToShardEvent.add_member(:child_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChildShardList, location_name: "ChildShards"))
+    StreamSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary)
+    SubscribeToShardEvent.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordList, location_name: "Records", traits: {"smithy.api#required" => {}}))
+    SubscribeToShardEvent.add_member(:continuation_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "ContinuationSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SubscribeToShardEvent.add_member(:millis_behind_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: MillisBehindLatest, location_name: "MillisBehindLatest", traits: {"smithy.api#required" => {}}))
+    SubscribeToShardEvent.add_member(:child_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildShardList, location_name: "ChildShards"))
     SubscribeToShardEvent.type = Types::SubscribeToShardEvent
-    SubscribeToShardEventStream.add_member(:subscribe_to_shard_event, Types::SubscribeToShardEventStream::SubscribeToShardEvent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscribeToShardEvent, location_name: "SubscribeToShardEvent"))
-    SubscribeToShardEventStream.add_member(:resource_not_found_exception, Types::SubscribeToShardEventStream::ResourceNotFoundException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException, location_name: "ResourceNotFoundException"))
-    SubscribeToShardEventStream.add_member(:resource_in_use_exception, Types::SubscribeToShardEventStream::ResourceInUseException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException, location_name: "ResourceInUseException"))
-    SubscribeToShardEventStream.add_member(:kms_disabled_exception, Types::SubscribeToShardEventStream::KMSDisabledException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSDisabledException, location_name: "KMSDisabledException"))
-    SubscribeToShardEventStream.add_member(:kms_invalid_state_exception, Types::SubscribeToShardEventStream::KMSInvalidStateException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSInvalidStateException, location_name: "KMSInvalidStateException"))
-    SubscribeToShardEventStream.add_member(:kms_access_denied_exception, Types::SubscribeToShardEventStream::KMSAccessDeniedException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSAccessDeniedException, location_name: "KMSAccessDeniedException"))
-    SubscribeToShardEventStream.add_member(:kms_not_found_exception, Types::SubscribeToShardEventStream::KMSNotFoundException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSNotFoundException, location_name: "KMSNotFoundException"))
-    SubscribeToShardEventStream.add_member(:kms_opt_in_required, Types::SubscribeToShardEventStream::KMSOptInRequired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSOptInRequired, location_name: "KMSOptInRequired"))
-    SubscribeToShardEventStream.add_member(:kms_throttling_exception, Types::SubscribeToShardEventStream::KMSThrottlingException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSThrottlingException, location_name: "KMSThrottlingException"))
-    SubscribeToShardEventStream.add_member(:internal_failure_exception, Types::SubscribeToShardEventStream::InternalFailureException, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException, location_name: "InternalFailureException"))
-    SubscribeToShardEventStream.add_member(:unknown, Types::SubscribeToShardEventStream::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SubscribeToShardEventStream.add_member(:subscribe_to_shard_event, Types::SubscribeToShardEventStream::SubscribeToShardEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribeToShardEvent, location_name: "SubscribeToShardEvent"))
+    SubscribeToShardEventStream.add_member(:resource_not_found_exception, Types::SubscribeToShardEventStream::ResourceNotFoundException, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNotFoundException, location_name: "ResourceNotFoundException"))
+    SubscribeToShardEventStream.add_member(:resource_in_use_exception, Types::SubscribeToShardEventStream::ResourceInUseException, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInUseException, location_name: "ResourceInUseException"))
+    SubscribeToShardEventStream.add_member(:kms_disabled_exception, Types::SubscribeToShardEventStream::KMSDisabledException, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSDisabledException, location_name: "KMSDisabledException"))
+    SubscribeToShardEventStream.add_member(:kms_invalid_state_exception, Types::SubscribeToShardEventStream::KMSInvalidStateException, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSInvalidStateException, location_name: "KMSInvalidStateException"))
+    SubscribeToShardEventStream.add_member(:kms_access_denied_exception, Types::SubscribeToShardEventStream::KMSAccessDeniedException, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSAccessDeniedException, location_name: "KMSAccessDeniedException"))
+    SubscribeToShardEventStream.add_member(:kms_not_found_exception, Types::SubscribeToShardEventStream::KMSNotFoundException, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSNotFoundException, location_name: "KMSNotFoundException"))
+    SubscribeToShardEventStream.add_member(:kms_opt_in_required, Types::SubscribeToShardEventStream::KMSOptInRequired, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSOptInRequired, location_name: "KMSOptInRequired"))
+    SubscribeToShardEventStream.add_member(:kms_throttling_exception, Types::SubscribeToShardEventStream::KMSThrottlingException, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSThrottlingException, location_name: "KMSThrottlingException"))
+    SubscribeToShardEventStream.add_member(:internal_failure_exception, Types::SubscribeToShardEventStream::InternalFailureException, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalFailureException, location_name: "InternalFailureException"))
+    SubscribeToShardEventStream.add_member(:unknown, Types::SubscribeToShardEventStream::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SubscribeToShardEventStream.type = Types::SubscribeToShardEventStream
-    SubscribeToShardInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ConsumerARN"}}))
-    SubscribeToShardInput.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
-    SubscribeToShardInput.add_member(:starting_position, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartingPosition, location_name: "StartingPosition", traits: {"smithy.api#required" => {}}))
+    SubscribeToShardInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerARN, location_name: "ConsumerARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ConsumerARN"}}))
+    SubscribeToShardInput.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "ShardId", traits: {"smithy.api#required" => {}}))
+    SubscribeToShardInput.add_member(:starting_position, ::Smithy::Schema::Shapes::MemberShape.new(target: StartingPosition, location_name: "StartingPosition", traits: {"smithy.api#required" => {}}))
     SubscribeToShardInput.type = Types::SubscribeToShardInput
-    SubscribeToShardOutput.add_member(:event_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscribeToShardEventStream, location_name: "EventStream", traits: {"smithy.api#required" => {}}))
+    SubscribeToShardOutput.add_member(:event_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribeToShardEventStream, location_name: "EventStream", traits: {"smithy.api#required" => {}}))
     SubscribeToShardOutput.type = Types::SubscribeToShardOutput
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
     TagResourceInput.type = Types::TagResourceInput
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
     UntagResourceInput.type = Types::UntagResourceInput
-    UpdateShardCountInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    UpdateShardCountInput.add_member(:target_shard_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "TargetShardCount", traits: {"smithy.api#required" => {}}))
-    UpdateShardCountInput.add_member(:scaling_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingType, location_name: "ScalingType", traits: {"smithy.api#required" => {}}))
-    UpdateShardCountInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    UpdateShardCountInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    UpdateShardCountInput.add_member(:target_shard_count, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerObject, location_name: "TargetShardCount", traits: {"smithy.api#required" => {}}))
+    UpdateShardCountInput.add_member(:scaling_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingType, location_name: "ScalingType", traits: {"smithy.api#required" => {}}))
+    UpdateShardCountInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     UpdateShardCountInput.type = Types::UpdateShardCountInput
-    UpdateShardCountOutput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    UpdateShardCountOutput.add_member(:current_shard_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "CurrentShardCount"))
-    UpdateShardCountOutput.add_member(:target_shard_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "TargetShardCount"))
-    UpdateShardCountOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN"))
+    UpdateShardCountOutput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    UpdateShardCountOutput.add_member(:current_shard_count, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerObject, location_name: "CurrentShardCount"))
+    UpdateShardCountOutput.add_member(:target_shard_count, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerObject, location_name: "TargetShardCount"))
+    UpdateShardCountOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN"))
     UpdateShardCountOutput.type = Types::UpdateShardCountOutput
-    UpdateStreamModeInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "StreamARN"}}))
-    UpdateStreamModeInput.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails", traits: {"smithy.api#required" => {}}))
+    UpdateStreamModeInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, location_name: "StreamARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "StreamARN"}}))
+    UpdateStreamModeInput.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamModeDetails, location_name: "StreamModeDetails", traits: {"smithy.api#required" => {}}))
     UpdateStreamModeInput.type = Types::UpdateStreamModeInput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     Kinesis20131202 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -550,435 +550,435 @@ module Aws::Kinesis
       service.add_operation(:add_tags_to_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#AddTagsToStream"
         operation.name = "AddTagsToStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsToStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = AddTagsToStreamInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:create_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#CreateStream"
         operation.name = "CreateStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = CreateStreamInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:decrease_stream_retention_period, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DecreaseStreamRetentionPeriod"
         operation.name = "DecreaseStreamRetentionPeriod"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecreaseStreamRetentionPeriodInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DecreaseStreamRetentionPeriodInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DeleteResourcePolicy"
         operation.name = "DeleteResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteResourcePolicyInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:delete_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DeleteStream"
         operation.name = "DeleteStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteStreamInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:deregister_stream_consumer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DeregisterStreamConsumer"
         operation.name = "DeregisterStreamConsumer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterStreamConsumerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeregisterStreamConsumerInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:describe_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DescribeLimits"
         operation.name = "DescribeLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLimitsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLimitsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = DescribeLimitsInput
+        operation.output = DescribeLimitsOutput
+        operation.errors << LimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:describe_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DescribeStream"
         operation.name = "DescribeStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStreamOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeStreamInput
+        operation.output = DescribeStreamOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}, "smithy.test#smokeTests" => [{"id" => "DescribeStreamFailure", "params" => {"StreamName" => "bogus-stream-name"}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"failure" => {}}}]}
       end)
       service.add_operation(:describe_stream_consumer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DescribeStreamConsumer"
         operation.name = "DescribeStreamConsumer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStreamConsumerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStreamConsumerOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeStreamConsumerInput
+        operation.output = DescribeStreamConsumerOutput
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:describe_stream_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DescribeStreamSummary"
         operation.name = "DescribeStreamSummary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStreamSummaryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStreamSummaryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeStreamSummaryInput
+        operation.output = DescribeStreamSummaryOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:disable_enhanced_monitoring, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#DisableEnhancedMonitoring"
         operation.name = "DisableEnhancedMonitoring"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableEnhancedMonitoringInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableEnhancedMonitoringOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DisableEnhancedMonitoringInput
+        operation.output = DisableEnhancedMonitoringOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:enable_enhanced_monitoring, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#EnableEnhancedMonitoring"
         operation.name = "EnableEnhancedMonitoring"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableEnhancedMonitoringInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableEnhancedMonitoringOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = EnableEnhancedMonitoringInput
+        operation.output = EnableEnhancedMonitoringOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:get_records, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#GetRecords"
         operation.name = "GetRecords"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecordsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecordsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredIteratorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSOptInRequired)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetRecordsInput
+        operation.output = GetRecordsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ExpiredIteratorException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidArgumentException
+        operation.errors << KMSAccessDeniedException
+        operation.errors << KMSDisabledException
+        operation.errors << KMSInvalidStateException
+        operation.errors << KMSNotFoundException
+        operation.errors << KMSOptInRequired
+        operation.errors << KMSThrottlingException
+        operation.errors << ProvisionedThroughputExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "data"}}}
       end)
       service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#GetResourcePolicy"
         operation.name = "GetResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetResourcePolicyInput
+        operation.output = GetResourcePolicyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:get_shard_iterator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#GetShardIterator"
         operation.name = "GetShardIterator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetShardIteratorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetShardIteratorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetShardIteratorInput
+        operation.output = GetShardIteratorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidArgumentException
+        operation.errors << ProvisionedThroughputExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "data"}}}
       end)
       service.add_operation(:increase_stream_retention_period, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#IncreaseStreamRetentionPeriod"
         operation.name = "IncreaseStreamRetentionPeriod"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncreaseStreamRetentionPeriodInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = IncreaseStreamRetentionPeriodInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:list_shards, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#ListShards"
         operation.name = "ListShards"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListShardsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListShardsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListShardsInput
+        operation.output = ListShardsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ExpiredNextTokenException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:list_stream_consumers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#ListStreamConsumers"
         operation.name = "ListStreamConsumers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamConsumersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamConsumersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListStreamConsumersInput
+        operation.output = ListStreamConsumersOutput
+        operation.errors << ExpiredNextTokenException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
         operation[:paginator] = Paginators::ListStreamConsumers.new
       end)
       service.add_operation(:list_streams, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#ListStreams"
         operation.name = "ListStreams"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = ListStreamsInput
+        operation.output = ListStreamsOutput
+        operation.errors << ExpiredNextTokenException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListStreamsSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::ListStreams.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:list_tags_for_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#ListTagsForStream"
         operation.name = "ListTagsForStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForStreamOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForStreamInput
+        operation.output = ListTagsForStreamOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:merge_shards, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#MergeShards"
         operation.name = "MergeShards"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeShardsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = MergeShardsInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:put_record, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#PutRecord"
         operation.name = "PutRecord"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSOptInRequired)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutRecordInput
+        operation.output = PutRecordOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidArgumentException
+        operation.errors << KMSAccessDeniedException
+        operation.errors << KMSDisabledException
+        operation.errors << KMSInvalidStateException
+        operation.errors << KMSNotFoundException
+        operation.errors << KMSOptInRequired
+        operation.errors << KMSThrottlingException
+        operation.errors << ProvisionedThroughputExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "data"}}}
       end)
       service.add_operation(:put_records, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#PutRecords"
         operation.name = "PutRecords"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRecordsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSOptInRequired)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutRecordsInput
+        operation.output = PutRecordsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidArgumentException
+        operation.errors << KMSAccessDeniedException
+        operation.errors << KMSDisabledException
+        operation.errors << KMSInvalidStateException
+        operation.errors << KMSNotFoundException
+        operation.errors << KMSOptInRequired
+        operation.errors << KMSThrottlingException
+        operation.errors << ProvisionedThroughputExceededException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "data"}}}
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#PutResourcePolicy"
         operation.name = "PutResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutResourcePolicyInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:register_stream_consumer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#RegisterStreamConsumer"
         operation.name = "RegisterStreamConsumer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterStreamConsumerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterStreamConsumerOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = RegisterStreamConsumerInput
+        operation.output = RegisterStreamConsumerOutput
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:remove_tags_from_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#RemoveTagsFromStream"
         operation.name = "RemoveTagsFromStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsFromStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = RemoveTagsFromStreamInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:split_shard, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#SplitShard"
         operation.name = "SplitShard"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SplitShardInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SplitShardInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:start_stream_encryption, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#StartStreamEncryption"
         operation.name = "StartStreamEncryption"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartStreamEncryptionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSOptInRequired)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = StartStreamEncryptionInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << KMSAccessDeniedException
+        operation.errors << KMSDisabledException
+        operation.errors << KMSInvalidStateException
+        operation.errors << KMSNotFoundException
+        operation.errors << KMSOptInRequired
+        operation.errors << KMSThrottlingException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:stop_stream_encryption, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#StopStreamEncryption"
         operation.name = "StopStreamEncryption"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopStreamEncryptionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = StopStreamEncryptionInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:subscribe_to_shard, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#SubscribeToShard"
         operation.name = "SubscribeToShard"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscribeToShardInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscribeToShardOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = SubscribeToShardInput
+        operation.output = SubscribeToShardOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "data"}}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = TagResourceInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:update_shard_count, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#UpdateShardCount"
         operation.name = "UpdateShardCount"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateShardCountInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateShardCountOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateShardCountInput
+        operation.output = UpdateShardCountOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
       service.add_operation(:update_stream_mode, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesis#UpdateStreamMode"
         operation.name = "UpdateStreamMode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStreamModeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateStreamModeInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidArgumentException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.rules#staticContextParams" => {"OperationType" => {"value" => "control"}}}
       end)
     end

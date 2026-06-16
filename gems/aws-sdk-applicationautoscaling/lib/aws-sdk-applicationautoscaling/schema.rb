@@ -145,409 +145,409 @@ module Aws::ApplicationAutoScaling
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.applicationautoscaling#ValidationException", name: "ValidationException", traits: {"aws.protocols#awsQueryError" => {"code" => "ValidationException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     XmlString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.applicationautoscaling#XmlString", name: "XmlString", traits: {"smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"})
 
-    AdjustmentType.add_member(:change_in_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ChangeInCapacity", traits: {"smithy.api#enumValue" => "ChangeInCapacity"}))
-    AdjustmentType.add_member(:percent_change_in_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PercentChangeInCapacity", traits: {"smithy.api#enumValue" => "PercentChangeInCapacity"}))
-    AdjustmentType.add_member(:exact_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ExactCapacity", traits: {"smithy.api#enumValue" => "ExactCapacity"}))
-    Alarm.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "AlarmName", traits: {"smithy.api#required" => {}}))
-    Alarm.add_member(:alarm_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "AlarmARN", traits: {"smithy.api#required" => {}}))
+    AdjustmentType.add_member(:change_in_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ChangeInCapacity", traits: {"smithy.api#enumValue" => "ChangeInCapacity"}))
+    AdjustmentType.add_member(:percent_change_in_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PercentChangeInCapacity", traits: {"smithy.api#enumValue" => "PercentChangeInCapacity"}))
+    AdjustmentType.add_member(:exact_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ExactCapacity", traits: {"smithy.api#enumValue" => "ExactCapacity"}))
+    Alarm.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "AlarmName", traits: {"smithy.api#required" => {}}))
+    Alarm.add_member(:alarm_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "AlarmARN", traits: {"smithy.api#required" => {}}))
     Alarm.type = Types::Alarm
-    Alarms.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alarm)
-    CapacityForecast.add_member(:timestamps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingForecastTimestamps, location_name: "Timestamps", traits: {"smithy.api#required" => {}}))
-    CapacityForecast.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingForecastValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    Alarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm)
+    CapacityForecast.add_member(:timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastTimestamps, location_name: "Timestamps", traits: {"smithy.api#required" => {}}))
+    CapacityForecast.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
     CapacityForecast.type = Types::CapacityForecast
-    ConcurrentUpdateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentUpdateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConcurrentUpdateException.type = Types::ConcurrentUpdateException
-    CustomizedMetricSpecification.add_member(:metric_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
-    CustomizedMetricSpecification.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricNamespace, location_name: "Namespace"))
-    CustomizedMetricSpecification.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensions, location_name: "Dimensions"))
-    CustomizedMetricSpecification.add_member(:statistic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricStatistic, location_name: "Statistic"))
-    CustomizedMetricSpecification.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
-    CustomizedMetricSpecification.add_member(:metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricDataQueries, location_name: "Metrics"))
+    CustomizedMetricSpecification.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, location_name: "MetricName"))
+    CustomizedMetricSpecification.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricNamespace, location_name: "Namespace"))
+    CustomizedMetricSpecification.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensions, location_name: "Dimensions"))
+    CustomizedMetricSpecification.add_member(:statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStatistic, location_name: "Statistic"))
+    CustomizedMetricSpecification.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricUnit, location_name: "Unit"))
+    CustomizedMetricSpecification.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDataQueries, location_name: "Metrics"))
     CustomizedMetricSpecification.type = Types::CustomizedMetricSpecification
-    DeleteScalingPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
-    DeleteScalingPolicyRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    DeleteScalingPolicyRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    DeleteScalingPolicyRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    DeleteScalingPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    DeleteScalingPolicyRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    DeleteScalingPolicyRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DeleteScalingPolicyRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
     DeleteScalingPolicyRequest.type = Types::DeleteScalingPolicyRequest
     DeleteScalingPolicyResponse.type = Types::DeleteScalingPolicyResponse
-    DeleteScheduledActionRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    DeleteScheduledActionRequest.add_member(:scheduled_action_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ScheduledActionName", traits: {"smithy.api#required" => {}}))
-    DeleteScheduledActionRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    DeleteScheduledActionRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    DeleteScheduledActionRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    DeleteScheduledActionRequest.add_member(:scheduled_action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ScheduledActionName", traits: {"smithy.api#required" => {}}))
+    DeleteScheduledActionRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DeleteScheduledActionRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
     DeleteScheduledActionRequest.type = Types::DeleteScheduledActionRequest
     DeleteScheduledActionResponse.type = Types::DeleteScheduledActionResponse
-    DeregisterScalableTargetRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    DeregisterScalableTargetRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    DeregisterScalableTargetRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    DeregisterScalableTargetRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    DeregisterScalableTargetRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DeregisterScalableTargetRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
     DeregisterScalableTargetRequest.type = Types::DeregisterScalableTargetRequest
     DeregisterScalableTargetResponse.type = Types::DeregisterScalableTargetResponse
-    DescribeScalableTargetsRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    DescribeScalableTargetsRequest.add_member(:resource_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdsMaxLen1600, location_name: "ResourceIds"))
-    DescribeScalableTargetsRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
-    DescribeScalableTargetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeScalableTargetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScalableTargetsRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    DescribeScalableTargetsRequest.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdsMaxLen1600, location_name: "ResourceIds"))
+    DescribeScalableTargetsRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension"))
+    DescribeScalableTargetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeScalableTargetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
     DescribeScalableTargetsRequest.type = Types::DescribeScalableTargetsRequest
-    DescribeScalableTargetsResponse.add_member(:scalable_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableTargets, location_name: "ScalableTargets"))
-    DescribeScalableTargetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScalableTargetsResponse.add_member(:scalable_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableTargets, location_name: "ScalableTargets"))
+    DescribeScalableTargetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
     DescribeScalableTargetsResponse.type = Types::DescribeScalableTargetsResponse
-    DescribeScalingActivitiesRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    DescribeScalingActivitiesRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId"))
-    DescribeScalingActivitiesRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
-    DescribeScalingActivitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeScalingActivitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
-    DescribeScalingActivitiesRequest.add_member(:include_not_scaled_activities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeNotScaledActivities, location_name: "IncludeNotScaledActivities"))
+    DescribeScalingActivitiesRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    DescribeScalingActivitiesRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId"))
+    DescribeScalingActivitiesRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension"))
+    DescribeScalingActivitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeScalingActivitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
+    DescribeScalingActivitiesRequest.add_member(:include_not_scaled_activities, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeNotScaledActivities, location_name: "IncludeNotScaledActivities"))
     DescribeScalingActivitiesRequest.type = Types::DescribeScalingActivitiesRequest
-    DescribeScalingActivitiesResponse.add_member(:scaling_activities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingActivities, location_name: "ScalingActivities"))
-    DescribeScalingActivitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScalingActivitiesResponse.add_member(:scaling_activities, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingActivities, location_name: "ScalingActivities"))
+    DescribeScalingActivitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
     DescribeScalingActivitiesResponse.type = Types::DescribeScalingActivitiesResponse
-    DescribeScalingPoliciesRequest.add_member(:policy_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdsMaxLen1600, location_name: "PolicyNames"))
-    DescribeScalingPoliciesRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    DescribeScalingPoliciesRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId"))
-    DescribeScalingPoliciesRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
-    DescribeScalingPoliciesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeScalingPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScalingPoliciesRequest.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdsMaxLen1600, location_name: "PolicyNames"))
+    DescribeScalingPoliciesRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    DescribeScalingPoliciesRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId"))
+    DescribeScalingPoliciesRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension"))
+    DescribeScalingPoliciesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeScalingPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
     DescribeScalingPoliciesRequest.type = Types::DescribeScalingPoliciesRequest
-    DescribeScalingPoliciesResponse.add_member(:scaling_policies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingPolicies, location_name: "ScalingPolicies"))
-    DescribeScalingPoliciesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScalingPoliciesResponse.add_member(:scaling_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingPolicies, location_name: "ScalingPolicies"))
+    DescribeScalingPoliciesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
     DescribeScalingPoliciesResponse.type = Types::DescribeScalingPoliciesResponse
-    DescribeScheduledActionsRequest.add_member(:scheduled_action_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdsMaxLen1600, location_name: "ScheduledActionNames"))
-    DescribeScheduledActionsRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    DescribeScheduledActionsRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId"))
-    DescribeScheduledActionsRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
-    DescribeScheduledActionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeScheduledActionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScheduledActionsRequest.add_member(:scheduled_action_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdsMaxLen1600, location_name: "ScheduledActionNames"))
+    DescribeScheduledActionsRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    DescribeScheduledActionsRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId"))
+    DescribeScheduledActionsRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension"))
+    DescribeScheduledActionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeScheduledActionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
     DescribeScheduledActionsRequest.type = Types::DescribeScheduledActionsRequest
-    DescribeScheduledActionsResponse.add_member(:scheduled_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduledActions, location_name: "ScheduledActions"))
-    DescribeScheduledActionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScheduledActionsResponse.add_member(:scheduled_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledActions, location_name: "ScheduledActions"))
+    DescribeScheduledActionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "NextToken"))
     DescribeScheduledActionsResponse.type = Types::DescribeScheduledActionsResponse
-    FailedResourceAccessException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FailedResourceAccessException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     FailedResourceAccessException.type = Types::FailedResourceAccessException
-    GetPredictiveScalingForecastRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    GetPredictiveScalingForecastRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    GetPredictiveScalingForecastRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
-    GetPredictiveScalingForecastRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
-    GetPredictiveScalingForecastRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    GetPredictiveScalingForecastRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    GetPredictiveScalingForecastRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    GetPredictiveScalingForecastRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    GetPredictiveScalingForecastRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    GetPredictiveScalingForecastRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    GetPredictiveScalingForecastRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    GetPredictiveScalingForecastRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
     GetPredictiveScalingForecastRequest.type = Types::GetPredictiveScalingForecastRequest
-    GetPredictiveScalingForecastResponse.add_member(:load_forecast, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoadForecasts, location_name: "LoadForecast"))
-    GetPredictiveScalingForecastResponse.add_member(:capacity_forecast, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityForecast, location_name: "CapacityForecast"))
-    GetPredictiveScalingForecastResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "UpdateTime"))
+    GetPredictiveScalingForecastResponse.add_member(:load_forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadForecasts, location_name: "LoadForecast"))
+    GetPredictiveScalingForecastResponse.add_member(:capacity_forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityForecast, location_name: "CapacityForecast"))
+    GetPredictiveScalingForecastResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "UpdateTime"))
     GetPredictiveScalingForecastResponse.type = Types::GetPredictiveScalingForecastResponse
-    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServiceException.type = Types::InternalServiceException
-    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LoadForecast.add_member(:timestamps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingForecastTimestamps, location_name: "Timestamps", traits: {"smithy.api#required" => {}}))
-    LoadForecast.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingForecastValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
-    LoadForecast.add_member(:metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricSpecification, location_name: "MetricSpecification", traits: {"smithy.api#required" => {}}))
+    LoadForecast.add_member(:timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastTimestamps, location_name: "Timestamps", traits: {"smithy.api#required" => {}}))
+    LoadForecast.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    LoadForecast.add_member(:metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricSpecification, location_name: "MetricSpecification", traits: {"smithy.api#required" => {}}))
     LoadForecast.type = Types::LoadForecast
-    LoadForecasts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoadForecast)
-    MetricAggregationType.add_member(:average, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Average", traits: {"smithy.api#enumValue" => "Average"}))
-    MetricAggregationType.add_member(:minimum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Minimum", traits: {"smithy.api#enumValue" => "Minimum"}))
-    MetricAggregationType.add_member(:maximum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Maximum", traits: {"smithy.api#enumValue" => "Maximum"}))
-    MetricDimension.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensionName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    MetricDimension.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensionValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    LoadForecasts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadForecast)
+    MetricAggregationType.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Average", traits: {"smithy.api#enumValue" => "Average"}))
+    MetricAggregationType.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Minimum", traits: {"smithy.api#enumValue" => "Minimum"}))
+    MetricAggregationType.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Maximum", traits: {"smithy.api#enumValue" => "Maximum"}))
+    MetricDimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    MetricDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     MetricDimension.type = Types::MetricDimension
-    MetricDimensions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimension)
-    MetricStatistic.add_member(:average, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Average", traits: {"smithy.api#enumValue" => "Average"}))
-    MetricStatistic.add_member(:minimum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Minimum", traits: {"smithy.api#enumValue" => "Minimum"}))
-    MetricStatistic.add_member(:maximum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Maximum", traits: {"smithy.api#enumValue" => "Maximum"}))
-    MetricStatistic.add_member(:sample_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SampleCount", traits: {"smithy.api#enumValue" => "SampleCount"}))
-    MetricStatistic.add_member(:sum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Sum", traits: {"smithy.api#enumValue" => "Sum"}))
-    MetricType.add_member(:dynamo_db_read_capacity_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBReadCapacityUtilization", traits: {"smithy.api#enumValue" => "DynamoDBReadCapacityUtilization"}))
-    MetricType.add_member(:dynamo_db_write_capacity_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBWriteCapacityUtilization", traits: {"smithy.api#enumValue" => "DynamoDBWriteCapacityUtilization"}))
-    MetricType.add_member(:alb_request_count_per_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALBRequestCountPerTarget", traits: {"smithy.api#enumValue" => "ALBRequestCountPerTarget"}))
-    MetricType.add_member(:rds_reader_average_cpu_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSReaderAverageCPUUtilization", traits: {"smithy.api#enumValue" => "RDSReaderAverageCPUUtilization"}))
-    MetricType.add_member(:rds_reader_average_database_connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSReaderAverageDatabaseConnections", traits: {"smithy.api#enumValue" => "RDSReaderAverageDatabaseConnections"}))
-    MetricType.add_member(:ec2_spot_fleet_request_average_cpu_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestAverageCPUUtilization", traits: {"smithy.api#enumValue" => "EC2SpotFleetRequestAverageCPUUtilization"}))
-    MetricType.add_member(:ec2_spot_fleet_request_average_network_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestAverageNetworkIn", traits: {"smithy.api#enumValue" => "EC2SpotFleetRequestAverageNetworkIn"}))
-    MetricType.add_member(:ec2_spot_fleet_request_average_network_out, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestAverageNetworkOut", traits: {"smithy.api#enumValue" => "EC2SpotFleetRequestAverageNetworkOut"}))
-    MetricType.add_member(:sage_maker_variant_invocations_per_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantInvocationsPerInstance", traits: {"smithy.api#enumValue" => "SageMakerVariantInvocationsPerInstance"}))
-    MetricType.add_member(:ecs_service_average_cpu_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSServiceAverageCPUUtilization", traits: {"smithy.api#enumValue" => "ECSServiceAverageCPUUtilization"}))
-    MetricType.add_member(:ecs_service_average_memory_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSServiceAverageMemoryUtilization", traits: {"smithy.api#enumValue" => "ECSServiceAverageMemoryUtilization"}))
-    MetricType.add_member(:app_stream_average_capacity_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamAverageCapacityUtilization", traits: {"smithy.api#enumValue" => "AppStreamAverageCapacityUtilization"}))
-    MetricType.add_member(:comprehend_inference_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ComprehendInferenceUtilization", traits: {"smithy.api#enumValue" => "ComprehendInferenceUtilization"}))
-    MetricType.add_member(:lambda_provisioned_concurrency_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaProvisionedConcurrencyUtilization", traits: {"smithy.api#enumValue" => "LambdaProvisionedConcurrencyUtilization"}))
-    MetricType.add_member(:cassandra_read_capacity_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraReadCapacityUtilization", traits: {"smithy.api#enumValue" => "CassandraReadCapacityUtilization"}))
-    MetricType.add_member(:cassandra_write_capacity_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraWriteCapacityUtilization", traits: {"smithy.api#enumValue" => "CassandraWriteCapacityUtilization"}))
-    MetricType.add_member(:kafka_broker_storage_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KafkaBrokerStorageUtilization", traits: {"smithy.api#enumValue" => "KafkaBrokerStorageUtilization"}))
-    MetricType.add_member(:elasti_cache_engine_cpu_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheEngineCPUUtilization", traits: {"smithy.api#enumValue" => "ElastiCacheEngineCPUUtilization"}))
-    MetricType.add_member(:elasti_cache_database_memory_usage_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheDatabaseMemoryUsagePercentage", traits: {"smithy.api#enumValue" => "ElastiCacheDatabaseMemoryUsagePercentage"}))
-    MetricType.add_member(:elasti_cache_primary_engine_cpu_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCachePrimaryEngineCPUUtilization", traits: {"smithy.api#enumValue" => "ElastiCachePrimaryEngineCPUUtilization"}))
-    MetricType.add_member(:elasti_cache_replica_engine_cpu_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheReplicaEngineCPUUtilization", traits: {"smithy.api#enumValue" => "ElastiCacheReplicaEngineCPUUtilization"}))
-    MetricType.add_member(:elasti_cache_database_memory_usage_counted_for_evict_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage", traits: {"smithy.api#enumValue" => "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"}))
-    MetricType.add_member(:neptune_reader_average_cpu_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NeptuneReaderAverageCPUUtilization", traits: {"smithy.api#enumValue" => "NeptuneReaderAverageCPUUtilization"}))
-    MetricType.add_member(:sage_maker_variant_provisioned_concurrency_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantProvisionedConcurrencyUtilization", traits: {"smithy.api#enumValue" => "SageMakerVariantProvisionedConcurrencyUtilization"}))
-    MetricType.add_member(:elasti_cache_database_capacity_usage_counted_for_evict_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage", traits: {"smithy.api#enumValue" => "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage"}))
-    MetricType.add_member(:sage_maker_inference_component_invocations_per_copy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceComponentInvocationsPerCopy", traits: {"smithy.api#enumValue" => "SageMakerInferenceComponentInvocationsPerCopy"}))
-    MetricType.add_member(:work_spaces_average_user_sessions_capacity_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesAverageUserSessionsCapacityUtilization", traits: {"smithy.api#enumValue" => "WorkSpacesAverageUserSessionsCapacityUtilization"}))
-    MetricType.add_member(:sage_maker_inference_component_concurrent_requests_per_copy_high_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution", traits: {"smithy.api#enumValue" => "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution"}))
-    MetricType.add_member(:sage_maker_variant_concurrent_requests_per_model_high_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantConcurrentRequestsPerModelHighResolution", traits: {"smithy.api#enumValue" => "SageMakerVariantConcurrentRequestsPerModelHighResolution"}))
-    NotScaledReason.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Code", traits: {"smithy.api#required" => {}}))
-    NotScaledReason.add_member(:max_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity"))
-    NotScaledReason.add_member(:min_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
-    NotScaledReason.add_member(:current_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "CurrentCapacity"))
+    MetricDimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimension)
+    MetricStatistic.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Average", traits: {"smithy.api#enumValue" => "Average"}))
+    MetricStatistic.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Minimum", traits: {"smithy.api#enumValue" => "Minimum"}))
+    MetricStatistic.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Maximum", traits: {"smithy.api#enumValue" => "Maximum"}))
+    MetricStatistic.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SampleCount", traits: {"smithy.api#enumValue" => "SampleCount"}))
+    MetricStatistic.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Sum", traits: {"smithy.api#enumValue" => "Sum"}))
+    MetricType.add_member(:dynamo_db_read_capacity_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBReadCapacityUtilization", traits: {"smithy.api#enumValue" => "DynamoDBReadCapacityUtilization"}))
+    MetricType.add_member(:dynamo_db_write_capacity_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBWriteCapacityUtilization", traits: {"smithy.api#enumValue" => "DynamoDBWriteCapacityUtilization"}))
+    MetricType.add_member(:alb_request_count_per_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALBRequestCountPerTarget", traits: {"smithy.api#enumValue" => "ALBRequestCountPerTarget"}))
+    MetricType.add_member(:rds_reader_average_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSReaderAverageCPUUtilization", traits: {"smithy.api#enumValue" => "RDSReaderAverageCPUUtilization"}))
+    MetricType.add_member(:rds_reader_average_database_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSReaderAverageDatabaseConnections", traits: {"smithy.api#enumValue" => "RDSReaderAverageDatabaseConnections"}))
+    MetricType.add_member(:ec2_spot_fleet_request_average_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestAverageCPUUtilization", traits: {"smithy.api#enumValue" => "EC2SpotFleetRequestAverageCPUUtilization"}))
+    MetricType.add_member(:ec2_spot_fleet_request_average_network_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestAverageNetworkIn", traits: {"smithy.api#enumValue" => "EC2SpotFleetRequestAverageNetworkIn"}))
+    MetricType.add_member(:ec2_spot_fleet_request_average_network_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestAverageNetworkOut", traits: {"smithy.api#enumValue" => "EC2SpotFleetRequestAverageNetworkOut"}))
+    MetricType.add_member(:sage_maker_variant_invocations_per_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantInvocationsPerInstance", traits: {"smithy.api#enumValue" => "SageMakerVariantInvocationsPerInstance"}))
+    MetricType.add_member(:ecs_service_average_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSServiceAverageCPUUtilization", traits: {"smithy.api#enumValue" => "ECSServiceAverageCPUUtilization"}))
+    MetricType.add_member(:ecs_service_average_memory_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSServiceAverageMemoryUtilization", traits: {"smithy.api#enumValue" => "ECSServiceAverageMemoryUtilization"}))
+    MetricType.add_member(:app_stream_average_capacity_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamAverageCapacityUtilization", traits: {"smithy.api#enumValue" => "AppStreamAverageCapacityUtilization"}))
+    MetricType.add_member(:comprehend_inference_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ComprehendInferenceUtilization", traits: {"smithy.api#enumValue" => "ComprehendInferenceUtilization"}))
+    MetricType.add_member(:lambda_provisioned_concurrency_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaProvisionedConcurrencyUtilization", traits: {"smithy.api#enumValue" => "LambdaProvisionedConcurrencyUtilization"}))
+    MetricType.add_member(:cassandra_read_capacity_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraReadCapacityUtilization", traits: {"smithy.api#enumValue" => "CassandraReadCapacityUtilization"}))
+    MetricType.add_member(:cassandra_write_capacity_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraWriteCapacityUtilization", traits: {"smithy.api#enumValue" => "CassandraWriteCapacityUtilization"}))
+    MetricType.add_member(:kafka_broker_storage_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KafkaBrokerStorageUtilization", traits: {"smithy.api#enumValue" => "KafkaBrokerStorageUtilization"}))
+    MetricType.add_member(:elasti_cache_engine_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheEngineCPUUtilization", traits: {"smithy.api#enumValue" => "ElastiCacheEngineCPUUtilization"}))
+    MetricType.add_member(:elasti_cache_database_memory_usage_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheDatabaseMemoryUsagePercentage", traits: {"smithy.api#enumValue" => "ElastiCacheDatabaseMemoryUsagePercentage"}))
+    MetricType.add_member(:elasti_cache_primary_engine_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCachePrimaryEngineCPUUtilization", traits: {"smithy.api#enumValue" => "ElastiCachePrimaryEngineCPUUtilization"}))
+    MetricType.add_member(:elasti_cache_replica_engine_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheReplicaEngineCPUUtilization", traits: {"smithy.api#enumValue" => "ElastiCacheReplicaEngineCPUUtilization"}))
+    MetricType.add_member(:elasti_cache_database_memory_usage_counted_for_evict_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage", traits: {"smithy.api#enumValue" => "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"}))
+    MetricType.add_member(:neptune_reader_average_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NeptuneReaderAverageCPUUtilization", traits: {"smithy.api#enumValue" => "NeptuneReaderAverageCPUUtilization"}))
+    MetricType.add_member(:sage_maker_variant_provisioned_concurrency_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantProvisionedConcurrencyUtilization", traits: {"smithy.api#enumValue" => "SageMakerVariantProvisionedConcurrencyUtilization"}))
+    MetricType.add_member(:elasti_cache_database_capacity_usage_counted_for_evict_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage", traits: {"smithy.api#enumValue" => "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage"}))
+    MetricType.add_member(:sage_maker_inference_component_invocations_per_copy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceComponentInvocationsPerCopy", traits: {"smithy.api#enumValue" => "SageMakerInferenceComponentInvocationsPerCopy"}))
+    MetricType.add_member(:work_spaces_average_user_sessions_capacity_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesAverageUserSessionsCapacityUtilization", traits: {"smithy.api#enumValue" => "WorkSpacesAverageUserSessionsCapacityUtilization"}))
+    MetricType.add_member(:sage_maker_inference_component_concurrent_requests_per_copy_high_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution", traits: {"smithy.api#enumValue" => "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution"}))
+    MetricType.add_member(:sage_maker_variant_concurrent_requests_per_model_high_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantConcurrentRequestsPerModelHighResolution", traits: {"smithy.api#enumValue" => "SageMakerVariantConcurrentRequestsPerModelHighResolution"}))
+    NotScaledReason.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Code", traits: {"smithy.api#required" => {}}))
+    NotScaledReason.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MaxCapacity"))
+    NotScaledReason.add_member(:min_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MinCapacity"))
+    NotScaledReason.add_member(:current_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "CurrentCapacity"))
     NotScaledReason.type = Types::NotScaledReason
-    NotScaledReasons.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotScaledReason)
-    ObjectNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotScaledReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotScaledReason)
+    ObjectNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ObjectNotFoundException.type = Types::ObjectNotFoundException
-    PolicyType.add_member(:step_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StepScaling", traits: {"smithy.api#enumValue" => "StepScaling"}))
-    PolicyType.add_member(:target_tracking_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetTrackingScaling", traits: {"smithy.api#enumValue" => "TargetTrackingScaling"}))
-    PolicyType.add_member(:predictive_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PredictiveScaling", traits: {"smithy.api#enumValue" => "PredictiveScaling"}))
-    PredefinedMetricSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
-    PredefinedMetricSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLabel, location_name: "ResourceLabel"))
+    PolicyType.add_member(:step_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StepScaling", traits: {"smithy.api#enumValue" => "StepScaling"}))
+    PolicyType.add_member(:target_tracking_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetTrackingScaling", traits: {"smithy.api#enumValue" => "TargetTrackingScaling"}))
+    PolicyType.add_member(:predictive_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PredictiveScaling", traits: {"smithy.api#enumValue" => "PredictiveScaling"}))
+    PredefinedMetricSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
+    PredefinedMetricSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLabel, location_name: "ResourceLabel"))
     PredefinedMetricSpecification.type = Types::PredefinedMetricSpecification
-    PredictiveScalingCustomizedMetricSpecification.add_member(:metric_data_queries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricDataQueries, location_name: "MetricDataQueries", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingCustomizedMetricSpecification.add_member(:metric_data_queries, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricDataQueries, location_name: "MetricDataQueries", traits: {"smithy.api#required" => {}}))
     PredictiveScalingCustomizedMetricSpecification.type = Types::PredictiveScalingCustomizedMetricSpecification
-    PredictiveScalingForecastTimestamps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType)
-    PredictiveScalingForecastValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricScale)
-    PredictiveScalingMaxCapacityBreachBehavior.add_member(:honor_max_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HonorMaxCapacity", traits: {"smithy.api#enumValue" => "HonorMaxCapacity"}))
-    PredictiveScalingMaxCapacityBreachBehavior.add_member(:increase_max_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IncreaseMaxCapacity", traits: {"smithy.api#enumValue" => "IncreaseMaxCapacity"}))
-    PredictiveScalingMetric.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricDimensions, location_name: "Dimensions"))
-    PredictiveScalingMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricName, location_name: "MetricName"))
-    PredictiveScalingMetric.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricNamespace, location_name: "Namespace"))
+    PredictiveScalingForecastTimestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType)
+    PredictiveScalingForecastValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale)
+    PredictiveScalingMaxCapacityBreachBehavior.add_member(:honor_max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HonorMaxCapacity", traits: {"smithy.api#enumValue" => "HonorMaxCapacity"}))
+    PredictiveScalingMaxCapacityBreachBehavior.add_member(:increase_max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IncreaseMaxCapacity", traits: {"smithy.api#enumValue" => "IncreaseMaxCapacity"}))
+    PredictiveScalingMetric.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricDimensions, location_name: "Dimensions"))
+    PredictiveScalingMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricName, location_name: "MetricName"))
+    PredictiveScalingMetric.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricNamespace, location_name: "Namespace"))
     PredictiveScalingMetric.type = Types::PredictiveScalingMetric
-    PredictiveScalingMetricDataQueries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricDataQuery)
-    PredictiveScalingMetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingMetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
-    PredictiveScalingMetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricStat, location_name: "MetricStat"))
-    PredictiveScalingMetricDataQuery.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Label"))
-    PredictiveScalingMetricDataQuery.add_member(:return_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    PredictiveScalingMetricDataQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricDataQuery)
+    PredictiveScalingMetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingMetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, location_name: "Expression"))
+    PredictiveScalingMetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricStat, location_name: "MetricStat"))
+    PredictiveScalingMetricDataQuery.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Label"))
+    PredictiveScalingMetricDataQuery.add_member(:return_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnData, location_name: "ReturnData"))
     PredictiveScalingMetricDataQuery.type = Types::PredictiveScalingMetricDataQuery
-    PredictiveScalingMetricDimension.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricDimensionName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingMetricDimension.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricDimensionValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingMetricDimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricDimensionName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingMetricDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricDimensionValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     PredictiveScalingMetricDimension.type = Types::PredictiveScalingMetricDimension
-    PredictiveScalingMetricDimensions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricDimension)
-    PredictiveScalingMetricSpecification.add_member(:target_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricScale, location_name: "TargetValue", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingMetricSpecification.add_member(:predefined_metric_pair_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedMetricPairSpecification, location_name: "PredefinedMetricPairSpecification"))
-    PredictiveScalingMetricSpecification.add_member(:predefined_scaling_metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedScalingMetricSpecification, location_name: "PredefinedScalingMetricSpecification"))
-    PredictiveScalingMetricSpecification.add_member(:predefined_load_metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedLoadMetricSpecification, location_name: "PredefinedLoadMetricSpecification"))
-    PredictiveScalingMetricSpecification.add_member(:customized_scaling_metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingCustomizedMetricSpecification, location_name: "CustomizedScalingMetricSpecification"))
-    PredictiveScalingMetricSpecification.add_member(:customized_load_metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingCustomizedMetricSpecification, location_name: "CustomizedLoadMetricSpecification"))
-    PredictiveScalingMetricSpecification.add_member(:customized_capacity_metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingCustomizedMetricSpecification, location_name: "CustomizedCapacityMetricSpecification"))
+    PredictiveScalingMetricDimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricDimension)
+    PredictiveScalingMetricSpecification.add_member(:target_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, location_name: "TargetValue", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingMetricSpecification.add_member(:predefined_metric_pair_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingPredefinedMetricPairSpecification, location_name: "PredefinedMetricPairSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:predefined_scaling_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingPredefinedScalingMetricSpecification, location_name: "PredefinedScalingMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:predefined_load_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingPredefinedLoadMetricSpecification, location_name: "PredefinedLoadMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:customized_scaling_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingCustomizedMetricSpecification, location_name: "CustomizedScalingMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:customized_load_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingCustomizedMetricSpecification, location_name: "CustomizedLoadMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:customized_capacity_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingCustomizedMetricSpecification, location_name: "CustomizedCapacityMetricSpecification"))
     PredictiveScalingMetricSpecification.type = Types::PredictiveScalingMetricSpecification
-    PredictiveScalingMetricSpecifications.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricSpecification)
-    PredictiveScalingMetricStat.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetric, location_name: "Metric", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingMetricStat.add_member(:stat, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Stat", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingMetricStat.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricUnit, location_name: "Unit"))
+    PredictiveScalingMetricSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricSpecification)
+    PredictiveScalingMetricStat.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetric, location_name: "Metric", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingMetricStat.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Stat", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingMetricStat.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricUnit, location_name: "Unit"))
     PredictiveScalingMetricStat.type = Types::PredictiveScalingMetricStat
-    PredictiveScalingMode.add_member(:forecast_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastOnly", traits: {"smithy.api#enumValue" => "ForecastOnly"}))
-    PredictiveScalingMode.add_member(:forecast_and_scale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastAndScale", traits: {"smithy.api#enumValue" => "ForecastAndScale"}))
-    PredictiveScalingPolicyConfiguration.add_member(:metric_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricSpecifications, location_name: "MetricSpecifications", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingPolicyConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMode, location_name: "Mode"))
-    PredictiveScalingPolicyConfiguration.add_member(:scheduling_buffer_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingSchedulingBufferTime, location_name: "SchedulingBufferTime"))
-    PredictiveScalingPolicyConfiguration.add_member(:max_capacity_breach_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMaxCapacityBreachBehavior, location_name: "MaxCapacityBreachBehavior"))
-    PredictiveScalingPolicyConfiguration.add_member(:max_capacity_buffer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMaxCapacityBuffer, location_name: "MaxCapacityBuffer"))
+    PredictiveScalingMode.add_member(:forecast_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastOnly", traits: {"smithy.api#enumValue" => "ForecastOnly"}))
+    PredictiveScalingMode.add_member(:forecast_and_scale, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastAndScale", traits: {"smithy.api#enumValue" => "ForecastAndScale"}))
+    PredictiveScalingPolicyConfiguration.add_member(:metric_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricSpecifications, location_name: "MetricSpecifications", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingPolicyConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMode, location_name: "Mode"))
+    PredictiveScalingPolicyConfiguration.add_member(:scheduling_buffer_time, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingSchedulingBufferTime, location_name: "SchedulingBufferTime"))
+    PredictiveScalingPolicyConfiguration.add_member(:max_capacity_breach_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMaxCapacityBreachBehavior, location_name: "MaxCapacityBreachBehavior"))
+    PredictiveScalingPolicyConfiguration.add_member(:max_capacity_buffer, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMaxCapacityBuffer, location_name: "MaxCapacityBuffer"))
     PredictiveScalingPolicyConfiguration.type = Types::PredictiveScalingPolicyConfiguration
-    PredictiveScalingPredefinedLoadMetricSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingPredefinedLoadMetricSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLabel, location_name: "ResourceLabel"))
+    PredictiveScalingPredefinedLoadMetricSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingPredefinedLoadMetricSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLabel, location_name: "ResourceLabel"))
     PredictiveScalingPredefinedLoadMetricSpecification.type = Types::PredictiveScalingPredefinedLoadMetricSpecification
-    PredictiveScalingPredefinedMetricPairSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingPredefinedMetricPairSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLabel, location_name: "ResourceLabel"))
+    PredictiveScalingPredefinedMetricPairSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingPredefinedMetricPairSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLabel, location_name: "ResourceLabel"))
     PredictiveScalingPredefinedMetricPairSpecification.type = Types::PredictiveScalingPredefinedMetricPairSpecification
-    PredictiveScalingPredefinedScalingMetricSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingMetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
-    PredictiveScalingPredefinedScalingMetricSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLabel, location_name: "ResourceLabel"))
+    PredictiveScalingPredefinedScalingMetricSpecification.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricType, location_name: "PredefinedMetricType", traits: {"smithy.api#required" => {}}))
+    PredictiveScalingPredefinedScalingMetricSpecification.add_member(:resource_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLabel, location_name: "ResourceLabel"))
     PredictiveScalingPredefinedScalingMetricSpecification.type = Types::PredictiveScalingPredefinedScalingMetricSpecification
-    PutScalingPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
-    PutScalingPolicyRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    PutScalingPolicyRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    PutScalingPolicyRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
-    PutScalingPolicyRequest.add_member(:policy_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyType, location_name: "PolicyType"))
-    PutScalingPolicyRequest.add_member(:step_scaling_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StepScalingPolicyConfiguration, location_name: "StepScalingPolicyConfiguration"))
-    PutScalingPolicyRequest.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingScalingPolicyConfiguration, location_name: "TargetTrackingScalingPolicyConfiguration"))
-    PutScalingPolicyRequest.add_member(:predictive_scaling_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingPolicyConfiguration, location_name: "PredictiveScalingPolicyConfiguration"))
+    PutScalingPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    PutScalingPolicyRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    PutScalingPolicyRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    PutScalingPolicyRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    PutScalingPolicyRequest.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, location_name: "PolicyType"))
+    PutScalingPolicyRequest.add_member(:step_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StepScalingPolicyConfiguration, location_name: "StepScalingPolicyConfiguration"))
+    PutScalingPolicyRequest.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingScalingPolicyConfiguration, location_name: "TargetTrackingScalingPolicyConfiguration"))
+    PutScalingPolicyRequest.add_member(:predictive_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingPolicyConfiguration, location_name: "PredictiveScalingPolicyConfiguration"))
     PutScalingPolicyRequest.type = Types::PutScalingPolicyRequest
-    PutScalingPolicyResponse.add_member(:policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "PolicyARN", traits: {"smithy.api#required" => {}}))
-    PutScalingPolicyResponse.add_member(:alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
+    PutScalingPolicyResponse.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "PolicyARN", traits: {"smithy.api#required" => {}}))
+    PutScalingPolicyResponse.add_member(:alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: Alarms, location_name: "Alarms"))
     PutScalingPolicyResponse.type = Types::PutScalingPolicyResponse
-    PutScheduledActionRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    PutScheduledActionRequest.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Schedule"))
-    PutScheduledActionRequest.add_member(:timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Timezone"))
-    PutScheduledActionRequest.add_member(:scheduled_action_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduledActionName, location_name: "ScheduledActionName", traits: {"smithy.api#required" => {}}))
-    PutScheduledActionRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    PutScheduledActionRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
-    PutScheduledActionRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime"))
-    PutScheduledActionRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
-    PutScheduledActionRequest.add_member(:scalable_target_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableTargetAction, location_name: "ScalableTargetAction"))
+    PutScheduledActionRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    PutScheduledActionRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "Schedule"))
+    PutScheduledActionRequest.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "Timezone"))
+    PutScheduledActionRequest.add_member(:scheduled_action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledActionName, location_name: "ScheduledActionName", traits: {"smithy.api#required" => {}}))
+    PutScheduledActionRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    PutScheduledActionRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    PutScheduledActionRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "StartTime"))
+    PutScheduledActionRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "EndTime"))
+    PutScheduledActionRequest.add_member(:scalable_target_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableTargetAction, location_name: "ScalableTargetAction"))
     PutScheduledActionRequest.type = Types::PutScheduledActionRequest
     PutScheduledActionResponse.type = Types::PutScheduledActionResponse
-    RegisterScalableTargetRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    RegisterScalableTargetRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    RegisterScalableTargetRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
-    RegisterScalableTargetRequest.add_member(:min_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
-    RegisterScalableTargetRequest.add_member(:max_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity"))
-    RegisterScalableTargetRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "RoleARN"))
-    RegisterScalableTargetRequest.add_member(:suspended_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuspendedState, location_name: "SuspendedState"))
-    RegisterScalableTargetRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    RegisterScalableTargetRequest.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    RegisterScalableTargetRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    RegisterScalableTargetRequest.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    RegisterScalableTargetRequest.add_member(:min_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MinCapacity"))
+    RegisterScalableTargetRequest.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MaxCapacity"))
+    RegisterScalableTargetRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "RoleARN"))
+    RegisterScalableTargetRequest.add_member(:suspended_state, ::Smithy::Schema::Shapes::MemberShape.new(target: SuspendedState, location_name: "SuspendedState"))
+    RegisterScalableTargetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     RegisterScalableTargetRequest.type = Types::RegisterScalableTargetRequest
-    RegisterScalableTargetResponse.add_member(:scalable_target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "ScalableTargetARN"))
+    RegisterScalableTargetResponse.add_member(:scalable_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "ScalableTargetARN"))
     RegisterScalableTargetResponse.type = Types::RegisterScalableTargetResponse
-    ResourceIdsMaxLen1600.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    ResourceNotFoundException.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    ResourceIdsMaxLen1600.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceName"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ScalableDimension.add_member(:ecs_service_desired_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSServiceDesiredCount", traits: {"smithy.api#enumValue" => "ecs:service:DesiredCount"}))
-    ScalableDimension.add_member(:ec2_spot_fleet_request_target_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestTargetCapacity", traits: {"smithy.api#enumValue" => "ec2:spot-fleet-request:TargetCapacity"}))
-    ScalableDimension.add_member(:emr_instance_group_instance_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMRInstanceGroupInstanceCount", traits: {"smithy.api#enumValue" => "elasticmapreduce:instancegroup:InstanceCount"}))
-    ScalableDimension.add_member(:appstream_fleet_desired_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppstreamFleetDesiredCapacity", traits: {"smithy.api#enumValue" => "appstream:fleet:DesiredCapacity"}))
-    ScalableDimension.add_member(:dynamo_db_table_read_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBTableReadCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:table:ReadCapacityUnits"}))
-    ScalableDimension.add_member(:dynamo_db_table_write_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBTableWriteCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:table:WriteCapacityUnits"}))
-    ScalableDimension.add_member(:dynamo_db_index_read_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBIndexReadCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:index:ReadCapacityUnits"}))
-    ScalableDimension.add_member(:dynamo_db_index_write_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBIndexWriteCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:index:WriteCapacityUnits"}))
-    ScalableDimension.add_member(:rds_cluster_read_replica_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSClusterReadReplicaCount", traits: {"smithy.api#enumValue" => "rds:cluster:ReadReplicaCount"}))
-    ScalableDimension.add_member(:sage_maker_variant_desired_instance_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantDesiredInstanceCount", traits: {"smithy.api#enumValue" => "sagemaker:variant:DesiredInstanceCount"}))
-    ScalableDimension.add_member(:custom_resource_scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomResourceScalableDimension", traits: {"smithy.api#enumValue" => "custom-resource:ResourceType:Property"}))
-    ScalableDimension.add_member(:comprehend_doc_classifier_endpoint_inference_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ComprehendDocClassifierEndpointInferenceUnits", traits: {"smithy.api#enumValue" => "comprehend:document-classifier-endpoint:DesiredInferenceUnits"}))
-    ScalableDimension.add_member(:comprehend_entity_recognizer_endpoint_inference_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ComprehendEntityRecognizerEndpointInferenceUnits", traits: {"smithy.api#enumValue" => "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"}))
-    ScalableDimension.add_member(:lambda_function_provisioned_concurrency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaFunctionProvisionedConcurrency", traits: {"smithy.api#enumValue" => "lambda:function:ProvisionedConcurrency"}))
-    ScalableDimension.add_member(:cassandra_table_read_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraTableReadCapacityUnits", traits: {"smithy.api#enumValue" => "cassandra:table:ReadCapacityUnits"}))
-    ScalableDimension.add_member(:cassandra_table_write_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraTableWriteCapacityUnits", traits: {"smithy.api#enumValue" => "cassandra:table:WriteCapacityUnits"}))
-    ScalableDimension.add_member(:kafka_broker_storage_volume_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KafkaBrokerStorageVolumeSize", traits: {"smithy.api#enumValue" => "kafka:broker-storage:VolumeSize"}))
-    ScalableDimension.add_member(:elasti_cache_cache_cluster_nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheCacheClusterNodes", traits: {"smithy.api#enumValue" => "elasticache:cache-cluster:Nodes"}))
-    ScalableDimension.add_member(:elasti_cache_replication_group_node_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheReplicationGroupNodeGroups", traits: {"smithy.api#enumValue" => "elasticache:replication-group:NodeGroups"}))
-    ScalableDimension.add_member(:elasti_cache_replication_group_replicas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheReplicationGroupReplicas", traits: {"smithy.api#enumValue" => "elasticache:replication-group:Replicas"}))
-    ScalableDimension.add_member(:neptune_cluster_read_replica_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NeptuneClusterReadReplicaCount", traits: {"smithy.api#enumValue" => "neptune:cluster:ReadReplicaCount"}))
-    ScalableDimension.add_member(:sage_maker_variant_desired_provisioned_concurrency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantDesiredProvisionedConcurrency", traits: {"smithy.api#enumValue" => "sagemaker:variant:DesiredProvisionedConcurrency"}))
-    ScalableDimension.add_member(:sage_maker_inference_component_desired_copy_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceComponentDesiredCopyCount", traits: {"smithy.api#enumValue" => "sagemaker:inference-component:DesiredCopyCount"}))
-    ScalableDimension.add_member(:work_spaces_work_spaces_pool_desired_user_sessions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesWorkSpacesPoolDesiredUserSessions", traits: {"smithy.api#enumValue" => "workspaces:workspacespool:DesiredUserSessions"}))
-    ScalableTarget.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    ScalableTarget.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ScalableTarget.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
-    ScalableTarget.add_member(:min_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity", traits: {"smithy.api#required" => {}}))
-    ScalableTarget.add_member(:max_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity", traits: {"smithy.api#required" => {}}))
-    ScalableTarget.add_member(:predicted_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "PredictedCapacity"))
-    ScalableTarget.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "RoleARN", traits: {"smithy.api#required" => {}}))
-    ScalableTarget.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreationTime", traits: {"smithy.api#required" => {}}))
-    ScalableTarget.add_member(:suspended_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuspendedState, location_name: "SuspendedState"))
-    ScalableTarget.add_member(:scalable_target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "ScalableTargetARN"))
+    ScalableDimension.add_member(:ecs_service_desired_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSServiceDesiredCount", traits: {"smithy.api#enumValue" => "ecs:service:DesiredCount"}))
+    ScalableDimension.add_member(:ec2_spot_fleet_request_target_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleetRequestTargetCapacity", traits: {"smithy.api#enumValue" => "ec2:spot-fleet-request:TargetCapacity"}))
+    ScalableDimension.add_member(:emr_instance_group_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMRInstanceGroupInstanceCount", traits: {"smithy.api#enumValue" => "elasticmapreduce:instancegroup:InstanceCount"}))
+    ScalableDimension.add_member(:appstream_fleet_desired_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppstreamFleetDesiredCapacity", traits: {"smithy.api#enumValue" => "appstream:fleet:DesiredCapacity"}))
+    ScalableDimension.add_member(:dynamo_db_table_read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBTableReadCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:table:ReadCapacityUnits"}))
+    ScalableDimension.add_member(:dynamo_db_table_write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBTableWriteCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:table:WriteCapacityUnits"}))
+    ScalableDimension.add_member(:dynamo_db_index_read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBIndexReadCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:index:ReadCapacityUnits"}))
+    ScalableDimension.add_member(:dynamo_db_index_write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DynamoDBIndexWriteCapacityUnits", traits: {"smithy.api#enumValue" => "dynamodb:index:WriteCapacityUnits"}))
+    ScalableDimension.add_member(:rds_cluster_read_replica_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSClusterReadReplicaCount", traits: {"smithy.api#enumValue" => "rds:cluster:ReadReplicaCount"}))
+    ScalableDimension.add_member(:sage_maker_variant_desired_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantDesiredInstanceCount", traits: {"smithy.api#enumValue" => "sagemaker:variant:DesiredInstanceCount"}))
+    ScalableDimension.add_member(:custom_resource_scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomResourceScalableDimension", traits: {"smithy.api#enumValue" => "custom-resource:ResourceType:Property"}))
+    ScalableDimension.add_member(:comprehend_doc_classifier_endpoint_inference_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ComprehendDocClassifierEndpointInferenceUnits", traits: {"smithy.api#enumValue" => "comprehend:document-classifier-endpoint:DesiredInferenceUnits"}))
+    ScalableDimension.add_member(:comprehend_entity_recognizer_endpoint_inference_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ComprehendEntityRecognizerEndpointInferenceUnits", traits: {"smithy.api#enumValue" => "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"}))
+    ScalableDimension.add_member(:lambda_function_provisioned_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaFunctionProvisionedConcurrency", traits: {"smithy.api#enumValue" => "lambda:function:ProvisionedConcurrency"}))
+    ScalableDimension.add_member(:cassandra_table_read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraTableReadCapacityUnits", traits: {"smithy.api#enumValue" => "cassandra:table:ReadCapacityUnits"}))
+    ScalableDimension.add_member(:cassandra_table_write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraTableWriteCapacityUnits", traits: {"smithy.api#enumValue" => "cassandra:table:WriteCapacityUnits"}))
+    ScalableDimension.add_member(:kafka_broker_storage_volume_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KafkaBrokerStorageVolumeSize", traits: {"smithy.api#enumValue" => "kafka:broker-storage:VolumeSize"}))
+    ScalableDimension.add_member(:elasti_cache_cache_cluster_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheCacheClusterNodes", traits: {"smithy.api#enumValue" => "elasticache:cache-cluster:Nodes"}))
+    ScalableDimension.add_member(:elasti_cache_replication_group_node_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheReplicationGroupNodeGroups", traits: {"smithy.api#enumValue" => "elasticache:replication-group:NodeGroups"}))
+    ScalableDimension.add_member(:elasti_cache_replication_group_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ElastiCacheReplicationGroupReplicas", traits: {"smithy.api#enumValue" => "elasticache:replication-group:Replicas"}))
+    ScalableDimension.add_member(:neptune_cluster_read_replica_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NeptuneClusterReadReplicaCount", traits: {"smithy.api#enumValue" => "neptune:cluster:ReadReplicaCount"}))
+    ScalableDimension.add_member(:sage_maker_variant_desired_provisioned_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerVariantDesiredProvisionedConcurrency", traits: {"smithy.api#enumValue" => "sagemaker:variant:DesiredProvisionedConcurrency"}))
+    ScalableDimension.add_member(:sage_maker_inference_component_desired_copy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceComponentDesiredCopyCount", traits: {"smithy.api#enumValue" => "sagemaker:inference-component:DesiredCopyCount"}))
+    ScalableDimension.add_member(:work_spaces_work_spaces_pool_desired_user_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesWorkSpacesPoolDesiredUserSessions", traits: {"smithy.api#enumValue" => "workspaces:workspacespool:DesiredUserSessions"}))
+    ScalableTarget.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    ScalableTarget.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ScalableTarget.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    ScalableTarget.add_member(:min_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MinCapacity", traits: {"smithy.api#required" => {}}))
+    ScalableTarget.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MaxCapacity", traits: {"smithy.api#required" => {}}))
+    ScalableTarget.add_member(:predicted_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "PredictedCapacity"))
+    ScalableTarget.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "RoleARN", traits: {"smithy.api#required" => {}}))
+    ScalableTarget.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "CreationTime", traits: {"smithy.api#required" => {}}))
+    ScalableTarget.add_member(:suspended_state, ::Smithy::Schema::Shapes::MemberShape.new(target: SuspendedState, location_name: "SuspendedState"))
+    ScalableTarget.add_member(:scalable_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "ScalableTargetARN"))
     ScalableTarget.type = Types::ScalableTarget
-    ScalableTargetAction.add_member(:min_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
-    ScalableTargetAction.add_member(:max_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity"))
+    ScalableTargetAction.add_member(:min_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MinCapacity"))
+    ScalableTargetAction.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCapacity, location_name: "MaxCapacity"))
     ScalableTargetAction.type = Types::ScalableTargetAction
-    ScalableTargets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableTarget)
-    ScalingActivities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingActivity)
-    ScalingActivity.add_member(:activity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ActivityId", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Description", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:cause, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Cause", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
-    ScalingActivity.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingActivityStatusCode, location_name: "StatusCode", traits: {"smithy.api#required" => {}}))
-    ScalingActivity.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "StatusMessage"))
-    ScalingActivity.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Details"))
-    ScalingActivity.add_member(:not_scaled_reasons, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotScaledReasons, location_name: "NotScaledReasons"))
+    ScalableTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableTarget)
+    ScalingActivities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingActivity)
+    ScalingActivity.add_member(:activity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ActivityId", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:cause, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Cause", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "EndTime"))
+    ScalingActivity.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingActivityStatusCode, location_name: "StatusCode", traits: {"smithy.api#required" => {}}))
+    ScalingActivity.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "StatusMessage"))
+    ScalingActivity.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Details"))
+    ScalingActivity.add_member(:not_scaled_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: NotScaledReasons, location_name: "NotScaledReasons"))
     ScalingActivity.type = Types::ScalingActivity
-    ScalingActivityStatusCode.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
-    ScalingActivityStatusCode.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
-    ScalingActivityStatusCode.add_member(:successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Successful", traits: {"smithy.api#enumValue" => "Successful"}))
-    ScalingActivityStatusCode.add_member(:overridden, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Overridden", traits: {"smithy.api#enumValue" => "Overridden"}))
-    ScalingActivityStatusCode.add_member(:unfulfilled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unfulfilled", traits: {"smithy.api#enumValue" => "Unfulfilled"}))
-    ScalingActivityStatusCode.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
-    ScalingPolicies.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingPolicy)
-    ScalingPolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "PolicyARN", traits: {"smithy.api#required" => {}}))
-    ScalingPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
-    ScalingPolicy.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    ScalingPolicy.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ScalingPolicy.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
-    ScalingPolicy.add_member(:policy_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyType, location_name: "PolicyType", traits: {"smithy.api#required" => {}}))
-    ScalingPolicy.add_member(:step_scaling_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StepScalingPolicyConfiguration, location_name: "StepScalingPolicyConfiguration"))
-    ScalingPolicy.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingScalingPolicyConfiguration, location_name: "TargetTrackingScalingPolicyConfiguration"))
-    ScalingPolicy.add_member(:predictive_scaling_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveScalingPolicyConfiguration, location_name: "PredictiveScalingPolicyConfiguration"))
-    ScalingPolicy.add_member(:alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
-    ScalingPolicy.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreationTime", traits: {"smithy.api#required" => {}}))
+    ScalingActivityStatusCode.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
+    ScalingActivityStatusCode.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
+    ScalingActivityStatusCode.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Successful", traits: {"smithy.api#enumValue" => "Successful"}))
+    ScalingActivityStatusCode.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Overridden", traits: {"smithy.api#enumValue" => "Overridden"}))
+    ScalingActivityStatusCode.add_member(:unfulfilled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unfulfilled", traits: {"smithy.api#enumValue" => "Unfulfilled"}))
+    ScalingActivityStatusCode.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
+    ScalingPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingPolicy)
+    ScalingPolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "PolicyARN", traits: {"smithy.api#required" => {}}))
+    ScalingPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    ScalingPolicy.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    ScalingPolicy.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ScalingPolicy.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension", traits: {"smithy.api#required" => {}}))
+    ScalingPolicy.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, location_name: "PolicyType", traits: {"smithy.api#required" => {}}))
+    ScalingPolicy.add_member(:step_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StepScalingPolicyConfiguration, location_name: "StepScalingPolicyConfiguration"))
+    ScalingPolicy.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingScalingPolicyConfiguration, location_name: "TargetTrackingScalingPolicyConfiguration"))
+    ScalingPolicy.add_member(:predictive_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingPolicyConfiguration, location_name: "PredictiveScalingPolicyConfiguration"))
+    ScalingPolicy.add_member(:alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: Alarms, location_name: "Alarms"))
+    ScalingPolicy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "CreationTime", traits: {"smithy.api#required" => {}}))
     ScalingPolicy.type = Types::ScalingPolicy
-    ScheduledAction.add_member(:scheduled_action_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduledActionName, location_name: "ScheduledActionName", traits: {"smithy.api#required" => {}}))
-    ScheduledAction.add_member(:scheduled_action_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ScheduledActionARN", traits: {"smithy.api#required" => {}}))
-    ScheduledAction.add_member(:service_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
-    ScheduledAction.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Schedule", traits: {"smithy.api#required" => {}}))
-    ScheduledAction.add_member(:timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Timezone"))
-    ScheduledAction.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ScheduledAction.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
-    ScheduledAction.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime"))
-    ScheduledAction.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
-    ScheduledAction.add_member(:scalable_target_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalableTargetAction, location_name: "ScalableTargetAction"))
-    ScheduledAction.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreationTime", traits: {"smithy.api#required" => {}}))
+    ScheduledAction.add_member(:scheduled_action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledActionName, location_name: "ScheduledActionName", traits: {"smithy.api#required" => {}}))
+    ScheduledAction.add_member(:scheduled_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ScheduledActionARN", traits: {"smithy.api#required" => {}}))
+    ScheduledAction.add_member(:service_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespace, location_name: "ServiceNamespace", traits: {"smithy.api#required" => {}}))
+    ScheduledAction.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "Schedule", traits: {"smithy.api#required" => {}}))
+    ScheduledAction.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "Timezone"))
+    ScheduledAction.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdMaxLen1600, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ScheduledAction.add_member(:scalable_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableDimension, location_name: "ScalableDimension"))
+    ScheduledAction.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "StartTime"))
+    ScheduledAction.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "EndTime"))
+    ScheduledAction.add_member(:scalable_target_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalableTargetAction, location_name: "ScalableTargetAction"))
+    ScheduledAction.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, location_name: "CreationTime", traits: {"smithy.api#required" => {}}))
     ScheduledAction.type = Types::ScheduledAction
-    ScheduledActions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduledAction)
-    ServiceNamespace.add_member(:ecs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECS", traits: {"smithy.api#enumValue" => "ecs"}))
-    ServiceNamespace.add_member(:emr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMR", traits: {"smithy.api#enumValue" => "elasticmapreduce"}))
-    ServiceNamespace.add_member(:ec2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2", traits: {"smithy.api#enumValue" => "ec2"}))
-    ServiceNamespace.add_member(:appstream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPSTREAM", traits: {"smithy.api#enumValue" => "appstream"}))
-    ServiceNamespace.add_member(:dynamodb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DYNAMODB", traits: {"smithy.api#enumValue" => "dynamodb"}))
-    ServiceNamespace.add_member(:rds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDS", traits: {"smithy.api#enumValue" => "rds"}))
-    ServiceNamespace.add_member(:sagemaker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAGEMAKER", traits: {"smithy.api#enumValue" => "sagemaker"}))
-    ServiceNamespace.add_member(:custom_resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_RESOURCE", traits: {"smithy.api#enumValue" => "custom-resource"}))
-    ServiceNamespace.add_member(:comprehend, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND", traits: {"smithy.api#enumValue" => "comprehend"}))
-    ServiceNamespace.add_member(:lambda, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAMBDA", traits: {"smithy.api#enumValue" => "lambda"}))
-    ServiceNamespace.add_member(:cassandra, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CASSANDRA", traits: {"smithy.api#enumValue" => "cassandra"}))
-    ServiceNamespace.add_member(:kafka, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KAFKA", traits: {"smithy.api#enumValue" => "kafka"}))
-    ServiceNamespace.add_member(:elasticache, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ELASTICACHE", traits: {"smithy.api#enumValue" => "elasticache"}))
-    ServiceNamespace.add_member(:neptune, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEPTUNE", traits: {"smithy.api#enumValue" => "neptune"}))
-    ServiceNamespace.add_member(:workspaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORKSPACES", traits: {"smithy.api#enumValue" => "workspaces"}))
-    StepAdjustment.add_member(:metric_interval_lower_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricScale, location_name: "MetricIntervalLowerBound"))
-    StepAdjustment.add_member(:metric_interval_upper_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricScale, location_name: "MetricIntervalUpperBound"))
-    StepAdjustment.add_member(:scaling_adjustment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingAdjustment, location_name: "ScalingAdjustment", traits: {"smithy.api#required" => {}}))
+    ScheduledActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledAction)
+    ServiceNamespace.add_member(:ecs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECS", traits: {"smithy.api#enumValue" => "ecs"}))
+    ServiceNamespace.add_member(:emr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMR", traits: {"smithy.api#enumValue" => "elasticmapreduce"}))
+    ServiceNamespace.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2", traits: {"smithy.api#enumValue" => "ec2"}))
+    ServiceNamespace.add_member(:appstream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPSTREAM", traits: {"smithy.api#enumValue" => "appstream"}))
+    ServiceNamespace.add_member(:dynamodb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DYNAMODB", traits: {"smithy.api#enumValue" => "dynamodb"}))
+    ServiceNamespace.add_member(:rds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDS", traits: {"smithy.api#enumValue" => "rds"}))
+    ServiceNamespace.add_member(:sagemaker, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAGEMAKER", traits: {"smithy.api#enumValue" => "sagemaker"}))
+    ServiceNamespace.add_member(:custom_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOM_RESOURCE", traits: {"smithy.api#enumValue" => "custom-resource"}))
+    ServiceNamespace.add_member(:comprehend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND", traits: {"smithy.api#enumValue" => "comprehend"}))
+    ServiceNamespace.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAMBDA", traits: {"smithy.api#enumValue" => "lambda"}))
+    ServiceNamespace.add_member(:cassandra, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CASSANDRA", traits: {"smithy.api#enumValue" => "cassandra"}))
+    ServiceNamespace.add_member(:kafka, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KAFKA", traits: {"smithy.api#enumValue" => "kafka"}))
+    ServiceNamespace.add_member(:elasticache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ELASTICACHE", traits: {"smithy.api#enumValue" => "elasticache"}))
+    ServiceNamespace.add_member(:neptune, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEPTUNE", traits: {"smithy.api#enumValue" => "neptune"}))
+    ServiceNamespace.add_member(:workspaces, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORKSPACES", traits: {"smithy.api#enumValue" => "workspaces"}))
+    StepAdjustment.add_member(:metric_interval_lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, location_name: "MetricIntervalLowerBound"))
+    StepAdjustment.add_member(:metric_interval_upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, location_name: "MetricIntervalUpperBound"))
+    StepAdjustment.add_member(:scaling_adjustment, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingAdjustment, location_name: "ScalingAdjustment", traits: {"smithy.api#required" => {}}))
     StepAdjustment.type = Types::StepAdjustment
-    StepAdjustments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StepAdjustment)
-    StepScalingPolicyConfiguration.add_member(:adjustment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdjustmentType, location_name: "AdjustmentType"))
-    StepScalingPolicyConfiguration.add_member(:step_adjustments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StepAdjustments, location_name: "StepAdjustments"))
-    StepScalingPolicyConfiguration.add_member(:min_adjustment_magnitude, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinAdjustmentMagnitude, location_name: "MinAdjustmentMagnitude"))
-    StepScalingPolicyConfiguration.add_member(:cooldown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cooldown, location_name: "Cooldown"))
-    StepScalingPolicyConfiguration.add_member(:metric_aggregation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricAggregationType, location_name: "MetricAggregationType"))
+    StepAdjustments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepAdjustment)
+    StepScalingPolicyConfiguration.add_member(:adjustment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AdjustmentType, location_name: "AdjustmentType"))
+    StepScalingPolicyConfiguration.add_member(:step_adjustments, ::Smithy::Schema::Shapes::MemberShape.new(target: StepAdjustments, location_name: "StepAdjustments"))
+    StepScalingPolicyConfiguration.add_member(:min_adjustment_magnitude, ::Smithy::Schema::Shapes::MemberShape.new(target: MinAdjustmentMagnitude, location_name: "MinAdjustmentMagnitude"))
+    StepScalingPolicyConfiguration.add_member(:cooldown, ::Smithy::Schema::Shapes::MemberShape.new(target: Cooldown, location_name: "Cooldown"))
+    StepScalingPolicyConfiguration.add_member(:metric_aggregation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAggregationType, location_name: "MetricAggregationType"))
     StepScalingPolicyConfiguration.type = Types::StepScalingPolicyConfiguration
-    SuspendedState.add_member(:dynamic_scaling_in_suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "DynamicScalingInSuspended"))
-    SuspendedState.add_member(:dynamic_scaling_out_suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "DynamicScalingOutSuspended"))
-    SuspendedState.add_member(:scheduled_scaling_suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "ScheduledScalingSuspended"))
+    SuspendedState.add_member(:dynamic_scaling_in_suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingSuspended, location_name: "DynamicScalingInSuspended"))
+    SuspendedState.add_member(:dynamic_scaling_out_suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingSuspended, location_name: "DynamicScalingOutSuspended"))
+    SuspendedState.add_member(:scheduled_scaling_suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingSuspended, location_name: "ScheduledScalingSuspended"))
     SuspendedState.type = Types::SuspendedState
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetTrackingMetric.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricDimensions, location_name: "Dimensions"))
-    TargetTrackingMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricName, location_name: "MetricName"))
-    TargetTrackingMetric.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricNamespace, location_name: "Namespace"))
+    TargetTrackingMetric.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDimensions, location_name: "Dimensions"))
+    TargetTrackingMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricName, location_name: "MetricName"))
+    TargetTrackingMetric.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricNamespace, location_name: "Namespace"))
     TargetTrackingMetric.type = Types::TargetTrackingMetric
-    TargetTrackingMetricDataQueries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricDataQuery)
-    TargetTrackingMetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
-    TargetTrackingMetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    TargetTrackingMetricDataQuery.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Label"))
-    TargetTrackingMetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricStat, location_name: "MetricStat"))
-    TargetTrackingMetricDataQuery.add_member(:return_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    TargetTrackingMetricDataQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDataQuery)
+    TargetTrackingMetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, location_name: "Expression"))
+    TargetTrackingMetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    TargetTrackingMetricDataQuery.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Label"))
+    TargetTrackingMetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricStat, location_name: "MetricStat"))
+    TargetTrackingMetricDataQuery.add_member(:return_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnData, location_name: "ReturnData"))
     TargetTrackingMetricDataQuery.type = Types::TargetTrackingMetricDataQuery
-    TargetTrackingMetricDimension.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricDimensionName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    TargetTrackingMetricDimension.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricDimensionValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    TargetTrackingMetricDimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDimensionName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    TargetTrackingMetricDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDimensionValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     TargetTrackingMetricDimension.type = Types::TargetTrackingMetricDimension
-    TargetTrackingMetricDimensions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricDimension)
-    TargetTrackingMetricStat.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetric, location_name: "Metric", traits: {"smithy.api#required" => {}}))
-    TargetTrackingMetricStat.add_member(:stat, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlString, location_name: "Stat", traits: {"smithy.api#required" => {}}))
-    TargetTrackingMetricStat.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingMetricUnit, location_name: "Unit"))
+    TargetTrackingMetricDimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDimension)
+    TargetTrackingMetricStat.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetric, location_name: "Metric", traits: {"smithy.api#required" => {}}))
+    TargetTrackingMetricStat.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, location_name: "Stat", traits: {"smithy.api#required" => {}}))
+    TargetTrackingMetricStat.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricUnit, location_name: "Unit"))
     TargetTrackingMetricStat.type = Types::TargetTrackingMetricStat
-    TargetTrackingScalingPolicyConfiguration.add_member(:target_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricScale, location_name: "TargetValue", traits: {"smithy.api#required" => {}}))
-    TargetTrackingScalingPolicyConfiguration.add_member(:predefined_metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedMetricSpecification, location_name: "PredefinedMetricSpecification"))
-    TargetTrackingScalingPolicyConfiguration.add_member(:customized_metric_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomizedMetricSpecification, location_name: "CustomizedMetricSpecification"))
-    TargetTrackingScalingPolicyConfiguration.add_member(:scale_out_cooldown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleOutCooldown"))
-    TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleInCooldown"))
-    TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableScaleIn, location_name: "DisableScaleIn"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:target_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, location_name: "TargetValue", traits: {"smithy.api#required" => {}}))
+    TargetTrackingScalingPolicyConfiguration.add_member(:predefined_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedMetricSpecification, location_name: "PredefinedMetricSpecification"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:customized_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizedMetricSpecification, location_name: "CustomizedMetricSpecification"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_out_cooldown, ::Smithy::Schema::Shapes::MemberShape.new(target: Cooldown, location_name: "ScaleOutCooldown"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, ::Smithy::Schema::Shapes::MemberShape.new(target: Cooldown, location_name: "ScaleInCooldown"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableScaleIn, location_name: "DisableScaleIn"))
     TargetTrackingScalingPolicyConfiguration.type = Types::TargetTrackingScalingPolicyConfiguration
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceName"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ValidationException.type = Types::ValidationException
 
     AnyScaleFrontendService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -558,155 +558,155 @@ module Aws::ApplicationAutoScaling
       service.add_operation(:delete_scaling_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#DeleteScalingPolicy"
         operation.name = "DeleteScalingPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScalingPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScalingPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteScalingPolicyRequest
+        operation.output = DeleteScalingPolicyResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << ObjectNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_scheduled_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#DeleteScheduledAction"
         operation.name = "DeleteScheduledAction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScheduledActionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScheduledActionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteScheduledActionRequest
+        operation.output = DeleteScheduledActionResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << ObjectNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:deregister_scalable_target, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#DeregisterScalableTarget"
         operation.name = "DeregisterScalableTarget"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterScalableTargetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterScalableTargetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeregisterScalableTargetRequest
+        operation.output = DeregisterScalableTargetResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << ObjectNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_scalable_targets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#DescribeScalableTargets"
         operation.name = "DescribeScalableTargets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScalableTargetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScalableTargetsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeScalableTargetsRequest
+        operation.output = DescribeScalableTargetsResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ValidationException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "DescribeScalableTargetsSuccess", "params" => {"ServiceNamespace" => "ec2"}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::DescribeScalableTargets.new
       end)
       service.add_operation(:describe_scaling_activities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#DescribeScalingActivities"
         operation.name = "DescribeScalingActivities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScalingActivitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScalingActivitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeScalingActivitiesRequest
+        operation.output = DescribeScalingActivitiesResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeScalingActivities.new
       end)
       service.add_operation(:describe_scaling_policies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#DescribeScalingPolicies"
         operation.name = "DescribeScalingPolicies"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScalingPoliciesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScalingPoliciesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedResourceAccessException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeScalingPoliciesRequest
+        operation.output = DescribeScalingPoliciesResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << FailedResourceAccessException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeScalingPolicies.new
       end)
       service.add_operation(:describe_scheduled_actions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#DescribeScheduledActions"
         operation.name = "DescribeScheduledActions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScheduledActionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScheduledActionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeScheduledActionsRequest
+        operation.output = DescribeScheduledActionsResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeScheduledActions.new
       end)
       service.add_operation(:get_predictive_scaling_forecast, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#GetPredictiveScalingForecast"
         operation.name = "GetPredictiveScalingForecast"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPredictiveScalingForecastRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPredictiveScalingForecastResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetPredictiveScalingForecastRequest
+        operation.output = GetPredictiveScalingForecastResponse
+        operation.errors << InternalServiceException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:put_scaling_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#PutScalingPolicy"
         operation.name = "PutScalingPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutScalingPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutScalingPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedResourceAccessException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutScalingPolicyRequest
+        operation.output = PutScalingPolicyResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << FailedResourceAccessException
+        operation.errors << InternalServiceException
+        operation.errors << LimitExceededException
+        operation.errors << ObjectNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_scheduled_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#PutScheduledAction"
         operation.name = "PutScheduledAction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutScheduledActionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutScheduledActionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutScheduledActionRequest
+        operation.output = PutScheduledActionResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << LimitExceededException
+        operation.errors << ObjectNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:register_scalable_target, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#RegisterScalableTarget"
         operation.name = "RegisterScalableTarget"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterScalableTargetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterScalableTargetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RegisterScalableTargetRequest
+        operation.output = RegisterScalableTargetResponse
+        operation.errors << ConcurrentUpdateException
+        operation.errors << InternalServiceException
+        operation.errors << LimitExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationautoscaling#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

@@ -78,160 +78,160 @@ module Aws::KinesisVideoArchivedMedia
     UnsupportedStreamMediaTypeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideoarchivedmedia#UnsupportedStreamMediaTypeException", name: "UnsupportedStreamMediaTypeException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     WidthPixels = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.kinesisvideoarchivedmedia#WidthPixels", name: "WidthPixels", traits: {"smithy.api#range" => {"min" => 1, "max" => 3840}})
 
-    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ClientLimitExceededException.type = Types::ClientLimitExceededException
-    ClipFragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClipFragmentSelectorType, location_name: "FragmentSelectorType", traits: {"smithy.api#required" => {}}))
-    ClipFragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClipTimestampRange, location_name: "TimestampRange", traits: {"smithy.api#required" => {}}))
+    ClipFragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClipFragmentSelectorType, location_name: "FragmentSelectorType", traits: {"smithy.api#required" => {}}))
+    ClipFragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ClipTimestampRange, location_name: "TimestampRange", traits: {"smithy.api#required" => {}}))
     ClipFragmentSelector.type = Types::ClipFragmentSelector
-    ClipFragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
-    ClipFragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
-    ClipTimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp", traits: {"smithy.api#required" => {}}))
-    ClipTimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp", traits: {"smithy.api#required" => {}}))
+    ClipFragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
+    ClipFragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
+    ClipTimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTimestamp", traits: {"smithy.api#required" => {}}))
+    ClipTimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTimestamp", traits: {"smithy.api#required" => {}}))
     ClipTimestampRange.type = Types::ClipTimestampRange
-    ContainerFormat.add_member(:fragmented_mp4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRAGMENTED_MP4", traits: {"smithy.api#enumValue" => "FRAGMENTED_MP4"}))
-    ContainerFormat.add_member(:mpeg_ts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MPEG_TS", traits: {"smithy.api#enumValue" => "MPEG_TS"}))
-    DASHDisplayFragmentNumber.add_member(:always, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
-    DASHDisplayFragmentNumber.add_member(:never, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
-    DASHDisplayFragmentTimestamp.add_member(:always, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
-    DASHDisplayFragmentTimestamp.add_member(:never, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
-    DASHFragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHFragmentSelectorType, location_name: "FragmentSelectorType"))
-    DASHFragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHTimestampRange, location_name: "TimestampRange"))
+    ContainerFormat.add_member(:fragmented_mp4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRAGMENTED_MP4", traits: {"smithy.api#enumValue" => "FRAGMENTED_MP4"}))
+    ContainerFormat.add_member(:mpeg_ts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MPEG_TS", traits: {"smithy.api#enumValue" => "MPEG_TS"}))
+    DASHDisplayFragmentNumber.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
+    DASHDisplayFragmentNumber.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
+    DASHDisplayFragmentTimestamp.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
+    DASHDisplayFragmentTimestamp.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
+    DASHFragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHFragmentSelectorType, location_name: "FragmentSelectorType"))
+    DASHFragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHTimestampRange, location_name: "TimestampRange"))
     DASHFragmentSelector.type = Types::DASHFragmentSelector
-    DASHFragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
-    DASHFragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
-    DASHPlaybackMode.add_member(:live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
-    DASHPlaybackMode.add_member(:live_replay, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE_REPLAY", traits: {"smithy.api#enumValue" => "LIVE_REPLAY"}))
-    DASHPlaybackMode.add_member(:on_demand, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
-    DASHTimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
-    DASHTimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    DASHFragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
+    DASHFragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
+    DASHPlaybackMode.add_member(:live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
+    DASHPlaybackMode.add_member(:live_replay, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE_REPLAY", traits: {"smithy.api#enumValue" => "LIVE_REPLAY"}))
+    DASHPlaybackMode.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
+    DASHTimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTimestamp"))
+    DASHTimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTimestamp"))
     DASHTimestampRange.type = Types::DASHTimestampRange
-    Format.add_member(:jpeg, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JPEG", traits: {"smithy.api#enumValue" => "JPEG"}))
-    Format.add_member(:png, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PNG", traits: {"smithy.api#enumValue" => "PNG"}))
-    FormatConfig.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatConfigKey)
-    FormatConfig.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatConfigValue)
-    FormatConfigKey.add_member(:jpeg_quality, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JPEGQuality", traits: {"smithy.api#enumValue" => "JPEGQuality"}))
-    Fragment.add_member(:fragment_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FragmentNumberString, location_name: "FragmentNumber"))
-    Fragment.add_member(:fragment_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FragmentSizeInBytes", traits: {"smithy.api#default" => 0}))
-    Fragment.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ProducerTimestamp"))
-    Fragment.add_member(:server_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ServerTimestamp"))
-    Fragment.add_member(:fragment_length_in_milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FragmentLengthInMilliseconds", traits: {"smithy.api#default" => 0}))
+    Format.add_member(:jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JPEG", traits: {"smithy.api#enumValue" => "JPEG"}))
+    Format.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PNG", traits: {"smithy.api#enumValue" => "PNG"}))
+    FormatConfig.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigKey)
+    FormatConfig.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigValue)
+    FormatConfigKey.add_member(:jpeg_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JPEGQuality", traits: {"smithy.api#enumValue" => "JPEGQuality"}))
+    Fragment.add_member(:fragment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberString, location_name: "FragmentNumber"))
+    Fragment.add_member(:fragment_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FragmentSizeInBytes", traits: {"smithy.api#default" => 0}))
+    Fragment.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ProducerTimestamp"))
+    Fragment.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ServerTimestamp"))
+    Fragment.add_member(:fragment_length_in_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FragmentLengthInMilliseconds", traits: {"smithy.api#default" => 0}))
     Fragment.type = Types::Fragment
-    FragmentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Fragment)
-    FragmentNumberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FragmentNumberString)
-    FragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FragmentSelectorType, location_name: "FragmentSelectorType", traits: {"smithy.api#required" => {}}))
-    FragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampRange, location_name: "TimestampRange", traits: {"smithy.api#required" => {}}))
+    FragmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Fragment)
+    FragmentNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberString)
+    FragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentSelectorType, location_name: "FragmentSelectorType", traits: {"smithy.api#required" => {}}))
+    FragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampRange, location_name: "TimestampRange", traits: {"smithy.api#required" => {}}))
     FragmentSelector.type = Types::FragmentSelector
-    FragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
-    FragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
-    GetClipInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    GetClipInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    GetClipInput.add_member(:clip_fragment_selector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClipFragmentSelector, location_name: "ClipFragmentSelector", traits: {"smithy.api#required" => {}}))
+    FragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
+    FragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
+    GetClipInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    GetClipInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "StreamARN"))
+    GetClipInput.add_member(:clip_fragment_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: ClipFragmentSelector, location_name: "ClipFragmentSelector", traits: {"smithy.api#required" => {}}))
     GetClipInput.type = Types::GetClipInput
-    GetClipOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
-    GetClipOutput.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Payload, location_name: "Payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetClipOutput.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    GetClipOutput.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Payload, location_name: "Payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     GetClipOutput[:http_payload] = :payload
     GetClipOutput[:http_payload_member] = GetClipOutput.member(:payload)
     GetClipOutput.type = Types::GetClipOutput
-    GetDASHStreamingSessionURLInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    GetDASHStreamingSessionURLInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    GetDASHStreamingSessionURLInput.add_member(:playback_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHPlaybackMode, location_name: "PlaybackMode"))
-    GetDASHStreamingSessionURLInput.add_member(:display_fragment_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHDisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
-    GetDASHStreamingSessionURLInput.add_member(:display_fragment_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHDisplayFragmentNumber, location_name: "DisplayFragmentNumber"))
-    GetDASHStreamingSessionURLInput.add_member(:dash_fragment_selector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHFragmentSelector, location_name: "DASHFragmentSelector"))
-    GetDASHStreamingSessionURLInput.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires"))
-    GetDASHStreamingSessionURLInput.add_member(:max_manifest_fragment_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHMaxResults, location_name: "MaxManifestFragmentResults"))
+    GetDASHStreamingSessionURLInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    GetDASHStreamingSessionURLInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "StreamARN"))
+    GetDASHStreamingSessionURLInput.add_member(:playback_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHPlaybackMode, location_name: "PlaybackMode"))
+    GetDASHStreamingSessionURLInput.add_member(:display_fragment_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHDisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
+    GetDASHStreamingSessionURLInput.add_member(:display_fragment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHDisplayFragmentNumber, location_name: "DisplayFragmentNumber"))
+    GetDASHStreamingSessionURLInput.add_member(:dash_fragment_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHFragmentSelector, location_name: "DASHFragmentSelector"))
+    GetDASHStreamingSessionURLInput.add_member(:expires, ::Smithy::Schema::Shapes::MemberShape.new(target: Expires, location_name: "Expires"))
+    GetDASHStreamingSessionURLInput.add_member(:max_manifest_fragment_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHMaxResults, location_name: "MaxManifestFragmentResults"))
     GetDASHStreamingSessionURLInput.type = Types::GetDASHStreamingSessionURLInput
-    GetDASHStreamingSessionURLOutput.add_member(:dash_streaming_session_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DASHStreamingSessionURL, location_name: "DASHStreamingSessionURL"))
+    GetDASHStreamingSessionURLOutput.add_member(:dash_streaming_session_url, ::Smithy::Schema::Shapes::MemberShape.new(target: DASHStreamingSessionURL, location_name: "DASHStreamingSessionURL"))
     GetDASHStreamingSessionURLOutput.type = Types::GetDASHStreamingSessionURLOutput
-    GetHLSStreamingSessionURLInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    GetHLSStreamingSessionURLInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    GetHLSStreamingSessionURLInput.add_member(:playback_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSPlaybackMode, location_name: "PlaybackMode"))
-    GetHLSStreamingSessionURLInput.add_member(:hls_fragment_selector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSFragmentSelector, location_name: "HLSFragmentSelector"))
-    GetHLSStreamingSessionURLInput.add_member(:container_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "ContainerFormat"))
-    GetHLSStreamingSessionURLInput.add_member(:discontinuity_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSDiscontinuityMode, location_name: "DiscontinuityMode"))
-    GetHLSStreamingSessionURLInput.add_member(:display_fragment_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSDisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
-    GetHLSStreamingSessionURLInput.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires"))
-    GetHLSStreamingSessionURLInput.add_member(:max_media_playlist_fragment_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSMaxResults, location_name: "MaxMediaPlaylistFragmentResults"))
+    GetHLSStreamingSessionURLInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    GetHLSStreamingSessionURLInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "StreamARN"))
+    GetHLSStreamingSessionURLInput.add_member(:playback_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSPlaybackMode, location_name: "PlaybackMode"))
+    GetHLSStreamingSessionURLInput.add_member(:hls_fragment_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSFragmentSelector, location_name: "HLSFragmentSelector"))
+    GetHLSStreamingSessionURLInput.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, location_name: "ContainerFormat"))
+    GetHLSStreamingSessionURLInput.add_member(:discontinuity_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSDiscontinuityMode, location_name: "DiscontinuityMode"))
+    GetHLSStreamingSessionURLInput.add_member(:display_fragment_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSDisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
+    GetHLSStreamingSessionURLInput.add_member(:expires, ::Smithy::Schema::Shapes::MemberShape.new(target: Expires, location_name: "Expires"))
+    GetHLSStreamingSessionURLInput.add_member(:max_media_playlist_fragment_results, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSMaxResults, location_name: "MaxMediaPlaylistFragmentResults"))
     GetHLSStreamingSessionURLInput.type = Types::GetHLSStreamingSessionURLInput
-    GetHLSStreamingSessionURLOutput.add_member(:hls_streaming_session_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSStreamingSessionURL, location_name: "HLSStreamingSessionURL"))
+    GetHLSStreamingSessionURLOutput.add_member(:hls_streaming_session_url, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSStreamingSessionURL, location_name: "HLSStreamingSessionURL"))
     GetHLSStreamingSessionURLOutput.type = Types::GetHLSStreamingSessionURLOutput
-    GetImagesInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    GetImagesInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    GetImagesInput.add_member(:image_selector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageSelectorType, location_name: "ImageSelectorType", traits: {"smithy.api#required" => {}}))
-    GetImagesInput.add_member(:start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp", traits: {"smithy.api#required" => {}}))
-    GetImagesInput.add_member(:end_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp", traits: {"smithy.api#required" => {}}))
-    GetImagesInput.add_member(:sampling_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingInterval, location_name: "SamplingInterval"))
-    GetImagesInput.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Format, location_name: "Format", traits: {"smithy.api#required" => {}}))
-    GetImagesInput.add_member(:format_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatConfig, location_name: "FormatConfig"))
-    GetImagesInput.add_member(:width_pixels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WidthPixels, location_name: "WidthPixels"))
-    GetImagesInput.add_member(:height_pixels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeightPixels, location_name: "HeightPixels"))
-    GetImagesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImagesMaxResults, location_name: "MaxResults"))
-    GetImagesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetImagesInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    GetImagesInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "StreamARN"))
+    GetImagesInput.add_member(:image_selector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSelectorType, location_name: "ImageSelectorType", traits: {"smithy.api#required" => {}}))
+    GetImagesInput.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTimestamp", traits: {"smithy.api#required" => {}}))
+    GetImagesInput.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTimestamp", traits: {"smithy.api#required" => {}}))
+    GetImagesInput.add_member(:sampling_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingInterval, location_name: "SamplingInterval"))
+    GetImagesInput.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: Format, location_name: "Format", traits: {"smithy.api#required" => {}}))
+    GetImagesInput.add_member(:format_config, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfig, location_name: "FormatConfig"))
+    GetImagesInput.add_member(:width_pixels, ::Smithy::Schema::Shapes::MemberShape.new(target: WidthPixels, location_name: "WidthPixels"))
+    GetImagesInput.add_member(:height_pixels, ::Smithy::Schema::Shapes::MemberShape.new(target: HeightPixels, location_name: "HeightPixels"))
+    GetImagesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: GetImagesMaxResults, location_name: "MaxResults"))
+    GetImagesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetImagesInput.type = Types::GetImagesInput
-    GetImagesOutput.add_member(:images, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Images, location_name: "Images"))
-    GetImagesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetImagesOutput.add_member(:images, ::Smithy::Schema::Shapes::MemberShape.new(target: Images, location_name: "Images"))
+    GetImagesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetImagesOutput.type = Types::GetImagesOutput
-    GetMediaForFragmentListInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    GetMediaForFragmentListInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    GetMediaForFragmentListInput.add_member(:fragments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FragmentNumberList, location_name: "Fragments", traits: {"smithy.api#required" => {}}))
+    GetMediaForFragmentListInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    GetMediaForFragmentListInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "StreamARN"))
+    GetMediaForFragmentListInput.add_member(:fragments, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberList, location_name: "Fragments", traits: {"smithy.api#required" => {}}))
     GetMediaForFragmentListInput.type = Types::GetMediaForFragmentListInput
-    GetMediaForFragmentListOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
-    GetMediaForFragmentListOutput.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Payload, location_name: "Payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetMediaForFragmentListOutput.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    GetMediaForFragmentListOutput.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Payload, location_name: "Payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     GetMediaForFragmentListOutput[:http_payload] = :payload
     GetMediaForFragmentListOutput[:http_payload_member] = GetMediaForFragmentListOutput.member(:payload)
     GetMediaForFragmentListOutput.type = Types::GetMediaForFragmentListOutput
-    HLSDiscontinuityMode.add_member(:always, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
-    HLSDiscontinuityMode.add_member(:never, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
-    HLSDiscontinuityMode.add_member(:on_discontinuity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DISCONTINUITY", traits: {"smithy.api#enumValue" => "ON_DISCONTINUITY"}))
-    HLSDisplayFragmentTimestamp.add_member(:always, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
-    HLSDisplayFragmentTimestamp.add_member(:never, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
-    HLSFragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSFragmentSelectorType, location_name: "FragmentSelectorType"))
-    HLSFragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HLSTimestampRange, location_name: "TimestampRange"))
+    HLSDiscontinuityMode.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
+    HLSDiscontinuityMode.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
+    HLSDiscontinuityMode.add_member(:on_discontinuity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DISCONTINUITY", traits: {"smithy.api#enumValue" => "ON_DISCONTINUITY"}))
+    HLSDisplayFragmentTimestamp.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
+    HLSDisplayFragmentTimestamp.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
+    HLSFragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSFragmentSelectorType, location_name: "FragmentSelectorType"))
+    HLSFragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::MemberShape.new(target: HLSTimestampRange, location_name: "TimestampRange"))
     HLSFragmentSelector.type = Types::HLSFragmentSelector
-    HLSFragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
-    HLSFragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
-    HLSPlaybackMode.add_member(:live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
-    HLSPlaybackMode.add_member(:live_replay, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE_REPLAY", traits: {"smithy.api#enumValue" => "LIVE_REPLAY"}))
-    HLSPlaybackMode.add_member(:on_demand, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
-    HLSTimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
-    HLSTimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    HLSFragmentSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
+    HLSFragmentSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
+    HLSPlaybackMode.add_member(:live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
+    HLSPlaybackMode.add_member(:live_replay, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE_REPLAY", traits: {"smithy.api#enumValue" => "LIVE_REPLAY"}))
+    HLSPlaybackMode.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
+    HLSTimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTimestamp"))
+    HLSTimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTimestamp"))
     HLSTimestampRange.type = Types::HLSTimestampRange
-    Image.add_member(:time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "TimeStamp"))
-    Image.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageError, location_name: "Error"))
-    Image.add_member(:image_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageContent, location_name: "ImageContent"))
+    Image.add_member(:time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "TimeStamp"))
+    Image.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageError, location_name: "Error"))
+    Image.add_member(:image_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageContent, location_name: "ImageContent"))
     Image.type = Types::Image
-    ImageError.add_member(:no_media, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_MEDIA", traits: {"smithy.api#enumValue" => "NO_MEDIA"}))
-    ImageError.add_member(:media_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEDIA_ERROR", traits: {"smithy.api#enumValue" => "MEDIA_ERROR"}))
-    ImageSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
-    ImageSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
-    Images.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Image)
-    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ImageError.add_member(:no_media, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_MEDIA", traits: {"smithy.api#enumValue" => "NO_MEDIA"}))
+    ImageError.add_member(:media_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEDIA_ERROR", traits: {"smithy.api#enumValue" => "MEDIA_ERROR"}))
+    ImageSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
+    ImageSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
+    Images.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Image)
+    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
-    InvalidCodecPrivateDataException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidCodecPrivateDataException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidCodecPrivateDataException.type = Types::InvalidCodecPrivateDataException
-    InvalidMediaFrameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidMediaFrameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidMediaFrameException.type = Types::InvalidMediaFrameException
-    ListFragmentsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
-    ListFragmentsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    ListFragmentsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFragmentsMaxResults, location_name: "MaxResults"))
-    ListFragmentsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListFragmentsInput.add_member(:fragment_selector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FragmentSelector, location_name: "FragmentSelector"))
+    ListFragmentsInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, location_name: "StreamName"))
+    ListFragmentsInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "StreamARN"))
+    ListFragmentsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListFragmentsMaxResults, location_name: "MaxResults"))
+    ListFragmentsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListFragmentsInput.add_member(:fragment_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentSelector, location_name: "FragmentSelector"))
     ListFragmentsInput.type = Types::ListFragmentsInput
-    ListFragmentsOutput.add_member(:fragments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FragmentList, location_name: "Fragments"))
-    ListFragmentsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFragmentsOutput.add_member(:fragments, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentList, location_name: "Fragments"))
+    ListFragmentsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListFragmentsOutput.type = Types::ListFragmentsOutput
-    MissingCodecPrivateDataException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingCodecPrivateDataException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     MissingCodecPrivateDataException.type = Types::MissingCodecPrivateDataException
-    NoDataRetentionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NoDataRetentionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NoDataRetentionException.type = Types::NoDataRetentionException
-    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotAuthorizedException.type = Types::NotAuthorizedException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    TimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp", traits: {"smithy.api#required" => {}}))
-    TimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp", traits: {"smithy.api#required" => {}}))
+    TimestampRange.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTimestamp", traits: {"smithy.api#required" => {}}))
+    TimestampRange.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTimestamp", traits: {"smithy.api#required" => {}}))
     TimestampRange.type = Types::TimestampRange
-    UnsupportedStreamMediaTypeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnsupportedStreamMediaTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UnsupportedStreamMediaTypeException.type = Types::UnsupportedStreamMediaTypeException
 
     AWSAcuityReader = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -242,82 +242,82 @@ module Aws::KinesisVideoArchivedMedia
       service.add_operation(:get_clip, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideoarchivedmedia#GetClip"
         operation.name = "GetClip"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetClipInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetClipOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCodecPrivateDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMediaFrameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingCodecPrivateDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoDataRetentionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedStreamMediaTypeException)
+        operation.input = GetClipInput
+        operation.output = GetClipOutput
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << InvalidCodecPrivateDataException
+        operation.errors << InvalidMediaFrameException
+        operation.errors << MissingCodecPrivateDataException
+        operation.errors << NoDataRetentionException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UnsupportedStreamMediaTypeException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/getClip", "code" => 200}}
       end)
       service.add_operation(:get_dash_streaming_session_url, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideoarchivedmedia#GetDASHStreamingSessionURL"
         operation.name = "GetDASHStreamingSessionURL"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDASHStreamingSessionURLInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDASHStreamingSessionURLOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCodecPrivateDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingCodecPrivateDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoDataRetentionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedStreamMediaTypeException)
+        operation.input = GetDASHStreamingSessionURLInput
+        operation.output = GetDASHStreamingSessionURLOutput
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << InvalidCodecPrivateDataException
+        operation.errors << MissingCodecPrivateDataException
+        operation.errors << NoDataRetentionException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UnsupportedStreamMediaTypeException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/getDASHStreamingSessionURL", "code" => 200}}
       end)
       service.add_operation(:get_hls_streaming_session_url, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideoarchivedmedia#GetHLSStreamingSessionURL"
         operation.name = "GetHLSStreamingSessionURL"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetHLSStreamingSessionURLInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetHLSStreamingSessionURLOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCodecPrivateDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingCodecPrivateDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoDataRetentionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedStreamMediaTypeException)
+        operation.input = GetHLSStreamingSessionURLInput
+        operation.output = GetHLSStreamingSessionURLOutput
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << InvalidCodecPrivateDataException
+        operation.errors << MissingCodecPrivateDataException
+        operation.errors << NoDataRetentionException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << UnsupportedStreamMediaTypeException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/getHLSStreamingSessionURL", "code" => 200}}
       end)
       service.add_operation(:get_images, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideoarchivedmedia#GetImages"
         operation.name = "GetImages"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImagesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImagesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoDataRetentionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetImagesInput
+        operation.output = GetImagesOutput
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << NoDataRetentionException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/getImages", "code" => 200}}
         operation[:paginator] = Paginators::GetImages.new
       end)
       service.add_operation(:get_media_for_fragment_list, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideoarchivedmedia#GetMediaForFragmentList"
         operation.name = "GetMediaForFragmentList"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMediaForFragmentListInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMediaForFragmentListOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetMediaForFragmentListInput
+        operation.output = GetMediaForFragmentListOutput
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/getMediaForFragmentList", "code" => 200}}
       end)
       service.add_operation(:list_fragments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideoarchivedmedia#ListFragments"
         operation.name = "ListFragments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFragmentsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFragmentsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListFragmentsInput
+        operation.output = ListFragmentsOutput
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/listFragments", "code" => 200}}
         operation[:paginator] = Paginators::ListFragments.new
       end)

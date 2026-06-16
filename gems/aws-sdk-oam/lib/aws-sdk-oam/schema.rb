@@ -74,172 +74,172 @@ module Aws::OAM
     UpdateLinkOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.oam#UpdateLinkOutput", name: "UpdateLinkOutput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.oam#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    ConflictException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ConflictException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ConflictException.type = Types::ConflictException
-    CreateLinkInput.add_member(:label_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LabelTemplate, location_name: "LabelTemplate", traits: {"smithy.api#required" => {}}))
-    CreateLinkInput.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesInput, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
-    CreateLinkInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
-    CreateLinkInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapInput, location_name: "Tags"))
-    CreateLinkInput.add_member(:link_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
+    CreateLinkInput.add_member(:label_template, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelTemplate, location_name: "LabelTemplate", traits: {"smithy.api#required" => {}}))
+    CreateLinkInput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesInput, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
+    CreateLinkInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateLinkInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapInput, location_name: "Tags"))
+    CreateLinkInput.add_member(:link_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkConfiguration, location_name: "LinkConfiguration"))
     CreateLinkInput.type = Types::CreateLinkInput
-    CreateLinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    CreateLinkOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
-    CreateLinkOutput.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
-    CreateLinkOutput.add_member(:label_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LabelTemplate"))
-    CreateLinkOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
-    CreateLinkOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
-    CreateLinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
-    CreateLinkOutput.add_member(:link_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
+    CreateLinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    CreateLinkOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
+    CreateLinkOutput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
+    CreateLinkOutput.add_member(:label_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LabelTemplate"))
+    CreateLinkOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesOutput, location_name: "ResourceTypes"))
+    CreateLinkOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
+    CreateLinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapOutput, location_name: "Tags"))
+    CreateLinkOutput.add_member(:link_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkConfiguration, location_name: "LinkConfiguration"))
     CreateLinkOutput.type = Types::CreateLinkOutput
-    CreateSinkInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SinkName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateSinkInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapInput, location_name: "Tags"))
+    CreateSinkInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SinkName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateSinkInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapInput, location_name: "Tags"))
     CreateSinkInput.type = Types::CreateSinkInput
-    CreateSinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    CreateSinkOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
-    CreateSinkOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
-    CreateSinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
+    CreateSinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    CreateSinkOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
+    CreateSinkOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
+    CreateSinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapOutput, location_name: "Tags"))
     CreateSinkOutput.type = Types::CreateSinkOutput
-    DeleteLinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    DeleteLinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
     DeleteLinkInput.type = Types::DeleteLinkInput
     DeleteLinkOutput.type = Types::DeleteLinkOutput
-    DeleteSinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    DeleteSinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
     DeleteSinkInput.type = Types::DeleteSinkInput
     DeleteSinkOutput.type = Types::DeleteSinkOutput
-    GetLinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    GetLinkInput.add_member(:include_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeTags, location_name: "IncludeTags"))
+    GetLinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    GetLinkInput.add_member(:include_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeTags, location_name: "IncludeTags"))
     GetLinkInput.type = Types::GetLinkInput
-    GetLinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    GetLinkOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
-    GetLinkOutput.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
-    GetLinkOutput.add_member(:label_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LabelTemplate"))
-    GetLinkOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
-    GetLinkOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
-    GetLinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
-    GetLinkOutput.add_member(:link_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
+    GetLinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    GetLinkOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
+    GetLinkOutput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
+    GetLinkOutput.add_member(:label_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LabelTemplate"))
+    GetLinkOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesOutput, location_name: "ResourceTypes"))
+    GetLinkOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
+    GetLinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapOutput, location_name: "Tags"))
+    GetLinkOutput.add_member(:link_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkConfiguration, location_name: "LinkConfiguration"))
     GetLinkOutput.type = Types::GetLinkOutput
-    GetSinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    GetSinkInput.add_member(:include_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeTags, location_name: "IncludeTags"))
+    GetSinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    GetSinkInput.add_member(:include_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeTags, location_name: "IncludeTags"))
     GetSinkInput.type = Types::GetSinkInput
-    GetSinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    GetSinkOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
-    GetSinkOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
-    GetSinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
+    GetSinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    GetSinkOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
+    GetSinkOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
+    GetSinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapOutput, location_name: "Tags"))
     GetSinkOutput.type = Types::GetSinkOutput
-    GetSinkPolicyInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
+    GetSinkPolicyInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
     GetSinkPolicyInput.type = Types::GetSinkPolicyInput
-    GetSinkPolicyOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
-    GetSinkPolicyOutput.add_member(:sink_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkId"))
-    GetSinkPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Policy"))
+    GetSinkPolicyOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
+    GetSinkPolicyOutput.add_member(:sink_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkId"))
+    GetSinkPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Policy"))
     GetSinkPolicyOutput.type = Types::GetSinkPolicyOutput
-    InternalServiceFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    InternalServiceFault.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    InternalServiceFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    InternalServiceFault.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InternalServiceFault.type = Types::InternalServiceFault
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
-    InvalidParameterException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InvalidParameterException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InvalidParameterException.type = Types::InvalidParameterException
-    LinkConfiguration.add_member(:log_group_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupConfiguration, location_name: "LogGroupConfiguration"))
-    LinkConfiguration.add_member(:metric_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricConfiguration, location_name: "MetricConfiguration"))
+    LinkConfiguration.add_member(:log_group_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupConfiguration, location_name: "LogGroupConfiguration"))
+    LinkConfiguration.add_member(:metric_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricConfiguration, location_name: "MetricConfiguration"))
     LinkConfiguration.type = Types::LinkConfiguration
-    ListAttachedLinksInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttachedLinksMaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
-    ListAttachedLinksInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAttachedLinksInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
+    ListAttachedLinksInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttachedLinksMaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ListAttachedLinksInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListAttachedLinksInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
     ListAttachedLinksInput.type = Types::ListAttachedLinksInput
-    ListAttachedLinksItem.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
-    ListAttachedLinksItem.add_member(:link_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LinkArn"))
-    ListAttachedLinksItem.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
+    ListAttachedLinksItem.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
+    ListAttachedLinksItem.add_member(:link_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LinkArn"))
+    ListAttachedLinksItem.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesOutput, location_name: "ResourceTypes"))
     ListAttachedLinksItem.type = Types::ListAttachedLinksItem
-    ListAttachedLinksItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttachedLinksItem)
-    ListAttachedLinksOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttachedLinksItems, location_name: "Items", traits: {"smithy.api#required" => {}}))
-    ListAttachedLinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListAttachedLinksItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttachedLinksItem)
+    ListAttachedLinksOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttachedLinksItems, location_name: "Items", traits: {"smithy.api#required" => {}}))
+    ListAttachedLinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListAttachedLinksOutput.type = Types::ListAttachedLinksOutput
-    ListLinksInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinksMaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
-    ListLinksInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLinksInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListLinksMaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ListLinksInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListLinksInput.type = Types::ListLinksInput
-    ListLinksItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    ListLinksItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
-    ListLinksItem.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
-    ListLinksItem.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
-    ListLinksItem.add_member(:sink_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
+    ListLinksItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    ListLinksItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
+    ListLinksItem.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
+    ListLinksItem.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesOutput, location_name: "ResourceTypes"))
+    ListLinksItem.add_member(:sink_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
     ListLinksItem.type = Types::ListLinksItem
-    ListLinksItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinksItem)
-    ListLinksOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinksItems, location_name: "Items", traits: {"smithy.api#required" => {}}))
-    ListLinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListLinksItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListLinksItem)
+    ListLinksOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListLinksItems, location_name: "Items", traits: {"smithy.api#required" => {}}))
+    ListLinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListLinksOutput.type = Types::ListLinksOutput
-    ListSinksInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSinksMaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
-    ListSinksInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSinksInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSinksMaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ListSinksInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListSinksInput.type = Types::ListSinksInput
-    ListSinksItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    ListSinksItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
-    ListSinksItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
+    ListSinksItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    ListSinksItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
+    ListSinksItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
     ListSinksItem.type = Types::ListSinksItem
-    ListSinksItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSinksItem)
-    ListSinksOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSinksItems, location_name: "Items", traits: {"smithy.api#required" => {}}))
-    ListSinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListSinksItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSinksItem)
+    ListSinksOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSinksItems, location_name: "Items", traits: {"smithy.api#required" => {}}))
+    ListSinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListSinksOutput.type = Types::ListSinksOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapOutput, location_name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    LogGroupConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogsFilter, location_name: "Filter", traits: {"smithy.api#required" => {}}))
+    LogGroupConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsFilter, location_name: "Filter", traits: {"smithy.api#required" => {}}))
     LogGroupConfiguration.type = Types::LogGroupConfiguration
-    MetricConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsFilter, location_name: "Filter", traits: {"smithy.api#required" => {}}))
+    MetricConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsFilter, location_name: "Filter", traits: {"smithy.api#required" => {}}))
     MetricConfiguration.type = Types::MetricConfiguration
-    MissingRequiredParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
-    MissingRequiredParameterException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    MissingRequiredParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    MissingRequiredParameterException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     MissingRequiredParameterException.type = Types::MissingRequiredParameterException
-    PutSinkPolicyInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
-    PutSinkPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SinkPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutSinkPolicyInput.add_member(:sink_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "SinkIdentifier", traits: {"smithy.api#required" => {}}))
+    PutSinkPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SinkPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     PutSinkPolicyInput.type = Types::PutSinkPolicyInput
-    PutSinkPolicyOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
-    PutSinkPolicyOutput.add_member(:sink_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkId"))
-    PutSinkPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Policy"))
+    PutSinkPolicyOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
+    PutSinkPolicyOutput.add_member(:sink_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkId"))
+    PutSinkPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Policy"))
     PutSinkPolicyOutput.type = Types::PutSinkPolicyOutput
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    ResourceNotFoundException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceType.add_member(:aws_cloudwatch_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_CLOUDWATCH_METRIC", traits: {"smithy.api#enumValue" => "AWS::CloudWatch::Metric"}))
-    ResourceType.add_member(:aws_logs_loggroup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_LOGS_LOGGROUP", traits: {"smithy.api#enumValue" => "AWS::Logs::LogGroup"}))
-    ResourceType.add_member(:aws_xray_trace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_XRAY_TRACE", traits: {"smithy.api#enumValue" => "AWS::XRay::Trace"}))
-    ResourceType.add_member(:aws_applicationinsights_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_APPLICATIONINSIGHTS_APPLICATION", traits: {"smithy.api#enumValue" => "AWS::ApplicationInsights::Application"}))
-    ResourceType.add_member(:aws_internetmonitor_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_INTERNETMONITOR_MONITOR", traits: {"smithy.api#enumValue" => "AWS::InternetMonitor::Monitor"}))
-    ResourceType.add_member(:aws_application_signals_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_APPLICATION_SIGNALS_SERVICE", traits: {"smithy.api#enumValue" => "AWS::ApplicationSignals::Service"}))
-    ResourceType.add_member(:aws_application_signals_slo, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_APPLICATION_SIGNALS_SLO", traits: {"smithy.api#enumValue" => "AWS::ApplicationSignals::ServiceLevelObjective"}))
-    ResourceTypesInput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType)
-    ResourceTypesOutput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    ServiceQuotaExceededException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ResourceType.add_member(:aws_cloudwatch_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_CLOUDWATCH_METRIC", traits: {"smithy.api#enumValue" => "AWS::CloudWatch::Metric"}))
+    ResourceType.add_member(:aws_logs_loggroup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_LOGS_LOGGROUP", traits: {"smithy.api#enumValue" => "AWS::Logs::LogGroup"}))
+    ResourceType.add_member(:aws_xray_trace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_XRAY_TRACE", traits: {"smithy.api#enumValue" => "AWS::XRay::Trace"}))
+    ResourceType.add_member(:aws_applicationinsights_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_APPLICATIONINSIGHTS_APPLICATION", traits: {"smithy.api#enumValue" => "AWS::ApplicationInsights::Application"}))
+    ResourceType.add_member(:aws_internetmonitor_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_INTERNETMONITOR_MONITOR", traits: {"smithy.api#enumValue" => "AWS::InternetMonitor::Monitor"}))
+    ResourceType.add_member(:aws_application_signals_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_APPLICATION_SIGNALS_SERVICE", traits: {"smithy.api#enumValue" => "AWS::ApplicationSignals::Service"}))
+    ResourceType.add_member(:aws_application_signals_slo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_APPLICATION_SIGNALS_SLO", traits: {"smithy.api#enumValue" => "AWS::ApplicationSignals::ServiceLevelObjective"}))
+    ResourceTypesInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType)
+    ResourceTypesOutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMapInput.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMapInput.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagMapOutput.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagMapOutput.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapInput, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMapInput.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMapInput.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagMapOutput.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagMapOutput.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapInput, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateLinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    UpdateLinkInput.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesInput, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
-    UpdateLinkInput.add_member(:link_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
-    UpdateLinkInput.add_member(:include_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeTags, location_name: "IncludeTags"))
+    UpdateLinkInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    UpdateLinkInput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesInput, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
+    UpdateLinkInput.add_member(:link_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkConfiguration, location_name: "LinkConfiguration"))
+    UpdateLinkInput.add_member(:include_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeTags, location_name: "IncludeTags"))
     UpdateLinkInput.type = Types::UpdateLinkInput
-    UpdateLinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    UpdateLinkOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
-    UpdateLinkOutput.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
-    UpdateLinkOutput.add_member(:label_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LabelTemplate, location_name: "LabelTemplate"))
-    UpdateLinkOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
-    UpdateLinkOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
-    UpdateLinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
-    UpdateLinkOutput.add_member(:link_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
+    UpdateLinkOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    UpdateLinkOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id"))
+    UpdateLinkOutput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Label"))
+    UpdateLinkOutput.add_member(:label_template, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelTemplate, location_name: "LabelTemplate"))
+    UpdateLinkOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesOutput, location_name: "ResourceTypes"))
+    UpdateLinkOutput.add_member(:sink_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SinkArn"))
+    UpdateLinkOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapOutput, location_name: "Tags"))
+    UpdateLinkOutput.add_member(:link_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkConfiguration, location_name: "LinkConfiguration"))
     UpdateLinkOutput.type = Types::UpdateLinkOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ValidationException.type = Types::ValidationException
 
     Oamservice = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -250,165 +250,165 @@ module Aws::OAM
       service.add_operation(:create_link, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#CreateLink"
         operation.name = "CreateLink"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLinkInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLinkOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = CreateLinkInput
+        operation.output = CreateLinkOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}", "oam:ResourceTypes"], "smithy.api#http" => {"method" => "POST", "uri" => "/CreateLink"}}
       end)
       service.add_operation(:create_sink, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#CreateSink"
         operation.name = "CreateSink"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSinkInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSinkOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = CreateSinkInput
+        operation.output = CreateSinkOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/CreateSink"}}
       end)
       service.add_operation(:delete_link, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#DeleteLink"
         operation.name = "DeleteLink"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLinkInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLinkOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteLinkInput
+        operation.output = DeleteLinkOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/DeleteLink"}}
       end)
       service.add_operation(:delete_sink, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#DeleteSink"
         operation.name = "DeleteSink"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSinkInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSinkOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteSinkInput
+        operation.output = DeleteSinkOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/DeleteSink"}}
       end)
       service.add_operation(:get_link, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#GetLink"
         operation.name = "GetLink"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLinkInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLinkOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetLinkInput
+        operation.output = GetLinkOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/GetLink"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_sink, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#GetSink"
         operation.name = "GetSink"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSinkInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSinkOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetSinkInput
+        operation.output = GetSinkOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/GetSink"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_sink_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#GetSinkPolicy"
         operation.name = "GetSinkPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSinkPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSinkPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetSinkPolicyInput
+        operation.output = GetSinkPolicyOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/GetSinkPolicy"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_attached_links, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#ListAttachedLinks"
         operation.name = "ListAttachedLinks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttachedLinksInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAttachedLinksOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListAttachedLinksInput
+        operation.output = ListAttachedLinksOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/ListAttachedLinks"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAttachedLinks.new
       end)
       service.add_operation(:list_links, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#ListLinks"
         operation.name = "ListLinks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinksInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinksOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListLinksInput
+        operation.output = ListLinksOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListLinks"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListLinks.new
       end)
       service.add_operation(:list_sinks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#ListSinks"
         operation.name = "ListSinks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSinksInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSinksOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListSinksInput
+        operation.output = ListSinksOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListSinks"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSinks.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list the tags for a resource", "smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:put_sink_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#PutSinkPolicy"
         operation.name = "PutSinkPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutSinkPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutSinkPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutSinkPolicyInput
+        operation.output = PutSinkPolicyOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/PutSinkPolicy"}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to tag a resource", "aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "smithy.api#http" => {"method" => "PUT", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to untag a resource", "aws.iam#conditionKeys" => ["aws:TagKeys"], "smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:update_link, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.oam#UpdateLink"
         operation.name = "UpdateLink"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLinkInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLinkOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateLinkInput
+        operation.output = UpdateLinkOutput
+        operation.errors << InternalServiceFault
+        operation.errors << InvalidParameterException
+        operation.errors << MissingRequiredParameterException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "oam:ResourceTypes"], "smithy.api#http" => {"method" => "POST", "uri" => "/UpdateLink"}}
       end)
     end

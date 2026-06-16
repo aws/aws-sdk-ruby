@@ -65,190 +65,190 @@ module Aws::NetworkMonitor
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmonitor#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.networkmonitor#VpcId", name: "VpcId", traits: {"smithy.api#pattern" => "^vpc-[a-zA-Z0-9]{8,32}$"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddressFamily.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
-    AddressFamily.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6", traits: {"smithy.api#enumValue" => "IPV6"}))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AddressFamily.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
+    AddressFamily.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6", traits: {"smithy.api#enumValue" => "IPV6"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
-    CreateMonitorInput.add_member(:probes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMonitorProbeInputList, location_name: "probes"))
-    CreateMonitorInput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "aggregationPeriod"))
-    CreateMonitorInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateMonitorInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
+    CreateMonitorInput.add_member(:probes, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateMonitorProbeInputList, location_name: "probes"))
+    CreateMonitorInput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "aggregationPeriod"))
+    CreateMonitorInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateMonitorInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateMonitorInput.type = Types::CreateMonitorInput
-    CreateMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
-    CreateMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
-    CreateMonitorOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    CreateMonitorOutput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "aggregationPeriod"))
-    CreateMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
+    CreateMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
+    CreateMonitorOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    CreateMonitorOutput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "aggregationPeriod"))
+    CreateMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateMonitorOutput.type = Types::CreateMonitorOutput
-    CreateMonitorProbeInput.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
-    CreateMonitorProbeInput.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    CreateMonitorProbeInput.add_member(:destination_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: "destinationPort"))
-    CreateMonitorProbeInput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    CreateMonitorProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PacketSize, location_name: "packetSize"))
-    CreateMonitorProbeInput.add_member(:probe_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "probeTags"))
+    CreateMonitorProbeInput.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
+    CreateMonitorProbeInput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    CreateMonitorProbeInput.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, location_name: "destinationPort"))
+    CreateMonitorProbeInput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    CreateMonitorProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, location_name: "packetSize"))
+    CreateMonitorProbeInput.add_member(:probe_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "probeTags"))
     CreateMonitorProbeInput.type = Types::CreateMonitorProbeInput
-    CreateMonitorProbeInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMonitorProbeInput)
-    CreateProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateProbeInput.add_member(:probe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeInput, location_name: "probe", traits: {"smithy.api#required" => {}}))
-    CreateProbeInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateProbeInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateMonitorProbeInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateMonitorProbeInput)
+    CreateProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateProbeInput.add_member(:probe, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeInput, location_name: "probe", traits: {"smithy.api#required" => {}}))
+    CreateProbeInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateProbeInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateProbeInput.type = Types::CreateProbeInput
-    CreateProbeOutput.add_member(:probe_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeId, location_name: "probeId"))
-    CreateProbeOutput.add_member(:probe_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "probeArn"))
-    CreateProbeOutput.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
-    CreateProbeOutput.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    CreateProbeOutput.add_member(:destination_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: "destinationPort"))
-    CreateProbeOutput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    CreateProbeOutput.add_member(:packet_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PacketSize, location_name: "packetSize"))
-    CreateProbeOutput.add_member(:address_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
-    CreateProbeOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
-    CreateProbeOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeState, location_name: "state"))
-    CreateProbeOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "createdAt"))
-    CreateProbeOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "modifiedAt"))
-    CreateProbeOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateProbeOutput.add_member(:probe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeId, location_name: "probeId"))
+    CreateProbeOutput.add_member(:probe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "probeArn"))
+    CreateProbeOutput.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
+    CreateProbeOutput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    CreateProbeOutput.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, location_name: "destinationPort"))
+    CreateProbeOutput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    CreateProbeOutput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, location_name: "packetSize"))
+    CreateProbeOutput.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, location_name: "addressFamily"))
+    CreateProbeOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "vpcId"))
+    CreateProbeOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeState, location_name: "state"))
+    CreateProbeOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "createdAt"))
+    CreateProbeOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "modifiedAt"))
+    CreateProbeOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateProbeOutput.type = Types::CreateProbeOutput
-    DeleteMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteMonitorInput.type = Types::DeleteMonitorInput
     DeleteMonitorOutput.type = Types::DeleteMonitorOutput
-    DeleteProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteProbeInput.add_member(:probe_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeId, location_name: "probeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProbeInput.add_member(:probe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeId, location_name: "probeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProbeInput.type = Types::DeleteProbeInput
     DeleteProbeOutput.type = Types::DeleteProbeOutput
-    GetMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetMonitorInput.type = Types::GetMonitorInput
-    GetMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "aggregationPeriod", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetMonitorOutput.add_member(:probes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeList, location_name: "probes"))
-    GetMonitorOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    GetMonitorOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "modifiedAt", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "aggregationPeriod", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    GetMonitorOutput.add_member(:probes, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeList, location_name: "probes"))
+    GetMonitorOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    GetMonitorOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "modifiedAt", traits: {"smithy.api#required" => {}}))
     GetMonitorOutput.type = Types::GetMonitorOutput
-    GetProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetProbeInput.add_member(:probe_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeId, location_name: "probeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProbeInput.add_member(:probe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeId, location_name: "probeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProbeInput.type = Types::GetProbeInput
-    GetProbeOutput.add_member(:probe_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeId, location_name: "probeId"))
-    GetProbeOutput.add_member(:probe_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "probeArn"))
-    GetProbeOutput.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
-    GetProbeOutput.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    GetProbeOutput.add_member(:destination_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: "destinationPort"))
-    GetProbeOutput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    GetProbeOutput.add_member(:packet_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PacketSize, location_name: "packetSize"))
-    GetProbeOutput.add_member(:address_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
-    GetProbeOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
-    GetProbeOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeState, location_name: "state"))
-    GetProbeOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "createdAt"))
-    GetProbeOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "modifiedAt"))
-    GetProbeOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetProbeOutput.add_member(:probe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeId, location_name: "probeId"))
+    GetProbeOutput.add_member(:probe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "probeArn"))
+    GetProbeOutput.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
+    GetProbeOutput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    GetProbeOutput.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, location_name: "destinationPort"))
+    GetProbeOutput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    GetProbeOutput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, location_name: "packetSize"))
+    GetProbeOutput.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, location_name: "addressFamily"))
+    GetProbeOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "vpcId"))
+    GetProbeOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeState, location_name: "state"))
+    GetProbeOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "createdAt"))
+    GetProbeOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "modifiedAt"))
+    GetProbeOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     GetProbeOutput.type = Types::GetProbeOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    ListMonitorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListMonitorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListMonitorsInput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "state", traits: {"smithy.api#httpQuery" => "state"}))
+    ListMonitorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListMonitorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListMonitorsInput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "state", traits: {"smithy.api#httpQuery" => "state"}))
     ListMonitorsInput.type = Types::ListMonitorsInput
-    ListMonitorsOutput.add_member(:monitors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorList, location_name: "monitors", traits: {"smithy.api#required" => {}}))
-    ListMonitorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListMonitorsOutput.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, location_name: "monitors", traits: {"smithy.api#required" => {}}))
+    ListMonitorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListMonitorsOutput.type = Types::ListMonitorsOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    MonitorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorSummary)
-    MonitorState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    MonitorState.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    MonitorState.add_member(:inactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    MonitorState.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    MonitorState.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    MonitorSummary.add_member(:monitor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
-    MonitorSummary.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
-    MonitorSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    MonitorSummary.add_member(:aggregation_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "aggregationPeriod"))
-    MonitorSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    MonitorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorSummary)
+    MonitorState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    MonitorState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    MonitorState.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    MonitorState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    MonitorState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    MonitorSummary.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
+    MonitorSummary.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
+    MonitorSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    MonitorSummary.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "aggregationPeriod"))
+    MonitorSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     MonitorSummary.type = Types::MonitorSummary
-    Probe.add_member(:probe_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeId, location_name: "probeId"))
-    Probe.add_member(:probe_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "probeArn"))
-    Probe.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
-    Probe.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    Probe.add_member(:destination_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: "destinationPort"))
-    Probe.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    Probe.add_member(:packet_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PacketSize, location_name: "packetSize"))
-    Probe.add_member(:address_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
-    Probe.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
-    Probe.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeState, location_name: "state"))
-    Probe.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "createdAt"))
-    Probe.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "modifiedAt"))
-    Probe.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Probe.add_member(:probe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeId, location_name: "probeId"))
+    Probe.add_member(:probe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "probeArn"))
+    Probe.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
+    Probe.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    Probe.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, location_name: "destinationPort"))
+    Probe.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    Probe.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, location_name: "packetSize"))
+    Probe.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, location_name: "addressFamily"))
+    Probe.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "vpcId"))
+    Probe.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeState, location_name: "state"))
+    Probe.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "createdAt"))
+    Probe.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "modifiedAt"))
+    Probe.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     Probe.type = Types::Probe
-    ProbeInput.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
-    ProbeInput.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    ProbeInput.add_member(:destination_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: "destinationPort"))
-    ProbeInput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    ProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PacketSize, location_name: "packetSize"))
-    ProbeInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ProbeInput.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
+    ProbeInput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    ProbeInput.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, location_name: "destinationPort"))
+    ProbeInput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    ProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, location_name: "packetSize"))
+    ProbeInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ProbeInput.type = Types::ProbeInput
-    ProbeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Probe)
-    ProbeState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    ProbeState.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ProbeState.add_member(:inactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    ProbeState.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    ProbeState.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ProbeState.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    Protocol.add_member(:tcp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
-    Protocol.add_member(:icmp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ICMP", traits: {"smithy.api#enumValue" => "ICMP"}))
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ProbeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Probe)
+    ProbeState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ProbeState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ProbeState.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    ProbeState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    ProbeState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ProbeState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    Protocol.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
+    Protocol.add_member(:icmp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ICMP", traits: {"smithy.api#enumValue" => "ICMP"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateMonitorInput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "aggregationPeriod", traits: {"smithy.api#required" => {}}))
+    UpdateMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateMonitorInput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "aggregationPeriod", traits: {"smithy.api#required" => {}}))
     UpdateMonitorInput.type = Types::UpdateMonitorInput
-    UpdateMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
-    UpdateMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
-    UpdateMonitorOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    UpdateMonitorOutput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "aggregationPeriod"))
-    UpdateMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateMonitorOutput.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, location_name: "monitorArn", traits: {"smithy.api#required" => {}}))
+    UpdateMonitorOutput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#required" => {}}))
+    UpdateMonitorOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    UpdateMonitorOutput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, location_name: "aggregationPeriod"))
+    UpdateMonitorOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     UpdateMonitorOutput.type = Types::UpdateMonitorOutput
-    UpdateProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateProbeInput.add_member(:probe_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeId, location_name: "probeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateProbeInput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeState, location_name: "state"))
-    UpdateProbeInput.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
-    UpdateProbeInput.add_member(:destination_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: "destinationPort"))
-    UpdateProbeInput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
-    UpdateProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PacketSize, location_name: "packetSize"))
+    UpdateProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProbeInput.add_member(:probe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeId, location_name: "probeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProbeInput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeState, location_name: "state"))
+    UpdateProbeInput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination"))
+    UpdateProbeInput.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, location_name: "destinationPort"))
+    UpdateProbeInput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "protocol"))
+    UpdateProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, location_name: "packetSize"))
     UpdateProbeInput.type = Types::UpdateProbeInput
-    UpdateProbeOutput.add_member(:probe_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeId, location_name: "probeId"))
-    UpdateProbeOutput.add_member(:probe_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "probeArn"))
-    UpdateProbeOutput.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
-    UpdateProbeOutput.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    UpdateProbeOutput.add_member(:destination_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: "destinationPort"))
-    UpdateProbeOutput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    UpdateProbeOutput.add_member(:packet_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PacketSize, location_name: "packetSize"))
-    UpdateProbeOutput.add_member(:address_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
-    UpdateProbeOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
-    UpdateProbeOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProbeState, location_name: "state"))
-    UpdateProbeOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "createdAt"))
-    UpdateProbeOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "modifiedAt"))
-    UpdateProbeOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateProbeOutput.add_member(:probe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeId, location_name: "probeId"))
+    UpdateProbeOutput.add_member(:probe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "probeArn"))
+    UpdateProbeOutput.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "sourceArn", traits: {"smithy.api#required" => {}}))
+    UpdateProbeOutput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    UpdateProbeOutput.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, location_name: "destinationPort"))
+    UpdateProbeOutput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    UpdateProbeOutput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, location_name: "packetSize"))
+    UpdateProbeOutput.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, location_name: "addressFamily"))
+    UpdateProbeOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "vpcId"))
+    UpdateProbeOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeState, location_name: "state"))
+    UpdateProbeOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "createdAt"))
+    UpdateProbeOutput.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, location_name: "modifiedAt"))
+    UpdateProbeOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     UpdateProbeOutput.type = Types::UpdateProbeOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     NetworkMonitor = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -259,153 +259,153 @@ module Aws::NetworkMonitor
       service.add_operation(:create_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#CreateMonitor"
         operation.name = "CreateMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateMonitorInput
+        operation.output = CreateMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a monitor"}, "smithy.api#http" => {"uri" => "/monitors", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_probe, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#CreateProbe"
         operation.name = "CreateProbe"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProbeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProbeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateProbeInput
+        operation.output = CreateProbeOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a probe"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}/probes", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#DeleteMonitor"
         operation.name = "DeleteMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteMonitorInput
+        operation.output = DeleteMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a monitor"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_probe, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#DeleteProbe"
         operation.name = "DeleteProbe"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProbeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProbeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteProbeInput
+        operation.output = DeleteProbeOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a probe"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}/probes/{probeId}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#GetMonitor"
         operation.name = "GetMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetMonitorInput
+        operation.output = GetMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get information about a monitor"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_probe, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#GetProbe"
         operation.name = "GetProbe"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProbeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProbeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetProbeInput
+        operation.output = GetProbeOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get information about a probe"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}/probes/{probeId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_monitors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#ListMonitors"
         operation.name = "ListMonitors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMonitorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMonitorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListMonitorsInput
+        operation.output = ListMonitorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list all monitors in an account and their statuses"}, "smithy.api#http" => {"uri" => "/monitors", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListMonitors.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list the tags for a resource"}, "smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to add tags to a resource"}, "smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to remove tags from a resource"}, "smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#UpdateMonitor"
         operation.name = "UpdateMonitor"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMonitorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMonitorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateMonitorInput
+        operation.output = UpdateMonitorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a monitor"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_probe, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmonitor#UpdateProbe"
         operation.name = "UpdateProbe"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProbeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProbeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateProbeInput
+        operation.output = UpdateProbeOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a probe"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}/probes/{probeId}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
     end

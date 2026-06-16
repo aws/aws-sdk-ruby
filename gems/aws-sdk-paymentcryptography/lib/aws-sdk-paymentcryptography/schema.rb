@@ -142,337 +142,337 @@ module Aws::PaymentCryptography
     WrappedKeyMaterialFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#WrappedKeyMaterialFormat", name: "WrappedKeyMaterialFormat", traits: {"smithy.api#enum" => [{"value" => "KEY_CRYPTOGRAM", "name" => "KEY_CRYPTOGRAM"}, {"value" => "TR31_KEY_BLOCK", "name" => "TR31_KEY_BLOCK"}, {"value" => "TR34_KEY_BLOCK", "name" => "TR34_KEY_BLOCK"}]})
     WrappingKeySpec = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#WrappingKeySpec", name: "WrappingKeySpec", traits: {"smithy.api#enum" => [{"value" => "RSA_OAEP_SHA_256", "name" => "RSA_OAEP_SHA_256"}, {"value" => "RSA_OAEP_SHA_512", "name" => "RSA_OAEP_SHA_512"}]})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddKeyReplicationRegionsInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    AddKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
+    AddKeyReplicationRegionsInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    AddKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
     AddKeyReplicationRegionsInput.type = Types::AddKeyReplicationRegionsInput
-    AddKeyReplicationRegionsOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    AddKeyReplicationRegionsOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     AddKeyReplicationRegionsOutput.type = Types::AddKeyReplicationRegionsOutput
-    Alias.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
-    Alias.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn"))
+    Alias.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
+    Alias.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn"))
     Alias.type = Types::Alias
-    Aliases.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alias)
-    CertificateSubjectType.add_member(:common_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "CommonName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$", "smithy.api#required" => {}}))
-    CertificateSubjectType.add_member(:organization_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OrganizationUnit", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:organization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Organization", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:city, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "City", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:country, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Country", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:state_or_province, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StateOrProvince", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "EmailAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9.!\#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"}))
+    Aliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alias)
+    CertificateSubjectType.add_member(:common_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "CommonName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$", "smithy.api#required" => {}}))
+    CertificateSubjectType.add_member(:organization_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OrganizationUnit", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
+    CertificateSubjectType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Organization", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
+    CertificateSubjectType.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "City", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
+    CertificateSubjectType.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Country", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
+    CertificateSubjectType.add_member(:state_or_province, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StateOrProvince", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
+    CertificateSubjectType.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "EmailAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9.!\#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"}))
     CertificateSubjectType.type = Types::CertificateSubjectType
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName", traits: {"aws.cloudformation#cfnMutability" => "create", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateAliasInput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "AliasName", traits: {"aws.cloudformation#cfnMutability" => "create", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateAliasInput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateAliasInput.type = Types::CreateAliasInput
-    CreateAliasOutput.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alias, location_name: "Alias", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateAliasOutput.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, location_name: "Alias", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateAliasOutput.type = Types::CreateAliasOutput
-    CreateKeyInput.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributes, location_name: "KeyAttributes", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateKeyInput.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateKeyInput.add_member(:exportable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateKeyInput.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateKeyInput.add_member(:derive_key_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeriveKeyUsage, location_name: "DeriveKeyUsage", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateKeyInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributes, location_name: "KeyAttributes", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:exportable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:derive_key_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: DeriveKeyUsage, location_name: "DeriveKeyUsage", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "ReplicationRegions", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateKeyInput.type = Types::CreateKeyInput
-    CreateKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateKeyOutput.type = Types::CreateKeyOutput
-    DeleteAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
+    DeleteAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
     DeleteAliasInput.type = Types::DeleteAliasInput
     DeleteAliasOutput.type = Types::DeleteAliasOutput
-    DeleteKeyInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    DeleteKeyInput.add_member(:delete_key_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DeleteKeyInDays", traits: {"smithy.api#range" => {"min" => 3, "max" => 180}}))
+    DeleteKeyInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    DeleteKeyInput.add_member(:delete_key_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DeleteKeyInDays", traits: {"smithy.api#range" => {"min" => 3, "max" => 180}}))
     DeleteKeyInput.type = Types::DeleteKeyInput
-    DeleteKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    DeleteKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     DeleteKeyOutput.type = Types::DeleteKeyOutput
-    DiffieHellmanDerivationData.add_member(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SharedInformation, location_name: "SharedInformation"))
-    DiffieHellmanDerivationData.add_member(:unknown, Types::DiffieHellmanDerivationData::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    DiffieHellmanDerivationData.add_member(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedInformation, location_name: "SharedInformation"))
+    DiffieHellmanDerivationData.add_member(:unknown, Types::DiffieHellmanDerivationData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DiffieHellmanDerivationData.type = Types::DiffieHellmanDerivationData
-    DisableDefaultKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
+    DisableDefaultKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
     DisableDefaultKeyReplicationRegionsInput.type = Types::DisableDefaultKeyReplicationRegionsInput
-    DisableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
+    DisableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
     DisableDefaultKeyReplicationRegionsOutput.type = Types::DisableDefaultKeyReplicationRegionsOutput
-    EnableDefaultKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
+    EnableDefaultKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
     EnableDefaultKeyReplicationRegionsInput.type = Types::EnableDefaultKeyReplicationRegionsInput
-    EnableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
+    EnableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
     EnableDefaultKeyReplicationRegionsOutput.type = Types::EnableDefaultKeyReplicationRegionsOutput
-    ExportAttributes.add_member(:export_dukpt_initial_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportDukptInitialKey, location_name: "ExportDukptInitialKey"))
-    ExportAttributes.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    ExportAttributes.add_member(:export_dukpt_initial_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDukptInitialKey, location_name: "ExportDukptInitialKey"))
+    ExportAttributes.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     ExportAttributes.type = Types::ExportAttributes
-    ExportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "PrivateKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ExportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ExportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
-    ExportDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, location_name: "DeriveKeyAlgorithm", traits: {"smithy.api#required" => {}}))
-    ExportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
-    ExportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
-    ExportDiffieHellmanTr31KeyBlock.add_member(:derivation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiffieHellmanDerivationData, location_name: "DerivationData", traits: {"smithy.api#required" => {}}))
-    ExportDiffieHellmanTr31KeyBlock.add_member(:key_block_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "PrivateKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricKeyAlgorithm, location_name: "DeriveKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:derivation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffieHellmanDerivationData, location_name: "DerivationData", traits: {"smithy.api#required" => {}}))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:key_block_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
     ExportDiffieHellmanTr31KeyBlock.type = Types::ExportDiffieHellmanTr31KeyBlock
-    ExportDukptInitialKey.add_member(:key_serial_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLength20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
+    ExportDukptInitialKey.add_member(:key_serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLength20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
     ExportDukptInitialKey.type = Types::ExportDukptInitialKey
-    ExportKeyCryptogram.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ExportKeyCryptogram.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "WrappingKeyCertificate", traits: {"smithy.api#required" => {}}))
-    ExportKeyCryptogram.add_member(:wrapping_spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappingKeySpec, location_name: "WrappingSpec"))
+    ExportKeyCryptogram.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ExportKeyCryptogram.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "WrappingKeyCertificate", traits: {"smithy.api#required" => {}}))
+    ExportKeyCryptogram.add_member(:wrapping_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappingKeySpec, location_name: "WrappingSpec"))
     ExportKeyCryptogram.type = Types::ExportKeyCryptogram
-    ExportKeyInput.add_member(:key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportKeyMaterial, location_name: "KeyMaterial", traits: {"smithy.api#required" => {}}))
-    ExportKeyInput.add_member(:export_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "ExportKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ExportKeyInput.add_member(:export_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportAttributes, location_name: "ExportAttributes"))
+    ExportKeyInput.add_member(:key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportKeyMaterial, location_name: "KeyMaterial", traits: {"smithy.api#required" => {}}))
+    ExportKeyInput.add_member(:export_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "ExportKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ExportKeyInput.add_member(:export_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportAttributes, location_name: "ExportAttributes"))
     ExportKeyInput.type = Types::ExportKeyInput
-    ExportKeyMaterial.add_member(:tr31_key_block, Types::ExportKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportTr31KeyBlock, location_name: "Tr31KeyBlock"))
-    ExportKeyMaterial.add_member(:tr34_key_block, Types::ExportKeyMaterial::Tr34KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportTr34KeyBlock, location_name: "Tr34KeyBlock"))
-    ExportKeyMaterial.add_member(:key_cryptogram, Types::ExportKeyMaterial::KeyCryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportKeyCryptogram, location_name: "KeyCryptogram"))
-    ExportKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::ExportKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
-    ExportKeyMaterial.add_member(:unknown, Types::ExportKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ExportKeyMaterial.add_member(:tr31_key_block, Types::ExportKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTr31KeyBlock, location_name: "Tr31KeyBlock"))
+    ExportKeyMaterial.add_member(:tr34_key_block, Types::ExportKeyMaterial::Tr34KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTr34KeyBlock, location_name: "Tr34KeyBlock"))
+    ExportKeyMaterial.add_member(:key_cryptogram, Types::ExportKeyMaterial::KeyCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportKeyCryptogram, location_name: "KeyCryptogram"))
+    ExportKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::ExportKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
+    ExportKeyMaterial.add_member(:unknown, Types::ExportKeyMaterial::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ExportKeyMaterial.type = Types::ExportKeyMaterial
-    ExportKeyOutput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "WrappedKey"))
+    ExportKeyOutput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "WrappedKey"))
     ExportKeyOutput.type = Types::ExportKeyOutput
-    ExportTr31KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ExportTr31KeyBlock.add_member(:key_block_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
+    ExportTr31KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ExportTr31KeyBlock.add_member(:key_block_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
     ExportTr31KeyBlock.type = Types::ExportTr31KeyBlock
-    ExportTr34KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ExportTr34KeyBlock.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "WrappingKeyCertificate", traits: {"smithy.api#required" => {}}))
-    ExportTr34KeyBlock.add_member(:export_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportTokenId, location_name: "ExportToken", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
-    ExportTr34KeyBlock.add_member(:signing_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "SigningKeyIdentifier"))
-    ExportTr34KeyBlock.add_member(:signing_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "SigningKeyCertificate"))
-    ExportTr34KeyBlock.add_member(:key_block_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr34KeyBlockFormat, location_name: "KeyBlockFormat", traits: {"smithy.api#required" => {}}))
-    ExportTr34KeyBlock.add_member(:random_nonce, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
-    ExportTr34KeyBlock.add_member(:key_block_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
+    ExportTr34KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ExportTr34KeyBlock.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "WrappingKeyCertificate", traits: {"smithy.api#required" => {}}))
+    ExportTr34KeyBlock.add_member(:export_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTokenId, location_name: "ExportToken", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    ExportTr34KeyBlock.add_member(:signing_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "SigningKeyIdentifier"))
+    ExportTr34KeyBlock.add_member(:signing_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "SigningKeyCertificate"))
+    ExportTr34KeyBlock.add_member(:key_block_format, ::Smithy::Schema::Shapes::MemberShape.new(target: Tr34KeyBlockFormat, location_name: "KeyBlockFormat", traits: {"smithy.api#required" => {}}))
+    ExportTr34KeyBlock.add_member(:random_nonce, ::Smithy::Schema::Shapes::MemberShape.new(target: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
+    ExportTr34KeyBlock.add_member(:key_block_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
     ExportTr34KeyBlock.type = Types::ExportTr34KeyBlock
-    GetAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
+    GetAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
     GetAliasInput.type = Types::GetAliasInput
-    GetAliasOutput.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alias, location_name: "Alias", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    GetAliasOutput.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, location_name: "Alias", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     GetAliasOutput.type = Types::GetAliasOutput
-    GetCertificateSigningRequestInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    GetCertificateSigningRequestInput.add_member(:signing_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SigningAlgorithmType, location_name: "SigningAlgorithm", traits: {"smithy.api#required" => {}}))
-    GetCertificateSigningRequestInput.add_member(:certificate_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateSubjectType, location_name: "CertificateSubject", traits: {"smithy.api#required" => {}}))
+    GetCertificateSigningRequestInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GetCertificateSigningRequestInput.add_member(:signing_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningAlgorithmType, location_name: "SigningAlgorithm", traits: {"smithy.api#required" => {}}))
+    GetCertificateSigningRequestInput.add_member(:certificate_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSubjectType, location_name: "CertificateSubject", traits: {"smithy.api#required" => {}}))
     GetCertificateSigningRequestInput.type = Types::GetCertificateSigningRequestInput
-    GetCertificateSigningRequestOutput.add_member(:certificate_signing_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateSigningRequestType, location_name: "CertificateSigningRequest", traits: {"smithy.api#required" => {}}))
+    GetCertificateSigningRequestOutput.add_member(:certificate_signing_request, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSigningRequestType, location_name: "CertificateSigningRequest", traits: {"smithy.api#required" => {}}))
     GetCertificateSigningRequestOutput.type = Types::GetCertificateSigningRequestOutput
     GetDefaultKeyReplicationRegionsInput.type = Types::GetDefaultKeyReplicationRegionsInput
-    GetDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
+    GetDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
     GetDefaultKeyReplicationRegionsOutput.type = Types::GetDefaultKeyReplicationRegionsOutput
-    GetKeyInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GetKeyInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     GetKeyInput.type = Types::GetKeyInput
-    GetKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    GetKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     GetKeyOutput.type = Types::GetKeyOutput
-    GetParametersForExportInput.add_member(:key_material_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMaterialType, location_name: "KeyMaterialType", traits: {"smithy.api#required" => {}}))
-    GetParametersForExportInput.add_member(:signing_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "SigningKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportInput.add_member(:key_material_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMaterialType, location_name: "KeyMaterialType", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportInput.add_member(:signing_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, location_name: "SigningKeyAlgorithm", traits: {"smithy.api#required" => {}}))
     GetParametersForExportInput.type = Types::GetParametersForExportInput
-    GetParametersForExportOutput.add_member(:signing_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "SigningKeyCertificate", traits: {"smithy.api#required" => {}}))
-    GetParametersForExportOutput.add_member(:signing_key_certificate_chain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "SigningKeyCertificateChain", traits: {"smithy.api#required" => {}}))
-    GetParametersForExportOutput.add_member(:signing_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "SigningKeyAlgorithm", traits: {"smithy.api#required" => {}}))
-    GetParametersForExportOutput.add_member(:export_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportTokenId, location_name: "ExportToken", traits: {"smithy.api#required" => {}}))
-    GetParametersForExportOutput.add_member(:parameters_valid_until_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ParametersValidUntilTimestamp", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportOutput.add_member(:signing_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "SigningKeyCertificate", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportOutput.add_member(:signing_key_certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "SigningKeyCertificateChain", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportOutput.add_member(:signing_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, location_name: "SigningKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportOutput.add_member(:export_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTokenId, location_name: "ExportToken", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportOutput.add_member(:parameters_valid_until_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ParametersValidUntilTimestamp", traits: {"smithy.api#required" => {}}))
     GetParametersForExportOutput.type = Types::GetParametersForExportOutput
-    GetParametersForImportInput.add_member(:key_material_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMaterialType, location_name: "KeyMaterialType", traits: {"smithy.api#required" => {}}))
-    GetParametersForImportInput.add_member(:wrapping_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "WrappingKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportInput.add_member(:key_material_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMaterialType, location_name: "KeyMaterialType", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportInput.add_member(:wrapping_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, location_name: "WrappingKeyAlgorithm", traits: {"smithy.api#required" => {}}))
     GetParametersForImportInput.type = Types::GetParametersForImportInput
-    GetParametersForImportOutput.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "WrappingKeyCertificate", traits: {"smithy.api#required" => {}}))
-    GetParametersForImportOutput.add_member(:wrapping_key_certificate_chain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "WrappingKeyCertificateChain", traits: {"smithy.api#required" => {}}))
-    GetParametersForImportOutput.add_member(:wrapping_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "WrappingKeyAlgorithm", traits: {"smithy.api#required" => {}}))
-    GetParametersForImportOutput.add_member(:import_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTokenId, location_name: "ImportToken", traits: {"smithy.api#required" => {}}))
-    GetParametersForImportOutput.add_member(:parameters_valid_until_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ParametersValidUntilTimestamp", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportOutput.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "WrappingKeyCertificate", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportOutput.add_member(:wrapping_key_certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "WrappingKeyCertificateChain", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportOutput.add_member(:wrapping_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, location_name: "WrappingKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportOutput.add_member(:import_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTokenId, location_name: "ImportToken", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportOutput.add_member(:parameters_valid_until_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ParametersValidUntilTimestamp", traits: {"smithy.api#required" => {}}))
     GetParametersForImportOutput.type = Types::GetParametersForImportOutput
-    GetPublicKeyCertificateInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GetPublicKeyCertificateInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     GetPublicKeyCertificateInput.type = Types::GetPublicKeyCertificateInput
-    GetPublicKeyCertificateOutput.add_member(:key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "KeyCertificate", traits: {"smithy.api#required" => {}}))
-    GetPublicKeyCertificateOutput.add_member(:key_certificate_chain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "KeyCertificateChain", traits: {"smithy.api#required" => {}}))
+    GetPublicKeyCertificateOutput.add_member(:key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "KeyCertificate", traits: {"smithy.api#required" => {}}))
+    GetPublicKeyCertificateOutput.add_member(:key_certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "KeyCertificateChain", traits: {"smithy.api#required" => {}}))
     GetPublicKeyCertificateOutput.type = Types::GetPublicKeyCertificateOutput
-    ImportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "PrivateKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ImportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ImportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
-    ImportDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, location_name: "DeriveKeyAlgorithm", traits: {"smithy.api#required" => {}}))
-    ImportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
-    ImportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
-    ImportDiffieHellmanTr31KeyBlock.add_member(:derivation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiffieHellmanDerivationData, location_name: "DerivationData", traits: {"smithy.api#required" => {}}))
-    ImportDiffieHellmanTr31KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "PrivateKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricKeyAlgorithm, location_name: "DeriveKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:derivation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffieHellmanDerivationData, location_name: "DerivationData", traits: {"smithy.api#required" => {}}))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::MemberShape.new(target: Tr31WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
     ImportDiffieHellmanTr31KeyBlock.type = Types::ImportDiffieHellmanTr31KeyBlock
-    ImportKeyCryptogram.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
-    ImportKeyCryptogram.add_member(:exportable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"smithy.api#required" => {}}))
-    ImportKeyCryptogram.add_member(:wrapped_key_cryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKeyCryptogram, location_name: "WrappedKeyCryptogram", traits: {"smithy.api#required" => {}}))
-    ImportKeyCryptogram.add_member(:import_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTokenId, location_name: "ImportToken", traits: {"smithy.api#required" => {}}))
-    ImportKeyCryptogram.add_member(:wrapping_spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappingKeySpec, location_name: "WrappingSpec"))
+    ImportKeyCryptogram.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
+    ImportKeyCryptogram.add_member(:exportable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"smithy.api#required" => {}}))
+    ImportKeyCryptogram.add_member(:wrapped_key_cryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKeyCryptogram, location_name: "WrappedKeyCryptogram", traits: {"smithy.api#required" => {}}))
+    ImportKeyCryptogram.add_member(:import_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTokenId, location_name: "ImportToken", traits: {"smithy.api#required" => {}}))
+    ImportKeyCryptogram.add_member(:wrapping_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappingKeySpec, location_name: "WrappingSpec"))
     ImportKeyCryptogram.type = Types::ImportKeyCryptogram
-    ImportKeyInput.add_member(:key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportKeyMaterial, location_name: "KeyMaterial", traits: {"smithy.api#required" => {}}))
-    ImportKeyInput.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
-    ImportKeyInput.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
-    ImportKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    ImportKeyInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions"))
+    ImportKeyInput.add_member(:key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportKeyMaterial, location_name: "KeyMaterial", traits: {"smithy.api#required" => {}}))
+    ImportKeyInput.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    ImportKeyInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
+    ImportKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    ImportKeyInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "ReplicationRegions"))
     ImportKeyInput.type = Types::ImportKeyInput
-    ImportKeyMaterial.add_member(:root_certificate_public_key, Types::ImportKeyMaterial::RootCertificatePublicKey, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RootCertificatePublicKey, location_name: "RootCertificatePublicKey"))
-    ImportKeyMaterial.add_member(:trusted_certificate_public_key, Types::ImportKeyMaterial::TrustedCertificatePublicKey, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustedCertificatePublicKey, location_name: "TrustedCertificatePublicKey"))
-    ImportKeyMaterial.add_member(:tr31_key_block, Types::ImportKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTr31KeyBlock, location_name: "Tr31KeyBlock"))
-    ImportKeyMaterial.add_member(:tr34_key_block, Types::ImportKeyMaterial::Tr34KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTr34KeyBlock, location_name: "Tr34KeyBlock"))
-    ImportKeyMaterial.add_member(:key_cryptogram, Types::ImportKeyMaterial::KeyCryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportKeyCryptogram, location_name: "KeyCryptogram"))
-    ImportKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::ImportKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
-    ImportKeyMaterial.add_member(:unknown, Types::ImportKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ImportKeyMaterial.add_member(:root_certificate_public_key, Types::ImportKeyMaterial::RootCertificatePublicKey, ::Smithy::Schema::Shapes::MemberShape.new(target: RootCertificatePublicKey, location_name: "RootCertificatePublicKey"))
+    ImportKeyMaterial.add_member(:trusted_certificate_public_key, Types::ImportKeyMaterial::TrustedCertificatePublicKey, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedCertificatePublicKey, location_name: "TrustedCertificatePublicKey"))
+    ImportKeyMaterial.add_member(:tr31_key_block, Types::ImportKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTr31KeyBlock, location_name: "Tr31KeyBlock"))
+    ImportKeyMaterial.add_member(:tr34_key_block, Types::ImportKeyMaterial::Tr34KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTr34KeyBlock, location_name: "Tr34KeyBlock"))
+    ImportKeyMaterial.add_member(:key_cryptogram, Types::ImportKeyMaterial::KeyCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportKeyCryptogram, location_name: "KeyCryptogram"))
+    ImportKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::ImportKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
+    ImportKeyMaterial.add_member(:unknown, Types::ImportKeyMaterial::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ImportKeyMaterial.type = Types::ImportKeyMaterial
-    ImportKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    ImportKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
     ImportKeyOutput.type = Types::ImportKeyOutput
-    ImportTr31KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ImportTr31KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
+    ImportTr31KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ImportTr31KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::MemberShape.new(target: Tr31WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
     ImportTr31KeyBlock.type = Types::ImportTr31KeyBlock
-    ImportTr34KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ImportTr34KeyBlock.add_member(:signing_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "SigningKeyCertificate", traits: {"smithy.api#required" => {}}))
-    ImportTr34KeyBlock.add_member(:import_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTokenId, location_name: "ImportToken", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
-    ImportTr34KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier"))
-    ImportTr34KeyBlock.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "WrappingKeyCertificate"))
-    ImportTr34KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr34WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
-    ImportTr34KeyBlock.add_member(:key_block_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr34KeyBlockFormat, location_name: "KeyBlockFormat", traits: {"smithy.api#required" => {}}))
-    ImportTr34KeyBlock.add_member(:random_nonce, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
+    ImportTr34KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ImportTr34KeyBlock.add_member(:signing_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "SigningKeyCertificate", traits: {"smithy.api#required" => {}}))
+    ImportTr34KeyBlock.add_member(:import_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTokenId, location_name: "ImportToken", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    ImportTr34KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier"))
+    ImportTr34KeyBlock.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "WrappingKeyCertificate"))
+    ImportTr34KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::MemberShape.new(target: Tr34WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
+    ImportTr34KeyBlock.add_member(:key_block_format, ::Smithy::Schema::Shapes::MemberShape.new(target: Tr34KeyBlockFormat, location_name: "KeyBlockFormat", traits: {"smithy.api#required" => {}}))
+    ImportTr34KeyBlock.add_member(:random_nonce, ::Smithy::Schema::Shapes::MemberShape.new(target: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
     ImportTr34KeyBlock.type = Types::ImportTr34KeyBlock
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    Key.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
-    Key.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm", traits: {"smithy.api#required" => {}}))
-    Key.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
-    Key.add_member(:exportable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"smithy.api#required" => {}}))
-    Key.add_member(:key_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyState, location_name: "KeyState", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:key_origin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyOrigin, location_name: "KeyOrigin", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:create_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:usage_start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UsageStartTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:usage_stop_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UsageStopTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:delete_pending_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletePendingTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:delete_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeleteTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:derive_key_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeriveKeyUsage, location_name: "DeriveKeyUsage", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:multi_region_key_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionKeyType, location_name: "MultiRegionKeyType", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:primary_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "PrimaryRegion", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "ReplicationStatus", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:using_default_replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "UsingDefaultReplicationRegions", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
+    Key.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm", traits: {"smithy.api#required" => {}}))
+    Key.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
+    Key.add_member(:exportable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"smithy.api#required" => {}}))
+    Key.add_member(:key_state, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyState, location_name: "KeyState", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:key_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyOrigin, location_name: "KeyOrigin", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:create_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreateTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:usage_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UsageStartTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:usage_stop_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UsageStopTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:delete_pending_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DeletePendingTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:delete_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DeleteTimestamp", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:derive_key_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: DeriveKeyUsage, location_name: "DeriveKeyUsage", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:multi_region_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionKeyType, location_name: "MultiRegionKeyType", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "PrimaryRegion", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, location_name: "ReplicationStatus", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:using_default_replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "UsingDefaultReplicationRegions", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     Key.type = Types::Key
-    KeyAttributes.add_member(:key_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyUsage, location_name: "KeyUsage", traits: {"smithy.api#required" => {}}))
-    KeyAttributes.add_member(:key_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyClass, location_name: "KeyClass", traits: {"smithy.api#required" => {}}))
-    KeyAttributes.add_member(:key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "KeyAlgorithm", traits: {"smithy.api#required" => {}}))
-    KeyAttributes.add_member(:key_modes_of_use, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyModesOfUse, location_name: "KeyModesOfUse", traits: {"smithy.api#required" => {}}))
+    KeyAttributes.add_member(:key_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsage, location_name: "KeyUsage", traits: {"smithy.api#required" => {}}))
+    KeyAttributes.add_member(:key_class, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyClass, location_name: "KeyClass", traits: {"smithy.api#required" => {}}))
+    KeyAttributes.add_member(:key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, location_name: "KeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    KeyAttributes.add_member(:key_modes_of_use, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyModesOfUse, location_name: "KeyModesOfUse", traits: {"smithy.api#required" => {}}))
     KeyAttributes.type = Types::KeyAttributes
-    KeyBlockHeaders.add_member(:key_modes_of_use, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyModesOfUse, location_name: "KeyModesOfUse"))
-    KeyBlockHeaders.add_member(:key_exportability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyExportability, location_name: "KeyExportability"))
-    KeyBlockHeaders.add_member(:key_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyVersion, location_name: "KeyVersion"))
-    KeyBlockHeaders.add_member(:optional_blocks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalBlocks, location_name: "OptionalBlocks"))
+    KeyBlockHeaders.add_member(:key_modes_of_use, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyModesOfUse, location_name: "KeyModesOfUse"))
+    KeyBlockHeaders.add_member(:key_exportability, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyExportability, location_name: "KeyExportability"))
+    KeyBlockHeaders.add_member(:key_version, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyVersion, location_name: "KeyVersion"))
+    KeyBlockHeaders.add_member(:optional_blocks, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlocks, location_name: "OptionalBlocks"))
     KeyBlockHeaders.type = Types::KeyBlockHeaders
-    KeyDerivationFunction.add_member(:nist_sp800, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NIST_SP800", traits: {"smithy.api#enumValue" => "NIST_SP800"}))
-    KeyDerivationFunction.add_member(:ansi_x963, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ANSI_X963", traits: {"smithy.api#enumValue" => "ANSI_X963"}))
-    KeyDerivationHashAlgorithm.add_member(:sha_256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_256", traits: {"smithy.api#enumValue" => "SHA_256"}))
-    KeyDerivationHashAlgorithm.add_member(:sha_384, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_384", traits: {"smithy.api#enumValue" => "SHA_384"}))
-    KeyDerivationHashAlgorithm.add_member(:sha_512, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_512", traits: {"smithy.api#enumValue" => "SHA_512"}))
-    KeyModesOfUse.add_member(:encrypt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Encrypt", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:decrypt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Decrypt", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:wrap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Wrap", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:unwrap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Unwrap", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:generate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Generate", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:sign, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Sign", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:verify, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Verify", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:derive_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeriveKey", traits: {"smithy.api#default" => false}))
-    KeyModesOfUse.add_member(:no_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "NoRestrictions", traits: {"smithy.api#default" => false}))
+    KeyDerivationFunction.add_member(:nist_sp800, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NIST_SP800", traits: {"smithy.api#enumValue" => "NIST_SP800"}))
+    KeyDerivationFunction.add_member(:ansi_x963, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ANSI_X963", traits: {"smithy.api#enumValue" => "ANSI_X963"}))
+    KeyDerivationHashAlgorithm.add_member(:sha_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_256", traits: {"smithy.api#enumValue" => "SHA_256"}))
+    KeyDerivationHashAlgorithm.add_member(:sha_384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_384", traits: {"smithy.api#enumValue" => "SHA_384"}))
+    KeyDerivationHashAlgorithm.add_member(:sha_512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_512", traits: {"smithy.api#enumValue" => "SHA_512"}))
+    KeyModesOfUse.add_member(:encrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Encrypt", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:decrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Decrypt", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:wrap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Wrap", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:unwrap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Unwrap", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:generate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Generate", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:sign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Sign", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:verify, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Verify", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:derive_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeriveKey", traits: {"smithy.api#default" => false}))
+    KeyModesOfUse.add_member(:no_restrictions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "NoRestrictions", traits: {"smithy.api#default" => false}))
     KeyModesOfUse.type = Types::KeyModesOfUse
-    KeySummary.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    KeySummary.add_member(:key_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyState, location_name: "KeyState", traits: {"smithy.api#required" => {}}))
-    KeySummary.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
-    KeySummary.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
-    KeySummary.add_member(:exportable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"smithy.api#required" => {}}))
-    KeySummary.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
-    KeySummary.add_member(:multi_region_key_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionKeyType, location_name: "MultiRegionKeyType"))
-    KeySummary.add_member(:primary_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "PrimaryRegion"))
+    KeySummary.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    KeySummary.add_member(:key_state, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyState, location_name: "KeyState", traits: {"smithy.api#required" => {}}))
+    KeySummary.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
+    KeySummary.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    KeySummary.add_member(:exportable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Exportable", traits: {"smithy.api#required" => {}}))
+    KeySummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
+    KeySummary.add_member(:multi_region_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionKeyType, location_name: "MultiRegionKeyType"))
+    KeySummary.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "PrimaryRegion"))
     KeySummary.type = Types::KeySummary
-    KeySummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeySummary)
-    ListAliasesInput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn"))
-    ListAliasesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAliasesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    KeySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeySummary)
+    ListAliasesInput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn"))
+    ListAliasesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListAliasesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListAliasesInput.type = Types::ListAliasesInput
-    ListAliasesOutput.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    ListAliasesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAliasesOutput.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: Aliases, location_name: "Aliases", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    ListAliasesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAliasesOutput.type = Types::ListAliasesOutput
-    ListKeysInput.add_member(:key_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyState, location_name: "KeyState"))
-    ListKeysInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListKeysInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListKeysInput.add_member(:key_state, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyState, location_name: "KeyState"))
+    ListKeysInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListKeysInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListKeysInput.type = Types::ListKeysInput
-    ListKeysOutput.add_member(:keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeySummaryList, location_name: "Keys", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    ListKeysOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListKeysOutput.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySummaryList, location_name: "Keys", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    ListKeysOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListKeysOutput.type = Types::ListKeysOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListTagsForResourceInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListTagsForResourceInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    OptionalBlocks.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalBlockId)
-    OptionalBlocks.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalBlockValue)
-    Regions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
-    RemoveKeyReplicationRegionsInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    RemoveKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
+    OptionalBlocks.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockId)
+    OptionalBlocks.value = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockValue)
+    Regions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region)
+    RemoveKeyReplicationRegionsInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    RemoveKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, location_name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
     RemoveKeyReplicationRegionsInput.type = Types::RemoveKeyReplicationRegionsInput
-    RemoveKeyReplicationRegionsOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    RemoveKeyReplicationRegionsOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     RemoveKeyReplicationRegionsOutput.type = Types::RemoveKeyReplicationRegionsOutput
-    ReplicationStatus.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
-    ReplicationStatus.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatusType)
-    ReplicationStatusType.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyReplicationState, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    ReplicationStatusType.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StatusMessage"))
+    ReplicationStatus.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Region)
+    ReplicationStatus.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusType)
+    ReplicationStatusType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyReplicationState, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ReplicationStatusType.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StatusMessage"))
     ReplicationStatusType.type = Types::ReplicationStatusType
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RestoreKeyInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    RestoreKeyInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     RestoreKeyInput.type = Types::RestoreKeyInput
-    RestoreKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    RestoreKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     RestoreKeyOutput.type = Types::RestoreKeyOutput
-    RootCertificatePublicKey.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
-    RootCertificatePublicKey.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
+    RootCertificatePublicKey.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
+    RootCertificatePublicKey.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
     RootCertificatePublicKey.type = Types::RootCertificatePublicKey
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    StartKeyUsageInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    StartKeyUsageInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     StartKeyUsageInput.type = Types::StartKeyUsageInput
-    StartKeyUsageOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    StartKeyUsageOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     StartKeyUsageOutput.type = Types::StartKeyUsageOutput
-    StopKeyUsageInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    StopKeyUsageInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     StopKeyUsageInput.type = Types::StopKeyUsageInput
-    StopKeyUsageOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    StopKeyUsageOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     StopKeyUsageOutput.type = Types::StopKeyUsageOutput
-    SymmetricKeyAlgorithm.add_member(:tdes_2_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_2KEY", traits: {"smithy.api#enumValue" => "TDES_2KEY"}))
-    SymmetricKeyAlgorithm.add_member(:tdes_3_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_3KEY", traits: {"smithy.api#enumValue" => "TDES_3KEY"}))
-    SymmetricKeyAlgorithm.add_member(:aes_128, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_128", traits: {"smithy.api#enumValue" => "AES_128"}))
-    SymmetricKeyAlgorithm.add_member(:aes_192, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_192", traits: {"smithy.api#enumValue" => "AES_192"}))
-    SymmetricKeyAlgorithm.add_member(:aes_256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_256", traits: {"smithy.api#enumValue" => "AES_256"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA256", traits: {"smithy.api#enumValue" => "HMAC_SHA256"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha384, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA384", traits: {"smithy.api#enumValue" => "HMAC_SHA384"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha512, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA512", traits: {"smithy.api#enumValue" => "HMAC_SHA512"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha224, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA224", traits: {"smithy.api#enumValue" => "HMAC_SHA224"}))
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SymmetricKeyAlgorithm.add_member(:tdes_2_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_2KEY", traits: {"smithy.api#enumValue" => "TDES_2KEY"}))
+    SymmetricKeyAlgorithm.add_member(:tdes_3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_3KEY", traits: {"smithy.api#enumValue" => "TDES_3KEY"}))
+    SymmetricKeyAlgorithm.add_member(:aes_128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_128", traits: {"smithy.api#enumValue" => "AES_128"}))
+    SymmetricKeyAlgorithm.add_member(:aes_192, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_192", traits: {"smithy.api#enumValue" => "AES_192"}))
+    SymmetricKeyAlgorithm.add_member(:aes_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_256", traits: {"smithy.api#enumValue" => "AES_256"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA256", traits: {"smithy.api#enumValue" => "HMAC_SHA256"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA384", traits: {"smithy.api#enumValue" => "HMAC_SHA384"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA512", traits: {"smithy.api#enumValue" => "HMAC_SHA512"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha224, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA224", traits: {"smithy.api#enumValue" => "HMAC_SHA224"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    TrustedCertificatePublicKey.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
-    TrustedCertificatePublicKey.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
-    TrustedCertificatePublicKey.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    TrustedCertificatePublicKey.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributes, location_name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
+    TrustedCertificatePublicKey.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
+    TrustedCertificatePublicKey.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
     TrustedCertificatePublicKey.type = Types::TrustedCertificatePublicKey
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
-    UpdateAliasInput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn"))
+    UpdateAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, location_name: "AliasName", traits: {"smithy.api#required" => {}}))
+    UpdateAliasInput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn"))
     UpdateAliasInput.type = Types::UpdateAliasInput
-    UpdateAliasOutput.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alias, location_name: "Alias", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    UpdateAliasOutput.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, location_name: "Alias", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     UpdateAliasOutput.type = Types::UpdateAliasOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ValidationException.type = Types::ValidationException
-    WrappedKey.add_member(:wrapping_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "WrappingKeyArn", traits: {"smithy.api#required" => {}}))
-    WrappedKey.add_member(:wrapped_key_material_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKeyMaterialFormat, location_name: "WrappedKeyMaterialFormat", traits: {"smithy.api#required" => {}}))
-    WrappedKey.add_member(:key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMaterial, location_name: "KeyMaterial", traits: {"smithy.api#required" => {}}))
-    WrappedKey.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue"))
-    WrappedKey.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    WrappedKey.add_member(:wrapping_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "WrappingKeyArn", traits: {"smithy.api#required" => {}}))
+    WrappedKey.add_member(:wrapped_key_material_format, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKeyMaterialFormat, location_name: "WrappedKeyMaterialFormat", traits: {"smithy.api#required" => {}}))
+    WrappedKey.add_member(:key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMaterial, location_name: "KeyMaterial", traits: {"smithy.api#required" => {}}))
+    WrappedKey.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue"))
+    WrappedKey.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     WrappedKey.type = Types::WrappedKey
 
     PaymentCryptographyControlPlane = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -483,370 +483,370 @@ module Aws::PaymentCryptography
       service.add_operation(:add_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#AddKeyReplicationRegions"
         operation.name = "AddKeyReplicationRegions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddKeyReplicationRegionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddKeyReplicationRegionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AddKeyReplicationRegionsInput
+        operation.output = AddKeyReplicationRegionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:create_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#CreateAlias"
         operation.name = "CreateAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAliasInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAliasOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateAliasInput
+        operation.output = CreateAliasOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#CreateKey"
         operation.name = "CreateKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateKeyInput
+        operation.output = CreateKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:delete_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#DeleteAlias"
         operation.name = "DeleteAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAliasInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAliasOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteAliasInput
+        operation.output = DeleteAliasOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#DeleteKey"
         operation.name = "DeleteKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteKeyInput
+        operation.output = DeleteKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:disable_default_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#DisableDefaultKeyReplicationRegions"
         operation.name = "DisableDefaultKeyReplicationRegions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableDefaultKeyReplicationRegionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableDefaultKeyReplicationRegionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisableDefaultKeyReplicationRegionsInput
+        operation.output = DisableDefaultKeyReplicationRegionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:enable_default_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#EnableDefaultKeyReplicationRegions"
         operation.name = "EnableDefaultKeyReplicationRegions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableDefaultKeyReplicationRegionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableDefaultKeyReplicationRegionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = EnableDefaultKeyReplicationRegionsInput
+        operation.output = EnableDefaultKeyReplicationRegionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:export_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#ExportKey"
         operation.name = "ExportKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ExportKeyInput
+        operation.output = ExportKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:get_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetAlias"
         operation.name = "GetAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAliasInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAliasOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAliasInput
+        operation.output = GetAliasOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_certificate_signing_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetCertificateSigningRequest"
         operation.name = "GetCertificateSigningRequest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCertificateSigningRequestInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCertificateSigningRequestOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetCertificateSigningRequestInput
+        operation.output = GetCertificateSigningRequestOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:get_default_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetDefaultKeyReplicationRegions"
         operation.name = "GetDefaultKeyReplicationRegions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDefaultKeyReplicationRegionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDefaultKeyReplicationRegionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetDefaultKeyReplicationRegionsInput
+        operation.output = GetDefaultKeyReplicationRegionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:get_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetKey"
         operation.name = "GetKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetKeyInput
+        operation.output = GetKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_parameters_for_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetParametersForExport"
         operation.name = "GetParametersForExport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetParametersForExportInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetParametersForExportOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetParametersForExportInput
+        operation.output = GetParametersForExportOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:get_parameters_for_import, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetParametersForImport"
         operation.name = "GetParametersForImport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetParametersForImportInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetParametersForImportOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetParametersForImportInput
+        operation.output = GetParametersForImportOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:get_public_key_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetPublicKeyCertificate"
         operation.name = "GetPublicKeyCertificate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPublicKeyCertificateInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPublicKeyCertificateOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetPublicKeyCertificateInput
+        operation.output = GetPublicKeyCertificateOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:import_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#ImportKey"
         operation.name = "ImportKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ImportKeyInput
+        operation.output = ImportKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:list_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#ListAliases"
         operation.name = "ListAliases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAliasesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAliasesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAliasesInput
+        operation.output = ListAliasesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAliases.new
       end)
       service.add_operation(:list_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#ListKeys"
         operation.name = "ListKeys"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeysInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeysOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListKeysInput
+        operation.output = ListKeysOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListKeys.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:remove_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#RemoveKeyReplicationRegions"
         operation.name = "RemoveKeyReplicationRegions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveKeyReplicationRegionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveKeyReplicationRegionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RemoveKeyReplicationRegionsInput
+        operation.output = RemoveKeyReplicationRegionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:restore_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#RestoreKey"
         operation.name = "RestoreKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RestoreKeyInput
+        operation.output = RestoreKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:start_key_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#StartKeyUsage"
         operation.name = "StartKeyUsage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartKeyUsageInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartKeyUsageOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartKeyUsageInput
+        operation.output = StartKeyUsageOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:stop_key_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#StopKeyUsage"
         operation.name = "StopKeyUsage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopKeyUsageInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopKeyUsageOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopKeyUsageInput
+        operation.output = StopKeyUsageOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
       service.add_operation(:update_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#UpdateAlias"
         operation.name = "UpdateAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAliasInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAliasOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateAliasInput
+        operation.output = UpdateAliasOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
     end

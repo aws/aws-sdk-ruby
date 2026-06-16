@@ -113,267 +113,267 @@ module Aws::PI
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#UntagResourceResponse", name: "UntagResourceResponse")
 
-    AcceptLanguage.add_member(:en_us, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_US", traits: {"smithy.api#enumValue" => "EN_US"}))
-    AdditionalMetricsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString)
-    AdditionalMetricsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestString)
-    AdditionalMetricsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double)
-    AnalysisReport.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisReportId, location_name: "AnalysisReportId", traits: {"smithy.api#required" => {}}))
-    AnalysisReport.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier"))
-    AnalysisReport.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType"))
-    AnalysisReport.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "CreateTime"))
-    AnalysisReport.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "StartTime"))
-    AnalysisReport.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "EndTime"))
-    AnalysisReport.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisStatus, location_name: "Status"))
-    AnalysisReport.add_member(:insights, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightList, location_name: "Insights"))
+    AcceptLanguage.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN_US", traits: {"smithy.api#enumValue" => "EN_US"}))
+    AdditionalMetricsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString)
+    AdditionalMetricsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestString)
+    AdditionalMetricsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Double)
+    AnalysisReport.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportId, location_name: "AnalysisReportId", traits: {"smithy.api#required" => {}}))
+    AnalysisReport.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier"))
+    AnalysisReport.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType"))
+    AnalysisReport.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "CreateTime"))
+    AnalysisReport.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "StartTime"))
+    AnalysisReport.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "EndTime"))
+    AnalysisReport.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisStatus, location_name: "Status"))
+    AnalysisReport.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightList, location_name: "Insights"))
     AnalysisReport.type = Types::AnalysisReport
-    AnalysisReportSummary.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AnalysisReportId"))
-    AnalysisReportSummary.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "CreateTime"))
-    AnalysisReportSummary.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "StartTime"))
-    AnalysisReportSummary.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "EndTime"))
-    AnalysisReportSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisStatus, location_name: "Status"))
-    AnalysisReportSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    AnalysisReportSummary.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AnalysisReportId"))
+    AnalysisReportSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "CreateTime"))
+    AnalysisReportSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "StartTime"))
+    AnalysisReportSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "EndTime"))
+    AnalysisReportSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisStatus, location_name: "Status"))
+    AnalysisReportSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     AnalysisReportSummary.type = Types::AnalysisReportSummary
-    AnalysisReportSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisReportSummary)
-    AnalysisStatus.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    AnalysisStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    AnalysisStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    AuthorizedActionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FineGrainedAction)
-    ContextType.add_member(:causal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CAUSAL", traits: {"smithy.api#enumValue" => "CAUSAL"}))
-    ContextType.add_member(:contextual, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTEXTUAL", traits: {"smithy.api#enumValue" => "CONTEXTUAL"}))
-    CreatePerformanceAnalysisReportRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    CreatePerformanceAnalysisReportRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    CreatePerformanceAnalysisReportRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    CreatePerformanceAnalysisReportRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    CreatePerformanceAnalysisReportRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    AnalysisReportSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportSummary)
+    AnalysisStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    AnalysisStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    AnalysisStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    AuthorizedActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FineGrainedAction)
+    ContextType.add_member(:causal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CAUSAL", traits: {"smithy.api#enumValue" => "CAUSAL"}))
+    ContextType.add_member(:contextual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTEXTUAL", traits: {"smithy.api#enumValue" => "CONTEXTUAL"}))
+    CreatePerformanceAnalysisReportRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    CreatePerformanceAnalysisReportRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    CreatePerformanceAnalysisReportRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    CreatePerformanceAnalysisReportRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    CreatePerformanceAnalysisReportRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreatePerformanceAnalysisReportRequest.type = Types::CreatePerformanceAnalysisReportRequest
-    CreatePerformanceAnalysisReportResponse.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisReportId, location_name: "AnalysisReportId"))
+    CreatePerformanceAnalysisReportResponse.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportId, location_name: "AnalysisReportId"))
     CreatePerformanceAnalysisReportResponse.type = Types::CreatePerformanceAnalysisReportResponse
-    Data.add_member(:performance_insights_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerformanceInsightsMetric, location_name: "PerformanceInsightsMetric"))
+    Data.add_member(:performance_insights_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetric, location_name: "PerformanceInsightsMetric"))
     Data.type = Types::Data
-    DataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Data)
-    DataPoint.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "Timestamp", traits: {"smithy.api#required" => {}}))
-    DataPoint.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    DataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Data)
+    DataPoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "Timestamp", traits: {"smithy.api#required" => {}}))
+    DataPoint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Value", traits: {"smithy.api#required" => {}}))
     DataPoint.type = Types::DataPoint
-    DataPointsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataPoint)
-    DeletePerformanceAnalysisReportRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    DeletePerformanceAnalysisReportRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    DeletePerformanceAnalysisReportRequest.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisReportId, location_name: "AnalysisReportId", traits: {"smithy.api#required" => {}}))
+    DataPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataPoint)
+    DeletePerformanceAnalysisReportRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    DeletePerformanceAnalysisReportRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    DeletePerformanceAnalysisReportRequest.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportId, location_name: "AnalysisReportId", traits: {"smithy.api#required" => {}}))
     DeletePerformanceAnalysisReportRequest.type = Types::DeletePerformanceAnalysisReportRequest
     DeletePerformanceAnalysisReportResponse.type = Types::DeletePerformanceAnalysisReportResponse
-    DescribeDimensionKeysRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    DescribeDimensionKeysRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    DescribeDimensionKeysRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    DescribeDimensionKeysRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    DescribeDimensionKeysRequest.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestString, location_name: "Metric", traits: {"smithy.api#required" => {}}))
-    DescribeDimensionKeysRequest.add_member(:period_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "PeriodInSeconds"))
-    DescribeDimensionKeysRequest.add_member(:group_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionGroup, location_name: "GroupBy", traits: {"smithy.api#required" => {}}))
-    DescribeDimensionKeysRequest.add_member(:additional_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdditionalMetricsList, location_name: "AdditionalMetrics"))
-    DescribeDimensionKeysRequest.add_member(:partition_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionGroup, location_name: "PartitionBy"))
-    DescribeDimensionKeysRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricQueryFilterMap, location_name: "Filter"))
-    DescribeDimensionKeysRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeDimensionKeysRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDimensionKeysRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    DescribeDimensionKeysRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    DescribeDimensionKeysRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    DescribeDimensionKeysRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    DescribeDimensionKeysRequest.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestString, location_name: "Metric", traits: {"smithy.api#required" => {}}))
+    DescribeDimensionKeysRequest.add_member(:period_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "PeriodInSeconds"))
+    DescribeDimensionKeysRequest.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionGroup, location_name: "GroupBy", traits: {"smithy.api#required" => {}}))
+    DescribeDimensionKeysRequest.add_member(:additional_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalMetricsList, location_name: "AdditionalMetrics"))
+    DescribeDimensionKeysRequest.add_member(:partition_by, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionGroup, location_name: "PartitionBy"))
+    DescribeDimensionKeysRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryFilterMap, location_name: "Filter"))
+    DescribeDimensionKeysRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeDimensionKeysRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDimensionKeysRequest.type = Types::DescribeDimensionKeysRequest
-    DescribeDimensionKeysResponse.add_member(:aligned_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedStartTime"))
-    DescribeDimensionKeysResponse.add_member(:aligned_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedEndTime"))
-    DescribeDimensionKeysResponse.add_member(:partition_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePartitionKeyList, location_name: "PartitionKeys"))
-    DescribeDimensionKeysResponse.add_member(:keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionKeyDescriptionList, location_name: "Keys"))
-    DescribeDimensionKeysResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDimensionKeysResponse.add_member(:aligned_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "AlignedStartTime"))
+    DescribeDimensionKeysResponse.add_member(:aligned_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "AlignedEndTime"))
+    DescribeDimensionKeysResponse.add_member(:partition_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsePartitionKeyList, location_name: "PartitionKeys"))
+    DescribeDimensionKeysResponse.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionKeyDescriptionList, location_name: "Keys"))
+    DescribeDimensionKeysResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDimensionKeysResponse.type = Types::DescribeDimensionKeysResponse
-    DescriptiveMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptiveString)
-    DescriptiveMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptiveString)
-    DetailStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    DetailStatus.add_member(:processing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
-    DetailStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
-    DimensionDetail.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Identifier"))
+    DescriptiveMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptiveString)
+    DescriptiveMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptiveString)
+    DetailStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    DetailStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
+    DetailStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
+    DimensionDetail.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Identifier"))
     DimensionDetail.type = Types::DimensionDetail
-    DimensionDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionDetail)
-    DimensionGroup.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString, location_name: "Group", traits: {"smithy.api#required" => {}}))
-    DimensionGroup.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedStringList, location_name: "Dimensions"))
-    DimensionGroup.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DimensionDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionDetail)
+    DimensionGroup.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString, location_name: "Group", traits: {"smithy.api#required" => {}}))
+    DimensionGroup.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedStringList, location_name: "Dimensions"))
+    DimensionGroup.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit"))
     DimensionGroup.type = Types::DimensionGroup
-    DimensionGroupDetail.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Group"))
-    DimensionGroupDetail.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionDetailList, location_name: "Dimensions"))
+    DimensionGroupDetail.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Group"))
+    DimensionGroupDetail.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionDetailList, location_name: "Dimensions"))
     DimensionGroupDetail.type = Types::DimensionGroupDetail
-    DimensionGroupDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionGroupDetail)
-    DimensionKeyDescription.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionMap, location_name: "Dimensions"))
-    DimensionKeyDescription.add_member(:total, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Total"))
-    DimensionKeyDescription.add_member(:additional_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdditionalMetricsMap, location_name: "AdditionalMetrics"))
-    DimensionKeyDescription.add_member(:partitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricValuesList, location_name: "Partitions"))
+    DimensionGroupDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionGroupDetail)
+    DimensionKeyDescription.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMap, location_name: "Dimensions"))
+    DimensionKeyDescription.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Total"))
+    DimensionKeyDescription.add_member(:additional_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalMetricsMap, location_name: "AdditionalMetrics"))
+    DimensionKeyDescription.add_member(:partitions, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValuesList, location_name: "Partitions"))
     DimensionKeyDescription.type = Types::DimensionKeyDescription
-    DimensionKeyDescriptionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionKeyDescription)
-    DimensionKeyDetail.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
-    DimensionKeyDetail.add_member(:dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Dimension"))
-    DimensionKeyDetail.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailStatus, location_name: "Status"))
+    DimensionKeyDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionKeyDescription)
+    DimensionKeyDetail.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
+    DimensionKeyDetail.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Dimension"))
+    DimensionKeyDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailStatus, location_name: "Status"))
     DimensionKeyDetail.type = Types::DimensionKeyDetail
-    DimensionKeyDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionKeyDetail)
-    DimensionMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestString)
-    DimensionMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestString)
-    DimensionsMetricList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString)
-    FeatureMetadata.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    DimensionKeyDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionKeyDetail)
+    DimensionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestString)
+    DimensionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestString)
+    DimensionsMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString)
+    FeatureMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, location_name: "Status"))
     FeatureMetadata.type = Types::FeatureMetadata
-    FeatureMetadataMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    FeatureMetadataMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureMetadata)
-    FeatureStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    FeatureStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    FeatureStatus.add_member(:unsupported, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED", traits: {"smithy.api#enumValue" => "UNSUPPORTED"}))
-    FeatureStatus.add_member(:enabled_pending_reboot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED_PENDING_REBOOT", traits: {"smithy.api#enumValue" => "ENABLED_PENDING_REBOOT"}))
-    FeatureStatus.add_member(:disabled_pending_reboot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_PENDING_REBOOT", traits: {"smithy.api#enumValue" => "DISABLED_PENDING_REBOOT"}))
-    FeatureStatus.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    FineGrainedAction.add_member(:describe_dimension_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCRIBE_DIMENSION_KEYS", traits: {"smithy.api#enumValue" => "DescribeDimensionKeys"}))
-    FineGrainedAction.add_member(:get_dimension_key_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GET_DIMENSION_KEY_DETAILS", traits: {"smithy.api#enumValue" => "GetDimensionKeyDetails"}))
-    FineGrainedAction.add_member(:get_resource_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GET_RESOURCE_METRICS", traits: {"smithy.api#enumValue" => "GetResourceMetrics"}))
-    GetDimensionKeyDetailsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    GetDimensionKeyDetailsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    GetDimensionKeyDetailsRequest.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestString, location_name: "Group", traits: {"smithy.api#required" => {}}))
-    GetDimensionKeyDetailsRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestString, location_name: "GroupIdentifier", traits: {"smithy.api#required" => {}}))
-    GetDimensionKeyDetailsRequest.add_member(:requested_dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedDimensionList, location_name: "RequestedDimensions"))
+    FeatureMetadataMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    FeatureMetadataMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureMetadata)
+    FeatureStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    FeatureStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    FeatureStatus.add_member(:unsupported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED", traits: {"smithy.api#enumValue" => "UNSUPPORTED"}))
+    FeatureStatus.add_member(:enabled_pending_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED_PENDING_REBOOT", traits: {"smithy.api#enumValue" => "ENABLED_PENDING_REBOOT"}))
+    FeatureStatus.add_member(:disabled_pending_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_PENDING_REBOOT", traits: {"smithy.api#enumValue" => "DISABLED_PENDING_REBOOT"}))
+    FeatureStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    FineGrainedAction.add_member(:describe_dimension_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCRIBE_DIMENSION_KEYS", traits: {"smithy.api#enumValue" => "DescribeDimensionKeys"}))
+    FineGrainedAction.add_member(:get_dimension_key_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GET_DIMENSION_KEY_DETAILS", traits: {"smithy.api#enumValue" => "GetDimensionKeyDetails"}))
+    FineGrainedAction.add_member(:get_resource_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GET_RESOURCE_METRICS", traits: {"smithy.api#enumValue" => "GetResourceMetrics"}))
+    GetDimensionKeyDetailsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    GetDimensionKeyDetailsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    GetDimensionKeyDetailsRequest.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestString, location_name: "Group", traits: {"smithy.api#required" => {}}))
+    GetDimensionKeyDetailsRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestString, location_name: "GroupIdentifier", traits: {"smithy.api#required" => {}}))
+    GetDimensionKeyDetailsRequest.add_member(:requested_dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedDimensionList, location_name: "RequestedDimensions"))
     GetDimensionKeyDetailsRequest.type = Types::GetDimensionKeyDetailsRequest
-    GetDimensionKeyDetailsResponse.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionKeyDetailList, location_name: "Dimensions"))
+    GetDimensionKeyDetailsResponse.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionKeyDetailList, location_name: "Dimensions"))
     GetDimensionKeyDetailsResponse.type = Types::GetDimensionKeyDetailsResponse
-    GetPerformanceAnalysisReportRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    GetPerformanceAnalysisReportRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    GetPerformanceAnalysisReportRequest.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisReportId, location_name: "AnalysisReportId", traits: {"smithy.api#required" => {}}))
-    GetPerformanceAnalysisReportRequest.add_member(:text_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextFormat, location_name: "TextFormat"))
-    GetPerformanceAnalysisReportRequest.add_member(:accept_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    GetPerformanceAnalysisReportRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    GetPerformanceAnalysisReportRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    GetPerformanceAnalysisReportRequest.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportId, location_name: "AnalysisReportId", traits: {"smithy.api#required" => {}}))
+    GetPerformanceAnalysisReportRequest.add_member(:text_format, ::Smithy::Schema::Shapes::MemberShape.new(target: TextFormat, location_name: "TextFormat"))
+    GetPerformanceAnalysisReportRequest.add_member(:accept_language, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptLanguage, location_name: "AcceptLanguage"))
     GetPerformanceAnalysisReportRequest.type = Types::GetPerformanceAnalysisReportRequest
-    GetPerformanceAnalysisReportResponse.add_member(:analysis_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisReport, location_name: "AnalysisReport"))
+    GetPerformanceAnalysisReportResponse.add_member(:analysis_report, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReport, location_name: "AnalysisReport"))
     GetPerformanceAnalysisReportResponse.type = Types::GetPerformanceAnalysisReportResponse
-    GetResourceMetadataRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    GetResourceMetadataRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    GetResourceMetadataRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    GetResourceMetadataRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
     GetResourceMetadataRequest.type = Types::GetResourceMetadataRequest
-    GetResourceMetadataResponse.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Identifier"))
-    GetResourceMetadataResponse.add_member(:features, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureMetadataMap, location_name: "Features"))
+    GetResourceMetadataResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Identifier"))
+    GetResourceMetadataResponse.add_member(:features, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureMetadataMap, location_name: "Features"))
     GetResourceMetadataResponse.type = Types::GetResourceMetadataResponse
-    GetResourceMetricsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    GetResourceMetricsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    GetResourceMetricsRequest.add_member(:metric_queries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricQueryList, location_name: "MetricQueries", traits: {"smithy.api#required" => {}}))
-    GetResourceMetricsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    GetResourceMetricsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    GetResourceMetricsRequest.add_member(:period_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "PeriodInSeconds"))
-    GetResourceMetricsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    GetResourceMetricsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    GetResourceMetricsRequest.add_member(:period_alignment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PeriodAlignment, location_name: "PeriodAlignment"))
+    GetResourceMetricsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    GetResourceMetricsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    GetResourceMetricsRequest.add_member(:metric_queries, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryList, location_name: "MetricQueries", traits: {"smithy.api#required" => {}}))
+    GetResourceMetricsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    GetResourceMetricsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    GetResourceMetricsRequest.add_member(:period_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "PeriodInSeconds"))
+    GetResourceMetricsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    GetResourceMetricsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    GetResourceMetricsRequest.add_member(:period_alignment, ::Smithy::Schema::Shapes::MemberShape.new(target: PeriodAlignment, location_name: "PeriodAlignment"))
     GetResourceMetricsRequest.type = Types::GetResourceMetricsRequest
-    GetResourceMetricsResponse.add_member(:aligned_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedStartTime"))
-    GetResourceMetricsResponse.add_member(:aligned_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedEndTime"))
-    GetResourceMetricsResponse.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Identifier"))
-    GetResourceMetricsResponse.add_member(:metric_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricKeyDataPointsList, location_name: "MetricList"))
-    GetResourceMetricsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetResourceMetricsResponse.add_member(:aligned_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "AlignedStartTime"))
+    GetResourceMetricsResponse.add_member(:aligned_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "AlignedEndTime"))
+    GetResourceMetricsResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Identifier"))
+    GetResourceMetricsResponse.add_member(:metric_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricKeyDataPointsList, location_name: "MetricList"))
+    GetResourceMetricsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetResourceMetricsResponse.type = Types::GetResourceMetricsResponse
-    Insight.add_member(:insight_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "InsightId", traits: {"smithy.api#required" => {}}))
-    Insight.add_member(:insight_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "InsightType"))
-    Insight.add_member(:context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextType, location_name: "Context"))
-    Insight.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "StartTime"))
-    Insight.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "EndTime"))
-    Insight.add_member(:severity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
-    Insight.add_member(:supporting_insights, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightList, location_name: "SupportingInsights"))
-    Insight.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MarkdownString, location_name: "Description"))
-    Insight.add_member(:recommendations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationList, location_name: "Recommendations"))
-    Insight.add_member(:insight_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataList, location_name: "InsightData"))
-    Insight.add_member(:baseline_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataList, location_name: "BaselineData"))
+    Insight.add_member(:insight_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "InsightId", traits: {"smithy.api#required" => {}}))
+    Insight.add_member(:insight_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "InsightType"))
+    Insight.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextType, location_name: "Context"))
+    Insight.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "StartTime"))
+    Insight.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, location_name: "EndTime"))
+    Insight.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, location_name: "Severity"))
+    Insight.add_member(:supporting_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightList, location_name: "SupportingInsights"))
+    Insight.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkdownString, location_name: "Description"))
+    Insight.add_member(:recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationList, location_name: "Recommendations"))
+    Insight.add_member(:insight_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DataList, location_name: "InsightData"))
+    Insight.add_member(:baseline_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DataList, location_name: "BaselineData"))
     Insight.type = Types::Insight
-    InsightList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Insight)
-    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorString, location_name: "Message"))
+    InsightList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Insight)
+    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorString, location_name: "Message"))
     InternalServiceError.type = Types::InternalServiceError
-    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorString, location_name: "Message"))
+    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorString, location_name: "Message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
-    ListAvailableResourceDimensionsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    ListAvailableResourceDimensionsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    ListAvailableResourceDimensionsRequest.add_member(:metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionsMetricList, location_name: "Metrics", traits: {"smithy.api#required" => {}}))
-    ListAvailableResourceDimensionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListAvailableResourceDimensionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAvailableResourceDimensionsRequest.add_member(:authorized_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizedActionsList, location_name: "AuthorizedActions"))
+    ListAvailableResourceDimensionsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    ListAvailableResourceDimensionsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    ListAvailableResourceDimensionsRequest.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsMetricList, location_name: "Metrics", traits: {"smithy.api#required" => {}}))
+    ListAvailableResourceDimensionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListAvailableResourceDimensionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListAvailableResourceDimensionsRequest.add_member(:authorized_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedActionsList, location_name: "AuthorizedActions"))
     ListAvailableResourceDimensionsRequest.type = Types::ListAvailableResourceDimensionsRequest
-    ListAvailableResourceDimensionsResponse.add_member(:metric_dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensionsList, location_name: "MetricDimensions"))
-    ListAvailableResourceDimensionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailableResourceDimensionsResponse.add_member(:metric_dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionsList, location_name: "MetricDimensions"))
+    ListAvailableResourceDimensionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAvailableResourceDimensionsResponse.type = Types::ListAvailableResourceDimensionsResponse
-    ListAvailableResourceMetricsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    ListAvailableResourceMetricsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    ListAvailableResourceMetricsRequest.add_member(:metric_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricTypeList, location_name: "MetricTypes", traits: {"smithy.api#required" => {}}))
-    ListAvailableResourceMetricsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAvailableResourceMetricsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAvailableResourceMetricsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    ListAvailableResourceMetricsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    ListAvailableResourceMetricsRequest.add_member(:metric_types, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricTypeList, location_name: "MetricTypes", traits: {"smithy.api#required" => {}}))
+    ListAvailableResourceMetricsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListAvailableResourceMetricsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListAvailableResourceMetricsRequest.type = Types::ListAvailableResourceMetricsRequest
-    ListAvailableResourceMetricsResponse.add_member(:metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseResourceMetricList, location_name: "Metrics"))
-    ListAvailableResourceMetricsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailableResourceMetricsResponse.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseResourceMetricList, location_name: "Metrics"))
+    ListAvailableResourceMetricsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAvailableResourceMetricsResponse.type = Types::ListAvailableResourceMetricsResponse
-    ListPerformanceAnalysisReportsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    ListPerformanceAnalysisReportsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    ListPerformanceAnalysisReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListPerformanceAnalysisReportsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListPerformanceAnalysisReportsRequest.add_member(:list_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ListTags"))
+    ListPerformanceAnalysisReportsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    ListPerformanceAnalysisReportsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    ListPerformanceAnalysisReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListPerformanceAnalysisReportsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListPerformanceAnalysisReportsRequest.add_member(:list_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ListTags"))
     ListPerformanceAnalysisReportsRequest.type = Types::ListPerformanceAnalysisReportsRequest
-    ListPerformanceAnalysisReportsResponse.add_member(:analysis_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisReportSummaryList, location_name: "AnalysisReports"))
-    ListPerformanceAnalysisReportsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPerformanceAnalysisReportsResponse.add_member(:analysis_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportSummaryList, location_name: "AnalysisReports"))
+    ListPerformanceAnalysisReportsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListPerformanceAnalysisReportsResponse.type = Types::ListPerformanceAnalysisReportsResponse
-    ListTagsForResourceRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MetricDimensionGroups.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Metric"))
-    MetricDimensionGroups.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionGroupDetailList, location_name: "Groups"))
+    MetricDimensionGroups.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Metric"))
+    MetricDimensionGroups.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionGroupDetailList, location_name: "Groups"))
     MetricDimensionGroups.type = Types::MetricDimensionGroups
-    MetricDimensionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensionGroups)
-    MetricKeyDataPoints.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseResourceMetricKey, location_name: "Key"))
-    MetricKeyDataPoints.add_member(:data_points, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataPointsList, location_name: "DataPoints"))
+    MetricDimensionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionGroups)
+    MetricKeyDataPoints.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseResourceMetricKey, location_name: "Key"))
+    MetricKeyDataPoints.add_member(:data_points, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPointsList, location_name: "DataPoints"))
     MetricKeyDataPoints.type = Types::MetricKeyDataPoints
-    MetricKeyDataPointsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricKeyDataPoints)
-    MetricQuery.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString, location_name: "Metric", traits: {"smithy.api#required" => {}}))
-    MetricQuery.add_member(:group_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionGroup, location_name: "GroupBy"))
-    MetricQuery.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricQueryFilterMap, location_name: "Filter"))
+    MetricKeyDataPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricKeyDataPoints)
+    MetricQuery.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString, location_name: "Metric", traits: {"smithy.api#required" => {}}))
+    MetricQuery.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionGroup, location_name: "GroupBy"))
+    MetricQuery.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryFilterMap, location_name: "Filter"))
     MetricQuery.type = Types::MetricQuery
-    MetricQueryFilterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString)
-    MetricQueryFilterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestString)
-    MetricQueryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricQuery)
-    MetricTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString)
-    MetricValuesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double)
-    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorString, location_name: "Message"))
+    MetricQueryFilterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString)
+    MetricQueryFilterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestString)
+    MetricQueryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQuery)
+    MetricTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString)
+    MetricValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Double)
+    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorString, location_name: "Message"))
     NotAuthorizedException.type = Types::NotAuthorizedException
-    PerformanceInsightsMetric.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptiveString, location_name: "Metric"))
-    PerformanceInsightsMetric.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptiveString, location_name: "DisplayName"))
-    PerformanceInsightsMetric.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptiveMap, location_name: "Dimensions"))
-    PerformanceInsightsMetric.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescriptiveMap, location_name: "Filter"))
-    PerformanceInsightsMetric.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Value"))
+    PerformanceInsightsMetric.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptiveString, location_name: "Metric"))
+    PerformanceInsightsMetric.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptiveString, location_name: "DisplayName"))
+    PerformanceInsightsMetric.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptiveMap, location_name: "Dimensions"))
+    PerformanceInsightsMetric.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptiveMap, location_name: "Filter"))
+    PerformanceInsightsMetric.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Value"))
     PerformanceInsightsMetric.type = Types::PerformanceInsightsMetric
-    PeriodAlignment.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "END_TIME", traits: {"smithy.api#enumValue" => "END_TIME"}))
-    PeriodAlignment.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "START_TIME", traits: {"smithy.api#enumValue" => "START_TIME"}))
-    Recommendation.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RecommendationId"))
-    Recommendation.add_member(:recommendation_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MarkdownString, location_name: "RecommendationDescription"))
+    PeriodAlignment.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "END_TIME", traits: {"smithy.api#enumValue" => "END_TIME"}))
+    PeriodAlignment.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "START_TIME", traits: {"smithy.api#enumValue" => "START_TIME"}))
+    Recommendation.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RecommendationId"))
+    Recommendation.add_member(:recommendation_description, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkdownString, location_name: "RecommendationDescription"))
     Recommendation.type = Types::Recommendation
-    RecommendationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Recommendation)
-    RequestedDimensionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString)
-    ResponsePartitionKey.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionMap, location_name: "Dimensions", traits: {"smithy.api#required" => {}}))
+    RecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation)
+    RequestedDimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString)
+    ResponsePartitionKey.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMap, location_name: "Dimensions", traits: {"smithy.api#required" => {}}))
     ResponsePartitionKey.type = Types::ResponsePartitionKey
-    ResponsePartitionKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponsePartitionKey)
-    ResponseResourceMetric.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Metric"))
-    ResponseResourceMetric.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    ResponseResourceMetric.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Unit"))
+    ResponsePartitionKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsePartitionKey)
+    ResponseResourceMetric.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Metric"))
+    ResponseResourceMetric.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    ResponseResourceMetric.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Unit"))
     ResponseResourceMetric.type = Types::ResponseResourceMetric
-    ResponseResourceMetricKey.add_member(:metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Metric", traits: {"smithy.api#required" => {}}))
-    ResponseResourceMetricKey.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionMap, location_name: "Dimensions"))
+    ResponseResourceMetricKey.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Metric", traits: {"smithy.api#required" => {}}))
+    ResponseResourceMetricKey.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMap, location_name: "Dimensions"))
     ResponseResourceMetricKey.type = Types::ResponseResourceMetricKey
-    ResponseResourceMetricList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseResourceMetric)
-    SanitizedStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SanitizedString)
-    ServiceType.add_member(:rds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDS", traits: {"smithy.api#enumValue" => "RDS"}))
-    ServiceType.add_member(:docdb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOCDB", traits: {"smithy.api#enumValue" => "DOCDB"}))
-    Severity.add_member(:low, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
-    Severity.add_member(:medium, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
-    Severity.add_member(:high, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    ResponseResourceMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseResourceMetric)
+    SanitizedStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString)
+    ServiceType.add_member(:rds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDS", traits: {"smithy.api#enumValue" => "RDS"}))
+    ServiceType.add_member(:docdb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOCDB", traits: {"smithy.api#enumValue" => "DOCDB"}))
+    Severity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
+    Severity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
+    Severity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TextFormat.add_member(:plain_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT"}))
-    TextFormat.add_member(:markdown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MARKDOWN", traits: {"smithy.api#enumValue" => "MARKDOWN"}))
-    UntagResourceRequest.add_member(:service_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    TextFormat.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT"}))
+    TextFormat.add_member(:markdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MARKDOWN", traits: {"smithy.api#enumValue" => "MARKDOWN"}))
+    UntagResourceRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
 
@@ -385,136 +385,136 @@ module Aws::PI
       service.add_operation(:create_performance_analysis_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#CreatePerformanceAnalysisReport"
         operation.name = "CreatePerformanceAnalysisReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePerformanceAnalysisReportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePerformanceAnalysisReportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = CreatePerformanceAnalysisReportRequest
+        operation.output = CreatePerformanceAnalysisReportResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
       service.add_operation(:delete_performance_analysis_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#DeletePerformanceAnalysisReport"
         operation.name = "DeletePerformanceAnalysisReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePerformanceAnalysisReportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePerformanceAnalysisReportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = DeletePerformanceAnalysisReportRequest
+        operation.output = DeletePerformanceAnalysisReportResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
       service.add_operation(:describe_dimension_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#DescribeDimensionKeys"
         operation.name = "DescribeDimensionKeys"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDimensionKeysRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDimensionKeysResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = DescribeDimensionKeysRequest
+        operation.output = DescribeDimensionKeysResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeDimensionKeys.new
       end)
       service.add_operation(:get_dimension_key_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#GetDimensionKeyDetails"
         operation.name = "GetDimensionKeyDetails"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDimensionKeyDetailsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDimensionKeyDetailsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = GetDimensionKeyDetailsRequest
+        operation.output = GetDimensionKeyDetailsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
       service.add_operation(:get_performance_analysis_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#GetPerformanceAnalysisReport"
         operation.name = "GetPerformanceAnalysisReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPerformanceAnalysisReportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPerformanceAnalysisReportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = GetPerformanceAnalysisReportRequest
+        operation.output = GetPerformanceAnalysisReportResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
       service.add_operation(:get_resource_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#GetResourceMetadata"
         operation.name = "GetResourceMetadata"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceMetadataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceMetadataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = GetResourceMetadataRequest
+        operation.output = GetResourceMetadataResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
       service.add_operation(:get_resource_metrics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#GetResourceMetrics"
         operation.name = "GetResourceMetrics"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceMetricsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceMetricsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = GetResourceMetricsRequest
+        operation.output = GetResourceMetricsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
         operation[:paginator] = Paginators::GetResourceMetrics.new
       end)
       service.add_operation(:list_available_resource_dimensions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#ListAvailableResourceDimensions"
         operation.name = "ListAvailableResourceDimensions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAvailableResourceDimensionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAvailableResourceDimensionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = ListAvailableResourceDimensionsRequest
+        operation.output = ListAvailableResourceDimensionsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAvailableResourceDimensions.new
       end)
       service.add_operation(:list_available_resource_metrics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#ListAvailableResourceMetrics"
         operation.name = "ListAvailableResourceMetrics"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAvailableResourceMetricsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAvailableResourceMetricsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = ListAvailableResourceMetricsRequest
+        operation.output = ListAvailableResourceMetricsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAvailableResourceMetrics.new
       end)
       service.add_operation(:list_performance_analysis_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#ListPerformanceAnalysisReports"
         operation.name = "ListPerformanceAnalysisReports"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPerformanceAnalysisReportsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPerformanceAnalysisReportsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = ListPerformanceAnalysisReportsRequest
+        operation.output = ListPerformanceAnalysisReportsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPerformanceAnalysisReports.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
         operation.traits = {}
       end)
     end

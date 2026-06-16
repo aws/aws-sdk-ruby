@@ -259,572 +259,572 @@ module Aws::MarketplaceCatalog
     ValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ValueList", name: "ValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     VisibilityValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#VisibilityValue", name: "VisibilityValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z]+$"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AmiProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductEntityIdFilterValueList, location_name: "ValueList"))
+    AmiProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdFilterValueList, location_name: "ValueList"))
     AmiProductEntityIdFilter.type = Types::AmiProductEntityIdFilter
-    AmiProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductEntityIdString)
-    AmiProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductEntityIdFilter, location_name: "EntityId"))
-    AmiProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
-    AmiProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductTitleFilter, location_name: "ProductTitle"))
-    AmiProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductVisibilityFilter, location_name: "Visibility"))
+    AmiProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdString)
+    AmiProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdFilter, location_name: "EntityId"))
+    AmiProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    AmiProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleFilter, location_name: "ProductTitle"))
+    AmiProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductVisibilityFilter, location_name: "Visibility"))
     AmiProductFilters.type = Types::AmiProductFilters
-    AmiProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    AmiProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
     AmiProductLastModifiedDateFilter.type = Types::AmiProductLastModifiedDateFilter
-    AmiProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    AmiProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    AmiProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    AmiProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     AmiProductLastModifiedDateFilterDateRange.type = Types::AmiProductLastModifiedDateFilterDateRange
-    AmiProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductSortBy, location_name: "SortBy"))
-    AmiProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    AmiProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductSortBy, location_name: "SortBy"))
+    AmiProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     AmiProductSort.type = Types::AmiProductSort
-    AmiProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
-    AmiProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
-    AmiProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
-    AmiProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
-    AmiProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductTitleString, location_name: "ProductTitle"))
-    AmiProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductVisibilityString, location_name: "Visibility"))
+    AmiProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    AmiProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    AmiProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
+    AmiProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
+    AmiProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleString, location_name: "ProductTitle"))
+    AmiProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductVisibilityString, location_name: "Visibility"))
     AmiProductSummary.type = Types::AmiProductSummary
-    AmiProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductTitleFilterValueList, location_name: "ValueList"))
-    AmiProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductTitleString, location_name: "WildCardValue"))
+    AmiProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleFilterValueList, location_name: "ValueList"))
+    AmiProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleString, location_name: "WildCardValue"))
     AmiProductTitleFilter.type = Types::AmiProductTitleFilter
-    AmiProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductTitleString)
-    AmiProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductVisibilityFilterValueList, location_name: "ValueList"))
+    AmiProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleString)
+    AmiProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductVisibilityFilterValueList, location_name: "ValueList"))
     AmiProductVisibilityFilter.type = Types::AmiProductVisibilityFilter
-    AmiProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductVisibilityString)
-    AmiProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
-    AmiProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
-    AmiProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
-    AmiProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
-    BatchDescribeEntitiesRequest.add_member(:entity_request_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRequestList, location_name: "EntityRequestList", traits: {"smithy.api#required" => {}}))
+    AmiProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductVisibilityString)
+    AmiProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
+    AmiProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
+    AmiProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
+    AmiProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    BatchDescribeEntitiesRequest.add_member(:entity_request_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRequestList, location_name: "EntityRequestList", traits: {"smithy.api#required" => {}}))
     BatchDescribeEntitiesRequest.type = Types::BatchDescribeEntitiesRequest
-    BatchDescribeEntitiesResponse.add_member(:entity_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDetails, location_name: "EntityDetails"))
-    BatchDescribeEntitiesResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Errors, location_name: "Errors"))
+    BatchDescribeEntitiesResponse.add_member(:entity_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDetails, location_name: "EntityDetails"))
+    BatchDescribeEntitiesResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: Errors, location_name: "Errors"))
     BatchDescribeEntitiesResponse.type = Types::BatchDescribeEntitiesResponse
-    BatchDescribeErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeErrorCodeString, location_name: "ErrorCode"))
-    BatchDescribeErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeErrorMessageContent, location_name: "ErrorMessage"))
+    BatchDescribeErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeErrorCodeString, location_name: "ErrorCode"))
+    BatchDescribeErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeErrorMessageContent, location_name: "ErrorMessage"))
     BatchDescribeErrorDetail.type = Types::BatchDescribeErrorDetail
-    CancelChangeSetRequest.add_member(:catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Catalog, location_name: "Catalog", traits: {"smithy.api#httpQuery" => "catalog", "smithy.api#required" => {}}))
-    CancelChangeSetRequest.add_member(:change_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId", traits: {"smithy.api#httpQuery" => "changeSetId", "smithy.api#required" => {}}))
+    CancelChangeSetRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "Catalog", traits: {"smithy.api#httpQuery" => "catalog", "smithy.api#required" => {}}))
+    CancelChangeSetRequest.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ChangeSetId", traits: {"smithy.api#httpQuery" => "changeSetId", "smithy.api#required" => {}}))
     CancelChangeSetRequest.type = Types::CancelChangeSetRequest
-    CancelChangeSetResponse.add_member(:change_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
-    CancelChangeSetResponse.add_member(:change_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
+    CancelChangeSetResponse.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ChangeSetId"))
+    CancelChangeSetResponse.add_member(:change_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "ChangeSetArn"))
     CancelChangeSetResponse.type = Types::CancelChangeSetResponse
-    Change.add_member(:change_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeType, location_name: "ChangeType", traits: {"smithy.api#required" => {}}))
-    Change.add_member(:entity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Entity, location_name: "Entity", traits: {"smithy.api#required" => {}}))
-    Change.add_member(:entity_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "EntityTags"))
-    Change.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
-    Change.add_member(:details_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
-    Change.add_member(:change_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
+    Change.add_member(:change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeType, location_name: "ChangeType", traits: {"smithy.api#required" => {}}))
+    Change.add_member(:entity, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, location_name: "Entity", traits: {"smithy.api#required" => {}}))
+    Change.add_member(:entity_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "EntityTags"))
+    Change.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: Json, location_name: "Details"))
+    Change.add_member(:details_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonDocumentType, location_name: "DetailsDocument"))
+    Change.add_member(:change_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeName, location_name: "ChangeName"))
     Change.type = Types::Change
-    ChangeSetDescription.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSummary)
-    ChangeSetSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSetSummaryListItem)
-    ChangeSetSummaryListItem.add_member(:change_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
-    ChangeSetSummaryListItem.add_member(:change_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
-    ChangeSetSummaryListItem.add_member(:change_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
-    ChangeSetSummaryListItem.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "StartTime"))
-    ChangeSetSummaryListItem.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "EndTime"))
-    ChangeSetSummaryListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeStatus, location_name: "Status"))
-    ChangeSetSummaryListItem.add_member(:entity_id_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "EntityIdList"))
-    ChangeSetSummaryListItem.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
+    ChangeSetDescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSummary)
+    ChangeSetSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetSummaryListItem)
+    ChangeSetSummaryListItem.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ChangeSetId"))
+    ChangeSetSummaryListItem.add_member(:change_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "ChangeSetArn"))
+    ChangeSetSummaryListItem.add_member(:change_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetName, location_name: "ChangeSetName"))
+    ChangeSetSummaryListItem.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "StartTime"))
+    ChangeSetSummaryListItem.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "EndTime"))
+    ChangeSetSummaryListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeStatus, location_name: "Status"))
+    ChangeSetSummaryListItem.add_member(:entity_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdList, location_name: "EntityIdList"))
+    ChangeSetSummaryListItem.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, location_name: "FailureCode"))
     ChangeSetSummaryListItem.type = Types::ChangeSetSummaryListItem
-    ChangeStatus.add_member(:preparing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREPARING", traits: {"smithy.api#enumValue" => "PREPARING"}))
-    ChangeStatus.add_member(:applying, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLYING", traits: {"smithy.api#enumValue" => "APPLYING"}))
-    ChangeStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    ChangeStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
-    ChangeStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ChangeSummary.add_member(:change_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeType, location_name: "ChangeType"))
-    ChangeSummary.add_member(:entity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Entity, location_name: "Entity"))
-    ChangeSummary.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
-    ChangeSummary.add_member(:details_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
-    ChangeSummary.add_member(:error_detail_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "ErrorDetailList"))
-    ChangeSummary.add_member(:change_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
+    ChangeStatus.add_member(:preparing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREPARING", traits: {"smithy.api#enumValue" => "PREPARING"}))
+    ChangeStatus.add_member(:applying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLYING", traits: {"smithy.api#enumValue" => "APPLYING"}))
+    ChangeStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    ChangeStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    ChangeStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ChangeSummary.add_member(:change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeType, location_name: "ChangeType"))
+    ChangeSummary.add_member(:entity, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, location_name: "Entity"))
+    ChangeSummary.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: Json, location_name: "Details"))
+    ChangeSummary.add_member(:details_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonDocumentType, location_name: "DetailsDocument"))
+    ChangeSummary.add_member(:error_detail_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetailList, location_name: "ErrorDetailList"))
+    ChangeSummary.add_member(:change_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeName, location_name: "ChangeName"))
     ChangeSummary.type = Types::ChangeSummary
-    ContainerProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductEntityIdFilterValueList, location_name: "ValueList"))
+    ContainerProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductEntityIdFilterValueList, location_name: "ValueList"))
     ContainerProductEntityIdFilter.type = Types::ContainerProductEntityIdFilter
-    ContainerProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductEntityIdString)
-    ContainerProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductEntityIdFilter, location_name: "EntityId"))
-    ContainerProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
-    ContainerProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductTitleFilter, location_name: "ProductTitle"))
-    ContainerProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductVisibilityFilter, location_name: "Visibility"))
+    ContainerProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductEntityIdString)
+    ContainerProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductEntityIdFilter, location_name: "EntityId"))
+    ContainerProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    ContainerProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleFilter, location_name: "ProductTitle"))
+    ContainerProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityFilter, location_name: "Visibility"))
     ContainerProductFilters.type = Types::ContainerProductFilters
-    ContainerProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    ContainerProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
     ContainerProductLastModifiedDateFilter.type = Types::ContainerProductLastModifiedDateFilter
-    ContainerProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    ContainerProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    ContainerProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    ContainerProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     ContainerProductLastModifiedDateFilterDateRange.type = Types::ContainerProductLastModifiedDateFilterDateRange
-    ContainerProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductSortBy, location_name: "SortBy"))
-    ContainerProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ContainerProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductSortBy, location_name: "SortBy"))
+    ContainerProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     ContainerProductSort.type = Types::ContainerProductSort
-    ContainerProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
-    ContainerProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
-    ContainerProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
-    ContainerProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
-    ContainerProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductTitleString, location_name: "ProductTitle"))
-    ContainerProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductVisibilityString, location_name: "Visibility"))
+    ContainerProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    ContainerProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    ContainerProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
+    ContainerProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
+    ContainerProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleString, location_name: "ProductTitle"))
+    ContainerProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityString, location_name: "Visibility"))
     ContainerProductSummary.type = Types::ContainerProductSummary
-    ContainerProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductTitleFilterValueList, location_name: "ValueList"))
-    ContainerProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductTitleString, location_name: "WildCardValue"))
+    ContainerProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleFilterValueList, location_name: "ValueList"))
+    ContainerProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleString, location_name: "WildCardValue"))
     ContainerProductTitleFilter.type = Types::ContainerProductTitleFilter
-    ContainerProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductTitleString)
-    ContainerProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductVisibilityFilterValueList, location_name: "ValueList"))
+    ContainerProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleString)
+    ContainerProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityFilterValueList, location_name: "ValueList"))
     ContainerProductVisibilityFilter.type = Types::ContainerProductVisibilityFilter
-    ContainerProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductVisibilityString)
-    ContainerProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
-    ContainerProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
-    ContainerProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
-    ContainerProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
-    DataProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductEntityIdFilterValueList, location_name: "ValueList"))
+    ContainerProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityString)
+    ContainerProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
+    ContainerProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
+    ContainerProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
+    ContainerProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    DataProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdFilterValueList, location_name: "ValueList"))
     DataProductEntityIdFilter.type = Types::DataProductEntityIdFilter
-    DataProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductEntityIdString)
-    DataProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductEntityIdFilter, location_name: "EntityId"))
-    DataProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductTitleFilter, location_name: "ProductTitle"))
-    DataProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductVisibilityFilter, location_name: "Visibility"))
-    DataProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    DataProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdString)
+    DataProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdFilter, location_name: "EntityId"))
+    DataProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleFilter, location_name: "ProductTitle"))
+    DataProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityFilter, location_name: "Visibility"))
+    DataProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
     DataProductFilters.type = Types::DataProductFilters
-    DataProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    DataProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
     DataProductLastModifiedDateFilter.type = Types::DataProductLastModifiedDateFilter
-    DataProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    DataProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    DataProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    DataProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     DataProductLastModifiedDateFilterDateRange.type = Types::DataProductLastModifiedDateFilterDateRange
-    DataProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductSortBy, location_name: "SortBy"))
-    DataProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    DataProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductSortBy, location_name: "SortBy"))
+    DataProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     DataProductSort.type = Types::DataProductSort
-    DataProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
-    DataProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
-    DataProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
-    DataProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
-    DataProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductTitleString, location_name: "ProductTitle"))
-    DataProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductVisibilityString, location_name: "Visibility"))
+    DataProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    DataProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
+    DataProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
+    DataProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    DataProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleString, location_name: "ProductTitle"))
+    DataProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityString, location_name: "Visibility"))
     DataProductSummary.type = Types::DataProductSummary
-    DataProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductTitleFilterValueList, location_name: "ValueList"))
-    DataProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductTitleString, location_name: "WildCardValue"))
+    DataProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleFilterValueList, location_name: "ValueList"))
+    DataProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleString, location_name: "WildCardValue"))
     DataProductTitleFilter.type = Types::DataProductTitleFilter
-    DataProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductTitleString)
-    DataProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductVisibilityFilterValueList, location_name: "ValueList"))
+    DataProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleString)
+    DataProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityFilterValueList, location_name: "ValueList"))
     DataProductVisibilityFilter.type = Types::DataProductVisibilityFilter
-    DataProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductVisibilityString)
-    DataProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
-    DataProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
-    DataProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
-    DataProductVisibilityString.add_member(:unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unavailable", traits: {"smithy.api#enumValue" => "Unavailable"}))
-    DataProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
-    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
+    DataProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityString)
+    DataProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
+    DataProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
+    DataProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
+    DataProductVisibilityString.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unavailable", traits: {"smithy.api#enumValue" => "Unavailable"}))
+    DataProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
     DeleteResourcePolicyResponse.type = Types::DeleteResourcePolicyResponse
-    DescribeChangeSetRequest.add_member(:catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Catalog, location_name: "Catalog", traits: {"smithy.api#httpQuery" => "catalog", "smithy.api#required" => {}}))
-    DescribeChangeSetRequest.add_member(:change_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId", traits: {"smithy.api#httpQuery" => "changeSetId", "smithy.api#required" => {}}))
+    DescribeChangeSetRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "Catalog", traits: {"smithy.api#httpQuery" => "catalog", "smithy.api#required" => {}}))
+    DescribeChangeSetRequest.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ChangeSetId", traits: {"smithy.api#httpQuery" => "changeSetId", "smithy.api#required" => {}}))
     DescribeChangeSetRequest.type = Types::DescribeChangeSetRequest
-    DescribeChangeSetResponse.add_member(:change_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
-    DescribeChangeSetResponse.add_member(:change_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
-    DescribeChangeSetResponse.add_member(:change_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
-    DescribeChangeSetResponse.add_member(:intent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Intent, location_name: "Intent"))
-    DescribeChangeSetResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "StartTime"))
-    DescribeChangeSetResponse.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "EndTime"))
-    DescribeChangeSetResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeStatus, location_name: "Status"))
-    DescribeChangeSetResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
-    DescribeChangeSetResponse.add_member(:failure_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "FailureDescription"))
-    DescribeChangeSetResponse.add_member(:change_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSetDescription, location_name: "ChangeSet"))
+    DescribeChangeSetResponse.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ChangeSetId"))
+    DescribeChangeSetResponse.add_member(:change_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "ChangeSetArn"))
+    DescribeChangeSetResponse.add_member(:change_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetName, location_name: "ChangeSetName"))
+    DescribeChangeSetResponse.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: Intent, location_name: "Intent"))
+    DescribeChangeSetResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "StartTime"))
+    DescribeChangeSetResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "EndTime"))
+    DescribeChangeSetResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeStatus, location_name: "Status"))
+    DescribeChangeSetResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, location_name: "FailureCode"))
+    DescribeChangeSetResponse.add_member(:failure_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "FailureDescription"))
+    DescribeChangeSetResponse.add_member(:change_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetDescription, location_name: "ChangeSet"))
     DescribeChangeSetResponse.type = Types::DescribeChangeSetResponse
-    DescribeEntityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Catalog, location_name: "Catalog", traits: {"smithy.api#httpQuery" => "catalog", "smithy.api#required" => {}}))
-    DescribeEntityRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId", traits: {"smithy.api#httpQuery" => "entityId", "smithy.api#required" => {}}))
+    DescribeEntityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "Catalog", traits: {"smithy.api#httpQuery" => "catalog", "smithy.api#required" => {}}))
+    DescribeEntityRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "EntityId", traits: {"smithy.api#httpQuery" => "entityId", "smithy.api#required" => {}}))
     DescribeEntityRequest.type = Types::DescribeEntityRequest
-    DescribeEntityResponse.add_member(:entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
-    DescribeEntityResponse.add_member(:entity_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "EntityIdentifier"))
-    DescribeEntityResponse.add_member(:entity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "EntityArn"))
-    DescribeEntityResponse.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "LastModifiedDate"))
-    DescribeEntityResponse.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
-    DescribeEntityResponse.add_member(:details_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
+    DescribeEntityResponse.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, location_name: "EntityType"))
+    DescribeEntityResponse.add_member(:entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "EntityIdentifier"))
+    DescribeEntityResponse.add_member(:entity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "EntityArn"))
+    DescribeEntityResponse.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "LastModifiedDate"))
+    DescribeEntityResponse.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: Json, location_name: "Details"))
+    DescribeEntityResponse.add_member(:details_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonDocumentType, location_name: "DetailsDocument"))
     DescribeEntityResponse.type = Types::DescribeEntityResponse
-    Entity.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    Entity.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier"))
+    Entity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Entity.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier"))
     Entity.type = Types::Entity
-    EntityDetail.add_member(:entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
-    EntityDetail.add_member(:entity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "EntityArn"))
-    EntityDetail.add_member(:entity_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "EntityIdentifier"))
-    EntityDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "LastModifiedDate"))
-    EntityDetail.add_member(:details_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
+    EntityDetail.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, location_name: "EntityType"))
+    EntityDetail.add_member(:entity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "EntityArn"))
+    EntityDetail.add_member(:entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "EntityIdentifier"))
+    EntityDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "LastModifiedDate"))
+    EntityDetail.add_member(:details_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonDocumentType, location_name: "DetailsDocument"))
     EntityDetail.type = Types::EntityDetail
-    EntityDetails.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId)
-    EntityDetails.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDetail)
-    EntityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
-    EntityRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    EntityDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId)
+    EntityDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDetail)
+    EntityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
+    EntityRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
     EntityRequest.type = Types::EntityRequest
-    EntityRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRequest)
-    EntitySummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNameString, location_name: "Name"))
-    EntitySummary.add_member(:entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
-    EntitySummary.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId"))
-    EntitySummary.add_member(:entity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "EntityArn"))
-    EntitySummary.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "LastModifiedDate"))
-    EntitySummary.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisibilityValue, location_name: "Visibility"))
-    EntitySummary.add_member(:ami_product_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductSummary, location_name: "AmiProductSummary"))
-    EntitySummary.add_member(:container_product_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductSummary, location_name: "ContainerProductSummary"))
-    EntitySummary.add_member(:data_product_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductSummary, location_name: "DataProductSummary"))
-    EntitySummary.add_member(:saa_s_product_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductSummary, location_name: "SaaSProductSummary"))
-    EntitySummary.add_member(:offer_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferSummary, location_name: "OfferSummary"))
-    EntitySummary.add_member(:resale_authorization_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationSummary, location_name: "ResaleAuthorizationSummary"))
-    EntitySummary.add_member(:machine_learning_product_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductSummary, location_name: "MachineLearningProductSummary"))
+    EntityRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRequest)
+    EntitySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityNameString, location_name: "Name"))
+    EntitySummary.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, location_name: "EntityType"))
+    EntitySummary.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "EntityId"))
+    EntitySummary.add_member(:entity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "EntityArn"))
+    EntitySummary.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "LastModifiedDate"))
+    EntitySummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: VisibilityValue, location_name: "Visibility"))
+    EntitySummary.add_member(:ami_product_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductSummary, location_name: "AmiProductSummary"))
+    EntitySummary.add_member(:container_product_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductSummary, location_name: "ContainerProductSummary"))
+    EntitySummary.add_member(:data_product_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductSummary, location_name: "DataProductSummary"))
+    EntitySummary.add_member(:saa_s_product_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductSummary, location_name: "SaaSProductSummary"))
+    EntitySummary.add_member(:offer_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSummary, location_name: "OfferSummary"))
+    EntitySummary.add_member(:resale_authorization_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSummary, location_name: "ResaleAuthorizationSummary"))
+    EntitySummary.add_member(:machine_learning_product_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductSummary, location_name: "MachineLearningProductSummary"))
     EntitySummary.type = Types::EntitySummary
-    EntitySummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitySummary)
-    EntityTypeFilters.add_member(:data_product_filters, Types::EntityTypeFilters::DataProductFilters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductFilters, location_name: "DataProductFilters"))
-    EntityTypeFilters.add_member(:saa_s_product_filters, Types::EntityTypeFilters::SaaSProductFilters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductFilters, location_name: "SaaSProductFilters"))
-    EntityTypeFilters.add_member(:ami_product_filters, Types::EntityTypeFilters::AmiProductFilters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductFilters, location_name: "AmiProductFilters"))
-    EntityTypeFilters.add_member(:offer_filters, Types::EntityTypeFilters::OfferFilters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferFilters, location_name: "OfferFilters"))
-    EntityTypeFilters.add_member(:container_product_filters, Types::EntityTypeFilters::ContainerProductFilters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductFilters, location_name: "ContainerProductFilters"))
-    EntityTypeFilters.add_member(:resale_authorization_filters, Types::EntityTypeFilters::ResaleAuthorizationFilters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationFilters, location_name: "ResaleAuthorizationFilters"))
-    EntityTypeFilters.add_member(:machine_learning_product_filters, Types::EntityTypeFilters::MachineLearningProductFilters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductFilters, location_name: "MachineLearningProductFilters"))
-    EntityTypeFilters.add_member(:unknown, Types::EntityTypeFilters::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EntitySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntitySummary)
+    EntityTypeFilters.add_member(:data_product_filters, Types::EntityTypeFilters::DataProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductFilters, location_name: "DataProductFilters"))
+    EntityTypeFilters.add_member(:saa_s_product_filters, Types::EntityTypeFilters::SaaSProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductFilters, location_name: "SaaSProductFilters"))
+    EntityTypeFilters.add_member(:ami_product_filters, Types::EntityTypeFilters::AmiProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductFilters, location_name: "AmiProductFilters"))
+    EntityTypeFilters.add_member(:offer_filters, Types::EntityTypeFilters::OfferFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferFilters, location_name: "OfferFilters"))
+    EntityTypeFilters.add_member(:container_product_filters, Types::EntityTypeFilters::ContainerProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductFilters, location_name: "ContainerProductFilters"))
+    EntityTypeFilters.add_member(:resale_authorization_filters, Types::EntityTypeFilters::ResaleAuthorizationFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationFilters, location_name: "ResaleAuthorizationFilters"))
+    EntityTypeFilters.add_member(:machine_learning_product_filters, Types::EntityTypeFilters::MachineLearningProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductFilters, location_name: "MachineLearningProductFilters"))
+    EntityTypeFilters.add_member(:unknown, Types::EntityTypeFilters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EntityTypeFilters.type = Types::EntityTypeFilters
-    EntityTypeSort.add_member(:data_product_sort, Types::EntityTypeSort::DataProductSort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataProductSort, location_name: "DataProductSort"))
-    EntityTypeSort.add_member(:saa_s_product_sort, Types::EntityTypeSort::SaaSProductSort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductSort, location_name: "SaaSProductSort"))
-    EntityTypeSort.add_member(:ami_product_sort, Types::EntityTypeSort::AmiProductSort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiProductSort, location_name: "AmiProductSort"))
-    EntityTypeSort.add_member(:offer_sort, Types::EntityTypeSort::OfferSort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferSort, location_name: "OfferSort"))
-    EntityTypeSort.add_member(:container_product_sort, Types::EntityTypeSort::ContainerProductSort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProductSort, location_name: "ContainerProductSort"))
-    EntityTypeSort.add_member(:resale_authorization_sort, Types::EntityTypeSort::ResaleAuthorizationSort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationSort, location_name: "ResaleAuthorizationSort"))
-    EntityTypeSort.add_member(:machine_learning_product_sort, Types::EntityTypeSort::MachineLearningProductSort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductSort, location_name: "MachineLearningProductSort"))
-    EntityTypeSort.add_member(:unknown, Types::EntityTypeSort::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EntityTypeSort.add_member(:data_product_sort, Types::EntityTypeSort::DataProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductSort, location_name: "DataProductSort"))
+    EntityTypeSort.add_member(:saa_s_product_sort, Types::EntityTypeSort::SaaSProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductSort, location_name: "SaaSProductSort"))
+    EntityTypeSort.add_member(:ami_product_sort, Types::EntityTypeSort::AmiProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductSort, location_name: "AmiProductSort"))
+    EntityTypeSort.add_member(:offer_sort, Types::EntityTypeSort::OfferSort, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSort, location_name: "OfferSort"))
+    EntityTypeSort.add_member(:container_product_sort, Types::EntityTypeSort::ContainerProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductSort, location_name: "ContainerProductSort"))
+    EntityTypeSort.add_member(:resale_authorization_sort, Types::EntityTypeSort::ResaleAuthorizationSort, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSort, location_name: "ResaleAuthorizationSort"))
+    EntityTypeSort.add_member(:machine_learning_product_sort, Types::EntityTypeSort::MachineLearningProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductSort, location_name: "MachineLearningProductSort"))
+    EntityTypeSort.add_member(:unknown, Types::EntityTypeSort::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EntityTypeSort.type = Types::EntityTypeSort
-    ErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCodeString, location_name: "ErrorCode"))
-    ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "ErrorMessage"))
+    ErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCodeString, location_name: "ErrorCode"))
+    ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "ErrorMessage"))
     ErrorDetail.type = Types::ErrorDetail
-    ErrorDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDetail)
-    Errors.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId)
-    Errors.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeErrorDetail)
-    FailureCode.add_member(:client_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClientError", traits: {"smithy.api#enumValue" => "CLIENT_ERROR"}))
-    FailureCode.add_member(:server_fault, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServerFault", traits: {"smithy.api#enumValue" => "SERVER_FAULT"}))
-    Filter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
-    Filter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValueList, location_name: "ValueList"))
+    ErrorDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail)
+    Errors.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId)
+    Errors.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeErrorDetail)
+    FailureCode.add_member(:client_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClientError", traits: {"smithy.api#enumValue" => "CLIENT_ERROR"}))
+    FailureCode.add_member(:server_fault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServerFault", traits: {"smithy.api#enumValue" => "SERVER_FAULT"}))
+    Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, location_name: "Name"))
+    Filter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueList, location_name: "ValueList"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
+    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
-    GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicyJson, location_name: "Policy"))
+    GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyJson, location_name: "Policy"))
     GetResourcePolicyResponse.type = Types::GetResourcePolicyResponse
-    Intent.add_member(:validate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALIDATE", traits: {"smithy.api#enumValue" => "VALIDATE"}))
-    Intent.add_member(:apply, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLY", traits: {"smithy.api#enumValue" => "APPLY"}))
-    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    Intent.add_member(:validate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALIDATE", traits: {"smithy.api#enumValue" => "VALIDATE"}))
+    Intent.add_member(:apply, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPLY", traits: {"smithy.api#enumValue" => "APPLY"}))
+    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     InternalServiceException.type = Types::InternalServiceException
-    ListChangeSetsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
-    ListChangeSetsRequest.add_member(:filter_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "FilterList"))
-    ListChangeSetsRequest.add_member(:sort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sort, location_name: "Sort"))
-    ListChangeSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChangeSetsMaxResultInteger, location_name: "MaxResults"))
-    ListChangeSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChangeSetsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
+    ListChangeSetsRequest.add_member(:filter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "FilterList"))
+    ListChangeSetsRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, location_name: "Sort"))
+    ListChangeSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListChangeSetsMaxResultInteger, location_name: "MaxResults"))
+    ListChangeSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListChangeSetsRequest.type = Types::ListChangeSetsRequest
-    ListChangeSetsResponse.add_member(:change_set_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSetSummaryList, location_name: "ChangeSetSummaryList"))
-    ListChangeSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChangeSetsResponse.add_member(:change_set_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetSummaryList, location_name: "ChangeSetSummaryList"))
+    ListChangeSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListChangeSetsResponse.type = Types::ListChangeSetsResponse
-    ListEntitiesRequest.add_member(:catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
-    ListEntitiesRequest.add_member(:entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType", traits: {"smithy.api#required" => {}}))
-    ListEntitiesRequest.add_member(:filter_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "FilterList"))
-    ListEntitiesRequest.add_member(:sort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sort, location_name: "Sort"))
-    ListEntitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListEntitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntitiesMaxResultInteger, location_name: "MaxResults"))
-    ListEntitiesRequest.add_member(:ownership_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnershipType, location_name: "OwnershipType"))
-    ListEntitiesRequest.add_member(:entity_type_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityTypeFilters, location_name: "EntityTypeFilters"))
-    ListEntitiesRequest.add_member(:entity_type_sort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityTypeSort, location_name: "EntityTypeSort"))
+    ListEntitiesRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
+    ListEntitiesRequest.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, location_name: "EntityType", traits: {"smithy.api#required" => {}}))
+    ListEntitiesRequest.add_member(:filter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "FilterList"))
+    ListEntitiesRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, location_name: "Sort"))
+    ListEntitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListEntitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEntitiesMaxResultInteger, location_name: "MaxResults"))
+    ListEntitiesRequest.add_member(:ownership_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnershipType, location_name: "OwnershipType"))
+    ListEntitiesRequest.add_member(:entity_type_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityTypeFilters, location_name: "EntityTypeFilters"))
+    ListEntitiesRequest.add_member(:entity_type_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityTypeSort, location_name: "EntityTypeSort"))
     ListEntitiesRequest.type = Types::ListEntitiesRequest
-    ListEntitiesResponse.add_member(:entity_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitySummaryList, location_name: "EntitySummaryList"))
-    ListEntitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEntitiesResponse.add_member(:entity_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitySummaryList, location_name: "EntitySummaryList"))
+    ListEntitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListEntitiesResponse.type = Types::ListEntitiesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn"))
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceArn"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MachineLearningProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductEntityIdFilterValueList, location_name: "ValueList"))
+    MachineLearningProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductEntityIdFilterValueList, location_name: "ValueList"))
     MachineLearningProductEntityIdFilter.type = Types::MachineLearningProductEntityIdFilter
-    MachineLearningProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductEntityIdString)
-    MachineLearningProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductEntityIdFilter, location_name: "EntityId"))
-    MachineLearningProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
-    MachineLearningProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductTitleFilter, location_name: "ProductTitle"))
-    MachineLearningProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityFilter, location_name: "Visibility"))
+    MachineLearningProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductEntityIdString)
+    MachineLearningProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductEntityIdFilter, location_name: "EntityId"))
+    MachineLearningProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    MachineLearningProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleFilter, location_name: "ProductTitle"))
+    MachineLearningProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductVisibilityFilter, location_name: "Visibility"))
     MachineLearningProductFilters.type = Types::MachineLearningProductFilters
-    MachineLearningProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    MachineLearningProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
     MachineLearningProductLastModifiedDateFilter.type = Types::MachineLearningProductLastModifiedDateFilter
-    MachineLearningProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    MachineLearningProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    MachineLearningProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    MachineLearningProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     MachineLearningProductLastModifiedDateFilterDateRange.type = Types::MachineLearningProductLastModifiedDateFilterDateRange
-    MachineLearningProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductSortBy, location_name: "SortBy"))
-    MachineLearningProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    MachineLearningProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductSortBy, location_name: "SortBy"))
+    MachineLearningProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     MachineLearningProductSort.type = Types::MachineLearningProductSort
-    MachineLearningProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
-    MachineLearningProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
-    MachineLearningProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
-    MachineLearningProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
-    MachineLearningProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductTitleString, location_name: "ProductTitle"))
-    MachineLearningProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityString, location_name: "Visibility"))
+    MachineLearningProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    MachineLearningProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    MachineLearningProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
+    MachineLearningProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
+    MachineLearningProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleString, location_name: "ProductTitle"))
+    MachineLearningProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductVisibilityString, location_name: "Visibility"))
     MachineLearningProductSummary.type = Types::MachineLearningProductSummary
-    MachineLearningProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductTitleFilterValueList, location_name: "ValueList"))
-    MachineLearningProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductTitleString, location_name: "WildCardValue"))
+    MachineLearningProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleFilterValueList, location_name: "ValueList"))
+    MachineLearningProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleString, location_name: "WildCardValue"))
     MachineLearningProductTitleFilter.type = Types::MachineLearningProductTitleFilter
-    MachineLearningProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductTitleString)
-    MachineLearningProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityFilterValueList, location_name: "ValueList"))
+    MachineLearningProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleString)
+    MachineLearningProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductVisibilityFilterValueList, location_name: "ValueList"))
     MachineLearningProductVisibilityFilter.type = Types::MachineLearningProductVisibilityFilter
-    MachineLearningProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityString)
-    MachineLearningProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
-    MachineLearningProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
-    MachineLearningProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
-    MachineLearningProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
-    OfferAvailabilityEndDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferAvailabilityEndDateFilterDateRange, location_name: "DateRange"))
+    MachineLearningProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductVisibilityString)
+    MachineLearningProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
+    MachineLearningProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
+    MachineLearningProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
+    MachineLearningProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    OfferAvailabilityEndDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferAvailabilityEndDateFilterDateRange, location_name: "DateRange"))
     OfferAvailabilityEndDateFilter.type = Types::OfferAvailabilityEndDateFilter
-    OfferAvailabilityEndDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    OfferAvailabilityEndDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    OfferAvailabilityEndDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    OfferAvailabilityEndDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     OfferAvailabilityEndDateFilterDateRange.type = Types::OfferAvailabilityEndDateFilterDateRange
-    OfferBuyerAccountsFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferBuyerAccountsFilterWildcard, location_name: "WildCardValue"))
+    OfferBuyerAccountsFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsFilterWildcard, location_name: "WildCardValue"))
     OfferBuyerAccountsFilter.type = Types::OfferBuyerAccountsFilter
-    OfferBuyerAccountsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferBuyerAccountsString)
-    OfferEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferEntityIdFilterValueList, location_name: "ValueList"))
+    OfferBuyerAccountsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsString)
+    OfferEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdFilterValueList, location_name: "ValueList"))
     OfferEntityIdFilter.type = Types::OfferEntityIdFilter
-    OfferEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferEntityIdString)
-    OfferFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferEntityIdFilter, location_name: "EntityId"))
-    OfferFilters.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferNameFilter, location_name: "Name"))
-    OfferFilters.add_member(:product_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferProductIdFilter, location_name: "ProductId"))
-    OfferFilters.add_member(:resale_authorization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdFilter, location_name: "ResaleAuthorizationId"))
-    OfferFilters.add_member(:release_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferReleaseDateFilter, location_name: "ReleaseDate"))
-    OfferFilters.add_member(:availability_end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferAvailabilityEndDateFilter, location_name: "AvailabilityEndDate"))
-    OfferFilters.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferBuyerAccountsFilter, location_name: "BuyerAccounts"))
-    OfferFilters.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferStateFilter, location_name: "State"))
-    OfferFilters.add_member(:targeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferTargetingFilter, location_name: "Targeting"))
-    OfferFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    OfferEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdString)
+    OfferFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdFilter, location_name: "EntityId"))
+    OfferFilters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameFilter, location_name: "Name"))
+    OfferFilters.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdFilter, location_name: "ProductId"))
+    OfferFilters.add_member(:resale_authorization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdFilter, location_name: "ResaleAuthorizationId"))
+    OfferFilters.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferReleaseDateFilter, location_name: "ReleaseDate"))
+    OfferFilters.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferAvailabilityEndDateFilter, location_name: "AvailabilityEndDate"))
+    OfferFilters.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsFilter, location_name: "BuyerAccounts"))
+    OfferFilters.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateFilter, location_name: "State"))
+    OfferFilters.add_member(:targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingFilter, location_name: "Targeting"))
+    OfferFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferLastModifiedDateFilter, location_name: "LastModifiedDate"))
     OfferFilters.type = Types::OfferFilters
-    OfferLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    OfferLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferLastModifiedDateFilterDateRange, location_name: "DateRange"))
     OfferLastModifiedDateFilter.type = Types::OfferLastModifiedDateFilter
-    OfferLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    OfferLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    OfferLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    OfferLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     OfferLastModifiedDateFilterDateRange.type = Types::OfferLastModifiedDateFilterDateRange
-    OfferNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferNameFilterValueList, location_name: "ValueList"))
-    OfferNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferNameString, location_name: "WildCardValue"))
+    OfferNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameFilterValueList, location_name: "ValueList"))
+    OfferNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameString, location_name: "WildCardValue"))
     OfferNameFilter.type = Types::OfferNameFilter
-    OfferNameFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferNameString)
-    OfferProductIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferProductIdFilterValueList, location_name: "ValueList"))
+    OfferNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameString)
+    OfferProductIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdFilterValueList, location_name: "ValueList"))
     OfferProductIdFilter.type = Types::OfferProductIdFilter
-    OfferProductIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferProductIdString)
-    OfferReleaseDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferReleaseDateFilterDateRange, location_name: "DateRange"))
+    OfferProductIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdString)
+    OfferReleaseDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferReleaseDateFilterDateRange, location_name: "DateRange"))
     OfferReleaseDateFilter.type = Types::OfferReleaseDateFilter
-    OfferReleaseDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    OfferReleaseDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    OfferReleaseDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    OfferReleaseDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     OfferReleaseDateFilterDateRange.type = Types::OfferReleaseDateFilterDateRange
-    OfferResaleAuthorizationIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdFilterValueList, location_name: "ValueList"))
+    OfferResaleAuthorizationIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdFilterValueList, location_name: "ValueList"))
     OfferResaleAuthorizationIdFilter.type = Types::OfferResaleAuthorizationIdFilter
-    OfferResaleAuthorizationIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdString)
-    OfferSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferSortBy, location_name: "SortBy"))
-    OfferSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    OfferResaleAuthorizationIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdString)
+    OfferSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSortBy, location_name: "SortBy"))
+    OfferSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     OfferSort.type = Types::OfferSort
-    OfferSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
-    OfferSortBy.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
-    OfferSortBy.add_member(:product_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductId", traits: {"smithy.api#enumValue" => "ProductId"}))
-    OfferSortBy.add_member(:resale_authorization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResaleAuthorizationId", traits: {"smithy.api#enumValue" => "ResaleAuthorizationId"}))
-    OfferSortBy.add_member(:release_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReleaseDate", traits: {"smithy.api#enumValue" => "ReleaseDate"}))
-    OfferSortBy.add_member(:availability_end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AvailabilityEndDate", traits: {"smithy.api#enumValue" => "AvailabilityEndDate"}))
-    OfferSortBy.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BuyerAccounts", traits: {"smithy.api#enumValue" => "BuyerAccounts"}))
-    OfferSortBy.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "State", traits: {"smithy.api#enumValue" => "State"}))
-    OfferSortBy.add_member(:targeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Targeting", traits: {"smithy.api#enumValue" => "Targeting"}))
-    OfferSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
-    OfferStateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferStateFilterValueList, location_name: "ValueList"))
+    OfferSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    OfferSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
+    OfferSortBy.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductId", traits: {"smithy.api#enumValue" => "ProductId"}))
+    OfferSortBy.add_member(:resale_authorization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResaleAuthorizationId", traits: {"smithy.api#enumValue" => "ResaleAuthorizationId"}))
+    OfferSortBy.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReleaseDate", traits: {"smithy.api#enumValue" => "ReleaseDate"}))
+    OfferSortBy.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AvailabilityEndDate", traits: {"smithy.api#enumValue" => "AvailabilityEndDate"}))
+    OfferSortBy.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BuyerAccounts", traits: {"smithy.api#enumValue" => "BuyerAccounts"}))
+    OfferSortBy.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "State", traits: {"smithy.api#enumValue" => "State"}))
+    OfferSortBy.add_member(:targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Targeting", traits: {"smithy.api#enumValue" => "Targeting"}))
+    OfferSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    OfferStateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateFilterValueList, location_name: "ValueList"))
     OfferStateFilter.type = Types::OfferStateFilter
-    OfferStateFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferStateString)
-    OfferStateString.add_member(:draft, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
-    OfferStateString.add_member(:released, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Released", traits: {"smithy.api#enumValue" => "Released"}))
-    OfferSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferNameString, location_name: "Name"))
-    OfferSummary.add_member(:product_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferProductIdString, location_name: "ProductId"))
-    OfferSummary.add_member(:resale_authorization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdString, location_name: "ResaleAuthorizationId"))
-    OfferSummary.add_member(:release_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "ReleaseDate"))
-    OfferSummary.add_member(:availability_end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AvailabilityEndDate"))
-    OfferSummary.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferBuyerAccountsList, location_name: "BuyerAccounts"))
-    OfferSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferStateString, location_name: "State"))
-    OfferSummary.add_member(:targeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferTargetingList, location_name: "Targeting"))
+    OfferStateFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateString)
+    OfferStateString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    OfferStateString.add_member(:released, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Released", traits: {"smithy.api#enumValue" => "Released"}))
+    OfferSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameString, location_name: "Name"))
+    OfferSummary.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdString, location_name: "ProductId"))
+    OfferSummary.add_member(:resale_authorization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdString, location_name: "ResaleAuthorizationId"))
+    OfferSummary.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "ReleaseDate"))
+    OfferSummary.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AvailabilityEndDate"))
+    OfferSummary.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsList, location_name: "BuyerAccounts"))
+    OfferSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateString, location_name: "State"))
+    OfferSummary.add_member(:targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingList, location_name: "Targeting"))
     OfferSummary.type = Types::OfferSummary
-    OfferTargetingFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferTargetingFilterValueList, location_name: "ValueList"))
+    OfferTargetingFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingFilterValueList, location_name: "ValueList"))
     OfferTargetingFilter.type = Types::OfferTargetingFilter
-    OfferTargetingFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferTargetingString)
-    OfferTargetingList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OfferTargetingString)
-    OfferTargetingString.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BuyerAccounts", traits: {"smithy.api#enumValue" => "BuyerAccounts"}))
-    OfferTargetingString.add_member(:participating_programs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ParticipatingPrograms", traits: {"smithy.api#enumValue" => "ParticipatingPrograms"}))
-    OfferTargetingString.add_member(:country_codes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CountryCodes", traits: {"smithy.api#enumValue" => "CountryCodes"}))
-    OfferTargetingString.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "None", traits: {"smithy.api#enumValue" => "None"}))
-    OwnershipType.add_member(:self, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELF", traits: {"smithy.api#enumValue" => "SELF"}))
-    OwnershipType.add_member(:shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
-    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicyJson, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    OfferTargetingFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingString)
+    OfferTargetingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingString)
+    OfferTargetingString.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BuyerAccounts", traits: {"smithy.api#enumValue" => "BuyerAccounts"}))
+    OfferTargetingString.add_member(:participating_programs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ParticipatingPrograms", traits: {"smithy.api#enumValue" => "ParticipatingPrograms"}))
+    OfferTargetingString.add_member(:country_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CountryCodes", traits: {"smithy.api#enumValue" => "CountryCodes"}))
+    OfferTargetingString.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "None", traits: {"smithy.api#enumValue" => "None"}))
+    OwnershipType.add_member(:self, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELF", traits: {"smithy.api#enumValue" => "SELF"}))
+    OwnershipType.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
+    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyJson, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
     PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
-    RequestedChangeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Change)
-    ResaleAuthorizationAvailabilityEndDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationAvailabilityEndDateFilterDateRange, location_name: "DateRange"))
-    ResaleAuthorizationAvailabilityEndDateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationAvailabilityEndDateFilterValueList, location_name: "ValueList"))
+    RequestedChangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Change)
+    ResaleAuthorizationAvailabilityEndDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationAvailabilityEndDateFilterDateRange, location_name: "DateRange"))
+    ResaleAuthorizationAvailabilityEndDateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationAvailabilityEndDateFilterValueList, location_name: "ValueList"))
     ResaleAuthorizationAvailabilityEndDateFilter.type = Types::ResaleAuthorizationAvailabilityEndDateFilter
-    ResaleAuthorizationAvailabilityEndDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    ResaleAuthorizationAvailabilityEndDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    ResaleAuthorizationAvailabilityEndDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    ResaleAuthorizationAvailabilityEndDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     ResaleAuthorizationAvailabilityEndDateFilterDateRange.type = Types::ResaleAuthorizationAvailabilityEndDateFilterDateRange
-    ResaleAuthorizationAvailabilityEndDateFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601)
-    ResaleAuthorizationCreatedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationCreatedDateFilterDateRange, location_name: "DateRange"))
-    ResaleAuthorizationCreatedDateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationCreatedDateFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationAvailabilityEndDateFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601)
+    ResaleAuthorizationCreatedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationCreatedDateFilterDateRange, location_name: "DateRange"))
+    ResaleAuthorizationCreatedDateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationCreatedDateFilterValueList, location_name: "ValueList"))
     ResaleAuthorizationCreatedDateFilter.type = Types::ResaleAuthorizationCreatedDateFilter
-    ResaleAuthorizationCreatedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    ResaleAuthorizationCreatedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    ResaleAuthorizationCreatedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    ResaleAuthorizationCreatedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     ResaleAuthorizationCreatedDateFilterDateRange.type = Types::ResaleAuthorizationCreatedDateFilterDateRange
-    ResaleAuthorizationCreatedDateFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601)
-    ResaleAuthorizationEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationEntityIdFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationCreatedDateFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601)
+    ResaleAuthorizationEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationEntityIdFilterValueList, location_name: "ValueList"))
     ResaleAuthorizationEntityIdFilter.type = Types::ResaleAuthorizationEntityIdFilter
-    ResaleAuthorizationEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationEntityIdString)
-    ResaleAuthorizationFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationEntityIdFilter, location_name: "EntityId"))
-    ResaleAuthorizationFilters.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationNameFilter, location_name: "Name"))
-    ResaleAuthorizationFilters.add_member(:product_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductIdFilter, location_name: "ProductId"))
-    ResaleAuthorizationFilters.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationCreatedDateFilter, location_name: "CreatedDate"))
-    ResaleAuthorizationFilters.add_member(:availability_end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationAvailabilityEndDateFilter, location_name: "AvailabilityEndDate"))
-    ResaleAuthorizationFilters.add_member(:manufacturer_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerAccountIdFilter, location_name: "ManufacturerAccountId"))
-    ResaleAuthorizationFilters.add_member(:product_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductNameFilter, location_name: "ProductName"))
-    ResaleAuthorizationFilters.add_member(:manufacturer_legal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerLegalNameFilter, location_name: "ManufacturerLegalName"))
-    ResaleAuthorizationFilters.add_member(:reseller_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerAccountIDFilter, location_name: "ResellerAccountID"))
-    ResaleAuthorizationFilters.add_member(:reseller_legal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerLegalNameFilter, location_name: "ResellerLegalName"))
-    ResaleAuthorizationFilters.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationStatusFilter, location_name: "Status"))
-    ResaleAuthorizationFilters.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationOfferExtendedStatusFilter, location_name: "OfferExtendedStatus"))
-    ResaleAuthorizationFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    ResaleAuthorizationEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationEntityIdString)
+    ResaleAuthorizationFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationEntityIdFilter, location_name: "EntityId"))
+    ResaleAuthorizationFilters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameFilter, location_name: "Name"))
+    ResaleAuthorizationFilters.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdFilter, location_name: "ProductId"))
+    ResaleAuthorizationFilters.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationCreatedDateFilter, location_name: "CreatedDate"))
+    ResaleAuthorizationFilters.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationAvailabilityEndDateFilter, location_name: "AvailabilityEndDate"))
+    ResaleAuthorizationFilters.add_member(:manufacturer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdFilter, location_name: "ManufacturerAccountId"))
+    ResaleAuthorizationFilters.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameFilter, location_name: "ProductName"))
+    ResaleAuthorizationFilters.add_member(:manufacturer_legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameFilter, location_name: "ManufacturerLegalName"))
+    ResaleAuthorizationFilters.add_member(:reseller_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDFilter, location_name: "ResellerAccountID"))
+    ResaleAuthorizationFilters.add_member(:reseller_legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameFilter, location_name: "ResellerLegalName"))
+    ResaleAuthorizationFilters.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusFilter, location_name: "Status"))
+    ResaleAuthorizationFilters.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusFilter, location_name: "OfferExtendedStatus"))
+    ResaleAuthorizationFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationLastModifiedDateFilter, location_name: "LastModifiedDate"))
     ResaleAuthorizationFilters.type = Types::ResaleAuthorizationFilters
-    ResaleAuthorizationLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    ResaleAuthorizationLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationLastModifiedDateFilterDateRange, location_name: "DateRange"))
     ResaleAuthorizationLastModifiedDateFilter.type = Types::ResaleAuthorizationLastModifiedDateFilter
-    ResaleAuthorizationLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    ResaleAuthorizationLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    ResaleAuthorizationLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    ResaleAuthorizationLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     ResaleAuthorizationLastModifiedDateFilterDateRange.type = Types::ResaleAuthorizationLastModifiedDateFilterDateRange
-    ResaleAuthorizationManufacturerAccountIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerAccountIdFilterValueList, location_name: "ValueList"))
-    ResaleAuthorizationManufacturerAccountIdFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerAccountIdFilterWildcard, location_name: "WildCardValue"))
+    ResaleAuthorizationManufacturerAccountIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationManufacturerAccountIdFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdFilterWildcard, location_name: "WildCardValue"))
     ResaleAuthorizationManufacturerAccountIdFilter.type = Types::ResaleAuthorizationManufacturerAccountIdFilter
-    ResaleAuthorizationManufacturerAccountIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerAccountIdString)
-    ResaleAuthorizationManufacturerLegalNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerLegalNameFilterValueList, location_name: "ValueList"))
-    ResaleAuthorizationManufacturerLegalNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerLegalNameFilterWildcard, location_name: "WildCardValue"))
+    ResaleAuthorizationManufacturerAccountIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdString)
+    ResaleAuthorizationManufacturerLegalNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationManufacturerLegalNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameFilterWildcard, location_name: "WildCardValue"))
     ResaleAuthorizationManufacturerLegalNameFilter.type = Types::ResaleAuthorizationManufacturerLegalNameFilter
-    ResaleAuthorizationManufacturerLegalNameFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerLegalNameString)
-    ResaleAuthorizationNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationNameFilterValueList, location_name: "ValueList"))
-    ResaleAuthorizationNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationNameFilterWildcard, location_name: "WildCardValue"))
+    ResaleAuthorizationManufacturerLegalNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameString)
+    ResaleAuthorizationNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameFilterWildcard, location_name: "WildCardValue"))
     ResaleAuthorizationNameFilter.type = Types::ResaleAuthorizationNameFilter
-    ResaleAuthorizationNameFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationNameString)
-    ResaleAuthorizationOfferExtendedStatusFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationOfferExtendedStatusFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameString)
+    ResaleAuthorizationOfferExtendedStatusFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusFilterValueList, location_name: "ValueList"))
     ResaleAuthorizationOfferExtendedStatusFilter.type = Types::ResaleAuthorizationOfferExtendedStatusFilter
-    ResaleAuthorizationOfferExtendedStatusFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationOfferExtendedStatusString)
-    ResaleAuthorizationProductIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductIdFilterValueList, location_name: "ValueList"))
-    ResaleAuthorizationProductIdFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductIdFilterWildcard, location_name: "WildCardValue"))
+    ResaleAuthorizationOfferExtendedStatusFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusString)
+    ResaleAuthorizationProductIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationProductIdFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdFilterWildcard, location_name: "WildCardValue"))
     ResaleAuthorizationProductIdFilter.type = Types::ResaleAuthorizationProductIdFilter
-    ResaleAuthorizationProductIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductIdString)
-    ResaleAuthorizationProductNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductNameFilterValueList, location_name: "ValueList"))
-    ResaleAuthorizationProductNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductNameFilterWildcard, location_name: "WildCardValue"))
+    ResaleAuthorizationProductIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdString)
+    ResaleAuthorizationProductNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationProductNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameFilterWildcard, location_name: "WildCardValue"))
     ResaleAuthorizationProductNameFilter.type = Types::ResaleAuthorizationProductNameFilter
-    ResaleAuthorizationProductNameFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductNameString)
-    ResaleAuthorizationResellerAccountIDFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerAccountIDFilterValueList, location_name: "ValueList"))
-    ResaleAuthorizationResellerAccountIDFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerAccountIDFilterWildcard, location_name: "WildCardValue"))
+    ResaleAuthorizationProductNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameString)
+    ResaleAuthorizationResellerAccountIDFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationResellerAccountIDFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDFilterWildcard, location_name: "WildCardValue"))
     ResaleAuthorizationResellerAccountIDFilter.type = Types::ResaleAuthorizationResellerAccountIDFilter
-    ResaleAuthorizationResellerAccountIDFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerAccountIDString)
-    ResaleAuthorizationResellerLegalNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerLegalNameFilterValueList, location_name: "ValueList"))
-    ResaleAuthorizationResellerLegalNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerLegalNameFilterWildcard, location_name: "WildCardValue"))
+    ResaleAuthorizationResellerAccountIDFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDString)
+    ResaleAuthorizationResellerLegalNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationResellerLegalNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameFilterWildcard, location_name: "WildCardValue"))
     ResaleAuthorizationResellerLegalNameFilter.type = Types::ResaleAuthorizationResellerLegalNameFilter
-    ResaleAuthorizationResellerLegalNameFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerLegalNameString)
-    ResaleAuthorizationSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationSortBy, location_name: "SortBy"))
-    ResaleAuthorizationSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ResaleAuthorizationResellerLegalNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameString)
+    ResaleAuthorizationSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSortBy, location_name: "SortBy"))
+    ResaleAuthorizationSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     ResaleAuthorizationSort.type = Types::ResaleAuthorizationSort
-    ResaleAuthorizationSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
-    ResaleAuthorizationSortBy.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
-    ResaleAuthorizationSortBy.add_member(:product_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductId", traits: {"smithy.api#enumValue" => "ProductId"}))
-    ResaleAuthorizationSortBy.add_member(:product_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductName", traits: {"smithy.api#enumValue" => "ProductName"}))
-    ResaleAuthorizationSortBy.add_member(:manufacturer_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManufacturerAccountId", traits: {"smithy.api#enumValue" => "ManufacturerAccountId"}))
-    ResaleAuthorizationSortBy.add_member(:manufacturer_legal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManufacturerLegalName", traits: {"smithy.api#enumValue" => "ManufacturerLegalName"}))
-    ResaleAuthorizationSortBy.add_member(:reseller_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResellerAccountID", traits: {"smithy.api#enumValue" => "ResellerAccountID"}))
-    ResaleAuthorizationSortBy.add_member(:reseller_legal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResellerLegalName", traits: {"smithy.api#enumValue" => "ResellerLegalName"}))
-    ResaleAuthorizationSortBy.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Status", traits: {"smithy.api#enumValue" => "Status"}))
-    ResaleAuthorizationSortBy.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OfferExtendedStatus", traits: {"smithy.api#enumValue" => "OfferExtendedStatus"}))
-    ResaleAuthorizationSortBy.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CreatedDate", traits: {"smithy.api#enumValue" => "CreatedDate"}))
-    ResaleAuthorizationSortBy.add_member(:availability_end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AvailabilityEndDate", traits: {"smithy.api#enumValue" => "AvailabilityEndDate"}))
-    ResaleAuthorizationSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
-    ResaleAuthorizationStatusFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationStatusFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    ResaleAuthorizationSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
+    ResaleAuthorizationSortBy.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductId", traits: {"smithy.api#enumValue" => "ProductId"}))
+    ResaleAuthorizationSortBy.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductName", traits: {"smithy.api#enumValue" => "ProductName"}))
+    ResaleAuthorizationSortBy.add_member(:manufacturer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManufacturerAccountId", traits: {"smithy.api#enumValue" => "ManufacturerAccountId"}))
+    ResaleAuthorizationSortBy.add_member(:manufacturer_legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManufacturerLegalName", traits: {"smithy.api#enumValue" => "ManufacturerLegalName"}))
+    ResaleAuthorizationSortBy.add_member(:reseller_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResellerAccountID", traits: {"smithy.api#enumValue" => "ResellerAccountID"}))
+    ResaleAuthorizationSortBy.add_member(:reseller_legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResellerLegalName", traits: {"smithy.api#enumValue" => "ResellerLegalName"}))
+    ResaleAuthorizationSortBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Status", traits: {"smithy.api#enumValue" => "Status"}))
+    ResaleAuthorizationSortBy.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OfferExtendedStatus", traits: {"smithy.api#enumValue" => "OfferExtendedStatus"}))
+    ResaleAuthorizationSortBy.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CreatedDate", traits: {"smithy.api#enumValue" => "CreatedDate"}))
+    ResaleAuthorizationSortBy.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AvailabilityEndDate", traits: {"smithy.api#enumValue" => "AvailabilityEndDate"}))
+    ResaleAuthorizationSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    ResaleAuthorizationStatusFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusFilterValueList, location_name: "ValueList"))
     ResaleAuthorizationStatusFilter.type = Types::ResaleAuthorizationStatusFilter
-    ResaleAuthorizationStatusFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationStatusString)
-    ResaleAuthorizationStatusString.add_member(:draft, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
-    ResaleAuthorizationStatusString.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
-    ResaleAuthorizationStatusString.add_member(:restricted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
-    ResaleAuthorizationSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationNameString, location_name: "Name"))
-    ResaleAuthorizationSummary.add_member(:product_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductIdString, location_name: "ProductId"))
-    ResaleAuthorizationSummary.add_member(:product_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationProductNameString, location_name: "ProductName"))
-    ResaleAuthorizationSummary.add_member(:manufacturer_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerAccountIdString, location_name: "ManufacturerAccountId"))
-    ResaleAuthorizationSummary.add_member(:manufacturer_legal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationManufacturerLegalNameString, location_name: "ManufacturerLegalName"))
-    ResaleAuthorizationSummary.add_member(:reseller_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerAccountIDString, location_name: "ResellerAccountID"))
-    ResaleAuthorizationSummary.add_member(:reseller_legal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerLegalNameString, location_name: "ResellerLegalName"))
-    ResaleAuthorizationSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationStatusString, location_name: "Status"))
-    ResaleAuthorizationSummary.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResaleAuthorizationOfferExtendedStatusString, location_name: "OfferExtendedStatus"))
-    ResaleAuthorizationSummary.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "CreatedDate"))
-    ResaleAuthorizationSummary.add_member(:availability_end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AvailabilityEndDate"))
+    ResaleAuthorizationStatusFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusString)
+    ResaleAuthorizationStatusString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    ResaleAuthorizationStatusString.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
+    ResaleAuthorizationStatusString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
+    ResaleAuthorizationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameString, location_name: "Name"))
+    ResaleAuthorizationSummary.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdString, location_name: "ProductId"))
+    ResaleAuthorizationSummary.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameString, location_name: "ProductName"))
+    ResaleAuthorizationSummary.add_member(:manufacturer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdString, location_name: "ManufacturerAccountId"))
+    ResaleAuthorizationSummary.add_member(:manufacturer_legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameString, location_name: "ManufacturerLegalName"))
+    ResaleAuthorizationSummary.add_member(:reseller_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDString, location_name: "ResellerAccountID"))
+    ResaleAuthorizationSummary.add_member(:reseller_legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameString, location_name: "ResellerLegalName"))
+    ResaleAuthorizationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusString, location_name: "Status"))
+    ResaleAuthorizationSummary.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusString, location_name: "OfferExtendedStatus"))
+    ResaleAuthorizationSummary.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "CreatedDate"))
+    ResaleAuthorizationSummary.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AvailabilityEndDate"))
     ResaleAuthorizationSummary.type = Types::ResaleAuthorizationSummary
-    ResourceIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId)
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    ResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId)
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    ResourceNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     ResourceNotSupportedException.type = Types::ResourceNotSupportedException
-    SaaSProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductEntityIdFilterValueList, location_name: "ValueList"))
+    SaaSProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductEntityIdFilterValueList, location_name: "ValueList"))
     SaaSProductEntityIdFilter.type = Types::SaaSProductEntityIdFilter
-    SaaSProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductEntityIdString)
-    SaaSProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductEntityIdFilter, location_name: "EntityId"))
-    SaaSProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductTitleFilter, location_name: "ProductTitle"))
-    SaaSProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductVisibilityFilter, location_name: "Visibility"))
-    SaaSProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    SaaSProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductEntityIdString)
+    SaaSProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductEntityIdFilter, location_name: "EntityId"))
+    SaaSProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleFilter, location_name: "ProductTitle"))
+    SaaSProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityFilter, location_name: "Visibility"))
+    SaaSProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
     SaaSProductFilters.type = Types::SaaSProductFilters
-    SaaSProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    SaaSProductLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
     SaaSProductLastModifiedDateFilter.type = Types::SaaSProductLastModifiedDateFilter
-    SaaSProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
-    SaaSProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    SaaSProductLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "AfterValue"))
+    SaaSProductLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, location_name: "BeforeValue"))
     SaaSProductLastModifiedDateFilterDateRange.type = Types::SaaSProductLastModifiedDateFilterDateRange
-    SaaSProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductSortBy, location_name: "SortBy"))
-    SaaSProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    SaaSProductSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductSortBy, location_name: "SortBy"))
+    SaaSProductSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     SaaSProductSort.type = Types::SaaSProductSort
-    SaaSProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
-    SaaSProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
-    SaaSProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
-    SaaSProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
-    SaaSProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductTitleString, location_name: "ProductTitle"))
-    SaaSProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductVisibilityString, location_name: "Visibility"))
+    SaaSProductSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    SaaSProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
+    SaaSProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
+    SaaSProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    SaaSProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleString, location_name: "ProductTitle"))
+    SaaSProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityString, location_name: "Visibility"))
     SaaSProductSummary.type = Types::SaaSProductSummary
-    SaaSProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductTitleFilterValueList, location_name: "ValueList"))
-    SaaSProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductTitleString, location_name: "WildCardValue"))
+    SaaSProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleFilterValueList, location_name: "ValueList"))
+    SaaSProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleString, location_name: "WildCardValue"))
     SaaSProductTitleFilter.type = Types::SaaSProductTitleFilter
-    SaaSProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductTitleString)
-    SaaSProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductVisibilityFilterValueList, location_name: "ValueList"))
+    SaaSProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleString)
+    SaaSProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityFilterValueList, location_name: "ValueList"))
     SaaSProductVisibilityFilter.type = Types::SaaSProductVisibilityFilter
-    SaaSProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SaaSProductVisibilityString)
-    SaaSProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
-    SaaSProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
-    SaaSProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
-    SaaSProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    SaaSProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityString)
+    SaaSProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
+    SaaSProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
+    SaaSProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
+    SaaSProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Sort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
-    Sort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    Sort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortBy, location_name: "SortBy"))
+    Sort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
     Sort.type = Types::Sort
-    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
-    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
-    StartChangeSetRequest.add_member(:catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
-    StartChangeSetRequest.add_member(:change_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedChangeList, location_name: "ChangeSet", traits: {"smithy.api#required" => {}}))
-    StartChangeSetRequest.add_member(:change_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
-    StartChangeSetRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartChangeSetRequest.add_member(:change_set_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "ChangeSetTags"))
-    StartChangeSetRequest.add_member(:intent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Intent, location_name: "Intent"))
+    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
+    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
+    StartChangeSetRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "Catalog", traits: {"smithy.api#required" => {}}))
+    StartChangeSetRequest.add_member(:change_set, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedChangeList, location_name: "ChangeSet", traits: {"smithy.api#required" => {}}))
+    StartChangeSetRequest.add_member(:change_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetName, location_name: "ChangeSetName"))
+    StartChangeSetRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartChangeSetRequest.add_member(:change_set_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "ChangeSetTags"))
+    StartChangeSetRequest.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: Intent, location_name: "Intent"))
     StartChangeSetRequest.type = Types::StartChangeSetRequest
-    StartChangeSetResponse.add_member(:change_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
-    StartChangeSetResponse.add_member(:change_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
+    StartChangeSetResponse.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ChangeSetId"))
+    StartChangeSetResponse.add_member(:change_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "ChangeSetArn"))
     StartChangeSetResponse.type = Types::StartChangeSetResponse
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, location_name: "Message"))
     ValidationException.type = Types::ValidationException
-    ValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueContent)
+    ValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueContent)
 
     AWSMPSeymour = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.marketplacecatalog#AWSMPSeymour"
@@ -834,161 +834,161 @@ module Aws::MarketplaceCatalog
       service.add_operation(:batch_describe_entities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#BatchDescribeEntities"
         operation.name = "BatchDescribeEntities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeEntitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeEntitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchDescribeEntitiesRequest
+        operation.output = BatchDescribeEntitiesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchDescribeEntities", "code" => 200}}
       end)
       service.add_operation(:cancel_change_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#CancelChangeSet"
         operation.name = "CancelChangeSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelChangeSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelChangeSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelChangeSetRequest
+        operation.output = CancelChangeSetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/CancelChangeSet", "code" => 200}}
       end)
       service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#DeleteResourcePolicy"
         operation.name = "DeleteResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteResourcePolicyRequest
+        operation.output = DeleteResourcePolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/DeleteResourcePolicy", "code" => 200}}
       end)
       service.add_operation(:describe_change_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#DescribeChangeSet"
         operation.name = "DescribeChangeSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeChangeSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeChangeSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeChangeSetRequest
+        operation.output = DescribeChangeSetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/DescribeChangeSet", "code" => 200}}
       end)
       service.add_operation(:describe_entity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#DescribeEntity"
         operation.name = "DescribeEntity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotSupportedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeEntityRequest
+        operation.output = DescribeEntityResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceNotSupportedException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/DescribeEntity", "code" => 200}}
       end)
       service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#GetResourcePolicy"
         operation.name = "GetResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetResourcePolicyRequest
+        operation.output = GetResourcePolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/GetResourcePolicy", "code" => 200}}
       end)
       service.add_operation(:list_change_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#ListChangeSets"
         operation.name = "ListChangeSets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChangeSetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChangeSetsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListChangeSetsRequest
+        operation.output = ListChangeSetsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListChangeSets", "code" => 200}}
         operation[:paginator] = Paginators::ListChangeSets.new
       end)
       service.add_operation(:list_entities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#ListEntities"
         operation.name = "ListEntities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListEntitiesRequest
+        operation.output = ListEntitiesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListEntities", "code" => 200}}
         operation[:paginator] = Paginators::ListEntities.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListTagsForResource", "code" => 200}}
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#PutResourcePolicy"
         operation.name = "PutResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutResourcePolicyRequest
+        operation.output = PutResourcePolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/PutResourcePolicy", "code" => 200}}
       end)
       service.add_operation(:start_change_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#StartChangeSet"
         operation.name = "StartChangeSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartChangeSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartChangeSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartChangeSetRequest
+        operation.output = StartChangeSetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/StartChangeSet", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/TagResource", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UntagResource", "code" => 200}}
       end)
     end

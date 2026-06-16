@@ -65,108 +65,108 @@ module Aws::KendraRanking
     UpdateRescoreExecutionPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kendraranking#UpdateRescoreExecutionPlanRequest", name: "UpdateRescoreExecutionPlanRequest")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kendraranking#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    BodyTokensList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tokens)
-    CapacityUnitsConfiguration.add_member(:rescore_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreCapacityUnit, location_name: "RescoreCapacityUnits", traits: {"smithy.api#required" => {}}))
+    BodyTokensList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tokens)
+    CapacityUnitsConfiguration.add_member(:rescore_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreCapacityUnit, location_name: "RescoreCapacityUnits", traits: {"smithy.api#required" => {}}))
     CapacityUnitsConfiguration.type = Types::CapacityUnitsConfiguration
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateRescoreExecutionPlanRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateRescoreExecutionPlanRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateRescoreExecutionPlanRequest.add_member(:capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
-    CreateRescoreExecutionPlanRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRescoreExecutionPlanRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateRescoreExecutionPlanRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateRescoreExecutionPlanRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateRescoreExecutionPlanRequest.add_member(:capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
+    CreateRescoreExecutionPlanRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateRescoreExecutionPlanRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenName, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateRescoreExecutionPlanRequest.type = Types::CreateRescoreExecutionPlanRequest
-    CreateRescoreExecutionPlanResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    CreateRescoreExecutionPlanResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    CreateRescoreExecutionPlanResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    CreateRescoreExecutionPlanResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
     CreateRescoreExecutionPlanResponse.type = Types::CreateRescoreExecutionPlanResponse
-    DeleteRescoreExecutionPlanRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRescoreExecutionPlanRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRescoreExecutionPlanRequest.type = Types::DeleteRescoreExecutionPlanRequest
-    DescribeRescoreExecutionPlanRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeRescoreExecutionPlanRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeRescoreExecutionPlanRequest.type = Types::DescribeRescoreExecutionPlanRequest
-    DescribeRescoreExecutionPlanResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanId, location_name: "Id"))
-    DescribeRescoreExecutionPlanResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanArn, location_name: "Arn"))
-    DescribeRescoreExecutionPlanResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanName, location_name: "Name"))
-    DescribeRescoreExecutionPlanResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DescribeRescoreExecutionPlanResponse.add_member(:capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
-    DescribeRescoreExecutionPlanResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    DescribeRescoreExecutionPlanResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
-    DescribeRescoreExecutionPlanResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanStatus, location_name: "Status"))
-    DescribeRescoreExecutionPlanResponse.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeRescoreExecutionPlanResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, location_name: "Id"))
+    DescribeRescoreExecutionPlanResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanArn, location_name: "Arn"))
+    DescribeRescoreExecutionPlanResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanName, location_name: "Name"))
+    DescribeRescoreExecutionPlanResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DescribeRescoreExecutionPlanResponse.add_member(:capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
+    DescribeRescoreExecutionPlanResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    DescribeRescoreExecutionPlanResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
+    DescribeRescoreExecutionPlanResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanStatus, location_name: "Status"))
+    DescribeRescoreExecutionPlanResponse.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "ErrorMessage"))
     DescribeRescoreExecutionPlanResponse.type = Types::DescribeRescoreExecutionPlanResponse
-    Document.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentId, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    Document.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupId, location_name: "GroupId"))
-    Document.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentTitle, location_name: "Title"))
-    Document.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentBody, location_name: "Body"))
-    Document.add_member(:tokenized_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TitleTokensList, location_name: "TokenizedTitle"))
-    Document.add_member(:tokenized_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BodyTokensList, location_name: "TokenizedBody"))
-    Document.add_member(:original_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "OriginalScore", traits: {"smithy.api#required" => {}}))
+    Document.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    Document.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, location_name: "GroupId"))
+    Document.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentTitle, location_name: "Title"))
+    Document.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentBody, location_name: "Body"))
+    Document.add_member(:tokenized_title, ::Smithy::Schema::Shapes::MemberShape.new(target: TitleTokensList, location_name: "TokenizedTitle"))
+    Document.add_member(:tokenized_body, ::Smithy::Schema::Shapes::MemberShape.new(target: BodyTokensList, location_name: "TokenizedBody"))
+    Document.add_member(:original_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "OriginalScore", traits: {"smithy.api#required" => {}}))
     Document.type = Types::Document
-    DocumentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Document)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Document)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    ListRescoreExecutionPlansRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListRescoreExecutionPlansRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsIntegerForListRescoreExecutionPlansRequest, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListRescoreExecutionPlansRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListRescoreExecutionPlansRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsIntegerForListRescoreExecutionPlansRequest, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListRescoreExecutionPlansRequest.type = Types::ListRescoreExecutionPlansRequest
-    ListRescoreExecutionPlansResponse.add_member(:summary_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanSummaryList, location_name: "SummaryItems"))
-    ListRescoreExecutionPlansResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRescoreExecutionPlansResponse.add_member(:summary_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanSummaryList, location_name: "SummaryItems"))
+    ListRescoreExecutionPlansResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRescoreExecutionPlansResponse.type = Types::ListRescoreExecutionPlansResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    RescoreExecutionPlanStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    RescoreExecutionPlanStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    RescoreExecutionPlanStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    RescoreExecutionPlanStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    RescoreExecutionPlanStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    RescoreExecutionPlanSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanName, location_name: "Name"))
-    RescoreExecutionPlanSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanId, location_name: "Id"))
-    RescoreExecutionPlanSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    RescoreExecutionPlanSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
-    RescoreExecutionPlanSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanStatus, location_name: "Status"))
+    RescoreExecutionPlanStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    RescoreExecutionPlanStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    RescoreExecutionPlanStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    RescoreExecutionPlanStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    RescoreExecutionPlanStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    RescoreExecutionPlanSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanName, location_name: "Name"))
+    RescoreExecutionPlanSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, location_name: "Id"))
+    RescoreExecutionPlanSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    RescoreExecutionPlanSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdatedAt"))
+    RescoreExecutionPlanSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanStatus, location_name: "Status"))
     RescoreExecutionPlanSummary.type = Types::RescoreExecutionPlanSummary
-    RescoreExecutionPlanSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanSummary)
-    RescoreRequest.add_member(:rescore_execution_plan_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanId, location_name: "RescoreExecutionPlanId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RescoreRequest.add_member(:search_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchQuery, location_name: "SearchQuery", traits: {"smithy.api#required" => {}}))
-    RescoreRequest.add_member(:documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentList, location_name: "Documents", traits: {"smithy.api#required" => {}}))
+    RescoreExecutionPlanSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanSummary)
+    RescoreRequest.add_member(:rescore_execution_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, location_name: "RescoreExecutionPlanId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RescoreRequest.add_member(:search_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQuery, location_name: "SearchQuery", traits: {"smithy.api#required" => {}}))
+    RescoreRequest.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentList, location_name: "Documents", traits: {"smithy.api#required" => {}}))
     RescoreRequest.type = Types::RescoreRequest
-    RescoreResult.add_member(:rescore_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreId, location_name: "RescoreId"))
-    RescoreResult.add_member(:result_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreResultItemList, location_name: "ResultItems"))
+    RescoreResult.add_member(:rescore_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreId, location_name: "RescoreId"))
+    RescoreResult.add_member(:result_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreResultItemList, location_name: "ResultItems"))
     RescoreResult.type = Types::RescoreResult
-    RescoreResultItem.add_member(:document_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentId, location_name: "DocumentId"))
-    RescoreResultItem.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    RescoreResultItem.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, location_name: "DocumentId"))
+    RescoreResultItem.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
     RescoreResultItem.type = Types::RescoreResultItem
-    RescoreResultItemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreResultItem)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RescoreResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreResultItem)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceUnavailableException.type = Types::ResourceUnavailableException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    TitleTokensList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tokens)
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    TitleTokensList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tokens)
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateRescoreExecutionPlanRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateRescoreExecutionPlanRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreExecutionPlanName, location_name: "Name"))
-    UpdateRescoreExecutionPlanRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateRescoreExecutionPlanRequest.add_member(:capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
+    UpdateRescoreExecutionPlanRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRescoreExecutionPlanRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanName, location_name: "Name"))
+    UpdateRescoreExecutionPlanRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateRescoreExecutionPlanRequest.add_member(:capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
     UpdateRescoreExecutionPlanRequest.type = Types::UpdateRescoreExecutionPlanRequest
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ValidationException.type = Types::ValidationException
 
     AWSKendraRerankingFrontendService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -177,114 +177,114 @@ module Aws::KendraRanking
       service.add_operation(:create_rescore_execution_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#CreateRescoreExecutionPlan"
         operation.name = "CreateRescoreExecutionPlan"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRescoreExecutionPlanRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRescoreExecutionPlanResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRescoreExecutionPlanRequest
+        operation.output = CreateRescoreExecutionPlanResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/rescore-execution-plans", "code" => 200}}
       end)
       service.add_operation(:delete_rescore_execution_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#DeleteRescoreExecutionPlan"
         operation.name = "DeleteRescoreExecutionPlan"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRescoreExecutionPlanRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRescoreExecutionPlanRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/rescore-execution-plans/{Id}", "code" => 200}}
       end)
       service.add_operation(:describe_rescore_execution_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#DescribeRescoreExecutionPlan"
         operation.name = "DescribeRescoreExecutionPlan"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRescoreExecutionPlanRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRescoreExecutionPlanResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRescoreExecutionPlanRequest
+        operation.output = DescribeRescoreExecutionPlanResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/rescore-execution-plans/{Id}", "code" => 200}}
       end)
       service.add_operation(:list_rescore_execution_plans, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#ListRescoreExecutionPlans"
         operation.name = "ListRescoreExecutionPlans"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRescoreExecutionPlansRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRescoreExecutionPlansResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRescoreExecutionPlansRequest
+        operation.output = ListRescoreExecutionPlansResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/rescore-execution-plans", "code" => 200}}
         operation[:paginator] = Paginators::ListRescoreExecutionPlans.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:rescore, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#Rescore"
         operation.name = "Rescore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RescoreResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RescoreRequest
+        operation.output = RescoreResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/rescore-execution-plans/{RescoreExecutionPlanId}/rescore", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_rescore_execution_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kendraranking#UpdateRescoreExecutionPlan"
         operation.name = "UpdateRescoreExecutionPlan"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRescoreExecutionPlanRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateRescoreExecutionPlanRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/rescore-execution-plans/{Id}", "code" => 200}}
       end)
     end

@@ -193,476 +193,476 @@ module Aws::SSMContacts
     WeeklySetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmcontacts#WeeklySetting", name: "WeeklySetting")
     WeeklySettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssmcontacts#WeeklySettings", name: "WeeklySettings")
 
-    AcceptCodeValidation.add_member(:ignore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IGNORE", traits: {"smithy.api#enumValue" => "IGNORE"}))
-    AcceptCodeValidation.add_member(:enforce, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENFORCE", traits: {"smithy.api#enumValue" => "ENFORCE"}))
-    AcceptPageRequest.add_member(:page_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
-    AcceptPageRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId"))
-    AcceptPageRequest.add_member(:accept_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptType, location_name: "AcceptType", traits: {"smithy.api#required" => {}}))
-    AcceptPageRequest.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReceiptInfo, location_name: "Note"))
-    AcceptPageRequest.add_member(:accept_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptCode, location_name: "AcceptCode", traits: {"smithy.api#required" => {}}))
-    AcceptPageRequest.add_member(:accept_code_validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptCodeValidation, location_name: "AcceptCodeValidation"))
+    AcceptCodeValidation.add_member(:ignore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IGNORE", traits: {"smithy.api#enumValue" => "IGNORE"}))
+    AcceptCodeValidation.add_member(:enforce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENFORCE", traits: {"smithy.api#enumValue" => "ENFORCE"}))
+    AcceptPageRequest.add_member(:page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
+    AcceptPageRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId"))
+    AcceptPageRequest.add_member(:accept_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptType, location_name: "AcceptType", traits: {"smithy.api#required" => {}}))
+    AcceptPageRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptInfo, location_name: "Note"))
+    AcceptPageRequest.add_member(:accept_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptCode, location_name: "AcceptCode", traits: {"smithy.api#required" => {}}))
+    AcceptPageRequest.add_member(:accept_code_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptCodeValidation, location_name: "AcceptCodeValidation"))
     AcceptPageRequest.type = Types::AcceptPageRequest
     AcceptPageResult.type = Types::AcceptPageResult
-    AcceptType.add_member(:delivered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELIVERED", traits: {"smithy.api#enumValue" => "DELIVERED"}))
-    AcceptType.add_member(:read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    AcceptType.add_member(:delivered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELIVERED", traits: {"smithy.api#enumValue" => "DELIVERED"}))
+    AcceptType.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ActivateContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
-    ActivateContactChannelRequest.add_member(:activation_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationCode, location_name: "ActivationCode", traits: {"smithy.api#required" => {}}))
+    ActivateContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
+    ActivateContactChannelRequest.add_member(:activation_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationCode, location_name: "ActivationCode", traits: {"smithy.api#required" => {}}))
     ActivateContactChannelRequest.type = Types::ActivateContactChannelRequest
     ActivateContactChannelResult.type = Types::ActivateContactChannelResult
-    ActivationStatus.add_member(:activated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATED", traits: {"smithy.api#enumValue" => "ACTIVATED"}))
-    ActivationStatus.add_member(:not_activated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_ACTIVATED", traits: {"smithy.api#enumValue" => "NOT_ACTIVATED"}))
-    ChannelTargetInfo.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
-    ChannelTargetInfo.add_member(:retry_interval_in_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryIntervalInMinutes, location_name: "RetryIntervalInMinutes"))
+    ActivationStatus.add_member(:activated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATED", traits: {"smithy.api#enumValue" => "ACTIVATED"}))
+    ActivationStatus.add_member(:not_activated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_ACTIVATED", traits: {"smithy.api#enumValue" => "NOT_ACTIVATED"}))
+    ChannelTargetInfo.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
+    ChannelTargetInfo.add_member(:retry_interval_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryIntervalInMinutes, location_name: "RetryIntervalInMinutes"))
     ChannelTargetInfo.type = Types::ChannelTargetInfo
-    ChannelType.add_member(:sms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
-    ChannelType.add_member(:voice, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOICE", traits: {"smithy.api#enumValue" => "VOICE"}))
-    ChannelType.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:dependent_entities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependentEntityList, location_name: "DependentEntities"))
+    ChannelType.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
+    ChannelType.add_member(:voice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOICE", traits: {"smithy.api#enumValue" => "VOICE"}))
+    ChannelType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:dependent_entities, ::Smithy::Schema::Shapes::MemberShape.new(target: DependentEntityList, location_name: "DependentEntities"))
     ConflictException.type = Types::ConflictException
-    Contact.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    Contact.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactAlias, location_name: "Alias", traits: {"smithy.api#required" => {}}))
-    Contact.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
-    Contact.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Contact.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    Contact.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAlias, location_name: "Alias", traits: {"smithy.api#required" => {}}))
+    Contact.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactName, location_name: "DisplayName"))
+    Contact.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     Contact.type = Types::Contact
-    ContactChannel.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelArn", traits: {"smithy.api#required" => {}}))
-    ContactChannel.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    ContactChannel.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ContactChannel.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "Type"))
-    ContactChannel.add_member(:delivery_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactChannelAddress, location_name: "DeliveryAddress", traits: {"smithy.api#required" => {}}))
-    ContactChannel.add_member(:activation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationStatus, location_name: "ActivationStatus", traits: {"smithy.api#required" => {}}))
+    ContactChannel.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelArn", traits: {"smithy.api#required" => {}}))
+    ContactChannel.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    ContactChannel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ContactChannel.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "Type"))
+    ContactChannel.add_member(:delivery_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannelAddress, location_name: "DeliveryAddress", traits: {"smithy.api#required" => {}}))
+    ContactChannel.add_member(:activation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationStatus, location_name: "ActivationStatus", traits: {"smithy.api#required" => {}}))
     ContactChannel.type = Types::ContactChannel
-    ContactChannelAddress.add_member(:simple_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimpleAddress, location_name: "SimpleAddress"))
+    ContactChannelAddress.add_member(:simple_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SimpleAddress, location_name: "SimpleAddress"))
     ContactChannelAddress.type = Types::ContactChannelAddress
-    ContactChannelList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactChannel)
-    ContactTargetInfo.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId"))
-    ContactTargetInfo.add_member(:is_essential, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsEssential, location_name: "IsEssential", traits: {"smithy.api#required" => {}}))
+    ContactChannelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannel)
+    ContactTargetInfo.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId"))
+    ContactTargetInfo.add_member(:is_essential, ::Smithy::Schema::Shapes::MemberShape.new(target: IsEssential, location_name: "IsEssential", traits: {"smithy.api#required" => {}}))
     ContactTargetInfo.type = Types::ContactTargetInfo
-    ContactType.add_member(:personal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSONAL", traits: {"smithy.api#enumValue" => "PERSONAL"}))
-    ContactType.add_member(:escalation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ESCALATION", traits: {"smithy.api#enumValue" => "ESCALATION"}))
-    ContactType.add_member(:oncall_schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONCALL_SCHEDULE", traits: {"smithy.api#enumValue" => "ONCALL_SCHEDULE"}))
-    ContactsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Contact)
-    CoverageTime.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandOffTime, location_name: "Start"))
-    CoverageTime.add_member(:end, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandOffTime, location_name: "End"))
+    ContactType.add_member(:personal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSONAL", traits: {"smithy.api#enumValue" => "PERSONAL"}))
+    ContactType.add_member(:escalation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ESCALATION", traits: {"smithy.api#enumValue" => "ESCALATION"}))
+    ContactType.add_member(:oncall_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONCALL_SCHEDULE", traits: {"smithy.api#enumValue" => "ONCALL_SCHEDULE"}))
+    ContactsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Contact)
+    CoverageTime.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, location_name: "Start"))
+    CoverageTime.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, location_name: "End"))
     CoverageTime.type = Types::CoverageTime
-    CoverageTimes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CoverageTime)
-    CreateContactChannelRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
-    CreateContactChannelRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateContactChannelRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    CreateContactChannelRequest.add_member(:delivery_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactChannelAddress, location_name: "DeliveryAddress", traits: {"smithy.api#required" => {}}))
-    CreateContactChannelRequest.add_member(:defer_activation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeferActivation, location_name: "DeferActivation"))
-    CreateContactChannelRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CoverageTimes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageTime)
+    CreateContactChannelRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
+    CreateContactChannelRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateContactChannelRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    CreateContactChannelRequest.add_member(:delivery_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannelAddress, location_name: "DeliveryAddress", traits: {"smithy.api#required" => {}}))
+    CreateContactChannelRequest.add_member(:defer_activation, ::Smithy::Schema::Shapes::MemberShape.new(target: DeferActivation, location_name: "DeferActivation"))
+    CreateContactChannelRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, location_name: "IdempotencyToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateContactChannelRequest.type = Types::CreateContactChannelRequest
-    CreateContactChannelResult.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelArn", traits: {"smithy.api#required" => {}}))
+    CreateContactChannelResult.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelArn", traits: {"smithy.api#required" => {}}))
     CreateContactChannelResult.type = Types::CreateContactChannelResult
-    CreateContactRequest.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactAlias, location_name: "Alias", traits: {"smithy.api#required" => {}}))
-    CreateContactRequest.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
-    CreateContactRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    CreateContactRequest.add_member(:plan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Plan, location_name: "Plan", traits: {"smithy.api#required" => {}}))
-    CreateContactRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
-    CreateContactRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateContactRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAlias, location_name: "Alias", traits: {"smithy.api#required" => {}}))
+    CreateContactRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactName, location_name: "DisplayName"))
+    CreateContactRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    CreateContactRequest.add_member(:plan, ::Smithy::Schema::Shapes::MemberShape.new(target: Plan, location_name: "Plan", traits: {"smithy.api#required" => {}}))
+    CreateContactRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
+    CreateContactRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, location_name: "IdempotencyToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateContactRequest.type = Types::CreateContactRequest
-    CreateContactResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    CreateContactResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
     CreateContactResult.type = Types::CreateContactResult
-    CreateRotationOverrideRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
-    CreateRotationOverrideRequest.add_member(:new_contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationOverrideContactsArnList, location_name: "NewContactIds", traits: {"smithy.api#required" => {}}))
-    CreateRotationOverrideRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    CreateRotationOverrideRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    CreateRotationOverrideRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
+    CreateRotationOverrideRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    CreateRotationOverrideRequest.add_member(:new_contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationOverrideContactsArnList, location_name: "NewContactIds", traits: {"smithy.api#required" => {}}))
+    CreateRotationOverrideRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    CreateRotationOverrideRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    CreateRotationOverrideRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, location_name: "IdempotencyToken"))
     CreateRotationOverrideRequest.type = Types::CreateRotationOverrideRequest
-    CreateRotationOverrideResult.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
+    CreateRotationOverrideResult.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
     CreateRotationOverrideResult.type = Types::CreateRotationOverrideResult
-    CreateRotationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateRotationRequest.add_member(:contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationContactsArnList, location_name: "ContactIds", traits: {"smithy.api#required" => {}}))
-    CreateRotationRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    CreateRotationRequest.add_member(:time_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeZoneId, location_name: "TimeZoneId", traits: {"smithy.api#required" => {}}))
-    CreateRotationRequest.add_member(:recurrence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
-    CreateRotationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
-    CreateRotationRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
+    CreateRotationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateRotationRequest.add_member(:contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationContactsArnList, location_name: "ContactIds", traits: {"smithy.api#required" => {}}))
+    CreateRotationRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    CreateRotationRequest.add_member(:time_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZoneId, location_name: "TimeZoneId", traits: {"smithy.api#required" => {}}))
+    CreateRotationRequest.add_member(:recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
+    CreateRotationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
+    CreateRotationRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, location_name: "IdempotencyToken"))
     CreateRotationRequest.type = Types::CreateRotationRequest
-    CreateRotationResult.add_member(:rotation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationArn", traits: {"smithy.api#required" => {}}))
+    CreateRotationResult.add_member(:rotation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationArn", traits: {"smithy.api#required" => {}}))
     CreateRotationResult.type = Types::CreateRotationResult
-    DailySettings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandOffTime)
-    DataEncryptionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    DailySettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime)
+    DataEncryptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     DataEncryptionException.type = Types::DataEncryptionException
-    DayOfWeek.add_member(:mon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MON", traits: {"smithy.api#enumValue" => "MON"}))
-    DayOfWeek.add_member(:tue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TUE", traits: {"smithy.api#enumValue" => "TUE"}))
-    DayOfWeek.add_member(:wed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WED", traits: {"smithy.api#enumValue" => "WED"}))
-    DayOfWeek.add_member(:thu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THU", traits: {"smithy.api#enumValue" => "THU"}))
-    DayOfWeek.add_member(:fri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRI", traits: {"smithy.api#enumValue" => "FRI"}))
-    DayOfWeek.add_member(:sat, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAT", traits: {"smithy.api#enumValue" => "SAT"}))
-    DayOfWeek.add_member(:sun, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUN", traits: {"smithy.api#enumValue" => "SUN"}))
-    DeactivateContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
+    DayOfWeek.add_member(:mon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MON", traits: {"smithy.api#enumValue" => "MON"}))
+    DayOfWeek.add_member(:tue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TUE", traits: {"smithy.api#enumValue" => "TUE"}))
+    DayOfWeek.add_member(:wed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WED", traits: {"smithy.api#enumValue" => "WED"}))
+    DayOfWeek.add_member(:thu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THU", traits: {"smithy.api#enumValue" => "THU"}))
+    DayOfWeek.add_member(:fri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRI", traits: {"smithy.api#enumValue" => "FRI"}))
+    DayOfWeek.add_member(:sat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAT", traits: {"smithy.api#enumValue" => "SAT"}))
+    DayOfWeek.add_member(:sun, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUN", traits: {"smithy.api#enumValue" => "SUN"}))
+    DeactivateContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
     DeactivateContactChannelRequest.type = Types::DeactivateContactChannelRequest
     DeactivateContactChannelResult.type = Types::DeactivateContactChannelResult
-    DeleteContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
+    DeleteContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
     DeleteContactChannelRequest.type = Types::DeleteContactChannelRequest
     DeleteContactChannelResult.type = Types::DeleteContactChannelResult
-    DeleteContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
+    DeleteContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
     DeleteContactRequest.type = Types::DeleteContactRequest
     DeleteContactResult.type = Types::DeleteContactResult
-    DeleteRotationOverrideRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
-    DeleteRotationOverrideRequest.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
+    DeleteRotationOverrideRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    DeleteRotationOverrideRequest.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
     DeleteRotationOverrideRequest.type = Types::DeleteRotationOverrideRequest
     DeleteRotationOverrideResult.type = Types::DeleteRotationOverrideResult
-    DeleteRotationRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    DeleteRotationRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
     DeleteRotationRequest.type = Types::DeleteRotationRequest
     DeleteRotationResult.type = Types::DeleteRotationResult
-    DependentEntity.add_member(:relation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RelationType", traits: {"smithy.api#required" => {}}))
-    DependentEntity.add_member(:dependent_resource_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "DependentResourceIds", traits: {"smithy.api#required" => {}}))
+    DependentEntity.add_member(:relation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RelationType", traits: {"smithy.api#required" => {}}))
+    DependentEntity.add_member(:dependent_resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, location_name: "DependentResourceIds", traits: {"smithy.api#required" => {}}))
     DependentEntity.type = Types::DependentEntity
-    DependentEntityList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependentEntity)
-    DescribeEngagementRequest.add_member(:engagement_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementId", traits: {"smithy.api#required" => {}}))
+    DependentEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DependentEntity)
+    DescribeEngagementRequest.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementId", traits: {"smithy.api#required" => {}}))
     DescribeEngagementRequest.type = Types::DescribeEngagementRequest
-    DescribeEngagementResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    DescribeEngagementResult.add_member(:engagement_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
-    DescribeEngagementResult.add_member(:sender, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
-    DescribeEngagementResult.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subject, location_name: "Subject", traits: {"smithy.api#required" => {}}))
-    DescribeEngagementResult.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "Content", traits: {"smithy.api#required" => {}}))
-    DescribeEngagementResult.add_member(:public_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicSubject, location_name: "PublicSubject"))
-    DescribeEngagementResult.add_member(:public_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicContent, location_name: "PublicContent"))
-    DescribeEngagementResult.add_member(:incident_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
-    DescribeEngagementResult.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    DescribeEngagementResult.add_member(:stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StopTime"))
+    DescribeEngagementResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    DescribeEngagementResult.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
+    DescribeEngagementResult.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
+    DescribeEngagementResult.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, location_name: "Subject", traits: {"smithy.api#required" => {}}))
+    DescribeEngagementResult.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "Content", traits: {"smithy.api#required" => {}}))
+    DescribeEngagementResult.add_member(:public_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicSubject, location_name: "PublicSubject"))
+    DescribeEngagementResult.add_member(:public_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicContent, location_name: "PublicContent"))
+    DescribeEngagementResult.add_member(:incident_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentId, location_name: "IncidentId"))
+    DescribeEngagementResult.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    DescribeEngagementResult.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StopTime"))
     DescribeEngagementResult.type = Types::DescribeEngagementResult
-    DescribePageRequest.add_member(:page_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
+    DescribePageRequest.add_member(:page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
     DescribePageRequest.type = Types::DescribePageRequest
-    DescribePageResult.add_member(:page_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "PageArn", traits: {"smithy.api#required" => {}}))
-    DescribePageResult.add_member(:engagement_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
-    DescribePageResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    DescribePageResult.add_member(:sender, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
-    DescribePageResult.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subject, location_name: "Subject", traits: {"smithy.api#required" => {}}))
-    DescribePageResult.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "Content", traits: {"smithy.api#required" => {}}))
-    DescribePageResult.add_member(:public_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicSubject, location_name: "PublicSubject"))
-    DescribePageResult.add_member(:public_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicContent, location_name: "PublicContent"))
-    DescribePageResult.add_member(:incident_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
-    DescribePageResult.add_member(:sent_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "SentTime"))
-    DescribePageResult.add_member(:read_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "ReadTime"))
-    DescribePageResult.add_member(:delivery_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "DeliveryTime"))
+    DescribePageResult.add_member(:page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "PageArn", traits: {"smithy.api#required" => {}}))
+    DescribePageResult.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
+    DescribePageResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    DescribePageResult.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
+    DescribePageResult.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, location_name: "Subject", traits: {"smithy.api#required" => {}}))
+    DescribePageResult.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "Content", traits: {"smithy.api#required" => {}}))
+    DescribePageResult.add_member(:public_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicSubject, location_name: "PublicSubject"))
+    DescribePageResult.add_member(:public_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicContent, location_name: "PublicContent"))
+    DescribePageResult.add_member(:incident_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentId, location_name: "IncidentId"))
+    DescribePageResult.add_member(:sent_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "SentTime"))
+    DescribePageResult.add_member(:read_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "ReadTime"))
+    DescribePageResult.add_member(:delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "DeliveryTime"))
     DescribePageResult.type = Types::DescribePageResult
-    Engagement.add_member(:engagement_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
-    Engagement.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    Engagement.add_member(:sender, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
-    Engagement.add_member(:incident_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
-    Engagement.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    Engagement.add_member(:stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StopTime"))
+    Engagement.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
+    Engagement.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    Engagement.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
+    Engagement.add_member(:incident_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentId, location_name: "IncidentId"))
+    Engagement.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    Engagement.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StopTime"))
     Engagement.type = Types::Engagement
-    EngagementsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Engagement)
-    GetContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
+    EngagementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Engagement)
+    GetContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
     GetContactChannelRequest.type = Types::GetContactChannelRequest
-    GetContactChannelResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    GetContactChannelResult.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelArn", traits: {"smithy.api#required" => {}}))
-    GetContactChannelResult.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    GetContactChannelResult.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    GetContactChannelResult.add_member(:delivery_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactChannelAddress, location_name: "DeliveryAddress", traits: {"smithy.api#required" => {}}))
-    GetContactChannelResult.add_member(:activation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationStatus, location_name: "ActivationStatus"))
+    GetContactChannelResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    GetContactChannelResult.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelArn", traits: {"smithy.api#required" => {}}))
+    GetContactChannelResult.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    GetContactChannelResult.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    GetContactChannelResult.add_member(:delivery_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannelAddress, location_name: "DeliveryAddress", traits: {"smithy.api#required" => {}}))
+    GetContactChannelResult.add_member(:activation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationStatus, location_name: "ActivationStatus"))
     GetContactChannelResult.type = Types::GetContactChannelResult
-    GetContactPolicyRequest.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    GetContactPolicyRequest.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
     GetContactPolicyRequest.type = Types::GetContactPolicyRequest
-    GetContactPolicyResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn"))
-    GetContactPolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    GetContactPolicyResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn"))
+    GetContactPolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "Policy"))
     GetContactPolicyResult.type = Types::GetContactPolicyResult
-    GetContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
+    GetContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
     GetContactRequest.type = Types::GetContactRequest
-    GetContactResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    GetContactResult.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactAlias, location_name: "Alias", traits: {"smithy.api#required" => {}}))
-    GetContactResult.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
-    GetContactResult.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    GetContactResult.add_member(:plan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Plan, location_name: "Plan", traits: {"smithy.api#required" => {}}))
+    GetContactResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    GetContactResult.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAlias, location_name: "Alias", traits: {"smithy.api#required" => {}}))
+    GetContactResult.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactName, location_name: "DisplayName"))
+    GetContactResult.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    GetContactResult.add_member(:plan, ::Smithy::Schema::Shapes::MemberShape.new(target: Plan, location_name: "Plan", traits: {"smithy.api#required" => {}}))
     GetContactResult.type = Types::GetContactResult
-    GetRotationOverrideRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
-    GetRotationOverrideRequest.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
+    GetRotationOverrideRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    GetRotationOverrideRequest.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
     GetRotationOverrideRequest.type = Types::GetRotationOverrideRequest
-    GetRotationOverrideResult.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "RotationOverrideId"))
-    GetRotationOverrideResult.add_member(:rotation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationArn"))
-    GetRotationOverrideResult.add_member(:new_contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "NewContactIds"))
-    GetRotationOverrideResult.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    GetRotationOverrideResult.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
-    GetRotationOverrideResult.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime"))
+    GetRotationOverrideResult.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "RotationOverrideId"))
+    GetRotationOverrideResult.add_member(:rotation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationArn"))
+    GetRotationOverrideResult.add_member(:new_contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, location_name: "NewContactIds"))
+    GetRotationOverrideResult.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    GetRotationOverrideResult.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime"))
+    GetRotationOverrideResult.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "CreateTime"))
     GetRotationOverrideResult.type = Types::GetRotationOverrideResult
-    GetRotationRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    GetRotationRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
     GetRotationRequest.type = Types::GetRotationRequest
-    GetRotationResult.add_member(:rotation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationArn", traits: {"smithy.api#required" => {}}))
-    GetRotationResult.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    GetRotationResult.add_member(:contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationContactsArnList, location_name: "ContactIds", traits: {"smithy.api#required" => {}}))
-    GetRotationResult.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    GetRotationResult.add_member(:time_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeZoneId, location_name: "TimeZoneId", traits: {"smithy.api#required" => {}}))
-    GetRotationResult.add_member(:recurrence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
+    GetRotationResult.add_member(:rotation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationArn", traits: {"smithy.api#required" => {}}))
+    GetRotationResult.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    GetRotationResult.add_member(:contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationContactsArnList, location_name: "ContactIds", traits: {"smithy.api#required" => {}}))
+    GetRotationResult.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    GetRotationResult.add_member(:time_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZoneId, location_name: "TimeZoneId", traits: {"smithy.api#required" => {}}))
+    GetRotationResult.add_member(:recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
     GetRotationResult.type = Types::GetRotationResult
-    HandOffTime.add_member(:hour_of_day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HourOfDay, location_name: "HourOfDay", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    HandOffTime.add_member(:minute_of_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinuteOfHour, location_name: "MinuteOfHour", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    HandOffTime.add_member(:hour_of_day, ::Smithy::Schema::Shapes::MemberShape.new(target: HourOfDay, location_name: "HourOfDay", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    HandOffTime.add_member(:minute_of_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: MinuteOfHour, location_name: "MinuteOfHour", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     HandOffTime.type = Types::HandOffTime
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    ListContactChannelsRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
-    ListContactChannelsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactChannelsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListContactChannelsRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
+    ListContactChannelsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListContactChannelsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListContactChannelsRequest.type = Types::ListContactChannelsRequest
-    ListContactChannelsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactChannelsResult.add_member(:contact_channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactChannelList, location_name: "ContactChannels", traits: {"smithy.api#required" => {}}))
+    ListContactChannelsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListContactChannelsResult.add_member(:contact_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannelList, location_name: "ContactChannels", traits: {"smithy.api#required" => {}}))
     ListContactChannelsResult.type = Types::ListContactChannelsResult
-    ListContactsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListContactsRequest.add_member(:alias_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactAlias, location_name: "AliasPrefix"))
-    ListContactsRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactType, location_name: "Type"))
+    ListContactsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListContactsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListContactsRequest.add_member(:alias_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAlias, location_name: "AliasPrefix"))
+    ListContactsRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactType, location_name: "Type"))
     ListContactsRequest.type = Types::ListContactsRequest
-    ListContactsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactsResult.add_member(:contacts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactsList, location_name: "Contacts"))
+    ListContactsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListContactsResult.add_member(:contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactsList, location_name: "Contacts"))
     ListContactsResult.type = Types::ListContactsResult
-    ListEngagementsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListEngagementsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListEngagementsRequest.add_member(:incident_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
-    ListEngagementsRequest.add_member(:time_range_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeRange, location_name: "TimeRangeValue"))
+    ListEngagementsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListEngagementsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListEngagementsRequest.add_member(:incident_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentId, location_name: "IncidentId"))
+    ListEngagementsRequest.add_member(:time_range_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRange, location_name: "TimeRangeValue"))
     ListEngagementsRequest.type = Types::ListEngagementsRequest
-    ListEngagementsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListEngagementsResult.add_member(:engagements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngagementsList, location_name: "Engagements", traits: {"smithy.api#required" => {}}))
+    ListEngagementsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListEngagementsResult.add_member(:engagements, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementsList, location_name: "Engagements", traits: {"smithy.api#required" => {}}))
     ListEngagementsResult.type = Types::ListEngagementsResult
-    ListPageReceiptsRequest.add_member(:page_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
-    ListPageReceiptsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPageReceiptsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPageReceiptsRequest.add_member(:page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
+    ListPageReceiptsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPageReceiptsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListPageReceiptsRequest.type = Types::ListPageReceiptsRequest
-    ListPageReceiptsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPageReceiptsResult.add_member(:receipts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReceiptsList, location_name: "Receipts"))
+    ListPageReceiptsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPageReceiptsResult.add_member(:receipts, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptsList, location_name: "Receipts"))
     ListPageReceiptsResult.type = Types::ListPageReceiptsResult
-    ListPageResolutionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPageResolutionsRequest.add_member(:page_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
+    ListPageResolutionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPageResolutionsRequest.add_member(:page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "PageId", traits: {"smithy.api#required" => {}}))
     ListPageResolutionsRequest.type = Types::ListPageResolutionsRequest
-    ListPageResolutionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPageResolutionsResult.add_member(:page_resolutions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResolutionList, location_name: "PageResolutions", traits: {"smithy.api#required" => {}}))
+    ListPageResolutionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPageResolutionsResult.add_member(:page_resolutions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolutionList, location_name: "PageResolutions", traits: {"smithy.api#required" => {}}))
     ListPageResolutionsResult.type = Types::ListPageResolutionsResult
-    ListPagesByContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
-    ListPagesByContactRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByContactRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPagesByContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
+    ListPagesByContactRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPagesByContactRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListPagesByContactRequest.type = Types::ListPagesByContactRequest
-    ListPagesByContactResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByContactResult.add_member(:pages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PagesList, location_name: "Pages", traits: {"smithy.api#required" => {}}))
+    ListPagesByContactResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPagesByContactResult.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: PagesList, location_name: "Pages", traits: {"smithy.api#required" => {}}))
     ListPagesByContactResult.type = Types::ListPagesByContactResult
-    ListPagesByEngagementRequest.add_member(:engagement_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementId", traits: {"smithy.api#required" => {}}))
-    ListPagesByEngagementRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByEngagementRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPagesByEngagementRequest.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementId", traits: {"smithy.api#required" => {}}))
+    ListPagesByEngagementRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPagesByEngagementRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListPagesByEngagementRequest.type = Types::ListPagesByEngagementRequest
-    ListPagesByEngagementResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByEngagementResult.add_member(:pages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PagesList, location_name: "Pages", traits: {"smithy.api#required" => {}}))
+    ListPagesByEngagementResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPagesByEngagementResult.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: PagesList, location_name: "Pages", traits: {"smithy.api#required" => {}}))
     ListPagesByEngagementResult.type = Types::ListPagesByEngagementResult
-    ListPreviewRotationShiftsRequest.add_member(:rotation_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "RotationStartTime"))
-    ListPreviewRotationShiftsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    ListPreviewRotationShiftsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    ListPreviewRotationShiftsRequest.add_member(:members, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationPreviewMemberList, location_name: "Members", traits: {"smithy.api#required" => {}}))
-    ListPreviewRotationShiftsRequest.add_member(:time_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeZoneId, location_name: "TimeZoneId", traits: {"smithy.api#required" => {}}))
-    ListPreviewRotationShiftsRequest.add_member(:recurrence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
-    ListPreviewRotationShiftsRequest.add_member(:overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverrideList, location_name: "Overrides"))
-    ListPreviewRotationShiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPreviewRotationShiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPreviewRotationShiftsRequest.add_member(:rotation_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "RotationStartTime"))
+    ListPreviewRotationShiftsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    ListPreviewRotationShiftsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    ListPreviewRotationShiftsRequest.add_member(:members, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationPreviewMemberList, location_name: "Members", traits: {"smithy.api#required" => {}}))
+    ListPreviewRotationShiftsRequest.add_member(:time_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZoneId, location_name: "TimeZoneId", traits: {"smithy.api#required" => {}}))
+    ListPreviewRotationShiftsRequest.add_member(:recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
+    ListPreviewRotationShiftsRequest.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideList, location_name: "Overrides"))
+    ListPreviewRotationShiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListPreviewRotationShiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListPreviewRotationShiftsRequest.type = Types::ListPreviewRotationShiftsRequest
-    ListPreviewRotationShiftsResult.add_member(:rotation_shifts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationShifts, location_name: "RotationShifts"))
-    ListPreviewRotationShiftsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListPreviewRotationShiftsResult.add_member(:rotation_shifts, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationShifts, location_name: "RotationShifts"))
+    ListPreviewRotationShiftsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListPreviewRotationShiftsResult.type = Types::ListPreviewRotationShiftsResult
-    ListRotationOverridesRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
-    ListRotationOverridesRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    ListRotationOverridesRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    ListRotationOverridesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListRotationOverridesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRotationOverridesRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    ListRotationOverridesRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    ListRotationOverridesRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    ListRotationOverridesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListRotationOverridesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListRotationOverridesRequest.type = Types::ListRotationOverridesRequest
-    ListRotationOverridesResult.add_member(:rotation_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationOverrides, location_name: "RotationOverrides"))
-    ListRotationOverridesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationOverridesResult.add_member(:rotation_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationOverrides, location_name: "RotationOverrides"))
+    ListRotationOverridesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListRotationOverridesResult.type = Types::ListRotationOverridesResult
-    ListRotationShiftsRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
-    ListRotationShiftsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    ListRotationShiftsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    ListRotationShiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListRotationShiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRotationShiftsRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    ListRotationShiftsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    ListRotationShiftsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    ListRotationShiftsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListRotationShiftsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListRotationShiftsRequest.type = Types::ListRotationShiftsRequest
-    ListRotationShiftsResult.add_member(:rotation_shifts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationShifts, location_name: "RotationShifts"))
-    ListRotationShiftsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationShiftsResult.add_member(:rotation_shifts, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationShifts, location_name: "RotationShifts"))
+    ListRotationShiftsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListRotationShiftsResult.type = Types::ListRotationShiftsResult
-    ListRotationsRequest.add_member(:rotation_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationName, location_name: "RotationNamePrefix"))
-    ListRotationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListRotationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRotationsRequest.add_member(:rotation_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationName, location_name: "RotationNamePrefix"))
+    ListRotationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListRotationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListRotationsRequest.type = Types::ListRotationsRequest
-    ListRotationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListRotationsResult.add_member(:rotations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Rotations, location_name: "Rotations", traits: {"smithy.api#required" => {}}))
+    ListRotationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListRotationsResult.add_member(:rotations, ::Smithy::Schema::Shapes::MemberShape.new(target: Rotations, location_name: "Rotations", traits: {"smithy.api#required" => {}}))
     ListRotationsResult.type = Types::ListRotationsResult
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    ListTagsForResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
     ListTagsForResourceResult.type = Types::ListTagsForResourceResult
-    MonthlySetting.add_member(:day_of_month, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth", traits: {"smithy.api#required" => {}}))
-    MonthlySetting.add_member(:hand_off_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandOffTime, location_name: "HandOffTime", traits: {"smithy.api#required" => {}}))
+    MonthlySetting.add_member(:day_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfMonth, location_name: "DayOfMonth", traits: {"smithy.api#required" => {}}))
+    MonthlySetting.add_member(:hand_off_time, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, location_name: "HandOffTime", traits: {"smithy.api#required" => {}}))
     MonthlySetting.type = Types::MonthlySetting
-    MonthlySettings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlySetting)
-    OverrideList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreviewOverride)
-    Page.add_member(:page_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "PageArn", traits: {"smithy.api#required" => {}}))
-    Page.add_member(:engagement_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
-    Page.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    Page.add_member(:sender, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
-    Page.add_member(:incident_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
-    Page.add_member(:sent_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "SentTime"))
-    Page.add_member(:delivery_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "DeliveryTime"))
-    Page.add_member(:read_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "ReadTime"))
+    MonthlySettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlySetting)
+    OverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PreviewOverride)
+    Page.add_member(:page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "PageArn", traits: {"smithy.api#required" => {}}))
+    Page.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
+    Page.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    Page.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
+    Page.add_member(:incident_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentId, location_name: "IncidentId"))
+    Page.add_member(:sent_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "SentTime"))
+    Page.add_member(:delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "DeliveryTime"))
+    Page.add_member(:read_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "ReadTime"))
     Page.type = Types::Page
-    PagesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Page)
-    Plan.add_member(:stages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StagesList, location_name: "Stages"))
-    Plan.add_member(:rotation_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "RotationIds"))
+    PagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Page)
+    Plan.add_member(:stages, ::Smithy::Schema::Shapes::MemberShape.new(target: StagesList, location_name: "Stages"))
+    Plan.add_member(:rotation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, location_name: "RotationIds"))
     Plan.type = Types::Plan
-    PreviewOverride.add_member(:new_members, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationOverridePreviewMemberList, location_name: "NewMembers"))
-    PreviewOverride.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    PreviewOverride.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    PreviewOverride.add_member(:new_members, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationOverridePreviewMemberList, location_name: "NewMembers"))
+    PreviewOverride.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    PreviewOverride.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime"))
     PreviewOverride.type = Types::PreviewOverride
-    PutContactPolicyRequest.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    PutContactPolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutContactPolicyRequest.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    PutContactPolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     PutContactPolicyRequest.type = Types::PutContactPolicyRequest
     PutContactPolicyResult.type = Types::PutContactPolicyResult
-    Receipt.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelArn"))
-    Receipt.add_member(:receipt_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReceiptType, location_name: "ReceiptType", traits: {"smithy.api#required" => {}}))
-    Receipt.add_member(:receipt_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReceiptInfo, location_name: "ReceiptInfo"))
-    Receipt.add_member(:receipt_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "ReceiptTime", traits: {"smithy.api#required" => {}}))
+    Receipt.add_member(:contact_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelArn"))
+    Receipt.add_member(:receipt_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptType, location_name: "ReceiptType", traits: {"smithy.api#required" => {}}))
+    Receipt.add_member(:receipt_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptInfo, location_name: "ReceiptInfo"))
+    Receipt.add_member(:receipt_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "ReceiptTime", traits: {"smithy.api#required" => {}}))
     Receipt.type = Types::Receipt
-    ReceiptType.add_member(:delivered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELIVERED", traits: {"smithy.api#enumValue" => "DELIVERED"}))
-    ReceiptType.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    ReceiptType.add_member(:read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
-    ReceiptType.add_member(:sent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SENT", traits: {"smithy.api#enumValue" => "SENT"}))
-    ReceiptType.add_member(:stop, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP", traits: {"smithy.api#enumValue" => "STOP"}))
-    ReceiptsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Receipt)
-    RecurrenceSettings.add_member(:monthly_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlySettings, location_name: "MonthlySettings"))
-    RecurrenceSettings.add_member(:weekly_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklySettings, location_name: "WeeklySettings"))
-    RecurrenceSettings.add_member(:daily_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailySettings, location_name: "DailySettings"))
-    RecurrenceSettings.add_member(:number_of_on_calls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberOfOnCalls, location_name: "NumberOfOnCalls", traits: {"smithy.api#required" => {}}))
-    RecurrenceSettings.add_member(:shift_coverages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShiftCoveragesMap, location_name: "ShiftCoverages"))
-    RecurrenceSettings.add_member(:recurrence_multiplier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceMultiplier, location_name: "RecurrenceMultiplier", traits: {"smithy.api#required" => {}}))
+    ReceiptType.add_member(:delivered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELIVERED", traits: {"smithy.api#enumValue" => "DELIVERED"}))
+    ReceiptType.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    ReceiptType.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    ReceiptType.add_member(:sent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SENT", traits: {"smithy.api#enumValue" => "SENT"}))
+    ReceiptType.add_member(:stop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP", traits: {"smithy.api#enumValue" => "STOP"}))
+    ReceiptsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Receipt)
+    RecurrenceSettings.add_member(:monthly_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlySettings, location_name: "MonthlySettings"))
+    RecurrenceSettings.add_member(:weekly_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklySettings, location_name: "WeeklySettings"))
+    RecurrenceSettings.add_member(:daily_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DailySettings, location_name: "DailySettings"))
+    RecurrenceSettings.add_member(:number_of_on_calls, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfOnCalls, location_name: "NumberOfOnCalls", traits: {"smithy.api#required" => {}}))
+    RecurrenceSettings.add_member(:shift_coverages, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftCoveragesMap, location_name: "ShiftCoverages"))
+    RecurrenceSettings.add_member(:recurrence_multiplier, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceMultiplier, location_name: "RecurrenceMultiplier", traits: {"smithy.api#required" => {}}))
     RecurrenceSettings.type = Types::RecurrenceSettings
-    ResolutionContact.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
-    ResolutionContact.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    ResolutionContact.add_member(:stage_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StageIndex, location_name: "StageIndex", traits: {"smithy.api#default" => nil}))
+    ResolutionContact.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactArn", traits: {"smithy.api#required" => {}}))
+    ResolutionContact.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    ResolutionContact.add_member(:stage_index, ::Smithy::Schema::Shapes::MemberShape.new(target: StageIndex, location_name: "StageIndex", traits: {"smithy.api#default" => nil}))
     ResolutionContact.type = Types::ResolutionContact
-    ResolutionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResolutionContact)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ResolutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResolutionContact)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    Rotation.add_member(:rotation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationArn", traits: {"smithy.api#required" => {}}))
-    Rotation.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Rotation.add_member(:contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "ContactIds"))
-    Rotation.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    Rotation.add_member(:time_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeZoneId, location_name: "TimeZoneId"))
-    Rotation.add_member(:recurrence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceSettings, location_name: "Recurrence"))
+    Rotation.add_member(:rotation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationArn", traits: {"smithy.api#required" => {}}))
+    Rotation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Rotation.add_member(:contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, location_name: "ContactIds"))
+    Rotation.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    Rotation.add_member(:time_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZoneId, location_name: "TimeZoneId"))
+    Rotation.add_member(:recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceSettings, location_name: "Recurrence"))
     Rotation.type = Types::Rotation
-    RotationContactsArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn)
-    RotationOverride.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
-    RotationOverride.add_member(:new_contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "NewContactIds", traits: {"smithy.api#required" => {}}))
-    RotationOverride.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    RotationOverride.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    RotationOverride.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime", traits: {"smithy.api#required" => {}}))
+    RotationContactsArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn)
+    RotationOverride.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
+    RotationOverride.add_member(:new_contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, location_name: "NewContactIds", traits: {"smithy.api#required" => {}}))
+    RotationOverride.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    RotationOverride.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    RotationOverride.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "CreateTime", traits: {"smithy.api#required" => {}}))
     RotationOverride.type = Types::RotationOverride
-    RotationOverrideContactsArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn)
-    RotationOverridePreviewMemberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Member)
-    RotationOverrides.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationOverride)
-    RotationPreviewMemberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Member)
-    RotationShift.add_member(:contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "ContactIds"))
-    RotationShift.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    RotationShift.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
-    RotationShift.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShiftType, location_name: "Type"))
-    RotationShift.add_member(:shift_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShiftDetails, location_name: "ShiftDetails"))
+    RotationOverrideContactsArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn)
+    RotationOverridePreviewMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member)
+    RotationOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RotationOverride)
+    RotationPreviewMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member)
+    RotationShift.add_member(:contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, location_name: "ContactIds"))
+    RotationShift.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    RotationShift.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    RotationShift.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftType, location_name: "Type"))
+    RotationShift.add_member(:shift_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftDetails, location_name: "ShiftDetails"))
     RotationShift.type = Types::RotationShift
-    RotationShifts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationShift)
-    Rotations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Rotation)
-    SendActivationCodeRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
+    RotationShifts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RotationShift)
+    Rotations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rotation)
+    SendActivationCodeRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
     SendActivationCodeRequest.type = Types::SendActivationCodeRequest
     SendActivationCodeResult.type = Types::SendActivationCodeResult
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
-    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
-    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceId"))
+    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType"))
+    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ShiftCoveragesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfWeek)
-    ShiftCoveragesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CoverageTimes)
-    ShiftDetails.add_member(:overridden_contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "OverriddenContactIds", traits: {"smithy.api#required" => {}}))
+    ShiftCoveragesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek)
+    ShiftCoveragesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageTimes)
+    ShiftDetails.add_member(:overridden_contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, location_name: "OverriddenContactIds", traits: {"smithy.api#required" => {}}))
     ShiftDetails.type = Types::ShiftDetails
-    ShiftType.add_member(:regular, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGULAR", traits: {"smithy.api#enumValue" => "REGULAR"}))
-    ShiftType.add_member(:overridden, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERRIDDEN", traits: {"smithy.api#enumValue" => "OVERRIDDEN"}))
-    SsmContactsArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn)
-    Stage.add_member(:duration_in_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StageDurationInMins, location_name: "DurationInMinutes", traits: {"smithy.api#required" => {}}))
-    Stage.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetsList, location_name: "Targets", traits: {"smithy.api#required" => {}}))
+    ShiftType.add_member(:regular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGULAR", traits: {"smithy.api#enumValue" => "REGULAR"}))
+    ShiftType.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERRIDDEN", traits: {"smithy.api#enumValue" => "OVERRIDDEN"}))
+    SsmContactsArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn)
+    Stage.add_member(:duration_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: StageDurationInMins, location_name: "DurationInMinutes", traits: {"smithy.api#required" => {}}))
+    Stage.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetsList, location_name: "Targets", traits: {"smithy.api#required" => {}}))
     Stage.type = Types::Stage
-    StagesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stage)
-    StartEngagementRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
-    StartEngagementRequest.add_member(:sender, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
-    StartEngagementRequest.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subject, location_name: "Subject", traits: {"smithy.api#required" => {}}))
-    StartEngagementRequest.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "Content", traits: {"smithy.api#required" => {}}))
-    StartEngagementRequest.add_member(:public_subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicSubject, location_name: "PublicSubject"))
-    StartEngagementRequest.add_member(:public_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicContent, location_name: "PublicContent"))
-    StartEngagementRequest.add_member(:incident_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
-    StartEngagementRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Stage)
+    StartEngagementRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
+    StartEngagementRequest.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: Sender, location_name: "Sender", traits: {"smithy.api#required" => {}}))
+    StartEngagementRequest.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, location_name: "Subject", traits: {"smithy.api#required" => {}}))
+    StartEngagementRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "Content", traits: {"smithy.api#required" => {}}))
+    StartEngagementRequest.add_member(:public_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicSubject, location_name: "PublicSubject"))
+    StartEngagementRequest.add_member(:public_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicContent, location_name: "PublicContent"))
+    StartEngagementRequest.add_member(:incident_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentId, location_name: "IncidentId"))
+    StartEngagementRequest.add_member(:idempotency_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, location_name: "IdempotencyToken", traits: {"smithy.api#idempotencyToken" => {}}))
     StartEngagementRequest.type = Types::StartEngagementRequest
-    StartEngagementResult.add_member(:engagement_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
+    StartEngagementResult.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementArn", traits: {"smithy.api#required" => {}}))
     StartEngagementResult.type = Types::StartEngagementResult
-    StopEngagementRequest.add_member(:engagement_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "EngagementId", traits: {"smithy.api#required" => {}}))
-    StopEngagementRequest.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopReason, location_name: "Reason"))
+    StopEngagementRequest.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "EngagementId", traits: {"smithy.api#required" => {}}))
+    StopEngagementRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StopReason, location_name: "Reason"))
     StopEngagementRequest.type = Types::StopEngagementRequest
     StopEngagementResult.type = Types::StopEngagementResult
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key"))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResult.type = Types::TagResourceResult
-    TagsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    Target.add_member(:channel_target_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelTargetInfo, location_name: "ChannelTargetInfo"))
-    Target.add_member(:contact_target_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactTargetInfo, location_name: "ContactTargetInfo"))
+    TagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    Target.add_member(:channel_target_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelTargetInfo, location_name: "ChannelTargetInfo"))
+    Target.add_member(:contact_target_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTargetInfo, location_name: "ContactTargetInfo"))
     Target.type = Types::Target
-    TargetsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "QuotaCode"))
-    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
+    TargetsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "QuotaCode"))
+    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceCode"))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    TimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    TimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    TimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    TimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime"))
     TimeRange.type = Types::TimeRange
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResult.type = Types::UntagResourceResult
-    UpdateContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
-    UpdateContactChannelRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name"))
-    UpdateContactChannelRequest.add_member(:delivery_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactChannelAddress, location_name: "DeliveryAddress"))
+    UpdateContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
+    UpdateContactChannelRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "Name"))
+    UpdateContactChannelRequest.add_member(:delivery_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannelAddress, location_name: "DeliveryAddress"))
     UpdateContactChannelRequest.type = Types::UpdateContactChannelRequest
     UpdateContactChannelResult.type = Types::UpdateContactChannelResult
-    UpdateContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
-    UpdateContactRequest.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
-    UpdateContactRequest.add_member(:plan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Plan, location_name: "Plan"))
+    UpdateContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "ContactId", traits: {"smithy.api#required" => {}}))
+    UpdateContactRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactName, location_name: "DisplayName"))
+    UpdateContactRequest.add_member(:plan, ::Smithy::Schema::Shapes::MemberShape.new(target: Plan, location_name: "Plan"))
     UpdateContactRequest.type = Types::UpdateContactRequest
     UpdateContactResult.type = Types::UpdateContactResult
-    UpdateRotationRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
-    UpdateRotationRequest.add_member(:contact_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationContactsArnList, location_name: "ContactIds"))
-    UpdateRotationRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    UpdateRotationRequest.add_member(:time_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeZoneId, location_name: "TimeZoneId"))
-    UpdateRotationRequest.add_member(:recurrence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
+    UpdateRotationRequest.add_member(:rotation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, location_name: "RotationId", traits: {"smithy.api#required" => {}}))
+    UpdateRotationRequest.add_member(:contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationContactsArnList, location_name: "ContactIds"))
+    UpdateRotationRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    UpdateRotationRequest.add_member(:time_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZoneId, location_name: "TimeZoneId"))
+    UpdateRotationRequest.add_member(:recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceSettings, location_name: "Recurrence", traits: {"smithy.api#required" => {}}))
     UpdateRotationRequest.type = Types::UpdateRotationRequest
     UpdateRotationResult.type = Types::UpdateRotationResult
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
-    ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "Fields"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "Reason"))
+    ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "Fields"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
-    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
-    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
-    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
-    WeeklySetting.add_member(:day_of_week, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek", traits: {"smithy.api#required" => {}}))
-    WeeklySetting.add_member(:hand_off_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandOffTime, location_name: "HandOffTime", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
+    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
+    WeeklySetting.add_member(:day_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, location_name: "DayOfWeek", traits: {"smithy.api#required" => {}}))
+    WeeklySetting.add_member(:hand_off_time, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, location_name: "HandOffTime", traits: {"smithy.api#required" => {}}))
     WeeklySetting.type = Types::WeeklySetting
-    WeeklySettings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklySetting)
+    WeeklySettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklySetting)
 
     SSMContacts = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ssmcontacts#SSMContacts"
@@ -672,500 +672,500 @@ module Aws::SSMContacts
       service.add_operation(:accept_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#AcceptPage"
         operation.name = "AcceptPage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptPageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptPageResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AcceptPageRequest
+        operation.output = AcceptPageResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:activate_contact_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ActivateContactChannel"
         operation.name = "ActivateContactChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateContactChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateContactChannelResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ActivateContactChannelRequest
+        operation.output = ActivateContactChannelResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#CreateContact"
         operation.name = "CreateContact"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateContactRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateContactResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateContactRequest
+        operation.output = CreateContactResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_contact_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#CreateContactChannel"
         operation.name = "CreateContactChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateContactChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateContactChannelResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateContactChannelRequest
+        operation.output = CreateContactChannelResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_rotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#CreateRotation"
         operation.name = "CreateRotation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRotationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRotationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRotationRequest
+        operation.output = CreateRotationResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_rotation_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#CreateRotationOverride"
         operation.name = "CreateRotationOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRotationOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRotationOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRotationOverrideRequest
+        operation.output = CreateRotationOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:deactivate_contact_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#DeactivateContactChannel"
         operation.name = "DeactivateContactChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeactivateContactChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeactivateContactChannelResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeactivateContactChannelRequest
+        operation.output = DeactivateContactChannelResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#DeleteContact"
         operation.name = "DeleteContact"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContactRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContactResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteContactRequest
+        operation.output = DeleteContactResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_contact_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#DeleteContactChannel"
         operation.name = "DeleteContactChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContactChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContactChannelResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteContactChannelRequest
+        operation.output = DeleteContactChannelResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_rotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#DeleteRotation"
         operation.name = "DeleteRotation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRotationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRotationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRotationRequest
+        operation.output = DeleteRotationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_rotation_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#DeleteRotationOverride"
         operation.name = "DeleteRotationOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRotationOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRotationOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRotationOverrideRequest
+        operation.output = DeleteRotationOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_engagement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#DescribeEngagement"
         operation.name = "DescribeEngagement"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEngagementRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEngagementResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeEngagementRequest
+        operation.output = DescribeEngagementResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#DescribePage"
         operation.name = "DescribePage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePageResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribePageRequest
+        operation.output = DescribePageResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#GetContact"
         operation.name = "GetContact"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetContactRequest
+        operation.output = GetContactResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_contact_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#GetContactChannel"
         operation.name = "GetContactChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactChannelResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetContactChannelRequest
+        operation.output = GetContactChannelResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_contact_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#GetContactPolicy"
         operation.name = "GetContactPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactPolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetContactPolicyRequest
+        operation.output = GetContactPolicyResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_rotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#GetRotation"
         operation.name = "GetRotation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRotationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRotationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRotationRequest
+        operation.output = GetRotationResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_rotation_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#GetRotationOverride"
         operation.name = "GetRotationOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRotationOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRotationOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRotationOverrideRequest
+        operation.output = GetRotationOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_contact_channels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListContactChannels"
         operation.name = "ListContactChannels"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListContactChannelsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListContactChannelsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListContactChannelsRequest
+        operation.output = ListContactChannelsResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListContactChannels.new
       end)
       service.add_operation(:list_contacts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListContacts"
         operation.name = "ListContacts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListContactsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListContactsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListContactsRequest
+        operation.output = ListContactsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListContacts.new
       end)
       service.add_operation(:list_engagements, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListEngagements"
         operation.name = "ListEngagements"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEngagementsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEngagementsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListEngagementsRequest
+        operation.output = ListEngagementsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListEngagements.new
       end)
       service.add_operation(:list_page_receipts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListPageReceipts"
         operation.name = "ListPageReceipts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPageReceiptsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPageReceiptsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPageReceiptsRequest
+        operation.output = ListPageReceiptsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPageReceipts.new
       end)
       service.add_operation(:list_page_resolutions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListPageResolutions"
         operation.name = "ListPageResolutions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPageResolutionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPageResolutionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPageResolutionsRequest
+        operation.output = ListPageResolutionsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPageResolutions.new
       end)
       service.add_operation(:list_pages_by_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListPagesByContact"
         operation.name = "ListPagesByContact"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPagesByContactRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPagesByContactResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPagesByContactRequest
+        operation.output = ListPagesByContactResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPagesByContact.new
       end)
       service.add_operation(:list_pages_by_engagement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListPagesByEngagement"
         operation.name = "ListPagesByEngagement"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPagesByEngagementRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPagesByEngagementResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPagesByEngagementRequest
+        operation.output = ListPagesByEngagementResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPagesByEngagement.new
       end)
       service.add_operation(:list_preview_rotation_shifts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListPreviewRotationShifts"
         operation.name = "ListPreviewRotationShifts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPreviewRotationShiftsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPreviewRotationShiftsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPreviewRotationShiftsRequest
+        operation.output = ListPreviewRotationShiftsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPreviewRotationShifts.new
       end)
       service.add_operation(:list_rotation_overrides, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListRotationOverrides"
         operation.name = "ListRotationOverrides"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRotationOverridesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRotationOverridesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRotationOverridesRequest
+        operation.output = ListRotationOverridesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRotationOverrides.new
       end)
       service.add_operation(:list_rotation_shifts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListRotationShifts"
         operation.name = "ListRotationShifts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRotationShiftsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRotationShiftsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRotationShiftsRequest
+        operation.output = ListRotationShiftsResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRotationShifts.new
       end)
       service.add_operation(:list_rotations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListRotations"
         operation.name = "ListRotations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRotationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRotationsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRotationsRequest
+        operation.output = ListRotationsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRotations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_contact_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#PutContactPolicy"
         operation.name = "PutContactPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutContactPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutContactPolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutContactPolicyRequest
+        operation.output = PutContactPolicyResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:send_activation_code, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#SendActivationCode"
         operation.name = "SendActivationCode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendActivationCodeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendActivationCodeResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SendActivationCodeRequest
+        operation.output = SendActivationCodeResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:start_engagement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#StartEngagement"
         operation.name = "StartEngagement"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEngagementRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEngagementResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartEngagementRequest
+        operation.output = StartEngagementResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:stop_engagement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#StopEngagement"
         operation.name = "StopEngagement"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEngagementRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEngagementResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopEngagementRequest
+        operation.output = StopEngagementResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#UpdateContact"
         operation.name = "UpdateContact"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateContactRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateContactResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateContactRequest
+        operation.output = UpdateContactResult
+        operation.errors << AccessDeniedException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_contact_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#UpdateContactChannel"
         operation.name = "UpdateContactChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateContactChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateContactChannelResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataEncryptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateContactChannelRequest
+        operation.output = UpdateContactChannelResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DataEncryptionException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_rotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmcontacts#UpdateRotation"
         operation.name = "UpdateRotation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRotationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRotationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateRotationRequest
+        operation.output = UpdateRotationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

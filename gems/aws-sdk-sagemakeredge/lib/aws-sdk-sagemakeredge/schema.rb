@@ -45,78 +45,78 @@ module Aws::SagemakerEdge
     Value = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.sagemakeredge#Value", name: "Value")
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemakeredge#Version", name: "Version", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9\\ \\_\\.]+$"})
 
-    Checksum.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "Type"))
-    Checksum.add_member(:sum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumString, location_name: "Sum"))
+    Checksum.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, location_name: "Type"))
+    Checksum.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumString, location_name: "Sum"))
     Checksum.type = Types::Checksum
-    ChecksumType.add_member(:sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Sha1", traits: {"smithy.api#enumValue" => "SHA1"}))
-    Definition.add_member(:model_handle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelHandle"))
-    Definition.add_member(:s3_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Url"))
-    Definition.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Checksum, location_name: "Checksum"))
-    Definition.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelState, location_name: "State"))
+    ChecksumType.add_member(:sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Sha1", traits: {"smithy.api#enumValue" => "SHA1"}))
+    Definition.add_member(:model_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "ModelHandle"))
+    Definition.add_member(:s3_url, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Url"))
+    Definition.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: Checksum, location_name: "Checksum"))
+    Definition.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelState, location_name: "State"))
     Definition.type = Types::Definition
-    Definitions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Definition)
-    DeploymentModel.add_member(:model_handle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelHandle"))
-    DeploymentModel.add_member(:model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
-    DeploymentModel.add_member(:model_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "ModelVersion"))
-    DeploymentModel.add_member(:desired_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelState, location_name: "DesiredState"))
-    DeploymentModel.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelState, location_name: "State"))
-    DeploymentModel.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "Status"))
-    DeploymentModel.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
-    DeploymentModel.add_member(:rollback_failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RollbackFailureReason"))
+    Definitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Definition)
+    DeploymentModel.add_member(:model_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "ModelHandle"))
+    DeploymentModel.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, location_name: "ModelName"))
+    DeploymentModel.add_member(:model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "ModelVersion"))
+    DeploymentModel.add_member(:desired_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelState, location_name: "DesiredState"))
+    DeploymentModel.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelState, location_name: "State"))
+    DeploymentModel.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStatus, location_name: "Status"))
+    DeploymentModel.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StatusReason"))
+    DeploymentModel.add_member(:rollback_failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RollbackFailureReason"))
     DeploymentModel.type = Types::DeploymentModel
-    DeploymentModels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeploymentModel)
-    DeploymentResult.add_member(:deployment_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "DeploymentName"))
-    DeploymentResult.add_member(:deployment_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "DeploymentStatus"))
-    DeploymentResult.add_member(:deployment_status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DeploymentStatusMessage"))
-    DeploymentResult.add_member(:deployment_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeploymentStartTime"))
-    DeploymentResult.add_member(:deployment_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeploymentEndTime"))
-    DeploymentResult.add_member(:deployment_models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeploymentModels, location_name: "DeploymentModels"))
+    DeploymentModels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentModel)
+    DeploymentResult.add_member(:deployment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "DeploymentName"))
+    DeploymentResult.add_member(:deployment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "DeploymentStatus"))
+    DeploymentResult.add_member(:deployment_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DeploymentStatusMessage"))
+    DeploymentResult.add_member(:deployment_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DeploymentStartTime"))
+    DeploymentResult.add_member(:deployment_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DeploymentEndTime"))
+    DeploymentResult.add_member(:deployment_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentModels, location_name: "DeploymentModels"))
     DeploymentResult.type = Types::DeploymentResult
-    DeploymentStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    DeploymentStatus.add_member(:fail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Fail", traits: {"smithy.api#enumValue" => "FAIL"}))
-    DeploymentType.add_member(:model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Model", traits: {"smithy.api#enumValue" => "Model"}))
-    EdgeDeployment.add_member(:deployment_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "DeploymentName"))
-    EdgeDeployment.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeploymentType, location_name: "Type"))
-    EdgeDeployment.add_member(:failure_handling_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureHandlingPolicy, location_name: "FailureHandlingPolicy"))
-    EdgeDeployment.add_member(:definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Definitions, location_name: "Definitions"))
+    DeploymentStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    DeploymentStatus.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Fail", traits: {"smithy.api#enumValue" => "FAIL"}))
+    DeploymentType.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Model", traits: {"smithy.api#enumValue" => "Model"}))
+    EdgeDeployment.add_member(:deployment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "DeploymentName"))
+    EdgeDeployment.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentType, location_name: "Type"))
+    EdgeDeployment.add_member(:failure_handling_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureHandlingPolicy, location_name: "FailureHandlingPolicy"))
+    EdgeDeployment.add_member(:definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: Definitions, location_name: "Definitions"))
     EdgeDeployment.type = Types::EdgeDeployment
-    EdgeDeployments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EdgeDeployment)
-    EdgeMetric.add_member(:dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimension, location_name: "Dimension"))
-    EdgeMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metric, location_name: "MetricName"))
-    EdgeMetric.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
-    EdgeMetric.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    EdgeDeployments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeDeployment)
+    EdgeMetric.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, location_name: "Dimension"))
+    EdgeMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, location_name: "MetricName"))
+    EdgeMetric.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "Value"))
+    EdgeMetric.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp"))
     EdgeMetric.type = Types::EdgeMetric
-    EdgeMetrics.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EdgeMetric)
-    FailureHandlingPolicy.add_member(:rollback_on_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RollbackOnFailure", traits: {"smithy.api#enumValue" => "ROLLBACK_ON_FAILURE"}))
-    FailureHandlingPolicy.add_member(:do_nothing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DoNothing", traits: {"smithy.api#enumValue" => "DO_NOTHING"}))
-    GetDeploymentsRequest.add_member(:device_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    GetDeploymentsRequest.add_member(:device_fleet_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceFleetName, location_name: "DeviceFleetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    EdgeMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeMetric)
+    FailureHandlingPolicy.add_member(:rollback_on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RollbackOnFailure", traits: {"smithy.api#enumValue" => "ROLLBACK_ON_FAILURE"}))
+    FailureHandlingPolicy.add_member(:do_nothing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DoNothing", traits: {"smithy.api#enumValue" => "DO_NOTHING"}))
+    GetDeploymentsRequest.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, location_name: "DeviceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDeploymentsRequest.add_member(:device_fleet_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceFleetName, location_name: "DeviceFleetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetDeploymentsRequest.type = Types::GetDeploymentsRequest
-    GetDeploymentsResult.add_member(:deployments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EdgeDeployments, location_name: "Deployments"))
+    GetDeploymentsResult.add_member(:deployments, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeDeployments, location_name: "Deployments"))
     GetDeploymentsResult.type = Types::GetDeploymentsResult
-    GetDeviceRegistrationRequest.add_member(:device_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    GetDeviceRegistrationRequest.add_member(:device_fleet_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceFleetName, location_name: "DeviceFleetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDeviceRegistrationRequest.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, location_name: "DeviceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDeviceRegistrationRequest.add_member(:device_fleet_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceFleetName, location_name: "DeviceFleetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetDeviceRegistrationRequest.type = Types::GetDeviceRegistrationRequest
-    GetDeviceRegistrationResult.add_member(:device_registration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceRegistration, location_name: "DeviceRegistration"))
-    GetDeviceRegistrationResult.add_member(:cache_ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheTTLSeconds, location_name: "CacheTTL"))
+    GetDeviceRegistrationResult.add_member(:device_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceRegistration, location_name: "DeviceRegistration"))
+    GetDeviceRegistrationResult.add_member(:cache_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheTTLSeconds, location_name: "CacheTTL"))
     GetDeviceRegistrationResult.type = Types::GetDeviceRegistrationResult
-    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServiceException.type = Types::InternalServiceException
-    Model.add_member(:model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
-    Model.add_member(:model_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "ModelVersion"))
-    Model.add_member(:latest_sample_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestSampleTime"))
-    Model.add_member(:latest_inference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestInference"))
-    Model.add_member(:model_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EdgeMetrics, location_name: "ModelMetrics"))
+    Model.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, location_name: "ModelName"))
+    Model.add_member(:model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "ModelVersion"))
+    Model.add_member(:latest_sample_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LatestSampleTime"))
+    Model.add_member(:latest_inference, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LatestInference"))
+    Model.add_member(:model_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeMetrics, location_name: "ModelMetrics"))
     Model.type = Types::Model
-    ModelState.add_member(:deploy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Deploy", traits: {"smithy.api#enumValue" => "DEPLOY"}))
-    ModelState.add_member(:undeploy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Undeploy", traits: {"smithy.api#enumValue" => "UNDEPLOY"}))
-    Models.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Model)
-    SendHeartbeatRequest.add_member(:agent_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EdgeMetrics, location_name: "AgentMetrics"))
-    SendHeartbeatRequest.add_member(:models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Models, location_name: "Models"))
-    SendHeartbeatRequest.add_member(:agent_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "AgentVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SendHeartbeatRequest.add_member(:device_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SendHeartbeatRequest.add_member(:device_fleet_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceFleetName, location_name: "DeviceFleetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SendHeartbeatRequest.add_member(:deployment_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeploymentResult, location_name: "DeploymentResult"))
+    ModelState.add_member(:deploy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Deploy", traits: {"smithy.api#enumValue" => "DEPLOY"}))
+    ModelState.add_member(:undeploy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Undeploy", traits: {"smithy.api#enumValue" => "UNDEPLOY"}))
+    Models.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Model)
+    SendHeartbeatRequest.add_member(:agent_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeMetrics, location_name: "AgentMetrics"))
+    SendHeartbeatRequest.add_member(:models, ::Smithy::Schema::Shapes::MemberShape.new(target: Models, location_name: "Models"))
+    SendHeartbeatRequest.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "AgentVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SendHeartbeatRequest.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, location_name: "DeviceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SendHeartbeatRequest.add_member(:device_fleet_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceFleetName, location_name: "DeviceFleetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SendHeartbeatRequest.add_member(:deployment_result, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentResult, location_name: "DeploymentResult"))
     SendHeartbeatRequest.type = Types::SendHeartbeatRequest
 
     AmazonSageMakerEdge = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -127,25 +127,25 @@ module Aws::SagemakerEdge
       service.add_operation(:get_deployments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakeredge#GetDeployments"
         operation.name = "GetDeployments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeploymentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeploymentsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.input = GetDeploymentsRequest
+        operation.output = GetDeploymentsResult
+        operation.errors << InternalServiceException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetDeployments", "code" => 200}}
       end)
       service.add_operation(:get_device_registration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakeredge#GetDeviceRegistration"
         operation.name = "GetDeviceRegistration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeviceRegistrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeviceRegistrationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.input = GetDeviceRegistrationRequest
+        operation.output = GetDeviceRegistrationResult
+        operation.errors << InternalServiceException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetDeviceRegistration", "code" => 200}}
       end)
       service.add_operation(:send_heartbeat, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakeredge#SendHeartbeat"
         operation.name = "SendHeartbeat"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendHeartbeatRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.input = SendHeartbeatRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalServiceException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/SendHeartbeat", "code" => 200}}
       end)
     end

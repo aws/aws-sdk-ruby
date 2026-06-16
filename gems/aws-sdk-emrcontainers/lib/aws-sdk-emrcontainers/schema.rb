@@ -163,405 +163,405 @@ module Aws::EMRcontainers
     VirtualClusterStates = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrcontainers#VirtualClusterStates", name: "VirtualClusterStates", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     VirtualClusters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrcontainers#VirtualClusters", name: "VirtualClusters")
 
-    AllowAWSToRetainLogs.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    AllowAWSToRetainLogs.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    AuthorizationConfiguration.add_member(:lake_formation_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LakeFormationConfiguration, location_name: "lakeFormationConfiguration"))
-    AuthorizationConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    AllowAWSToRetainLogs.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    AllowAWSToRetainLogs.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    AuthorizationConfiguration.add_member(:lake_formation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationConfiguration, location_name: "lakeFormationConfiguration"))
+    AuthorizationConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     AuthorizationConfiguration.type = Types::AuthorizationConfiguration
-    CancelJobRunRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CancelJobRunRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelJobRunRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelJobRunRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelJobRunRequest.type = Types::CancelJobRunRequest
-    CancelJobRunResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    CancelJobRunResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
+    CancelJobRunResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    CancelJobRunResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId"))
     CancelJobRunResponse.type = Types::CancelJobRunResponse
-    Certificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACMCertArn, location_name: "certificateArn"))
-    Certificate.add_member(:certificate_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Base64Encoded, location_name: "certificateData"))
+    Certificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ACMCertArn, location_name: "certificateArn"))
+    Certificate.add_member(:certificate_data, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64Encoded, location_name: "certificateData"))
     Certificate.type = Types::Certificate
-    CertificateProviderType.add_member(:pem, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PEM", traits: {"smithy.api#enumValue" => "PEM"}))
-    CloudWatchMonitoringConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName", traits: {"smithy.api#required" => {}}))
-    CloudWatchMonitoringConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "logStreamNamePrefix"))
+    CertificateProviderType.add_member(:pem, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PEM", traits: {"smithy.api#enumValue" => "PEM"}))
+    CloudWatchMonitoringConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, location_name: "logGroupName", traits: {"smithy.api#required" => {}}))
+    CloudWatchMonitoringConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "logStreamNamePrefix"))
     CloudWatchMonitoringConfiguration.type = Types::CloudWatchMonitoringConfiguration
-    Configuration.add_member(:classification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "classification", traits: {"smithy.api#required" => {}}))
-    Configuration.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitivePropertiesMap, location_name: "properties"))
-    Configuration.add_member(:configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "configurations"))
+    Configuration.add_member(:classification, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "classification", traits: {"smithy.api#required" => {}}))
+    Configuration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitivePropertiesMap, location_name: "properties"))
+    Configuration.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "configurations"))
     Configuration.type = Types::Configuration
-    ConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration)
-    ConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "applicationConfiguration"))
-    ConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    ConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration)
+    ConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "applicationConfiguration"))
+    ConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     ConfigurationOverrides.type = Types::ConfigurationOverrides
-    ContainerInfo.add_member(:eks_info, Types::ContainerInfo::EksInfo, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EksInfo, location_name: "eksInfo"))
-    ContainerInfo.add_member(:unknown, Types::ContainerInfo::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ContainerInfo.add_member(:eks_info, Types::ContainerInfo::EksInfo, ::Smithy::Schema::Shapes::MemberShape.new(target: EksInfo, location_name: "eksInfo"))
+    ContainerInfo.add_member(:unknown, Types::ContainerInfo::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContainerInfo.type = Types::ContainerInfo
-    ContainerLogRotationConfiguration.add_member(:rotation_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RotationSize, location_name: "rotationSize", traits: {"smithy.api#required" => {}}))
-    ContainerLogRotationConfiguration.add_member(:max_files_to_keep, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxFilesToKeep, location_name: "maxFilesToKeep", traits: {"smithy.api#required" => {}}))
+    ContainerLogRotationConfiguration.add_member(:rotation_size, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationSize, location_name: "rotationSize", traits: {"smithy.api#required" => {}}))
+    ContainerLogRotationConfiguration.add_member(:max_files_to_keep, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxFilesToKeep, location_name: "maxFilesToKeep", traits: {"smithy.api#required" => {}}))
     ContainerLogRotationConfiguration.type = Types::ContainerLogRotationConfiguration
-    ContainerProvider.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProviderType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    ContainerProvider.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ContainerProvider.add_member(:info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInfo, location_name: "info"))
+    ContainerProvider.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProviderType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    ContainerProvider.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ContainerProvider.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInfo, location_name: "info"))
     ContainerProvider.type = Types::ContainerProvider
-    ContainerProviderType.add_member(:eks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKS", traits: {"smithy.api#enumValue" => "EKS"}))
-    CreateJobTemplateRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateJobTemplateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateJobTemplateRequest.add_member(:job_template_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobTemplateData, location_name: "jobTemplateData", traits: {"smithy.api#required" => {}}))
-    CreateJobTemplateRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateJobTemplateRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    ContainerProviderType.add_member(:eks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKS", traits: {"smithy.api#enumValue" => "EKS"}))
+    CreateJobTemplateRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateJobTemplateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateJobTemplateRequest.add_member(:job_template_data, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateData, location_name: "jobTemplateData", traits: {"smithy.api#required" => {}}))
+    CreateJobTemplateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateJobTemplateRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateJobTemplateRequest.type = Types::CreateJobTemplateRequest
-    CreateJobTemplateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    CreateJobTemplateResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    CreateJobTemplateResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "arn"))
-    CreateJobTemplateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
+    CreateJobTemplateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    CreateJobTemplateResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    CreateJobTemplateResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateArn, location_name: "arn"))
+    CreateJobTemplateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt"))
     CreateJobTemplateResponse.type = Types::CreateJobTemplateResponse
-    CreateManagedEndpointRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateManagedEndpointRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateManagedEndpointRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    CreateManagedEndpointRequest.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    CreateManagedEndpointRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateManagedEndpointRequest.add_member(:certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACMCertArn, location_name: "certificateArn", traits: {"smithy.api#deprecated" => {"message" => "Customer provided certificate-arn is deprecated and would be removed in future."}}))
-    CreateManagedEndpointRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
-    CreateManagedEndpointRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateManagedEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateManagedEndpointRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateManagedEndpointRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateManagedEndpointRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    CreateManagedEndpointRequest.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    CreateManagedEndpointRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateManagedEndpointRequest.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ACMCertArn, location_name: "certificateArn", traits: {"smithy.api#deprecated" => {"message" => "Customer provided certificate-arn is deprecated and would be removed in future."}}))
+    CreateManagedEndpointRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, location_name: "configurationOverrides"))
+    CreateManagedEndpointRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateManagedEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateManagedEndpointRequest.type = Types::CreateManagedEndpointRequest
-    CreateManagedEndpointResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    CreateManagedEndpointResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    CreateManagedEndpointResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointArn, location_name: "arn"))
-    CreateManagedEndpointResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
+    CreateManagedEndpointResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    CreateManagedEndpointResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    CreateManagedEndpointResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointArn, location_name: "arn"))
+    CreateManagedEndpointResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId"))
     CreateManagedEndpointResponse.type = Types::CreateManagedEndpointResponse
-    CreateSecurityConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateSecurityConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateSecurityConfigurationRequest.add_member(:container_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProvider, location_name: "containerProvider"))
-    CreateSecurityConfigurationRequest.add_member(:security_configuration_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfigurationData, location_name: "securityConfigurationData", traits: {"smithy.api#required" => {}}))
-    CreateSecurityConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSecurityConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateSecurityConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateSecurityConfigurationRequest.add_member(:container_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProvider, location_name: "containerProvider"))
+    CreateSecurityConfigurationRequest.add_member(:security_configuration_data, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationData, location_name: "securityConfigurationData", traits: {"smithy.api#required" => {}}))
+    CreateSecurityConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateSecurityConfigurationRequest.type = Types::CreateSecurityConfigurationRequest
-    CreateSecurityConfigurationResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    CreateSecurityConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    CreateSecurityConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfigurationArn, location_name: "arn"))
+    CreateSecurityConfigurationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    CreateSecurityConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    CreateSecurityConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationArn, location_name: "arn"))
     CreateSecurityConfigurationResponse.type = Types::CreateSecurityConfigurationResponse
-    CreateVirtualClusterRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateVirtualClusterRequest.add_member(:container_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProvider, location_name: "containerProvider", traits: {"smithy.api#required" => {}}))
-    CreateVirtualClusterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateVirtualClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateVirtualClusterRequest.add_member(:security_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "securityConfigurationId"))
+    CreateVirtualClusterRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateVirtualClusterRequest.add_member(:container_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProvider, location_name: "containerProvider", traits: {"smithy.api#required" => {}}))
+    CreateVirtualClusterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateVirtualClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateVirtualClusterRequest.add_member(:security_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "securityConfigurationId"))
     CreateVirtualClusterRequest.type = Types::CreateVirtualClusterRequest
-    CreateVirtualClusterResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    CreateVirtualClusterResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    CreateVirtualClusterResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualClusterArn, location_name: "arn"))
+    CreateVirtualClusterResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    CreateVirtualClusterResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    CreateVirtualClusterResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusterArn, location_name: "arn"))
     CreateVirtualClusterResponse.type = Types::CreateVirtualClusterResponse
-    Credentials.add_member(:token, Types::Credentials::Token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "token"))
-    Credentials.add_member(:unknown, Types::Credentials::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    Credentials.add_member(:token, Types::Credentials::Token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "token"))
+    Credentials.add_member(:unknown, Types::Credentials::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Credentials.type = Types::Credentials
-    DeleteJobTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteJobTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteJobTemplateRequest.type = Types::DeleteJobTemplateRequest
-    DeleteJobTemplateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    DeleteJobTemplateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
     DeleteJobTemplateResponse.type = Types::DeleteJobTemplateResponse
-    DeleteManagedEndpointRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteManagedEndpointRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteManagedEndpointRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteManagedEndpointRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteManagedEndpointRequest.type = Types::DeleteManagedEndpointRequest
-    DeleteManagedEndpointResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    DeleteManagedEndpointResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
+    DeleteManagedEndpointResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    DeleteManagedEndpointResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId"))
     DeleteManagedEndpointResponse.type = Types::DeleteManagedEndpointResponse
-    DeleteVirtualClusterRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualClusterRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVirtualClusterRequest.type = Types::DeleteVirtualClusterRequest
-    DeleteVirtualClusterResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    DeleteVirtualClusterResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
     DeleteVirtualClusterResponse.type = Types::DeleteVirtualClusterResponse
-    DescribeJobRunRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeJobRunRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeJobRunRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeJobRunRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeJobRunRequest.type = Types::DescribeJobRunRequest
-    DescribeJobRunResponse.add_member(:job_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRun, location_name: "jobRun"))
+    DescribeJobRunResponse.add_member(:job_run, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRun, location_name: "jobRun"))
     DescribeJobRunResponse.type = Types::DescribeJobRunResponse
-    DescribeJobTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeJobTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeJobTemplateRequest.type = Types::DescribeJobTemplateRequest
-    DescribeJobTemplateResponse.add_member(:job_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobTemplate, location_name: "jobTemplate"))
+    DescribeJobTemplateResponse.add_member(:job_template, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplate, location_name: "jobTemplate"))
     DescribeJobTemplateResponse.type = Types::DescribeJobTemplateResponse
-    DescribeManagedEndpointRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeManagedEndpointRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeManagedEndpointRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeManagedEndpointRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeManagedEndpointRequest.type = Types::DescribeManagedEndpointRequest
-    DescribeManagedEndpointResponse.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
+    DescribeManagedEndpointResponse.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, location_name: "endpoint"))
     DescribeManagedEndpointResponse.type = Types::DescribeManagedEndpointResponse
-    DescribeSecurityConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeSecurityConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeSecurityConfigurationRequest.type = Types::DescribeSecurityConfigurationRequest
-    DescribeSecurityConfigurationResponse.add_member(:security_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfiguration, location_name: "securityConfiguration"))
+    DescribeSecurityConfigurationResponse.add_member(:security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfiguration, location_name: "securityConfiguration"))
     DescribeSecurityConfigurationResponse.type = Types::DescribeSecurityConfigurationResponse
-    DescribeVirtualClusterRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualClusterRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeVirtualClusterRequest.type = Types::DescribeVirtualClusterRequest
-    DescribeVirtualClusterResponse.add_member(:virtual_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualCluster, location_name: "virtualCluster"))
+    DescribeVirtualClusterResponse.add_member(:virtual_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualCluster, location_name: "virtualCluster"))
     DescribeVirtualClusterResponse.type = Types::DescribeVirtualClusterResponse
-    EKSRequestThrottledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
+    EKSRequestThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message"))
     EKSRequestThrottledException.type = Types::EKSRequestThrottledException
-    EksInfo.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: "namespace"))
-    EksInfo.add_member(:node_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "nodeLabel"))
+    EksInfo.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesNamespace, location_name: "namespace"))
+    EksInfo.add_member(:node_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "nodeLabel"))
     EksInfo.type = Types::EksInfo
-    EncryptionConfiguration.add_member(:in_transit_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InTransitEncryptionConfiguration, location_name: "inTransitEncryptionConfiguration"))
+    EncryptionConfiguration.add_member(:in_transit_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InTransitEncryptionConfiguration, location_name: "inTransitEncryptionConfiguration"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
-    Endpoint.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    Endpoint.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    Endpoint.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointArn, location_name: "arn"))
-    Endpoint.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
-    Endpoint.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointType, location_name: "type"))
-    Endpoint.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointState, location_name: "state"))
-    Endpoint.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
-    Endpoint.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn"))
-    Endpoint.add_member(:certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACMCertArn, location_name: "certificateArn", traits: {"smithy.api#deprecated" => {"message" => "Customer provided certificate-arn is deprecated and would be removed in future."}}))
-    Endpoint.add_member(:certificate_authority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Certificate, location_name: "certificateAuthority"))
-    Endpoint.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
-    Endpoint.add_member(:server_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UriString, location_name: "serverUrl"))
-    Endpoint.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
-    Endpoint.add_member(:security_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "securityGroup"))
-    Endpoint.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))
-    Endpoint.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails"))
-    Endpoint.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
-    Endpoint.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Endpoint.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    Endpoint.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    Endpoint.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointArn, location_name: "arn"))
+    Endpoint.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId"))
+    Endpoint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType, location_name: "type"))
+    Endpoint.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointState, location_name: "state"))
+    Endpoint.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel"))
+    Endpoint.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRoleArn"))
+    Endpoint.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ACMCertArn, location_name: "certificateArn", traits: {"smithy.api#deprecated" => {"message" => "Customer provided certificate-arn is deprecated and would be removed in future."}}))
+    Endpoint.add_member(:certificate_authority, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, location_name: "certificateAuthority"))
+    Endpoint.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, location_name: "configurationOverrides"))
+    Endpoint.add_member(:server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, location_name: "serverUrl"))
+    Endpoint.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt"))
+    Endpoint.add_member(:security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "securityGroup"))
+    Endpoint.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "subnetIds"))
+    Endpoint.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "stateDetails"))
+    Endpoint.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "failureReason"))
+    Endpoint.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     Endpoint.type = Types::Endpoint
-    EndpointState.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    EndpointState.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    EndpointState.add_member(:terminating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
-    EndpointState.add_member(:terminated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
-    EndpointState.add_member(:terminated_with_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED_WITH_ERRORS", traits: {"smithy.api#enumValue" => "TERMINATED_WITH_ERRORS"}))
-    EndpointStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointState)
-    EndpointTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointType)
-    Endpoints.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint)
-    EntryPointArguments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntryPointArgument)
-    FailureReason.add_member(:internal_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
-    FailureReason.add_member(:user_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_ERROR", traits: {"smithy.api#enumValue" => "USER_ERROR"}))
-    FailureReason.add_member(:validation_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
-    FailureReason.add_member(:cluster_unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLUSTER_UNAVAILABLE", traits: {"smithy.api#enumValue" => "CLUSTER_UNAVAILABLE"}))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:endpoint_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String2048, location_name: "endpointIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:virtual_cluster_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String2048, location_name: "virtualClusterIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:credential_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CredentialType, location_name: "credentialType", traits: {"smithy.api#required" => {}}))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "durationInSeconds"))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:log_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogContext, location_name: "logContext"))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    EndpointState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    EndpointState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    EndpointState.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
+    EndpointState.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
+    EndpointState.add_member(:terminated_with_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED_WITH_ERRORS", traits: {"smithy.api#enumValue" => "TERMINATED_WITH_ERRORS"}))
+    EndpointStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointState)
+    EndpointTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType)
+    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint)
+    EntryPointArguments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArgument)
+    FailureReason.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
+    FailureReason.add_member(:user_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_ERROR", traits: {"smithy.api#enumValue" => "USER_ERROR"}))
+    FailureReason.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
+    FailureReason.add_member(:cluster_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLUSTER_UNAVAILABLE", traits: {"smithy.api#enumValue" => "CLUSTER_UNAVAILABLE"}))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, location_name: "endpointIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:virtual_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, location_name: "virtualClusterIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:credential_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialType, location_name: "credentialType", traits: {"smithy.api#required" => {}}))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "durationInSeconds"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:log_context, ::Smithy::Schema::Shapes::MemberShape.new(target: LogContext, location_name: "logContext"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     GetManagedEndpointSessionCredentialsRequest.type = Types::GetManagedEndpointSessionCredentialsRequest
-    GetManagedEndpointSessionCredentialsResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    GetManagedEndpointSessionCredentialsResponse.add_member(:credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Credentials, location_name: "credentials"))
-    GetManagedEndpointSessionCredentialsResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "expiresAt"))
+    GetManagedEndpointSessionCredentialsResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    GetManagedEndpointSessionCredentialsResponse.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: Credentials, location_name: "credentials"))
+    GetManagedEndpointSessionCredentialsResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "expiresAt"))
     GetManagedEndpointSessionCredentialsResponse.type = Types::GetManagedEndpointSessionCredentialsResponse
-    InTransitEncryptionConfiguration.add_member(:tls_certificate_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TLSCertificateConfiguration, location_name: "tlsCertificateConfiguration"))
+    InTransitEncryptionConfiguration.add_member(:tls_certificate_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TLSCertificateConfiguration, location_name: "tlsCertificateConfiguration"))
     InTransitEncryptionConfiguration.type = Types::InTransitEncryptionConfiguration
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    JobDriver.add_member(:spark_submit_job_driver, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SparkSubmitJobDriver, location_name: "sparkSubmitJobDriver"))
-    JobDriver.add_member(:spark_sql_job_driver, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SparkSqlJobDriver, location_name: "sparkSqlJobDriver"))
+    JobDriver.add_member(:spark_submit_job_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSubmitJobDriver, location_name: "sparkSubmitJobDriver"))
+    JobDriver.add_member(:spark_sql_job_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSqlJobDriver, location_name: "sparkSqlJobDriver"))
     JobDriver.type = Types::JobDriver
-    JobRun.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    JobRun.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    JobRun.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
-    JobRun.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobArn, location_name: "arn"))
-    JobRun.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunState, location_name: "state"))
-    JobRun.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    JobRun.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn"))
-    JobRun.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
-    JobRun.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
-    JobRun.add_member(:job_driver, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver"))
-    JobRun.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
-    JobRun.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy"))
-    JobRun.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "finishedAt"))
-    JobRun.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails"))
-    JobRun.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
-    JobRun.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    JobRun.add_member(:retry_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryPolicyConfiguration, location_name: "retryPolicyConfiguration"))
-    JobRun.add_member(:retry_policy_execution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryPolicyExecution, location_name: "retryPolicyExecution"))
+    JobRun.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    JobRun.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    JobRun.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId"))
+    JobRun.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, location_name: "arn"))
+    JobRun.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, location_name: "state"))
+    JobRun.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    JobRun.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRoleArn"))
+    JobRun.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel"))
+    JobRun.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, location_name: "configurationOverrides"))
+    JobRun.add_member(:job_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDriver, location_name: "jobDriver"))
+    JobRun.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt"))
+    JobRun.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, location_name: "createdBy"))
+    JobRun.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "finishedAt"))
+    JobRun.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "stateDetails"))
+    JobRun.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "failureReason"))
+    JobRun.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    JobRun.add_member(:retry_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryPolicyConfiguration, location_name: "retryPolicyConfiguration"))
+    JobRun.add_member(:retry_policy_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryPolicyExecution, location_name: "retryPolicyExecution"))
     JobRun.type = Types::JobRun
-    JobRunState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    JobRunState.add_member(:submitted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
-    JobRunState.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    JobRunState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    JobRunState.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
-    JobRunState.add_member(:cancel_pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCEL_PENDING", traits: {"smithy.api#enumValue" => "CANCEL_PENDING"}))
-    JobRunState.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    JobRunStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunState)
-    JobRuns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRun)
-    JobTemplate.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    JobTemplate.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    JobTemplate.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "arn"))
-    JobTemplate.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
-    JobTemplate.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy"))
-    JobTemplate.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    JobTemplate.add_member(:job_template_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobTemplateData, location_name: "jobTemplateData", traits: {"smithy.api#required" => {}}))
-    JobTemplate.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    JobTemplate.add_member(:decryption_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String2048, location_name: "decryptionError"))
+    JobRunState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    JobRunState.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    JobRunState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    JobRunState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    JobRunState.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    JobRunState.add_member(:cancel_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCEL_PENDING", traits: {"smithy.api#enumValue" => "CANCEL_PENDING"}))
+    JobRunState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    JobRunStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState)
+    JobRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRun)
+    JobTemplate.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    JobTemplate.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    JobTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateArn, location_name: "arn"))
+    JobTemplate.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt"))
+    JobTemplate.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, location_name: "createdBy"))
+    JobTemplate.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    JobTemplate.add_member(:job_template_data, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateData, location_name: "jobTemplateData", traits: {"smithy.api#required" => {}}))
+    JobTemplate.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "kmsKeyArn"))
+    JobTemplate.add_member(:decryption_error, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, location_name: "decryptionError"))
     JobTemplate.type = Types::JobTemplate
-    JobTemplateData.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametricIAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
-    JobTemplateData.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametricReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    JobTemplateData.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametricConfigurationOverrides, location_name: "configurationOverrides"))
-    JobTemplateData.add_member(:job_driver, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver", traits: {"smithy.api#required" => {}}))
-    JobTemplateData.add_member(:parameter_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameterConfigurationMap, location_name: "parameterConfiguration"))
-    JobTemplateData.add_member(:job_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "jobTags"))
+    JobTemplateData.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametricIAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    JobTemplateData.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametricReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    JobTemplateData.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametricConfigurationOverrides, location_name: "configurationOverrides"))
+    JobTemplateData.add_member(:job_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDriver, location_name: "jobDriver", traits: {"smithy.api#required" => {}}))
+    JobTemplateData.add_member(:parameter_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterConfigurationMap, location_name: "parameterConfiguration"))
+    JobTemplateData.add_member(:job_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "jobTags"))
     JobTemplateData.type = Types::JobTemplateData
-    JobTemplates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobTemplate)
-    LakeFormationConfiguration.add_member(:authorized_session_tag_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionTagValue, location_name: "authorizedSessionTagValue"))
-    LakeFormationConfiguration.add_member(:secure_namespace_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecureNamespaceInfo, location_name: "secureNamespaceInfo"))
-    LakeFormationConfiguration.add_member(:query_engine_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "queryEngineRoleArn"))
+    JobTemplates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplate)
+    LakeFormationConfiguration.add_member(:authorized_session_tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagValue, location_name: "authorizedSessionTagValue"))
+    LakeFormationConfiguration.add_member(:secure_namespace_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SecureNamespaceInfo, location_name: "secureNamespaceInfo"))
+    LakeFormationConfiguration.add_member(:query_engine_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "queryEngineRoleArn"))
     LakeFormationConfiguration.type = Types::LakeFormationConfiguration
-    ListJobRunsRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListJobRunsRequest.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
-    ListJobRunsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
-    ListJobRunsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
-    ListJobRunsRequest.add_member(:states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunStates, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
-    ListJobRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListJobRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListJobRunsRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListJobRunsRequest.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
+    ListJobRunsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
+    ListJobRunsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
+    ListJobRunsRequest.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunStates, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
+    ListJobRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListJobRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListJobRunsRequest.type = Types::ListJobRunsRequest
-    ListJobRunsResponse.add_member(:job_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRuns, location_name: "jobRuns"))
-    ListJobRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListJobRunsResponse.add_member(:job_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRuns, location_name: "jobRuns"))
+    ListJobRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListJobRunsResponse.type = Types::ListJobRunsResponse
-    ListJobTemplatesRequest.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
-    ListJobTemplatesRequest.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
-    ListJobTemplatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListJobTemplatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListJobTemplatesRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
+    ListJobTemplatesRequest.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
+    ListJobTemplatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListJobTemplatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListJobTemplatesRequest.type = Types::ListJobTemplatesRequest
-    ListJobTemplatesResponse.add_member(:templates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobTemplates, location_name: "templates"))
-    ListJobTemplatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListJobTemplatesResponse.add_member(:templates, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplates, location_name: "templates"))
+    ListJobTemplatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListJobTemplatesResponse.type = Types::ListJobTemplatesResponse
-    ListManagedEndpointsRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListManagedEndpointsRequest.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
-    ListManagedEndpointsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
-    ListManagedEndpointsRequest.add_member(:types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointTypes, location_name: "types", traits: {"smithy.api#httpQuery" => "types"}))
-    ListManagedEndpointsRequest.add_member(:states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointStates, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
-    ListManagedEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListManagedEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListManagedEndpointsRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListManagedEndpointsRequest.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
+    ListManagedEndpointsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
+    ListManagedEndpointsRequest.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointTypes, location_name: "types", traits: {"smithy.api#httpQuery" => "types"}))
+    ListManagedEndpointsRequest.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStates, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
+    ListManagedEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListManagedEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListManagedEndpointsRequest.type = Types::ListManagedEndpointsRequest
-    ListManagedEndpointsResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoints, location_name: "endpoints"))
-    ListManagedEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListManagedEndpointsResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoints, location_name: "endpoints"))
+    ListManagedEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListManagedEndpointsResponse.type = Types::ListManagedEndpointsResponse
-    ListSecurityConfigurationsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
-    ListSecurityConfigurationsRequest.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
-    ListSecurityConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListSecurityConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSecurityConfigurationsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
+    ListSecurityConfigurationsRequest.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
+    ListSecurityConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListSecurityConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListSecurityConfigurationsRequest.type = Types::ListSecurityConfigurationsRequest
-    ListSecurityConfigurationsResponse.add_member(:security_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfigurations, location_name: "securityConfigurations"))
-    ListSecurityConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSecurityConfigurationsResponse.add_member(:security_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurations, location_name: "securityConfigurations"))
+    ListSecurityConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListSecurityConfigurationsResponse.type = Types::ListSecurityConfigurationsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RsiArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RsiArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListVirtualClustersRequest.add_member(:container_provider_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "containerProviderId", traits: {"smithy.api#httpQuery" => "containerProviderId"}))
-    ListVirtualClustersRequest.add_member(:container_provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProviderType, location_name: "containerProviderType", traits: {"smithy.api#httpQuery" => "containerProviderType"}))
-    ListVirtualClustersRequest.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
-    ListVirtualClustersRequest.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
-    ListVirtualClustersRequest.add_member(:states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualClusterStates, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
-    ListVirtualClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListVirtualClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListVirtualClustersRequest.add_member(:eks_access_entry_integrated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "eksAccessEntryIntegrated", traits: {"smithy.api#httpQuery" => "eksAccessEntryIntegrated"}))
+    ListVirtualClustersRequest.add_member(:container_provider_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "containerProviderId", traits: {"smithy.api#httpQuery" => "containerProviderId"}))
+    ListVirtualClustersRequest.add_member(:container_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProviderType, location_name: "containerProviderType", traits: {"smithy.api#httpQuery" => "containerProviderType"}))
+    ListVirtualClustersRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAfter", traits: {"smithy.api#httpQuery" => "createdAfter"}))
+    ListVirtualClustersRequest.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdBefore", traits: {"smithy.api#httpQuery" => "createdBefore"}))
+    ListVirtualClustersRequest.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusterStates, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
+    ListVirtualClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListVirtualClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListVirtualClustersRequest.add_member(:eks_access_entry_integrated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "eksAccessEntryIntegrated", traits: {"smithy.api#httpQuery" => "eksAccessEntryIntegrated"}))
     ListVirtualClustersRequest.type = Types::ListVirtualClustersRequest
-    ListVirtualClustersResponse.add_member(:virtual_clusters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualClusters, location_name: "virtualClusters"))
-    ListVirtualClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListVirtualClustersResponse.add_member(:virtual_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusters, location_name: "virtualClusters"))
+    ListVirtualClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListVirtualClustersResponse.type = Types::ListVirtualClustersResponse
-    ManagedLogs.add_member(:allow_aws_to_retain_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowAWSToRetainLogs, location_name: "allowAWSToRetainLogs"))
-    ManagedLogs.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    ManagedLogs.add_member(:allow_aws_to_retain_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowAWSToRetainLogs, location_name: "allowAWSToRetainLogs"))
+    ManagedLogs.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "encryptionKeyArn"))
     ManagedLogs.type = Types::ManagedLogs
-    MonitoringConfiguration.add_member(:managed_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedLogs, location_name: "managedLogs"))
-    MonitoringConfiguration.add_member(:persistent_app_ui, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersistentAppUI, location_name: "persistentAppUI"))
-    MonitoringConfiguration.add_member(:cloud_watch_monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchMonitoringConfiguration, location_name: "cloudWatchMonitoringConfiguration"))
-    MonitoringConfiguration.add_member(:s3_monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
-    MonitoringConfiguration.add_member(:container_log_rotation_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerLogRotationConfiguration, location_name: "containerLogRotationConfiguration"))
+    MonitoringConfiguration.add_member(:managed_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLogs, location_name: "managedLogs"))
+    MonitoringConfiguration.add_member(:persistent_app_ui, ::Smithy::Schema::Shapes::MemberShape.new(target: PersistentAppUI, location_name: "persistentAppUI"))
+    MonitoringConfiguration.add_member(:cloud_watch_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMonitoringConfiguration, location_name: "cloudWatchMonitoringConfiguration"))
+    MonitoringConfiguration.add_member(:s3_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
+    MonitoringConfiguration.add_member(:container_log_rotation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerLogRotationConfiguration, location_name: "containerLogRotationConfiguration"))
     MonitoringConfiguration.type = Types::MonitoringConfiguration
-    ParametricCloudWatchMonitoringConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameter, location_name: "logGroupName"))
-    ParametricCloudWatchMonitoringConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "logStreamNamePrefix"))
+    ParametricCloudWatchMonitoringConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameter, location_name: "logGroupName"))
+    ParametricCloudWatchMonitoringConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "logStreamNamePrefix"))
     ParametricCloudWatchMonitoringConfiguration.type = Types::ParametricCloudWatchMonitoringConfiguration
-    ParametricConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "applicationConfiguration"))
-    ParametricConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametricMonitoringConfiguration, location_name: "monitoringConfiguration"))
+    ParametricConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "applicationConfiguration"))
+    ParametricConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametricMonitoringConfiguration, location_name: "monitoringConfiguration"))
     ParametricConfigurationOverrides.type = Types::ParametricConfigurationOverrides
-    ParametricMonitoringConfiguration.add_member(:persistent_app_ui, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameter, location_name: "persistentAppUI"))
-    ParametricMonitoringConfiguration.add_member(:cloud_watch_monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametricCloudWatchMonitoringConfiguration, location_name: "cloudWatchMonitoringConfiguration"))
-    ParametricMonitoringConfiguration.add_member(:s3_monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametricS3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
+    ParametricMonitoringConfiguration.add_member(:persistent_app_ui, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameter, location_name: "persistentAppUI"))
+    ParametricMonitoringConfiguration.add_member(:cloud_watch_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametricCloudWatchMonitoringConfiguration, location_name: "cloudWatchMonitoringConfiguration"))
+    ParametricMonitoringConfiguration.add_member(:s3_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametricS3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
     ParametricMonitoringConfiguration.type = Types::ParametricMonitoringConfiguration
-    ParametricS3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UriString, location_name: "logUri"))
+    ParametricS3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, location_name: "logUri"))
     ParametricS3MonitoringConfiguration.type = Types::ParametricS3MonitoringConfiguration
-    PersistentAppUI.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    PersistentAppUI.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    RequestThrottledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
+    PersistentAppUI.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    PersistentAppUI.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    RequestThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message"))
     RequestThrottledException.type = Types::RequestThrottledException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RetryPolicyConfiguration.add_member(:max_attempts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "maxAttempts", traits: {"smithy.api#required" => {}}))
+    RetryPolicyConfiguration.add_member(:max_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "maxAttempts", traits: {"smithy.api#required" => {}}))
     RetryPolicyConfiguration.type = Types::RetryPolicyConfiguration
-    RetryPolicyExecution.add_member(:current_attempt_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JavaInteger, location_name: "currentAttemptCount", traits: {"smithy.api#required" => {}}))
+    RetryPolicyExecution.add_member(:current_attempt_count, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, location_name: "currentAttemptCount", traits: {"smithy.api#required" => {}}))
     RetryPolicyExecution.type = Types::RetryPolicyExecution
-    S3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UriString, location_name: "logUri", traits: {"smithy.api#required" => {}}))
+    S3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, location_name: "logUri", traits: {"smithy.api#required" => {}}))
     S3MonitoringConfiguration.type = Types::S3MonitoringConfiguration
-    SecureNamespaceInfo.add_member(:cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterId, location_name: "clusterId"))
-    SecureNamespaceInfo.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: "namespace"))
+    SecureNamespaceInfo.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, location_name: "clusterId"))
+    SecureNamespaceInfo.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesNamespace, location_name: "namespace"))
     SecureNamespaceInfo.type = Types::SecureNamespaceInfo
-    SecurityConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    SecurityConfiguration.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    SecurityConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfigurationArn, location_name: "arn"))
-    SecurityConfiguration.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
-    SecurityConfiguration.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy"))
-    SecurityConfiguration.add_member(:security_configuration_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfigurationData, location_name: "securityConfigurationData"))
-    SecurityConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    SecurityConfiguration.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    SecurityConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    SecurityConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationArn, location_name: "arn"))
+    SecurityConfiguration.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt"))
+    SecurityConfiguration.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, location_name: "createdBy"))
+    SecurityConfiguration.add_member(:security_configuration_data, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationData, location_name: "securityConfigurationData"))
+    SecurityConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     SecurityConfiguration.type = Types::SecurityConfiguration
-    SecurityConfigurationData.add_member(:authorization_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationConfiguration, location_name: "authorizationConfiguration"))
+    SecurityConfigurationData.add_member(:authorization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationConfiguration, location_name: "authorizationConfiguration"))
     SecurityConfigurationData.type = Types::SecurityConfigurationData
-    SecurityConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfiguration)
-    SensitivePropertiesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024)
-    SensitivePropertiesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024)
-    SparkSqlJobDriver.add_member(:entry_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntryPointPath, location_name: "entryPoint"))
-    SparkSqlJobDriver.add_member(:spark_sql_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SparkSqlParameters, location_name: "sparkSqlParameters"))
+    SecurityConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfiguration)
+    SensitivePropertiesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String1024)
+    SensitivePropertiesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String1024)
+    SparkSqlJobDriver.add_member(:entry_point, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointPath, location_name: "entryPoint"))
+    SparkSqlJobDriver.add_member(:spark_sql_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSqlParameters, location_name: "sparkSqlParameters"))
     SparkSqlJobDriver.type = Types::SparkSqlJobDriver
-    SparkSubmitJobDriver.add_member(:entry_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntryPointPath, location_name: "entryPoint", traits: {"smithy.api#required" => {}}))
-    SparkSubmitJobDriver.add_member(:entry_point_arguments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntryPointArguments, location_name: "entryPointArguments"))
-    SparkSubmitJobDriver.add_member(:spark_submit_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SparkSubmitParameters, location_name: "sparkSubmitParameters"))
+    SparkSubmitJobDriver.add_member(:entry_point, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointPath, location_name: "entryPoint", traits: {"smithy.api#required" => {}}))
+    SparkSubmitJobDriver.add_member(:entry_point_arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArguments, location_name: "entryPointArguments"))
+    SparkSubmitJobDriver.add_member(:spark_submit_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSubmitParameters, location_name: "sparkSubmitParameters"))
     SparkSubmitJobDriver.type = Types::SparkSubmitJobDriver
-    StartJobRunRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    StartJobRunRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartJobRunRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    StartJobRunRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn"))
-    StartJobRunRequest.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
-    StartJobRunRequest.add_member(:job_driver, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver"))
-    StartJobRunRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
-    StartJobRunRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    StartJobRunRequest.add_member(:job_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "jobTemplateId"))
-    StartJobRunRequest.add_member(:job_template_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameterInputMap, location_name: "jobTemplateParameters"))
-    StartJobRunRequest.add_member(:retry_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryPolicyConfiguration, location_name: "retryPolicyConfiguration"))
+    StartJobRunRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    StartJobRunRequest.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartJobRunRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartJobRunRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRoleArn"))
+    StartJobRunRequest.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel"))
+    StartJobRunRequest.add_member(:job_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDriver, location_name: "jobDriver"))
+    StartJobRunRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, location_name: "configurationOverrides"))
+    StartJobRunRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    StartJobRunRequest.add_member(:job_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "jobTemplateId"))
+    StartJobRunRequest.add_member(:job_template_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterInputMap, location_name: "jobTemplateParameters"))
+    StartJobRunRequest.add_member(:retry_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryPolicyConfiguration, location_name: "retryPolicyConfiguration"))
     StartJobRunRequest.type = Types::StartJobRunRequest
-    StartJobRunResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    StartJobRunResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    StartJobRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobArn, location_name: "arn"))
-    StartJobRunResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
+    StartJobRunResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    StartJobRunResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    StartJobRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, location_name: "arn"))
+    StartJobRunResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "virtualClusterId"))
     StartJobRunResponse.type = Types::StartJobRunResponse
-    SubnetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256)
-    TLSCertificateConfiguration.add_member(:certificate_provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateProviderType, location_name: "certificateProviderType"))
-    TLSCertificateConfiguration.add_member(:public_certificate_secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretsManagerArn, location_name: "publicCertificateSecretArn"))
-    TLSCertificateConfiguration.add_member(:private_certificate_secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretsManagerArn, location_name: "privateCertificateSecretArn"))
+    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String256)
+    TLSCertificateConfiguration.add_member(:certificate_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderType, location_name: "certificateProviderType"))
+    TLSCertificateConfiguration.add_member(:public_certificate_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerArn, location_name: "publicCertificateSecretArn"))
+    TLSCertificateConfiguration.add_member(:private_certificate_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerArn, location_name: "privateCertificateSecretArn"))
     TLSCertificateConfiguration.type = Types::TLSCertificateConfiguration
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringEmpty256)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RsiArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String128)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String128)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringEmpty256)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RsiArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TemplateParameterConfiguration.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameterDataType, location_name: "type"))
-    TemplateParameterConfiguration.add_member(:default_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "defaultValue"))
+    TemplateParameterConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterDataType, location_name: "type"))
+    TemplateParameterConfiguration.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "defaultValue"))
     TemplateParameterConfiguration.type = Types::TemplateParameterConfiguration
-    TemplateParameterConfigurationMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameterName)
-    TemplateParameterConfigurationMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameterConfiguration)
-    TemplateParameterDataType.add_member(:number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
-    TemplateParameterDataType.add_member(:string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
-    TemplateParameterInputMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateParameterName)
-    TemplateParameterInputMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024)
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RsiArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    TemplateParameterConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterName)
+    TemplateParameterConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterConfiguration)
+    TemplateParameterDataType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
+    TemplateParameterDataType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
+    TemplateParameterInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterName)
+    TemplateParameterInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String1024)
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RsiArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message"))
     ValidationException.type = Types::ValidationException
-    VirtualCluster.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
-    VirtualCluster.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
-    VirtualCluster.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualClusterArn, location_name: "arn"))
-    VirtualCluster.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualClusterState, location_name: "state"))
-    VirtualCluster.add_member(:container_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProvider, location_name: "containerProvider"))
-    VirtualCluster.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
-    VirtualCluster.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    VirtualCluster.add_member(:security_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "securityConfigurationId"))
+    VirtualCluster.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "id"))
+    VirtualCluster.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, location_name: "name"))
+    VirtualCluster.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusterArn, location_name: "arn"))
+    VirtualCluster.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusterState, location_name: "state"))
+    VirtualCluster.add_member(:container_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProvider, location_name: "containerProvider"))
+    VirtualCluster.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt"))
+    VirtualCluster.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    VirtualCluster.add_member(:security_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, location_name: "securityConfigurationId"))
     VirtualCluster.type = Types::VirtualCluster
-    VirtualClusterState.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    VirtualClusterState.add_member(:terminating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
-    VirtualClusterState.add_member(:terminated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
-    VirtualClusterState.add_member(:arrested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARRESTED", traits: {"smithy.api#enumValue" => "ARRESTED"}))
-    VirtualClusterStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualClusterState)
-    VirtualClusters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualCluster)
+    VirtualClusterState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    VirtualClusterState.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
+    VirtualClusterState.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
+    VirtualClusterState.add_member(:arrested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARRESTED", traits: {"smithy.api#enumValue" => "ARRESTED"}))
+    VirtualClusterStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusterState)
+    VirtualClusters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualCluster)
 
     AwsChicagoWebService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.emrcontainers#AwsChicagoWebService"
@@ -571,228 +571,228 @@ module Aws::EMRcontainers
       service.add_operation(:cancel_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#CancelJobRun"
         operation.name = "CancelJobRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelJobRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelJobRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelJobRunRequest
+        operation.output = CancelJobRunResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/virtualclusters/{virtualClusterId}/jobruns/{id}", "code" => 200}}
       end)
       service.add_operation(:create_job_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#CreateJobTemplate"
         operation.name = "CreateJobTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateJobTemplateRequest
+        operation.output = CreateJobTemplateResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/jobtemplates", "code" => 200}}
       end)
       service.add_operation(:create_managed_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#CreateManagedEndpoint"
         operation.name = "CreateManagedEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateManagedEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateManagedEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateManagedEndpointRequest
+        operation.output = CreateManagedEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/virtualclusters/{virtualClusterId}/endpoints", "code" => 200}}
       end)
       service.add_operation(:create_security_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#CreateSecurityConfiguration"
         operation.name = "CreateSecurityConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSecurityConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSecurityConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateSecurityConfigurationRequest
+        operation.output = CreateSecurityConfigurationResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/securityconfigurations", "code" => 200}}
       end)
       service.add_operation(:create_virtual_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#CreateVirtualCluster"
         operation.name = "CreateVirtualCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EKSRequestThrottledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateVirtualClusterRequest
+        operation.output = CreateVirtualClusterResponse
+        operation.errors << EKSRequestThrottledException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/virtualclusters", "code" => 200}}
       end)
       service.add_operation(:delete_job_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DeleteJobTemplate"
         operation.name = "DeleteJobTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteJobTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteJobTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteJobTemplateRequest
+        operation.output = DeleteJobTemplateResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/jobtemplates/{id}", "code" => 200}}
       end)
       service.add_operation(:delete_managed_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DeleteManagedEndpoint"
         operation.name = "DeleteManagedEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteManagedEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteManagedEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteManagedEndpointRequest
+        operation.output = DeleteManagedEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/virtualclusters/{virtualClusterId}/endpoints/{id}", "code" => 200}}
       end)
       service.add_operation(:delete_virtual_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DeleteVirtualCluster"
         operation.name = "DeleteVirtualCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteVirtualClusterRequest
+        operation.output = DeleteVirtualClusterResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/virtualclusters/{id}", "code" => 200}}
       end)
       service.add_operation(:describe_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DescribeJobRun"
         operation.name = "DescribeJobRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeJobRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeJobRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeJobRunRequest
+        operation.output = DescribeJobRunResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/virtualclusters/{virtualClusterId}/jobruns/{id}", "code" => 200}}
       end)
       service.add_operation(:describe_job_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DescribeJobTemplate"
         operation.name = "DescribeJobTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeJobTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeJobTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeJobTemplateRequest
+        operation.output = DescribeJobTemplateResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/jobtemplates/{id}", "code" => 200}}
       end)
       service.add_operation(:describe_managed_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DescribeManagedEndpoint"
         operation.name = "DescribeManagedEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeManagedEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeManagedEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeManagedEndpointRequest
+        operation.output = DescribeManagedEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/virtualclusters/{virtualClusterId}/endpoints/{id}", "code" => 200}}
       end)
       service.add_operation(:describe_security_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DescribeSecurityConfiguration"
         operation.name = "DescribeSecurityConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSecurityConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSecurityConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeSecurityConfigurationRequest
+        operation.output = DescribeSecurityConfigurationResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/securityconfigurations/{id}", "code" => 200}}
       end)
       service.add_operation(:describe_virtual_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DescribeVirtualCluster"
         operation.name = "DescribeVirtualCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeVirtualClusterRequest
+        operation.output = DescribeVirtualClusterResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/virtualclusters/{id}", "code" => 200}}
       end)
       service.add_operation(:get_managed_endpoint_session_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#GetManagedEndpointSessionCredentials"
         operation.name = "GetManagedEndpointSessionCredentials"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetManagedEndpointSessionCredentialsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetManagedEndpointSessionCredentialsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestThrottledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetManagedEndpointSessionCredentialsRequest
+        operation.output = GetManagedEndpointSessionCredentialsResponse
+        operation.errors << InternalServerException
+        operation.errors << RequestThrottledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/virtualclusters/{virtualClusterIdentifier}/endpoints/{endpointIdentifier}/credentials", "code" => 200}}
       end)
       service.add_operation(:list_job_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#ListJobRuns"
         operation.name = "ListJobRuns"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobRunsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobRunsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListJobRunsRequest
+        operation.output = ListJobRunsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/virtualclusters/{virtualClusterId}/jobruns", "code" => 200}}
         operation[:paginator] = Paginators::ListJobRuns.new
       end)
       service.add_operation(:list_job_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#ListJobTemplates"
         operation.name = "ListJobTemplates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobTemplatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobTemplatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListJobTemplatesRequest
+        operation.output = ListJobTemplatesResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/jobtemplates", "code" => 200}}
         operation[:paginator] = Paginators::ListJobTemplates.new
       end)
       service.add_operation(:list_managed_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#ListManagedEndpoints"
         operation.name = "ListManagedEndpoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListManagedEndpointsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListManagedEndpointsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListManagedEndpointsRequest
+        operation.output = ListManagedEndpointsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/virtualclusters/{virtualClusterId}/endpoints", "code" => 200}}
         operation[:paginator] = Paginators::ListManagedEndpoints.new
       end)
       service.add_operation(:list_security_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#ListSecurityConfigurations"
         operation.name = "ListSecurityConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSecurityConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSecurityConfigurationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSecurityConfigurationsRequest
+        operation.output = ListSecurityConfigurationsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/securityconfigurations", "code" => 200}}
         operation[:paginator] = Paginators::ListSecurityConfigurations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:list_virtual_clusters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#ListVirtualClusters"
         operation.name = "ListVirtualClusters"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualClustersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualClustersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListVirtualClustersRequest
+        operation.output = ListVirtualClustersResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/virtualclusters", "code" => 200}}
         operation[:paginator] = Paginators::ListVirtualClusters.new
       end)
       service.add_operation(:start_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#StartJobRun"
         operation.name = "StartJobRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartJobRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartJobRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartJobRunRequest
+        operation.output = StartJobRunResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/virtualclusters/{virtualClusterId}/jobruns", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
     end

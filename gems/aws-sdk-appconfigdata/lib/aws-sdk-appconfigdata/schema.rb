@@ -28,43 +28,43 @@ module Aws::AppConfigData
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfigdata#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     Token = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfigdata#Token", name: "Token", traits: {"smithy.api#pattern" => "^\\S{1,8192}$"})
 
-    BadRequestDetails.add_member(:invalid_parameters, Types::BadRequestDetails::InvalidParameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterMap, location_name: "InvalidParameters"))
-    BadRequestDetails.add_member(:unknown, Types::BadRequestDetails::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    BadRequestDetails.add_member(:invalid_parameters, Types::BadRequestDetails::InvalidParameters, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidParameterMap, location_name: "InvalidParameters"))
+    BadRequestDetails.add_member(:unknown, Types::BadRequestDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     BadRequestDetails.type = Types::BadRequestDetails
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    BadRequestException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestReason, location_name: "Reason"))
-    BadRequestException.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestDetails, location_name: "Details"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    BadRequestException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: BadRequestReason, location_name: "Reason"))
+    BadRequestException.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: BadRequestDetails, location_name: "Details"))
     BadRequestException.type = Types::BadRequestException
-    GetLatestConfigurationInput.add_member(:configuration_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ConfigurationToken", traits: {"smithy.api#httpQuery" => "configuration_token", "smithy.api#required" => {}}))
+    GetLatestConfigurationInput.add_member(:configuration_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "ConfigurationToken", traits: {"smithy.api#httpQuery" => "configuration_token", "smithy.api#required" => {}}))
     GetLatestConfigurationInput.type = Types::GetLatestConfigurationInput
-    GetLatestConfigurationOutput.add_member(:next_poll_configuration_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextPollConfigurationToken", traits: {"smithy.api#httpHeader" => "Next-Poll-Configuration-Token"}))
-    GetLatestConfigurationOutput.add_member(:next_poll_interval_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NextPollIntervalInSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Next-Poll-Interval-In-Seconds"}))
-    GetLatestConfigurationOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
-    GetLatestConfigurationOutput.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveBlob, location_name: "Configuration", traits: {"smithy.api#httpPayload" => {}}))
-    GetLatestConfigurationOutput.add_member(:version_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VersionLabel", traits: {"smithy.api#httpHeader" => "Version-Label"}))
+    GetLatestConfigurationOutput.add_member(:next_poll_configuration_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextPollConfigurationToken", traits: {"smithy.api#httpHeader" => "Next-Poll-Configuration-Token"}))
+    GetLatestConfigurationOutput.add_member(:next_poll_interval_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NextPollIntervalInSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Next-Poll-Interval-In-Seconds"}))
+    GetLatestConfigurationOutput.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    GetLatestConfigurationOutput.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBlob, location_name: "Configuration", traits: {"smithy.api#httpPayload" => {}}))
+    GetLatestConfigurationOutput.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VersionLabel", traits: {"smithy.api#httpHeader" => "Version-Label"}))
     GetLatestConfigurationOutput[:http_payload] = :configuration
     GetLatestConfigurationOutput[:http_payload_member] = GetLatestConfigurationOutput.member(:configuration)
     GetLatestConfigurationOutput.type = Types::GetLatestConfigurationOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    InvalidParameterDetail.add_member(:problem, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterProblem, location_name: "Problem"))
+    InvalidParameterDetail.add_member(:problem, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidParameterProblem, location_name: "Problem"))
     InvalidParameterDetail.type = Types::InvalidParameterDetail
-    InvalidParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    InvalidParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterDetail)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ResourceNotFoundException.add_member(:referenced_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringMap, location_name: "ReferencedBy"))
+    InvalidParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    InvalidParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidParameterDetail)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:referenced_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, location_name: "ReferencedBy"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    StartConfigurationSessionInput.add_member(:application_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "ApplicationIdentifier", traits: {"smithy.api#required" => {}}))
-    StartConfigurationSessionInput.add_member(:environment_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "EnvironmentIdentifier", traits: {"smithy.api#required" => {}}))
-    StartConfigurationSessionInput.add_member(:configuration_profile_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "ConfigurationProfileIdentifier", traits: {"smithy.api#required" => {}}))
-    StartConfigurationSessionInput.add_member(:required_minimum_poll_interval_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalPollSeconds, location_name: "RequiredMinimumPollIntervalInSeconds"))
+    StartConfigurationSessionInput.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "ApplicationIdentifier", traits: {"smithy.api#required" => {}}))
+    StartConfigurationSessionInput.add_member(:environment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "EnvironmentIdentifier", traits: {"smithy.api#required" => {}}))
+    StartConfigurationSessionInput.add_member(:configuration_profile_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "ConfigurationProfileIdentifier", traits: {"smithy.api#required" => {}}))
+    StartConfigurationSessionInput.add_member(:required_minimum_poll_interval_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalPollSeconds, location_name: "RequiredMinimumPollIntervalInSeconds"))
     StartConfigurationSessionInput.type = Types::StartConfigurationSessionInput
-    StartConfigurationSessionOutput.add_member(:initial_configuration_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "InitialConfigurationToken"))
+    StartConfigurationSessionOutput.add_member(:initial_configuration_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "InitialConfigurationToken"))
     StartConfigurationSessionOutput.type = Types::StartConfigurationSessionOutput
-    StringMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    StringMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
 
     AppConfigData = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -75,23 +75,23 @@ module Aws::AppConfigData
       service.add_operation(:get_latest_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfigdata#GetLatestConfiguration"
         operation.name = "GetLatestConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLatestConfigurationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLatestConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetLatestConfigurationInput
+        operation.output = GetLatestConfigurationOutput
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/configuration", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:start_configuration_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfigdata#StartConfigurationSession"
         operation.name = "StartConfigurationSession"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartConfigurationSessionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartConfigurationSessionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = StartConfigurationSessionInput
+        operation.output = StartConfigurationSessionOutput
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/configurationsessions", "code" => 201}}
       end)
     end

@@ -104,258 +104,258 @@ module Aws::Repostspace
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.repostspace#ValidationExceptionReason", name: "ValidationExceptionReason")
     VanityDomainStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.repostspace#VanityDomainStatus", name: "VanityDomainStatus")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccessorIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorId)
-    AllowedDomainsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailDomain)
-    BatchAddChannelRoleToAccessorsInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    BatchAddChannelRoleToAccessorsInput.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    BatchAddChannelRoleToAccessorsInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
-    BatchAddChannelRoleToAccessorsInput.add_member(:channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRole, location_name: "channelRole", traits: {"smithy.api#required" => {}}))
+    AccessorIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorId)
+    AllowedDomainsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailDomain)
+    BatchAddChannelRoleToAccessorsInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchAddChannelRoleToAccessorsInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchAddChannelRoleToAccessorsInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
+    BatchAddChannelRoleToAccessorsInput.add_member(:channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRole, location_name: "channelRole", traits: {"smithy.api#required" => {}}))
     BatchAddChannelRoleToAccessorsInput.type = Types::BatchAddChannelRoleToAccessorsInput
-    BatchAddChannelRoleToAccessorsOutput.add_member(:added_accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "addedAccessorIds", traits: {"smithy.api#required" => {}}))
-    BatchAddChannelRoleToAccessorsOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchAddChannelRoleToAccessorsOutput.add_member(:added_accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "addedAccessorIds", traits: {"smithy.api#required" => {}}))
+    BatchAddChannelRoleToAccessorsOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
     BatchAddChannelRoleToAccessorsOutput.type = Types::BatchAddChannelRoleToAccessorsOutput
-    BatchAddRoleInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    BatchAddRoleInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
-    BatchAddRoleInput.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "role", traits: {"smithy.api#required" => {}}))
+    BatchAddRoleInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchAddRoleInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
+    BatchAddRoleInput.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "role", traits: {"smithy.api#required" => {}}))
     BatchAddRoleInput.type = Types::BatchAddRoleInput
-    BatchAddRoleOutput.add_member(:added_accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "addedAccessorIds", traits: {"smithy.api#required" => {}}))
-    BatchAddRoleOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchAddRoleOutput.add_member(:added_accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "addedAccessorIds", traits: {"smithy.api#required" => {}}))
+    BatchAddRoleOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
     BatchAddRoleOutput.type = Types::BatchAddRoleOutput
-    BatchError.add_member(:accessor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorId, location_name: "accessorId", traits: {"smithy.api#required" => {}}))
-    BatchError.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
-    BatchError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    BatchError.add_member(:accessor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorId, location_name: "accessorId", traits: {"smithy.api#required" => {}}))
+    BatchError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
+    BatchError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     BatchError.type = Types::BatchError
-    BatchErrorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchError)
-    BatchRemoveChannelRoleFromAccessorsInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    BatchRemoveChannelRoleFromAccessorsInput.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    BatchRemoveChannelRoleFromAccessorsInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
-    BatchRemoveChannelRoleFromAccessorsInput.add_member(:channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRole, location_name: "channelRole", traits: {"smithy.api#required" => {}}))
+    BatchErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchError)
+    BatchRemoveChannelRoleFromAccessorsInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchRemoveChannelRoleFromAccessorsInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchRemoveChannelRoleFromAccessorsInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
+    BatchRemoveChannelRoleFromAccessorsInput.add_member(:channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRole, location_name: "channelRole", traits: {"smithy.api#required" => {}}))
     BatchRemoveChannelRoleFromAccessorsInput.type = Types::BatchRemoveChannelRoleFromAccessorsInput
-    BatchRemoveChannelRoleFromAccessorsOutput.add_member(:removed_accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "removedAccessorIds", traits: {"smithy.api#required" => {}}))
-    BatchRemoveChannelRoleFromAccessorsOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchRemoveChannelRoleFromAccessorsOutput.add_member(:removed_accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "removedAccessorIds", traits: {"smithy.api#required" => {}}))
+    BatchRemoveChannelRoleFromAccessorsOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
     BatchRemoveChannelRoleFromAccessorsOutput.type = Types::BatchRemoveChannelRoleFromAccessorsOutput
-    BatchRemoveRoleInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    BatchRemoveRoleInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
-    BatchRemoveRoleInput.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "role", traits: {"smithy.api#required" => {}}))
+    BatchRemoveRoleInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchRemoveRoleInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
+    BatchRemoveRoleInput.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "role", traits: {"smithy.api#required" => {}}))
     BatchRemoveRoleInput.type = Types::BatchRemoveRoleInput
-    BatchRemoveRoleOutput.add_member(:removed_accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "removedAccessorIds", traits: {"smithy.api#required" => {}}))
-    BatchRemoveRoleOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchRemoveRoleOutput.add_member(:removed_accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "removedAccessorIds", traits: {"smithy.api#required" => {}}))
+    BatchRemoveRoleOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrorList, location_name: "errors", traits: {"smithy.api#required" => {}}))
     BatchRemoveRoleOutput.type = Types::BatchRemoveRoleOutput
-    ChannelData.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
-    ChannelData.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
-    ChannelData.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
-    ChannelData.add_member(:channel_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelDescription, location_name: "channelDescription"))
-    ChannelData.add_member(:create_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ChannelData.add_member(:delete_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ChannelData.add_member(:channel_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelStatus, location_name: "channelStatus", traits: {"smithy.api#required" => {}}))
-    ChannelData.add_member(:user_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCount, location_name: "userCount", traits: {"smithy.api#required" => {}}))
-    ChannelData.add_member(:group_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupCount, location_name: "groupCount", traits: {"smithy.api#required" => {}}))
+    ChannelData.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
+    ChannelData.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
+    ChannelData.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
+    ChannelData.add_member(:channel_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDescription, location_name: "channelDescription"))
+    ChannelData.add_member(:create_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ChannelData.add_member(:delete_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ChannelData.add_member(:channel_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelStatus, location_name: "channelStatus", traits: {"smithy.api#required" => {}}))
+    ChannelData.add_member(:user_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCount, location_name: "userCount", traits: {"smithy.api#required" => {}}))
+    ChannelData.add_member(:group_count, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupCount, location_name: "groupCount", traits: {"smithy.api#required" => {}}))
     ChannelData.type = Types::ChannelData
-    ChannelRole.add_member(:asker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASKER", traits: {"smithy.api#enumValue" => "ASKER"}))
-    ChannelRole.add_member(:expert, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPERT", traits: {"smithy.api#enumValue" => "EXPERT"}))
-    ChannelRole.add_member(:moderator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODERATOR", traits: {"smithy.api#enumValue" => "MODERATOR"}))
-    ChannelRole.add_member(:supportrequestor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUPPORTREQUESTOR", traits: {"smithy.api#enumValue" => "SUPPORTREQUESTOR"}))
-    ChannelRoleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRole)
-    ChannelRoles.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorId)
-    ChannelRoles.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRoleList)
-    ChannelStatus.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
-    ChannelStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    ChannelStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    ChannelStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    ChannelStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ChannelStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    ChannelsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelData)
-    ConfigurationStatus.add_member(:configured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIGURED", traits: {"smithy.api#enumValue" => "CONFIGURED"}))
-    ConfigurationStatus.add_member(:unconfigured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNCONFIGURED", traits: {"smithy.api#enumValue" => "UNCONFIGURED"}))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ChannelRole.add_member(:asker, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASKER", traits: {"smithy.api#enumValue" => "ASKER"}))
+    ChannelRole.add_member(:expert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPERT", traits: {"smithy.api#enumValue" => "EXPERT"}))
+    ChannelRole.add_member(:moderator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODERATOR", traits: {"smithy.api#enumValue" => "MODERATOR"}))
+    ChannelRole.add_member(:supportrequestor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUPPORTREQUESTOR", traits: {"smithy.api#enumValue" => "SUPPORTREQUESTOR"}))
+    ChannelRoleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRole)
+    ChannelRoles.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorId)
+    ChannelRoles.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRoleList)
+    ChannelStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    ChannelStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ChannelStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    ChannelStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    ChannelStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ChannelStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    ChannelsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelData)
+    ConfigurationStatus.add_member(:configured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIGURED", traits: {"smithy.api#enumValue" => "CONFIGURED"}))
+    ConfigurationStatus.add_member(:unconfigured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNCONFIGURED", traits: {"smithy.api#enumValue" => "UNCONFIGURED"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateChannelInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateChannelInput.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
-    CreateChannelInput.add_member(:channel_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelDescription, location_name: "channelDescription"))
+    CreateChannelInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateChannelInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
+    CreateChannelInput.add_member(:channel_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDescription, location_name: "channelDescription"))
     CreateChannelInput.type = Types::CreateChannelInput
-    CreateChannelOutput.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
+    CreateChannelOutput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
     CreateChannelOutput.type = Types::CreateChannelOutput
-    CreateSpaceInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateSpaceInput.add_member(:subdomain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceSubdomain, location_name: "subdomain", traits: {"smithy.api#required" => {}}))
-    CreateSpaceInput.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TierLevel, location_name: "tier", traits: {"smithy.api#required" => {}}))
-    CreateSpaceInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceDescription, location_name: "description"))
-    CreateSpaceInput.add_member(:user_kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "userKMSKey"))
-    CreateSpaceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateSpaceInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
-    CreateSpaceInput.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedEmailDomainsParameters, location_name: "supportedEmailDomains"))
+    CreateSpaceInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateSpaceInput.add_member(:subdomain, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceSubdomain, location_name: "subdomain", traits: {"smithy.api#required" => {}}))
+    CreateSpaceInput.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: TierLevel, location_name: "tier", traits: {"smithy.api#required" => {}}))
+    CreateSpaceInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceDescription, location_name: "description"))
+    CreateSpaceInput.add_member(:user_kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "userKMSKey"))
+    CreateSpaceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    CreateSpaceInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn"))
+    CreateSpaceInput.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEmailDomainsParameters, location_name: "supportedEmailDomains"))
     CreateSpaceInput.type = Types::CreateSpaceInput
-    CreateSpaceOutput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
+    CreateSpaceOutput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
     CreateSpaceOutput.type = Types::CreateSpaceOutput
-    DeleteSpaceInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSpaceInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSpaceInput.type = Types::DeleteSpaceInput
-    DeregisterAdminInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeregisterAdminInput.add_member(:admin_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminId, location_name: "adminId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeregisterAdminInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeregisterAdminInput.add_member(:admin_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminId, location_name: "adminId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeregisterAdminInput.type = Types::DeregisterAdminInput
-    FeatureEnableParameter.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    FeatureEnableParameter.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    FeatureEnableStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    FeatureEnableStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    FeatureEnableStatus.add_member(:not_allowed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_ALLOWED", traits: {"smithy.api#enumValue" => "NOT_ALLOWED"}))
-    GetChannelInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetChannelInput.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    FeatureEnableParameter.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    FeatureEnableParameter.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    FeatureEnableStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    FeatureEnableStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    FeatureEnableStatus.add_member(:not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_ALLOWED", traits: {"smithy.api#enumValue" => "NOT_ALLOWED"}))
+    GetChannelInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetChannelInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetChannelInput.type = Types::GetChannelInput
-    GetChannelOutput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
-    GetChannelOutput.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
-    GetChannelOutput.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
-    GetChannelOutput.add_member(:channel_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelDescription, location_name: "channelDescription"))
-    GetChannelOutput.add_member(:create_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetChannelOutput.add_member(:delete_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetChannelOutput.add_member(:channel_roles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRoles, location_name: "channelRoles"))
-    GetChannelOutput.add_member(:channel_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelStatus, location_name: "channelStatus", traits: {"smithy.api#required" => {}}))
+    GetChannelOutput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
+    GetChannelOutput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
+    GetChannelOutput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
+    GetChannelOutput.add_member(:channel_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDescription, location_name: "channelDescription"))
+    GetChannelOutput.add_member(:create_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetChannelOutput.add_member(:delete_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetChannelOutput.add_member(:channel_roles, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRoles, location_name: "channelRoles"))
+    GetChannelOutput.add_member(:channel_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelStatus, location_name: "channelStatus", traits: {"smithy.api#required" => {}}))
     GetChannelOutput.type = Types::GetChannelOutput
-    GetSpaceInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSpaceInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSpaceInput.type = Types::GetSpaceInput
-    GetSpaceOutput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisioningStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:configuration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationStatus, location_name: "configurationStatus", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:identity_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityStoreId, location_name: "identityStoreId"))
-    GetSpaceOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "applicationArn"))
-    GetSpaceOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceDescription, location_name: "description"))
-    GetSpaceOutput.add_member(:vanity_domain_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VanityDomainStatus, location_name: "vanityDomainStatus", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:vanity_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "vanityDomain", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:random_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "randomDomain", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:customer_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "customerRoleArn"))
-    GetSpaceOutput.add_member(:create_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetSpaceOutput.add_member(:delete_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetSpaceOutput.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TierLevel, location_name: "tier", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:storage_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageLimit, location_name: "storageLimit", traits: {"smithy.api#required" => {}}))
-    GetSpaceOutput.add_member(:user_admins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAdmins, location_name: "userAdmins", traits: {"smithy.api#deprecated" => {"message" => "This property has been depracted and will be replaced by the roles property."}}))
-    GetSpaceOutput.add_member(:group_admins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupAdmins, location_name: "groupAdmins", traits: {"smithy.api#deprecated" => {"message" => "This property has been depracted and will be replaced by the roles property."}}))
-    GetSpaceOutput.add_member(:roles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Roles, location_name: "roles"))
-    GetSpaceOutput.add_member(:user_kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "userKMSKey"))
-    GetSpaceOutput.add_member(:user_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCount, location_name: "userCount"))
-    GetSpaceOutput.add_member(:content_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentSize, location_name: "contentSize"))
-    GetSpaceOutput.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedEmailDomainsStatus, location_name: "supportedEmailDomains"))
+    GetSpaceOutput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, location_name: "configurationStatus", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, location_name: "clientId", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreId, location_name: "identityStoreId"))
+    GetSpaceOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "applicationArn"))
+    GetSpaceOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceDescription, location_name: "description"))
+    GetSpaceOutput.add_member(:vanity_domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VanityDomainStatus, location_name: "vanityDomainStatus", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:vanity_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "vanityDomain", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:random_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "randomDomain", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:customer_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "customerRoleArn"))
+    GetSpaceOutput.add_member(:create_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetSpaceOutput.add_member(:delete_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetSpaceOutput.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: TierLevel, location_name: "tier", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:storage_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageLimit, location_name: "storageLimit", traits: {"smithy.api#required" => {}}))
+    GetSpaceOutput.add_member(:user_admins, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAdmins, location_name: "userAdmins", traits: {"smithy.api#deprecated" => {"message" => "This property has been depracted and will be replaced by the roles property."}}))
+    GetSpaceOutput.add_member(:group_admins, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupAdmins, location_name: "groupAdmins", traits: {"smithy.api#deprecated" => {"message" => "This property has been depracted and will be replaced by the roles property."}}))
+    GetSpaceOutput.add_member(:roles, ::Smithy::Schema::Shapes::MemberShape.new(target: Roles, location_name: "roles"))
+    GetSpaceOutput.add_member(:user_kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "userKMSKey"))
+    GetSpaceOutput.add_member(:user_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCount, location_name: "userCount"))
+    GetSpaceOutput.add_member(:content_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentSize, location_name: "contentSize"))
+    GetSpaceOutput.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEmailDomainsStatus, location_name: "supportedEmailDomains"))
     GetSpaceOutput.type = Types::GetSpaceOutput
-    GroupAdmins.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminId)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    GroupAdmins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdminId)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    ListChannelsInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListChannelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListChannelsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChannelsLimit, location_name: "maxResults", traits: {"smithy.api#default" => 10, "smithy.api#httpQuery" => "maxResults"}))
+    ListChannelsInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListChannelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListChannelsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListChannelsLimit, location_name: "maxResults", traits: {"smithy.api#default" => 10, "smithy.api#httpQuery" => "maxResults"}))
     ListChannelsInput.type = Types::ListChannelsInput
-    ListChannelsOutput.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelsList, location_name: "channels", traits: {"smithy.api#required" => {}}))
-    ListChannelsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListChannelsOutput.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelsList, location_name: "channels", traits: {"smithy.api#required" => {}}))
+    ListChannelsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListChannelsOutput.type = Types::ListChannelsOutput
-    ListSpacesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListSpacesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSpacesLimit, location_name: "maxResults", traits: {"smithy.api#default" => 10, "smithy.api#httpQuery" => "maxResults"}))
+    ListSpacesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSpacesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSpacesLimit, location_name: "maxResults", traits: {"smithy.api#default" => 10, "smithy.api#httpQuery" => "maxResults"}))
     ListSpacesInput.type = Types::ListSpacesInput
-    ListSpacesOutput.add_member(:spaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpacesList, location_name: "spaces", traits: {"smithy.api#required" => {}}))
-    ListSpacesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListSpacesOutput.add_member(:spaces, ::Smithy::Schema::Shapes::MemberShape.new(target: SpacesList, location_name: "spaces", traits: {"smithy.api#required" => {}}))
+    ListSpacesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListSpacesOutput.type = Types::ListSpacesOutput
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    RegisterAdminInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RegisterAdminInput.add_member(:admin_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminId, location_name: "adminId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RegisterAdminInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RegisterAdminInput.add_member(:admin_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminId, location_name: "adminId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RegisterAdminInput.type = Types::RegisterAdminInput
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    Role.add_member(:expert, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPERT", traits: {"smithy.api#enumValue" => "EXPERT"}))
-    Role.add_member(:moderator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODERATOR", traits: {"smithy.api#enumValue" => "MODERATOR"}))
-    Role.add_member(:administrator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMINISTRATOR", traits: {"smithy.api#enumValue" => "ADMINISTRATOR"}))
-    Role.add_member(:supportrequestor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUPPORTREQUESTOR", traits: {"smithy.api#enumValue" => "SUPPORTREQUESTOR"}))
-    RoleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role)
-    Roles.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorId)
-    Roles.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleList)
-    SendInvitesInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SendInvitesInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
-    SendInvitesInput.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InviteTitle, location_name: "title", traits: {"smithy.api#required" => {}}))
-    SendInvitesInput.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InviteBody, location_name: "body", traits: {"smithy.api#required" => {}}))
+    Role.add_member(:expert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPERT", traits: {"smithy.api#enumValue" => "EXPERT"}))
+    Role.add_member(:moderator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODERATOR", traits: {"smithy.api#enumValue" => "MODERATOR"}))
+    Role.add_member(:administrator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADMINISTRATOR", traits: {"smithy.api#enumValue" => "ADMINISTRATOR"}))
+    Role.add_member(:supportrequestor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUPPORTREQUESTOR", traits: {"smithy.api#enumValue" => "SUPPORTREQUESTOR"}))
+    RoleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Role)
+    Roles.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorId)
+    Roles.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleList)
+    SendInvitesInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SendInvitesInput.add_member(:accessor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorIdList, location_name: "accessorIds", traits: {"smithy.api#required" => {}}))
+    SendInvitesInput.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: InviteTitle, location_name: "title", traits: {"smithy.api#required" => {}}))
+    SendInvitesInput.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: InviteBody, location_name: "body", traits: {"smithy.api#required" => {}}))
     SendInvitesInput.type = Types::SendInvitesInput
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SpaceData.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceDescription, location_name: "description"))
-    SpaceData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisioningStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:configuration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationStatus, location_name: "configurationStatus", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:vanity_domain_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VanityDomainStatus, location_name: "vanityDomainStatus", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:vanity_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "vanityDomain", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:random_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "randomDomain", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TierLevel, location_name: "tier", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:storage_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageLimit, location_name: "storageLimit", traits: {"smithy.api#required" => {}}))
-    SpaceData.add_member(:create_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    SpaceData.add_member(:delete_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SpaceData.add_member(:user_kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "userKMSKey"))
-    SpaceData.add_member(:user_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCount, location_name: "userCount"))
-    SpaceData.add_member(:content_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentSize, location_name: "contentSize"))
-    SpaceData.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedEmailDomainsStatus, location_name: "supportedEmailDomains"))
+    SpaceData.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceDescription, location_name: "description"))
+    SpaceData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, location_name: "configurationStatus", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:vanity_domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VanityDomainStatus, location_name: "vanityDomainStatus", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:vanity_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "vanityDomain", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:random_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "randomDomain", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: TierLevel, location_name: "tier", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:storage_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageLimit, location_name: "storageLimit", traits: {"smithy.api#required" => {}}))
+    SpaceData.add_member(:create_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createDateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    SpaceData.add_member(:delete_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "deleteDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SpaceData.add_member(:user_kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "userKMSKey"))
+    SpaceData.add_member(:user_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCount, location_name: "userCount"))
+    SpaceData.add_member(:content_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentSize, location_name: "contentSize"))
+    SpaceData.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEmailDomainsStatus, location_name: "supportedEmailDomains"))
     SpaceData.type = Types::SpaceData
-    SpacesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceData)
-    SupportedEmailDomainsParameters.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureEnableParameter, location_name: "enabled"))
-    SupportedEmailDomainsParameters.add_member(:allowed_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedDomainsList, location_name: "allowedDomains"))
+    SpacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceData)
+    SupportedEmailDomainsParameters.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureEnableParameter, location_name: "enabled"))
+    SupportedEmailDomainsParameters.add_member(:allowed_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedDomainsList, location_name: "allowedDomains"))
     SupportedEmailDomainsParameters.type = Types::SupportedEmailDomainsParameters
-    SupportedEmailDomainsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FeatureEnableStatus, location_name: "enabled"))
-    SupportedEmailDomainsStatus.add_member(:allowed_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedDomainsList, location_name: "allowedDomains"))
+    SupportedEmailDomainsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureEnableStatus, location_name: "enabled"))
+    SupportedEmailDomainsStatus.add_member(:allowed_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedDomainsList, location_name: "allowedDomains"))
     SupportedEmailDomainsStatus.type = Types::SupportedEmailDomainsStatus
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode"))
-    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode"))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode"))
+    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode"))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    TierLevel.add_member(:basic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
-    TierLevel.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    TierLevel.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
+    TierLevel.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateChannelInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateChannelInput.add_member(:channel_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateChannelInput.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
-    UpdateChannelInput.add_member(:channel_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelDescription, location_name: "channelDescription"))
+    UpdateChannelInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateChannelInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateChannelInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName", traits: {"smithy.api#required" => {}}))
+    UpdateChannelInput.add_member(:channel_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDescription, location_name: "channelDescription"))
     UpdateChannelInput.type = Types::UpdateChannelInput
     UpdateChannelOutput.type = Types::UpdateChannelOutput
-    UpdateSpaceInput.add_member(:space_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateSpaceInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpaceDescription, location_name: "description"))
-    UpdateSpaceInput.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TierLevel, location_name: "tier"))
-    UpdateSpaceInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
-    UpdateSpaceInput.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedEmailDomainsParameters, location_name: "supportedEmailDomains"))
+    UpdateSpaceInput.add_member(:space_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceId, location_name: "spaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateSpaceInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceDescription, location_name: "description"))
+    UpdateSpaceInput.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: TierLevel, location_name: "tier"))
+    UpdateSpaceInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn"))
+    UpdateSpaceInput.add_member(:supported_email_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEmailDomainsParameters, location_name: "supportedEmailDomains"))
     UpdateSpaceInput.type = Types::UpdateSpaceInput
-    UserAdmins.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminId)
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
+    UserAdmins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdminId)
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
-    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
-    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
-    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
-    VanityDomainStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    VanityDomainStatus.add_member(:approved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
-    VanityDomainStatus.add_member(:unapproved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAPPROVED", traits: {"smithy.api#enumValue" => "UNAPPROVED"}))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
+    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
+    VanityDomainStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    VanityDomainStatus.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
+    VanityDomainStatus.add_member(:unapproved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAPPROVED", traits: {"smithy.api#enumValue" => "UNAPPROVED"}))
 
     RepostSpace = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.repostspace#RepostSpace"
@@ -365,235 +365,235 @@ module Aws::Repostspace
       service.add_operation(:batch_add_channel_role_to_accessors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#BatchAddChannelRoleToAccessors"
         operation.name = "BatchAddChannelRoleToAccessors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAddChannelRoleToAccessorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAddChannelRoleToAccessorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchAddChannelRoleToAccessorsInput
+        operation.output = BatchAddChannelRoleToAccessorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/spaces/{spaceId}/channels/{channelId}/roles", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_add_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#BatchAddRole"
         operation.name = "BatchAddRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAddRoleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAddRoleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchAddRoleInput
+        operation.output = BatchAddRoleOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/spaces/{spaceId}/roles", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_remove_channel_role_from_accessors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#BatchRemoveChannelRoleFromAccessors"
         operation.name = "BatchRemoveChannelRoleFromAccessors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchRemoveChannelRoleFromAccessorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchRemoveChannelRoleFromAccessorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchRemoveChannelRoleFromAccessorsInput
+        operation.output = BatchRemoveChannelRoleFromAccessorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/spaces/{spaceId}/channels/{channelId}/roles", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_remove_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#BatchRemoveRole"
         operation.name = "BatchRemoveRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchRemoveRoleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchRemoveRoleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchRemoveRoleInput
+        operation.output = BatchRemoveRoleOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/spaces/{spaceId}/roles", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#CreateChannel"
         operation.name = "CreateChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChannelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateChannelInput
+        operation.output = CreateChannelOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/spaces/{spaceId}/channels", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_space, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#CreateSpace"
         operation.name = "CreateSpace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSpaceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSpaceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateSpaceInput
+        operation.output = CreateSpaceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/spaces", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_space, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#DeleteSpace"
         operation.name = "DeleteSpace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSpaceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteSpaceInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/spaces/{spaceId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:deregister_admin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#DeregisterAdmin"
         operation.name = "DeregisterAdmin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterAdminInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeregisterAdminInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/spaces/{spaceId}/admins/{adminId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#GetChannel"
         operation.name = "GetChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChannelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetChannelInput
+        operation.output = GetChannelOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/spaces/{spaceId}/channels/{channelId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_space, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#GetSpace"
         operation.name = "GetSpace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSpaceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSpaceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetSpaceInput
+        operation.output = GetSpaceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/spaces/{spaceId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_channels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#ListChannels"
         operation.name = "ListChannels"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChannelsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChannelsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListChannelsInput
+        operation.output = ListChannelsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/spaces/{spaceId}/channels", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListChannels.new
       end)
       service.add_operation(:list_spaces, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#ListSpaces"
         operation.name = "ListSpaces"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSpacesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSpacesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSpacesInput
+        operation.output = ListSpacesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/spaces", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSpaces.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:register_admin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#RegisterAdmin"
         operation.name = "RegisterAdmin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterAdminInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RegisterAdminInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/spaces/{spaceId}/admins/{adminId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:send_invites, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#SendInvites"
         operation.name = "SendInvites"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendInvitesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SendInvitesInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/spaces/{spaceId}/invite", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "DELETE", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#UpdateChannel"
         operation.name = "UpdateChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChannelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateChannelInput
+        operation.output = UpdateChannelOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/spaces/{spaceId}/channels/{channelId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_space, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.repostspace#UpdateSpace"
         operation.name = "UpdateSpace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSpaceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateSpaceInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/spaces/{spaceId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end

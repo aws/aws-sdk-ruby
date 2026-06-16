@@ -86,172 +86,172 @@ module Aws::RDSData
     UpdateResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#UpdateResults", name: "UpdateResults")
     Value = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.rdsdata#Value", name: "Value")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ArrayOfArray.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArrayValue)
-    ArrayValue.add_member(:boolean_values, Types::ArrayValue::BooleanValues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanArray, location_name: "booleanValues"))
-    ArrayValue.add_member(:long_values, Types::ArrayValue::LongValues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongArray, location_name: "longValues"))
-    ArrayValue.add_member(:double_values, Types::ArrayValue::DoubleValues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DoubleArray, location_name: "doubleValues"))
-    ArrayValue.add_member(:string_values, Types::ArrayValue::StringValues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringArray, location_name: "stringValues"))
-    ArrayValue.add_member(:array_values, Types::ArrayValue::ArrayValues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArrayOfArray, location_name: "arrayValues"))
-    ArrayValue.add_member(:unknown, Types::ArrayValue::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ArrayOfArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValue)
+    ArrayValue.add_member(:boolean_values, Types::ArrayValue::BooleanValues, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanArray, location_name: "booleanValues"))
+    ArrayValue.add_member(:long_values, Types::ArrayValue::LongValues, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArray, location_name: "longValues"))
+    ArrayValue.add_member(:double_values, Types::ArrayValue::DoubleValues, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleArray, location_name: "doubleValues"))
+    ArrayValue.add_member(:string_values, Types::ArrayValue::StringValues, ::Smithy::Schema::Shapes::MemberShape.new(target: StringArray, location_name: "stringValues"))
+    ArrayValue.add_member(:array_values, Types::ArrayValue::ArrayValues, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayOfArray, location_name: "arrayValues"))
+    ArrayValue.add_member(:unknown, Types::ArrayValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ArrayValue.type = Types::ArrayValue
-    ArrayValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value)
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ArrayValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value)
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     BadRequestException.type = Types::BadRequestException
-    BatchExecuteStatementInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    BatchExecuteStatementInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
-    BatchExecuteStatementInput.add_member(:sql, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlStatement, location_name: "sql", traits: {"smithy.api#required" => {}}))
-    BatchExecuteStatementInput.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
-    BatchExecuteStatementInput.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
-    BatchExecuteStatementInput.add_member(:parameter_sets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlParameterSets, location_name: "parameterSets"))
-    BatchExecuteStatementInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "transactionId"))
+    BatchExecuteStatementInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    BatchExecuteStatementInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
+    BatchExecuteStatementInput.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatement, location_name: "sql", traits: {"smithy.api#required" => {}}))
+    BatchExecuteStatementInput.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "database"))
+    BatchExecuteStatementInput.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "schema"))
+    BatchExecuteStatementInput.add_member(:parameter_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParameterSets, location_name: "parameterSets"))
+    BatchExecuteStatementInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "transactionId"))
     BatchExecuteStatementInput.type = Types::BatchExecuteStatementInput
-    BatchExecuteStatementOutput.add_member(:update_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResults, location_name: "updateResults"))
+    BatchExecuteStatementOutput.add_member(:update_results, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateResults, location_name: "updateResults"))
     BatchExecuteStatementOutput.type = Types::BatchExecuteStatementOutput
-    BeginTransactionInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    BeginTransactionInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
-    BeginTransactionInput.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
-    BeginTransactionInput.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
+    BeginTransactionInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    BeginTransactionInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
+    BeginTransactionInput.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "database"))
+    BeginTransactionInput.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "schema"))
     BeginTransactionInput.type = Types::BeginTransactionInput
-    BeginTransactionOutput.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "transactionId"))
+    BeginTransactionOutput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "transactionId"))
     BeginTransactionOutput.type = Types::BeginTransactionOutput
-    BooleanArray.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedBoolean)
-    ColumnMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    ColumnMetadata.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "type", traits: {"smithy.api#default" => 0}))
-    ColumnMetadata.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "typeName"))
-    ColumnMetadata.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "label"))
-    ColumnMetadata.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "schemaName"))
-    ColumnMetadata.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "tableName"))
-    ColumnMetadata.add_member(:is_auto_increment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoIncrement", traits: {"smithy.api#default" => false}))
-    ColumnMetadata.add_member(:is_signed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "isSigned", traits: {"smithy.api#default" => false}))
-    ColumnMetadata.add_member(:is_currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "isCurrency", traits: {"smithy.api#default" => false}))
-    ColumnMetadata.add_member(:is_case_sensitive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "isCaseSensitive", traits: {"smithy.api#default" => false}))
-    ColumnMetadata.add_member(:nullable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "nullable", traits: {"smithy.api#default" => 0}))
-    ColumnMetadata.add_member(:precision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "precision", traits: {"smithy.api#default" => 0}))
-    ColumnMetadata.add_member(:scale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "scale", traits: {"smithy.api#default" => 0}))
-    ColumnMetadata.add_member(:array_base_column_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "arrayBaseColumnType", traits: {"smithy.api#default" => 0}))
+    BooleanArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean)
+    ColumnMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    ColumnMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "type", traits: {"smithy.api#default" => 0}))
+    ColumnMetadata.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "typeName"))
+    ColumnMetadata.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "label"))
+    ColumnMetadata.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "schemaName"))
+    ColumnMetadata.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "tableName"))
+    ColumnMetadata.add_member(:is_auto_increment, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "isAutoIncrement", traits: {"smithy.api#default" => false}))
+    ColumnMetadata.add_member(:is_signed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "isSigned", traits: {"smithy.api#default" => false}))
+    ColumnMetadata.add_member(:is_currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "isCurrency", traits: {"smithy.api#default" => false}))
+    ColumnMetadata.add_member(:is_case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "isCaseSensitive", traits: {"smithy.api#default" => false}))
+    ColumnMetadata.add_member(:nullable, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "nullable", traits: {"smithy.api#default" => 0}))
+    ColumnMetadata.add_member(:precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "precision", traits: {"smithy.api#default" => 0}))
+    ColumnMetadata.add_member(:scale, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "scale", traits: {"smithy.api#default" => 0}))
+    ColumnMetadata.add_member(:array_base_column_type, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "arrayBaseColumnType", traits: {"smithy.api#default" => 0}))
     ColumnMetadata.type = Types::ColumnMetadata
-    CommitTransactionInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    CommitTransactionInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
-    CommitTransactionInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "transactionId", traits: {"smithy.api#required" => {}}))
+    CommitTransactionInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    CommitTransactionInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
+    CommitTransactionInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "transactionId", traits: {"smithy.api#required" => {}}))
     CommitTransactionInput.type = Types::CommitTransactionInput
-    CommitTransactionOutput.add_member(:transaction_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionStatus, location_name: "transactionStatus"))
+    CommitTransactionOutput.add_member(:transaction_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionStatus, location_name: "transactionStatus"))
     CommitTransactionOutput.type = Types::CommitTransactionOutput
-    DatabaseErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DatabaseErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     DatabaseErrorException.type = Types::DatabaseErrorException
-    DatabaseNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DatabaseNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     DatabaseNotFoundException.type = Types::DatabaseNotFoundException
-    DatabaseResumingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DatabaseResumingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     DatabaseResumingException.type = Types::DatabaseResumingException
     DatabaseUnavailableException.type = Types::DatabaseUnavailableException
-    DoubleArray.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedDouble)
-    ExecuteSqlInput.add_member(:db_cluster_or_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "dbClusterOrInstanceArn", traits: {"smithy.api#required" => {}}))
-    ExecuteSqlInput.add_member(:aws_secret_store_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "awsSecretStoreArn", traits: {"smithy.api#required" => {}}))
-    ExecuteSqlInput.add_member(:sql_statements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlStatement, location_name: "sqlStatements", traits: {"smithy.api#required" => {}}))
-    ExecuteSqlInput.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
-    ExecuteSqlInput.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
+    DoubleArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble)
+    ExecuteSqlInput.add_member(:db_cluster_or_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "dbClusterOrInstanceArn", traits: {"smithy.api#required" => {}}))
+    ExecuteSqlInput.add_member(:aws_secret_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "awsSecretStoreArn", traits: {"smithy.api#required" => {}}))
+    ExecuteSqlInput.add_member(:sql_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatement, location_name: "sqlStatements", traits: {"smithy.api#required" => {}}))
+    ExecuteSqlInput.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "database"))
+    ExecuteSqlInput.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "schema"))
     ExecuteSqlInput.type = Types::ExecuteSqlInput
-    ExecuteSqlOutput.add_member(:sql_statement_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlStatementResults, location_name: "sqlStatementResults"))
+    ExecuteSqlOutput.add_member(:sql_statement_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatementResults, location_name: "sqlStatementResults"))
     ExecuteSqlOutput.type = Types::ExecuteSqlOutput
-    ExecuteStatementInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    ExecuteStatementInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
-    ExecuteStatementInput.add_member(:sql, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlStatement, location_name: "sql", traits: {"smithy.api#required" => {}}))
-    ExecuteStatementInput.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
-    ExecuteStatementInput.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
-    ExecuteStatementInput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "parameters"))
-    ExecuteStatementInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "transactionId"))
-    ExecuteStatementInput.add_member(:include_result_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "includeResultMetadata", traits: {"smithy.api#default" => false}))
-    ExecuteStatementInput.add_member(:continue_after_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "continueAfterTimeout", traits: {"smithy.api#default" => false}))
-    ExecuteStatementInput.add_member(:result_set_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResultSetOptions, location_name: "resultSetOptions"))
-    ExecuteStatementInput.add_member(:format_records_as, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordsFormatType, location_name: "formatRecordsAs"))
+    ExecuteStatementInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    ExecuteStatementInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
+    ExecuteStatementInput.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatement, location_name: "sql", traits: {"smithy.api#required" => {}}))
+    ExecuteStatementInput.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "database"))
+    ExecuteStatementInput.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, location_name: "schema"))
+    ExecuteStatementInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParametersList, location_name: "parameters"))
+    ExecuteStatementInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "transactionId"))
+    ExecuteStatementInput.add_member(:include_result_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "includeResultMetadata", traits: {"smithy.api#default" => false}))
+    ExecuteStatementInput.add_member(:continue_after_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "continueAfterTimeout", traits: {"smithy.api#default" => false}))
+    ExecuteStatementInput.add_member(:result_set_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultSetOptions, location_name: "resultSetOptions"))
+    ExecuteStatementInput.add_member(:format_records_as, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordsFormatType, location_name: "formatRecordsAs"))
     ExecuteStatementInput.type = Types::ExecuteStatementInput
-    ExecuteStatementOutput.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlRecords, location_name: "records"))
-    ExecuteStatementOutput.add_member(:column_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "columnMetadata"))
-    ExecuteStatementOutput.add_member(:number_of_records_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordsUpdated, location_name: "numberOfRecordsUpdated", traits: {"smithy.api#default" => 0}))
-    ExecuteStatementOutput.add_member(:generated_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList, location_name: "generatedFields"))
-    ExecuteStatementOutput.add_member(:formatted_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormattedSqlRecords, location_name: "formattedRecords"))
+    ExecuteStatementOutput.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlRecords, location_name: "records"))
+    ExecuteStatementOutput.add_member(:column_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "columnMetadata"))
+    ExecuteStatementOutput.add_member(:number_of_records_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordsUpdated, location_name: "numberOfRecordsUpdated", traits: {"smithy.api#default" => 0}))
+    ExecuteStatementOutput.add_member(:generated_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, location_name: "generatedFields"))
+    ExecuteStatementOutput.add_member(:formatted_records, ::Smithy::Schema::Shapes::MemberShape.new(target: FormattedSqlRecords, location_name: "formattedRecords"))
     ExecuteStatementOutput.type = Types::ExecuteStatementOutput
-    Field.add_member(:is_null, Types::Field::IsNull, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
-    Field.add_member(:boolean_value, Types::Field::BooleanValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue"))
-    Field.add_member(:long_value, Types::Field::LongValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue"))
-    Field.add_member(:double_value, Types::Field::DoubleValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
-    Field.add_member(:string_value, Types::Field::StringValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
-    Field.add_member(:blob_value, Types::Field::BlobValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
-    Field.add_member(:array_value, Types::Field::ArrayValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArrayValue, location_name: "arrayValue"))
-    Field.add_member(:unknown, Types::Field::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    Field.add_member(:is_null, Types::Field::IsNull, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, location_name: "isNull"))
+    Field.add_member(:boolean_value, Types::Field::BooleanValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, location_name: "booleanValue"))
+    Field.add_member(:long_value, Types::Field::LongValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, location_name: "longValue"))
+    Field.add_member(:double_value, Types::Field::DoubleValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, location_name: "doubleValue"))
+    Field.add_member(:string_value, Types::Field::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "stringValue"))
+    Field.add_member(:blob_value, Types::Field::BlobValue, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, location_name: "blobValue"))
+    Field.add_member(:array_value, Types::Field::ArrayValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValue, location_name: "arrayValue"))
+    Field.add_member(:unknown, Types::Field::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Field.type = Types::Field
-    FieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Field)
-    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Field)
+    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ForbiddenException.type = Types::ForbiddenException
-    HttpEndpointNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HttpEndpointNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     HttpEndpointNotEnabledException.type = Types::HttpEndpointNotEnabledException
     InternalServerErrorException.type = Types::InternalServerErrorException
-    InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidResourceStateException.type = Types::InvalidResourceStateException
-    InvalidSecretException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSecretException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidSecretException.type = Types::InvalidSecretException
-    LongArray.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedLong)
-    Metadata.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnMetadata)
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LongArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong)
+    Metadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata)
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NotFoundException.type = Types::NotFoundException
-    Record.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Row, location_name: "values"))
+    Record.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, location_name: "values"))
     Record.type = Types::Record
-    Records.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Record)
-    ResultFrame.add_member(:result_set_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResultSetMetadata, location_name: "resultSetMetadata"))
-    ResultFrame.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Records, location_name: "records"))
+    Records.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record)
+    ResultFrame.add_member(:result_set_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultSetMetadata, location_name: "resultSetMetadata"))
+    ResultFrame.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: Records, location_name: "records"))
     ResultFrame.type = Types::ResultFrame
-    ResultSetMetadata.add_member(:column_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "columnCount", traits: {"smithy.api#default" => 0}))
-    ResultSetMetadata.add_member(:column_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "columnMetadata"))
+    ResultSetMetadata.add_member(:column_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "columnCount", traits: {"smithy.api#default" => 0}))
+    ResultSetMetadata.add_member(:column_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "columnMetadata"))
     ResultSetMetadata.type = Types::ResultSetMetadata
-    ResultSetOptions.add_member(:decimal_return_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecimalReturnType, location_name: "decimalReturnType"))
-    ResultSetOptions.add_member(:long_return_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongReturnType, location_name: "longReturnType"))
+    ResultSetOptions.add_member(:decimal_return_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalReturnType, location_name: "decimalReturnType"))
+    ResultSetOptions.add_member(:long_return_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LongReturnType, location_name: "longReturnType"))
     ResultSetOptions.type = Types::ResultSetOptions
-    RollbackTransactionInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    RollbackTransactionInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
-    RollbackTransactionInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "transactionId", traits: {"smithy.api#required" => {}}))
+    RollbackTransactionInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    RollbackTransactionInput.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "secretArn", traits: {"smithy.api#required" => {}}))
+    RollbackTransactionInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "transactionId", traits: {"smithy.api#required" => {}}))
     RollbackTransactionInput.type = Types::RollbackTransactionInput
-    RollbackTransactionOutput.add_member(:transaction_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionStatus, location_name: "transactionStatus"))
+    RollbackTransactionOutput.add_member(:transaction_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionStatus, location_name: "transactionStatus"))
     RollbackTransactionOutput.type = Types::RollbackTransactionOutput
-    Row.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value)
-    SecretsErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    Row.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value)
+    SecretsErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     SecretsErrorException.type = Types::SecretsErrorException
     ServiceUnavailableError.type = Types::ServiceUnavailableError
-    SqlParameter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterName, location_name: "name"))
-    SqlParameter.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Field, location_name: "value"))
-    SqlParameter.add_member(:type_hint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeHint, location_name: "typeHint"))
+    SqlParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, location_name: "name"))
+    SqlParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, location_name: "value"))
+    SqlParameter.add_member(:type_hint, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeHint, location_name: "typeHint"))
     SqlParameter.type = Types::SqlParameter
-    SqlParameterSets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlParametersList)
-    SqlParametersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlParameter)
-    SqlRecords.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList)
-    SqlStatementResult.add_member(:result_frame, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResultFrame, location_name: "resultFrame"))
-    SqlStatementResult.add_member(:number_of_records_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordsUpdated, location_name: "numberOfRecordsUpdated", traits: {"smithy.api#default" => 0}))
+    SqlParameterSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParametersList)
+    SqlParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParameter)
+    SqlRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList)
+    SqlStatementResult.add_member(:result_frame, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFrame, location_name: "resultFrame"))
+    SqlStatementResult.add_member(:number_of_records_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordsUpdated, location_name: "numberOfRecordsUpdated", traits: {"smithy.api#default" => 0}))
     SqlStatementResult.type = Types::SqlStatementResult
-    SqlStatementResults.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlStatementResult)
-    StatementTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
-    StatementTimeoutException.add_member(:db_connection_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "dbConnectionId", traits: {"smithy.api#default" => 0}))
+    SqlStatementResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatementResult)
+    StatementTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    StatementTimeoutException.add_member(:db_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "dbConnectionId", traits: {"smithy.api#default" => 0}))
     StatementTimeoutException.type = Types::StatementTimeoutException
-    StringArray.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    StructValue.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "attributes"))
+    StringArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    StructValue.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValueList, location_name: "attributes"))
     StructValue.type = Types::StructValue
-    TransactionNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TransactionNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     TransactionNotFoundException.type = Types::TransactionNotFoundException
-    UnsupportedResultException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnsupportedResultException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     UnsupportedResultException.type = Types::UnsupportedResultException
-    UpdateResult.add_member(:generated_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList, location_name: "generatedFields"))
+    UpdateResult.add_member(:generated_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, location_name: "generatedFields"))
     UpdateResult.type = Types::UpdateResult
-    UpdateResults.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResult)
-    Value.add_member(:is_null, Types::Value::IsNull, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
-    Value.add_member(:bit_value, Types::Value::BitValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bitValue"))
-    Value.add_member(:big_int_value, Types::Value::BigIntValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedLong, location_name: "bigIntValue"))
-    Value.add_member(:int_value, Types::Value::IntValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "intValue"))
-    Value.add_member(:double_value, Types::Value::DoubleValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
-    Value.add_member(:real_value, Types::Value::RealValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedFloat, location_name: "realValue"))
-    Value.add_member(:string_value, Types::Value::StringValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
-    Value.add_member(:blob_value, Types::Value::BlobValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
-    Value.add_member(:array_values, Types::Value::ArrayValues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "arrayValues"))
-    Value.add_member(:struct_value, Types::Value::StructValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StructValue, location_name: "structValue"))
-    Value.add_member(:unknown, Types::Value::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    UpdateResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateResult)
+    Value.add_member(:is_null, Types::Value::IsNull, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, location_name: "isNull"))
+    Value.add_member(:bit_value, Types::Value::BitValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, location_name: "bitValue"))
+    Value.add_member(:big_int_value, Types::Value::BigIntValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, location_name: "bigIntValue"))
+    Value.add_member(:int_value, Types::Value::IntValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, location_name: "intValue"))
+    Value.add_member(:double_value, Types::Value::DoubleValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, location_name: "doubleValue"))
+    Value.add_member(:real_value, Types::Value::RealValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedFloat, location_name: "realValue"))
+    Value.add_member(:string_value, Types::Value::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "stringValue"))
+    Value.add_member(:blob_value, Types::Value::BlobValue, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, location_name: "blobValue"))
+    Value.add_member(:array_values, Types::Value::ArrayValues, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValueList, location_name: "arrayValues"))
+    Value.add_member(:struct_value, Types::Value::StructValue, ::Smithy::Schema::Shapes::MemberShape.new(target: StructValue, location_name: "structValue"))
+    Value.add_member(:unknown, Types::Value::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Value.type = Types::Value
 
     RdsDataService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -262,124 +262,124 @@ module Aws::RDSData
       service.add_operation(:batch_execute_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rdsdata#BatchExecuteStatement"
         operation.name = "BatchExecuteStatement"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchExecuteStatementInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchExecuteStatementOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseResumingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSecretException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretsErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatementTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        operation.input = BatchExecuteStatementInput
+        operation.output = BatchExecuteStatementOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << DatabaseErrorException
+        operation.errors << DatabaseNotFoundException
+        operation.errors << DatabaseResumingException
+        operation.errors << DatabaseUnavailableException
+        operation.errors << ForbiddenException
+        operation.errors << HttpEndpointNotEnabledException
+        operation.errors << InternalServerErrorException
+        operation.errors << InvalidResourceStateException
+        operation.errors << InvalidSecretException
+        operation.errors << SecretsErrorException
+        operation.errors << ServiceUnavailableError
+        operation.errors << StatementTimeoutException
+        operation.errors << TransactionNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/BatchExecute"}}
       end)
       service.add_operation(:begin_transaction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rdsdata#BeginTransaction"
         operation.name = "BeginTransaction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BeginTransactionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BeginTransactionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseResumingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSecretException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretsErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatementTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        operation.input = BeginTransactionInput
+        operation.output = BeginTransactionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << DatabaseErrorException
+        operation.errors << DatabaseNotFoundException
+        operation.errors << DatabaseResumingException
+        operation.errors << DatabaseUnavailableException
+        operation.errors << ForbiddenException
+        operation.errors << HttpEndpointNotEnabledException
+        operation.errors << InternalServerErrorException
+        operation.errors << InvalidResourceStateException
+        operation.errors << InvalidSecretException
+        operation.errors << SecretsErrorException
+        operation.errors << ServiceUnavailableError
+        operation.errors << StatementTimeoutException
+        operation.errors << TransactionNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/BeginTransaction"}}
       end)
       service.add_operation(:commit_transaction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rdsdata#CommitTransaction"
         operation.name = "CommitTransaction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitTransactionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitTransactionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSecretException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretsErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatementTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        operation.input = CommitTransactionInput
+        operation.output = CommitTransactionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << DatabaseErrorException
+        operation.errors << DatabaseNotFoundException
+        operation.errors << DatabaseUnavailableException
+        operation.errors << ForbiddenException
+        operation.errors << HttpEndpointNotEnabledException
+        operation.errors << InternalServerErrorException
+        operation.errors << InvalidResourceStateException
+        operation.errors << InvalidSecretException
+        operation.errors << NotFoundException
+        operation.errors << SecretsErrorException
+        operation.errors << ServiceUnavailableError
+        operation.errors << StatementTimeoutException
+        operation.errors << TransactionNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/CommitTransaction"}}
       end)
       service.add_operation(:execute_sql, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rdsdata#ExecuteSql"
         operation.name = "ExecuteSql"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecuteSqlInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecuteSqlOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        operation.input = ExecuteSqlInput
+        operation.output = ExecuteSqlOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableError
         operation.traits = {"smithy.api#deprecated" => {"message" => "The ExecuteSql API is deprecated, please use the ExecuteStatement API.", "since" => "2019-03-21"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/ExecuteSql"}}
       end)
       service.add_operation(:execute_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rdsdata#ExecuteStatement"
         operation.name = "ExecuteStatement"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecuteStatementInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecuteStatementOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseResumingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSecretException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretsErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatementTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedResultException)
+        operation.input = ExecuteStatementInput
+        operation.output = ExecuteStatementOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << DatabaseErrorException
+        operation.errors << DatabaseNotFoundException
+        operation.errors << DatabaseResumingException
+        operation.errors << DatabaseUnavailableException
+        operation.errors << ForbiddenException
+        operation.errors << HttpEndpointNotEnabledException
+        operation.errors << InternalServerErrorException
+        operation.errors << InvalidResourceStateException
+        operation.errors << InvalidSecretException
+        operation.errors << SecretsErrorException
+        operation.errors << ServiceUnavailableError
+        operation.errors << StatementTimeoutException
+        operation.errors << TransactionNotFoundException
+        operation.errors << UnsupportedResultException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/Execute"}}
       end)
       service.add_operation(:rollback_transaction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rdsdata#RollbackTransaction"
         operation.name = "RollbackTransaction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RollbackTransactionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RollbackTransactionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSecretException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretsErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatementTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        operation.input = RollbackTransactionInput
+        operation.output = RollbackTransactionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << DatabaseErrorException
+        operation.errors << DatabaseNotFoundException
+        operation.errors << DatabaseUnavailableException
+        operation.errors << ForbiddenException
+        operation.errors << HttpEndpointNotEnabledException
+        operation.errors << InternalServerErrorException
+        operation.errors << InvalidResourceStateException
+        operation.errors << InvalidSecretException
+        operation.errors << NotFoundException
+        operation.errors << SecretsErrorException
+        operation.errors << ServiceUnavailableError
+        operation.errors << StatementTimeoutException
+        operation.errors << TransactionNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/RollbackTransaction"}}
       end)
     end

@@ -240,805 +240,805 @@ module Aws::LicenseManager
     UsageOperation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#UsageOperation", name: "UsageOperation", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AcceptGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
+    AcceptGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
     AcceptGrantRequest.type = Types::AcceptGrantRequest
-    AcceptGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
-    AcceptGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
-    AcceptGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    AcceptGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn"))
+    AcceptGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, location_name: "Status"))
+    AcceptGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     AcceptGrantResponse.type = Types::AcceptGrantResponse
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ActivationOverrideBehavior.add_member(:distributed_grants_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISTRIBUTED_GRANTS_ONLY", traits: {"smithy.api#enumValue" => "DISTRIBUTED_GRANTS_ONLY"}))
-    ActivationOverrideBehavior.add_member(:all_grants_permitted_by_issuer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL_GRANTS_PERMITTED_BY_ISSUER", traits: {"smithy.api#enumValue" => "ALL_GRANTS_PERMITTED_BY_ISSUER"}))
-    AllowedOperation.add_member(:create_grant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_GRANT", traits: {"smithy.api#enumValue" => "CreateGrant"}))
-    AllowedOperation.add_member(:checkout_license, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHECKOUT_LICENSE", traits: {"smithy.api#enumValue" => "CheckoutLicense"}))
-    AllowedOperation.add_member(:checkout_borrow_license, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHECKOUT_BORROW_LICENSE", traits: {"smithy.api#enumValue" => "CheckoutBorrowLicense"}))
-    AllowedOperation.add_member(:check_in_license, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHECK_IN_LICENSE", traits: {"smithy.api#enumValue" => "CheckInLicense"}))
-    AllowedOperation.add_member(:extend_consumption_license, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXTEND_CONSUMPTION_LICENSE", traits: {"smithy.api#enumValue" => "ExtendConsumptionLicense"}))
-    AllowedOperation.add_member(:list_purchased_licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIST_PURCHASED_LICENSES", traits: {"smithy.api#enumValue" => "ListPurchasedLicenses"}))
-    AllowedOperation.add_member(:create_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_TOKEN", traits: {"smithy.api#enumValue" => "CreateToken"}))
-    AllowedOperationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOperation)
-    ArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    AuthorizationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ActivationOverrideBehavior.add_member(:distributed_grants_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISTRIBUTED_GRANTS_ONLY", traits: {"smithy.api#enumValue" => "DISTRIBUTED_GRANTS_ONLY"}))
+    ActivationOverrideBehavior.add_member(:all_grants_permitted_by_issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL_GRANTS_PERMITTED_BY_ISSUER", traits: {"smithy.api#enumValue" => "ALL_GRANTS_PERMITTED_BY_ISSUER"}))
+    AllowedOperation.add_member(:create_grant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_GRANT", traits: {"smithy.api#enumValue" => "CreateGrant"}))
+    AllowedOperation.add_member(:checkout_license, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHECKOUT_LICENSE", traits: {"smithy.api#enumValue" => "CheckoutLicense"}))
+    AllowedOperation.add_member(:checkout_borrow_license, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHECKOUT_BORROW_LICENSE", traits: {"smithy.api#enumValue" => "CheckoutBorrowLicense"}))
+    AllowedOperation.add_member(:check_in_license, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHECK_IN_LICENSE", traits: {"smithy.api#enumValue" => "CheckInLicense"}))
+    AllowedOperation.add_member(:extend_consumption_license, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXTEND_CONSUMPTION_LICENSE", traits: {"smithy.api#enumValue" => "ExtendConsumptionLicense"}))
+    AllowedOperation.add_member(:list_purchased_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIST_PURCHASED_LICENSES", traits: {"smithy.api#enumValue" => "ListPurchasedLicenses"}))
+    AllowedOperation.add_member(:create_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_TOKEN", traits: {"smithy.api#enumValue" => "CreateToken"}))
+    AllowedOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperation)
+    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    AuthorizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     AuthorizationException.type = Types::AuthorizationException
-    AutomatedDiscoveryInformation.add_member(:last_run_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "LastRunTime"))
+    AutomatedDiscoveryInformation.add_member(:last_run_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "LastRunTime"))
     AutomatedDiscoveryInformation.type = Types::AutomatedDiscoveryInformation
-    BorrowConfiguration.add_member(:allow_early_check_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "AllowEarlyCheckIn", traits: {"smithy.api#required" => {}}))
-    BorrowConfiguration.add_member(:max_time_to_live_in_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxTimeToLiveInMinutes", traits: {"smithy.api#required" => {}}))
+    BorrowConfiguration.add_member(:allow_early_check_in, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "AllowEarlyCheckIn", traits: {"smithy.api#required" => {}}))
+    BorrowConfiguration.add_member(:max_time_to_live_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxTimeToLiveInMinutes", traits: {"smithy.api#required" => {}}))
     BorrowConfiguration.type = Types::BorrowConfiguration
-    CheckInLicenseRequest.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConsumptionToken", traits: {"smithy.api#required" => {}}))
-    CheckInLicenseRequest.add_member(:beneficiary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Beneficiary"))
+    CheckInLicenseRequest.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConsumptionToken", traits: {"smithy.api#required" => {}}))
+    CheckInLicenseRequest.add_member(:beneficiary, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Beneficiary"))
     CheckInLicenseRequest.type = Types::CheckInLicenseRequest
     CheckInLicenseResponse.type = Types::CheckInLicenseResponse
-    CheckoutBorrowLicenseRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    CheckoutBorrowLicenseRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementDataList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
-    CheckoutBorrowLicenseRequest.add_member(:digital_signature_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DigitalSignatureMethod, location_name: "DigitalSignatureMethod", traits: {"smithy.api#required" => {}}))
-    CheckoutBorrowLicenseRequest.add_member(:node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeId"))
-    CheckoutBorrowLicenseRequest.add_member(:checkout_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataList, location_name: "CheckoutMetadata"))
-    CheckoutBorrowLicenseRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CheckoutBorrowLicenseRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    CheckoutBorrowLicenseRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
+    CheckoutBorrowLicenseRequest.add_member(:digital_signature_method, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitalSignatureMethod, location_name: "DigitalSignatureMethod", traits: {"smithy.api#required" => {}}))
+    CheckoutBorrowLicenseRequest.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeId"))
+    CheckoutBorrowLicenseRequest.add_member(:checkout_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, location_name: "CheckoutMetadata"))
+    CheckoutBorrowLicenseRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
     CheckoutBorrowLicenseRequest.type = Types::CheckoutBorrowLicenseRequest
-    CheckoutBorrowLicenseResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))
-    CheckoutBorrowLicenseResponse.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConsumptionToken"))
-    CheckoutBorrowLicenseResponse.add_member(:entitlements_allowed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementDataList, location_name: "EntitlementsAllowed"))
-    CheckoutBorrowLicenseResponse.add_member(:node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeId"))
-    CheckoutBorrowLicenseResponse.add_member(:signed_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignedToken, location_name: "SignedToken"))
-    CheckoutBorrowLicenseResponse.add_member(:issued_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "IssuedAt"))
-    CheckoutBorrowLicenseResponse.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "Expiration"))
-    CheckoutBorrowLicenseResponse.add_member(:checkout_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataList, location_name: "CheckoutMetadata"))
+    CheckoutBorrowLicenseResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn"))
+    CheckoutBorrowLicenseResponse.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConsumptionToken"))
+    CheckoutBorrowLicenseResponse.add_member(:entitlements_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataList, location_name: "EntitlementsAllowed"))
+    CheckoutBorrowLicenseResponse.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeId"))
+    CheckoutBorrowLicenseResponse.add_member(:signed_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SignedToken, location_name: "SignedToken"))
+    CheckoutBorrowLicenseResponse.add_member(:issued_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "IssuedAt"))
+    CheckoutBorrowLicenseResponse.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "Expiration"))
+    CheckoutBorrowLicenseResponse.add_member(:checkout_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, location_name: "CheckoutMetadata"))
     CheckoutBorrowLicenseResponse.type = Types::CheckoutBorrowLicenseResponse
-    CheckoutLicenseRequest.add_member(:product_sku, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductSKU", traits: {"smithy.api#required" => {}}))
-    CheckoutLicenseRequest.add_member(:checkout_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckoutType, location_name: "CheckoutType", traits: {"smithy.api#required" => {}}))
-    CheckoutLicenseRequest.add_member(:key_fingerprint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KeyFingerprint", traits: {"smithy.api#required" => {}}))
-    CheckoutLicenseRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementDataList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
-    CheckoutLicenseRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CheckoutLicenseRequest.add_member(:beneficiary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Beneficiary"))
-    CheckoutLicenseRequest.add_member(:node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeId"))
+    CheckoutLicenseRequest.add_member(:product_sku, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductSKU", traits: {"smithy.api#required" => {}}))
+    CheckoutLicenseRequest.add_member(:checkout_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckoutType, location_name: "CheckoutType", traits: {"smithy.api#required" => {}}))
+    CheckoutLicenseRequest.add_member(:key_fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KeyFingerprint", traits: {"smithy.api#required" => {}}))
+    CheckoutLicenseRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
+    CheckoutLicenseRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CheckoutLicenseRequest.add_member(:beneficiary, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Beneficiary"))
+    CheckoutLicenseRequest.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeId"))
     CheckoutLicenseRequest.type = Types::CheckoutLicenseRequest
-    CheckoutLicenseResponse.add_member(:checkout_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckoutType, location_name: "CheckoutType"))
-    CheckoutLicenseResponse.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConsumptionToken"))
-    CheckoutLicenseResponse.add_member(:entitlements_allowed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementDataList, location_name: "EntitlementsAllowed"))
-    CheckoutLicenseResponse.add_member(:signed_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignedToken, location_name: "SignedToken"))
-    CheckoutLicenseResponse.add_member(:node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeId"))
-    CheckoutLicenseResponse.add_member(:issued_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "IssuedAt"))
-    CheckoutLicenseResponse.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "Expiration"))
-    CheckoutLicenseResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseArn"))
+    CheckoutLicenseResponse.add_member(:checkout_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckoutType, location_name: "CheckoutType"))
+    CheckoutLicenseResponse.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConsumptionToken"))
+    CheckoutLicenseResponse.add_member(:entitlements_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataList, location_name: "EntitlementsAllowed"))
+    CheckoutLicenseResponse.add_member(:signed_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SignedToken, location_name: "SignedToken"))
+    CheckoutLicenseResponse.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeId"))
+    CheckoutLicenseResponse.add_member(:issued_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "IssuedAt"))
+    CheckoutLicenseResponse.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "Expiration"))
+    CheckoutLicenseResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseArn"))
     CheckoutLicenseResponse.type = Types::CheckoutLicenseResponse
-    CheckoutType.add_member(:provisional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROVISIONAL", traits: {"smithy.api#enumValue" => "PROVISIONAL"}))
-    CheckoutType.add_member(:perpetual, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERPETUAL", traits: {"smithy.api#enumValue" => "PERPETUAL"}))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    CheckoutType.add_member(:provisional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROVISIONAL", traits: {"smithy.api#enumValue" => "PROVISIONAL"}))
+    CheckoutType.add_member(:perpetual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERPETUAL", traits: {"smithy.api#enumValue" => "PERPETUAL"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    ConsumedLicenseSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ConsumedLicenseSummary.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "ConsumedLicenses"))
+    ConsumedLicenseSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    ConsumedLicenseSummary.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "ConsumedLicenses"))
     ConsumedLicenseSummary.type = Types::ConsumedLicenseSummary
-    ConsumedLicenseSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumedLicenseSummary)
-    ConsumptionConfiguration.add_member(:renew_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenewType, location_name: "RenewType"))
-    ConsumptionConfiguration.add_member(:provisional_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionalConfiguration, location_name: "ProvisionalConfiguration"))
-    ConsumptionConfiguration.add_member(:borrow_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BorrowConfiguration, location_name: "BorrowConfiguration"))
+    ConsumedLicenseSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedLicenseSummary)
+    ConsumptionConfiguration.add_member(:renew_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RenewType, location_name: "RenewType"))
+    ConsumptionConfiguration.add_member(:provisional_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionalConfiguration, location_name: "ProvisionalConfiguration"))
+    ConsumptionConfiguration.add_member(:borrow_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BorrowConfiguration, location_name: "BorrowConfiguration"))
     ConsumptionConfiguration.type = Types::ConsumptionConfiguration
-    CreateGrantRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateGrantRequest.add_member(:grant_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "GrantName", traits: {"smithy.api#required" => {}}))
-    CreateGrantRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    CreateGrantRequest.add_member(:principals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrincipalArnList, location_name: "Principals", traits: {"smithy.api#required" => {}}))
-    CreateGrantRequest.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
-    CreateGrantRequest.add_member(:allowed_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOperationList, location_name: "AllowedOperations", traits: {"smithy.api#required" => {}}))
-    CreateGrantRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateGrantRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateGrantRequest.add_member(:grant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "GrantName", traits: {"smithy.api#required" => {}}))
+    CreateGrantRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    CreateGrantRequest.add_member(:principals, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArnList, location_name: "Principals", traits: {"smithy.api#required" => {}}))
+    CreateGrantRequest.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
+    CreateGrantRequest.add_member(:allowed_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperationList, location_name: "AllowedOperations", traits: {"smithy.api#required" => {}}))
+    CreateGrantRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateGrantRequest.type = Types::CreateGrantRequest
-    CreateGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
-    CreateGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
-    CreateGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    CreateGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn"))
+    CreateGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, location_name: "Status"))
+    CreateGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     CreateGrantResponse.type = Types::CreateGrantResponse
-    CreateGrantVersionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateGrantVersionRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
-    CreateGrantVersionRequest.add_member(:grant_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "GrantName"))
-    CreateGrantVersionRequest.add_member(:allowed_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOperationList, location_name: "AllowedOperations"))
-    CreateGrantVersionRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
-    CreateGrantVersionRequest.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
-    CreateGrantVersionRequest.add_member(:source_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion"))
-    CreateGrantVersionRequest.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
+    CreateGrantVersionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateGrantVersionRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
+    CreateGrantVersionRequest.add_member(:grant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "GrantName"))
+    CreateGrantVersionRequest.add_member(:allowed_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperationList, location_name: "AllowedOperations"))
+    CreateGrantVersionRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, location_name: "Status"))
+    CreateGrantVersionRequest.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReasonMessage, location_name: "StatusReason"))
+    CreateGrantVersionRequest.add_member(:source_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceVersion"))
+    CreateGrantVersionRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "Options"))
     CreateGrantVersionRequest.type = Types::CreateGrantVersionRequest
-    CreateGrantVersionResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
-    CreateGrantVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
-    CreateGrantVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    CreateGrantVersionResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn"))
+    CreateGrantVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, location_name: "Status"))
+    CreateGrantVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     CreateGrantVersionResponse.type = Types::CreateGrantVersionResponse
-    CreateLicenseConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateLicenseConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateLicenseConfigurationRequest.add_member(:license_counting_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseCountingType, location_name: "LicenseCountingType", traits: {"smithy.api#required" => {}}))
-    CreateLicenseConfigurationRequest.add_member(:license_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "LicenseCount"))
-    CreateLicenseConfigurationRequest.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
-    CreateLicenseConfigurationRequest.add_member(:license_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseRules"))
-    CreateLicenseConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
-    CreateLicenseConfigurationRequest.add_member(:product_information_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
+    CreateLicenseConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateLicenseConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateLicenseConfigurationRequest.add_member(:license_counting_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseCountingType, location_name: "LicenseCountingType", traits: {"smithy.api#required" => {}}))
+    CreateLicenseConfigurationRequest.add_member(:license_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "LicenseCount"))
+    CreateLicenseConfigurationRequest.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "LicenseCountHardLimit"))
+    CreateLicenseConfigurationRequest.add_member(:license_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "LicenseRules"))
+    CreateLicenseConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "DisassociateWhenNotFound"))
+    CreateLicenseConfigurationRequest.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, location_name: "ProductInformationList"))
     CreateLicenseConfigurationRequest.type = Types::CreateLicenseConfigurationRequest
-    CreateLicenseConfigurationResponse.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
+    CreateLicenseConfigurationResponse.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn"))
     CreateLicenseConfigurationResponse.type = Types::CreateLicenseConfigurationResponse
-    CreateLicenseConversionTaskForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    CreateLicenseConversionTaskForResourceRequest.add_member(:source_license_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "SourceLicenseContext", traits: {"smithy.api#required" => {}}))
-    CreateLicenseConversionTaskForResourceRequest.add_member(:destination_license_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "DestinationLicenseContext", traits: {"smithy.api#required" => {}}))
+    CreateLicenseConversionTaskForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    CreateLicenseConversionTaskForResourceRequest.add_member(:source_license_context, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionContext, location_name: "SourceLicenseContext", traits: {"smithy.api#required" => {}}))
+    CreateLicenseConversionTaskForResourceRequest.add_member(:destination_license_context, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionContext, location_name: "DestinationLicenseContext", traits: {"smithy.api#required" => {}}))
     CreateLicenseConversionTaskForResourceRequest.type = Types::CreateLicenseConversionTaskForResourceRequest
-    CreateLicenseConversionTaskForResourceResponse.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
+    CreateLicenseConversionTaskForResourceResponse.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
     CreateLicenseConversionTaskForResourceResponse.type = Types::CreateLicenseConversionTaskForResourceResponse
-    CreateLicenseManagerReportGeneratorRequest.add_member(:report_generator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportGeneratorName, location_name: "ReportGeneratorName", traits: {"smithy.api#required" => {}}))
-    CreateLicenseManagerReportGeneratorRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportTypeList, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    CreateLicenseManagerReportGeneratorRequest.add_member(:report_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportContext, location_name: "ReportContext", traits: {"smithy.api#required" => {}}))
-    CreateLicenseManagerReportGeneratorRequest.add_member(:report_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportFrequency, location_name: "ReportFrequency", traits: {"smithy.api#required" => {}}))
-    CreateLicenseManagerReportGeneratorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateLicenseManagerReportGeneratorRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateLicenseManagerReportGeneratorRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:report_generator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGeneratorName, location_name: "ReportGeneratorName", traits: {"smithy.api#required" => {}}))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportTypeList, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:report_context, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportContext, location_name: "ReportContext", traits: {"smithy.api#required" => {}}))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:report_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFrequency, location_name: "ReportFrequency", traits: {"smithy.api#required" => {}}))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateLicenseManagerReportGeneratorRequest.type = Types::CreateLicenseManagerReportGeneratorRequest
-    CreateLicenseManagerReportGeneratorResponse.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerReportGeneratorArn"))
+    CreateLicenseManagerReportGeneratorResponse.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseManagerReportGeneratorArn"))
     CreateLicenseManagerReportGeneratorResponse.type = Types::CreateLicenseManagerReportGeneratorResponse
-    CreateLicenseRequest.add_member(:license_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseName", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:product_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductName", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:product_sku, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductSKU", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:issuer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Issuer, location_name: "Issuer", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatetimeRange, location_name: "Validity", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:beneficiary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Beneficiary", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumptionConfiguration, location_name: "ConsumptionConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:license_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataList, location_name: "LicenseMetadata"))
-    CreateLicenseRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateLicenseRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLicenseRequest.add_member(:license_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseName", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductName", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:product_sku, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductSKU", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: Issuer, location_name: "Issuer", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:validity, ::Smithy::Schema::Shapes::MemberShape.new(target: DatetimeRange, location_name: "Validity", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:beneficiary, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Beneficiary", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumptionConfiguration, location_name: "ConsumptionConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:license_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, location_name: "LicenseMetadata"))
+    CreateLicenseRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateLicenseRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateLicenseRequest.type = Types::CreateLicenseRequest
-    CreateLicenseResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))
-    CreateLicenseResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseStatus, location_name: "Status"))
-    CreateLicenseResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    CreateLicenseResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn"))
+    CreateLicenseResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseStatus, location_name: "Status"))
+    CreateLicenseResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     CreateLicenseResponse.type = Types::CreateLicenseResponse
-    CreateLicenseVersionRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:license_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseName", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:product_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductName", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:issuer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Issuer, location_name: "Issuer", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatetimeRange, location_name: "Validity", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:license_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataList, location_name: "LicenseMetadata"))
-    CreateLicenseVersionRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumptionConfiguration, location_name: "ConsumptionConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateLicenseVersionRequest.add_member(:source_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion"))
+    CreateLicenseVersionRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:license_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseName", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductName", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: Issuer, location_name: "Issuer", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:validity, ::Smithy::Schema::Shapes::MemberShape.new(target: DatetimeRange, location_name: "Validity", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:license_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, location_name: "LicenseMetadata"))
+    CreateLicenseVersionRequest.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementList, location_name: "Entitlements", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumptionConfiguration, location_name: "ConsumptionConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateLicenseVersionRequest.add_member(:source_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceVersion"))
     CreateLicenseVersionRequest.type = Types::CreateLicenseVersionRequest
-    CreateLicenseVersionResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))
-    CreateLicenseVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
-    CreateLicenseVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseStatus, location_name: "Status"))
+    CreateLicenseVersionResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn"))
+    CreateLicenseVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
+    CreateLicenseVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseStatus, location_name: "Status"))
     CreateLicenseVersionResponse.type = Types::CreateLicenseVersionResponse
-    CreateTokenRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    CreateTokenRequest.add_member(:role_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "RoleArns"))
-    CreateTokenRequest.add_member(:expiration_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "ExpirationInDays"))
-    CreateTokenRequest.add_member(:token_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize3StringList, location_name: "TokenProperties"))
-    CreateTokenRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateTokenRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    CreateTokenRequest.add_member(:role_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "RoleArns"))
+    CreateTokenRequest.add_member(:expiration_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "ExpirationInDays"))
+    CreateTokenRequest.add_member(:token_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize3StringList, location_name: "TokenProperties"))
+    CreateTokenRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
     CreateTokenRequest.type = Types::CreateTokenRequest
-    CreateTokenResponse.add_member(:token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TokenId"))
-    CreateTokenResponse.add_member(:token_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenType, location_name: "TokenType"))
-    CreateTokenResponse.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenString, location_name: "Token"))
+    CreateTokenResponse.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TokenId"))
+    CreateTokenResponse.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenType, location_name: "TokenType"))
+    CreateTokenResponse.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, location_name: "Token"))
     CreateTokenResponse.type = Types::CreateTokenResponse
-    DatetimeRange.add_member(:begin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "Begin", traits: {"smithy.api#required" => {}}))
-    DatetimeRange.add_member(:end, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "End"))
+    DatetimeRange.add_member(:begin, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "Begin", traits: {"smithy.api#required" => {}}))
+    DatetimeRange.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "End"))
     DatetimeRange.type = Types::DatetimeRange
-    DeleteGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
-    DeleteGrantRequest.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
-    DeleteGrantRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version", traits: {"smithy.api#required" => {}}))
+    DeleteGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
+    DeleteGrantRequest.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReasonMessage, location_name: "StatusReason"))
+    DeleteGrantRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version", traits: {"smithy.api#required" => {}}))
     DeleteGrantRequest.type = Types::DeleteGrantRequest
-    DeleteGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
-    DeleteGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
-    DeleteGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    DeleteGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn"))
+    DeleteGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, location_name: "Status"))
+    DeleteGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     DeleteGrantResponse.type = Types::DeleteGrantResponse
-    DeleteLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     DeleteLicenseConfigurationRequest.type = Types::DeleteLicenseConfigurationRequest
     DeleteLicenseConfigurationResponse.type = Types::DeleteLicenseConfigurationResponse
-    DeleteLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerReportGeneratorArn", traits: {"smithy.api#required" => {}}))
+    DeleteLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseManagerReportGeneratorArn", traits: {"smithy.api#required" => {}}))
     DeleteLicenseManagerReportGeneratorRequest.type = Types::DeleteLicenseManagerReportGeneratorRequest
     DeleteLicenseManagerReportGeneratorResponse.type = Types::DeleteLicenseManagerReportGeneratorResponse
-    DeleteLicenseRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    DeleteLicenseRequest.add_member(:source_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion", traits: {"smithy.api#required" => {}}))
+    DeleteLicenseRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    DeleteLicenseRequest.add_member(:source_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceVersion", traits: {"smithy.api#required" => {}}))
     DeleteLicenseRequest.type = Types::DeleteLicenseRequest
-    DeleteLicenseResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseDeletionStatus, location_name: "Status"))
-    DeleteLicenseResponse.add_member(:deletion_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "DeletionDate"))
+    DeleteLicenseResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseDeletionStatus, location_name: "Status"))
+    DeleteLicenseResponse.add_member(:deletion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "DeletionDate"))
     DeleteLicenseResponse.type = Types::DeleteLicenseResponse
-    DeleteTokenRequest.add_member(:token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TokenId", traits: {"smithy.api#required" => {}}))
+    DeleteTokenRequest.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TokenId", traits: {"smithy.api#required" => {}}))
     DeleteTokenRequest.type = Types::DeleteTokenRequest
     DeleteTokenResponse.type = Types::DeleteTokenResponse
-    DigitalSignatureMethod.add_member(:jwt_ps384, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JWT_PS384", traits: {"smithy.api#enumValue" => "JWT_PS384"}))
-    Entitlement.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Entitlement.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
-    Entitlement.add_member(:max_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "MaxCount"))
-    Entitlement.add_member(:overage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "Overage"))
-    Entitlement.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementUnit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
-    Entitlement.add_member(:allow_check_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "AllowCheckIn"))
+    DigitalSignatureMethod.add_member(:jwt_ps384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JWT_PS384", traits: {"smithy.api#enumValue" => "JWT_PS384"}))
+    Entitlement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Entitlement.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
+    Entitlement.add_member(:max_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "MaxCount"))
+    Entitlement.add_member(:overage, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "Overage"))
+    Entitlement.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementUnit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
+    Entitlement.add_member(:allow_check_in, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "AllowCheckIn"))
     Entitlement.type = Types::Entitlement
-    EntitlementData.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    EntitlementData.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
-    EntitlementData.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementDataUnit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
+    EntitlementData.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    EntitlementData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
+    EntitlementData.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataUnit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
     EntitlementData.type = Types::EntitlementData
-    EntitlementDataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementData)
-    EntitlementDataUnit.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
-    EntitlementDataUnit.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
-    EntitlementDataUnit.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "Seconds"}))
-    EntitlementDataUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECONDS", traits: {"smithy.api#enumValue" => "Microseconds"}))
-    EntitlementDataUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECONDS", traits: {"smithy.api#enumValue" => "Milliseconds"}))
-    EntitlementDataUnit.add_member(:bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES", traits: {"smithy.api#enumValue" => "Bytes"}))
-    EntitlementDataUnit.add_member(:kilobytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES", traits: {"smithy.api#enumValue" => "Kilobytes"}))
-    EntitlementDataUnit.add_member(:megabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES", traits: {"smithy.api#enumValue" => "Megabytes"}))
-    EntitlementDataUnit.add_member(:gigabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES", traits: {"smithy.api#enumValue" => "Gigabytes"}))
-    EntitlementDataUnit.add_member(:terabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES", traits: {"smithy.api#enumValue" => "Terabytes"}))
-    EntitlementDataUnit.add_member(:bits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS", traits: {"smithy.api#enumValue" => "Bits"}))
-    EntitlementDataUnit.add_member(:kilobits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS", traits: {"smithy.api#enumValue" => "Kilobits"}))
-    EntitlementDataUnit.add_member(:megabits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS", traits: {"smithy.api#enumValue" => "Megabits"}))
-    EntitlementDataUnit.add_member(:gigabits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS", traits: {"smithy.api#enumValue" => "Gigabits"}))
-    EntitlementDataUnit.add_member(:terabits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS", traits: {"smithy.api#enumValue" => "Terabits"}))
-    EntitlementDataUnit.add_member(:percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERCENT", traits: {"smithy.api#enumValue" => "Percent"}))
-    EntitlementDataUnit.add_member(:bytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Bytes/Second"}))
-    EntitlementDataUnit.add_member(:kilobytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobytes/Second"}))
-    EntitlementDataUnit.add_member(:megabytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabytes/Second"}))
-    EntitlementDataUnit.add_member(:gigabytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabytes/Second"}))
-    EntitlementDataUnit.add_member(:terabytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabytes/Second"}))
-    EntitlementDataUnit.add_member(:bits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Bits/Second"}))
-    EntitlementDataUnit.add_member(:kilobits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobits/Second"}))
-    EntitlementDataUnit.add_member(:megabits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabits/Second"}))
-    EntitlementDataUnit.add_member(:gigabits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabits/Second"}))
-    EntitlementDataUnit.add_member(:terabits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabits/Second"}))
-    EntitlementDataUnit.add_member(:count_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT_PER_SECOND", traits: {"smithy.api#enumValue" => "Count/Second"}))
-    EntitlementList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Entitlement)
-    EntitlementNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    EntitlementDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementData)
+    EntitlementDataUnit.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
+    EntitlementDataUnit.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
+    EntitlementDataUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "Seconds"}))
+    EntitlementDataUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECONDS", traits: {"smithy.api#enumValue" => "Microseconds"}))
+    EntitlementDataUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECONDS", traits: {"smithy.api#enumValue" => "Milliseconds"}))
+    EntitlementDataUnit.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES", traits: {"smithy.api#enumValue" => "Bytes"}))
+    EntitlementDataUnit.add_member(:kilobytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES", traits: {"smithy.api#enumValue" => "Kilobytes"}))
+    EntitlementDataUnit.add_member(:megabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES", traits: {"smithy.api#enumValue" => "Megabytes"}))
+    EntitlementDataUnit.add_member(:gigabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES", traits: {"smithy.api#enumValue" => "Gigabytes"}))
+    EntitlementDataUnit.add_member(:terabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES", traits: {"smithy.api#enumValue" => "Terabytes"}))
+    EntitlementDataUnit.add_member(:bits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS", traits: {"smithy.api#enumValue" => "Bits"}))
+    EntitlementDataUnit.add_member(:kilobits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS", traits: {"smithy.api#enumValue" => "Kilobits"}))
+    EntitlementDataUnit.add_member(:megabits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS", traits: {"smithy.api#enumValue" => "Megabits"}))
+    EntitlementDataUnit.add_member(:gigabits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS", traits: {"smithy.api#enumValue" => "Gigabits"}))
+    EntitlementDataUnit.add_member(:terabits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS", traits: {"smithy.api#enumValue" => "Terabits"}))
+    EntitlementDataUnit.add_member(:percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERCENT", traits: {"smithy.api#enumValue" => "Percent"}))
+    EntitlementDataUnit.add_member(:bytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Bytes/Second"}))
+    EntitlementDataUnit.add_member(:kilobytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobytes/Second"}))
+    EntitlementDataUnit.add_member(:megabytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabytes/Second"}))
+    EntitlementDataUnit.add_member(:gigabytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabytes/Second"}))
+    EntitlementDataUnit.add_member(:terabytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabytes/Second"}))
+    EntitlementDataUnit.add_member(:bits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Bits/Second"}))
+    EntitlementDataUnit.add_member(:kilobits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobits/Second"}))
+    EntitlementDataUnit.add_member(:megabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabits/Second"}))
+    EntitlementDataUnit.add_member(:gigabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabits/Second"}))
+    EntitlementDataUnit.add_member(:terabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabits/Second"}))
+    EntitlementDataUnit.add_member(:count_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT_PER_SECOND", traits: {"smithy.api#enumValue" => "Count/Second"}))
+    EntitlementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entitlement)
+    EntitlementNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     EntitlementNotAllowedException.type = Types::EntitlementNotAllowedException
-    EntitlementUnit.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
-    EntitlementUnit.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
-    EntitlementUnit.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "Seconds"}))
-    EntitlementUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECONDS", traits: {"smithy.api#enumValue" => "Microseconds"}))
-    EntitlementUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECONDS", traits: {"smithy.api#enumValue" => "Milliseconds"}))
-    EntitlementUnit.add_member(:bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES", traits: {"smithy.api#enumValue" => "Bytes"}))
-    EntitlementUnit.add_member(:kilobytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES", traits: {"smithy.api#enumValue" => "Kilobytes"}))
-    EntitlementUnit.add_member(:megabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES", traits: {"smithy.api#enumValue" => "Megabytes"}))
-    EntitlementUnit.add_member(:gigabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES", traits: {"smithy.api#enumValue" => "Gigabytes"}))
-    EntitlementUnit.add_member(:terabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES", traits: {"smithy.api#enumValue" => "Terabytes"}))
-    EntitlementUnit.add_member(:bits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS", traits: {"smithy.api#enumValue" => "Bits"}))
-    EntitlementUnit.add_member(:kilobits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS", traits: {"smithy.api#enumValue" => "Kilobits"}))
-    EntitlementUnit.add_member(:megabits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS", traits: {"smithy.api#enumValue" => "Megabits"}))
-    EntitlementUnit.add_member(:gigabits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS", traits: {"smithy.api#enumValue" => "Gigabits"}))
-    EntitlementUnit.add_member(:terabits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS", traits: {"smithy.api#enumValue" => "Terabits"}))
-    EntitlementUnit.add_member(:percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERCENT", traits: {"smithy.api#enumValue" => "Percent"}))
-    EntitlementUnit.add_member(:bytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Bytes/Second"}))
-    EntitlementUnit.add_member(:kilobytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobytes/Second"}))
-    EntitlementUnit.add_member(:megabytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabytes/Second"}))
-    EntitlementUnit.add_member(:gigabytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabytes/Second"}))
-    EntitlementUnit.add_member(:terabytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabytes/Second"}))
-    EntitlementUnit.add_member(:bits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Bits/Second"}))
-    EntitlementUnit.add_member(:kilobits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobits/Second"}))
-    EntitlementUnit.add_member(:megabits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabits/Second"}))
-    EntitlementUnit.add_member(:gigabits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabits/Second"}))
-    EntitlementUnit.add_member(:terabits_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabits/Second"}))
-    EntitlementUnit.add_member(:count_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT_PER_SECOND", traits: {"smithy.api#enumValue" => "Count/Second"}))
-    EntitlementUsage.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    EntitlementUsage.add_member(:consumed_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ConsumedValue", traits: {"smithy.api#required" => {}}))
-    EntitlementUsage.add_member(:max_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MaxCount"))
-    EntitlementUsage.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementDataUnit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
+    EntitlementUnit.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
+    EntitlementUnit.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
+    EntitlementUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "Seconds"}))
+    EntitlementUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECONDS", traits: {"smithy.api#enumValue" => "Microseconds"}))
+    EntitlementUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECONDS", traits: {"smithy.api#enumValue" => "Milliseconds"}))
+    EntitlementUnit.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES", traits: {"smithy.api#enumValue" => "Bytes"}))
+    EntitlementUnit.add_member(:kilobytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES", traits: {"smithy.api#enumValue" => "Kilobytes"}))
+    EntitlementUnit.add_member(:megabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES", traits: {"smithy.api#enumValue" => "Megabytes"}))
+    EntitlementUnit.add_member(:gigabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES", traits: {"smithy.api#enumValue" => "Gigabytes"}))
+    EntitlementUnit.add_member(:terabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES", traits: {"smithy.api#enumValue" => "Terabytes"}))
+    EntitlementUnit.add_member(:bits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS", traits: {"smithy.api#enumValue" => "Bits"}))
+    EntitlementUnit.add_member(:kilobits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS", traits: {"smithy.api#enumValue" => "Kilobits"}))
+    EntitlementUnit.add_member(:megabits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS", traits: {"smithy.api#enumValue" => "Megabits"}))
+    EntitlementUnit.add_member(:gigabits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS", traits: {"smithy.api#enumValue" => "Gigabits"}))
+    EntitlementUnit.add_member(:terabits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS", traits: {"smithy.api#enumValue" => "Terabits"}))
+    EntitlementUnit.add_member(:percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERCENT", traits: {"smithy.api#enumValue" => "Percent"}))
+    EntitlementUnit.add_member(:bytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Bytes/Second"}))
+    EntitlementUnit.add_member(:kilobytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobytes/Second"}))
+    EntitlementUnit.add_member(:megabytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabytes/Second"}))
+    EntitlementUnit.add_member(:gigabytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabytes/Second"}))
+    EntitlementUnit.add_member(:terabytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABYTES_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabytes/Second"}))
+    EntitlementUnit.add_member(:bits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Bits/Second"}))
+    EntitlementUnit.add_member(:kilobits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KILOBITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Kilobits/Second"}))
+    EntitlementUnit.add_member(:megabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Megabits/Second"}))
+    EntitlementUnit.add_member(:gigabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabits/Second"}))
+    EntitlementUnit.add_member(:terabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabits/Second"}))
+    EntitlementUnit.add_member(:count_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COUNT_PER_SECOND", traits: {"smithy.api#enumValue" => "Count/Second"}))
+    EntitlementUsage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    EntitlementUsage.add_member(:consumed_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConsumedValue", traits: {"smithy.api#required" => {}}))
+    EntitlementUsage.add_member(:max_count, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MaxCount"))
+    EntitlementUsage.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataUnit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
     EntitlementUsage.type = Types::EntitlementUsage
-    EntitlementUsageList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementUsage)
-    ExtendLicenseConsumptionRequest.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConsumptionToken", traits: {"smithy.api#required" => {}}))
-    ExtendLicenseConsumptionRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    EntitlementUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementUsage)
+    ExtendLicenseConsumptionRequest.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConsumptionToken", traits: {"smithy.api#required" => {}}))
+    ExtendLicenseConsumptionRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     ExtendLicenseConsumptionRequest.type = Types::ExtendLicenseConsumptionRequest
-    ExtendLicenseConsumptionResponse.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConsumptionToken"))
-    ExtendLicenseConsumptionResponse.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "Expiration"))
+    ExtendLicenseConsumptionResponse.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConsumptionToken"))
+    ExtendLicenseConsumptionResponse.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "Expiration"))
     ExtendLicenseConsumptionResponse.type = Types::ExtendLicenseConsumptionResponse
-    FailedDependencyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    FailedDependencyException.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    FailedDependencyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    FailedDependencyException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
     FailedDependencyException.type = Types::FailedDependencyException
-    Filter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
-    Filter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values"))
+    Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, location_name: "Name"))
+    Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "Values"))
     Filter.type = Types::Filter
-    FilterLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    FilterLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     FilterLimitExceededException.type = Types::FilterLimitExceededException
-    FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    FilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue, traits: {"smithy.api#xmlName" => "item"})
-    Filters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter, traits: {"smithy.api#xmlName" => "item"})
-    GetAccessTokenRequest.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenString, location_name: "Token", traits: {"smithy.api#required" => {}}))
-    GetAccessTokenRequest.add_member(:token_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize3StringList, location_name: "TokenProperties"))
+    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, traits: {"smithy.api#xmlName" => "item"})
+    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, traits: {"smithy.api#xmlName" => "item"})
+    GetAccessTokenRequest.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, location_name: "Token", traits: {"smithy.api#required" => {}}))
+    GetAccessTokenRequest.add_member(:token_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize3StringList, location_name: "TokenProperties"))
     GetAccessTokenRequest.type = Types::GetAccessTokenRequest
-    GetAccessTokenResponse.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenString, location_name: "AccessToken"))
+    GetAccessTokenResponse.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, location_name: "AccessToken"))
     GetAccessTokenResponse.type = Types::GetAccessTokenResponse
-    GetGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
-    GetGrantRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    GetGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
+    GetGrantRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     GetGrantRequest.type = Types::GetGrantRequest
-    GetGrantResponse.add_member(:grant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grant, location_name: "Grant"))
+    GetGrantResponse.add_member(:grant, ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, location_name: "Grant"))
     GetGrantResponse.type = Types::GetGrantResponse
-    GetLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
+    GetLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     GetLicenseConfigurationRequest.type = Types::GetLicenseConfigurationRequest
-    GetLicenseConfigurationResponse.add_member(:license_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationId"))
-    GetLicenseConfigurationResponse.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
-    GetLicenseConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    GetLicenseConfigurationResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    GetLicenseConfigurationResponse.add_member(:license_counting_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseCountingType, location_name: "LicenseCountingType"))
-    GetLicenseConfigurationResponse.add_member(:license_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseRules"))
-    GetLicenseConfigurationResponse.add_member(:license_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "LicenseCount"))
-    GetLicenseConfigurationResponse.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
-    GetLicenseConfigurationResponse.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "ConsumedLicenses"))
-    GetLicenseConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    GetLicenseConfigurationResponse.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccountId"))
-    GetLicenseConfigurationResponse.add_member(:consumed_license_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumedLicenseSummaryList, location_name: "ConsumedLicenseSummaryList"))
-    GetLicenseConfigurationResponse.add_member(:managed_resource_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedResourceSummaryList, location_name: "ManagedResourceSummaryList"))
-    GetLicenseConfigurationResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    GetLicenseConfigurationResponse.add_member(:product_information_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
-    GetLicenseConfigurationResponse.add_member(:automated_discovery_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
-    GetLicenseConfigurationResponse.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
+    GetLicenseConfigurationResponse.add_member(:license_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationId"))
+    GetLicenseConfigurationResponse.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn"))
+    GetLicenseConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    GetLicenseConfigurationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    GetLicenseConfigurationResponse.add_member(:license_counting_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseCountingType, location_name: "LicenseCountingType"))
+    GetLicenseConfigurationResponse.add_member(:license_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "LicenseRules"))
+    GetLicenseConfigurationResponse.add_member(:license_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "LicenseCount"))
+    GetLicenseConfigurationResponse.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "LicenseCountHardLimit"))
+    GetLicenseConfigurationResponse.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "ConsumedLicenses"))
+    GetLicenseConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    GetLicenseConfigurationResponse.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OwnerAccountId"))
+    GetLicenseConfigurationResponse.add_member(:consumed_license_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedLicenseSummaryList, location_name: "ConsumedLicenseSummaryList"))
+    GetLicenseConfigurationResponse.add_member(:managed_resource_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummaryList, location_name: "ManagedResourceSummaryList"))
+    GetLicenseConfigurationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    GetLicenseConfigurationResponse.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, location_name: "ProductInformationList"))
+    GetLicenseConfigurationResponse.add_member(:automated_discovery_information, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
+    GetLicenseConfigurationResponse.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     GetLicenseConfigurationResponse.type = Types::GetLicenseConfigurationResponse
-    GetLicenseConversionTaskRequest.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId", traits: {"smithy.api#required" => {}}))
+    GetLicenseConversionTaskRequest.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTaskId, location_name: "LicenseConversionTaskId", traits: {"smithy.api#required" => {}}))
     GetLicenseConversionTaskRequest.type = Types::GetLicenseConversionTaskRequest
-    GetLicenseConversionTaskResponse.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
-    GetLicenseConversionTaskResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
-    GetLicenseConversionTaskResponse.add_member(:source_license_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "SourceLicenseContext"))
-    GetLicenseConversionTaskResponse.add_member(:destination_license_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "DestinationLicenseContext"))
-    GetLicenseConversionTaskResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
-    GetLicenseConversionTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTaskStatus, location_name: "Status"))
-    GetLicenseConversionTaskResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    GetLicenseConversionTaskResponse.add_member(:license_conversion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "LicenseConversionTime"))
-    GetLicenseConversionTaskResponse.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    GetLicenseConversionTaskResponse.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
+    GetLicenseConversionTaskResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn"))
+    GetLicenseConversionTaskResponse.add_member(:source_license_context, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionContext, location_name: "SourceLicenseContext"))
+    GetLicenseConversionTaskResponse.add_member(:destination_license_context, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionContext, location_name: "DestinationLicenseContext"))
+    GetLicenseConversionTaskResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StatusMessage"))
+    GetLicenseConversionTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTaskStatus, location_name: "Status"))
+    GetLicenseConversionTaskResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    GetLicenseConversionTaskResponse.add_member(:license_conversion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "LicenseConversionTime"))
+    GetLicenseConversionTaskResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime"))
     GetLicenseConversionTaskResponse.type = Types::GetLicenseConversionTaskResponse
-    GetLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerReportGeneratorArn", traits: {"smithy.api#required" => {}}))
+    GetLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseManagerReportGeneratorArn", traits: {"smithy.api#required" => {}}))
     GetLicenseManagerReportGeneratorRequest.type = Types::GetLicenseManagerReportGeneratorRequest
-    GetLicenseManagerReportGeneratorResponse.add_member(:report_generator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportGenerator, location_name: "ReportGenerator"))
+    GetLicenseManagerReportGeneratorResponse.add_member(:report_generator, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGenerator, location_name: "ReportGenerator"))
     GetLicenseManagerReportGeneratorResponse.type = Types::GetLicenseManagerReportGeneratorResponse
-    GetLicenseRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    GetLicenseRequest.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    GetLicenseRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    GetLicenseRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     GetLicenseRequest.type = Types::GetLicenseRequest
-    GetLicenseResponse.add_member(:license, ::Smithy::Schema::Shapes::ShapeRef.new(shape: License, location_name: "License"))
+    GetLicenseResponse.add_member(:license, ::Smithy::Schema::Shapes::MemberShape.new(target: License, location_name: "License"))
     GetLicenseResponse.type = Types::GetLicenseResponse
-    GetLicenseUsageRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    GetLicenseUsageRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
     GetLicenseUsageRequest.type = Types::GetLicenseUsageRequest
-    GetLicenseUsageResponse.add_member(:license_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseUsage, location_name: "LicenseUsage"))
+    GetLicenseUsageResponse.add_member(:license_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseUsage, location_name: "LicenseUsage"))
     GetLicenseUsageResponse.type = Types::GetLicenseUsageResponse
     GetServiceSettingsRequest.type = Types::GetServiceSettingsRequest
-    GetServiceSettingsResponse.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "S3BucketArn"))
-    GetServiceSettingsResponse.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
-    GetServiceSettingsResponse.add_member(:organization_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfiguration, location_name: "OrganizationConfiguration"))
-    GetServiceSettingsResponse.add_member(:enable_cross_accounts_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "EnableCrossAccountsDiscovery"))
-    GetServiceSettingsResponse.add_member(:license_manager_resource_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerResourceShareArn"))
+    GetServiceSettingsResponse.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "S3BucketArn"))
+    GetServiceSettingsResponse.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnsTopicArn"))
+    GetServiceSettingsResponse.add_member(:organization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfiguration, location_name: "OrganizationConfiguration"))
+    GetServiceSettingsResponse.add_member(:enable_cross_accounts_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "EnableCrossAccountsDiscovery"))
+    GetServiceSettingsResponse.add_member(:license_manager_resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseManagerResourceShareArn"))
     GetServiceSettingsResponse.type = Types::GetServiceSettingsResponse
-    Grant.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:grant_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "GrantName", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:parent_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ParentArn", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:grantee_principal_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GranteePrincipalArn", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:grant_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantStatus, location_name: "GrantStatus", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
-    Grant.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:granted_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOperationList, location_name: "GrantedOperations", traits: {"smithy.api#required" => {}}))
-    Grant.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
+    Grant.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:grant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "GrantName", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:parent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ParentArn", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:grantee_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GranteePrincipalArn", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:grant_status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, location_name: "GrantStatus", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReasonMessage, location_name: "StatusReason"))
+    Grant.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:granted_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperationList, location_name: "GrantedOperations", traits: {"smithy.api#required" => {}}))
+    Grant.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "Options"))
     Grant.type = Types::Grant
-    GrantList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grant)
-    GrantStatus.add_member(:pending_workflow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_WORKFLOW", traits: {"smithy.api#enumValue" => "PENDING_WORKFLOW"}))
-    GrantStatus.add_member(:pending_accept, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_ACCEPT", traits: {"smithy.api#enumValue" => "PENDING_ACCEPT"}))
-    GrantStatus.add_member(:rejected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
-    GrantStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    GrantStatus.add_member(:failed_workflow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_WORKFLOW", traits: {"smithy.api#enumValue" => "FAILED_WORKFLOW"}))
-    GrantStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    GrantStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
-    GrantStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    GrantStatus.add_member(:workflow_completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORKFLOW_COMPLETED", traits: {"smithy.api#enumValue" => "WORKFLOW_COMPLETED"}))
-    GrantedLicense.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))
-    GrantedLicense.add_member(:license_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseName"))
-    GrantedLicense.add_member(:product_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    GrantedLicense.add_member(:product_sku, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductSKU"))
-    GrantedLicense.add_member(:issuer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IssuerDetails, location_name: "Issuer"))
-    GrantedLicense.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "HomeRegion"))
-    GrantedLicense.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseStatus, location_name: "Status"))
-    GrantedLicense.add_member(:validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatetimeRange, location_name: "Validity"))
-    GrantedLicense.add_member(:beneficiary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Beneficiary"))
-    GrantedLicense.add_member(:entitlements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements"))
-    GrantedLicense.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumptionConfiguration, location_name: "ConsumptionConfiguration"))
-    GrantedLicense.add_member(:license_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataList, location_name: "LicenseMetadata"))
-    GrantedLicense.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "CreateTime"))
-    GrantedLicense.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
-    GrantedLicense.add_member(:received_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReceivedMetadata, location_name: "ReceivedMetadata"))
+    GrantList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Grant)
+    GrantStatus.add_member(:pending_workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_WORKFLOW", traits: {"smithy.api#enumValue" => "PENDING_WORKFLOW"}))
+    GrantStatus.add_member(:pending_accept, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_ACCEPT", traits: {"smithy.api#enumValue" => "PENDING_ACCEPT"}))
+    GrantStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
+    GrantStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    GrantStatus.add_member(:failed_workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_WORKFLOW", traits: {"smithy.api#enumValue" => "FAILED_WORKFLOW"}))
+    GrantStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    GrantStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
+    GrantStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    GrantStatus.add_member(:workflow_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORKFLOW_COMPLETED", traits: {"smithy.api#enumValue" => "WORKFLOW_COMPLETED"}))
+    GrantedLicense.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn"))
+    GrantedLicense.add_member(:license_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseName"))
+    GrantedLicense.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductName"))
+    GrantedLicense.add_member(:product_sku, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductSKU"))
+    GrantedLicense.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuerDetails, location_name: "Issuer"))
+    GrantedLicense.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "HomeRegion"))
+    GrantedLicense.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseStatus, location_name: "Status"))
+    GrantedLicense.add_member(:validity, ::Smithy::Schema::Shapes::MemberShape.new(target: DatetimeRange, location_name: "Validity"))
+    GrantedLicense.add_member(:beneficiary, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Beneficiary"))
+    GrantedLicense.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementList, location_name: "Entitlements"))
+    GrantedLicense.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumptionConfiguration, location_name: "ConsumptionConfiguration"))
+    GrantedLicense.add_member(:license_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, location_name: "LicenseMetadata"))
+    GrantedLicense.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "CreateTime"))
+    GrantedLicense.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
+    GrantedLicense.add_member(:received_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceivedMetadata, location_name: "ReceivedMetadata"))
     GrantedLicense.type = Types::GrantedLicense
-    GrantedLicenseList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantedLicense)
-    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    GrantedLicenseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedLicense)
+    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
-    InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     InvalidResourceStateException.type = Types::InvalidResourceStateException
-    InventoryFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    InventoryFilter.add_member(:condition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryFilterCondition, location_name: "Condition", traits: {"smithy.api#required" => {}}))
-    InventoryFilter.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    InventoryFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    InventoryFilter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryFilterCondition, location_name: "Condition", traits: {"smithy.api#required" => {}}))
+    InventoryFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
     InventoryFilter.type = Types::InventoryFilter
-    InventoryFilterCondition.add_member(:equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
-    InventoryFilterCondition.add_member(:not_equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NOT_EQUALS"}))
-    InventoryFilterCondition.add_member(:begins_with, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
-    InventoryFilterCondition.add_member(:contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
-    InventoryFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryFilter)
-    Issuer.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Issuer.add_member(:sign_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SignKey"))
+    InventoryFilterCondition.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    InventoryFilterCondition.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NOT_EQUALS"}))
+    InventoryFilterCondition.add_member(:begins_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
+    InventoryFilterCondition.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
+    InventoryFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryFilter)
+    Issuer.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Issuer.add_member(:sign_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SignKey"))
     Issuer.type = Types::Issuer
-    IssuerDetails.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    IssuerDetails.add_member(:sign_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SignKey"))
-    IssuerDetails.add_member(:key_fingerprint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KeyFingerprint"))
+    IssuerDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    IssuerDetails.add_member(:sign_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SignKey"))
+    IssuerDetails.add_member(:key_fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KeyFingerprint"))
     IssuerDetails.type = Types::IssuerDetails
-    License.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))
-    License.add_member(:license_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseName"))
-    License.add_member(:product_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    License.add_member(:product_sku, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductSKU"))
-    License.add_member(:issuer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IssuerDetails, location_name: "Issuer"))
-    License.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "HomeRegion"))
-    License.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseStatus, location_name: "Status"))
-    License.add_member(:validity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatetimeRange, location_name: "Validity"))
-    License.add_member(:beneficiary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Beneficiary"))
-    License.add_member(:entitlements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements"))
-    License.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumptionConfiguration, location_name: "ConsumptionConfiguration"))
-    License.add_member(:license_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataList, location_name: "LicenseMetadata"))
-    License.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "CreateTime"))
-    License.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    License.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn"))
+    License.add_member(:license_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseName"))
+    License.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductName"))
+    License.add_member(:product_sku, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductSKU"))
+    License.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuerDetails, location_name: "Issuer"))
+    License.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "HomeRegion"))
+    License.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseStatus, location_name: "Status"))
+    License.add_member(:validity, ::Smithy::Schema::Shapes::MemberShape.new(target: DatetimeRange, location_name: "Validity"))
+    License.add_member(:beneficiary, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Beneficiary"))
+    License.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementList, location_name: "Entitlements"))
+    License.add_member(:consumption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumptionConfiguration, location_name: "ConsumptionConfiguration"))
+    License.add_member(:license_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, location_name: "LicenseMetadata"))
+    License.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "CreateTime"))
+    License.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     License.type = Types::License
-    LicenseConfiguration.add_member(:license_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationId"))
-    LicenseConfiguration.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
-    LicenseConfiguration.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    LicenseConfiguration.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    LicenseConfiguration.add_member(:license_counting_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseCountingType, location_name: "LicenseCountingType"))
-    LicenseConfiguration.add_member(:license_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseRules"))
-    LicenseConfiguration.add_member(:license_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "LicenseCount"))
-    LicenseConfiguration.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
-    LicenseConfiguration.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
-    LicenseConfiguration.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "ConsumedLicenses"))
-    LicenseConfiguration.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    LicenseConfiguration.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccountId"))
-    LicenseConfiguration.add_member(:consumed_license_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsumedLicenseSummaryList, location_name: "ConsumedLicenseSummaryList"))
-    LicenseConfiguration.add_member(:managed_resource_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedResourceSummaryList, location_name: "ManagedResourceSummaryList"))
-    LicenseConfiguration.add_member(:product_information_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
-    LicenseConfiguration.add_member(:automated_discovery_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
+    LicenseConfiguration.add_member(:license_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationId"))
+    LicenseConfiguration.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn"))
+    LicenseConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    LicenseConfiguration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    LicenseConfiguration.add_member(:license_counting_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseCountingType, location_name: "LicenseCountingType"))
+    LicenseConfiguration.add_member(:license_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "LicenseRules"))
+    LicenseConfiguration.add_member(:license_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "LicenseCount"))
+    LicenseConfiguration.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "LicenseCountHardLimit"))
+    LicenseConfiguration.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "DisassociateWhenNotFound"))
+    LicenseConfiguration.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "ConsumedLicenses"))
+    LicenseConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    LicenseConfiguration.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OwnerAccountId"))
+    LicenseConfiguration.add_member(:consumed_license_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedLicenseSummaryList, location_name: "ConsumedLicenseSummaryList"))
+    LicenseConfiguration.add_member(:managed_resource_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummaryList, location_name: "ManagedResourceSummaryList"))
+    LicenseConfiguration.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, location_name: "ProductInformationList"))
+    LicenseConfiguration.add_member(:automated_discovery_information, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
     LicenseConfiguration.type = Types::LicenseConfiguration
-    LicenseConfigurationAssociation.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
-    LicenseConfigurationAssociation.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    LicenseConfigurationAssociation.add_member(:resource_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwnerId"))
-    LicenseConfigurationAssociation.add_member(:association_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "AssociationTime"))
-    LicenseConfigurationAssociation.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AmiAssociationScope"))
+    LicenseConfigurationAssociation.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn"))
+    LicenseConfigurationAssociation.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    LicenseConfigurationAssociation.add_member(:resource_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceOwnerId"))
+    LicenseConfigurationAssociation.add_member(:association_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "AssociationTime"))
+    LicenseConfigurationAssociation.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AmiAssociationScope"))
     LicenseConfigurationAssociation.type = Types::LicenseConfigurationAssociation
-    LicenseConfigurationAssociations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConfigurationAssociation)
-    LicenseConfigurationStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    LicenseConfigurationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    LicenseConfigurationUsage.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
-    LicenseConfigurationUsage.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    LicenseConfigurationUsage.add_member(:resource_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceStatus"))
-    LicenseConfigurationUsage.add_member(:resource_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwnerId"))
-    LicenseConfigurationUsage.add_member(:association_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "AssociationTime"))
-    LicenseConfigurationUsage.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "ConsumedLicenses"))
+    LicenseConfigurationAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationAssociation)
+    LicenseConfigurationStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    LicenseConfigurationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    LicenseConfigurationUsage.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn"))
+    LicenseConfigurationUsage.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    LicenseConfigurationUsage.add_member(:resource_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceStatus"))
+    LicenseConfigurationUsage.add_member(:resource_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceOwnerId"))
+    LicenseConfigurationUsage.add_member(:association_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "AssociationTime"))
+    LicenseConfigurationUsage.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "ConsumedLicenses"))
     LicenseConfigurationUsage.type = Types::LicenseConfigurationUsage
-    LicenseConfigurationUsageList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConfigurationUsage)
-    LicenseConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConfiguration)
-    LicenseConversionContext.add_member(:usage_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageOperation, location_name: "UsageOperation"))
-    LicenseConversionContext.add_member(:product_codes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "ProductCodes"))
+    LicenseConfigurationUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationUsage)
+    LicenseConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfiguration)
+    LicenseConversionContext.add_member(:usage_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageOperation, location_name: "UsageOperation"))
+    LicenseConversionContext.add_member(:product_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeList, location_name: "ProductCodes"))
     LicenseConversionContext.type = Types::LicenseConversionContext
-    LicenseConversionTask.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
-    LicenseConversionTask.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
-    LicenseConversionTask.add_member(:source_license_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "SourceLicenseContext"))
-    LicenseConversionTask.add_member(:destination_license_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "DestinationLicenseContext"))
-    LicenseConversionTask.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTaskStatus, location_name: "Status"))
-    LicenseConversionTask.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
-    LicenseConversionTask.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    LicenseConversionTask.add_member(:license_conversion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "LicenseConversionTime"))
-    LicenseConversionTask.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    LicenseConversionTask.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
+    LicenseConversionTask.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn"))
+    LicenseConversionTask.add_member(:source_license_context, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionContext, location_name: "SourceLicenseContext"))
+    LicenseConversionTask.add_member(:destination_license_context, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionContext, location_name: "DestinationLicenseContext"))
+    LicenseConversionTask.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTaskStatus, location_name: "Status"))
+    LicenseConversionTask.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StatusMessage"))
+    LicenseConversionTask.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartTime"))
+    LicenseConversionTask.add_member(:license_conversion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "LicenseConversionTime"))
+    LicenseConversionTask.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndTime"))
     LicenseConversionTask.type = Types::LicenseConversionTask
-    LicenseConversionTaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    LicenseConversionTaskStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    LicenseConversionTaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    LicenseConversionTasks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTask)
-    LicenseCountingType.add_member(:vcpu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VCPU", traits: {"smithy.api#enumValue" => "vCPU"}))
-    LicenseCountingType.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "Instance"}))
-    LicenseCountingType.add_member(:core, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CORE", traits: {"smithy.api#enumValue" => "Core"}))
-    LicenseCountingType.add_member(:socket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SOCKET", traits: {"smithy.api#enumValue" => "Socket"}))
-    LicenseDeletionStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
-    LicenseDeletionStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    LicenseList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: License)
-    LicenseOperationFailure.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
-    LicenseOperationFailure.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    LicenseOperationFailure.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    LicenseOperationFailure.add_member(:failure_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "FailureTime"))
-    LicenseOperationFailure.add_member(:operation_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OperationName"))
-    LicenseOperationFailure.add_member(:resource_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwnerId"))
-    LicenseOperationFailure.add_member(:operation_requested_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OperationRequestedBy"))
-    LicenseOperationFailure.add_member(:metadata_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataList, location_name: "MetadataList"))
+    LicenseConversionTaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    LicenseConversionTaskStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    LicenseConversionTaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    LicenseConversionTasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTask)
+    LicenseCountingType.add_member(:vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VCPU", traits: {"smithy.api#enumValue" => "vCPU"}))
+    LicenseCountingType.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "Instance"}))
+    LicenseCountingType.add_member(:core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CORE", traits: {"smithy.api#enumValue" => "Core"}))
+    LicenseCountingType.add_member(:socket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SOCKET", traits: {"smithy.api#enumValue" => "Socket"}))
+    LicenseDeletionStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
+    LicenseDeletionStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    LicenseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: License)
+    LicenseOperationFailure.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn"))
+    LicenseOperationFailure.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    LicenseOperationFailure.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    LicenseOperationFailure.add_member(:failure_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "FailureTime"))
+    LicenseOperationFailure.add_member(:operation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OperationName"))
+    LicenseOperationFailure.add_member(:resource_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceOwnerId"))
+    LicenseOperationFailure.add_member(:operation_requested_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OperationRequestedBy"))
+    LicenseOperationFailure.add_member(:metadata_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, location_name: "MetadataList"))
     LicenseOperationFailure.type = Types::LicenseOperationFailure
-    LicenseOperationFailureList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseOperationFailure)
-    LicenseSpecification.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
-    LicenseSpecification.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AmiAssociationScope"))
+    LicenseOperationFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseOperationFailure)
+    LicenseSpecification.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
+    LicenseSpecification.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AmiAssociationScope"))
     LicenseSpecification.type = Types::LicenseSpecification
-    LicenseSpecifications.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseSpecification)
-    LicenseStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    LicenseStatus.add_member(:pending_available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_AVAILABLE", traits: {"smithy.api#enumValue" => "PENDING_AVAILABLE"}))
-    LicenseStatus.add_member(:deactivated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEACTIVATED", traits: {"smithy.api#enumValue" => "DEACTIVATED"}))
-    LicenseStatus.add_member(:suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUSPENDED", traits: {"smithy.api#enumValue" => "SUSPENDED"}))
-    LicenseStatus.add_member(:expired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
-    LicenseStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
-    LicenseStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    LicenseUsage.add_member(:entitlement_usages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementUsageList, location_name: "EntitlementUsages"))
+    LicenseSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseSpecification)
+    LicenseStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    LicenseStatus.add_member(:pending_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_AVAILABLE", traits: {"smithy.api#enumValue" => "PENDING_AVAILABLE"}))
+    LicenseStatus.add_member(:deactivated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEACTIVATED", traits: {"smithy.api#enumValue" => "DEACTIVATED"}))
+    LicenseStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUSPENDED", traits: {"smithy.api#enumValue" => "SUSPENDED"}))
+    LicenseStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
+    LicenseStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
+    LicenseStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    LicenseUsage.add_member(:entitlement_usages, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementUsageList, location_name: "EntitlementUsages"))
     LicenseUsage.type = Types::LicenseUsage
-    LicenseUsageException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    LicenseUsageException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     LicenseUsageException.type = Types::LicenseUsageException
-    ListAssociationsForLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
-    ListAssociationsForLicenseConfigurationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListAssociationsForLicenseConfigurationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAssociationsForLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
+    ListAssociationsForLicenseConfigurationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListAssociationsForLicenseConfigurationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListAssociationsForLicenseConfigurationRequest.type = Types::ListAssociationsForLicenseConfigurationRequest
-    ListAssociationsForLicenseConfigurationResponse.add_member(:license_configuration_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConfigurationAssociations, location_name: "LicenseConfigurationAssociations"))
-    ListAssociationsForLicenseConfigurationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAssociationsForLicenseConfigurationResponse.add_member(:license_configuration_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationAssociations, location_name: "LicenseConfigurationAssociations"))
+    ListAssociationsForLicenseConfigurationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListAssociationsForLicenseConfigurationResponse.type = Types::ListAssociationsForLicenseConfigurationResponse
-    ListDistributedGrantsRequest.add_member(:grant_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "GrantArns"))
-    ListDistributedGrantsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListDistributedGrantsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListDistributedGrantsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListDistributedGrantsRequest.add_member(:grant_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "GrantArns"))
+    ListDistributedGrantsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListDistributedGrantsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListDistributedGrantsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListDistributedGrantsRequest.type = Types::ListDistributedGrantsRequest
-    ListDistributedGrantsResponse.add_member(:grants, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantList, location_name: "Grants"))
-    ListDistributedGrantsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDistributedGrantsResponse.add_member(:grants, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantList, location_name: "Grants"))
+    ListDistributedGrantsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDistributedGrantsResponse.type = Types::ListDistributedGrantsResponse
-    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
-    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
+    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListFailuresForLicenseConfigurationOperationsRequest.type = Types::ListFailuresForLicenseConfigurationOperationsRequest
-    ListFailuresForLicenseConfigurationOperationsResponse.add_member(:license_operation_failure_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseOperationFailureList, location_name: "LicenseOperationFailureList"))
-    ListFailuresForLicenseConfigurationOperationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFailuresForLicenseConfigurationOperationsResponse.add_member(:license_operation_failure_list, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseOperationFailureList, location_name: "LicenseOperationFailureList"))
+    ListFailuresForLicenseConfigurationOperationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListFailuresForLicenseConfigurationOperationsResponse.type = Types::ListFailuresForLicenseConfigurationOperationsResponse
-    ListLicenseConfigurationsRequest.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseConfigurationArns"))
-    ListLicenseConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListLicenseConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListLicenseConfigurationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListLicenseConfigurationsRequest.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "LicenseConfigurationArns"))
+    ListLicenseConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListLicenseConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListLicenseConfigurationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters"))
     ListLicenseConfigurationsRequest.type = Types::ListLicenseConfigurationsRequest
-    ListLicenseConfigurationsResponse.add_member(:license_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConfigurations, location_name: "LicenseConfigurations"))
-    ListLicenseConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseConfigurationsResponse.add_member(:license_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurations, location_name: "LicenseConfigurations"))
+    ListLicenseConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListLicenseConfigurationsResponse.type = Types::ListLicenseConfigurationsResponse
-    ListLicenseConversionTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListLicenseConversionTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListLicenseConversionTasksRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListLicenseConversionTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListLicenseConversionTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListLicenseConversionTasksRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters"))
     ListLicenseConversionTasksRequest.type = Types::ListLicenseConversionTasksRequest
-    ListLicenseConversionTasksResponse.add_member(:license_conversion_tasks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConversionTasks, location_name: "LicenseConversionTasks"))
-    ListLicenseConversionTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseConversionTasksResponse.add_member(:license_conversion_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTasks, location_name: "LicenseConversionTasks"))
+    ListLicenseConversionTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListLicenseConversionTasksResponse.type = Types::ListLicenseConversionTasksResponse
-    ListLicenseManagerReportGeneratorsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListLicenseManagerReportGeneratorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListLicenseManagerReportGeneratorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListLicenseManagerReportGeneratorsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListLicenseManagerReportGeneratorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListLicenseManagerReportGeneratorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListLicenseManagerReportGeneratorsRequest.type = Types::ListLicenseManagerReportGeneratorsRequest
-    ListLicenseManagerReportGeneratorsResponse.add_member(:report_generators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportGeneratorList, location_name: "ReportGenerators"))
-    ListLicenseManagerReportGeneratorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseManagerReportGeneratorsResponse.add_member(:report_generators, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGeneratorList, location_name: "ReportGenerators"))
+    ListLicenseManagerReportGeneratorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListLicenseManagerReportGeneratorsResponse.type = Types::ListLicenseManagerReportGeneratorsResponse
-    ListLicenseSpecificationsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    ListLicenseSpecificationsForResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListLicenseSpecificationsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseSpecificationsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListLicenseSpecificationsForResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListLicenseSpecificationsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListLicenseSpecificationsForResourceRequest.type = Types::ListLicenseSpecificationsForResourceRequest
-    ListLicenseSpecificationsForResourceResponse.add_member(:license_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseSpecifications, location_name: "LicenseSpecifications"))
-    ListLicenseSpecificationsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseSpecificationsForResourceResponse.add_member(:license_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseSpecifications, location_name: "LicenseSpecifications"))
+    ListLicenseSpecificationsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListLicenseSpecificationsForResourceResponse.type = Types::ListLicenseSpecificationsForResourceResponse
-    ListLicenseVersionsRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    ListLicenseVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListLicenseVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListLicenseVersionsRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    ListLicenseVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListLicenseVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListLicenseVersionsRequest.type = Types::ListLicenseVersionsRequest
-    ListLicenseVersionsResponse.add_member(:licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseList, location_name: "Licenses"))
-    ListLicenseVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseVersionsResponse.add_member(:licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseList, location_name: "Licenses"))
+    ListLicenseVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListLicenseVersionsResponse.type = Types::ListLicenseVersionsResponse
-    ListLicensesRequest.add_member(:license_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "LicenseArns"))
-    ListLicensesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListLicensesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListLicensesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListLicensesRequest.add_member(:license_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "LicenseArns"))
+    ListLicensesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListLicensesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListLicensesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListLicensesRequest.type = Types::ListLicensesRequest
-    ListLicensesResponse.add_member(:licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseList, location_name: "Licenses"))
-    ListLicensesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicensesResponse.add_member(:licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseList, location_name: "Licenses"))
+    ListLicensesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListLicensesResponse.type = Types::ListLicensesResponse
-    ListReceivedGrantsForOrganizationRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
-    ListReceivedGrantsForOrganizationRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListReceivedGrantsForOrganizationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListReceivedGrantsForOrganizationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListReceivedGrantsForOrganizationRequest.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "LicenseArn", traits: {"smithy.api#required" => {}}))
+    ListReceivedGrantsForOrganizationRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListReceivedGrantsForOrganizationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListReceivedGrantsForOrganizationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListReceivedGrantsForOrganizationRequest.type = Types::ListReceivedGrantsForOrganizationRequest
-    ListReceivedGrantsForOrganizationResponse.add_member(:grants, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantList, location_name: "Grants"))
-    ListReceivedGrantsForOrganizationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedGrantsForOrganizationResponse.add_member(:grants, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantList, location_name: "Grants"))
+    ListReceivedGrantsForOrganizationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListReceivedGrantsForOrganizationResponse.type = Types::ListReceivedGrantsForOrganizationResponse
-    ListReceivedGrantsRequest.add_member(:grant_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "GrantArns"))
-    ListReceivedGrantsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListReceivedGrantsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListReceivedGrantsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListReceivedGrantsRequest.add_member(:grant_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "GrantArns"))
+    ListReceivedGrantsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListReceivedGrantsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListReceivedGrantsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListReceivedGrantsRequest.type = Types::ListReceivedGrantsRequest
-    ListReceivedGrantsResponse.add_member(:grants, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantList, location_name: "Grants"))
-    ListReceivedGrantsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedGrantsResponse.add_member(:grants, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantList, location_name: "Grants"))
+    ListReceivedGrantsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListReceivedGrantsResponse.type = Types::ListReceivedGrantsResponse
-    ListReceivedLicensesForOrganizationRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListReceivedLicensesForOrganizationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListReceivedLicensesForOrganizationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListReceivedLicensesForOrganizationRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListReceivedLicensesForOrganizationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListReceivedLicensesForOrganizationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListReceivedLicensesForOrganizationRequest.type = Types::ListReceivedLicensesForOrganizationRequest
-    ListReceivedLicensesForOrganizationResponse.add_member(:licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantedLicenseList, location_name: "Licenses"))
-    ListReceivedLicensesForOrganizationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedLicensesForOrganizationResponse.add_member(:licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedLicenseList, location_name: "Licenses"))
+    ListReceivedLicensesForOrganizationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListReceivedLicensesForOrganizationResponse.type = Types::ListReceivedLicensesForOrganizationResponse
-    ListReceivedLicensesRequest.add_member(:license_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "LicenseArns"))
-    ListReceivedLicensesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListReceivedLicensesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListReceivedLicensesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListReceivedLicensesRequest.add_member(:license_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "LicenseArns"))
+    ListReceivedLicensesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListReceivedLicensesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListReceivedLicensesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListReceivedLicensesRequest.type = Types::ListReceivedLicensesRequest
-    ListReceivedLicensesResponse.add_member(:licenses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantedLicenseList, location_name: "Licenses"))
-    ListReceivedLicensesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedLicensesResponse.add_member(:licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedLicenseList, location_name: "Licenses"))
+    ListReceivedLicensesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListReceivedLicensesResponse.type = Types::ListReceivedLicensesResponse
-    ListResourceInventoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListResourceInventoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListResourceInventoryRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryFilterList, location_name: "Filters"))
+    ListResourceInventoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListResourceInventoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListResourceInventoryRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryFilterList, location_name: "Filters"))
     ListResourceInventoryRequest.type = Types::ListResourceInventoryRequest
-    ListResourceInventoryResponse.add_member(:resource_inventory_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInventoryList, location_name: "ResourceInventoryList"))
-    ListResourceInventoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListResourceInventoryResponse.add_member(:resource_inventory_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInventoryList, location_name: "ResourceInventoryList"))
+    ListResourceInventoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListResourceInventoryResponse.type = Types::ListResourceInventoryResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTokensRequest.add_member(:token_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "TokenIds"))
-    ListTokensRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListTokensRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListTokensRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListTokensRequest.add_member(:token_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "TokenIds"))
+    ListTokensRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListTokensRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListTokensRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     ListTokensRequest.type = Types::ListTokensRequest
-    ListTokensResponse.add_member(:tokens, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenList, location_name: "Tokens"))
-    ListTokensResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTokensResponse.add_member(:tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenList, location_name: "Tokens"))
+    ListTokensResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListTokensResponse.type = Types::ListTokensResponse
-    ListUsageForLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
-    ListUsageForLicenseConfigurationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListUsageForLicenseConfigurationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListUsageForLicenseConfigurationRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListUsageForLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
+    ListUsageForLicenseConfigurationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListUsageForLicenseConfigurationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListUsageForLicenseConfigurationRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters"))
     ListUsageForLicenseConfigurationRequest.type = Types::ListUsageForLicenseConfigurationRequest
-    ListUsageForLicenseConfigurationResponse.add_member(:license_configuration_usage_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConfigurationUsageList, location_name: "LicenseConfigurationUsageList"))
-    ListUsageForLicenseConfigurationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListUsageForLicenseConfigurationResponse.add_member(:license_configuration_usage_list, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationUsageList, location_name: "LicenseConfigurationUsageList"))
+    ListUsageForLicenseConfigurationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListUsageForLicenseConfigurationResponse.type = Types::ListUsageForLicenseConfigurationResponse
-    ManagedResourceSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ManagedResourceSummary.add_member(:association_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "AssociationCount"))
+    ManagedResourceSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    ManagedResourceSummary.add_member(:association_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "AssociationCount"))
     ManagedResourceSummary.type = Types::ManagedResourceSummary
-    ManagedResourceSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedResourceSummary)
-    MaxSize3StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Metadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    Metadata.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    ManagedResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummary)
+    MaxSize3StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Metadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
     Metadata.type = Types::Metadata
-    MetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata)
-    NoEntitlementsAllowedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    MetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata)
+    NoEntitlementsAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     NoEntitlementsAllowedException.type = Types::NoEntitlementsAllowedException
-    Options.add_member(:activation_override_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationOverrideBehavior, location_name: "ActivationOverrideBehavior"))
+    Options.add_member(:activation_override_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationOverrideBehavior, location_name: "ActivationOverrideBehavior"))
     Options.type = Types::Options
-    OrganizationConfiguration.add_member(:enable_integration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIntegration", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    OrganizationConfiguration.add_member(:enable_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "EnableIntegration", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     OrganizationConfiguration.type = Types::OrganizationConfiguration
-    PrincipalArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    ProductCodeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductCodeListItem)
-    ProductCodeListItem.add_member(:product_code_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductCodeId, location_name: "ProductCodeId", traits: {"smithy.api#required" => {}}))
-    ProductCodeListItem.add_member(:product_code_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductCodeType, location_name: "ProductCodeType", traits: {"smithy.api#required" => {}}))
+    PrincipalArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    ProductCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeListItem)
+    ProductCodeListItem.add_member(:product_code_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeId, location_name: "ProductCodeId", traits: {"smithy.api#required" => {}}))
+    ProductCodeListItem.add_member(:product_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeType, location_name: "ProductCodeType", traits: {"smithy.api#required" => {}}))
     ProductCodeListItem.type = Types::ProductCodeListItem
-    ProductCodeType.add_member(:marketplace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MARKETPLACE", traits: {"smithy.api#enumValue" => "marketplace"}))
-    ProductInformation.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    ProductInformation.add_member(:product_information_filter_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductInformationFilterList, location_name: "ProductInformationFilterList", traits: {"smithy.api#required" => {}}))
+    ProductCodeType.add_member(:marketplace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MARKETPLACE", traits: {"smithy.api#enumValue" => "marketplace"}))
+    ProductInformation.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ProductInformation.add_member(:product_information_filter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationFilterList, location_name: "ProductInformationFilterList", traits: {"smithy.api#required" => {}}))
     ProductInformation.type = Types::ProductInformation
-    ProductInformationFilter.add_member(:product_information_filter_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductInformationFilterName", traits: {"smithy.api#required" => {}}))
-    ProductInformationFilter.add_member(:product_information_filter_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "ProductInformationFilterValue"))
-    ProductInformationFilter.add_member(:product_information_filter_comparator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ProductInformationFilterComparator", traits: {"smithy.api#required" => {}}))
+    ProductInformationFilter.add_member(:product_information_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductInformationFilterName", traits: {"smithy.api#required" => {}}))
+    ProductInformationFilter.add_member(:product_information_filter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "ProductInformationFilterValue"))
+    ProductInformationFilter.add_member(:product_information_filter_comparator, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ProductInformationFilterComparator", traits: {"smithy.api#required" => {}}))
     ProductInformationFilter.type = Types::ProductInformationFilter
-    ProductInformationFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductInformationFilter)
-    ProductInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductInformation)
-    ProvisionalConfiguration.add_member(:max_time_to_live_in_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxTimeToLiveInMinutes", traits: {"smithy.api#required" => {}}))
+    ProductInformationFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationFilter)
+    ProductInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformation)
+    ProvisionalConfiguration.add_member(:max_time_to_live_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxTimeToLiveInMinutes", traits: {"smithy.api#required" => {}}))
     ProvisionalConfiguration.type = Types::ProvisionalConfiguration
-    RateLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    RateLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     RateLimitExceededException.type = Types::RateLimitExceededException
-    ReceivedMetadata.add_member(:received_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReceivedStatus, location_name: "ReceivedStatus"))
-    ReceivedMetadata.add_member(:received_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "ReceivedStatusReason"))
-    ReceivedMetadata.add_member(:allowed_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOperationList, location_name: "AllowedOperations"))
+    ReceivedMetadata.add_member(:received_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceivedStatus, location_name: "ReceivedStatus"))
+    ReceivedMetadata.add_member(:received_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReasonMessage, location_name: "ReceivedStatusReason"))
+    ReceivedMetadata.add_member(:allowed_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperationList, location_name: "AllowedOperations"))
     ReceivedMetadata.type = Types::ReceivedMetadata
-    ReceivedStatus.add_member(:pending_workflow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_WORKFLOW", traits: {"smithy.api#enumValue" => "PENDING_WORKFLOW"}))
-    ReceivedStatus.add_member(:pending_accept, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_ACCEPT", traits: {"smithy.api#enumValue" => "PENDING_ACCEPT"}))
-    ReceivedStatus.add_member(:rejected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
-    ReceivedStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ReceivedStatus.add_member(:failed_workflow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_WORKFLOW", traits: {"smithy.api#enumValue" => "FAILED_WORKFLOW"}))
-    ReceivedStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    ReceivedStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ReceivedStatus.add_member(:workflow_completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORKFLOW_COMPLETED", traits: {"smithy.api#enumValue" => "WORKFLOW_COMPLETED"}))
-    RedirectException.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "Location", traits: {"smithy.api#httpHeader" => "Location"}))
-    RedirectException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ReceivedStatus.add_member(:pending_workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_WORKFLOW", traits: {"smithy.api#enumValue" => "PENDING_WORKFLOW"}))
+    ReceivedStatus.add_member(:pending_accept, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_ACCEPT", traits: {"smithy.api#enumValue" => "PENDING_ACCEPT"}))
+    ReceivedStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
+    ReceivedStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ReceivedStatus.add_member(:failed_workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_WORKFLOW", traits: {"smithy.api#enumValue" => "FAILED_WORKFLOW"}))
+    ReceivedStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    ReceivedStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ReceivedStatus.add_member(:workflow_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORKFLOW_COMPLETED", traits: {"smithy.api#enumValue" => "WORKFLOW_COMPLETED"}))
+    RedirectException.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, location_name: "Location", traits: {"smithy.api#httpHeader" => "Location"}))
+    RedirectException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     RedirectException.type = Types::RedirectException
-    RejectGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
+    RejectGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn", traits: {"smithy.api#required" => {}}))
     RejectGrantRequest.type = Types::RejectGrantRequest
-    RejectGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
-    RejectGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
-    RejectGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    RejectGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "GrantArn"))
+    RejectGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, location_name: "Status"))
+    RejectGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Version"))
     RejectGrantResponse.type = Types::RejectGrantResponse
-    RenewType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
-    RenewType.add_member(:weekly, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEKLY", traits: {"smithy.api#enumValue" => "Weekly"}))
-    RenewType.add_member(:monthly, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHLY", traits: {"smithy.api#enumValue" => "Monthly"}))
-    ReportContext.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "licenseConfigurationArns", traits: {"smithy.api#required" => {}}))
+    RenewType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
+    RenewType.add_member(:weekly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEKLY", traits: {"smithy.api#enumValue" => "Weekly"}))
+    RenewType.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHLY", traits: {"smithy.api#enumValue" => "Monthly"}))
+    ReportContext.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "licenseConfigurationArns", traits: {"smithy.api#required" => {}}))
     ReportContext.type = Types::ReportContext
-    ReportFrequency.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "value"))
-    ReportFrequency.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportFrequencyType, location_name: "period"))
+    ReportFrequency.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "value"))
+    ReportFrequency.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFrequencyType, location_name: "period"))
     ReportFrequency.type = Types::ReportFrequency
-    ReportFrequencyType.add_member(:day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAY", traits: {"smithy.api#enumValue" => "DAY"}))
-    ReportFrequencyType.add_member(:week, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEK", traits: {"smithy.api#enumValue" => "WEEK"}))
-    ReportFrequencyType.add_member(:month, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTH", traits: {"smithy.api#enumValue" => "MONTH"}))
-    ReportGenerator.add_member(:report_generator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReportGeneratorName"))
-    ReportGenerator.add_member(:report_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportTypeList, location_name: "ReportType"))
-    ReportGenerator.add_member(:report_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportContext, location_name: "ReportContext"))
-    ReportGenerator.add_member(:report_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportFrequency, location_name: "ReportFrequency"))
-    ReportGenerator.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerReportGeneratorArn"))
-    ReportGenerator.add_member(:last_run_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastRunStatus"))
-    ReportGenerator.add_member(:last_run_failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastRunFailureReason"))
-    ReportGenerator.add_member(:last_report_generation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastReportGenerationTime"))
-    ReportGenerator.add_member(:report_creator_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReportCreatorAccount"))
-    ReportGenerator.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    ReportGenerator.add_member(:s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "S3Location"))
-    ReportGenerator.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreateTime"))
-    ReportGenerator.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ReportFrequencyType.add_member(:day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAY", traits: {"smithy.api#enumValue" => "DAY"}))
+    ReportFrequencyType.add_member(:week, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEK", traits: {"smithy.api#enumValue" => "WEEK"}))
+    ReportFrequencyType.add_member(:month, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTH", traits: {"smithy.api#enumValue" => "MONTH"}))
+    ReportGenerator.add_member(:report_generator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReportGeneratorName"))
+    ReportGenerator.add_member(:report_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportTypeList, location_name: "ReportType"))
+    ReportGenerator.add_member(:report_context, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportContext, location_name: "ReportContext"))
+    ReportGenerator.add_member(:report_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFrequency, location_name: "ReportFrequency"))
+    ReportGenerator.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseManagerReportGeneratorArn"))
+    ReportGenerator.add_member(:last_run_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastRunStatus"))
+    ReportGenerator.add_member(:last_run_failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastRunFailureReason"))
+    ReportGenerator.add_member(:last_report_generation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastReportGenerationTime"))
+    ReportGenerator.add_member(:report_creator_account, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReportCreatorAccount"))
+    ReportGenerator.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    ReportGenerator.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "S3Location"))
+    ReportGenerator.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreateTime"))
+    ReportGenerator.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ReportGenerator.type = Types::ReportGenerator
-    ReportGeneratorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportGenerator)
-    ReportType.add_member(:license_configuration_summary_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LICENSE_CONFIGURATION_SUMMARY_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationSummaryReport"}))
-    ReportType.add_member(:license_configuration_usage_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LICENSE_CONFIGURATION_USAGE_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationUsageReport"}))
-    ReportTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportType)
-    ResourceInventory.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
-    ResourceInventory.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ResourceInventory.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
-    ResourceInventory.add_member(:platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Platform"))
-    ResourceInventory.add_member(:platform_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "PlatformVersion"))
-    ResourceInventory.add_member(:resource_owning_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwningAccountId"))
+    ReportGeneratorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGenerator)
+    ReportType.add_member(:license_configuration_summary_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LICENSE_CONFIGURATION_SUMMARY_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationSummaryReport"}))
+    ReportType.add_member(:license_configuration_usage_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LICENSE_CONFIGURATION_USAGE_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationUsageReport"}))
+    ReportTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportType)
+    ResourceInventory.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceId"))
+    ResourceInventory.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    ResourceInventory.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn"))
+    ResourceInventory.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Platform"))
+    ResourceInventory.add_member(:platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformVersion"))
+    ResourceInventory.add_member(:resource_owning_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceOwningAccountId"))
     ResourceInventory.type = Types::ResourceInventory
-    ResourceInventoryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInventory)
-    ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ResourceInventoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInventory)
+    ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     ResourceLimitExceededException.type = Types::ResourceLimitExceededException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceType.add_member(:ec2_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_INSTANCE", traits: {"smithy.api#enumValue" => "EC2_INSTANCE"}))
-    ResourceType.add_member(:ec2_host, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_HOST", traits: {"smithy.api#enumValue" => "EC2_HOST"}))
-    ResourceType.add_member(:ec2_ami, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_AMI", traits: {"smithy.api#enumValue" => "EC2_AMI"}))
-    ResourceType.add_member(:rds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDS", traits: {"smithy.api#enumValue" => "RDS"}))
-    ResourceType.add_member(:systems_manager_managed_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYSTEMS_MANAGER_MANAGED_INSTANCE", traits: {"smithy.api#enumValue" => "SYSTEMS_MANAGER_MANAGED_INSTANCE"}))
-    S3Location.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
-    S3Location.add_member(:key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "keyPrefix"))
+    ResourceType.add_member(:ec2_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_INSTANCE", traits: {"smithy.api#enumValue" => "EC2_INSTANCE"}))
+    ResourceType.add_member(:ec2_host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_HOST", traits: {"smithy.api#enumValue" => "EC2_HOST"}))
+    ResourceType.add_member(:ec2_ami, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_AMI", traits: {"smithy.api#enumValue" => "EC2_AMI"}))
+    ResourceType.add_member(:rds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDS", traits: {"smithy.api#enumValue" => "RDS"}))
+    ResourceType.add_member(:systems_manager_managed_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYSTEMS_MANAGER_MANAGED_INSTANCE", traits: {"smithy.api#enumValue" => "SYSTEMS_MANAGER_MANAGED_INSTANCE"}))
+    S3Location.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "bucket"))
+    S3Location.add_member(:key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "keyPrefix"))
     S3Location.type = Types::S3Location
-    ServerInternalException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ServerInternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     ServerInternalException.type = Types::ServerInternalException
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Key"))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Key"))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TokenData.add_member(:token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TokenId"))
-    TokenData.add_member(:token_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TokenType"))
-    TokenData.add_member(:license_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseArn"))
-    TokenData.add_member(:expiration_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "ExpirationTime"))
-    TokenData.add_member(:token_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize3StringList, location_name: "TokenProperties"))
-    TokenData.add_member(:role_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "RoleArns"))
-    TokenData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    TokenData.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TokenId"))
+    TokenData.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TokenType"))
+    TokenData.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseArn"))
+    TokenData.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, location_name: "ExpirationTime"))
+    TokenData.add_member(:token_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize3StringList, location_name: "TokenProperties"))
+    TokenData.add_member(:role_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "RoleArns"))
+    TokenData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
     TokenData.type = Types::TokenData
-    TokenList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenData)
-    TokenType.add_member(:refresh_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN"}))
-    UnsupportedDigitalSignatureMethodException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    TokenList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenData)
+    TokenType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN"}))
+    UnsupportedDigitalSignatureMethodException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     UnsupportedDigitalSignatureMethodException.type = Types::UnsupportedDigitalSignatureMethodException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseConfigurationRequest.add_member(:license_configuration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseConfigurationStatus, location_name: "LicenseConfigurationStatus"))
-    UpdateLicenseConfigurationRequest.add_member(:license_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseRules"))
-    UpdateLicenseConfigurationRequest.add_member(:license_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "LicenseCount"))
-    UpdateLicenseConfigurationRequest.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
-    UpdateLicenseConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    UpdateLicenseConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    UpdateLicenseConfigurationRequest.add_member(:product_information_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
-    UpdateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
+    UpdateLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseConfigurationRequest.add_member(:license_configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationStatus, location_name: "LicenseConfigurationStatus"))
+    UpdateLicenseConfigurationRequest.add_member(:license_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "LicenseRules"))
+    UpdateLicenseConfigurationRequest.add_member(:license_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "LicenseCount"))
+    UpdateLicenseConfigurationRequest.add_member(:license_count_hard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "LicenseCountHardLimit"))
+    UpdateLicenseConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    UpdateLicenseConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    UpdateLicenseConfigurationRequest.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, location_name: "ProductInformationList"))
+    UpdateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     UpdateLicenseConfigurationRequest.type = Types::UpdateLicenseConfigurationRequest
     UpdateLicenseConfigurationResponse.type = Types::UpdateLicenseConfigurationResponse
-    UpdateLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerReportGeneratorArn", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_generator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportGeneratorName, location_name: "ReportGeneratorName", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseManagerReportGeneratorRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportTypeList, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportContext, location_name: "ReportContext", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportFrequency, location_name: "ReportFrequency", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseManagerReportGeneratorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseManagerReportGeneratorRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LicenseManagerReportGeneratorArn", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_generator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGeneratorName, location_name: "ReportGeneratorName", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportTypeList, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_context, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportContext, location_name: "ReportContext", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFrequency, location_name: "ReportFrequency", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
     UpdateLicenseManagerReportGeneratorRequest.type = Types::UpdateLicenseManagerReportGeneratorRequest
     UpdateLicenseManagerReportGeneratorResponse.type = Types::UpdateLicenseManagerReportGeneratorResponse
-    UpdateLicenseSpecificationsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UpdateLicenseSpecificationsForResourceRequest.add_member(:add_license_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseSpecifications, location_name: "AddLicenseSpecifications"))
-    UpdateLicenseSpecificationsForResourceRequest.add_member(:remove_license_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseSpecifications, location_name: "RemoveLicenseSpecifications"))
+    UpdateLicenseSpecificationsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseSpecificationsForResourceRequest.add_member(:add_license_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseSpecifications, location_name: "AddLicenseSpecifications"))
+    UpdateLicenseSpecificationsForResourceRequest.add_member(:remove_license_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseSpecifications, location_name: "RemoveLicenseSpecifications"))
     UpdateLicenseSpecificationsForResourceRequest.type = Types::UpdateLicenseSpecificationsForResourceRequest
     UpdateLicenseSpecificationsForResourceResponse.type = Types::UpdateLicenseSpecificationsForResourceResponse
-    UpdateServiceSettingsRequest.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "S3BucketArn"))
-    UpdateServiceSettingsRequest.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
-    UpdateServiceSettingsRequest.add_member(:organization_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfiguration, location_name: "OrganizationConfiguration"))
-    UpdateServiceSettingsRequest.add_member(:enable_cross_accounts_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "EnableCrossAccountsDiscovery"))
+    UpdateServiceSettingsRequest.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "S3BucketArn"))
+    UpdateServiceSettingsRequest.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnsTopicArn"))
+    UpdateServiceSettingsRequest.add_member(:organization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfiguration, location_name: "OrganizationConfiguration"))
+    UpdateServiceSettingsRequest.add_member(:enable_cross_accounts_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, location_name: "EnableCrossAccountsDiscovery"))
     UpdateServiceSettingsRequest.type = Types::UpdateServiceSettingsRequest
     UpdateServiceSettingsResponse.type = Types::UpdateServiceSettingsResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     ValidationException.type = Types::ValidationException
 
     AWSLicenseManager = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -1049,681 +1049,681 @@ module Aws::LicenseManager
       service.add_operation(:accept_grant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#AcceptGrant"
         operation.name = "AcceptGrant"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptGrantRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptGrantResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AcceptGrantRequest
+        operation.output = AcceptGrantResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:check_in_license, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CheckInLicense"
         operation.name = "CheckInLicense"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckInLicenseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckInLicenseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CheckInLicenseRequest
+        operation.output = CheckInLicenseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << ConflictException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:checkout_borrow_license, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CheckoutBorrowLicense"
         operation.name = "CheckoutBorrowLicense"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckoutBorrowLicenseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckoutBorrowLicenseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementNotAllowedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoEntitlementsAllowedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedDigitalSignatureMethodException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CheckoutBorrowLicenseRequest
+        operation.output = CheckoutBorrowLicenseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << EntitlementNotAllowedException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoEntitlementsAllowedException
+        operation.errors << RateLimitExceededException
+        operation.errors << RedirectException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << UnsupportedDigitalSignatureMethodException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:checkout_license, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CheckoutLicense"
         operation.name = "CheckoutLicense"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckoutLicenseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckoutLicenseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoEntitlementsAllowedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedDigitalSignatureMethodException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CheckoutLicenseRequest
+        operation.output = CheckoutLicenseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoEntitlementsAllowedException
+        operation.errors << RateLimitExceededException
+        operation.errors << RedirectException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << UnsupportedDigitalSignatureMethodException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_grant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateGrant"
         operation.name = "CreateGrant"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGrantRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGrantResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateGrantRequest
+        operation.output = CreateGrantResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_grant_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateGrantVersion"
         operation.name = "CreateGrantVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGrantVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGrantVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateGrantVersionRequest
+        operation.output = CreateGrantVersionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_license, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateLicense"
         operation.name = "CreateLicense"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateLicenseRequest
+        operation.output = CreateLicenseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << RedirectException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateLicenseConfiguration"
         operation.name = "CreateLicenseConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = CreateLicenseConfigurationRequest
+        operation.output = CreateLicenseConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:create_license_conversion_task_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateLicenseConversionTaskForResource"
         operation.name = "CreateLicenseConversionTaskForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseConversionTaskForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseConversionTaskForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateLicenseConversionTaskForResourceRequest
+        operation.output = CreateLicenseConversionTaskForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_license_manager_report_generator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateLicenseManagerReportGenerator"
         operation.name = "CreateLicenseManagerReportGenerator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseManagerReportGeneratorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseManagerReportGeneratorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateLicenseManagerReportGeneratorRequest
+        operation.output = CreateLicenseManagerReportGeneratorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_license_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateLicenseVersion"
         operation.name = "CreateLicenseVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLicenseVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateLicenseVersionRequest
+        operation.output = CreateLicenseVersionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << ConflictException
+        operation.errors << RateLimitExceededException
+        operation.errors << RedirectException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateToken"
         operation.name = "CreateToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateTokenRequest
+        operation.output = CreateTokenResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << RateLimitExceededException
+        operation.errors << RedirectException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_grant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#DeleteGrant"
         operation.name = "DeleteGrant"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGrantRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGrantResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteGrantRequest
+        operation.output = DeleteGrantResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_license, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#DeleteLicense"
         operation.name = "DeleteLicense"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLicenseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLicenseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteLicenseRequest
+        operation.output = DeleteLicenseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << ConflictException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << RedirectException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#DeleteLicenseConfiguration"
         operation.name = "DeleteLicenseConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLicenseConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLicenseConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = DeleteLicenseConfigurationRequest
+        operation.output = DeleteLicenseConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:delete_license_manager_report_generator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#DeleteLicenseManagerReportGenerator"
         operation.name = "DeleteLicenseManagerReportGenerator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLicenseManagerReportGeneratorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLicenseManagerReportGeneratorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteLicenseManagerReportGeneratorRequest
+        operation.output = DeleteLicenseManagerReportGeneratorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#DeleteToken"
         operation.name = "DeleteToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteTokenRequest
+        operation.output = DeleteTokenResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << RateLimitExceededException
+        operation.errors << RedirectException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:extend_license_consumption, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ExtendLicenseConsumption"
         operation.name = "ExtendLicenseConsumption"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExtendLicenseConsumptionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExtendLicenseConsumptionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ExtendLicenseConsumptionRequest
+        operation.output = ExtendLicenseConsumptionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_access_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetAccessToken"
         operation.name = "GetAccessToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccessTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccessTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAccessTokenRequest
+        operation.output = GetAccessTokenResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_grant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetGrant"
         operation.name = "GetGrant"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGrantRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGrantResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetGrantRequest
+        operation.output = GetGrantResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_license, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetLicense"
         operation.name = "GetLicense"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetLicenseRequest
+        operation.output = GetLicenseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetLicenseConfiguration"
         operation.name = "GetLicenseConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = GetLicenseConfigurationRequest
+        operation.output = GetLicenseConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:get_license_conversion_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetLicenseConversionTask"
         operation.name = "GetLicenseConversionTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseConversionTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseConversionTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = GetLicenseConversionTaskRequest
+        operation.output = GetLicenseConversionTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:get_license_manager_report_generator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetLicenseManagerReportGenerator"
         operation.name = "GetLicenseManagerReportGenerator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseManagerReportGeneratorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseManagerReportGeneratorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetLicenseManagerReportGeneratorRequest
+        operation.output = GetLicenseManagerReportGeneratorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_license_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetLicenseUsage"
         operation.name = "GetLicenseUsage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseUsageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLicenseUsageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetLicenseUsageRequest
+        operation.output = GetLicenseUsageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_service_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetServiceSettings"
         operation.name = "GetServiceSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = GetServiceSettingsRequest
+        operation.output = GetServiceSettingsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_associations_for_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListAssociationsForLicenseConfiguration"
         operation.name = "ListAssociationsForLicenseConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociationsForLicenseConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociationsForLicenseConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListAssociationsForLicenseConfigurationRequest
+        operation.output = ListAssociationsForLicenseConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << FilterLimitExceededException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_distributed_grants, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListDistributedGrants"
         operation.name = "ListDistributedGrants"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDistributedGrantsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDistributedGrantsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListDistributedGrantsRequest
+        operation.output = ListDistributedGrantsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_failures_for_license_configuration_operations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListFailuresForLicenseConfigurationOperations"
         operation.name = "ListFailuresForLicenseConfigurationOperations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFailuresForLicenseConfigurationOperationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFailuresForLicenseConfigurationOperationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListFailuresForLicenseConfigurationOperationsRequest
+        operation.output = ListFailuresForLicenseConfigurationOperationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_license_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListLicenseConfigurations"
         operation.name = "ListLicenseConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseConfigurationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListLicenseConfigurationsRequest
+        operation.output = ListLicenseConfigurationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << FilterLimitExceededException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_license_conversion_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListLicenseConversionTasks"
         operation.name = "ListLicenseConversionTasks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseConversionTasksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseConversionTasksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListLicenseConversionTasksRequest
+        operation.output = ListLicenseConversionTasksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_license_manager_report_generators, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListLicenseManagerReportGenerators"
         operation.name = "ListLicenseManagerReportGenerators"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseManagerReportGeneratorsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseManagerReportGeneratorsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListLicenseManagerReportGeneratorsRequest
+        operation.output = ListLicenseManagerReportGeneratorsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_license_specifications_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListLicenseSpecificationsForResource"
         operation.name = "ListLicenseSpecificationsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseSpecificationsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseSpecificationsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListLicenseSpecificationsForResourceRequest
+        operation.output = ListLicenseSpecificationsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_license_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListLicenseVersions"
         operation.name = "ListLicenseVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicenseVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListLicenseVersionsRequest
+        operation.output = ListLicenseVersionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_licenses, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListLicenses"
         operation.name = "ListLicenses"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicensesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLicensesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListLicensesRequest
+        operation.output = ListLicensesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_received_grants, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListReceivedGrants"
         operation.name = "ListReceivedGrants"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedGrantsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedGrantsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReceivedGrantsRequest
+        operation.output = ListReceivedGrantsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_received_grants_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListReceivedGrantsForOrganization"
         operation.name = "ListReceivedGrantsForOrganization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedGrantsForOrganizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedGrantsForOrganizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReceivedGrantsForOrganizationRequest
+        operation.output = ListReceivedGrantsForOrganizationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_received_licenses, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListReceivedLicenses"
         operation.name = "ListReceivedLicenses"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedLicensesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedLicensesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReceivedLicensesRequest
+        operation.output = ListReceivedLicensesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_received_licenses_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListReceivedLicensesForOrganization"
         operation.name = "ListReceivedLicensesForOrganization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedLicensesForOrganizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReceivedLicensesForOrganizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReceivedLicensesForOrganizationRequest
+        operation.output = ListReceivedLicensesForOrganizationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_resource_inventory, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListResourceInventory"
         operation.name = "ListResourceInventory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceInventoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceInventoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedDependencyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListResourceInventoryRequest
+        operation.output = ListResourceInventoryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << FailedDependencyException
+        operation.errors << FilterLimitExceededException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:list_tokens, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListTokens"
         operation.name = "ListTokens"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTokensRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTokensResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTokensRequest
+        operation.output = ListTokensResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_usage_for_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListUsageForLicenseConfiguration"
         operation.name = "ListUsageForLicenseConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageForLicenseConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageForLicenseConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = ListUsageForLicenseConfigurationRequest
+        operation.output = ListUsageForLicenseConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << FilterLimitExceededException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:reject_grant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#RejectGrant"
         operation.name = "RejectGrant"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RejectGrantRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RejectGrantResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RejectGrantRequest
+        operation.output = RejectGrantResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:update_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#UpdateLicenseConfiguration"
         operation.name = "UpdateLicenseConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLicenseConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLicenseConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = UpdateLicenseConfigurationRequest
+        operation.output = UpdateLicenseConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << ConflictException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:update_license_manager_report_generator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#UpdateLicenseManagerReportGenerator"
         operation.name = "UpdateLicenseManagerReportGenerator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLicenseManagerReportGeneratorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLicenseManagerReportGeneratorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateLicenseManagerReportGeneratorRequest
+        operation.output = UpdateLicenseManagerReportGeneratorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_license_specifications_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#UpdateLicenseSpecificationsForResource"
         operation.name = "UpdateLicenseSpecificationsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLicenseSpecificationsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLicenseSpecificationsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LicenseUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = UpdateLicenseSpecificationsForResourceRequest
+        operation.output = UpdateLicenseSpecificationsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << ConflictException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidResourceStateException
+        operation.errors << LicenseUsageException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
       service.add_operation(:update_service_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#UpdateServiceSettings"
         operation.name = "UpdateServiceSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
+        operation.input = UpdateServiceSettingsRequest
+        operation.output = UpdateServiceSettingsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
         operation.traits = {}
       end)
     end

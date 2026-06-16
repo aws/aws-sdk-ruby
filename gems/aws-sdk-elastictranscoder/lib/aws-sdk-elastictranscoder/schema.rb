@@ -179,379 +179,379 @@ module Aws::ElasticTranscoder
     ZeroTo255String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elastictranscoder#ZeroTo255String", name: "ZeroTo255String", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     ZeroTo512String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elastictranscoder#ZeroTo512String", name: "ZeroTo512String", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}})
 
-    AccessControls.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControl)
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControl)
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    Artwork.add_member(:input_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatermarkKey, location_name: "InputKey"))
-    Artwork.add_member(:max_width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxWidth"))
-    Artwork.add_member(:max_height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxHeight"))
-    Artwork.add_member(:sizing_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SizingPolicy, location_name: "SizingPolicy"))
-    Artwork.add_member(:padding_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaddingPolicy, location_name: "PaddingPolicy"))
-    Artwork.add_member(:album_art_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JpgOrPng, location_name: "AlbumArtFormat"))
-    Artwork.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    Artwork.add_member(:input_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WatermarkKey, location_name: "InputKey"))
+    Artwork.add_member(:max_width, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitsOrAuto, location_name: "MaxWidth"))
+    Artwork.add_member(:max_height, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitsOrAuto, location_name: "MaxHeight"))
+    Artwork.add_member(:sizing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SizingPolicy, location_name: "SizingPolicy"))
+    Artwork.add_member(:padding_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PaddingPolicy, location_name: "PaddingPolicy"))
+    Artwork.add_member(:album_art_format, ::Smithy::Schema::Shapes::MemberShape.new(target: JpgOrPng, location_name: "AlbumArtFormat"))
+    Artwork.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
     Artwork.type = Types::Artwork
-    Artworks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Artwork)
-    AudioCodecOptions.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioCodecProfile, location_name: "Profile"))
-    AudioCodecOptions.add_member(:bit_depth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioBitDepth, location_name: "BitDepth"))
-    AudioCodecOptions.add_member(:bit_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioBitOrder, location_name: "BitOrder"))
-    AudioCodecOptions.add_member(:signed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioSigned, location_name: "Signed"))
+    Artworks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Artwork)
+    AudioCodecOptions.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioCodecProfile, location_name: "Profile"))
+    AudioCodecOptions.add_member(:bit_depth, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioBitDepth, location_name: "BitDepth"))
+    AudioCodecOptions.add_member(:bit_order, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioBitOrder, location_name: "BitOrder"))
+    AudioCodecOptions.add_member(:signed, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSigned, location_name: "Signed"))
     AudioCodecOptions.type = Types::AudioCodecOptions
-    AudioParameters.add_member(:codec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioCodec, location_name: "Codec"))
-    AudioParameters.add_member(:sample_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioSampleRate, location_name: "SampleRate"))
-    AudioParameters.add_member(:bit_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioBitRate, location_name: "BitRate"))
-    AudioParameters.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioChannels, location_name: "Channels"))
-    AudioParameters.add_member(:audio_packing_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioPackingMode, location_name: "AudioPackingMode"))
-    AudioParameters.add_member(:codec_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioCodecOptions, location_name: "CodecOptions"))
+    AudioParameters.add_member(:codec, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioCodec, location_name: "Codec"))
+    AudioParameters.add_member(:sample_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSampleRate, location_name: "SampleRate"))
+    AudioParameters.add_member(:bit_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioBitRate, location_name: "BitRate"))
+    AudioParameters.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioChannels, location_name: "Channels"))
+    AudioParameters.add_member(:audio_packing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioPackingMode, location_name: "AudioPackingMode"))
+    AudioParameters.add_member(:codec_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioCodecOptions, location_name: "CodecOptions"))
     AudioParameters.type = Types::AudioParameters
-    CancelJobRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelJobRequest.type = Types::CancelJobRequest
     CancelJobResponse.type = Types::CancelJobResponse
-    CaptionFormat.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionFormatFormat, location_name: "Format"))
-    CaptionFormat.add_member(:pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionFormatPattern, location_name: "Pattern"))
-    CaptionFormat.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    CaptionFormat.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormatFormat, location_name: "Format"))
+    CaptionFormat.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormatPattern, location_name: "Pattern"))
+    CaptionFormat.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
     CaptionFormat.type = Types::CaptionFormat
-    CaptionFormats.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionFormat)
-    CaptionSource.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongKey, location_name: "Key"))
-    CaptionSource.add_member(:language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Language"))
-    CaptionSource.add_member(:time_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeOffset, location_name: "TimeOffset"))
-    CaptionSource.add_member(:label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Label"))
-    CaptionSource.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    CaptionFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormat)
+    CaptionSource.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LongKey, location_name: "Key"))
+    CaptionSource.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Language"))
+    CaptionSource.add_member(:time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeOffset, location_name: "TimeOffset"))
+    CaptionSource.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Label"))
+    CaptionSource.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
     CaptionSource.type = Types::CaptionSource
-    CaptionSources.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionSource)
-    Captions.add_member(:merge_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionMergePolicy, location_name: "MergePolicy", traits: {"smithy.api#deprecated" => {}}))
-    Captions.add_member(:caption_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionSources, location_name: "CaptionSources", traits: {"smithy.api#deprecated" => {}}))
-    Captions.add_member(:caption_formats, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionFormats, location_name: "CaptionFormats"))
+    CaptionSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSource)
+    Captions.add_member(:merge_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionMergePolicy, location_name: "MergePolicy", traits: {"smithy.api#deprecated" => {}}))
+    Captions.add_member(:caption_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSources, location_name: "CaptionSources", traits: {"smithy.api#deprecated" => {}}))
+    Captions.add_member(:caption_formats, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormats, location_name: "CaptionFormats"))
     Captions.type = Types::Captions
-    Clip.add_member(:time_span, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeSpan, location_name: "TimeSpan"))
+    Clip.add_member(:time_span, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSpan, location_name: "TimeSpan"))
     Clip.type = Types::Clip
-    CodecOptions.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodecOption)
-    CodecOptions.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodecOption)
-    Composition.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Clip)
-    CreateJobOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
-    CreateJobOutput.add_member(:thumbnail_pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailPattern, location_name: "ThumbnailPattern"))
-    CreateJobOutput.add_member(:thumbnail_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "ThumbnailEncryption"))
-    CreateJobOutput.add_member(:rotate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Rotate, location_name: "Rotate"))
-    CreateJobOutput.add_member(:preset_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PresetId"))
-    CreateJobOutput.add_member(:segment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FloatString, location_name: "SegmentDuration"))
-    CreateJobOutput.add_member(:watermarks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobWatermarks, location_name: "Watermarks"))
-    CreateJobOutput.add_member(:album_art, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobAlbumArt, location_name: "AlbumArt"))
-    CreateJobOutput.add_member(:composition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Composition, location_name: "Composition", traits: {"smithy.api#deprecated" => {}}))
-    CreateJobOutput.add_member(:captions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Captions, location_name: "Captions"))
-    CreateJobOutput.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    CodecOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CodecOption)
+    CodecOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CodecOption)
+    Composition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Clip)
+    CreateJobOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key"))
+    CreateJobOutput.add_member(:thumbnail_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailPattern, location_name: "ThumbnailPattern"))
+    CreateJobOutput.add_member(:thumbnail_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "ThumbnailEncryption"))
+    CreateJobOutput.add_member(:rotate, ::Smithy::Schema::Shapes::MemberShape.new(target: Rotate, location_name: "Rotate"))
+    CreateJobOutput.add_member(:preset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PresetId"))
+    CreateJobOutput.add_member(:segment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: FloatString, location_name: "SegmentDuration"))
+    CreateJobOutput.add_member(:watermarks, ::Smithy::Schema::Shapes::MemberShape.new(target: JobWatermarks, location_name: "Watermarks"))
+    CreateJobOutput.add_member(:album_art, ::Smithy::Schema::Shapes::MemberShape.new(target: JobAlbumArt, location_name: "AlbumArt"))
+    CreateJobOutput.add_member(:composition, ::Smithy::Schema::Shapes::MemberShape.new(target: Composition, location_name: "Composition", traits: {"smithy.api#deprecated" => {}}))
+    CreateJobOutput.add_member(:captions, ::Smithy::Schema::Shapes::MemberShape.new(target: Captions, location_name: "Captions"))
+    CreateJobOutput.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
     CreateJobOutput.type = Types::CreateJobOutput
-    CreateJobOutputs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobOutput)
-    CreateJobPlaylist.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filename, location_name: "Name"))
-    CreateJobPlaylist.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaylistFormat, location_name: "Format"))
-    CreateJobPlaylist.add_member(:output_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputKeys, location_name: "OutputKeys"))
-    CreateJobPlaylist.add_member(:hls_content_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HlsContentProtection, location_name: "HlsContentProtection"))
-    CreateJobPlaylist.add_member(:play_ready_drm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlayReadyDrm, location_name: "PlayReadyDrm"))
+    CreateJobOutputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobOutput)
+    CreateJobPlaylist.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Filename, location_name: "Name"))
+    CreateJobPlaylist.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaylistFormat, location_name: "Format"))
+    CreateJobPlaylist.add_member(:output_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputKeys, location_name: "OutputKeys"))
+    CreateJobPlaylist.add_member(:hls_content_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsContentProtection, location_name: "HlsContentProtection"))
+    CreateJobPlaylist.add_member(:play_ready_drm, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayReadyDrm, location_name: "PlayReadyDrm"))
     CreateJobPlaylist.type = Types::CreateJobPlaylist
-    CreateJobPlaylists.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobPlaylist)
-    CreateJobRequest.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PipelineId", traits: {"smithy.api#required" => {}}))
-    CreateJobRequest.add_member(:input, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobInput, location_name: "Input"))
-    CreateJobRequest.add_member(:inputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobInputs, location_name: "Inputs"))
-    CreateJobRequest.add_member(:output, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobOutput, location_name: "Output"))
-    CreateJobRequest.add_member(:outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobOutputs, location_name: "Outputs"))
-    CreateJobRequest.add_member(:output_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "OutputKeyPrefix"))
-    CreateJobRequest.add_member(:playlists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobPlaylists, location_name: "Playlists"))
-    CreateJobRequest.add_member(:user_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserMetadata, location_name: "UserMetadata"))
+    CreateJobPlaylists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobPlaylist)
+    CreateJobRequest.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PipelineId", traits: {"smithy.api#required" => {}}))
+    CreateJobRequest.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInput, location_name: "Input"))
+    CreateJobRequest.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputs, location_name: "Inputs"))
+    CreateJobRequest.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobOutput, location_name: "Output"))
+    CreateJobRequest.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobOutputs, location_name: "Outputs"))
+    CreateJobRequest.add_member(:output_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "OutputKeyPrefix"))
+    CreateJobRequest.add_member(:playlists, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobPlaylists, location_name: "Playlists"))
+    CreateJobRequest.add_member(:user_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMetadata, location_name: "UserMetadata"))
     CreateJobRequest.type = Types::CreateJobRequest
-    CreateJobResponse.add_member(:job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Job, location_name: "Job"))
+    CreateJobResponse.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, location_name: "Job"))
     CreateJobResponse.type = Types::CreateJobResponse
-    CreatePipelineRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreatePipelineRequest.add_member(:input_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "InputBucket", traits: {"smithy.api#required" => {}}))
-    CreatePipelineRequest.add_member(:output_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "OutputBucket"))
-    CreatePipelineRequest.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
-    CreatePipelineRequest.add_member(:aws_kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "AwsKmsKeyArn"))
-    CreatePipelineRequest.add_member(:notifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Notifications, location_name: "Notifications"))
-    CreatePipelineRequest.add_member(:content_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineOutputConfig, location_name: "ContentConfig"))
-    CreatePipelineRequest.add_member(:thumbnail_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineOutputConfig, location_name: "ThumbnailConfig"))
+    CreatePipelineRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreatePipelineRequest.add_member(:input_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "InputBucket", traits: {"smithy.api#required" => {}}))
+    CreatePipelineRequest.add_member(:output_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "OutputBucket"))
+    CreatePipelineRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
+    CreatePipelineRequest.add_member(:aws_kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "AwsKmsKeyArn"))
+    CreatePipelineRequest.add_member(:notifications, ::Smithy::Schema::Shapes::MemberShape.new(target: Notifications, location_name: "Notifications"))
+    CreatePipelineRequest.add_member(:content_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineOutputConfig, location_name: "ContentConfig"))
+    CreatePipelineRequest.add_member(:thumbnail_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineOutputConfig, location_name: "ThumbnailConfig"))
     CreatePipelineRequest.type = Types::CreatePipelineRequest
-    CreatePipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
-    CreatePipelineResponse.add_member(:warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
+    CreatePipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, location_name: "Pipeline"))
+    CreatePipelineResponse.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: Warnings, location_name: "Warnings"))
     CreatePipelineResponse.type = Types::CreatePipelineResponse
-    CreatePresetRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreatePresetRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreatePresetRequest.add_member(:container, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresetContainer, location_name: "Container", traits: {"smithy.api#required" => {}}))
-    CreatePresetRequest.add_member(:video, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoParameters, location_name: "Video"))
-    CreatePresetRequest.add_member(:audio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioParameters, location_name: "Audio"))
-    CreatePresetRequest.add_member(:thumbnails, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Thumbnails, location_name: "Thumbnails"))
+    CreatePresetRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreatePresetRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreatePresetRequest.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetContainer, location_name: "Container", traits: {"smithy.api#required" => {}}))
+    CreatePresetRequest.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoParameters, location_name: "Video"))
+    CreatePresetRequest.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioParameters, location_name: "Audio"))
+    CreatePresetRequest.add_member(:thumbnails, ::Smithy::Schema::Shapes::MemberShape.new(target: Thumbnails, location_name: "Thumbnails"))
     CreatePresetRequest.type = Types::CreatePresetRequest
-    CreatePresetResponse.add_member(:preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Preset, location_name: "Preset"))
-    CreatePresetResponse.add_member(:warning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Warning"))
+    CreatePresetResponse.add_member(:preset, ::Smithy::Schema::Shapes::MemberShape.new(target: Preset, location_name: "Preset"))
+    CreatePresetResponse.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Warning"))
     CreatePresetResponse.type = Types::CreatePresetResponse
-    DeletePipelineRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePipelineRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeletePipelineRequest.type = Types::DeletePipelineRequest
     DeletePipelineResponse.type = Types::DeletePipelineResponse
-    DeletePresetRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePresetRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeletePresetRequest.type = Types::DeletePresetRequest
     DeletePresetResponse.type = Types::DeletePresetResponse
-    DetectedProperties.add_member(:width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Width"))
-    DetectedProperties.add_member(:height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Height"))
-    DetectedProperties.add_member(:frame_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FloatString, location_name: "FrameRate"))
-    DetectedProperties.add_member(:file_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "FileSize"))
-    DetectedProperties.add_member(:duration_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "DurationMillis"))
+    DetectedProperties.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, location_name: "Width"))
+    DetectedProperties.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, location_name: "Height"))
+    DetectedProperties.add_member(:frame_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: FloatString, location_name: "FrameRate"))
+    DetectedProperties.add_member(:file_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "FileSize"))
+    DetectedProperties.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "DurationMillis"))
     DetectedProperties.type = Types::DetectedProperties
-    Encryption.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "Mode"))
-    Encryption.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Base64EncodedString, location_name: "Key"))
-    Encryption.add_member(:key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Base64EncodedString, location_name: "KeyMd5"))
-    Encryption.add_member(:initialization_vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZeroTo255String, location_name: "InitializationVector"))
+    Encryption.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, location_name: "Mode"))
+    Encryption.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedString, location_name: "Key"))
+    Encryption.add_member(:key_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedString, location_name: "KeyMd5"))
+    Encryption.add_member(:initialization_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeroTo255String, location_name: "InitializationVector"))
     Encryption.type = Types::Encryption
-    ExceptionMessages.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    HlsContentProtection.add_member(:method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HlsContentProtectionMethod, location_name: "Method"))
-    HlsContentProtection.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Base64EncodedString, location_name: "Key"))
-    HlsContentProtection.add_member(:key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Base64EncodedString, location_name: "KeyMd5"))
-    HlsContentProtection.add_member(:initialization_vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZeroTo255String, location_name: "InitializationVector"))
-    HlsContentProtection.add_member(:license_acquisition_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZeroTo512String, location_name: "LicenseAcquisitionUrl"))
-    HlsContentProtection.add_member(:key_storage_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyStoragePolicy, location_name: "KeyStoragePolicy"))
+    ExceptionMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    HlsContentProtection.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsContentProtectionMethod, location_name: "Method"))
+    HlsContentProtection.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedString, location_name: "Key"))
+    HlsContentProtection.add_member(:key_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedString, location_name: "KeyMd5"))
+    HlsContentProtection.add_member(:initialization_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeroTo255String, location_name: "InitializationVector"))
+    HlsContentProtection.add_member(:license_acquisition_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeroTo512String, location_name: "LicenseAcquisitionUrl"))
+    HlsContentProtection.add_member(:key_storage_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyStoragePolicy, location_name: "KeyStoragePolicy"))
     HlsContentProtection.type = Types::HlsContentProtection
-    IncompatibleVersionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    IncompatibleVersionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     IncompatibleVersionException.type = Types::IncompatibleVersionException
-    InputCaptions.add_member(:merge_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionMergePolicy, location_name: "MergePolicy"))
-    InputCaptions.add_member(:caption_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaptionSources, location_name: "CaptionSources"))
+    InputCaptions.add_member(:merge_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionMergePolicy, location_name: "MergePolicy"))
+    InputCaptions.add_member(:caption_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSources, location_name: "CaptionSources"))
     InputCaptions.type = Types::InputCaptions
-    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     InternalServiceException.type = Types::InternalServiceException
-    Job.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    Job.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
-    Job.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PipelineId"))
-    Job.add_member(:input, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobInput, location_name: "Input"))
-    Job.add_member(:inputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobInputs, location_name: "Inputs"))
-    Job.add_member(:output, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobOutput, location_name: "Output"))
-    Job.add_member(:outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobOutputs, location_name: "Outputs"))
-    Job.add_member(:output_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "OutputKeyPrefix"))
-    Job.add_member(:playlists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Playlists, location_name: "Playlists"))
-    Job.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "Status"))
-    Job.add_member(:user_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserMetadata, location_name: "UserMetadata"))
-    Job.add_member(:timing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timing, location_name: "Timing"))
+    Job.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    Job.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Arn"))
+    Job.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PipelineId"))
+    Job.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInput, location_name: "Input"))
+    Job.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputs, location_name: "Inputs"))
+    Job.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutput, location_name: "Output"))
+    Job.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutputs, location_name: "Outputs"))
+    Job.add_member(:output_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "OutputKeyPrefix"))
+    Job.add_member(:playlists, ::Smithy::Schema::Shapes::MemberShape.new(target: Playlists, location_name: "Playlists"))
+    Job.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "Status"))
+    Job.add_member(:user_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMetadata, location_name: "UserMetadata"))
+    Job.add_member(:timing, ::Smithy::Schema::Shapes::MemberShape.new(target: Timing, location_name: "Timing"))
     Job.type = Types::Job
-    JobAlbumArt.add_member(:merge_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergePolicy, location_name: "MergePolicy"))
-    JobAlbumArt.add_member(:artwork, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Artworks, location_name: "Artwork"))
+    JobAlbumArt.add_member(:merge_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MergePolicy, location_name: "MergePolicy"))
+    JobAlbumArt.add_member(:artwork, ::Smithy::Schema::Shapes::MemberShape.new(target: Artworks, location_name: "Artwork"))
     JobAlbumArt.type = Types::JobAlbumArt
-    JobInput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongKey, location_name: "Key"))
-    JobInput.add_member(:frame_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameRate, location_name: "FrameRate"))
-    JobInput.add_member(:resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Resolution, location_name: "Resolution"))
-    JobInput.add_member(:aspect_ratio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AspectRatio, location_name: "AspectRatio"))
-    JobInput.add_member(:interlaced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Interlaced, location_name: "Interlaced"))
-    JobInput.add_member(:container, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobContainer, location_name: "Container"))
-    JobInput.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
-    JobInput.add_member(:time_span, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeSpan, location_name: "TimeSpan"))
-    JobInput.add_member(:input_captions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputCaptions, location_name: "InputCaptions"))
-    JobInput.add_member(:detected_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectedProperties, location_name: "DetectedProperties"))
+    JobInput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LongKey, location_name: "Key"))
+    JobInput.add_member(:frame_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameRate, location_name: "FrameRate"))
+    JobInput.add_member(:resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: Resolution, location_name: "Resolution"))
+    JobInput.add_member(:aspect_ratio, ::Smithy::Schema::Shapes::MemberShape.new(target: AspectRatio, location_name: "AspectRatio"))
+    JobInput.add_member(:interlaced, ::Smithy::Schema::Shapes::MemberShape.new(target: Interlaced, location_name: "Interlaced"))
+    JobInput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: JobContainer, location_name: "Container"))
+    JobInput.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
+    JobInput.add_member(:time_span, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSpan, location_name: "TimeSpan"))
+    JobInput.add_member(:input_captions, ::Smithy::Schema::Shapes::MemberShape.new(target: InputCaptions, location_name: "InputCaptions"))
+    JobInput.add_member(:detected_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectedProperties, location_name: "DetectedProperties"))
     JobInput.type = Types::JobInput
-    JobInputs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobInput)
-    JobOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Id"))
-    JobOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
-    JobOutput.add_member(:thumbnail_pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailPattern, location_name: "ThumbnailPattern"))
-    JobOutput.add_member(:thumbnail_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "ThumbnailEncryption"))
-    JobOutput.add_member(:rotate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Rotate, location_name: "Rotate"))
-    JobOutput.add_member(:preset_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PresetId"))
-    JobOutput.add_member(:segment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FloatString, location_name: "SegmentDuration"))
-    JobOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "Status"))
-    JobOutput.add_member(:status_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "StatusDetail"))
-    JobOutput.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "Duration"))
-    JobOutput.add_member(:width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Width"))
-    JobOutput.add_member(:height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Height"))
-    JobOutput.add_member(:frame_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FloatString, location_name: "FrameRate"))
-    JobOutput.add_member(:file_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "FileSize"))
-    JobOutput.add_member(:duration_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "DurationMillis"))
-    JobOutput.add_member(:watermarks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobWatermarks, location_name: "Watermarks"))
-    JobOutput.add_member(:album_art, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobAlbumArt, location_name: "AlbumArt"))
-    JobOutput.add_member(:composition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Composition, location_name: "Composition", traits: {"smithy.api#deprecated" => {}}))
-    JobOutput.add_member(:captions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Captions, location_name: "Captions"))
-    JobOutput.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
-    JobOutput.add_member(:applied_color_space_conversion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AppliedColorSpaceConversion"))
+    JobInputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobInput)
+    JobOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id"))
+    JobOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key"))
+    JobOutput.add_member(:thumbnail_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailPattern, location_name: "ThumbnailPattern"))
+    JobOutput.add_member(:thumbnail_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "ThumbnailEncryption"))
+    JobOutput.add_member(:rotate, ::Smithy::Schema::Shapes::MemberShape.new(target: Rotate, location_name: "Rotate"))
+    JobOutput.add_member(:preset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PresetId"))
+    JobOutput.add_member(:segment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: FloatString, location_name: "SegmentDuration"))
+    JobOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "Status"))
+    JobOutput.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "StatusDetail"))
+    JobOutput.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "Duration"))
+    JobOutput.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, location_name: "Width"))
+    JobOutput.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, location_name: "Height"))
+    JobOutput.add_member(:frame_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: FloatString, location_name: "FrameRate"))
+    JobOutput.add_member(:file_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "FileSize"))
+    JobOutput.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "DurationMillis"))
+    JobOutput.add_member(:watermarks, ::Smithy::Schema::Shapes::MemberShape.new(target: JobWatermarks, location_name: "Watermarks"))
+    JobOutput.add_member(:album_art, ::Smithy::Schema::Shapes::MemberShape.new(target: JobAlbumArt, location_name: "AlbumArt"))
+    JobOutput.add_member(:composition, ::Smithy::Schema::Shapes::MemberShape.new(target: Composition, location_name: "Composition", traits: {"smithy.api#deprecated" => {}}))
+    JobOutput.add_member(:captions, ::Smithy::Schema::Shapes::MemberShape.new(target: Captions, location_name: "Captions"))
+    JobOutput.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
+    JobOutput.add_member(:applied_color_space_conversion, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AppliedColorSpaceConversion"))
     JobOutput.type = Types::JobOutput
-    JobOutputs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobOutput)
-    JobWatermark.add_member(:preset_watermark_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresetWatermarkId, location_name: "PresetWatermarkId"))
-    JobWatermark.add_member(:input_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatermarkKey, location_name: "InputKey"))
-    JobWatermark.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    JobOutputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutput)
+    JobWatermark.add_member(:preset_watermark_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetWatermarkId, location_name: "PresetWatermarkId"))
+    JobWatermark.add_member(:input_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WatermarkKey, location_name: "InputKey"))
+    JobWatermark.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
     JobWatermark.type = Types::JobWatermark
-    JobWatermarks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobWatermark)
-    Jobs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Job)
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    JobWatermarks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobWatermark)
+    Jobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Job)
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     LimitExceededException.type = Types::LimitExceededException
-    ListJobsByPipelineRequest.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PipelineId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListJobsByPipelineRequest.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
-    ListJobsByPipelineRequest.add_member(:page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
+    ListJobsByPipelineRequest.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PipelineId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListJobsByPipelineRequest.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
+    ListJobsByPipelineRequest.add_member(:page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
     ListJobsByPipelineRequest.type = Types::ListJobsByPipelineRequest
-    ListJobsByPipelineResponse.add_member(:jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Jobs, location_name: "Jobs"))
-    ListJobsByPipelineResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "NextPageToken"))
+    ListJobsByPipelineResponse.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: Jobs, location_name: "Jobs"))
+    ListJobsByPipelineResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "NextPageToken"))
     ListJobsByPipelineResponse.type = Types::ListJobsByPipelineResponse
-    ListJobsByStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "Status", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListJobsByStatusRequest.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
-    ListJobsByStatusRequest.add_member(:page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
+    ListJobsByStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "Status", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListJobsByStatusRequest.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
+    ListJobsByStatusRequest.add_member(:page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
     ListJobsByStatusRequest.type = Types::ListJobsByStatusRequest
-    ListJobsByStatusResponse.add_member(:jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Jobs, location_name: "Jobs"))
-    ListJobsByStatusResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "NextPageToken"))
+    ListJobsByStatusResponse.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: Jobs, location_name: "Jobs"))
+    ListJobsByStatusResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "NextPageToken"))
     ListJobsByStatusResponse.type = Types::ListJobsByStatusResponse
-    ListPipelinesRequest.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
-    ListPipelinesRequest.add_member(:page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
+    ListPipelinesRequest.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
+    ListPipelinesRequest.add_member(:page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
     ListPipelinesRequest.type = Types::ListPipelinesRequest
-    ListPipelinesResponse.add_member(:pipelines, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipelines, location_name: "Pipelines"))
-    ListPipelinesResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "NextPageToken"))
+    ListPipelinesResponse.add_member(:pipelines, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipelines, location_name: "Pipelines"))
+    ListPipelinesResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "NextPageToken"))
     ListPipelinesResponse.type = Types::ListPipelinesResponse
-    ListPresetsRequest.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
-    ListPresetsRequest.add_member(:page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
+    ListPresetsRequest.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: Ascending, location_name: "Ascending", traits: {"smithy.api#httpQuery" => "Ascending"}))
+    ListPresetsRequest.add_member(:page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "PageToken", traits: {"smithy.api#httpQuery" => "PageToken"}))
     ListPresetsRequest.type = Types::ListPresetsRequest
-    ListPresetsResponse.add_member(:presets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Presets, location_name: "Presets"))
-    ListPresetsResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "NextPageToken"))
+    ListPresetsResponse.add_member(:presets, ::Smithy::Schema::Shapes::MemberShape.new(target: Presets, location_name: "Presets"))
+    ListPresetsResponse.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "NextPageToken"))
     ListPresetsResponse.type = Types::ListPresetsResponse
-    Notifications.add_member(:progressing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopic, location_name: "Progressing"))
-    Notifications.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopic, location_name: "Completed"))
-    Notifications.add_member(:warning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopic, location_name: "Warning"))
-    Notifications.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopic, location_name: "Error"))
+    Notifications.add_member(:progressing, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, location_name: "Progressing"))
+    Notifications.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, location_name: "Completed"))
+    Notifications.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, location_name: "Warning"))
+    Notifications.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, location_name: "Error"))
     Notifications.type = Types::Notifications
-    OutputKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key)
-    Permission.add_member(:grantee_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GranteeType, location_name: "GranteeType"))
-    Permission.add_member(:grantee, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
-    Permission.add_member(:access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControls, location_name: "Access"))
+    OutputKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Key)
+    Permission.add_member(:grantee_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GranteeType, location_name: "GranteeType"))
+    Permission.add_member(:grantee, ::Smithy::Schema::Shapes::MemberShape.new(target: Grantee, location_name: "Grantee"))
+    Permission.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControls, location_name: "Access"))
     Permission.type = Types::Permission
-    Permissions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permission)
-    Pipeline.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    Pipeline.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
-    Pipeline.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    Pipeline.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "Status"))
-    Pipeline.add_member(:input_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "InputBucket"))
-    Pipeline.add_member(:output_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "OutputBucket"))
-    Pipeline.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
-    Pipeline.add_member(:aws_kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "AwsKmsKeyArn"))
-    Pipeline.add_member(:notifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Notifications, location_name: "Notifications"))
-    Pipeline.add_member(:content_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineOutputConfig, location_name: "ContentConfig"))
-    Pipeline.add_member(:thumbnail_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineOutputConfig, location_name: "ThumbnailConfig"))
+    Permissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission)
+    Pipeline.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    Pipeline.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Arn"))
+    Pipeline.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    Pipeline.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineStatus, location_name: "Status"))
+    Pipeline.add_member(:input_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "InputBucket"))
+    Pipeline.add_member(:output_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "OutputBucket"))
+    Pipeline.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role"))
+    Pipeline.add_member(:aws_kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "AwsKmsKeyArn"))
+    Pipeline.add_member(:notifications, ::Smithy::Schema::Shapes::MemberShape.new(target: Notifications, location_name: "Notifications"))
+    Pipeline.add_member(:content_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineOutputConfig, location_name: "ContentConfig"))
+    Pipeline.add_member(:thumbnail_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineOutputConfig, location_name: "ThumbnailConfig"))
     Pipeline.type = Types::Pipeline
-    PipelineOutputConfig.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
-    PipelineOutputConfig.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
-    PipelineOutputConfig.add_member(:permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permissions, location_name: "Permissions"))
+    PipelineOutputConfig.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "Bucket"))
+    PipelineOutputConfig.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "StorageClass"))
+    PipelineOutputConfig.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions, location_name: "Permissions"))
     PipelineOutputConfig.type = Types::PipelineOutputConfig
-    Pipelines.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline)
-    PlayReadyDrm.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlayReadyDrmFormatString, location_name: "Format"))
-    PlayReadyDrm.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyBase64EncodedString, location_name: "Key"))
-    PlayReadyDrm.add_member(:key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyBase64EncodedString, location_name: "KeyMd5"))
-    PlayReadyDrm.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyIdGuid, location_name: "KeyId"))
-    PlayReadyDrm.add_member(:initialization_vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZeroTo255String, location_name: "InitializationVector"))
-    PlayReadyDrm.add_member(:license_acquisition_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OneTo512String, location_name: "LicenseAcquisitionUrl"))
+    Pipelines.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline)
+    PlayReadyDrm.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayReadyDrmFormatString, location_name: "Format"))
+    PlayReadyDrm.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyBase64EncodedString, location_name: "Key"))
+    PlayReadyDrm.add_member(:key_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyBase64EncodedString, location_name: "KeyMd5"))
+    PlayReadyDrm.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdGuid, location_name: "KeyId"))
+    PlayReadyDrm.add_member(:initialization_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeroTo255String, location_name: "InitializationVector"))
+    PlayReadyDrm.add_member(:license_acquisition_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OneTo512String, location_name: "LicenseAcquisitionUrl"))
     PlayReadyDrm.type = Types::PlayReadyDrm
-    Playlist.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filename, location_name: "Name"))
-    Playlist.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaylistFormat, location_name: "Format"))
-    Playlist.add_member(:output_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputKeys, location_name: "OutputKeys"))
-    Playlist.add_member(:hls_content_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HlsContentProtection, location_name: "HlsContentProtection"))
-    Playlist.add_member(:play_ready_drm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlayReadyDrm, location_name: "PlayReadyDrm"))
-    Playlist.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "Status"))
-    Playlist.add_member(:status_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "StatusDetail"))
+    Playlist.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Filename, location_name: "Name"))
+    Playlist.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaylistFormat, location_name: "Format"))
+    Playlist.add_member(:output_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputKeys, location_name: "OutputKeys"))
+    Playlist.add_member(:hls_content_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsContentProtection, location_name: "HlsContentProtection"))
+    Playlist.add_member(:play_ready_drm, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayReadyDrm, location_name: "PlayReadyDrm"))
+    Playlist.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "Status"))
+    Playlist.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "StatusDetail"))
     Playlist.type = Types::Playlist
-    Playlists.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Playlist)
-    Preset.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    Preset.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
-    Preset.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    Preset.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    Preset.add_member(:container, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresetContainer, location_name: "Container"))
-    Preset.add_member(:audio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioParameters, location_name: "Audio"))
-    Preset.add_member(:video, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoParameters, location_name: "Video"))
-    Preset.add_member(:thumbnails, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Thumbnails, location_name: "Thumbnails"))
-    Preset.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresetType, location_name: "Type"))
+    Playlists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Playlist)
+    Preset.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    Preset.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Arn"))
+    Preset.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    Preset.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    Preset.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetContainer, location_name: "Container"))
+    Preset.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioParameters, location_name: "Audio"))
+    Preset.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoParameters, location_name: "Video"))
+    Preset.add_member(:thumbnails, ::Smithy::Schema::Shapes::MemberShape.new(target: Thumbnails, location_name: "Thumbnails"))
+    Preset.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetType, location_name: "Type"))
     Preset.type = Types::Preset
-    PresetWatermark.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresetWatermarkId, location_name: "Id"))
-    PresetWatermark.add_member(:max_width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PixelsOrPercent, location_name: "MaxWidth"))
-    PresetWatermark.add_member(:max_height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PixelsOrPercent, location_name: "MaxHeight"))
-    PresetWatermark.add_member(:sizing_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WatermarkSizingPolicy, location_name: "SizingPolicy"))
-    PresetWatermark.add_member(:horizontal_align, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HorizontalAlign, location_name: "HorizontalAlign"))
-    PresetWatermark.add_member(:horizontal_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PixelsOrPercent, location_name: "HorizontalOffset"))
-    PresetWatermark.add_member(:vertical_align, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerticalAlign, location_name: "VerticalAlign"))
-    PresetWatermark.add_member(:vertical_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PixelsOrPercent, location_name: "VerticalOffset"))
-    PresetWatermark.add_member(:opacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Opacity, location_name: "Opacity"))
-    PresetWatermark.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target"))
+    PresetWatermark.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetWatermarkId, location_name: "Id"))
+    PresetWatermark.add_member(:max_width, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelsOrPercent, location_name: "MaxWidth"))
+    PresetWatermark.add_member(:max_height, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelsOrPercent, location_name: "MaxHeight"))
+    PresetWatermark.add_member(:sizing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: WatermarkSizingPolicy, location_name: "SizingPolicy"))
+    PresetWatermark.add_member(:horizontal_align, ::Smithy::Schema::Shapes::MemberShape.new(target: HorizontalAlign, location_name: "HorizontalAlign"))
+    PresetWatermark.add_member(:horizontal_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelsOrPercent, location_name: "HorizontalOffset"))
+    PresetWatermark.add_member(:vertical_align, ::Smithy::Schema::Shapes::MemberShape.new(target: VerticalAlign, location_name: "VerticalAlign"))
+    PresetWatermark.add_member(:vertical_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelsOrPercent, location_name: "VerticalOffset"))
+    PresetWatermark.add_member(:opacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Opacity, location_name: "Opacity"))
+    PresetWatermark.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target"))
     PresetWatermark.type = Types::PresetWatermark
-    PresetWatermarks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresetWatermark)
-    Presets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Preset)
-    ReadJobRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PresetWatermarks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PresetWatermark)
+    Presets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Preset)
+    ReadJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ReadJobRequest.type = Types::ReadJobRequest
-    ReadJobResponse.add_member(:job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Job, location_name: "Job"))
+    ReadJobResponse.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, location_name: "Job"))
     ReadJobResponse.type = Types::ReadJobResponse
-    ReadPipelineRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ReadPipelineRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ReadPipelineRequest.type = Types::ReadPipelineRequest
-    ReadPipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
-    ReadPipelineResponse.add_member(:warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
+    ReadPipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, location_name: "Pipeline"))
+    ReadPipelineResponse.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: Warnings, location_name: "Warnings"))
     ReadPipelineResponse.type = Types::ReadPipelineResponse
-    ReadPresetRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ReadPresetRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ReadPresetRequest.type = Types::ReadPresetRequest
-    ReadPresetResponse.add_member(:preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Preset, location_name: "Preset"))
+    ReadPresetResponse.add_member(:preset, ::Smithy::Schema::Shapes::MemberShape.new(target: Preset, location_name: "Preset"))
     ReadPresetResponse.type = Types::ReadPresetResponse
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SnsTopics.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopic)
-    TestRoleRequest.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
-    TestRoleRequest.add_member(:input_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "InputBucket", traits: {"smithy.api#required" => {}}))
-    TestRoleRequest.add_member(:output_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "OutputBucket", traits: {"smithy.api#required" => {}}))
-    TestRoleRequest.add_member(:topics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopics, location_name: "Topics", traits: {"smithy.api#required" => {}}))
+    SnsTopics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic)
+    TestRoleRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
+    TestRoleRequest.add_member(:input_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "InputBucket", traits: {"smithy.api#required" => {}}))
+    TestRoleRequest.add_member(:output_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "OutputBucket", traits: {"smithy.api#required" => {}}))
+    TestRoleRequest.add_member(:topics, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopics, location_name: "Topics", traits: {"smithy.api#required" => {}}))
     TestRoleRequest.type = Types::TestRoleRequest
-    TestRoleResponse.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Success, location_name: "Success"))
-    TestRoleResponse.add_member(:messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessages, location_name: "Messages"))
+    TestRoleResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: Success, location_name: "Success"))
+    TestRoleResponse.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessages, location_name: "Messages"))
     TestRoleResponse.type = Types::TestRoleResponse
-    Thumbnails.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JpgOrPng, location_name: "Format"))
-    Thumbnails.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Digits, location_name: "Interval"))
-    Thumbnails.add_member(:resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailResolution, location_name: "Resolution"))
-    Thumbnails.add_member(:aspect_ratio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AspectRatio, location_name: "AspectRatio"))
-    Thumbnails.add_member(:max_width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxWidth"))
-    Thumbnails.add_member(:max_height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxHeight"))
-    Thumbnails.add_member(:sizing_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SizingPolicy, location_name: "SizingPolicy"))
-    Thumbnails.add_member(:padding_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaddingPolicy, location_name: "PaddingPolicy"))
+    Thumbnails.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: JpgOrPng, location_name: "Format"))
+    Thumbnails.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Digits, location_name: "Interval"))
+    Thumbnails.add_member(:resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailResolution, location_name: "Resolution"))
+    Thumbnails.add_member(:aspect_ratio, ::Smithy::Schema::Shapes::MemberShape.new(target: AspectRatio, location_name: "AspectRatio"))
+    Thumbnails.add_member(:max_width, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitsOrAuto, location_name: "MaxWidth"))
+    Thumbnails.add_member(:max_height, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitsOrAuto, location_name: "MaxHeight"))
+    Thumbnails.add_member(:sizing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SizingPolicy, location_name: "SizingPolicy"))
+    Thumbnails.add_member(:padding_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PaddingPolicy, location_name: "PaddingPolicy"))
     Thumbnails.type = Types::Thumbnails
-    TimeSpan.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "StartTime"))
-    TimeSpan.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "Duration"))
+    TimeSpan.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "StartTime"))
+    TimeSpan.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "Duration"))
     TimeSpan.type = Types::TimeSpan
-    Timing.add_member(:submit_time_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "SubmitTimeMillis"))
-    Timing.add_member(:start_time_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "StartTimeMillis"))
-    Timing.add_member(:finish_time_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "FinishTimeMillis"))
+    Timing.add_member(:submit_time_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "SubmitTimeMillis"))
+    Timing.add_member(:start_time_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "StartTimeMillis"))
+    Timing.add_member(:finish_time_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "FinishTimeMillis"))
     Timing.type = Types::Timing
-    UpdatePipelineNotificationsRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdatePipelineNotificationsRequest.add_member(:notifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Notifications, location_name: "Notifications", traits: {"smithy.api#required" => {}}))
+    UpdatePipelineNotificationsRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePipelineNotificationsRequest.add_member(:notifications, ::Smithy::Schema::Shapes::MemberShape.new(target: Notifications, location_name: "Notifications", traits: {"smithy.api#required" => {}}))
     UpdatePipelineNotificationsRequest.type = Types::UpdatePipelineNotificationsRequest
-    UpdatePipelineNotificationsResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
+    UpdatePipelineNotificationsResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, location_name: "Pipeline"))
     UpdatePipelineNotificationsResponse.type = Types::UpdatePipelineNotificationsResponse
-    UpdatePipelineRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdatePipelineRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    UpdatePipelineRequest.add_member(:input_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "InputBucket"))
-    UpdatePipelineRequest.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
-    UpdatePipelineRequest.add_member(:aws_kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "AwsKmsKeyArn"))
-    UpdatePipelineRequest.add_member(:notifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Notifications, location_name: "Notifications"))
-    UpdatePipelineRequest.add_member(:content_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineOutputConfig, location_name: "ContentConfig"))
-    UpdatePipelineRequest.add_member(:thumbnail_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineOutputConfig, location_name: "ThumbnailConfig"))
+    UpdatePipelineRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePipelineRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
+    UpdatePipelineRequest.add_member(:input_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "InputBucket"))
+    UpdatePipelineRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role"))
+    UpdatePipelineRequest.add_member(:aws_kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "AwsKmsKeyArn"))
+    UpdatePipelineRequest.add_member(:notifications, ::Smithy::Schema::Shapes::MemberShape.new(target: Notifications, location_name: "Notifications"))
+    UpdatePipelineRequest.add_member(:content_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineOutputConfig, location_name: "ContentConfig"))
+    UpdatePipelineRequest.add_member(:thumbnail_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineOutputConfig, location_name: "ThumbnailConfig"))
     UpdatePipelineRequest.type = Types::UpdatePipelineRequest
-    UpdatePipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
-    UpdatePipelineResponse.add_member(:warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
+    UpdatePipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, location_name: "Pipeline"))
+    UpdatePipelineResponse.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: Warnings, location_name: "Warnings"))
     UpdatePipelineResponse.type = Types::UpdatePipelineResponse
-    UpdatePipelineStatusRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdatePipelineStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdatePipelineStatusRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePipelineStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
     UpdatePipelineStatusRequest.type = Types::UpdatePipelineStatusRequest
-    UpdatePipelineStatusResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
+    UpdatePipelineStatusResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, location_name: "Pipeline"))
     UpdatePipelineStatusResponse.type = Types::UpdatePipelineStatusResponse
-    UserMetadata.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    UserMetadata.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    UserMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    UserMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    VideoParameters.add_member(:codec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoCodec, location_name: "Codec"))
-    VideoParameters.add_member(:codec_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodecOptions, location_name: "CodecOptions"))
-    VideoParameters.add_member(:keyframes_max_dist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyframesMaxDist, location_name: "KeyframesMaxDist"))
-    VideoParameters.add_member(:fixed_gop, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FixedGOP, location_name: "FixedGOP"))
-    VideoParameters.add_member(:bit_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoBitRate, location_name: "BitRate"))
-    VideoParameters.add_member(:frame_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FrameRate, location_name: "FrameRate"))
-    VideoParameters.add_member(:max_frame_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxFrameRate, location_name: "MaxFrameRate"))
-    VideoParameters.add_member(:resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Resolution, location_name: "Resolution"))
-    VideoParameters.add_member(:aspect_ratio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AspectRatio, location_name: "AspectRatio"))
-    VideoParameters.add_member(:max_width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxWidth"))
-    VideoParameters.add_member(:max_height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxHeight"))
-    VideoParameters.add_member(:display_aspect_ratio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AspectRatio, location_name: "DisplayAspectRatio"))
-    VideoParameters.add_member(:sizing_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SizingPolicy, location_name: "SizingPolicy"))
-    VideoParameters.add_member(:padding_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaddingPolicy, location_name: "PaddingPolicy"))
-    VideoParameters.add_member(:watermarks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresetWatermarks, location_name: "Watermarks"))
+    VideoParameters.add_member(:codec, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoCodec, location_name: "Codec"))
+    VideoParameters.add_member(:codec_options, ::Smithy::Schema::Shapes::MemberShape.new(target: CodecOptions, location_name: "CodecOptions"))
+    VideoParameters.add_member(:keyframes_max_dist, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyframesMaxDist, location_name: "KeyframesMaxDist"))
+    VideoParameters.add_member(:fixed_gop, ::Smithy::Schema::Shapes::MemberShape.new(target: FixedGOP, location_name: "FixedGOP"))
+    VideoParameters.add_member(:bit_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoBitRate, location_name: "BitRate"))
+    VideoParameters.add_member(:frame_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameRate, location_name: "FrameRate"))
+    VideoParameters.add_member(:max_frame_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxFrameRate, location_name: "MaxFrameRate"))
+    VideoParameters.add_member(:resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: Resolution, location_name: "Resolution"))
+    VideoParameters.add_member(:aspect_ratio, ::Smithy::Schema::Shapes::MemberShape.new(target: AspectRatio, location_name: "AspectRatio"))
+    VideoParameters.add_member(:max_width, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitsOrAuto, location_name: "MaxWidth"))
+    VideoParameters.add_member(:max_height, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitsOrAuto, location_name: "MaxHeight"))
+    VideoParameters.add_member(:display_aspect_ratio, ::Smithy::Schema::Shapes::MemberShape.new(target: AspectRatio, location_name: "DisplayAspectRatio"))
+    VideoParameters.add_member(:sizing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SizingPolicy, location_name: "SizingPolicy"))
+    VideoParameters.add_member(:padding_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PaddingPolicy, location_name: "PaddingPolicy"))
+    VideoParameters.add_member(:watermarks, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetWatermarks, location_name: "Watermarks"))
     VideoParameters.type = Types::VideoParameters
-    Warning.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code"))
-    Warning.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    Warning.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code"))
+    Warning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     Warning.type = Types::Warning
-    Warnings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Warning)
+    Warnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Warning)
 
     EtsCustomerService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.elastictranscoder#EtsCustomerService"
@@ -561,214 +561,214 @@ module Aws::ElasticTranscoder
       service.add_operation(:cancel_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#CancelJob"
         operation.name = "CancelJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelJobRequest
+        operation.output = CancelJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2012-09-25/jobs/{Id}", "code" => 202}}
       end)
       service.add_operation(:create_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#CreateJob"
         operation.name = "CreateJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateJobRequest
+        operation.output = CreateJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2012-09-25/jobs", "code" => 201}}
       end)
       service.add_operation(:create_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#CreatePipeline"
         operation.name = "CreatePipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePipelineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePipelineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreatePipelineRequest
+        operation.output = CreatePipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2012-09-25/pipelines", "code" => 201}}
       end)
       service.add_operation(:create_preset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#CreatePreset"
         operation.name = "CreatePreset"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePresetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePresetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreatePresetRequest
+        operation.output = CreatePresetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << LimitExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2012-09-25/presets", "code" => 201}}
       end)
       service.add_operation(:delete_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#DeletePipeline"
         operation.name = "DeletePipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePipelineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePipelineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeletePipelineRequest
+        operation.output = DeletePipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2012-09-25/pipelines/{Id}", "code" => 202}}
       end)
       service.add_operation(:delete_preset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#DeletePreset"
         operation.name = "DeletePreset"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePresetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePresetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeletePresetRequest
+        operation.output = DeletePresetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2012-09-25/presets/{Id}", "code" => 202}}
       end)
       service.add_operation(:list_jobs_by_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#ListJobsByPipeline"
         operation.name = "ListJobsByPipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobsByPipelineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobsByPipelineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListJobsByPipelineRequest
+        operation.output = ListJobsByPipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2012-09-25/jobsByPipeline/{PipelineId}", "code" => 200}}
         operation[:paginator] = Paginators::ListJobsByPipeline.new
       end)
       service.add_operation(:list_jobs_by_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#ListJobsByStatus"
         operation.name = "ListJobsByStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobsByStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobsByStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListJobsByStatusRequest
+        operation.output = ListJobsByStatusResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2012-09-25/jobsByStatus/{Status}", "code" => 200}}
         operation[:paginator] = Paginators::ListJobsByStatus.new
       end)
       service.add_operation(:list_pipelines, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#ListPipelines"
         operation.name = "ListPipelines"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelinesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelinesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPipelinesRequest
+        operation.output = ListPipelinesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2012-09-25/pipelines", "code" => 200}}
         operation[:paginator] = Paginators::ListPipelines.new
       end)
       service.add_operation(:list_presets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#ListPresets"
         operation.name = "ListPresets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPresetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPresetsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPresetsRequest
+        operation.output = ListPresetsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2012-09-25/presets", "code" => 200}, "smithy.test#smokeTests" => [{"id" => "ListPresetsSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::ListPresets.new
       end)
       service.add_operation(:read_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#ReadJob"
         operation.name = "ReadJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ReadJobRequest
+        operation.output = ReadJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2012-09-25/jobs/{Id}", "code" => 200}}
       end)
       service.add_operation(:read_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#ReadPipeline"
         operation.name = "ReadPipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadPipelineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadPipelineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ReadPipelineRequest
+        operation.output = ReadPipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2012-09-25/pipelines/{Id}", "code" => 200}}
       end)
       service.add_operation(:read_preset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#ReadPreset"
         operation.name = "ReadPreset"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadPresetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadPresetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ReadPresetRequest
+        operation.output = ReadPresetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2012-09-25/presets/{Id}", "code" => 200}}
       end)
       service.add_operation(:test_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#TestRole"
         operation.name = "TestRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TestRoleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TestRoleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TestRoleRequest
+        operation.output = TestRoleResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#deprecated" => {}, "smithy.api#http" => {"method" => "POST", "uri" => "/2012-09-25/roleTests", "code" => 200}}
       end)
       service.add_operation(:update_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#UpdatePipeline"
         operation.name = "UpdatePipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePipelineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePipelineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdatePipelineRequest
+        operation.output = UpdatePipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/2012-09-25/pipelines/{Id}", "code" => 200}}
       end)
       service.add_operation(:update_pipeline_notifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#UpdatePipelineNotifications"
         operation.name = "UpdatePipelineNotifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePipelineNotificationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePipelineNotificationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdatePipelineNotificationsRequest
+        operation.output = UpdatePipelineNotificationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2012-09-25/pipelines/{Id}/notifications", "code" => 200}}
       end)
       service.add_operation(:update_pipeline_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elastictranscoder#UpdatePipelineStatus"
         operation.name = "UpdatePipelineStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePipelineStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePipelineStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleVersionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdatePipelineStatusRequest
+        operation.output = UpdatePipelineStatusResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IncompatibleVersionException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2012-09-25/pipelines/{Id}/status", "code" => 200}}
       end)
     end

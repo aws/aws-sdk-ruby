@@ -168,513 +168,513 @@ module Aws::PaymentCryptographyData
     WrappedKeyMaterialFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#WrappedKeyMaterialFormat", name: "WrappedKeyMaterialFormat", traits: {"smithy.api#enum" => [{"value" => "KEY_CRYPTOGRAM", "name" => "KEY_CRYPTOGRAM"}, {"value" => "TR31_KEY_BLOCK", "name" => "TR31_KEY_BLOCK"}, {"value" => "TR34_KEY_BLOCK", "name" => "TR34_KEY_BLOCK"}]})
     WrappedWorkingKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#WrappedWorkingKey", name: "WrappedWorkingKey")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AmexAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    AmexAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    AmexAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    AmexAttributes.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
-    AmexAttributes.add_member(:authorization_request_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "AuthorizationRequestKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    AmexAttributes.add_member(:current_pin_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrentPinAttributes, location_name: "CurrentPinAttributes"))
+    AmexAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    AmexAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    AmexAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    AmexAttributes.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    AmexAttributes.add_member(:authorization_request_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "AuthorizationRequestKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    AmexAttributes.add_member(:current_pin_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentPinAttributes, location_name: "CurrentPinAttributes"))
     AmexAttributes.type = Types::AmexAttributes
-    AmexCardSecurityCodeVersion1.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
+    AmexCardSecurityCodeVersion1.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
     AmexCardSecurityCodeVersion1.type = Types::AmexCardSecurityCodeVersion1
-    AmexCardSecurityCodeVersion2.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
-    AmexCardSecurityCodeVersion2.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCodeType, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    AmexCardSecurityCodeVersion2.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
+    AmexCardSecurityCodeVersion2.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCodeType, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     AmexCardSecurityCodeVersion2.type = Types::AmexCardSecurityCodeVersion2
-    AsymmetricEncryptionAttributes.add_member(:padding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaddingType, location_name: "PaddingType"))
+    AsymmetricEncryptionAttributes.add_member(:padding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PaddingType, location_name: "PaddingType"))
     AsymmetricEncryptionAttributes.type = Types::AsymmetricEncryptionAttributes
-    CardGenerationAttributes.add_member(:amex_card_security_code_version1, Types::CardGenerationAttributes::AmexCardSecurityCodeVersion1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion1, location_name: "AmexCardSecurityCodeVersion1"))
-    CardGenerationAttributes.add_member(:amex_card_security_code_version2, Types::CardGenerationAttributes::AmexCardSecurityCodeVersion2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion2, location_name: "AmexCardSecurityCodeVersion2"))
-    CardGenerationAttributes.add_member(:card_verification_value1, Types::CardGenerationAttributes::CardVerificationValue1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardVerificationValue1, location_name: "CardVerificationValue1"))
-    CardGenerationAttributes.add_member(:card_verification_value2, Types::CardGenerationAttributes::CardVerificationValue2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardVerificationValue2, location_name: "CardVerificationValue2"))
-    CardGenerationAttributes.add_member(:card_holder_verification_value, Types::CardGenerationAttributes::CardHolderVerificationValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
-    CardGenerationAttributes.add_member(:dynamic_card_verification_code, Types::CardGenerationAttributes::DynamicCardVerificationCode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DynamicCardVerificationCode, location_name: "DynamicCardVerificationCode"))
-    CardGenerationAttributes.add_member(:dynamic_card_verification_value, Types::CardGenerationAttributes::DynamicCardVerificationValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DynamicCardVerificationValue, location_name: "DynamicCardVerificationValue"))
-    CardGenerationAttributes.add_member(:unknown, Types::CardGenerationAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CardGenerationAttributes.add_member(:amex_card_security_code_version1, Types::CardGenerationAttributes::AmexCardSecurityCodeVersion1, ::Smithy::Schema::Shapes::MemberShape.new(target: AmexCardSecurityCodeVersion1, location_name: "AmexCardSecurityCodeVersion1"))
+    CardGenerationAttributes.add_member(:amex_card_security_code_version2, Types::CardGenerationAttributes::AmexCardSecurityCodeVersion2, ::Smithy::Schema::Shapes::MemberShape.new(target: AmexCardSecurityCodeVersion2, location_name: "AmexCardSecurityCodeVersion2"))
+    CardGenerationAttributes.add_member(:card_verification_value1, Types::CardGenerationAttributes::CardVerificationValue1, ::Smithy::Schema::Shapes::MemberShape.new(target: CardVerificationValue1, location_name: "CardVerificationValue1"))
+    CardGenerationAttributes.add_member(:card_verification_value2, Types::CardGenerationAttributes::CardVerificationValue2, ::Smithy::Schema::Shapes::MemberShape.new(target: CardVerificationValue2, location_name: "CardVerificationValue2"))
+    CardGenerationAttributes.add_member(:card_holder_verification_value, Types::CardGenerationAttributes::CardHolderVerificationValue, ::Smithy::Schema::Shapes::MemberShape.new(target: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
+    CardGenerationAttributes.add_member(:dynamic_card_verification_code, Types::CardGenerationAttributes::DynamicCardVerificationCode, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicCardVerificationCode, location_name: "DynamicCardVerificationCode"))
+    CardGenerationAttributes.add_member(:dynamic_card_verification_value, Types::CardGenerationAttributes::DynamicCardVerificationValue, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicCardVerificationValue, location_name: "DynamicCardVerificationValue"))
+    CardGenerationAttributes.add_member(:unknown, Types::CardGenerationAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CardGenerationAttributes.type = Types::CardGenerationAttributes
-    CardHolderVerificationValue.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
-    CardHolderVerificationValue.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    CardHolderVerificationValue.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    CardHolderVerificationValue.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
+    CardHolderVerificationValue.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    CardHolderVerificationValue.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
     CardHolderVerificationValue.type = Types::CardHolderVerificationValue
-    CardVerificationAttributes.add_member(:amex_card_security_code_version1, Types::CardVerificationAttributes::AmexCardSecurityCodeVersion1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion1, location_name: "AmexCardSecurityCodeVersion1"))
-    CardVerificationAttributes.add_member(:amex_card_security_code_version2, Types::CardVerificationAttributes::AmexCardSecurityCodeVersion2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion2, location_name: "AmexCardSecurityCodeVersion2"))
-    CardVerificationAttributes.add_member(:card_verification_value1, Types::CardVerificationAttributes::CardVerificationValue1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardVerificationValue1, location_name: "CardVerificationValue1"))
-    CardVerificationAttributes.add_member(:card_verification_value2, Types::CardVerificationAttributes::CardVerificationValue2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardVerificationValue2, location_name: "CardVerificationValue2"))
-    CardVerificationAttributes.add_member(:card_holder_verification_value, Types::CardVerificationAttributes::CardHolderVerificationValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
-    CardVerificationAttributes.add_member(:dynamic_card_verification_code, Types::CardVerificationAttributes::DynamicCardVerificationCode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DynamicCardVerificationCode, location_name: "DynamicCardVerificationCode"))
-    CardVerificationAttributes.add_member(:dynamic_card_verification_value, Types::CardVerificationAttributes::DynamicCardVerificationValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DynamicCardVerificationValue, location_name: "DynamicCardVerificationValue"))
-    CardVerificationAttributes.add_member(:discover_dynamic_card_verification_code, Types::CardVerificationAttributes::DiscoverDynamicCardVerificationCode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoverDynamicCardVerificationCode, location_name: "DiscoverDynamicCardVerificationCode"))
-    CardVerificationAttributes.add_member(:unknown, Types::CardVerificationAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CardVerificationAttributes.add_member(:amex_card_security_code_version1, Types::CardVerificationAttributes::AmexCardSecurityCodeVersion1, ::Smithy::Schema::Shapes::MemberShape.new(target: AmexCardSecurityCodeVersion1, location_name: "AmexCardSecurityCodeVersion1"))
+    CardVerificationAttributes.add_member(:amex_card_security_code_version2, Types::CardVerificationAttributes::AmexCardSecurityCodeVersion2, ::Smithy::Schema::Shapes::MemberShape.new(target: AmexCardSecurityCodeVersion2, location_name: "AmexCardSecurityCodeVersion2"))
+    CardVerificationAttributes.add_member(:card_verification_value1, Types::CardVerificationAttributes::CardVerificationValue1, ::Smithy::Schema::Shapes::MemberShape.new(target: CardVerificationValue1, location_name: "CardVerificationValue1"))
+    CardVerificationAttributes.add_member(:card_verification_value2, Types::CardVerificationAttributes::CardVerificationValue2, ::Smithy::Schema::Shapes::MemberShape.new(target: CardVerificationValue2, location_name: "CardVerificationValue2"))
+    CardVerificationAttributes.add_member(:card_holder_verification_value, Types::CardVerificationAttributes::CardHolderVerificationValue, ::Smithy::Schema::Shapes::MemberShape.new(target: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
+    CardVerificationAttributes.add_member(:dynamic_card_verification_code, Types::CardVerificationAttributes::DynamicCardVerificationCode, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicCardVerificationCode, location_name: "DynamicCardVerificationCode"))
+    CardVerificationAttributes.add_member(:dynamic_card_verification_value, Types::CardVerificationAttributes::DynamicCardVerificationValue, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicCardVerificationValue, location_name: "DynamicCardVerificationValue"))
+    CardVerificationAttributes.add_member(:discover_dynamic_card_verification_code, Types::CardVerificationAttributes::DiscoverDynamicCardVerificationCode, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoverDynamicCardVerificationCode, location_name: "DiscoverDynamicCardVerificationCode"))
+    CardVerificationAttributes.add_member(:unknown, Types::CardVerificationAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CardVerificationAttributes.type = Types::CardVerificationAttributes
-    CardVerificationValue1.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
-    CardVerificationValue1.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCodeType, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    CardVerificationValue1.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
+    CardVerificationValue1.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCodeType, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     CardVerificationValue1.type = Types::CardVerificationValue1
-    CardVerificationValue2.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
+    CardVerificationValue2.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
     CardVerificationValue2.type = Types::CardVerificationValue2
-    CryptogramAuthResponse.add_member(:arpc_method1, Types::CryptogramAuthResponse::ArpcMethod1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CryptogramVerificationArpcMethod1, location_name: "ArpcMethod1"))
-    CryptogramAuthResponse.add_member(:arpc_method2, Types::CryptogramAuthResponse::ArpcMethod2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CryptogramVerificationArpcMethod2, location_name: "ArpcMethod2"))
-    CryptogramAuthResponse.add_member(:unknown, Types::CryptogramAuthResponse::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CryptogramAuthResponse.add_member(:arpc_method1, Types::CryptogramAuthResponse::ArpcMethod1, ::Smithy::Schema::Shapes::MemberShape.new(target: CryptogramVerificationArpcMethod1, location_name: "ArpcMethod1"))
+    CryptogramAuthResponse.add_member(:arpc_method2, Types::CryptogramAuthResponse::ArpcMethod2, ::Smithy::Schema::Shapes::MemberShape.new(target: CryptogramVerificationArpcMethod2, location_name: "ArpcMethod2"))
+    CryptogramAuthResponse.add_member(:unknown, Types::CryptogramAuthResponse::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CryptogramAuthResponse.type = Types::CryptogramAuthResponse
-    CryptogramVerificationArpcMethod1.add_member(:auth_response_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "AuthResponseCode", traits: {"smithy.api#required" => {}}))
+    CryptogramVerificationArpcMethod1.add_member(:auth_response_code, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "AuthResponseCode", traits: {"smithy.api#required" => {}}))
     CryptogramVerificationArpcMethod1.type = Types::CryptogramVerificationArpcMethod1
-    CryptogramVerificationArpcMethod2.add_member(:card_status_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals8, location_name: "CardStatusUpdate", traits: {"smithy.api#required" => {}}))
-    CryptogramVerificationArpcMethod2.add_member(:proprietary_authentication_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProprietaryAuthenticationDataType, location_name: "ProprietaryAuthenticationData"))
+    CryptogramVerificationArpcMethod2.add_member(:card_status_update, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals8, location_name: "CardStatusUpdate", traits: {"smithy.api#required" => {}}))
+    CryptogramVerificationArpcMethod2.add_member(:proprietary_authentication_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ProprietaryAuthenticationDataType, location_name: "ProprietaryAuthenticationData"))
     CryptogramVerificationArpcMethod2.type = Types::CryptogramVerificationArpcMethod2
-    CurrentPinAttributes.add_member(:current_pin_pek_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CurrentPinPekIdentifier", traits: {"smithy.api#required" => {}}))
-    CurrentPinAttributes.add_member(:current_encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockLengthEquals16, location_name: "CurrentEncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    CurrentPinAttributes.add_member(:current_pin_pek_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CurrentPinPekIdentifier", traits: {"smithy.api#required" => {}}))
+    CurrentPinAttributes.add_member(:current_encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: PinBlockLengthEquals16, location_name: "CurrentEncryptedPinBlock", traits: {"smithy.api#required" => {}}))
     CurrentPinAttributes.type = Types::CurrentPinAttributes
-    DecryptDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DecryptDataInput.add_member(:cipher_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
-    DecryptDataInput.add_member(:decryption_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionDecryptionAttributes, location_name: "DecryptionAttributes", traits: {"smithy.api#required" => {}}))
-    DecryptDataInput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "WrappedKey"))
+    DecryptDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DecryptDataInput.add_member(:cipher_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
+    DecryptDataInput.add_member(:decryption_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionDecryptionAttributes, location_name: "DecryptionAttributes", traits: {"smithy.api#required" => {}}))
+    DecryptDataInput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "WrappedKey"))
     DecryptDataInput.type = Types::DecryptDataInput
-    DecryptDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    DecryptDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
-    DecryptDataOutput.add_member(:plain_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlainTextOutputType, location_name: "PlainText", traits: {"smithy.api#required" => {}}))
+    DecryptDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    DecryptDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    DecryptDataOutput.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: PlainTextOutputType, location_name: "PlainText", traits: {"smithy.api#required" => {}}))
     DecryptDataOutput.type = Types::DecryptDataOutput
-    DerivationMethodAttributes.add_member(:emv_common, Types::DerivationMethodAttributes::EmvCommon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmvCommonAttributes, location_name: "EmvCommon"))
-    DerivationMethodAttributes.add_member(:amex, Types::DerivationMethodAttributes::Amex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmexAttributes, location_name: "Amex"))
-    DerivationMethodAttributes.add_member(:visa, Types::DerivationMethodAttributes::Visa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisaAttributes, location_name: "Visa"))
-    DerivationMethodAttributes.add_member(:emv2000, Types::DerivationMethodAttributes::Emv2000, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Emv2000Attributes, location_name: "Emv2000"))
-    DerivationMethodAttributes.add_member(:mastercard, Types::DerivationMethodAttributes::Mastercard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MasterCardAttributes, location_name: "Mastercard"))
-    DerivationMethodAttributes.add_member(:unknown, Types::DerivationMethodAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    DerivationMethodAttributes.add_member(:emv_common, Types::DerivationMethodAttributes::EmvCommon, ::Smithy::Schema::Shapes::MemberShape.new(target: EmvCommonAttributes, location_name: "EmvCommon"))
+    DerivationMethodAttributes.add_member(:amex, Types::DerivationMethodAttributes::Amex, ::Smithy::Schema::Shapes::MemberShape.new(target: AmexAttributes, location_name: "Amex"))
+    DerivationMethodAttributes.add_member(:visa, Types::DerivationMethodAttributes::Visa, ::Smithy::Schema::Shapes::MemberShape.new(target: VisaAttributes, location_name: "Visa"))
+    DerivationMethodAttributes.add_member(:emv2000, Types::DerivationMethodAttributes::Emv2000, ::Smithy::Schema::Shapes::MemberShape.new(target: Emv2000Attributes, location_name: "Emv2000"))
+    DerivationMethodAttributes.add_member(:mastercard, Types::DerivationMethodAttributes::Mastercard, ::Smithy::Schema::Shapes::MemberShape.new(target: MasterCardAttributes, location_name: "Mastercard"))
+    DerivationMethodAttributes.add_member(:unknown, Types::DerivationMethodAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DerivationMethodAttributes.type = Types::DerivationMethodAttributes
-    DiffieHellmanDerivationData.add_member(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SharedInformation, location_name: "SharedInformation"))
-    DiffieHellmanDerivationData.add_member(:unknown, Types::DiffieHellmanDerivationData::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    DiffieHellmanDerivationData.add_member(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedInformation, location_name: "SharedInformation"))
+    DiffieHellmanDerivationData.add_member(:unknown, Types::DiffieHellmanDerivationData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DiffieHellmanDerivationData.type = Types::DiffieHellmanDerivationData
-    DiscoverDynamicCardVerificationCode.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
-    DiscoverDynamicCardVerificationCode.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
-    DiscoverDynamicCardVerificationCode.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    DiscoverDynamicCardVerificationCode.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
+    DiscoverDynamicCardVerificationCode.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
+    DiscoverDynamicCardVerificationCode.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
     DiscoverDynamicCardVerificationCode.type = Types::DiscoverDynamicCardVerificationCode
-    DukptAttributes.add_member(:key_serial_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
-    DukptAttributes.add_member(:dukpt_derivation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptDerivationType", traits: {"smithy.api#required" => {}}))
+    DukptAttributes.add_member(:key_serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
+    DukptAttributes.add_member(:dukpt_derivation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationType, location_name: "DukptDerivationType", traits: {"smithy.api#required" => {}}))
     DukptAttributes.type = Types::DukptAttributes
-    DukptDerivationAttributes.add_member(:key_serial_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
-    DukptDerivationAttributes.add_member(:dukpt_key_derivation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptKeyDerivationType"))
-    DukptDerivationAttributes.add_member(:dukpt_key_variant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptKeyVariant, location_name: "DukptKeyVariant"))
+    DukptDerivationAttributes.add_member(:key_serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
+    DukptDerivationAttributes.add_member(:dukpt_key_derivation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationType, location_name: "DukptKeyDerivationType"))
+    DukptDerivationAttributes.add_member(:dukpt_key_variant, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptKeyVariant, location_name: "DukptKeyVariant"))
     DukptDerivationAttributes.type = Types::DukptDerivationAttributes
-    DukptDerivationType.add_member(:tdes_2_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_2KEY", traits: {"smithy.api#enumValue" => "TDES_2KEY"}))
-    DukptDerivationType.add_member(:tdes_3_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_3KEY", traits: {"smithy.api#enumValue" => "TDES_3KEY"}))
-    DukptDerivationType.add_member(:aes_128, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_128", traits: {"smithy.api#enumValue" => "AES_128"}))
-    DukptDerivationType.add_member(:aes_192, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_192", traits: {"smithy.api#enumValue" => "AES_192"}))
-    DukptDerivationType.add_member(:aes_256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_256", traits: {"smithy.api#enumValue" => "AES_256"}))
-    DukptEncryptionAttributes.add_member(:key_serial_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
-    DukptEncryptionAttributes.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptEncryptionMode, location_name: "Mode"))
-    DukptEncryptionAttributes.add_member(:dukpt_key_derivation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptKeyDerivationType"))
-    DukptEncryptionAttributes.add_member(:dukpt_key_variant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptKeyVariant, location_name: "DukptKeyVariant"))
-    DukptEncryptionAttributes.add_member(:initialization_vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitializationVectorType, location_name: "InitializationVector"))
+    DukptDerivationType.add_member(:tdes_2_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_2KEY", traits: {"smithy.api#enumValue" => "TDES_2KEY"}))
+    DukptDerivationType.add_member(:tdes_3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_3KEY", traits: {"smithy.api#enumValue" => "TDES_3KEY"}))
+    DukptDerivationType.add_member(:aes_128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_128", traits: {"smithy.api#enumValue" => "AES_128"}))
+    DukptDerivationType.add_member(:aes_192, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_192", traits: {"smithy.api#enumValue" => "AES_192"}))
+    DukptDerivationType.add_member(:aes_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_256", traits: {"smithy.api#enumValue" => "AES_256"}))
+    DukptEncryptionAttributes.add_member(:key_serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
+    DukptEncryptionAttributes.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptEncryptionMode, location_name: "Mode"))
+    DukptEncryptionAttributes.add_member(:dukpt_key_derivation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationType, location_name: "DukptKeyDerivationType"))
+    DukptEncryptionAttributes.add_member(:dukpt_key_variant, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptKeyVariant, location_name: "DukptKeyVariant"))
+    DukptEncryptionAttributes.add_member(:initialization_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: InitializationVectorType, location_name: "InitializationVector"))
     DukptEncryptionAttributes.type = Types::DukptEncryptionAttributes
-    DukptEncryptionMode.add_member(:ecb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECB", traits: {"smithy.api#enumValue" => "ECB"}))
-    DukptEncryptionMode.add_member(:cbc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CBC", traits: {"smithy.api#enumValue" => "CBC"}))
-    DukptKeyVariant.add_member(:bidirectional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIDIRECTIONAL", traits: {"smithy.api#enumValue" => "BIDIRECTIONAL"}))
-    DukptKeyVariant.add_member(:request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUEST", traits: {"smithy.api#enumValue" => "REQUEST"}))
-    DukptKeyVariant.add_member(:response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESPONSE", traits: {"smithy.api#enumValue" => "RESPONSE"}))
-    DynamicCardVerificationCode.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
-    DynamicCardVerificationCode.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    DynamicCardVerificationCode.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
-    DynamicCardVerificationCode.add_member(:track_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrackDataType, location_name: "TrackData", traits: {"smithy.api#required" => {}}))
+    DukptEncryptionMode.add_member(:ecb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECB", traits: {"smithy.api#enumValue" => "ECB"}))
+    DukptEncryptionMode.add_member(:cbc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CBC", traits: {"smithy.api#enumValue" => "CBC"}))
+    DukptKeyVariant.add_member(:bidirectional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIDIRECTIONAL", traits: {"smithy.api#enumValue" => "BIDIRECTIONAL"}))
+    DukptKeyVariant.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUEST", traits: {"smithy.api#enumValue" => "REQUEST"}))
+    DukptKeyVariant.add_member(:response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESPONSE", traits: {"smithy.api#enumValue" => "RESPONSE"}))
+    DynamicCardVerificationCode.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
+    DynamicCardVerificationCode.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    DynamicCardVerificationCode.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    DynamicCardVerificationCode.add_member(:track_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackDataType, location_name: "TrackData", traits: {"smithy.api#required" => {}}))
     DynamicCardVerificationCode.type = Types::DynamicCardVerificationCode
-    DynamicCardVerificationValue.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    DynamicCardVerificationValue.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
-    DynamicCardVerificationValue.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCodeType, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    DynamicCardVerificationValue.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    DynamicCardVerificationValue.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    DynamicCardVerificationValue.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CardExpiryDateType, location_name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
+    DynamicCardVerificationValue.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCodeType, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    DynamicCardVerificationValue.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
     DynamicCardVerificationValue.type = Types::DynamicCardVerificationValue
-    EcdhDerivationAttributes.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    EcdhDerivationAttributes.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
-    EcdhDerivationAttributes.add_member(:key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, location_name: "KeyAlgorithm", traits: {"smithy.api#required" => {}}))
-    EcdhDerivationAttributes.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
-    EcdhDerivationAttributes.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
-    EcdhDerivationAttributes.add_member(:shared_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SharedInformation, location_name: "SharedInformation", traits: {"smithy.api#required" => {}}))
+    EcdhDerivationAttributes.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    EcdhDerivationAttributes.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
+    EcdhDerivationAttributes.add_member(:key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricKeyAlgorithm, location_name: "KeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    EcdhDerivationAttributes.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
+    EcdhDerivationAttributes.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
+    EcdhDerivationAttributes.add_member(:shared_information, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedInformation, location_name: "SharedInformation", traits: {"smithy.api#required" => {}}))
     EcdhDerivationAttributes.type = Types::EcdhDerivationAttributes
-    Emv2000Attributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    Emv2000Attributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    Emv2000Attributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    Emv2000Attributes.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    Emv2000Attributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    Emv2000Attributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    Emv2000Attributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    Emv2000Attributes.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
     Emv2000Attributes.type = Types::Emv2000Attributes
-    EmvCommonAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    EmvCommonAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    EmvCommonAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    EmvCommonAttributes.add_member(:application_cryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationCryptogramType, location_name: "ApplicationCryptogram", traits: {"smithy.api#required" => {}}))
-    EmvCommonAttributes.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmvEncryptionMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
-    EmvCommonAttributes.add_member(:pin_block_padding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockPaddingType, location_name: "PinBlockPaddingType", traits: {"smithy.api#required" => {}}))
-    EmvCommonAttributes.add_member(:pin_block_length_position, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockLengthPosition, location_name: "PinBlockLengthPosition", traits: {"smithy.api#required" => {}}))
+    EmvCommonAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    EmvCommonAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    EmvCommonAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    EmvCommonAttributes.add_member(:application_cryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationCryptogramType, location_name: "ApplicationCryptogram", traits: {"smithy.api#required" => {}}))
+    EmvCommonAttributes.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmvEncryptionMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
+    EmvCommonAttributes.add_member(:pin_block_padding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PinBlockPaddingType, location_name: "PinBlockPaddingType", traits: {"smithy.api#required" => {}}))
+    EmvCommonAttributes.add_member(:pin_block_length_position, ::Smithy::Schema::Shapes::MemberShape.new(target: PinBlockLengthPosition, location_name: "PinBlockLengthPosition", traits: {"smithy.api#required" => {}}))
     EmvCommonAttributes.type = Types::EmvCommonAttributes
-    EmvEncryptionAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmvMajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    EmvEncryptionAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    EmvEncryptionAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    EmvEncryptionAttributes.add_member(:session_derivation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionDerivationDataType, location_name: "SessionDerivationData", traits: {"smithy.api#required" => {}}))
-    EmvEncryptionAttributes.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmvEncryptionMode, location_name: "Mode"))
-    EmvEncryptionAttributes.add_member(:initialization_vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitializationVectorType, location_name: "InitializationVector"))
+    EmvEncryptionAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmvMajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    EmvEncryptionAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    EmvEncryptionAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    EmvEncryptionAttributes.add_member(:session_derivation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionDerivationDataType, location_name: "SessionDerivationData", traits: {"smithy.api#required" => {}}))
+    EmvEncryptionAttributes.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmvEncryptionMode, location_name: "Mode"))
+    EmvEncryptionAttributes.add_member(:initialization_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: InitializationVectorType, location_name: "InitializationVector"))
     EmvEncryptionAttributes.type = Types::EmvEncryptionAttributes
-    EmvEncryptionMode.add_member(:ecb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECB", traits: {"smithy.api#enumValue" => "ECB"}))
-    EmvEncryptionMode.add_member(:cbc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CBC", traits: {"smithy.api#enumValue" => "CBC"}))
-    EmvMajorKeyDerivationMode.add_member(:emv_option_a, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_A", traits: {"smithy.api#enumValue" => "EMV_OPTION_A"}))
-    EmvMajorKeyDerivationMode.add_member(:emv_option_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_B", traits: {"smithy.api#enumValue" => "EMV_OPTION_B"}))
-    EncryptDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    EncryptDataInput.add_member(:plain_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlainTextType, location_name: "PlainText", traits: {"smithy.api#required" => {}}))
-    EncryptDataInput.add_member(:encryption_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionDecryptionAttributes, location_name: "EncryptionAttributes", traits: {"smithy.api#required" => {}}))
-    EncryptDataInput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "WrappedKey"))
+    EmvEncryptionMode.add_member(:ecb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECB", traits: {"smithy.api#enumValue" => "ECB"}))
+    EmvEncryptionMode.add_member(:cbc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CBC", traits: {"smithy.api#enumValue" => "CBC"}))
+    EmvMajorKeyDerivationMode.add_member(:emv_option_a, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_A", traits: {"smithy.api#enumValue" => "EMV_OPTION_A"}))
+    EmvMajorKeyDerivationMode.add_member(:emv_option_b, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_B", traits: {"smithy.api#enumValue" => "EMV_OPTION_B"}))
+    EncryptDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EncryptDataInput.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: PlainTextType, location_name: "PlainText", traits: {"smithy.api#required" => {}}))
+    EncryptDataInput.add_member(:encryption_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionDecryptionAttributes, location_name: "EncryptionAttributes", traits: {"smithy.api#required" => {}}))
+    EncryptDataInput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "WrappedKey"))
     EncryptDataInput.type = Types::EncryptDataInput
-    EncryptDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    EncryptDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue"))
-    EncryptDataOutput.add_member(:cipher_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
+    EncryptDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    EncryptDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue"))
+    EncryptDataOutput.add_member(:cipher_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
     EncryptDataOutput.type = Types::EncryptDataOutput
-    EncryptionDecryptionAttributes.add_member(:symmetric, Types::EncryptionDecryptionAttributes::Symmetric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymmetricEncryptionAttributes, location_name: "Symmetric"))
-    EncryptionDecryptionAttributes.add_member(:asymmetric, Types::EncryptionDecryptionAttributes::Asymmetric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AsymmetricEncryptionAttributes, location_name: "Asymmetric"))
-    EncryptionDecryptionAttributes.add_member(:dukpt, Types::EncryptionDecryptionAttributes::Dukpt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptEncryptionAttributes, location_name: "Dukpt"))
-    EncryptionDecryptionAttributes.add_member(:emv, Types::EncryptionDecryptionAttributes::Emv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmvEncryptionAttributes, location_name: "Emv"))
-    EncryptionDecryptionAttributes.add_member(:unknown, Types::EncryptionDecryptionAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EncryptionDecryptionAttributes.add_member(:symmetric, Types::EncryptionDecryptionAttributes::Symmetric, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricEncryptionAttributes, location_name: "Symmetric"))
+    EncryptionDecryptionAttributes.add_member(:asymmetric, Types::EncryptionDecryptionAttributes::Asymmetric, ::Smithy::Schema::Shapes::MemberShape.new(target: AsymmetricEncryptionAttributes, location_name: "Asymmetric"))
+    EncryptionDecryptionAttributes.add_member(:dukpt, Types::EncryptionDecryptionAttributes::Dukpt, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptEncryptionAttributes, location_name: "Dukpt"))
+    EncryptionDecryptionAttributes.add_member(:emv, Types::EncryptionDecryptionAttributes::Emv, ::Smithy::Schema::Shapes::MemberShape.new(target: EmvEncryptionAttributes, location_name: "Emv"))
+    EncryptionDecryptionAttributes.add_member(:unknown, Types::EncryptionDecryptionAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EncryptionDecryptionAttributes.type = Types::EncryptionDecryptionAttributes
-    EncryptionMode.add_member(:ecb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECB", traits: {"smithy.api#enumValue" => "ECB"}))
-    EncryptionMode.add_member(:cbc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CBC", traits: {"smithy.api#enumValue" => "CBC"}))
-    EncryptionMode.add_member(:cfb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB", traits: {"smithy.api#enumValue" => "CFB"}))
-    EncryptionMode.add_member(:cfb1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB1", traits: {"smithy.api#enumValue" => "CFB1"}))
-    EncryptionMode.add_member(:cfb8, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB8", traits: {"smithy.api#enumValue" => "CFB8"}))
-    EncryptionMode.add_member(:cfb64, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB64", traits: {"smithy.api#enumValue" => "CFB64"}))
-    EncryptionMode.add_member(:cfb128, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB128", traits: {"smithy.api#enumValue" => "CFB128"}))
-    EncryptionMode.add_member(:ofb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFB", traits: {"smithy.api#enumValue" => "OFB"}))
-    GenerateCardValidationDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    GenerateCardValidationDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    GenerateCardValidationDataInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardGenerationAttributes, location_name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
-    GenerateCardValidationDataInput.add_member(:validation_data_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween3And5Type, location_name: "ValidationDataLength"))
+    EncryptionMode.add_member(:ecb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECB", traits: {"smithy.api#enumValue" => "ECB"}))
+    EncryptionMode.add_member(:cbc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CBC", traits: {"smithy.api#enumValue" => "CBC"}))
+    EncryptionMode.add_member(:cfb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB", traits: {"smithy.api#enumValue" => "CFB"}))
+    EncryptionMode.add_member(:cfb1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB1", traits: {"smithy.api#enumValue" => "CFB1"}))
+    EncryptionMode.add_member(:cfb8, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB8", traits: {"smithy.api#enumValue" => "CFB8"}))
+    EncryptionMode.add_member(:cfb64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB64", traits: {"smithy.api#enumValue" => "CFB64"}))
+    EncryptionMode.add_member(:cfb128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFB128", traits: {"smithy.api#enumValue" => "CFB128"}))
+    EncryptionMode.add_member(:ofb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFB", traits: {"smithy.api#enumValue" => "OFB"}))
+    GenerateCardValidationDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GenerateCardValidationDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    GenerateCardValidationDataInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CardGenerationAttributes, location_name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
+    GenerateCardValidationDataInput.add_member(:validation_data_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween3And5Type, location_name: "ValidationDataLength"))
     GenerateCardValidationDataInput.type = Types::GenerateCardValidationDataInput
-    GenerateCardValidationDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    GenerateCardValidationDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
-    GenerateCardValidationDataOutput.add_member(:validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationDataType, location_name: "ValidationData", traits: {"smithy.api#required" => {}}))
+    GenerateCardValidationDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    GenerateCardValidationDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GenerateCardValidationDataOutput.add_member(:validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationDataType, location_name: "ValidationData", traits: {"smithy.api#required" => {}}))
     GenerateCardValidationDataOutput.type = Types::GenerateCardValidationDataOutput
-    GenerateMacEmvPinChangeInput.add_member(:new_pin_pek_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "NewPinPekIdentifier", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeInput.add_member(:new_encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockLengthEquals16, location_name: "NewEncryptedPinBlock", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockFormatForEmvPinChange, location_name: "PinBlockFormat", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeInput.add_member(:secure_messaging_integrity_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "SecureMessagingIntegrityKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeInput.add_member(:secure_messaging_confidentiality_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "SecureMessagingConfidentialityKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeInput.add_member(:message_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommandMessageDataType, location_name: "MessageData", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeInput.add_member(:derivation_method_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DerivationMethodAttributes, location_name: "DerivationMethodAttributes", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeInput.add_member(:new_pin_pek_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "NewPinPekIdentifier", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeInput.add_member(:new_encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: PinBlockLengthEquals16, location_name: "NewEncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::MemberShape.new(target: PinBlockFormatForEmvPinChange, location_name: "PinBlockFormat", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeInput.add_member(:secure_messaging_integrity_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "SecureMessagingIntegrityKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeInput.add_member(:secure_messaging_confidentiality_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "SecureMessagingConfidentialityKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeInput.add_member(:message_data, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandMessageDataType, location_name: "MessageData", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeInput.add_member(:derivation_method_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DerivationMethodAttributes, location_name: "DerivationMethodAttributes", traits: {"smithy.api#required" => {}}))
     GenerateMacEmvPinChangeInput.type = Types::GenerateMacEmvPinChangeInput
-    GenerateMacEmvPinChangeOutput.add_member(:new_pin_pek_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "NewPinPekArn", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_integrity_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "SecureMessagingIntegrityKeyArn", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_confidentiality_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "SecureMessagingConfidentialityKeyArn", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:mac, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinChangeMacOutputType, location_name: "Mac", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:new_pin_pek_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "NewPinPekKeyCheckValue", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_integrity_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "SecureMessagingIntegrityKeyCheckValue", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_confidentiality_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "SecureMessagingConfidentialityKeyCheckValue", traits: {"smithy.api#required" => {}}))
-    GenerateMacEmvPinChangeOutput.add_member(:visa_amex_derivation_outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisaAmexDerivationOutputs, location_name: "VisaAmexDerivationOutputs"))
+    GenerateMacEmvPinChangeOutput.add_member(:new_pin_pek_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "NewPinPekArn", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_integrity_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "SecureMessagingIntegrityKeyArn", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_confidentiality_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "SecureMessagingConfidentialityKeyArn", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:mac, ::Smithy::Schema::Shapes::MemberShape.new(target: PinChangeMacOutputType, location_name: "Mac", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:new_pin_pek_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "NewPinPekKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_integrity_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "SecureMessagingIntegrityKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:secure_messaging_confidentiality_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "SecureMessagingConfidentialityKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GenerateMacEmvPinChangeOutput.add_member(:visa_amex_derivation_outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: VisaAmexDerivationOutputs, location_name: "VisaAmexDerivationOutputs"))
     GenerateMacEmvPinChangeOutput.type = Types::GenerateMacEmvPinChangeOutput
-    GenerateMacInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    GenerateMacInput.add_member(:message_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageDataType, location_name: "MessageData", traits: {"smithy.api#required" => {}}))
-    GenerateMacInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacAttributes, location_name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
-    GenerateMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
+    GenerateMacInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GenerateMacInput.add_member(:message_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageDataType, location_name: "MessageData", traits: {"smithy.api#required" => {}}))
+    GenerateMacInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAttributes, location_name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
+    GenerateMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And16, location_name: "MacLength"))
     GenerateMacInput.type = Types::GenerateMacInput
-    GenerateMacOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    GenerateMacOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
-    GenerateMacOutput.add_member(:mac, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacOutputType, location_name: "Mac", traits: {"smithy.api#required" => {}}))
+    GenerateMacOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    GenerateMacOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GenerateMacOutput.add_member(:mac, ::Smithy::Schema::Shapes::MemberShape.new(target: MacOutputType, location_name: "Mac", traits: {"smithy.api#required" => {}}))
     GenerateMacOutput.type = Types::GenerateMacOutput
-    GeneratePinDataInput.add_member(:generation_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "GenerationKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataInput.add_member(:encryption_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "EncryptionKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinGenerationAttributes, location_name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataInput.add_member(:pin_data_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
-    GeneratePinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber"))
-    GeneratePinDataInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, location_name: "PinBlockFormat", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataInput.add_member(:encryption_wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "EncryptionWrappedKey"))
+    GeneratePinDataInput.add_member(:generation_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "GenerationKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataInput.add_member(:encryption_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "EncryptionKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PinGenerationAttributes, location_name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataInput.add_member(:pin_data_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And12, location_name: "PinDataLength"))
+    GeneratePinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber"))
+    GeneratePinDataInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::MemberShape.new(target: PinBlockFormatForPinData, location_name: "PinBlockFormat", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataInput.add_member(:encryption_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "EncryptionWrappedKey"))
     GeneratePinDataInput.type = Types::GeneratePinDataInput
-    GeneratePinDataOutput.add_member(:generation_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "GenerationKeyArn", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataOutput.add_member(:generation_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "GenerationKeyCheckValue", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataOutput.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "EncryptionKeyArn", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataOutput.add_member(:encryption_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "EncryptionKeyCheckValue", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataOutput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
-    GeneratePinDataOutput.add_member(:pin_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinData, location_name: "PinData", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataOutput.add_member(:generation_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "GenerationKeyArn", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataOutput.add_member(:generation_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "GenerationKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataOutput.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "EncryptionKeyArn", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataOutput.add_member(:encryption_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "EncryptionKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataOutput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    GeneratePinDataOutput.add_member(:pin_data, ::Smithy::Schema::Shapes::MemberShape.new(target: PinData, location_name: "PinData", traits: {"smithy.api#required" => {}}))
     GeneratePinDataOutput.type = Types::GeneratePinDataOutput
-    Ibm3624NaturalPin.add_member(:decimalization_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
-    Ibm3624NaturalPin.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
-    Ibm3624NaturalPin.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
+    Ibm3624NaturalPin.add_member(:decimalization_table, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
+    Ibm3624NaturalPin.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
+    Ibm3624NaturalPin.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
     Ibm3624NaturalPin.type = Types::Ibm3624NaturalPin
-    Ibm3624PinFromOffset.add_member(:decimalization_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinFromOffset.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinFromOffset.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinFromOffset.add_member(:pin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinOffsetType, location_name: "PinOffset", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinFromOffset.add_member(:decimalization_table, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinFromOffset.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinFromOffset.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinFromOffset.add_member(:pin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: PinOffsetType, location_name: "PinOffset", traits: {"smithy.api#required" => {}}))
     Ibm3624PinFromOffset.type = Types::Ibm3624PinFromOffset
-    Ibm3624PinOffset.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinOffset.add_member(:decimalization_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinOffset.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinOffset.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinOffset.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinOffset.add_member(:decimalization_table, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinOffset.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinOffset.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
     Ibm3624PinOffset.type = Types::Ibm3624PinOffset
-    Ibm3624PinVerification.add_member(:decimalization_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinVerification.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinVerification.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
-    Ibm3624PinVerification.add_member(:pin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinOffsetType, location_name: "PinOffset", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinVerification.add_member(:decimalization_table, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinVerification.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinVerification.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
+    Ibm3624PinVerification.add_member(:pin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: PinOffsetType, location_name: "PinOffset", traits: {"smithy.api#required" => {}}))
     Ibm3624PinVerification.type = Types::Ibm3624PinVerification
-    Ibm3624RandomPin.add_member(:decimalization_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
-    Ibm3624RandomPin.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
-    Ibm3624RandomPin.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
+    Ibm3624RandomPin.add_member(:decimalization_table, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalizationTableType, location_name: "DecimalizationTable", traits: {"smithy.api#required" => {}}))
+    Ibm3624RandomPin.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals1, location_name: "PinValidationDataPadCharacter", traits: {"smithy.api#required" => {}}))
+    Ibm3624RandomPin.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: PinValidationDataType, location_name: "PinValidationData", traits: {"smithy.api#required" => {}}))
     Ibm3624RandomPin.type = Types::Ibm3624RandomPin
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "PrivateKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, location_name: "DeriveKeyAlgorithm", traits: {"smithy.api#required" => {}}))
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:derivation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiffieHellmanDerivationData, location_name: "DerivationData", traits: {"smithy.api#required" => {}}))
-    IncomingDiffieHellmanTr31KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "PrivateKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, location_name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricKeyAlgorithm, location_name: "DeriveKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationFunction, location_name: "KeyDerivationFunction", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyDerivationHashAlgorithm, location_name: "KeyDerivationHashAlgorithm", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:derivation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffieHellmanDerivationData, location_name: "DerivationData", traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::MemberShape.new(target: Tr31WrappedKeyBlock, location_name: "WrappedKeyBlock", traits: {"smithy.api#required" => {}}))
     IncomingDiffieHellmanTr31KeyBlock.type = Types::IncomingDiffieHellmanTr31KeyBlock
-    IncomingKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::IncomingKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncomingDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
-    IncomingKeyMaterial.add_member(:unknown, Types::IncomingKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IncomingKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::IncomingKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: IncomingDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
+    IncomingKeyMaterial.add_member(:unknown, Types::IncomingKeyMaterial::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IncomingKeyMaterial.type = Types::IncomingKeyMaterial
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    KeyDerivationFunction.add_member(:nist_sp800, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NIST_SP800", traits: {"smithy.api#enumValue" => "NIST_SP800"}))
-    KeyDerivationFunction.add_member(:ansi_x963, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ANSI_X963", traits: {"smithy.api#enumValue" => "ANSI_X963"}))
-    KeyDerivationHashAlgorithm.add_member(:sha_256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_256", traits: {"smithy.api#enumValue" => "SHA_256"}))
-    KeyDerivationHashAlgorithm.add_member(:sha_384, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_384", traits: {"smithy.api#enumValue" => "SHA_384"}))
-    KeyDerivationHashAlgorithm.add_member(:sha_512, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_512", traits: {"smithy.api#enumValue" => "SHA_512"}))
-    MacAlgorithm.add_member(:iso9797_algorithm1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO9797_ALGORITHM1", traits: {"smithy.api#enumValue" => "ISO9797_ALGORITHM1"}))
-    MacAlgorithm.add_member(:iso9797_algorithm3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO9797_ALGORITHM3", traits: {"smithy.api#enumValue" => "ISO9797_ALGORITHM3"}))
-    MacAlgorithm.add_member(:cmac, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CMAC", traits: {"smithy.api#enumValue" => "CMAC"}))
-    MacAlgorithm.add_member(:hmac, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC", traits: {"smithy.api#enumValue" => "HMAC"}))
-    MacAlgorithm.add_member(:hmac_sha224, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA224", traits: {"smithy.api#enumValue" => "HMAC_SHA224"}))
-    MacAlgorithm.add_member(:hmac_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA256", traits: {"smithy.api#enumValue" => "HMAC_SHA256"}))
-    MacAlgorithm.add_member(:hmac_sha384, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA384", traits: {"smithy.api#enumValue" => "HMAC_SHA384"}))
-    MacAlgorithm.add_member(:hmac_sha512, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA512", traits: {"smithy.api#enumValue" => "HMAC_SHA512"}))
-    MacAlgorithmDukpt.add_member(:key_serial_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
-    MacAlgorithmDukpt.add_member(:dukpt_key_variant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptKeyVariant, location_name: "DukptKeyVariant", traits: {"smithy.api#required" => {}}))
-    MacAlgorithmDukpt.add_member(:dukpt_derivation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptDerivationType"))
+    KeyDerivationFunction.add_member(:nist_sp800, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NIST_SP800", traits: {"smithy.api#enumValue" => "NIST_SP800"}))
+    KeyDerivationFunction.add_member(:ansi_x963, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ANSI_X963", traits: {"smithy.api#enumValue" => "ANSI_X963"}))
+    KeyDerivationHashAlgorithm.add_member(:sha_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_256", traits: {"smithy.api#enumValue" => "SHA_256"}))
+    KeyDerivationHashAlgorithm.add_member(:sha_384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_384", traits: {"smithy.api#enumValue" => "SHA_384"}))
+    KeyDerivationHashAlgorithm.add_member(:sha_512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA_512", traits: {"smithy.api#enumValue" => "SHA_512"}))
+    MacAlgorithm.add_member(:iso9797_algorithm1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO9797_ALGORITHM1", traits: {"smithy.api#enumValue" => "ISO9797_ALGORITHM1"}))
+    MacAlgorithm.add_member(:iso9797_algorithm3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO9797_ALGORITHM3", traits: {"smithy.api#enumValue" => "ISO9797_ALGORITHM3"}))
+    MacAlgorithm.add_member(:cmac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CMAC", traits: {"smithy.api#enumValue" => "CMAC"}))
+    MacAlgorithm.add_member(:hmac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC", traits: {"smithy.api#enumValue" => "HMAC"}))
+    MacAlgorithm.add_member(:hmac_sha224, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA224", traits: {"smithy.api#enumValue" => "HMAC_SHA224"}))
+    MacAlgorithm.add_member(:hmac_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA256", traits: {"smithy.api#enumValue" => "HMAC_SHA256"}))
+    MacAlgorithm.add_member(:hmac_sha384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA384", traits: {"smithy.api#enumValue" => "HMAC_SHA384"}))
+    MacAlgorithm.add_member(:hmac_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA512", traits: {"smithy.api#enumValue" => "HMAC_SHA512"}))
+    MacAlgorithmDukpt.add_member(:key_serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLength16Or20Or24, location_name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
+    MacAlgorithmDukpt.add_member(:dukpt_key_variant, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptKeyVariant, location_name: "DukptKeyVariant", traits: {"smithy.api#required" => {}}))
+    MacAlgorithmDukpt.add_member(:dukpt_derivation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationType, location_name: "DukptDerivationType"))
     MacAlgorithmDukpt.type = Types::MacAlgorithmDukpt
-    MacAlgorithmEmv.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    MacAlgorithmEmv.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    MacAlgorithmEmv.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    MacAlgorithmEmv.add_member(:session_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyDerivationMode, location_name: "SessionKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    MacAlgorithmEmv.add_member(:session_key_derivation_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyDerivationValue, location_name: "SessionKeyDerivationValue", traits: {"smithy.api#required" => {}}))
+    MacAlgorithmEmv.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    MacAlgorithmEmv.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    MacAlgorithmEmv.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    MacAlgorithmEmv.add_member(:session_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyDerivationMode, location_name: "SessionKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    MacAlgorithmEmv.add_member(:session_key_derivation_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyDerivationValue, location_name: "SessionKeyDerivationValue", traits: {"smithy.api#required" => {}}))
     MacAlgorithmEmv.type = Types::MacAlgorithmEmv
-    MacAttributes.add_member(:algorithm, Types::MacAttributes::Algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacAlgorithm, location_name: "Algorithm"))
-    MacAttributes.add_member(:emv_mac, Types::MacAttributes::EmvMac, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacAlgorithmEmv, location_name: "EmvMac"))
-    MacAttributes.add_member(:dukpt_iso9797_algorithm1, Types::MacAttributes::DukptIso9797Algorithm1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacAlgorithmDukpt, location_name: "DukptIso9797Algorithm1"))
-    MacAttributes.add_member(:dukpt_iso9797_algorithm3, Types::MacAttributes::DukptIso9797Algorithm3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacAlgorithmDukpt, location_name: "DukptIso9797Algorithm3"))
-    MacAttributes.add_member(:dukpt_cmac, Types::MacAttributes::DukptCmac, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacAlgorithmDukpt, location_name: "DukptCmac"))
-    MacAttributes.add_member(:unknown, Types::MacAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    MacAttributes.add_member(:algorithm, Types::MacAttributes::Algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAlgorithm, location_name: "Algorithm"))
+    MacAttributes.add_member(:emv_mac, Types::MacAttributes::EmvMac, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAlgorithmEmv, location_name: "EmvMac"))
+    MacAttributes.add_member(:dukpt_iso9797_algorithm1, Types::MacAttributes::DukptIso9797Algorithm1, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAlgorithmDukpt, location_name: "DukptIso9797Algorithm1"))
+    MacAttributes.add_member(:dukpt_iso9797_algorithm3, Types::MacAttributes::DukptIso9797Algorithm3, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAlgorithmDukpt, location_name: "DukptIso9797Algorithm3"))
+    MacAttributes.add_member(:dukpt_cmac, Types::MacAttributes::DukptCmac, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAlgorithmDukpt, location_name: "DukptCmac"))
+    MacAttributes.add_member(:unknown, Types::MacAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     MacAttributes.type = Types::MacAttributes
-    MajorKeyDerivationMode.add_member(:emv_option_a, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_A", traits: {"smithy.api#enumValue" => "EMV_OPTION_A"}))
-    MajorKeyDerivationMode.add_member(:emv_option_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_B", traits: {"smithy.api#enumValue" => "EMV_OPTION_B"}))
-    MasterCardAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    MasterCardAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    MasterCardAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    MasterCardAttributes.add_member(:application_cryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationCryptogramType, location_name: "ApplicationCryptogram", traits: {"smithy.api#required" => {}}))
+    MajorKeyDerivationMode.add_member(:emv_option_a, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_A", traits: {"smithy.api#enumValue" => "EMV_OPTION_A"}))
+    MajorKeyDerivationMode.add_member(:emv_option_b, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_OPTION_B", traits: {"smithy.api#enumValue" => "EMV_OPTION_B"}))
+    MasterCardAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    MasterCardAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    MasterCardAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    MasterCardAttributes.add_member(:application_cryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationCryptogramType, location_name: "ApplicationCryptogram", traits: {"smithy.api#required" => {}}))
     MasterCardAttributes.type = Types::MasterCardAttributes
-    OutgoingKeyMaterial.add_member(:tr31_key_block, Types::OutgoingKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutgoingTr31KeyBlock, location_name: "Tr31KeyBlock"))
-    OutgoingKeyMaterial.add_member(:unknown, Types::OutgoingKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    OutgoingKeyMaterial.add_member(:tr31_key_block, Types::OutgoingKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: OutgoingTr31KeyBlock, location_name: "Tr31KeyBlock"))
+    OutgoingKeyMaterial.add_member(:unknown, Types::OutgoingKeyMaterial::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OutgoingKeyMaterial.type = Types::OutgoingKeyMaterial
-    OutgoingTr31KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    OutgoingTr31KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
     OutgoingTr31KeyBlock.type = Types::OutgoingTr31KeyBlock
-    PaddingType.add_member(:pkcs1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PKCS1", traits: {"smithy.api#enumValue" => "PKCS1"}))
-    PaddingType.add_member(:oaep_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OAEP_SHA1", traits: {"smithy.api#enumValue" => "OAEP_SHA1"}))
-    PaddingType.add_member(:oaep_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OAEP_SHA256", traits: {"smithy.api#enumValue" => "OAEP_SHA256"}))
-    PaddingType.add_member(:oaep_sha512, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OAEP_SHA512", traits: {"smithy.api#enumValue" => "OAEP_SHA512"}))
-    PinBlockFormatForEmvPinChange.add_member(:iso_format_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_0", traits: {"smithy.api#enumValue" => "ISO_FORMAT_0"}))
-    PinBlockFormatForEmvPinChange.add_member(:iso_format_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_1", traits: {"smithy.api#enumValue" => "ISO_FORMAT_1"}))
-    PinBlockFormatForEmvPinChange.add_member(:iso_format_3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_3", traits: {"smithy.api#enumValue" => "ISO_FORMAT_3"}))
-    PinBlockFormatForPinData.add_member(:iso_format_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_0", traits: {"smithy.api#enumValue" => "ISO_FORMAT_0"}))
-    PinBlockFormatForPinData.add_member(:iso_format_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_1", traits: {"smithy.api#enumValue" => "ISO_FORMAT_1"}))
-    PinBlockFormatForPinData.add_member(:iso_format_3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_3", traits: {"smithy.api#enumValue" => "ISO_FORMAT_3"}))
-    PinBlockFormatForPinData.add_member(:iso_format_4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_4", traits: {"smithy.api#enumValue" => "ISO_FORMAT_4"}))
-    PinBlockLengthPosition.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    PinBlockLengthPosition.add_member(:front_of_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRONT_OF_PIN_BLOCK", traits: {"smithy.api#enumValue" => "FRONT_OF_PIN_BLOCK"}))
-    PinBlockPaddingType.add_member(:no_padding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_PADDING", traits: {"smithy.api#enumValue" => "NO_PADDING"}))
-    PinBlockPaddingType.add_member(:iso_iec_7816_4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_IEC_7816_4", traits: {"smithy.api#enumValue" => "ISO_IEC_7816_4"}))
-    PinData.add_member(:pin_offset, Types::PinData::PinOffset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinOffsetType, location_name: "PinOffset"))
-    PinData.add_member(:verification_value, Types::PinData::VerificationValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationValueType, location_name: "VerificationValue"))
-    PinData.add_member(:unknown, Types::PinData::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    PaddingType.add_member(:pkcs1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PKCS1", traits: {"smithy.api#enumValue" => "PKCS1"}))
+    PaddingType.add_member(:oaep_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OAEP_SHA1", traits: {"smithy.api#enumValue" => "OAEP_SHA1"}))
+    PaddingType.add_member(:oaep_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OAEP_SHA256", traits: {"smithy.api#enumValue" => "OAEP_SHA256"}))
+    PaddingType.add_member(:oaep_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OAEP_SHA512", traits: {"smithy.api#enumValue" => "OAEP_SHA512"}))
+    PinBlockFormatForEmvPinChange.add_member(:iso_format_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_0", traits: {"smithy.api#enumValue" => "ISO_FORMAT_0"}))
+    PinBlockFormatForEmvPinChange.add_member(:iso_format_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_1", traits: {"smithy.api#enumValue" => "ISO_FORMAT_1"}))
+    PinBlockFormatForEmvPinChange.add_member(:iso_format_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_3", traits: {"smithy.api#enumValue" => "ISO_FORMAT_3"}))
+    PinBlockFormatForPinData.add_member(:iso_format_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_0", traits: {"smithy.api#enumValue" => "ISO_FORMAT_0"}))
+    PinBlockFormatForPinData.add_member(:iso_format_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_1", traits: {"smithy.api#enumValue" => "ISO_FORMAT_1"}))
+    PinBlockFormatForPinData.add_member(:iso_format_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_3", traits: {"smithy.api#enumValue" => "ISO_FORMAT_3"}))
+    PinBlockFormatForPinData.add_member(:iso_format_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_FORMAT_4", traits: {"smithy.api#enumValue" => "ISO_FORMAT_4"}))
+    PinBlockLengthPosition.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    PinBlockLengthPosition.add_member(:front_of_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FRONT_OF_PIN_BLOCK", traits: {"smithy.api#enumValue" => "FRONT_OF_PIN_BLOCK"}))
+    PinBlockPaddingType.add_member(:no_padding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_PADDING", traits: {"smithy.api#enumValue" => "NO_PADDING"}))
+    PinBlockPaddingType.add_member(:iso_iec_7816_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ISO_IEC_7816_4", traits: {"smithy.api#enumValue" => "ISO_IEC_7816_4"}))
+    PinData.add_member(:pin_offset, Types::PinData::PinOffset, ::Smithy::Schema::Shapes::MemberShape.new(target: PinOffsetType, location_name: "PinOffset"))
+    PinData.add_member(:verification_value, Types::PinData::VerificationValue, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationValueType, location_name: "VerificationValue"))
+    PinData.add_member(:unknown, Types::PinData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PinData.type = Types::PinData
-    PinGenerationAttributes.add_member(:visa_pin, Types::PinGenerationAttributes::VisaPin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisaPin, location_name: "VisaPin"))
-    PinGenerationAttributes.add_member(:visa_pin_verification_value, Types::PinGenerationAttributes::VisaPinVerificationValue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisaPinVerificationValue, location_name: "VisaPinVerificationValue"))
-    PinGenerationAttributes.add_member(:ibm3624_pin_offset, Types::PinGenerationAttributes::Ibm3624PinOffset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ibm3624PinOffset, location_name: "Ibm3624PinOffset"))
-    PinGenerationAttributes.add_member(:ibm3624_natural_pin, Types::PinGenerationAttributes::Ibm3624NaturalPin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ibm3624NaturalPin, location_name: "Ibm3624NaturalPin"))
-    PinGenerationAttributes.add_member(:ibm3624_random_pin, Types::PinGenerationAttributes::Ibm3624RandomPin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ibm3624RandomPin, location_name: "Ibm3624RandomPin"))
-    PinGenerationAttributes.add_member(:ibm3624_pin_from_offset, Types::PinGenerationAttributes::Ibm3624PinFromOffset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ibm3624PinFromOffset, location_name: "Ibm3624PinFromOffset"))
-    PinGenerationAttributes.add_member(:unknown, Types::PinGenerationAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    PinGenerationAttributes.add_member(:visa_pin, Types::PinGenerationAttributes::VisaPin, ::Smithy::Schema::Shapes::MemberShape.new(target: VisaPin, location_name: "VisaPin"))
+    PinGenerationAttributes.add_member(:visa_pin_verification_value, Types::PinGenerationAttributes::VisaPinVerificationValue, ::Smithy::Schema::Shapes::MemberShape.new(target: VisaPinVerificationValue, location_name: "VisaPinVerificationValue"))
+    PinGenerationAttributes.add_member(:ibm3624_pin_offset, Types::PinGenerationAttributes::Ibm3624PinOffset, ::Smithy::Schema::Shapes::MemberShape.new(target: Ibm3624PinOffset, location_name: "Ibm3624PinOffset"))
+    PinGenerationAttributes.add_member(:ibm3624_natural_pin, Types::PinGenerationAttributes::Ibm3624NaturalPin, ::Smithy::Schema::Shapes::MemberShape.new(target: Ibm3624NaturalPin, location_name: "Ibm3624NaturalPin"))
+    PinGenerationAttributes.add_member(:ibm3624_random_pin, Types::PinGenerationAttributes::Ibm3624RandomPin, ::Smithy::Schema::Shapes::MemberShape.new(target: Ibm3624RandomPin, location_name: "Ibm3624RandomPin"))
+    PinGenerationAttributes.add_member(:ibm3624_pin_from_offset, Types::PinGenerationAttributes::Ibm3624PinFromOffset, ::Smithy::Schema::Shapes::MemberShape.new(target: Ibm3624PinFromOffset, location_name: "Ibm3624PinFromOffset"))
+    PinGenerationAttributes.add_member(:unknown, Types::PinGenerationAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PinGenerationAttributes.type = Types::PinGenerationAttributes
-    PinVerificationAttributes.add_member(:visa_pin, Types::PinVerificationAttributes::VisaPin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisaPinVerification, location_name: "VisaPin"))
-    PinVerificationAttributes.add_member(:ibm3624_pin, Types::PinVerificationAttributes::Ibm3624Pin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ibm3624PinVerification, location_name: "Ibm3624Pin"))
-    PinVerificationAttributes.add_member(:unknown, Types::PinVerificationAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    PinVerificationAttributes.add_member(:visa_pin, Types::PinVerificationAttributes::VisaPin, ::Smithy::Schema::Shapes::MemberShape.new(target: VisaPinVerification, location_name: "VisaPin"))
+    PinVerificationAttributes.add_member(:ibm3624_pin, Types::PinVerificationAttributes::Ibm3624Pin, ::Smithy::Schema::Shapes::MemberShape.new(target: Ibm3624PinVerification, location_name: "Ibm3624Pin"))
+    PinVerificationAttributes.add_member(:unknown, Types::PinVerificationAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PinVerificationAttributes.type = Types::PinVerificationAttributes
-    ReEncryptDataInput.add_member(:incoming_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "IncomingKeyIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ReEncryptDataInput.add_member(:outgoing_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "OutgoingKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    ReEncryptDataInput.add_member(:cipher_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
-    ReEncryptDataInput.add_member(:incoming_encryption_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReEncryptionAttributes, location_name: "IncomingEncryptionAttributes", traits: {"smithy.api#required" => {}}))
-    ReEncryptDataInput.add_member(:outgoing_encryption_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReEncryptionAttributes, location_name: "OutgoingEncryptionAttributes", traits: {"smithy.api#required" => {}}))
-    ReEncryptDataInput.add_member(:incoming_wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "IncomingWrappedKey"))
-    ReEncryptDataInput.add_member(:outgoing_wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "OutgoingWrappedKey"))
+    ReEncryptDataInput.add_member(:incoming_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "IncomingKeyIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ReEncryptDataInput.add_member(:outgoing_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "OutgoingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ReEncryptDataInput.add_member(:cipher_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
+    ReEncryptDataInput.add_member(:incoming_encryption_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReEncryptionAttributes, location_name: "IncomingEncryptionAttributes", traits: {"smithy.api#required" => {}}))
+    ReEncryptDataInput.add_member(:outgoing_encryption_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReEncryptionAttributes, location_name: "OutgoingEncryptionAttributes", traits: {"smithy.api#required" => {}}))
+    ReEncryptDataInput.add_member(:incoming_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "IncomingWrappedKey"))
+    ReEncryptDataInput.add_member(:outgoing_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "OutgoingWrappedKey"))
     ReEncryptDataInput.type = Types::ReEncryptDataInput
-    ReEncryptDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    ReEncryptDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
-    ReEncryptDataOutput.add_member(:cipher_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
+    ReEncryptDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    ReEncryptDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    ReEncryptDataOutput.add_member(:cipher_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherTextType, location_name: "CipherText", traits: {"smithy.api#required" => {}}))
     ReEncryptDataOutput.type = Types::ReEncryptDataOutput
-    ReEncryptionAttributes.add_member(:symmetric, Types::ReEncryptionAttributes::Symmetric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymmetricEncryptionAttributes, location_name: "Symmetric"))
-    ReEncryptionAttributes.add_member(:dukpt, Types::ReEncryptionAttributes::Dukpt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptEncryptionAttributes, location_name: "Dukpt"))
-    ReEncryptionAttributes.add_member(:unknown, Types::ReEncryptionAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ReEncryptionAttributes.add_member(:symmetric, Types::ReEncryptionAttributes::Symmetric, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricEncryptionAttributes, location_name: "Symmetric"))
+    ReEncryptionAttributes.add_member(:dukpt, Types::ReEncryptionAttributes::Dukpt, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptEncryptionAttributes, location_name: "Dukpt"))
+    ReEncryptionAttributes.add_member(:unknown, Types::ReEncryptionAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ReEncryptionAttributes.type = Types::ReEncryptionAttributes
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SessionKeyAmex.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyAmex.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyAmex.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyAmex.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyAmex.type = Types::SessionKeyAmex
-    SessionKeyDerivation.add_member(:emv_common, Types::SessionKeyDerivation::EmvCommon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyEmvCommon, location_name: "EmvCommon"))
-    SessionKeyDerivation.add_member(:mastercard, Types::SessionKeyDerivation::Mastercard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyMastercard, location_name: "Mastercard"))
-    SessionKeyDerivation.add_member(:emv2000, Types::SessionKeyDerivation::Emv2000, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyEmv2000, location_name: "Emv2000"))
-    SessionKeyDerivation.add_member(:amex, Types::SessionKeyDerivation::Amex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyAmex, location_name: "Amex"))
-    SessionKeyDerivation.add_member(:visa, Types::SessionKeyDerivation::Visa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyVisa, location_name: "Visa"))
-    SessionKeyDerivation.add_member(:unknown, Types::SessionKeyDerivation::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SessionKeyDerivation.add_member(:emv_common, Types::SessionKeyDerivation::EmvCommon, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyEmvCommon, location_name: "EmvCommon"))
+    SessionKeyDerivation.add_member(:mastercard, Types::SessionKeyDerivation::Mastercard, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyMastercard, location_name: "Mastercard"))
+    SessionKeyDerivation.add_member(:emv2000, Types::SessionKeyDerivation::Emv2000, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyEmv2000, location_name: "Emv2000"))
+    SessionKeyDerivation.add_member(:amex, Types::SessionKeyDerivation::Amex, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyAmex, location_name: "Amex"))
+    SessionKeyDerivation.add_member(:visa, Types::SessionKeyDerivation::Visa, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyVisa, location_name: "Visa"))
+    SessionKeyDerivation.add_member(:unknown, Types::SessionKeyDerivation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SessionKeyDerivation.type = Types::SessionKeyDerivation
-    SessionKeyDerivationMode.add_member(:emv_common_session_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_COMMON_SESSION_KEY", traits: {"smithy.api#enumValue" => "EMV_COMMON_SESSION_KEY"}))
-    SessionKeyDerivationMode.add_member(:emv2000, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV2000", traits: {"smithy.api#enumValue" => "EMV2000"}))
-    SessionKeyDerivationMode.add_member(:amex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AMEX", traits: {"smithy.api#enumValue" => "AMEX"}))
-    SessionKeyDerivationMode.add_member(:mastercard_session_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MASTERCARD_SESSION_KEY", traits: {"smithy.api#enumValue" => "MASTERCARD_SESSION_KEY"}))
-    SessionKeyDerivationMode.add_member(:visa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VISA", traits: {"smithy.api#enumValue" => "VISA"}))
-    SessionKeyDerivationValue.add_member(:application_cryptogram, Types::SessionKeyDerivationValue::ApplicationCryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationCryptogramType, location_name: "ApplicationCryptogram"))
-    SessionKeyDerivationValue.add_member(:application_transaction_counter, Types::SessionKeyDerivationValue::ApplicationTransactionCounter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "ApplicationTransactionCounter"))
-    SessionKeyDerivationValue.add_member(:unknown, Types::SessionKeyDerivationValue::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SessionKeyDerivationMode.add_member(:emv_common_session_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV_COMMON_SESSION_KEY", traits: {"smithy.api#enumValue" => "EMV_COMMON_SESSION_KEY"}))
+    SessionKeyDerivationMode.add_member(:emv2000, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMV2000", traits: {"smithy.api#enumValue" => "EMV2000"}))
+    SessionKeyDerivationMode.add_member(:amex, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AMEX", traits: {"smithy.api#enumValue" => "AMEX"}))
+    SessionKeyDerivationMode.add_member(:mastercard_session_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MASTERCARD_SESSION_KEY", traits: {"smithy.api#enumValue" => "MASTERCARD_SESSION_KEY"}))
+    SessionKeyDerivationMode.add_member(:visa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VISA", traits: {"smithy.api#enumValue" => "VISA"}))
+    SessionKeyDerivationValue.add_member(:application_cryptogram, Types::SessionKeyDerivationValue::ApplicationCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationCryptogramType, location_name: "ApplicationCryptogram"))
+    SessionKeyDerivationValue.add_member(:application_transaction_counter, Types::SessionKeyDerivationValue::ApplicationTransactionCounter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "ApplicationTransactionCounter"))
+    SessionKeyDerivationValue.add_member(:unknown, Types::SessionKeyDerivationValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SessionKeyDerivationValue.type = Types::SessionKeyDerivationValue
-    SessionKeyEmv2000.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyEmv2000.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyEmv2000.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    SessionKeyEmv2000.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyEmv2000.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyEmv2000.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
     SessionKeyEmv2000.type = Types::SessionKeyEmv2000
-    SessionKeyEmvCommon.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyEmvCommon.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyEmvCommon.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    SessionKeyEmvCommon.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyEmvCommon.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyEmvCommon.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
     SessionKeyEmvCommon.type = Types::SessionKeyEmvCommon
-    SessionKeyMastercard.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyMastercard.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyMastercard.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
-    SessionKeyMastercard.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyMastercard.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyMastercard.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyMastercard.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    SessionKeyMastercard.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And8, location_name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyMastercard.type = Types::SessionKeyMastercard
-    SessionKeyVisa.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    SessionKeyVisa.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyVisa.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyVisa.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyVisa.type = Types::SessionKeyVisa
-    SymmetricEncryptionAttributes.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
-    SymmetricEncryptionAttributes.add_member(:initialization_vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitializationVectorType, location_name: "InitializationVector"))
-    SymmetricEncryptionAttributes.add_member(:padding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaddingType, location_name: "PaddingType"))
+    SymmetricEncryptionAttributes.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
+    SymmetricEncryptionAttributes.add_member(:initialization_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: InitializationVectorType, location_name: "InitializationVector"))
+    SymmetricEncryptionAttributes.add_member(:padding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PaddingType, location_name: "PaddingType"))
     SymmetricEncryptionAttributes.type = Types::SymmetricEncryptionAttributes
-    SymmetricKeyAlgorithm.add_member(:tdes_2_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_2KEY", traits: {"smithy.api#enumValue" => "TDES_2KEY"}))
-    SymmetricKeyAlgorithm.add_member(:tdes_3_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_3KEY", traits: {"smithy.api#enumValue" => "TDES_3KEY"}))
-    SymmetricKeyAlgorithm.add_member(:aes_128, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_128", traits: {"smithy.api#enumValue" => "AES_128"}))
-    SymmetricKeyAlgorithm.add_member(:aes_192, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_192", traits: {"smithy.api#enumValue" => "AES_192"}))
-    SymmetricKeyAlgorithm.add_member(:aes_256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_256", traits: {"smithy.api#enumValue" => "AES_256"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA256", traits: {"smithy.api#enumValue" => "HMAC_SHA256"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha384, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA384", traits: {"smithy.api#enumValue" => "HMAC_SHA384"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha512, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA512", traits: {"smithy.api#enumValue" => "HMAC_SHA512"}))
-    SymmetricKeyAlgorithm.add_member(:hmac_sha224, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA224", traits: {"smithy.api#enumValue" => "HMAC_SHA224"}))
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    SymmetricKeyAlgorithm.add_member(:tdes_2_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_2KEY", traits: {"smithy.api#enumValue" => "TDES_2KEY"}))
+    SymmetricKeyAlgorithm.add_member(:tdes_3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TDES_3KEY", traits: {"smithy.api#enumValue" => "TDES_3KEY"}))
+    SymmetricKeyAlgorithm.add_member(:aes_128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_128", traits: {"smithy.api#enumValue" => "AES_128"}))
+    SymmetricKeyAlgorithm.add_member(:aes_192, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_192", traits: {"smithy.api#enumValue" => "AES_192"}))
+    SymmetricKeyAlgorithm.add_member(:aes_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES_256", traits: {"smithy.api#enumValue" => "AES_256"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA256", traits: {"smithy.api#enumValue" => "HMAC_SHA256"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA384", traits: {"smithy.api#enumValue" => "HMAC_SHA384"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA512", traits: {"smithy.api#enumValue" => "HMAC_SHA512"}))
+    SymmetricKeyAlgorithm.add_member(:hmac_sha224, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HMAC_SHA224", traits: {"smithy.api#enumValue" => "HMAC_SHA224"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    TranslateKeyMaterialInput.add_member(:incoming_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncomingKeyMaterial, location_name: "IncomingKeyMaterial", traits: {"smithy.api#required" => {}}))
-    TranslateKeyMaterialInput.add_member(:outgoing_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutgoingKeyMaterial, location_name: "OutgoingKeyMaterial", traits: {"smithy.api#required" => {}}))
-    TranslateKeyMaterialInput.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    TranslateKeyMaterialInput.add_member(:incoming_key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: IncomingKeyMaterial, location_name: "IncomingKeyMaterial", traits: {"smithy.api#required" => {}}))
+    TranslateKeyMaterialInput.add_member(:outgoing_key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: OutgoingKeyMaterial, location_name: "OutgoingKeyMaterial", traits: {"smithy.api#required" => {}}))
+    TranslateKeyMaterialInput.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     TranslateKeyMaterialInput.type = Types::TranslateKeyMaterialInput
-    TranslateKeyMaterialOutput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedWorkingKey, location_name: "WrappedKey", traits: {"smithy.api#required" => {}}))
+    TranslateKeyMaterialOutput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedWorkingKey, location_name: "WrappedKey", traits: {"smithy.api#required" => {}}))
     TranslateKeyMaterialOutput.type = Types::TranslateKeyMaterialOutput
-    TranslatePinDataInput.add_member(:incoming_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "IncomingKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    TranslatePinDataInput.add_member(:outgoing_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "OutgoingKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    TranslatePinDataInput.add_member(:incoming_translation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationIsoFormats, location_name: "IncomingTranslationAttributes", traits: {"smithy.api#required" => {}}))
-    TranslatePinDataInput.add_member(:outgoing_translation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationIsoFormats, location_name: "OutgoingTranslationAttributes", traits: {"smithy.api#required" => {}}))
-    TranslatePinDataInput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And32, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
-    TranslatePinDataInput.add_member(:incoming_dukpt_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptDerivationAttributes, location_name: "IncomingDukptAttributes"))
-    TranslatePinDataInput.add_member(:outgoing_dukpt_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptDerivationAttributes, location_name: "OutgoingDukptAttributes"))
-    TranslatePinDataInput.add_member(:incoming_wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "IncomingWrappedKey"))
-    TranslatePinDataInput.add_member(:outgoing_wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "OutgoingWrappedKey"))
+    TranslatePinDataInput.add_member(:incoming_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "IncomingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataInput.add_member(:outgoing_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "OutgoingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataInput.add_member(:incoming_translation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationIsoFormats, location_name: "IncomingTranslationAttributes", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataInput.add_member(:outgoing_translation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationIsoFormats, location_name: "OutgoingTranslationAttributes", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataInput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: HexEvenLengthBetween16And32, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataInput.add_member(:incoming_dukpt_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationAttributes, location_name: "IncomingDukptAttributes"))
+    TranslatePinDataInput.add_member(:outgoing_dukpt_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationAttributes, location_name: "OutgoingDukptAttributes"))
+    TranslatePinDataInput.add_member(:incoming_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "IncomingWrappedKey"))
+    TranslatePinDataInput.add_member(:outgoing_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "OutgoingWrappedKey"))
     TranslatePinDataInput.type = Types::TranslatePinDataInput
-    TranslatePinDataOutput.add_member(:pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedPinBlockType, location_name: "PinBlock", traits: {"smithy.api#required" => {}}))
-    TranslatePinDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    TranslatePinDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataOutput.add_member(:pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedPinBlockType, location_name: "PinBlock", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    TranslatePinDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
     TranslatePinDataOutput.type = Types::TranslatePinDataOutput
-    TranslationIsoFormats.add_member(:iso_format0, Types::TranslationIsoFormats::IsoFormat0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat034, location_name: "IsoFormat0"))
-    TranslationIsoFormats.add_member(:iso_format1, Types::TranslationIsoFormats::IsoFormat1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat1, location_name: "IsoFormat1"))
-    TranslationIsoFormats.add_member(:iso_format3, Types::TranslationIsoFormats::IsoFormat3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat034, location_name: "IsoFormat3"))
-    TranslationIsoFormats.add_member(:iso_format4, Types::TranslationIsoFormats::IsoFormat4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat034, location_name: "IsoFormat4"))
-    TranslationIsoFormats.add_member(:unknown, Types::TranslationIsoFormats::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    TranslationIsoFormats.add_member(:iso_format0, Types::TranslationIsoFormats::IsoFormat0, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataIsoFormat034, location_name: "IsoFormat0"))
+    TranslationIsoFormats.add_member(:iso_format1, Types::TranslationIsoFormats::IsoFormat1, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataIsoFormat1, location_name: "IsoFormat1"))
+    TranslationIsoFormats.add_member(:iso_format3, Types::TranslationIsoFormats::IsoFormat3, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataIsoFormat034, location_name: "IsoFormat3"))
+    TranslationIsoFormats.add_member(:iso_format4, Types::TranslationIsoFormats::IsoFormat4, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataIsoFormat034, location_name: "IsoFormat4"))
+    TranslationIsoFormats.add_member(:unknown, Types::TranslationIsoFormats::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TranslationIsoFormats.type = Types::TranslationIsoFormats
-    TranslationPinDataIsoFormat034.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    TranslationPinDataIsoFormat034.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
     TranslationPinDataIsoFormat034.type = Types::TranslationPinDataIsoFormat034
     TranslationPinDataIsoFormat1.type = Types::TranslationPinDataIsoFormat1
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    VerificationFailedException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationFailedReason, location_name: "Reason", traits: {"smithy.api#required" => {}}))
-    VerificationFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    VerificationFailedException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationFailedReason, location_name: "Reason", traits: {"smithy.api#required" => {}}))
+    VerificationFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     VerificationFailedException.type = Types::VerificationFailedException
-    VerifyAuthRequestCryptogramInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    VerifyAuthRequestCryptogramInput.add_member(:transaction_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionDataType, location_name: "TransactionData", traits: {"smithy.api#required" => {}}))
-    VerifyAuthRequestCryptogramInput.add_member(:auth_request_cryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthRequestCryptogramType, location_name: "AuthRequestCryptogram", traits: {"smithy.api#required" => {}}))
-    VerifyAuthRequestCryptogramInput.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    VerifyAuthRequestCryptogramInput.add_member(:session_key_derivation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionKeyDerivation, location_name: "SessionKeyDerivationAttributes", traits: {"smithy.api#required" => {}}))
-    VerifyAuthRequestCryptogramInput.add_member(:auth_response_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CryptogramAuthResponse, location_name: "AuthResponseAttributes"))
+    VerifyAuthRequestCryptogramInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    VerifyAuthRequestCryptogramInput.add_member(:transaction_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionDataType, location_name: "TransactionData", traits: {"smithy.api#required" => {}}))
+    VerifyAuthRequestCryptogramInput.add_member(:auth_request_cryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthRequestCryptogramType, location_name: "AuthRequestCryptogram", traits: {"smithy.api#required" => {}}))
+    VerifyAuthRequestCryptogramInput.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    VerifyAuthRequestCryptogramInput.add_member(:session_key_derivation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyDerivation, location_name: "SessionKeyDerivationAttributes", traits: {"smithy.api#required" => {}}))
+    VerifyAuthRequestCryptogramInput.add_member(:auth_response_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CryptogramAuthResponse, location_name: "AuthResponseAttributes"))
     VerifyAuthRequestCryptogramInput.type = Types::VerifyAuthRequestCryptogramInput
-    VerifyAuthRequestCryptogramOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    VerifyAuthRequestCryptogramOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
-    VerifyAuthRequestCryptogramOutput.add_member(:auth_response_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthResponseValueType, location_name: "AuthResponseValue"))
+    VerifyAuthRequestCryptogramOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    VerifyAuthRequestCryptogramOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    VerifyAuthRequestCryptogramOutput.add_member(:auth_response_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthResponseValueType, location_name: "AuthResponseValue"))
     VerifyAuthRequestCryptogramOutput.type = Types::VerifyAuthRequestCryptogramOutput
-    VerifyCardValidationDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    VerifyCardValidationDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    VerifyCardValidationDataInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardVerificationAttributes, location_name: "VerificationAttributes", traits: {"smithy.api#required" => {}}))
-    VerifyCardValidationDataInput.add_member(:validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationDataType, location_name: "ValidationData", traits: {"smithy.api#required" => {}}))
+    VerifyCardValidationDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    VerifyCardValidationDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    VerifyCardValidationDataInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CardVerificationAttributes, location_name: "VerificationAttributes", traits: {"smithy.api#required" => {}}))
+    VerifyCardValidationDataInput.add_member(:validation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationDataType, location_name: "ValidationData", traits: {"smithy.api#required" => {}}))
     VerifyCardValidationDataInput.type = Types::VerifyCardValidationDataInput
-    VerifyCardValidationDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    VerifyCardValidationDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    VerifyCardValidationDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    VerifyCardValidationDataOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
     VerifyCardValidationDataOutput.type = Types::VerifyCardValidationDataOutput
-    VerifyMacInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
-    VerifyMacInput.add_member(:message_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageDataType, location_name: "MessageData", traits: {"smithy.api#required" => {}}))
-    VerifyMacInput.add_member(:mac, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacType, location_name: "Mac", traits: {"smithy.api#required" => {}}))
-    VerifyMacInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacAttributes, location_name: "VerificationAttributes", traits: {"smithy.api#required" => {}}))
-    VerifyMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
+    VerifyMacInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    VerifyMacInput.add_member(:message_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageDataType, location_name: "MessageData", traits: {"smithy.api#required" => {}}))
+    VerifyMacInput.add_member(:mac, ::Smithy::Schema::Shapes::MemberShape.new(target: MacType, location_name: "Mac", traits: {"smithy.api#required" => {}}))
+    VerifyMacInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAttributes, location_name: "VerificationAttributes", traits: {"smithy.api#required" => {}}))
+    VerifyMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And16, location_name: "MacLength"))
     VerifyMacInput.type = Types::VerifyMacInput
-    VerifyMacOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
-    VerifyMacOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    VerifyMacOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    VerifyMacOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
     VerifyMacOutput.type = Types::VerifyMacOutput
-    VerifyPinDataInput.add_member(:verification_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "VerificationKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataInput.add_member(:encryption_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "EncryptionKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinVerificationAttributes, location_name: "VerificationAttributes", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataInput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber"))
-    VerifyPinDataInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, location_name: "PinBlockFormat", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataInput.add_member(:pin_data_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
-    VerifyPinDataInput.add_member(:dukpt_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptAttributes, location_name: "DukptAttributes"))
-    VerifyPinDataInput.add_member(:encryption_wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: "EncryptionWrappedKey"))
+    VerifyPinDataInput.add_member(:verification_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "VerificationKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataInput.add_member(:encryption_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "EncryptionKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PinVerificationAttributes, location_name: "VerificationAttributes", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataInput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber"))
+    VerifyPinDataInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::MemberShape.new(target: PinBlockFormatForPinData, location_name: "PinBlockFormat", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataInput.add_member(:pin_data_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And12, location_name: "PinDataLength"))
+    VerifyPinDataInput.add_member(:dukpt_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptAttributes, location_name: "DukptAttributes"))
+    VerifyPinDataInput.add_member(:encryption_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, location_name: "EncryptionWrappedKey"))
     VerifyPinDataInput.type = Types::VerifyPinDataInput
-    VerifyPinDataOutput.add_member(:verification_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "VerificationKeyArn", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataOutput.add_member(:verification_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "VerificationKeyCheckValue", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataOutput.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "EncryptionKeyArn", traits: {"smithy.api#required" => {}}))
-    VerifyPinDataOutput.add_member(:encryption_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "EncryptionKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataOutput.add_member(:verification_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "VerificationKeyArn", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataOutput.add_member(:verification_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "VerificationKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataOutput.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "EncryptionKeyArn", traits: {"smithy.api#required" => {}}))
+    VerifyPinDataOutput.add_member(:encryption_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "EncryptionKeyCheckValue", traits: {"smithy.api#required" => {}}))
     VerifyPinDataOutput.type = Types::VerifyPinDataOutput
-    VisaAmexDerivationOutputs.add_member(:authorization_request_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "AuthorizationRequestKeyArn", traits: {"smithy.api#required" => {}}))
-    VisaAmexDerivationOutputs.add_member(:authorization_request_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "AuthorizationRequestKeyCheckValue", traits: {"smithy.api#required" => {}}))
-    VisaAmexDerivationOutputs.add_member(:current_pin_pek_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArn, location_name: "CurrentPinPekArn"))
-    VisaAmexDerivationOutputs.add_member(:current_pin_pek_key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "CurrentPinPekKeyCheckValue"))
+    VisaAmexDerivationOutputs.add_member(:authorization_request_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "AuthorizationRequestKeyArn", traits: {"smithy.api#required" => {}}))
+    VisaAmexDerivationOutputs.add_member(:authorization_request_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "AuthorizationRequestKeyCheckValue", traits: {"smithy.api#required" => {}}))
+    VisaAmexDerivationOutputs.add_member(:current_pin_pek_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, location_name: "CurrentPinPekArn"))
+    VisaAmexDerivationOutputs.add_member(:current_pin_pek_key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "CurrentPinPekKeyCheckValue"))
     VisaAmexDerivationOutputs.type = Types::VisaAmexDerivationOutputs
-    VisaAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
-    VisaAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
-    VisaAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
-    VisaAttributes.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
-    VisaAttributes.add_member(:authorization_request_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: "AuthorizationRequestKeyIdentifier", traits: {"smithy.api#required" => {}}))
-    VisaAttributes.add_member(:current_pin_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrentPinAttributes, location_name: "CurrentPinAttributes"))
+    VisaAttributes.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, location_name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    VisaAttributes.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    VisaAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, location_name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    VisaAttributes.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, location_name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    VisaAttributes.add_member(:authorization_request_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, location_name: "AuthorizationRequestKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    VisaAttributes.add_member(:current_pin_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentPinAttributes, location_name: "CurrentPinAttributes"))
     VisaAttributes.type = Types::VisaAttributes
-    VisaPin.add_member(:pin_verification_key_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween0And6, location_name: "PinVerificationKeyIndex", traits: {"smithy.api#required" => {}}))
+    VisaPin.add_member(:pin_verification_key_index, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween0And6, location_name: "PinVerificationKeyIndex", traits: {"smithy.api#required" => {}}))
     VisaPin.type = Types::VisaPin
-    VisaPinVerification.add_member(:pin_verification_key_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween0And6, location_name: "PinVerificationKeyIndex", traits: {"smithy.api#required" => {}}))
-    VisaPinVerification.add_member(:verification_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationValueType, location_name: "VerificationValue", traits: {"smithy.api#required" => {}}))
+    VisaPinVerification.add_member(:pin_verification_key_index, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween0And6, location_name: "PinVerificationKeyIndex", traits: {"smithy.api#required" => {}}))
+    VisaPinVerification.add_member(:verification_value, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationValueType, location_name: "VerificationValue", traits: {"smithy.api#required" => {}}))
     VisaPinVerification.type = Types::VisaPinVerification
-    VisaPinVerificationValue.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
-    VisaPinVerificationValue.add_member(:pin_verification_key_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween0And6, location_name: "PinVerificationKeyIndex", traits: {"smithy.api#required" => {}}))
+    VisaPinVerificationValue.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedPinBlockType, location_name: "EncryptedPinBlock", traits: {"smithy.api#required" => {}}))
+    VisaPinVerificationValue.add_member(:pin_verification_key_index, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween0And6, location_name: "PinVerificationKeyIndex", traits: {"smithy.api#required" => {}}))
     VisaPinVerificationValue.type = Types::VisaPinVerificationValue
-    WrappedKey.add_member(:wrapped_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKeyMaterial, location_name: "WrappedKeyMaterial", traits: {"smithy.api#required" => {}}))
-    WrappedKey.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    WrappedKey.add_member(:wrapped_key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKeyMaterial, location_name: "WrappedKeyMaterial", traits: {"smithy.api#required" => {}}))
+    WrappedKey.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     WrappedKey.type = Types::WrappedKey
-    WrappedKeyMaterial.add_member(:tr31_key_block, Types::WrappedKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, location_name: "Tr31KeyBlock"))
-    WrappedKeyMaterial.add_member(:diffie_hellman_symmetric_key, Types::WrappedKeyMaterial::DiffieHellmanSymmetricKey, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EcdhDerivationAttributes, location_name: "DiffieHellmanSymmetricKey"))
-    WrappedKeyMaterial.add_member(:unknown, Types::WrappedKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    WrappedKeyMaterial.add_member(:tr31_key_block, Types::WrappedKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: Tr31WrappedKeyBlock, location_name: "Tr31KeyBlock"))
+    WrappedKeyMaterial.add_member(:diffie_hellman_symmetric_key, Types::WrappedKeyMaterial::DiffieHellmanSymmetricKey, ::Smithy::Schema::Shapes::MemberShape.new(target: EcdhDerivationAttributes, location_name: "DiffieHellmanSymmetricKey"))
+    WrappedKeyMaterial.add_member(:unknown, Types::WrappedKeyMaterial::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     WrappedKeyMaterial.type = Types::WrappedKeyMaterial
-    WrappedWorkingKey.add_member(:wrapped_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMaterial, location_name: "WrappedKeyMaterial", traits: {"smithy.api#required" => {}}))
-    WrappedWorkingKey.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
-    WrappedWorkingKey.add_member(:wrapped_key_material_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKeyMaterialFormat, location_name: "WrappedKeyMaterialFormat", traits: {"smithy.api#required" => {}}))
+    WrappedWorkingKey.add_member(:wrapped_key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMaterial, location_name: "WrappedKeyMaterial", traits: {"smithy.api#required" => {}}))
+    WrappedWorkingKey.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, location_name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    WrappedWorkingKey.add_member(:wrapped_key_material_format, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKeyMaterialFormat, location_name: "WrappedKeyMaterialFormat", traits: {"smithy.api#required" => {}}))
     WrappedWorkingKey.type = Types::WrappedWorkingKey
 
     PaymentCryptographyDataPlane = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -685,161 +685,161 @@ module Aws::PaymentCryptographyData
       service.add_operation(:decrypt_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#DecryptData"
         operation.name = "DecryptData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecryptDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DecryptDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DecryptDataInput
+        operation.output = DecryptDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/keys/{KeyIdentifier}/decrypt", "code" => 200}}
       end)
       service.add_operation(:encrypt_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#EncryptData"
         operation.name = "EncryptData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = EncryptDataInput
+        operation.output = EncryptDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/keys/{KeyIdentifier}/encrypt", "code" => 200}}
       end)
       service.add_operation(:generate_card_validation_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#GenerateCardValidationData"
         operation.name = "GenerateCardValidationData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerateCardValidationDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerateCardValidationDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GenerateCardValidationDataInput
+        operation.output = GenerateCardValidationDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/cardvalidationdata/generate", "code" => 200}}
       end)
       service.add_operation(:generate_mac, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#GenerateMac"
         operation.name = "GenerateMac"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerateMacInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerateMacOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GenerateMacInput
+        operation.output = GenerateMacOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/mac/generate", "code" => 200}}
       end)
       service.add_operation(:generate_mac_emv_pin_change, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#GenerateMacEmvPinChange"
         operation.name = "GenerateMacEmvPinChange"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerateMacEmvPinChangeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerateMacEmvPinChangeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GenerateMacEmvPinChangeInput
+        operation.output = GenerateMacEmvPinChangeOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/macemvpinchange/generate", "code" => 200}}
       end)
       service.add_operation(:generate_pin_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#GeneratePinData"
         operation.name = "GeneratePinData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratePinDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratePinDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GeneratePinDataInput
+        operation.output = GeneratePinDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/pindata/generate", "code" => 200}}
       end)
       service.add_operation(:re_encrypt_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#ReEncryptData"
         operation.name = "ReEncryptData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReEncryptDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReEncryptDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ReEncryptDataInput
+        operation.output = ReEncryptDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/keys/{IncomingKeyIdentifier}/reencrypt", "code" => 200}}
       end)
       service.add_operation(:translate_key_material, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#TranslateKeyMaterial"
         operation.name = "TranslateKeyMaterial"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateKeyMaterialInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateKeyMaterialOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TranslateKeyMaterialInput
+        operation.output = TranslateKeyMaterialOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/keymaterial/translate", "code" => 200}}
       end)
       service.add_operation(:translate_pin_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#TranslatePinData"
         operation.name = "TranslatePinData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslatePinDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslatePinDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TranslatePinDataInput
+        operation.output = TranslatePinDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/pindata/translate", "code" => 200}}
       end)
       service.add_operation(:verify_auth_request_cryptogram, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#VerifyAuthRequestCryptogram"
         operation.name = "VerifyAuthRequestCryptogram"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyAuthRequestCryptogramInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyAuthRequestCryptogramOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationFailedException)
+        operation.input = VerifyAuthRequestCryptogramInput
+        operation.output = VerifyAuthRequestCryptogramOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << VerificationFailedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/cryptogram/verify", "code" => 200}}
       end)
       service.add_operation(:verify_card_validation_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#VerifyCardValidationData"
         operation.name = "VerifyCardValidationData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyCardValidationDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyCardValidationDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationFailedException)
+        operation.input = VerifyCardValidationDataInput
+        operation.output = VerifyCardValidationDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << VerificationFailedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/cardvalidationdata/verify", "code" => 200}}
       end)
       service.add_operation(:verify_mac, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#VerifyMac"
         operation.name = "VerifyMac"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyMacInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyMacOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationFailedException)
+        operation.input = VerifyMacInput
+        operation.output = VerifyMacOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << VerificationFailedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/mac/verify", "code" => 200}}
       end)
       service.add_operation(:verify_pin_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#VerifyPinData"
         operation.name = "VerifyPinData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyPinDataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyPinDataOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationFailedException)
+        operation.input = VerifyPinDataInput
+        operation.output = VerifyPinDataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << VerificationFailedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/pindata/verify", "code" => 200}}
       end)
     end

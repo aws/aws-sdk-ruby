@@ -85,229 +85,229 @@ module Aws::ManagedBlockchainQuery
     ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.managedblockchainquery#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "unknownOperation", "name" => "UNKNOWN_OPERATION"}, {"value" => "cannotParse", "name" => "CANNOT_PARSE"}, {"value" => "fieldValidationFailed", "name" => "FIELD_VALIDATION_FAILED"}, {"value" => "other", "name" => "OTHER"}]})
     VoutFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.managedblockchainquery#VoutFilter", name: "VoutFilter")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddressIdentifierFilter.add_member(:transaction_event_to_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddresses, location_name: "transactionEventToAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#required" => {}}))
+    AddressIdentifierFilter.add_member(:transaction_event_to_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddresses, location_name: "transactionEventToAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#required" => {}}))
     AddressIdentifierFilter.type = Types::AddressIdentifierFilter
-    AssetContract.add_member(:contract_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContractIdentifier, location_name: "contractIdentifier", traits: {"smithy.api#required" => {}}))
-    AssetContract.add_member(:token_standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTokenStandard, location_name: "tokenStandard", traits: {"smithy.api#required" => {}}))
-    AssetContract.add_member(:deployer_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "deployerAddress", traits: {"smithy.api#required" => {}}))
+    AssetContract.add_member(:contract_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ContractIdentifier, location_name: "contractIdentifier", traits: {"smithy.api#required" => {}}))
+    AssetContract.add_member(:token_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenStandard, location_name: "tokenStandard", traits: {"smithy.api#required" => {}}))
+    AssetContract.add_member(:deployer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "deployerAddress", traits: {"smithy.api#required" => {}}))
     AssetContract.type = Types::AssetContract
-    AssetContractList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetContract)
-    BatchGetTokenBalanceErrorItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier"))
-    BatchGetTokenBalanceErrorItem.add_member(:owner_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier"))
-    BatchGetTokenBalanceErrorItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "atBlockchainInstant"))
-    BatchGetTokenBalanceErrorItem.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorCode", traits: {"smithy.api#required" => {}}))
-    BatchGetTokenBalanceErrorItem.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage", traits: {"smithy.api#required" => {}}))
-    BatchGetTokenBalanceErrorItem.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorType, location_name: "errorType", traits: {"smithy.api#required" => {}}))
+    AssetContractList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetContract)
+    BatchGetTokenBalanceErrorItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, location_name: "tokenIdentifier"))
+    BatchGetTokenBalanceErrorItem.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, location_name: "ownerIdentifier"))
+    BatchGetTokenBalanceErrorItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "atBlockchainInstant"))
+    BatchGetTokenBalanceErrorItem.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorCode", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceErrorItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceErrorItem.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, location_name: "errorType", traits: {"smithy.api#required" => {}}))
     BatchGetTokenBalanceErrorItem.type = Types::BatchGetTokenBalanceErrorItem
-    BatchGetTokenBalanceErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetTokenBalanceErrorItem)
-    BatchGetTokenBalanceInput.add_member(:get_token_balance_inputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTokenBalanceInputList, location_name: "getTokenBalanceInputs"))
+    BatchGetTokenBalanceErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceErrorItem)
+    BatchGetTokenBalanceInput.add_member(:get_token_balance_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: GetTokenBalanceInputList, location_name: "getTokenBalanceInputs"))
     BatchGetTokenBalanceInput.type = Types::BatchGetTokenBalanceInput
-    BatchGetTokenBalanceInputItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier", traits: {"smithy.api#required" => {}}))
-    BatchGetTokenBalanceInputItem.add_member(:owner_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier", traits: {"smithy.api#required" => {}}))
-    BatchGetTokenBalanceInputItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "atBlockchainInstant"))
+    BatchGetTokenBalanceInputItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, location_name: "tokenIdentifier", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceInputItem.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, location_name: "ownerIdentifier", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceInputItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "atBlockchainInstant"))
     BatchGetTokenBalanceInputItem.type = Types::BatchGetTokenBalanceInputItem
-    BatchGetTokenBalanceOutput.add_member(:token_balances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetTokenBalanceOutputList, location_name: "tokenBalances", traits: {"smithy.api#required" => {}}))
-    BatchGetTokenBalanceOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetTokenBalanceErrors, location_name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceOutput.add_member(:token_balances, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceOutputList, location_name: "tokenBalances", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceErrors, location_name: "errors", traits: {"smithy.api#required" => {}}))
     BatchGetTokenBalanceOutput.type = Types::BatchGetTokenBalanceOutput
-    BatchGetTokenBalanceOutputItem.add_member(:owner_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier"))
-    BatchGetTokenBalanceOutputItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier"))
-    BatchGetTokenBalanceOutputItem.add_member(:balance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "balance", traits: {"smithy.api#required" => {}}))
-    BatchGetTokenBalanceOutputItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
-    BatchGetTokenBalanceOutputItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "lastUpdatedTime"))
+    BatchGetTokenBalanceOutputItem.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, location_name: "ownerIdentifier"))
+    BatchGetTokenBalanceOutputItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, location_name: "tokenIdentifier"))
+    BatchGetTokenBalanceOutputItem.add_member(:balance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "balance", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceOutputItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
+    BatchGetTokenBalanceOutputItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "lastUpdatedTime"))
     BatchGetTokenBalanceOutputItem.type = Types::BatchGetTokenBalanceOutputItem
-    BatchGetTokenBalanceOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetTokenBalanceOutputItem)
-    BlockchainInstant.add_member(:time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "time"))
+    BatchGetTokenBalanceOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceOutputItem)
+    BlockchainInstant.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "time"))
     BlockchainInstant.type = Types::BlockchainInstant
-    ChainAddresses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress)
-    ConfirmationStatusFilter.add_member(:include, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationStatusIncludeList, location_name: "include", traits: {"smithy.api#required" => {}}))
+    ChainAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress)
+    ConfirmationStatusFilter.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatusIncludeList, location_name: "include", traits: {"smithy.api#required" => {}}))
     ConfirmationStatusFilter.type = Types::ConfirmationStatusFilter
-    ConfirmationStatusIncludeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationStatus)
-    ContractFilter.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    ContractFilter.add_member(:token_standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTokenStandard, location_name: "tokenStandard", traits: {"smithy.api#required" => {}}))
-    ContractFilter.add_member(:deployer_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "deployerAddress", traits: {"smithy.api#required" => {}}))
+    ConfirmationStatusIncludeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus)
+    ContractFilter.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    ContractFilter.add_member(:token_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenStandard, location_name: "tokenStandard", traits: {"smithy.api#required" => {}}))
+    ContractFilter.add_member(:deployer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "deployerAddress", traits: {"smithy.api#required" => {}}))
     ContractFilter.type = Types::ContractFilter
-    ContractIdentifier.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    ContractIdentifier.add_member(:contract_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "contractAddress", traits: {"smithy.api#required" => {}}))
+    ContractIdentifier.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    ContractIdentifier.add_member(:contract_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "contractAddress", traits: {"smithy.api#required" => {}}))
     ContractIdentifier.type = Types::ContractIdentifier
-    ContractMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name"))
-    ContractMetadata.add_member(:symbol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "symbol"))
-    ContractMetadata.add_member(:decimals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "decimals"))
+    ContractMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name"))
+    ContractMetadata.add_member(:symbol, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "symbol"))
+    ContractMetadata.add_member(:decimals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "decimals"))
     ContractMetadata.type = Types::ContractMetadata
-    GetAssetContractInput.add_member(:contract_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContractIdentifier, location_name: "contractIdentifier", traits: {"smithy.api#required" => {}}))
+    GetAssetContractInput.add_member(:contract_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ContractIdentifier, location_name: "contractIdentifier", traits: {"smithy.api#required" => {}}))
     GetAssetContractInput.type = Types::GetAssetContractInput
-    GetAssetContractOutput.add_member(:contract_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContractIdentifier, location_name: "contractIdentifier", traits: {"smithy.api#required" => {}}))
-    GetAssetContractOutput.add_member(:token_standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTokenStandard, location_name: "tokenStandard", traits: {"smithy.api#required" => {}}))
-    GetAssetContractOutput.add_member(:deployer_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "deployerAddress", traits: {"smithy.api#required" => {}}))
-    GetAssetContractOutput.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContractMetadata, location_name: "metadata"))
+    GetAssetContractOutput.add_member(:contract_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ContractIdentifier, location_name: "contractIdentifier", traits: {"smithy.api#required" => {}}))
+    GetAssetContractOutput.add_member(:token_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenStandard, location_name: "tokenStandard", traits: {"smithy.api#required" => {}}))
+    GetAssetContractOutput.add_member(:deployer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "deployerAddress", traits: {"smithy.api#required" => {}}))
+    GetAssetContractOutput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ContractMetadata, location_name: "metadata"))
     GetAssetContractOutput.type = Types::GetAssetContractOutput
-    GetTokenBalanceInput.add_member(:token_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier", traits: {"smithy.api#required" => {}}))
-    GetTokenBalanceInput.add_member(:owner_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier", traits: {"smithy.api#required" => {}}))
-    GetTokenBalanceInput.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "atBlockchainInstant"))
+    GetTokenBalanceInput.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, location_name: "tokenIdentifier", traits: {"smithy.api#required" => {}}))
+    GetTokenBalanceInput.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, location_name: "ownerIdentifier", traits: {"smithy.api#required" => {}}))
+    GetTokenBalanceInput.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "atBlockchainInstant"))
     GetTokenBalanceInput.type = Types::GetTokenBalanceInput
-    GetTokenBalanceInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetTokenBalanceInputItem)
-    GetTokenBalanceOutput.add_member(:owner_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier"))
-    GetTokenBalanceOutput.add_member(:token_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier"))
-    GetTokenBalanceOutput.add_member(:balance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "balance", traits: {"smithy.api#required" => {}}))
-    GetTokenBalanceOutput.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
-    GetTokenBalanceOutput.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "lastUpdatedTime"))
+    GetTokenBalanceInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceInputItem)
+    GetTokenBalanceOutput.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, location_name: "ownerIdentifier"))
+    GetTokenBalanceOutput.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, location_name: "tokenIdentifier"))
+    GetTokenBalanceOutput.add_member(:balance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "balance", traits: {"smithy.api#required" => {}}))
+    GetTokenBalanceOutput.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
+    GetTokenBalanceOutput.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "lastUpdatedTime"))
     GetTokenBalanceOutput.type = Types::GetTokenBalanceOutput
-    GetTransactionInput.add_member(:transaction_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionHash, location_name: "transactionHash"))
-    GetTransactionInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionId, location_name: "transactionId"))
-    GetTransactionInput.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    GetTransactionInput.add_member(:transaction_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionHash, location_name: "transactionHash"))
+    GetTransactionInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionId, location_name: "transactionId"))
+    GetTransactionInput.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
     GetTransactionInput.type = Types::GetTransactionInput
-    GetTransactionOutput.add_member(:transaction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Transaction, location_name: "transaction", traits: {"smithy.api#required" => {}}))
+    GetTransactionOutput.add_member(:transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: Transaction, location_name: "transaction", traits: {"smithy.api#required" => {}}))
     GetTransactionOutput.type = Types::GetTransactionOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    ListAssetContractsInput.add_member(:contract_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContractFilter, location_name: "contractFilter", traits: {"smithy.api#required" => {}}))
-    ListAssetContractsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListAssetContractsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
+    ListAssetContractsInput.add_member(:contract_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ContractFilter, location_name: "contractFilter", traits: {"smithy.api#required" => {}}))
+    ListAssetContractsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListAssetContractsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
     ListAssetContractsInput.type = Types::ListAssetContractsInput
-    ListAssetContractsOutput.add_member(:contracts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetContractList, location_name: "contracts", traits: {"smithy.api#required" => {}}))
-    ListAssetContractsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssetContractsOutput.add_member(:contracts, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetContractList, location_name: "contracts", traits: {"smithy.api#required" => {}}))
+    ListAssetContractsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListAssetContractsOutput.type = Types::ListAssetContractsOutput
-    ListFilteredTransactionEventsInput.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "network", traits: {"smithy.api#required" => {}}))
-    ListFilteredTransactionEventsInput.add_member(:address_identifier_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressIdentifierFilter, location_name: "addressIdentifierFilter", traits: {"smithy.api#required" => {}}))
-    ListFilteredTransactionEventsInput.add_member(:time_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeFilter, location_name: "timeFilter"))
-    ListFilteredTransactionEventsInput.add_member(:vout_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoutFilter, location_name: "voutFilter"))
-    ListFilteredTransactionEventsInput.add_member(:confirmation_status_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationStatusFilter, location_name: "confirmationStatusFilter"))
-    ListFilteredTransactionEventsInput.add_member(:sort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsSort, location_name: "sort"))
-    ListFilteredTransactionEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListFilteredTransactionEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
+    ListFilteredTransactionEventsInput.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "network", traits: {"smithy.api#required" => {}}))
+    ListFilteredTransactionEventsInput.add_member(:address_identifier_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressIdentifierFilter, location_name: "addressIdentifierFilter", traits: {"smithy.api#required" => {}}))
+    ListFilteredTransactionEventsInput.add_member(:time_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeFilter, location_name: "timeFilter"))
+    ListFilteredTransactionEventsInput.add_member(:vout_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: VoutFilter, location_name: "voutFilter"))
+    ListFilteredTransactionEventsInput.add_member(:confirmation_status_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatusFilter, location_name: "confirmationStatusFilter"))
+    ListFilteredTransactionEventsInput.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: ListFilteredTransactionEventsSort, location_name: "sort"))
+    ListFilteredTransactionEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListFilteredTransactionEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
     ListFilteredTransactionEventsInput.type = Types::ListFilteredTransactionEventsInput
-    ListFilteredTransactionEventsOutput.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionEventList, location_name: "events", traits: {"smithy.api#required" => {}}))
-    ListFilteredTransactionEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFilteredTransactionEventsOutput.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionEventList, location_name: "events", traits: {"smithy.api#required" => {}}))
+    ListFilteredTransactionEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListFilteredTransactionEventsOutput.type = Types::ListFilteredTransactionEventsOutput
-    ListFilteredTransactionEventsSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsSortBy, location_name: "sortBy"))
-    ListFilteredTransactionEventsSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
+    ListFilteredTransactionEventsSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ListFilteredTransactionEventsSortBy, location_name: "sortBy"))
+    ListFilteredTransactionEventsSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "sortOrder"))
     ListFilteredTransactionEventsSort.type = Types::ListFilteredTransactionEventsSort
-    ListTokenBalancesInput.add_member(:owner_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerFilter, location_name: "ownerFilter"))
-    ListTokenBalancesInput.add_member(:token_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenFilter, location_name: "tokenFilter", traits: {"smithy.api#required" => {}}))
-    ListTokenBalancesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTokenBalancesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
+    ListTokenBalancesInput.add_member(:owner_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerFilter, location_name: "ownerFilter"))
+    ListTokenBalancesInput.add_member(:token_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenFilter, location_name: "tokenFilter", traits: {"smithy.api#required" => {}}))
+    ListTokenBalancesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTokenBalancesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
     ListTokenBalancesInput.type = Types::ListTokenBalancesInput
-    ListTokenBalancesOutput.add_member(:token_balances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenBalanceList, location_name: "tokenBalances", traits: {"smithy.api#required" => {}}))
-    ListTokenBalancesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTokenBalancesOutput.add_member(:token_balances, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenBalanceList, location_name: "tokenBalances", traits: {"smithy.api#required" => {}}))
+    ListTokenBalancesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListTokenBalancesOutput.type = Types::ListTokenBalancesOutput
-    ListTransactionEventsInput.add_member(:transaction_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionHash, location_name: "transactionHash"))
-    ListTransactionEventsInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionId, location_name: "transactionId"))
-    ListTransactionEventsInput.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    ListTransactionEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTransactionEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
+    ListTransactionEventsInput.add_member(:transaction_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionHash, location_name: "transactionHash"))
+    ListTransactionEventsInput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionId, location_name: "transactionId"))
+    ListTransactionEventsInput.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    ListTransactionEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTransactionEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
     ListTransactionEventsInput.type = Types::ListTransactionEventsInput
-    ListTransactionEventsOutput.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionEventList, location_name: "events", traits: {"smithy.api#required" => {}}))
-    ListTransactionEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTransactionEventsOutput.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionEventList, location_name: "events", traits: {"smithy.api#required" => {}}))
+    ListTransactionEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListTransactionEventsOutput.type = Types::ListTransactionEventsOutput
-    ListTransactionsInput.add_member(:address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "address", traits: {"smithy.api#required" => {}}))
-    ListTransactionsInput.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    ListTransactionsInput.add_member(:from_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "fromBlockchainInstant"))
-    ListTransactionsInput.add_member(:to_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "toBlockchainInstant"))
-    ListTransactionsInput.add_member(:sort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTransactionsSort, location_name: "sort"))
-    ListTransactionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTransactionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
-    ListTransactionsInput.add_member(:confirmation_status_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationStatusFilter, location_name: "confirmationStatusFilter"))
+    ListTransactionsInput.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "address", traits: {"smithy.api#required" => {}}))
+    ListTransactionsInput.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    ListTransactionsInput.add_member(:from_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "fromBlockchainInstant"))
+    ListTransactionsInput.add_member(:to_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "toBlockchainInstant"))
+    ListTransactionsInput.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTransactionsSort, location_name: "sort"))
+    ListTransactionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTransactionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}}))
+    ListTransactionsInput.add_member(:confirmation_status_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatusFilter, location_name: "confirmationStatusFilter"))
     ListTransactionsInput.type = Types::ListTransactionsInput
-    ListTransactionsOutput.add_member(:transactions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionOutputList, location_name: "transactions", traits: {"smithy.api#required" => {}}))
-    ListTransactionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTransactionsOutput.add_member(:transactions, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionOutputList, location_name: "transactions", traits: {"smithy.api#required" => {}}))
+    ListTransactionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListTransactionsOutput.type = Types::ListTransactionsOutput
-    ListTransactionsSort.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTransactionsSortBy, location_name: "sortBy"))
-    ListTransactionsSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
+    ListTransactionsSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTransactionsSortBy, location_name: "sortBy"))
+    ListTransactionsSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "sortOrder"))
     ListTransactionsSort.type = Types::ListTransactionsSort
-    OwnerFilter.add_member(:address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "address", traits: {"smithy.api#required" => {}}))
+    OwnerFilter.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "address", traits: {"smithy.api#required" => {}}))
     OwnerFilter.type = Types::OwnerFilter
-    OwnerIdentifier.add_member(:address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "address", traits: {"smithy.api#required" => {}}))
+    OwnerIdentifier.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "address", traits: {"smithy.api#required" => {}}))
     OwnerIdentifier.type = Types::OwnerIdentifier
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "quotaCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "quotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "quotaCode", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "quotaCode", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    TimeFilter.add_member(:from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "from"))
-    TimeFilter.add_member(:to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "to"))
+    TimeFilter.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "from"))
+    TimeFilter.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "to"))
     TimeFilter.type = Types::TimeFilter
-    TokenBalance.add_member(:owner_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier"))
-    TokenBalance.add_member(:token_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier"))
-    TokenBalance.add_member(:balance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "balance", traits: {"smithy.api#required" => {}}))
-    TokenBalance.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
-    TokenBalance.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "lastUpdatedTime"))
+    TokenBalance.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, location_name: "ownerIdentifier"))
+    TokenBalance.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, location_name: "tokenIdentifier"))
+    TokenBalance.add_member(:balance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "balance", traits: {"smithy.api#required" => {}}))
+    TokenBalance.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
+    TokenBalance.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "lastUpdatedTime"))
     TokenBalance.type = Types::TokenBalance
-    TokenBalanceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenBalance)
-    TokenFilter.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    TokenFilter.add_member(:contract_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "contractAddress"))
-    TokenFilter.add_member(:token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTokenId, location_name: "tokenId"))
+    TokenBalanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenBalance)
+    TokenFilter.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    TokenFilter.add_member(:contract_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "contractAddress"))
+    TokenFilter.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenId, location_name: "tokenId"))
     TokenFilter.type = Types::TokenFilter
-    TokenIdentifier.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    TokenIdentifier.add_member(:contract_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "contractAddress"))
-    TokenIdentifier.add_member(:token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTokenId, location_name: "tokenId"))
+    TokenIdentifier.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    TokenIdentifier.add_member(:contract_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "contractAddress"))
+    TokenIdentifier.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenId, location_name: "tokenId"))
     TokenIdentifier.type = Types::TokenIdentifier
-    Transaction.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    Transaction.add_member(:block_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockHash, location_name: "blockHash"))
-    Transaction.add_member(:transaction_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionHash, location_name: "transactionHash", traits: {"smithy.api#required" => {}}))
-    Transaction.add_member(:block_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "blockNumber"))
-    Transaction.add_member(:transaction_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "transactionTimestamp", traits: {"smithy.api#required" => {}}))
-    Transaction.add_member(:transaction_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "transactionIndex", traits: {"smithy.api#required" => {}}))
-    Transaction.add_member(:number_of_transactions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "numberOfTransactions", traits: {"smithy.api#required" => {}}))
-    Transaction.add_member(:to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "to", traits: {"smithy.api#required" => {}}))
-    Transaction.add_member(:from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "from"))
-    Transaction.add_member(:contract_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "contractAddress"))
-    Transaction.add_member(:gas_used, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "gasUsed"))
-    Transaction.add_member(:cumulative_gas_used, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "cumulativeGasUsed"))
-    Transaction.add_member(:effective_gas_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "effectiveGasPrice"))
-    Transaction.add_member(:signature_v, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "signatureV"))
-    Transaction.add_member(:signature_r, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "signatureR"))
-    Transaction.add_member(:signature_s, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "signatureS"))
-    Transaction.add_member(:transaction_fee, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "transactionFee"))
-    Transaction.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "transactionId"))
-    Transaction.add_member(:confirmation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))
-    Transaction.add_member(:execution_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "executionStatus"))
+    Transaction.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    Transaction.add_member(:block_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockHash, location_name: "blockHash"))
+    Transaction.add_member(:transaction_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionHash, location_name: "transactionHash", traits: {"smithy.api#required" => {}}))
+    Transaction.add_member(:block_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "blockNumber"))
+    Transaction.add_member(:transaction_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "transactionTimestamp", traits: {"smithy.api#required" => {}}))
+    Transaction.add_member(:transaction_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "transactionIndex", traits: {"smithy.api#required" => {}}))
+    Transaction.add_member(:number_of_transactions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "numberOfTransactions", traits: {"smithy.api#required" => {}}))
+    Transaction.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "to", traits: {"smithy.api#required" => {}}))
+    Transaction.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "from"))
+    Transaction.add_member(:contract_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "contractAddress"))
+    Transaction.add_member(:gas_used, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "gasUsed"))
+    Transaction.add_member(:cumulative_gas_used, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "cumulativeGasUsed"))
+    Transaction.add_member(:effective_gas_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "effectiveGasPrice"))
+    Transaction.add_member(:signature_v, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "signatureV"))
+    Transaction.add_member(:signature_r, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "signatureR"))
+    Transaction.add_member(:signature_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "signatureS"))
+    Transaction.add_member(:transaction_fee, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "transactionFee"))
+    Transaction.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "transactionId"))
+    Transaction.add_member(:confirmation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus, location_name: "confirmationStatus"))
+    Transaction.add_member(:execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, location_name: "executionStatus"))
     Transaction.type = Types::Transaction
-    TransactionEvent.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    TransactionEvent.add_member(:transaction_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionHash, location_name: "transactionHash", traits: {"smithy.api#required" => {}}))
-    TransactionEvent.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionEventType, location_name: "eventType", traits: {"smithy.api#required" => {}}))
-    TransactionEvent.add_member(:from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "from"))
-    TransactionEvent.add_member(:to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "to"))
-    TransactionEvent.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "value"))
-    TransactionEvent.add_member(:contract_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChainAddress, location_name: "contractAddress"))
-    TransactionEvent.add_member(:token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTokenId, location_name: "tokenId"))
-    TransactionEvent.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "transactionId"))
-    TransactionEvent.add_member(:vout_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "voutIndex"))
-    TransactionEvent.add_member(:vout_spent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "voutSpent"))
-    TransactionEvent.add_member(:spent_vout_transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "spentVoutTransactionId"))
-    TransactionEvent.add_member(:spent_vout_transaction_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "spentVoutTransactionHash"))
-    TransactionEvent.add_member(:spent_vout_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "spentVoutIndex"))
-    TransactionEvent.add_member(:blockchain_instant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "blockchainInstant"))
-    TransactionEvent.add_member(:confirmation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))
+    TransactionEvent.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    TransactionEvent.add_member(:transaction_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionHash, location_name: "transactionHash", traits: {"smithy.api#required" => {}}))
+    TransactionEvent.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionEventType, location_name: "eventType", traits: {"smithy.api#required" => {}}))
+    TransactionEvent.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "from"))
+    TransactionEvent.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "to"))
+    TransactionEvent.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "value"))
+    TransactionEvent.add_member(:contract_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, location_name: "contractAddress"))
+    TransactionEvent.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenId, location_name: "tokenId"))
+    TransactionEvent.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "transactionId"))
+    TransactionEvent.add_member(:vout_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "voutIndex"))
+    TransactionEvent.add_member(:vout_spent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "voutSpent"))
+    TransactionEvent.add_member(:spent_vout_transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "spentVoutTransactionId"))
+    TransactionEvent.add_member(:spent_vout_transaction_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "spentVoutTransactionHash"))
+    TransactionEvent.add_member(:spent_vout_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "spentVoutIndex"))
+    TransactionEvent.add_member(:blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, location_name: "blockchainInstant"))
+    TransactionEvent.add_member(:confirmation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus, location_name: "confirmationStatus"))
     TransactionEvent.type = Types::TransactionEvent
-    TransactionEventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionEvent)
-    TransactionOutputItem.add_member(:transaction_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionHash, location_name: "transactionHash", traits: {"smithy.api#required" => {}}))
-    TransactionOutputItem.add_member(:transaction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryTransactionId, location_name: "transactionId"))
-    TransactionOutputItem.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
-    TransactionOutputItem.add_member(:transaction_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "transactionTimestamp", traits: {"smithy.api#required" => {}}))
-    TransactionOutputItem.add_member(:confirmation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))
+    TransactionEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionEvent)
+    TransactionOutputItem.add_member(:transaction_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionHash, location_name: "transactionHash", traits: {"smithy.api#required" => {}}))
+    TransactionOutputItem.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionId, location_name: "transactionId"))
+    TransactionOutputItem.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, location_name: "network", traits: {"smithy.api#required" => {}}))
+    TransactionOutputItem.add_member(:transaction_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "transactionTimestamp", traits: {"smithy.api#required" => {}}))
+    TransactionOutputItem.add_member(:confirmation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus, location_name: "confirmationStatus"))
     TransactionOutputItem.type = Types::TransactionOutputItem
-    TransactionOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransactionOutputItem)
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
+    TransactionOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionOutputItem)
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    VoutFilter.add_member(:vout_spent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "voutSpent", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    VoutFilter.add_member(:vout_spent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "voutSpent", traits: {"smithy.api#required" => {}}))
     VoutFilter.type = Types::VoutFilter
 
     TietonChainQueryService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -318,117 +318,117 @@ module Aws::ManagedBlockchainQuery
       service.add_operation(:batch_get_token_balance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#BatchGetTokenBalance"
         operation.name = "BatchGetTokenBalance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetTokenBalanceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetTokenBalanceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchGetTokenBalanceInput
+        operation.output = BatchGetTokenBalanceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to batch calls for GetTokenBalance API", "smithy.api#http" => {"uri" => "/batch-get-token-balance", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_asset_contract, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#GetAssetContract"
         operation.name = "GetAssetContract"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAssetContractInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAssetContractOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAssetContractInput
+        operation.output = GetAssetContractOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to fetch information about a contract on the blockchain", "smithy.api#http" => {"uri" => "/get-asset-contract", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_token_balance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#GetTokenBalance"
         operation.name = "GetTokenBalance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTokenBalanceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTokenBalanceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTokenBalanceInput
+        operation.output = GetTokenBalanceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to retrieve balance of a token for an address on the blockchain", "smithy.api#http" => {"uri" => "/get-token-balance", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_transaction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#GetTransaction"
         operation.name = "GetTransaction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTransactionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTransactionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTransactionInput
+        operation.output = GetTransactionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to retrieve a transaction on the blockchain", "smithy.api#http" => {"uri" => "/get-transaction", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_asset_contracts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#ListAssetContracts"
         operation.name = "ListAssetContracts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssetContractsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssetContractsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAssetContractsInput
+        operation.output = ListAssetContractsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to fetch multiple contracts on the blockchain", "smithy.api#http" => {"uri" => "/list-asset-contracts", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAssetContracts.new
       end)
       service.add_operation(:list_filtered_transaction_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#ListFilteredTransactionEvents"
         operation.name = "ListFilteredTransactionEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListFilteredTransactionEventsInput
+        operation.output = ListFilteredTransactionEventsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to retrieve events on the blockchain with additional filters", "smithy.api#http" => {"uri" => "/list-filtered-transaction-events", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListFilteredTransactionEvents.new
       end)
       service.add_operation(:list_token_balances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#ListTokenBalances"
         operation.name = "ListTokenBalances"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTokenBalancesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTokenBalancesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTokenBalancesInput
+        operation.output = ListTokenBalancesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to retrieve multiple balances on the blockchain", "smithy.api#http" => {"uri" => "/list-token-balances", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTokenBalances.new
       end)
       service.add_operation(:list_transaction_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#ListTransactionEvents"
         operation.name = "ListTransactionEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTransactionEventsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTransactionEventsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTransactionEventsInput
+        operation.output = ListTransactionEventsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to retrieve events in a transaction on the blockchain", "smithy.api#http" => {"uri" => "/list-transaction-events", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTransactionEvents.new
       end)
       service.add_operation(:list_transactions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.managedblockchainquery#ListTransactions"
         operation.name = "ListTransactions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTransactionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTransactionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTransactionsInput
+        operation.output = ListTransactionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to retrieve a multiple transactions on a blockchain", "smithy.api#http" => {"uri" => "/list-transactions", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTransactions.new
       end)

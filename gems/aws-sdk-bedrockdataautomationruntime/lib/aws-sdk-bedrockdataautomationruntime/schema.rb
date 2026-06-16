@@ -56,94 +56,94 @@ module Aws::BedrockDataAutomationRuntime
     VideoAssetProcessingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockdataautomationruntime#VideoAssetProcessingConfiguration", name: "VideoAssetProcessingConfiguration")
     VideoSegmentConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockdataautomationruntime#VideoSegmentConfiguration", name: "VideoSegmentConfiguration")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AssetProcessingConfiguration.add_member(:video, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoAssetProcessingConfiguration, location_name: "video"))
+    AssetProcessingConfiguration.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoAssetProcessingConfiguration, location_name: "video"))
     AssetProcessingConfiguration.type = Types::AssetProcessingConfiguration
-    AutomationJobStatus.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
-    AutomationJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
-    AutomationJobStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
-    AutomationJobStatus.add_member(:service_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_ERROR", traits: {"smithy.api#enumValue" => "ServiceError"}))
-    AutomationJobStatus.add_member(:client_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT_ERROR", traits: {"smithy.api#enumValue" => "ClientError"}))
-    Blueprint.add_member(:blueprint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintArn, location_name: "blueprintArn", traits: {"smithy.api#required" => {}}))
-    Blueprint.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "version"))
-    Blueprint.add_member(:stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintStage, location_name: "stage"))
+    AutomationJobStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
+    AutomationJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    AutomationJobStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
+    AutomationJobStatus.add_member(:service_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_ERROR", traits: {"smithy.api#enumValue" => "ServiceError"}))
+    AutomationJobStatus.add_member(:client_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLIENT_ERROR", traits: {"smithy.api#enumValue" => "ClientError"}))
+    Blueprint.add_member(:blueprint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintArn, location_name: "blueprintArn", traits: {"smithy.api#required" => {}}))
+    Blueprint.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintVersion, location_name: "version"))
+    Blueprint.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintStage, location_name: "stage"))
     Blueprint.type = Types::Blueprint
-    BlueprintList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blueprint)
-    BlueprintStage.add_member(:development, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
-    BlueprintStage.add_member(:live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
-    DataAutomationConfiguration.add_member(:data_automation_project_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationArn, location_name: "dataAutomationProjectArn", traits: {"smithy.api#required" => {}}))
-    DataAutomationConfiguration.add_member(:stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationStage, location_name: "stage"))
+    BlueprintList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Blueprint)
+    BlueprintStage.add_member(:development, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
+    BlueprintStage.add_member(:live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
+    DataAutomationConfiguration.add_member(:data_automation_project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationArn, location_name: "dataAutomationProjectArn", traits: {"smithy.api#required" => {}}))
+    DataAutomationConfiguration.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationStage, location_name: "stage"))
     DataAutomationConfiguration.type = Types::DataAutomationConfiguration
-    DataAutomationStage.add_member(:live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
-    DataAutomationStage.add_member(:development, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
-    EncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "kmsKeyId", traits: {"smithy.api#required" => {}}))
-    EncryptionConfiguration.add_member(:kms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "kmsEncryptionContext"))
+    DataAutomationStage.add_member(:live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
+    DataAutomationStage.add_member(:development, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
+    EncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyId, location_name: "kmsKeyId", traits: {"smithy.api#required" => {}}))
+    EncryptionConfiguration.add_member(:kms_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, location_name: "kmsEncryptionContext"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
-    EncryptionContextMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionContextKey)
-    EncryptionContextMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionContextValue)
-    EventBridgeConfiguration.add_member(:event_bridge_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "eventBridgeEnabled", traits: {"smithy.api#required" => {}}))
+    EncryptionContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextKey)
+    EncryptionContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextValue)
+    EventBridgeConfiguration.add_member(:event_bridge_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "eventBridgeEnabled", traits: {"smithy.api#required" => {}}))
     EventBridgeConfiguration.type = Types::EventBridgeConfiguration
-    GetDataAutomationStatusRequest.add_member(:invocation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvocationArn, location_name: "invocationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDataAutomationStatusRequest.add_member(:invocation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationArn, location_name: "invocationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDataAutomationStatusRequest.type = Types::GetDataAutomationStatusRequest
-    GetDataAutomationStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomationJobStatus, location_name: "status"))
-    GetDataAutomationStatusResponse.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorType"))
-    GetDataAutomationStatusResponse.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
-    GetDataAutomationStatusResponse.add_member(:output_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputConfiguration, location_name: "outputConfiguration"))
+    GetDataAutomationStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationJobStatus, location_name: "status"))
+    GetDataAutomationStatusResponse.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorType"))
+    GetDataAutomationStatusResponse.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    GetDataAutomationStatusResponse.add_member(:output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputConfiguration, location_name: "outputConfiguration"))
     GetDataAutomationStatusResponse.type = Types::GetDataAutomationStatusResponse
-    InputConfiguration.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri", traits: {"smithy.api#required" => {}}))
-    InputConfiguration.add_member(:asset_processing_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetProcessingConfiguration, location_name: "assetProcessingConfiguration"))
+    InputConfiguration.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "s3Uri", traits: {"smithy.api#required" => {}}))
+    InputConfiguration.add_member(:asset_processing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetProcessingConfiguration, location_name: "assetProcessingConfiguration"))
     InputConfiguration.type = Types::InputConfiguration
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    InvokeDataAutomationAsyncRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    InvokeDataAutomationAsyncRequest.add_member(:input_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputConfiguration, location_name: "inputConfiguration", traits: {"smithy.api#required" => {}}))
-    InvokeDataAutomationAsyncRequest.add_member(:output_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputConfiguration, location_name: "outputConfiguration", traits: {"smithy.api#required" => {}}))
-    InvokeDataAutomationAsyncRequest.add_member(:data_automation_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationConfiguration, location_name: "dataAutomationConfiguration"))
-    InvokeDataAutomationAsyncRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
-    InvokeDataAutomationAsyncRequest.add_member(:notification_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "notificationConfiguration"))
-    InvokeDataAutomationAsyncRequest.add_member(:blueprints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintList, location_name: "blueprints"))
-    InvokeDataAutomationAsyncRequest.add_member(:data_automation_profile_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataAutomationProfileArn, location_name: "dataAutomationProfileArn", traits: {"smithy.api#required" => {}}))
-    InvokeDataAutomationAsyncRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    InvokeDataAutomationAsyncRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InputConfiguration, location_name: "inputConfiguration", traits: {"smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputConfiguration, location_name: "outputConfiguration", traits: {"smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:data_automation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationConfiguration, location_name: "dataAutomationConfiguration"))
+    InvokeDataAutomationAsyncRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    InvokeDataAutomationAsyncRequest.add_member(:notification_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfiguration, location_name: "notificationConfiguration"))
+    InvokeDataAutomationAsyncRequest.add_member(:blueprints, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintList, location_name: "blueprints"))
+    InvokeDataAutomationAsyncRequest.add_member(:data_automation_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationProfileArn, location_name: "dataAutomationProfileArn", traits: {"smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     InvokeDataAutomationAsyncRequest.type = Types::InvokeDataAutomationAsyncRequest
-    InvokeDataAutomationAsyncResponse.add_member(:invocation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvocationArn, location_name: "invocationArn", traits: {"smithy.api#required" => {}}))
+    InvokeDataAutomationAsyncResponse.add_member(:invocation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationArn, location_name: "invocationArn", traits: {"smithy.api#required" => {}}))
     InvokeDataAutomationAsyncResponse.type = Types::InvokeDataAutomationAsyncResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: "resourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, location_name: "resourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    NotificationConfiguration.add_member(:event_bridge_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventBridgeConfiguration, location_name: "eventBridgeConfiguration", traits: {"smithy.api#required" => {}}))
+    NotificationConfiguration.add_member(:event_bridge_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeConfiguration, location_name: "eventBridgeConfiguration", traits: {"smithy.api#required" => {}}))
     NotificationConfiguration.type = Types::NotificationConfiguration
-    OutputConfiguration.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri", traits: {"smithy.api#required" => {}}))
+    OutputConfiguration.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "s3Uri", traits: {"smithy.api#required" => {}}))
     OutputConfiguration.type = Types::OutputConfiguration
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: "resourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, location_name: "resourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    TimestampSegment.add_member(:start_time_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "startTimeMillis", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
-    TimestampSegment.add_member(:end_time_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "endTimeMillis", traits: {"smithy.api#range" => {"min" => 300000}, "smithy.api#required" => {}}))
+    TimestampSegment.add_member(:start_time_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "startTimeMillis", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    TimestampSegment.add_member(:end_time_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "endTimeMillis", traits: {"smithy.api#range" => {"min" => 300000}, "smithy.api#required" => {}}))
     TimestampSegment.type = Types::TimestampSegment
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: "resourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, location_name: "resourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, location_name: "message"))
     ValidationException.type = Types::ValidationException
-    VideoAssetProcessingConfiguration.add_member(:segment_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoSegmentConfiguration, location_name: "segmentConfiguration"))
+    VideoAssetProcessingConfiguration.add_member(:segment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoSegmentConfiguration, location_name: "segmentConfiguration"))
     VideoAssetProcessingConfiguration.type = Types::VideoAssetProcessingConfiguration
-    VideoSegmentConfiguration.add_member(:timestamp_segment, Types::VideoSegmentConfiguration::TimestampSegment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampSegment, location_name: "timestampSegment"))
-    VideoSegmentConfiguration.add_member(:unknown, Types::VideoSegmentConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VideoSegmentConfiguration.add_member(:timestamp_segment, Types::VideoSegmentConfiguration::TimestampSegment, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampSegment, location_name: "timestampSegment"))
+    VideoSegmentConfiguration.add_member(:unknown, Types::VideoSegmentConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VideoSegmentConfiguration.type = Types::VideoSegmentConfiguration
 
     AmazonBedrockKeystoneRuntimeService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -154,62 +154,62 @@ module Aws::BedrockDataAutomationRuntime
       service.add_operation(:get_data_automation_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatus"
         operation.name = "GetDataAutomationStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataAutomationStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataAutomationStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetDataAutomationStatusRequest
+        operation.output = GetDataAutomationStatusResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
       end)
       service.add_operation(:invoke_data_automation_async, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsync"
         operation.name = "InvokeDataAutomationAsync"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvokeDataAutomationAsyncRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvokeDataAutomationAsyncResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = InvokeDataAutomationAsyncRequest
+        operation.output = InvokeDataAutomationAsyncResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockdataautomationruntime#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockdataautomationruntime#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockdataautomationruntime#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

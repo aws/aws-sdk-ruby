@@ -417,1150 +417,1150 @@ module Aws::StorageGateway
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.storagegateway#long", name: "Long", traits: {"smithy.api#default" => 0})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.storagegateway#string", name: "String")
 
-    ActivateGatewayInput.add_member(:activation_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationKey, location_name: "ActivationKey", traits: {"smithy.api#required" => {}}))
-    ActivateGatewayInput.add_member(:gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayName, location_name: "GatewayName", traits: {"smithy.api#required" => {}}))
-    ActivateGatewayInput.add_member(:gateway_timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "GatewayTimezone", traits: {"smithy.api#required" => {}}))
-    ActivateGatewayInput.add_member(:gateway_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionId, location_name: "GatewayRegion", traits: {"smithy.api#required" => {}}))
-    ActivateGatewayInput.add_member(:gateway_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
-    ActivateGatewayInput.add_member(:tape_drive_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeDriveType, location_name: "TapeDriveType"))
-    ActivateGatewayInput.add_member(:medium_changer_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediumChangerType, location_name: "MediumChangerType"))
-    ActivateGatewayInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ActivateGatewayInput.add_member(:activation_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationKey, location_name: "ActivationKey", traits: {"smithy.api#required" => {}}))
+    ActivateGatewayInput.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayName, location_name: "GatewayName", traits: {"smithy.api#required" => {}}))
+    ActivateGatewayInput.add_member(:gateway_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayTimezone, location_name: "GatewayTimezone", traits: {"smithy.api#required" => {}}))
+    ActivateGatewayInput.add_member(:gateway_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionId, location_name: "GatewayRegion", traits: {"smithy.api#required" => {}}))
+    ActivateGatewayInput.add_member(:gateway_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayType, location_name: "GatewayType"))
+    ActivateGatewayInput.add_member(:tape_drive_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeDriveType, location_name: "TapeDriveType"))
+    ActivateGatewayInput.add_member(:medium_changer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediumChangerType, location_name: "MediumChangerType"))
+    ActivateGatewayInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     ActivateGatewayInput.type = Types::ActivateGatewayInput
-    ActivateGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    ActivateGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     ActivateGatewayOutput.type = Types::ActivateGatewayOutput
-    ActiveDirectoryStatus.add_member(:access_denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
-    ActiveDirectoryStatus.add_member(:detached, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DETACHED", traits: {"smithy.api#enumValue" => "DETACHED"}))
-    ActiveDirectoryStatus.add_member(:joined, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JOINED", traits: {"smithy.api#enumValue" => "JOINED"}))
-    ActiveDirectoryStatus.add_member(:joining, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JOINING", traits: {"smithy.api#enumValue" => "JOINING"}))
-    ActiveDirectoryStatus.add_member(:network_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NETWORK_ERROR", traits: {"smithy.api#enumValue" => "NETWORK_ERROR"}))
-    ActiveDirectoryStatus.add_member(:timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TIMEOUT", traits: {"smithy.api#enumValue" => "TIMEOUT"}))
-    ActiveDirectoryStatus.add_member(:unknown_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_ERROR", traits: {"smithy.api#enumValue" => "UNKNOWN_ERROR"}))
-    ActiveDirectoryStatus.add_member(:insufficient_permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "INSUFFICIENT_PERMISSIONS"}))
-    AddCacheInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    AddCacheInput.add_member(:disk_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIds, location_name: "DiskIds", traits: {"smithy.api#required" => {}}))
+    ActiveDirectoryStatus.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
+    ActiveDirectoryStatus.add_member(:detached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DETACHED", traits: {"smithy.api#enumValue" => "DETACHED"}))
+    ActiveDirectoryStatus.add_member(:joined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JOINED", traits: {"smithy.api#enumValue" => "JOINED"}))
+    ActiveDirectoryStatus.add_member(:joining, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JOINING", traits: {"smithy.api#enumValue" => "JOINING"}))
+    ActiveDirectoryStatus.add_member(:network_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NETWORK_ERROR", traits: {"smithy.api#enumValue" => "NETWORK_ERROR"}))
+    ActiveDirectoryStatus.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TIMEOUT", traits: {"smithy.api#enumValue" => "TIMEOUT"}))
+    ActiveDirectoryStatus.add_member(:unknown_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_ERROR", traits: {"smithy.api#enumValue" => "UNKNOWN_ERROR"}))
+    ActiveDirectoryStatus.add_member(:insufficient_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "INSUFFICIENT_PERMISSIONS"}))
+    AddCacheInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    AddCacheInput.add_member(:disk_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIds, location_name: "DiskIds", traits: {"smithy.api#required" => {}}))
     AddCacheInput.type = Types::AddCacheInput
-    AddCacheOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    AddCacheOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     AddCacheOutput.type = Types::AddCacheOutput
-    AddTagsToResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    AddTagsToResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    AddTagsToResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    AddTagsToResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceInput.type = Types::AddTagsToResourceInput
-    AddTagsToResourceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    AddTagsToResourceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
     AddTagsToResourceOutput.type = Types::AddTagsToResourceOutput
-    AddUploadBufferInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    AddUploadBufferInput.add_member(:disk_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIds, location_name: "DiskIds", traits: {"smithy.api#required" => {}}))
+    AddUploadBufferInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    AddUploadBufferInput.add_member(:disk_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIds, location_name: "DiskIds", traits: {"smithy.api#required" => {}}))
     AddUploadBufferInput.type = Types::AddUploadBufferInput
-    AddUploadBufferOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    AddUploadBufferOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     AddUploadBufferOutput.type = Types::AddUploadBufferOutput
-    AddWorkingStorageInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    AddWorkingStorageInput.add_member(:disk_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIds, location_name: "DiskIds", traits: {"smithy.api#required" => {}}))
+    AddWorkingStorageInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    AddWorkingStorageInput.add_member(:disk_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIds, location_name: "DiskIds", traits: {"smithy.api#required" => {}}))
     AddWorkingStorageInput.type = Types::AddWorkingStorageInput
-    AddWorkingStorageOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    AddWorkingStorageOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     AddWorkingStorageOutput.type = Types::AddWorkingStorageOutput
-    AssignTapePoolInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
-    AssignTapePoolInput.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
-    AssignTapePoolInput.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "BypassGovernanceRetention", traits: {"smithy.api#default" => false}))
+    AssignTapePoolInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
+    AssignTapePoolInput.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolId, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    AssignTapePoolInput.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "BypassGovernanceRetention", traits: {"smithy.api#default" => false}))
     AssignTapePoolInput.type = Types::AssignTapePoolInput
-    AssignTapePoolOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    AssignTapePoolOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     AssignTapePoolOutput.type = Types::AssignTapePoolOutput
-    AssociateFileSystemInput.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainUserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
-    AssociateFileSystemInput.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainUserPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    AssociateFileSystemInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    AssociateFileSystemInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    AssociateFileSystemInput.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemLocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
-    AssociateFileSystemInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    AssociateFileSystemInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
-    AssociateFileSystemInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    AssociateFileSystemInput.add_member(:endpoint_network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointNetworkConfiguration, location_name: "EndpointNetworkConfiguration"))
+    AssociateFileSystemInput.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
+    AssociateFileSystemInput.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUserPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    AssociateFileSystemInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    AssociateFileSystemInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    AssociateFileSystemInput.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemLocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
+    AssociateFileSystemInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    AssociateFileSystemInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    AssociateFileSystemInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    AssociateFileSystemInput.add_member(:endpoint_network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointNetworkConfiguration, location_name: "EndpointNetworkConfiguration"))
     AssociateFileSystemInput.type = Types::AssociateFileSystemInput
-    AssociateFileSystemOutput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    AssociateFileSystemOutput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
     AssociateFileSystemOutput.type = Types::AssociateFileSystemOutput
-    AttachVolumeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    AttachVolumeInput.add_member(:target_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
-    AttachVolumeInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
-    AttachVolumeInput.add_member(:network_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId", traits: {"smithy.api#required" => {}}))
-    AttachVolumeInput.add_member(:disk_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskId, location_name: "DiskId"))
+    AttachVolumeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    AttachVolumeInput.add_member(:target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, location_name: "TargetName"))
+    AttachVolumeInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    AttachVolumeInput.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, location_name: "NetworkInterfaceId", traits: {"smithy.api#required" => {}}))
+    AttachVolumeInput.add_member(:disk_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskId, location_name: "DiskId"))
     AttachVolumeInput.type = Types::AttachVolumeInput
-    AttachVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    AttachVolumeOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
+    AttachVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    AttachVolumeOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
     AttachVolumeOutput.type = Types::AttachVolumeOutput
-    AutomaticTapeCreationPolicyInfo.add_member(:automatic_tape_creation_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticTapeCreationRules, location_name: "AutomaticTapeCreationRules"))
-    AutomaticTapeCreationPolicyInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    AutomaticTapeCreationPolicyInfo.add_member(:automatic_tape_creation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticTapeCreationRules, location_name: "AutomaticTapeCreationRules"))
+    AutomaticTapeCreationPolicyInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     AutomaticTapeCreationPolicyInfo.type = Types::AutomaticTapeCreationPolicyInfo
-    AutomaticTapeCreationPolicyInfos.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticTapeCreationPolicyInfo)
-    AutomaticTapeCreationRule.add_member(:tape_barcode_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeBarcodePrefix, location_name: "TapeBarcodePrefix", traits: {"smithy.api#required" => {}}))
-    AutomaticTapeCreationRule.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
-    AutomaticTapeCreationRule.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes", traits: {"smithy.api#required" => {}}))
-    AutomaticTapeCreationRule.add_member(:minimum_num_tapes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinimumNumTapes, location_name: "MinimumNumTapes", traits: {"smithy.api#required" => {}}))
-    AutomaticTapeCreationRule.add_member(:worm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
+    AutomaticTapeCreationPolicyInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticTapeCreationPolicyInfo)
+    AutomaticTapeCreationRule.add_member(:tape_barcode_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeBarcodePrefix, location_name: "TapeBarcodePrefix", traits: {"smithy.api#required" => {}}))
+    AutomaticTapeCreationRule.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolId, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    AutomaticTapeCreationRule.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeSize, location_name: "TapeSizeInBytes", traits: {"smithy.api#required" => {}}))
+    AutomaticTapeCreationRule.add_member(:minimum_num_tapes, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumNumTapes, location_name: "MinimumNumTapes", traits: {"smithy.api#required" => {}}))
+    AutomaticTapeCreationRule.add_member(:worm, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
     AutomaticTapeCreationRule.type = Types::AutomaticTapeCreationRule
-    AutomaticTapeCreationRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticTapeCreationRule)
-    AutomaticUpdatePolicy.add_member(:all_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL_VERSIONS", traits: {"smithy.api#enumValue" => "ALL_VERSIONS"}))
-    AutomaticUpdatePolicy.add_member(:emergency_versions_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMERGENCY_VERSIONS_ONLY", traits: {"smithy.api#enumValue" => "EMERGENCY_VERSIONS_ONLY"}))
-    AvailabilityMonitorTestStatus.add_member(:complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
-    AvailabilityMonitorTestStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    AvailabilityMonitorTestStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    BandwidthRateLimitInterval.add_member(:start_hour_of_day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HourOfDay, location_name: "StartHourOfDay", traits: {"smithy.api#required" => {}}))
-    BandwidthRateLimitInterval.add_member(:start_minute_of_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinuteOfHour, location_name: "StartMinuteOfHour", traits: {"smithy.api#required" => {}}))
-    BandwidthRateLimitInterval.add_member(:end_hour_of_day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HourOfDay, location_name: "EndHourOfDay", traits: {"smithy.api#required" => {}}))
-    BandwidthRateLimitInterval.add_member(:end_minute_of_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinuteOfHour, location_name: "EndMinuteOfHour", traits: {"smithy.api#required" => {}}))
-    BandwidthRateLimitInterval.add_member(:days_of_week, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DaysOfWeek, location_name: "DaysOfWeek", traits: {"smithy.api#required" => {}}))
-    BandwidthRateLimitInterval.add_member(:average_upload_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
-    BandwidthRateLimitInterval.add_member(:average_download_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
+    AutomaticTapeCreationRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticTapeCreationRule)
+    AutomaticUpdatePolicy.add_member(:all_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL_VERSIONS", traits: {"smithy.api#enumValue" => "ALL_VERSIONS"}))
+    AutomaticUpdatePolicy.add_member(:emergency_versions_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMERGENCY_VERSIONS_ONLY", traits: {"smithy.api#enumValue" => "EMERGENCY_VERSIONS_ONLY"}))
+    AvailabilityMonitorTestStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
+    AvailabilityMonitorTestStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    AvailabilityMonitorTestStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    BandwidthRateLimitInterval.add_member(:start_hour_of_day, ::Smithy::Schema::Shapes::MemberShape.new(target: HourOfDay, location_name: "StartHourOfDay", traits: {"smithy.api#required" => {}}))
+    BandwidthRateLimitInterval.add_member(:start_minute_of_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: MinuteOfHour, location_name: "StartMinuteOfHour", traits: {"smithy.api#required" => {}}))
+    BandwidthRateLimitInterval.add_member(:end_hour_of_day, ::Smithy::Schema::Shapes::MemberShape.new(target: HourOfDay, location_name: "EndHourOfDay", traits: {"smithy.api#required" => {}}))
+    BandwidthRateLimitInterval.add_member(:end_minute_of_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: MinuteOfHour, location_name: "EndMinuteOfHour", traits: {"smithy.api#required" => {}}))
+    BandwidthRateLimitInterval.add_member(:days_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DaysOfWeek, location_name: "DaysOfWeek", traits: {"smithy.api#required" => {}}))
+    BandwidthRateLimitInterval.add_member(:average_upload_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
+    BandwidthRateLimitInterval.add_member(:average_download_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
     BandwidthRateLimitInterval.type = Types::BandwidthRateLimitInterval
-    BandwidthRateLimitIntervals.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthRateLimitInterval)
-    CacheAttributes.add_member(:cache_stale_timeout_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheStaleTimeoutInSeconds, location_name: "CacheStaleTimeoutInSeconds"))
+    BandwidthRateLimitIntervals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthRateLimitInterval)
+    CacheAttributes.add_member(:cache_stale_timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheStaleTimeoutInSeconds, location_name: "CacheStaleTimeoutInSeconds"))
     CacheAttributes.type = Types::CacheAttributes
-    CacheReportFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CacheReportFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    CacheReportFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CacheReportFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
     CacheReportFilter.type = Types::CacheReportFilter
-    CacheReportFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilter)
-    CacheReportFilterName.add_member(:upload_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UploadState", traits: {"smithy.api#enumValue" => "UploadState"}))
-    CacheReportFilterName.add_member(:upload_failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UploadFailureReason", traits: {"smithy.api#enumValue" => "UploadFailureReason"}))
-    CacheReportFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilterValue)
-    CacheReportInfo.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportARN, location_name: "CacheReportARN"))
-    CacheReportInfo.add_member(:cache_report_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportStatus, location_name: "CacheReportStatus"))
-    CacheReportInfo.add_member(:report_completion_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportCompletionPercent, location_name: "ReportCompletionPercent"))
-    CacheReportInfo.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "EndTime"))
-    CacheReportInfo.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
-    CacheReportInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
-    CacheReportInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN"))
-    CacheReportInfo.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "StartTime"))
-    CacheReportInfo.add_member(:inclusion_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilterList, location_name: "InclusionFilters"))
-    CacheReportInfo.add_member(:exclusion_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilterList, location_name: "ExclusionFilters"))
-    CacheReportInfo.add_member(:report_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportName, location_name: "ReportName"))
-    CacheReportInfo.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CacheReportFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilter)
+    CacheReportFilterName.add_member(:upload_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UploadState", traits: {"smithy.api#enumValue" => "UploadState"}))
+    CacheReportFilterName.add_member(:upload_failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UploadFailureReason", traits: {"smithy.api#enumValue" => "UploadFailureReason"}))
+    CacheReportFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilterValue)
+    CacheReportInfo.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportARN, location_name: "CacheReportARN"))
+    CacheReportInfo.add_member(:cache_report_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportStatus, location_name: "CacheReportStatus"))
+    CacheReportInfo.add_member(:report_completion_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportCompletionPercent, location_name: "ReportCompletionPercent"))
+    CacheReportInfo.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "EndTime"))
+    CacheReportInfo.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role"))
+    CacheReportInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
+    CacheReportInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationARN, location_name: "LocationARN"))
+    CacheReportInfo.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "StartTime"))
+    CacheReportInfo.add_member(:inclusion_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilterList, location_name: "InclusionFilters"))
+    CacheReportInfo.add_member(:exclusion_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilterList, location_name: "ExclusionFilters"))
+    CacheReportInfo.add_member(:report_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportName, location_name: "ReportName"))
+    CacheReportInfo.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CacheReportInfo.type = Types::CacheReportInfo
-    CacheReportList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportInfo)
-    CacheReportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    CacheReportStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    CacheReportStatus.add_member(:canceled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
-    CacheReportStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CacheReportStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    CachediSCSIVolume.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    CachediSCSIVolume.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    CachediSCSIVolume.add_member(:volume_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
-    CachediSCSIVolume.add_member(:volume_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeStatus, location_name: "VolumeStatus"))
-    CachediSCSIVolume.add_member(:volume_attachment_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
-    CachediSCSIVolume.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
-    CachediSCSIVolume.add_member(:volume_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DoubleObject, location_name: "VolumeProgress"))
-    CachediSCSIVolume.add_member(:source_snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SourceSnapshotId"))
-    CachediSCSIVolume.add_member(:volumei_scsi_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
-    CachediSCSIVolume.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
-    CachediSCSIVolume.add_member(:volume_used_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
-    CachediSCSIVolume.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    CachediSCSIVolume.add_member(:target_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
+    CacheReportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportInfo)
+    CacheReportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    CacheReportStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    CacheReportStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    CacheReportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    CacheReportStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    CachediSCSIVolume.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    CachediSCSIVolume.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    CachediSCSIVolume.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeType, location_name: "VolumeType"))
+    CachediSCSIVolume.add_member(:volume_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStatus, location_name: "VolumeStatus"))
+    CachediSCSIVolume.add_member(:volume_attachment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
+    CachediSCSIVolume.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
+    CachediSCSIVolume.add_member(:volume_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleObject, location_name: "VolumeProgress"))
+    CachediSCSIVolume.add_member(:source_snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SourceSnapshotId"))
+    CachediSCSIVolume.add_member(:volumei_scsi_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
+    CachediSCSIVolume.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDate, location_name: "CreatedDate"))
+    CachediSCSIVolume.add_member(:volume_used_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
+    CachediSCSIVolume.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    CachediSCSIVolume.add_member(:target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, location_name: "TargetName"))
     CachediSCSIVolume.type = Types::CachediSCSIVolume
-    CachediSCSIVolumes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CachediSCSIVolume)
-    CancelArchivalInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CancelArchivalInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
+    CachediSCSIVolumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CachediSCSIVolume)
+    CancelArchivalInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CancelArchivalInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
     CancelArchivalInput.type = Types::CancelArchivalInput
-    CancelArchivalOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    CancelArchivalOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     CancelArchivalOutput.type = Types::CancelArchivalOutput
-    CancelCacheReportInput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportARN, location_name: "CacheReportARN", traits: {"smithy.api#required" => {}}))
+    CancelCacheReportInput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportARN, location_name: "CacheReportARN", traits: {"smithy.api#required" => {}}))
     CancelCacheReportInput.type = Types::CancelCacheReportInput
-    CancelCacheReportOutput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportARN, location_name: "CacheReportARN"))
+    CancelCacheReportOutput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportARN, location_name: "CacheReportARN"))
     CancelCacheReportOutput.type = Types::CancelCacheReportOutput
-    CancelRetrievalInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CancelRetrievalInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
+    CancelRetrievalInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CancelRetrievalInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
     CancelRetrievalInput.type = Types::CancelRetrievalInput
-    CancelRetrievalOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    CancelRetrievalOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     CancelRetrievalOutput.type = Types::CancelRetrievalOutput
-    CaseSensitivity.add_member(:client_specified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClientSpecified", traits: {"smithy.api#enumValue" => "ClientSpecified"}))
-    CaseSensitivity.add_member(:case_sensitive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CaseSensitive", traits: {"smithy.api#enumValue" => "CaseSensitive"}))
-    ChapCredentials.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChapInfo)
-    ChapInfo.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
-    ChapInfo.add_member(:secret_to_authenticate_initiator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChapSecret, location_name: "SecretToAuthenticateInitiator"))
-    ChapInfo.add_member(:initiator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IqnName, location_name: "InitiatorName"))
-    ChapInfo.add_member(:secret_to_authenticate_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChapSecret, location_name: "SecretToAuthenticateTarget"))
+    CaseSensitivity.add_member(:client_specified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClientSpecified", traits: {"smithy.api#enumValue" => "ClientSpecified"}))
+    CaseSensitivity.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CaseSensitive", traits: {"smithy.api#enumValue" => "CaseSensitive"}))
+    ChapCredentials.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChapInfo)
+    ChapInfo.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
+    ChapInfo.add_member(:secret_to_authenticate_initiator, ::Smithy::Schema::Shapes::MemberShape.new(target: ChapSecret, location_name: "SecretToAuthenticateInitiator"))
+    ChapInfo.add_member(:initiator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IqnName, location_name: "InitiatorName"))
+    ChapInfo.add_member(:secret_to_authenticate_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ChapSecret, location_name: "SecretToAuthenticateTarget"))
     ChapInfo.type = Types::ChapInfo
-    CreateCachediSCSIVolumeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CreateCachediSCSIVolumeInput.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    CreateCachediSCSIVolumeInput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
-    CreateCachediSCSIVolumeInput.add_member(:target_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName", traits: {"smithy.api#required" => {}}))
-    CreateCachediSCSIVolumeInput.add_member(:source_volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "SourceVolumeARN"))
-    CreateCachediSCSIVolumeInput.add_member(:network_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId", traits: {"smithy.api#required" => {}}))
-    CreateCachediSCSIVolumeInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateCachediSCSIVolumeInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
-    CreateCachediSCSIVolumeInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    CreateCachediSCSIVolumeInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateCachediSCSIVolumeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CreateCachediSCSIVolumeInput.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    CreateCachediSCSIVolumeInput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
+    CreateCachediSCSIVolumeInput.add_member(:target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, location_name: "TargetName", traits: {"smithy.api#required" => {}}))
+    CreateCachediSCSIVolumeInput.add_member(:source_volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "SourceVolumeARN"))
+    CreateCachediSCSIVolumeInput.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, location_name: "NetworkInterfaceId", traits: {"smithy.api#required" => {}}))
+    CreateCachediSCSIVolumeInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateCachediSCSIVolumeInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted"))
+    CreateCachediSCSIVolumeInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    CreateCachediSCSIVolumeInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateCachediSCSIVolumeInput.type = Types::CreateCachediSCSIVolumeInput
-    CreateCachediSCSIVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    CreateCachediSCSIVolumeOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
+    CreateCachediSCSIVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    CreateCachediSCSIVolumeOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
     CreateCachediSCSIVolumeOutput.type = Types::CreateCachediSCSIVolumeOutput
-    CreateNFSFileShareInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateNFSFileShareInput.add_member(:nfs_file_share_defaults, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
-    CreateNFSFileShareInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CreateNFSFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    CreateNFSFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
-    CreateNFSFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    CreateNFSFileShareInput.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
-    CreateNFSFileShareInput.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
-    CreateNFSFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
-    CreateNFSFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
-    CreateNFSFileShareInput.add_member(:client_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
-    CreateNFSFileShareInput.add_member(:squash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
-    CreateNFSFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
-    CreateNFSFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
-    CreateNFSFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
-    CreateNFSFileShareInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateNFSFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
-    CreateNFSFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    CreateNFSFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
-    CreateNFSFileShareInput.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSHostName, location_name: "VPCEndpointDNSName"))
-    CreateNFSFileShareInput.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionId, location_name: "BucketRegion"))
-    CreateNFSFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    CreateNFSFileShareInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateNFSFileShareInput.add_member(:nfs_file_share_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
+    CreateNFSFileShareInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CreateNFSFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    CreateNFSFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
+    CreateNFSFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    CreateNFSFileShareInput.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
+    CreateNFSFileShareInput.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
+    CreateNFSFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "DefaultStorageClass"))
+    CreateNFSFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectACL, location_name: "ObjectACL"))
+    CreateNFSFileShareInput.add_member(:client_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareClientList, location_name: "ClientList"))
+    CreateNFSFileShareInput.add_member(:squash, ::Smithy::Schema::Shapes::MemberShape.new(target: Squash, location_name: "Squash"))
+    CreateNFSFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ReadOnly"))
+    CreateNFSFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "GuessMIMETypeEnabled"))
+    CreateNFSFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "RequesterPays"))
+    CreateNFSFileShareInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateNFSFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareName, location_name: "FileShareName"))
+    CreateNFSFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    CreateNFSFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationPolicy, location_name: "NotificationPolicy"))
+    CreateNFSFileShareInput.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSHostName, location_name: "VPCEndpointDNSName"))
+    CreateNFSFileShareInput.add_member(:bucket_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionId, location_name: "BucketRegion"))
+    CreateNFSFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
     CreateNFSFileShareInput.type = Types::CreateNFSFileShareInput
-    CreateNFSFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    CreateNFSFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
     CreateNFSFileShareOutput.type = Types::CreateNFSFileShareOutput
-    CreateSMBFileShareInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateSMBFileShareInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CreateSMBFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    CreateSMBFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
-    CreateSMBFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    CreateSMBFileShareInput.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
-    CreateSMBFileShareInput.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
-    CreateSMBFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
-    CreateSMBFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
-    CreateSMBFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
-    CreateSMBFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
-    CreateSMBFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
-    CreateSMBFileShareInput.add_member(:smbacl_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
-    CreateSMBFileShareInput.add_member(:access_based_enumeration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
-    CreateSMBFileShareInput.add_member(:admin_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "AdminUserList"))
-    CreateSMBFileShareInput.add_member(:valid_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "ValidUserList"))
-    CreateSMBFileShareInput.add_member(:invalid_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "InvalidUserList"))
-    CreateSMBFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
-    CreateSMBFileShareInput.add_member(:authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
-    CreateSMBFileShareInput.add_member(:case_sensitivity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
-    CreateSMBFileShareInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateSMBFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
-    CreateSMBFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    CreateSMBFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
-    CreateSMBFileShareInput.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSHostName, location_name: "VPCEndpointDNSName"))
-    CreateSMBFileShareInput.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionId, location_name: "BucketRegion"))
-    CreateSMBFileShareInput.add_member(:oplocks_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "OplocksEnabled"))
+    CreateSMBFileShareInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateSMBFileShareInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CreateSMBFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    CreateSMBFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
+    CreateSMBFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    CreateSMBFileShareInput.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
+    CreateSMBFileShareInput.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
+    CreateSMBFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "DefaultStorageClass"))
+    CreateSMBFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectACL, location_name: "ObjectACL"))
+    CreateSMBFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ReadOnly"))
+    CreateSMBFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "GuessMIMETypeEnabled"))
+    CreateSMBFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "RequesterPays"))
+    CreateSMBFileShareInput.add_member(:smbacl_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "SMBACLEnabled"))
+    CreateSMBFileShareInput.add_member(:access_based_enumeration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AccessBasedEnumeration"))
+    CreateSMBFileShareInput.add_member(:admin_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "AdminUserList"))
+    CreateSMBFileShareInput.add_member(:valid_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "ValidUserList"))
+    CreateSMBFileShareInput.add_member(:invalid_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "InvalidUserList"))
+    CreateSMBFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    CreateSMBFileShareInput.add_member(:authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: Authentication, location_name: "Authentication"))
+    CreateSMBFileShareInput.add_member(:case_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseSensitivity, location_name: "CaseSensitivity"))
+    CreateSMBFileShareInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateSMBFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareName, location_name: "FileShareName"))
+    CreateSMBFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    CreateSMBFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationPolicy, location_name: "NotificationPolicy"))
+    CreateSMBFileShareInput.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSHostName, location_name: "VPCEndpointDNSName"))
+    CreateSMBFileShareInput.add_member(:bucket_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionId, location_name: "BucketRegion"))
+    CreateSMBFileShareInput.add_member(:oplocks_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "OplocksEnabled"))
     CreateSMBFileShareInput.type = Types::CreateSMBFileShareInput
-    CreateSMBFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    CreateSMBFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
     CreateSMBFileShareOutput.type = Types::CreateSMBFileShareOutput
-    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
-    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:snapshot_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotDescription, location_name: "SnapshotDescription", traits: {"smithy.api#required" => {}}))
-    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:snapshot_description, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotDescription, location_name: "SnapshotDescription", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateSnapshotFromVolumeRecoveryPointInput.type = Types::CreateSnapshotFromVolumeRecoveryPointInput
-    CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
-    CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:volume_recovery_point_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VolumeRecoveryPointTime"))
+    CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
+    CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:volume_recovery_point_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VolumeRecoveryPointTime"))
     CreateSnapshotFromVolumeRecoveryPointOutput.type = Types::CreateSnapshotFromVolumeRecoveryPointOutput
-    CreateSnapshotInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
-    CreateSnapshotInput.add_member(:snapshot_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotDescription, location_name: "SnapshotDescription", traits: {"smithy.api#required" => {}}))
-    CreateSnapshotInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapshotInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotInput.add_member(:snapshot_description, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotDescription, location_name: "SnapshotDescription", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateSnapshotInput.type = Types::CreateSnapshotInput
-    CreateSnapshotOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    CreateSnapshotOutput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    CreateSnapshotOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    CreateSnapshotOutput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
     CreateSnapshotOutput.type = Types::CreateSnapshotOutput
-    CreateStorediSCSIVolumeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CreateStorediSCSIVolumeInput.add_member(:disk_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskId, location_name: "DiskId", traits: {"smithy.api#required" => {}}))
-    CreateStorediSCSIVolumeInput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
-    CreateStorediSCSIVolumeInput.add_member(:preserve_existing_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "PreserveExistingData", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    CreateStorediSCSIVolumeInput.add_member(:target_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName", traits: {"smithy.api#required" => {}}))
-    CreateStorediSCSIVolumeInput.add_member(:network_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId", traits: {"smithy.api#required" => {}}))
-    CreateStorediSCSIVolumeInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
-    CreateStorediSCSIVolumeInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    CreateStorediSCSIVolumeInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateStorediSCSIVolumeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CreateStorediSCSIVolumeInput.add_member(:disk_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskId, location_name: "DiskId", traits: {"smithy.api#required" => {}}))
+    CreateStorediSCSIVolumeInput.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
+    CreateStorediSCSIVolumeInput.add_member(:preserve_existing_data, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "PreserveExistingData", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CreateStorediSCSIVolumeInput.add_member(:target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, location_name: "TargetName", traits: {"smithy.api#required" => {}}))
+    CreateStorediSCSIVolumeInput.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, location_name: "NetworkInterfaceId", traits: {"smithy.api#required" => {}}))
+    CreateStorediSCSIVolumeInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted"))
+    CreateStorediSCSIVolumeInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    CreateStorediSCSIVolumeInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateStorediSCSIVolumeInput.type = Types::CreateStorediSCSIVolumeInput
-    CreateStorediSCSIVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    CreateStorediSCSIVolumeOutput.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
-    CreateStorediSCSIVolumeOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
+    CreateStorediSCSIVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    CreateStorediSCSIVolumeOutput.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
+    CreateStorediSCSIVolumeOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
     CreateStorediSCSIVolumeOutput.type = Types::CreateStorediSCSIVolumeOutput
-    CreateTapePoolInput.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "PoolName", traits: {"smithy.api#required" => {}}))
-    CreateTapePoolInput.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeStorageClass, location_name: "StorageClass", traits: {"smithy.api#required" => {}}))
-    CreateTapePoolInput.add_member(:retention_lock_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionLockType, location_name: "RetentionLockType"))
-    CreateTapePoolInput.add_member(:retention_lock_time_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionLockTimeInDays, location_name: "RetentionLockTimeInDays"))
-    CreateTapePoolInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateTapePoolInput.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "PoolName", traits: {"smithy.api#required" => {}}))
+    CreateTapePoolInput.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeStorageClass, location_name: "StorageClass", traits: {"smithy.api#required" => {}}))
+    CreateTapePoolInput.add_member(:retention_lock_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionLockType, location_name: "RetentionLockType"))
+    CreateTapePoolInput.add_member(:retention_lock_time_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionLockTimeInDays, location_name: "RetentionLockTimeInDays"))
+    CreateTapePoolInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateTapePoolInput.type = Types::CreateTapePoolInput
-    CreateTapePoolOutput.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolARN, location_name: "PoolARN"))
+    CreateTapePoolOutput.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolARN, location_name: "PoolARN"))
     CreateTapePoolOutput.type = Types::CreateTapePoolOutput
-    CreateTapeWithBarcodeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CreateTapeWithBarcodeInput.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes", traits: {"smithy.api#required" => {}}))
-    CreateTapeWithBarcodeInput.add_member(:tape_barcode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeBarcode, location_name: "TapeBarcode", traits: {"smithy.api#required" => {}}))
-    CreateTapeWithBarcodeInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
-    CreateTapeWithBarcodeInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    CreateTapeWithBarcodeInput.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
-    CreateTapeWithBarcodeInput.add_member(:worm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
-    CreateTapeWithBarcodeInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateTapeWithBarcodeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CreateTapeWithBarcodeInput.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeSize, location_name: "TapeSizeInBytes", traits: {"smithy.api#required" => {}}))
+    CreateTapeWithBarcodeInput.add_member(:tape_barcode, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeBarcode, location_name: "TapeBarcode", traits: {"smithy.api#required" => {}}))
+    CreateTapeWithBarcodeInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted"))
+    CreateTapeWithBarcodeInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    CreateTapeWithBarcodeInput.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolId, location_name: "PoolId"))
+    CreateTapeWithBarcodeInput.add_member(:worm, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
+    CreateTapeWithBarcodeInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateTapeWithBarcodeInput.type = Types::CreateTapeWithBarcodeInput
-    CreateTapeWithBarcodeOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    CreateTapeWithBarcodeOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     CreateTapeWithBarcodeOutput.type = Types::CreateTapeWithBarcodeOutput
-    CreateTapesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    CreateTapesInput.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes", traits: {"smithy.api#required" => {}}))
-    CreateTapesInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    CreateTapesInput.add_member(:num_tapes_to_create, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumTapesToCreate, location_name: "NumTapesToCreate", traits: {"smithy.api#required" => {}}))
-    CreateTapesInput.add_member(:tape_barcode_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeBarcodePrefix, location_name: "TapeBarcodePrefix", traits: {"smithy.api#required" => {}}))
-    CreateTapesInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
-    CreateTapesInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    CreateTapesInput.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
-    CreateTapesInput.add_member(:worm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
-    CreateTapesInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateTapesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    CreateTapesInput.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeSize, location_name: "TapeSizeInBytes", traits: {"smithy.api#required" => {}}))
+    CreateTapesInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateTapesInput.add_member(:num_tapes_to_create, ::Smithy::Schema::Shapes::MemberShape.new(target: NumTapesToCreate, location_name: "NumTapesToCreate", traits: {"smithy.api#required" => {}}))
+    CreateTapesInput.add_member(:tape_barcode_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeBarcodePrefix, location_name: "TapeBarcodePrefix", traits: {"smithy.api#required" => {}}))
+    CreateTapesInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted"))
+    CreateTapesInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    CreateTapesInput.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolId, location_name: "PoolId"))
+    CreateTapesInput.add_member(:worm, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
+    CreateTapesInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateTapesInput.type = Types::CreateTapesInput
-    CreateTapesOutput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
+    CreateTapesOutput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARNs, location_name: "TapeARNs"))
     CreateTapesOutput.type = Types::CreateTapesOutput
-    DaysOfWeek.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfWeek)
-    DeleteAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DaysOfWeek.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek)
+    DeleteAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DeleteAutomaticTapeCreationPolicyInput.type = Types::DeleteAutomaticTapeCreationPolicyInput
-    DeleteAutomaticTapeCreationPolicyOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DeleteAutomaticTapeCreationPolicyOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     DeleteAutomaticTapeCreationPolicyOutput.type = Types::DeleteAutomaticTapeCreationPolicyOutput
-    DeleteBandwidthRateLimitInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    DeleteBandwidthRateLimitInput.add_member(:bandwidth_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthType, location_name: "BandwidthType", traits: {"smithy.api#required" => {}}))
+    DeleteBandwidthRateLimitInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DeleteBandwidthRateLimitInput.add_member(:bandwidth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthType, location_name: "BandwidthType", traits: {"smithy.api#required" => {}}))
     DeleteBandwidthRateLimitInput.type = Types::DeleteBandwidthRateLimitInput
-    DeleteBandwidthRateLimitOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DeleteBandwidthRateLimitOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     DeleteBandwidthRateLimitOutput.type = Types::DeleteBandwidthRateLimitOutput
-    DeleteCacheReportInput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportARN, location_name: "CacheReportARN", traits: {"smithy.api#required" => {}}))
+    DeleteCacheReportInput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportARN, location_name: "CacheReportARN", traits: {"smithy.api#required" => {}}))
     DeleteCacheReportInput.type = Types::DeleteCacheReportInput
-    DeleteCacheReportOutput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportARN, location_name: "CacheReportARN"))
+    DeleteCacheReportOutput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportARN, location_name: "CacheReportARN"))
     DeleteCacheReportOutput.type = Types::DeleteCacheReportOutput
-    DeleteChapCredentialsInput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN", traits: {"smithy.api#required" => {}}))
-    DeleteChapCredentialsInput.add_member(:initiator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IqnName, location_name: "InitiatorName", traits: {"smithy.api#required" => {}}))
+    DeleteChapCredentialsInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN", traits: {"smithy.api#required" => {}}))
+    DeleteChapCredentialsInput.add_member(:initiator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IqnName, location_name: "InitiatorName", traits: {"smithy.api#required" => {}}))
     DeleteChapCredentialsInput.type = Types::DeleteChapCredentialsInput
-    DeleteChapCredentialsOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
-    DeleteChapCredentialsOutput.add_member(:initiator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IqnName, location_name: "InitiatorName"))
+    DeleteChapCredentialsOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
+    DeleteChapCredentialsOutput.add_member(:initiator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IqnName, location_name: "InitiatorName"))
     DeleteChapCredentialsOutput.type = Types::DeleteChapCredentialsOutput
-    DeleteFileShareInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
-    DeleteFileShareInput.add_member(:force_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "ForceDelete", traits: {"smithy.api#default" => false}))
+    DeleteFileShareInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
+    DeleteFileShareInput.add_member(:force_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "ForceDelete", traits: {"smithy.api#default" => false}))
     DeleteFileShareInput.type = Types::DeleteFileShareInput
-    DeleteFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    DeleteFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
     DeleteFileShareOutput.type = Types::DeleteFileShareOutput
-    DeleteGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DeleteGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DeleteGatewayInput.type = Types::DeleteGatewayInput
-    DeleteGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DeleteGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     DeleteGatewayOutput.type = Types::DeleteGatewayOutput
-    DeleteSnapshotScheduleInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    DeleteSnapshotScheduleInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
     DeleteSnapshotScheduleInput.type = Types::DeleteSnapshotScheduleInput
-    DeleteSnapshotScheduleOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
+    DeleteSnapshotScheduleOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
     DeleteSnapshotScheduleOutput.type = Types::DeleteSnapshotScheduleOutput
-    DeleteTapeArchiveInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
-    DeleteTapeArchiveInput.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "BypassGovernanceRetention", traits: {"smithy.api#default" => false}))
+    DeleteTapeArchiveInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
+    DeleteTapeArchiveInput.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "BypassGovernanceRetention", traits: {"smithy.api#default" => false}))
     DeleteTapeArchiveInput.type = Types::DeleteTapeArchiveInput
-    DeleteTapeArchiveOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    DeleteTapeArchiveOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     DeleteTapeArchiveOutput.type = Types::DeleteTapeArchiveOutput
-    DeleteTapeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    DeleteTapeInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
-    DeleteTapeInput.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "BypassGovernanceRetention", traits: {"smithy.api#default" => false}))
+    DeleteTapeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DeleteTapeInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
+    DeleteTapeInput.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "BypassGovernanceRetention", traits: {"smithy.api#default" => false}))
     DeleteTapeInput.type = Types::DeleteTapeInput
-    DeleteTapeOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    DeleteTapeOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     DeleteTapeOutput.type = Types::DeleteTapeOutput
-    DeleteTapePoolInput.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolARN, location_name: "PoolARN", traits: {"smithy.api#required" => {}}))
+    DeleteTapePoolInput.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolARN, location_name: "PoolARN", traits: {"smithy.api#required" => {}}))
     DeleteTapePoolInput.type = Types::DeleteTapePoolInput
-    DeleteTapePoolOutput.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolARN, location_name: "PoolARN"))
+    DeleteTapePoolOutput.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolARN, location_name: "PoolARN"))
     DeleteTapePoolOutput.type = Types::DeleteTapePoolOutput
-    DeleteVolumeInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    DeleteVolumeInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
     DeleteVolumeInput.type = Types::DeleteVolumeInput
-    DeleteVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
+    DeleteVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
     DeleteVolumeOutput.type = Types::DeleteVolumeOutput
-    DescribeAvailabilityMonitorTestInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeAvailabilityMonitorTestInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeAvailabilityMonitorTestInput.type = Types::DescribeAvailabilityMonitorTestInput
-    DescribeAvailabilityMonitorTestOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeAvailabilityMonitorTestOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityMonitorTestStatus, location_name: "Status"))
-    DescribeAvailabilityMonitorTestOutput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "StartTime"))
+    DescribeAvailabilityMonitorTestOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeAvailabilityMonitorTestOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityMonitorTestStatus, location_name: "Status"))
+    DescribeAvailabilityMonitorTestOutput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "StartTime"))
     DescribeAvailabilityMonitorTestOutput.type = Types::DescribeAvailabilityMonitorTestOutput
-    DescribeBandwidthRateLimitInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeBandwidthRateLimitInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeBandwidthRateLimitInput.type = Types::DescribeBandwidthRateLimitInput
-    DescribeBandwidthRateLimitOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeBandwidthRateLimitOutput.add_member(:average_upload_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
-    DescribeBandwidthRateLimitOutput.add_member(:average_download_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
+    DescribeBandwidthRateLimitOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeBandwidthRateLimitOutput.add_member(:average_upload_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
+    DescribeBandwidthRateLimitOutput.add_member(:average_download_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
     DescribeBandwidthRateLimitOutput.type = Types::DescribeBandwidthRateLimitOutput
-    DescribeBandwidthRateLimitScheduleInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeBandwidthRateLimitScheduleInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeBandwidthRateLimitScheduleInput.type = Types::DescribeBandwidthRateLimitScheduleInput
-    DescribeBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeBandwidthRateLimitScheduleOutput.add_member(:bandwidth_rate_limit_intervals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals"))
+    DescribeBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeBandwidthRateLimitScheduleOutput.add_member(:bandwidth_rate_limit_intervals, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals"))
     DescribeBandwidthRateLimitScheduleOutput.type = Types::DescribeBandwidthRateLimitScheduleOutput
-    DescribeCacheInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeCacheInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeCacheInput.type = Types::DescribeCacheInput
-    DescribeCacheOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeCacheOutput.add_member(:disk_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIds, location_name: "DiskIds"))
-    DescribeCacheOutput.add_member(:cache_allocated_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "CacheAllocatedInBytes", traits: {"smithy.api#default" => 0}))
-    DescribeCacheOutput.add_member(:cache_used_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "CacheUsedPercentage", traits: {"smithy.api#default" => 0}))
-    DescribeCacheOutput.add_member(:cache_dirty_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "CacheDirtyPercentage", traits: {"smithy.api#default" => 0}))
-    DescribeCacheOutput.add_member(:cache_hit_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "CacheHitPercentage", traits: {"smithy.api#default" => 0}))
-    DescribeCacheOutput.add_member(:cache_miss_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "CacheMissPercentage", traits: {"smithy.api#default" => 0}))
+    DescribeCacheOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeCacheOutput.add_member(:disk_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIds, location_name: "DiskIds"))
+    DescribeCacheOutput.add_member(:cache_allocated_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "CacheAllocatedInBytes", traits: {"smithy.api#default" => 0}))
+    DescribeCacheOutput.add_member(:cache_used_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "CacheUsedPercentage", traits: {"smithy.api#default" => 0}))
+    DescribeCacheOutput.add_member(:cache_dirty_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "CacheDirtyPercentage", traits: {"smithy.api#default" => 0}))
+    DescribeCacheOutput.add_member(:cache_hit_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "CacheHitPercentage", traits: {"smithy.api#default" => 0}))
+    DescribeCacheOutput.add_member(:cache_miss_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "CacheMissPercentage", traits: {"smithy.api#default" => 0}))
     DescribeCacheOutput.type = Types::DescribeCacheOutput
-    DescribeCacheReportInput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportARN, location_name: "CacheReportARN", traits: {"smithy.api#required" => {}}))
+    DescribeCacheReportInput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportARN, location_name: "CacheReportARN", traits: {"smithy.api#required" => {}}))
     DescribeCacheReportInput.type = Types::DescribeCacheReportInput
-    DescribeCacheReportOutput.add_member(:cache_report_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportInfo, location_name: "CacheReportInfo"))
+    DescribeCacheReportOutput.add_member(:cache_report_info, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportInfo, location_name: "CacheReportInfo"))
     DescribeCacheReportOutput.type = Types::DescribeCacheReportOutput
-    DescribeCachediSCSIVolumesInput.add_member(:volume_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARNs, location_name: "VolumeARNs", traits: {"smithy.api#required" => {}}))
+    DescribeCachediSCSIVolumesInput.add_member(:volume_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARNs, location_name: "VolumeARNs", traits: {"smithy.api#required" => {}}))
     DescribeCachediSCSIVolumesInput.type = Types::DescribeCachediSCSIVolumesInput
-    DescribeCachediSCSIVolumesOutput.add_member(:cachedi_scsi_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CachediSCSIVolumes, location_name: "CachediSCSIVolumes"))
+    DescribeCachediSCSIVolumesOutput.add_member(:cachedi_scsi_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: CachediSCSIVolumes, location_name: "CachediSCSIVolumes"))
     DescribeCachediSCSIVolumesOutput.type = Types::DescribeCachediSCSIVolumesOutput
-    DescribeChapCredentialsInput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN", traits: {"smithy.api#required" => {}}))
+    DescribeChapCredentialsInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN", traits: {"smithy.api#required" => {}}))
     DescribeChapCredentialsInput.type = Types::DescribeChapCredentialsInput
-    DescribeChapCredentialsOutput.add_member(:chap_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChapCredentials, location_name: "ChapCredentials"))
+    DescribeChapCredentialsOutput.add_member(:chap_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ChapCredentials, location_name: "ChapCredentials"))
     DescribeChapCredentialsOutput.type = Types::DescribeChapCredentialsOutput
-    DescribeFileSystemAssociationsInput.add_member(:file_system_association_arn_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARNList, location_name: "FileSystemAssociationARNList", traits: {"smithy.api#required" => {}}))
+    DescribeFileSystemAssociationsInput.add_member(:file_system_association_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARNList, location_name: "FileSystemAssociationARNList", traits: {"smithy.api#required" => {}}))
     DescribeFileSystemAssociationsInput.type = Types::DescribeFileSystemAssociationsInput
-    DescribeFileSystemAssociationsOutput.add_member(:file_system_association_info_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationInfoList, location_name: "FileSystemAssociationInfoList"))
+    DescribeFileSystemAssociationsOutput.add_member(:file_system_association_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationInfoList, location_name: "FileSystemAssociationInfoList"))
     DescribeFileSystemAssociationsOutput.type = Types::DescribeFileSystemAssociationsOutput
-    DescribeGatewayInformationInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeGatewayInformationInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeGatewayInformationInput.type = Types::DescribeGatewayInformationInput
-    DescribeGatewayInformationOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeGatewayInformationOutput.add_member(:gateway_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayId, location_name: "GatewayId"))
-    DescribeGatewayInformationOutput.add_member(:gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "GatewayName"))
-    DescribeGatewayInformationOutput.add_member(:gateway_timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "GatewayTimezone"))
-    DescribeGatewayInformationOutput.add_member(:gateway_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayState, location_name: "GatewayState"))
-    DescribeGatewayInformationOutput.add_member(:gateway_network_interfaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayNetworkInterfaces, location_name: "GatewayNetworkInterfaces"))
-    DescribeGatewayInformationOutput.add_member(:gateway_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
-    DescribeGatewayInformationOutput.add_member(:next_update_availability_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextUpdateAvailabilityDate, location_name: "NextUpdateAvailabilityDate"))
-    DescribeGatewayInformationOutput.add_member(:last_software_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastSoftwareUpdate, location_name: "LastSoftwareUpdate"))
-    DescribeGatewayInformationOutput.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2InstanceId, location_name: "Ec2InstanceId"))
-    DescribeGatewayInformationOutput.add_member(:ec2_instance_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
-    DescribeGatewayInformationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    DescribeGatewayInformationOutput.add_member(:vpc_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VPCEndpoint"))
-    DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
-    DescribeGatewayInformationOutput.add_member(:host_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HostEnvironment, location_name: "HostEnvironment"))
-    DescribeGatewayInformationOutput.add_member(:endpoint_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
-    DescribeGatewayInformationOutput.add_member(:software_updates_end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareUpdatesEndDate, location_name: "SoftwareUpdatesEndDate"))
-    DescribeGatewayInformationOutput.add_member(:deprecation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeprecationDate, location_name: "DeprecationDate"))
-    DescribeGatewayInformationOutput.add_member(:gateway_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayCapacity, location_name: "GatewayCapacity"))
-    DescribeGatewayInformationOutput.add_member(:supported_gateway_capacities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedGatewayCapacities, location_name: "SupportedGatewayCapacities"))
-    DescribeGatewayInformationOutput.add_member(:host_environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HostEnvironmentId, location_name: "HostEnvironmentId"))
-    DescribeGatewayInformationOutput.add_member(:software_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareVersion, location_name: "SoftwareVersion"))
+    DescribeGatewayInformationOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeGatewayInformationOutput.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayId, location_name: "GatewayId"))
+    DescribeGatewayInformationOutput.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "GatewayName"))
+    DescribeGatewayInformationOutput.add_member(:gateway_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayTimezone, location_name: "GatewayTimezone"))
+    DescribeGatewayInformationOutput.add_member(:gateway_state, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayState, location_name: "GatewayState"))
+    DescribeGatewayInformationOutput.add_member(:gateway_network_interfaces, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayNetworkInterfaces, location_name: "GatewayNetworkInterfaces"))
+    DescribeGatewayInformationOutput.add_member(:gateway_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayType, location_name: "GatewayType"))
+    DescribeGatewayInformationOutput.add_member(:next_update_availability_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NextUpdateAvailabilityDate, location_name: "NextUpdateAvailabilityDate"))
+    DescribeGatewayInformationOutput.add_member(:last_software_update, ::Smithy::Schema::Shapes::MemberShape.new(target: LastSoftwareUpdate, location_name: "LastSoftwareUpdate"))
+    DescribeGatewayInformationOutput.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2InstanceId, location_name: "Ec2InstanceId"))
+    DescribeGatewayInformationOutput.add_member(:ec2_instance_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
+    DescribeGatewayInformationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    DescribeGatewayInformationOutput.add_member(:vpc_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VPCEndpoint"))
+    DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
+    DescribeGatewayInformationOutput.add_member(:host_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: HostEnvironment, location_name: "HostEnvironment"))
+    DescribeGatewayInformationOutput.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType, location_name: "EndpointType"))
+    DescribeGatewayInformationOutput.add_member(:software_updates_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdatesEndDate, location_name: "SoftwareUpdatesEndDate"))
+    DescribeGatewayInformationOutput.add_member(:deprecation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DeprecationDate, location_name: "DeprecationDate"))
+    DescribeGatewayInformationOutput.add_member(:gateway_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayCapacity, location_name: "GatewayCapacity"))
+    DescribeGatewayInformationOutput.add_member(:supported_gateway_capacities, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedGatewayCapacities, location_name: "SupportedGatewayCapacities"))
+    DescribeGatewayInformationOutput.add_member(:host_environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostEnvironmentId, location_name: "HostEnvironmentId"))
+    DescribeGatewayInformationOutput.add_member(:software_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareVersion, location_name: "SoftwareVersion"))
     DescribeGatewayInformationOutput.type = Types::DescribeGatewayInformationOutput
-    DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeMaintenanceStartTimeInput.type = Types::DescribeMaintenanceStartTimeInput
-    DescribeMaintenanceStartTimeOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeMaintenanceStartTimeOutput.add_member(:hour_of_day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HourOfDay, location_name: "HourOfDay"))
-    DescribeMaintenanceStartTimeOutput.add_member(:minute_of_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinuteOfHour, location_name: "MinuteOfHour"))
-    DescribeMaintenanceStartTimeOutput.add_member(:day_of_week, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
-    DescribeMaintenanceStartTimeOutput.add_member(:day_of_month, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
-    DescribeMaintenanceStartTimeOutput.add_member(:timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
-    DescribeMaintenanceStartTimeOutput.add_member(:software_update_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareUpdatePreferences, location_name: "SoftwareUpdatePreferences"))
+    DescribeMaintenanceStartTimeOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeMaintenanceStartTimeOutput.add_member(:hour_of_day, ::Smithy::Schema::Shapes::MemberShape.new(target: HourOfDay, location_name: "HourOfDay"))
+    DescribeMaintenanceStartTimeOutput.add_member(:minute_of_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: MinuteOfHour, location_name: "MinuteOfHour"))
+    DescribeMaintenanceStartTimeOutput.add_member(:day_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, location_name: "DayOfWeek"))
+    DescribeMaintenanceStartTimeOutput.add_member(:day_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfMonth, location_name: "DayOfMonth"))
+    DescribeMaintenanceStartTimeOutput.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayTimezone, location_name: "Timezone"))
+    DescribeMaintenanceStartTimeOutput.add_member(:software_update_preferences, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdatePreferences, location_name: "SoftwareUpdatePreferences"))
     DescribeMaintenanceStartTimeOutput.type = Types::DescribeMaintenanceStartTimeOutput
-    DescribeNFSFileSharesInput.add_member(:file_share_arn_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARNList, location_name: "FileShareARNList", traits: {"smithy.api#required" => {}}))
+    DescribeNFSFileSharesInput.add_member(:file_share_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARNList, location_name: "FileShareARNList", traits: {"smithy.api#required" => {}}))
     DescribeNFSFileSharesInput.type = Types::DescribeNFSFileSharesInput
-    DescribeNFSFileSharesOutput.add_member(:nfs_file_share_info_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NFSFileShareInfoList, location_name: "NFSFileShareInfoList"))
+    DescribeNFSFileSharesOutput.add_member(:nfs_file_share_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: NFSFileShareInfoList, location_name: "NFSFileShareInfoList"))
     DescribeNFSFileSharesOutput.type = Types::DescribeNFSFileSharesOutput
-    DescribeSMBFileSharesInput.add_member(:file_share_arn_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARNList, location_name: "FileShareARNList", traits: {"smithy.api#required" => {}}))
+    DescribeSMBFileSharesInput.add_member(:file_share_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARNList, location_name: "FileShareARNList", traits: {"smithy.api#required" => {}}))
     DescribeSMBFileSharesInput.type = Types::DescribeSMBFileSharesInput
-    DescribeSMBFileSharesOutput.add_member(:smb_file_share_info_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMBFileShareInfoList, location_name: "SMBFileShareInfoList"))
+    DescribeSMBFileSharesOutput.add_member(:smb_file_share_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SMBFileShareInfoList, location_name: "SMBFileShareInfoList"))
     DescribeSMBFileSharesOutput.type = Types::DescribeSMBFileSharesOutput
-    DescribeSMBSettingsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeSMBSettingsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeSMBSettingsInput.type = Types::DescribeSMBSettingsInput
-    DescribeSMBSettingsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeSMBSettingsOutput.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
-    DescribeSMBSettingsOutput.add_member(:active_directory_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
-    DescribeSMBSettingsOutput.add_member(:smb_guest_password_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBGuestPasswordSet"))
-    DescribeSMBSettingsOutput.add_member(:smb_security_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMBSecurityStrategy, location_name: "SMBSecurityStrategy"))
-    DescribeSMBSettingsOutput.add_member(:file_shares_visible, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "FileSharesVisible"))
-    DescribeSMBSettingsOutput.add_member(:smb_local_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMBLocalGroups, location_name: "SMBLocalGroups"))
+    DescribeSMBSettingsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeSMBSettingsOutput.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName"))
+    DescribeSMBSettingsOutput.add_member(:active_directory_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
+    DescribeSMBSettingsOutput.add_member(:smb_guest_password_set, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "SMBGuestPasswordSet"))
+    DescribeSMBSettingsOutput.add_member(:smb_security_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SMBSecurityStrategy, location_name: "SMBSecurityStrategy"))
+    DescribeSMBSettingsOutput.add_member(:file_shares_visible, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "FileSharesVisible"))
+    DescribeSMBSettingsOutput.add_member(:smb_local_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SMBLocalGroups, location_name: "SMBLocalGroups"))
     DescribeSMBSettingsOutput.type = Types::DescribeSMBSettingsOutput
-    DescribeSnapshotScheduleInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    DescribeSnapshotScheduleInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
     DescribeSnapshotScheduleInput.type = Types::DescribeSnapshotScheduleInput
-    DescribeSnapshotScheduleOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    DescribeSnapshotScheduleOutput.add_member(:start_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HourOfDay, location_name: "StartAt"))
-    DescribeSnapshotScheduleOutput.add_member(:recurrence_in_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceInHours, location_name: "RecurrenceInHours"))
-    DescribeSnapshotScheduleOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DescribeSnapshotScheduleOutput.add_member(:timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
-    DescribeSnapshotScheduleOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribeSnapshotScheduleOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    DescribeSnapshotScheduleOutput.add_member(:start_at, ::Smithy::Schema::Shapes::MemberShape.new(target: HourOfDay, location_name: "StartAt"))
+    DescribeSnapshotScheduleOutput.add_member(:recurrence_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceInHours, location_name: "RecurrenceInHours"))
+    DescribeSnapshotScheduleOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DescribeSnapshotScheduleOutput.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayTimezone, location_name: "Timezone"))
+    DescribeSnapshotScheduleOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     DescribeSnapshotScheduleOutput.type = Types::DescribeSnapshotScheduleOutput
-    DescribeStorediSCSIVolumesInput.add_member(:volume_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARNs, location_name: "VolumeARNs", traits: {"smithy.api#required" => {}}))
+    DescribeStorediSCSIVolumesInput.add_member(:volume_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARNs, location_name: "VolumeARNs", traits: {"smithy.api#required" => {}}))
     DescribeStorediSCSIVolumesInput.type = Types::DescribeStorediSCSIVolumesInput
-    DescribeStorediSCSIVolumesOutput.add_member(:storedi_scsi_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorediSCSIVolumes, location_name: "StorediSCSIVolumes"))
+    DescribeStorediSCSIVolumesOutput.add_member(:storedi_scsi_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: StorediSCSIVolumes, location_name: "StorediSCSIVolumes"))
     DescribeStorediSCSIVolumesOutput.type = Types::DescribeStorediSCSIVolumesOutput
-    DescribeTapeArchivesInput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
-    DescribeTapeArchivesInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    DescribeTapeArchivesInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    DescribeTapeArchivesInput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARNs, location_name: "TapeARNs"))
+    DescribeTapeArchivesInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    DescribeTapeArchivesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     DescribeTapeArchivesInput.type = Types::DescribeTapeArchivesInput
-    DescribeTapeArchivesOutput.add_member(:tape_archives, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeArchives, location_name: "TapeArchives"))
-    DescribeTapeArchivesOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeTapeArchivesOutput.add_member(:tape_archives, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeArchives, location_name: "TapeArchives"))
+    DescribeTapeArchivesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     DescribeTapeArchivesOutput.type = Types::DescribeTapeArchivesOutput
-    DescribeTapeRecoveryPointsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    DescribeTapeRecoveryPointsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    DescribeTapeRecoveryPointsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    DescribeTapeRecoveryPointsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeTapeRecoveryPointsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    DescribeTapeRecoveryPointsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     DescribeTapeRecoveryPointsInput.type = Types::DescribeTapeRecoveryPointsInput
-    DescribeTapeRecoveryPointsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeTapeRecoveryPointsOutput.add_member(:tape_recovery_point_infos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeRecoveryPointInfos, location_name: "TapeRecoveryPointInfos"))
-    DescribeTapeRecoveryPointsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeTapeRecoveryPointsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeTapeRecoveryPointsOutput.add_member(:tape_recovery_point_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeRecoveryPointInfos, location_name: "TapeRecoveryPointInfos"))
+    DescribeTapeRecoveryPointsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     DescribeTapeRecoveryPointsOutput.type = Types::DescribeTapeRecoveryPointsOutput
-    DescribeTapesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    DescribeTapesInput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
-    DescribeTapesInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    DescribeTapesInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    DescribeTapesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeTapesInput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARNs, location_name: "TapeARNs"))
+    DescribeTapesInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    DescribeTapesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     DescribeTapesInput.type = Types::DescribeTapesInput
-    DescribeTapesOutput.add_member(:tapes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tapes, location_name: "Tapes"))
-    DescribeTapesOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeTapesOutput.add_member(:tapes, ::Smithy::Schema::Shapes::MemberShape.new(target: Tapes, location_name: "Tapes"))
+    DescribeTapesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     DescribeTapesOutput.type = Types::DescribeTapesOutput
-    DescribeUploadBufferInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeUploadBufferInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeUploadBufferInput.type = Types::DescribeUploadBufferInput
-    DescribeUploadBufferOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeUploadBufferOutput.add_member(:disk_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIds, location_name: "DiskIds"))
-    DescribeUploadBufferOutput.add_member(:upload_buffer_used_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "UploadBufferUsedInBytes", traits: {"smithy.api#default" => 0}))
-    DescribeUploadBufferOutput.add_member(:upload_buffer_allocated_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "UploadBufferAllocatedInBytes", traits: {"smithy.api#default" => 0}))
+    DescribeUploadBufferOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeUploadBufferOutput.add_member(:disk_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIds, location_name: "DiskIds"))
+    DescribeUploadBufferOutput.add_member(:upload_buffer_used_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "UploadBufferUsedInBytes", traits: {"smithy.api#default" => 0}))
+    DescribeUploadBufferOutput.add_member(:upload_buffer_allocated_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "UploadBufferAllocatedInBytes", traits: {"smithy.api#default" => 0}))
     DescribeUploadBufferOutput.type = Types::DescribeUploadBufferOutput
-    DescribeVTLDevicesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    DescribeVTLDevicesInput.add_member(:vtl_device_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceARNs, location_name: "VTLDeviceARNs"))
-    DescribeVTLDevicesInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    DescribeVTLDevicesInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    DescribeVTLDevicesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeVTLDevicesInput.add_member(:vtl_device_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceARNs, location_name: "VTLDeviceARNs"))
+    DescribeVTLDevicesInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    DescribeVTLDevicesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     DescribeVTLDevicesInput.type = Types::DescribeVTLDevicesInput
-    DescribeVTLDevicesOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeVTLDevicesOutput.add_member(:vtl_devices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDevices, location_name: "VTLDevices"))
-    DescribeVTLDevicesOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeVTLDevicesOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeVTLDevicesOutput.add_member(:vtl_devices, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDevices, location_name: "VTLDevices"))
+    DescribeVTLDevicesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     DescribeVTLDevicesOutput.type = Types::DescribeVTLDevicesOutput
-    DescribeWorkingStorageInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DescribeWorkingStorageInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DescribeWorkingStorageInput.type = Types::DescribeWorkingStorageInput
-    DescribeWorkingStorageOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    DescribeWorkingStorageOutput.add_member(:disk_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIds, location_name: "DiskIds"))
-    DescribeWorkingStorageOutput.add_member(:working_storage_used_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "WorkingStorageUsedInBytes", traits: {"smithy.api#default" => 0}))
-    DescribeWorkingStorageOutput.add_member(:working_storage_allocated_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "WorkingStorageAllocatedInBytes", traits: {"smithy.api#default" => 0}))
+    DescribeWorkingStorageOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    DescribeWorkingStorageOutput.add_member(:disk_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIds, location_name: "DiskIds"))
+    DescribeWorkingStorageOutput.add_member(:working_storage_used_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "WorkingStorageUsedInBytes", traits: {"smithy.api#default" => 0}))
+    DescribeWorkingStorageOutput.add_member(:working_storage_allocated_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "WorkingStorageAllocatedInBytes", traits: {"smithy.api#default" => 0}))
     DescribeWorkingStorageOutput.type = Types::DescribeWorkingStorageOutput
-    DetachVolumeInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
-    DetachVolumeInput.add_member(:force_detach, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceDetach"))
+    DetachVolumeInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    DetachVolumeInput.add_member(:force_detach, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ForceDetach"))
     DetachVolumeInput.type = Types::DetachVolumeInput
-    DetachVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
+    DetachVolumeOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
     DetachVolumeOutput.type = Types::DetachVolumeOutput
-    DeviceiSCSIAttributes.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
-    DeviceiSCSIAttributes.add_member(:network_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
-    DeviceiSCSIAttributes.add_member(:network_interface_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkInterfacePort", traits: {"smithy.api#default" => 0}))
-    DeviceiSCSIAttributes.add_member(:chap_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "ChapEnabled", traits: {"smithy.api#default" => false}))
+    DeviceiSCSIAttributes.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
+    DeviceiSCSIAttributes.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
+    DeviceiSCSIAttributes.add_member(:network_interface_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NetworkInterfacePort", traits: {"smithy.api#default" => 0}))
+    DeviceiSCSIAttributes.add_member(:chap_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "ChapEnabled", traits: {"smithy.api#default" => false}))
     DeviceiSCSIAttributes.type = Types::DeviceiSCSIAttributes
-    DisableGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    DisableGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     DisableGatewayInput.type = Types::DisableGatewayInput
-    DisableGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DisableGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     DisableGatewayOutput.type = Types::DisableGatewayOutput
-    DisassociateFileSystemInput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN", traits: {"smithy.api#required" => {}}))
-    DisassociateFileSystemInput.add_member(:force_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "ForceDelete", traits: {"smithy.api#default" => false}))
+    DisassociateFileSystemInput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN, location_name: "FileSystemAssociationARN", traits: {"smithy.api#required" => {}}))
+    DisassociateFileSystemInput.add_member(:force_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "ForceDelete", traits: {"smithy.api#default" => false}))
     DisassociateFileSystemInput.type = Types::DisassociateFileSystemInput
-    DisassociateFileSystemOutput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    DisassociateFileSystemOutput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
     DisassociateFileSystemOutput.type = Types::DisassociateFileSystemOutput
-    Disk.add_member(:disk_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskId, location_name: "DiskId"))
-    Disk.add_member(:disk_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiskPath"))
-    Disk.add_member(:disk_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiskNode"))
-    Disk.add_member(:disk_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiskStatus"))
-    Disk.add_member(:disk_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "DiskSizeInBytes", traits: {"smithy.api#default" => 0}))
-    Disk.add_member(:disk_allocation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskAllocationType, location_name: "DiskAllocationType"))
-    Disk.add_member(:disk_allocation_resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiskAllocationResource"))
-    Disk.add_member(:disk_attribute_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskAttributeList, location_name: "DiskAttributeList"))
+    Disk.add_member(:disk_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskId, location_name: "DiskId"))
+    Disk.add_member(:disk_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiskPath"))
+    Disk.add_member(:disk_node, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiskNode"))
+    Disk.add_member(:disk_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiskStatus"))
+    Disk.add_member(:disk_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "DiskSizeInBytes", traits: {"smithy.api#default" => 0}))
+    Disk.add_member(:disk_allocation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskAllocationType, location_name: "DiskAllocationType"))
+    Disk.add_member(:disk_allocation_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiskAllocationResource"))
+    Disk.add_member(:disk_attribute_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskAttributeList, location_name: "DiskAttributeList"))
     Disk.type = Types::Disk
-    DiskAttributeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskAttribute)
-    DiskIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskId)
-    Disks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Disk)
-    EncryptionType.add_member(:sse_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SseS3", traits: {"smithy.api#enumValue" => "SseS3"}))
-    EncryptionType.add_member(:sse_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SseKms", traits: {"smithy.api#enumValue" => "SseKms"}))
-    EncryptionType.add_member(:dsse_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DsseKms", traits: {"smithy.api#enumValue" => "DsseKms"}))
-    EndpointNetworkConfiguration.add_member(:ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressList, location_name: "IpAddresses"))
+    DiskAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiskAttribute)
+    DiskIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiskId)
+    Disks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Disk)
+    EncryptionType.add_member(:sse_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SseS3", traits: {"smithy.api#enumValue" => "SseS3"}))
+    EncryptionType.add_member(:sse_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SseKms", traits: {"smithy.api#enumValue" => "SseKms"}))
+    EncryptionType.add_member(:dsse_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DsseKms", traits: {"smithy.api#enumValue" => "DsseKms"}))
+    EndpointNetworkConfiguration.add_member(:ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressList, location_name: "IpAddresses"))
     EndpointNetworkConfiguration.type = Types::EndpointNetworkConfiguration
-    ErrorCode.add_member(:activation_key_expired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ActivationKeyExpired", traits: {"smithy.api#enumValue" => "ActivationKeyExpired"}))
-    ErrorCode.add_member(:activation_key_invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ActivationKeyInvalid", traits: {"smithy.api#enumValue" => "ActivationKeyInvalid"}))
-    ErrorCode.add_member(:activation_key_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ActivationKeyNotFound", traits: {"smithy.api#enumValue" => "ActivationKeyNotFound"}))
-    ErrorCode.add_member(:gateway_internal_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayInternalError", traits: {"smithy.api#enumValue" => "GatewayInternalError"}))
-    ErrorCode.add_member(:gateway_not_connected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayNotConnected", traits: {"smithy.api#enumValue" => "GatewayNotConnected"}))
-    ErrorCode.add_member(:gateway_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayNotFound", traits: {"smithy.api#enumValue" => "GatewayNotFound"}))
-    ErrorCode.add_member(:gateway_proxy_network_connection_busy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayProxyNetworkConnectionBusy", traits: {"smithy.api#enumValue" => "GatewayProxyNetworkConnectionBusy"}))
-    ErrorCode.add_member(:authentication_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AuthenticationFailure", traits: {"smithy.api#enumValue" => "AuthenticationFailure"}))
-    ErrorCode.add_member(:bandwidth_throttle_schedule_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BandwidthThrottleScheduleNotFound", traits: {"smithy.api#enumValue" => "BandwidthThrottleScheduleNotFound"}))
-    ErrorCode.add_member(:blocked, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Blocked", traits: {"smithy.api#enumValue" => "Blocked"}))
-    ErrorCode.add_member(:cannot_export_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CannotExportSnapshot", traits: {"smithy.api#enumValue" => "CannotExportSnapshot"}))
-    ErrorCode.add_member(:chap_credential_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ChapCredentialNotFound", traits: {"smithy.api#enumValue" => "ChapCredentialNotFound"}))
-    ErrorCode.add_member(:disk_already_allocated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskAlreadyAllocated", traits: {"smithy.api#enumValue" => "DiskAlreadyAllocated"}))
-    ErrorCode.add_member(:disk_does_not_exist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskDoesNotExist", traits: {"smithy.api#enumValue" => "DiskDoesNotExist"}))
-    ErrorCode.add_member(:disk_size_greater_than_volume_max_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskSizeGreaterThanVolumeMaxSize", traits: {"smithy.api#enumValue" => "DiskSizeGreaterThanVolumeMaxSize"}))
-    ErrorCode.add_member(:disk_size_less_than_volume_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskSizeLessThanVolumeSize", traits: {"smithy.api#enumValue" => "DiskSizeLessThanVolumeSize"}))
-    ErrorCode.add_member(:disk_size_not_gig_aligned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskSizeNotGigAligned", traits: {"smithy.api#enumValue" => "DiskSizeNotGigAligned"}))
-    ErrorCode.add_member(:duplicate_certificate_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DuplicateCertificateInfo", traits: {"smithy.api#enumValue" => "DuplicateCertificateInfo"}))
-    ErrorCode.add_member(:duplicate_schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DuplicateSchedule", traits: {"smithy.api#enumValue" => "DuplicateSchedule"}))
-    ErrorCode.add_member(:endpoint_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EndpointNotFound", traits: {"smithy.api#enumValue" => "EndpointNotFound"}))
-    ErrorCode.add_member(:iam_not_supported, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMNotSupported", traits: {"smithy.api#enumValue" => "IAMNotSupported"}))
-    ErrorCode.add_member(:initiator_invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InitiatorInvalid", traits: {"smithy.api#enumValue" => "InitiatorInvalid"}))
-    ErrorCode.add_member(:initiator_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InitiatorNotFound", traits: {"smithy.api#enumValue" => "InitiatorNotFound"}))
-    ErrorCode.add_member(:internal_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InternalError", traits: {"smithy.api#enumValue" => "InternalError"}))
-    ErrorCode.add_member(:invalid_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidGateway", traits: {"smithy.api#enumValue" => "InvalidGateway"}))
-    ErrorCode.add_member(:invalid_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidEndpoint", traits: {"smithy.api#enumValue" => "InvalidEndpoint"}))
-    ErrorCode.add_member(:invalid_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidParameters", traits: {"smithy.api#enumValue" => "InvalidParameters"}))
-    ErrorCode.add_member(:invalid_schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidSchedule", traits: {"smithy.api#enumValue" => "InvalidSchedule"}))
-    ErrorCode.add_member(:local_storage_limit_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocalStorageLimitExceeded", traits: {"smithy.api#enumValue" => "LocalStorageLimitExceeded"}))
-    ErrorCode.add_member(:lun_already_allocated_, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LunAlreadyAllocated_", traits: {"smithy.api#enumValue" => "LunAlreadyAllocated "}))
-    ErrorCode.add_member(:lun_invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LunInvalid", traits: {"smithy.api#enumValue" => "LunInvalid"}))
-    ErrorCode.add_member(:join_domain_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JoinDomainInProgress", traits: {"smithy.api#enumValue" => "JoinDomainInProgress"}))
-    ErrorCode.add_member(:maximum_content_length_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MaximumContentLengthExceeded", traits: {"smithy.api#enumValue" => "MaximumContentLengthExceeded"}))
-    ErrorCode.add_member(:maximum_tape_cartridge_count_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MaximumTapeCartridgeCountExceeded", traits: {"smithy.api#enumValue" => "MaximumTapeCartridgeCountExceeded"}))
-    ErrorCode.add_member(:maximum_volume_count_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MaximumVolumeCountExceeded", traits: {"smithy.api#enumValue" => "MaximumVolumeCountExceeded"}))
-    ErrorCode.add_member(:network_configuration_changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkConfigurationChanged", traits: {"smithy.api#enumValue" => "NetworkConfigurationChanged"}))
-    ErrorCode.add_member(:no_disks_available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NoDisksAvailable", traits: {"smithy.api#enumValue" => "NoDisksAvailable"}))
-    ErrorCode.add_member(:not_implemented, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotImplemented", traits: {"smithy.api#enumValue" => "NotImplemented"}))
-    ErrorCode.add_member(:not_supported, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotSupported", traits: {"smithy.api#enumValue" => "NotSupported"}))
-    ErrorCode.add_member(:operation_aborted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OperationAborted", traits: {"smithy.api#enumValue" => "OperationAborted"}))
-    ErrorCode.add_member(:outdated_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OutdatedGateway", traits: {"smithy.api#enumValue" => "OutdatedGateway"}))
-    ErrorCode.add_member(:parameters_not_implemented, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ParametersNotImplemented", traits: {"smithy.api#enumValue" => "ParametersNotImplemented"}))
-    ErrorCode.add_member(:region_invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionInvalid", traits: {"smithy.api#enumValue" => "RegionInvalid"}))
-    ErrorCode.add_member(:request_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RequestTimeout", traits: {"smithy.api#enumValue" => "RequestTimeout"}))
-    ErrorCode.add_member(:service_unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceUnavailable", traits: {"smithy.api#enumValue" => "ServiceUnavailable"}))
-    ErrorCode.add_member(:snapshot_deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotDeleted", traits: {"smithy.api#enumValue" => "SnapshotDeleted"}))
-    ErrorCode.add_member(:snapshot_id_invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotIdInvalid", traits: {"smithy.api#enumValue" => "SnapshotIdInvalid"}))
-    ErrorCode.add_member(:snapshot_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotInProgress", traits: {"smithy.api#enumValue" => "SnapshotInProgress"}))
-    ErrorCode.add_member(:snapshot_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotNotFound", traits: {"smithy.api#enumValue" => "SnapshotNotFound"}))
-    ErrorCode.add_member(:snapshot_schedule_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotScheduleNotFound", traits: {"smithy.api#enumValue" => "SnapshotScheduleNotFound"}))
-    ErrorCode.add_member(:staging_area_full, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StagingAreaFull", traits: {"smithy.api#enumValue" => "StagingAreaFull"}))
-    ErrorCode.add_member(:storage_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StorageFailure", traits: {"smithy.api#enumValue" => "StorageFailure"}))
-    ErrorCode.add_member(:tape_cartridge_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TapeCartridgeNotFound", traits: {"smithy.api#enumValue" => "TapeCartridgeNotFound"}))
-    ErrorCode.add_member(:target_already_exists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetAlreadyExists", traits: {"smithy.api#enumValue" => "TargetAlreadyExists"}))
-    ErrorCode.add_member(:target_invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetInvalid", traits: {"smithy.api#enumValue" => "TargetInvalid"}))
-    ErrorCode.add_member(:target_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetNotFound", traits: {"smithy.api#enumValue" => "TargetNotFound"}))
-    ErrorCode.add_member(:unauthorized_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UnauthorizedOperation", traits: {"smithy.api#enumValue" => "UnauthorizedOperation"}))
-    ErrorCode.add_member(:volume_already_exists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeAlreadyExists", traits: {"smithy.api#enumValue" => "VolumeAlreadyExists"}))
-    ErrorCode.add_member(:volume_id_invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeIdInvalid", traits: {"smithy.api#enumValue" => "VolumeIdInvalid"}))
-    ErrorCode.add_member(:volume_in_use, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeInUse", traits: {"smithy.api#enumValue" => "VolumeInUse"}))
-    ErrorCode.add_member(:volume_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeNotFound", traits: {"smithy.api#enumValue" => "VolumeNotFound"}))
-    ErrorCode.add_member(:volume_not_ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeNotReady", traits: {"smithy.api#enumValue" => "VolumeNotReady"}))
-    EvictFilesFailingUploadInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
-    EvictFilesFailingUploadInput.add_member(:force_remove, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "ForceRemove", traits: {"smithy.api#default" => false}))
+    ErrorCode.add_member(:activation_key_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ActivationKeyExpired", traits: {"smithy.api#enumValue" => "ActivationKeyExpired"}))
+    ErrorCode.add_member(:activation_key_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ActivationKeyInvalid", traits: {"smithy.api#enumValue" => "ActivationKeyInvalid"}))
+    ErrorCode.add_member(:activation_key_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ActivationKeyNotFound", traits: {"smithy.api#enumValue" => "ActivationKeyNotFound"}))
+    ErrorCode.add_member(:gateway_internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayInternalError", traits: {"smithy.api#enumValue" => "GatewayInternalError"}))
+    ErrorCode.add_member(:gateway_not_connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayNotConnected", traits: {"smithy.api#enumValue" => "GatewayNotConnected"}))
+    ErrorCode.add_member(:gateway_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayNotFound", traits: {"smithy.api#enumValue" => "GatewayNotFound"}))
+    ErrorCode.add_member(:gateway_proxy_network_connection_busy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GatewayProxyNetworkConnectionBusy", traits: {"smithy.api#enumValue" => "GatewayProxyNetworkConnectionBusy"}))
+    ErrorCode.add_member(:authentication_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AuthenticationFailure", traits: {"smithy.api#enumValue" => "AuthenticationFailure"}))
+    ErrorCode.add_member(:bandwidth_throttle_schedule_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BandwidthThrottleScheduleNotFound", traits: {"smithy.api#enumValue" => "BandwidthThrottleScheduleNotFound"}))
+    ErrorCode.add_member(:blocked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Blocked", traits: {"smithy.api#enumValue" => "Blocked"}))
+    ErrorCode.add_member(:cannot_export_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CannotExportSnapshot", traits: {"smithy.api#enumValue" => "CannotExportSnapshot"}))
+    ErrorCode.add_member(:chap_credential_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ChapCredentialNotFound", traits: {"smithy.api#enumValue" => "ChapCredentialNotFound"}))
+    ErrorCode.add_member(:disk_already_allocated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskAlreadyAllocated", traits: {"smithy.api#enumValue" => "DiskAlreadyAllocated"}))
+    ErrorCode.add_member(:disk_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskDoesNotExist", traits: {"smithy.api#enumValue" => "DiskDoesNotExist"}))
+    ErrorCode.add_member(:disk_size_greater_than_volume_max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskSizeGreaterThanVolumeMaxSize", traits: {"smithy.api#enumValue" => "DiskSizeGreaterThanVolumeMaxSize"}))
+    ErrorCode.add_member(:disk_size_less_than_volume_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskSizeLessThanVolumeSize", traits: {"smithy.api#enumValue" => "DiskSizeLessThanVolumeSize"}))
+    ErrorCode.add_member(:disk_size_not_gig_aligned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DiskSizeNotGigAligned", traits: {"smithy.api#enumValue" => "DiskSizeNotGigAligned"}))
+    ErrorCode.add_member(:duplicate_certificate_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DuplicateCertificateInfo", traits: {"smithy.api#enumValue" => "DuplicateCertificateInfo"}))
+    ErrorCode.add_member(:duplicate_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DuplicateSchedule", traits: {"smithy.api#enumValue" => "DuplicateSchedule"}))
+    ErrorCode.add_member(:endpoint_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EndpointNotFound", traits: {"smithy.api#enumValue" => "EndpointNotFound"}))
+    ErrorCode.add_member(:iam_not_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMNotSupported", traits: {"smithy.api#enumValue" => "IAMNotSupported"}))
+    ErrorCode.add_member(:initiator_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InitiatorInvalid", traits: {"smithy.api#enumValue" => "InitiatorInvalid"}))
+    ErrorCode.add_member(:initiator_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InitiatorNotFound", traits: {"smithy.api#enumValue" => "InitiatorNotFound"}))
+    ErrorCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InternalError", traits: {"smithy.api#enumValue" => "InternalError"}))
+    ErrorCode.add_member(:invalid_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidGateway", traits: {"smithy.api#enumValue" => "InvalidGateway"}))
+    ErrorCode.add_member(:invalid_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidEndpoint", traits: {"smithy.api#enumValue" => "InvalidEndpoint"}))
+    ErrorCode.add_member(:invalid_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidParameters", traits: {"smithy.api#enumValue" => "InvalidParameters"}))
+    ErrorCode.add_member(:invalid_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidSchedule", traits: {"smithy.api#enumValue" => "InvalidSchedule"}))
+    ErrorCode.add_member(:local_storage_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocalStorageLimitExceeded", traits: {"smithy.api#enumValue" => "LocalStorageLimitExceeded"}))
+    ErrorCode.add_member(:lun_already_allocated_, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LunAlreadyAllocated_", traits: {"smithy.api#enumValue" => "LunAlreadyAllocated "}))
+    ErrorCode.add_member(:lun_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LunInvalid", traits: {"smithy.api#enumValue" => "LunInvalid"}))
+    ErrorCode.add_member(:join_domain_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JoinDomainInProgress", traits: {"smithy.api#enumValue" => "JoinDomainInProgress"}))
+    ErrorCode.add_member(:maximum_content_length_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MaximumContentLengthExceeded", traits: {"smithy.api#enumValue" => "MaximumContentLengthExceeded"}))
+    ErrorCode.add_member(:maximum_tape_cartridge_count_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MaximumTapeCartridgeCountExceeded", traits: {"smithy.api#enumValue" => "MaximumTapeCartridgeCountExceeded"}))
+    ErrorCode.add_member(:maximum_volume_count_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MaximumVolumeCountExceeded", traits: {"smithy.api#enumValue" => "MaximumVolumeCountExceeded"}))
+    ErrorCode.add_member(:network_configuration_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkConfigurationChanged", traits: {"smithy.api#enumValue" => "NetworkConfigurationChanged"}))
+    ErrorCode.add_member(:no_disks_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NoDisksAvailable", traits: {"smithy.api#enumValue" => "NoDisksAvailable"}))
+    ErrorCode.add_member(:not_implemented, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotImplemented", traits: {"smithy.api#enumValue" => "NotImplemented"}))
+    ErrorCode.add_member(:not_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotSupported", traits: {"smithy.api#enumValue" => "NotSupported"}))
+    ErrorCode.add_member(:operation_aborted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OperationAborted", traits: {"smithy.api#enumValue" => "OperationAborted"}))
+    ErrorCode.add_member(:outdated_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OutdatedGateway", traits: {"smithy.api#enumValue" => "OutdatedGateway"}))
+    ErrorCode.add_member(:parameters_not_implemented, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ParametersNotImplemented", traits: {"smithy.api#enumValue" => "ParametersNotImplemented"}))
+    ErrorCode.add_member(:region_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionInvalid", traits: {"smithy.api#enumValue" => "RegionInvalid"}))
+    ErrorCode.add_member(:request_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RequestTimeout", traits: {"smithy.api#enumValue" => "RequestTimeout"}))
+    ErrorCode.add_member(:service_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceUnavailable", traits: {"smithy.api#enumValue" => "ServiceUnavailable"}))
+    ErrorCode.add_member(:snapshot_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotDeleted", traits: {"smithy.api#enumValue" => "SnapshotDeleted"}))
+    ErrorCode.add_member(:snapshot_id_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotIdInvalid", traits: {"smithy.api#enumValue" => "SnapshotIdInvalid"}))
+    ErrorCode.add_member(:snapshot_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotInProgress", traits: {"smithy.api#enumValue" => "SnapshotInProgress"}))
+    ErrorCode.add_member(:snapshot_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotNotFound", traits: {"smithy.api#enumValue" => "SnapshotNotFound"}))
+    ErrorCode.add_member(:snapshot_schedule_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SnapshotScheduleNotFound", traits: {"smithy.api#enumValue" => "SnapshotScheduleNotFound"}))
+    ErrorCode.add_member(:staging_area_full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StagingAreaFull", traits: {"smithy.api#enumValue" => "StagingAreaFull"}))
+    ErrorCode.add_member(:storage_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StorageFailure", traits: {"smithy.api#enumValue" => "StorageFailure"}))
+    ErrorCode.add_member(:tape_cartridge_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TapeCartridgeNotFound", traits: {"smithy.api#enumValue" => "TapeCartridgeNotFound"}))
+    ErrorCode.add_member(:target_already_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetAlreadyExists", traits: {"smithy.api#enumValue" => "TargetAlreadyExists"}))
+    ErrorCode.add_member(:target_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetInvalid", traits: {"smithy.api#enumValue" => "TargetInvalid"}))
+    ErrorCode.add_member(:target_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TargetNotFound", traits: {"smithy.api#enumValue" => "TargetNotFound"}))
+    ErrorCode.add_member(:unauthorized_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UnauthorizedOperation", traits: {"smithy.api#enumValue" => "UnauthorizedOperation"}))
+    ErrorCode.add_member(:volume_already_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeAlreadyExists", traits: {"smithy.api#enumValue" => "VolumeAlreadyExists"}))
+    ErrorCode.add_member(:volume_id_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeIdInvalid", traits: {"smithy.api#enumValue" => "VolumeIdInvalid"}))
+    ErrorCode.add_member(:volume_in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeInUse", traits: {"smithy.api#enumValue" => "VolumeInUse"}))
+    ErrorCode.add_member(:volume_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeNotFound", traits: {"smithy.api#enumValue" => "VolumeNotFound"}))
+    ErrorCode.add_member(:volume_not_ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VolumeNotReady", traits: {"smithy.api#enumValue" => "VolumeNotReady"}))
+    EvictFilesFailingUploadInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
+    EvictFilesFailingUploadInput.add_member(:force_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "ForceRemove", traits: {"smithy.api#default" => false}))
     EvictFilesFailingUploadInput.type = Types::EvictFilesFailingUploadInput
-    EvictFilesFailingUploadOutput.add_member(:notification_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NotificationId"))
+    EvictFilesFailingUploadOutput.add_member(:notification_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NotificationId"))
     EvictFilesFailingUploadOutput.type = Types::EvictFilesFailingUploadOutput
-    FileShareARNList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN)
-    FileShareClientList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv4OrIpv6AddressCIDR)
-    FileShareInfo.add_member(:file_share_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareType, location_name: "FileShareType"))
-    FileShareInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
-    FileShareInfo.add_member(:file_share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareId, location_name: "FileShareId"))
-    FileShareInfo.add_member(:file_share_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareStatus, location_name: "FileShareStatus"))
-    FileShareInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    FileShareARNList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN)
+    FileShareClientList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4OrIpv6AddressCIDR)
+    FileShareInfo.add_member(:file_share_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareType, location_name: "FileShareType"))
+    FileShareInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
+    FileShareInfo.add_member(:file_share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareId, location_name: "FileShareId"))
+    FileShareInfo.add_member(:file_share_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareStatus, location_name: "FileShareStatus"))
+    FileShareInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     FileShareInfo.type = Types::FileShareInfo
-    FileShareInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareInfo)
-    FileShareType.add_member(:nfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS", traits: {"smithy.api#enumValue" => "NFS"}))
-    FileShareType.add_member(:smb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB", traits: {"smithy.api#enumValue" => "SMB"}))
-    FileSystemAssociationARNList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN)
-    FileSystemAssociationInfo.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
-    FileSystemAssociationInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemLocationARN, location_name: "LocationARN"))
-    FileSystemAssociationInfo.add_member(:file_system_association_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationStatus, location_name: "FileSystemAssociationStatus"))
-    FileSystemAssociationInfo.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
-    FileSystemAssociationInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    FileSystemAssociationInfo.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    FileSystemAssociationInfo.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    FileSystemAssociationInfo.add_member(:endpoint_network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointNetworkConfiguration, location_name: "EndpointNetworkConfiguration"))
-    FileSystemAssociationInfo.add_member(:file_system_association_status_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationStatusDetails, location_name: "FileSystemAssociationStatusDetails"))
+    FileShareInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareInfo)
+    FileShareType.add_member(:nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS", traits: {"smithy.api#enumValue" => "NFS"}))
+    FileShareType.add_member(:smb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB", traits: {"smithy.api#enumValue" => "SMB"}))
+    FileSystemAssociationARNList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN)
+    FileSystemAssociationInfo.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    FileSystemAssociationInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemLocationARN, location_name: "LocationARN"))
+    FileSystemAssociationInfo.add_member(:file_system_association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationStatus, location_name: "FileSystemAssociationStatus"))
+    FileSystemAssociationInfo.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    FileSystemAssociationInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    FileSystemAssociationInfo.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    FileSystemAssociationInfo.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    FileSystemAssociationInfo.add_member(:endpoint_network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointNetworkConfiguration, location_name: "EndpointNetworkConfiguration"))
+    FileSystemAssociationInfo.add_member(:file_system_association_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationStatusDetails, location_name: "FileSystemAssociationStatusDetails"))
     FileSystemAssociationInfo.type = Types::FileSystemAssociationInfo
-    FileSystemAssociationInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationInfo)
-    FileSystemAssociationStatusDetail.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationSyncErrorCode, location_name: "ErrorCode"))
+    FileSystemAssociationInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationInfo)
+    FileSystemAssociationStatusDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationSyncErrorCode, location_name: "ErrorCode"))
     FileSystemAssociationStatusDetail.type = Types::FileSystemAssociationStatusDetail
-    FileSystemAssociationStatusDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationStatusDetail)
-    FileSystemAssociationSummary.add_member(:file_system_association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationId, location_name: "FileSystemAssociationId"))
-    FileSystemAssociationSummary.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
-    FileSystemAssociationSummary.add_member(:file_system_association_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationStatus, location_name: "FileSystemAssociationStatus"))
-    FileSystemAssociationSummary.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    FileSystemAssociationStatusDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationStatusDetail)
+    FileSystemAssociationSummary.add_member(:file_system_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationId, location_name: "FileSystemAssociationId"))
+    FileSystemAssociationSummary.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    FileSystemAssociationSummary.add_member(:file_system_association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationStatus, location_name: "FileSystemAssociationStatus"))
+    FileSystemAssociationSummary.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     FileSystemAssociationSummary.type = Types::FileSystemAssociationSummary
-    FileSystemAssociationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationSummary)
-    FolderList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Folder)
-    GatewayCapacity.add_member(:small, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Small", traits: {"smithy.api#enumValue" => "Small"}))
-    GatewayCapacity.add_member(:medium, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Medium", traits: {"smithy.api#enumValue" => "Medium"}))
-    GatewayCapacity.add_member(:large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Large", traits: {"smithy.api#enumValue" => "Large"}))
-    GatewayInfo.add_member(:gateway_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayId, location_name: "GatewayId"))
-    GatewayInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    GatewayInfo.add_member(:gateway_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
-    GatewayInfo.add_member(:gateway_operational_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayOperationalState, location_name: "GatewayOperationalState"))
-    GatewayInfo.add_member(:gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "GatewayName"))
-    GatewayInfo.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2InstanceId, location_name: "Ec2InstanceId"))
-    GatewayInfo.add_member(:ec2_instance_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
-    GatewayInfo.add_member(:host_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HostEnvironment, location_name: "HostEnvironment"))
-    GatewayInfo.add_member(:host_environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HostEnvironmentId, location_name: "HostEnvironmentId"))
-    GatewayInfo.add_member(:deprecation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeprecationDate, location_name: "DeprecationDate"))
-    GatewayInfo.add_member(:software_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareVersion, location_name: "SoftwareVersion"))
+    FileSystemAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationSummary)
+    FolderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Folder)
+    GatewayCapacity.add_member(:small, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Small", traits: {"smithy.api#enumValue" => "Small"}))
+    GatewayCapacity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Medium", traits: {"smithy.api#enumValue" => "Medium"}))
+    GatewayCapacity.add_member(:large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Large", traits: {"smithy.api#enumValue" => "Large"}))
+    GatewayInfo.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayId, location_name: "GatewayId"))
+    GatewayInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    GatewayInfo.add_member(:gateway_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayType, location_name: "GatewayType"))
+    GatewayInfo.add_member(:gateway_operational_state, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayOperationalState, location_name: "GatewayOperationalState"))
+    GatewayInfo.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "GatewayName"))
+    GatewayInfo.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2InstanceId, location_name: "Ec2InstanceId"))
+    GatewayInfo.add_member(:ec2_instance_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
+    GatewayInfo.add_member(:host_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: HostEnvironment, location_name: "HostEnvironment"))
+    GatewayInfo.add_member(:host_environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostEnvironmentId, location_name: "HostEnvironmentId"))
+    GatewayInfo.add_member(:deprecation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DeprecationDate, location_name: "DeprecationDate"))
+    GatewayInfo.add_member(:software_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareVersion, location_name: "SoftwareVersion"))
     GatewayInfo.type = Types::GatewayInfo
-    GatewayNetworkInterfaces.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterface)
-    Gateways.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayInfo)
-    HostEnvironment.add_member(:vmware, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VMWARE", traits: {"smithy.api#enumValue" => "VMWARE"}))
-    HostEnvironment.add_member(:hyper_v, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HYPER_V", traits: {"smithy.api#enumValue" => "HYPER-V"}))
-    HostEnvironment.add_member(:ec2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2", traits: {"smithy.api#enumValue" => "EC2"}))
-    HostEnvironment.add_member(:kvm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KVM", traits: {"smithy.api#enumValue" => "KVM"}))
-    HostEnvironment.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
-    HostEnvironment.add_member(:snowball, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOWBALL", traits: {"smithy.api#enumValue" => "SNOWBALL"}))
-    Hosts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Host)
-    Initiators.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Initiator)
-    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    InternalServerError.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    GatewayNetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface)
+    Gateways.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayInfo)
+    HostEnvironment.add_member(:vmware, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VMWARE", traits: {"smithy.api#enumValue" => "VMWARE"}))
+    HostEnvironment.add_member(:hyper_v, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HYPER_V", traits: {"smithy.api#enumValue" => "HYPER-V"}))
+    HostEnvironment.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2", traits: {"smithy.api#enumValue" => "EC2"}))
+    HostEnvironment.add_member(:kvm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KVM", traits: {"smithy.api#enumValue" => "KVM"}))
+    HostEnvironment.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
+    HostEnvironment.add_member(:snowball, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOWBALL", traits: {"smithy.api#enumValue" => "SNOWBALL"}))
+    Hosts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Host)
+    Initiators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Initiator)
+    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InternalServerError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageGatewayError, location_name: "error"))
     InternalServerError.type = Types::InternalServerError
-    InvalidGatewayRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    InvalidGatewayRequestException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    InvalidGatewayRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InvalidGatewayRequestException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageGatewayError, location_name: "error"))
     InvalidGatewayRequestException.type = Types::InvalidGatewayRequestException
-    IpAddressList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IPV4Address)
-    JoinDomainInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    JoinDomainInput.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
-    JoinDomainInput.add_member(:organizational_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnit, location_name: "OrganizationalUnit"))
-    JoinDomainInput.add_member(:domain_controllers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hosts, location_name: "DomainControllers"))
-    JoinDomainInput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "TimeoutInSeconds"))
-    JoinDomainInput.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainUserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
-    JoinDomainInput.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainUserPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    IpAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPV4Address)
+    JoinDomainInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    JoinDomainInput.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    JoinDomainInput.add_member(:organizational_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnit, location_name: "OrganizationalUnit"))
+    JoinDomainInput.add_member(:domain_controllers, ::Smithy::Schema::Shapes::MemberShape.new(target: Hosts, location_name: "DomainControllers"))
+    JoinDomainInput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutInSeconds, location_name: "TimeoutInSeconds"))
+    JoinDomainInput.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
+    JoinDomainInput.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUserPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
     JoinDomainInput.type = Types::JoinDomainInput
-    JoinDomainOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    JoinDomainOutput.add_member(:active_directory_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
+    JoinDomainOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    JoinDomainOutput.add_member(:active_directory_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
     JoinDomainOutput.type = Types::JoinDomainOutput
-    ListAutomaticTapeCreationPoliciesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    ListAutomaticTapeCreationPoliciesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     ListAutomaticTapeCreationPoliciesInput.type = Types::ListAutomaticTapeCreationPoliciesInput
-    ListAutomaticTapeCreationPoliciesOutput.add_member(:automatic_tape_creation_policy_infos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticTapeCreationPolicyInfos, location_name: "AutomaticTapeCreationPolicyInfos"))
+    ListAutomaticTapeCreationPoliciesOutput.add_member(:automatic_tape_creation_policy_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticTapeCreationPolicyInfos, location_name: "AutomaticTapeCreationPolicyInfos"))
     ListAutomaticTapeCreationPoliciesOutput.type = Types::ListAutomaticTapeCreationPoliciesOutput
-    ListCacheReportsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListCacheReportsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     ListCacheReportsInput.type = Types::ListCacheReportsInput
-    ListCacheReportsOutput.add_member(:cache_report_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportList, location_name: "CacheReportList"))
-    ListCacheReportsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListCacheReportsOutput.add_member(:cache_report_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportList, location_name: "CacheReportList"))
+    ListCacheReportsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     ListCacheReportsOutput.type = Types::ListCacheReportsOutput
-    ListFileSharesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    ListFileSharesInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
-    ListFileSharesInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListFileSharesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    ListFileSharesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
+    ListFileSharesInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     ListFileSharesInput.type = Types::ListFileSharesInput
-    ListFileSharesOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListFileSharesOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
-    ListFileSharesOutput.add_member(:file_share_info_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareInfoList, location_name: "FileShareInfoList"))
+    ListFileSharesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListFileSharesOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "NextMarker"))
+    ListFileSharesOutput.add_member(:file_share_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareInfoList, location_name: "FileShareInfoList"))
     ListFileSharesOutput.type = Types::ListFileSharesOutput
-    ListFileSystemAssociationsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    ListFileSystemAssociationsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
-    ListFileSystemAssociationsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListFileSystemAssociationsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    ListFileSystemAssociationsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
+    ListFileSystemAssociationsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     ListFileSystemAssociationsInput.type = Types::ListFileSystemAssociationsInput
-    ListFileSystemAssociationsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListFileSystemAssociationsOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
-    ListFileSystemAssociationsOutput.add_member(:file_system_association_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationSummaryList, location_name: "FileSystemAssociationSummaryList"))
+    ListFileSystemAssociationsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListFileSystemAssociationsOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "NextMarker"))
+    ListFileSystemAssociationsOutput.add_member(:file_system_association_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationSummaryList, location_name: "FileSystemAssociationSummaryList"))
     ListFileSystemAssociationsOutput.type = Types::ListFileSystemAssociationsOutput
-    ListGatewaysInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListGatewaysInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListGatewaysInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListGatewaysInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     ListGatewaysInput.type = Types::ListGatewaysInput
-    ListGatewaysOutput.add_member(:gateways, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Gateways, location_name: "Gateways"))
-    ListGatewaysOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListGatewaysOutput.add_member(:gateways, ::Smithy::Schema::Shapes::MemberShape.new(target: Gateways, location_name: "Gateways"))
+    ListGatewaysOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     ListGatewaysOutput.type = Types::ListGatewaysOutput
-    ListLocalDisksInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    ListLocalDisksInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     ListLocalDisksInput.type = Types::ListLocalDisksInput
-    ListLocalDisksOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    ListLocalDisksOutput.add_member(:disks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Disks, location_name: "Disks"))
+    ListLocalDisksOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    ListLocalDisksOutput.add_member(:disks, ::Smithy::Schema::Shapes::MemberShape.new(target: Disks, location_name: "Disks"))
     ListLocalDisksOutput.type = Types::ListLocalDisksOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListTagsForResourceInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListTagsForResourceInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    ListTagsForResourceOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    ListTagsForResourceOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListTapePoolsInput.add_member(:pool_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolARNs, location_name: "PoolARNs"))
-    ListTapePoolsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListTapePoolsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListTapePoolsInput.add_member(:pool_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolARNs, location_name: "PoolARNs"))
+    ListTapePoolsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListTapePoolsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     ListTapePoolsInput.type = Types::ListTapePoolsInput
-    ListTapePoolsOutput.add_member(:pool_infos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolInfos, location_name: "PoolInfos"))
-    ListTapePoolsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListTapePoolsOutput.add_member(:pool_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolInfos, location_name: "PoolInfos"))
+    ListTapePoolsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     ListTapePoolsOutput.type = Types::ListTapePoolsOutput
-    ListTapesInput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
-    ListTapesInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListTapesInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListTapesInput.add_member(:tape_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARNs, location_name: "TapeARNs"))
+    ListTapesInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListTapesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     ListTapesInput.type = Types::ListTapesInput
-    ListTapesOutput.add_member(:tape_infos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeInfos, location_name: "TapeInfos"))
-    ListTapesOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListTapesOutput.add_member(:tape_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeInfos, location_name: "TapeInfos"))
+    ListTapesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
     ListTapesOutput.type = Types::ListTapesOutput
-    ListVolumeInitiatorsInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    ListVolumeInitiatorsInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
     ListVolumeInitiatorsInput.type = Types::ListVolumeInitiatorsInput
-    ListVolumeInitiatorsOutput.add_member(:initiators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Initiators, location_name: "Initiators"))
+    ListVolumeInitiatorsOutput.add_member(:initiators, ::Smithy::Schema::Shapes::MemberShape.new(target: Initiators, location_name: "Initiators"))
     ListVolumeInitiatorsOutput.type = Types::ListVolumeInitiatorsOutput
-    ListVolumeRecoveryPointsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    ListVolumeRecoveryPointsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     ListVolumeRecoveryPointsInput.type = Types::ListVolumeRecoveryPointsInput
-    ListVolumeRecoveryPointsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    ListVolumeRecoveryPointsOutput.add_member(:volume_recovery_point_infos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeRecoveryPointInfos, location_name: "VolumeRecoveryPointInfos"))
+    ListVolumeRecoveryPointsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    ListVolumeRecoveryPointsOutput.add_member(:volume_recovery_point_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeRecoveryPointInfos, location_name: "VolumeRecoveryPointInfos"))
     ListVolumeRecoveryPointsOutput.type = Types::ListVolumeRecoveryPointsOutput
-    ListVolumesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    ListVolumesInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListVolumesInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListVolumesInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    ListVolumesInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListVolumesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "Limit"))
     ListVolumesInput.type = Types::ListVolumesInput
-    ListVolumesOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    ListVolumesOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
-    ListVolumesOutput.add_member(:volume_infos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeInfos, location_name: "VolumeInfos"))
+    ListVolumesOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    ListVolumesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
+    ListVolumesOutput.add_member(:volume_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeInfos, location_name: "VolumeInfos"))
     ListVolumesOutput.type = Types::ListVolumesOutput
-    NFSFileShareDefaults.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionMode, location_name: "FileMode"))
-    NFSFileShareDefaults.add_member(:directory_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionMode, location_name: "DirectoryMode"))
-    NFSFileShareDefaults.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionId, location_name: "GroupId"))
-    NFSFileShareDefaults.add_member(:owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionId, location_name: "OwnerId"))
+    NFSFileShareDefaults.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionMode, location_name: "FileMode"))
+    NFSFileShareDefaults.add_member(:directory_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionMode, location_name: "DirectoryMode"))
+    NFSFileShareDefaults.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionId, location_name: "GroupId"))
+    NFSFileShareDefaults.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionId, location_name: "OwnerId"))
     NFSFileShareDefaults.type = Types::NFSFileShareDefaults
-    NFSFileShareInfo.add_member(:nfs_file_share_defaults, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
-    NFSFileShareInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
-    NFSFileShareInfo.add_member(:file_share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareId, location_name: "FileShareId"))
-    NFSFileShareInfo.add_member(:file_share_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareStatus, location_name: "FileShareStatus"))
-    NFSFileShareInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    NFSFileShareInfo.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    NFSFileShareInfo.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "KMSEncrypted", traits: {"smithy.api#default" => false, "smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
-    NFSFileShareInfo.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    NFSFileShareInfo.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
-    NFSFileShareInfo.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
-    NFSFileShareInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN"))
-    NFSFileShareInfo.add_member(:default_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
-    NFSFileShareInfo.add_member(:object_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
-    NFSFileShareInfo.add_member(:client_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
-    NFSFileShareInfo.add_member(:squash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
-    NFSFileShareInfo.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
-    NFSFileShareInfo.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
-    NFSFileShareInfo.add_member(:requester_pays, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
-    NFSFileShareInfo.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    NFSFileShareInfo.add_member(:file_share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
-    NFSFileShareInfo.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    NFSFileShareInfo.add_member(:notification_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
-    NFSFileShareInfo.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSHostName, location_name: "VPCEndpointDNSName"))
-    NFSFileShareInfo.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionId, location_name: "BucketRegion"))
-    NFSFileShareInfo.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    NFSFileShareInfo.add_member(:nfs_file_share_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
+    NFSFileShareInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
+    NFSFileShareInfo.add_member(:file_share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareId, location_name: "FileShareId"))
+    NFSFileShareInfo.add_member(:file_share_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareStatus, location_name: "FileShareStatus"))
+    NFSFileShareInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    NFSFileShareInfo.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    NFSFileShareInfo.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "KMSEncrypted", traits: {"smithy.api#default" => false, "smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
+    NFSFileShareInfo.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    NFSFileShareInfo.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "Path"))
+    NFSFileShareInfo.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role"))
+    NFSFileShareInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationARN, location_name: "LocationARN"))
+    NFSFileShareInfo.add_member(:default_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "DefaultStorageClass"))
+    NFSFileShareInfo.add_member(:object_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectACL, location_name: "ObjectACL"))
+    NFSFileShareInfo.add_member(:client_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareClientList, location_name: "ClientList"))
+    NFSFileShareInfo.add_member(:squash, ::Smithy::Schema::Shapes::MemberShape.new(target: Squash, location_name: "Squash"))
+    NFSFileShareInfo.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ReadOnly"))
+    NFSFileShareInfo.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "GuessMIMETypeEnabled"))
+    NFSFileShareInfo.add_member(:requester_pays, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "RequesterPays"))
+    NFSFileShareInfo.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    NFSFileShareInfo.add_member(:file_share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareName, location_name: "FileShareName"))
+    NFSFileShareInfo.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    NFSFileShareInfo.add_member(:notification_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationPolicy, location_name: "NotificationPolicy"))
+    NFSFileShareInfo.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSHostName, location_name: "VPCEndpointDNSName"))
+    NFSFileShareInfo.add_member(:bucket_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionId, location_name: "BucketRegion"))
+    NFSFileShareInfo.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
     NFSFileShareInfo.type = Types::NFSFileShareInfo
-    NFSFileShareInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NFSFileShareInfo)
-    NetworkInterface.add_member(:ipv4_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Ipv4Address"))
-    NetworkInterface.add_member(:mac_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MacAddress"))
-    NetworkInterface.add_member(:ipv6_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Address"))
+    NFSFileShareInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NFSFileShareInfo)
+    NetworkInterface.add_member(:ipv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Ipv4Address"))
+    NetworkInterface.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MacAddress"))
+    NetworkInterface.add_member(:ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Ipv6Address"))
     NetworkInterface.type = Types::NetworkInterface
-    NotifyWhenUploadedInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
+    NotifyWhenUploadedInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
     NotifyWhenUploadedInput.type = Types::NotifyWhenUploadedInput
-    NotifyWhenUploadedOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
-    NotifyWhenUploadedOutput.add_member(:notification_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationId, location_name: "NotificationId"))
+    NotifyWhenUploadedOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
+    NotifyWhenUploadedOutput.add_member(:notification_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationId, location_name: "NotificationId"))
     NotifyWhenUploadedOutput.type = Types::NotifyWhenUploadedOutput
-    ObjectACL.add_member(:private, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "private", traits: {"smithy.api#enumValue" => "private"}))
-    ObjectACL.add_member(:public_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read", traits: {"smithy.api#enumValue" => "public-read"}))
-    ObjectACL.add_member(:public_read_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read_write", traits: {"smithy.api#enumValue" => "public-read-write"}))
-    ObjectACL.add_member(:authenticated_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "authenticated_read", traits: {"smithy.api#enumValue" => "authenticated-read"}))
-    ObjectACL.add_member(:bucket_owner_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "bucket_owner_read", traits: {"smithy.api#enumValue" => "bucket-owner-read"}))
-    ObjectACL.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "bucket_owner_full_control", traits: {"smithy.api#enumValue" => "bucket-owner-full-control"}))
-    ObjectACL.add_member(:aws_exec_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws_exec_read", traits: {"smithy.api#enumValue" => "aws-exec-read"}))
-    PoolARNs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolARN)
-    PoolInfo.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolARN, location_name: "PoolARN"))
-    PoolInfo.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "PoolName"))
-    PoolInfo.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeStorageClass, location_name: "StorageClass"))
-    PoolInfo.add_member(:retention_lock_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionLockType, location_name: "RetentionLockType"))
-    PoolInfo.add_member(:retention_lock_time_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionLockTimeInDays, location_name: "RetentionLockTimeInDays"))
-    PoolInfo.add_member(:pool_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolStatus, location_name: "PoolStatus"))
+    ObjectACL.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "private", traits: {"smithy.api#enumValue" => "private"}))
+    ObjectACL.add_member(:public_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read", traits: {"smithy.api#enumValue" => "public-read"}))
+    ObjectACL.add_member(:public_read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read_write", traits: {"smithy.api#enumValue" => "public-read-write"}))
+    ObjectACL.add_member(:authenticated_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "authenticated_read", traits: {"smithy.api#enumValue" => "authenticated-read"}))
+    ObjectACL.add_member(:bucket_owner_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "bucket_owner_read", traits: {"smithy.api#enumValue" => "bucket-owner-read"}))
+    ObjectACL.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "bucket_owner_full_control", traits: {"smithy.api#enumValue" => "bucket-owner-full-control"}))
+    ObjectACL.add_member(:aws_exec_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws_exec_read", traits: {"smithy.api#enumValue" => "aws-exec-read"}))
+    PoolARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolARN)
+    PoolInfo.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolARN, location_name: "PoolARN"))
+    PoolInfo.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "PoolName"))
+    PoolInfo.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeStorageClass, location_name: "StorageClass"))
+    PoolInfo.add_member(:retention_lock_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionLockType, location_name: "RetentionLockType"))
+    PoolInfo.add_member(:retention_lock_time_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionLockTimeInDays, location_name: "RetentionLockTimeInDays"))
+    PoolInfo.add_member(:pool_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolStatus, location_name: "PoolStatus"))
     PoolInfo.type = Types::PoolInfo
-    PoolInfos.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolInfo)
-    PoolStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    PoolStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    RefreshCacheInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
-    RefreshCacheInput.add_member(:folder_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderList, location_name: "FolderList"))
-    RefreshCacheInput.add_member(:recursive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "Recursive"))
+    PoolInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolInfo)
+    PoolStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    PoolStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    RefreshCacheInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
+    RefreshCacheInput.add_member(:folder_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderList, location_name: "FolderList"))
+    RefreshCacheInput.add_member(:recursive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "Recursive"))
     RefreshCacheInput.type = Types::RefreshCacheInput
-    RefreshCacheOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
-    RefreshCacheOutput.add_member(:notification_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationId, location_name: "NotificationId"))
+    RefreshCacheOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
+    RefreshCacheOutput.add_member(:notification_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationId, location_name: "NotificationId"))
     RefreshCacheOutput.type = Types::RefreshCacheOutput
-    RemoveTagsFromResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    RemoveTagsFromResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    RemoveTagsFromResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    RemoveTagsFromResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     RemoveTagsFromResourceInput.type = Types::RemoveTagsFromResourceInput
-    RemoveTagsFromResourceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    RemoveTagsFromResourceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
     RemoveTagsFromResourceOutput.type = Types::RemoveTagsFromResourceOutput
-    ResetCacheInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    ResetCacheInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     ResetCacheInput.type = Types::ResetCacheInput
-    ResetCacheOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    ResetCacheOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     ResetCacheOutput.type = Types::ResetCacheOutput
-    RetentionLockType.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
-    RetentionLockType.add_member(:governance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GOVERNANCE", traits: {"smithy.api#enumValue" => "GOVERNANCE"}))
-    RetentionLockType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    RetrieveTapeArchiveInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
-    RetrieveTapeArchiveInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    RetentionLockType.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
+    RetentionLockType.add_member(:governance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GOVERNANCE", traits: {"smithy.api#enumValue" => "GOVERNANCE"}))
+    RetentionLockType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    RetrieveTapeArchiveInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
+    RetrieveTapeArchiveInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     RetrieveTapeArchiveInput.type = Types::RetrieveTapeArchiveInput
-    RetrieveTapeArchiveOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    RetrieveTapeArchiveOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     RetrieveTapeArchiveOutput.type = Types::RetrieveTapeArchiveOutput
-    RetrieveTapeRecoveryPointInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
-    RetrieveTapeRecoveryPointInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    RetrieveTapeRecoveryPointInput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN", traits: {"smithy.api#required" => {}}))
+    RetrieveTapeRecoveryPointInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     RetrieveTapeRecoveryPointInput.type = Types::RetrieveTapeRecoveryPointInput
-    RetrieveTapeRecoveryPointOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    RetrieveTapeRecoveryPointOutput.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
     RetrieveTapeRecoveryPointOutput.type = Types::RetrieveTapeRecoveryPointOutput
-    SMBFileShareInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
-    SMBFileShareInfo.add_member(:file_share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareId, location_name: "FileShareId"))
-    SMBFileShareInfo.add_member(:file_share_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareStatus, location_name: "FileShareStatus"))
-    SMBFileShareInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    SMBFileShareInfo.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    SMBFileShareInfo.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "KMSEncrypted", traits: {"smithy.api#default" => false, "smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
-    SMBFileShareInfo.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    SMBFileShareInfo.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
-    SMBFileShareInfo.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
-    SMBFileShareInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN"))
-    SMBFileShareInfo.add_member(:default_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
-    SMBFileShareInfo.add_member(:object_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
-    SMBFileShareInfo.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
-    SMBFileShareInfo.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
-    SMBFileShareInfo.add_member(:requester_pays, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
-    SMBFileShareInfo.add_member(:smbacl_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
-    SMBFileShareInfo.add_member(:access_based_enumeration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
-    SMBFileShareInfo.add_member(:admin_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "AdminUserList"))
-    SMBFileShareInfo.add_member(:valid_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "ValidUserList"))
-    SMBFileShareInfo.add_member(:invalid_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "InvalidUserList"))
-    SMBFileShareInfo.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
-    SMBFileShareInfo.add_member(:authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
-    SMBFileShareInfo.add_member(:case_sensitivity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
-    SMBFileShareInfo.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    SMBFileShareInfo.add_member(:file_share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
-    SMBFileShareInfo.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    SMBFileShareInfo.add_member(:notification_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
-    SMBFileShareInfo.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSHostName, location_name: "VPCEndpointDNSName"))
-    SMBFileShareInfo.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionId, location_name: "BucketRegion"))
-    SMBFileShareInfo.add_member(:oplocks_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "OplocksEnabled"))
+    SMBFileShareInfo.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
+    SMBFileShareInfo.add_member(:file_share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareId, location_name: "FileShareId"))
+    SMBFileShareInfo.add_member(:file_share_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareStatus, location_name: "FileShareStatus"))
+    SMBFileShareInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    SMBFileShareInfo.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    SMBFileShareInfo.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "KMSEncrypted", traits: {"smithy.api#default" => false, "smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
+    SMBFileShareInfo.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    SMBFileShareInfo.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "Path"))
+    SMBFileShareInfo.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role"))
+    SMBFileShareInfo.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationARN, location_name: "LocationARN"))
+    SMBFileShareInfo.add_member(:default_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "DefaultStorageClass"))
+    SMBFileShareInfo.add_member(:object_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectACL, location_name: "ObjectACL"))
+    SMBFileShareInfo.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ReadOnly"))
+    SMBFileShareInfo.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "GuessMIMETypeEnabled"))
+    SMBFileShareInfo.add_member(:requester_pays, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "RequesterPays"))
+    SMBFileShareInfo.add_member(:smbacl_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "SMBACLEnabled"))
+    SMBFileShareInfo.add_member(:access_based_enumeration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AccessBasedEnumeration"))
+    SMBFileShareInfo.add_member(:admin_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "AdminUserList"))
+    SMBFileShareInfo.add_member(:valid_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "ValidUserList"))
+    SMBFileShareInfo.add_member(:invalid_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "InvalidUserList"))
+    SMBFileShareInfo.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    SMBFileShareInfo.add_member(:authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: Authentication, location_name: "Authentication"))
+    SMBFileShareInfo.add_member(:case_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseSensitivity, location_name: "CaseSensitivity"))
+    SMBFileShareInfo.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    SMBFileShareInfo.add_member(:file_share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareName, location_name: "FileShareName"))
+    SMBFileShareInfo.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    SMBFileShareInfo.add_member(:notification_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationPolicy, location_name: "NotificationPolicy"))
+    SMBFileShareInfo.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSHostName, location_name: "VPCEndpointDNSName"))
+    SMBFileShareInfo.add_member(:bucket_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionId, location_name: "BucketRegion"))
+    SMBFileShareInfo.add_member(:oplocks_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "OplocksEnabled"))
     SMBFileShareInfo.type = Types::SMBFileShareInfo
-    SMBFileShareInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMBFileShareInfo)
-    SMBLocalGroups.add_member(:gateway_admins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "GatewayAdmins"))
+    SMBFileShareInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SMBFileShareInfo)
+    SMBLocalGroups.add_member(:gateway_admins, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "GatewayAdmins"))
     SMBLocalGroups.type = Types::SMBLocalGroups
-    SMBSecurityStrategy.add_member(:client_specified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClientSpecified", traits: {"smithy.api#enumValue" => "ClientSpecified"}))
-    SMBSecurityStrategy.add_member(:mandatory_signing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MandatorySigning", traits: {"smithy.api#enumValue" => "MandatorySigning"}))
-    SMBSecurityStrategy.add_member(:mandatory_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MandatoryEncryption", traits: {"smithy.api#enumValue" => "MandatoryEncryption"}))
-    SMBSecurityStrategy.add_member(:mandatory_encryption_no_aes128, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MandatoryEncryptionNoAes128", traits: {"smithy.api#enumValue" => "MandatoryEncryptionNoAes128"}))
-    ServiceUnavailableError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    ServiceUnavailableError.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    SMBSecurityStrategy.add_member(:client_specified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClientSpecified", traits: {"smithy.api#enumValue" => "ClientSpecified"}))
+    SMBSecurityStrategy.add_member(:mandatory_signing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MandatorySigning", traits: {"smithy.api#enumValue" => "MandatorySigning"}))
+    SMBSecurityStrategy.add_member(:mandatory_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MandatoryEncryption", traits: {"smithy.api#enumValue" => "MandatoryEncryption"}))
+    SMBSecurityStrategy.add_member(:mandatory_encryption_no_aes128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MandatoryEncryptionNoAes128", traits: {"smithy.api#enumValue" => "MandatoryEncryptionNoAes128"}))
+    ServiceUnavailableError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ServiceUnavailableError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageGatewayError, location_name: "error"))
     ServiceUnavailableError.type = Types::ServiceUnavailableError
-    SetLocalConsolePasswordInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    SetLocalConsolePasswordInput.add_member(:local_console_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalConsolePassword, location_name: "LocalConsolePassword", traits: {"smithy.api#required" => {}}))
+    SetLocalConsolePasswordInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    SetLocalConsolePasswordInput.add_member(:local_console_password, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalConsolePassword, location_name: "LocalConsolePassword", traits: {"smithy.api#required" => {}}))
     SetLocalConsolePasswordInput.type = Types::SetLocalConsolePasswordInput
-    SetLocalConsolePasswordOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    SetLocalConsolePasswordOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     SetLocalConsolePasswordOutput.type = Types::SetLocalConsolePasswordOutput
-    SetSMBGuestPasswordInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    SetSMBGuestPasswordInput.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMBGuestPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    SetSMBGuestPasswordInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    SetSMBGuestPasswordInput.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SMBGuestPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
     SetSMBGuestPasswordInput.type = Types::SetSMBGuestPasswordInput
-    SetSMBGuestPasswordOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    SetSMBGuestPasswordOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     SetSMBGuestPasswordOutput.type = Types::SetSMBGuestPasswordOutput
-    ShutdownGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    ShutdownGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     ShutdownGatewayInput.type = Types::ShutdownGatewayInput
-    ShutdownGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    ShutdownGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     ShutdownGatewayOutput.type = Types::ShutdownGatewayOutput
-    SoftwareUpdatePreferences.add_member(:automatic_update_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticUpdatePolicy, location_name: "AutomaticUpdatePolicy"))
+    SoftwareUpdatePreferences.add_member(:automatic_update_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticUpdatePolicy, location_name: "AutomaticUpdatePolicy"))
     SoftwareUpdatePreferences.type = Types::SoftwareUpdatePreferences
-    StartAvailabilityMonitorTestInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    StartAvailabilityMonitorTestInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     StartAvailabilityMonitorTestInput.type = Types::StartAvailabilityMonitorTestInput
-    StartAvailabilityMonitorTestOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    StartAvailabilityMonitorTestOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     StartAvailabilityMonitorTestOutput.type = Types::StartAvailabilityMonitorTestOutput
-    StartCacheReportInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
-    StartCacheReportInput.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
-    StartCacheReportInput.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
-    StartCacheReportInput.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionId, location_name: "BucketRegion", traits: {"smithy.api#required" => {}}))
-    StartCacheReportInput.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSHostName, location_name: "VPCEndpointDNSName"))
-    StartCacheReportInput.add_member(:inclusion_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilterList, location_name: "InclusionFilters"))
-    StartCacheReportInput.add_member(:exclusion_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportFilterList, location_name: "ExclusionFilters"))
-    StartCacheReportInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
-    StartCacheReportInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StartCacheReportInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
+    StartCacheReportInput.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
+    StartCacheReportInput.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationARN, location_name: "LocationARN", traits: {"smithy.api#required" => {}}))
+    StartCacheReportInput.add_member(:bucket_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionId, location_name: "BucketRegion", traits: {"smithy.api#required" => {}}))
+    StartCacheReportInput.add_member(:vpc_endpoint_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSHostName, location_name: "VPCEndpointDNSName"))
+    StartCacheReportInput.add_member(:inclusion_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilterList, location_name: "InclusionFilters"))
+    StartCacheReportInput.add_member(:exclusion_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportFilterList, location_name: "ExclusionFilters"))
+    StartCacheReportInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    StartCacheReportInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     StartCacheReportInput.type = Types::StartCacheReportInput
-    StartCacheReportOutput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheReportARN, location_name: "CacheReportARN"))
+    StartCacheReportOutput.add_member(:cache_report_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheReportARN, location_name: "CacheReportARN"))
     StartCacheReportOutput.type = Types::StartCacheReportOutput
-    StartGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    StartGatewayInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     StartGatewayInput.type = Types::StartGatewayInput
-    StartGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    StartGatewayOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     StartGatewayOutput.type = Types::StartGatewayOutput
-    StorageGatewayError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    StorageGatewayError.add_member(:error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
+    StorageGatewayError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    StorageGatewayError.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, location_name: "errorDetails"))
     StorageGatewayError.type = Types::StorageGatewayError
-    StorediSCSIVolume.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    StorediSCSIVolume.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    StorediSCSIVolume.add_member(:volume_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
-    StorediSCSIVolume.add_member(:volume_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeStatus, location_name: "VolumeStatus"))
-    StorediSCSIVolume.add_member(:volume_attachment_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
-    StorediSCSIVolume.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
-    StorediSCSIVolume.add_member(:volume_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DoubleObject, location_name: "VolumeProgress"))
-    StorediSCSIVolume.add_member(:volume_disk_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskId, location_name: "VolumeDiskId"))
-    StorediSCSIVolume.add_member(:source_snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SourceSnapshotId"))
-    StorediSCSIVolume.add_member(:preserved_existing_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "PreservedExistingData", traits: {"smithy.api#default" => false}))
-    StorediSCSIVolume.add_member(:volumei_scsi_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
-    StorediSCSIVolume.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
-    StorediSCSIVolume.add_member(:volume_used_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
-    StorediSCSIVolume.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    StorediSCSIVolume.add_member(:target_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
+    StorediSCSIVolume.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    StorediSCSIVolume.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    StorediSCSIVolume.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeType, location_name: "VolumeType"))
+    StorediSCSIVolume.add_member(:volume_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStatus, location_name: "VolumeStatus"))
+    StorediSCSIVolume.add_member(:volume_attachment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
+    StorediSCSIVolume.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
+    StorediSCSIVolume.add_member(:volume_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleObject, location_name: "VolumeProgress"))
+    StorediSCSIVolume.add_member(:volume_disk_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskId, location_name: "VolumeDiskId"))
+    StorediSCSIVolume.add_member(:source_snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SourceSnapshotId"))
+    StorediSCSIVolume.add_member(:preserved_existing_data, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "PreservedExistingData", traits: {"smithy.api#default" => false}))
+    StorediSCSIVolume.add_member(:volumei_scsi_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
+    StorediSCSIVolume.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDate, location_name: "CreatedDate"))
+    StorediSCSIVolume.add_member(:volume_used_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
+    StorediSCSIVolume.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    StorediSCSIVolume.add_member(:target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, location_name: "TargetName"))
     StorediSCSIVolume.type = Types::StorediSCSIVolume
-    StorediSCSIVolumes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorediSCSIVolume)
-    SupportedGatewayCapacities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayCapacity)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    StorediSCSIVolumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorediSCSIVolume)
+    SupportedGatewayCapacities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayCapacity)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    Tags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    Tape.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
-    Tape.add_member(:tape_barcode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeBarcode, location_name: "TapeBarcode"))
-    Tape.add_member(:tape_created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "TapeCreatedDate"))
-    Tape.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes"))
-    Tape.add_member(:tape_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeStatus, location_name: "TapeStatus"))
-    Tape.add_member(:vtl_device, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDevice"))
-    Tape.add_member(:progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DoubleObject, location_name: "Progress"))
-    Tape.add_member(:tape_used_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
-    Tape.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    Tape.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
-    Tape.add_member(:worm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
-    Tape.add_member(:retention_start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "RetentionStartDate"))
-    Tape.add_member(:pool_entry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "PoolEntryDate"))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    Tape.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
+    Tape.add_member(:tape_barcode, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeBarcode, location_name: "TapeBarcode"))
+    Tape.add_member(:tape_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "TapeCreatedDate"))
+    Tape.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeSize, location_name: "TapeSizeInBytes"))
+    Tape.add_member(:tape_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeStatus, location_name: "TapeStatus"))
+    Tape.add_member(:vtl_device, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceARN, location_name: "VTLDevice"))
+    Tape.add_member(:progress, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleObject, location_name: "Progress"))
+    Tape.add_member(:tape_used_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeUsage, location_name: "TapeUsedInBytes"))
+    Tape.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    Tape.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolId, location_name: "PoolId"))
+    Tape.add_member(:worm, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
+    Tape.add_member(:retention_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "RetentionStartDate"))
+    Tape.add_member(:pool_entry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "PoolEntryDate"))
     Tape.type = Types::Tape
-    TapeARNs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN)
-    TapeArchive.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
-    TapeArchive.add_member(:tape_barcode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeBarcode, location_name: "TapeBarcode"))
-    TapeArchive.add_member(:tape_created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "TapeCreatedDate"))
-    TapeArchive.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes"))
-    TapeArchive.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CompletionTime"))
-    TapeArchive.add_member(:retrieved_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "RetrievedTo"))
-    TapeArchive.add_member(:tape_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeArchiveStatus, location_name: "TapeStatus"))
-    TapeArchive.add_member(:tape_used_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
-    TapeArchive.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    TapeArchive.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
-    TapeArchive.add_member(:worm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
-    TapeArchive.add_member(:retention_start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "RetentionStartDate"))
-    TapeArchive.add_member(:pool_entry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "PoolEntryDate"))
+    TapeARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN)
+    TapeArchive.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
+    TapeArchive.add_member(:tape_barcode, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeBarcode, location_name: "TapeBarcode"))
+    TapeArchive.add_member(:tape_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "TapeCreatedDate"))
+    TapeArchive.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeSize, location_name: "TapeSizeInBytes"))
+    TapeArchive.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CompletionTime"))
+    TapeArchive.add_member(:retrieved_to, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "RetrievedTo"))
+    TapeArchive.add_member(:tape_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeArchiveStatus, location_name: "TapeStatus"))
+    TapeArchive.add_member(:tape_used_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeUsage, location_name: "TapeUsedInBytes"))
+    TapeArchive.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    TapeArchive.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolId, location_name: "PoolId"))
+    TapeArchive.add_member(:worm, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "Worm", traits: {"smithy.api#default" => false}))
+    TapeArchive.add_member(:retention_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "RetentionStartDate"))
+    TapeArchive.add_member(:pool_entry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "PoolEntryDate"))
     TapeArchive.type = Types::TapeArchive
-    TapeArchives.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeArchive)
-    TapeInfo.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
-    TapeInfo.add_member(:tape_barcode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeBarcode, location_name: "TapeBarcode"))
-    TapeInfo.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes"))
-    TapeInfo.add_member(:tape_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeStatus, location_name: "TapeStatus"))
-    TapeInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    TapeInfo.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
-    TapeInfo.add_member(:retention_start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "RetentionStartDate"))
-    TapeInfo.add_member(:pool_entry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "PoolEntryDate"))
+    TapeArchives.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TapeArchive)
+    TapeInfo.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
+    TapeInfo.add_member(:tape_barcode, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeBarcode, location_name: "TapeBarcode"))
+    TapeInfo.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeSize, location_name: "TapeSizeInBytes"))
+    TapeInfo.add_member(:tape_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeStatus, location_name: "TapeStatus"))
+    TapeInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    TapeInfo.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolId, location_name: "PoolId"))
+    TapeInfo.add_member(:retention_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "RetentionStartDate"))
+    TapeInfo.add_member(:pool_entry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "PoolEntryDate"))
     TapeInfo.type = Types::TapeInfo
-    TapeInfos.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeInfo)
-    TapeRecoveryPointInfo.add_member(:tape_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
-    TapeRecoveryPointInfo.add_member(:tape_recovery_point_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "TapeRecoveryPointTime"))
-    TapeRecoveryPointInfo.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes"))
-    TapeRecoveryPointInfo.add_member(:tape_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeRecoveryPointStatus, location_name: "TapeStatus"))
+    TapeInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TapeInfo)
+    TapeRecoveryPointInfo.add_member(:tape_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeARN, location_name: "TapeARN"))
+    TapeRecoveryPointInfo.add_member(:tape_recovery_point_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "TapeRecoveryPointTime"))
+    TapeRecoveryPointInfo.add_member(:tape_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeSize, location_name: "TapeSizeInBytes"))
+    TapeRecoveryPointInfo.add_member(:tape_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TapeRecoveryPointStatus, location_name: "TapeStatus"))
     TapeRecoveryPointInfo.type = Types::TapeRecoveryPointInfo
-    TapeRecoveryPointInfos.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TapeRecoveryPointInfo)
-    TapeStorageClass.add_member(:deep_archive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE"}))
-    TapeStorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
-    Tapes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tape)
-    UpdateAutomaticTapeCreationPolicyInput.add_member(:automatic_tape_creation_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticTapeCreationRules, location_name: "AutomaticTapeCreationRules", traits: {"smithy.api#required" => {}}))
-    UpdateAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    TapeRecoveryPointInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TapeRecoveryPointInfo)
+    TapeStorageClass.add_member(:deep_archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE"}))
+    TapeStorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
+    Tapes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tape)
+    UpdateAutomaticTapeCreationPolicyInput.add_member(:automatic_tape_creation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticTapeCreationRules, location_name: "AutomaticTapeCreationRules", traits: {"smithy.api#required" => {}}))
+    UpdateAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     UpdateAutomaticTapeCreationPolicyInput.type = Types::UpdateAutomaticTapeCreationPolicyInput
-    UpdateAutomaticTapeCreationPolicyOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateAutomaticTapeCreationPolicyOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateAutomaticTapeCreationPolicyOutput.type = Types::UpdateAutomaticTapeCreationPolicyOutput
-    UpdateBandwidthRateLimitInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    UpdateBandwidthRateLimitInput.add_member(:average_upload_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
-    UpdateBandwidthRateLimitInput.add_member(:average_download_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
+    UpdateBandwidthRateLimitInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateBandwidthRateLimitInput.add_member(:average_upload_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
+    UpdateBandwidthRateLimitInput.add_member(:average_download_rate_limit_in_bits_per_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
     UpdateBandwidthRateLimitInput.type = Types::UpdateBandwidthRateLimitInput
-    UpdateBandwidthRateLimitOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateBandwidthRateLimitOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateBandwidthRateLimitOutput.type = Types::UpdateBandwidthRateLimitOutput
-    UpdateBandwidthRateLimitScheduleInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    UpdateBandwidthRateLimitScheduleInput.add_member(:bandwidth_rate_limit_intervals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals", traits: {"smithy.api#required" => {}}))
+    UpdateBandwidthRateLimitScheduleInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateBandwidthRateLimitScheduleInput.add_member(:bandwidth_rate_limit_intervals, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals", traits: {"smithy.api#required" => {}}))
     UpdateBandwidthRateLimitScheduleInput.type = Types::UpdateBandwidthRateLimitScheduleInput
-    UpdateBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateBandwidthRateLimitScheduleOutput.type = Types::UpdateBandwidthRateLimitScheduleOutput
-    UpdateChapCredentialsInput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN", traits: {"smithy.api#required" => {}}))
-    UpdateChapCredentialsInput.add_member(:secret_to_authenticate_initiator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChapSecret, location_name: "SecretToAuthenticateInitiator", traits: {"smithy.api#required" => {}}))
-    UpdateChapCredentialsInput.add_member(:initiator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IqnName, location_name: "InitiatorName", traits: {"smithy.api#required" => {}}))
-    UpdateChapCredentialsInput.add_member(:secret_to_authenticate_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChapSecret, location_name: "SecretToAuthenticateTarget"))
+    UpdateChapCredentialsInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN", traits: {"smithy.api#required" => {}}))
+    UpdateChapCredentialsInput.add_member(:secret_to_authenticate_initiator, ::Smithy::Schema::Shapes::MemberShape.new(target: ChapSecret, location_name: "SecretToAuthenticateInitiator", traits: {"smithy.api#required" => {}}))
+    UpdateChapCredentialsInput.add_member(:initiator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IqnName, location_name: "InitiatorName", traits: {"smithy.api#required" => {}}))
+    UpdateChapCredentialsInput.add_member(:secret_to_authenticate_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ChapSecret, location_name: "SecretToAuthenticateTarget"))
     UpdateChapCredentialsInput.type = Types::UpdateChapCredentialsInput
-    UpdateChapCredentialsOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
-    UpdateChapCredentialsOutput.add_member(:initiator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IqnName, location_name: "InitiatorName"))
+    UpdateChapCredentialsOutput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
+    UpdateChapCredentialsOutput.add_member(:initiator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IqnName, location_name: "InitiatorName"))
     UpdateChapCredentialsOutput.type = Types::UpdateChapCredentialsOutput
-    UpdateFileSystemAssociationInput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN", traits: {"smithy.api#required" => {}}))
-    UpdateFileSystemAssociationInput.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainUserName, location_name: "UserName"))
-    UpdateFileSystemAssociationInput.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainUserPassword, location_name: "Password"))
-    UpdateFileSystemAssociationInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
-    UpdateFileSystemAssociationInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    UpdateFileSystemAssociationInput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN, location_name: "FileSystemAssociationARN", traits: {"smithy.api#required" => {}}))
+    UpdateFileSystemAssociationInput.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUserName, location_name: "UserName"))
+    UpdateFileSystemAssociationInput.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUserPassword, location_name: "Password"))
+    UpdateFileSystemAssociationInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    UpdateFileSystemAssociationInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
     UpdateFileSystemAssociationInput.type = Types::UpdateFileSystemAssociationInput
-    UpdateFileSystemAssociationOutput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    UpdateFileSystemAssociationOutput.add_member(:file_system_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
     UpdateFileSystemAssociationOutput.type = Types::UpdateFileSystemAssociationOutput
-    UpdateGatewayInformationInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    UpdateGatewayInformationInput.add_member(:gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayName, location_name: "GatewayName"))
-    UpdateGatewayInformationInput.add_member(:gateway_timezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "GatewayTimezone"))
-    UpdateGatewayInformationInput.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
-    UpdateGatewayInformationInput.add_member(:gateway_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayCapacity, location_name: "GatewayCapacity"))
+    UpdateGatewayInformationInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateGatewayInformationInput.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayName, location_name: "GatewayName"))
+    UpdateGatewayInformationInput.add_member(:gateway_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayTimezone, location_name: "GatewayTimezone"))
+    UpdateGatewayInformationInput.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
+    UpdateGatewayInformationInput.add_member(:gateway_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayCapacity, location_name: "GatewayCapacity"))
     UpdateGatewayInformationInput.type = Types::UpdateGatewayInformationInput
-    UpdateGatewayInformationOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    UpdateGatewayInformationOutput.add_member(:gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "GatewayName"))
+    UpdateGatewayInformationOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    UpdateGatewayInformationOutput.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "GatewayName"))
     UpdateGatewayInformationOutput.type = Types::UpdateGatewayInformationOutput
-    UpdateGatewaySoftwareNowInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateGatewaySoftwareNowInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
     UpdateGatewaySoftwareNowInput.type = Types::UpdateGatewaySoftwareNowInput
-    UpdateGatewaySoftwareNowOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateGatewaySoftwareNowOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateGatewaySoftwareNowOutput.type = Types::UpdateGatewaySoftwareNowOutput
-    UpdateMaintenanceStartTimeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    UpdateMaintenanceStartTimeInput.add_member(:hour_of_day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HourOfDay, location_name: "HourOfDay"))
-    UpdateMaintenanceStartTimeInput.add_member(:minute_of_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinuteOfHour, location_name: "MinuteOfHour"))
-    UpdateMaintenanceStartTimeInput.add_member(:day_of_week, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
-    UpdateMaintenanceStartTimeInput.add_member(:day_of_month, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
-    UpdateMaintenanceStartTimeInput.add_member(:software_update_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SoftwareUpdatePreferences, location_name: "SoftwareUpdatePreferences"))
+    UpdateMaintenanceStartTimeInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateMaintenanceStartTimeInput.add_member(:hour_of_day, ::Smithy::Schema::Shapes::MemberShape.new(target: HourOfDay, location_name: "HourOfDay"))
+    UpdateMaintenanceStartTimeInput.add_member(:minute_of_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: MinuteOfHour, location_name: "MinuteOfHour"))
+    UpdateMaintenanceStartTimeInput.add_member(:day_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, location_name: "DayOfWeek"))
+    UpdateMaintenanceStartTimeInput.add_member(:day_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfMonth, location_name: "DayOfMonth"))
+    UpdateMaintenanceStartTimeInput.add_member(:software_update_preferences, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdatePreferences, location_name: "SoftwareUpdatePreferences"))
     UpdateMaintenanceStartTimeInput.type = Types::UpdateMaintenanceStartTimeInput
-    UpdateMaintenanceStartTimeOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateMaintenanceStartTimeOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateMaintenanceStartTimeOutput.type = Types::UpdateMaintenanceStartTimeOutput
-    UpdateNFSFileShareInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
-    UpdateNFSFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    UpdateNFSFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
-    UpdateNFSFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    UpdateNFSFileShareInput.add_member(:nfs_file_share_defaults, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
-    UpdateNFSFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
-    UpdateNFSFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
-    UpdateNFSFileShareInput.add_member(:client_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
-    UpdateNFSFileShareInput.add_member(:squash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
-    UpdateNFSFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
-    UpdateNFSFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
-    UpdateNFSFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
-    UpdateNFSFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
-    UpdateNFSFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    UpdateNFSFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
-    UpdateNFSFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    UpdateNFSFileShareInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
+    UpdateNFSFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    UpdateNFSFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
+    UpdateNFSFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    UpdateNFSFileShareInput.add_member(:nfs_file_share_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
+    UpdateNFSFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "DefaultStorageClass"))
+    UpdateNFSFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectACL, location_name: "ObjectACL"))
+    UpdateNFSFileShareInput.add_member(:client_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareClientList, location_name: "ClientList"))
+    UpdateNFSFileShareInput.add_member(:squash, ::Smithy::Schema::Shapes::MemberShape.new(target: Squash, location_name: "Squash"))
+    UpdateNFSFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ReadOnly"))
+    UpdateNFSFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "GuessMIMETypeEnabled"))
+    UpdateNFSFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "RequesterPays"))
+    UpdateNFSFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareName, location_name: "FileShareName"))
+    UpdateNFSFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    UpdateNFSFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationPolicy, location_name: "NotificationPolicy"))
+    UpdateNFSFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
     UpdateNFSFileShareInput.type = Types::UpdateNFSFileShareInput
-    UpdateNFSFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    UpdateNFSFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
     UpdateNFSFileShareOutput.type = Types::UpdateNFSFileShareOutput
-    UpdateSMBFileShareInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
-    UpdateSMBFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    UpdateSMBFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
-    UpdateSMBFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
-    UpdateSMBFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
-    UpdateSMBFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
-    UpdateSMBFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
-    UpdateSMBFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
-    UpdateSMBFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
-    UpdateSMBFileShareInput.add_member(:smbacl_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
-    UpdateSMBFileShareInput.add_member(:access_based_enumeration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
-    UpdateSMBFileShareInput.add_member(:admin_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "AdminUserList"))
-    UpdateSMBFileShareInput.add_member(:valid_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "ValidUserList"))
-    UpdateSMBFileShareInput.add_member(:invalid_user_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "InvalidUserList"))
-    UpdateSMBFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
-    UpdateSMBFileShareInput.add_member(:case_sensitivity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
-    UpdateSMBFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
-    UpdateSMBFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
-    UpdateSMBFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
-    UpdateSMBFileShareInput.add_member(:oplocks_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "OplocksEnabled"))
+    UpdateSMBFileShareInput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN", traits: {"smithy.api#required" => {}}))
+    UpdateSMBFileShareInput.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    UpdateSMBFileShareInput.add_member(:kms_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "KMSEncrypted", traits: {"smithy.api#deprecated" => {"message" => "KMSEncrypted is deprecated, use EncryptionType instead."}}))
+    UpdateSMBFileShareInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, location_name: "KMSKey"))
+    UpdateSMBFileShareInput.add_member(:default_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "DefaultStorageClass"))
+    UpdateSMBFileShareInput.add_member(:object_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectACL, location_name: "ObjectACL"))
+    UpdateSMBFileShareInput.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ReadOnly"))
+    UpdateSMBFileShareInput.add_member(:guess_mime_type_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "GuessMIMETypeEnabled"))
+    UpdateSMBFileShareInput.add_member(:requester_pays, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "RequesterPays"))
+    UpdateSMBFileShareInput.add_member(:smbacl_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "SMBACLEnabled"))
+    UpdateSMBFileShareInput.add_member(:access_based_enumeration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AccessBasedEnumeration"))
+    UpdateSMBFileShareInput.add_member(:admin_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "AdminUserList"))
+    UpdateSMBFileShareInput.add_member(:valid_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "ValidUserList"))
+    UpdateSMBFileShareInput.add_member(:invalid_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "InvalidUserList"))
+    UpdateSMBFileShareInput.add_member(:audit_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    UpdateSMBFileShareInput.add_member(:case_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseSensitivity, location_name: "CaseSensitivity"))
+    UpdateSMBFileShareInput.add_member(:file_share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareName, location_name: "FileShareName"))
+    UpdateSMBFileShareInput.add_member(:cache_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheAttributes, location_name: "CacheAttributes"))
+    UpdateSMBFileShareInput.add_member(:notification_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationPolicy, location_name: "NotificationPolicy"))
+    UpdateSMBFileShareInput.add_member(:oplocks_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "OplocksEnabled"))
     UpdateSMBFileShareInput.type = Types::UpdateSMBFileShareInput
-    UpdateSMBFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    UpdateSMBFileShareOutput.add_member(:file_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FileShareARN, location_name: "FileShareARN"))
     UpdateSMBFileShareOutput.type = Types::UpdateSMBFileShareOutput
-    UpdateSMBFileShareVisibilityInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    UpdateSMBFileShareVisibilityInput.add_member(:file_shares_visible, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "FileSharesVisible", traits: {"smithy.api#required" => {}}))
+    UpdateSMBFileShareVisibilityInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateSMBFileShareVisibilityInput.add_member(:file_shares_visible, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "FileSharesVisible", traits: {"smithy.api#required" => {}}))
     UpdateSMBFileShareVisibilityInput.type = Types::UpdateSMBFileShareVisibilityInput
-    UpdateSMBFileShareVisibilityOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateSMBFileShareVisibilityOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateSMBFileShareVisibilityOutput.type = Types::UpdateSMBFileShareVisibilityOutput
-    UpdateSMBLocalGroupsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    UpdateSMBLocalGroupsInput.add_member(:smb_local_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMBLocalGroups, location_name: "SMBLocalGroups", traits: {"smithy.api#required" => {}}))
+    UpdateSMBLocalGroupsInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateSMBLocalGroupsInput.add_member(:smb_local_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SMBLocalGroups, location_name: "SMBLocalGroups", traits: {"smithy.api#required" => {}}))
     UpdateSMBLocalGroupsInput.type = Types::UpdateSMBLocalGroupsInput
-    UpdateSMBLocalGroupsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateSMBLocalGroupsOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateSMBLocalGroupsOutput.type = Types::UpdateSMBLocalGroupsOutput
-    UpdateSMBSecurityStrategyInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
-    UpdateSMBSecurityStrategyInput.add_member(:smb_security_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SMBSecurityStrategy, location_name: "SMBSecurityStrategy", traits: {"smithy.api#required" => {}}))
+    UpdateSMBSecurityStrategyInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN", traits: {"smithy.api#required" => {}}))
+    UpdateSMBSecurityStrategyInput.add_member(:smb_security_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SMBSecurityStrategy, location_name: "SMBSecurityStrategy", traits: {"smithy.api#required" => {}}))
     UpdateSMBSecurityStrategyInput.type = Types::UpdateSMBSecurityStrategyInput
-    UpdateSMBSecurityStrategyOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateSMBSecurityStrategyOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
     UpdateSMBSecurityStrategyOutput.type = Types::UpdateSMBSecurityStrategyOutput
-    UpdateSnapshotScheduleInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
-    UpdateSnapshotScheduleInput.add_member(:start_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HourOfDay, location_name: "StartAt", traits: {"smithy.api#required" => {}}))
-    UpdateSnapshotScheduleInput.add_member(:recurrence_in_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurrenceInHours, location_name: "RecurrenceInHours", traits: {"smithy.api#required" => {}}))
-    UpdateSnapshotScheduleInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateSnapshotScheduleInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    UpdateSnapshotScheduleInput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN", traits: {"smithy.api#required" => {}}))
+    UpdateSnapshotScheduleInput.add_member(:start_at, ::Smithy::Schema::Shapes::MemberShape.new(target: HourOfDay, location_name: "StartAt", traits: {"smithy.api#required" => {}}))
+    UpdateSnapshotScheduleInput.add_member(:recurrence_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceInHours, location_name: "RecurrenceInHours", traits: {"smithy.api#required" => {}}))
+    UpdateSnapshotScheduleInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateSnapshotScheduleInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     UpdateSnapshotScheduleInput.type = Types::UpdateSnapshotScheduleInput
-    UpdateSnapshotScheduleOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
+    UpdateSnapshotScheduleOutput.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
     UpdateSnapshotScheduleOutput.type = Types::UpdateSnapshotScheduleOutput
-    UpdateVTLDeviceTypeInput.add_member(:vtl_device_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDeviceARN", traits: {"smithy.api#required" => {}}))
-    UpdateVTLDeviceTypeInput.add_member(:device_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceType, location_name: "DeviceType", traits: {"smithy.api#required" => {}}))
+    UpdateVTLDeviceTypeInput.add_member(:vtl_device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceARN, location_name: "VTLDeviceARN", traits: {"smithy.api#required" => {}}))
+    UpdateVTLDeviceTypeInput.add_member(:device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, location_name: "DeviceType", traits: {"smithy.api#required" => {}}))
     UpdateVTLDeviceTypeInput.type = Types::UpdateVTLDeviceTypeInput
-    UpdateVTLDeviceTypeOutput.add_member(:vtl_device_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDeviceARN"))
+    UpdateVTLDeviceTypeOutput.add_member(:vtl_device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceARN, location_name: "VTLDeviceARN"))
     UpdateVTLDeviceTypeOutput.type = Types::UpdateVTLDeviceTypeOutput
-    UserList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserListUser)
-    VTLDevice.add_member(:vtl_device_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDeviceARN"))
-    VTLDevice.add_member(:vtl_device_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceType, location_name: "VTLDeviceType"))
-    VTLDevice.add_member(:vtl_device_vendor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceVendor, location_name: "VTLDeviceVendor"))
-    VTLDevice.add_member(:vtl_device_product_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceProductIdentifier, location_name: "VTLDeviceProductIdentifier"))
-    VTLDevice.add_member(:devicei_scsi_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceiSCSIAttributes, location_name: "DeviceiSCSIAttributes"))
+    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserListUser)
+    VTLDevice.add_member(:vtl_device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceARN, location_name: "VTLDeviceARN"))
+    VTLDevice.add_member(:vtl_device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceType, location_name: "VTLDeviceType"))
+    VTLDevice.add_member(:vtl_device_vendor, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceVendor, location_name: "VTLDeviceVendor"))
+    VTLDevice.add_member(:vtl_device_product_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceProductIdentifier, location_name: "VTLDeviceProductIdentifier"))
+    VTLDevice.add_member(:devicei_scsi_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceiSCSIAttributes, location_name: "DeviceiSCSIAttributes"))
     VTLDevice.type = Types::VTLDevice
-    VTLDeviceARNs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDeviceARN)
-    VTLDevices.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VTLDevice)
-    VolumeARNs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN)
-    VolumeInfo.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    VolumeInfo.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    VolumeInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
-    VolumeInfo.add_member(:gateway_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayId, location_name: "GatewayId"))
-    VolumeInfo.add_member(:volume_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
-    VolumeInfo.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
-    VolumeInfo.add_member(:volume_attachment_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
+    VTLDeviceARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDeviceARN)
+    VTLDevices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VTLDevice)
+    VolumeARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN)
+    VolumeInfo.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    VolumeInfo.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    VolumeInfo.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayARN, location_name: "GatewayARN"))
+    VolumeInfo.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayId, location_name: "GatewayId"))
+    VolumeInfo.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeType, location_name: "VolumeType"))
+    VolumeInfo.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
+    VolumeInfo.add_member(:volume_attachment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
     VolumeInfo.type = Types::VolumeInfo
-    VolumeInfos.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeInfo)
-    VolumeRecoveryPointInfo.add_member(:volume_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
-    VolumeRecoveryPointInfo.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
-    VolumeRecoveryPointInfo.add_member(:volume_usage_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VolumeUsageInBytes", traits: {"smithy.api#default" => 0}))
-    VolumeRecoveryPointInfo.add_member(:volume_recovery_point_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VolumeRecoveryPointTime"))
+    VolumeInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeInfo)
+    VolumeRecoveryPointInfo.add_member(:volume_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeARN, location_name: "VolumeARN"))
+    VolumeRecoveryPointInfo.add_member(:volume_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VolumeSizeInBytes", traits: {"smithy.api#default" => 0}))
+    VolumeRecoveryPointInfo.add_member(:volume_usage_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VolumeUsageInBytes", traits: {"smithy.api#default" => 0}))
+    VolumeRecoveryPointInfo.add_member(:volume_recovery_point_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VolumeRecoveryPointTime"))
     VolumeRecoveryPointInfo.type = Types::VolumeRecoveryPointInfo
-    VolumeRecoveryPointInfos.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeRecoveryPointInfo)
-    VolumeiSCSIAttributes.add_member(:target_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
-    VolumeiSCSIAttributes.add_member(:network_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
-    VolumeiSCSIAttributes.add_member(:network_interface_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkInterfacePort", traits: {"smithy.api#default" => 0}))
-    VolumeiSCSIAttributes.add_member(:lun_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "LunNumber"))
-    VolumeiSCSIAttributes.add_member(:chap_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean2, location_name: "ChapEnabled", traits: {"smithy.api#default" => false}))
+    VolumeRecoveryPointInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeRecoveryPointInfo)
+    VolumeiSCSIAttributes.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetARN, location_name: "TargetARN"))
+    VolumeiSCSIAttributes.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
+    VolumeiSCSIAttributes.add_member(:network_interface_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NetworkInterfacePort", traits: {"smithy.api#default" => 0}))
+    VolumeiSCSIAttributes.add_member(:lun_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntObject, location_name: "LunNumber"))
+    VolumeiSCSIAttributes.add_member(:chap_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, location_name: "ChapEnabled", traits: {"smithy.api#default" => false}))
     VolumeiSCSIAttributes.type = Types::VolumeiSCSIAttributes
-    ErrorDetails.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ErrorDetails.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
+    ErrorDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ErrorDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
 
     StorageGateway20130630 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.storagegateway#StorageGateway_20130630"
@@ -1570,879 +1570,879 @@ module Aws::StorageGateway
       service.add_operation(:activate_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ActivateGateway"
         operation.name = "ActivateGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateGatewayInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateGatewayOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ActivateGatewayInput
+        operation.output = ActivateGatewayOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:add_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#AddCache"
         operation.name = "AddCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddCacheInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddCacheOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = AddCacheInput
+        operation.output = AddCacheOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:add_tags_to_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#AddTagsToResource"
         operation.name = "AddTagsToResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsToResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsToResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = AddTagsToResourceInput
+        operation.output = AddTagsToResourceOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:add_upload_buffer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#AddUploadBuffer"
         operation.name = "AddUploadBuffer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddUploadBufferInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddUploadBufferOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = AddUploadBufferInput
+        operation.output = AddUploadBufferOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:add_working_storage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#AddWorkingStorage"
         operation.name = "AddWorkingStorage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddWorkingStorageInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddWorkingStorageOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = AddWorkingStorageInput
+        operation.output = AddWorkingStorageOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:assign_tape_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#AssignTapePool"
         operation.name = "AssignTapePool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssignTapePoolInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssignTapePoolOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = AssignTapePoolInput
+        operation.output = AssignTapePoolOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:associate_file_system, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#AssociateFileSystem"
         operation.name = "AssociateFileSystem"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateFileSystemInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateFileSystemOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = AssociateFileSystemInput
+        operation.output = AssociateFileSystemOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:attach_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#AttachVolume"
         operation.name = "AttachVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachVolumeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachVolumeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = AttachVolumeInput
+        operation.output = AttachVolumeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:cancel_archival, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CancelArchival"
         operation.name = "CancelArchival"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelArchivalInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelArchivalOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CancelArchivalInput
+        operation.output = CancelArchivalOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:cancel_cache_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CancelCacheReport"
         operation.name = "CancelCacheReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelCacheReportInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelCacheReportOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CancelCacheReportInput
+        operation.output = CancelCacheReportOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:cancel_retrieval, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CancelRetrieval"
         operation.name = "CancelRetrieval"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelRetrievalInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelRetrievalOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CancelRetrievalInput
+        operation.output = CancelRetrievalOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_cachedi_scsi_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateCachediSCSIVolume"
         operation.name = "CreateCachediSCSIVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCachediSCSIVolumeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCachediSCSIVolumeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CreateCachediSCSIVolumeInput
+        operation.output = CreateCachediSCSIVolumeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_nfs_file_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateNFSFileShare"
         operation.name = "CreateNFSFileShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateNFSFileShareInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateNFSFileShareOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CreateNFSFileShareInput
+        operation.output = CreateNFSFileShareOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_smb_file_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateSMBFileShare"
         operation.name = "CreateSMBFileShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSMBFileShareInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSMBFileShareOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CreateSMBFileShareInput
+        operation.output = CreateSMBFileShareOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateSnapshot"
         operation.name = "CreateSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        operation.input = CreateSnapshotInput
+        operation.output = CreateSnapshotOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
+        operation.errors << ServiceUnavailableError
         operation.traits = {}
       end)
       service.add_operation(:create_snapshot_from_volume_recovery_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateSnapshotFromVolumeRecoveryPoint"
         operation.name = "CreateSnapshotFromVolumeRecoveryPoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotFromVolumeRecoveryPointInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotFromVolumeRecoveryPointOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        operation.input = CreateSnapshotFromVolumeRecoveryPointInput
+        operation.output = CreateSnapshotFromVolumeRecoveryPointOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
+        operation.errors << ServiceUnavailableError
         operation.traits = {}
       end)
       service.add_operation(:create_storedi_scsi_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateStorediSCSIVolume"
         operation.name = "CreateStorediSCSIVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStorediSCSIVolumeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStorediSCSIVolumeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CreateStorediSCSIVolumeInput
+        operation.output = CreateStorediSCSIVolumeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_tape_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateTapePool"
         operation.name = "CreateTapePool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTapePoolInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTapePoolOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CreateTapePoolInput
+        operation.output = CreateTapePoolOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_tape_with_barcode, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateTapeWithBarcode"
         operation.name = "CreateTapeWithBarcode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTapeWithBarcodeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTapeWithBarcodeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CreateTapeWithBarcodeInput
+        operation.output = CreateTapeWithBarcodeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_tapes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#CreateTapes"
         operation.name = "CreateTapes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTapesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTapesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = CreateTapesInput
+        operation.output = CreateTapesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_automatic_tape_creation_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteAutomaticTapeCreationPolicy"
         operation.name = "DeleteAutomaticTapeCreationPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAutomaticTapeCreationPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAutomaticTapeCreationPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteAutomaticTapeCreationPolicyInput
+        operation.output = DeleteAutomaticTapeCreationPolicyOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_bandwidth_rate_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteBandwidthRateLimit"
         operation.name = "DeleteBandwidthRateLimit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBandwidthRateLimitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBandwidthRateLimitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteBandwidthRateLimitInput
+        operation.output = DeleteBandwidthRateLimitOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_cache_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteCacheReport"
         operation.name = "DeleteCacheReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCacheReportInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCacheReportOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteCacheReportInput
+        operation.output = DeleteCacheReportOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_chap_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteChapCredentials"
         operation.name = "DeleteChapCredentials"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteChapCredentialsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteChapCredentialsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteChapCredentialsInput
+        operation.output = DeleteChapCredentialsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_file_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteFileShare"
         operation.name = "DeleteFileShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileShareInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileShareOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteFileShareInput
+        operation.output = DeleteFileShareOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteGateway"
         operation.name = "DeleteGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGatewayInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGatewayOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteGatewayInput
+        operation.output = DeleteGatewayOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_snapshot_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteSnapshotSchedule"
         operation.name = "DeleteSnapshotSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotScheduleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotScheduleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteSnapshotScheduleInput
+        operation.output = DeleteSnapshotScheduleOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_tape, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteTape"
         operation.name = "DeleteTape"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTapeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTapeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteTapeInput
+        operation.output = DeleteTapeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_tape_archive, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteTapeArchive"
         operation.name = "DeleteTapeArchive"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTapeArchiveInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTapeArchiveOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteTapeArchiveInput
+        operation.output = DeleteTapeArchiveOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_tape_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteTapePool"
         operation.name = "DeleteTapePool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTapePoolInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTapePoolOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteTapePoolInput
+        operation.output = DeleteTapePoolOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DeleteVolume"
         operation.name = "DeleteVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVolumeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVolumeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DeleteVolumeInput
+        operation.output = DeleteVolumeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_availability_monitor_test, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeAvailabilityMonitorTest"
         operation.name = "DescribeAvailabilityMonitorTest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAvailabilityMonitorTestInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAvailabilityMonitorTestOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeAvailabilityMonitorTestInput
+        operation.output = DescribeAvailabilityMonitorTestOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_bandwidth_rate_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeBandwidthRateLimit"
         operation.name = "DescribeBandwidthRateLimit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeBandwidthRateLimitInput
+        operation.output = DescribeBandwidthRateLimitOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_bandwidth_rate_limit_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeBandwidthRateLimitSchedule"
         operation.name = "DescribeBandwidthRateLimitSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitScheduleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitScheduleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeBandwidthRateLimitScheduleInput
+        operation.output = DescribeBandwidthRateLimitScheduleOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeCache"
         operation.name = "DescribeCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCacheInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCacheOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeCacheInput
+        operation.output = DescribeCacheOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_cache_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeCacheReport"
         operation.name = "DescribeCacheReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCacheReportInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCacheReportOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeCacheReportInput
+        operation.output = DescribeCacheReportOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_cachedi_scsi_volumes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeCachediSCSIVolumes"
         operation.name = "DescribeCachediSCSIVolumes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCachediSCSIVolumesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCachediSCSIVolumesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeCachediSCSIVolumesInput
+        operation.output = DescribeCachediSCSIVolumesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_chap_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeChapCredentials"
         operation.name = "DescribeChapCredentials"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeChapCredentialsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeChapCredentialsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeChapCredentialsInput
+        operation.output = DescribeChapCredentialsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_file_system_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeFileSystemAssociations"
         operation.name = "DescribeFileSystemAssociations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileSystemAssociationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileSystemAssociationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeFileSystemAssociationsInput
+        operation.output = DescribeFileSystemAssociationsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_gateway_information, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeGatewayInformation"
         operation.name = "DescribeGatewayInformation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGatewayInformationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGatewayInformationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeGatewayInformationInput
+        operation.output = DescribeGatewayInformationOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_maintenance_start_time, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeMaintenanceStartTime"
         operation.name = "DescribeMaintenanceStartTime"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMaintenanceStartTimeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMaintenanceStartTimeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeMaintenanceStartTimeInput
+        operation.output = DescribeMaintenanceStartTimeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_nfs_file_shares, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeNFSFileShares"
         operation.name = "DescribeNFSFileShares"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeNFSFileSharesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeNFSFileSharesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeNFSFileSharesInput
+        operation.output = DescribeNFSFileSharesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_smb_file_shares, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeSMBFileShares"
         operation.name = "DescribeSMBFileShares"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSMBFileSharesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSMBFileSharesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeSMBFileSharesInput
+        operation.output = DescribeSMBFileSharesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_smb_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeSMBSettings"
         operation.name = "DescribeSMBSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSMBSettingsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSMBSettingsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeSMBSettingsInput
+        operation.output = DescribeSMBSettingsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_snapshot_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeSnapshotSchedule"
         operation.name = "DescribeSnapshotSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotScheduleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotScheduleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeSnapshotScheduleInput
+        operation.output = DescribeSnapshotScheduleOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_storedi_scsi_volumes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeStorediSCSIVolumes"
         operation.name = "DescribeStorediSCSIVolumes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStorediSCSIVolumesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStorediSCSIVolumesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeStorediSCSIVolumesInput
+        operation.output = DescribeStorediSCSIVolumesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_tape_archives, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeTapeArchives"
         operation.name = "DescribeTapeArchives"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTapeArchivesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTapeArchivesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeTapeArchivesInput
+        operation.output = DescribeTapeArchivesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeTapeArchives.new
       end)
       service.add_operation(:describe_tape_recovery_points, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeTapeRecoveryPoints"
         operation.name = "DescribeTapeRecoveryPoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTapeRecoveryPointsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTapeRecoveryPointsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeTapeRecoveryPointsInput
+        operation.output = DescribeTapeRecoveryPointsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeTapeRecoveryPoints.new
       end)
       service.add_operation(:describe_tapes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeTapes"
         operation.name = "DescribeTapes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTapesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTapesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeTapesInput
+        operation.output = DescribeTapesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeTapes.new
       end)
       service.add_operation(:describe_upload_buffer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeUploadBuffer"
         operation.name = "DescribeUploadBuffer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUploadBufferInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUploadBufferOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeUploadBufferInput
+        operation.output = DescribeUploadBufferOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_vtl_devices, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeVTLDevices"
         operation.name = "DescribeVTLDevices"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVTLDevicesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVTLDevicesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeVTLDevicesInput
+        operation.output = DescribeVTLDevicesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeVTLDevices.new
       end)
       service.add_operation(:describe_working_storage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DescribeWorkingStorage"
         operation.name = "DescribeWorkingStorage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeWorkingStorageInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeWorkingStorageOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DescribeWorkingStorageInput
+        operation.output = DescribeWorkingStorageOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:detach_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DetachVolume"
         operation.name = "DetachVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetachVolumeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetachVolumeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DetachVolumeInput
+        operation.output = DetachVolumeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:disable_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DisableGateway"
         operation.name = "DisableGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableGatewayInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableGatewayOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DisableGatewayInput
+        operation.output = DisableGatewayOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:disassociate_file_system, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#DisassociateFileSystem"
         operation.name = "DisassociateFileSystem"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFileSystemInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFileSystemOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = DisassociateFileSystemInput
+        operation.output = DisassociateFileSystemOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:evict_files_failing_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#EvictFilesFailingUpload"
         operation.name = "EvictFilesFailingUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvictFilesFailingUploadInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvictFilesFailingUploadOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = EvictFilesFailingUploadInput
+        operation.output = EvictFilesFailingUploadOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:join_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#JoinDomain"
         operation.name = "JoinDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JoinDomainInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JoinDomainOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = JoinDomainInput
+        operation.output = JoinDomainOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:list_automatic_tape_creation_policies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListAutomaticTapeCreationPolicies"
         operation.name = "ListAutomaticTapeCreationPolicies"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAutomaticTapeCreationPoliciesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAutomaticTapeCreationPoliciesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListAutomaticTapeCreationPoliciesInput
+        operation.output = ListAutomaticTapeCreationPoliciesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:list_cache_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListCacheReports"
         operation.name = "ListCacheReports"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCacheReportsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCacheReportsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListCacheReportsInput
+        operation.output = ListCacheReportsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListCacheReports.new
       end)
       service.add_operation(:list_file_shares, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListFileShares"
         operation.name = "ListFileShares"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFileSharesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFileSharesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListFileSharesInput
+        operation.output = ListFileSharesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFileShares.new
       end)
       service.add_operation(:list_file_system_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListFileSystemAssociations"
         operation.name = "ListFileSystemAssociations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFileSystemAssociationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFileSystemAssociationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListFileSystemAssociationsInput
+        operation.output = ListFileSystemAssociationsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFileSystemAssociations.new
       end)
       service.add_operation(:list_gateways, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListGateways"
         operation.name = "ListGateways"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGatewaysInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGatewaysOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListGatewaysInput
+        operation.output = ListGatewaysOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListGateways.new
       end)
       service.add_operation(:list_local_disks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListLocalDisks"
         operation.name = "ListLocalDisks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLocalDisksInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLocalDisksOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListLocalDisksInput
+        operation.output = ListLocalDisksOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:list_tape_pools, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListTapePools"
         operation.name = "ListTapePools"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTapePoolsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTapePoolsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListTapePoolsInput
+        operation.output = ListTapePoolsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTapePools.new
       end)
       service.add_operation(:list_tapes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListTapes"
         operation.name = "ListTapes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTapesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTapesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListTapesInput
+        operation.output = ListTapesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTapes.new
       end)
       service.add_operation(:list_volume_initiators, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListVolumeInitiators"
         operation.name = "ListVolumeInitiators"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVolumeInitiatorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVolumeInitiatorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListVolumeInitiatorsInput
+        operation.output = ListVolumeInitiatorsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:list_volume_recovery_points, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListVolumeRecoveryPoints"
         operation.name = "ListVolumeRecoveryPoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVolumeRecoveryPointsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVolumeRecoveryPointsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListVolumeRecoveryPointsInput
+        operation.output = ListVolumeRecoveryPointsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:list_volumes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ListVolumes"
         operation.name = "ListVolumes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVolumesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVolumesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ListVolumesInput
+        operation.output = ListVolumesOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListVolumes.new
       end)
       service.add_operation(:notify_when_uploaded, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#NotifyWhenUploaded"
         operation.name = "NotifyWhenUploaded"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyWhenUploadedInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyWhenUploadedOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = NotifyWhenUploadedInput
+        operation.output = NotifyWhenUploadedOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:refresh_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#RefreshCache"
         operation.name = "RefreshCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshCacheInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshCacheOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = RefreshCacheInput
+        operation.output = RefreshCacheOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:remove_tags_from_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#RemoveTagsFromResource"
         operation.name = "RemoveTagsFromResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsFromResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsFromResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = RemoveTagsFromResourceInput
+        operation.output = RemoveTagsFromResourceOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:reset_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ResetCache"
         operation.name = "ResetCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetCacheInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetCacheOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ResetCacheInput
+        operation.output = ResetCacheOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:retrieve_tape_archive, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#RetrieveTapeArchive"
         operation.name = "RetrieveTapeArchive"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetrieveTapeArchiveInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetrieveTapeArchiveOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = RetrieveTapeArchiveInput
+        operation.output = RetrieveTapeArchiveOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:retrieve_tape_recovery_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#RetrieveTapeRecoveryPoint"
         operation.name = "RetrieveTapeRecoveryPoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetrieveTapeRecoveryPointInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetrieveTapeRecoveryPointOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = RetrieveTapeRecoveryPointInput
+        operation.output = RetrieveTapeRecoveryPointOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:set_local_console_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#SetLocalConsolePassword"
         operation.name = "SetLocalConsolePassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetLocalConsolePasswordInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetLocalConsolePasswordOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = SetLocalConsolePasswordInput
+        operation.output = SetLocalConsolePasswordOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:set_smb_guest_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#SetSMBGuestPassword"
         operation.name = "SetSMBGuestPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetSMBGuestPasswordInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetSMBGuestPasswordOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = SetSMBGuestPasswordInput
+        operation.output = SetSMBGuestPasswordOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:shutdown_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#ShutdownGateway"
         operation.name = "ShutdownGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShutdownGatewayInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShutdownGatewayOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = ShutdownGatewayInput
+        operation.output = ShutdownGatewayOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:start_availability_monitor_test, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#StartAvailabilityMonitorTest"
         operation.name = "StartAvailabilityMonitorTest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAvailabilityMonitorTestInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAvailabilityMonitorTestOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = StartAvailabilityMonitorTestInput
+        operation.output = StartAvailabilityMonitorTestOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:start_cache_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#StartCacheReport"
         operation.name = "StartCacheReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartCacheReportInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartCacheReportOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = StartCacheReportInput
+        operation.output = StartCacheReportOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:start_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#StartGateway"
         operation.name = "StartGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartGatewayInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartGatewayOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = StartGatewayInput
+        operation.output = StartGatewayOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_automatic_tape_creation_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateAutomaticTapeCreationPolicy"
         operation.name = "UpdateAutomaticTapeCreationPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAutomaticTapeCreationPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAutomaticTapeCreationPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateAutomaticTapeCreationPolicyInput
+        operation.output = UpdateAutomaticTapeCreationPolicyOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_bandwidth_rate_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateBandwidthRateLimit"
         operation.name = "UpdateBandwidthRateLimit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateBandwidthRateLimitInput
+        operation.output = UpdateBandwidthRateLimitOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_bandwidth_rate_limit_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateBandwidthRateLimitSchedule"
         operation.name = "UpdateBandwidthRateLimitSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitScheduleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitScheduleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateBandwidthRateLimitScheduleInput
+        operation.output = UpdateBandwidthRateLimitScheduleOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_chap_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateChapCredentials"
         operation.name = "UpdateChapCredentials"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChapCredentialsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChapCredentialsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateChapCredentialsInput
+        operation.output = UpdateChapCredentialsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_file_system_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateFileSystemAssociation"
         operation.name = "UpdateFileSystemAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemAssociationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemAssociationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateFileSystemAssociationInput
+        operation.output = UpdateFileSystemAssociationOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_gateway_information, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateGatewayInformation"
         operation.name = "UpdateGatewayInformation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGatewayInformationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGatewayInformationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateGatewayInformationInput
+        operation.output = UpdateGatewayInformationOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_gateway_software_now, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateGatewaySoftwareNow"
         operation.name = "UpdateGatewaySoftwareNow"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGatewaySoftwareNowInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGatewaySoftwareNowOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateGatewaySoftwareNowInput
+        operation.output = UpdateGatewaySoftwareNowOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_maintenance_start_time, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateMaintenanceStartTime"
         operation.name = "UpdateMaintenanceStartTime"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMaintenanceStartTimeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMaintenanceStartTimeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateMaintenanceStartTimeInput
+        operation.output = UpdateMaintenanceStartTimeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_nfs_file_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateNFSFileShare"
         operation.name = "UpdateNFSFileShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateNFSFileShareInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateNFSFileShareOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateNFSFileShareInput
+        operation.output = UpdateNFSFileShareOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_smb_file_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateSMBFileShare"
         operation.name = "UpdateSMBFileShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBFileShareInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBFileShareOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateSMBFileShareInput
+        operation.output = UpdateSMBFileShareOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_smb_file_share_visibility, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateSMBFileShareVisibility"
         operation.name = "UpdateSMBFileShareVisibility"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBFileShareVisibilityInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBFileShareVisibilityOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateSMBFileShareVisibilityInput
+        operation.output = UpdateSMBFileShareVisibilityOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_smb_local_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateSMBLocalGroups"
         operation.name = "UpdateSMBLocalGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBLocalGroupsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBLocalGroupsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateSMBLocalGroupsInput
+        operation.output = UpdateSMBLocalGroupsOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_smb_security_strategy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateSMBSecurityStrategy"
         operation.name = "UpdateSMBSecurityStrategy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBSecurityStrategyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSMBSecurityStrategyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateSMBSecurityStrategyInput
+        operation.output = UpdateSMBSecurityStrategyOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_snapshot_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateSnapshotSchedule"
         operation.name = "UpdateSnapshotSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSnapshotScheduleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSnapshotScheduleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateSnapshotScheduleInput
+        operation.output = UpdateSnapshotScheduleOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_vtl_device_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.storagegateway#UpdateVTLDeviceType"
         operation.name = "UpdateVTLDeviceType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVTLDeviceTypeInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVTLDeviceTypeOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        operation.input = UpdateVTLDeviceTypeInput
+        operation.output = UpdateVTLDeviceTypeOutput
+        operation.errors << InternalServerError
+        operation.errors << InvalidGatewayRequestException
         operation.traits = {}
       end)
     end

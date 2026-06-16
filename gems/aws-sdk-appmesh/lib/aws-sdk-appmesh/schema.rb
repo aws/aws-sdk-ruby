@@ -336,935 +336,935 @@ module Aws::AppMesh
     WeightedTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appmesh#WeightedTarget", name: "WeightedTarget")
     WeightedTargets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appmesh#WeightedTargets", name: "WeightedTargets", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
 
-    AccessLog.add_member(:file, Types::AccessLog::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileAccessLog, location_name: "file"))
-    AccessLog.add_member(:unknown, Types::AccessLog::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AccessLog.add_member(:file, Types::AccessLog::File, ::Smithy::Schema::Shapes::MemberShape.new(target: FileAccessLog, location_name: "file"))
+    AccessLog.add_member(:unknown, Types::AccessLog::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AccessLog.type = Types::AccessLog
-    AwsCloudMapInstanceAttribute.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributeKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    AwsCloudMapInstanceAttribute.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributeValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    AwsCloudMapInstanceAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttributeKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    AwsCloudMapInstanceAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttributeValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     AwsCloudMapInstanceAttribute.type = Types::AwsCloudMapInstanceAttribute
-    AwsCloudMapInstanceAttributes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttribute)
-    AwsCloudMapServiceDiscovery.add_member(:namespace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsCloudMapName, location_name: "namespaceName", traits: {"smithy.api#required" => {}}))
-    AwsCloudMapServiceDiscovery.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsCloudMapName, location_name: "serviceName", traits: {"smithy.api#required" => {}}))
-    AwsCloudMapServiceDiscovery.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributes, location_name: "attributes"))
-    AwsCloudMapServiceDiscovery.add_member(:ip_preference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
+    AwsCloudMapInstanceAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttribute)
+    AwsCloudMapServiceDiscovery.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapName, location_name: "namespaceName", traits: {"smithy.api#required" => {}}))
+    AwsCloudMapServiceDiscovery.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapName, location_name: "serviceName", traits: {"smithy.api#required" => {}}))
+    AwsCloudMapServiceDiscovery.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttributes, location_name: "attributes"))
+    AwsCloudMapServiceDiscovery.add_member(:ip_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: IpPreference, location_name: "ipPreference"))
     AwsCloudMapServiceDiscovery.type = Types::AwsCloudMapServiceDiscovery
-    Backend.add_member(:virtual_service, Types::Backend::VirtualService, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceBackend, location_name: "virtualService"))
-    Backend.add_member(:unknown, Types::Backend::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    Backend.add_member(:virtual_service, Types::Backend::VirtualService, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceBackend, location_name: "virtualService"))
+    Backend.add_member(:unknown, Types::Backend::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Backend.type = Types::Backend
-    BackendDefaults.add_member(:client_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPolicy, location_name: "clientPolicy"))
+    BackendDefaults.add_member(:client_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPolicy, location_name: "clientPolicy"))
     BackendDefaults.type = Types::BackendDefaults
-    Backends.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Backend)
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    Backends.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Backend)
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     BadRequestException.type = Types::BadRequestException
-    CertificateAuthorityArns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    ClientPolicy.add_member(:tls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPolicyTls, location_name: "tls"))
+    CertificateAuthorityArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    ClientPolicy.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPolicyTls, location_name: "tls"))
     ClientPolicy.type = Types::ClientPolicy
-    ClientPolicyTls.add_member(:enforce, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enforce", traits: {"smithy.api#default" => nil}))
-    ClientPolicyTls.add_member(:ports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortSet, location_name: "ports"))
-    ClientPolicyTls.add_member(:certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTlsCertificate, location_name: "certificate"))
-    ClientPolicyTls.add_member(:validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsValidationContext, location_name: "validation", traits: {"smithy.api#required" => {}}))
+    ClientPolicyTls.add_member(:enforce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enforce", traits: {"smithy.api#default" => nil}))
+    ClientPolicyTls.add_member(:ports, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSet, location_name: "ports"))
+    ClientPolicyTls.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTlsCertificate, location_name: "certificate"))
+    ClientPolicyTls.add_member(:validation, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContext, location_name: "validation", traits: {"smithy.api#required" => {}}))
     ClientPolicyTls.type = Types::ClientPolicyTls
-    ClientTlsCertificate.add_member(:file, Types::ClientTlsCertificate::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsFileCertificate, location_name: "file"))
-    ClientTlsCertificate.add_member(:sds, Types::ClientTlsCertificate::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsSdsCertificate, location_name: "sds"))
-    ClientTlsCertificate.add_member(:unknown, Types::ClientTlsCertificate::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ClientTlsCertificate.add_member(:file, Types::ClientTlsCertificate::File, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsFileCertificate, location_name: "file"))
+    ClientTlsCertificate.add_member(:sds, Types::ClientTlsCertificate::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsSdsCertificate, location_name: "sds"))
+    ClientTlsCertificate.add_member(:unknown, Types::ClientTlsCertificate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ClientTlsCertificate.type = Types::ClientTlsCertificate
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#required" => {}}))
-    CreateGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateGatewayRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    CreateGatewayRouteOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateGatewayRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    CreateGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#required" => {}}))
+    CreateGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateGatewayRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    CreateGatewayRouteOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CreateGatewayRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     CreateGatewayRouteOperationInput.type = Types::CreateGatewayRouteOperationInput
-    CreateGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateGatewayRouteOperationOutput[:http_payload] = :gateway_route
     CreateGatewayRouteOperationOutput[:http_payload_member] = CreateGatewayRouteOperationOutput.member(:gateway_route)
     CreateGatewayRouteOperationOutput.type = Types::CreateGatewayRouteOperationOutput
-    CreateMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    CreateMeshOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
-    CreateMeshOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
-    CreateMeshOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    CreateMeshOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshSpec, location_name: "spec"))
+    CreateMeshOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
+    CreateMeshOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateMeshOperationInput.type = Types::CreateMeshOperationInput
-    CreateMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateMeshOperationOutput[:http_payload] = :mesh
     CreateMeshOperationOutput[:http_payload_member] = CreateMeshOperationOutput.member(:mesh)
     CreateMeshOperationOutput.type = Types::CreateMeshOperationOutput
-    CreateRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "routeName", traits: {"smithy.api#required" => {}}))
-    CreateRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    CreateRouteOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
-    CreateRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    CreateRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "routeName", traits: {"smithy.api#required" => {}}))
+    CreateRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    CreateRouteOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
+    CreateRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     CreateRouteOperationInput.type = Types::CreateRouteOperationInput
-    CreateRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateRouteOperationOutput[:http_payload] = :route
     CreateRouteOperationOutput[:http_payload_member] = CreateRouteOperationOutput.member(:route)
     CreateRouteOperationOutput.type = Types::CreateRouteOperationOutput
-    CreateVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
-    CreateVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateVirtualGatewayOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewaySpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    CreateVirtualGatewayOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateVirtualGatewayOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    CreateVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
+    CreateVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateVirtualGatewayOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewaySpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    CreateVirtualGatewayOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CreateVirtualGatewayOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     CreateVirtualGatewayOperationInput.type = Types::CreateVirtualGatewayOperationInput
-    CreateVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateVirtualGatewayOperationOutput[:http_payload] = :virtual_gateway
     CreateVirtualGatewayOperationOutput[:http_payload_member] = CreateVirtualGatewayOperationOutput.member(:virtual_gateway)
     CreateVirtualGatewayOperationOutput.type = Types::CreateVirtualGatewayOperationOutput
-    CreateVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
-    CreateVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateVirtualNodeOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    CreateVirtualNodeOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
-    CreateVirtualNodeOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    CreateVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
+    CreateVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateVirtualNodeOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    CreateVirtualNodeOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
+    CreateVirtualNodeOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     CreateVirtualNodeOperationInput.type = Types::CreateVirtualNodeOperationInput
-    CreateVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateVirtualNodeOperationOutput[:http_payload] = :virtual_node
     CreateVirtualNodeOperationOutput[:http_payload_member] = CreateVirtualNodeOperationOutput.member(:virtual_node)
     CreateVirtualNodeOperationOutput.type = Types::CreateVirtualNodeOperationOutput
-    CreateVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
-    CreateVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateVirtualRouterOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    CreateVirtualRouterOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
-    CreateVirtualRouterOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    CreateVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
+    CreateVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateVirtualRouterOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    CreateVirtualRouterOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
+    CreateVirtualRouterOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     CreateVirtualRouterOperationInput.type = Types::CreateVirtualRouterOperationInput
-    CreateVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateVirtualRouterOperationOutput[:http_payload] = :virtual_router
     CreateVirtualRouterOperationOutput[:http_payload_member] = CreateVirtualRouterOperationOutput.member(:virtual_router)
     CreateVirtualRouterOperationOutput.type = Types::CreateVirtualRouterOperationOutput
-    CreateVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
-    CreateVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateVirtualServiceOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    CreateVirtualServiceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
-    CreateVirtualServiceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    CreateVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
+    CreateVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateVirtualServiceOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    CreateVirtualServiceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#tags" => ["not-preview"]}))
+    CreateVirtualServiceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     CreateVirtualServiceOperationInput.type = Types::CreateVirtualServiceOperationInput
-    CreateVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateVirtualServiceOperationOutput[:http_payload] = :virtual_service
     CreateVirtualServiceOperationOutput[:http_payload_member] = CreateVirtualServiceOperationOutput.member(:virtual_service)
     CreateVirtualServiceOperationOutput.type = Types::CreateVirtualServiceOperationOutput
-    DeleteGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DeleteGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DeleteGatewayRouteOperationInput.type = Types::DeleteGatewayRouteOperationInput
-    DeleteGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DeleteGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DeleteGatewayRouteOperationOutput[:http_payload] = :gateway_route
     DeleteGatewayRouteOperationOutput[:http_payload_member] = DeleteGatewayRouteOperationOutput.member(:gateway_route)
     DeleteGatewayRouteOperationOutput.type = Types::DeleteGatewayRouteOperationOutput
-    DeleteMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteMeshOperationInput.type = Types::DeleteMeshOperationInput
-    DeleteMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DeleteMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DeleteMeshOperationOutput[:http_payload] = :mesh
     DeleteMeshOperationOutput[:http_payload_member] = DeleteMeshOperationOutput.member(:mesh)
     DeleteMeshOperationOutput.type = Types::DeleteMeshOperationOutput
-    DeleteRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "routeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DeleteRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "routeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DeleteRouteOperationInput.type = Types::DeleteRouteOperationInput
-    DeleteRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DeleteRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DeleteRouteOperationOutput[:http_payload] = :route
     DeleteRouteOperationOutput[:http_payload_member] = DeleteRouteOperationOutput.member(:route)
     DeleteRouteOperationOutput.type = Types::DeleteRouteOperationOutput
-    DeleteVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DeleteVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DeleteVirtualGatewayOperationInput.type = Types::DeleteVirtualGatewayOperationInput
-    DeleteVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DeleteVirtualGatewayOperationOutput[:http_payload] = :virtual_gateway
     DeleteVirtualGatewayOperationOutput[:http_payload_member] = DeleteVirtualGatewayOperationOutput.member(:virtual_gateway)
     DeleteVirtualGatewayOperationOutput.type = Types::DeleteVirtualGatewayOperationOutput
-    DeleteVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DeleteVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DeleteVirtualNodeOperationInput.type = Types::DeleteVirtualNodeOperationInput
-    DeleteVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DeleteVirtualNodeOperationOutput[:http_payload] = :virtual_node
     DeleteVirtualNodeOperationOutput[:http_payload_member] = DeleteVirtualNodeOperationOutput.member(:virtual_node)
     DeleteVirtualNodeOperationOutput.type = Types::DeleteVirtualNodeOperationOutput
-    DeleteVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DeleteVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DeleteVirtualRouterOperationInput.type = Types::DeleteVirtualRouterOperationInput
-    DeleteVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DeleteVirtualRouterOperationOutput[:http_payload] = :virtual_router
     DeleteVirtualRouterOperationOutput[:http_payload_member] = DeleteVirtualRouterOperationOutput.member(:virtual_router)
     DeleteVirtualRouterOperationOutput.type = Types::DeleteVirtualRouterOperationOutput
-    DeleteVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DeleteVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DeleteVirtualServiceOperationInput.type = Types::DeleteVirtualServiceOperationInput
-    DeleteVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DeleteVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DeleteVirtualServiceOperationOutput[:http_payload] = :virtual_service
     DeleteVirtualServiceOperationOutput[:http_payload_member] = DeleteVirtualServiceOperationOutput.member(:virtual_service)
     DeleteVirtualServiceOperationOutput.type = Types::DeleteVirtualServiceOperationOutput
-    DescribeGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DescribeGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DescribeGatewayRouteOperationInput.type = Types::DescribeGatewayRouteOperationInput
-    DescribeGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeGatewayRouteOperationOutput[:http_payload] = :gateway_route
     DescribeGatewayRouteOperationOutput[:http_payload_member] = DescribeGatewayRouteOperationOutput.member(:gateway_route)
     DescribeGatewayRouteOperationOutput.type = Types::DescribeGatewayRouteOperationOutput
-    DescribeMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeMeshOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DescribeMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeMeshOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DescribeMeshOperationInput.type = Types::DescribeMeshOperationInput
-    DescribeMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeMeshOperationOutput[:http_payload] = :mesh
     DescribeMeshOperationOutput[:http_payload_member] = DescribeMeshOperationOutput.member(:mesh)
     DescribeMeshOperationOutput.type = Types::DescribeMeshOperationOutput
-    DescribeRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "routeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
-    DescribeRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "routeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DescribeRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeRouteOperationInput.type = Types::DescribeRouteOperationInput
-    DescribeRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeRouteOperationOutput[:http_payload] = :route
     DescribeRouteOperationOutput[:http_payload_member] = DescribeRouteOperationOutput.member(:route)
     DescribeRouteOperationOutput.type = Types::DescribeRouteOperationOutput
-    DescribeVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DescribeVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DescribeVirtualGatewayOperationInput.type = Types::DescribeVirtualGatewayOperationInput
-    DescribeVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeVirtualGatewayOperationOutput[:http_payload] = :virtual_gateway
     DescribeVirtualGatewayOperationOutput[:http_payload_member] = DescribeVirtualGatewayOperationOutput.member(:virtual_gateway)
     DescribeVirtualGatewayOperationOutput.type = Types::DescribeVirtualGatewayOperationOutput
-    DescribeVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DescribeVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DescribeVirtualNodeOperationInput.type = Types::DescribeVirtualNodeOperationInput
-    DescribeVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeVirtualNodeOperationOutput[:http_payload] = :virtual_node
     DescribeVirtualNodeOperationOutput[:http_payload_member] = DescribeVirtualNodeOperationOutput.member(:virtual_node)
     DescribeVirtualNodeOperationOutput.type = Types::DescribeVirtualNodeOperationOutput
-    DescribeVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DescribeVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DescribeVirtualRouterOperationInput.type = Types::DescribeVirtualRouterOperationInput
-    DescribeVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeVirtualRouterOperationOutput[:http_payload] = :virtual_router
     DescribeVirtualRouterOperationOutput[:http_payload_member] = DescribeVirtualRouterOperationOutput.member(:virtual_router)
     DescribeVirtualRouterOperationOutput.type = Types::DescribeVirtualRouterOperationOutput
-    DescribeVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    DescribeVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     DescribeVirtualServiceOperationInput.type = Types::DescribeVirtualServiceOperationInput
-    DescribeVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    DescribeVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     DescribeVirtualServiceOperationOutput[:http_payload] = :virtual_service
     DescribeVirtualServiceOperationOutput[:http_payload_member] = DescribeVirtualServiceOperationOutput.member(:virtual_service)
     DescribeVirtualServiceOperationOutput.type = Types::DescribeVirtualServiceOperationOutput
-    DnsServiceDiscovery.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hostname, location_name: "hostname", traits: {"smithy.api#required" => {}}))
-    DnsServiceDiscovery.add_member(:response_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsResponseType, location_name: "responseType"))
-    DnsServiceDiscovery.add_member(:ip_preference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
+    DnsServiceDiscovery.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: Hostname, location_name: "hostname", traits: {"smithy.api#required" => {}}))
+    DnsServiceDiscovery.add_member(:response_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsResponseType, location_name: "responseType"))
+    DnsServiceDiscovery.add_member(:ip_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: IpPreference, location_name: "ipPreference"))
     DnsServiceDiscovery.type = Types::DnsServiceDiscovery
-    Duration.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DurationValue, location_name: "value"))
-    Duration.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DurationUnit, location_name: "unit"))
+    Duration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationValue, location_name: "value"))
+    Duration.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationUnit, location_name: "unit"))
     Duration.type = Types::Duration
-    EgressFilter.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EgressFilterType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    EgressFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EgressFilterType, location_name: "type", traits: {"smithy.api#required" => {}}))
     EgressFilter.type = Types::EgressFilter
-    FileAccessLog.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "path", traits: {"smithy.api#required" => {}}))
-    FileAccessLog.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingFormat, location_name: "format"))
+    FileAccessLog.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "path", traits: {"smithy.api#required" => {}}))
+    FileAccessLog.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingFormat, location_name: "format"))
     FileAccessLog.type = Types::FileAccessLog
-    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ForbiddenException.type = Types::ForbiddenException
-    GatewayRouteData.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    GatewayRouteData.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#required" => {}}))
-    GatewayRouteData.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
-    GatewayRouteData.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    GatewayRouteData.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
-    GatewayRouteData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GatewayRouteData.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    GatewayRouteData.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#required" => {}}))
+    GatewayRouteData.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
+    GatewayRouteData.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    GatewayRouteData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    GatewayRouteData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     GatewayRouteData.type = Types::GatewayRouteData
-    GatewayRouteHostnameMatch.add_member(:exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExactHostName, location_name: "exact"))
-    GatewayRouteHostnameMatch.add_member(:suffix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuffixHostname, location_name: "suffix"))
+    GatewayRouteHostnameMatch.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: ExactHostName, location_name: "exact"))
+    GatewayRouteHostnameMatch.add_member(:suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: SuffixHostname, location_name: "suffix"))
     GatewayRouteHostnameMatch.type = Types::GatewayRouteHostnameMatch
-    GatewayRouteHostnameRewrite.add_member(:default_target_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultGatewayRouteRewrite, location_name: "defaultTargetHostname"))
+    GatewayRouteHostnameRewrite.add_member(:default_target_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultGatewayRouteRewrite, location_name: "defaultTargetHostname"))
     GatewayRouteHostnameRewrite.type = Types::GatewayRouteHostnameRewrite
-    GatewayRouteList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteRef)
-    GatewayRouteRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    GatewayRouteRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    GatewayRouteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteRef)
+    GatewayRouteRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    GatewayRouteRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
     GatewayRouteRef.type = Types::GatewayRouteRef
-    GatewayRouteSpec.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRoutePriority, location_name: "priority"))
-    GatewayRouteSpec.add_member(:http_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRoute, location_name: "httpRoute"))
-    GatewayRouteSpec.add_member(:http2_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRoute, location_name: "http2Route"))
-    GatewayRouteSpec.add_member(:grpc_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcGatewayRoute, location_name: "grpcRoute"))
+    GatewayRouteSpec.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRoutePriority, location_name: "priority"))
+    GatewayRouteSpec.add_member(:http_route, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRoute, location_name: "httpRoute"))
+    GatewayRouteSpec.add_member(:http2_route, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRoute, location_name: "http2Route"))
+    GatewayRouteSpec.add_member(:grpc_route, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRoute, location_name: "grpcRoute"))
     GatewayRouteSpec.type = Types::GatewayRouteSpec
-    GatewayRouteStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GatewayRouteStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
     GatewayRouteStatus.type = Types::GatewayRouteStatus
-    GatewayRouteTarget.add_member(:virtual_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteVirtualService, location_name: "virtualService", traits: {"smithy.api#required" => {}}))
-    GatewayRouteTarget.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    GatewayRouteTarget.add_member(:virtual_service, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteVirtualService, location_name: "virtualService", traits: {"smithy.api#required" => {}}))
+    GatewayRouteTarget.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, location_name: "port"))
     GatewayRouteTarget.type = Types::GatewayRouteTarget
-    GatewayRouteVirtualService.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
+    GatewayRouteVirtualService.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
     GatewayRouteVirtualService.type = Types::GatewayRouteVirtualService
-    GrpcGatewayRoute.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcGatewayRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
-    GrpcGatewayRoute.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcGatewayRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
+    GrpcGatewayRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
+    GrpcGatewayRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
     GrpcGatewayRoute.type = Types::GrpcGatewayRoute
-    GrpcGatewayRouteAction.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteTarget, location_name: "target", traits: {"smithy.api#required" => {}}))
-    GrpcGatewayRouteAction.add_member(:rewrite, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcGatewayRouteRewrite, location_name: "rewrite"))
+    GrpcGatewayRouteAction.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteTarget, location_name: "target", traits: {"smithy.api#required" => {}}))
+    GrpcGatewayRouteAction.add_member(:rewrite, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRouteRewrite, location_name: "rewrite"))
     GrpcGatewayRouteAction.type = Types::GrpcGatewayRouteAction
-    GrpcGatewayRouteMatch.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "serviceName"))
-    GrpcGatewayRouteMatch.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteHostnameMatch, location_name: "hostname"))
-    GrpcGatewayRouteMatch.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcGatewayRouteMetadataList, location_name: "metadata"))
-    GrpcGatewayRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    GrpcGatewayRouteMatch.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "serviceName"))
+    GrpcGatewayRouteMatch.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteHostnameMatch, location_name: "hostname"))
+    GrpcGatewayRouteMatch.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRouteMetadataList, location_name: "metadata"))
+    GrpcGatewayRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, location_name: "port"))
     GrpcGatewayRouteMatch.type = Types::GrpcGatewayRouteMatch
-    GrpcGatewayRouteMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    GrpcGatewayRouteMetadata.add_member(:invert, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
-    GrpcGatewayRouteMetadata.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcMetadataMatchMethod, location_name: "match"))
+    GrpcGatewayRouteMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    GrpcGatewayRouteMetadata.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
+    GrpcGatewayRouteMetadata.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcMetadataMatchMethod, location_name: "match"))
     GrpcGatewayRouteMetadata.type = Types::GrpcGatewayRouteMetadata
-    GrpcGatewayRouteMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcGatewayRouteMetadata)
-    GrpcGatewayRouteRewrite.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteHostnameRewrite, location_name: "hostname"))
+    GrpcGatewayRouteMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRouteMetadata)
+    GrpcGatewayRouteRewrite.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteHostnameRewrite, location_name: "hostname"))
     GrpcGatewayRouteRewrite.type = Types::GrpcGatewayRouteRewrite
-    GrpcMetadataMatchMethod.add_member(:exact, Types::GrpcMetadataMatchMethod::Exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
-    GrpcMetadataMatchMethod.add_member(:regex, Types::GrpcMetadataMatchMethod::Regex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
-    GrpcMetadataMatchMethod.add_member(:range, Types::GrpcMetadataMatchMethod::Range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
-    GrpcMetadataMatchMethod.add_member(:prefix, Types::GrpcMetadataMatchMethod::Prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
-    GrpcMetadataMatchMethod.add_member(:suffix, Types::GrpcMetadataMatchMethod::Suffix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
-    GrpcMetadataMatchMethod.add_member(:unknown, Types::GrpcMetadataMatchMethod::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    GrpcMetadataMatchMethod.add_member(:exact, Types::GrpcMetadataMatchMethod::Exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "exact"))
+    GrpcMetadataMatchMethod.add_member(:regex, Types::GrpcMetadataMatchMethod::Regex, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "regex"))
+    GrpcMetadataMatchMethod.add_member(:range, Types::GrpcMetadataMatchMethod::Range, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchRange, location_name: "range"))
+    GrpcMetadataMatchMethod.add_member(:prefix, Types::GrpcMetadataMatchMethod::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "prefix"))
+    GrpcMetadataMatchMethod.add_member(:suffix, Types::GrpcMetadataMatchMethod::Suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "suffix"))
+    GrpcMetadataMatchMethod.add_member(:unknown, Types::GrpcMetadataMatchMethod::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     GrpcMetadataMatchMethod.type = Types::GrpcMetadataMatchMethod
-    GrpcRetryPolicy.add_member(:per_retry_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "perRetryTimeout", traits: {"smithy.api#required" => {}}))
-    GrpcRetryPolicy.add_member(:max_retries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRetries, location_name: "maxRetries", traits: {"smithy.api#required" => {}}))
-    GrpcRetryPolicy.add_member(:http_retry_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
-    GrpcRetryPolicy.add_member(:tcp_retry_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpRetryPolicyEvents, location_name: "tcpRetryEvents"))
-    GrpcRetryPolicy.add_member(:grpc_retry_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRetryPolicyEvents, location_name: "grpcRetryEvents"))
+    GrpcRetryPolicy.add_member(:per_retry_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "perRetryTimeout", traits: {"smithy.api#required" => {}}))
+    GrpcRetryPolicy.add_member(:max_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRetries, location_name: "maxRetries", traits: {"smithy.api#required" => {}}))
+    GrpcRetryPolicy.add_member(:http_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
+    GrpcRetryPolicy.add_member(:tcp_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRetryPolicyEvents, location_name: "tcpRetryEvents"))
+    GrpcRetryPolicy.add_member(:grpc_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRetryPolicyEvents, location_name: "grpcRetryEvents"))
     GrpcRetryPolicy.type = Types::GrpcRetryPolicy
-    GrpcRetryPolicyEvents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRetryPolicyEvent)
-    GrpcRoute.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
-    GrpcRoute.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
-    GrpcRoute.add_member(:retry_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRetryPolicy, location_name: "retryPolicy"))
-    GrpcRoute.add_member(:timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcTimeout, location_name: "timeout"))
+    GrpcRetryPolicyEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRetryPolicyEvent)
+    GrpcRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
+    GrpcRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
+    GrpcRoute.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRetryPolicy, location_name: "retryPolicy"))
+    GrpcRoute.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcTimeout, location_name: "timeout"))
     GrpcRoute.type = Types::GrpcRoute
-    GrpcRouteAction.add_member(:weighted_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeightedTargets, location_name: "weightedTargets", traits: {"smithy.api#required" => {}}))
+    GrpcRouteAction.add_member(:weighted_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTargets, location_name: "weightedTargets", traits: {"smithy.api#required" => {}}))
     GrpcRouteAction.type = Types::GrpcRouteAction
-    GrpcRouteMatch.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "serviceName"))
-    GrpcRouteMatch.add_member(:method_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MethodName, location_name: "methodName"))
-    GrpcRouteMatch.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRouteMetadataList, location_name: "metadata"))
-    GrpcRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    GrpcRouteMatch.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "serviceName"))
+    GrpcRouteMatch.add_member(:method_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MethodName, location_name: "methodName"))
+    GrpcRouteMatch.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMetadataList, location_name: "metadata"))
+    GrpcRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, location_name: "port"))
     GrpcRouteMatch.type = Types::GrpcRouteMatch
-    GrpcRouteMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    GrpcRouteMetadata.add_member(:invert, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
-    GrpcRouteMetadata.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRouteMetadataMatchMethod, location_name: "match"))
+    GrpcRouteMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    GrpcRouteMetadata.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
+    GrpcRouteMetadata.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMetadataMatchMethod, location_name: "match"))
     GrpcRouteMetadata.type = Types::GrpcRouteMetadata
-    GrpcRouteMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRouteMetadata)
-    GrpcRouteMetadataMatchMethod.add_member(:exact, Types::GrpcRouteMetadataMatchMethod::Exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
-    GrpcRouteMetadataMatchMethod.add_member(:regex, Types::GrpcRouteMetadataMatchMethod::Regex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
-    GrpcRouteMetadataMatchMethod.add_member(:range, Types::GrpcRouteMetadataMatchMethod::Range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
-    GrpcRouteMetadataMatchMethod.add_member(:prefix, Types::GrpcRouteMetadataMatchMethod::Prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
-    GrpcRouteMetadataMatchMethod.add_member(:suffix, Types::GrpcRouteMetadataMatchMethod::Suffix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
-    GrpcRouteMetadataMatchMethod.add_member(:unknown, Types::GrpcRouteMetadataMatchMethod::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    GrpcRouteMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMetadata)
+    GrpcRouteMetadataMatchMethod.add_member(:exact, Types::GrpcRouteMetadataMatchMethod::Exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "exact"))
+    GrpcRouteMetadataMatchMethod.add_member(:regex, Types::GrpcRouteMetadataMatchMethod::Regex, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "regex"))
+    GrpcRouteMetadataMatchMethod.add_member(:range, Types::GrpcRouteMetadataMatchMethod::Range, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchRange, location_name: "range"))
+    GrpcRouteMetadataMatchMethod.add_member(:prefix, Types::GrpcRouteMetadataMatchMethod::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "prefix"))
+    GrpcRouteMetadataMatchMethod.add_member(:suffix, Types::GrpcRouteMetadataMatchMethod::Suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "suffix"))
+    GrpcRouteMetadataMatchMethod.add_member(:unknown, Types::GrpcRouteMetadataMatchMethod::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     GrpcRouteMetadataMatchMethod.type = Types::GrpcRouteMetadataMatchMethod
-    GrpcTimeout.add_member(:per_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "perRequest"))
-    GrpcTimeout.add_member(:idle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
+    GrpcTimeout.add_member(:per_request, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "perRequest"))
+    GrpcTimeout.add_member(:idle, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "idle"))
     GrpcTimeout.type = Types::GrpcTimeout
-    HeaderMatchMethod.add_member(:exact, Types::HeaderMatchMethod::Exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
-    HeaderMatchMethod.add_member(:regex, Types::HeaderMatchMethod::Regex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
-    HeaderMatchMethod.add_member(:range, Types::HeaderMatchMethod::Range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
-    HeaderMatchMethod.add_member(:prefix, Types::HeaderMatchMethod::Prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
-    HeaderMatchMethod.add_member(:suffix, Types::HeaderMatchMethod::Suffix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
-    HeaderMatchMethod.add_member(:unknown, Types::HeaderMatchMethod::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    HeaderMatchMethod.add_member(:exact, Types::HeaderMatchMethod::Exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "exact"))
+    HeaderMatchMethod.add_member(:regex, Types::HeaderMatchMethod::Regex, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "regex"))
+    HeaderMatchMethod.add_member(:range, Types::HeaderMatchMethod::Range, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchRange, location_name: "range"))
+    HeaderMatchMethod.add_member(:prefix, Types::HeaderMatchMethod::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "prefix"))
+    HeaderMatchMethod.add_member(:suffix, Types::HeaderMatchMethod::Suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, location_name: "suffix"))
+    HeaderMatchMethod.add_member(:unknown, Types::HeaderMatchMethod::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     HeaderMatchMethod.type = Types::HeaderMatchMethod
-    HealthCheckPolicy.add_member(:timeout_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckTimeoutMillis, location_name: "timeoutMillis", traits: {"smithy.api#required" => {}}))
-    HealthCheckPolicy.add_member(:interval_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckIntervalMillis, location_name: "intervalMillis", traits: {"smithy.api#required" => {}}))
-    HealthCheckPolicy.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    HealthCheckPolicy.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: "port"))
-    HealthCheckPolicy.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path"))
-    HealthCheckPolicy.add_member(:healthy_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckThreshold, location_name: "healthyThreshold", traits: {"smithy.api#required" => {}}))
-    HealthCheckPolicy.add_member(:unhealthy_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckThreshold, location_name: "unhealthyThreshold", traits: {"smithy.api#required" => {}}))
+    HealthCheckPolicy.add_member(:timeout_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckTimeoutMillis, location_name: "timeoutMillis", traits: {"smithy.api#required" => {}}))
+    HealthCheckPolicy.add_member(:interval_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckIntervalMillis, location_name: "intervalMillis", traits: {"smithy.api#required" => {}}))
+    HealthCheckPolicy.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: PortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    HealthCheckPolicy.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, location_name: "port"))
+    HealthCheckPolicy.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path"))
+    HealthCheckPolicy.add_member(:healthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckThreshold, location_name: "healthyThreshold", traits: {"smithy.api#required" => {}}))
+    HealthCheckPolicy.add_member(:unhealthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckThreshold, location_name: "unhealthyThreshold", traits: {"smithy.api#required" => {}}))
     HealthCheckPolicy.type = Types::HealthCheckPolicy
-    HttpGatewayRoute.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
-    HttpGatewayRoute.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
+    HttpGatewayRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
+    HttpGatewayRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
     HttpGatewayRoute.type = Types::HttpGatewayRoute
-    HttpGatewayRouteAction.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteTarget, location_name: "target", traits: {"smithy.api#required" => {}}))
-    HttpGatewayRouteAction.add_member(:rewrite, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRouteRewrite, location_name: "rewrite"))
+    HttpGatewayRouteAction.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteTarget, location_name: "target", traits: {"smithy.api#required" => {}}))
+    HttpGatewayRouteAction.add_member(:rewrite, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRouteRewrite, location_name: "rewrite"))
     HttpGatewayRouteAction.type = Types::HttpGatewayRouteAction
-    HttpGatewayRouteHeader.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    HttpGatewayRouteHeader.add_member(:invert, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
-    HttpGatewayRouteHeader.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatchMethod, location_name: "match"))
+    HttpGatewayRouteHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    HttpGatewayRouteHeader.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
+    HttpGatewayRouteHeader.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchMethod, location_name: "match"))
     HttpGatewayRouteHeader.type = Types::HttpGatewayRouteHeader
-    HttpGatewayRouteHeaders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRouteHeader)
-    HttpGatewayRouteMatch.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "prefix"))
-    HttpGatewayRouteMatch.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpPathMatch, location_name: "path"))
-    HttpGatewayRouteMatch.add_member(:query_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpQueryParameters, location_name: "queryParameters"))
-    HttpGatewayRouteMatch.add_member(:method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
-    HttpGatewayRouteMatch.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteHostnameMatch, location_name: "hostname"))
-    HttpGatewayRouteMatch.add_member(:headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRouteHeaders, location_name: "headers"))
-    HttpGatewayRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    HttpGatewayRouteHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRouteHeader)
+    HttpGatewayRouteMatch.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "prefix"))
+    HttpGatewayRouteMatch.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPathMatch, location_name: "path"))
+    HttpGatewayRouteMatch.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryParameters, location_name: "queryParameters"))
+    HttpGatewayRouteMatch.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpMethod, location_name: "method"))
+    HttpGatewayRouteMatch.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteHostnameMatch, location_name: "hostname"))
+    HttpGatewayRouteMatch.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRouteHeaders, location_name: "headers"))
+    HttpGatewayRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, location_name: "port"))
     HttpGatewayRouteMatch.type = Types::HttpGatewayRouteMatch
-    HttpGatewayRoutePathRewrite.add_member(:exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpPathExact, location_name: "exact"))
+    HttpGatewayRoutePathRewrite.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPathExact, location_name: "exact"))
     HttpGatewayRoutePathRewrite.type = Types::HttpGatewayRoutePathRewrite
-    HttpGatewayRoutePrefixRewrite.add_member(:default_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultGatewayRouteRewrite, location_name: "defaultPrefix"))
-    HttpGatewayRoutePrefixRewrite.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRoutePrefix, location_name: "value"))
+    HttpGatewayRoutePrefixRewrite.add_member(:default_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultGatewayRouteRewrite, location_name: "defaultPrefix"))
+    HttpGatewayRoutePrefixRewrite.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRoutePrefix, location_name: "value"))
     HttpGatewayRoutePrefixRewrite.type = Types::HttpGatewayRoutePrefixRewrite
-    HttpGatewayRouteRewrite.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRoutePrefixRewrite, location_name: "prefix"))
-    HttpGatewayRouteRewrite.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpGatewayRoutePathRewrite, location_name: "path"))
-    HttpGatewayRouteRewrite.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteHostnameRewrite, location_name: "hostname"))
+    HttpGatewayRouteRewrite.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRoutePrefixRewrite, location_name: "prefix"))
+    HttpGatewayRouteRewrite.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRoutePathRewrite, location_name: "path"))
+    HttpGatewayRouteRewrite.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteHostnameRewrite, location_name: "hostname"))
     HttpGatewayRouteRewrite.type = Types::HttpGatewayRouteRewrite
-    HttpPathMatch.add_member(:exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpPathExact, location_name: "exact"))
-    HttpPathMatch.add_member(:regex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpPathRegex, location_name: "regex"))
+    HttpPathMatch.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPathExact, location_name: "exact"))
+    HttpPathMatch.add_member(:regex, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPathRegex, location_name: "regex"))
     HttpPathMatch.type = Types::HttpPathMatch
-    HttpQueryParameter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryParameterName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    HttpQueryParameter.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryParameterMatch, location_name: "match"))
+    HttpQueryParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    HttpQueryParameter.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterMatch, location_name: "match"))
     HttpQueryParameter.type = Types::HttpQueryParameter
-    HttpQueryParameters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpQueryParameter)
-    HttpRetryPolicy.add_member(:per_retry_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "perRetryTimeout", traits: {"smithy.api#required" => {}}))
-    HttpRetryPolicy.add_member(:max_retries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRetries, location_name: "maxRetries", traits: {"smithy.api#required" => {}}))
-    HttpRetryPolicy.add_member(:http_retry_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
-    HttpRetryPolicy.add_member(:tcp_retry_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpRetryPolicyEvents, location_name: "tcpRetryEvents"))
+    HttpQueryParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryParameter)
+    HttpRetryPolicy.add_member(:per_retry_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "perRetryTimeout", traits: {"smithy.api#required" => {}}))
+    HttpRetryPolicy.add_member(:max_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRetries, location_name: "maxRetries", traits: {"smithy.api#required" => {}}))
+    HttpRetryPolicy.add_member(:http_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
+    HttpRetryPolicy.add_member(:tcp_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRetryPolicyEvents, location_name: "tcpRetryEvents"))
     HttpRetryPolicy.type = Types::HttpRetryPolicy
-    HttpRetryPolicyEvents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRetryPolicyEvent)
-    HttpRoute.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
-    HttpRoute.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
-    HttpRoute.add_member(:retry_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRetryPolicy, location_name: "retryPolicy"))
-    HttpRoute.add_member(:timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "timeout"))
+    HttpRetryPolicyEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicyEvent)
+    HttpRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteMatch, location_name: "match", traits: {"smithy.api#required" => {}}))
+    HttpRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
+    HttpRoute.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicy, location_name: "retryPolicy"))
+    HttpRoute.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpTimeout, location_name: "timeout"))
     HttpRoute.type = Types::HttpRoute
-    HttpRouteAction.add_member(:weighted_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeightedTargets, location_name: "weightedTargets", traits: {"smithy.api#required" => {}}))
+    HttpRouteAction.add_member(:weighted_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTargets, location_name: "weightedTargets", traits: {"smithy.api#required" => {}}))
     HttpRouteAction.type = Types::HttpRouteAction
-    HttpRouteHeader.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    HttpRouteHeader.add_member(:invert, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
-    HttpRouteHeader.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderMatchMethod, location_name: "match"))
+    HttpRouteHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    HttpRouteHeader.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "invert"))
+    HttpRouteHeader.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchMethod, location_name: "match"))
     HttpRouteHeader.type = Types::HttpRouteHeader
-    HttpRouteHeaders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRouteHeader)
-    HttpRouteMatch.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "prefix"))
-    HttpRouteMatch.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpPathMatch, location_name: "path"))
-    HttpRouteMatch.add_member(:query_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpQueryParameters, location_name: "queryParameters"))
-    HttpRouteMatch.add_member(:method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
-    HttpRouteMatch.add_member(:scheme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpScheme, location_name: "scheme"))
-    HttpRouteMatch.add_member(:headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRouteHeaders, location_name: "headers"))
-    HttpRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    HttpRouteHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteHeader)
+    HttpRouteMatch.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "prefix"))
+    HttpRouteMatch.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPathMatch, location_name: "path"))
+    HttpRouteMatch.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryParameters, location_name: "queryParameters"))
+    HttpRouteMatch.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpMethod, location_name: "method"))
+    HttpRouteMatch.add_member(:scheme, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpScheme, location_name: "scheme"))
+    HttpRouteMatch.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteHeaders, location_name: "headers"))
+    HttpRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, location_name: "port"))
     HttpRouteMatch.type = Types::HttpRouteMatch
-    HttpTimeout.add_member(:per_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "perRequest"))
-    HttpTimeout.add_member(:idle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
+    HttpTimeout.add_member(:per_request, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "perRequest"))
+    HttpTimeout.add_member(:idle, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "idle"))
     HttpTimeout.type = Types::HttpTimeout
-    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerErrorException.type = Types::InternalServerErrorException
-    JsonFormat.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonFormatRef)
-    JsonFormatRef.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    JsonFormatRef.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    JsonFormat.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JsonFormatRef)
+    JsonFormatRef.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    JsonFormatRef.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     JsonFormatRef.type = Types::JsonFormatRef
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListGatewayRoutesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListGatewayRoutesOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListGatewayRoutesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListGatewayRoutesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGatewayRoutesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListGatewayRoutesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    ListGatewayRoutesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListGatewayRoutesOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListGatewayRoutesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListGatewayRoutesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGatewayRoutesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListGatewayRoutesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     ListGatewayRoutesOperationInput.type = Types::ListGatewayRoutesOperationInput
-    ListGatewayRoutesOperationOutput.add_member(:gateway_routes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteList, location_name: "gatewayRoutes", traits: {"smithy.api#required" => {}}))
-    ListGatewayRoutesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListGatewayRoutesOperationOutput.add_member(:gateway_routes, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteList, location_name: "gatewayRoutes", traits: {"smithy.api#required" => {}}))
+    ListGatewayRoutesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListGatewayRoutesOperationOutput.type = Types::ListGatewayRoutesOperationOutput
-    ListMeshesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListMeshesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMeshesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListMeshesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListMeshesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListMeshesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
     ListMeshesOperationInput.type = Types::ListMeshesOperationInput
-    ListMeshesOperationOutput.add_member(:meshes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshList, location_name: "meshes", traits: {"smithy.api#required" => {}}))
-    ListMeshesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListMeshesOperationOutput.add_member(:meshes, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshList, location_name: "meshes", traits: {"smithy.api#required" => {}}))
+    ListMeshesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListMeshesOperationOutput.type = Types::ListMeshesOperationOutput
-    ListRoutesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListRoutesOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListRoutesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListRoutesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRoutesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListRoutesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    ListRoutesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRoutesOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRoutesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListRoutesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListRoutesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListRoutesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     ListRoutesOperationInput.type = Types::ListRoutesOperationInput
-    ListRoutesOperationOutput.add_member(:routes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteList, location_name: "routes", traits: {"smithy.api#required" => {}}))
-    ListRoutesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListRoutesOperationOutput.add_member(:routes, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteList, location_name: "routes", traits: {"smithy.api#required" => {}}))
+    ListRoutesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListRoutesOperationOutput.type = Types::ListRoutesOperationOutput
-    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
-    ListTagsForResourceOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListTagsForResourceOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
+    ListTagsForResourceOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListTagsForResourceOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
     ListTagsForResourceOperationInput.type = Types::ListTagsForResourceOperationInput
-    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListTagsForResourceOperationOutput.type = Types::ListTagsForResourceOperationOutput
-    ListVirtualGatewaysOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListVirtualGatewaysOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListVirtualGatewaysOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualGatewaysLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListVirtualGatewaysOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    ListVirtualGatewaysOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListVirtualGatewaysOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListVirtualGatewaysOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVirtualGatewaysLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListVirtualGatewaysOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     ListVirtualGatewaysOperationInput.type = Types::ListVirtualGatewaysOperationInput
-    ListVirtualGatewaysOperationOutput.add_member(:virtual_gateways, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayList, location_name: "virtualGateways", traits: {"smithy.api#required" => {}}))
-    ListVirtualGatewaysOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListVirtualGatewaysOperationOutput.add_member(:virtual_gateways, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayList, location_name: "virtualGateways", traits: {"smithy.api#required" => {}}))
+    ListVirtualGatewaysOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListVirtualGatewaysOperationOutput.type = Types::ListVirtualGatewaysOperationOutput
-    ListVirtualNodesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListVirtualNodesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListVirtualNodesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualNodesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListVirtualNodesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    ListVirtualNodesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListVirtualNodesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListVirtualNodesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVirtualNodesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListVirtualNodesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     ListVirtualNodesOperationInput.type = Types::ListVirtualNodesOperationInput
-    ListVirtualNodesOperationOutput.add_member(:virtual_nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeList, location_name: "virtualNodes", traits: {"smithy.api#required" => {}}))
-    ListVirtualNodesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListVirtualNodesOperationOutput.add_member(:virtual_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeList, location_name: "virtualNodes", traits: {"smithy.api#required" => {}}))
+    ListVirtualNodesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListVirtualNodesOperationOutput.type = Types::ListVirtualNodesOperationOutput
-    ListVirtualRoutersOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListVirtualRoutersOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListVirtualRoutersOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualRoutersLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListVirtualRoutersOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    ListVirtualRoutersOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListVirtualRoutersOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListVirtualRoutersOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVirtualRoutersLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListVirtualRoutersOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     ListVirtualRoutersOperationInput.type = Types::ListVirtualRoutersOperationInput
-    ListVirtualRoutersOperationOutput.add_member(:virtual_routers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterList, location_name: "virtualRouters", traits: {"smithy.api#required" => {}}))
-    ListVirtualRoutersOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListVirtualRoutersOperationOutput.add_member(:virtual_routers, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterList, location_name: "virtualRouters", traits: {"smithy.api#required" => {}}))
+    ListVirtualRoutersOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListVirtualRoutersOperationOutput.type = Types::ListVirtualRoutersOperationOutput
-    ListVirtualServicesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListVirtualServicesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListVirtualServicesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualServicesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListVirtualServicesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    ListVirtualServicesOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListVirtualServicesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListVirtualServicesOperationInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVirtualServicesLimit, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListVirtualServicesOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     ListVirtualServicesOperationInput.type = Types::ListVirtualServicesOperationInput
-    ListVirtualServicesOperationOutput.add_member(:virtual_services, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceList, location_name: "virtualServices", traits: {"smithy.api#required" => {}}))
-    ListVirtualServicesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListVirtualServicesOperationOutput.add_member(:virtual_services, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceList, location_name: "virtualServices", traits: {"smithy.api#required" => {}}))
+    ListVirtualServicesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListVirtualServicesOperationOutput.type = Types::ListVirtualServicesOperationOutput
-    Listener.add_member(:port_mapping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortMapping, location_name: "portMapping", traits: {"smithy.api#required" => {}}))
-    Listener.add_member(:tls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTls, location_name: "tls"))
-    Listener.add_member(:health_check, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckPolicy, location_name: "healthCheck"))
-    Listener.add_member(:timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTimeout, location_name: "timeout"))
-    Listener.add_member(:outlier_detection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutlierDetection, location_name: "outlierDetection"))
-    Listener.add_member(:connection_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeConnectionPool, location_name: "connectionPool"))
+    Listener.add_member(:port_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, location_name: "portMapping", traits: {"smithy.api#required" => {}}))
+    Listener.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTls, location_name: "tls"))
+    Listener.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckPolicy, location_name: "healthCheck"))
+    Listener.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTimeout, location_name: "timeout"))
+    Listener.add_member(:outlier_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: OutlierDetection, location_name: "outlierDetection"))
+    Listener.add_member(:connection_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeConnectionPool, location_name: "connectionPool"))
     Listener.type = Types::Listener
-    ListenerTimeout.add_member(:tcp, Types::ListenerTimeout::Tcp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpTimeout, location_name: "tcp"))
-    ListenerTimeout.add_member(:http, Types::ListenerTimeout::Http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "http"))
-    ListenerTimeout.add_member(:http2, Types::ListenerTimeout::Http2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "http2"))
-    ListenerTimeout.add_member(:grpc, Types::ListenerTimeout::Grpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcTimeout, location_name: "grpc"))
-    ListenerTimeout.add_member(:unknown, Types::ListenerTimeout::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ListenerTimeout.add_member(:tcp, Types::ListenerTimeout::Tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpTimeout, location_name: "tcp"))
+    ListenerTimeout.add_member(:http, Types::ListenerTimeout::Http, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpTimeout, location_name: "http"))
+    ListenerTimeout.add_member(:http2, Types::ListenerTimeout::Http2, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpTimeout, location_name: "http2"))
+    ListenerTimeout.add_member(:grpc, Types::ListenerTimeout::Grpc, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcTimeout, location_name: "grpc"))
+    ListenerTimeout.add_member(:unknown, Types::ListenerTimeout::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ListenerTimeout.type = Types::ListenerTimeout
-    ListenerTls.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsMode, location_name: "mode", traits: {"smithy.api#required" => {}}))
-    ListenerTls.add_member(:certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsCertificate, location_name: "certificate", traits: {"smithy.api#required" => {}}))
-    ListenerTls.add_member(:validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsValidationContext, location_name: "validation"))
+    ListenerTls.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsMode, location_name: "mode", traits: {"smithy.api#required" => {}}))
+    ListenerTls.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsCertificate, location_name: "certificate", traits: {"smithy.api#required" => {}}))
+    ListenerTls.add_member(:validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsValidationContext, location_name: "validation"))
     ListenerTls.type = Types::ListenerTls
-    ListenerTlsAcmCertificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "certificateArn", traits: {"smithy.api#required" => {}}))
+    ListenerTlsAcmCertificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "certificateArn", traits: {"smithy.api#required" => {}}))
     ListenerTlsAcmCertificate.type = Types::ListenerTlsAcmCertificate
-    ListenerTlsCertificate.add_member(:acm, Types::ListenerTlsCertificate::Acm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsAcmCertificate, location_name: "acm"))
-    ListenerTlsCertificate.add_member(:file, Types::ListenerTlsCertificate::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsFileCertificate, location_name: "file"))
-    ListenerTlsCertificate.add_member(:sds, Types::ListenerTlsCertificate::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsSdsCertificate, location_name: "sds"))
-    ListenerTlsCertificate.add_member(:unknown, Types::ListenerTlsCertificate::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ListenerTlsCertificate.add_member(:acm, Types::ListenerTlsCertificate::Acm, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsAcmCertificate, location_name: "acm"))
+    ListenerTlsCertificate.add_member(:file, Types::ListenerTlsCertificate::File, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsFileCertificate, location_name: "file"))
+    ListenerTlsCertificate.add_member(:sds, Types::ListenerTlsCertificate::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsSdsCertificate, location_name: "sds"))
+    ListenerTlsCertificate.add_member(:unknown, Types::ListenerTlsCertificate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ListenerTlsCertificate.type = Types::ListenerTlsCertificate
-    ListenerTlsFileCertificate.add_member(:certificate_chain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
-    ListenerTlsFileCertificate.add_member(:private_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "privateKey", traits: {"smithy.api#required" => {}}))
+    ListenerTlsFileCertificate.add_member(:certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
+    ListenerTlsFileCertificate.add_member(:private_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "privateKey", traits: {"smithy.api#required" => {}}))
     ListenerTlsFileCertificate.type = Types::ListenerTlsFileCertificate
-    ListenerTlsSdsCertificate.add_member(:secret_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
+    ListenerTlsSdsCertificate.add_member(:secret_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
     ListenerTlsSdsCertificate.type = Types::ListenerTlsSdsCertificate
-    ListenerTlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerTlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
-    ListenerTlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
+    ListenerTlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerTlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
+    ListenerTlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
     ListenerTlsValidationContext.type = Types::ListenerTlsValidationContext
-    ListenerTlsValidationContextTrust.add_member(:file, Types::ListenerTlsValidationContextTrust::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsValidationContextFileTrust, location_name: "file"))
-    ListenerTlsValidationContextTrust.add_member(:sds, Types::ListenerTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsValidationContextSdsTrust, location_name: "sds"))
-    ListenerTlsValidationContextTrust.add_member(:unknown, Types::ListenerTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ListenerTlsValidationContextTrust.add_member(:file, Types::ListenerTlsValidationContextTrust::File, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContextFileTrust, location_name: "file"))
+    ListenerTlsValidationContextTrust.add_member(:sds, Types::ListenerTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContextSdsTrust, location_name: "sds"))
+    ListenerTlsValidationContextTrust.add_member(:unknown, Types::ListenerTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ListenerTlsValidationContextTrust.type = Types::ListenerTlsValidationContextTrust
-    Listeners.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listener)
-    Logging.add_member(:access_log, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessLog, location_name: "accessLog"))
+    Listeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Listener)
+    Logging.add_member(:access_log, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLog, location_name: "accessLog"))
     Logging.type = Types::Logging
-    LoggingFormat.add_member(:text, Types::LoggingFormat::Text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextFormat, location_name: "text"))
-    LoggingFormat.add_member(:json, Types::LoggingFormat::Json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JsonFormat, location_name: "json"))
-    LoggingFormat.add_member(:unknown, Types::LoggingFormat::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    LoggingFormat.add_member(:text, Types::LoggingFormat::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: TextFormat, location_name: "text"))
+    LoggingFormat.add_member(:json, Types::LoggingFormat::Json, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonFormat, location_name: "json"))
+    LoggingFormat.add_member(:unknown, Types::LoggingFormat::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     LoggingFormat.type = Types::LoggingFormat
-    MatchRange.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "start", traits: {"smithy.api#required" => {}}))
-    MatchRange.add_member(:end, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "end", traits: {"smithy.api#required" => {}}))
+    MatchRange.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "start", traits: {"smithy.api#required" => {}}))
+    MatchRange.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "end", traits: {"smithy.api#required" => {}}))
     MatchRange.type = Types::MatchRange
-    MeshData.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    MeshData.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    MeshData.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
-    MeshData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    MeshData.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    MeshData.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    MeshData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    MeshData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     MeshData.type = Types::MeshData
-    MeshList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshRef)
-    MeshRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    MeshRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    MeshRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    MeshRef.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    MeshRef.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    MeshRef.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    MeshRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    MeshList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeshRef)
+    MeshRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    MeshRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    MeshRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    MeshRef.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    MeshRef.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    MeshRef.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    MeshRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
     MeshRef.type = Types::MeshRef
-    MeshServiceDiscovery.add_member(:ip_preference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
+    MeshServiceDiscovery.add_member(:ip_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: IpPreference, location_name: "ipPreference"))
     MeshServiceDiscovery.type = Types::MeshServiceDiscovery
-    MeshSpec.add_member(:egress_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EgressFilter, location_name: "egressFilter"))
-    MeshSpec.add_member(:service_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshServiceDiscovery, location_name: "serviceDiscovery"))
+    MeshSpec.add_member(:egress_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EgressFilter, location_name: "egressFilter"))
+    MeshSpec.add_member(:service_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshServiceDiscovery, location_name: "serviceDiscovery"))
     MeshSpec.type = Types::MeshSpec
-    MeshStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshStatusCode, location_name: "status"))
+    MeshStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshStatusCode, location_name: "status"))
     MeshStatus.type = Types::MeshStatus
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     NotFoundException.type = Types::NotFoundException
-    OutlierDetection.add_member(:max_server_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutlierDetectionMaxServerErrors, location_name: "maxServerErrors", traits: {"smithy.api#required" => {}}))
-    OutlierDetection.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "interval", traits: {"smithy.api#required" => {}}))
-    OutlierDetection.add_member(:base_ejection_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "baseEjectionDuration", traits: {"smithy.api#required" => {}}))
-    OutlierDetection.add_member(:max_ejection_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutlierDetectionMaxEjectionPercent, location_name: "maxEjectionPercent", traits: {"smithy.api#required" => {}}))
+    OutlierDetection.add_member(:max_server_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: OutlierDetectionMaxServerErrors, location_name: "maxServerErrors", traits: {"smithy.api#required" => {}}))
+    OutlierDetection.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "interval", traits: {"smithy.api#required" => {}}))
+    OutlierDetection.add_member(:base_ejection_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "baseEjectionDuration", traits: {"smithy.api#required" => {}}))
+    OutlierDetection.add_member(:max_ejection_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: OutlierDetectionMaxEjectionPercent, location_name: "maxEjectionPercent", traits: {"smithy.api#required" => {}}))
     OutlierDetection.type = Types::OutlierDetection
-    PortMapping.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: "port", traits: {"smithy.api#required" => {}}))
-    PortMapping.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    PortMapping.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, location_name: "port", traits: {"smithy.api#required" => {}}))
+    PortMapping.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: PortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
     PortMapping.type = Types::PortMapping
-    PortSet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber)
-    QueryParameterMatch.add_member(:exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "exact"))
+    PortSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber)
+    QueryParameterMatch.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "exact"))
     QueryParameterMatch.type = Types::QueryParameterMatch
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceMetadata.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    ResourceMetadata.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    ResourceMetadata.add_member(:uid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "uid", traits: {"smithy.api#required" => {}}))
-    ResourceMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    ResourceMetadata.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
-    ResourceMetadata.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    ResourceMetadata.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    ResourceMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    ResourceMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    ResourceMetadata.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "uid", traits: {"smithy.api#required" => {}}))
+    ResourceMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    ResourceMetadata.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    ResourceMetadata.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    ResourceMetadata.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
     ResourceMetadata.type = Types::ResourceMetadata
-    RouteData.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    RouteData.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
-    RouteData.add_member(:route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "routeName", traits: {"smithy.api#required" => {}}))
-    RouteData.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    RouteData.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
-    RouteData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    RouteData.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    RouteData.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
+    RouteData.add_member(:route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "routeName", traits: {"smithy.api#required" => {}}))
+    RouteData.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    RouteData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    RouteData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     RouteData.type = Types::RouteData
-    RouteList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteRef)
-    RouteRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "routeName", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    RouteRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    RouteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteRef)
+    RouteRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "routeName", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    RouteRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
     RouteRef.type = Types::RouteRef
-    RouteSpec.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutePriority, location_name: "priority"))
-    RouteSpec.add_member(:http_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRoute, location_name: "httpRoute"))
-    RouteSpec.add_member(:tcp_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpRoute, location_name: "tcpRoute"))
-    RouteSpec.add_member(:http2_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRoute, location_name: "http2Route"))
-    RouteSpec.add_member(:grpc_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrpcRoute, location_name: "grpcRoute"))
+    RouteSpec.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePriority, location_name: "priority"))
+    RouteSpec.add_member(:http_route, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRoute, location_name: "httpRoute"))
+    RouteSpec.add_member(:tcp_route, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRoute, location_name: "tcpRoute"))
+    RouteSpec.add_member(:http2_route, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRoute, location_name: "http2Route"))
+    RouteSpec.add_member(:grpc_route, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRoute, location_name: "grpcRoute"))
     RouteSpec.type = Types::RouteSpec
-    RouteStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
+    RouteStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
     RouteStatus.type = Types::RouteStatus
-    ServiceDiscovery.add_member(:dns, Types::ServiceDiscovery::Dns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsServiceDiscovery, location_name: "dns"))
-    ServiceDiscovery.add_member(:aws_cloud_map, Types::ServiceDiscovery::AwsCloudMap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsCloudMapServiceDiscovery, location_name: "awsCloudMap"))
-    ServiceDiscovery.add_member(:unknown, Types::ServiceDiscovery::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ServiceDiscovery.add_member(:dns, Types::ServiceDiscovery::Dns, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsServiceDiscovery, location_name: "dns"))
+    ServiceDiscovery.add_member(:aws_cloud_map, Types::ServiceDiscovery::AwsCloudMap, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapServiceDiscovery, location_name: "awsCloudMap"))
+    ServiceDiscovery.add_member(:unknown, Types::ServiceDiscovery::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ServiceDiscovery.type = Types::ServiceDiscovery
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    SubjectAlternativeNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectAlternativeName)
-    SubjectAlternativeNameMatchers.add_member(:exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectAlternativeNameList, location_name: "exact", traits: {"smithy.api#required" => {}}))
+    SubjectAlternativeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeName)
+    SubjectAlternativeNameMatchers.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNameList, location_name: "exact", traits: {"smithy.api#required" => {}}))
     SubjectAlternativeNameMatchers.type = Types::SubjectAlternativeNameMatchers
-    SubjectAlternativeNames.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectAlternativeNameMatchers, location_name: "match", traits: {"smithy.api#required" => {}}))
+    SubjectAlternativeNames.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNameMatchers, location_name: "match", traits: {"smithy.api#required" => {}}))
     SubjectAlternativeNames.type = Types::SubjectAlternativeNames
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagRef)
-    TagRef.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    TagRef.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagRef)
+    TagRef.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    TagRef.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     TagRef.type = Types::TagRef
-    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
-    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
+    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    TcpRetryPolicyEvents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpRetryPolicyEvent)
-    TcpRoute.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
-    TcpRoute.add_member(:timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpTimeout, location_name: "timeout"))
-    TcpRoute.add_member(:match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TcpRouteMatch, location_name: "match"))
+    TcpRetryPolicyEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRetryPolicyEvent)
+    TcpRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRouteAction, location_name: "action", traits: {"smithy.api#required" => {}}))
+    TcpRoute.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpTimeout, location_name: "timeout"))
+    TcpRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRouteMatch, location_name: "match"))
     TcpRoute.type = Types::TcpRoute
-    TcpRouteAction.add_member(:weighted_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeightedTargets, location_name: "weightedTargets", traits: {"smithy.api#required" => {}}))
+    TcpRouteAction.add_member(:weighted_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTargets, location_name: "weightedTargets", traits: {"smithy.api#required" => {}}))
     TcpRouteAction.type = Types::TcpRouteAction
-    TcpRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    TcpRouteMatch.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, location_name: "port"))
     TcpRouteMatch.type = Types::TcpRouteMatch
-    TcpTimeout.add_member(:idle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
+    TcpTimeout.add_member(:idle, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "idle"))
     TcpTimeout.type = Types::TcpTimeout
-    TlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
-    TlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
+    TlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
+    TlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
     TlsValidationContext.type = Types::TlsValidationContext
-    TlsValidationContextAcmTrust.add_member(:certificate_authority_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateAuthorityArns, location_name: "certificateAuthorityArns", traits: {"smithy.api#required" => {}}))
+    TlsValidationContextAcmTrust.add_member(:certificate_authority_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthorityArns, location_name: "certificateAuthorityArns", traits: {"smithy.api#required" => {}}))
     TlsValidationContextAcmTrust.type = Types::TlsValidationContextAcmTrust
-    TlsValidationContextFileTrust.add_member(:certificate_chain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
+    TlsValidationContextFileTrust.add_member(:certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
     TlsValidationContextFileTrust.type = Types::TlsValidationContextFileTrust
-    TlsValidationContextSdsTrust.add_member(:secret_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
+    TlsValidationContextSdsTrust.add_member(:secret_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
     TlsValidationContextSdsTrust.type = Types::TlsValidationContextSdsTrust
-    TlsValidationContextTrust.add_member(:acm, Types::TlsValidationContextTrust::Acm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsValidationContextAcmTrust, location_name: "acm"))
-    TlsValidationContextTrust.add_member(:file, Types::TlsValidationContextTrust::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsValidationContextFileTrust, location_name: "file"))
-    TlsValidationContextTrust.add_member(:sds, Types::TlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsValidationContextSdsTrust, location_name: "sds"))
-    TlsValidationContextTrust.add_member(:unknown, Types::TlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    TlsValidationContextTrust.add_member(:acm, Types::TlsValidationContextTrust::Acm, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContextAcmTrust, location_name: "acm"))
+    TlsValidationContextTrust.add_member(:file, Types::TlsValidationContextTrust::File, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContextFileTrust, location_name: "file"))
+    TlsValidationContextTrust.add_member(:sds, Types::TlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContextSdsTrust, location_name: "sds"))
+    TlsValidationContextTrust.add_member(:unknown, Types::TlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TlsValidationContextTrust.type = Types::TlsValidationContextTrust
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
-    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceOperationInput.type = Types::UntagResourceOperationInput
     UntagResourceOperationOutput.type = Types::UntagResourceOperationOutput
-    UpdateGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateGatewayRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    UpdateGatewayRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    UpdateGatewayRouteOperationInput.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "gatewayRouteName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateGatewayRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateGatewayRouteOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateGatewayRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    UpdateGatewayRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateGatewayRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     UpdateGatewayRouteOperationInput.type = Types::UpdateGatewayRouteOperationInput
-    UpdateGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateGatewayRouteOperationOutput.add_member(:gateway_route, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteData, location_name: "gatewayRoute", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateGatewayRouteOperationOutput[:http_payload] = :gateway_route
     UpdateGatewayRouteOperationOutput[:http_payload_member] = UpdateGatewayRouteOperationOutput.member(:gateway_route)
     UpdateGatewayRouteOperationOutput.type = Types::UpdateGatewayRouteOperationOutput
-    UpdateMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateMeshOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
-    UpdateMeshOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateMeshOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateMeshOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshSpec, location_name: "spec"))
+    UpdateMeshOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateMeshOperationInput.type = Types::UpdateMeshOperationInput
-    UpdateMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateMeshOperationOutput.add_member(:mesh, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshData, location_name: "mesh", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateMeshOperationOutput[:http_payload] = :mesh
     UpdateMeshOperationOutput[:http_payload_member] = UpdateMeshOperationOutput.member(:mesh)
     UpdateMeshOperationOutput.type = Types::UpdateMeshOperationOutput
-    UpdateRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "routeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    UpdateRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    UpdateRouteOperationInput.add_member(:route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "routeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRouteOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRouteOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRouteOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    UpdateRouteOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateRouteOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     UpdateRouteOperationInput.type = Types::UpdateRouteOperationInput
-    UpdateRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateRouteOperationOutput.add_member(:route, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteData, location_name: "route", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateRouteOperationOutput[:http_payload] = :route
     UpdateRouteOperationOutput[:http_payload_member] = UpdateRouteOperationOutput.member(:route)
     UpdateRouteOperationOutput.type = Types::UpdateRouteOperationOutput
-    UpdateVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualGatewayOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewaySpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    UpdateVirtualGatewayOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    UpdateVirtualGatewayOperationInput.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualGatewayOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualGatewayOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewaySpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    UpdateVirtualGatewayOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateVirtualGatewayOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     UpdateVirtualGatewayOperationInput.type = Types::UpdateVirtualGatewayOperationInput
-    UpdateVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualGatewayOperationOutput.add_member(:virtual_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayData, location_name: "virtualGateway", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateVirtualGatewayOperationOutput[:http_payload] = :virtual_gateway
     UpdateVirtualGatewayOperationOutput[:http_payload_member] = UpdateVirtualGatewayOperationOutput.member(:virtual_gateway)
     UpdateVirtualGatewayOperationOutput.type = Types::UpdateVirtualGatewayOperationOutput
-    UpdateVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualNodeOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    UpdateVirtualNodeOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    UpdateVirtualNodeOperationInput.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualNodeOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualNodeOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    UpdateVirtualNodeOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateVirtualNodeOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     UpdateVirtualNodeOperationInput.type = Types::UpdateVirtualNodeOperationInput
-    UpdateVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualNodeOperationOutput.add_member(:virtual_node, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeData, location_name: "virtualNode", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateVirtualNodeOperationOutput[:http_payload] = :virtual_node
     UpdateVirtualNodeOperationOutput[:http_payload_member] = UpdateVirtualNodeOperationOutput.member(:virtual_node)
     UpdateVirtualNodeOperationOutput.type = Types::UpdateVirtualNodeOperationOutput
-    UpdateVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualRouterOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    UpdateVirtualRouterOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    UpdateVirtualRouterOperationInput.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualRouterOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualRouterOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    UpdateVirtualRouterOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateVirtualRouterOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     UpdateVirtualRouterOperationInput.type = Types::UpdateVirtualRouterOperationInput
-    UpdateVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualRouterOperationOutput.add_member(:virtual_router, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterData, location_name: "virtualRouter", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateVirtualRouterOperationOutput[:http_payload] = :virtual_router
     UpdateVirtualRouterOperationOutput[:http_payload_member] = UpdateVirtualRouterOperationOutput.member(:virtual_router)
     UpdateVirtualRouterOperationOutput.type = Types::UpdateVirtualRouterOperationOutput
-    UpdateVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVirtualServiceOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    UpdateVirtualServiceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
+    UpdateVirtualServiceOperationInput.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualServiceOperationInput.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualServiceOperationInput.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    UpdateVirtualServiceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateVirtualServiceOperationInput.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#httpQuery" => "meshOwner"}))
     UpdateVirtualServiceOperationInput.type = Types::UpdateVirtualServiceOperationInput
-    UpdateVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualServiceOperationOutput.add_member(:virtual_service, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceData, location_name: "virtualService", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateVirtualServiceOperationOutput[:http_payload] = :virtual_service
     UpdateVirtualServiceOperationOutput[:http_payload_member] = UpdateVirtualServiceOperationOutput.member(:virtual_service)
     UpdateVirtualServiceOperationOutput.type = Types::UpdateVirtualServiceOperationOutput
-    VirtualGatewayAccessLog.add_member(:file, Types::VirtualGatewayAccessLog::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayFileAccessLog, location_name: "file"))
-    VirtualGatewayAccessLog.add_member(:unknown, Types::VirtualGatewayAccessLog::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualGatewayAccessLog.add_member(:file, Types::VirtualGatewayAccessLog::File, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayFileAccessLog, location_name: "file"))
+    VirtualGatewayAccessLog.add_member(:unknown, Types::VirtualGatewayAccessLog::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualGatewayAccessLog.type = Types::VirtualGatewayAccessLog
-    VirtualGatewayBackendDefaults.add_member(:client_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayClientPolicy, location_name: "clientPolicy"))
+    VirtualGatewayBackendDefaults.add_member(:client_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayClientPolicy, location_name: "clientPolicy"))
     VirtualGatewayBackendDefaults.type = Types::VirtualGatewayBackendDefaults
-    VirtualGatewayCertificateAuthorityArns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    VirtualGatewayClientPolicy.add_member(:tls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayClientPolicyTls, location_name: "tls"))
+    VirtualGatewayCertificateAuthorityArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    VirtualGatewayClientPolicy.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayClientPolicyTls, location_name: "tls"))
     VirtualGatewayClientPolicy.type = Types::VirtualGatewayClientPolicy
-    VirtualGatewayClientPolicyTls.add_member(:enforce, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enforce", traits: {"smithy.api#default" => nil}))
-    VirtualGatewayClientPolicyTls.add_member(:ports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortSet, location_name: "ports"))
-    VirtualGatewayClientPolicyTls.add_member(:certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayClientTlsCertificate, location_name: "certificate"))
-    VirtualGatewayClientPolicyTls.add_member(:validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContext, location_name: "validation", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayClientPolicyTls.add_member(:enforce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enforce", traits: {"smithy.api#default" => nil}))
+    VirtualGatewayClientPolicyTls.add_member(:ports, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSet, location_name: "ports"))
+    VirtualGatewayClientPolicyTls.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayClientTlsCertificate, location_name: "certificate"))
+    VirtualGatewayClientPolicyTls.add_member(:validation, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContext, location_name: "validation", traits: {"smithy.api#required" => {}}))
     VirtualGatewayClientPolicyTls.type = Types::VirtualGatewayClientPolicyTls
-    VirtualGatewayClientTlsCertificate.add_member(:file, Types::VirtualGatewayClientTlsCertificate::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsFileCertificate, location_name: "file"))
-    VirtualGatewayClientTlsCertificate.add_member(:sds, Types::VirtualGatewayClientTlsCertificate::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsSdsCertificate, location_name: "sds"))
-    VirtualGatewayClientTlsCertificate.add_member(:unknown, Types::VirtualGatewayClientTlsCertificate::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualGatewayClientTlsCertificate.add_member(:file, Types::VirtualGatewayClientTlsCertificate::File, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsFileCertificate, location_name: "file"))
+    VirtualGatewayClientTlsCertificate.add_member(:sds, Types::VirtualGatewayClientTlsCertificate::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsSdsCertificate, location_name: "sds"))
+    VirtualGatewayClientTlsCertificate.add_member(:unknown, Types::VirtualGatewayClientTlsCertificate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualGatewayClientTlsCertificate.type = Types::VirtualGatewayClientTlsCertificate
-    VirtualGatewayConnectionPool.add_member(:http, Types::VirtualGatewayConnectionPool::Http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayHttpConnectionPool, location_name: "http"))
-    VirtualGatewayConnectionPool.add_member(:http2, Types::VirtualGatewayConnectionPool::Http2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayHttp2ConnectionPool, location_name: "http2"))
-    VirtualGatewayConnectionPool.add_member(:grpc, Types::VirtualGatewayConnectionPool::Grpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayGrpcConnectionPool, location_name: "grpc"))
-    VirtualGatewayConnectionPool.add_member(:unknown, Types::VirtualGatewayConnectionPool::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualGatewayConnectionPool.add_member(:http, Types::VirtualGatewayConnectionPool::Http, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHttpConnectionPool, location_name: "http"))
+    VirtualGatewayConnectionPool.add_member(:http2, Types::VirtualGatewayConnectionPool::Http2, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHttp2ConnectionPool, location_name: "http2"))
+    VirtualGatewayConnectionPool.add_member(:grpc, Types::VirtualGatewayConnectionPool::Grpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayGrpcConnectionPool, location_name: "grpc"))
+    VirtualGatewayConnectionPool.add_member(:unknown, Types::VirtualGatewayConnectionPool::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualGatewayConnectionPool.type = Types::VirtualGatewayConnectionPool
-    VirtualGatewayData.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayData.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayData.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewaySpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayData.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayData.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayData.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayData.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewaySpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualGatewayData.type = Types::VirtualGatewayData
-    VirtualGatewayFileAccessLog.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "path", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayFileAccessLog.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingFormat, location_name: "format"))
+    VirtualGatewayFileAccessLog.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "path", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayFileAccessLog.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingFormat, location_name: "format"))
     VirtualGatewayFileAccessLog.type = Types::VirtualGatewayFileAccessLog
-    VirtualGatewayGrpcConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayGrpcConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
     VirtualGatewayGrpcConnectionPool.type = Types::VirtualGatewayGrpcConnectionPool
-    VirtualGatewayHealthCheckPolicy.add_member(:timeout_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckTimeoutMillis, location_name: "timeoutMillis", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayHealthCheckPolicy.add_member(:interval_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckIntervalMillis, location_name: "intervalMillis", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayHealthCheckPolicy.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayPortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayHealthCheckPolicy.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: "port"))
-    VirtualGatewayHealthCheckPolicy.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path"))
-    VirtualGatewayHealthCheckPolicy.add_member(:healthy_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckThreshold, location_name: "healthyThreshold", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayHealthCheckPolicy.add_member(:unhealthy_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckThreshold, location_name: "unhealthyThreshold", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayHealthCheckPolicy.add_member(:timeout_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHealthCheckTimeoutMillis, location_name: "timeoutMillis", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayHealthCheckPolicy.add_member(:interval_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHealthCheckIntervalMillis, location_name: "intervalMillis", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayHealthCheckPolicy.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayPortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayHealthCheckPolicy.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, location_name: "port"))
+    VirtualGatewayHealthCheckPolicy.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path"))
+    VirtualGatewayHealthCheckPolicy.add_member(:healthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHealthCheckThreshold, location_name: "healthyThreshold", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayHealthCheckPolicy.add_member(:unhealthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHealthCheckThreshold, location_name: "unhealthyThreshold", traits: {"smithy.api#required" => {}}))
     VirtualGatewayHealthCheckPolicy.type = Types::VirtualGatewayHealthCheckPolicy
-    VirtualGatewayHttp2ConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayHttp2ConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
     VirtualGatewayHttp2ConnectionPool.type = Types::VirtualGatewayHttp2ConnectionPool
-    VirtualGatewayHttpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxConnections, location_name: "maxConnections", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayHttpConnectionPool.add_member(:max_pending_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests", traits: {"smithy.api#default" => nil}))
+    VirtualGatewayHttpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConnections, location_name: "maxConnections", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayHttpConnectionPool.add_member(:max_pending_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPendingRequests, location_name: "maxPendingRequests", traits: {"smithy.api#default" => nil}))
     VirtualGatewayHttpConnectionPool.type = Types::VirtualGatewayHttpConnectionPool
-    VirtualGatewayList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayRef)
-    VirtualGatewayListener.add_member(:health_check, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckPolicy, location_name: "healthCheck"))
-    VirtualGatewayListener.add_member(:port_mapping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayPortMapping, location_name: "portMapping", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayListener.add_member(:tls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTls, location_name: "tls"))
-    VirtualGatewayListener.add_member(:connection_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayConnectionPool, location_name: "connectionPool"))
+    VirtualGatewayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayRef)
+    VirtualGatewayListener.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHealthCheckPolicy, location_name: "healthCheck"))
+    VirtualGatewayListener.add_member(:port_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayPortMapping, location_name: "portMapping", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListener.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTls, location_name: "tls"))
+    VirtualGatewayListener.add_member(:connection_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayConnectionPool, location_name: "connectionPool"))
     VirtualGatewayListener.type = Types::VirtualGatewayListener
-    VirtualGatewayListenerTls.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsMode, location_name: "mode", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayListenerTls.add_member(:validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsValidationContext, location_name: "validation"))
-    VirtualGatewayListenerTls.add_member(:certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsCertificate, location_name: "certificate", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListenerTls.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsMode, location_name: "mode", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListenerTls.add_member(:validation, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsValidationContext, location_name: "validation"))
+    VirtualGatewayListenerTls.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsCertificate, location_name: "certificate", traits: {"smithy.api#required" => {}}))
     VirtualGatewayListenerTls.type = Types::VirtualGatewayListenerTls
-    VirtualGatewayListenerTlsAcmCertificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "certificateArn", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListenerTlsAcmCertificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "certificateArn", traits: {"smithy.api#required" => {}}))
     VirtualGatewayListenerTlsAcmCertificate.type = Types::VirtualGatewayListenerTlsAcmCertificate
-    VirtualGatewayListenerTlsCertificate.add_member(:acm, Types::VirtualGatewayListenerTlsCertificate::Acm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsAcmCertificate, location_name: "acm"))
-    VirtualGatewayListenerTlsCertificate.add_member(:file, Types::VirtualGatewayListenerTlsCertificate::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsFileCertificate, location_name: "file"))
-    VirtualGatewayListenerTlsCertificate.add_member(:sds, Types::VirtualGatewayListenerTlsCertificate::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsSdsCertificate, location_name: "sds"))
-    VirtualGatewayListenerTlsCertificate.add_member(:unknown, Types::VirtualGatewayListenerTlsCertificate::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualGatewayListenerTlsCertificate.add_member(:acm, Types::VirtualGatewayListenerTlsCertificate::Acm, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsAcmCertificate, location_name: "acm"))
+    VirtualGatewayListenerTlsCertificate.add_member(:file, Types::VirtualGatewayListenerTlsCertificate::File, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsFileCertificate, location_name: "file"))
+    VirtualGatewayListenerTlsCertificate.add_member(:sds, Types::VirtualGatewayListenerTlsCertificate::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsSdsCertificate, location_name: "sds"))
+    VirtualGatewayListenerTlsCertificate.add_member(:unknown, Types::VirtualGatewayListenerTlsCertificate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualGatewayListenerTlsCertificate.type = Types::VirtualGatewayListenerTlsCertificate
-    VirtualGatewayListenerTlsFileCertificate.add_member(:certificate_chain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayListenerTlsFileCertificate.add_member(:private_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "privateKey", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListenerTlsFileCertificate.add_member(:certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListenerTlsFileCertificate.add_member(:private_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "privateKey", traits: {"smithy.api#required" => {}}))
     VirtualGatewayListenerTlsFileCertificate.type = Types::VirtualGatewayListenerTlsFileCertificate
-    VirtualGatewayListenerTlsSdsCertificate.add_member(:secret_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewaySdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListenerTlsSdsCertificate.add_member(:secret_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewaySdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
     VirtualGatewayListenerTlsSdsCertificate.type = Types::VirtualGatewayListenerTlsSdsCertificate
-    VirtualGatewayListenerTlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListenerTlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayListenerTlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
+    VirtualGatewayListenerTlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayListenerTlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
     VirtualGatewayListenerTlsValidationContext.type = Types::VirtualGatewayListenerTlsValidationContext
-    VirtualGatewayListenerTlsValidationContextTrust.add_member(:file, Types::VirtualGatewayListenerTlsValidationContextTrust::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextFileTrust, location_name: "file"))
-    VirtualGatewayListenerTlsValidationContextTrust.add_member(:sds, Types::VirtualGatewayListenerTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextSdsTrust, location_name: "sds"))
-    VirtualGatewayListenerTlsValidationContextTrust.add_member(:unknown, Types::VirtualGatewayListenerTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualGatewayListenerTlsValidationContextTrust.add_member(:file, Types::VirtualGatewayListenerTlsValidationContextTrust::File, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContextFileTrust, location_name: "file"))
+    VirtualGatewayListenerTlsValidationContextTrust.add_member(:sds, Types::VirtualGatewayListenerTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContextSdsTrust, location_name: "sds"))
+    VirtualGatewayListenerTlsValidationContextTrust.add_member(:unknown, Types::VirtualGatewayListenerTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualGatewayListenerTlsValidationContextTrust.type = Types::VirtualGatewayListenerTlsValidationContextTrust
-    VirtualGatewayListeners.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListener)
-    VirtualGatewayLogging.add_member(:access_log, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayAccessLog, location_name: "accessLog"))
+    VirtualGatewayListeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListener)
+    VirtualGatewayLogging.add_member(:access_log, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayAccessLog, location_name: "accessLog"))
     VirtualGatewayLogging.type = Types::VirtualGatewayLogging
-    VirtualGatewayPortMapping.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: "port", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayPortMapping.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayPortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayPortMapping.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, location_name: "port", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayPortMapping.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayPortProtocol, location_name: "protocol", traits: {"smithy.api#required" => {}}))
     VirtualGatewayPortMapping.type = Types::VirtualGatewayPortMapping
-    VirtualGatewayRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayRef.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayRef.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayRef.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayRef.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
     VirtualGatewayRef.type = Types::VirtualGatewayRef
-    VirtualGatewaySpec.add_member(:backend_defaults, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayBackendDefaults, location_name: "backendDefaults"))
-    VirtualGatewaySpec.add_member(:listeners, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayListeners, location_name: "listeners", traits: {"smithy.api#required" => {}}))
-    VirtualGatewaySpec.add_member(:logging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayLogging, location_name: "logging"))
+    VirtualGatewaySpec.add_member(:backend_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayBackendDefaults, location_name: "backendDefaults"))
+    VirtualGatewaySpec.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListeners, location_name: "listeners", traits: {"smithy.api#required" => {}}))
+    VirtualGatewaySpec.add_member(:logging, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayLogging, location_name: "logging"))
     VirtualGatewaySpec.type = Types::VirtualGatewaySpec
-    VirtualGatewayStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualGatewayStatus.type = Types::VirtualGatewayStatus
-    VirtualGatewayTlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
-    VirtualGatewayTlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
+    VirtualGatewayTlsValidationContext.add_member(:trust, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContextTrust, location_name: "trust", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayTlsValidationContext.add_member(:subject_alternative_names, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNames, location_name: "subjectAlternativeNames"))
     VirtualGatewayTlsValidationContext.type = Types::VirtualGatewayTlsValidationContext
-    VirtualGatewayTlsValidationContextAcmTrust.add_member(:certificate_authority_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayCertificateAuthorityArns, location_name: "certificateAuthorityArns", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayTlsValidationContextAcmTrust.add_member(:certificate_authority_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayCertificateAuthorityArns, location_name: "certificateAuthorityArns", traits: {"smithy.api#required" => {}}))
     VirtualGatewayTlsValidationContextAcmTrust.type = Types::VirtualGatewayTlsValidationContextAcmTrust
-    VirtualGatewayTlsValidationContextFileTrust.add_member(:certificate_chain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayTlsValidationContextFileTrust.add_member(:certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, location_name: "certificateChain", traits: {"smithy.api#required" => {}}))
     VirtualGatewayTlsValidationContextFileTrust.type = Types::VirtualGatewayTlsValidationContextFileTrust
-    VirtualGatewayTlsValidationContextSdsTrust.add_member(:secret_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewaySdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
+    VirtualGatewayTlsValidationContextSdsTrust.add_member(:secret_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewaySdsSecretName, location_name: "secretName", traits: {"smithy.api#required" => {}}))
     VirtualGatewayTlsValidationContextSdsTrust.type = Types::VirtualGatewayTlsValidationContextSdsTrust
-    VirtualGatewayTlsValidationContextTrust.add_member(:acm, Types::VirtualGatewayTlsValidationContextTrust::Acm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextAcmTrust, location_name: "acm"))
-    VirtualGatewayTlsValidationContextTrust.add_member(:file, Types::VirtualGatewayTlsValidationContextTrust::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextFileTrust, location_name: "file"))
-    VirtualGatewayTlsValidationContextTrust.add_member(:sds, Types::VirtualGatewayTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextSdsTrust, location_name: "sds"))
-    VirtualGatewayTlsValidationContextTrust.add_member(:unknown, Types::VirtualGatewayTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualGatewayTlsValidationContextTrust.add_member(:acm, Types::VirtualGatewayTlsValidationContextTrust::Acm, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContextAcmTrust, location_name: "acm"))
+    VirtualGatewayTlsValidationContextTrust.add_member(:file, Types::VirtualGatewayTlsValidationContextTrust::File, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContextFileTrust, location_name: "file"))
+    VirtualGatewayTlsValidationContextTrust.add_member(:sds, Types::VirtualGatewayTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContextSdsTrust, location_name: "sds"))
+    VirtualGatewayTlsValidationContextTrust.add_member(:unknown, Types::VirtualGatewayTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualGatewayTlsValidationContextTrust.type = Types::VirtualGatewayTlsValidationContextTrust
-    VirtualNodeConnectionPool.add_member(:tcp, Types::VirtualNodeConnectionPool::Tcp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeTcpConnectionPool, location_name: "tcp"))
-    VirtualNodeConnectionPool.add_member(:http, Types::VirtualNodeConnectionPool::Http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeHttpConnectionPool, location_name: "http"))
-    VirtualNodeConnectionPool.add_member(:http2, Types::VirtualNodeConnectionPool::Http2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeHttp2ConnectionPool, location_name: "http2"))
-    VirtualNodeConnectionPool.add_member(:grpc, Types::VirtualNodeConnectionPool::Grpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeGrpcConnectionPool, location_name: "grpc"))
-    VirtualNodeConnectionPool.add_member(:unknown, Types::VirtualNodeConnectionPool::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualNodeConnectionPool.add_member(:tcp, Types::VirtualNodeConnectionPool::Tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeTcpConnectionPool, location_name: "tcp"))
+    VirtualNodeConnectionPool.add_member(:http, Types::VirtualNodeConnectionPool::Http, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeHttpConnectionPool, location_name: "http"))
+    VirtualNodeConnectionPool.add_member(:http2, Types::VirtualNodeConnectionPool::Http2, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeHttp2ConnectionPool, location_name: "http2"))
+    VirtualNodeConnectionPool.add_member(:grpc, Types::VirtualNodeConnectionPool::Grpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeGrpcConnectionPool, location_name: "grpc"))
+    VirtualNodeConnectionPool.add_member(:unknown, Types::VirtualNodeConnectionPool::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualNodeConnectionPool.type = Types::VirtualNodeConnectionPool
-    VirtualNodeData.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualNodeData.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
-    VirtualNodeData.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    VirtualNodeData.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
-    VirtualNodeData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualNodeData.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualNodeData.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
+    VirtualNodeData.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    VirtualNodeData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    VirtualNodeData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualNodeData.type = Types::VirtualNodeData
-    VirtualNodeGrpcConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
+    VirtualNodeGrpcConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
     VirtualNodeGrpcConnectionPool.type = Types::VirtualNodeGrpcConnectionPool
-    VirtualNodeHttp2ConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
+    VirtualNodeHttp2ConnectionPool.add_member(:max_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRequests, location_name: "maxRequests", traits: {"smithy.api#required" => {}}))
     VirtualNodeHttp2ConnectionPool.type = Types::VirtualNodeHttp2ConnectionPool
-    VirtualNodeHttpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxConnections, location_name: "maxConnections", traits: {"smithy.api#required" => {}}))
-    VirtualNodeHttpConnectionPool.add_member(:max_pending_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests", traits: {"smithy.api#default" => nil}))
+    VirtualNodeHttpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConnections, location_name: "maxConnections", traits: {"smithy.api#required" => {}}))
+    VirtualNodeHttpConnectionPool.add_member(:max_pending_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPendingRequests, location_name: "maxPendingRequests", traits: {"smithy.api#default" => nil}))
     VirtualNodeHttpConnectionPool.type = Types::VirtualNodeHttpConnectionPool
-    VirtualNodeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeRef)
-    VirtualNodeRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualNodeRef.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
-    VirtualNodeRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    VirtualNodeRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    VirtualNodeRef.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    VirtualNodeRef.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    VirtualNodeRef.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    VirtualNodeRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    VirtualNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeRef)
+    VirtualNodeRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualNodeRef.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
+    VirtualNodeRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    VirtualNodeRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    VirtualNodeRef.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    VirtualNodeRef.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    VirtualNodeRef.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    VirtualNodeRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
     VirtualNodeRef.type = Types::VirtualNodeRef
-    VirtualNodeServiceProvider.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
+    VirtualNodeServiceProvider.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
     VirtualNodeServiceProvider.type = Types::VirtualNodeServiceProvider
-    VirtualNodeSpec.add_member(:service_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceDiscovery, location_name: "serviceDiscovery"))
-    VirtualNodeSpec.add_member(:listeners, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listeners, location_name: "listeners"))
-    VirtualNodeSpec.add_member(:backends, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Backends, location_name: "backends"))
-    VirtualNodeSpec.add_member(:backend_defaults, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackendDefaults, location_name: "backendDefaults"))
-    VirtualNodeSpec.add_member(:logging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
+    VirtualNodeSpec.add_member(:service_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDiscovery, location_name: "serviceDiscovery"))
+    VirtualNodeSpec.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: Listeners, location_name: "listeners"))
+    VirtualNodeSpec.add_member(:backends, ::Smithy::Schema::Shapes::MemberShape.new(target: Backends, location_name: "backends"))
+    VirtualNodeSpec.add_member(:backend_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: BackendDefaults, location_name: "backendDefaults"))
+    VirtualNodeSpec.add_member(:logging, ::Smithy::Schema::Shapes::MemberShape.new(target: Logging, location_name: "logging"))
     VirtualNodeSpec.type = Types::VirtualNodeSpec
-    VirtualNodeStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualNodeStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualNodeStatus.type = Types::VirtualNodeStatus
-    VirtualNodeTcpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxConnections, location_name: "maxConnections", traits: {"smithy.api#required" => {}}))
+    VirtualNodeTcpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConnections, location_name: "maxConnections", traits: {"smithy.api#required" => {}}))
     VirtualNodeTcpConnectionPool.type = Types::VirtualNodeTcpConnectionPool
-    VirtualRouterData.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualRouterData.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
-    VirtualRouterData.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    VirtualRouterData.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
-    VirtualRouterData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualRouterData.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualRouterData.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
+    VirtualRouterData.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    VirtualRouterData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    VirtualRouterData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualRouterData.type = Types::VirtualRouterData
-    VirtualRouterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterRef)
-    VirtualRouterListener.add_member(:port_mapping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortMapping, location_name: "portMapping", traits: {"smithy.api#required" => {}}))
+    VirtualRouterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterRef)
+    VirtualRouterListener.add_member(:port_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, location_name: "portMapping", traits: {"smithy.api#required" => {}}))
     VirtualRouterListener.type = Types::VirtualRouterListener
-    VirtualRouterListeners.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterListener)
-    VirtualRouterRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualRouterRef.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
-    VirtualRouterRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    VirtualRouterRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    VirtualRouterRef.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    VirtualRouterRef.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    VirtualRouterRef.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    VirtualRouterRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    VirtualRouterListeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterListener)
+    VirtualRouterRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualRouterRef.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
+    VirtualRouterRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    VirtualRouterRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    VirtualRouterRef.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    VirtualRouterRef.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    VirtualRouterRef.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    VirtualRouterRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
     VirtualRouterRef.type = Types::VirtualRouterRef
-    VirtualRouterServiceProvider.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
+    VirtualRouterServiceProvider.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
     VirtualRouterServiceProvider.type = Types::VirtualRouterServiceProvider
-    VirtualRouterSpec.add_member(:listeners, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterListeners, location_name: "listeners"))
+    VirtualRouterSpec.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterListeners, location_name: "listeners"))
     VirtualRouterSpec.type = Types::VirtualRouterSpec
-    VirtualRouterStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualRouterStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualRouterStatus.type = Types::VirtualRouterStatus
-    VirtualServiceBackend.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
-    VirtualServiceBackend.add_member(:client_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientPolicy, location_name: "clientPolicy"))
+    VirtualServiceBackend.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
+    VirtualServiceBackend.add_member(:client_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPolicy, location_name: "clientPolicy"))
     VirtualServiceBackend.type = Types::VirtualServiceBackend
-    VirtualServiceData.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualServiceData.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
-    VirtualServiceData.add_member(:spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
-    VirtualServiceData.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
-    VirtualServiceData.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualServiceData.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualServiceData.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
+    VirtualServiceData.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceSpec, location_name: "spec", traits: {"smithy.api#required" => {}}))
+    VirtualServiceData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    VirtualServiceData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualServiceData.type = Types::VirtualServiceData
-    VirtualServiceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceRef)
-    VirtualServiceProvider.add_member(:virtual_node, Types::VirtualServiceProvider::VirtualNode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualNodeServiceProvider, location_name: "virtualNode"))
-    VirtualServiceProvider.add_member(:virtual_router, Types::VirtualServiceProvider::VirtualRouter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualRouterServiceProvider, location_name: "virtualRouter"))
-    VirtualServiceProvider.add_member(:unknown, Types::VirtualServiceProvider::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VirtualServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceRef)
+    VirtualServiceProvider.add_member(:virtual_node, Types::VirtualServiceProvider::VirtualNode, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeServiceProvider, location_name: "virtualNode"))
+    VirtualServiceProvider.add_member(:virtual_router, Types::VirtualServiceProvider::VirtualRouter, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterServiceProvider, location_name: "virtualRouter"))
+    VirtualServiceProvider.add_member(:unknown, Types::VirtualServiceProvider::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualServiceProvider.type = Types::VirtualServiceProvider
-    VirtualServiceRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
-    VirtualServiceRef.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
-    VirtualServiceRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
-    VirtualServiceRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    VirtualServiceRef.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    VirtualServiceRef.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
-    VirtualServiceRef.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    VirtualServiceRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "meshName", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:virtual_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "virtualServiceName", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "meshOwner", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "version", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    VirtualServiceRef.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedAt", traits: {"smithy.api#required" => {}}))
     VirtualServiceRef.type = Types::VirtualServiceRef
-    VirtualServiceSpec.add_member(:provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceProvider, location_name: "provider"))
+    VirtualServiceSpec.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceProvider, location_name: "provider"))
     VirtualServiceSpec.type = Types::VirtualServiceSpec
-    VirtualServiceStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualServiceStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VirtualServiceStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
     VirtualServiceStatus.type = Types::VirtualServiceStatus
-    WeightedTarget.add_member(:virtual_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "virtualNode", traits: {"smithy.api#required" => {}}))
-    WeightedTarget.add_member(:weight, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PercentInt, location_name: "weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    WeightedTarget.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    WeightedTarget.add_member(:virtual_node, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "virtualNode", traits: {"smithy.api#required" => {}}))
+    WeightedTarget.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentInt, location_name: "weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    WeightedTarget.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, location_name: "port"))
     WeightedTarget.type = Types::WeightedTarget
-    WeightedTargets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeightedTarget)
+    WeightedTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTarget)
 
     AppMesh = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.appmesh#AppMesh"
@@ -1274,538 +1274,538 @@ module Aws::AppMesh
       service.add_operation(:create_gateway_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#CreateGatewayRoute"
         operation.name = "CreateGatewayRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGatewayRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGatewayRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateGatewayRouteOperationInput
+        operation.output = CreateGatewayRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_mesh, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#CreateMesh"
         operation.name = "CreateMesh"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMeshOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMeshOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateMeshOperationInput
+        operation.output = CreateMeshOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#CreateRoute"
         operation.name = "CreateRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateRouteOperationInput
+        operation.output = CreateRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_virtual_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#CreateVirtualGateway"
         operation.name = "CreateVirtualGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualGatewayOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualGatewayOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateVirtualGatewayOperationInput
+        operation.output = CreateVirtualGatewayOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateways", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_virtual_node, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#CreateVirtualNode"
         operation.name = "CreateVirtualNode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualNodeOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualNodeOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateVirtualNodeOperationInput
+        operation.output = CreateVirtualNodeOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualNodes", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_virtual_router, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#CreateVirtualRouter"
         operation.name = "CreateVirtualRouter"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualRouterOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualRouterOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateVirtualRouterOperationInput
+        operation.output = CreateVirtualRouterOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouters", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_virtual_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#CreateVirtualService"
         operation.name = "CreateVirtualService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualServiceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVirtualServiceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateVirtualServiceOperationInput
+        operation.output = CreateVirtualServiceOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualServices", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_gateway_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DeleteGatewayRoute"
         operation.name = "DeleteGatewayRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGatewayRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGatewayRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteGatewayRouteOperationInput
+        operation.output = DeleteGatewayRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_mesh, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DeleteMesh"
         operation.name = "DeleteMesh"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMeshOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMeshOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteMeshOperationInput
+        operation.output = DeleteMeshOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DeleteRoute"
         operation.name = "DeleteRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteRouteOperationInput
+        operation.output = DeleteRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_virtual_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DeleteVirtualGateway"
         operation.name = "DeleteVirtualGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualGatewayOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualGatewayOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteVirtualGatewayOperationInput
+        operation.output = DeleteVirtualGatewayOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_virtual_node, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DeleteVirtualNode"
         operation.name = "DeleteVirtualNode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualNodeOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualNodeOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteVirtualNodeOperationInput
+        operation.output = DeleteVirtualNodeOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_virtual_router, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DeleteVirtualRouter"
         operation.name = "DeleteVirtualRouter"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualRouterOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualRouterOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteVirtualRouterOperationInput
+        operation.output = DeleteVirtualRouterOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_virtual_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DeleteVirtualService"
         operation.name = "DeleteVirtualService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualServiceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVirtualServiceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteVirtualServiceOperationInput
+        operation.output = DeleteVirtualServiceOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ResourceInUseException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_gateway_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DescribeGatewayRoute"
         operation.name = "DescribeGatewayRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGatewayRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGatewayRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeGatewayRouteOperationInput
+        operation.output = DescribeGatewayRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_mesh, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DescribeMesh"
         operation.name = "DescribeMesh"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMeshOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMeshOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeMeshOperationInput
+        operation.output = DescribeMeshOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DescribeRoute"
         operation.name = "DescribeRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeRouteOperationInput
+        operation.output = DescribeRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_virtual_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DescribeVirtualGateway"
         operation.name = "DescribeVirtualGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualGatewayOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualGatewayOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeVirtualGatewayOperationInput
+        operation.output = DescribeVirtualGatewayOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_virtual_node, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DescribeVirtualNode"
         operation.name = "DescribeVirtualNode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualNodeOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualNodeOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeVirtualNodeOperationInput
+        operation.output = DescribeVirtualNodeOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_virtual_router, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DescribeVirtualRouter"
         operation.name = "DescribeVirtualRouter"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualRouterOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualRouterOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeVirtualRouterOperationInput
+        operation.output = DescribeVirtualRouterOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_virtual_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#DescribeVirtualService"
         operation.name = "DescribeVirtualService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualServiceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVirtualServiceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeVirtualServiceOperationInput
+        operation.output = DescribeVirtualServiceOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_gateway_routes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListGatewayRoutes"
         operation.name = "ListGatewayRoutes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGatewayRoutesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGatewayRoutesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListGatewayRoutesOperationInput
+        operation.output = ListGatewayRoutesOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListGatewayRoutes.new
       end)
       service.add_operation(:list_meshes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListMeshes"
         operation.name = "ListMeshes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMeshesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMeshesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListMeshesOperationInput
+        operation.output = ListMeshesOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListMeshes.new
       end)
       service.add_operation(:list_routes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListRoutes"
         operation.name = "ListRoutes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRoutesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRoutesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListRoutesOperationInput
+        operation.output = ListRoutesOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRoutes.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTagsForResourceOperationInput
+        operation.output = ListTagsForResourceOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/tags", "method" => "GET"}, "smithy.api#readonly" => {}, "smithy.api#tags" => ["not-preview"]}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:list_virtual_gateways, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListVirtualGateways"
         operation.name = "ListVirtualGateways"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualGatewaysOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualGatewaysOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListVirtualGatewaysOperationInput
+        operation.output = ListVirtualGatewaysOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateways", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVirtualGateways.new
       end)
       service.add_operation(:list_virtual_nodes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListVirtualNodes"
         operation.name = "ListVirtualNodes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualNodesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualNodesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListVirtualNodesOperationInput
+        operation.output = ListVirtualNodesOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualNodes", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVirtualNodes.new
       end)
       service.add_operation(:list_virtual_routers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListVirtualRouters"
         operation.name = "ListVirtualRouters"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualRoutersOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualRoutersOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListVirtualRoutersOperationInput
+        operation.output = ListVirtualRoutersOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouters", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVirtualRouters.new
       end)
       service.add_operation(:list_virtual_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#ListVirtualServices"
         operation.name = "ListVirtualServices"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualServicesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVirtualServicesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListVirtualServicesOperationInput
+        operation.output = ListVirtualServicesOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualServices", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVirtualServices.new
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceOperationInput
+        operation.output = TagResourceOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/tag", "method" => "PUT"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["not-preview"]}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UntagResourceOperationInput
+        operation.output = UntagResourceOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/untag", "method" => "PUT"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["not-preview"]}
       end)
       service.add_operation(:update_gateway_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UpdateGatewayRoute"
         operation.name = "UpdateGatewayRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGatewayRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGatewayRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateGatewayRouteOperationInput
+        operation.output = UpdateGatewayRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_mesh, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UpdateMesh"
         operation.name = "UpdateMesh"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMeshOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMeshOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateMeshOperationInput
+        operation.output = UpdateMeshOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UpdateRoute"
         operation.name = "UpdateRoute"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRouteOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRouteOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateRouteOperationInput
+        operation.output = UpdateRouteOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_virtual_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UpdateVirtualGateway"
         operation.name = "UpdateVirtualGateway"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualGatewayOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualGatewayOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateVirtualGatewayOperationInput
+        operation.output = UpdateVirtualGatewayOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_virtual_node, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UpdateVirtualNode"
         operation.name = "UpdateVirtualNode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualNodeOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualNodeOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateVirtualNodeOperationInput
+        operation.output = UpdateVirtualNodeOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_virtual_router, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UpdateVirtualRouter"
         operation.name = "UpdateVirtualRouter"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualRouterOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualRouterOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateVirtualRouterOperationInput
+        operation.output = UpdateVirtualRouterOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_virtual_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appmesh#UpdateVirtualService"
         operation.name = "UpdateVirtualService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualServiceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVirtualServiceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateVirtualServiceOperationInput
+        operation.output = UpdateVirtualServiceOperationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"uri" => "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
     end

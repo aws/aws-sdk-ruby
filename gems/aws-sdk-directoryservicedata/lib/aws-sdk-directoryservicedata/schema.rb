@@ -89,278 +89,278 @@ module Aws::DirectoryServiceData
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directoryservicedata#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directoryservicedata#ValidationExceptionReason", name: "ValidationExceptionReason")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedReason, location_name: "Reason"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDeniedReason, location_name: "Reason"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccessDeniedReason.add_member(:iam_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_AUTH", traits: {"smithy.api#enumValue" => "IAM_AUTH"}))
-    AccessDeniedReason.add_member(:directory_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY_AUTH", traits: {"smithy.api#enumValue" => "DIRECTORY_AUTH"}))
-    AccessDeniedReason.add_member(:data_disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_DISABLED", traits: {"smithy.api#enumValue" => "DATA_DISABLED"}))
-    AddGroupMemberRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    AddGroupMemberRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    AddGroupMemberRequest.add_member(:member_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberName, location_name: "MemberName", traits: {"smithy.api#required" => {}}))
-    AddGroupMemberRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "MemberRealm"))
-    AddGroupMemberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    AccessDeniedReason.add_member(:iam_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_AUTH", traits: {"smithy.api#enumValue" => "IAM_AUTH"}))
+    AccessDeniedReason.add_member(:directory_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY_AUTH", traits: {"smithy.api#enumValue" => "DIRECTORY_AUTH"}))
+    AccessDeniedReason.add_member(:data_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_DISABLED", traits: {"smithy.api#enumValue" => "DATA_DISABLED"}))
+    AddGroupMemberRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    AddGroupMemberRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    AddGroupMemberRequest.add_member(:member_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberName, location_name: "MemberName", traits: {"smithy.api#required" => {}}))
+    AddGroupMemberRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "MemberRealm"))
+    AddGroupMemberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AddGroupMemberRequest.type = Types::AddGroupMemberRequest
     AddGroupMemberResult.type = Types::AddGroupMemberResult
-    AttributeValue.add_member(:s, Types::AttributeValue::S, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringAttributeValue, location_name: "S"))
-    AttributeValue.add_member(:n, Types::AttributeValue::N, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberAttributeValue, location_name: "N"))
-    AttributeValue.add_member(:bool, Types::AttributeValue::BOOL, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanAttributeValue, location_name: "BOOL"))
-    AttributeValue.add_member(:ss, Types::AttributeValue::SS, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringSetAttributeValue, location_name: "SS"))
-    AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AttributeValue.add_member(:s, Types::AttributeValue::S, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, location_name: "S"))
+    AttributeValue.add_member(:n, Types::AttributeValue::N, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, location_name: "N"))
+    AttributeValue.add_member(:bool, Types::AttributeValue::BOOL, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAttributeValue, location_name: "BOOL"))
+    AttributeValue.add_member(:ss, Types::AttributeValue::SS, ::Smithy::Schema::Shapes::MemberShape.new(target: StringSetAttributeValue, location_name: "SS"))
+    AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AttributeValue.type = Types::AttributeValue
-    Attributes.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LdapDisplayName)
-    Attributes.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValue)
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayName)
+    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    CreateGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    CreateGroupRequest.add_member(:group_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "GroupType"))
-    CreateGroupRequest.add_member(:group_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupScope, location_name: "GroupScope"))
-    CreateGroupRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
-    CreateGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    CreateGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    CreateGroupRequest.add_member(:group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "GroupType"))
+    CreateGroupRequest.add_member(:group_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupScope, location_name: "GroupScope"))
+    CreateGroupRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
+    CreateGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateGroupRequest.type = Types::CreateGroupRequest
-    CreateGroupResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    CreateGroupResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName"))
-    CreateGroupResult.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
+    CreateGroupResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    CreateGroupResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName"))
+    CreateGroupResult.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID"))
     CreateGroupResult.type = Types::CreateGroupResult
-    CreateUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
-    CreateUserRequest.add_member(:given_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GivenName, location_name: "GivenName"))
-    CreateUserRequest.add_member(:surname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Surname, location_name: "Surname"))
-    CreateUserRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
-    CreateUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "EmailAddress"))
+    CreateUserRequest.add_member(:given_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GivenName, location_name: "GivenName"))
+    CreateUserRequest.add_member(:surname, ::Smithy::Schema::Shapes::MemberShape.new(target: Surname, location_name: "Surname"))
+    CreateUserRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
+    CreateUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateUserRequest.type = Types::CreateUserRequest
-    CreateUserResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    CreateUserResult.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
-    CreateUserResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName"))
+    CreateUserResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    CreateUserResult.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID"))
+    CreateUserResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName"))
     CreateUserResult.type = Types::CreateUserResult
-    DeleteGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    DeleteGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    DeleteGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    DeleteGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    DeleteGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DeleteGroupRequest.type = Types::DeleteGroupRequest
     DeleteGroupResult.type = Types::DeleteGroupResult
-    DeleteUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    DeleteUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    DeleteUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    DeleteUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    DeleteUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DeleteUserRequest.type = Types::DeleteUserRequest
     DeleteUserResult.type = Types::DeleteUserResult
-    DescribeGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    DescribeGroupRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    DescribeGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    DescribeGroupRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LdapDisplayNameList, location_name: "OtherAttributes"))
+    DescribeGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    DescribeGroupRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    DescribeGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    DescribeGroupRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayNameList, location_name: "OtherAttributes"))
     DescribeGroupRequest.type = Types::DescribeGroupRequest
-    DescribeGroupResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DescribeGroupResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    DescribeGroupResult.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
-    DescribeGroupResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName"))
-    DescribeGroupResult.add_member(:distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DistinguishedName, location_name: "DistinguishedName"))
-    DescribeGroupResult.add_member(:group_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "GroupType"))
-    DescribeGroupResult.add_member(:group_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupScope, location_name: "GroupScope"))
-    DescribeGroupResult.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
+    DescribeGroupResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DescribeGroupResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    DescribeGroupResult.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID"))
+    DescribeGroupResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName"))
+    DescribeGroupResult.add_member(:distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DistinguishedName, location_name: "DistinguishedName"))
+    DescribeGroupResult.add_member(:group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "GroupType"))
+    DescribeGroupResult.add_member(:group_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupScope, location_name: "GroupScope"))
+    DescribeGroupResult.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
     DescribeGroupResult.type = Types::DescribeGroupResult
-    DescribeUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    DescribeUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    DescribeUserRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LdapDisplayNameList, location_name: "OtherAttributes"))
-    DescribeUserRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
+    DescribeUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    DescribeUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    DescribeUserRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayNameList, location_name: "OtherAttributes"))
+    DescribeUserRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
     DescribeUserRequest.type = Types::DescribeUserRequest
-    DescribeUserResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    DescribeUserResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    DescribeUserResult.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
-    DescribeUserResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName"))
-    DescribeUserResult.add_member(:distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DistinguishedName, location_name: "DistinguishedName"))
-    DescribeUserResult.add_member(:user_principal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPrincipalName, location_name: "UserPrincipalName"))
-    DescribeUserResult.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
-    DescribeUserResult.add_member(:given_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GivenName, location_name: "GivenName"))
-    DescribeUserResult.add_member(:surname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Surname, location_name: "Surname"))
-    DescribeUserResult.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
-    DescribeUserResult.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
+    DescribeUserResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    DescribeUserResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    DescribeUserResult.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID"))
+    DescribeUserResult.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName"))
+    DescribeUserResult.add_member(:distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DistinguishedName, location_name: "DistinguishedName"))
+    DescribeUserResult.add_member(:user_principal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPrincipalName, location_name: "UserPrincipalName"))
+    DescribeUserResult.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "EmailAddress"))
+    DescribeUserResult.add_member(:given_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GivenName, location_name: "GivenName"))
+    DescribeUserResult.add_member(:surname, ::Smithy::Schema::Shapes::MemberShape.new(target: Surname, location_name: "Surname"))
+    DescribeUserResult.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
+    DescribeUserResult.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
     DescribeUserResult.type = Types::DescribeUserResult
-    DirectoryUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    DirectoryUnavailableException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableReason, location_name: "Reason"))
+    DirectoryUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    DirectoryUnavailableException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUnavailableReason, location_name: "Reason"))
     DirectoryUnavailableException.type = Types::DirectoryUnavailableException
-    DirectoryUnavailableReason.add_member(:invalid_directory_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DIRECTORY_STATE", traits: {"smithy.api#enumValue" => "INVALID_DIRECTORY_STATE"}))
-    DirectoryUnavailableReason.add_member(:directory_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY_TIMEOUT", traits: {"smithy.api#enumValue" => "DIRECTORY_TIMEOUT"}))
-    DirectoryUnavailableReason.add_member(:directory_resources_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY_RESOURCES_EXCEEDED", traits: {"smithy.api#enumValue" => "DIRECTORY_RESOURCES_EXCEEDED"}))
-    DirectoryUnavailableReason.add_member(:no_disk_space, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_DISK_SPACE", traits: {"smithy.api#enumValue" => "NO_DISK_SPACE"}))
-    DirectoryUnavailableReason.add_member(:trust_auth_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRUST_AUTH_FAILURE", traits: {"smithy.api#enumValue" => "TRUST_AUTH_FAILURE"}))
-    DisableUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    DisableUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    DisableUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DirectoryUnavailableReason.add_member(:invalid_directory_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DIRECTORY_STATE", traits: {"smithy.api#enumValue" => "INVALID_DIRECTORY_STATE"}))
+    DirectoryUnavailableReason.add_member(:directory_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY_TIMEOUT", traits: {"smithy.api#enumValue" => "DIRECTORY_TIMEOUT"}))
+    DirectoryUnavailableReason.add_member(:directory_resources_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY_RESOURCES_EXCEEDED", traits: {"smithy.api#enumValue" => "DIRECTORY_RESOURCES_EXCEEDED"}))
+    DirectoryUnavailableReason.add_member(:no_disk_space, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_DISK_SPACE", traits: {"smithy.api#enumValue" => "NO_DISK_SPACE"}))
+    DirectoryUnavailableReason.add_member(:trust_auth_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRUST_AUTH_FAILURE", traits: {"smithy.api#enumValue" => "TRUST_AUTH_FAILURE"}))
+    DisableUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    DisableUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    DisableUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DisableUserRequest.type = Types::DisableUserRequest
     DisableUserResult.type = Types::DisableUserResult
-    Group.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
-    Group.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    Group.add_member(:distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DistinguishedName, location_name: "DistinguishedName"))
-    Group.add_member(:group_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "GroupType"))
-    Group.add_member(:group_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupScope, location_name: "GroupScope"))
-    Group.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
+    Group.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID"))
+    Group.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    Group.add_member(:distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DistinguishedName, location_name: "DistinguishedName"))
+    Group.add_member(:group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "GroupType"))
+    Group.add_member(:group_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupScope, location_name: "GroupScope"))
+    Group.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
     Group.type = Types::Group
-    GroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Group)
-    GroupScope.add_member(:domain_local, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOMAIN_LOCAL", traits: {"smithy.api#enumValue" => "DomainLocal"}))
-    GroupScope.add_member(:global, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLOBAL", traits: {"smithy.api#enumValue" => "Global"}))
-    GroupScope.add_member(:universal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIVERSAL", traits: {"smithy.api#enumValue" => "Universal"}))
-    GroupScope.add_member(:builtin_local, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BUILTIN_LOCAL", traits: {"smithy.api#enumValue" => "BuiltinLocal"}))
-    GroupSummary.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID", traits: {"smithy.api#required" => {}}))
-    GroupSummary.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    GroupSummary.add_member(:group_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "GroupType", traits: {"smithy.api#required" => {}}))
-    GroupSummary.add_member(:group_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupScope, location_name: "GroupScope", traits: {"smithy.api#required" => {}}))
+    GroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group)
+    GroupScope.add_member(:domain_local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOMAIN_LOCAL", traits: {"smithy.api#enumValue" => "DomainLocal"}))
+    GroupScope.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLOBAL", traits: {"smithy.api#enumValue" => "Global"}))
+    GroupScope.add_member(:universal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIVERSAL", traits: {"smithy.api#enumValue" => "Universal"}))
+    GroupScope.add_member(:builtin_local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BUILTIN_LOCAL", traits: {"smithy.api#enumValue" => "BuiltinLocal"}))
+    GroupSummary.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID", traits: {"smithy.api#required" => {}}))
+    GroupSummary.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    GroupSummary.add_member(:group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "GroupType", traits: {"smithy.api#required" => {}}))
+    GroupSummary.add_member(:group_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupScope, location_name: "GroupScope", traits: {"smithy.api#required" => {}}))
     GroupSummary.type = Types::GroupSummary
-    GroupSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupSummary)
-    GroupType.add_member(:distribution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISTRIBUTION", traits: {"smithy.api#enumValue" => "Distribution"}))
-    GroupType.add_member(:security, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY", traits: {"smithy.api#enumValue" => "Security"}))
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    GroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary)
+    GroupType.add_member(:distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISTRIBUTION", traits: {"smithy.api#enumValue" => "Distribution"}))
+    GroupType.add_member(:security, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY", traits: {"smithy.api#enumValue" => "Security"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    LdapDisplayNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LdapDisplayName)
-    ListGroupMembersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    ListGroupMembersRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListGroupMembersRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "MemberRealm"))
-    ListGroupMembersRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    ListGroupMembersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListGroupMembersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    LdapDisplayNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayName)
+    ListGroupMembersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    ListGroupMembersRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListGroupMembersRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "MemberRealm"))
+    ListGroupMembersRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    ListGroupMembersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListGroupMembersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListGroupMembersRequest.type = Types::ListGroupMembersRequest
-    ListGroupMembersResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    ListGroupMembersResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListGroupMembersResult.add_member(:member_realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "MemberRealm"))
-    ListGroupMembersResult.add_member(:members, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberList, location_name: "Members"))
-    ListGroupMembersResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupMembersResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    ListGroupMembersResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListGroupMembersResult.add_member(:member_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "MemberRealm"))
+    ListGroupMembersResult.add_member(:members, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberList, location_name: "Members"))
+    ListGroupMembersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListGroupMembersResult.type = Types::ListGroupMembersResult
-    ListGroupsForMemberRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    ListGroupsForMemberRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListGroupsForMemberRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "MemberRealm"))
-    ListGroupsForMemberRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    ListGroupsForMemberRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListGroupsForMemberRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGroupsForMemberRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    ListGroupsForMemberRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListGroupsForMemberRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "MemberRealm"))
+    ListGroupsForMemberRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    ListGroupsForMemberRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListGroupsForMemberRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListGroupsForMemberRequest.type = Types::ListGroupsForMemberRequest
-    ListGroupsForMemberResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    ListGroupsForMemberResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListGroupsForMemberResult.add_member(:member_realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "MemberRealm"))
-    ListGroupsForMemberResult.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
-    ListGroupsForMemberResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupsForMemberResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    ListGroupsForMemberResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListGroupsForMemberResult.add_member(:member_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "MemberRealm"))
+    ListGroupsForMemberResult.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummaryList, location_name: "Groups"))
+    ListGroupsForMemberResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListGroupsForMemberResult.type = Types::ListGroupsForMemberResult
-    ListGroupsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    ListGroupsRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGroupsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    ListGroupsRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListGroupsRequest.type = Types::ListGroupsRequest
-    ListGroupsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    ListGroupsResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListGroupsResult.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
-    ListGroupsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    ListGroupsResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListGroupsResult.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummaryList, location_name: "Groups"))
+    ListGroupsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListGroupsResult.type = Types::ListGroupsResult
-    ListUsersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    ListUsersRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListUsersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    ListUsersRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListUsersRequest.type = Types::ListUsersRequest
-    ListUsersResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    ListUsersResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    ListUsersResult.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserSummaryList, location_name: "Users"))
-    ListUsersResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListUsersResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    ListUsersResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    ListUsersResult.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSummaryList, location_name: "Users"))
+    ListUsersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListUsersResult.type = Types::ListUsersResult
-    Member.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID", traits: {"smithy.api#required" => {}}))
-    Member.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    Member.add_member(:member_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberType, location_name: "MemberType", traits: {"smithy.api#required" => {}}))
+    Member.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID", traits: {"smithy.api#required" => {}}))
+    Member.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    Member.add_member(:member_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberType, location_name: "MemberType", traits: {"smithy.api#required" => {}}))
     Member.type = Types::Member
-    MemberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Member)
-    MemberType.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    MemberType.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
-    MemberType.add_member(:computer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPUTER", traits: {"smithy.api#enumValue" => "COMPUTER"}))
-    RemoveGroupMemberRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    RemoveGroupMemberRequest.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    RemoveGroupMemberRequest.add_member(:member_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberName, location_name: "MemberName", traits: {"smithy.api#required" => {}}))
-    RemoveGroupMemberRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "MemberRealm"))
-    RemoveGroupMemberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    MemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member)
+    MemberType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    MemberType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
+    MemberType.add_member(:computer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPUTER", traits: {"smithy.api#enumValue" => "COMPUTER"}))
+    RemoveGroupMemberRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    RemoveGroupMemberRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    RemoveGroupMemberRequest.add_member(:member_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberName, location_name: "MemberName", traits: {"smithy.api#required" => {}}))
+    RemoveGroupMemberRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "MemberRealm"))
+    RemoveGroupMemberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     RemoveGroupMemberRequest.type = Types::RemoveGroupMemberRequest
     RemoveGroupMemberResult.type = Types::RemoveGroupMemberResult
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SearchGroupsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    SearchGroupsRequest.add_member(:search_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString", traits: {"smithy.api#required" => {}}))
-    SearchGroupsRequest.add_member(:search_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LdapDisplayNameList, location_name: "SearchAttributes", traits: {"smithy.api#required" => {}}))
-    SearchGroupsRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    SearchGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    SearchGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    SearchGroupsRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    SearchGroupsRequest.add_member(:search_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchString, location_name: "SearchString", traits: {"smithy.api#required" => {}}))
+    SearchGroupsRequest.add_member(:search_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayNameList, location_name: "SearchAttributes", traits: {"smithy.api#required" => {}}))
+    SearchGroupsRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    SearchGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    SearchGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     SearchGroupsRequest.type = Types::SearchGroupsRequest
-    SearchGroupsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    SearchGroupsResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    SearchGroupsResult.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupList, location_name: "Groups"))
-    SearchGroupsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchGroupsResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    SearchGroupsResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    SearchGroupsResult.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupList, location_name: "Groups"))
+    SearchGroupsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     SearchGroupsResult.type = Types::SearchGroupsResult
-    SearchUsersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    SearchUsersRequest.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    SearchUsersRequest.add_member(:search_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString", traits: {"smithy.api#required" => {}}))
-    SearchUsersRequest.add_member(:search_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LdapDisplayNameList, location_name: "SearchAttributes", traits: {"smithy.api#required" => {}}))
-    SearchUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    SearchUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    SearchUsersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    SearchUsersRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    SearchUsersRequest.add_member(:search_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchString, location_name: "SearchString", traits: {"smithy.api#required" => {}}))
+    SearchUsersRequest.add_member(:search_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayNameList, location_name: "SearchAttributes", traits: {"smithy.api#required" => {}}))
+    SearchUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    SearchUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     SearchUsersRequest.type = Types::SearchUsersRequest
-    SearchUsersResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    SearchUsersResult.add_member(:realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Realm, location_name: "Realm"))
-    SearchUsersResult.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "Users"))
-    SearchUsersResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchUsersResult.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    SearchUsersResult.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, location_name: "Realm"))
+    SearchUsersResult.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "Users"))
+    SearchUsersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     SearchUsersResult.type = Types::SearchUsersResult
-    StringSetAttributeValue.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringAttributeValue)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RetryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    StringSetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RetryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    UpdateGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    UpdateGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    UpdateGroupRequest.add_member(:group_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupType, location_name: "GroupType"))
-    UpdateGroupRequest.add_member(:group_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupScope, location_name: "GroupScope"))
-    UpdateGroupRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
-    UpdateGroupRequest.add_member(:update_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateType, location_name: "UpdateType"))
-    UpdateGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    UpdateGroupRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    UpdateGroupRequest.add_member(:group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, location_name: "GroupType"))
+    UpdateGroupRequest.add_member(:group_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupScope, location_name: "GroupScope"))
+    UpdateGroupRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
+    UpdateGroupRequest.add_member(:update_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateType, location_name: "UpdateType"))
+    UpdateGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateGroupRequest.type = Types::UpdateGroupRequest
     UpdateGroupResult.type = Types::UpdateGroupResult
-    UpdateType.add_member(:add, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADD", traits: {"smithy.api#enumValue" => "ADD"}))
-    UpdateType.add_member(:replace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLACE", traits: {"smithy.api#enumValue" => "REPLACE"}))
-    UpdateType.add_member(:remove, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVE", traits: {"smithy.api#enumValue" => "REMOVE"}))
-    UpdateUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
-    UpdateUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    UpdateUserRequest.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
-    UpdateUserRequest.add_member(:given_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GivenName, location_name: "GivenName"))
-    UpdateUserRequest.add_member(:surname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Surname, location_name: "Surname"))
-    UpdateUserRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
-    UpdateUserRequest.add_member(:update_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateType, location_name: "UpdateType"))
-    UpdateUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateType.add_member(:add, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADD", traits: {"smithy.api#enumValue" => "ADD"}))
+    UpdateType.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLACE", traits: {"smithy.api#enumValue" => "REPLACE"}))
+    UpdateType.add_member(:remove, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVE", traits: {"smithy.api#enumValue" => "REMOVE"}))
+    UpdateUserRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
+    UpdateUserRequest.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    UpdateUserRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "EmailAddress"))
+    UpdateUserRequest.add_member(:given_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GivenName, location_name: "GivenName"))
+    UpdateUserRequest.add_member(:surname, ::Smithy::Schema::Shapes::MemberShape.new(target: Surname, location_name: "Surname"))
+    UpdateUserRequest.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
+    UpdateUserRequest.add_member(:update_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateType, location_name: "UpdateType"))
+    UpdateUserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateUserRequest.type = Types::UpdateUserRequest
     UpdateUserResult.type = Types::UpdateUserResult
-    User.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
-    User.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    User.add_member(:distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DistinguishedName, location_name: "DistinguishedName"))
-    User.add_member(:user_principal_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPrincipalName, location_name: "UserPrincipalName"))
-    User.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
-    User.add_member(:given_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GivenName, location_name: "GivenName"))
-    User.add_member(:surname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Surname, location_name: "Surname"))
-    User.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
-    User.add_member(:other_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OtherAttributes"))
+    User.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID"))
+    User.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    User.add_member(:distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DistinguishedName, location_name: "DistinguishedName"))
+    User.add_member(:user_principal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPrincipalName, location_name: "UserPrincipalName"))
+    User.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "EmailAddress"))
+    User.add_member(:given_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GivenName, location_name: "GivenName"))
+    User.add_member(:surname, ::Smithy::Schema::Shapes::MemberShape.new(target: Surname, location_name: "Surname"))
+    User.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
+    User.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OtherAttributes"))
     User.type = Types::User
-    UserList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: User)
-    UserSummary.add_member(:sid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SID, location_name: "SID", traits: {"smithy.api#required" => {}}))
-    UserSummary.add_member(:sam_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
-    UserSummary.add_member(:given_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GivenName, location_name: "GivenName"))
-    UserSummary.add_member(:surname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Surname, location_name: "Surname"))
-    UserSummary.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
+    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User)
+    UserSummary.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, location_name: "SID", traits: {"smithy.api#required" => {}}))
+    UserSummary.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
+    UserSummary.add_member(:given_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GivenName, location_name: "GivenName"))
+    UserSummary.add_member(:surname, ::Smithy::Schema::Shapes::MemberShape.new(target: Surname, location_name: "Surname"))
+    UserSummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
     UserSummary.type = Types::UserSummary
-    UserSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserSummary)
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
+    UserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserSummary)
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionReason.add_member(:invalid_realm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REALM", traits: {"smithy.api#enumValue" => "INVALID_REALM"}))
-    ValidationExceptionReason.add_member(:invalid_directory_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DIRECTORY_TYPE", traits: {"smithy.api#enumValue" => "INVALID_DIRECTORY_TYPE"}))
-    ValidationExceptionReason.add_member(:invalid_secondary_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_SECONDARY_REGION", traits: {"smithy.api#enumValue" => "INVALID_SECONDARY_REGION"}))
-    ValidationExceptionReason.add_member(:invalid_next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_NEXT_TOKEN", traits: {"smithy.api#enumValue" => "INVALID_NEXT_TOKEN"}))
-    ValidationExceptionReason.add_member(:invalid_attribute_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_VALUE", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_VALUE"}))
-    ValidationExceptionReason.add_member(:invalid_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_NAME", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_NAME"}))
-    ValidationExceptionReason.add_member(:invalid_attribute_for_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_USER", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_USER"}))
-    ValidationExceptionReason.add_member(:invalid_attribute_for_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_GROUP", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_GROUP"}))
-    ValidationExceptionReason.add_member(:invalid_attribute_for_search, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_SEARCH", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_SEARCH"}))
-    ValidationExceptionReason.add_member(:invalid_attribute_for_modify, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_MODIFY", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_MODIFY"}))
-    ValidationExceptionReason.add_member(:duplicate_attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUPLICATE_ATTRIBUTE", traits: {"smithy.api#enumValue" => "DUPLICATE_ATTRIBUTE"}))
-    ValidationExceptionReason.add_member(:missing_attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISSING_ATTRIBUTE", traits: {"smithy.api#enumValue" => "MISSING_ATTRIBUTE"}))
-    ValidationExceptionReason.add_member(:attribute_exists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ATTRIBUTE_EXISTS", traits: {"smithy.api#enumValue" => "ATTRIBUTE_EXISTS"}))
-    ValidationExceptionReason.add_member(:ldap_size_limit_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LDAP_SIZE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "LDAP_SIZE_LIMIT_EXCEEDED"}))
-    ValidationExceptionReason.add_member(:ldap_unsupported_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LDAP_UNSUPPORTED_OPERATION", traits: {"smithy.api#enumValue" => "LDAP_UNSUPPORTED_OPERATION"}))
+    ValidationExceptionReason.add_member(:invalid_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REALM", traits: {"smithy.api#enumValue" => "INVALID_REALM"}))
+    ValidationExceptionReason.add_member(:invalid_directory_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DIRECTORY_TYPE", traits: {"smithy.api#enumValue" => "INVALID_DIRECTORY_TYPE"}))
+    ValidationExceptionReason.add_member(:invalid_secondary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_SECONDARY_REGION", traits: {"smithy.api#enumValue" => "INVALID_SECONDARY_REGION"}))
+    ValidationExceptionReason.add_member(:invalid_next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_NEXT_TOKEN", traits: {"smithy.api#enumValue" => "INVALID_NEXT_TOKEN"}))
+    ValidationExceptionReason.add_member(:invalid_attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_VALUE", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_VALUE"}))
+    ValidationExceptionReason.add_member(:invalid_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_NAME", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_NAME"}))
+    ValidationExceptionReason.add_member(:invalid_attribute_for_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_USER", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_USER"}))
+    ValidationExceptionReason.add_member(:invalid_attribute_for_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_GROUP", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_GROUP"}))
+    ValidationExceptionReason.add_member(:invalid_attribute_for_search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_SEARCH", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_SEARCH"}))
+    ValidationExceptionReason.add_member(:invalid_attribute_for_modify, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ATTRIBUTE_FOR_MODIFY", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_FOR_MODIFY"}))
+    ValidationExceptionReason.add_member(:duplicate_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUPLICATE_ATTRIBUTE", traits: {"smithy.api#enumValue" => "DUPLICATE_ATTRIBUTE"}))
+    ValidationExceptionReason.add_member(:missing_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISSING_ATTRIBUTE", traits: {"smithy.api#enumValue" => "MISSING_ATTRIBUTE"}))
+    ValidationExceptionReason.add_member(:attribute_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ATTRIBUTE_EXISTS", traits: {"smithy.api#enumValue" => "ATTRIBUTE_EXISTS"}))
+    ValidationExceptionReason.add_member(:ldap_size_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LDAP_SIZE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "LDAP_SIZE_LIMIT_EXCEEDED"}))
+    ValidationExceptionReason.add_member(:ldap_unsupported_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LDAP_UNSUPPORTED_OPERATION", traits: {"smithy.api#enumValue" => "LDAP_UNSUPPORTED_OPERATION"}))
 
     DirectoryServiceData = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.directoryservicedata#DirectoryServiceData"
@@ -370,231 +370,231 @@ module Aws::DirectoryServiceData
       service.add_operation(:add_group_member, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#AddGroupMember"
         operation.name = "AddGroupMember"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddGroupMemberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddGroupMemberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AddGroupMemberRequest
+        operation.output = AddGroupMemberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/GroupMemberships/AddGroupMember", "method" => "POST"}}
       end)
       service.add_operation(:create_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#CreateGroup"
         operation.name = "CreateGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateGroupRequest
+        operation.output = CreateGroupResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Groups/CreateGroup", "method" => "POST"}}
       end)
       service.add_operation(:create_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#CreateUser"
         operation.name = "CreateUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateUserRequest
+        operation.output = CreateUserResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Users/CreateUser", "method" => "POST"}}
       end)
       service.add_operation(:delete_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#DeleteGroup"
         operation.name = "DeleteGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteGroupRequest
+        operation.output = DeleteGroupResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Groups/DeleteGroup", "method" => "POST"}}
       end)
       service.add_operation(:delete_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#DeleteUser"
         operation.name = "DeleteUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteUserRequest
+        operation.output = DeleteUserResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Users/DeleteUser", "method" => "POST"}}
       end)
       service.add_operation(:describe_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#DescribeGroup"
         operation.name = "DescribeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGroupResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeGroupRequest
+        operation.output = DescribeGroupResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Groups/DescribeGroup", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "DescribeGroupFailure", "params" => {"DirectoryId" => "d-1111111111", "SAMAccountName" => "test-group"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.directoryservicedata#AccessDeniedException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:describe_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#DescribeUser"
         operation.name = "DescribeUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeUserRequest
+        operation.output = DescribeUserResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Users/DescribeUser", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "DescribeUserFailure", "params" => {"DirectoryId" => "d-1111111111", "SAMAccountName" => "test-user"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.directoryservicedata#AccessDeniedException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:disable_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#DisableUser"
         operation.name = "DisableUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableUserResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisableUserRequest
+        operation.output = DisableUserResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Users/DisableUser", "method" => "POST"}}
       end)
       service.add_operation(:list_group_members, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#ListGroupMembers"
         operation.name = "ListGroupMembers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupMembersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupMembersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListGroupMembersRequest
+        operation.output = ListGroupMembersResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/GroupMemberships/ListGroupMembers", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListGroupMembers.new
       end)
       service.add_operation(:list_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#ListGroups"
         operation.name = "ListGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListGroupsRequest
+        operation.output = ListGroupsResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Groups/ListGroups", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListGroups.new
       end)
       service.add_operation(:list_groups_for_member, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#ListGroupsForMember"
         operation.name = "ListGroupsForMember"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsForMemberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsForMemberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListGroupsForMemberRequest
+        operation.output = ListGroupsForMemberResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/GroupMemberships/ListGroupsForMember", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListGroupsForMember.new
       end)
       service.add_operation(:list_users, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#ListUsers"
         operation.name = "ListUsers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListUsersRequest
+        operation.output = ListUsersResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Users/ListUsers", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListUsers.new
       end)
       service.add_operation(:remove_group_member, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#RemoveGroupMember"
         operation.name = "RemoveGroupMember"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveGroupMemberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveGroupMemberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RemoveGroupMemberRequest
+        operation.output = RemoveGroupMemberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/GroupMemberships/RemoveGroupMember", "method" => "POST"}}
       end)
       service.add_operation(:search_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#SearchGroups"
         operation.name = "SearchGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchGroupsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SearchGroupsRequest
+        operation.output = SearchGroupsResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Groups/SearchGroups", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::SearchGroups.new
       end)
       service.add_operation(:search_users, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#SearchUsers"
         operation.name = "SearchUsers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchUsersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchUsersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SearchUsersRequest
+        operation.output = SearchUsersResult
+        operation.errors << AccessDeniedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Users/SearchUsers", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::SearchUsers.new
       end)
       service.add_operation(:update_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#UpdateGroup"
         operation.name = "UpdateGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGroupResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateGroupRequest
+        operation.output = UpdateGroupResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Groups/UpdateGroup", "method" => "POST"}}
       end)
       service.add_operation(:update_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservicedata#UpdateUser"
         operation.name = "UpdateUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateUserRequest
+        operation.output = UpdateUserResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/Users/UpdateUser", "method" => "POST"}}
       end)
     end

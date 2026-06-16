@@ -526,1555 +526,1555 @@ module Aws::Omics
     WorkflowVersionListToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowVersionListToken", name: "WorkflowVersionListToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     WorkflowVersionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowVersionName", name: "WorkflowVersionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$"})
 
-    AbortMultipartReadSetUploadRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AbortMultipartReadSetUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AbortMultipartReadSetUploadRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AbortMultipartReadSetUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AbortMultipartReadSetUploadRequest.type = Types::AbortMultipartReadSetUploadRequest
     AbortMultipartReadSetUploadResponse.type = Types::AbortMultipartReadSetUploadResponse
-    AcceptShareRequest.add_member(:share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AcceptShareRequest.add_member(:share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AcceptShareRequest.type = Types::AcceptShareRequest
-    AcceptShareResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
+    AcceptShareResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, location_name: "status"))
     AcceptShareResponse.type = Types::AcceptShareResponse
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ActivateReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetActivationJobStatus, location_name: "status"))
-    ActivateReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ActivateReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ActivateReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetActivationJobStatus, location_name: "status"))
+    ActivateReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ActivateReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ActivateReadSetFilter.type = Types::ActivateReadSetFilter
-    ActivateReadSetJobItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ActivateReadSetJobItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    ActivateReadSetJobItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetActivationJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ActivateReadSetJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ActivateReadSetJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ActivateReadSetJobItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ActivateReadSetJobItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    ActivateReadSetJobItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetActivationJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ActivateReadSetJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ActivateReadSetJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ActivateReadSetJobItem.type = Types::ActivateReadSetJobItem
-    ActivateReadSetJobList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateReadSetJobItem)
-    ActivateReadSetSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
-    ActivateReadSetSourceItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetActivationJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ActivateReadSetSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
+    ActivateReadSetJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetJobItem)
+    ActivateReadSetSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
+    ActivateReadSetSourceItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetActivationJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ActivateReadSetSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
     ActivateReadSetSourceItem.type = Types::ActivateReadSetSourceItem
-    ActivateReadSetSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateReadSetSourceItem)
-    AnnotationFieldMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 21}})
-    AnnotationFieldMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 21}})
-    AnnotationImportItemDetail.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
-    AnnotationImportItemDetail.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus", traits: {"smithy.api#required" => {}}))
+    ActivateReadSetSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetSourceItem)
+    AnnotationFieldMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 21}})
+    AnnotationFieldMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 21}})
+    AnnotationImportItemDetail.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
+    AnnotationImportItemDetail.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "jobStatus", traits: {"smithy.api#required" => {}}))
     AnnotationImportItemDetail.type = Types::AnnotationImportItemDetail
-    AnnotationImportItemDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationImportItemDetail)
-    AnnotationImportItemSource.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
+    AnnotationImportItemDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemDetail)
+    AnnotationImportItemSource.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
     AnnotationImportItemSource.type = Types::AnnotationImportItemSource
-    AnnotationImportItemSources.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationImportItemSource)
-    AnnotationImportJobItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id", traits: {"smithy.api#required" => {}}))
-    AnnotationImportJobItem.add_member(:destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
-    AnnotationImportJobItem.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    AnnotationImportJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    AnnotationImportJobItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    AnnotationImportJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    AnnotationImportJobItem.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    AnnotationImportJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletionTime, location_name: "completionTime"))
-    AnnotationImportJobItem.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
-    AnnotationImportJobItem.add_member(:annotation_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationFieldMap, location_name: "annotationFields"))
+    AnnotationImportItemSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemSource)
+    AnnotationImportJobItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItem.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItem.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItem.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionTime, location_name: "completionTime"))
+    AnnotationImportJobItem.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
+    AnnotationImportJobItem.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, location_name: "annotationFields"))
     AnnotationImportJobItem.type = Types::AnnotationImportJobItem
-    AnnotationImportJobItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationImportJobItem)
-    AnnotationStoreItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:store_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:store_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreFormat, location_name: "storeFormat", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreItem.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
+    AnnotationImportJobItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportJobItem)
+    AnnotationStoreItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:store_format, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreFormat, location_name: "storeFormat", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItem.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
     AnnotationStoreItem.type = Types::AnnotationStoreItem
-    AnnotationStoreItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationStoreItem)
-    AnnotationStoreVersionItem.add_member(:store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:version_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "versionArn", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    AnnotationStoreVersionItem.add_member(:version_size_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "versionSizeBytes", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreItem)
+    AnnotationStoreVersionItem.add_member(:store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "versionArn", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    AnnotationStoreVersionItem.add_member(:version_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "versionSizeBytes", traits: {"smithy.api#required" => {}}))
     AnnotationStoreVersionItem.type = Types::AnnotationStoreVersionItem
-    AnnotationStoreVersionItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationStoreVersionItem)
-    ArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    BatchDeleteReadSetRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetIdList, location_name: "ids", traits: {"smithy.api#required" => {}}))
-    BatchDeleteReadSetRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AnnotationStoreVersionItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreVersionItem)
+    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    BatchDeleteReadSetRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetIdList, location_name: "ids", traits: {"smithy.api#required" => {}}))
+    BatchDeleteReadSetRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchDeleteReadSetRequest.type = Types::BatchDeleteReadSetRequest
-    BatchDeleteReadSetResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetBatchErrorList, location_name: "errors"))
+    BatchDeleteReadSetResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetBatchErrorList, location_name: "errors"))
     BatchDeleteReadSetResponse.type = Types::BatchDeleteReadSetResponse
-    CancelAnnotationImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelAnnotationImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelAnnotationImportRequest.type = Types::CancelAnnotationImportRequest
     CancelAnnotationImportResponse.type = Types::CancelAnnotationImportResponse
-    CancelRunRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelRunRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelRunRequest.type = Types::CancelRunRequest
-    CancelVariantImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelVariantImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelVariantImportRequest.type = Types::CancelVariantImportRequest
     CancelVariantImportResponse.type = Types::CancelVariantImportResponse
-    CompleteMultipartReadSetUploadRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CompleteMultipartReadSetUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CompleteMultipartReadSetUploadRequest.add_member(:parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteReadSetUploadPartList, location_name: "parts", traits: {"smithy.api#required" => {}}))
+    CompleteMultipartReadSetUploadRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteMultipartReadSetUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteMultipartReadSetUploadRequest.add_member(:parts, ::Smithy::Schema::Shapes::MemberShape.new(target: CompleteReadSetUploadPartList, location_name: "parts", traits: {"smithy.api#required" => {}}))
     CompleteMultipartReadSetUploadRequest.type = Types::CompleteMultipartReadSetUploadRequest
-    CompleteMultipartReadSetUploadResponse.add_member(:read_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
+    CompleteMultipartReadSetUploadResponse.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
     CompleteMultipartReadSetUploadResponse.type = Types::CompleteMultipartReadSetUploadResponse
-    CompleteReadSetUploadPartList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteReadSetUploadPartListItem)
-    CompleteReadSetUploadPartListItem.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
-    CompleteReadSetUploadPartListItem.add_member(:part_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#required" => {}}))
-    CompleteReadSetUploadPartListItem.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "checksum", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$", "smithy.api#required" => {}}))
+    CompleteReadSetUploadPartList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompleteReadSetUploadPartListItem)
+    CompleteReadSetUploadPartListItem.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
+    CompleteReadSetUploadPartListItem.add_member(:part_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#required" => {}}))
+    CompleteReadSetUploadPartListItem.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "checksum", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$", "smithy.api#required" => {}}))
     CompleteReadSetUploadPartListItem.type = Types::CompleteReadSetUploadPartListItem
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    ContainerRegistryMap.add_member(:registry_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryMappingsList, location_name: "registryMappings"))
-    ContainerRegistryMap.add_member(:image_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageMappingsList, location_name: "imageMappings"))
+    ContainerRegistryMap.add_member(:registry_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryMappingsList, location_name: "registryMappings"))
+    ContainerRegistryMap.add_member(:image_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMappingsList, location_name: "imageMappings"))
     ContainerRegistryMap.type = Types::ContainerRegistryMap
-    CreateAnnotationStoreRequest.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference"))
-    CreateAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "name"))
-    CreateAnnotationStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateAnnotationStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateAnnotationStoreRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName"))
-    CreateAnnotationStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    CreateAnnotationStoreRequest.add_member(:store_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreFormat, location_name: "storeFormat", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreRequest.add_member(:store_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreOptions, location_name: "storeOptions"))
+    CreateAnnotationStoreRequest.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference"))
+    CreateAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "name"))
+    CreateAnnotationStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateAnnotationStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateAnnotationStoreRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName"))
+    CreateAnnotationStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    CreateAnnotationStoreRequest.add_member(:store_format, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreFormat, location_name: "storeFormat", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreRequest.add_member(:store_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreOptions, location_name: "storeOptions"))
     CreateAnnotationStoreRequest.type = Types::CreateAnnotationStoreRequest
-    CreateAnnotationStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference"))
-    CreateAnnotationStoreResponse.add_member(:store_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreFormat, location_name: "storeFormat"))
-    CreateAnnotationStoreResponse.add_member(:store_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreOptions, location_name: "storeOptions"))
-    CreateAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreResponse.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference"))
+    CreateAnnotationStoreResponse.add_member(:store_format, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreFormat, location_name: "storeFormat"))
+    CreateAnnotationStoreResponse.add_member(:store_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreOptions, location_name: "storeOptions"))
+    CreateAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreResponse.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
     CreateAnnotationStoreResponse.type = Types::CreateAnnotationStoreResponse
-    CreateAnnotationStoreVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateAnnotationStoreVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateAnnotationStoreVersionRequest.add_member(:version_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionOptions, location_name: "versionOptions"))
-    CreateAnnotationStoreVersionRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAnnotationStoreVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateAnnotationStoreVersionRequest.add_member(:version_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionOptions, location_name: "versionOptions"))
+    CreateAnnotationStoreVersionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateAnnotationStoreVersionRequest.type = Types::CreateAnnotationStoreVersionRequest
-    CreateAnnotationStoreVersionResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreVersionResponse.add_member(:store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreVersionResponse.add_member(:version_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionOptions, location_name: "versionOptions"))
-    CreateAnnotationStoreVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    CreateAnnotationStoreVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionResponse.add_member(:store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionResponse.add_member(:version_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionOptions, location_name: "versionOptions"))
+    CreateAnnotationStoreVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    CreateAnnotationStoreVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
     CreateAnnotationStoreVersionResponse.type = Types::CreateAnnotationStoreVersionResponse
-    CreateMultipartReadSetUploadRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    CreateMultipartReadSetUploadRequest.add_member(:source_file_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadRequest.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadRequest.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadRequest.add_member(:generated_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    CreateMultipartReadSetUploadRequest.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
-    CreateMultipartReadSetUploadRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
-    CreateMultipartReadSetUploadRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateMultipartReadSetUploadRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    CreateMultipartReadSetUploadRequest.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadRequest.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadRequest.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadRequest.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, location_name: "generatedFrom"))
+    CreateMultipartReadSetUploadRequest.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn"))
+    CreateMultipartReadSetUploadRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, location_name: "description"))
+    CreateMultipartReadSetUploadRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateMultipartReadSetUploadRequest.type = Types::CreateMultipartReadSetUploadRequest
-    CreateMultipartReadSetUploadResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadResponse.add_member(:source_file_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadResponse.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadResponse.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadResponse.add_member(:generated_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    CreateMultipartReadSetUploadResponse.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn", traits: {"smithy.api#required" => {}}))
-    CreateMultipartReadSetUploadResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
-    CreateMultipartReadSetUploadResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
-    CreateMultipartReadSetUploadResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateMultipartReadSetUploadResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    CreateMultipartReadSetUploadResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadResponse.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadResponse.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadResponse.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadResponse.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, location_name: "generatedFrom"))
+    CreateMultipartReadSetUploadResponse.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn", traits: {"smithy.api#required" => {}}))
+    CreateMultipartReadSetUploadResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name"))
+    CreateMultipartReadSetUploadResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, location_name: "description"))
+    CreateMultipartReadSetUploadResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateMultipartReadSetUploadResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CreateMultipartReadSetUploadResponse.type = Types::CreateMultipartReadSetUploadResponse
-    CreateReferenceStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateReferenceStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreDescription, location_name: "description"))
-    CreateReferenceStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    CreateReferenceStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateReferenceStoreRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    CreateReferenceStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateReferenceStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDescription, location_name: "description"))
+    CreateReferenceStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    CreateReferenceStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateReferenceStoreRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
     CreateReferenceStoreRequest.type = Types::CreateReferenceStoreRequest
-    CreateReferenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    CreateReferenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    CreateReferenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreName, location_name: "name"))
-    CreateReferenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreDescription, location_name: "description"))
-    CreateReferenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    CreateReferenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    CreateReferenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    CreateReferenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    CreateReferenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreName, location_name: "name"))
+    CreateReferenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDescription, location_name: "description"))
+    CreateReferenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    CreateReferenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CreateReferenceStoreResponse.type = Types::CreateReferenceStoreResponse
-    CreateRunCacheRequest.add_member(:cache_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheBehavior, location_name: "cacheBehavior"))
-    CreateRunCacheRequest.add_member(:cache_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3UriForBucketOrObject, location_name: "cacheS3Location", traits: {"smithy.api#required" => {}}))
-    CreateRunCacheRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCustomDescription, location_name: "description"))
-    CreateRunCacheRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCustomName, location_name: "name"))
-    CreateRunCacheRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateRunCacheRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateRunCacheRequest.add_member(:cache_bucket_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "cacheBucketOwnerId"))
+    CreateRunCacheRequest.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, location_name: "cacheBehavior"))
+    CreateRunCacheRequest.add_member(:cache_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForBucketOrObject, location_name: "cacheS3Location", traits: {"smithy.api#required" => {}}))
+    CreateRunCacheRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomDescription, location_name: "description"))
+    CreateRunCacheRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomName, location_name: "name"))
+    CreateRunCacheRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateRunCacheRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateRunCacheRequest.add_member(:cache_bucket_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, location_name: "cacheBucketOwnerId"))
     CreateRunCacheRequest.type = Types::CreateRunCacheRequest
-    CreateRunCacheResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheArn, location_name: "arn"))
-    CreateRunCacheResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheId, location_name: "id"))
-    CreateRunCacheResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheStatus, location_name: "status"))
-    CreateRunCacheResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateRunCacheResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheArn, location_name: "arn"))
+    CreateRunCacheResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheId, location_name: "id"))
+    CreateRunCacheResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheStatus, location_name: "status"))
+    CreateRunCacheResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateRunCacheResponse.type = Types::CreateRunCacheResponse
-    CreateRunGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupName, location_name: "name"))
-    CreateRunGroupRequest.add_member(:max_cpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    CreateRunGroupRequest.add_member(:max_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    CreateRunGroupRequest.add_member(:max_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    CreateRunGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateRunGroupRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateRunGroupRequest.add_member(:max_gpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    CreateRunGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupName, location_name: "name"))
+    CreateRunGroupRequest.add_member(:max_cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    CreateRunGroupRequest.add_member(:max_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    CreateRunGroupRequest.add_member(:max_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    CreateRunGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateRunGroupRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateRunGroupRequest.add_member(:max_gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
     CreateRunGroupRequest.type = Types::CreateRunGroupRequest
-    CreateRunGroupResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupArn, location_name: "arn"))
-    CreateRunGroupResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "id"))
-    CreateRunGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateRunGroupResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupArn, location_name: "arn"))
+    CreateRunGroupResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "id"))
+    CreateRunGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateRunGroupResponse.type = Types::CreateRunGroupResponse
-    CreateSequenceStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateSequenceStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
-    CreateSequenceStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    CreateSequenceStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateSequenceStoreRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateSequenceStoreRequest.add_member(:fallback_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
-    CreateSequenceStoreRequest.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
-    CreateSequenceStoreRequest.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
-    CreateSequenceStoreRequest.add_member(:s3_access_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessConfig, location_name: "s3AccessConfig"))
+    CreateSequenceStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateSequenceStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDescription, location_name: "description"))
+    CreateSequenceStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    CreateSequenceStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateSequenceStoreRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateSequenceStoreRequest.add_member(:fallback_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackLocation, location_name: "fallbackLocation"))
+    CreateSequenceStoreRequest.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
+    CreateSequenceStoreRequest.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
+    CreateSequenceStoreRequest.add_member(:s3_access_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessConfig, location_name: "s3AccessConfig"))
     CreateSequenceStoreRequest.type = Types::CreateSequenceStoreRequest
-    CreateSequenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    CreateSequenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    CreateSequenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name"))
-    CreateSequenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
-    CreateSequenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    CreateSequenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    CreateSequenceStoreResponse.add_member(:fallback_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
-    CreateSequenceStoreResponse.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
-    CreateSequenceStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatus, location_name: "status"))
-    CreateSequenceStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatusMessage, location_name: "statusMessage"))
-    CreateSequenceStoreResponse.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
-    CreateSequenceStoreResponse.add_member(:s3_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreS3Access, location_name: "s3Access"))
+    CreateSequenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    CreateSequenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    CreateSequenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, location_name: "name"))
+    CreateSequenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDescription, location_name: "description"))
+    CreateSequenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    CreateSequenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    CreateSequenceStoreResponse.add_member(:fallback_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackLocation, location_name: "fallbackLocation"))
+    CreateSequenceStoreResponse.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
+    CreateSequenceStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatus, location_name: "status"))
+    CreateSequenceStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatusMessage, location_name: "statusMessage"))
+    CreateSequenceStoreResponse.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
+    CreateSequenceStoreResponse.add_member(:s3_access, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreS3Access, location_name: "s3Access"))
     CreateSequenceStoreResponse.type = Types::CreateSequenceStoreResponse
-    CreateShareRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    CreateShareRequest.add_member(:principal_subscriber, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "principalSubscriber", traits: {"smithy.api#required" => {}}))
-    CreateShareRequest.add_member(:share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareName, location_name: "shareName"))
+    CreateShareRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    CreateShareRequest.add_member(:principal_subscriber, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "principalSubscriber", traits: {"smithy.api#required" => {}}))
+    CreateShareRequest.add_member(:share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareName, location_name: "shareName"))
     CreateShareRequest.type = Types::CreateShareRequest
-    CreateShareResponse.add_member(:share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId"))
-    CreateShareResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
-    CreateShareResponse.add_member(:share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareName, location_name: "shareName"))
+    CreateShareResponse.add_member(:share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId"))
+    CreateShareResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, location_name: "status"))
+    CreateShareResponse.add_member(:share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareName, location_name: "shareName"))
     CreateShareResponse.type = Types::CreateShareResponse
-    CreateVariantStoreRequest.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
-    CreateVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "name"))
-    CreateVariantStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateVariantStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateVariantStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
+    CreateVariantStoreRequest.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
+    CreateVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "name"))
+    CreateVariantStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreateVariantStoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateVariantStoreRequest.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
     CreateVariantStoreRequest.type = Types::CreateVariantStoreRequest
-    CreateVariantStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    CreateVariantStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference"))
-    CreateVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    CreateVariantStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateVariantStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    CreateVariantStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    CreateVariantStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference"))
+    CreateVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    CreateVariantStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateVariantStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
     CreateVariantStoreResponse.type = Types::CreateVariantStoreResponse
-    CreateWorkflowRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowName, location_name: "name"))
-    CreateWorkflowRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDescription, location_name: "description"))
-    CreateWorkflowRequest.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowEngine, location_name: "engine"))
-    CreateWorkflowRequest.add_member(:definition_zip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "definitionZip", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateWorkflowRequest.add_member(:definition_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDefinition, location_name: "definitionUri"))
-    CreateWorkflowRequest.add_member(:main, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMain, location_name: "main"))
-    CreateWorkflowRequest.add_member(:parameter_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowParameterTemplate, location_name: "parameterTemplate"))
-    CreateWorkflowRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    CreateWorkflowRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateWorkflowRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateWorkflowRequest.add_member(:accelerators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
-    CreateWorkflowRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    CreateWorkflowRequest.add_member(:container_registry_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerRegistryMap, location_name: "containerRegistryMap"))
-    CreateWorkflowRequest.add_member(:container_registry_map_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uri, location_name: "containerRegistryMapUri"))
-    CreateWorkflowRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
-    CreateWorkflowRequest.add_member(:parameter_template_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterTemplatePath, location_name: "parameterTemplatePath"))
-    CreateWorkflowRequest.add_member(:readme_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
-    CreateWorkflowRequest.add_member(:definition_repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefinitionRepository, location_name: "definitionRepository"))
-    CreateWorkflowRequest.add_member(:workflow_bucket_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
-    CreateWorkflowRequest.add_member(:readme_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3UriForObject, location_name: "readmeUri"))
+    CreateWorkflowRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowName, location_name: "name"))
+    CreateWorkflowRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDescription, location_name: "description"))
+    CreateWorkflowRequest.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowEngine, location_name: "engine"))
+    CreateWorkflowRequest.add_member(:definition_zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "definitionZip", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateWorkflowRequest.add_member(:definition_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDefinition, location_name: "definitionUri"))
+    CreateWorkflowRequest.add_member(:main, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMain, location_name: "main"))
+    CreateWorkflowRequest.add_member(:parameter_template, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterTemplate, location_name: "parameterTemplate"))
+    CreateWorkflowRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    CreateWorkflowRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateWorkflowRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateWorkflowRequest.add_member(:accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: Accelerators, location_name: "accelerators"))
+    CreateWorkflowRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    CreateWorkflowRequest.add_member(:container_registry_map, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRegistryMap, location_name: "containerRegistryMap"))
+    CreateWorkflowRequest.add_member(:container_registry_map_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, location_name: "containerRegistryMapUri"))
+    CreateWorkflowRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeMarkdown, location_name: "readmeMarkdown"))
+    CreateWorkflowRequest.add_member(:parameter_template_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterTemplatePath, location_name: "parameterTemplatePath"))
+    CreateWorkflowRequest.add_member(:readme_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmePath, location_name: "readmePath"))
+    CreateWorkflowRequest.add_member(:definition_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionRepository, location_name: "definitionRepository"))
+    CreateWorkflowRequest.add_member(:workflow_bucket_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
+    CreateWorkflowRequest.add_member(:readme_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForObject, location_name: "readmeUri"))
     CreateWorkflowRequest.type = Types::CreateWorkflowRequest
-    CreateWorkflowResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowArn, location_name: "arn"))
-    CreateWorkflowResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "id"))
-    CreateWorkflowResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "status"))
-    CreateWorkflowResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateWorkflowResponse.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "uuid"))
+    CreateWorkflowResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowArn, location_name: "arn"))
+    CreateWorkflowResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "id"))
+    CreateWorkflowResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, location_name: "status"))
+    CreateWorkflowResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateWorkflowResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowUuid, location_name: "uuid"))
     CreateWorkflowResponse.type = Types::CreateWorkflowResponse
-    CreateWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
-    CreateWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    CreateWorkflowVersionRequest.add_member(:definition_zip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "definitionZip", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateWorkflowVersionRequest.add_member(:definition_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDefinition, location_name: "definitionUri"))
-    CreateWorkflowVersionRequest.add_member(:accelerators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
-    CreateWorkflowVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionDescription, location_name: "description"))
-    CreateWorkflowVersionRequest.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowEngine, location_name: "engine"))
-    CreateWorkflowVersionRequest.add_member(:main, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMain, location_name: "main"))
-    CreateWorkflowVersionRequest.add_member(:parameter_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowParameterTemplate, location_name: "parameterTemplate"))
-    CreateWorkflowVersionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateWorkflowVersionRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    CreateWorkflowVersionRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    CreateWorkflowVersionRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateWorkflowVersionRequest.add_member(:workflow_bucket_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
-    CreateWorkflowVersionRequest.add_member(:container_registry_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerRegistryMap, location_name: "containerRegistryMap"))
-    CreateWorkflowVersionRequest.add_member(:container_registry_map_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uri, location_name: "containerRegistryMapUri"))
-    CreateWorkflowVersionRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
-    CreateWorkflowVersionRequest.add_member(:parameter_template_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterTemplatePath, location_name: "parameterTemplatePath"))
-    CreateWorkflowVersionRequest.add_member(:readme_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
-    CreateWorkflowVersionRequest.add_member(:definition_repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefinitionRepository, location_name: "definitionRepository"))
-    CreateWorkflowVersionRequest.add_member(:readme_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3UriForObject, location_name: "readmeUri"))
+    CreateWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
+    CreateWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    CreateWorkflowVersionRequest.add_member(:definition_zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "definitionZip", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateWorkflowVersionRequest.add_member(:definition_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDefinition, location_name: "definitionUri"))
+    CreateWorkflowVersionRequest.add_member(:accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: Accelerators, location_name: "accelerators"))
+    CreateWorkflowVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionDescription, location_name: "description"))
+    CreateWorkflowVersionRequest.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowEngine, location_name: "engine"))
+    CreateWorkflowVersionRequest.add_member(:main, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMain, location_name: "main"))
+    CreateWorkflowVersionRequest.add_member(:parameter_template, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterTemplate, location_name: "parameterTemplate"))
+    CreateWorkflowVersionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateWorkflowVersionRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    CreateWorkflowVersionRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    CreateWorkflowVersionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateWorkflowVersionRequest.add_member(:workflow_bucket_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
+    CreateWorkflowVersionRequest.add_member(:container_registry_map, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRegistryMap, location_name: "containerRegistryMap"))
+    CreateWorkflowVersionRequest.add_member(:container_registry_map_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, location_name: "containerRegistryMapUri"))
+    CreateWorkflowVersionRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeMarkdown, location_name: "readmeMarkdown"))
+    CreateWorkflowVersionRequest.add_member(:parameter_template_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterTemplatePath, location_name: "parameterTemplatePath"))
+    CreateWorkflowVersionRequest.add_member(:readme_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmePath, location_name: "readmePath"))
+    CreateWorkflowVersionRequest.add_member(:definition_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionRepository, location_name: "definitionRepository"))
+    CreateWorkflowVersionRequest.add_member(:readme_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForObject, location_name: "readmeUri"))
     CreateWorkflowVersionRequest.type = Types::CreateWorkflowVersionRequest
-    CreateWorkflowVersionResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionArn, location_name: "arn"))
-    CreateWorkflowVersionResponse.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId"))
-    CreateWorkflowVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "versionName"))
-    CreateWorkflowVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "status"))
-    CreateWorkflowVersionResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateWorkflowVersionResponse.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "uuid"))
+    CreateWorkflowVersionResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionArn, location_name: "arn"))
+    CreateWorkflowVersionResponse.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId"))
+    CreateWorkflowVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "versionName"))
+    CreateWorkflowVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, location_name: "status"))
+    CreateWorkflowVersionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateWorkflowVersionResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowUuid, location_name: "uuid"))
     CreateWorkflowVersionResponse.type = Types::CreateWorkflowVersionResponse
-    DefinitionRepository.add_member(:connection_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "connectionArn", traits: {"smithy.api#required" => {}}))
-    DefinitionRepository.add_member(:full_repository_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FullRepositoryId, location_name: "fullRepositoryId", traits: {"smithy.api#required" => {}}))
-    DefinitionRepository.add_member(:source_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceReference, location_name: "sourceReference"))
-    DefinitionRepository.add_member(:exclude_file_patterns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeFilePatternList, location_name: "excludeFilePatterns"))
+    DefinitionRepository.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, location_name: "connectionArn", traits: {"smithy.api#required" => {}}))
+    DefinitionRepository.add_member(:full_repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FullRepositoryId, location_name: "fullRepositoryId", traits: {"smithy.api#required" => {}}))
+    DefinitionRepository.add_member(:source_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceReference, location_name: "sourceReference"))
+    DefinitionRepository.add_member(:exclude_file_patterns, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeFilePatternList, location_name: "excludeFilePatterns"))
     DefinitionRepository.type = Types::DefinitionRepository
-    DefinitionRepositoryDetails.add_member(:connection_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "connectionArn"))
-    DefinitionRepositoryDetails.add_member(:full_repository_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FullRepositoryId, location_name: "fullRepositoryId"))
-    DefinitionRepositoryDetails.add_member(:source_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceReference, location_name: "sourceReference"))
-    DefinitionRepositoryDetails.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "providerType"))
-    DefinitionRepositoryDetails.add_member(:provider_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "providerEndpoint"))
+    DefinitionRepositoryDetails.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, location_name: "connectionArn"))
+    DefinitionRepositoryDetails.add_member(:full_repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FullRepositoryId, location_name: "fullRepositoryId"))
+    DefinitionRepositoryDetails.add_member(:source_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceReference, location_name: "sourceReference"))
+    DefinitionRepositoryDetails.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "providerType"))
+    DefinitionRepositoryDetails.add_member(:provider_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "providerEndpoint"))
     DefinitionRepositoryDetails.type = Types::DefinitionRepositoryDetails
-    DeleteAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteAnnotationStoreRequest.add_member(:force, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
+    DeleteAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAnnotationStoreRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
     DeleteAnnotationStoreRequest.type = Types::DeleteAnnotationStoreRequest
-    DeleteAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    DeleteAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     DeleteAnnotationStoreResponse.type = Types::DeleteAnnotationStoreResponse
-    DeleteAnnotationStoreVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteAnnotationStoreVersionsRequest.add_member(:versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionList, location_name: "versions", traits: {"smithy.api#required" => {}}))
-    DeleteAnnotationStoreVersionsRequest.add_member(:force, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
+    DeleteAnnotationStoreVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAnnotationStoreVersionsRequest.add_member(:versions, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionList, location_name: "versions", traits: {"smithy.api#required" => {}}))
+    DeleteAnnotationStoreVersionsRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
     DeleteAnnotationStoreVersionsRequest.type = Types::DeleteAnnotationStoreVersionsRequest
-    DeleteAnnotationStoreVersionsResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionDeleteErrorList, location_name: "errors"))
+    DeleteAnnotationStoreVersionsResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDeleteErrorList, location_name: "errors"))
     DeleteAnnotationStoreVersionsResponse.type = Types::DeleteAnnotationStoreVersionsResponse
-    DeleteReferenceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceId"}))
-    DeleteReferenceRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteReferenceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceId"}))
+    DeleteReferenceRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteReferenceRequest.type = Types::DeleteReferenceRequest
     DeleteReferenceResponse.type = Types::DeleteReferenceResponse
-    DeleteReferenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceStoreId"}))
+    DeleteReferenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceStoreId"}))
     DeleteReferenceStoreRequest.type = Types::DeleteReferenceStoreRequest
     DeleteReferenceStoreResponse.type = Types::DeleteReferenceStoreResponse
-    DeleteRunCacheRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRunCacheRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRunCacheRequest.type = Types::DeleteRunCacheRequest
-    DeleteRunGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRunGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRunGroupRequest.type = Types::DeleteRunGroupRequest
-    DeleteRunRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRunRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRunRequest.type = Types::DeleteRunRequest
-    DeleteS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, location_name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteS3AccessPolicyRequest.type = Types::DeleteS3AccessPolicyRequest
     DeleteS3AccessPolicyResponse.type = Types::DeleteS3AccessPolicyResponse
-    DeleteSequenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sequenceStoreId"}))
+    DeleteSequenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sequenceStoreId"}))
     DeleteSequenceStoreRequest.type = Types::DeleteSequenceStoreRequest
     DeleteSequenceStoreResponse.type = Types::DeleteSequenceStoreResponse
-    DeleteShareRequest.add_member(:share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteShareRequest.add_member(:share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteShareRequest.type = Types::DeleteShareRequest
-    DeleteShareResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
+    DeleteShareResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, location_name: "status"))
     DeleteShareResponse.type = Types::DeleteShareResponse
-    DeleteVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVariantStoreRequest.add_member(:force, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
+    DeleteVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVariantStoreRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
     DeleteVariantStoreRequest.type = Types::DeleteVariantStoreRequest
-    DeleteVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    DeleteVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     DeleteVariantStoreResponse.type = Types::DeleteVariantStoreResponse
-    DeleteWorkflowRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteWorkflowRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteWorkflowRequest.type = Types::DeleteWorkflowRequest
-    DeleteWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
-    DeleteWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
+    DeleteWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteWorkflowVersionRequest.type = Types::DeleteWorkflowVersionRequest
-    ETag.add_member(:algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETagAlgorithm, location_name: "algorithm"))
-    ETag.add_member(:source1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "source1"))
-    ETag.add_member(:source2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "source2"))
+    ETag.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagAlgorithm, location_name: "algorithm"))
+    ETag.add_member(:source1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "source1"))
+    ETag.add_member(:source2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "source2"))
     ETag.type = Types::ETag
-    ExcludeFilePatternList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ExportReadSet.add_member(:read_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
+    ExcludeFilePatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ExportReadSet.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
     ExportReadSet.type = Types::ExportReadSet
-    ExportReadSetDetail.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ExportReadSetDetail.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetExportJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ExportReadSetDetail.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
+    ExportReadSetDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ExportReadSetDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetExportJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ExportReadSetDetail.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
     ExportReadSetDetail.type = Types::ExportReadSetDetail
-    ExportReadSetDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportReadSetDetail)
-    ExportReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetExportJobStatus, location_name: "status"))
-    ExportReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ExportReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ExportReadSetDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetDetail)
+    ExportReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetExportJobStatus, location_name: "status"))
+    ExportReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ExportReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ExportReadSetFilter.type = Types::ExportReadSetFilter
-    ExportReadSetJobDetail.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ExportReadSetJobDetail.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    ExportReadSetJobDetail.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    ExportReadSetJobDetail.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetExportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ExportReadSetJobDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ExportReadSetJobDetail.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ExportReadSetJobDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ExportReadSetJobDetail.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    ExportReadSetJobDetail.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    ExportReadSetJobDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetExportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ExportReadSetJobDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ExportReadSetJobDetail.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ExportReadSetJobDetail.type = Types::ExportReadSetJobDetail
-    ExportReadSetJobDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportReadSetJobDetail)
-    ExportReadSetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportReadSet)
-    FileInformation.add_member(:total_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "totalParts", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}}))
-    FileInformation.add_member(:part_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "partSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 5368709120}}))
-    FileInformation.add_member(:content_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "contentLength", traits: {"smithy.api#range" => {"min" => 1, "max" => 5497558138880}}))
-    FileInformation.add_member(:s3_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetS3Access, location_name: "s3Access"))
+    ExportReadSetJobDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetJobDetail)
+    ExportReadSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSet)
+    FileInformation.add_member(:total_parts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "totalParts", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}}))
+    FileInformation.add_member(:part_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "partSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 5368709120}}))
+    FileInformation.add_member(:content_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "contentLength", traits: {"smithy.api#range" => {"min" => 1, "max" => 5497558138880}}))
+    FileInformation.add_member(:s3_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetS3Access, location_name: "s3Access"))
     FileInformation.type = Types::FileInformation
-    Filter.add_member(:resource_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "resourceArns"))
-    Filter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusList, location_name: "status"))
-    Filter.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeList, location_name: "type"))
+    Filter.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "resourceArns"))
+    Filter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusList, location_name: "status"))
+    Filter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeList, location_name: "type"))
     Filter.type = Types::Filter
-    FormatOptions.add_member(:tsv_options, Types::FormatOptions::TsvOptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TsvOptions, location_name: "tsvOptions"))
-    FormatOptions.add_member(:vcf_options, Types::FormatOptions::VcfOptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VcfOptions, location_name: "vcfOptions"))
-    FormatOptions.add_member(:unknown, Types::FormatOptions::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    FormatOptions.add_member(:tsv_options, Types::FormatOptions::TsvOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TsvOptions, location_name: "tsvOptions"))
+    FormatOptions.add_member(:vcf_options, Types::FormatOptions::VcfOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfOptions, location_name: "vcfOptions"))
+    FormatOptions.add_member(:unknown, Types::FormatOptions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     FormatOptions.type = Types::FormatOptions
-    FormatToHeader.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatToHeaderKey)
-    FormatToHeader.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
-    GetAnnotationImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    FormatToHeader.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatToHeaderKey)
+    FormatToHeader.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    GetAnnotationImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAnnotationImportRequest.type = Types::GetAnnotationImportRequest
-    GetAnnotationImportResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMsg, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletionTime, location_name: "completionTime", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationImportItemDetails, location_name: "items", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:format_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatOptions, location_name: "formatOptions", traits: {"smithy.api#required" => {}}))
-    GetAnnotationImportResponse.add_member(:annotation_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationFieldMap, location_name: "annotationFields"))
+    GetAnnotationImportResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMsg, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionTime, location_name: "completionTime", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemDetails, location_name: "items", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:format_options, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatOptions, location_name: "formatOptions", traits: {"smithy.api#required" => {}}))
+    GetAnnotationImportResponse.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, location_name: "annotationFields"))
     GetAnnotationImportResponse.type = Types::GetAnnotationImportResponse
-    GetAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAnnotationStoreRequest.type = Types::GetAnnotationStoreRequest
-    GetAnnotationStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:store_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:store_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreOptions, location_name: "storeOptions"))
-    GetAnnotationStoreResponse.add_member(:store_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreFormat, location_name: "storeFormat"))
-    GetAnnotationStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreResponse.add_member(:num_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "numVersions", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:store_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreOptions, location_name: "storeOptions"))
+    GetAnnotationStoreResponse.add_member(:store_format, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreFormat, location_name: "storeFormat"))
+    GetAnnotationStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreResponse.add_member(:num_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "numVersions", traits: {"smithy.api#required" => {}}))
     GetAnnotationStoreResponse.type = Types::GetAnnotationStoreResponse
-    GetAnnotationStoreVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetAnnotationStoreVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAnnotationStoreVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAnnotationStoreVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAnnotationStoreVersionRequest.type = Types::GetAnnotationStoreVersionRequest
-    GetAnnotationStoreVersionResponse.add_member(:store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:version_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "versionArn", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:version_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionOptions, location_name: "versionOptions"))
-    GetAnnotationStoreVersionResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    GetAnnotationStoreVersionResponse.add_member(:version_size_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "versionSizeBytes", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "versionArn", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:version_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionOptions, location_name: "versionOptions"))
+    GetAnnotationStoreVersionResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    GetAnnotationStoreVersionResponse.add_member(:version_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "versionSizeBytes", traits: {"smithy.api#required" => {}}))
     GetAnnotationStoreVersionResponse.type = Types::GetAnnotationStoreVersionResponse
-    GetReadSetActivationJobRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetReadSetActivationJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetActivationJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetActivationJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReadSetActivationJobRequest.type = Types::GetReadSetActivationJobRequest
-    GetReadSetActivationJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetReadSetActivationJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    GetReadSetActivationJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetActivationJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetReadSetActivationJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
-    GetReadSetActivationJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetReadSetActivationJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetReadSetActivationJobResponse.add_member(:sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateReadSetSourceList, location_name: "sources"))
+    GetReadSetActivationJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetReadSetActivationJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    GetReadSetActivationJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetActivationJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetReadSetActivationJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
+    GetReadSetActivationJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReadSetActivationJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetReadSetActivationJobResponse.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetSourceList, location_name: "sources"))
     GetReadSetActivationJobResponse.type = Types::GetReadSetActivationJobResponse
-    GetReadSetExportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetReadSetExportJobRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetExportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetExportJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReadSetExportJobRequest.type = Types::GetReadSetExportJobRequest
-    GetReadSetExportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetReadSetExportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    GetReadSetExportJobResponse.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    GetReadSetExportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetExportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetReadSetExportJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
-    GetReadSetExportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetReadSetExportJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetReadSetExportJobResponse.add_member(:read_sets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportReadSetDetailList, location_name: "readSets"))
+    GetReadSetExportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetReadSetExportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    GetReadSetExportJobResponse.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    GetReadSetExportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetExportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetReadSetExportJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
+    GetReadSetExportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReadSetExportJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetReadSetExportJobResponse.add_member(:read_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetDetailList, location_name: "readSets"))
     GetReadSetExportJobResponse.type = Types::GetReadSetExportJobResponse
-    GetReadSetImportJobRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetReadSetImportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetImportJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetImportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReadSetImportJobRequest.type = Types::GetReadSetImportJobRequest
-    GetReadSetImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetReadSetImportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    GetReadSetImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    GetReadSetImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetReadSetImportJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
-    GetReadSetImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetReadSetImportJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetReadSetImportJobResponse.add_member(:sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReadSetSourceList, location_name: "sources", traits: {"smithy.api#required" => {}}))
+    GetReadSetImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetReadSetImportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    GetReadSetImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    GetReadSetImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetReadSetImportJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
+    GetReadSetImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReadSetImportJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetReadSetImportJobResponse.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetSourceList, location_name: "sources", traits: {"smithy.api#required" => {}}))
     GetReadSetImportJobResponse.type = Types::GetReadSetImportJobResponse
-    GetReadSetMetadataRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "readSetId"}))
-    GetReadSetMetadataRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetMetadataRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "readSetId"}))
+    GetReadSetMetadataRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReadSetMetadataRequest.type = Types::GetReadSetMetadataRequest
-    GetReadSetMetadataResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetReadSetMetadataResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    GetReadSetMetadataResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    GetReadSetMetadataResponse.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId"))
-    GetReadSetMetadataResponse.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId"))
-    GetReadSetMetadataResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetReadSetMetadataResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
-    GetReadSetMetadataResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
-    GetReadSetMetadataResponse.add_member(:file_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileType, location_name: "fileType", traits: {"smithy.api#required" => {}}))
-    GetReadSetMetadataResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetReadSetMetadataResponse.add_member(:sequence_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceInformation, location_name: "sequenceInformation"))
-    GetReadSetMetadataResponse.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
-    GetReadSetMetadataResponse.add_member(:files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetFiles, location_name: "files"))
-    GetReadSetMetadataResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetStatusMessage, location_name: "statusMessage"))
-    GetReadSetMetadataResponse.add_member(:creation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
-    GetReadSetMetadataResponse.add_member(:etag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "etag"))
-    GetReadSetMetadataResponse.add_member(:creation_job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationJobId, location_name: "creationJobId"))
+    GetReadSetMetadataResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetReadSetMetadataResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetReadSetMetadataResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    GetReadSetMetadataResponse.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId"))
+    GetReadSetMetadataResponse.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId"))
+    GetReadSetMetadataResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetReadSetMetadataResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name"))
+    GetReadSetMetadataResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, location_name: "description"))
+    GetReadSetMetadataResponse.add_member(:file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, location_name: "fileType", traits: {"smithy.api#required" => {}}))
+    GetReadSetMetadataResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReadSetMetadataResponse.add_member(:sequence_information, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceInformation, location_name: "sequenceInformation"))
+    GetReadSetMetadataResponse.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn"))
+    GetReadSetMetadataResponse.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetFiles, location_name: "files"))
+    GetReadSetMetadataResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetStatusMessage, location_name: "statusMessage"))
+    GetReadSetMetadataResponse.add_member(:creation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationType, location_name: "creationType"))
+    GetReadSetMetadataResponse.add_member(:etag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, location_name: "etag"))
+    GetReadSetMetadataResponse.add_member(:creation_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationJobId, location_name: "creationJobId"))
     GetReadSetMetadataResponse.type = Types::GetReadSetMetadataResponse
-    GetReadSetRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "readSetId"}))
-    GetReadSetRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetReadSetRequest.add_member(:file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetFile, location_name: "file", traits: {"smithy.api#httpQuery" => "file"}))
-    GetReadSetRequest.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
+    GetReadSetRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "readSetId"}))
+    GetReadSetRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReadSetRequest.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetFile, location_name: "file", traits: {"smithy.api#httpQuery" => "file"}))
+    GetReadSetRequest.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
     GetReadSetRequest.type = Types::GetReadSetRequest
-    GetReadSetResponse.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetStreamingBlob, location_name: "payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetReadSetResponse.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetStreamingBlob, location_name: "payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     GetReadSetResponse[:http_payload] = :payload
     GetReadSetResponse[:http_payload_member] = GetReadSetResponse.member(:payload)
     GetReadSetResponse.type = Types::GetReadSetResponse
-    GetReferenceImportJobRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetReferenceImportJobRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReferenceImportJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReferenceImportJobRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReferenceImportJobRequest.type = Types::GetReferenceImportJobRequest
-    GetReferenceImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetReferenceImportJobResponse.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
-    GetReferenceImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    GetReferenceImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetReferenceImportJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
-    GetReferenceImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetReferenceImportJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetReferenceImportJobResponse.add_member(:sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReferenceSourceList, location_name: "sources", traits: {"smithy.api#required" => {}}))
+    GetReferenceImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetReferenceImportJobResponse.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
+    GetReferenceImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    GetReferenceImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetReferenceImportJobResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
+    GetReferenceImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReferenceImportJobResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetReferenceImportJobResponse.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceSourceList, location_name: "sources", traits: {"smithy.api#required" => {}}))
     GetReferenceImportJobResponse.type = Types::GetReferenceImportJobResponse
-    GetReferenceMetadataRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceId"}))
-    GetReferenceMetadataRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReferenceMetadataRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceId"}))
+    GetReferenceMetadataRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReferenceMetadataRequest.type = Types::GetReferenceMetadataRequest
-    GetReferenceMetadataResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetReferenceMetadataResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    GetReferenceMetadataResponse.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
-    GetReferenceMetadataResponse.add_member(:md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Md5, location_name: "md5", traits: {"smithy.api#required" => {}}))
-    GetReferenceMetadataResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "status"))
-    GetReferenceMetadataResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "name"))
-    GetReferenceMetadataResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceDescription, location_name: "description"))
-    GetReferenceMetadataResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetReferenceMetadataResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetReferenceMetadataResponse.add_member(:files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceFiles, location_name: "files"))
-    GetReferenceMetadataResponse.add_member(:creation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceCreationType, location_name: "creationType"))
-    GetReferenceMetadataResponse.add_member(:creation_job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationJobId, location_name: "creationJobId"))
+    GetReferenceMetadataResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetReferenceMetadataResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetReferenceMetadataResponse.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
+    GetReferenceMetadataResponse.add_member(:md5, ::Smithy::Schema::Shapes::MemberShape.new(target: Md5, location_name: "md5", traits: {"smithy.api#required" => {}}))
+    GetReferenceMetadataResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStatus, location_name: "status"))
+    GetReferenceMetadataResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "name"))
+    GetReferenceMetadataResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDescription, location_name: "description"))
+    GetReferenceMetadataResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReferenceMetadataResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReferenceMetadataResponse.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceFiles, location_name: "files"))
+    GetReferenceMetadataResponse.add_member(:creation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceCreationType, location_name: "creationType"))
+    GetReferenceMetadataResponse.add_member(:creation_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationJobId, location_name: "creationJobId"))
     GetReferenceMetadataResponse.type = Types::GetReferenceMetadataResponse
-    GetReferenceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceId"}))
-    GetReferenceRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetReferenceRequest.add_member(:range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Range, location_name: "range", traits: {"smithy.api#httpHeader" => "Range"}))
-    GetReferenceRequest.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
-    GetReferenceRequest.add_member(:file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceFile, location_name: "file", traits: {"smithy.api#httpQuery" => "file"}))
+    GetReferenceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceId"}))
+    GetReferenceRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetReferenceRequest.add_member(:range, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, location_name: "range", traits: {"smithy.api#httpHeader" => "Range"}))
+    GetReferenceRequest.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
+    GetReferenceRequest.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceFile, location_name: "file", traits: {"smithy.api#httpQuery" => "file"}))
     GetReferenceRequest.type = Types::GetReferenceRequest
-    GetReferenceResponse.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStreamingBlob, location_name: "payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetReferenceResponse.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStreamingBlob, location_name: "payload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     GetReferenceResponse[:http_payload] = :payload
     GetReferenceResponse[:http_payload_member] = GetReferenceResponse.member(:payload)
     GetReferenceResponse.type = Types::GetReferenceResponse
-    GetReferenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceStoreId"}))
+    GetReferenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceStoreId"}))
     GetReferenceStoreRequest.type = Types::GetReferenceStoreRequest
-    GetReferenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetReferenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    GetReferenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreName, location_name: "name"))
-    GetReferenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreDescription, location_name: "description"))
-    GetReferenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    GetReferenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetReferenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetReferenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetReferenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreName, location_name: "name"))
+    GetReferenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDescription, location_name: "description"))
+    GetReferenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    GetReferenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetReferenceStoreResponse.type = Types::GetReferenceStoreResponse
-    GetRunCacheRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRunCacheRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRunCacheRequest.type = Types::GetRunCacheRequest
-    GetRunCacheResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheArn, location_name: "arn"))
-    GetRunCacheResponse.add_member(:cache_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheBehavior, location_name: "cacheBehavior"))
-    GetRunCacheResponse.add_member(:cache_bucket_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "cacheBucketOwnerId"))
-    GetRunCacheResponse.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
-    GetRunCacheResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheTimestamp, location_name: "creationTime"))
-    GetRunCacheResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCustomDescription, location_name: "description"))
-    GetRunCacheResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheId, location_name: "id"))
-    GetRunCacheResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCustomName, location_name: "name"))
-    GetRunCacheResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheStatus, location_name: "status"))
-    GetRunCacheResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetRunCacheResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheArn, location_name: "arn"))
+    GetRunCacheResponse.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, location_name: "cacheBehavior"))
+    GetRunCacheResponse.add_member(:cache_bucket_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, location_name: "cacheBucketOwnerId"))
+    GetRunCacheResponse.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
+    GetRunCacheResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheTimestamp, location_name: "creationTime"))
+    GetRunCacheResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomDescription, location_name: "description"))
+    GetRunCacheResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheId, location_name: "id"))
+    GetRunCacheResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomName, location_name: "name"))
+    GetRunCacheResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheStatus, location_name: "status"))
+    GetRunCacheResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     GetRunCacheResponse.type = Types::GetRunCacheResponse
-    GetRunGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRunGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRunGroupRequest.type = Types::GetRunGroupRequest
-    GetRunGroupResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupArn, location_name: "arn"))
-    GetRunGroupResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "id"))
-    GetRunGroupResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupName, location_name: "name"))
-    GetRunGroupResponse.add_member(:max_cpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    GetRunGroupResponse.add_member(:max_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    GetRunGroupResponse.add_member(:max_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    GetRunGroupResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupTimestamp, location_name: "creationTime"))
-    GetRunGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetRunGroupResponse.add_member(:max_gpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    GetRunGroupResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupArn, location_name: "arn"))
+    GetRunGroupResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "id"))
+    GetRunGroupResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupName, location_name: "name"))
+    GetRunGroupResponse.add_member(:max_cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    GetRunGroupResponse.add_member(:max_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    GetRunGroupResponse.add_member(:max_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    GetRunGroupResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupTimestamp, location_name: "creationTime"))
+    GetRunGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    GetRunGroupResponse.add_member(:max_gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
     GetRunGroupResponse.type = Types::GetRunGroupResponse
-    GetRunRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetRunRequest.add_member(:export, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunExportList, location_name: "export", traits: {"smithy.api#httpQuery" => "export"}))
+    GetRunRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRunRequest.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: RunExportList, location_name: "export", traits: {"smithy.api#httpQuery" => "export"}))
     GetRunRequest.type = Types::GetRunRequest
-    GetRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))
-    GetRunResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id"))
-    GetRunResponse.add_member(:cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumericIdInArn, location_name: "cacheId"))
-    GetRunResponse.add_member(:cache_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheBehavior, location_name: "cacheBehavior"))
-    GetRunResponse.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineVersion, location_name: "engineVersion"))
-    GetRunResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunStatus, location_name: "status"))
-    GetRunResponse.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId"))
-    GetRunResponse.add_member(:workflow_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "workflowType"))
-    GetRunResponse.add_member(:run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "runId"))
-    GetRunResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunRoleArn, location_name: "roleArn"))
-    GetRunResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunName, location_name: "name"))
-    GetRunResponse.add_member(:run_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "runGroupId"))
-    GetRunResponse.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    GetRunResponse.add_member(:definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDefinition, location_name: "definition"))
-    GetRunResponse.add_member(:digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDigest, location_name: "digest"))
-    GetRunResponse.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunParameters, location_name: "parameters"))
-    GetRunResponse.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    GetRunResponse.add_member(:output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "outputUri"))
-    GetRunResponse.add_member(:log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLogLevel, location_name: "logLevel"))
-    GetRunResponse.add_member(:resource_digests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunResourceDigests, location_name: "resourceDigests"))
-    GetRunResponse.add_member(:started_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunStartedBy, location_name: "startedBy"))
-    GetRunResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "creationTime"))
-    GetRunResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "startTime"))
-    GetRunResponse.add_member(:stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "stopTime"))
-    GetRunResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunStatusMessage, location_name: "statusMessage"))
-    GetRunResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetRunResponse.add_member(:accelerators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
-    GetRunResponse.add_member(:retention_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
-    GetRunResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunFailureReason, location_name: "failureReason"))
-    GetRunResponse.add_member(:log_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLogLocation, location_name: "logLocation"))
-    GetRunResponse.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
-    GetRunResponse.add_member(:run_output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
-    GetRunResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    GetRunResponse.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId"))
-    GetRunResponse.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "workflowVersionName"))
-    GetRunResponse.add_member(:workflow_uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "workflowUuid"))
+    GetRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunArn, location_name: "arn"))
+    GetRunResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id"))
+    GetRunResponse.add_member(:cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericIdInArn, location_name: "cacheId"))
+    GetRunResponse.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, location_name: "cacheBehavior"))
+    GetRunResponse.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, location_name: "engineVersion"))
+    GetRunResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatus, location_name: "status"))
+    GetRunResponse.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId"))
+    GetRunResponse.add_member(:workflow_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "workflowType"))
+    GetRunResponse.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "runId"))
+    GetRunResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRoleArn, location_name: "roleArn"))
+    GetRunResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, location_name: "name"))
+    GetRunResponse.add_member(:run_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "runGroupId"))
+    GetRunResponse.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    GetRunResponse.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDefinition, location_name: "definition"))
+    GetRunResponse.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDigest, location_name: "digest"))
+    GetRunResponse.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RunParameters, location_name: "parameters"))
+    GetRunResponse.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    GetRunResponse.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RunOutputUri, location_name: "outputUri"))
+    GetRunResponse.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLogLevel, location_name: "logLevel"))
+    GetRunResponse.add_member(:resource_digests, ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigests, location_name: "resourceDigests"))
+    GetRunResponse.add_member(:started_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStartedBy, location_name: "startedBy"))
+    GetRunResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimestamp, location_name: "creationTime"))
+    GetRunResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimestamp, location_name: "startTime"))
+    GetRunResponse.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimestamp, location_name: "stopTime"))
+    GetRunResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatusMessage, location_name: "statusMessage"))
+    GetRunResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    GetRunResponse.add_member(:accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: Accelerators, location_name: "accelerators"))
+    GetRunResponse.add_member(:retention_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRetentionMode, location_name: "retentionMode"))
+    GetRunResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: RunFailureReason, location_name: "failureReason"))
+    GetRunResponse.add_member(:log_location, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLogLocation, location_name: "logLocation"))
+    GetRunResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: RunUuid, location_name: "uuid"))
+    GetRunResponse.add_member(:run_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RunOutputUri, location_name: "runOutputUri"))
+    GetRunResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    GetRunResponse.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, location_name: "workflowOwnerId"))
+    GetRunResponse.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "workflowVersionName"))
+    GetRunResponse.add_member(:workflow_uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowUuid, location_name: "workflowUuid"))
     GetRunResponse.type = Types::GetRunResponse
-    GetRunTaskRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetRunTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRunTaskRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRunTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "taskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRunTaskRequest.type = Types::GetRunTaskRequest
-    GetRunTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId"))
-    GetRunTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskStatus, location_name: "status"))
-    GetRunTaskResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskName, location_name: "name"))
-    GetRunTaskResponse.add_member(:cpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "cpus", traits: {"smithy.api#range" => {"min" => 1}}))
-    GetRunTaskResponse.add_member(:cache_hit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "cacheHit"))
-    GetRunTaskResponse.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
-    GetRunTaskResponse.add_member(:memory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "memory", traits: {"smithy.api#range" => {"min" => 1}}))
-    GetRunTaskResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "creationTime"))
-    GetRunTaskResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "startTime"))
-    GetRunTaskResponse.add_member(:stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "stopTime"))
-    GetRunTaskResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskStatusMessage, location_name: "statusMessage"))
-    GetRunTaskResponse.add_member(:log_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskLogStream, location_name: "logStream"))
-    GetRunTaskResponse.add_member(:gpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "gpus", traits: {"smithy.api#range" => {"min" => 0}}))
-    GetRunTaskResponse.add_member(:instance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
-    GetRunTaskResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskFailureReason, location_name: "failureReason"))
-    GetRunTaskResponse.add_member(:image_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDetails, location_name: "imageDetails"))
+    GetRunTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "taskId"))
+    GetRunTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, location_name: "status"))
+    GetRunTaskResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, location_name: "name"))
+    GetRunTaskResponse.add_member(:cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "cpus", traits: {"smithy.api#range" => {"min" => 1}}))
+    GetRunTaskResponse.add_member(:cache_hit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "cacheHit"))
+    GetRunTaskResponse.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
+    GetRunTaskResponse.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "memory", traits: {"smithy.api#range" => {"min" => 1}}))
+    GetRunTaskResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTimestamp, location_name: "creationTime"))
+    GetRunTaskResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTimestamp, location_name: "startTime"))
+    GetRunTaskResponse.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTimestamp, location_name: "stopTime"))
+    GetRunTaskResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatusMessage, location_name: "statusMessage"))
+    GetRunTaskResponse.add_member(:log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskLogStream, location_name: "logStream"))
+    GetRunTaskResponse.add_member(:gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "gpus", traits: {"smithy.api#range" => {"min" => 0}}))
+    GetRunTaskResponse.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskInstanceType, location_name: "instanceType"))
+    GetRunTaskResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFailureReason, location_name: "failureReason"))
+    GetRunTaskResponse.add_member(:image_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetails, location_name: "imageDetails"))
     GetRunTaskResponse.type = Types::GetRunTaskResponse
-    GetS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, location_name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetS3AccessPolicyRequest.type = Types::GetS3AccessPolicyRequest
-    GetS3AccessPolicyResponse.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn"))
-    GetS3AccessPolicyResponse.add_member(:store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreId, location_name: "storeId"))
-    GetS3AccessPolicyResponse.add_member(:store_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreType, location_name: "storeType"))
-    GetS3AccessPolicyResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetS3AccessPolicyResponse.add_member(:s3_access_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPolicy, location_name: "s3AccessPolicy", traits: {"smithy.api#required" => {}}))
+    GetS3AccessPolicyResponse.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, location_name: "s3AccessPointArn"))
+    GetS3AccessPolicyResponse.add_member(:store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreId, location_name: "storeId"))
+    GetS3AccessPolicyResponse.add_member(:store_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreType, location_name: "storeType"))
+    GetS3AccessPolicyResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetS3AccessPolicyResponse.add_member(:s3_access_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPolicy, location_name: "s3AccessPolicy", traits: {"smithy.api#required" => {}}))
     GetS3AccessPolicyResponse.type = Types::GetS3AccessPolicyResponse
-    GetSequenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sequenceStoreId"}))
+    GetSequenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sequenceStoreId"}))
     GetSequenceStoreRequest.type = Types::GetSequenceStoreRequest
-    GetSequenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetSequenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    GetSequenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name"))
-    GetSequenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
-    GetSequenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    GetSequenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetSequenceStoreResponse.add_member(:fallback_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
-    GetSequenceStoreResponse.add_member(:s3_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreS3Access, location_name: "s3Access"))
-    GetSequenceStoreResponse.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
-    GetSequenceStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatus, location_name: "status"))
-    GetSequenceStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatusMessage, location_name: "statusMessage"))
-    GetSequenceStoreResponse.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
-    GetSequenceStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetSequenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetSequenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetSequenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, location_name: "name"))
+    GetSequenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDescription, location_name: "description"))
+    GetSequenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    GetSequenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetSequenceStoreResponse.add_member(:fallback_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackLocation, location_name: "fallbackLocation"))
+    GetSequenceStoreResponse.add_member(:s3_access, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreS3Access, location_name: "s3Access"))
+    GetSequenceStoreResponse.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
+    GetSequenceStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatus, location_name: "status"))
+    GetSequenceStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatusMessage, location_name: "statusMessage"))
+    GetSequenceStoreResponse.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
+    GetSequenceStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     GetSequenceStoreResponse.type = Types::GetSequenceStoreResponse
-    GetShareRequest.add_member(:share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetShareRequest.add_member(:share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetShareRequest.type = Types::GetShareRequest
-    GetShareResponse.add_member(:share, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareDetails, location_name: "share"))
+    GetShareResponse.add_member(:share, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareDetails, location_name: "share"))
     GetShareResponse.type = Types::GetShareResponse
-    GetVariantImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVariantImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVariantImportRequest.type = Types::GetVariantImportRequest
-    GetVariantImportResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMsg, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletionTime, location_name: "completionTime"))
-    GetVariantImportResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantImportItemDetails, location_name: "items", traits: {"smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    GetVariantImportResponse.add_member(:annotation_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationFieldMap, location_name: "annotationFields"))
+    GetVariantImportResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMsg, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionTime, location_name: "completionTime"))
+    GetVariantImportResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemDetails, location_name: "items", traits: {"smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    GetVariantImportResponse.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, location_name: "annotationFields"))
     GetVariantImportResponse.type = Types::GetVariantImportResponse
-    GetVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVariantStoreRequest.type = Types::GetVariantStoreRequest
-    GetVariantStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:store_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    GetVariantStoreResponse.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    GetVariantStoreResponse.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
     GetVariantStoreResponse.type = Types::GetVariantStoreResponse
-    GetWorkflowRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetWorkflowRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
-    GetWorkflowRequest.add_member(:export, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowExportList, location_name: "export", traits: {"smithy.api#httpQuery" => "export"}))
-    GetWorkflowRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId", traits: {"smithy.api#httpQuery" => "workflowOwnerId"}))
+    GetWorkflowRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetWorkflowRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
+    GetWorkflowRequest.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExportList, location_name: "export", traits: {"smithy.api#httpQuery" => "export"}))
+    GetWorkflowRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, location_name: "workflowOwnerId", traits: {"smithy.api#httpQuery" => "workflowOwnerId"}))
     GetWorkflowRequest.type = Types::GetWorkflowRequest
-    GetWorkflowResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowArn, location_name: "arn"))
-    GetWorkflowResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "id"))
-    GetWorkflowResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "status"))
-    GetWorkflowResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
-    GetWorkflowResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowName, location_name: "name"))
-    GetWorkflowResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDescription, location_name: "description"))
-    GetWorkflowResponse.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowEngine, location_name: "engine"))
-    GetWorkflowResponse.add_member(:definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDefinition, location_name: "definition", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowResponse.add_member(:main, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMain, location_name: "main"))
-    GetWorkflowResponse.add_member(:digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDigest, location_name: "digest", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowResponse.add_member(:parameter_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowParameterTemplate, location_name: "parameterTemplate"))
-    GetWorkflowResponse.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    GetWorkflowResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowTimestamp, location_name: "creationTime"))
-    GetWorkflowResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatusMessage, location_name: "statusMessage", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetWorkflowResponse.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMetadata, location_name: "metadata"))
-    GetWorkflowResponse.add_member(:accelerators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
-    GetWorkflowResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    GetWorkflowResponse.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "uuid"))
-    GetWorkflowResponse.add_member(:container_registry_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerRegistryMap, location_name: "containerRegistryMap"))
-    GetWorkflowResponse.add_member(:readme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmeS3PresignedUrl, location_name: "readme", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowResponse.add_member(:definition_repository_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefinitionRepositoryDetails, location_name: "definitionRepositoryDetails"))
-    GetWorkflowResponse.add_member(:readme_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
+    GetWorkflowResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowArn, location_name: "arn"))
+    GetWorkflowResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "id"))
+    GetWorkflowResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, location_name: "status"))
+    GetWorkflowResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type"))
+    GetWorkflowResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowName, location_name: "name"))
+    GetWorkflowResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDescription, location_name: "description"))
+    GetWorkflowResponse.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowEngine, location_name: "engine"))
+    GetWorkflowResponse.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDefinition, location_name: "definition", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowResponse.add_member(:main, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMain, location_name: "main"))
+    GetWorkflowResponse.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDigest, location_name: "digest", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowResponse.add_member(:parameter_template, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterTemplate, location_name: "parameterTemplate"))
+    GetWorkflowResponse.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    GetWorkflowResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTimestamp, location_name: "creationTime"))
+    GetWorkflowResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatusMessage, location_name: "statusMessage", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    GetWorkflowResponse.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadata, location_name: "metadata"))
+    GetWorkflowResponse.add_member(:accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: Accelerators, location_name: "accelerators"))
+    GetWorkflowResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    GetWorkflowResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowUuid, location_name: "uuid"))
+    GetWorkflowResponse.add_member(:container_registry_map, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRegistryMap, location_name: "containerRegistryMap"))
+    GetWorkflowResponse.add_member(:readme, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeS3PresignedUrl, location_name: "readme", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowResponse.add_member(:definition_repository_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionRepositoryDetails, location_name: "definitionRepositoryDetails"))
+    GetWorkflowResponse.add_member(:readme_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmePath, location_name: "readmePath"))
     GetWorkflowResponse.type = Types::GetWorkflowResponse
-    GetWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
-    GetWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetWorkflowVersionRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
-    GetWorkflowVersionRequest.add_member(:export, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowExportList, location_name: "export", traits: {"smithy.api#httpQuery" => "export"}))
-    GetWorkflowVersionRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId", traits: {"smithy.api#httpQuery" => "workflowOwnerId"}))
+    GetWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
+    GetWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetWorkflowVersionRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
+    GetWorkflowVersionRequest.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExportList, location_name: "export", traits: {"smithy.api#httpQuery" => "export"}))
+    GetWorkflowVersionRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, location_name: "workflowOwnerId", traits: {"smithy.api#httpQuery" => "workflowOwnerId"}))
     GetWorkflowVersionRequest.type = Types::GetWorkflowVersionRequest
-    GetWorkflowVersionResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionArn, location_name: "arn"))
-    GetWorkflowVersionResponse.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId"))
-    GetWorkflowVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "versionName"))
-    GetWorkflowVersionResponse.add_member(:accelerators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
-    GetWorkflowVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowTimestamp, location_name: "creationTime"))
-    GetWorkflowVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionDescription, location_name: "description"))
-    GetWorkflowVersionResponse.add_member(:definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDefinition, location_name: "definition", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowVersionResponse.add_member(:digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDigest, location_name: "digest", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowVersionResponse.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowEngine, location_name: "engine"))
-    GetWorkflowVersionResponse.add_member(:main, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMain, location_name: "main"))
-    GetWorkflowVersionResponse.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMetadata, location_name: "metadata"))
-    GetWorkflowVersionResponse.add_member(:parameter_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowParameterTemplate, location_name: "parameterTemplate"))
-    GetWorkflowVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "status"))
-    GetWorkflowVersionResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatusMessage, location_name: "statusMessage", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowVersionResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    GetWorkflowVersionResponse.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    GetWorkflowVersionResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
-    GetWorkflowVersionResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetWorkflowVersionResponse.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "uuid"))
-    GetWorkflowVersionResponse.add_member(:workflow_bucket_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
-    GetWorkflowVersionResponse.add_member(:container_registry_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerRegistryMap, location_name: "containerRegistryMap"))
-    GetWorkflowVersionResponse.add_member(:readme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmeS3PresignedUrl, location_name: "readme", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetWorkflowVersionResponse.add_member(:definition_repository_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefinitionRepositoryDetails, location_name: "definitionRepositoryDetails"))
-    GetWorkflowVersionResponse.add_member(:readme_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
+    GetWorkflowVersionResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionArn, location_name: "arn"))
+    GetWorkflowVersionResponse.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId"))
+    GetWorkflowVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "versionName"))
+    GetWorkflowVersionResponse.add_member(:accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: Accelerators, location_name: "accelerators"))
+    GetWorkflowVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTimestamp, location_name: "creationTime"))
+    GetWorkflowVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionDescription, location_name: "description"))
+    GetWorkflowVersionResponse.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDefinition, location_name: "definition", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowVersionResponse.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDigest, location_name: "digest", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowVersionResponse.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowEngine, location_name: "engine"))
+    GetWorkflowVersionResponse.add_member(:main, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMain, location_name: "main"))
+    GetWorkflowVersionResponse.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadata, location_name: "metadata"))
+    GetWorkflowVersionResponse.add_member(:parameter_template, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterTemplate, location_name: "parameterTemplate"))
+    GetWorkflowVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, location_name: "status"))
+    GetWorkflowVersionResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatusMessage, location_name: "statusMessage", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowVersionResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    GetWorkflowVersionResponse.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    GetWorkflowVersionResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type"))
+    GetWorkflowVersionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    GetWorkflowVersionResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowUuid, location_name: "uuid"))
+    GetWorkflowVersionResponse.add_member(:workflow_bucket_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
+    GetWorkflowVersionResponse.add_member(:container_registry_map, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRegistryMap, location_name: "containerRegistryMap"))
+    GetWorkflowVersionResponse.add_member(:readme, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeS3PresignedUrl, location_name: "readme", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetWorkflowVersionResponse.add_member(:definition_repository_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionRepositoryDetails, location_name: "definitionRepositoryDetails"))
+    GetWorkflowVersionResponse.add_member(:readme_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmePath, location_name: "readmePath"))
     GetWorkflowVersionResponse.type = Types::GetWorkflowVersionResponse
-    IdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier)
-    ImageDetails.add_member(:image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uri, location_name: "image"))
-    ImageDetails.add_member(:image_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskImageDigest, location_name: "imageDigest"))
-    ImageDetails.add_member(:source_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uri, location_name: "sourceImage"))
+    IdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier)
+    ImageDetails.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, location_name: "image"))
+    ImageDetails.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskImageDigest, location_name: "imageDigest"))
+    ImageDetails.add_member(:source_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, location_name: "sourceImage"))
     ImageDetails.type = Types::ImageDetails
-    ImageMapping.add_member(:source_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uri, location_name: "sourceImage"))
-    ImageMapping.add_member(:destination_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uri, location_name: "destinationImage"))
+    ImageMapping.add_member(:source_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, location_name: "sourceImage"))
+    ImageMapping.add_member(:destination_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, location_name: "destinationImage"))
     ImageMapping.type = Types::ImageMapping
-    ImageMappingsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageMapping)
-    ImportReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetImportJobStatus, location_name: "status"))
-    ImportReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ImportReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ImageMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMapping)
+    ImportReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetImportJobStatus, location_name: "status"))
+    ImportReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ImportReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReadSetFilter.type = Types::ImportReadSetFilter
-    ImportReadSetJobItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ImportReadSetJobItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    ImportReadSetJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    ImportReadSetJobItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ImportReadSetJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ImportReadSetJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ImportReadSetJobItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ImportReadSetJobItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    ImportReadSetJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    ImportReadSetJobItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ImportReadSetJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ImportReadSetJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReadSetJobItem.type = Types::ImportReadSetJobItem
-    ImportReadSetJobList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReadSetJobItem)
-    ImportReadSetSourceItem.add_member(:source_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceFiles, location_name: "sourceFiles", traits: {"smithy.api#required" => {}}))
-    ImportReadSetSourceItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
-    ImportReadSetSourceItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetImportJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ImportReadSetSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
-    ImportReadSetSourceItem.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
-    ImportReadSetSourceItem.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
-    ImportReadSetSourceItem.add_member(:generated_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    ImportReadSetSourceItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
-    ImportReadSetSourceItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
-    ImportReadSetSourceItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
-    ImportReadSetSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    ImportReadSetSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "readSetId"))
+    ImportReadSetJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetJobItem)
+    ImportReadSetSourceItem.add_member(:source_files, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceFiles, location_name: "sourceFiles", traits: {"smithy.api#required" => {}}))
+    ImportReadSetSourceItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
+    ImportReadSetSourceItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetImportJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ImportReadSetSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
+    ImportReadSetSourceItem.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
+    ImportReadSetSourceItem.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
+    ImportReadSetSourceItem.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, location_name: "generatedFrom"))
+    ImportReadSetSourceItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn"))
+    ImportReadSetSourceItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name"))
+    ImportReadSetSourceItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, location_name: "description"))
+    ImportReadSetSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    ImportReadSetSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "readSetId"))
     ImportReadSetSourceItem.type = Types::ImportReadSetSourceItem
-    ImportReadSetSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReadSetSourceItem)
-    ImportReferenceFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceImportJobStatus, location_name: "status"))
-    ImportReferenceFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ImportReferenceFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ImportReadSetSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetSourceItem)
+    ImportReferenceFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceImportJobStatus, location_name: "status"))
+    ImportReferenceFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ImportReferenceFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReferenceFilter.type = Types::ImportReferenceFilter
-    ImportReferenceJobItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ImportReferenceJobItem.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
-    ImportReferenceJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    ImportReferenceJobItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ImportReferenceJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ImportReferenceJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ImportReferenceJobItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ImportReferenceJobItem.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
+    ImportReferenceJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    ImportReferenceJobItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ImportReferenceJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ImportReferenceJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReferenceJobItem.type = Types::ImportReferenceJobItem
-    ImportReferenceJobList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReferenceJobItem)
-    ImportReferenceSourceItem.add_member(:source_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "sourceFile"))
-    ImportReferenceSourceItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceImportJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ImportReferenceSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMessage, location_name: "statusMessage"))
-    ImportReferenceSourceItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "name"))
-    ImportReferenceSourceItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceDescription, location_name: "description"))
-    ImportReferenceSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    ImportReferenceSourceItem.add_member(:reference_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceId, location_name: "referenceId"))
+    ImportReferenceJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceJobItem)
+    ImportReferenceSourceItem.add_member(:source_file, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "sourceFile"))
+    ImportReferenceSourceItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceImportJobItemStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ImportReferenceSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, location_name: "statusMessage"))
+    ImportReferenceSourceItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "name"))
+    ImportReferenceSourceItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDescription, location_name: "description"))
+    ImportReferenceSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    ImportReferenceSourceItem.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, location_name: "referenceId"))
     ImportReferenceSourceItem.type = Types::ImportReferenceSourceItem
-    ImportReferenceSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReferenceSourceItem)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ImportReferenceSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceSourceItem)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    ListAnnotationImportJobsFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
-    ListAnnotationImportJobsFilter.add_member(:store_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "storeName"))
+    ListAnnotationImportJobsFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "status"))
+    ListAnnotationImportJobsFilter.add_member(:store_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "storeName"))
     ListAnnotationImportJobsFilter.type = Types::ListAnnotationImportJobsFilter
-    ListAnnotationImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListAnnotationImportJobsRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
-    ListAnnotationImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListAnnotationImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationImportJobsFilter, location_name: "filter"))
+    ListAnnotationImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListAnnotationImportJobsRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
+    ListAnnotationImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListAnnotationImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAnnotationImportJobsFilter, location_name: "filter"))
     ListAnnotationImportJobsRequest.type = Types::ListAnnotationImportJobsRequest
-    ListAnnotationImportJobsResponse.add_member(:annotation_import_jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationImportJobItems, location_name: "annotationImportJobs"))
-    ListAnnotationImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListAnnotationImportJobsResponse.add_member(:annotation_import_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportJobItems, location_name: "annotationImportJobs"))
+    ListAnnotationImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListAnnotationImportJobsResponse.type = Types::ListAnnotationImportJobsResponse
-    ListAnnotationStoreVersionsFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionStatus, location_name: "status"))
+    ListAnnotationStoreVersionsFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, location_name: "status"))
     ListAnnotationStoreVersionsFilter.type = Types::ListAnnotationStoreVersionsFilter
-    ListAnnotationStoreVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListAnnotationStoreVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListAnnotationStoreVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListAnnotationStoreVersionsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsFilter, location_name: "filter"))
+    ListAnnotationStoreVersionsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAnnotationStoreVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListAnnotationStoreVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListAnnotationStoreVersionsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAnnotationStoreVersionsFilter, location_name: "filter"))
     ListAnnotationStoreVersionsRequest.type = Types::ListAnnotationStoreVersionsRequest
-    ListAnnotationStoreVersionsResponse.add_member(:annotation_store_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationStoreVersionItems, location_name: "annotationStoreVersions"))
-    ListAnnotationStoreVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListAnnotationStoreVersionsResponse.add_member(:annotation_store_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreVersionItems, location_name: "annotationStoreVersions"))
+    ListAnnotationStoreVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListAnnotationStoreVersionsResponse.type = Types::ListAnnotationStoreVersionsResponse
-    ListAnnotationStoresFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status"))
+    ListAnnotationStoresFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status"))
     ListAnnotationStoresFilter.type = Types::ListAnnotationStoresFilter
-    ListAnnotationStoresRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
-    ListAnnotationStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListAnnotationStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListAnnotationStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationStoresFilter, location_name: "filter"))
+    ListAnnotationStoresRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
+    ListAnnotationStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListAnnotationStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListAnnotationStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAnnotationStoresFilter, location_name: "filter"))
     ListAnnotationStoresRequest.type = Types::ListAnnotationStoresRequest
-    ListAnnotationStoresResponse.add_member(:annotation_stores, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationStoreItems, location_name: "annotationStores"))
-    ListAnnotationStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListAnnotationStoresResponse.add_member(:annotation_stores, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreItems, location_name: "annotationStores"))
+    ListAnnotationStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListAnnotationStoresResponse.type = Types::ListAnnotationStoresResponse
-    ListMultipartReadSetUploadsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListMultipartReadSetUploadsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListMultipartReadSetUploadsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListMultipartReadSetUploadsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListMultipartReadSetUploadsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListMultipartReadSetUploadsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListMultipartReadSetUploadsRequest.type = Types::ListMultipartReadSetUploadsRequest
-    ListMultipartReadSetUploadsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListMultipartReadSetUploadsResponse.add_member(:uploads, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartReadSetUploadList, location_name: "uploads"))
+    ListMultipartReadSetUploadsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListMultipartReadSetUploadsResponse.add_member(:uploads, ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartReadSetUploadList, location_name: "uploads"))
     ListMultipartReadSetUploadsResponse.type = Types::ListMultipartReadSetUploadsResponse
-    ListReadSetActivationJobsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReadSetActivationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReadSetActivationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReadSetActivationJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateReadSetFilter, location_name: "filter"))
+    ListReadSetActivationJobsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReadSetActivationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReadSetActivationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReadSetActivationJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetFilter, location_name: "filter"))
     ListReadSetActivationJobsRequest.type = Types::ListReadSetActivationJobsRequest
-    ListReadSetActivationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReadSetActivationJobsResponse.add_member(:activation_jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivateReadSetJobList, location_name: "activationJobs"))
+    ListReadSetActivationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReadSetActivationJobsResponse.add_member(:activation_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetJobList, location_name: "activationJobs"))
     ListReadSetActivationJobsResponse.type = Types::ListReadSetActivationJobsResponse
-    ListReadSetExportJobsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReadSetExportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReadSetExportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReadSetExportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportReadSetFilter, location_name: "filter"))
+    ListReadSetExportJobsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReadSetExportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReadSetExportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReadSetExportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetFilter, location_name: "filter"))
     ListReadSetExportJobsRequest.type = Types::ListReadSetExportJobsRequest
-    ListReadSetExportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReadSetExportJobsResponse.add_member(:export_jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportReadSetJobDetailList, location_name: "exportJobs"))
+    ListReadSetExportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReadSetExportJobsResponse.add_member(:export_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetJobDetailList, location_name: "exportJobs"))
     ListReadSetExportJobsResponse.type = Types::ListReadSetExportJobsResponse
-    ListReadSetImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReadSetImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReadSetImportJobsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReadSetImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReadSetFilter, location_name: "filter"))
+    ListReadSetImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReadSetImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReadSetImportJobsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReadSetImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetFilter, location_name: "filter"))
     ListReadSetImportJobsRequest.type = Types::ListReadSetImportJobsRequest
-    ListReadSetImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReadSetImportJobsResponse.add_member(:import_jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReadSetJobList, location_name: "importJobs"))
+    ListReadSetImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReadSetImportJobsResponse.add_member(:import_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetJobList, location_name: "importJobs"))
     ListReadSetImportJobsResponse.type = Types::ListReadSetImportJobsResponse
-    ListReadSetUploadPartsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReadSetUploadPartsRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReadSetUploadPartsRequest.add_member(:part_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#required" => {}}))
-    ListReadSetUploadPartsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReadSetUploadPartsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReadSetUploadPartsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetUploadPartListFilter, location_name: "filter"))
+    ListReadSetUploadPartsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReadSetUploadPartsRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReadSetUploadPartsRequest.add_member(:part_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#required" => {}}))
+    ListReadSetUploadPartsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReadSetUploadPartsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReadSetUploadPartsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetUploadPartListFilter, location_name: "filter"))
     ListReadSetUploadPartsRequest.type = Types::ListReadSetUploadPartsRequest
-    ListReadSetUploadPartsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReadSetUploadPartsResponse.add_member(:parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetUploadPartList, location_name: "parts"))
+    ListReadSetUploadPartsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReadSetUploadPartsResponse.add_member(:parts, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetUploadPartList, location_name: "parts"))
     ListReadSetUploadPartsResponse.type = Types::ListReadSetUploadPartsResponse
-    ListReadSetsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReadSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReadSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReadSetsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetFilter, location_name: "filter"))
+    ListReadSetsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReadSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReadSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReadSetsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetFilter, location_name: "filter"))
     ListReadSetsRequest.type = Types::ListReadSetsRequest
-    ListReadSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReadSetsResponse.add_member(:read_sets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetList, location_name: "readSets", traits: {"smithy.api#required" => {}}))
+    ListReadSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReadSetsResponse.add_member(:read_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetList, location_name: "readSets", traits: {"smithy.api#required" => {}}))
     ListReadSetsResponse.type = Types::ListReadSetsResponse
-    ListReferenceImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReferenceImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReferenceImportJobsRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReferenceImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReferenceFilter, location_name: "filter"))
+    ListReferenceImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReferenceImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReferenceImportJobsRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReferenceImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceFilter, location_name: "filter"))
     ListReferenceImportJobsRequest.type = Types::ListReferenceImportJobsRequest
-    ListReferenceImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReferenceImportJobsResponse.add_member(:import_jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportReferenceJobList, location_name: "importJobs"))
+    ListReferenceImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReferenceImportJobsResponse.add_member(:import_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceJobList, location_name: "importJobs"))
     ListReferenceImportJobsResponse.type = Types::ListReferenceImportJobsResponse
-    ListReferenceStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReferenceStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReferenceStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreFilter, location_name: "filter"))
+    ListReferenceStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReferenceStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReferenceStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreFilter, location_name: "filter"))
     ListReferenceStoresRequest.type = Types::ListReferenceStoresRequest
-    ListReferenceStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReferenceStoresResponse.add_member(:reference_stores, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreDetailList, location_name: "referenceStores", traits: {"smithy.api#required" => {}}))
+    ListReferenceStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReferenceStoresResponse.add_member(:reference_stores, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDetailList, location_name: "referenceStores", traits: {"smithy.api#required" => {}}))
     ListReferenceStoresResponse.type = Types::ListReferenceStoresResponse
-    ListReferencesRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListReferencesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListReferencesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListReferencesRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceFilter, location_name: "filter"))
+    ListReferencesRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListReferencesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListReferencesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListReferencesRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceFilter, location_name: "filter"))
     ListReferencesRequest.type = Types::ListReferencesRequest
-    ListReferencesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListReferencesResponse.add_member(:references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceList, location_name: "references", traits: {"smithy.api#required" => {}}))
+    ListReferencesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListReferencesResponse.add_member(:references, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceList, location_name: "references", traits: {"smithy.api#required" => {}}))
     ListReferencesResponse.type = Types::ListReferencesResponse
-    ListRunCachesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListRunCachesRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListRunCachesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListRunCachesRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
     ListRunCachesRequest.type = Types::ListRunCachesRequest
-    ListRunCachesResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheList, location_name: "items"))
-    ListRunCachesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListToken, location_name: "nextToken"))
+    ListRunCachesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheList, location_name: "items"))
+    ListRunCachesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListToken, location_name: "nextToken"))
     ListRunCachesResponse.type = Types::ListRunCachesResponse
-    ListRunGroupsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupName, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
-    ListRunGroupsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
-    ListRunGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListRunGroupsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupName, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
+    ListRunGroupsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListRunGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListRunGroupsRequest.type = Types::ListRunGroupsRequest
-    ListRunGroupsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupList, location_name: "items"))
-    ListRunGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupListToken, location_name: "nextToken"))
+    ListRunGroupsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupList, location_name: "items"))
+    ListRunGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupListToken, location_name: "nextToken"))
     ListRunGroupsResponse.type = Types::ListRunGroupsResponse
-    ListRunTasksRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListRunTasksRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
-    ListRunTasksRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
-    ListRunTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListRunTasksRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRunTasksRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListRunTasksRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListRunTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListRunTasksRequest.type = Types::ListRunTasksRequest
-    ListRunTasksResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskList, location_name: "items"))
-    ListRunTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskListToken, location_name: "nextToken"))
+    ListRunTasksResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskList, location_name: "items"))
+    ListRunTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListToken, location_name: "nextToken"))
     ListRunTasksResponse.type = Types::ListRunTasksResponse
-    ListRunsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunName, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
-    ListRunsRequest.add_member(:run_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "runGroupId", traits: {"smithy.api#httpQuery" => "runGroupId"}))
-    ListRunsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
-    ListRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListRunsRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListRunsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
+    ListRunsRequest.add_member(:run_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "runGroupId", traits: {"smithy.api#httpQuery" => "runGroupId"}))
+    ListRunsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RunListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListRunsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatus, location_name: "status", traits: {"smithy.api#httpQuery" => "status"}))
     ListRunsRequest.type = Types::ListRunsRequest
-    ListRunsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunList, location_name: "items"))
-    ListRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunListToken, location_name: "nextToken"))
+    ListRunsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: RunList, location_name: "items"))
+    ListRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RunListToken, location_name: "nextToken"))
     ListRunsResponse.type = Types::ListRunsResponse
-    ListSequenceStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListSequenceStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListSequenceStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreFilter, location_name: "filter"))
+    ListSequenceStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListSequenceStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSequenceStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreFilter, location_name: "filter"))
     ListSequenceStoresRequest.type = Types::ListSequenceStoresRequest
-    ListSequenceStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListSequenceStoresResponse.add_member(:sequence_stores, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDetailList, location_name: "sequenceStores", traits: {"smithy.api#required" => {}}))
+    ListSequenceStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListSequenceStoresResponse.add_member(:sequence_stores, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDetailList, location_name: "sequenceStores", traits: {"smithy.api#required" => {}}))
     ListSequenceStoresResponse.type = Types::ListSequenceStoresResponse
-    ListSharesRequest.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
-    ListSharesRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
-    ListSharesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListSharesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListSharesRequest.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceOwner, location_name: "resourceOwner", traits: {"smithy.api#required" => {}}))
+    ListSharesRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, location_name: "filter"))
+    ListSharesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSharesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListSharesRequest.type = Types::ListSharesRequest
-    ListSharesResponse.add_member(:shares, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareDetailsList, location_name: "shares", traits: {"smithy.api#required" => {}}))
-    ListSharesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListSharesResponse.add_member(:shares, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareDetailsList, location_name: "shares", traits: {"smithy.api#required" => {}}))
+    ListSharesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListSharesResponse.type = Types::ListSharesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListVariantImportJobsFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
-    ListVariantImportJobsFilter.add_member(:store_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "storeName"))
+    ListVariantImportJobsFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "status"))
+    ListVariantImportJobsFilter.add_member(:store_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "storeName"))
     ListVariantImportJobsFilter.type = Types::ListVariantImportJobsFilter
-    ListVariantImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListVariantImportJobsRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
-    ListVariantImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListVariantImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVariantImportJobsFilter, location_name: "filter"))
+    ListVariantImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListVariantImportJobsRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
+    ListVariantImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListVariantImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVariantImportJobsFilter, location_name: "filter"))
     ListVariantImportJobsRequest.type = Types::ListVariantImportJobsRequest
-    ListVariantImportJobsResponse.add_member(:variant_import_jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantImportJobItems, location_name: "variantImportJobs"))
-    ListVariantImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListVariantImportJobsResponse.add_member(:variant_import_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportJobItems, location_name: "variantImportJobs"))
+    ListVariantImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListVariantImportJobsResponse.type = Types::ListVariantImportJobsResponse
-    ListVariantStoresFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status"))
+    ListVariantStoresFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status"))
     ListVariantStoresFilter.type = Types::ListVariantStoresFilter
-    ListVariantStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListVariantStoresRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
-    ListVariantStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
-    ListVariantStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVariantStoresFilter, location_name: "filter"))
+    ListVariantStoresRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListVariantStoresRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "ids", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
+    ListVariantStoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
+    ListVariantStoresRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVariantStoresFilter, location_name: "filter"))
     ListVariantStoresRequest.type = Types::ListVariantStoresRequest
-    ListVariantStoresResponse.add_member(:variant_stores, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantStoreItems, location_name: "variantStores"))
-    ListVariantStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
+    ListVariantStoresResponse.add_member(:variant_stores, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantStoreItems, location_name: "variantStores"))
+    ListVariantStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
     ListVariantStoresResponse.type = Types::ListVariantStoresResponse
-    ListWorkflowVersionsRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
-    ListWorkflowVersionsRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
-    ListWorkflowVersionsRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId", traits: {"smithy.api#httpQuery" => "workflowOwnerId"}))
-    ListWorkflowVersionsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
-    ListWorkflowVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListWorkflowVersionsRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
+    ListWorkflowVersionsRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
+    ListWorkflowVersionsRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, location_name: "workflowOwnerId", traits: {"smithy.api#httpQuery" => "workflowOwnerId"}))
+    ListWorkflowVersionsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListWorkflowVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListWorkflowVersionsRequest.type = Types::ListWorkflowVersionsRequest
-    ListWorkflowVersionsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionList, location_name: "items"))
-    ListWorkflowVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionListToken, location_name: "nextToken"))
+    ListWorkflowVersionsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionList, location_name: "items"))
+    ListWorkflowVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionListToken, location_name: "nextToken"))
     ListWorkflowVersionsResponse.type = Types::ListWorkflowVersionsResponse
-    ListWorkflowsRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
-    ListWorkflowsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowName, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
-    ListWorkflowsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
-    ListWorkflowsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListWorkflowsRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type", traits: {"smithy.api#httpQuery" => "type"}))
+    ListWorkflowsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowName, location_name: "name", traits: {"smithy.api#httpQuery" => "name"}))
+    ListWorkflowsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowListToken, location_name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListWorkflowsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListWorkflowsRequest.type = Types::ListWorkflowsRequest
-    ListWorkflowsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowList, location_name: "items"))
-    ListWorkflowsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowListToken, location_name: "nextToken"))
+    ListWorkflowsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowList, location_name: "items"))
+    ListWorkflowsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowListToken, location_name: "nextToken"))
     ListWorkflowsResponse.type = Types::ListWorkflowsResponse
-    MultipartReadSetUploadList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartReadSetUploadListItem)
-    MultipartReadSetUploadListItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    MultipartReadSetUploadListItem.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
-    MultipartReadSetUploadListItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
-    MultipartReadSetUploadListItem.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
-    MultipartReadSetUploadListItem.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
-    MultipartReadSetUploadListItem.add_member(:generated_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom", traits: {"smithy.api#required" => {}}))
-    MultipartReadSetUploadListItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn", traits: {"smithy.api#required" => {}}))
-    MultipartReadSetUploadListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
-    MultipartReadSetUploadListItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
-    MultipartReadSetUploadListItem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    MultipartReadSetUploadListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    MultipartReadSetUploadList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartReadSetUploadListItem)
+    MultipartReadSetUploadListItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    MultipartReadSetUploadListItem.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
+    MultipartReadSetUploadListItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
+    MultipartReadSetUploadListItem.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
+    MultipartReadSetUploadListItem.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
+    MultipartReadSetUploadListItem.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, location_name: "generatedFrom", traits: {"smithy.api#required" => {}}))
+    MultipartReadSetUploadListItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn", traits: {"smithy.api#required" => {}}))
+    MultipartReadSetUploadListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name"))
+    MultipartReadSetUploadListItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, location_name: "description"))
+    MultipartReadSetUploadListItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    MultipartReadSetUploadListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     MultipartReadSetUploadListItem.type = Types::MultipartReadSetUploadListItem
-    NotSupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    NotSupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     NotSupportedOperationException.type = Types::NotSupportedOperationException
-    PropagatedSetLevelTags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    PutS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutS3AccessPolicyRequest.add_member(:s3_access_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPolicy, location_name: "s3AccessPolicy", traits: {"smithy.api#required" => {}}))
+    PropagatedSetLevelTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    PutS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, location_name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutS3AccessPolicyRequest.add_member(:s3_access_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPolicy, location_name: "s3AccessPolicy", traits: {"smithy.api#required" => {}}))
     PutS3AccessPolicyRequest.type = Types::PutS3AccessPolicyRequest
-    PutS3AccessPolicyResponse.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn"))
-    PutS3AccessPolicyResponse.add_member(:store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreId, location_name: "storeId"))
-    PutS3AccessPolicyResponse.add_member(:store_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreType, location_name: "storeType"))
+    PutS3AccessPolicyResponse.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, location_name: "s3AccessPointArn"))
+    PutS3AccessPolicyResponse.add_member(:store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreId, location_name: "storeId"))
+    PutS3AccessPolicyResponse.add_member(:store_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreType, location_name: "storeType"))
     PutS3AccessPolicyResponse.type = Types::PutS3AccessPolicyResponse
-    RangeNotSatisfiableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    RangeNotSatisfiableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     RangeNotSatisfiableException.type = Types::RangeNotSatisfiableException
-    ReadOptions.add_member(:sep, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Separator, location_name: "sep"))
-    ReadOptions.add_member(:encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encoding, location_name: "encoding"))
-    ReadOptions.add_member(:quote, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Quote, location_name: "quote"))
-    ReadOptions.add_member(:quote_all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuoteAll, location_name: "quoteAll", traits: {"smithy.api#default" => false}))
-    ReadOptions.add_member(:escape, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EscapeChar, location_name: "escape"))
-    ReadOptions.add_member(:escape_quotes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EscapeQuotes, location_name: "escapeQuotes", traits: {"smithy.api#default" => false}))
-    ReadOptions.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentChar, location_name: "comment"))
-    ReadOptions.add_member(:header, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Header, location_name: "header", traits: {"smithy.api#default" => false}))
-    ReadOptions.add_member(:line_sep, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LineSep, location_name: "lineSep"))
+    ReadOptions.add_member(:sep, ::Smithy::Schema::Shapes::MemberShape.new(target: Separator, location_name: "sep"))
+    ReadOptions.add_member(:encoding, ::Smithy::Schema::Shapes::MemberShape.new(target: Encoding, location_name: "encoding"))
+    ReadOptions.add_member(:quote, ::Smithy::Schema::Shapes::MemberShape.new(target: Quote, location_name: "quote"))
+    ReadOptions.add_member(:quote_all, ::Smithy::Schema::Shapes::MemberShape.new(target: QuoteAll, location_name: "quoteAll", traits: {"smithy.api#default" => false}))
+    ReadOptions.add_member(:escape, ::Smithy::Schema::Shapes::MemberShape.new(target: EscapeChar, location_name: "escape"))
+    ReadOptions.add_member(:escape_quotes, ::Smithy::Schema::Shapes::MemberShape.new(target: EscapeQuotes, location_name: "escapeQuotes", traits: {"smithy.api#default" => false}))
+    ReadOptions.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentChar, location_name: "comment"))
+    ReadOptions.add_member(:header, ::Smithy::Schema::Shapes::MemberShape.new(target: Header, location_name: "header", traits: {"smithy.api#default" => false}))
+    ReadOptions.add_member(:line_sep, ::Smithy::Schema::Shapes::MemberShape.new(target: LineSep, location_name: "lineSep"))
     ReadOptions.type = Types::ReadOptions
-    ReadSetBatchError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ReadSetBatchError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "code", traits: {"smithy.api#required" => {}}))
-    ReadSetBatchError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ReadSetBatchError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ReadSetBatchError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "code", traits: {"smithy.api#required" => {}}))
+    ReadSetBatchError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ReadSetBatchError.type = Types::ReadSetBatchError
-    ReadSetBatchErrorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetBatchError)
-    ReadSetFiles.add_member(:source1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileInformation, location_name: "source1"))
-    ReadSetFiles.add_member(:source2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileInformation, location_name: "source2"))
-    ReadSetFiles.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileInformation, location_name: "index"))
+    ReadSetBatchErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetBatchError)
+    ReadSetFiles.add_member(:source1, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, location_name: "source1"))
+    ReadSetFiles.add_member(:source2, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, location_name: "source2"))
+    ReadSetFiles.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, location_name: "index"))
     ReadSetFiles.type = Types::ReadSetFiles
-    ReadSetFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
-    ReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetStatus, location_name: "status"))
-    ReadSetFilter.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArnFilter, location_name: "referenceArn"))
-    ReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ReadSetFilter.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId"))
-    ReadSetFilter.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId"))
-    ReadSetFilter.add_member(:generated_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    ReadSetFilter.add_member(:creation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
+    ReadSetFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name"))
+    ReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetStatus, location_name: "status"))
+    ReadSetFilter.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArnFilter, location_name: "referenceArn"))
+    ReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReadSetFilter.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId"))
+    ReadSetFilter.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId"))
+    ReadSetFilter.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, location_name: "generatedFrom"))
+    ReadSetFilter.add_member(:creation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationType, location_name: "creationType"))
     ReadSetFilter.type = Types::ReadSetFilter
-    ReadSetIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId)
-    ReadSetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetListItem)
-    ReadSetListItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ReadSetListItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    ReadSetListItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    ReadSetListItem.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId"))
-    ReadSetListItem.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId"))
-    ReadSetListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    ReadSetListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
-    ReadSetListItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
-    ReadSetListItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
-    ReadSetListItem.add_member(:file_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileType, location_name: "fileType", traits: {"smithy.api#required" => {}}))
-    ReadSetListItem.add_member(:sequence_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceInformation, location_name: "sequenceInformation"))
-    ReadSetListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ReadSetListItem.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetStatusMessage, location_name: "statusMessage"))
-    ReadSetListItem.add_member(:creation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
-    ReadSetListItem.add_member(:etag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "etag"))
+    ReadSetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId)
+    ReadSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetListItem)
+    ReadSetListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ReadSetListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    ReadSetListItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    ReadSetListItem.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId"))
+    ReadSetListItem.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId"))
+    ReadSetListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ReadSetListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name"))
+    ReadSetListItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, location_name: "description"))
+    ReadSetListItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn"))
+    ReadSetListItem.add_member(:file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, location_name: "fileType", traits: {"smithy.api#required" => {}}))
+    ReadSetListItem.add_member(:sequence_information, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceInformation, location_name: "sequenceInformation"))
+    ReadSetListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ReadSetListItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetStatusMessage, location_name: "statusMessage"))
+    ReadSetListItem.add_member(:creation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationType, location_name: "creationType"))
+    ReadSetListItem.add_member(:etag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, location_name: "etag"))
     ReadSetListItem.type = Types::ReadSetListItem
-    ReadSetS3Access.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
+    ReadSetS3Access.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "s3Uri"))
     ReadSetS3Access.type = Types::ReadSetS3Access
-    ReadSetUploadPartList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetUploadPartListItem)
-    ReadSetUploadPartListFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ReadSetUploadPartListFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReadSetUploadPartList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetUploadPartListItem)
+    ReadSetUploadPartListFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReadSetUploadPartListFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReadSetUploadPartListFilter.type = Types::ReadSetUploadPartListFilter
-    ReadSetUploadPartListItem.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
-    ReadSetUploadPartListItem.add_member(:part_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "partSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 5368709120}, "smithy.api#required" => {}}))
-    ReadSetUploadPartListItem.add_member(:part_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#required" => {}}))
-    ReadSetUploadPartListItem.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "checksum", traits: {"smithy.api#required" => {}}))
-    ReadSetUploadPartListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ReadSetUploadPartListItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReadSetUploadPartListItem.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
+    ReadSetUploadPartListItem.add_member(:part_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "partSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 5368709120}, "smithy.api#required" => {}}))
+    ReadSetUploadPartListItem.add_member(:part_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#required" => {}}))
+    ReadSetUploadPartListItem.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "checksum", traits: {"smithy.api#required" => {}}))
+    ReadSetUploadPartListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReadSetUploadPartListItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "lastUpdatedTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReadSetUploadPartListItem.type = Types::ReadSetUploadPartListItem
-    ReferenceFiles.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileInformation, location_name: "source"))
-    ReferenceFiles.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileInformation, location_name: "index"))
+    ReferenceFiles.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, location_name: "source"))
+    ReferenceFiles.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, location_name: "index"))
     ReferenceFiles.type = Types::ReferenceFiles
-    ReferenceFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "name"))
-    ReferenceFilter.add_member(:md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Md5, location_name: "md5"))
-    ReferenceFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ReferenceFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReferenceFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "name"))
+    ReferenceFilter.add_member(:md5, ::Smithy::Schema::Shapes::MemberShape.new(target: Md5, location_name: "md5"))
+    ReferenceFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReferenceFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReferenceFilter.type = Types::ReferenceFilter
-    ReferenceItem.add_member(:reference_arn, Types::ReferenceItem::ReferenceArn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
-    ReferenceItem.add_member(:unknown, Types::ReferenceItem::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ReferenceItem.add_member(:reference_arn, Types::ReferenceItem::ReferenceArn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn"))
+    ReferenceItem.add_member(:unknown, Types::ReferenceItem::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ReferenceItem.type = Types::ReferenceItem
-    ReferenceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceListItem)
-    ReferenceListItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ReferenceListItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    ReferenceListItem.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
-    ReferenceListItem.add_member(:md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Md5, location_name: "md5", traits: {"smithy.api#required" => {}}))
-    ReferenceListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "status"))
-    ReferenceListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "name"))
-    ReferenceListItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceDescription, location_name: "description"))
-    ReferenceListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ReferenceListItem.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceListItem)
+    ReferenceListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ReferenceListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    ReferenceListItem.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
+    ReferenceListItem.add_member(:md5, ::Smithy::Schema::Shapes::MemberShape.new(target: Md5, location_name: "md5", traits: {"smithy.api#required" => {}}))
+    ReferenceListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStatus, location_name: "status"))
+    ReferenceListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "name"))
+    ReferenceListItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDescription, location_name: "description"))
+    ReferenceListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ReferenceListItem.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ReferenceListItem.type = Types::ReferenceListItem
-    ReferenceStoreDetail.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    ReferenceStoreDetail.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ReferenceStoreDetail.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreName, location_name: "name"))
-    ReferenceStoreDetail.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreDescription, location_name: "description"))
-    ReferenceStoreDetail.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    ReferenceStoreDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ReferenceStoreDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    ReferenceStoreDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ReferenceStoreDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreName, location_name: "name"))
+    ReferenceStoreDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDescription, location_name: "description"))
+    ReferenceStoreDetail.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    ReferenceStoreDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ReferenceStoreDetail.type = Types::ReferenceStoreDetail
-    ReferenceStoreDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreDetail)
-    ReferenceStoreFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreName, location_name: "name"))
-    ReferenceStoreFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ReferenceStoreFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReferenceStoreDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDetail)
+    ReferenceStoreFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreName, location_name: "name"))
+    ReferenceStoreFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ReferenceStoreFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReferenceStoreFilter.type = Types::ReferenceStoreFilter
-    RegistryMapping.add_member(:upstream_registry_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uri, location_name: "upstreamRegistryUrl"))
-    RegistryMapping.add_member(:ecr_repository_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EcrRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
-    RegistryMapping.add_member(:upstream_repository_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpstreamRepositoryPrefix, location_name: "upstreamRepositoryPrefix"))
-    RegistryMapping.add_member(:ecr_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ecrAccountId"))
+    RegistryMapping.add_member(:upstream_registry_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, location_name: "upstreamRegistryUrl"))
+    RegistryMapping.add_member(:ecr_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
+    RegistryMapping.add_member(:upstream_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: UpstreamRepositoryPrefix, location_name: "upstreamRepositoryPrefix"))
+    RegistryMapping.add_member(:ecr_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, location_name: "ecrAccountId"))
     RegistryMapping.type = Types::RegistryMapping
-    RegistryMappingsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryMapping)
-    RequestTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    RegistryMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryMapping)
+    RequestTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     RequestTimeoutException.type = Types::RequestTimeoutException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RunCacheList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheListItem)
-    RunCacheListItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheArn, location_name: "arn"))
-    RunCacheListItem.add_member(:cache_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheBehavior, location_name: "cacheBehavior"))
-    RunCacheListItem.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
-    RunCacheListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheTimestamp, location_name: "creationTime"))
-    RunCacheListItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheId, location_name: "id"))
-    RunCacheListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCustomName, location_name: "name"))
-    RunCacheListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheStatus, location_name: "status"))
+    RunCacheList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheListItem)
+    RunCacheListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheArn, location_name: "arn"))
+    RunCacheListItem.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, location_name: "cacheBehavior"))
+    RunCacheListItem.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
+    RunCacheListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheTimestamp, location_name: "creationTime"))
+    RunCacheListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheId, location_name: "id"))
+    RunCacheListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomName, location_name: "name"))
+    RunCacheListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheStatus, location_name: "status"))
     RunCacheListItem.type = Types::RunCacheListItem
-    RunExportList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunExport)
-    RunGroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupListItem)
-    RunGroupListItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupArn, location_name: "arn"))
-    RunGroupListItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "id"))
-    RunGroupListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupName, location_name: "name"))
-    RunGroupListItem.add_member(:max_cpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    RunGroupListItem.add_member(:max_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    RunGroupListItem.add_member(:max_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    RunGroupListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupTimestamp, location_name: "creationTime"))
-    RunGroupListItem.add_member(:max_gpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    RunExportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunExport)
+    RunGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupListItem)
+    RunGroupListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupArn, location_name: "arn"))
+    RunGroupListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "id"))
+    RunGroupListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupName, location_name: "name"))
+    RunGroupListItem.add_member(:max_cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    RunGroupListItem.add_member(:max_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    RunGroupListItem.add_member(:max_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    RunGroupListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupTimestamp, location_name: "creationTime"))
+    RunGroupListItem.add_member(:max_gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
     RunGroupListItem.type = Types::RunGroupListItem
-    RunList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunListItem)
-    RunListItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))
-    RunListItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id"))
-    RunListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunStatus, location_name: "status"))
-    RunListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId"))
-    RunListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunName, location_name: "name"))
-    RunListItem.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    RunListItem.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    RunListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "creationTime"))
-    RunListItem.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "startTime"))
-    RunListItem.add_member(:stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "stopTime"))
-    RunListItem.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    RunListItem.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "workflowVersionName"))
+    RunList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunListItem)
+    RunListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunArn, location_name: "arn"))
+    RunListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id"))
+    RunListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatus, location_name: "status"))
+    RunListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId"))
+    RunListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, location_name: "name"))
+    RunListItem.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    RunListItem.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    RunListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimestamp, location_name: "creationTime"))
+    RunListItem.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimestamp, location_name: "startTime"))
+    RunListItem.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimestamp, location_name: "stopTime"))
+    RunListItem.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    RunListItem.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "workflowVersionName"))
     RunListItem.type = Types::RunListItem
-    RunLogLocation.add_member(:engine_log_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineLogStream, location_name: "engineLogStream"))
-    RunLogLocation.add_member(:run_log_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLogStream, location_name: "runLogStream"))
+    RunLogLocation.add_member(:engine_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineLogStream, location_name: "engineLogStream"))
+    RunLogLocation.add_member(:run_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLogStream, location_name: "runLogStream"))
     RunLogLocation.type = Types::RunLogLocation
-    RunResourceDigests.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunResourceDigestKey)
-    RunResourceDigests.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunResourceDigest)
-    S3AccessConfig.add_member(:access_log_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessLogLocation, location_name: "accessLogLocation"))
+    RunResourceDigests.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigestKey)
+    RunResourceDigests.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigest)
+    S3AccessConfig.add_member(:access_log_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogLocation, location_name: "accessLogLocation"))
     S3AccessConfig.type = Types::S3AccessConfig
-    Schema.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaItem)
-    SchemaItem.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#pattern" => "^[a-z0-9_]{1,255}$"})
-    SchemaItem.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaValueType)
-    SequenceInformation.add_member(:total_read_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "totalReadCount"))
-    SequenceInformation.add_member(:total_base_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "totalBaseCount"))
-    SequenceInformation.add_member(:generated_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    SequenceInformation.add_member(:alignment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "alignment"))
+    Schema.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaItem)
+    SchemaItem.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#pattern" => "^[a-z0-9_]{1,255}$"})
+    SchemaItem.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaValueType)
+    SequenceInformation.add_member(:total_read_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "totalReadCount"))
+    SequenceInformation.add_member(:total_base_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "totalBaseCount"))
+    SequenceInformation.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, location_name: "generatedFrom"))
+    SequenceInformation.add_member(:alignment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "alignment"))
     SequenceInformation.type = Types::SequenceInformation
-    SequenceStoreDetail.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    SequenceStoreDetail.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    SequenceStoreDetail.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name"))
-    SequenceStoreDetail.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
-    SequenceStoreDetail.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    SequenceStoreDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    SequenceStoreDetail.add_member(:fallback_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
-    SequenceStoreDetail.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
-    SequenceStoreDetail.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatus, location_name: "status"))
-    SequenceStoreDetail.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatusMessage, location_name: "statusMessage"))
-    SequenceStoreDetail.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SequenceStoreDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    SequenceStoreDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    SequenceStoreDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, location_name: "name"))
+    SequenceStoreDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDescription, location_name: "description"))
+    SequenceStoreDetail.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    SequenceStoreDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    SequenceStoreDetail.add_member(:fallback_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackLocation, location_name: "fallbackLocation"))
+    SequenceStoreDetail.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
+    SequenceStoreDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatus, location_name: "status"))
+    SequenceStoreDetail.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatusMessage, location_name: "statusMessage"))
+    SequenceStoreDetail.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     SequenceStoreDetail.type = Types::SequenceStoreDetail
-    SequenceStoreDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDetail)
-    SequenceStoreFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name"))
-    SequenceStoreFilter.add_member(:created_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SequenceStoreFilter.add_member(:created_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SequenceStoreFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatus, location_name: "status"))
-    SequenceStoreFilter.add_member(:updated_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    SequenceStoreFilter.add_member(:updated_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SequenceStoreDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDetail)
+    SequenceStoreFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, location_name: "name"))
+    SequenceStoreFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SequenceStoreFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SequenceStoreFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatus, location_name: "status"))
+    SequenceStoreFilter.add_member(:updated_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    SequenceStoreFilter.add_member(:updated_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updatedBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     SequenceStoreFilter.type = Types::SequenceStoreFilter
-    SequenceStoreS3Access.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
-    SequenceStoreS3Access.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn"))
-    SequenceStoreS3Access.add_member(:access_log_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessLogLocation, location_name: "accessLogLocation"))
+    SequenceStoreS3Access.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "s3Uri"))
+    SequenceStoreS3Access.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, location_name: "s3AccessPointArn"))
+    SequenceStoreS3Access.add_member(:access_log_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogLocation, location_name: "accessLogLocation"))
     SequenceStoreS3Access.type = Types::SequenceStoreS3Access
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ShareDetails.add_member(:share_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId"))
-    ShareDetails.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn"))
-    ShareDetails.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId"))
-    ShareDetails.add_member(:principal_subscriber, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "principalSubscriber"))
-    ShareDetails.add_member(:owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ownerId"))
-    ShareDetails.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
-    ShareDetails.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
-    ShareDetails.add_member(:share_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareName, location_name: "shareName"))
-    ShareDetails.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
-    ShareDetails.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime"))
+    ShareDetails.add_member(:share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "shareId"))
+    ShareDetails.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn"))
+    ShareDetails.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId"))
+    ShareDetails.add_member(:principal_subscriber, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "principalSubscriber"))
+    ShareDetails.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ownerId"))
+    ShareDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, location_name: "status"))
+    ShareDetails.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "statusMessage"))
+    ShareDetails.add_member(:share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareName, location_name: "shareName"))
+    ShareDetails.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime"))
+    ShareDetails.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime"))
     ShareDetails.type = Types::ShareDetails
-    ShareDetailsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareDetails)
-    SourceFiles.add_member(:source1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "source1", traits: {"smithy.api#required" => {}}))
-    SourceFiles.add_member(:source2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "source2"))
+    ShareDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareDetails)
+    SourceFiles.add_member(:source1, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "source1", traits: {"smithy.api#required" => {}}))
+    SourceFiles.add_member(:source2, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "source2"))
     SourceFiles.type = Types::SourceFiles
-    SourceReference.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceReferenceType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    SourceReference.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceReferenceValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    SourceReference.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceReferenceType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    SourceReference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceReferenceValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     SourceReference.type = Types::SourceReference
-    SseConfig.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    SseConfig.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "keyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)"}))
+    SseConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    SseConfig.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "keyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)"}))
     SseConfig.type = Types::SseConfig
-    StartAnnotationImportRequest.add_member(:destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
-    StartAnnotationImportRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartAnnotationImportRequest.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationImportItemSources, location_name: "items", traits: {"smithy.api#required" => {}}))
-    StartAnnotationImportRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName"))
-    StartAnnotationImportRequest.add_member(:format_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatOptions, location_name: "formatOptions"))
-    StartAnnotationImportRequest.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
-    StartAnnotationImportRequest.add_member(:annotation_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationFieldMap, location_name: "annotationFields"))
+    StartAnnotationImportRequest.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
+    StartAnnotationImportRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartAnnotationImportRequest.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemSources, location_name: "items", traits: {"smithy.api#required" => {}}))
+    StartAnnotationImportRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName"))
+    StartAnnotationImportRequest.add_member(:format_options, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatOptions, location_name: "formatOptions"))
+    StartAnnotationImportRequest.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
+    StartAnnotationImportRequest.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, location_name: "annotationFields"))
     StartAnnotationImportRequest.type = Types::StartAnnotationImportRequest
-    StartAnnotationImportResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "jobId", traits: {"smithy.api#required" => {}}))
+    StartAnnotationImportResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "jobId", traits: {"smithy.api#required" => {}}))
     StartAnnotationImportResponse.type = Types::StartAnnotationImportResponse
-    StartReadSetActivationJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartReadSetActivationJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    StartReadSetActivationJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetActivationJobSourceList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#required" => {}}))
+    StartReadSetActivationJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartReadSetActivationJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    StartReadSetActivationJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetActivationJobSourceList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#required" => {}}))
     StartReadSetActivationJobRequest.type = Types::StartReadSetActivationJobRequest
-    StartReadSetActivationJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    StartReadSetActivationJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    StartReadSetActivationJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetActivationJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    StartReadSetActivationJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartReadSetActivationJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    StartReadSetActivationJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    StartReadSetActivationJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetActivationJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    StartReadSetActivationJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     StartReadSetActivationJobResponse.type = Types::StartReadSetActivationJobResponse
-    StartReadSetActivationJobSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
+    StartReadSetActivationJobSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, location_name: "readSetId", traits: {"smithy.api#required" => {}}))
     StartReadSetActivationJobSourceItem.type = Types::StartReadSetActivationJobSourceItem
-    StartReadSetActivationJobSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetActivationJobSourceItem)
-    StartReadSetExportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartReadSetExportJobRequest.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    StartReadSetExportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartReadSetExportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    StartReadSetExportJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportReadSetList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
+    StartReadSetActivationJobSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetActivationJobSourceItem)
+    StartReadSetExportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartReadSetExportJobRequest.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    StartReadSetExportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartReadSetExportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    StartReadSetExportJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     StartReadSetExportJobRequest.type = Types::StartReadSetExportJobRequest
-    StartReadSetExportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    StartReadSetExportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    StartReadSetExportJobResponse.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
-    StartReadSetExportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetExportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    StartReadSetExportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartReadSetExportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    StartReadSetExportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    StartReadSetExportJobResponse.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, location_name: "destination", traits: {"smithy.api#required" => {}}))
+    StartReadSetExportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetExportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    StartReadSetExportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     StartReadSetExportJobResponse.type = Types::StartReadSetExportJobResponse
-    StartReadSetImportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartReadSetImportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    StartReadSetImportJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetImportJobSourceList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
+    StartReadSetImportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartReadSetImportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    StartReadSetImportJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetImportJobSourceList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     StartReadSetImportJobRequest.type = Types::StartReadSetImportJobRequest
-    StartReadSetImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartReadSetImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobResponse.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     StartReadSetImportJobResponse.type = Types::StartReadSetImportJobResponse
-    StartReadSetImportJobSourceItem.add_member(:source_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceFiles, location_name: "sourceFiles", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobSourceItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobSourceItem.add_member(:subject_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobSourceItem.add_member(:sample_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
-    StartReadSetImportJobSourceItem.add_member(:generated_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    StartReadSetImportJobSourceItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
-    StartReadSetImportJobSourceItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
-    StartReadSetImportJobSourceItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
-    StartReadSetImportJobSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartReadSetImportJobSourceItem.add_member(:source_files, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceFiles, location_name: "sourceFiles", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobSourceItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, location_name: "sourceFileType", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobSourceItem.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectId, location_name: "subjectId", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobSourceItem.add_member(:sample_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleId, location_name: "sampleId", traits: {"smithy.api#required" => {}}))
+    StartReadSetImportJobSourceItem.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, location_name: "generatedFrom"))
+    StartReadSetImportJobSourceItem.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, location_name: "referenceArn"))
+    StartReadSetImportJobSourceItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetName, location_name: "name"))
+    StartReadSetImportJobSourceItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, location_name: "description"))
+    StartReadSetImportJobSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     StartReadSetImportJobSourceItem.type = Types::StartReadSetImportJobSourceItem
-    StartReadSetImportJobSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetImportJobSourceItem)
-    StartReferenceImportJobRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartReferenceImportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartReferenceImportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    StartReferenceImportJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReferenceImportJobSourceList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
+    StartReadSetImportJobSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetImportJobSourceItem)
+    StartReferenceImportJobRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartReferenceImportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartReferenceImportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    StartReferenceImportJobRequest.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: StartReferenceImportJobSourceList, location_name: "sources", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     StartReferenceImportJobRequest.type = Types::StartReferenceImportJobRequest
-    StartReferenceImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    StartReferenceImportJobResponse.add_member(:reference_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
-    StartReferenceImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartReferenceImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    StartReferenceImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartReferenceImportJobResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    StartReferenceImportJobResponse.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, location_name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
+    StartReferenceImportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartReferenceImportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceImportJobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    StartReferenceImportJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     StartReferenceImportJobResponse.type = Types::StartReferenceImportJobResponse
-    StartReferenceImportJobSourceItem.add_member(:source_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "sourceFile", traits: {"smithy.api#required" => {}}))
-    StartReferenceImportJobSourceItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    StartReferenceImportJobSourceItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceDescription, location_name: "description"))
-    StartReferenceImportJobSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartReferenceImportJobSourceItem.add_member(:source_file, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "sourceFile", traits: {"smithy.api#required" => {}}))
+    StartReferenceImportJobSourceItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    StartReferenceImportJobSourceItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDescription, location_name: "description"))
+    StartReferenceImportJobSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     StartReferenceImportJobSourceItem.type = Types::StartReferenceImportJobSourceItem
-    StartReferenceImportJobSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReferenceImportJobSourceItem)
-    StartRunRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId"))
-    StartRunRequest.add_member(:workflow_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "workflowType"))
-    StartRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "runId"))
-    StartRunRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunRoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartRunRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunName, location_name: "name"))
-    StartRunRequest.add_member(:cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumericIdInArn, location_name: "cacheId"))
-    StartRunRequest.add_member(:cache_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheBehavior, location_name: "cacheBehavior"))
-    StartRunRequest.add_member(:run_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "runGroupId"))
-    StartRunRequest.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    StartRunRequest.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunParameters, location_name: "parameters"))
-    StartRunRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    StartRunRequest.add_member(:output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "outputUri", traits: {"smithy.api#required" => {}}))
-    StartRunRequest.add_member(:log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLogLevel, location_name: "logLevel"))
-    StartRunRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    StartRunRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    StartRunRequest.add_member(:retention_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
-    StartRunRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    StartRunRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId"))
-    StartRunRequest.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "workflowVersionName"))
+    StartReferenceImportJobSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartReferenceImportJobSourceItem)
+    StartRunRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId"))
+    StartRunRequest.add_member(:workflow_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "workflowType"))
+    StartRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "runId"))
+    StartRunRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartRunRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, location_name: "name"))
+    StartRunRequest.add_member(:cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericIdInArn, location_name: "cacheId"))
+    StartRunRequest.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, location_name: "cacheBehavior"))
+    StartRunRequest.add_member(:run_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "runGroupId"))
+    StartRunRequest.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    StartRunRequest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RunParameters, location_name: "parameters"))
+    StartRunRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    StartRunRequest.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RunOutputUri, location_name: "outputUri", traits: {"smithy.api#required" => {}}))
+    StartRunRequest.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLogLevel, location_name: "logLevel"))
+    StartRunRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    StartRunRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRequestId, location_name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartRunRequest.add_member(:retention_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRetentionMode, location_name: "retentionMode"))
+    StartRunRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    StartRunRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, location_name: "workflowOwnerId"))
+    StartRunRequest.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "workflowVersionName"))
     StartRunRequest.type = Types::StartRunRequest
-    StartRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))
-    StartRunResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunId, location_name: "id"))
-    StartRunResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunStatus, location_name: "status"))
-    StartRunResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    StartRunResponse.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
-    StartRunResponse.add_member(:run_output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
+    StartRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunArn, location_name: "arn"))
+    StartRunResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, location_name: "id"))
+    StartRunResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatus, location_name: "status"))
+    StartRunResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    StartRunResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: RunUuid, location_name: "uuid"))
+    StartRunResponse.add_member(:run_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RunOutputUri, location_name: "runOutputUri"))
     StartRunResponse.type = Types::StartRunResponse
-    StartVariantImportRequest.add_member(:destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
-    StartVariantImportRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    StartVariantImportRequest.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantImportItemSources, location_name: "items", traits: {"smithy.api#required" => {}}))
-    StartVariantImportRequest.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
-    StartVariantImportRequest.add_member(:annotation_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationFieldMap, location_name: "annotationFields"))
+    StartVariantImportRequest.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
+    StartVariantImportRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    StartVariantImportRequest.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemSources, location_name: "items", traits: {"smithy.api#required" => {}}))
+    StartVariantImportRequest.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
+    StartVariantImportRequest.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, location_name: "annotationFields"))
     StartVariantImportRequest.type = Types::StartVariantImportRequest
-    StartVariantImportResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "jobId", traits: {"smithy.api#required" => {}}))
+    StartVariantImportResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "jobId", traits: {"smithy.api#required" => {}}))
     StartVariantImportResponse.type = Types::StartVariantImportResponse
-    StatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus)
-    StoreOptions.add_member(:tsv_store_options, Types::StoreOptions::TsvStoreOptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TsvStoreOptions, location_name: "tsvStoreOptions"))
-    StoreOptions.add_member(:unknown, Types::StoreOptions::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    StatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus)
+    StoreOptions.add_member(:tsv_store_options, Types::StoreOptions::TsvStoreOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TsvStoreOptions, location_name: "tsvStoreOptions"))
+    StoreOptions.add_member(:unknown, Types::StoreOptions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StoreOptions.type = Types::StoreOptions
-    StoreType.add_member(:sequence_store, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEQUENCE_STORE", traits: {"smithy.api#enumValue" => "SEQUENCE_STORE"}))
-    StoreType.add_member(:reference_store, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFERENCE_STORE", traits: {"smithy.api#enumValue" => "REFERENCE_STORE"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#required" => {}}))
+    StoreType.add_member(:sequence_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEQUENCE_STORE", traits: {"smithy.api#enumValue" => "SEQUENCE_STORE"}))
+    StoreType.add_member(:reference_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REFERENCE_STORE", traits: {"smithy.api#enumValue" => "REFERENCE_STORE"}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TaskList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskListItem)
-    TaskListItem.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId"))
-    TaskListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskStatus, location_name: "status"))
-    TaskListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskName, location_name: "name"))
-    TaskListItem.add_member(:cpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "cpus", traits: {"smithy.api#range" => {"min" => 1}}))
-    TaskListItem.add_member(:cache_hit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "cacheHit"))
-    TaskListItem.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
-    TaskListItem.add_member(:memory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "memory", traits: {"smithy.api#range" => {"min" => 1}}))
-    TaskListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "creationTime"))
-    TaskListItem.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "startTime"))
-    TaskListItem.add_member(:stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "stopTime"))
-    TaskListItem.add_member(:gpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "gpus", traits: {"smithy.api#range" => {"min" => 0}}))
-    TaskListItem.add_member(:instance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
+    TaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListItem)
+    TaskListItem.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "taskId"))
+    TaskListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, location_name: "status"))
+    TaskListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, location_name: "name"))
+    TaskListItem.add_member(:cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "cpus", traits: {"smithy.api#range" => {"min" => 1}}))
+    TaskListItem.add_member(:cache_hit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "cacheHit"))
+    TaskListItem.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForBucketOrObject, location_name: "cacheS3Uri"))
+    TaskListItem.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "memory", traits: {"smithy.api#range" => {"min" => 1}}))
+    TaskListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTimestamp, location_name: "creationTime"))
+    TaskListItem.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTimestamp, location_name: "startTime"))
+    TaskListItem.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTimestamp, location_name: "stopTime"))
+    TaskListItem.add_member(:gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "gpus", traits: {"smithy.api#range" => {"min" => 0}}))
+    TaskListItem.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskInstanceType, location_name: "instanceType"))
     TaskListItem.type = Types::TaskListItem
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    TsvOptions.add_member(:read_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadOptions, location_name: "readOptions"))
+    TsvOptions.add_member(:read_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadOptions, location_name: "readOptions"))
     TsvOptions.type = Types::TsvOptions
-    TsvStoreOptions.add_member(:annotation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationType, location_name: "annotationType"))
-    TsvStoreOptions.add_member(:format_to_header, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatToHeader, location_name: "formatToHeader"))
-    TsvStoreOptions.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schema, location_name: "schema", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}}))
+    TsvStoreOptions.add_member(:annotation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationType, location_name: "annotationType"))
+    TsvStoreOptions.add_member(:format_to_header, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatToHeader, location_name: "formatToHeader"))
+    TsvStoreOptions.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, location_name: "schema", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}}))
     TsvStoreOptions.type = Types::TsvStoreOptions
-    TsvVersionOptions.add_member(:annotation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationType, location_name: "annotationType"))
-    TsvVersionOptions.add_member(:format_to_header, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatToHeader, location_name: "formatToHeader"))
-    TsvVersionOptions.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schema, location_name: "schema", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}}))
+    TsvVersionOptions.add_member(:annotation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationType, location_name: "annotationType"))
+    TsvVersionOptions.add_member(:format_to_header, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatToHeader, location_name: "formatToHeader"))
+    TsvVersionOptions.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, location_name: "schema", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}}))
     TsvVersionOptions.type = Types::TsvVersionOptions
-    TypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareResourceType)
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    TypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareResourceType)
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAnnotationStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAnnotationStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAnnotationStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
     UpdateAnnotationStoreRequest.type = Types::UpdateAnnotationStoreRequest
-    UpdateAnnotationStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreResponse.add_member(:store_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreOptions, location_name: "storeOptions"))
-    UpdateAnnotationStoreResponse.add_member(:store_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreFormat, location_name: "storeFormat"))
+    UpdateAnnotationStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreResponse.add_member(:store_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreOptions, location_name: "storeOptions"))
+    UpdateAnnotationStoreResponse.add_member(:store_format, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreFormat, location_name: "storeFormat"))
     UpdateAnnotationStoreResponse.type = Types::UpdateAnnotationStoreResponse
-    UpdateAnnotationStoreVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAnnotationStoreVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
     UpdateAnnotationStoreVersionRequest.type = Types::UpdateAnnotationStoreVersionRequest
-    UpdateAnnotationStoreVersionResponse.add_member(:store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    UpdateAnnotationStoreVersionResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "storeId", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    UpdateAnnotationStoreVersionResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
     UpdateAnnotationStoreVersionResponse.type = Types::UpdateAnnotationStoreVersionResponse
-    UpdateRunCacheRequest.add_member(:cache_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheBehavior, location_name: "cacheBehavior"))
-    UpdateRunCacheRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCustomDescription, location_name: "description"))
-    UpdateRunCacheRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunCacheId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateRunCacheRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserCustomName, location_name: "name"))
+    UpdateRunCacheRequest.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, location_name: "cacheBehavior"))
+    UpdateRunCacheRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomDescription, location_name: "description"))
+    UpdateRunCacheRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRunCacheRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomName, location_name: "name"))
     UpdateRunCacheRequest.type = Types::UpdateRunCacheRequest
-    UpdateRunGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateRunGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunGroupName, location_name: "name"))
-    UpdateRunGroupRequest.add_member(:max_cpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    UpdateRunGroupRequest.add_member(:max_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    UpdateRunGroupRequest.add_member(:max_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
-    UpdateRunGroupRequest.add_member(:max_gpus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    UpdateRunGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRunGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupName, location_name: "name"))
+    UpdateRunGroupRequest.add_member(:max_cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    UpdateRunGroupRequest.add_member(:max_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxRuns", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    UpdateRunGroupRequest.add_member(:max_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
+    UpdateRunGroupRequest.add_member(:max_gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
     UpdateRunGroupRequest.type = Types::UpdateRunGroupRequest
-    UpdateSequenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sequenceStoreId"}))
-    UpdateSequenceStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name"))
-    UpdateSequenceStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
-    UpdateSequenceStoreRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateSequenceStoreRequest.add_member(:fallback_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
-    UpdateSequenceStoreRequest.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
-    UpdateSequenceStoreRequest.add_member(:s3_access_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessConfig, location_name: "s3AccessConfig"))
+    UpdateSequenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sequenceStoreId"}))
+    UpdateSequenceStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, location_name: "name"))
+    UpdateSequenceStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDescription, location_name: "description"))
+    UpdateSequenceStoreRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateSequenceStoreRequest.add_member(:fallback_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackLocation, location_name: "fallbackLocation"))
+    UpdateSequenceStoreRequest.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
+    UpdateSequenceStoreRequest.add_member(:s3_access_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessConfig, location_name: "s3AccessConfig"))
     UpdateSequenceStoreRequest.type = Types::UpdateSequenceStoreRequest
-    UpdateSequenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    UpdateSequenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    UpdateSequenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name"))
-    UpdateSequenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
-    UpdateSequenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
-    UpdateSequenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    UpdateSequenceStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    UpdateSequenceStoreResponse.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
-    UpdateSequenceStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatus, location_name: "status"))
-    UpdateSequenceStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreStatusMessage, location_name: "statusMessage"))
-    UpdateSequenceStoreResponse.add_member(:fallback_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
-    UpdateSequenceStoreResponse.add_member(:s3_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreS3Access, location_name: "s3Access"))
-    UpdateSequenceStoreResponse.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
+    UpdateSequenceStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    UpdateSequenceStoreResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    UpdateSequenceStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, location_name: "name"))
+    UpdateSequenceStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDescription, location_name: "description"))
+    UpdateSequenceStoreResponse.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig"))
+    UpdateSequenceStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    UpdateSequenceStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    UpdateSequenceStoreResponse.add_member(:propagated_set_level_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
+    UpdateSequenceStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatus, location_name: "status"))
+    UpdateSequenceStoreResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatusMessage, location_name: "statusMessage"))
+    UpdateSequenceStoreResponse.add_member(:fallback_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackLocation, location_name: "fallbackLocation"))
+    UpdateSequenceStoreResponse.add_member(:s3_access, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreS3Access, location_name: "s3Access"))
+    UpdateSequenceStoreResponse.add_member(:e_tag_algorithm_family, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     UpdateSequenceStoreResponse.type = Types::UpdateSequenceStoreResponse
-    UpdateVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateVariantStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateVariantStoreRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVariantStoreRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
     UpdateVariantStoreRequest.type = Types::UpdateVariantStoreRequest
-    UpdateVariantStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    UpdateVariantStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
-    UpdateVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    UpdateVariantStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    UpdateVariantStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    UpdateVariantStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    UpdateVariantStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    UpdateVariantStoreResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    UpdateVariantStoreResponse.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
+    UpdateVariantStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateVariantStoreResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    UpdateVariantStoreResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    UpdateVariantStoreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    UpdateVariantStoreResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
     UpdateVariantStoreResponse.type = Types::UpdateVariantStoreResponse
-    UpdateWorkflowRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateWorkflowRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowName, location_name: "name"))
-    UpdateWorkflowRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDescription, location_name: "description"))
-    UpdateWorkflowRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    UpdateWorkflowRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    UpdateWorkflowRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
+    UpdateWorkflowRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateWorkflowRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowName, location_name: "name"))
+    UpdateWorkflowRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDescription, location_name: "description"))
+    UpdateWorkflowRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    UpdateWorkflowRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    UpdateWorkflowRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeMarkdown, location_name: "readmeMarkdown"))
     UpdateWorkflowRequest.type = Types::UpdateWorkflowRequest
-    UpdateWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
-    UpdateWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateWorkflowVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionDescription, location_name: "description"))
-    UpdateWorkflowVersionRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
-    UpdateWorkflowVersionRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
-    UpdateWorkflowVersionRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
+    UpdateWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
+    UpdateWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateWorkflowVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionDescription, location_name: "description"))
+    UpdateWorkflowVersionRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "storageType"))
+    UpdateWorkflowVersionRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    UpdateWorkflowVersionRequest.add_member(:readme_markdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeMarkdown, location_name: "readmeMarkdown"))
     UpdateWorkflowVersionRequest.type = Types::UpdateWorkflowVersionRequest
-    UploadReadSetPartRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UploadReadSetPartRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UploadReadSetPartRequest.add_member(:part_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#httpQuery" => "partSource", "smithy.api#required" => {}}))
-    UploadReadSetPartRequest.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
-    UploadReadSetPartRequest.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadSetPartStreamingBlob, location_name: "payload", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UploadReadSetPartRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, location_name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadReadSetPartRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadReadSetPartRequest.add_member(:part_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetPartSource, location_name: "partSource", traits: {"smithy.api#httpQuery" => "partSource", "smithy.api#required" => {}}))
+    UploadReadSetPartRequest.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "partNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
+    UploadReadSetPartRequest.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetPartStreamingBlob, location_name: "payload", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UploadReadSetPartRequest[:http_payload] = :payload
     UploadReadSetPartRequest[:http_payload_member] = UploadReadSetPartRequest.member(:payload)
     UploadReadSetPartRequest.type = Types::UploadReadSetPartRequest
-    UploadReadSetPartResponse.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "checksum", traits: {"smithy.api#required" => {}}))
+    UploadReadSetPartResponse.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "checksum", traits: {"smithy.api#required" => {}}))
     UploadReadSetPartResponse.type = Types::UploadReadSetPartResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    VariantImportItemDetail.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
-    VariantImportItemDetail.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus", traits: {"smithy.api#required" => {}}))
-    VariantImportItemDetail.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatusMsg, location_name: "statusMessage"))
+    VariantImportItemDetail.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
+    VariantImportItemDetail.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "jobStatus", traits: {"smithy.api#required" => {}}))
+    VariantImportItemDetail.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMsg, location_name: "statusMessage"))
     VariantImportItemDetail.type = Types::VariantImportItemDetail
-    VariantImportItemDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantImportItemDetail)
-    VariantImportItemSource.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
+    VariantImportItemDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemDetail)
+    VariantImportItemSource.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "source", traits: {"smithy.api#required" => {}}))
     VariantImportItemSource.type = Types::VariantImportItemSource
-    VariantImportItemSources.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantImportItemSource)
-    VariantImportJobItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id", traits: {"smithy.api#required" => {}}))
-    VariantImportJobItem.add_member(:destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
-    VariantImportJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    VariantImportJobItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    VariantImportJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    VariantImportJobItem.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    VariantImportJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletionTime, location_name: "completionTime"))
-    VariantImportJobItem.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
-    VariantImportJobItem.add_member(:annotation_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnnotationFieldMap, location_name: "annotationFields"))
+    VariantImportItemSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemSource)
+    VariantImportJobItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "id", traits: {"smithy.api#required" => {}}))
+    VariantImportJobItem.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "destinationName", traits: {"smithy.api#required" => {}}))
+    VariantImportJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    VariantImportJobItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VariantImportJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    VariantImportJobItem.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    VariantImportJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionTime, location_name: "completionTime"))
+    VariantImportJobItem.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, location_name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
+    VariantImportJobItem.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, location_name: "annotationFields"))
     VariantImportJobItem.type = Types::VariantImportJobItem
-    VariantImportJobItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantImportJobItem)
-    VariantStoreItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:store_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:sse_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
-    VariantStoreItem.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
+    VariantImportJobItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportJobItem)
+    VariantStoreItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, location_name: "reference", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "storeArn", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, location_name: "sseConfig", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "statusMessage", traits: {"smithy.api#required" => {}}))
+    VariantStoreItem.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
     VariantStoreItem.type = Types::VariantStoreItem
-    VariantStoreItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariantStoreItem)
-    VcfOptions.add_member(:ignore_qual_field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ignoreQualField"))
-    VcfOptions.add_member(:ignore_filter_field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ignoreFilterField"))
+    VariantStoreItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantStoreItem)
+    VcfOptions.add_member(:ignore_qual_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ignoreQualField"))
+    VcfOptions.add_member(:ignore_filter_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ignoreFilterField"))
     VcfOptions.type = Types::VcfOptions
-    VersionDeleteError.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
-    VersionDeleteError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    VersionDeleteError.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "versionName", traits: {"smithy.api#required" => {}}))
+    VersionDeleteError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     VersionDeleteError.type = Types::VersionDeleteError
-    VersionDeleteErrorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionDeleteError)
-    VersionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName)
-    VersionOptions.add_member(:tsv_version_options, Types::VersionOptions::TsvVersionOptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TsvVersionOptions, location_name: "tsvVersionOptions"))
-    VersionOptions.add_member(:unknown, Types::VersionOptions::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VersionDeleteErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDeleteError)
+    VersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName)
+    VersionOptions.add_member(:tsv_version_options, Types::VersionOptions::TsvVersionOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TsvVersionOptions, location_name: "tsvVersionOptions"))
+    VersionOptions.add_member(:unknown, Types::VersionOptions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VersionOptions.type = Types::VersionOptions
-    WorkflowExportList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowExport)
-    WorkflowList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowListItem)
-    WorkflowListItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowArn, location_name: "arn"))
-    WorkflowListItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "id"))
-    WorkflowListItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowName, location_name: "name"))
-    WorkflowListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "status"))
-    WorkflowListItem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
-    WorkflowListItem.add_member(:digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDigest, location_name: "digest"))
-    WorkflowListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowTimestamp, location_name: "creationTime"))
-    WorkflowListItem.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMetadata, location_name: "metadata"))
+    WorkflowExportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExport)
+    WorkflowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowListItem)
+    WorkflowListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowArn, location_name: "arn"))
+    WorkflowListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "id"))
+    WorkflowListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowName, location_name: "name"))
+    WorkflowListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, location_name: "status"))
+    WorkflowListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type"))
+    WorkflowListItem.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDigest, location_name: "digest"))
+    WorkflowListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTimestamp, location_name: "creationTime"))
+    WorkflowListItem.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadata, location_name: "metadata"))
     WorkflowListItem.type = Types::WorkflowListItem
-    WorkflowMetadata.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMetadataKey)
-    WorkflowMetadata.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMetadataValue)
-    WorkflowParameter.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowParameterDescription, location_name: "description"))
-    WorkflowParameter.add_member(:optional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "optional"))
+    WorkflowMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadataKey)
+    WorkflowMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadataValue)
+    WorkflowParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterDescription, location_name: "description"))
+    WorkflowParameter.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "optional"))
     WorkflowParameter.type = Types::WorkflowParameter
-    WorkflowParameterTemplate.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowParameterName)
-    WorkflowParameterTemplate.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowParameter)
-    WorkflowVersionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionListItem)
-    WorkflowVersionListItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionArn, location_name: "arn"))
-    WorkflowVersionListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowId, location_name: "workflowId"))
-    WorkflowVersionListItem.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "versionName"))
-    WorkflowVersionListItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowVersionDescription, location_name: "description"))
-    WorkflowVersionListItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "status"))
-    WorkflowVersionListItem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
-    WorkflowVersionListItem.add_member(:digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowDigest, location_name: "digest"))
-    WorkflowVersionListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowTimestamp, location_name: "creationTime"))
-    WorkflowVersionListItem.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkflowMetadata, location_name: "metadata"))
+    WorkflowParameterTemplate.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterName)
+    WorkflowParameterTemplate.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameter)
+    WorkflowVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionListItem)
+    WorkflowVersionListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionArn, location_name: "arn"))
+    WorkflowVersionListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, location_name: "workflowId"))
+    WorkflowVersionListItem.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, location_name: "versionName"))
+    WorkflowVersionListItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionDescription, location_name: "description"))
+    WorkflowVersionListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, location_name: "status"))
+    WorkflowVersionListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, location_name: "type"))
+    WorkflowVersionListItem.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDigest, location_name: "digest"))
+    WorkflowVersionListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTimestamp, location_name: "creationTime"))
+    WorkflowVersionListItem.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadata, location_name: "metadata"))
     WorkflowVersionListItem.type = Types::WorkflowVersionListItem
 
     Omics = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -2085,1349 +2085,1349 @@ module Aws::Omics
       service.add_operation(:abort_multipart_read_set_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#AbortMultipartReadSetUpload"
         operation.name = "AbortMultipartReadSetUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortMultipartReadSetUploadRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortMultipartReadSetUploadResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AbortMultipartReadSetUploadRequest
+        operation.output = AbortMultipartReadSetUploadResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to abort multipart read set uploads", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/sequencestore/{sequenceStoreId}/upload/{uploadId}/abort"}}
       end)
       service.add_operation(:accept_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#AcceptShare"
         operation.name = "AcceptShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptShareRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptShareResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AcceptShareRequest
+        operation.output = AcceptShareResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/share/{shareId}", "code" => 200}}
       end)
       service.add_operation(:batch_delete_read_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#BatchDeleteReadSet"
         operation.name = "BatchDeleteReadSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteReadSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteReadSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchDeleteReadSetRequest
+        operation.output = BatchDeleteReadSetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to batch delete Read Sets in the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/readset/batch/delete"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:cancel_annotation_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CancelAnnotationImportJob"
         operation.name = "CancelAnnotationImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelAnnotationImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelAnnotationImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelAnnotationImportRequest
+        operation.output = CancelAnnotationImportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/import/annotation/{jobId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:cancel_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CancelRun"
         operation.name = "CancelRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelRunRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/run/{id}/cancel", "code" => 202}}
       end)
       service.add_operation(:cancel_variant_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CancelVariantImportJob"
         operation.name = "CancelVariantImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelVariantImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelVariantImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelVariantImportRequest
+        operation.output = CancelVariantImportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/import/variant/{jobId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:complete_multipart_read_set_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CompleteMultipartReadSetUpload"
         operation.name = "CompleteMultipartReadSetUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteMultipartReadSetUploadRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteMultipartReadSetUploadResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CompleteMultipartReadSetUploadRequest
+        operation.output = CompleteMultipartReadSetUploadResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to complete a multipart read set upload", "smithy.api#endpoint" => {"hostPrefix" => "storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/upload/{uploadId}/complete"}}
       end)
       service.add_operation(:create_annotation_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateAnnotationStore"
         operation.name = "CreateAnnotationStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAnnotationStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAnnotationStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateAnnotationStoreRequest
+        operation.output = CreateAnnotationStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create an Annotation Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore", "code" => 200}}
       end)
       service.add_operation(:create_annotation_store_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateAnnotationStoreVersion"
         operation.name = "CreateAnnotationStoreVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAnnotationStoreVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAnnotationStoreVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateAnnotationStoreVersionRequest
+        operation.output = CreateAnnotationStoreVersionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore/{name}/version", "code" => 200}}
       end)
       service.add_operation(:create_multipart_read_set_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateMultipartReadSetUpload"
         operation.name = "CreateMultipartReadSetUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMultipartReadSetUploadRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMultipartReadSetUploadResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateMultipartReadSetUploadRequest
+        operation.output = CreateMultipartReadSetUploadResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create a multipart read set upload", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/upload"}}
       end)
       service.add_operation(:create_reference_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateReferenceStore"
         operation.name = "CreateReferenceStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateReferenceStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateReferenceStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateReferenceStoreRequest
+        operation.output = CreateReferenceStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create a Reference Store", "aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/referencestore"}}
       end)
       service.add_operation(:create_run_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateRunCache"
         operation.name = "CreateRunCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRunCacheRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRunCacheResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRunCacheRequest
+        operation.output = CreateRunCacheResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/runCache", "code" => 201}}
       end)
       service.add_operation(:create_run_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateRunGroup"
         operation.name = "CreateRunGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRunGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRunGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRunGroupRequest
+        operation.output = CreateRunGroupResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/runGroup", "code" => 201}}
       end)
       service.add_operation(:create_sequence_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateSequenceStore"
         operation.name = "CreateSequenceStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSequenceStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSequenceStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateSequenceStoreRequest
+        operation.output = CreateSequenceStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create a Sequence Store", "aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore"}}
       end)
       service.add_operation(:create_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateShare"
         operation.name = "CreateShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateShareRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateShareResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateShareRequest
+        operation.output = CreateShareResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/share", "code" => 200}}
       end)
       service.add_operation(:create_variant_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateVariantStore"
         operation.name = "CreateVariantStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVariantStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVariantStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateVariantStoreRequest
+        operation.output = CreateVariantStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a Variant Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/variantStore", "code" => 200}}
       end)
       service.add_operation(:create_workflow, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateWorkflow"
         operation.name = "CreateWorkflow"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkflowRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkflowResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateWorkflowRequest
+        operation.output = CreateWorkflowResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/workflow", "code" => 201}}
       end)
       service.add_operation(:create_workflow_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateWorkflowVersion"
         operation.name = "CreateWorkflowVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkflowVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkflowVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateWorkflowVersionRequest
+        operation.output = CreateWorkflowVersionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/workflow/{workflowId}/version", "code" => 201}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_annotation_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteAnnotationStore"
         operation.name = "DeleteAnnotationStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAnnotationStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAnnotationStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteAnnotationStoreRequest
+        operation.output = DeleteAnnotationStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an Annotation Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/annotationStore/{name}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_annotation_store_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteAnnotationStoreVersions"
         operation.name = "DeleteAnnotationStoreVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAnnotationStoreVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAnnotationStoreVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteAnnotationStoreVersionsRequest
+        operation.output = DeleteAnnotationStoreVersionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore/{name}/versions/delete", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_reference, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteReference"
         operation.name = "DeleteReference"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReferenceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReferenceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteReferenceRequest
+        operation.output = DeleteReferenceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to delete a Reference in the given Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/referencestore/{referenceStoreId}/reference/{id}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_reference_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteReferenceStore"
         operation.name = "DeleteReferenceStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReferenceStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteReferenceStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteReferenceStoreRequest
+        operation.output = DeleteReferenceStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to delete a Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/referencestore/{id}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteRun"
         operation.name = "DeleteRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRunRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/run/{id}", "code" => 202}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_run_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteRunCache"
         operation.name = "DeleteRunCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRunCacheRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRunCacheRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/runCache/{id}", "code" => 202}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_run_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteRunGroup"
         operation.name = "DeleteRunGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRunGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRunGroupRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/runGroup/{id}", "code" => 202}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_s3_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteS3AccessPolicy"
         operation.name = "DeleteS3AccessPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteS3AccessPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteS3AccessPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteS3AccessPolicyRequest
+        operation.output = DeleteS3AccessPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an access policy on a given store"}, "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/s3accesspolicy/{s3AccessPointArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_sequence_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteSequenceStore"
         operation.name = "DeleteSequenceStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSequenceStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSequenceStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteSequenceStoreRequest
+        operation.output = DeleteSequenceStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to delete a Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/sequencestore/{id}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteShare"
         operation.name = "DeleteShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteShareRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteShareResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteShareRequest
+        operation.output = DeleteShareResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/share/{shareId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_variant_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteVariantStore"
         operation.name = "DeleteVariantStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVariantStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVariantStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteVariantStoreRequest
+        operation.output = DeleteVariantStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a Variant Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/variantStore/{name}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_workflow, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteWorkflow"
         operation.name = "DeleteWorkflow"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWorkflowRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteWorkflowRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/workflow/{id}", "code" => 202}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_workflow_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteWorkflowVersion"
         operation.name = "DeleteWorkflowVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWorkflowVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteWorkflowVersionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/workflow/{workflowId}/version/{versionName}", "code" => 202}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_annotation_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetAnnotationImportJob"
         operation.name = "GetAnnotationImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAnnotationImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAnnotationImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAnnotationImportRequest
+        operation.output = GetAnnotationImportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/import/annotation/{jobId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_annotation_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetAnnotationStore"
         operation.name = "GetAnnotationStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAnnotationStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAnnotationStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAnnotationStoreRequest
+        operation.output = GetAnnotationStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get detailed information about an Annotation Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/annotationStore/{name}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_annotation_store_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetAnnotationStoreVersion"
         operation.name = "GetAnnotationStoreVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAnnotationStoreVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAnnotationStoreVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAnnotationStoreVersionRequest
+        operation.output = GetAnnotationStoreVersionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/annotationStore/{name}/version/{versionName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_read_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReadSet"
         operation.name = "GetReadSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RangeNotSatisfiableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReadSetRequest
+        operation.output = GetReadSetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RangeNotSatisfiableException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get a Read Set in the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sequencestore/{sequenceStoreId}/readset/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_read_set_activation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReadSetActivationJob"
         operation.name = "GetReadSetActivationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetActivationJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetActivationJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReadSetActivationJobRequest
+        operation.output = GetReadSetActivationJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Read Set activation job for the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sequencestore/{sequenceStoreId}/activationjob/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_read_set_export_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReadSetExportJob"
         operation.name = "GetReadSetExportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetExportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetExportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReadSetExportJobRequest
+        operation.output = GetReadSetExportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Read Set export job for the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sequencestore/{sequenceStoreId}/exportjob/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_read_set_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReadSetImportJob"
         operation.name = "GetReadSetImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReadSetImportJobRequest
+        operation.output = GetReadSetImportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Read Set import job for the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sequencestore/{sequenceStoreId}/importjob/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_read_set_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReadSetMetadata"
         operation.name = "GetReadSetMetadata"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetMetadataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReadSetMetadataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReadSetMetadataRequest
+        operation.output = GetReadSetMetadataResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Read Set in the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sequencestore/{sequenceStoreId}/readset/{id}/metadata"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_reference, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReference"
         operation.name = "GetReference"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RangeNotSatisfiableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReferenceRequest
+        operation.output = GetReferenceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RangeNotSatisfiableException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get a Reference in the given Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/referencestore/{referenceStoreId}/reference/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_reference_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReferenceImportJob"
         operation.name = "GetReferenceImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReferenceImportJobRequest
+        operation.output = GetReferenceImportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Reference import job for the given Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/referencestore/{referenceStoreId}/importjob/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_reference_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReferenceMetadata"
         operation.name = "GetReferenceMetadata"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceMetadataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceMetadataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReferenceMetadataRequest
+        operation.output = GetReferenceMetadataResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Reference in the given Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/referencestore/{referenceStoreId}/reference/{id}/metadata"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_reference_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReferenceStore"
         operation.name = "GetReferenceStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetReferenceStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetReferenceStoreRequest
+        operation.output = GetReferenceStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/referencestore/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetRun"
         operation.name = "GetRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRunRequest
+        operation.output = GetRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/run/{id}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_run_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetRunCache"
         operation.name = "GetRunCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunCacheRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunCacheResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRunCacheRequest
+        operation.output = GetRunCacheResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/runCache/{id}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_run_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetRunGroup"
         operation.name = "GetRunGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRunGroupRequest
+        operation.output = GetRunGroupResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/runGroup/{id}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_run_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetRunTask"
         operation.name = "GetRunTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRunTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRunTaskRequest
+        operation.output = GetRunTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/run/{id}/task/{taskId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_s3_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetS3AccessPolicy"
         operation.name = "GetS3AccessPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetS3AccessPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetS3AccessPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetS3AccessPolicyRequest
+        operation.output = GetS3AccessPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get details about an access policy on a given store"}, "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/s3accesspolicy/{s3AccessPointArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_sequence_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetSequenceStore"
         operation.name = "GetSequenceStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSequenceStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSequenceStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetSequenceStoreRequest
+        operation.output = GetSequenceStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get details about a Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sequencestore/{id}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetShare"
         operation.name = "GetShare"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetShareRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetShareResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetShareRequest
+        operation.output = GetShareResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/share/{shareId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_variant_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetVariantImportJob"
         operation.name = "GetVariantImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVariantImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVariantImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetVariantImportRequest
+        operation.output = GetVariantImportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/import/variant/{jobId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_variant_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetVariantStore"
         operation.name = "GetVariantStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVariantStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVariantStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetVariantStoreRequest
+        operation.output = GetVariantStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get detailed information about a Variant Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/variantStore/{name}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_workflow, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetWorkflow"
         operation.name = "GetWorkflow"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetWorkflowRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetWorkflowResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetWorkflowRequest
+        operation.output = GetWorkflowResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/workflow/{id}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_workflow_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetWorkflowVersion"
         operation.name = "GetWorkflowVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetWorkflowVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetWorkflowVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetWorkflowVersionRequest
+        operation.output = GetWorkflowVersionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/workflow/{workflowId}/version/{versionName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_annotation_import_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListAnnotationImportJobs"
         operation.name = "ListAnnotationImportJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationImportJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationImportJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAnnotationImportJobsRequest
+        operation.output = ListAnnotationImportJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/import/annotations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAnnotationImportJobs.new
       end)
       service.add_operation(:list_annotation_store_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListAnnotationStoreVersions"
         operation.name = "ListAnnotationStoreVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAnnotationStoreVersionsRequest
+        operation.output = ListAnnotationStoreVersionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore/{name}/versions", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAnnotationStoreVersions.new
       end)
       service.add_operation(:list_annotation_stores, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListAnnotationStores"
         operation.name = "ListAnnotationStores"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationStoresRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAnnotationStoresResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAnnotationStoresRequest
+        operation.output = ListAnnotationStoresResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve a list of information about Annotation Stores"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStores", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAnnotationStores.new
       end)
       service.add_operation(:list_multipart_read_set_uploads, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListMultipartReadSetUploads"
         operation.name = "ListMultipartReadSetUploads"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMultipartReadSetUploadsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMultipartReadSetUploadsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListMultipartReadSetUploadsRequest
+        operation.output = ListMultipartReadSetUploadsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list multipart read set uploads", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/uploads"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListMultipartReadSetUploads.new
       end)
       service.add_operation(:list_read_set_activation_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReadSetActivationJobs"
         operation.name = "ListReadSetActivationJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetActivationJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetActivationJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReadSetActivationJobsRequest
+        operation.output = ListReadSetActivationJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list Read Set activation jobs for the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/activationjobs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReadSetActivationJobs.new
       end)
       service.add_operation(:list_read_set_export_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReadSetExportJobs"
         operation.name = "ListReadSetExportJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetExportJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetExportJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReadSetExportJobsRequest
+        operation.output = ListReadSetExportJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list Read Set export jobs for the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/exportjobs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReadSetExportJobs.new
       end)
       service.add_operation(:list_read_set_import_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReadSetImportJobs"
         operation.name = "ListReadSetImportJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetImportJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetImportJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReadSetImportJobsRequest
+        operation.output = ListReadSetImportJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list Read Set import jobs for the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/importjobs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReadSetImportJobs.new
       end)
       service.add_operation(:list_read_set_upload_parts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReadSetUploadParts"
         operation.name = "ListReadSetUploadParts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetUploadPartsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetUploadPartsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReadSetUploadPartsRequest
+        operation.output = ListReadSetUploadPartsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list read set upload parts", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/upload/{uploadId}/parts"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReadSetUploadParts.new
       end)
       service.add_operation(:list_read_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReadSets"
         operation.name = "ListReadSets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReadSetsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReadSetsRequest
+        operation.output = ListReadSetsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list Read Sets in the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/readsets"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReadSets.new
       end)
       service.add_operation(:list_reference_import_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReferenceImportJobs"
         operation.name = "ListReferenceImportJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReferenceImportJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReferenceImportJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReferenceImportJobsRequest
+        operation.output = ListReferenceImportJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list Reference import jobs for the given Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/referencestore/{referenceStoreId}/importjobs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReferenceImportJobs.new
       end)
       service.add_operation(:list_reference_stores, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReferenceStores"
         operation.name = "ListReferenceStores"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReferenceStoresRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReferenceStoresResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReferenceStoresRequest
+        operation.output = ListReferenceStoresResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list Reference Stores", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/referencestores"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReferenceStores.new
       end)
       service.add_operation(:list_references, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListReferences"
         operation.name = "ListReferences"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReferencesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListReferencesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListReferencesRequest
+        operation.output = ListReferencesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list References in the given Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/referencestore/{referenceStoreId}/references"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListReferences.new
       end)
       service.add_operation(:list_run_caches, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListRunCaches"
         operation.name = "ListRunCaches"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunCachesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunCachesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRunCachesRequest
+        operation.output = ListRunCachesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/runCache", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRunCaches.new
       end)
       service.add_operation(:list_run_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListRunGroups"
         operation.name = "ListRunGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRunGroupsRequest
+        operation.output = ListRunGroupsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/runGroup", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRunGroups.new
       end)
       service.add_operation(:list_run_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListRunTasks"
         operation.name = "ListRunTasks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunTasksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunTasksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRunTasksRequest
+        operation.output = ListRunTasksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/run/{id}/task", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRunTasks.new
       end)
       service.add_operation(:list_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListRuns"
         operation.name = "ListRuns"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRunsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRunsRequest
+        operation.output = ListRunsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/run", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRuns.new
       end)
       service.add_operation(:list_sequence_stores, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListSequenceStores"
         operation.name = "ListSequenceStores"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSequenceStoresRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSequenceStoresResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSequenceStoresRequest
+        operation.output = ListSequenceStoresResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list Sequence Stores", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestores"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSequenceStores.new
       end)
       service.add_operation(:list_shares, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListShares"
         operation.name = "ListShares"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSharesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSharesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSharesRequest
+        operation.output = ListSharesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/shares", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListShares.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "tags-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_variant_import_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListVariantImportJobs"
         operation.name = "ListVariantImportJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVariantImportJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVariantImportJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListVariantImportJobsRequest
+        operation.output = ListVariantImportJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/import/variants", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVariantImportJobs.new
       end)
       service.add_operation(:list_variant_stores, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListVariantStores"
         operation.name = "ListVariantStores"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVariantStoresRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVariantStoresResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListVariantStoresRequest
+        operation.output = ListVariantStoresResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve a list of metadata for Variant Stores"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/variantStores", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVariantStores.new
       end)
       service.add_operation(:list_workflow_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListWorkflowVersions"
         operation.name = "ListWorkflowVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkflowVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkflowVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListWorkflowVersionsRequest
+        operation.output = ListWorkflowVersionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/workflow/{workflowId}/version", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListWorkflowVersions.new
       end)
       service.add_operation(:list_workflows, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListWorkflows"
         operation.name = "ListWorkflows"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkflowsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkflowsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListWorkflowsRequest
+        operation.output = ListWorkflowsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/workflow", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListWorkflows.new
       end)
       service.add_operation(:put_s3_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#PutS3AccessPolicy"
         operation.name = "PutS3AccessPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutS3AccessPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutS3AccessPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutS3AccessPolicyRequest
+        operation.output = PutS3AccessPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to put an access policy on a given store"}, "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/s3accesspolicy/{s3AccessPointArn}"}}
       end)
       service.add_operation(:start_annotation_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartAnnotationImportJob"
         operation.name = "StartAnnotationImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAnnotationImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAnnotationImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartAnnotationImportRequest
+        operation.output = StartAnnotationImportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/import/annotation", "code" => 200}}
       end)
       service.add_operation(:start_read_set_activation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartReadSetActivationJob"
         operation.name = "StartReadSetActivationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetActivationJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetActivationJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartReadSetActivationJobRequest
+        operation.output = StartReadSetActivationJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start a Read Set activation job from the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/activationjob"}}
       end)
       service.add_operation(:start_read_set_export_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartReadSetExportJob"
         operation.name = "StartReadSetExportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetExportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetExportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartReadSetExportJobRequest
+        operation.output = StartReadSetExportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start a Read Set export job from the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/exportjob"}}
       end)
       service.add_operation(:start_read_set_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartReadSetImportJob"
         operation.name = "StartReadSetImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReadSetImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartReadSetImportJobRequest
+        operation.output = StartReadSetImportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start a Read Set import job into the given Sequence Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/sequencestore/{sequenceStoreId}/importjob"}}
       end)
       service.add_operation(:start_reference_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartReferenceImportJob"
         operation.name = "StartReferenceImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReferenceImportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartReferenceImportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartReferenceImportJobRequest
+        operation.output = StartReferenceImportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start a Reference import job into the given Reference Store", "smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/referencestore/{referenceStoreId}/importjob"}}
       end)
       service.add_operation(:start_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartRun"
         operation.name = "StartRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartRunRequest
+        operation.output = StartRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/run", "code" => 201}}
       end)
       service.add_operation(:start_variant_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartVariantImportJob"
         operation.name = "StartVariantImportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartVariantImportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartVariantImportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartVariantImportRequest
+        operation.output = StartVariantImportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/import/variant", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "tags-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 204}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "tags-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_annotation_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateAnnotationStore"
         operation.name = "UpdateAnnotationStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAnnotationStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAnnotationStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateAnnotationStoreRequest
+        operation.output = UpdateAnnotationStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update information about the Annotation Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore/{name}", "code" => 200}}
       end)
       service.add_operation(:update_annotation_store_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateAnnotationStoreVersion"
         operation.name = "UpdateAnnotationStoreVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAnnotationStoreVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAnnotationStoreVersionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateAnnotationStoreVersionRequest
+        operation.output = UpdateAnnotationStoreVersionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore/{name}/version/{versionName}", "code" => 200}}
       end)
       service.add_operation(:update_run_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateRunCache"
         operation.name = "UpdateRunCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRunCacheRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateRunCacheRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/runCache/{id}", "code" => 202}}
       end)
       service.add_operation(:update_run_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateRunGroup"
         operation.name = "UpdateRunGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRunGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateRunGroupRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/runGroup/{id}", "code" => 202}}
       end)
       service.add_operation(:update_sequence_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateSequenceStore"
         operation.name = "UpdateSequenceStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSequenceStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSequenceStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateSequenceStoreRequest
+        operation.output = UpdateSequenceStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "control-storage-"}, "smithy.api#http" => {"method" => "PATCH", "uri" => "/sequencestore/{id}"}}
       end)
       service.add_operation(:update_variant_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateVariantStore"
         operation.name = "UpdateVariantStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVariantStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVariantStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateVariantStoreRequest
+        operation.output = UpdateVariantStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update metadata about the Variant Store"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/variantStore/{name}", "code" => 200}}
       end)
       service.add_operation(:update_workflow, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateWorkflow"
         operation.name = "UpdateWorkflow"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateWorkflowRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateWorkflowRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/workflow/{id}", "code" => 202}}
       end)
       service.add_operation(:update_workflow_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UpdateWorkflowVersion"
         operation.name = "UpdateWorkflowVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateWorkflowVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateWorkflowVersionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/workflow/{workflowId}/version/{versionName}", "code" => 202}}
       end)
       service.add_operation(:upload_read_set_part, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#UploadReadSetPart"
         operation.name = "UploadReadSetPart"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadReadSetPartRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadReadSetPartResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotSupportedOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UploadReadSetPartRequest
+        operation.output = UploadReadSetPartResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << NotSupportedOperationException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.auth#unsignedPayload" => {}, "aws.iam#actionPermissionDescription" => "Grants permission to upload read set parts", "smithy.api#endpoint" => {"hostPrefix" => "storage-"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/sequencestore/{sequenceStoreId}/upload/{uploadId}/part"}}
       end)
     end

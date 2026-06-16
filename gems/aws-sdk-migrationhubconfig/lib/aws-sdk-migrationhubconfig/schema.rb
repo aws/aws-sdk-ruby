@@ -34,49 +34,49 @@ module Aws::MigrationHubConfig
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.migrationhubconfig#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     Token = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.migrationhubconfig#Token", name: "Token", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^[a-zA-Z0-9\\/\\+\\=]{0,2048}$"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    CreateHomeRegionControlRequest.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegion, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
-    CreateHomeRegionControlRequest.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target", traits: {"smithy.api#required" => {}}))
-    CreateHomeRegionControlRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    CreateHomeRegionControlRequest.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegion, location_name: "HomeRegion", traits: {"smithy.api#required" => {}}))
+    CreateHomeRegionControlRequest.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target", traits: {"smithy.api#required" => {}}))
+    CreateHomeRegionControlRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     CreateHomeRegionControlRequest.type = Types::CreateHomeRegionControlRequest
-    CreateHomeRegionControlResult.add_member(:home_region_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionControl, location_name: "HomeRegionControl"))
+    CreateHomeRegionControlResult.add_member(:home_region_control, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegionControl, location_name: "HomeRegionControl"))
     CreateHomeRegionControlResult.type = Types::CreateHomeRegionControlResult
-    DeleteHomeRegionControlRequest.add_member(:control_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlId, location_name: "ControlId", traits: {"smithy.api#required" => {}}))
+    DeleteHomeRegionControlRequest.add_member(:control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlId, location_name: "ControlId", traits: {"smithy.api#required" => {}}))
     DeleteHomeRegionControlRequest.type = Types::DeleteHomeRegionControlRequest
     DeleteHomeRegionControlResult.type = Types::DeleteHomeRegionControlResult
-    DescribeHomeRegionControlsRequest.add_member(:control_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlId, location_name: "ControlId"))
-    DescribeHomeRegionControlsRequest.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegion, location_name: "HomeRegion"))
-    DescribeHomeRegionControlsRequest.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target"))
-    DescribeHomeRegionControlsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeHomeRegionControlsMaxResults, location_name: "MaxResults"))
-    DescribeHomeRegionControlsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeHomeRegionControlsRequest.add_member(:control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlId, location_name: "ControlId"))
+    DescribeHomeRegionControlsRequest.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegion, location_name: "HomeRegion"))
+    DescribeHomeRegionControlsRequest.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target"))
+    DescribeHomeRegionControlsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeHomeRegionControlsMaxResults, location_name: "MaxResults"))
+    DescribeHomeRegionControlsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     DescribeHomeRegionControlsRequest.type = Types::DescribeHomeRegionControlsRequest
-    DescribeHomeRegionControlsResult.add_member(:home_region_controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionControls, location_name: "HomeRegionControls"))
-    DescribeHomeRegionControlsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeHomeRegionControlsResult.add_member(:home_region_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegionControls, location_name: "HomeRegionControls"))
+    DescribeHomeRegionControlsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     DescribeHomeRegionControlsResult.type = Types::DescribeHomeRegionControlsResult
-    DryRunOperation.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DryRunOperation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DryRunOperation.type = Types::DryRunOperation
     GetHomeRegionRequest.type = Types::GetHomeRegionRequest
-    GetHomeRegionResult.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegion, location_name: "HomeRegion"))
+    GetHomeRegionResult.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegion, location_name: "HomeRegion"))
     GetHomeRegionResult.type = Types::GetHomeRegionResult
-    HomeRegionControl.add_member(:control_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlId, location_name: "ControlId"))
-    HomeRegionControl.add_member(:home_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegion, location_name: "HomeRegion"))
-    HomeRegionControl.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target, location_name: "Target"))
-    HomeRegionControl.add_member(:requested_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedTime, location_name: "RequestedTime"))
+    HomeRegionControl.add_member(:control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlId, location_name: "ControlId"))
+    HomeRegionControl.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegion, location_name: "HomeRegion"))
+    HomeRegionControl.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, location_name: "Target"))
+    HomeRegionControl.add_member(:requested_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedTime, location_name: "RequestedTime"))
     HomeRegionControl.type = Types::HomeRegionControl
-    HomeRegionControls.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionControl)
-    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    HomeRegionControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegionControl)
+    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerError.type = Types::InternalServerError
-    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidInputException.type = Types::InvalidInputException
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    Target.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    Target.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetId, location_name: "Id"))
+    Target.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Target.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, location_name: "Id"))
     Target.type = Types::Target
-    TargetType.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
+    TargetType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
 
     AWSMigrationHubMultiAccountService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -87,51 +87,51 @@ module Aws::MigrationHubConfig
       service.add_operation(:create_home_region_control, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhubconfig#CreateHomeRegionControl"
         operation.name = "CreateHomeRegionControl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateHomeRegionControlRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateHomeRegionControlResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = CreateHomeRegionControlRequest
+        operation.output = CreateHomeRegionControlResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:delete_home_region_control, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhubconfig#DeleteHomeRegionControl"
         operation.name = "DeleteHomeRegionControl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteHomeRegionControlRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteHomeRegionControlResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DeleteHomeRegionControlRequest
+        operation.output = DeleteHomeRegionControlResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:describe_home_region_controls, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhubconfig#DescribeHomeRegionControls"
         operation.name = "DescribeHomeRegionControls"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeHomeRegionControlsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeHomeRegionControlsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DescribeHomeRegionControlsRequest
+        operation.output = DescribeHomeRegionControlsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeHomeRegionControls.new
       end)
       service.add_operation(:get_home_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhubconfig#GetHomeRegion"
         operation.name = "GetHomeRegion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetHomeRegionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetHomeRegionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetHomeRegionRequest
+        operation.output = GetHomeRegionResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
     end

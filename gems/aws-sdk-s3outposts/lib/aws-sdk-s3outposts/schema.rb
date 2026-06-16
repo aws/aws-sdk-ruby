@@ -51,83 +51,83 @@ module Aws::S3Outposts
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3outposts#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3outposts#VpcId", name: "VpcId")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateEndpointRequest.add_member(:outpost_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId", traits: {"smithy.api#required" => {}}))
-    CreateEndpointRequest.add_member(:subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId", traits: {"smithy.api#required" => {}}))
-    CreateEndpointRequest.add_member(:security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId", traits: {"smithy.api#required" => {}}))
-    CreateEndpointRequest.add_member(:access_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointAccessType, location_name: "AccessType"))
-    CreateEndpointRequest.add_member(:customer_owned_ipv4_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
+    CreateEndpointRequest.add_member(:outpost_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostId, location_name: "OutpostId", traits: {"smithy.api#required" => {}}))
+    CreateEndpointRequest.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "SubnetId", traits: {"smithy.api#required" => {}}))
+    CreateEndpointRequest.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, location_name: "SecurityGroupId", traits: {"smithy.api#required" => {}}))
+    CreateEndpointRequest.add_member(:access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessType, location_name: "AccessType"))
+    CreateEndpointRequest.add_member(:customer_owned_ipv4_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
     CreateEndpointRequest.type = Types::CreateEndpointRequest
-    CreateEndpointResult.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointArn, location_name: "EndpointArn"))
+    CreateEndpointResult.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointArn, location_name: "EndpointArn"))
     CreateEndpointResult.type = Types::CreateEndpointResult
-    DeleteEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", traits: {"smithy.api#httpQuery" => "endpointId", "smithy.api#required" => {}}))
-    DeleteEndpointRequest.add_member(:outpost_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId", traits: {"smithy.api#httpQuery" => "outpostId", "smithy.api#required" => {}}))
+    DeleteEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointId, location_name: "EndpointId", traits: {"smithy.api#httpQuery" => "endpointId", "smithy.api#required" => {}}))
+    DeleteEndpointRequest.add_member(:outpost_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostId, location_name: "OutpostId", traits: {"smithy.api#httpQuery" => "outpostId", "smithy.api#required" => {}}))
     DeleteEndpointRequest.type = Types::DeleteEndpointRequest
-    Endpoint.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointArn, location_name: "EndpointArn"))
-    Endpoint.add_member(:outposts_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostsId"))
-    Endpoint.add_member(:cidr_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrBlock, location_name: "CidrBlock"))
-    Endpoint.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status"))
-    Endpoint.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    Endpoint.add_member(:network_interfaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "NetworkInterfaces"))
-    Endpoint.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    Endpoint.add_member(:subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
-    Endpoint.add_member(:security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId"))
-    Endpoint.add_member(:access_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointAccessType, location_name: "AccessType"))
-    Endpoint.add_member(:customer_owned_ipv4_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
-    Endpoint.add_member(:failed_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedReason, location_name: "FailedReason"))
+    Endpoint.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointArn, location_name: "EndpointArn"))
+    Endpoint.add_member(:outposts_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostId, location_name: "OutpostsId"))
+    Endpoint.add_member(:cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlock, location_name: "CidrBlock"))
+    Endpoint.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStatus, location_name: "Status"))
+    Endpoint.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    Endpoint.add_member(:network_interfaces, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaces, location_name: "NetworkInterfaces"))
+    Endpoint.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    Endpoint.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "SubnetId"))
+    Endpoint.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, location_name: "SecurityGroupId"))
+    Endpoint.add_member(:access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessType, location_name: "AccessType"))
+    Endpoint.add_member(:customer_owned_ipv4_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
+    Endpoint.add_member(:failed_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedReason, location_name: "FailedReason"))
     Endpoint.type = Types::Endpoint
-    EndpointAccessType.add_member(:private, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATE", traits: {"smithy.api#enumValue" => "Private"}))
-    EndpointAccessType.add_member(:customer_owned_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOMER_OWNED_IP", traits: {"smithy.api#enumValue" => "CustomerOwnedIp"}))
-    EndpointStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
-    EndpointStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "Available"}))
-    EndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    EndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "Create_Failed"}))
-    EndpointStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "Delete_Failed"}))
-    Endpoints.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint)
-    FailedReason.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    FailedReason.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    EndpointAccessType.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATE", traits: {"smithy.api#enumValue" => "Private"}))
+    EndpointAccessType.add_member(:customer_owned_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOMER_OWNED_IP", traits: {"smithy.api#enumValue" => "CustomerOwnedIp"}))
+    EndpointStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
+    EndpointStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "Available"}))
+    EndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    EndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "Create_Failed"}))
+    EndpointStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "Delete_Failed"}))
+    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint)
+    FailedReason.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    FailedReason.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     FailedReason.type = Types::FailedReason
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    ListEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
+    ListEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
     ListEndpointsRequest.type = Types::ListEndpointsRequest
-    ListEndpointsResult.add_member(:endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
-    ListEndpointsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEndpointsResult.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoints, location_name: "Endpoints"))
+    ListEndpointsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListEndpointsResult.type = Types::ListEndpointsResult
-    ListOutpostsWithS3Request.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListOutpostsWithS3Request.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
+    ListOutpostsWithS3Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListOutpostsWithS3Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
     ListOutpostsWithS3Request.type = Types::ListOutpostsWithS3Request
-    ListOutpostsWithS3Result.add_member(:outposts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Outposts, location_name: "Outposts"))
-    ListOutpostsWithS3Result.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOutpostsWithS3Result.add_member(:outposts, ::Smithy::Schema::Shapes::MemberShape.new(target: Outposts, location_name: "Outposts"))
+    ListOutpostsWithS3Result.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListOutpostsWithS3Result.type = Types::ListOutpostsWithS3Result
-    ListSharedEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListSharedEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
-    ListSharedEndpointsRequest.add_member(:outpost_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId", traits: {"smithy.api#httpQuery" => "outpostId", "smithy.api#required" => {}}))
+    ListSharedEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSharedEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
+    ListSharedEndpointsRequest.add_member(:outpost_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostId, location_name: "OutpostId", traits: {"smithy.api#httpQuery" => "outpostId", "smithy.api#required" => {}}))
     ListSharedEndpointsRequest.type = Types::ListSharedEndpointsRequest
-    ListSharedEndpointsResult.add_member(:endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
-    ListSharedEndpointsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSharedEndpointsResult.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoints, location_name: "Endpoints"))
+    ListSharedEndpointsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListSharedEndpointsResult.type = Types::ListSharedEndpointsResult
-    NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
+    NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaces.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterface)
-    Outpost.add_member(:outpost_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn"))
-    Outpost.add_member(:s3_outpost_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3OutpostArn, location_name: "S3OutpostArn"))
-    Outpost.add_member(:outpost_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
-    Outpost.add_member(:owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "OwnerId"))
-    Outpost.add_member(:capacity_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityInBytes, location_name: "CapacityInBytes", traits: {"smithy.api#default" => 0}))
+    NetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface)
+    Outpost.add_member(:outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostArn, location_name: "OutpostArn"))
+    Outpost.add_member(:s3_outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3OutpostArn, location_name: "S3OutpostArn"))
+    Outpost.add_member(:outpost_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostId, location_name: "OutpostId"))
+    Outpost.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, location_name: "OwnerId"))
+    Outpost.add_member(:capacity_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityInBytes, location_name: "CapacityInBytes", traits: {"smithy.api#default" => 0}))
     Outpost.type = Types::Outpost
-    OutpostOfflineException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    OutpostOfflineException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     OutpostOfflineException.type = Types::OutpostOfflineException
-    Outposts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Outpost)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    Outposts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Outpost)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ValidationException.type = Types::ValidationException
 
     S3Outposts = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -138,65 +138,65 @@ module Aws::S3Outposts
       service.add_operation(:create_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3outposts#CreateEndpoint"
         operation.name = "CreateEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEndpointResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostOfflineException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateEndpointRequest
+        operation.output = CreateEndpointResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << OutpostOfflineException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/S3Outposts/CreateEndpoint", "code" => 200}}
       end)
       service.add_operation(:delete_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3outposts#DeleteEndpoint"
         operation.name = "DeleteEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutpostOfflineException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteEndpointRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << OutpostOfflineException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/S3Outposts/DeleteEndpoint", "code" => 200}}
       end)
       service.add_operation(:list_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3outposts#ListEndpoints"
         operation.name = "ListEndpoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEndpointsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEndpointsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListEndpointsRequest
+        operation.output = ListEndpointsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/S3Outposts/ListEndpoints", "code" => 200}}
         operation[:paginator] = Paginators::ListEndpoints.new
       end)
       service.add_operation(:list_outposts_with_s3, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3outposts#ListOutpostsWithS3"
         operation.name = "ListOutpostsWithS3"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOutpostsWithS3Request)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOutpostsWithS3Result)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListOutpostsWithS3Request
+        operation.output = ListOutpostsWithS3Result
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/S3Outposts/ListOutpostsWithS3", "code" => 200}}
         operation[:paginator] = Paginators::ListOutpostsWithS3.new
       end)
       service.add_operation(:list_shared_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3outposts#ListSharedEndpoints"
         operation.name = "ListSharedEndpoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSharedEndpointsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSharedEndpointsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSharedEndpointsRequest
+        operation.output = ListSharedEndpointsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/S3Outposts/ListSharedEndpoints", "code" => 200}}
         operation[:paginator] = Paginators::ListSharedEndpoints.new
       end)

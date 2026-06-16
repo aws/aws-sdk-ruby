@@ -496,1498 +496,1498 @@ module Aws::FSx
     WindowsDeploymentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#WindowsDeploymentType", name: "WindowsDeploymentType")
     WindowsFileSystemConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#WindowsFileSystemConfiguration", name: "WindowsFileSystemConfiguration")
 
-    AccessPointAlreadyOwnedByYou.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    AccessPointAlreadyOwnedByYou.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessPointAlreadyOwnedByYou.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    AccessPointAlreadyOwnedByYou.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessPointAlreadyOwnedByYou.type = Types::AccessPointAlreadyOwnedByYou
-    ActiveDirectoryBackupAttributes.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
-    ActiveDirectoryBackupAttributes.add_member(:active_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
-    ActiveDirectoryBackupAttributes.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    ActiveDirectoryBackupAttributes.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
+    ActiveDirectoryBackupAttributes.add_member(:active_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "ActiveDirectoryId"))
+    ActiveDirectoryBackupAttributes.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
     ActiveDirectoryBackupAttributes.type = Types::ActiveDirectoryBackupAttributes
-    ActiveDirectoryError.add_member(:active_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ActiveDirectoryError.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryErrorType, location_name: "Type"))
-    ActiveDirectoryError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ActiveDirectoryError.add_member(:active_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "ActiveDirectoryId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ActiveDirectoryError.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryErrorType, location_name: "Type"))
+    ActiveDirectoryError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ActiveDirectoryError.type = Types::ActiveDirectoryError
-    ActiveDirectoryErrorType.add_member(:domain_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOMAIN_NOT_FOUND", traits: {"smithy.api#enumValue" => "DOMAIN_NOT_FOUND"}))
-    ActiveDirectoryErrorType.add_member(:incompatible_domain_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCOMPATIBLE_DOMAIN_MODE", traits: {"smithy.api#enumValue" => "INCOMPATIBLE_DOMAIN_MODE"}))
-    ActiveDirectoryErrorType.add_member(:wrong_vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRONG_VPC", traits: {"smithy.api#enumValue" => "WRONG_VPC"}))
-    ActiveDirectoryErrorType.add_member(:invalid_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_NETWORK_TYPE", traits: {"smithy.api#enumValue" => "INVALID_NETWORK_TYPE"}))
-    ActiveDirectoryErrorType.add_member(:invalid_domain_stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DOMAIN_STAGE", traits: {"smithy.api#enumValue" => "INVALID_DOMAIN_STAGE"}))
-    AdministrativeAction.add_member(:administrative_action_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActionType, location_name: "AdministrativeActionType"))
-    AdministrativeAction.add_member(:progress_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressPercent, location_name: "ProgressPercent"))
-    AdministrativeAction.add_member(:request_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTime, location_name: "RequestTime"))
-    AdministrativeAction.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
-    AdministrativeAction.add_member(:target_file_system_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem, location_name: "TargetFileSystemValues"))
-    AdministrativeAction.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActionFailureDetails, location_name: "FailureDetails"))
-    AdministrativeAction.add_member(:target_volume_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "TargetVolumeValues"))
-    AdministrativeAction.add_member(:target_snapshot_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot, location_name: "TargetSnapshotValues"))
-    AdministrativeAction.add_member(:total_transfer_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TotalTransferBytes, location_name: "TotalTransferBytes"))
-    AdministrativeAction.add_member(:remaining_transfer_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemainingTransferBytes, location_name: "RemainingTransferBytes"))
-    AdministrativeAction.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ActiveDirectoryErrorType.add_member(:domain_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOMAIN_NOT_FOUND", traits: {"smithy.api#enumValue" => "DOMAIN_NOT_FOUND"}))
+    ActiveDirectoryErrorType.add_member(:incompatible_domain_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCOMPATIBLE_DOMAIN_MODE", traits: {"smithy.api#enumValue" => "INCOMPATIBLE_DOMAIN_MODE"}))
+    ActiveDirectoryErrorType.add_member(:wrong_vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRONG_VPC", traits: {"smithy.api#enumValue" => "WRONG_VPC"}))
+    ActiveDirectoryErrorType.add_member(:invalid_network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_NETWORK_TYPE", traits: {"smithy.api#enumValue" => "INVALID_NETWORK_TYPE"}))
+    ActiveDirectoryErrorType.add_member(:invalid_domain_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DOMAIN_STAGE", traits: {"smithy.api#enumValue" => "INVALID_DOMAIN_STAGE"}))
+    AdministrativeAction.add_member(:administrative_action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeActionType, location_name: "AdministrativeActionType"))
+    AdministrativeAction.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressPercent, location_name: "ProgressPercent"))
+    AdministrativeAction.add_member(:request_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestTime, location_name: "RequestTime"))
+    AdministrativeAction.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "Status"))
+    AdministrativeAction.add_member(:target_file_system_values, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem, location_name: "TargetFileSystemValues"))
+    AdministrativeAction.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeActionFailureDetails, location_name: "FailureDetails"))
+    AdministrativeAction.add_member(:target_volume_values, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "TargetVolumeValues"))
+    AdministrativeAction.add_member(:target_snapshot_values, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, location_name: "TargetSnapshotValues"))
+    AdministrativeAction.add_member(:total_transfer_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalTransferBytes, location_name: "TotalTransferBytes"))
+    AdministrativeAction.add_member(:remaining_transfer_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: RemainingTransferBytes, location_name: "RemainingTransferBytes"))
+    AdministrativeAction.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AdministrativeAction.type = Types::AdministrativeAction
-    AdministrativeActionFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AdministrativeActionFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AdministrativeActionFailureDetails.type = Types::AdministrativeActionFailureDetails
-    AdministrativeActionType.add_member(:file_system_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_UPDATE", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_UPDATE"}))
-    AdministrativeActionType.add_member(:storage_optimization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_OPTIMIZATION", traits: {"smithy.api#enumValue" => "STORAGE_OPTIMIZATION"}))
-    AdministrativeActionType.add_member(:file_system_alias_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ALIAS_ASSOCIATION", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_ALIAS_ASSOCIATION"}))
-    AdministrativeActionType.add_member(:file_system_alias_disassociation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ALIAS_DISASSOCIATION", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_ALIAS_DISASSOCIATION"}))
-    AdministrativeActionType.add_member(:volume_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_UPDATE", traits: {"smithy.api#enumValue" => "VOLUME_UPDATE"}))
-    AdministrativeActionType.add_member(:snapshot_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNAPSHOT_UPDATE", traits: {"smithy.api#enumValue" => "SNAPSHOT_UPDATE"}))
-    AdministrativeActionType.add_member(:release_nfs_v3_locks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RELEASE_NFS_V3_LOCKS", traits: {"smithy.api#enumValue" => "RELEASE_NFS_V3_LOCKS"}))
-    AdministrativeActionType.add_member(:volume_restore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_RESTORE", traits: {"smithy.api#enumValue" => "VOLUME_RESTORE"}))
-    AdministrativeActionType.add_member(:throughput_optimization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THROUGHPUT_OPTIMIZATION", traits: {"smithy.api#enumValue" => "THROUGHPUT_OPTIMIZATION"}))
-    AdministrativeActionType.add_member(:iops_optimization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IOPS_OPTIMIZATION", traits: {"smithy.api#enumValue" => "IOPS_OPTIMIZATION"}))
-    AdministrativeActionType.add_member(:storage_type_optimization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_TYPE_OPTIMIZATION", traits: {"smithy.api#enumValue" => "STORAGE_TYPE_OPTIMIZATION"}))
-    AdministrativeActionType.add_member(:misconfigured_state_recovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED_STATE_RECOVERY", traits: {"smithy.api#enumValue" => "MISCONFIGURED_STATE_RECOVERY"}))
-    AdministrativeActionType.add_member(:volume_update_with_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_UPDATE_WITH_SNAPSHOT", traits: {"smithy.api#enumValue" => "VOLUME_UPDATE_WITH_SNAPSHOT"}))
-    AdministrativeActionType.add_member(:volume_initialize_with_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_INITIALIZE_WITH_SNAPSHOT", traits: {"smithy.api#enumValue" => "VOLUME_INITIALIZE_WITH_SNAPSHOT"}))
-    AdministrativeActionType.add_member(:download_data_from_backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOWNLOAD_DATA_FROM_BACKUP", traits: {"smithy.api#enumValue" => "DOWNLOAD_DATA_FROM_BACKUP"}))
-    AdministrativeActions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeAction)
-    AggregateConfiguration.add_member(:aggregates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aggregates, location_name: "Aggregates"))
-    AggregateConfiguration.add_member(:total_constituents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TotalConstituents, location_name: "TotalConstituents"))
+    AdministrativeActionType.add_member(:file_system_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_UPDATE", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_UPDATE"}))
+    AdministrativeActionType.add_member(:storage_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_OPTIMIZATION", traits: {"smithy.api#enumValue" => "STORAGE_OPTIMIZATION"}))
+    AdministrativeActionType.add_member(:file_system_alias_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ALIAS_ASSOCIATION", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_ALIAS_ASSOCIATION"}))
+    AdministrativeActionType.add_member(:file_system_alias_disassociation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ALIAS_DISASSOCIATION", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_ALIAS_DISASSOCIATION"}))
+    AdministrativeActionType.add_member(:volume_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_UPDATE", traits: {"smithy.api#enumValue" => "VOLUME_UPDATE"}))
+    AdministrativeActionType.add_member(:snapshot_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNAPSHOT_UPDATE", traits: {"smithy.api#enumValue" => "SNAPSHOT_UPDATE"}))
+    AdministrativeActionType.add_member(:release_nfs_v3_locks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RELEASE_NFS_V3_LOCKS", traits: {"smithy.api#enumValue" => "RELEASE_NFS_V3_LOCKS"}))
+    AdministrativeActionType.add_member(:volume_restore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_RESTORE", traits: {"smithy.api#enumValue" => "VOLUME_RESTORE"}))
+    AdministrativeActionType.add_member(:throughput_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THROUGHPUT_OPTIMIZATION", traits: {"smithy.api#enumValue" => "THROUGHPUT_OPTIMIZATION"}))
+    AdministrativeActionType.add_member(:iops_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IOPS_OPTIMIZATION", traits: {"smithy.api#enumValue" => "IOPS_OPTIMIZATION"}))
+    AdministrativeActionType.add_member(:storage_type_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_TYPE_OPTIMIZATION", traits: {"smithy.api#enumValue" => "STORAGE_TYPE_OPTIMIZATION"}))
+    AdministrativeActionType.add_member(:misconfigured_state_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED_STATE_RECOVERY", traits: {"smithy.api#enumValue" => "MISCONFIGURED_STATE_RECOVERY"}))
+    AdministrativeActionType.add_member(:volume_update_with_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_UPDATE_WITH_SNAPSHOT", traits: {"smithy.api#enumValue" => "VOLUME_UPDATE_WITH_SNAPSHOT"}))
+    AdministrativeActionType.add_member(:volume_initialize_with_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_INITIALIZE_WITH_SNAPSHOT", traits: {"smithy.api#enumValue" => "VOLUME_INITIALIZE_WITH_SNAPSHOT"}))
+    AdministrativeActionType.add_member(:download_data_from_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOWNLOAD_DATA_FROM_BACKUP", traits: {"smithy.api#enumValue" => "DOWNLOAD_DATA_FROM_BACKUP"}))
+    AdministrativeActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeAction)
+    AggregateConfiguration.add_member(:aggregates, ::Smithy::Schema::Shapes::MemberShape.new(target: Aggregates, location_name: "Aggregates"))
+    AggregateConfiguration.add_member(:total_constituents, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalConstituents, location_name: "TotalConstituents"))
     AggregateConfiguration.type = Types::AggregateConfiguration
-    Aggregates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aggregate)
-    Alias.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateDNSName, location_name: "Name"))
-    Alias.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AliasLifecycle, location_name: "Lifecycle"))
+    Aggregates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Aggregate)
+    Alias.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateDNSName, location_name: "Name"))
+    Alias.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasLifecycle, location_name: "Lifecycle"))
     Alias.type = Types::Alias
-    AliasLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    AliasLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    AliasLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    AliasLifecycle.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    AliasLifecycle.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    Aliases.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alias)
-    AlternateDNSNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateDNSName)
-    AssociateFileSystemAliasesRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    AssociateFileSystemAliasesRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    AssociateFileSystemAliasesRequest.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AliasLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    AliasLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    AliasLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    AliasLifecycle.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    AliasLifecycle.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    Aliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alias)
+    AlternateDNSNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateDNSName)
+    AssociateFileSystemAliasesRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    AssociateFileSystemAliasesRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AssociateFileSystemAliasesRequest.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateDNSNames, location_name: "Aliases", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AssociateFileSystemAliasesRequest.type = Types::AssociateFileSystemAliasesRequest
-    AssociateFileSystemAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
+    AssociateFileSystemAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: Aliases, location_name: "Aliases"))
     AssociateFileSystemAliasesResponse.type = Types::AssociateFileSystemAliasesResponse
-    AutoExportPolicy.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypes, location_name: "Events"))
+    AutoExportPolicy.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, location_name: "Events"))
     AutoExportPolicy.type = Types::AutoExportPolicy
-    AutoImportPolicy.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypes, location_name: "Events"))
+    AutoImportPolicy.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, location_name: "Events"))
     AutoImportPolicy.type = Types::AutoImportPolicy
-    AutoImportPolicyType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    AutoImportPolicyType.add_member(:new, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW", traits: {"smithy.api#enumValue" => "NEW"}))
-    AutoImportPolicyType.add_member(:new_changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_CHANGED", traits: {"smithy.api#enumValue" => "NEW_CHANGED"}))
-    AutoImportPolicyType.add_member(:new_changed_deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_CHANGED_DELETED", traits: {"smithy.api#enumValue" => "NEW_CHANGED_DELETED"}))
-    AutocommitPeriod.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutocommitPeriodType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    AutocommitPeriod.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutocommitPeriodValue, location_name: "Value"))
+    AutoImportPolicyType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    AutoImportPolicyType.add_member(:new, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW", traits: {"smithy.api#enumValue" => "NEW"}))
+    AutoImportPolicyType.add_member(:new_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_CHANGED", traits: {"smithy.api#enumValue" => "NEW_CHANGED"}))
+    AutoImportPolicyType.add_member(:new_changed_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_CHANGED_DELETED", traits: {"smithy.api#enumValue" => "NEW_CHANGED_DELETED"}))
+    AutocommitPeriod.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocommitPeriodType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AutocommitPeriod.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocommitPeriodValue, location_name: "Value"))
     AutocommitPeriod.type = Types::AutocommitPeriod
-    AutocommitPeriodType.add_member(:minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTES", traits: {"smithy.api#enumValue" => "MINUTES"}))
-    AutocommitPeriodType.add_member(:hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
-    AutocommitPeriodType.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
-    AutocommitPeriodType.add_member(:months, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHS", traits: {"smithy.api#enumValue" => "MONTHS"}))
-    AutocommitPeriodType.add_member(:years, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "YEARS", traits: {"smithy.api#enumValue" => "YEARS"}))
-    AutocommitPeriodType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    Backup.add_member(:backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Backup.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupLifecycle, location_name: "Lifecycle", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Backup.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupFailureDetails, location_name: "FailureDetails"))
-    Backup.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Backup.add_member(:progress_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressPercent, location_name: "ProgressPercent"))
-    Backup.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Backup.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    Backup.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    Backup.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    Backup.add_member(:file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Backup.add_member(:directory_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryBackupAttributes, location_name: "DirectoryInformation"))
-    Backup.add_member(:owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
-    Backup.add_member(:source_backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackupId"))
-    Backup.add_member(:source_backup_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "SourceBackupRegion"))
-    Backup.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    Backup.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
-    Backup.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SizeInBytes, location_name: "SizeInBytes"))
+    AutocommitPeriodType.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTES", traits: {"smithy.api#enumValue" => "MINUTES"}))
+    AutocommitPeriodType.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
+    AutocommitPeriodType.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
+    AutocommitPeriodType.add_member(:months, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHS", traits: {"smithy.api#enumValue" => "MONTHS"}))
+    AutocommitPeriodType.add_member(:years, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "YEARS", traits: {"smithy.api#enumValue" => "YEARS"}))
+    AutocommitPeriodType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    Backup.add_member(:backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Backup.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupLifecycle, location_name: "Lifecycle", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Backup.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupFailureDetails, location_name: "FailureDetails"))
+    Backup.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Backup.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressPercent, location_name: "ProgressPercent"))
+    Backup.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Backup.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    Backup.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    Backup.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    Backup.add_member(:file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem, location_name: "FileSystem", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Backup.add_member(:directory_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryBackupAttributes, location_name: "DirectoryInformation"))
+    Backup.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerId"))
+    Backup.add_member(:source_backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "SourceBackupId"))
+    Backup.add_member(:source_backup_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "SourceBackupRegion"))
+    Backup.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    Backup.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "Volume"))
+    Backup.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeInBytes, location_name: "SizeInBytes"))
     Backup.type = Types::Backup
-    BackupBeingCopied.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    BackupBeingCopied.add_member(:backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
+    BackupBeingCopied.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    BackupBeingCopied.add_member(:backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "BackupId"))
     BackupBeingCopied.type = Types::BackupBeingCopied
-    BackupFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     BackupFailureDetails.type = Types::BackupFailureDetails
-    BackupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId)
-    BackupInProgress.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId)
+    BackupInProgress.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     BackupInProgress.type = Types::BackupInProgress
-    BackupLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    BackupLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    BackupLifecycle.add_member(:transferring, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFERRING", traits: {"smithy.api#enumValue" => "TRANSFERRING"}))
-    BackupLifecycle.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    BackupLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    BackupLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    BackupLifecycle.add_member(:copying, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COPYING", traits: {"smithy.api#enumValue" => "COPYING"}))
-    BackupNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    BackupLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    BackupLifecycle.add_member(:transferring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFERRING", traits: {"smithy.api#enumValue" => "TRANSFERRING"}))
+    BackupLifecycle.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    BackupLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    BackupLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    BackupLifecycle.add_member(:copying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COPYING", traits: {"smithy.api#enumValue" => "COPYING"}))
+    BackupNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     BackupNotFound.type = Types::BackupNotFound
-    BackupRestoring.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    BackupRestoring.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    BackupRestoring.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    BackupRestoring.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
     BackupRestoring.type = Types::BackupRestoring
-    BackupType.add_member(:automatic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
-    BackupType.add_member(:user_initiated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_INITIATED", traits: {"smithy.api#enumValue" => "USER_INITIATED"}))
-    BackupType.add_member(:aws_backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_BACKUP", traits: {"smithy.api#enumValue" => "AWS_BACKUP"}))
-    Backups.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Backup)
-    BadRequest.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupType.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    BackupType.add_member(:user_initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_INITIATED", traits: {"smithy.api#enumValue" => "USER_INITIATED"}))
+    BackupType.add_member(:aws_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_BACKUP", traits: {"smithy.api#enumValue" => "AWS_BACKUP"}))
+    Backups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Backup)
+    BadRequest.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     BadRequest.type = Types::BadRequest
-    CancelDataRepositoryTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "TaskId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CancelDataRepositoryTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "TaskId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CancelDataRepositoryTaskRequest.type = Types::CancelDataRepositoryTaskRequest
-    CancelDataRepositoryTaskResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskLifecycle, location_name: "Lifecycle"))
-    CancelDataRepositoryTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "TaskId"))
+    CancelDataRepositoryTaskResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskLifecycle, location_name: "Lifecycle"))
+    CancelDataRepositoryTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "TaskId"))
     CancelDataRepositoryTaskResponse.type = Types::CancelDataRepositoryTaskResponse
-    CompletionReport.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "Enabled", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CompletionReport.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "Path"))
-    CompletionReport.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportFormat, location_name: "Format"))
-    CompletionReport.add_member(:scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportScope, location_name: "Scope"))
+    CompletionReport.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "Enabled", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CompletionReport.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "Path"))
+    CompletionReport.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFormat, location_name: "Format"))
+    CompletionReport.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportScope, location_name: "Scope"))
     CompletionReport.type = Types::CompletionReport
-    CopyBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CopyBackupRequest.add_member(:source_backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceBackupId, location_name: "SourceBackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CopyBackupRequest.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "SourceRegion"))
-    CopyBackupRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CopyBackupRequest.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTags"))
-    CopyBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CopyBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CopyBackupRequest.add_member(:source_backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceBackupId, location_name: "SourceBackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CopyBackupRequest.add_member(:source_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "SourceRegion"))
+    CopyBackupRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    CopyBackupRequest.add_member(:copy_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTags"))
+    CopyBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CopyBackupRequest.type = Types::CopyBackupRequest
-    CopyBackupResponse.add_member(:backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
+    CopyBackupResponse.add_member(:backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Backup, location_name: "Backup"))
     CopyBackupResponse.type = Types::CopyBackupResponse
-    CopySnapshotAndUpdateVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CopySnapshotAndUpdateVolumeRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CopySnapshotAndUpdateVolumeRequest.add_member(:source_snapshot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "SourceSnapshotARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CopySnapshotAndUpdateVolumeRequest.add_member(:copy_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
-    CopySnapshotAndUpdateVolumeRequest.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateOpenZFSVolumeOptions, location_name: "Options"))
+    CopySnapshotAndUpdateVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CopySnapshotAndUpdateVolumeRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CopySnapshotAndUpdateVolumeRequest.add_member(:source_snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "SourceSnapshotARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CopySnapshotAndUpdateVolumeRequest.add_member(:copy_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
+    CopySnapshotAndUpdateVolumeRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateOpenZFSVolumeOptions, location_name: "Options"))
     CopySnapshotAndUpdateVolumeRequest.type = Types::CopySnapshotAndUpdateVolumeRequest
-    CopySnapshotAndUpdateVolumeResponse.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    CopySnapshotAndUpdateVolumeResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeLifecycle, location_name: "Lifecycle"))
-    CopySnapshotAndUpdateVolumeResponse.add_member(:administrative_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
+    CopySnapshotAndUpdateVolumeResponse.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    CopySnapshotAndUpdateVolumeResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeLifecycle, location_name: "Lifecycle"))
+    CopySnapshotAndUpdateVolumeResponse.add_member(:administrative_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeActions, location_name: "AdministrativeActions"))
     CopySnapshotAndUpdateVolumeResponse.type = Types::CopySnapshotAndUpdateVolumeResponse
-    CreateAggregateConfiguration.add_member(:aggregates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aggregates, location_name: "Aggregates"))
-    CreateAggregateConfiguration.add_member(:constituents_per_aggregate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateListMultiplier, location_name: "ConstituentsPerAggregate"))
+    CreateAggregateConfiguration.add_member(:aggregates, ::Smithy::Schema::Shapes::MemberShape.new(target: Aggregates, location_name: "Aggregates"))
+    CreateAggregateConfiguration.add_member(:constituents_per_aggregate, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateListMultiplier, location_name: "ConstituentsPerAggregate"))
     CreateAggregateConfiguration.type = Types::CreateAggregateConfiguration
-    CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSFileSystemIdentity, location_name: "FileSystemIdentity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSFileSystemIdentity, location_name: "FileSystemIdentity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateAndAttachS3AccessPointOpenZFSConfiguration.type = Types::CreateAndAttachS3AccessPointOpenZFSConfiguration
-    CreateAndAttachS3AccessPointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateAndAttachS3AccessPointRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateAndAttachS3AccessPointRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateAndAttachS3AccessPointRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
-    CreateAndAttachS3AccessPointRequest.add_member(:s3_access_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointS3Configuration, location_name: "S3AccessPoint"))
+    CreateAndAttachS3AccessPointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateAndAttachS3AccessPointRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAndAttachS3AccessPointRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAndAttachS3AccessPointRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAndAttachS3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateAndAttachS3AccessPointRequest.add_member(:s3_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAndAttachS3AccessPointS3Configuration, location_name: "S3AccessPoint"))
     CreateAndAttachS3AccessPointRequest.type = Types::CreateAndAttachS3AccessPointRequest
-    CreateAndAttachS3AccessPointResponse.add_member(:s3_access_point_attachment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachment, location_name: "S3AccessPointAttachment"))
+    CreateAndAttachS3AccessPointResponse.add_member(:s3_access_point_attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachment, location_name: "S3AccessPointAttachment"))
     CreateAndAttachS3AccessPointResponse.type = Types::CreateAndAttachS3AccessPointResponse
-    CreateAndAttachS3AccessPointS3Configuration.add_member(:vpc_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointVpcConfiguration, location_name: "VpcConfiguration"))
-    CreateAndAttachS3AccessPointS3Configuration.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessPointPolicy, location_name: "Policy"))
+    CreateAndAttachS3AccessPointS3Configuration.add_member(:vpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointVpcConfiguration, location_name: "VpcConfiguration"))
+    CreateAndAttachS3AccessPointS3Configuration.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPolicy, location_name: "Policy"))
     CreateAndAttachS3AccessPointS3Configuration.type = Types::CreateAndAttachS3AccessPointS3Configuration
-    CreateBackupRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    CreateBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateBackupRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    CreateBackupRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
+    CreateBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateBackupRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
     CreateBackupRequest.type = Types::CreateBackupRequest
-    CreateBackupResponse.add_member(:backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
+    CreateBackupResponse.add_member(:backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Backup, location_name: "Backup"))
     CreateBackupResponse.type = Types::CreateBackupResponse
-    CreateDataRepositoryAssociationRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateDataRepositoryAssociationRequest.add_member(:file_system_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: "FileSystemPath"))
-    CreateDataRepositoryAssociationRequest.add_member(:data_repository_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "DataRepositoryPath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateDataRepositoryAssociationRequest.add_member(:batch_import_meta_data_on_create, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
-    CreateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
-    CreateDataRepositoryAssociationRequest.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
-    CreateDataRepositoryAssociationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateDataRepositoryAssociationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateDataRepositoryAssociationRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateDataRepositoryAssociationRequest.add_member(:file_system_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, location_name: "FileSystemPath"))
+    CreateDataRepositoryAssociationRequest.add_member(:data_repository_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "DataRepositoryPath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateDataRepositoryAssociationRequest.add_member(:batch_import_meta_data_on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
+    CreateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Megabytes, location_name: "ImportedFileChunkSize"))
+    CreateDataRepositoryAssociationRequest.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataRepositoryConfiguration, location_name: "S3"))
+    CreateDataRepositoryAssociationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateDataRepositoryAssociationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateDataRepositoryAssociationRequest.type = Types::CreateDataRepositoryAssociationRequest
-    CreateDataRepositoryAssociationResponse.add_member(:association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociation, location_name: "Association"))
+    CreateDataRepositoryAssociationResponse.add_member(:association, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociation, location_name: "Association"))
     CreateDataRepositoryAssociationResponse.type = Types::CreateDataRepositoryAssociationResponse
-    CreateDataRepositoryTaskRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateDataRepositoryTaskRequest.add_member(:paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskPaths, location_name: "Paths"))
-    CreateDataRepositoryTaskRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateDataRepositoryTaskRequest.add_member(:report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletionReport, location_name: "Report", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateDataRepositoryTaskRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateDataRepositoryTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateDataRepositoryTaskRequest.add_member(:capacity_to_release, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityToRelease, location_name: "CapacityToRelease"))
-    CreateDataRepositoryTaskRequest.add_member(:release_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseConfiguration, location_name: "ReleaseConfiguration"))
+    CreateDataRepositoryTaskRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateDataRepositoryTaskRequest.add_member(:paths, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskPaths, location_name: "Paths"))
+    CreateDataRepositoryTaskRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateDataRepositoryTaskRequest.add_member(:report, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionReport, location_name: "Report", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateDataRepositoryTaskRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateDataRepositoryTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateDataRepositoryTaskRequest.add_member(:capacity_to_release, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityToRelease, location_name: "CapacityToRelease"))
+    CreateDataRepositoryTaskRequest.add_member(:release_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseConfiguration, location_name: "ReleaseConfiguration"))
     CreateDataRepositoryTaskRequest.type = Types::CreateDataRepositoryTaskRequest
-    CreateDataRepositoryTaskResponse.add_member(:data_repository_task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTask, location_name: "DataRepositoryTask"))
+    CreateDataRepositoryTaskResponse.add_member(:data_repository_task, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTask, location_name: "DataRepositoryTask"))
     CreateDataRepositoryTaskResponse.type = Types::CreateDataRepositoryTaskResponse
-    CreateFileCacheDataRepositoryAssociations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheDataRepositoryAssociation)
-    CreateFileCacheLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileCacheLustreConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLustreDeploymentType, location_name: "DeploymentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    CreateFileCacheLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLustreMetadataConfiguration, location_name: "MetadataConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileCacheDataRepositoryAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheDataRepositoryAssociation)
+    CreateFileCacheLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileCacheLustreConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLustreDeploymentType, location_name: "DeploymentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileCacheLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLustreMetadataConfiguration, location_name: "MetadataConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateFileCacheLustreConfiguration.type = Types::CreateFileCacheLustreConfiguration
-    CreateFileCacheRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateFileCacheRequest.add_member(:file_cache_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheType, location_name: "FileCacheType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileCacheRequest.add_member(:file_cache_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileCacheTypeVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileCacheRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileCacheRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileCacheRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
-    CreateFileCacheRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateFileCacheRequest.add_member(:copy_tags_to_data_repository_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyTagsToDataRepositoryAssociations, location_name: "CopyTagsToDataRepositoryAssociations"))
-    CreateFileCacheRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CreateFileCacheRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileCacheLustreConfiguration, location_name: "LustreConfiguration"))
-    CreateFileCacheRequest.add_member(:data_repository_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileCacheDataRepositoryAssociations, location_name: "DataRepositoryAssociations"))
+    CreateFileCacheRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateFileCacheRequest.add_member(:file_cache_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheType, location_name: "FileCacheType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileCacheRequest.add_member(:file_cache_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemTypeVersion, location_name: "FileCacheTypeVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileCacheRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "StorageCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileCacheRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileCacheRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    CreateFileCacheRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateFileCacheRequest.add_member(:copy_tags_to_data_repository_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyTagsToDataRepositoryAssociations, location_name: "CopyTagsToDataRepositoryAssociations"))
+    CreateFileCacheRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    CreateFileCacheRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    CreateFileCacheRequest.add_member(:data_repository_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileCacheDataRepositoryAssociations, location_name: "DataRepositoryAssociations"))
     CreateFileCacheRequest.type = Types::CreateFileCacheRequest
-    CreateFileCacheResponse.add_member(:file_cache, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheCreating, location_name: "FileCache"))
+    CreateFileCacheResponse.add_member(:file_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheCreating, location_name: "FileCache"))
     CreateFileCacheResponse.type = Types::CreateFileCacheResponse
-    CreateFileSystemFromBackupRequest.add_member(:backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemFromBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateFileSystemFromBackupRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemFromBackupRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
-    CreateFileSystemFromBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateFileSystemFromBackupRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
-    CreateFileSystemFromBackupRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
-    CreateFileSystemFromBackupRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
-    CreateFileSystemFromBackupRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CreateFileSystemFromBackupRequest.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
-    CreateFileSystemFromBackupRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
-    CreateFileSystemFromBackupRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
-    CreateFileSystemFromBackupRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateFileSystemFromBackupRequest.add_member(:backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemFromBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateFileSystemFromBackupRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemFromBackupRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    CreateFileSystemFromBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateFileSystemFromBackupRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
+    CreateFileSystemFromBackupRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
+    CreateFileSystemFromBackupRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "StorageType"))
+    CreateFileSystemFromBackupRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    CreateFileSystemFromBackupRequest.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    CreateFileSystemFromBackupRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateFileSystemFromBackupRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "StorageCapacity"))
+    CreateFileSystemFromBackupRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     CreateFileSystemFromBackupRequest.type = Types::CreateFileSystemFromBackupRequest
-    CreateFileSystemFromBackupResponse.add_member(:file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
+    CreateFileSystemFromBackupResponse.add_member(:file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem, location_name: "FileSystem"))
     CreateFileSystemFromBackupResponse.type = Types::CreateFileSystemFromBackupResponse
-    CreateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    CreateFileSystemLustreConfiguration.add_member(:import_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ImportPath"))
-    CreateFileSystemLustreConfiguration.add_member(:export_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ExportPath"))
-    CreateFileSystemLustreConfiguration.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
-    CreateFileSystemLustreConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreDeploymentType, location_name: "DeploymentType"))
-    CreateFileSystemLustreConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
-    CreateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
-    CreateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    CreateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    CreateFileSystemLustreConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    CreateFileSystemLustreConfiguration.add_member(:drive_cache_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
-    CreateFileSystemLustreConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
-    CreateFileSystemLustreConfiguration.add_member(:efa_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "EfaEnabled"))
-    CreateFileSystemLustreConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
-    CreateFileSystemLustreConfiguration.add_member(:root_squash_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
-    CreateFileSystemLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
-    CreateFileSystemLustreConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
-    CreateFileSystemLustreConfiguration.add_member(:data_read_cache_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
+    CreateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileSystemLustreConfiguration.add_member(:import_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "ImportPath"))
+    CreateFileSystemLustreConfiguration.add_member(:export_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "ExportPath"))
+    CreateFileSystemLustreConfiguration.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Megabytes, location_name: "ImportedFileChunkSize"))
+    CreateFileSystemLustreConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreDeploymentType, location_name: "DeploymentType"))
+    CreateFileSystemLustreConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoImportPolicyType, location_name: "AutoImportPolicy"))
+    CreateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    CreateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    CreateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    CreateFileSystemLustreConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    CreateFileSystemLustreConfiguration.add_member(:drive_cache_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DriveCacheType, location_name: "DriveCacheType"))
+    CreateFileSystemLustreConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCompressionType, location_name: "DataCompressionType"))
+    CreateFileSystemLustreConfiguration.add_member(:efa_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "EfaEnabled"))
+    CreateFileSystemLustreConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
+    CreateFileSystemLustreConfiguration.add_member(:root_squash_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
+    CreateFileSystemLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
+    CreateFileSystemLustreConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
+    CreateFileSystemLustreConfiguration.add_member(:data_read_cache_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
     CreateFileSystemLustreConfiguration.type = Types::CreateFileSystemLustreConfiguration
-    CreateFileSystemLustreMetadataConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))
-    CreateFileSystemLustreMetadataConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataConfigurationMode, location_name: "Mode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemLustreMetadataConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataIops, location_name: "Iops"))
+    CreateFileSystemLustreMetadataConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfigurationMode, location_name: "Mode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateFileSystemLustreMetadataConfiguration.type = Types::CreateFileSystemLustreMetadataConfiguration
-    CreateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    CreateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    CreateFileSystemOntapConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapDeploymentType, location_name: "DeploymentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemOntapConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
-    CreateFileSystemOntapConfiguration.add_member(:fsx_admin_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
-    CreateFileSystemOntapConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
-    CreateFileSystemOntapConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
-    CreateFileSystemOntapConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
-    CreateFileSystemOntapConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
-    CreateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    CreateFileSystemOntapConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
-    CreateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
-    CreateFileSystemOntapConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
+    CreateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    CreateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    CreateFileSystemOntapConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapDeploymentType, location_name: "DeploymentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemOntapConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    CreateFileSystemOntapConfiguration.add_member(:fsx_admin_password, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminPassword, location_name: "FsxAdminPassword"))
+    CreateFileSystemOntapConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    CreateFileSystemOntapConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "PreferredSubnetId"))
+    CreateFileSystemOntapConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "RouteTableIds"))
+    CreateFileSystemOntapConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    CreateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileSystemOntapConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::MemberShape.new(target: HAPairs, location_name: "HAPairs"))
+    CreateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    CreateFileSystemOntapConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     CreateFileSystemOntapConfiguration.type = Types::CreateFileSystemOntapConfiguration
-    CreateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToVolumes"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSDeploymentType, location_name: "DeploymentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemOpenZFSConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:root_volume_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSCreateRootVolumeConfiguration, location_name: "RootVolumeConfiguration"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
-    CreateFileSystemOpenZFSConfiguration.add_member(:read_cache_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToVolumes"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSDeploymentType, location_name: "DeploymentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemOpenZFSConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:root_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSCreateRootVolumeConfiguration, location_name: "RootVolumeConfiguration"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "PreferredSubnetId"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "RouteTableIds"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:read_cache_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
     CreateFileSystemOpenZFSConfiguration.type = Types::CreateFileSystemOpenZFSConfiguration
-    CreateFileSystemRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateFileSystemRequest.add_member(:file_system_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemType, location_name: "FileSystemType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
-    CreateFileSystemRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
-    CreateFileSystemRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
-    CreateFileSystemRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateFileSystemRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CreateFileSystemRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
-    CreateFileSystemRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
-    CreateFileSystemRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
-    CreateFileSystemRequest.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
-    CreateFileSystemRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
-    CreateFileSystemRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateFileSystemRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateFileSystemRequest.add_member(:file_system_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemType, location_name: "FileSystemType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "StorageCapacity"))
+    CreateFileSystemRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "StorageType"))
+    CreateFileSystemRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    CreateFileSystemRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateFileSystemRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    CreateFileSystemRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
+    CreateFileSystemRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
+    CreateFileSystemRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
+    CreateFileSystemRequest.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    CreateFileSystemRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateFileSystemRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     CreateFileSystemRequest.type = Types::CreateFileSystemRequest
-    CreateFileSystemResponse.add_member(:file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
+    CreateFileSystemResponse.add_member(:file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem, location_name: "FileSystem"))
     CreateFileSystemResponse.type = Types::CreateFileSystemResponse
-    CreateFileSystemWindowsConfiguration.add_member(:active_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
-    CreateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfiguration, location_name: "SelfManagedActiveDirectoryConfiguration"))
-    CreateFileSystemWindowsConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsDeploymentType, location_name: "DeploymentType"))
-    CreateFileSystemWindowsConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
-    CreateFileSystemWindowsConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateFileSystemWindowsConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    CreateFileSystemWindowsConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    CreateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    CreateFileSystemWindowsConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    CreateFileSystemWindowsConfiguration.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases"))
-    CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
-    CreateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:active_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "ActiveDirectoryId"))
+    CreateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManagedActiveDirectoryConfiguration, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsDeploymentType, location_name: "DeploymentType"))
+    CreateFileSystemWindowsConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "PreferredSubnetId"))
+    CreateFileSystemWindowsConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateFileSystemWindowsConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileSystemWindowsConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    CreateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    CreateFileSystemWindowsConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    CreateFileSystemWindowsConfiguration.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateDNSNames, location_name: "Aliases"))
+    CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     CreateFileSystemWindowsConfiguration.type = Types::CreateFileSystemWindowsConfiguration
-    CreateOntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
-    CreateOntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
-    CreateOntapVolumeConfiguration.add_member(:size_in_megabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeCapacity, location_name: "SizeInMegabytes", traits: {"smithy.api#deprecated" => {"message" => "This property is deprecated, use SizeInBytes instead"}}))
-    CreateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "StorageEfficiencyEnabled"))
-    CreateOntapVolumeConfiguration.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateOntapVolumeConfiguration.add_member(:tiering_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
-    CreateOntapVolumeConfiguration.add_member(:ontap_volume_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputOntapVolumeType, location_name: "OntapVolumeType"))
-    CreateOntapVolumeConfiguration.add_member(:snapshot_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
-    CreateOntapVolumeConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    CreateOntapVolumeConfiguration.add_member(:snaplock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnaplockConfiguration, location_name: "SnaplockConfiguration"))
-    CreateOntapVolumeConfiguration.add_member(:volume_style, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeStyle, location_name: "VolumeStyle"))
-    CreateOntapVolumeConfiguration.add_member(:aggregate_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAggregateConfiguration, location_name: "AggregateConfiguration"))
-    CreateOntapVolumeConfiguration.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeCapacityBytes, location_name: "SizeInBytes"))
+    CreateOntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JunctionPath, location_name: "JunctionPath"))
+    CreateOntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityStyle, location_name: "SecurityStyle"))
+    CreateOntapVolumeConfiguration.add_member(:size_in_megabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeCapacity, location_name: "SizeInMegabytes", traits: {"smithy.api#deprecated" => {"message" => "This property is deprecated, use SizeInBytes instead"}}))
+    CreateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "StorageEfficiencyEnabled"))
+    CreateOntapVolumeConfiguration.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId, location_name: "StorageVirtualMachineId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateOntapVolumeConfiguration.add_member(:tiering_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringPolicy, location_name: "TieringPolicy"))
+    CreateOntapVolumeConfiguration.add_member(:ontap_volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InputOntapVolumeType, location_name: "OntapVolumeType"))
+    CreateOntapVolumeConfiguration.add_member(:snapshot_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    CreateOntapVolumeConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    CreateOntapVolumeConfiguration.add_member(:snaplock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateSnaplockConfiguration, location_name: "SnaplockConfiguration"))
+    CreateOntapVolumeConfiguration.add_member(:volume_style, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStyle, location_name: "VolumeStyle"))
+    CreateOntapVolumeConfiguration.add_member(:aggregate_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAggregateConfiguration, location_name: "AggregateConfiguration"))
+    CreateOntapVolumeConfiguration.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeCapacityBytes, location_name: "SizeInBytes"))
     CreateOntapVolumeConfiguration.type = Types::CreateOntapVolumeConfiguration
-    CreateOpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "SnapshotARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateOpenZFSOriginSnapshotConfiguration.add_member(:copy_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateOpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "SnapshotARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateOpenZFSOriginSnapshotConfiguration.add_member(:copy_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSCopyStrategy, location_name: "CopyStrategy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateOpenZFSOriginSnapshotConfiguration.type = Types::CreateOpenZFSOriginSnapshotConfiguration
-    CreateOpenZFSVolumeConfiguration.add_member(:parent_volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "ParentVolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateOpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityReservationGiB"))
-    CreateOpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityQuotaGiB"))
-    CreateOpenZFSVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
-    CreateOpenZFSVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
-    CreateOpenZFSVolumeConfiguration.add_member(:copy_tags_to_snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToSnapshots"))
-    CreateOpenZFSVolumeConfiguration.add_member(:origin_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOpenZFSOriginSnapshotConfiguration, location_name: "OriginSnapshot"))
-    CreateOpenZFSVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
-    CreateOpenZFSVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
-    CreateOpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    CreateOpenZFSVolumeConfiguration.add_member(:parent_volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "ParentVolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateOpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityReservationGiB"))
+    CreateOpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityQuotaGiB"))
+    CreateOpenZFSVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
+    CreateOpenZFSVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    CreateOpenZFSVolumeConfiguration.add_member(:copy_tags_to_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToSnapshots"))
+    CreateOpenZFSVolumeConfiguration.add_member(:origin_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOpenZFSOriginSnapshotConfiguration, location_name: "OriginSnapshot"))
+    CreateOpenZFSVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadOnly, location_name: "ReadOnly"))
+    CreateOpenZFSVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExports, location_name: "NfsExports"))
+    CreateOpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
     CreateOpenZFSVolumeConfiguration.type = Types::CreateOpenZFSVolumeConfiguration
-    CreateSnaplockConfiguration.add_member(:audit_log_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "AuditLogVolume"))
-    CreateSnaplockConfiguration.add_member(:autocommit_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutocommitPeriod, location_name: "AutocommitPeriod"))
-    CreateSnaplockConfiguration.add_member(:privileged_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivilegedDelete, location_name: "PrivilegedDelete"))
-    CreateSnaplockConfiguration.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnaplockRetentionPeriod, location_name: "RetentionPeriod"))
-    CreateSnaplockConfiguration.add_member(:snaplock_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnaplockType, location_name: "SnaplockType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateSnaplockConfiguration.add_member(:volume_append_mode_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "VolumeAppendModeEnabled"))
+    CreateSnaplockConfiguration.add_member(:audit_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "AuditLogVolume"))
+    CreateSnaplockConfiguration.add_member(:autocommit_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocommitPeriod, location_name: "AutocommitPeriod"))
+    CreateSnaplockConfiguration.add_member(:privileged_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivilegedDelete, location_name: "PrivilegedDelete"))
+    CreateSnaplockConfiguration.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: SnaplockRetentionPeriod, location_name: "RetentionPeriod"))
+    CreateSnaplockConfiguration.add_member(:snaplock_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SnaplockType, location_name: "SnaplockType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateSnaplockConfiguration.add_member(:volume_append_mode_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "VolumeAppendModeEnabled"))
     CreateSnaplockConfiguration.type = Types::CreateSnaplockConfiguration
-    CreateSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateSnapshotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateSnapshotRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateSnapshotRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateSnapshotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateSnapshotRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateSnapshotRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateSnapshotRequest.type = Types::CreateSnapshotRequest
-    CreateSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
+    CreateSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, location_name: "Snapshot"))
     CreateSnapshotResponse.type = Types::CreateSnapshotResponse
-    CreateStorageVirtualMachineRequest.add_member(:active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
-    CreateStorageVirtualMachineRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateStorageVirtualMachineRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateStorageVirtualMachineRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateStorageVirtualMachineRequest.add_member(:svm_admin_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminPassword, location_name: "SvmAdminPassword"))
-    CreateStorageVirtualMachineRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateStorageVirtualMachineRequest.add_member(:root_volume_security_style, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineRootVolumeSecurityStyle, location_name: "RootVolumeSecurityStyle"))
+    CreateStorageVirtualMachineRequest.add_member(:active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
+    CreateStorageVirtualMachineRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateStorageVirtualMachineRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateStorageVirtualMachineRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateStorageVirtualMachineRequest.add_member(:svm_admin_password, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminPassword, location_name: "SvmAdminPassword"))
+    CreateStorageVirtualMachineRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateStorageVirtualMachineRequest.add_member(:root_volume_security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineRootVolumeSecurityStyle, location_name: "RootVolumeSecurityStyle"))
     CreateStorageVirtualMachineRequest.type = Types::CreateStorageVirtualMachineRequest
-    CreateStorageVirtualMachineResponse.add_member(:storage_virtual_machine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachine, location_name: "StorageVirtualMachine"))
+    CreateStorageVirtualMachineResponse.add_member(:storage_virtual_machine, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachine, location_name: "StorageVirtualMachine"))
     CreateStorageVirtualMachineResponse.type = Types::CreateStorageVirtualMachineResponse
-    CreateSvmActiveDirectoryConfiguration.add_member(:net_bios_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetBiosAlias, location_name: "NetBiosName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateSvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfiguration, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    CreateSvmActiveDirectoryConfiguration.add_member(:net_bios_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetBiosAlias, location_name: "NetBiosName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateSvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManagedActiveDirectoryConfiguration, location_name: "SelfManagedActiveDirectoryConfiguration"))
     CreateSvmActiveDirectoryConfiguration.type = Types::CreateSvmActiveDirectoryConfiguration
-    CreateVolumeFromBackupRequest.add_member(:backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateVolumeFromBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateVolumeFromBackupRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateVolumeFromBackupRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
-    CreateVolumeFromBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateVolumeFromBackupRequest.add_member(:backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateVolumeFromBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateVolumeFromBackupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateVolumeFromBackupRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    CreateVolumeFromBackupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     CreateVolumeFromBackupRequest.type = Types::CreateVolumeFromBackupRequest
-    CreateVolumeFromBackupResponse.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
+    CreateVolumeFromBackupResponse.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "Volume"))
     CreateVolumeFromBackupResponse.type = Types::CreateVolumeFromBackupResponse
-    CreateVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateVolumeRequest.add_member(:volume_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateVolumeRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateVolumeRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
-    CreateVolumeRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    CreateVolumeRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateVolumeRequest.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeType, location_name: "VolumeType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateVolumeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateVolumeRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    CreateVolumeRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    CreateVolumeRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
     CreateVolumeRequest.type = Types::CreateVolumeRequest
-    CreateVolumeResponse.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
+    CreateVolumeResponse.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "Volume"))
     CreateVolumeResponse.type = Types::CreateVolumeResponse
-    DataCompressionType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    DataCompressionType.add_member(:lz4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LZ4", traits: {"smithy.api#enumValue" => "LZ4"}))
-    DataRepositoryAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, location_name: "AssociationId"))
-    DataRepositoryAssociation.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    DataRepositoryAssociation.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    DataRepositoryAssociation.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
-    DataRepositoryAssociation.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryFailureDetails, location_name: "FailureDetails"))
-    DataRepositoryAssociation.add_member(:file_system_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: "FileSystemPath"))
-    DataRepositoryAssociation.add_member(:data_repository_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "DataRepositoryPath"))
-    DataRepositoryAssociation.add_member(:batch_import_meta_data_on_create, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
-    DataRepositoryAssociation.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
-    DataRepositoryAssociation.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
-    DataRepositoryAssociation.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    DataRepositoryAssociation.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    DataRepositoryAssociation.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
-    DataRepositoryAssociation.add_member(:file_cache_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: "FileCachePath"))
-    DataRepositoryAssociation.add_member(:data_repository_subdirectories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubDirectoriesPaths, location_name: "DataRepositorySubdirectories"))
-    DataRepositoryAssociation.add_member(:nfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NFSDataRepositoryConfiguration, location_name: "NFS"))
+    DataCompressionType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    DataCompressionType.add_member(:lz4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LZ4", traits: {"smithy.api#enumValue" => "LZ4"}))
+    DataRepositoryAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationId, location_name: "AssociationId"))
+    DataRepositoryAssociation.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    DataRepositoryAssociation.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
+    DataRepositoryAssociation.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryLifecycle, location_name: "Lifecycle"))
+    DataRepositoryAssociation.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryFailureDetails, location_name: "FailureDetails"))
+    DataRepositoryAssociation.add_member(:file_system_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, location_name: "FileSystemPath"))
+    DataRepositoryAssociation.add_member(:data_repository_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "DataRepositoryPath"))
+    DataRepositoryAssociation.add_member(:batch_import_meta_data_on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
+    DataRepositoryAssociation.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Megabytes, location_name: "ImportedFileChunkSize"))
+    DataRepositoryAssociation.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataRepositoryConfiguration, location_name: "S3"))
+    DataRepositoryAssociation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    DataRepositoryAssociation.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    DataRepositoryAssociation.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId, location_name: "FileCacheId"))
+    DataRepositoryAssociation.add_member(:file_cache_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, location_name: "FileCachePath"))
+    DataRepositoryAssociation.add_member(:data_repository_subdirectories, ::Smithy::Schema::Shapes::MemberShape.new(target: SubDirectoriesPaths, location_name: "DataRepositorySubdirectories"))
+    DataRepositoryAssociation.add_member(:nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: NFSDataRepositoryConfiguration, location_name: "NFS"))
     DataRepositoryAssociation.type = Types::DataRepositoryAssociation
-    DataRepositoryAssociationIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationId)
-    DataRepositoryAssociationNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryAssociationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationId)
+    DataRepositoryAssociationNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DataRepositoryAssociationNotFound.type = Types::DataRepositoryAssociationNotFound
-    DataRepositoryAssociations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociation)
-    DataRepositoryConfiguration.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
-    DataRepositoryConfiguration.add_member(:import_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ImportPath"))
-    DataRepositoryConfiguration.add_member(:export_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ExportPath"))
-    DataRepositoryConfiguration.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
-    DataRepositoryConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
-    DataRepositoryConfiguration.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryFailureDetails, location_name: "FailureDetails"))
+    DataRepositoryAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociation)
+    DataRepositoryConfiguration.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryLifecycle, location_name: "Lifecycle"))
+    DataRepositoryConfiguration.add_member(:import_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "ImportPath"))
+    DataRepositoryConfiguration.add_member(:export_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "ExportPath"))
+    DataRepositoryConfiguration.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Megabytes, location_name: "ImportedFileChunkSize"))
+    DataRepositoryConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoImportPolicyType, location_name: "AutoImportPolicy"))
+    DataRepositoryConfiguration.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryFailureDetails, location_name: "FailureDetails"))
     DataRepositoryConfiguration.type = Types::DataRepositoryConfiguration
-    DataRepositoryFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DataRepositoryFailureDetails.type = Types::DataRepositoryFailureDetails
-    DataRepositoryLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    DataRepositoryLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    DataRepositoryLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
-    DataRepositoryLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    DataRepositoryLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    DataRepositoryLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DataRepositoryTask.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "TaskId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DataRepositoryTask.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskLifecycle, location_name: "Lifecycle", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DataRepositoryTask.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DataRepositoryTask.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DataRepositoryTask.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
-    DataRepositoryTask.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndTime, location_name: "EndTime"))
-    DataRepositoryTask.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    DataRepositoryTask.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    DataRepositoryTask.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    DataRepositoryTask.add_member(:paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskPaths, location_name: "Paths"))
-    DataRepositoryTask.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskFailureDetails, location_name: "FailureDetails"))
-    DataRepositoryTask.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskStatus, location_name: "Status"))
-    DataRepositoryTask.add_member(:report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletionReport, location_name: "Report"))
-    DataRepositoryTask.add_member(:capacity_to_release, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityToRelease, location_name: "CapacityToRelease"))
-    DataRepositoryTask.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
-    DataRepositoryTask.add_member(:release_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseConfiguration, location_name: "ReleaseConfiguration"))
+    DataRepositoryLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    DataRepositoryLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    DataRepositoryLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
+    DataRepositoryLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    DataRepositoryLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    DataRepositoryLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DataRepositoryTask.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "TaskId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DataRepositoryTask.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskLifecycle, location_name: "Lifecycle", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DataRepositoryTask.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DataRepositoryTask.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DataRepositoryTask.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, location_name: "StartTime"))
+    DataRepositoryTask.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTime, location_name: "EndTime"))
+    DataRepositoryTask.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    DataRepositoryTask.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    DataRepositoryTask.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
+    DataRepositoryTask.add_member(:paths, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskPaths, location_name: "Paths"))
+    DataRepositoryTask.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskFailureDetails, location_name: "FailureDetails"))
+    DataRepositoryTask.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskStatus, location_name: "Status"))
+    DataRepositoryTask.add_member(:report, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionReport, location_name: "Report"))
+    DataRepositoryTask.add_member(:capacity_to_release, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityToRelease, location_name: "CapacityToRelease"))
+    DataRepositoryTask.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId, location_name: "FileCacheId"))
+    DataRepositoryTask.add_member(:release_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseConfiguration, location_name: "ReleaseConfiguration"))
     DataRepositoryTask.type = Types::DataRepositoryTask
-    DataRepositoryTaskEnded.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryTaskEnded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DataRepositoryTaskEnded.type = Types::DataRepositoryTaskEnded
-    DataRepositoryTaskExecuting.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryTaskExecuting.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DataRepositoryTaskExecuting.type = Types::DataRepositoryTaskExecuting
-    DataRepositoryTaskFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryTaskFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DataRepositoryTaskFailureDetails.type = Types::DataRepositoryTaskFailureDetails
-    DataRepositoryTaskFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskFilterName, location_name: "Name"))
-    DataRepositoryTaskFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskFilterValues, location_name: "Values"))
+    DataRepositoryTaskFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskFilterName, location_name: "Name"))
+    DataRepositoryTaskFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskFilterValues, location_name: "Values"))
     DataRepositoryTaskFilter.type = Types::DataRepositoryTaskFilter
-    DataRepositoryTaskFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
-    DataRepositoryTaskFilterName.add_member(:task_lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TASK_LIFECYCLE", traits: {"smithy.api#enumValue" => "task-lifecycle"}))
-    DataRepositoryTaskFilterName.add_member(:data_repo_association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_REPO_ASSOCIATION_ID", traits: {"smithy.api#enumValue" => "data-repository-association-id"}))
-    DataRepositoryTaskFilterName.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_ID", traits: {"smithy.api#enumValue" => "file-cache-id"}))
-    DataRepositoryTaskFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskFilterValue)
-    DataRepositoryTaskFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskFilter)
-    DataRepositoryTaskLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    DataRepositoryTaskLifecycle.add_member(:executing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXECUTING", traits: {"smithy.api#enumValue" => "EXECUTING"}))
-    DataRepositoryTaskLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DataRepositoryTaskLifecycle.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    DataRepositoryTaskLifecycle.add_member(:canceled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
-    DataRepositoryTaskLifecycle.add_member(:canceling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELING", traits: {"smithy.api#enumValue" => "CANCELING"}))
-    DataRepositoryTaskNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryTaskFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
+    DataRepositoryTaskFilterName.add_member(:task_lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TASK_LIFECYCLE", traits: {"smithy.api#enumValue" => "task-lifecycle"}))
+    DataRepositoryTaskFilterName.add_member(:data_repo_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_REPO_ASSOCIATION_ID", traits: {"smithy.api#enumValue" => "data-repository-association-id"}))
+    DataRepositoryTaskFilterName.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_ID", traits: {"smithy.api#enumValue" => "file-cache-id"}))
+    DataRepositoryTaskFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskFilterValue)
+    DataRepositoryTaskFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskFilter)
+    DataRepositoryTaskLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    DataRepositoryTaskLifecycle.add_member(:executing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXECUTING", traits: {"smithy.api#enumValue" => "EXECUTING"}))
+    DataRepositoryTaskLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DataRepositoryTaskLifecycle.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    DataRepositoryTaskLifecycle.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    DataRepositoryTaskLifecycle.add_member(:canceling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELING", traits: {"smithy.api#enumValue" => "CANCELING"}))
+    DataRepositoryTaskNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DataRepositoryTaskNotFound.type = Types::DataRepositoryTaskNotFound
-    DataRepositoryTaskPaths.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskPath)
-    DataRepositoryTaskStatus.add_member(:total_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
-    DataRepositoryTaskStatus.add_member(:succeeded_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SucceededCount, location_name: "SucceededCount"))
-    DataRepositoryTaskStatus.add_member(:failed_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedCount, location_name: "FailedCount"))
-    DataRepositoryTaskStatus.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))
-    DataRepositoryTaskStatus.add_member(:released_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleasedCapacity, location_name: "ReleasedCapacity"))
+    DataRepositoryTaskPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskPath)
+    DataRepositoryTaskStatus.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalCount, location_name: "TotalCount"))
+    DataRepositoryTaskStatus.add_member(:succeeded_count, ::Smithy::Schema::Shapes::MemberShape.new(target: SucceededCount, location_name: "SucceededCount"))
+    DataRepositoryTaskStatus.add_member(:failed_count, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCount, location_name: "FailedCount"))
+    DataRepositoryTaskStatus.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedTime, location_name: "LastUpdatedTime"))
+    DataRepositoryTaskStatus.add_member(:released_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleasedCapacity, location_name: "ReleasedCapacity"))
     DataRepositoryTaskStatus.type = Types::DataRepositoryTaskStatus
-    DataRepositoryTaskType.add_member(:export, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPORT", traits: {"smithy.api#enumValue" => "EXPORT_TO_REPOSITORY"}))
-    DataRepositoryTaskType.add_member(:import, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPORT", traits: {"smithy.api#enumValue" => "IMPORT_METADATA_FROM_REPOSITORY"}))
-    DataRepositoryTaskType.add_member(:eviction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVICTION", traits: {"smithy.api#enumValue" => "RELEASE_DATA_FROM_FILESYSTEM"}))
-    DataRepositoryTaskType.add_member(:auto_triggered_eviction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO_TRIGGERED_EVICTION", traits: {"smithy.api#enumValue" => "AUTO_RELEASE_DATA"}))
-    DataRepositoryTasks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTask)
-    DeleteBackupRequest.add_member(:backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DeleteBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DataRepositoryTaskType.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPORT", traits: {"smithy.api#enumValue" => "EXPORT_TO_REPOSITORY"}))
+    DataRepositoryTaskType.add_member(:import, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMPORT", traits: {"smithy.api#enumValue" => "IMPORT_METADATA_FROM_REPOSITORY"}))
+    DataRepositoryTaskType.add_member(:eviction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVICTION", traits: {"smithy.api#enumValue" => "RELEASE_DATA_FROM_FILESYSTEM"}))
+    DataRepositoryTaskType.add_member(:auto_triggered_eviction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO_TRIGGERED_EVICTION", traits: {"smithy.api#enumValue" => "AUTO_RELEASE_DATA"}))
+    DataRepositoryTasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTask)
+    DeleteBackupRequest.add_member(:backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "BackupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteBackupRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DeleteBackupRequest.type = Types::DeleteBackupRequest
-    DeleteBackupResponse.add_member(:backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
-    DeleteBackupResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupLifecycle, location_name: "Lifecycle"))
+    DeleteBackupResponse.add_member(:backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "BackupId"))
+    DeleteBackupResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupLifecycle, location_name: "Lifecycle"))
     DeleteBackupResponse.type = Types::DeleteBackupResponse
-    DeleteDataRepositoryAssociationRequest.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, location_name: "AssociationId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DeleteDataRepositoryAssociationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DeleteDataRepositoryAssociationRequest.add_member(:delete_data_in_file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
+    DeleteDataRepositoryAssociationRequest.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationId, location_name: "AssociationId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteDataRepositoryAssociationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteDataRepositoryAssociationRequest.add_member(:delete_data_in_file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
     DeleteDataRepositoryAssociationRequest.type = Types::DeleteDataRepositoryAssociationRequest
-    DeleteDataRepositoryAssociationResponse.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, location_name: "AssociationId"))
-    DeleteDataRepositoryAssociationResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
-    DeleteDataRepositoryAssociationResponse.add_member(:delete_data_in_file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
+    DeleteDataRepositoryAssociationResponse.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationId, location_name: "AssociationId"))
+    DeleteDataRepositoryAssociationResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryLifecycle, location_name: "Lifecycle"))
+    DeleteDataRepositoryAssociationResponse.add_member(:delete_data_in_file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
     DeleteDataRepositoryAssociationResponse.type = Types::DeleteDataRepositoryAssociationResponse
-    DeleteFileCacheRequest.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DeleteFileCacheRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteFileCacheRequest.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId, location_name: "FileCacheId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteFileCacheRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DeleteFileCacheRequest.type = Types::DeleteFileCacheRequest
-    DeleteFileCacheResponse.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
-    DeleteFileCacheResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLifecycle, location_name: "Lifecycle"))
+    DeleteFileCacheResponse.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId, location_name: "FileCacheId"))
+    DeleteFileCacheResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLifecycle, location_name: "Lifecycle"))
     DeleteFileCacheResponse.type = Types::DeleteFileCacheResponse
-    DeleteFileSystemLustreConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
-    DeleteFileSystemLustreConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemLustreConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "SkipFinalBackup"))
+    DeleteFileSystemLustreConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemLustreConfiguration.type = Types::DeleteFileSystemLustreConfiguration
-    DeleteFileSystemLustreResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
-    DeleteFileSystemLustreResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemLustreResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "FinalBackupId"))
+    DeleteFileSystemLustreResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemLustreResponse.type = Types::DeleteFileSystemLustreResponse
-    DeleteFileSystemOpenZFSConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
-    DeleteFileSystemOpenZFSConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
-    DeleteFileSystemOpenZFSConfiguration.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemOpenZFSOptions, location_name: "Options"))
+    DeleteFileSystemOpenZFSConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "SkipFinalBackup"))
+    DeleteFileSystemOpenZFSConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemOpenZFSConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemOpenZFSOptions, location_name: "Options"))
     DeleteFileSystemOpenZFSConfiguration.type = Types::DeleteFileSystemOpenZFSConfiguration
-    DeleteFileSystemOpenZFSOption.add_member(:delete_child_volumes_and_snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"}))
-    DeleteFileSystemOpenZFSOptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemOpenZFSOption)
-    DeleteFileSystemOpenZFSResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
-    DeleteFileSystemOpenZFSResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemOpenZFSOption.add_member(:delete_child_volumes_and_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"}))
+    DeleteFileSystemOpenZFSOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemOpenZFSOption)
+    DeleteFileSystemOpenZFSResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "FinalBackupId"))
+    DeleteFileSystemOpenZFSResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemOpenZFSResponse.type = Types::DeleteFileSystemOpenZFSResponse
-    DeleteFileSystemRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DeleteFileSystemRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DeleteFileSystemRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
-    DeleteFileSystemRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
-    DeleteFileSystemRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    DeleteFileSystemRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteFileSystemRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteFileSystemRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
+    DeleteFileSystemRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
+    DeleteFileSystemRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     DeleteFileSystemRequest.type = Types::DeleteFileSystemRequest
-    DeleteFileSystemResponse.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    DeleteFileSystemResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemLifecycle, location_name: "Lifecycle"))
-    DeleteFileSystemResponse.add_member(:windows_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemWindowsResponse, location_name: "WindowsResponse"))
-    DeleteFileSystemResponse.add_member(:lustre_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemLustreResponse, location_name: "LustreResponse"))
-    DeleteFileSystemResponse.add_member(:open_zfs_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemOpenZFSResponse, location_name: "OpenZFSResponse"))
+    DeleteFileSystemResponse.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
+    DeleteFileSystemResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemLifecycle, location_name: "Lifecycle"))
+    DeleteFileSystemResponse.add_member(:windows_response, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemWindowsResponse, location_name: "WindowsResponse"))
+    DeleteFileSystemResponse.add_member(:lustre_response, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemLustreResponse, location_name: "LustreResponse"))
+    DeleteFileSystemResponse.add_member(:open_zfs_response, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileSystemOpenZFSResponse, location_name: "OpenZFSResponse"))
     DeleteFileSystemResponse.type = Types::DeleteFileSystemResponse
-    DeleteFileSystemWindowsConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
-    DeleteFileSystemWindowsConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemWindowsConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "SkipFinalBackup"))
+    DeleteFileSystemWindowsConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemWindowsConfiguration.type = Types::DeleteFileSystemWindowsConfiguration
-    DeleteFileSystemWindowsResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
-    DeleteFileSystemWindowsResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemWindowsResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "FinalBackupId"))
+    DeleteFileSystemWindowsResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemWindowsResponse.type = Types::DeleteFileSystemWindowsResponse
-    DeleteOpenZFSVolumeOption.add_member(:delete_child_volumes_and_snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"}))
-    DeleteOpenZFSVolumeOptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOpenZFSVolumeOption)
-    DeleteSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DeleteSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteOpenZFSVolumeOption.add_member(:delete_child_volumes_and_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"}))
+    DeleteOpenZFSVolumeOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteOpenZFSVolumeOption)
+    DeleteSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteSnapshotRequest.type = Types::DeleteSnapshotRequest
-    DeleteSnapshotResponse.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
-    DeleteSnapshotResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotLifecycle, location_name: "Lifecycle"))
+    DeleteSnapshotResponse.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
+    DeleteSnapshotResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotLifecycle, location_name: "Lifecycle"))
     DeleteSnapshotResponse.type = Types::DeleteSnapshotResponse
-    DeleteStorageVirtualMachineRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DeleteStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteStorageVirtualMachineRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId, location_name: "StorageVirtualMachineId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteStorageVirtualMachineRequest.type = Types::DeleteStorageVirtualMachineRequest
-    DeleteStorageVirtualMachineResponse.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
-    DeleteStorageVirtualMachineResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineLifecycle, location_name: "Lifecycle"))
+    DeleteStorageVirtualMachineResponse.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    DeleteStorageVirtualMachineResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineLifecycle, location_name: "Lifecycle"))
     DeleteStorageVirtualMachineResponse.type = Types::DeleteStorageVirtualMachineResponse
-    DeleteVolumeOntapConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
-    DeleteVolumeOntapConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
-    DeleteVolumeOntapConfiguration.add_member(:bypass_snaplock_enterprise_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "BypassSnaplockEnterpriseRetention"))
+    DeleteVolumeOntapConfiguration.add_member(:skip_final_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "SkipFinalBackup"))
+    DeleteVolumeOntapConfiguration.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
+    DeleteVolumeOntapConfiguration.add_member(:bypass_snaplock_enterprise_retention, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "BypassSnaplockEnterpriseRetention"))
     DeleteVolumeOntapConfiguration.type = Types::DeleteVolumeOntapConfiguration
-    DeleteVolumeOntapResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
-    DeleteVolumeOntapResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteVolumeOntapResponse.add_member(:final_backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "FinalBackupId"))
+    DeleteVolumeOntapResponse.add_member(:final_backup_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "FinalBackupTags"))
     DeleteVolumeOntapResponse.type = Types::DeleteVolumeOntapResponse
-    DeleteVolumeOpenZFSConfiguration.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOpenZFSVolumeOptions, location_name: "Options"))
+    DeleteVolumeOpenZFSConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteOpenZFSVolumeOptions, location_name: "Options"))
     DeleteVolumeOpenZFSConfiguration.type = Types::DeleteVolumeOpenZFSConfiguration
-    DeleteVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DeleteVolumeRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DeleteVolumeRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVolumeOntapConfiguration, location_name: "OntapConfiguration"))
-    DeleteVolumeRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVolumeOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    DeleteVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteVolumeRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteVolumeRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteVolumeOntapConfiguration, location_name: "OntapConfiguration"))
+    DeleteVolumeRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteVolumeOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     DeleteVolumeRequest.type = Types::DeleteVolumeRequest
-    DeleteVolumeResponse.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    DeleteVolumeResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeLifecycle, location_name: "Lifecycle"))
-    DeleteVolumeResponse.add_member(:ontap_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVolumeOntapResponse, location_name: "OntapResponse"))
+    DeleteVolumeResponse.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    DeleteVolumeResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeLifecycle, location_name: "Lifecycle"))
+    DeleteVolumeResponse.add_member(:ontap_response, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteVolumeOntapResponse, location_name: "OntapResponse"))
     DeleteVolumeResponse.type = Types::DeleteVolumeResponse
-    DescribeBackupsRequest.add_member(:backup_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupIds, location_name: "BackupIds"))
-    DescribeBackupsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
-    DescribeBackupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeBackupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeBackupsRequest.add_member(:backup_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupIds, location_name: "BackupIds"))
+    DescribeBackupsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters"))
+    DescribeBackupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeBackupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeBackupsRequest.type = Types::DescribeBackupsRequest
-    DescribeBackupsResponse.add_member(:backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Backups, location_name: "Backups"))
-    DescribeBackupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeBackupsResponse.add_member(:backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Backups, location_name: "Backups"))
+    DescribeBackupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeBackupsResponse.type = Types::DescribeBackupsResponse
-    DescribeDataRepositoryAssociationsRequest.add_member(:association_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationIds, location_name: "AssociationIds"))
-    DescribeDataRepositoryAssociationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
-    DescribeDataRepositoryAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitedMaxResults, location_name: "MaxResults"))
-    DescribeDataRepositoryAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDataRepositoryAssociationsRequest.add_member(:association_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationIds, location_name: "AssociationIds"))
+    DescribeDataRepositoryAssociationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters"))
+    DescribeDataRepositoryAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedMaxResults, location_name: "MaxResults"))
+    DescribeDataRepositoryAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDataRepositoryAssociationsRequest.type = Types::DescribeDataRepositoryAssociationsRequest
-    DescribeDataRepositoryAssociationsResponse.add_member(:associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociations, location_name: "Associations"))
-    DescribeDataRepositoryAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDataRepositoryAssociationsResponse.add_member(:associations, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociations, location_name: "Associations"))
+    DescribeDataRepositoryAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDataRepositoryAssociationsResponse.type = Types::DescribeDataRepositoryAssociationsResponse
-    DescribeDataRepositoryTasksRequest.add_member(:task_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskIds, location_name: "TaskIds"))
-    DescribeDataRepositoryTasksRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskFilters, location_name: "Filters"))
-    DescribeDataRepositoryTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeDataRepositoryTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDataRepositoryTasksRequest.add_member(:task_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskIds, location_name: "TaskIds"))
+    DescribeDataRepositoryTasksRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTaskFilters, location_name: "Filters"))
+    DescribeDataRepositoryTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeDataRepositoryTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDataRepositoryTasksRequest.type = Types::DescribeDataRepositoryTasksRequest
-    DescribeDataRepositoryTasksResponse.add_member(:data_repository_tasks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTasks, location_name: "DataRepositoryTasks"))
-    DescribeDataRepositoryTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDataRepositoryTasksResponse.add_member(:data_repository_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryTasks, location_name: "DataRepositoryTasks"))
+    DescribeDataRepositoryTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeDataRepositoryTasksResponse.type = Types::DescribeDataRepositoryTasksResponse
-    DescribeFileCachesRequest.add_member(:file_cache_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheIds, location_name: "FileCacheIds"))
-    DescribeFileCachesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeFileCachesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileCachesRequest.add_member(:file_cache_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheIds, location_name: "FileCacheIds"))
+    DescribeFileCachesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeFileCachesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeFileCachesRequest.type = Types::DescribeFileCachesRequest
-    DescribeFileCachesResponse.add_member(:file_caches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCaches, location_name: "FileCaches"))
-    DescribeFileCachesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileCachesResponse.add_member(:file_caches, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCaches, location_name: "FileCaches"))
+    DescribeFileCachesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeFileCachesResponse.type = Types::DescribeFileCachesResponse
-    DescribeFileSystemAliasesRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DescribeFileSystemAliasesRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DescribeFileSystemAliasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeFileSystemAliasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileSystemAliasesRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DescribeFileSystemAliasesRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeFileSystemAliasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeFileSystemAliasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeFileSystemAliasesRequest.type = Types::DescribeFileSystemAliasesRequest
-    DescribeFileSystemAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
-    DescribeFileSystemAliasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileSystemAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: Aliases, location_name: "Aliases"))
+    DescribeFileSystemAliasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeFileSystemAliasesResponse.type = Types::DescribeFileSystemAliasesResponse
-    DescribeFileSystemsRequest.add_member(:file_system_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemIds, location_name: "FileSystemIds"))
-    DescribeFileSystemsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeFileSystemsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileSystemsRequest.add_member(:file_system_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemIds, location_name: "FileSystemIds"))
+    DescribeFileSystemsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeFileSystemsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeFileSystemsRequest.type = Types::DescribeFileSystemsRequest
-    DescribeFileSystemsResponse.add_member(:file_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystems, location_name: "FileSystems"))
-    DescribeFileSystemsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileSystemsResponse.add_member(:file_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystems, location_name: "FileSystems"))
+    DescribeFileSystemsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeFileSystemsResponse.type = Types::DescribeFileSystemsResponse
-    DescribeS3AccessPointAttachmentsRequest.add_member(:names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentNames, location_name: "Names"))
-    DescribeS3AccessPointAttachmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilters, location_name: "Filters"))
-    DescribeS3AccessPointAttachmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeS3AccessPointAttachmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeS3AccessPointAttachmentsRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentNames, location_name: "Names"))
+    DescribeS3AccessPointAttachmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilters, location_name: "Filters"))
+    DescribeS3AccessPointAttachmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeS3AccessPointAttachmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeS3AccessPointAttachmentsRequest.type = Types::DescribeS3AccessPointAttachmentsRequest
-    DescribeS3AccessPointAttachmentsResponse.add_member(:s3_access_point_attachments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachments, location_name: "S3AccessPointAttachments"))
-    DescribeS3AccessPointAttachmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeS3AccessPointAttachmentsResponse.add_member(:s3_access_point_attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachments, location_name: "S3AccessPointAttachments"))
+    DescribeS3AccessPointAttachmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeS3AccessPointAttachmentsResponse.type = Types::DescribeS3AccessPointAttachmentsResponse
     DescribeSharedVpcConfigurationRequest.type = Types::DescribeSharedVpcConfigurationRequest
-    DescribeSharedVpcConfigurationResponse.add_member(:enable_fsx_route_table_updates_from_participant_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
+    DescribeSharedVpcConfigurationResponse.add_member(:enable_fsx_route_table_updates_from_participant_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
     DescribeSharedVpcConfigurationResponse.type = Types::DescribeSharedVpcConfigurationResponse
-    DescribeSnapshotsRequest.add_member(:snapshot_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotIds, location_name: "SnapshotIds"))
-    DescribeSnapshotsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotFilters, location_name: "Filters"))
-    DescribeSnapshotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeSnapshotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeSnapshotsRequest.add_member(:include_shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeShared, location_name: "IncludeShared"))
+    DescribeSnapshotsRequest.add_member(:snapshot_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotIds, location_name: "SnapshotIds"))
+    DescribeSnapshotsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFilters, location_name: "Filters"))
+    DescribeSnapshotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeSnapshotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeSnapshotsRequest.add_member(:include_shared, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeShared, location_name: "IncludeShared"))
     DescribeSnapshotsRequest.type = Types::DescribeSnapshotsRequest
-    DescribeSnapshotsResponse.add_member(:snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshots, location_name: "Snapshots"))
-    DescribeSnapshotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapshotsResponse.add_member(:snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshots, location_name: "Snapshots"))
+    DescribeSnapshotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeSnapshotsResponse.type = Types::DescribeSnapshotsResponse
-    DescribeStorageVirtualMachinesRequest.add_member(:storage_virtual_machine_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineIds, location_name: "StorageVirtualMachineIds"))
-    DescribeStorageVirtualMachinesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineFilters, location_name: "Filters"))
-    DescribeStorageVirtualMachinesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeStorageVirtualMachinesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStorageVirtualMachinesRequest.add_member(:storage_virtual_machine_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineIds, location_name: "StorageVirtualMachineIds"))
+    DescribeStorageVirtualMachinesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineFilters, location_name: "Filters"))
+    DescribeStorageVirtualMachinesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeStorageVirtualMachinesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeStorageVirtualMachinesRequest.type = Types::DescribeStorageVirtualMachinesRequest
-    DescribeStorageVirtualMachinesResponse.add_member(:storage_virtual_machines, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachines, location_name: "StorageVirtualMachines"))
-    DescribeStorageVirtualMachinesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStorageVirtualMachinesResponse.add_member(:storage_virtual_machines, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachines, location_name: "StorageVirtualMachines"))
+    DescribeStorageVirtualMachinesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeStorageVirtualMachinesResponse.type = Types::DescribeStorageVirtualMachinesResponse
-    DescribeVolumesRequest.add_member(:volume_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeIds, location_name: "VolumeIds"))
-    DescribeVolumesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeFilters, location_name: "Filters"))
-    DescribeVolumesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeVolumesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVolumesRequest.add_member(:volume_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeIds, location_name: "VolumeIds"))
+    DescribeVolumesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFilters, location_name: "Filters"))
+    DescribeVolumesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeVolumesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeVolumesRequest.type = Types::DescribeVolumesRequest
-    DescribeVolumesResponse.add_member(:volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volumes, location_name: "Volumes"))
-    DescribeVolumesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVolumesResponse.add_member(:volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Volumes, location_name: "Volumes"))
+    DescribeVolumesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeVolumesResponse.type = Types::DescribeVolumesResponse
-    DetachAndDeleteS3AccessPointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DetachAndDeleteS3AccessPointRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DetachAndDeleteS3AccessPointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DetachAndDeleteS3AccessPointRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DetachAndDeleteS3AccessPointRequest.type = Types::DetachAndDeleteS3AccessPointRequest
-    DetachAndDeleteS3AccessPointResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentLifecycle, location_name: "Lifecycle"))
-    DetachAndDeleteS3AccessPointResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, location_name: "Name"))
+    DetachAndDeleteS3AccessPointResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentLifecycle, location_name: "Lifecycle"))
+    DetachAndDeleteS3AccessPointResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName, location_name: "Name"))
     DetachAndDeleteS3AccessPointResponse.type = Types::DetachAndDeleteS3AccessPointResponse
-    DisassociateFileSystemAliasesRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DisassociateFileSystemAliasesRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DisassociateFileSystemAliasesRequest.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DisassociateFileSystemAliasesRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DisassociateFileSystemAliasesRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DisassociateFileSystemAliasesRequest.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateDNSNames, location_name: "Aliases", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DisassociateFileSystemAliasesRequest.type = Types::DisassociateFileSystemAliasesRequest
-    DisassociateFileSystemAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
+    DisassociateFileSystemAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: Aliases, location_name: "Aliases"))
     DisassociateFileSystemAliasesResponse.type = Types::DisassociateFileSystemAliasesResponse
-    DiskIopsConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfigurationMode, location_name: "Mode"))
-    DiskIopsConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iops, location_name: "Iops"))
+    DiskIopsConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfigurationMode, location_name: "Mode"))
+    DiskIopsConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: Iops, location_name: "Iops"))
     DiskIopsConfiguration.type = Types::DiskIopsConfiguration
-    DiskIopsConfigurationMode.add_member(:automatic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
-    DiskIopsConfigurationMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
-    DnsIps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress)
-    DriveCacheType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    DriveCacheType.add_member(:read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
-    DurationSinceLastAccess.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
-    DurationSinceLastAccess.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
+    DiskIopsConfigurationMode.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    DiskIopsConfigurationMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
+    DnsIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress)
+    DriveCacheType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    DriveCacheType.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    DurationSinceLastAccess.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: Unit, location_name: "Unit"))
+    DurationSinceLastAccess.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "Value"))
     DurationSinceLastAccess.type = Types::DurationSinceLastAccess
-    EventType.add_member(:new, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW", traits: {"smithy.api#enumValue" => "NEW"}))
-    EventType.add_member(:changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHANGED", traits: {"smithy.api#enumValue" => "CHANGED"}))
-    EventType.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    EventTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventType)
-    FileCache.add_member(:owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
-    FileCache.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    FileCache.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
-    FileCache.add_member(:file_cache_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheType, location_name: "FileCacheType"))
-    FileCache.add_member(:file_cache_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileCacheTypeVersion"))
-    FileCache.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLifecycle, location_name: "Lifecycle"))
-    FileCache.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheFailureDetails, location_name: "FailureDetails"))
-    FileCache.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
-    FileCache.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    FileCache.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    FileCache.add_member(:network_interface_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
-    FileCache.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
-    FileCache.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    FileCache.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    FileCache.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLustreConfiguration, location_name: "LustreConfiguration"))
-    FileCache.add_member(:data_repository_association_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationIds, location_name: "DataRepositoryAssociationIds"))
+    EventType.add_member(:new, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW", traits: {"smithy.api#enumValue" => "NEW"}))
+    EventType.add_member(:changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHANGED", traits: {"smithy.api#enumValue" => "CHANGED"}))
+    EventType.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    EventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType)
+    FileCache.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerId"))
+    FileCache.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    FileCache.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId, location_name: "FileCacheId"))
+    FileCache.add_member(:file_cache_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheType, location_name: "FileCacheType"))
+    FileCache.add_member(:file_cache_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemTypeVersion, location_name: "FileCacheTypeVersion"))
+    FileCache.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLifecycle, location_name: "Lifecycle"))
+    FileCache.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheFailureDetails, location_name: "FailureDetails"))
+    FileCache.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "StorageCapacity"))
+    FileCache.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    FileCache.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    FileCache.add_member(:network_interface_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
+    FileCache.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "DNSName"))
+    FileCache.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    FileCache.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    FileCache.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    FileCache.add_member(:data_repository_association_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationIds, location_name: "DataRepositoryAssociationIds"))
     FileCache.type = Types::FileCache
-    FileCacheCreating.add_member(:owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
-    FileCacheCreating.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    FileCacheCreating.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
-    FileCacheCreating.add_member(:file_cache_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheType, location_name: "FileCacheType"))
-    FileCacheCreating.add_member(:file_cache_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileCacheTypeVersion"))
-    FileCacheCreating.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLifecycle, location_name: "Lifecycle"))
-    FileCacheCreating.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheFailureDetails, location_name: "FailureDetails"))
-    FileCacheCreating.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
-    FileCacheCreating.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    FileCacheCreating.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    FileCacheCreating.add_member(:network_interface_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
-    FileCacheCreating.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
-    FileCacheCreating.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    FileCacheCreating.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    FileCacheCreating.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    FileCacheCreating.add_member(:copy_tags_to_data_repository_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyTagsToDataRepositoryAssociations, location_name: "CopyTagsToDataRepositoryAssociations"))
-    FileCacheCreating.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLustreConfiguration, location_name: "LustreConfiguration"))
-    FileCacheCreating.add_member(:data_repository_association_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationIds, location_name: "DataRepositoryAssociationIds"))
+    FileCacheCreating.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerId"))
+    FileCacheCreating.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    FileCacheCreating.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId, location_name: "FileCacheId"))
+    FileCacheCreating.add_member(:file_cache_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheType, location_name: "FileCacheType"))
+    FileCacheCreating.add_member(:file_cache_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemTypeVersion, location_name: "FileCacheTypeVersion"))
+    FileCacheCreating.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLifecycle, location_name: "Lifecycle"))
+    FileCacheCreating.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheFailureDetails, location_name: "FailureDetails"))
+    FileCacheCreating.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "StorageCapacity"))
+    FileCacheCreating.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    FileCacheCreating.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    FileCacheCreating.add_member(:network_interface_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
+    FileCacheCreating.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "DNSName"))
+    FileCacheCreating.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    FileCacheCreating.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    FileCacheCreating.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    FileCacheCreating.add_member(:copy_tags_to_data_repository_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyTagsToDataRepositoryAssociations, location_name: "CopyTagsToDataRepositoryAssociations"))
+    FileCacheCreating.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    FileCacheCreating.add_member(:data_repository_association_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationIds, location_name: "DataRepositoryAssociationIds"))
     FileCacheCreating.type = Types::FileCacheCreating
-    FileCacheDataRepositoryAssociation.add_member(:file_cache_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: "FileCachePath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    FileCacheDataRepositoryAssociation.add_member(:data_repository_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchivePath, location_name: "DataRepositoryPath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    FileCacheDataRepositoryAssociation.add_member(:data_repository_subdirectories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubDirectoriesPaths, location_name: "DataRepositorySubdirectories"))
-    FileCacheDataRepositoryAssociation.add_member(:nfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheNFSConfiguration, location_name: "NFS"))
+    FileCacheDataRepositoryAssociation.add_member(:file_cache_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, location_name: "FileCachePath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FileCacheDataRepositoryAssociation.add_member(:data_repository_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivePath, location_name: "DataRepositoryPath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FileCacheDataRepositoryAssociation.add_member(:data_repository_subdirectories, ::Smithy::Schema::Shapes::MemberShape.new(target: SubDirectoriesPaths, location_name: "DataRepositorySubdirectories"))
+    FileCacheDataRepositoryAssociation.add_member(:nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheNFSConfiguration, location_name: "NFS"))
     FileCacheDataRepositoryAssociation.type = Types::FileCacheDataRepositoryAssociation
-    FileCacheFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileCacheFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     FileCacheFailureDetails.type = Types::FileCacheFailureDetails
-    FileCacheIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId)
-    FileCacheLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    FileCacheLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    FileCacheLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    FileCacheLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    FileCacheLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    FileCacheLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
-    FileCacheLustreConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLustreDeploymentType, location_name: "DeploymentType"))
-    FileCacheLustreConfiguration.add_member(:mount_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreFileSystemMountName, location_name: "MountName"))
-    FileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    FileCacheLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
-    FileCacheLustreConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreLogConfiguration, location_name: "LogConfiguration"))
+    FileCacheIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId)
+    FileCacheLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    FileCacheLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    FileCacheLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    FileCacheLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    FileCacheLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    FileCacheLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    FileCacheLustreConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLustreDeploymentType, location_name: "DeploymentType"))
+    FileCacheLustreConfiguration.add_member(:mount_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreFileSystemMountName, location_name: "MountName"))
+    FileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    FileCacheLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
+    FileCacheLustreConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreLogConfiguration, location_name: "LogConfiguration"))
     FileCacheLustreConfiguration.type = Types::FileCacheLustreConfiguration
-    FileCacheLustreDeploymentType.add_member(:cache_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CACHE_1", traits: {"smithy.api#enumValue" => "CACHE_1"}))
-    FileCacheLustreMetadataConfiguration.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataStorageCapacity, location_name: "StorageCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FileCacheLustreDeploymentType.add_member(:cache_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CACHE_1", traits: {"smithy.api#enumValue" => "CACHE_1"}))
+    FileCacheLustreMetadataConfiguration.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataStorageCapacity, location_name: "StorageCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     FileCacheLustreMetadataConfiguration.type = Types::FileCacheLustreMetadataConfiguration
-    FileCacheNFSConfiguration.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsVersion, location_name: "Version", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    FileCacheNFSConfiguration.add_member(:dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDnsIps, location_name: "DnsIps"))
+    FileCacheNFSConfiguration.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsVersion, location_name: "Version", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FileCacheNFSConfiguration.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryDnsIps, location_name: "DnsIps"))
     FileCacheNFSConfiguration.type = Types::FileCacheNFSConfiguration
-    FileCacheNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileCacheNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     FileCacheNotFound.type = Types::FileCacheNotFound
-    FileCacheType.add_member(:lustre, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LUSTRE", traits: {"smithy.api#enumValue" => "LUSTRE"}))
-    FileCaches.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCache)
-    FileSystem.add_member(:owner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
-    FileSystem.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    FileSystem.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    FileSystem.add_member(:file_system_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemType, location_name: "FileSystemType"))
-    FileSystem.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemLifecycle, location_name: "Lifecycle"))
-    FileSystem.add_member(:failure_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemFailureDetails, location_name: "FailureDetails"))
-    FileSystem.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
-    FileSystem.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
-    FileSystem.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    FileSystem.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    FileSystem.add_member(:network_interface_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
-    FileSystem.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
-    FileSystem.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    FileSystem.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    FileSystem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    FileSystem.add_member(:windows_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsFileSystemConfiguration, location_name: "WindowsConfiguration"))
-    FileSystem.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreFileSystemConfiguration, location_name: "LustreConfiguration"))
-    FileSystem.add_member(:administrative_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
-    FileSystem.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapFileSystemConfiguration, location_name: "OntapConfiguration"))
-    FileSystem.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
-    FileSystem.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSFileSystemConfiguration, location_name: "OpenZFSConfiguration"))
-    FileSystem.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    FileCacheType.add_member(:lustre, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LUSTRE", traits: {"smithy.api#enumValue" => "LUSTRE"}))
+    FileCaches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileCache)
+    FileSystem.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerId"))
+    FileSystem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    FileSystem.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
+    FileSystem.add_member(:file_system_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemType, location_name: "FileSystemType"))
+    FileSystem.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemLifecycle, location_name: "Lifecycle"))
+    FileSystem.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemFailureDetails, location_name: "FailureDetails"))
+    FileSystem.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "StorageCapacity"))
+    FileSystem.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "StorageType"))
+    FileSystem.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    FileSystem.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    FileSystem.add_member(:network_interface_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
+    FileSystem.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "DNSName"))
+    FileSystem.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    FileSystem.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    FileSystem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    FileSystem.add_member(:windows_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsFileSystemConfiguration, location_name: "WindowsConfiguration"))
+    FileSystem.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreFileSystemConfiguration, location_name: "LustreConfiguration"))
+    FileSystem.add_member(:administrative_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeActions, location_name: "AdministrativeActions"))
+    FileSystem.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapFileSystemConfiguration, location_name: "OntapConfiguration"))
+    FileSystem.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    FileSystem.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSFileSystemConfiguration, location_name: "OpenZFSConfiguration"))
+    FileSystem.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     FileSystem.type = Types::FileSystem
-    FileSystemEndpoint.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
-    FileSystemEndpoint.add_member(:ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
-    FileSystemEndpoint.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
+    FileSystemEndpoint.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "DNSName"))
+    FileSystemEndpoint.add_member(:ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    FileSystemEndpoint.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
     FileSystemEndpoint.type = Types::FileSystemEndpoint
-    FileSystemEndpoints.add_member(:intercluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: "Intercluster"))
-    FileSystemEndpoints.add_member(:management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: "Management"))
+    FileSystemEndpoints.add_member(:intercluster, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemEndpoint, location_name: "Intercluster"))
+    FileSystemEndpoints.add_member(:management, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemEndpoint, location_name: "Management"))
     FileSystemEndpoints.type = Types::FileSystemEndpoints
-    FileSystemFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileSystemFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     FileSystemFailureDetails.type = Types::FileSystemFailureDetails
-    FileSystemIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId)
-    FileSystemLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    FileSystemLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    FileSystemLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    FileSystemLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    FileSystemLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
-    FileSystemLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    FileSystemLifecycle.add_member(:misconfigured_unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED_UNAVAILABLE", traits: {"smithy.api#enumValue" => "MISCONFIGURED_UNAVAILABLE"}))
-    FileSystemLustreMetadataConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))
-    FileSystemLustreMetadataConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataConfigurationMode, location_name: "Mode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FileSystemIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId)
+    FileSystemLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    FileSystemLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    FileSystemLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    FileSystemLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    FileSystemLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
+    FileSystemLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    FileSystemLifecycle.add_member(:misconfigured_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED_UNAVAILABLE", traits: {"smithy.api#enumValue" => "MISCONFIGURED_UNAVAILABLE"}))
+    FileSystemLustreMetadataConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataIops, location_name: "Iops"))
+    FileSystemLustreMetadataConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfigurationMode, location_name: "Mode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     FileSystemLustreMetadataConfiguration.type = Types::FileSystemLustreMetadataConfiguration
-    FileSystemMaintenanceOperation.add_member(:patching, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PATCHING", traits: {"smithy.api#enumValue" => "PATCHING"}))
-    FileSystemMaintenanceOperation.add_member(:backing_up, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BACKING_UP", traits: {"smithy.api#enumValue" => "BACKING_UP"}))
-    FileSystemMaintenanceOperations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemMaintenanceOperation)
-    FileSystemNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileSystemMaintenanceOperation.add_member(:patching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PATCHING", traits: {"smithy.api#enumValue" => "PATCHING"}))
+    FileSystemMaintenanceOperation.add_member(:backing_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BACKING_UP", traits: {"smithy.api#enumValue" => "BACKING_UP"}))
+    FileSystemMaintenanceOperations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemMaintenanceOperation)
+    FileSystemNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     FileSystemNotFound.type = Types::FileSystemNotFound
-    FileSystemSecondaryGIDs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemGID)
-    FileSystemType.add_member(:windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
-    FileSystemType.add_member(:lustre, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LUSTRE", traits: {"smithy.api#enumValue" => "LUSTRE"}))
-    FileSystemType.add_member(:ontap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONTAP", traits: {"smithy.api#enumValue" => "ONTAP"}))
-    FileSystemType.add_member(:openzfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPENZFS", traits: {"smithy.api#enumValue" => "OPENZFS"}))
-    FileSystems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem)
-    Filter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
-    Filter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values"))
+    FileSystemSecondaryGIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemGID)
+    FileSystemType.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
+    FileSystemType.add_member(:lustre, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LUSTRE", traits: {"smithy.api#enumValue" => "LUSTRE"}))
+    FileSystemType.add_member(:ontap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONTAP", traits: {"smithy.api#enumValue" => "ONTAP"}))
+    FileSystemType.add_member(:openzfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPENZFS", traits: {"smithy.api#enumValue" => "OPENZFS"}))
+    FileSystems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem)
+    Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, location_name: "Name"))
+    Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "Values"))
     Filter.type = Types::Filter
-    FilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
-    FilterName.add_member(:backup_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BACKUP_TYPE", traits: {"smithy.api#enumValue" => "backup-type"}))
-    FilterName.add_member(:file_system_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_TYPE", traits: {"smithy.api#enumValue" => "file-system-type"}))
-    FilterName.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_ID", traits: {"smithy.api#enumValue" => "volume-id"}))
-    FilterName.add_member(:data_repository_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_REPOSITORY_TYPE", traits: {"smithy.api#enumValue" => "data-repository-type"}))
-    FilterName.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_ID", traits: {"smithy.api#enumValue" => "file-cache-id"}))
-    FilterName.add_member(:file_cache_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_TYPE", traits: {"smithy.api#enumValue" => "file-cache-type"}))
-    FilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue)
-    Filters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    FlexCacheEndpointType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    FlexCacheEndpointType.add_member(:origin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORIGIN", traits: {"smithy.api#enumValue" => "ORIGIN"}))
-    FlexCacheEndpointType.add_member(:cache, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CACHE", traits: {"smithy.api#enumValue" => "CACHE"}))
-    IncompatibleParameterError.add_member(:parameter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Parameter, location_name: "Parameter", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    IncompatibleParameterError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
+    FilterName.add_member(:backup_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BACKUP_TYPE", traits: {"smithy.api#enumValue" => "backup-type"}))
+    FilterName.add_member(:file_system_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_TYPE", traits: {"smithy.api#enumValue" => "file-system-type"}))
+    FilterName.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_ID", traits: {"smithy.api#enumValue" => "volume-id"}))
+    FilterName.add_member(:data_repository_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_REPOSITORY_TYPE", traits: {"smithy.api#enumValue" => "data-repository-type"}))
+    FilterName.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_ID", traits: {"smithy.api#enumValue" => "file-cache-id"}))
+    FilterName.add_member(:file_cache_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_TYPE", traits: {"smithy.api#enumValue" => "file-cache-type"}))
+    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue)
+    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    FlexCacheEndpointType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    FlexCacheEndpointType.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORIGIN", traits: {"smithy.api#enumValue" => "ORIGIN"}))
+    FlexCacheEndpointType.add_member(:cache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CACHE", traits: {"smithy.api#enumValue" => "CACHE"}))
+    IncompatibleParameterError.add_member(:parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, location_name: "Parameter", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    IncompatibleParameterError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     IncompatibleParameterError.type = Types::IncompatibleParameterError
-    IncompatibleRegionForMultiAZ.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IncompatibleRegionForMultiAZ.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     IncompatibleRegionForMultiAZ.type = Types::IncompatibleRegionForMultiAZ
-    InputOntapVolumeType.add_member(:rw, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RW", traits: {"smithy.api#enumValue" => "RW"}))
-    InputOntapVolumeType.add_member(:dp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DP", traits: {"smithy.api#enumValue" => "DP"}))
-    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InputOntapVolumeType.add_member(:rw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RW", traits: {"smithy.api#enumValue" => "RW"}))
+    InputOntapVolumeType.add_member(:dp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DP", traits: {"smithy.api#enumValue" => "DP"}))
+    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerError.type = Types::InternalServerError
-    InvalidAccessPoint.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    InvalidAccessPoint.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidAccessPoint.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    InvalidAccessPoint.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidAccessPoint.type = Types::InvalidAccessPoint
-    InvalidDataRepositoryType.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidDataRepositoryType.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidDataRepositoryType.type = Types::InvalidDataRepositoryType
-    InvalidDestinationKmsKey.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidDestinationKmsKey.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidDestinationKmsKey.type = Types::InvalidDestinationKmsKey
-    InvalidExportPath.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidExportPath.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidExportPath.type = Types::InvalidExportPath
-    InvalidImportPath.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidImportPath.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidImportPath.type = Types::InvalidImportPath
-    InvalidNetworkSettings.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    InvalidNetworkSettings.add_member(:invalid_subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "InvalidSubnetId"))
-    InvalidNetworkSettings.add_member(:invalid_security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "InvalidSecurityGroupId"))
-    InvalidNetworkSettings.add_member(:invalid_route_table_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableId, location_name: "InvalidRouteTableId"))
+    InvalidNetworkSettings.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    InvalidNetworkSettings.add_member(:invalid_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "InvalidSubnetId"))
+    InvalidNetworkSettings.add_member(:invalid_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, location_name: "InvalidSecurityGroupId"))
+    InvalidNetworkSettings.add_member(:invalid_route_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableId, location_name: "InvalidRouteTableId"))
     InvalidNetworkSettings.type = Types::InvalidNetworkSettings
-    InvalidPerUnitStorageThroughput.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidPerUnitStorageThroughput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidPerUnitStorageThroughput.type = Types::InvalidPerUnitStorageThroughput
-    InvalidRegion.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRegion.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidRegion.type = Types::InvalidRegion
-    InvalidRequest.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    InvalidRequest.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequest.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    InvalidRequest.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidRequest.type = Types::InvalidRequest
-    InvalidSourceKmsKey.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidSourceKmsKey.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidSourceKmsKey.type = Types::InvalidSourceKmsKey
-    LifecycleTransitionReason.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LifecycleTransitionReason.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     LifecycleTransitionReason.type = Types::LifecycleTransitionReason
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ListTagsForResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    ListTagsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LustreAccessAuditLogLevel.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    LustreAccessAuditLogLevel.add_member(:warn_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WARN_ONLY", traits: {"smithy.api#enumValue" => "WARN_ONLY"}))
-    LustreAccessAuditLogLevel.add_member(:error_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR_ONLY", traits: {"smithy.api#enumValue" => "ERROR_ONLY"}))
-    LustreAccessAuditLogLevel.add_member(:warn_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WARN_ERROR", traits: {"smithy.api#enumValue" => "WARN_ERROR"}))
-    LustreDeploymentType.add_member(:scratch_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCRATCH_1", traits: {"smithy.api#enumValue" => "SCRATCH_1"}))
-    LustreDeploymentType.add_member(:scratch_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCRATCH_2", traits: {"smithy.api#enumValue" => "SCRATCH_2"}))
-    LustreDeploymentType.add_member(:persistent_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSISTENT_1", traits: {"smithy.api#enumValue" => "PERSISTENT_1"}))
-    LustreDeploymentType.add_member(:persistent_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSISTENT_2", traits: {"smithy.api#enumValue" => "PERSISTENT_2"}))
-    LustreFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    LustreFileSystemConfiguration.add_member(:data_repository_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryConfiguration, location_name: "DataRepositoryConfiguration"))
-    LustreFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreDeploymentType, location_name: "DeploymentType"))
-    LustreFileSystemConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
-    LustreFileSystemConfiguration.add_member(:mount_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreFileSystemMountName, location_name: "MountName"))
-    LustreFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    LustreFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    LustreFileSystemConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    LustreFileSystemConfiguration.add_member(:drive_cache_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
-    LustreFileSystemConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
-    LustreFileSystemConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreLogConfiguration, location_name: "LogConfiguration"))
-    LustreFileSystemConfiguration.add_member(:root_squash_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
-    LustreFileSystemConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
-    LustreFileSystemConfiguration.add_member(:efa_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "EfaEnabled"))
-    LustreFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
-    LustreFileSystemConfiguration.add_member(:data_read_cache_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
+    LustreAccessAuditLogLevel.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    LustreAccessAuditLogLevel.add_member(:warn_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WARN_ONLY", traits: {"smithy.api#enumValue" => "WARN_ONLY"}))
+    LustreAccessAuditLogLevel.add_member(:error_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR_ONLY", traits: {"smithy.api#enumValue" => "ERROR_ONLY"}))
+    LustreAccessAuditLogLevel.add_member(:warn_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WARN_ERROR", traits: {"smithy.api#enumValue" => "WARN_ERROR"}))
+    LustreDeploymentType.add_member(:scratch_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCRATCH_1", traits: {"smithy.api#enumValue" => "SCRATCH_1"}))
+    LustreDeploymentType.add_member(:scratch_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCRATCH_2", traits: {"smithy.api#enumValue" => "SCRATCH_2"}))
+    LustreDeploymentType.add_member(:persistent_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSISTENT_1", traits: {"smithy.api#enumValue" => "PERSISTENT_1"}))
+    LustreDeploymentType.add_member(:persistent_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSISTENT_2", traits: {"smithy.api#enumValue" => "PERSISTENT_2"}))
+    LustreFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    LustreFileSystemConfiguration.add_member(:data_repository_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryConfiguration, location_name: "DataRepositoryConfiguration"))
+    LustreFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreDeploymentType, location_name: "DeploymentType"))
+    LustreFileSystemConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    LustreFileSystemConfiguration.add_member(:mount_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreFileSystemMountName, location_name: "MountName"))
+    LustreFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    LustreFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    LustreFileSystemConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    LustreFileSystemConfiguration.add_member(:drive_cache_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DriveCacheType, location_name: "DriveCacheType"))
+    LustreFileSystemConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCompressionType, location_name: "DataCompressionType"))
+    LustreFileSystemConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreLogConfiguration, location_name: "LogConfiguration"))
+    LustreFileSystemConfiguration.add_member(:root_squash_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
+    LustreFileSystemConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
+    LustreFileSystemConfiguration.add_member(:efa_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "EfaEnabled"))
+    LustreFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
+    LustreFileSystemConfiguration.add_member(:data_read_cache_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
     LustreFileSystemConfiguration.type = Types::LustreFileSystemConfiguration
-    LustreLogConfiguration.add_member(:level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, location_name: "Level", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    LustreLogConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralARN, location_name: "Destination"))
+    LustreLogConfiguration.add_member(:level, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreAccessAuditLogLevel, location_name: "Level", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    LustreLogConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralARN, location_name: "Destination"))
     LustreLogConfiguration.type = Types::LustreLogConfiguration
-    LustreLogCreateConfiguration.add_member(:level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, location_name: "Level", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    LustreLogCreateConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralARN, location_name: "Destination"))
+    LustreLogCreateConfiguration.add_member(:level, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreAccessAuditLogLevel, location_name: "Level", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    LustreLogCreateConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralARN, location_name: "Destination"))
     LustreLogCreateConfiguration.type = Types::LustreLogCreateConfiguration
-    LustreNoSquashNids.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreNoSquashNid)
-    LustreReadCacheConfiguration.add_member(:sizing_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreReadCacheSizingMode, location_name: "SizingMode"))
-    LustreReadCacheConfiguration.add_member(:size_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "SizeGiB"))
+    LustreNoSquashNids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LustreNoSquashNid)
+    LustreReadCacheConfiguration.add_member(:sizing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreReadCacheSizingMode, location_name: "SizingMode"))
+    LustreReadCacheConfiguration.add_member(:size_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "SizeGiB"))
     LustreReadCacheConfiguration.type = Types::LustreReadCacheConfiguration
-    LustreReadCacheSizingMode.add_member(:no_cache, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_CACHE", traits: {"smithy.api#enumValue" => "NO_CACHE"}))
-    LustreReadCacheSizingMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
-    LustreReadCacheSizingMode.add_member(:proportional_to_throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROPORTIONAL_TO_THROUGHPUT_CAPACITY", traits: {"smithy.api#enumValue" => "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"}))
-    LustreRootSquashConfiguration.add_member(:root_squash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreRootSquash, location_name: "RootSquash"))
-    LustreRootSquashConfiguration.add_member(:no_squash_nids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreNoSquashNids, location_name: "NoSquashNids"))
+    LustreReadCacheSizingMode.add_member(:no_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_CACHE", traits: {"smithy.api#enumValue" => "NO_CACHE"}))
+    LustreReadCacheSizingMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
+    LustreReadCacheSizingMode.add_member(:proportional_to_throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROPORTIONAL_TO_THROUGHPUT_CAPACITY", traits: {"smithy.api#enumValue" => "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"}))
+    LustreRootSquashConfiguration.add_member(:root_squash, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreRootSquash, location_name: "RootSquash"))
+    LustreRootSquashConfiguration.add_member(:no_squash_nids, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreNoSquashNids, location_name: "NoSquashNids"))
     LustreRootSquashConfiguration.type = Types::LustreRootSquashConfiguration
-    MetadataConfigurationMode.add_member(:automatic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
-    MetadataConfigurationMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
-    MissingFileCacheConfiguration.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MetadataConfigurationMode.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    MetadataConfigurationMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
+    MissingFileCacheConfiguration.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     MissingFileCacheConfiguration.type = Types::MissingFileCacheConfiguration
-    MissingFileSystemConfiguration.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingFileSystemConfiguration.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     MissingFileSystemConfiguration.type = Types::MissingFileSystemConfiguration
-    MissingVolumeConfiguration.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingVolumeConfiguration.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     MissingVolumeConfiguration.type = Types::MissingVolumeConfiguration
-    NFSDataRepositoryConfiguration.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsVersion, location_name: "Version", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    NFSDataRepositoryConfiguration.add_member(:dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDnsIps, location_name: "DnsIps"))
-    NFSDataRepositoryConfiguration.add_member(:auto_export_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoExportPolicy, location_name: "AutoExportPolicy"))
+    NFSDataRepositoryConfiguration.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsVersion, location_name: "Version", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    NFSDataRepositoryConfiguration.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryDnsIps, location_name: "DnsIps"))
+    NFSDataRepositoryConfiguration.add_member(:auto_export_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoExportPolicy, location_name: "AutoExportPolicy"))
     NFSDataRepositoryConfiguration.type = Types::NFSDataRepositoryConfiguration
-    NetworkInterfaceIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceId)
-    NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
-    NetworkType.add_member(:dual, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUAL", traits: {"smithy.api#enumValue" => "DUAL"}))
-    NfsVersion.add_member(:nfs3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS3", traits: {"smithy.api#enumValue" => "NFS3"}))
-    NotServiceResourceError.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    NotServiceResourceError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NetworkInterfaceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId)
+    NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
+    NetworkType.add_member(:dual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUAL", traits: {"smithy.api#enumValue" => "DUAL"}))
+    NfsVersion.add_member(:nfs3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS3", traits: {"smithy.api#enumValue" => "NFS3"}))
+    NotServiceResourceError.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    NotServiceResourceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotServiceResourceError.type = Types::NotServiceResourceError
-    OntapDeploymentType.add_member(:multi_az_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_1", traits: {"smithy.api#enumValue" => "MULTI_AZ_1"}))
-    OntapDeploymentType.add_member(:single_az_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_1"}))
-    OntapDeploymentType.add_member(:single_az_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_2"}))
-    OntapDeploymentType.add_member(:multi_az_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_2", traits: {"smithy.api#enumValue" => "MULTI_AZ_2"}))
-    OntapEndpointIpAddresses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress)
-    OntapFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    OntapFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    OntapFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapDeploymentType, location_name: "DeploymentType"))
-    OntapFileSystemConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
-    OntapFileSystemConfiguration.add_member(:endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemEndpoints, location_name: "Endpoints"))
-    OntapFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
-    OntapFileSystemConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
-    OntapFileSystemConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
-    OntapFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
-    OntapFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    OntapFileSystemConfiguration.add_member(:fsx_admin_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
-    OntapFileSystemConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
-    OntapFileSystemConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
-    OntapFileSystemConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
+    OntapDeploymentType.add_member(:multi_az_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_1", traits: {"smithy.api#enumValue" => "MULTI_AZ_1"}))
+    OntapDeploymentType.add_member(:single_az_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_1"}))
+    OntapDeploymentType.add_member(:single_az_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_2"}))
+    OntapDeploymentType.add_member(:multi_az_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_2", traits: {"smithy.api#enumValue" => "MULTI_AZ_2"}))
+    OntapEndpointIpAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress)
+    OntapFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    OntapFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    OntapFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapDeploymentType, location_name: "DeploymentType"))
+    OntapFileSystemConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    OntapFileSystemConfiguration.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemEndpoints, location_name: "Endpoints"))
+    OntapFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    OntapFileSystemConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "PreferredSubnetId"))
+    OntapFileSystemConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "RouteTableIds"))
+    OntapFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    OntapFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    OntapFileSystemConfiguration.add_member(:fsx_admin_password, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminPassword, location_name: "FsxAdminPassword"))
+    OntapFileSystemConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::MemberShape.new(target: HAPairs, location_name: "HAPairs"))
+    OntapFileSystemConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    OntapFileSystemConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     OntapFileSystemConfiguration.type = Types::OntapFileSystemConfiguration
-    OntapVolumeConfiguration.add_member(:flex_cache_endpoint_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlexCacheEndpointType, location_name: "FlexCacheEndpointType"))
-    OntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
-    OntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
-    OntapVolumeConfiguration.add_member(:size_in_megabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeCapacity, location_name: "SizeInMegabytes"))
-    OntapVolumeConfiguration.add_member(:storage_efficiency_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "StorageEfficiencyEnabled"))
-    OntapVolumeConfiguration.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
-    OntapVolumeConfiguration.add_member(:storage_virtual_machine_root, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "StorageVirtualMachineRoot"))
-    OntapVolumeConfiguration.add_member(:tiering_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
-    OntapVolumeConfiguration.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
-    OntapVolumeConfiguration.add_member(:ontap_volume_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapVolumeType, location_name: "OntapVolumeType"))
-    OntapVolumeConfiguration.add_member(:snapshot_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
-    OntapVolumeConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    OntapVolumeConfiguration.add_member(:snaplock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnaplockConfiguration, location_name: "SnaplockConfiguration"))
-    OntapVolumeConfiguration.add_member(:volume_style, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeStyle, location_name: "VolumeStyle"))
-    OntapVolumeConfiguration.add_member(:aggregate_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConfiguration, location_name: "AggregateConfiguration"))
-    OntapVolumeConfiguration.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeCapacityBytes, location_name: "SizeInBytes"))
+    OntapVolumeConfiguration.add_member(:flex_cache_endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FlexCacheEndpointType, location_name: "FlexCacheEndpointType"))
+    OntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JunctionPath, location_name: "JunctionPath"))
+    OntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityStyle, location_name: "SecurityStyle"))
+    OntapVolumeConfiguration.add_member(:size_in_megabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeCapacity, location_name: "SizeInMegabytes"))
+    OntapVolumeConfiguration.add_member(:storage_efficiency_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "StorageEfficiencyEnabled"))
+    OntapVolumeConfiguration.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    OntapVolumeConfiguration.add_member(:storage_virtual_machine_root, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "StorageVirtualMachineRoot"))
+    OntapVolumeConfiguration.add_member(:tiering_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringPolicy, location_name: "TieringPolicy"))
+    OntapVolumeConfiguration.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "UUID"))
+    OntapVolumeConfiguration.add_member(:ontap_volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapVolumeType, location_name: "OntapVolumeType"))
+    OntapVolumeConfiguration.add_member(:snapshot_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    OntapVolumeConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    OntapVolumeConfiguration.add_member(:snaplock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SnaplockConfiguration, location_name: "SnaplockConfiguration"))
+    OntapVolumeConfiguration.add_member(:volume_style, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStyle, location_name: "VolumeStyle"))
+    OntapVolumeConfiguration.add_member(:aggregate_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConfiguration, location_name: "AggregateConfiguration"))
+    OntapVolumeConfiguration.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeCapacityBytes, location_name: "SizeInBytes"))
     OntapVolumeConfiguration.type = Types::OntapVolumeConfiguration
-    OntapVolumeType.add_member(:rw, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RW", traits: {"smithy.api#enumValue" => "RW"}))
-    OntapVolumeType.add_member(:dp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DP", traits: {"smithy.api#enumValue" => "DP"}))
-    OntapVolumeType.add_member(:ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LS", traits: {"smithy.api#enumValue" => "LS"}))
-    OpenZFSClientConfiguration.add_member(:clients, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSClients, location_name: "Clients", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    OpenZFSClientConfiguration.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSNfsExportOptions, location_name: "Options", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OntapVolumeType.add_member(:rw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RW", traits: {"smithy.api#enumValue" => "RW"}))
+    OntapVolumeType.add_member(:dp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DP", traits: {"smithy.api#enumValue" => "DP"}))
+    OntapVolumeType.add_member(:ls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LS", traits: {"smithy.api#enumValue" => "LS"}))
+    OpenZFSClientConfiguration.add_member(:clients, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSClients, location_name: "Clients", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSClientConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExportOptions, location_name: "Options", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OpenZFSClientConfiguration.type = Types::OpenZFSClientConfiguration
-    OpenZFSClientConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSClientConfiguration)
-    OpenZFSCopyStrategy.add_member(:clone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLONE", traits: {"smithy.api#enumValue" => "CLONE"}))
-    OpenZFSCopyStrategy.add_member(:full_copy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_COPY", traits: {"smithy.api#enumValue" => "FULL_COPY"}))
-    OpenZFSCopyStrategy.add_member(:incremental_copy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCREMENTAL_COPY", traits: {"smithy.api#enumValue" => "INCREMENTAL_COPY"}))
-    OpenZFSCreateRootVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
-    OpenZFSCreateRootVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
-    OpenZFSCreateRootVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
-    OpenZFSCreateRootVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
-    OpenZFSCreateRootVolumeConfiguration.add_member(:copy_tags_to_snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToSnapshots"))
-    OpenZFSCreateRootVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
+    OpenZFSClientConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSClientConfiguration)
+    OpenZFSCopyStrategy.add_member(:clone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLONE", traits: {"smithy.api#enumValue" => "CLONE"}))
+    OpenZFSCopyStrategy.add_member(:full_copy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_COPY", traits: {"smithy.api#enumValue" => "FULL_COPY"}))
+    OpenZFSCopyStrategy.add_member(:incremental_copy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCREMENTAL_COPY", traits: {"smithy.api#enumValue" => "INCREMENTAL_COPY"}))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExports, location_name: "NfsExports"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:copy_tags_to_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToSnapshots"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadOnly, location_name: "ReadOnly"))
     OpenZFSCreateRootVolumeConfiguration.type = Types::OpenZFSCreateRootVolumeConfiguration
-    OpenZFSDataCompressionType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    OpenZFSDataCompressionType.add_member(:zstd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZSTD", traits: {"smithy.api#enumValue" => "ZSTD"}))
-    OpenZFSDataCompressionType.add_member(:lz4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LZ4", traits: {"smithy.api#enumValue" => "LZ4"}))
-    OpenZFSDeploymentType.add_member(:single_az_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_1"}))
-    OpenZFSDeploymentType.add_member(:single_az_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_2"}))
-    OpenZFSDeploymentType.add_member(:single_az_ha_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_HA_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_HA_1"}))
-    OpenZFSDeploymentType.add_member(:single_az_ha_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_HA_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_HA_2"}))
-    OpenZFSDeploymentType.add_member(:multi_az_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_1", traits: {"smithy.api#enumValue" => "MULTI_AZ_1"}))
-    OpenZFSFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    OpenZFSFileSystemConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    OpenZFSFileSystemConfiguration.add_member(:copy_tags_to_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToVolumes"))
-    OpenZFSFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    OpenZFSFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSDeploymentType, location_name: "DeploymentType"))
-    OpenZFSFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
-    OpenZFSFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    OpenZFSFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
-    OpenZFSFileSystemConfiguration.add_member(:root_volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "RootVolumeId"))
-    OpenZFSFileSystemConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
-    OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
-    OpenZFSFileSystemConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
-    OpenZFSFileSystemConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
-    OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress, location_name: "EndpointIpAddress"))
-    OpenZFSFileSystemConfiguration.add_member(:endpoint_ipv6_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress, location_name: "EndpointIpv6Address"))
-    OpenZFSFileSystemConfiguration.add_member(:read_cache_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
+    OpenZFSDataCompressionType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    OpenZFSDataCompressionType.add_member(:zstd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZSTD", traits: {"smithy.api#enumValue" => "ZSTD"}))
+    OpenZFSDataCompressionType.add_member(:lz4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LZ4", traits: {"smithy.api#enumValue" => "LZ4"}))
+    OpenZFSDeploymentType.add_member(:single_az_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_1"}))
+    OpenZFSDeploymentType.add_member(:single_az_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_2"}))
+    OpenZFSDeploymentType.add_member(:single_az_ha_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_HA_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_HA_1"}))
+    OpenZFSDeploymentType.add_member(:single_az_ha_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_HA_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_HA_2"}))
+    OpenZFSDeploymentType.add_member(:multi_az_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_1", traits: {"smithy.api#enumValue" => "MULTI_AZ_1"}))
+    OpenZFSFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    OpenZFSFileSystemConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    OpenZFSFileSystemConfiguration.add_member(:copy_tags_to_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToVolumes"))
+    OpenZFSFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    OpenZFSFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSDeploymentType, location_name: "DeploymentType"))
+    OpenZFSFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    OpenZFSFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    OpenZFSFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    OpenZFSFileSystemConfiguration.add_member(:root_volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "RootVolumeId"))
+    OpenZFSFileSystemConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "PreferredSubnetId"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
+    OpenZFSFileSystemConfiguration.add_member(:route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "RouteTableIds"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, location_name: "EndpointIpAddress"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, location_name: "EndpointIpv6Address"))
+    OpenZFSFileSystemConfiguration.add_member(:read_cache_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
     OpenZFSFileSystemConfiguration.type = Types::OpenZFSFileSystemConfiguration
-    OpenZFSFileSystemIdentity.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSFileSystemUserType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    OpenZFSFileSystemIdentity.add_member(:posix_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSPosixFileSystemUser, location_name: "PosixUser"))
+    OpenZFSFileSystemIdentity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSFileSystemUserType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSFileSystemIdentity.add_member(:posix_user, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSPosixFileSystemUser, location_name: "PosixUser"))
     OpenZFSFileSystemIdentity.type = Types::OpenZFSFileSystemIdentity
-    OpenZFSFileSystemUserType.add_member(:posix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POSIX", traits: {"smithy.api#enumValue" => "POSIX"}))
-    OpenZFSNfsExport.add_member(:client_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSClientConfigurations, location_name: "ClientConfigurations", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSFileSystemUserType.add_member(:posix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POSIX", traits: {"smithy.api#enumValue" => "POSIX"}))
+    OpenZFSNfsExport.add_member(:client_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSClientConfigurations, location_name: "ClientConfigurations", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OpenZFSNfsExport.type = Types::OpenZFSNfsExport
-    OpenZFSNfsExportOptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSNfsExportOption)
-    OpenZFSNfsExports.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSNfsExport)
-    OpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "SnapshotARN"))
-    OpenZFSOriginSnapshotConfiguration.add_member(:copy_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
+    OpenZFSNfsExportOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExportOption)
+    OpenZFSNfsExports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExport)
+    OpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "SnapshotARN"))
+    OpenZFSOriginSnapshotConfiguration.add_member(:copy_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
     OpenZFSOriginSnapshotConfiguration.type = Types::OpenZFSOriginSnapshotConfiguration
-    OpenZFSPosixFileSystemUser.add_member(:uid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemUID, location_name: "Uid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    OpenZFSPosixFileSystemUser.add_member(:gid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemGID, location_name: "Gid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    OpenZFSPosixFileSystemUser.add_member(:secondary_gids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemSecondaryGIDs, location_name: "SecondaryGids"))
+    OpenZFSPosixFileSystemUser.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemUID, location_name: "Uid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSPosixFileSystemUser.add_member(:gid, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemGID, location_name: "Gid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSPosixFileSystemUser.add_member(:secondary_gids, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemSecondaryGIDs, location_name: "SecondaryGids"))
     OpenZFSPosixFileSystemUser.type = Types::OpenZFSPosixFileSystemUser
-    OpenZFSQuotaType.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    OpenZFSQuotaType.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
-    OpenZFSReadCacheConfiguration.add_member(:sizing_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSReadCacheSizingMode, location_name: "SizingMode"))
-    OpenZFSReadCacheConfiguration.add_member(:size_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "SizeGiB"))
+    OpenZFSQuotaType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    OpenZFSQuotaType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
+    OpenZFSReadCacheConfiguration.add_member(:sizing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSReadCacheSizingMode, location_name: "SizingMode"))
+    OpenZFSReadCacheConfiguration.add_member(:size_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "SizeGiB"))
     OpenZFSReadCacheConfiguration.type = Types::OpenZFSReadCacheConfiguration
-    OpenZFSReadCacheSizingMode.add_member(:no_cache, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_CACHE", traits: {"smithy.api#enumValue" => "NO_CACHE"}))
-    OpenZFSReadCacheSizingMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
-    OpenZFSReadCacheSizingMode.add_member(:proportional_to_throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROPORTIONAL_TO_THROUGHPUT_CAPACITY", traits: {"smithy.api#enumValue" => "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"}))
-    OpenZFSUserAndGroupQuotas.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSUserOrGroupQuota)
-    OpenZFSUserOrGroupQuota.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSQuotaType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    OpenZFSUserOrGroupQuota.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    OpenZFSUserOrGroupQuota.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityQuotaGiB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSReadCacheSizingMode.add_member(:no_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_CACHE", traits: {"smithy.api#enumValue" => "NO_CACHE"}))
+    OpenZFSReadCacheSizingMode.add_member(:user_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_PROVISIONED", traits: {"smithy.api#enumValue" => "USER_PROVISIONED"}))
+    OpenZFSReadCacheSizingMode.add_member(:proportional_to_throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROPORTIONAL_TO_THROUGHPUT_CAPACITY", traits: {"smithy.api#enumValue" => "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"}))
+    OpenZFSUserAndGroupQuotas.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSUserOrGroupQuota)
+    OpenZFSUserOrGroupQuota.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSQuotaType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSUserOrGroupQuota.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMax, location_name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OpenZFSUserOrGroupQuota.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMax, location_name: "StorageCapacityQuotaGiB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OpenZFSUserOrGroupQuota.type = Types::OpenZFSUserOrGroupQuota
-    OpenZFSVolumeConfiguration.add_member(:parent_volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "ParentVolumeId"))
-    OpenZFSVolumeConfiguration.add_member(:volume_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumePath, location_name: "VolumePath"))
-    OpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityReservationGiB"))
-    OpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityQuotaGiB"))
-    OpenZFSVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
-    OpenZFSVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
-    OpenZFSVolumeConfiguration.add_member(:copy_tags_to_snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToSnapshots"))
-    OpenZFSVolumeConfiguration.add_member(:origin_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSOriginSnapshotConfiguration, location_name: "OriginSnapshot"))
-    OpenZFSVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
-    OpenZFSVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
-    OpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
-    OpenZFSVolumeConfiguration.add_member(:restore_to_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "RestoreToSnapshot"))
-    OpenZFSVolumeConfiguration.add_member(:delete_intermediate_snaphots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "DeleteIntermediateSnaphots"))
-    OpenZFSVolumeConfiguration.add_member(:delete_cloned_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "DeleteClonedVolumes"))
-    OpenZFSVolumeConfiguration.add_member(:delete_intermediate_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "DeleteIntermediateData"))
-    OpenZFSVolumeConfiguration.add_member(:source_snapshot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "SourceSnapshotARN"))
-    OpenZFSVolumeConfiguration.add_member(:destination_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "DestinationSnapshot"))
-    OpenZFSVolumeConfiguration.add_member(:copy_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
+    OpenZFSVolumeConfiguration.add_member(:parent_volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "ParentVolumeId"))
+    OpenZFSVolumeConfiguration.add_member(:volume_path, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumePath, location_name: "VolumePath"))
+    OpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMax, location_name: "StorageCapacityReservationGiB"))
+    OpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMax, location_name: "StorageCapacityQuotaGiB"))
+    OpenZFSVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
+    OpenZFSVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    OpenZFSVolumeConfiguration.add_member(:copy_tags_to_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToSnapshots"))
+    OpenZFSVolumeConfiguration.add_member(:origin_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSOriginSnapshotConfiguration, location_name: "OriginSnapshot"))
+    OpenZFSVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadOnly, location_name: "ReadOnly"))
+    OpenZFSVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExports, location_name: "NfsExports"))
+    OpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    OpenZFSVolumeConfiguration.add_member(:restore_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "RestoreToSnapshot"))
+    OpenZFSVolumeConfiguration.add_member(:delete_intermediate_snaphots, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "DeleteIntermediateSnaphots"))
+    OpenZFSVolumeConfiguration.add_member(:delete_cloned_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "DeleteClonedVolumes"))
+    OpenZFSVolumeConfiguration.add_member(:delete_intermediate_data, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "DeleteIntermediateData"))
+    OpenZFSVolumeConfiguration.add_member(:source_snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "SourceSnapshotARN"))
+    OpenZFSVolumeConfiguration.add_member(:destination_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "DestinationSnapshot"))
+    OpenZFSVolumeConfiguration.add_member(:copy_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
     OpenZFSVolumeConfiguration.type = Types::OpenZFSVolumeConfiguration
-    PrivilegedDelete.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    PrivilegedDelete.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    PrivilegedDelete.add_member(:permanently_disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERMANENTLY_DISABLED", traits: {"smithy.api#enumValue" => "PERMANENTLY_DISABLED"}))
-    ReleaseConfiguration.add_member(:duration_since_last_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DurationSinceLastAccess, location_name: "DurationSinceLastAccess"))
+    PrivilegedDelete.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    PrivilegedDelete.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    PrivilegedDelete.add_member(:permanently_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERMANENTLY_DISABLED", traits: {"smithy.api#enumValue" => "PERMANENTLY_DISABLED"}))
+    ReleaseConfiguration.add_member(:duration_since_last_access, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSinceLastAccess, location_name: "DurationSinceLastAccess"))
     ReleaseConfiguration.type = Types::ReleaseConfiguration
-    ReleaseFileSystemNfsV3LocksRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ReleaseFileSystemNfsV3LocksRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    ReleaseFileSystemNfsV3LocksRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ReleaseFileSystemNfsV3LocksRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     ReleaseFileSystemNfsV3LocksRequest.type = Types::ReleaseFileSystemNfsV3LocksRequest
-    ReleaseFileSystemNfsV3LocksResponse.add_member(:file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
+    ReleaseFileSystemNfsV3LocksResponse.add_member(:file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem, location_name: "FileSystem"))
     ReleaseFileSystemNfsV3LocksResponse.type = Types::ReleaseFileSystemNfsV3LocksResponse
-    ReportFormat.add_member(:report_csv_20191124, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPORT_CSV_20191124", traits: {"smithy.api#enumValue" => "REPORT_CSV_20191124"}))
-    ReportScope.add_member(:failed_files_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_FILES_ONLY", traits: {"smithy.api#enumValue" => "FAILED_FILES_ONLY"}))
-    RepositoryDnsIps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress)
-    ResourceDoesNotSupportTagging.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ResourceDoesNotSupportTagging.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ReportFormat.add_member(:report_csv_20191124, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPORT_CSV_20191124", traits: {"smithy.api#enumValue" => "REPORT_CSV_20191124"}))
+    ReportScope.add_member(:failed_files_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_FILES_ONLY", traits: {"smithy.api#enumValue" => "FAILED_FILES_ONLY"}))
+    RepositoryDnsIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress)
+    ResourceDoesNotSupportTagging.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceDoesNotSupportTagging.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceDoesNotSupportTagging.type = Types::ResourceDoesNotSupportTagging
-    ResourceNotFound.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ResourceNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFound.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFound.type = Types::ResourceNotFound
-    ResourceType.add_member(:file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM", traits: {"smithy.api#enumValue" => "FILE_SYSTEM"}))
-    ResourceType.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
-    RestoreOpenZFSVolumeOption.add_member(:delete_intermediate_snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_INTERMEDIATE_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_INTERMEDIATE_SNAPSHOTS"}))
-    RestoreOpenZFSVolumeOption.add_member(:delete_cloned_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CLONED_VOLUMES", traits: {"smithy.api#enumValue" => "DELETE_CLONED_VOLUMES"}))
-    RestoreOpenZFSVolumeOptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreOpenZFSVolumeOption)
-    RestoreVolumeFromSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    RestoreVolumeFromSnapshotRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    RestoreVolumeFromSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    RestoreVolumeFromSnapshotRequest.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreOpenZFSVolumeOptions, location_name: "Options"))
+    ResourceType.add_member(:file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM", traits: {"smithy.api#enumValue" => "FILE_SYSTEM"}))
+    ResourceType.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
+    RestoreOpenZFSVolumeOption.add_member(:delete_intermediate_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_INTERMEDIATE_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_INTERMEDIATE_SNAPSHOTS"}))
+    RestoreOpenZFSVolumeOption.add_member(:delete_cloned_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CLONED_VOLUMES", traits: {"smithy.api#enumValue" => "DELETE_CLONED_VOLUMES"}))
+    RestoreOpenZFSVolumeOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreOpenZFSVolumeOption)
+    RestoreVolumeFromSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    RestoreVolumeFromSnapshotRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RestoreVolumeFromSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RestoreVolumeFromSnapshotRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreOpenZFSVolumeOptions, location_name: "Options"))
     RestoreVolumeFromSnapshotRequest.type = Types::RestoreVolumeFromSnapshotRequest
-    RestoreVolumeFromSnapshotResponse.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    RestoreVolumeFromSnapshotResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeLifecycle, location_name: "Lifecycle"))
-    RestoreVolumeFromSnapshotResponse.add_member(:administrative_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
+    RestoreVolumeFromSnapshotResponse.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    RestoreVolumeFromSnapshotResponse.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeLifecycle, location_name: "Lifecycle"))
+    RestoreVolumeFromSnapshotResponse.add_member(:administrative_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeActions, location_name: "AdministrativeActions"))
     RestoreVolumeFromSnapshotResponse.type = Types::RestoreVolumeFromSnapshotResponse
-    RetentionPeriod.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    RetentionPeriod.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodValue, location_name: "Value"))
+    RetentionPeriod.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodType, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RetentionPeriod.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodValue, location_name: "Value"))
     RetentionPeriod.type = Types::RetentionPeriod
-    RetentionPeriodType.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
-    RetentionPeriodType.add_member(:minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTES", traits: {"smithy.api#enumValue" => "MINUTES"}))
-    RetentionPeriodType.add_member(:hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
-    RetentionPeriodType.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
-    RetentionPeriodType.add_member(:months, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHS", traits: {"smithy.api#enumValue" => "MONTHS"}))
-    RetentionPeriodType.add_member(:years, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "YEARS", traits: {"smithy.api#enumValue" => "YEARS"}))
-    RetentionPeriodType.add_member(:infinite, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFINITE", traits: {"smithy.api#enumValue" => "INFINITE"}))
-    RetentionPeriodType.add_member(:unspecified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSPECIFIED", traits: {"smithy.api#enumValue" => "UNSPECIFIED"}))
-    RouteTableIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableId)
-    S3AccessPoint.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralARN, location_name: "ResourceARN"))
-    S3AccessPoint.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAlias, location_name: "Alias"))
-    S3AccessPoint.add_member(:vpc_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointVpcConfiguration, location_name: "VpcConfiguration"))
+    RetentionPeriodType.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
+    RetentionPeriodType.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTES", traits: {"smithy.api#enumValue" => "MINUTES"}))
+    RetentionPeriodType.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
+    RetentionPeriodType.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
+    RetentionPeriodType.add_member(:months, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MONTHS", traits: {"smithy.api#enumValue" => "MONTHS"}))
+    RetentionPeriodType.add_member(:years, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "YEARS", traits: {"smithy.api#enumValue" => "YEARS"}))
+    RetentionPeriodType.add_member(:infinite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFINITE", traits: {"smithy.api#enumValue" => "INFINITE"}))
+    RetentionPeriodType.add_member(:unspecified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSPECIFIED", traits: {"smithy.api#enumValue" => "UNSPECIFIED"}))
+    RouteTableIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableId)
+    S3AccessPoint.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralARN, location_name: "ResourceARN"))
+    S3AccessPoint.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAlias, location_name: "Alias"))
+    S3AccessPoint.add_member(:vpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointVpcConfiguration, location_name: "VpcConfiguration"))
     S3AccessPoint.type = Types::S3AccessPoint
-    S3AccessPointAttachment.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentLifecycle, location_name: "Lifecycle"))
-    S3AccessPointAttachment.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
-    S3AccessPointAttachment.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    S3AccessPointAttachment.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, location_name: "Name"))
-    S3AccessPointAttachment.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentType, location_name: "Type"))
-    S3AccessPointAttachment.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
-    S3AccessPointAttachment.add_member(:s3_access_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPoint, location_name: "S3AccessPoint"))
+    S3AccessPointAttachment.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentLifecycle, location_name: "Lifecycle"))
+    S3AccessPointAttachment.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    S3AccessPointAttachment.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    S3AccessPointAttachment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName, location_name: "Name"))
+    S3AccessPointAttachment.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentType, location_name: "Type"))
+    S3AccessPointAttachment.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    S3AccessPointAttachment.add_member(:s3_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPoint, location_name: "S3AccessPoint"))
     S3AccessPointAttachment.type = Types::S3AccessPointAttachment
-    S3AccessPointAttachmentLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    S3AccessPointAttachmentLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    S3AccessPointAttachmentLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    S3AccessPointAttachmentLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    S3AccessPointAttachmentLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    S3AccessPointAttachmentNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName)
-    S3AccessPointAttachmentNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    S3AccessPointAttachmentLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    S3AccessPointAttachmentLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    S3AccessPointAttachmentLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    S3AccessPointAttachmentLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    S3AccessPointAttachmentLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    S3AccessPointAttachmentNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName)
+    S3AccessPointAttachmentNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     S3AccessPointAttachmentNotFound.type = Types::S3AccessPointAttachmentNotFound
-    S3AccessPointAttachmentType.add_member(:openzfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPENZFS", traits: {"smithy.api#enumValue" => "OPENZFS"}))
-    S3AccessPointAttachments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachment)
-    S3AccessPointAttachmentsFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilterName, location_name: "Name"))
-    S3AccessPointAttachmentsFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilterValues, location_name: "Values"))
+    S3AccessPointAttachmentType.add_member(:openzfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPENZFS", traits: {"smithy.api#enumValue" => "OPENZFS"}))
+    S3AccessPointAttachments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachment)
+    S3AccessPointAttachmentsFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilterName, location_name: "Name"))
+    S3AccessPointAttachmentsFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilterValues, location_name: "Values"))
     S3AccessPointAttachmentsFilter.type = Types::S3AccessPointAttachmentsFilter
-    S3AccessPointAttachmentsFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
-    S3AccessPointAttachmentsFilterName.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_ID", traits: {"smithy.api#enumValue" => "volume-id"}))
-    S3AccessPointAttachmentsFilterName.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TYPE", traits: {"smithy.api#enumValue" => "type"}))
-    S3AccessPointAttachmentsFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilterValue)
-    S3AccessPointAttachmentsFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilter)
-    S3AccessPointOpenZFSConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    S3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSFileSystemIdentity, location_name: "FileSystemIdentity"))
+    S3AccessPointAttachmentsFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
+    S3AccessPointAttachmentsFilterName.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_ID", traits: {"smithy.api#enumValue" => "volume-id"}))
+    S3AccessPointAttachmentsFilterName.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TYPE", traits: {"smithy.api#enumValue" => "type"}))
+    S3AccessPointAttachmentsFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilterValue)
+    S3AccessPointAttachmentsFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilter)
+    S3AccessPointOpenZFSConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    S3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSFileSystemIdentity, location_name: "FileSystemIdentity"))
     S3AccessPointOpenZFSConfiguration.type = Types::S3AccessPointOpenZFSConfiguration
-    S3AccessPointVpcConfiguration.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    S3AccessPointVpcConfiguration.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
     S3AccessPointVpcConfiguration.type = Types::S3AccessPointVpcConfiguration
-    S3DataRepositoryConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoImportPolicy, location_name: "AutoImportPolicy"))
-    S3DataRepositoryConfiguration.add_member(:auto_export_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoExportPolicy, location_name: "AutoExportPolicy"))
+    S3DataRepositoryConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoImportPolicy, location_name: "AutoImportPolicy"))
+    S3DataRepositoryConfiguration.add_member(:auto_export_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoExportPolicy, location_name: "AutoExportPolicy"))
     S3DataRepositoryConfiguration.type = Types::S3DataRepositoryConfiguration
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId)
-    SecurityStyle.add_member(:unix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIX", traits: {"smithy.api#enumValue" => "UNIX"}))
-    SecurityStyle.add_member(:ntfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NTFS", traits: {"smithy.api#enumValue" => "NTFS"}))
-    SecurityStyle.add_member(:mixed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
-    SelfManagedActiveDirectoryAttributes.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
-    SelfManagedActiveDirectoryAttributes.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
-    SelfManagedActiveDirectoryAttributes.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
-    SelfManagedActiveDirectoryAttributes.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUserName, location_name: "UserName"))
-    SelfManagedActiveDirectoryAttributes.add_member(:dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIps, location_name: "DnsIps"))
+    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId)
+    SecurityStyle.add_member(:unix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIX", traits: {"smithy.api#enumValue" => "UNIX"}))
+    SecurityStyle.add_member(:ntfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NTFS", traits: {"smithy.api#enumValue" => "NTFS"}))
+    SecurityStyle.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
+    SelfManagedActiveDirectoryAttributes.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
+    SelfManagedActiveDirectoryAttributes.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
+    SelfManagedActiveDirectoryAttributes.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
+    SelfManagedActiveDirectoryAttributes.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUserName, location_name: "UserName"))
+    SelfManagedActiveDirectoryAttributes.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIps, location_name: "DnsIps"))
     SelfManagedActiveDirectoryAttributes.type = Types::SelfManagedActiveDirectoryAttributes
-    SelfManagedActiveDirectoryConfiguration.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SelfManagedActiveDirectoryConfiguration.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
-    SelfManagedActiveDirectoryConfiguration.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
-    SelfManagedActiveDirectoryConfiguration.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUserName, location_name: "UserName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SelfManagedActiveDirectoryConfiguration.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryPassword, location_name: "Password", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SelfManagedActiveDirectoryConfiguration.add_member(:dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIps, location_name: "DnsIps", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SelfManagedActiveDirectoryConfiguration.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryFullyQualifiedName, location_name: "DomainName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SelfManagedActiveDirectoryConfiguration.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
+    SelfManagedActiveDirectoryConfiguration.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
+    SelfManagedActiveDirectoryConfiguration.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUserName, location_name: "UserName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SelfManagedActiveDirectoryConfiguration.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryPassword, location_name: "Password", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SelfManagedActiveDirectoryConfiguration.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIps, location_name: "DnsIps", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SelfManagedActiveDirectoryConfiguration.type = Types::SelfManagedActiveDirectoryConfiguration
-    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUserName, location_name: "UserName"))
-    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryPassword, location_name: "Password"))
-    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIps, location_name: "DnsIps"))
-    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
-    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
-    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUserName, location_name: "UserName"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryPassword, location_name: "Password"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIps, location_name: "DnsIps"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
     SelfManagedActiveDirectoryConfigurationUpdates.type = Types::SelfManagedActiveDirectoryConfigurationUpdates
-    ServiceLimit.add_member(:file_system_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_COUNT", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_COUNT"}))
-    ServiceLimit.add_member(:total_throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_THROUGHPUT_CAPACITY", traits: {"smithy.api#enumValue" => "TOTAL_THROUGHPUT_CAPACITY"}))
-    ServiceLimit.add_member(:total_storage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_STORAGE", traits: {"smithy.api#enumValue" => "TOTAL_STORAGE"}))
-    ServiceLimit.add_member(:total_user_initiated_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_USER_INITIATED_BACKUPS", traits: {"smithy.api#enumValue" => "TOTAL_USER_INITIATED_BACKUPS"}))
-    ServiceLimit.add_member(:total_user_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_USER_TAGS", traits: {"smithy.api#enumValue" => "TOTAL_USER_TAGS"}))
-    ServiceLimit.add_member(:total_in_progress_copy_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_IN_PROGRESS_COPY_BACKUPS", traits: {"smithy.api#enumValue" => "TOTAL_IN_PROGRESS_COPY_BACKUPS"}))
-    ServiceLimit.add_member(:storage_virtual_machines_per_file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM", traits: {"smithy.api#enumValue" => "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM"}))
-    ServiceLimit.add_member(:volumes_per_file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUMES_PER_FILE_SYSTEM", traits: {"smithy.api#enumValue" => "VOLUMES_PER_FILE_SYSTEM"}))
-    ServiceLimit.add_member(:total_ssd_iops, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_SSD_IOPS", traits: {"smithy.api#enumValue" => "TOTAL_SSD_IOPS"}))
-    ServiceLimit.add_member(:file_cache_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_COUNT", traits: {"smithy.api#enumValue" => "FILE_CACHE_COUNT"}))
-    ServiceLimitExceeded.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimit, location_name: "Limit", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ServiceLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceLimit.add_member(:file_system_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_COUNT", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_COUNT"}))
+    ServiceLimit.add_member(:total_throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_THROUGHPUT_CAPACITY", traits: {"smithy.api#enumValue" => "TOTAL_THROUGHPUT_CAPACITY"}))
+    ServiceLimit.add_member(:total_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_STORAGE", traits: {"smithy.api#enumValue" => "TOTAL_STORAGE"}))
+    ServiceLimit.add_member(:total_user_initiated_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_USER_INITIATED_BACKUPS", traits: {"smithy.api#enumValue" => "TOTAL_USER_INITIATED_BACKUPS"}))
+    ServiceLimit.add_member(:total_user_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_USER_TAGS", traits: {"smithy.api#enumValue" => "TOTAL_USER_TAGS"}))
+    ServiceLimit.add_member(:total_in_progress_copy_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_IN_PROGRESS_COPY_BACKUPS", traits: {"smithy.api#enumValue" => "TOTAL_IN_PROGRESS_COPY_BACKUPS"}))
+    ServiceLimit.add_member(:storage_virtual_machines_per_file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM", traits: {"smithy.api#enumValue" => "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM"}))
+    ServiceLimit.add_member(:volumes_per_file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUMES_PER_FILE_SYSTEM", traits: {"smithy.api#enumValue" => "VOLUMES_PER_FILE_SYSTEM"}))
+    ServiceLimit.add_member(:total_ssd_iops, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOTAL_SSD_IOPS", traits: {"smithy.api#enumValue" => "TOTAL_SSD_IOPS"}))
+    ServiceLimit.add_member(:file_cache_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_CACHE_COUNT", traits: {"smithy.api#enumValue" => "FILE_CACHE_COUNT"}))
+    ServiceLimitExceeded.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLimit, location_name: "Limit", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ServiceLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceLimitExceeded.type = Types::ServiceLimitExceeded
-    SnaplockConfiguration.add_member(:audit_log_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "AuditLogVolume"))
-    SnaplockConfiguration.add_member(:autocommit_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutocommitPeriod, location_name: "AutocommitPeriod"))
-    SnaplockConfiguration.add_member(:privileged_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivilegedDelete, location_name: "PrivilegedDelete"))
-    SnaplockConfiguration.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnaplockRetentionPeriod, location_name: "RetentionPeriod"))
-    SnaplockConfiguration.add_member(:snaplock_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnaplockType, location_name: "SnaplockType"))
-    SnaplockConfiguration.add_member(:volume_append_mode_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "VolumeAppendModeEnabled"))
+    SnaplockConfiguration.add_member(:audit_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "AuditLogVolume"))
+    SnaplockConfiguration.add_member(:autocommit_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocommitPeriod, location_name: "AutocommitPeriod"))
+    SnaplockConfiguration.add_member(:privileged_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivilegedDelete, location_name: "PrivilegedDelete"))
+    SnaplockConfiguration.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: SnaplockRetentionPeriod, location_name: "RetentionPeriod"))
+    SnaplockConfiguration.add_member(:snaplock_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SnaplockType, location_name: "SnaplockType"))
+    SnaplockConfiguration.add_member(:volume_append_mode_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "VolumeAppendModeEnabled"))
     SnaplockConfiguration.type = Types::SnaplockConfiguration
-    SnaplockRetentionPeriod.add_member(:default_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "DefaultRetention", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SnaplockRetentionPeriod.add_member(:minimum_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "MinimumRetention", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SnaplockRetentionPeriod.add_member(:maximum_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "MaximumRetention", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SnaplockRetentionPeriod.add_member(:default_retention, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "DefaultRetention", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SnaplockRetentionPeriod.add_member(:minimum_retention, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "MinimumRetention", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SnaplockRetentionPeriod.add_member(:maximum_retention, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "MaximumRetention", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SnaplockRetentionPeriod.type = Types::SnaplockRetentionPeriod
-    SnaplockType.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
-    SnaplockType.add_member(:enterprise, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENTERPRISE", traits: {"smithy.api#enumValue" => "ENTERPRISE"}))
-    Snapshot.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    Snapshot.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
-    Snapshot.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name"))
-    Snapshot.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    Snapshot.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    Snapshot.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotLifecycle, location_name: "Lifecycle"))
-    Snapshot.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
-    Snapshot.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    Snapshot.add_member(:administrative_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
+    SnaplockType.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
+    SnaplockType.add_member(:enterprise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENTERPRISE", traits: {"smithy.api#enumValue" => "ENTERPRISE"}))
+    Snapshot.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    Snapshot.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId"))
+    Snapshot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotName, location_name: "Name"))
+    Snapshot.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    Snapshot.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    Snapshot.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotLifecycle, location_name: "Lifecycle"))
+    Snapshot.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    Snapshot.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    Snapshot.add_member(:administrative_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeActions, location_name: "AdministrativeActions"))
     Snapshot.type = Types::Snapshot
-    SnapshotFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotFilterName, location_name: "Name"))
-    SnapshotFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotFilterValues, location_name: "Values"))
+    SnapshotFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFilterName, location_name: "Name"))
+    SnapshotFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFilterValues, location_name: "Values"))
     SnapshotFilter.type = Types::SnapshotFilter
-    SnapshotFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
-    SnapshotFilterName.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_ID", traits: {"smithy.api#enumValue" => "volume-id"}))
-    SnapshotFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotFilterValue)
-    SnapshotFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotFilter)
-    SnapshotIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId)
-    SnapshotLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    SnapshotLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    SnapshotLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    SnapshotLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    SnapshotNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SnapshotFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
+    SnapshotFilterName.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOLUME_ID", traits: {"smithy.api#enumValue" => "volume-id"}))
+    SnapshotFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFilterValue)
+    SnapshotFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFilter)
+    SnapshotIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId)
+    SnapshotLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    SnapshotLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    SnapshotLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    SnapshotLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    SnapshotNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     SnapshotNotFound.type = Types::SnapshotNotFound
-    Snapshots.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot)
-    SourceBackupUnavailable.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    SourceBackupUnavailable.add_member(:backup_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
+    Snapshots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot)
+    SourceBackupUnavailable.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    SourceBackupUnavailable.add_member(:backup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupId, location_name: "BackupId"))
     SourceBackupUnavailable.type = Types::SourceBackupUnavailable
-    StartMisconfiguredStateRecoveryRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartMisconfiguredStateRecoveryRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartMisconfiguredStateRecoveryRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartMisconfiguredStateRecoveryRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StartMisconfiguredStateRecoveryRequest.type = Types::StartMisconfiguredStateRecoveryRequest
-    StartMisconfiguredStateRecoveryResponse.add_member(:file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
+    StartMisconfiguredStateRecoveryResponse.add_member(:file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem, location_name: "FileSystem"))
     StartMisconfiguredStateRecoveryResponse.type = Types::StartMisconfiguredStateRecoveryResponse
-    Status.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    Status.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    Status.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    Status.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    Status.add_member(:updated_optimizing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED_OPTIMIZING", traits: {"smithy.api#enumValue" => "UPDATED_OPTIMIZING"}))
-    Status.add_member(:optimizing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIMIZING", traits: {"smithy.api#enumValue" => "OPTIMIZING"}))
-    Status.add_member(:paused, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAUSED", traits: {"smithy.api#enumValue" => "PAUSED"}))
-    Status.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
-    StorageType.add_member(:ssd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSD", traits: {"smithy.api#enumValue" => "SSD"}))
-    StorageType.add_member(:hdd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HDD", traits: {"smithy.api#enumValue" => "HDD"}))
-    StorageType.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
-    StorageVirtualMachine.add_member(:active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
-    StorageVirtualMachine.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    StorageVirtualMachine.add_member(:endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmEndpoints, location_name: "Endpoints"))
-    StorageVirtualMachine.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    StorageVirtualMachine.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineLifecycle, location_name: "Lifecycle"))
-    StorageVirtualMachine.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineName, location_name: "Name"))
-    StorageVirtualMachine.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    StorageVirtualMachine.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
-    StorageVirtualMachine.add_member(:subtype, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineSubtype, location_name: "Subtype"))
-    StorageVirtualMachine.add_member(:uuid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
-    StorageVirtualMachine.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    StorageVirtualMachine.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
-    StorageVirtualMachine.add_member(:root_volume_security_style, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineRootVolumeSecurityStyle, location_name: "RootVolumeSecurityStyle"))
+    Status.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    Status.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    Status.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    Status.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    Status.add_member(:updated_optimizing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATED_OPTIMIZING", traits: {"smithy.api#enumValue" => "UPDATED_OPTIMIZING"}))
+    Status.add_member(:optimizing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIMIZING", traits: {"smithy.api#enumValue" => "OPTIMIZING"}))
+    Status.add_member(:paused, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAUSED", traits: {"smithy.api#enumValue" => "PAUSED"}))
+    Status.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    StorageType.add_member(:ssd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSD", traits: {"smithy.api#enumValue" => "SSD"}))
+    StorageType.add_member(:hdd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HDD", traits: {"smithy.api#enumValue" => "HDD"}))
+    StorageType.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
+    StorageVirtualMachine.add_member(:active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
+    StorageVirtualMachine.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    StorageVirtualMachine.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: SvmEndpoints, location_name: "Endpoints"))
+    StorageVirtualMachine.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
+    StorageVirtualMachine.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineLifecycle, location_name: "Lifecycle"))
+    StorageVirtualMachine.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineName, location_name: "Name"))
+    StorageVirtualMachine.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    StorageVirtualMachine.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    StorageVirtualMachine.add_member(:subtype, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineSubtype, location_name: "Subtype"))
+    StorageVirtualMachine.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "UUID"))
+    StorageVirtualMachine.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    StorageVirtualMachine.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    StorageVirtualMachine.add_member(:root_volume_security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineRootVolumeSecurityStyle, location_name: "RootVolumeSecurityStyle"))
     StorageVirtualMachine.type = Types::StorageVirtualMachine
-    StorageVirtualMachineFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineFilterName, location_name: "Name"))
-    StorageVirtualMachineFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineFilterValues, location_name: "Values"))
+    StorageVirtualMachineFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineFilterName, location_name: "Name"))
+    StorageVirtualMachineFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineFilterValues, location_name: "Values"))
     StorageVirtualMachineFilter.type = Types::StorageVirtualMachineFilter
-    StorageVirtualMachineFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
-    StorageVirtualMachineFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineFilterValue)
-    StorageVirtualMachineFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineFilter)
-    StorageVirtualMachineIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineId)
-    StorageVirtualMachineLifecycle.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
-    StorageVirtualMachineLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    StorageVirtualMachineLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    StorageVirtualMachineLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    StorageVirtualMachineLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
-    StorageVirtualMachineLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    StorageVirtualMachineNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    StorageVirtualMachineFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
+    StorageVirtualMachineFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineFilterValue)
+    StorageVirtualMachineFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineFilter)
+    StorageVirtualMachineIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId)
+    StorageVirtualMachineLifecycle.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    StorageVirtualMachineLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    StorageVirtualMachineLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    StorageVirtualMachineLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    StorageVirtualMachineLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
+    StorageVirtualMachineLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    StorageVirtualMachineNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     StorageVirtualMachineNotFound.type = Types::StorageVirtualMachineNotFound
-    StorageVirtualMachineRootVolumeSecurityStyle.add_member(:unix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIX", traits: {"smithy.api#enumValue" => "UNIX"}))
-    StorageVirtualMachineRootVolumeSecurityStyle.add_member(:ntfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NTFS", traits: {"smithy.api#enumValue" => "NTFS"}))
-    StorageVirtualMachineRootVolumeSecurityStyle.add_member(:mixed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
-    StorageVirtualMachineSubtype.add_member(:default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
-    StorageVirtualMachineSubtype.add_member(:dp_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DP_DESTINATION", traits: {"smithy.api#enumValue" => "DP_DESTINATION"}))
-    StorageVirtualMachineSubtype.add_member(:sync_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYNC_DESTINATION", traits: {"smithy.api#enumValue" => "SYNC_DESTINATION"}))
-    StorageVirtualMachineSubtype.add_member(:sync_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYNC_SOURCE", traits: {"smithy.api#enumValue" => "SYNC_SOURCE"}))
-    StorageVirtualMachines.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachine)
-    SubDirectoriesPaths.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace)
-    SubnetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
-    SvmActiveDirectoryConfiguration.add_member(:net_bios_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetBiosAlias, location_name: "NetBiosName"))
-    SvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryAttributes, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    StorageVirtualMachineRootVolumeSecurityStyle.add_member(:unix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNIX", traits: {"smithy.api#enumValue" => "UNIX"}))
+    StorageVirtualMachineRootVolumeSecurityStyle.add_member(:ntfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NTFS", traits: {"smithy.api#enumValue" => "NTFS"}))
+    StorageVirtualMachineRootVolumeSecurityStyle.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
+    StorageVirtualMachineSubtype.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
+    StorageVirtualMachineSubtype.add_member(:dp_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DP_DESTINATION", traits: {"smithy.api#enumValue" => "DP_DESTINATION"}))
+    StorageVirtualMachineSubtype.add_member(:sync_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYNC_DESTINATION", traits: {"smithy.api#enumValue" => "SYNC_DESTINATION"}))
+    StorageVirtualMachineSubtype.add_member(:sync_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYNC_SOURCE", traits: {"smithy.api#enumValue" => "SYNC_SOURCE"}))
+    StorageVirtualMachines.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachine)
+    SubDirectoriesPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace)
+    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId)
+    SvmActiveDirectoryConfiguration.add_member(:net_bios_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetBiosAlias, location_name: "NetBiosName"))
+    SvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManagedActiveDirectoryAttributes, location_name: "SelfManagedActiveDirectoryConfiguration"))
     SvmActiveDirectoryConfiguration.type = Types::SvmActiveDirectoryConfiguration
-    SvmEndpoint.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
-    SvmEndpoint.add_member(:ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
-    SvmEndpoint.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
+    SvmEndpoint.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "DNSName"))
+    SvmEndpoint.add_member(:ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    SvmEndpoint.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
     SvmEndpoint.type = Types::SvmEndpoint
-    SvmEndpoints.add_member(:iscsi, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Iscsi"))
-    SvmEndpoints.add_member(:management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Management"))
-    SvmEndpoints.add_member(:nfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Nfs"))
-    SvmEndpoints.add_member(:smb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Smb"))
+    SvmEndpoints.add_member(:iscsi, ::Smithy::Schema::Shapes::MemberShape.new(target: SvmEndpoint, location_name: "Iscsi"))
+    SvmEndpoints.add_member(:management, ::Smithy::Schema::Shapes::MemberShape.new(target: SvmEndpoint, location_name: "Management"))
+    SvmEndpoints.add_member(:nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: SvmEndpoint, location_name: "Nfs"))
+    SvmEndpoints.add_member(:smb, ::Smithy::Schema::Shapes::MemberShape.new(target: SvmEndpoint, location_name: "Smb"))
     SvmEndpoints.type = Types::SvmEndpoints
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TaskIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId)
-    TieringPolicy.add_member(:cooling_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CoolingPeriod, location_name: "CoolingPeriod"))
-    TieringPolicy.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TieringPolicyName, location_name: "Name"))
+    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TaskIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId)
+    TieringPolicy.add_member(:cooling_period, ::Smithy::Schema::Shapes::MemberShape.new(target: CoolingPeriod, location_name: "CoolingPeriod"))
+    TieringPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringPolicyName, location_name: "Name"))
     TieringPolicy.type = Types::TieringPolicy
-    TieringPolicyName.add_member(:snapshot_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNAPSHOT_ONLY", traits: {"smithy.api#enumValue" => "SNAPSHOT_ONLY"}))
-    TieringPolicyName.add_member(:auto, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
-    TieringPolicyName.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    TieringPolicyName.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    TooManyAccessPoints.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    TooManyAccessPoints.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TieringPolicyName.add_member(:snapshot_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNAPSHOT_ONLY", traits: {"smithy.api#enumValue" => "SNAPSHOT_ONLY"}))
+    TieringPolicyName.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
+    TieringPolicyName.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    TieringPolicyName.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    TooManyAccessPoints.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    TooManyAccessPoints.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     TooManyAccessPoints.type = Types::TooManyAccessPoints
-    Unit.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
-    UnsupportedOperation.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    Unit.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
+    UnsupportedOperation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UnsupportedOperation.type = Types::UnsupportedOperation
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateDataRepositoryAssociationRequest.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, location_name: "AssociationId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UpdateDataRepositoryAssociationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
-    UpdateDataRepositoryAssociationRequest.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
+    UpdateDataRepositoryAssociationRequest.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociationId, location_name: "AssociationId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateDataRepositoryAssociationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Megabytes, location_name: "ImportedFileChunkSize"))
+    UpdateDataRepositoryAssociationRequest.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataRepositoryConfiguration, location_name: "S3"))
     UpdateDataRepositoryAssociationRequest.type = Types::UpdateDataRepositoryAssociationRequest
-    UpdateDataRepositoryAssociationResponse.add_member(:association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociation, location_name: "Association"))
+    UpdateDataRepositoryAssociationResponse.add_member(:association, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRepositoryAssociation, location_name: "Association"))
     UpdateDataRepositoryAssociationResponse.type = Types::UpdateDataRepositoryAssociationResponse
-    UpdateFileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileCacheLustreConfiguration.type = Types::UpdateFileCacheLustreConfiguration
-    UpdateFileCacheRequest.add_member(:file_cache_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UpdateFileCacheRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateFileCacheRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    UpdateFileCacheRequest.add_member(:file_cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCacheId, location_name: "FileCacheId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateFileCacheRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateFileCacheRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFileCacheLustreConfiguration, location_name: "LustreConfiguration"))
     UpdateFileCacheRequest.type = Types::UpdateFileCacheRequest
-    UpdateFileCacheResponse.add_member(:file_cache, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCache, location_name: "FileCache"))
+    UpdateFileCacheResponse.add_member(:file_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: FileCache, location_name: "FileCache"))
     UpdateFileCacheResponse.type = Types::UpdateFileCacheResponse
-    UpdateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    UpdateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    UpdateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    UpdateFileSystemLustreConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
-    UpdateFileSystemLustreConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
-    UpdateFileSystemLustreConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
-    UpdateFileSystemLustreConfiguration.add_member(:root_squash_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
-    UpdateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
-    UpdateFileSystemLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
-    UpdateFileSystemLustreConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
-    UpdateFileSystemLustreConfiguration.add_member(:data_read_cache_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
+    UpdateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    UpdateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemLustreConfiguration.add_member(:auto_import_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoImportPolicyType, location_name: "AutoImportPolicy"))
+    UpdateFileSystemLustreConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCompressionType, location_name: "DataCompressionType"))
+    UpdateFileSystemLustreConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
+    UpdateFileSystemLustreConfiguration.add_member(:root_squash_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
+    UpdateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    UpdateFileSystemLustreConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
+    UpdateFileSystemLustreConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
+    UpdateFileSystemLustreConfiguration.add_member(:data_read_cache_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
     UpdateFileSystemLustreConfiguration.type = Types::UpdateFileSystemLustreConfiguration
-    UpdateFileSystemLustreMetadataConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))
-    UpdateFileSystemLustreMetadataConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataConfigurationMode, location_name: "Mode"))
+    UpdateFileSystemLustreMetadataConfiguration.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataIops, location_name: "Iops"))
+    UpdateFileSystemLustreMetadataConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfigurationMode, location_name: "Mode"))
     UpdateFileSystemLustreMetadataConfiguration.type = Types::UpdateFileSystemLustreMetadataConfiguration
-    UpdateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    UpdateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    UpdateFileSystemOntapConfiguration.add_member(:fsx_admin_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
-    UpdateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    UpdateFileSystemOntapConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
-    UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
-    UpdateFileSystemOntapConfiguration.add_member(:add_route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "AddRouteTableIds"))
-    UpdateFileSystemOntapConfiguration.add_member(:remove_route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RemoveRouteTableIds"))
-    UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
-    UpdateFileSystemOntapConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
-    UpdateFileSystemOntapConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
+    UpdateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    UpdateFileSystemOntapConfiguration.add_member(:fsx_admin_password, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminPassword, location_name: "FsxAdminPassword"))
+    UpdateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileSystemOntapConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    UpdateFileSystemOntapConfiguration.add_member(:add_route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "AddRouteTableIds"))
+    UpdateFileSystemOntapConfiguration.add_member(:remove_route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "RemoveRouteTableIds"))
+    UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    UpdateFileSystemOntapConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::MemberShape.new(target: HAPairs, location_name: "HAPairs"))
+    UpdateFileSystemOntapConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     UpdateFileSystemOntapConfiguration.type = Types::UpdateFileSystemOntapConfiguration
-    UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToVolumes"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:add_route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "AddRouteTableIds"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:remove_route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RemoveRouteTableIds"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:read_cache_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
-    UpdateFileSystemOpenZFSConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToVolumes"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:add_route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "AddRouteTableIds"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:remove_route_table_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTableIds, location_name: "RemoveRouteTableIds"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:read_cache_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     UpdateFileSystemOpenZFSConfiguration.type = Types::UpdateFileSystemOpenZFSConfiguration
-    UpdateFileSystemRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UpdateFileSystemRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateFileSystemRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
-    UpdateFileSystemRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
-    UpdateFileSystemRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
-    UpdateFileSystemRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
-    UpdateFileSystemRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
-    UpdateFileSystemRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
-    UpdateFileSystemRequest.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
-    UpdateFileSystemRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    UpdateFileSystemRequest.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateFileSystemRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateFileSystemRequest.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacity, location_name: "StorageCapacity"))
+    UpdateFileSystemRequest.add_member(:windows_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
+    UpdateFileSystemRequest.add_member(:lustre_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
+    UpdateFileSystemRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
+    UpdateFileSystemRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    UpdateFileSystemRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, location_name: "StorageType"))
+    UpdateFileSystemRequest.add_member(:file_system_type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    UpdateFileSystemRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
     UpdateFileSystemRequest.type = Types::UpdateFileSystemRequest
-    UpdateFileSystemResponse.add_member(:file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
+    UpdateFileSystemResponse.add_member(:file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystem, location_name: "FileSystem"))
     UpdateFileSystemResponse.type = Types::UpdateFileSystemResponse
-    UpdateFileSystemWindowsConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    UpdateFileSystemWindowsConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    UpdateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    UpdateFileSystemWindowsConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
-    UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
-    UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
-    UpdateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileSystemWindowsConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    UpdateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemWindowsConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     UpdateFileSystemWindowsConfiguration.type = Types::UpdateFileSystemWindowsConfiguration
-    UpdateOntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
-    UpdateOntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
-    UpdateOntapVolumeConfiguration.add_member(:size_in_megabytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeCapacity, location_name: "SizeInMegabytes"))
-    UpdateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "StorageEfficiencyEnabled"))
-    UpdateOntapVolumeConfiguration.add_member(:tiering_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
-    UpdateOntapVolumeConfiguration.add_member(:snapshot_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotPolicy, location_name: "SnapshotPolicy"))
-    UpdateOntapVolumeConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    UpdateOntapVolumeConfiguration.add_member(:snaplock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSnaplockConfiguration, location_name: "SnaplockConfiguration"))
-    UpdateOntapVolumeConfiguration.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeCapacityBytes, location_name: "SizeInBytes"))
+    UpdateOntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JunctionPath, location_name: "JunctionPath"))
+    UpdateOntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityStyle, location_name: "SecurityStyle"))
+    UpdateOntapVolumeConfiguration.add_member(:size_in_megabytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeCapacity, location_name: "SizeInMegabytes"))
+    UpdateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "StorageEfficiencyEnabled"))
+    UpdateOntapVolumeConfiguration.add_member(:tiering_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringPolicy, location_name: "TieringPolicy"))
+    UpdateOntapVolumeConfiguration.add_member(:snapshot_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotPolicy, location_name: "SnapshotPolicy"))
+    UpdateOntapVolumeConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    UpdateOntapVolumeConfiguration.add_member(:snaplock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateSnaplockConfiguration, location_name: "SnaplockConfiguration"))
+    UpdateOntapVolumeConfiguration.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeCapacityBytes, location_name: "SizeInBytes"))
     UpdateOntapVolumeConfiguration.type = Types::UpdateOntapVolumeConfiguration
-    UpdateOpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityReservationGiB"))
-    UpdateOpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityQuotaGiB"))
-    UpdateOpenZFSVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
-    UpdateOpenZFSVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
-    UpdateOpenZFSVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
-    UpdateOpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
-    UpdateOpenZFSVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityReservationGiB"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerNoMaxFromNegativeOne, location_name: "StorageCapacityQuotaGiB"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:record_size_ki_b, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRecordSizeKiB, location_name: "RecordSizeKiB"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:data_compression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:nfs_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExports, location_name: "NfsExports"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadOnly, location_name: "ReadOnly"))
     UpdateOpenZFSVolumeConfiguration.type = Types::UpdateOpenZFSVolumeConfiguration
-    UpdateOpenZFSVolumeOption.add_member(:delete_intermediate_snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_INTERMEDIATE_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_INTERMEDIATE_SNAPSHOTS"}))
-    UpdateOpenZFSVolumeOption.add_member(:delete_cloned_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CLONED_VOLUMES", traits: {"smithy.api#enumValue" => "DELETE_CLONED_VOLUMES"}))
-    UpdateOpenZFSVolumeOption.add_member(:delete_intermediate_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_INTERMEDIATE_DATA", traits: {"smithy.api#enumValue" => "DELETE_INTERMEDIATE_DATA"}))
-    UpdateOpenZFSVolumeOptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateOpenZFSVolumeOption)
-    UpdateSharedVpcConfigurationRequest.add_member(:enable_fsx_route_table_updates_from_participant_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
-    UpdateSharedVpcConfigurationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateOpenZFSVolumeOption.add_member(:delete_intermediate_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_INTERMEDIATE_SNAPSHOTS", traits: {"smithy.api#enumValue" => "DELETE_INTERMEDIATE_SNAPSHOTS"}))
+    UpdateOpenZFSVolumeOption.add_member(:delete_cloned_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_CLONED_VOLUMES", traits: {"smithy.api#enumValue" => "DELETE_CLONED_VOLUMES"}))
+    UpdateOpenZFSVolumeOption.add_member(:delete_intermediate_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_INTERMEDIATE_DATA", traits: {"smithy.api#enumValue" => "DELETE_INTERMEDIATE_DATA"}))
+    UpdateOpenZFSVolumeOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateOpenZFSVolumeOption)
+    UpdateSharedVpcConfigurationRequest.add_member(:enable_fsx_route_table_updates_from_participant_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
+    UpdateSharedVpcConfigurationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateSharedVpcConfigurationRequest.type = Types::UpdateSharedVpcConfigurationRequest
-    UpdateSharedVpcConfigurationResponse.add_member(:enable_fsx_route_table_updates_from_participant_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
+    UpdateSharedVpcConfigurationResponse.add_member(:enable_fsx_route_table_updates_from_participant_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
     UpdateSharedVpcConfigurationResponse.type = Types::UpdateSharedVpcConfigurationResponse
-    UpdateSnaplockConfiguration.add_member(:audit_log_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "AuditLogVolume"))
-    UpdateSnaplockConfiguration.add_member(:autocommit_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutocommitPeriod, location_name: "AutocommitPeriod"))
-    UpdateSnaplockConfiguration.add_member(:privileged_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivilegedDelete, location_name: "PrivilegedDelete"))
-    UpdateSnaplockConfiguration.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnaplockRetentionPeriod, location_name: "RetentionPeriod"))
-    UpdateSnaplockConfiguration.add_member(:volume_append_mode_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "VolumeAppendModeEnabled"))
+    UpdateSnaplockConfiguration.add_member(:audit_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "AuditLogVolume"))
+    UpdateSnaplockConfiguration.add_member(:autocommit_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocommitPeriod, location_name: "AutocommitPeriod"))
+    UpdateSnaplockConfiguration.add_member(:privileged_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivilegedDelete, location_name: "PrivilegedDelete"))
+    UpdateSnaplockConfiguration.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: SnaplockRetentionPeriod, location_name: "RetentionPeriod"))
+    UpdateSnaplockConfiguration.add_member(:volume_append_mode_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "VolumeAppendModeEnabled"))
     UpdateSnaplockConfiguration.type = Types::UpdateSnaplockConfiguration
-    UpdateSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateSnapshotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UpdateSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateSnapshotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateSnapshotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotName, location_name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, location_name: "SnapshotId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateSnapshotRequest.type = Types::UpdateSnapshotRequest
-    UpdateSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
+    UpdateSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, location_name: "Snapshot"))
     UpdateSnapshotResponse.type = Types::UpdateSnapshotResponse
-    UpdateStorageVirtualMachineRequest.add_member(:active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
-    UpdateStorageVirtualMachineRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UpdateStorageVirtualMachineRequest.add_member(:svm_admin_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminPassword, location_name: "SvmAdminPassword"))
+    UpdateStorageVirtualMachineRequest.add_member(:active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
+    UpdateStorageVirtualMachineRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId, location_name: "StorageVirtualMachineId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateStorageVirtualMachineRequest.add_member(:svm_admin_password, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminPassword, location_name: "SvmAdminPassword"))
     UpdateStorageVirtualMachineRequest.type = Types::UpdateStorageVirtualMachineRequest
-    UpdateStorageVirtualMachineResponse.add_member(:storage_virtual_machine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachine, location_name: "StorageVirtualMachine"))
+    UpdateStorageVirtualMachineResponse.add_member(:storage_virtual_machine, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachine, location_name: "StorageVirtualMachine"))
     UpdateStorageVirtualMachineResponse.type = Types::UpdateStorageVirtualMachineResponse
-    UpdateSvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
-    UpdateSvmActiveDirectoryConfiguration.add_member(:net_bios_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetBiosAlias, location_name: "NetBiosName"))
+    UpdateSvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    UpdateSvmActiveDirectoryConfiguration.add_member(:net_bios_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetBiosAlias, location_name: "NetBiosName"))
     UpdateSvmActiveDirectoryConfiguration.type = Types::UpdateSvmActiveDirectoryConfiguration
-    UpdateVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateVolumeRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UpdateVolumeRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
-    UpdateVolumeRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeName, location_name: "Name"))
-    UpdateVolumeRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateOpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
+    UpdateVolumeRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateVolumeRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateVolumeRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    UpdateVolumeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeName, location_name: "Name"))
+    UpdateVolumeRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateOpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
     UpdateVolumeRequest.type = Types::UpdateVolumeRequest
-    UpdateVolumeResponse.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
+    UpdateVolumeResponse.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "Volume"))
     UpdateVolumeResponse.type = Types::UpdateVolumeResponse
-    Volume.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
-    Volume.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    Volume.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeLifecycle, location_name: "Lifecycle"))
-    Volume.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeName, location_name: "Name"))
-    Volume.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapVolumeConfiguration, location_name: "OntapConfiguration"))
-    Volume.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
-    Volume.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    Volume.add_member(:volume_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
-    Volume.add_member(:volume_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
-    Volume.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
-    Volume.add_member(:administrative_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
-    Volume.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
+    Volume.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "CreationTime"))
+    Volume.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, location_name: "FileSystemId"))
+    Volume.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeLifecycle, location_name: "Lifecycle"))
+    Volume.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeName, location_name: "Name"))
+    Volume.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    Volume.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ResourceARN"))
+    Volume.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
+    Volume.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, location_name: "VolumeId"))
+    Volume.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeType, location_name: "VolumeType"))
+    Volume.add_member(:lifecycle_transition_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    Volume.add_member(:administrative_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeActions, location_name: "AdministrativeActions"))
+    Volume.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
     Volume.type = Types::Volume
-    VolumeFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeFilterName, location_name: "Name"))
-    VolumeFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeFilterValues, location_name: "Values"))
+    VolumeFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFilterName, location_name: "Name"))
+    VolumeFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFilterValues, location_name: "Values"))
     VolumeFilter.type = Types::VolumeFilter
-    VolumeFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
-    VolumeFilterName.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_VIRTUAL_MACHINE_ID", traits: {"smithy.api#enumValue" => "storage-virtual-machine-id"}))
-    VolumeFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeFilterValue)
-    VolumeFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeFilter)
-    VolumeIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeId)
-    VolumeLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    VolumeLifecycle.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
-    VolumeLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    VolumeLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    VolumeLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
-    VolumeLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    VolumeLifecycle.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    VolumeNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    VolumeFilterName.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_SYSTEM_ID", traits: {"smithy.api#enumValue" => "file-system-id"}))
+    VolumeFilterName.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_VIRTUAL_MACHINE_ID", traits: {"smithy.api#enumValue" => "storage-virtual-machine-id"}))
+    VolumeFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFilterValue)
+    VolumeFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFilter)
+    VolumeIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId)
+    VolumeLifecycle.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    VolumeLifecycle.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    VolumeLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    VolumeLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    VolumeLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
+    VolumeLifecycle.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    VolumeLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    VolumeNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     VolumeNotFound.type = Types::VolumeNotFound
-    VolumeStyle.add_member(:flexvol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FLEXVOL", traits: {"smithy.api#enumValue" => "FLEXVOL"}))
-    VolumeStyle.add_member(:flexgroup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FLEXGROUP", traits: {"smithy.api#enumValue" => "FLEXGROUP"}))
-    VolumeType.add_member(:ontap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONTAP", traits: {"smithy.api#enumValue" => "ONTAP"}))
-    VolumeType.add_member(:openzfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPENZFS", traits: {"smithy.api#enumValue" => "OPENZFS"}))
-    Volumes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume)
-    WindowsAccessAuditLogLevel.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    WindowsAccessAuditLogLevel.add_member(:success_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS_ONLY", traits: {"smithy.api#enumValue" => "SUCCESS_ONLY"}))
-    WindowsAccessAuditLogLevel.add_member(:failure_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILURE_ONLY", traits: {"smithy.api#enumValue" => "FAILURE_ONLY"}))
-    WindowsAccessAuditLogLevel.add_member(:success_and_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS_AND_FAILURE", traits: {"smithy.api#enumValue" => "SUCCESS_AND_FAILURE"}))
-    WindowsAuditLogConfiguration.add_member(:file_access_audit_log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, location_name: "FileAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    WindowsAuditLogConfiguration.add_member(:file_share_access_audit_log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, location_name: "FileShareAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    WindowsAuditLogConfiguration.add_member(:audit_log_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralARN, location_name: "AuditLogDestination"))
+    VolumeStyle.add_member(:flexvol, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FLEXVOL", traits: {"smithy.api#enumValue" => "FLEXVOL"}))
+    VolumeStyle.add_member(:flexgroup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FLEXGROUP", traits: {"smithy.api#enumValue" => "FLEXGROUP"}))
+    VolumeType.add_member(:ontap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONTAP", traits: {"smithy.api#enumValue" => "ONTAP"}))
+    VolumeType.add_member(:openzfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPENZFS", traits: {"smithy.api#enumValue" => "OPENZFS"}))
+    Volumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Volume)
+    WindowsAccessAuditLogLevel.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    WindowsAccessAuditLogLevel.add_member(:success_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS_ONLY", traits: {"smithy.api#enumValue" => "SUCCESS_ONLY"}))
+    WindowsAccessAuditLogLevel.add_member(:failure_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILURE_ONLY", traits: {"smithy.api#enumValue" => "FAILURE_ONLY"}))
+    WindowsAccessAuditLogLevel.add_member(:success_and_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS_AND_FAILURE", traits: {"smithy.api#enumValue" => "SUCCESS_AND_FAILURE"}))
+    WindowsAuditLogConfiguration.add_member(:file_access_audit_log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAccessAuditLogLevel, location_name: "FileAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    WindowsAuditLogConfiguration.add_member(:file_share_access_audit_log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAccessAuditLogLevel, location_name: "FileShareAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    WindowsAuditLogConfiguration.add_member(:audit_log_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralARN, location_name: "AuditLogDestination"))
     WindowsAuditLogConfiguration.type = Types::WindowsAuditLogConfiguration
-    WindowsAuditLogCreateConfiguration.add_member(:file_access_audit_log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, location_name: "FileAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    WindowsAuditLogCreateConfiguration.add_member(:file_share_access_audit_log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, location_name: "FileShareAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    WindowsAuditLogCreateConfiguration.add_member(:audit_log_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralARN, location_name: "AuditLogDestination"))
+    WindowsAuditLogCreateConfiguration.add_member(:file_access_audit_log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAccessAuditLogLevel, location_name: "FileAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    WindowsAuditLogCreateConfiguration.add_member(:file_share_access_audit_log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAccessAuditLogLevel, location_name: "FileShareAccessAuditLogLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    WindowsAuditLogCreateConfiguration.add_member(:audit_log_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralARN, location_name: "AuditLogDestination"))
     WindowsAuditLogCreateConfiguration.type = Types::WindowsAuditLogCreateConfiguration
-    WindowsDeploymentType.add_member(:multi_az_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_1", traits: {"smithy.api#enumValue" => "MULTI_AZ_1"}))
-    WindowsDeploymentType.add_member(:single_az_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_1"}))
-    WindowsDeploymentType.add_member(:single_az_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_2"}))
-    WindowsFileSystemConfiguration.add_member(:active_directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
-    WindowsFileSystemConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryAttributes, location_name: "SelfManagedActiveDirectoryConfiguration"))
-    WindowsFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsDeploymentType, location_name: "DeploymentType"))
-    WindowsFileSystemConfiguration.add_member(:remote_administration_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: "RemoteAdministrationEndpoint"))
-    WindowsFileSystemConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
-    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress, location_name: "PreferredFileServerIp"))
-    WindowsFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
-    WindowsFileSystemConfiguration.add_member(:maintenance_operations_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemMaintenanceOperations, location_name: "MaintenanceOperationsInProgress"))
-    WindowsFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
-    WindowsFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
-    WindowsFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
-    WindowsFileSystemConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
-    WindowsFileSystemConfiguration.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
-    WindowsFileSystemConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAuditLogConfiguration, location_name: "AuditLogConfiguration"))
-    WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
-    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress, location_name: "PreferredFileServerIpv6"))
+    WindowsDeploymentType.add_member(:multi_az_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_AZ_1", traits: {"smithy.api#enumValue" => "MULTI_AZ_1"}))
+    WindowsDeploymentType.add_member(:single_az_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_1", traits: {"smithy.api#enumValue" => "SINGLE_AZ_1"}))
+    WindowsDeploymentType.add_member(:single_az_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_AZ_2", traits: {"smithy.api#enumValue" => "SINGLE_AZ_2"}))
+    WindowsFileSystemConfiguration.add_member(:active_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "ActiveDirectoryId"))
+    WindowsFileSystemConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManagedActiveDirectoryAttributes, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    WindowsFileSystemConfiguration.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsDeploymentType, location_name: "DeploymentType"))
+    WindowsFileSystemConfiguration.add_member(:remote_administration_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "RemoteAdministrationEndpoint"))
+    WindowsFileSystemConfiguration.add_member(:preferred_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "PreferredSubnetId"))
+    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, location_name: "PreferredFileServerIp"))
+    WindowsFileSystemConfiguration.add_member(:throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    WindowsFileSystemConfiguration.add_member(:maintenance_operations_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemMaintenanceOperations, location_name: "MaintenanceOperationsInProgress"))
+    WindowsFileSystemConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    WindowsFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    WindowsFileSystemConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    WindowsFileSystemConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, location_name: "CopyTagsToBackups"))
+    WindowsFileSystemConfiguration.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: Aliases, location_name: "Aliases"))
+    WindowsFileSystemConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAuditLogConfiguration, location_name: "AuditLogConfiguration"))
+    WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, location_name: "PreferredFileServerIpv6"))
     WindowsFileSystemConfiguration.type = Types::WindowsFileSystemConfiguration
 
     AWSSimbaAPIServiceV20180301 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -1998,596 +1998,596 @@ module Aws::FSx
       service.add_operation(:associate_file_system_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#AssociateFileSystemAliases"
         operation.name = "AssociateFileSystemAliases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateFileSystemAliasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateFileSystemAliasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = AssociateFileSystemAliasesRequest
+        operation.output = AssociateFileSystemAliasesResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:cancel_data_repository_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CancelDataRepositoryTask"
         operation.name = "CancelDataRepositoryTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelDataRepositoryTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelDataRepositoryTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskEnded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = CancelDataRepositoryTaskRequest
+        operation.output = CancelDataRepositoryTaskResponse
+        operation.errors << BadRequest
+        operation.errors << DataRepositoryTaskEnded
+        operation.errors << DataRepositoryTaskNotFound
+        operation.errors << InternalServerError
+        operation.errors << UnsupportedOperation
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:copy_backup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CopyBackup"
         operation.name = "CopyBackup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyBackupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyBackupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleRegionForMultiAZ)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDestinationKmsKey)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRegion)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSourceKmsKey)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceBackupUnavailable)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = CopyBackupRequest
+        operation.output = CopyBackupResponse
+        operation.errors << BackupNotFound
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << IncompatibleRegionForMultiAZ
+        operation.errors << InternalServerError
+        operation.errors << InvalidDestinationKmsKey
+        operation.errors << InvalidRegion
+        operation.errors << InvalidSourceKmsKey
+        operation.errors << ServiceLimitExceeded
+        operation.errors << SourceBackupUnavailable
+        operation.errors << UnsupportedOperation
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:copy_snapshot_and_update_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CopySnapshotAndUpdateVolume"
         operation.name = "CopySnapshotAndUpdateVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySnapshotAndUpdateVolumeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySnapshotAndUpdateVolumeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = CopySnapshotAndUpdateVolumeRequest
+        operation.output = CopySnapshotAndUpdateVolumeResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_and_attach_s3_access_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateAndAttachS3AccessPoint"
         operation.name = "CreateAndAttachS3AccessPoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessPointAlreadyOwnedByYou)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidAccessPoint)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyAccessPoints)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = CreateAndAttachS3AccessPointRequest
+        operation.output = CreateAndAttachS3AccessPointResponse
+        operation.errors << AccessPointAlreadyOwnedByYou
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << InvalidAccessPoint
+        operation.errors << InvalidRequest
+        operation.errors << TooManyAccessPoints
+        operation.errors << UnsupportedOperation
+        operation.errors << VolumeNotFound
         operation.traits = {}
       end)
       service.add_operation(:create_backup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateBackup"
         operation.name = "CreateBackup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBackupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBackupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupInProgress)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = CreateBackupRequest
+        operation.output = CreateBackupResponse
+        operation.errors << BackupInProgress
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
+        operation.errors << UnsupportedOperation
+        operation.errors << VolumeNotFound
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_data_repository_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateDataRepositoryAssociation"
         operation.name = "CreateDataRepositoryAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataRepositoryAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataRepositoryAssociationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = CreateDataRepositoryAssociationRequest
+        operation.output = CreateDataRepositoryAssociationResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
+        operation.errors << UnsupportedOperation
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_data_repository_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateDataRepositoryTask"
         operation.name = "CreateDataRepositoryTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataRepositoryTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataRepositoryTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskExecuting)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = CreateDataRepositoryTaskRequest
+        operation.output = CreateDataRepositoryTaskResponse
+        operation.errors << BadRequest
+        operation.errors << DataRepositoryTaskExecuting
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
+        operation.errors << UnsupportedOperation
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_file_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateFileCache"
         operation.name = "CreateFileCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileCacheRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileCacheResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPerUnitStorageThroughput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingFileCacheConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = CreateFileCacheRequest
+        operation.output = CreateFileCacheResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << InvalidNetworkSettings
+        operation.errors << InvalidPerUnitStorageThroughput
+        operation.errors << MissingFileCacheConfiguration
+        operation.errors << ServiceLimitExceeded
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_file_system, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateFileSystem"
         operation.name = "CreateFileSystem"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidExportPath)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidImportPath)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPerUnitStorageThroughput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = CreateFileSystemRequest
+        operation.output = CreateFileSystemResponse
+        operation.errors << ActiveDirectoryError
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << InvalidExportPath
+        operation.errors << InvalidImportPath
+        operation.errors << InvalidNetworkSettings
+        operation.errors << InvalidPerUnitStorageThroughput
+        operation.errors << MissingFileSystemConfiguration
+        operation.errors << ServiceLimitExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_file_system_from_backup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateFileSystemFromBackup"
         operation.name = "CreateFileSystemFromBackup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemFromBackupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFileSystemFromBackupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPerUnitStorageThroughput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = CreateFileSystemFromBackupRequest
+        operation.output = CreateFileSystemFromBackupResponse
+        operation.errors << ActiveDirectoryError
+        operation.errors << BackupNotFound
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << InvalidNetworkSettings
+        operation.errors << InvalidPerUnitStorageThroughput
+        operation.errors << MissingFileSystemConfiguration
+        operation.errors << ServiceLimitExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateSnapshot"
         operation.name = "CreateSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = CreateSnapshotRequest
+        operation.output = CreateSnapshotResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
+        operation.errors << VolumeNotFound
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_storage_virtual_machine, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateStorageVirtualMachine"
         operation.name = "CreateStorageVirtualMachine"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStorageVirtualMachineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStorageVirtualMachineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = CreateStorageVirtualMachineRequest
+        operation.output = CreateStorageVirtualMachineResponse
+        operation.errors << ActiveDirectoryError
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
+        operation.errors << UnsupportedOperation
         operation.traits = {}
       end)
       service.add_operation(:create_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateVolume"
         operation.name = "CreateVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVolumeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVolumeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingVolumeConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = CreateVolumeRequest
+        operation.output = CreateVolumeResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << MissingVolumeConfiguration
+        operation.errors << ServiceLimitExceeded
+        operation.errors << StorageVirtualMachineNotFound
+        operation.errors << UnsupportedOperation
         operation.traits = {}
       end)
       service.add_operation(:create_volume_from_backup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#CreateVolumeFromBackup"
         operation.name = "CreateVolumeFromBackup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVolumeFromBackupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVolumeFromBackupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingVolumeConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        operation.input = CreateVolumeFromBackupRequest
+        operation.output = CreateVolumeFromBackupResponse
+        operation.errors << BackupNotFound
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << MissingVolumeConfiguration
+        operation.errors << ServiceLimitExceeded
+        operation.errors << StorageVirtualMachineNotFound
         operation.traits = {}
       end)
       service.add_operation(:delete_backup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DeleteBackup"
         operation.name = "DeleteBackup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBackupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBackupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupBeingCopied)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupInProgress)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupRestoring)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DeleteBackupRequest
+        operation.output = DeleteBackupResponse
+        operation.errors << BackupBeingCopied
+        operation.errors << BackupInProgress
+        operation.errors << BackupNotFound
+        operation.errors << BackupRestoring
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_data_repository_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DeleteDataRepositoryAssociation"
         operation.name = "DeleteDataRepositoryAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDataRepositoryAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDataRepositoryAssociationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = DeleteDataRepositoryAssociationRequest
+        operation.output = DeleteDataRepositoryAssociationResponse
+        operation.errors << BadRequest
+        operation.errors << DataRepositoryAssociationNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_file_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DeleteFileCache"
         operation.name = "DeleteFileCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileCacheRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileCacheResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = DeleteFileCacheRequest
+        operation.output = DeleteFileCacheResponse
+        operation.errors << BadRequest
+        operation.errors << FileCacheNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_file_system, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DeleteFileSystem"
         operation.name = "DeleteFileSystem"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileSystemResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = DeleteFileSystemRequest
+        operation.output = DeleteFileSystemResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DeleteSnapshot"
         operation.name = "DeleteSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFound)
+        operation.input = DeleteSnapshotRequest
+        operation.output = DeleteSnapshotResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << SnapshotNotFound
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_storage_virtual_machine, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DeleteStorageVirtualMachine"
         operation.name = "DeleteStorageVirtualMachine"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteStorageVirtualMachineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteStorageVirtualMachineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        operation.input = DeleteStorageVirtualMachineRequest
+        operation.output = DeleteStorageVirtualMachineResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << StorageVirtualMachineNotFound
         operation.traits = {}
       end)
       service.add_operation(:delete_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DeleteVolume"
         operation.name = "DeleteVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVolumeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVolumeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = DeleteVolumeRequest
+        operation.output = DeleteVolumeResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
+        operation.errors << VolumeNotFound
         operation.traits = {}
       end)
       service.add_operation(:describe_backups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeBackups"
         operation.name = "DescribeBackups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBackupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBackupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BackupNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = DescribeBackupsRequest
+        operation.output = DescribeBackupsResponse
+        operation.errors << BackupNotFound
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
+        operation.errors << VolumeNotFound
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeBackups.new
       end)
       service.add_operation(:describe_data_repository_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeDataRepositoryAssociations"
         operation.name = "DescribeDataRepositoryAssociations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDataRepositoryAssociationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDataRepositoryAssociationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDataRepositoryType)
+        operation.input = DescribeDataRepositoryAssociationsRequest
+        operation.output = DescribeDataRepositoryAssociationsResponse
+        operation.errors << BadRequest
+        operation.errors << DataRepositoryAssociationNotFound
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
+        operation.errors << InvalidDataRepositoryType
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::DescribeDataRepositoryAssociations.new
       end)
       service.add_operation(:describe_data_repository_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeDataRepositoryTasks"
         operation.name = "DescribeDataRepositoryTasks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDataRepositoryTasksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDataRepositoryTasksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryTaskNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DescribeDataRepositoryTasksRequest
+        operation.output = DescribeDataRepositoryTasksResponse
+        operation.errors << BadRequest
+        operation.errors << DataRepositoryTaskNotFound
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeDataRepositoryTasks.new
       end)
       service.add_operation(:describe_file_caches, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeFileCaches"
         operation.name = "DescribeFileCaches"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileCachesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileCachesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DescribeFileCachesRequest
+        operation.output = DescribeFileCachesResponse
+        operation.errors << BadRequest
+        operation.errors << FileCacheNotFound
+        operation.errors << InternalServerError
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::DescribeFileCaches.new
       end)
       service.add_operation(:describe_file_system_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeFileSystemAliases"
         operation.name = "DescribeFileSystemAliases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileSystemAliasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileSystemAliasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DescribeFileSystemAliasesRequest
+        operation.output = DescribeFileSystemAliasesResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeFileSystemAliases.new
       end)
       service.add_operation(:describe_file_systems, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeFileSystems"
         operation.name = "DescribeFileSystems"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileSystemsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFileSystemsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DescribeFileSystemsRequest
+        operation.output = DescribeFileSystemsResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeFileSystems.new
       end)
       service.add_operation(:describe_s3_access_point_attachments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeS3AccessPointAttachments"
         operation.name = "DescribeS3AccessPointAttachments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeS3AccessPointAttachmentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeS3AccessPointAttachmentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = DescribeS3AccessPointAttachmentsRequest
+        operation.output = DescribeS3AccessPointAttachmentsResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << S3AccessPointAttachmentNotFound
+        operation.errors << UnsupportedOperation
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeS3AccessPointAttachments.new
       end)
       service.add_operation(:describe_shared_vpc_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeSharedVpcConfiguration"
         operation.name = "DescribeSharedVpcConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSharedVpcConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSharedVpcConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DescribeSharedVpcConfigurationRequest
+        operation.output = DescribeSharedVpcConfigurationResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:describe_snapshots, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeSnapshots"
         operation.name = "DescribeSnapshots"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFound)
+        operation.input = DescribeSnapshotsRequest
+        operation.output = DescribeSnapshotsResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << SnapshotNotFound
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeSnapshots.new
       end)
       service.add_operation(:describe_storage_virtual_machines, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeStorageVirtualMachines"
         operation.name = "DescribeStorageVirtualMachines"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStorageVirtualMachinesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeStorageVirtualMachinesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        operation.input = DescribeStorageVirtualMachinesRequest
+        operation.output = DescribeStorageVirtualMachinesResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << StorageVirtualMachineNotFound
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeStorageVirtualMachines.new
       end)
       service.add_operation(:describe_volumes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DescribeVolumes"
         operation.name = "DescribeVolumes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVolumesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVolumesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = DescribeVolumesRequest
+        operation.output = DescribeVolumesResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << VolumeNotFound
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeVolumes.new
       end)
       service.add_operation(:detach_and_delete_s3_access_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DetachAndDeleteS3AccessPoint"
         operation.name = "DetachAndDeleteS3AccessPoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetachAndDeleteS3AccessPointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetachAndDeleteS3AccessPointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3AccessPointAttachmentNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = DetachAndDeleteS3AccessPointRequest
+        operation.output = DetachAndDeleteS3AccessPointResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << S3AccessPointAttachmentNotFound
+        operation.errors << UnsupportedOperation
         operation.traits = {}
       end)
       service.add_operation(:disassociate_file_system_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#DisassociateFileSystemAliases"
         operation.name = "DisassociateFileSystemAliases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFileSystemAliasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateFileSystemAliasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DisassociateFileSystemAliasesRequest
+        operation.output = DisassociateFileSystemAliasesResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotServiceResourceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDoesNotSupportTagging)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFound)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << NotServiceResourceError
+        operation.errors << ResourceDoesNotSupportTagging
+        operation.errors << ResourceNotFound
         operation.traits = {}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:release_file_system_nfs_v3_locks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#ReleaseFileSystemNfsV3Locks"
         operation.name = "ReleaseFileSystemNfsV3Locks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseFileSystemNfsV3LocksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseFileSystemNfsV3LocksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = ReleaseFileSystemNfsV3LocksRequest
+        operation.output = ReleaseFileSystemNfsV3LocksResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:restore_volume_from_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#RestoreVolumeFromSnapshot"
         operation.name = "RestoreVolumeFromSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreVolumeFromSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreVolumeFromSnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = RestoreVolumeFromSnapshotRequest
+        operation.output = RestoreVolumeFromSnapshotResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << VolumeNotFound
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_misconfigured_state_recovery, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#StartMisconfiguredStateRecovery"
         operation.name = "StartMisconfiguredStateRecovery"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartMisconfiguredStateRecoveryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartMisconfiguredStateRecoveryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = StartMisconfiguredStateRecoveryRequest
+        operation.output = StartMisconfiguredStateRecoveryResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotServiceResourceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDoesNotSupportTagging)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFound)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << NotServiceResourceError
+        operation.errors << ResourceDoesNotSupportTagging
+        operation.errors << ResourceNotFound
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotServiceResourceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDoesNotSupportTagging)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFound)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << NotServiceResourceError
+        operation.errors << ResourceDoesNotSupportTagging
+        operation.errors << ResourceNotFound
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_data_repository_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UpdateDataRepositoryAssociation"
         operation.name = "UpdateDataRepositoryAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDataRepositoryAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDataRepositoryAssociationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRepositoryAssociationNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        operation.input = UpdateDataRepositoryAssociationRequest
+        operation.output = UpdateDataRepositoryAssociationResponse
+        operation.errors << BadRequest
+        operation.errors << DataRepositoryAssociationNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << ServiceLimitExceeded
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_file_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UpdateFileCache"
         operation.name = "UpdateFileCache"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileCacheRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileCacheResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileCacheNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingFileCacheConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = UpdateFileCacheRequest
+        operation.output = UpdateFileCacheResponse
+        operation.errors << BadRequest
+        operation.errors << FileCacheNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << MissingFileCacheConfiguration
+        operation.errors << ServiceLimitExceeded
+        operation.errors << UnsupportedOperation
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_file_system, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UpdateFileSystem"
         operation.name = "UpdateFileSystem"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFileSystemResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = UpdateFileSystemRequest
+        operation.output = UpdateFileSystemResponse
+        operation.errors << BadRequest
+        operation.errors << FileSystemNotFound
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << InvalidNetworkSettings
+        operation.errors << MissingFileSystemConfiguration
+        operation.errors << ServiceLimitExceeded
+        operation.errors << UnsupportedOperation
         operation.traits = {}
       end)
       service.add_operation(:update_shared_vpc_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UpdateSharedVpcConfiguration"
         operation.name = "UpdateSharedVpcConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSharedVpcConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSharedVpcConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = UpdateSharedVpcConfigurationRequest
+        operation.output = UpdateSharedVpcConfigurationResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:update_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UpdateSnapshot"
         operation.name = "UpdateSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFound)
+        operation.input = UpdateSnapshotRequest
+        operation.output = UpdateSnapshotResponse
+        operation.errors << BadRequest
+        operation.errors << InternalServerError
+        operation.errors << SnapshotNotFound
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_storage_virtual_machine, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UpdateStorageVirtualMachine"
         operation.name = "UpdateStorageVirtualMachine"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStorageVirtualMachineRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStorageVirtualMachineResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        operation.input = UpdateStorageVirtualMachineRequest
+        operation.output = UpdateStorageVirtualMachineResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << StorageVirtualMachineNotFound
+        operation.errors << UnsupportedOperation
         operation.traits = {}
       end)
       service.add_operation(:update_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#UpdateVolume"
         operation.name = "UpdateVolume"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVolumeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateVolumeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncompatibleParameterError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingVolumeConfiguration)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeNotFound)
+        operation.input = UpdateVolumeRequest
+        operation.output = UpdateVolumeResponse
+        operation.errors << BadRequest
+        operation.errors << IncompatibleParameterError
+        operation.errors << InternalServerError
+        operation.errors << MissingVolumeConfiguration
+        operation.errors << VolumeNotFound
         operation.traits = {}
       end)
     end

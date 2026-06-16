@@ -77,175 +77,175 @@ module Aws::Cloud9
     UpdateEnvironmentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloud9#UpdateEnvironmentResult", name: "UpdateEnvironmentResult")
     UserArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloud9#UserArn", name: "UserArn", traits: {"smithy.api#pattern" => "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(iam|sts)::\\d+:(root|(user\\/[\\w+=/:,.@-]{1,64}|federated-user\\/[\\w+=/:,.@-]{2,32}|assumed-role\\/[\\w+=:,.@-]{1,64}\\/[\\w+=,.@-]{1,64}))$"})
 
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    BadRequestException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    BadRequestException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     BadRequestException.type = Types::BadRequestException
-    BoundedEnvironmentIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId)
-    ConcurrentAccessException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    ConcurrentAccessException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    ConcurrentAccessException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    BoundedEnvironmentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId)
+    ConcurrentAccessException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ConcurrentAccessException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    ConcurrentAccessException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     ConcurrentAccessException.type = Types::ConcurrentAccessException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    ConflictException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    ConflictException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ConflictException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     ConflictException.type = Types::ConflictException
-    ConnectionType.add_member(:connect_ssh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECT_SSH", traits: {"smithy.api#enumValue" => "CONNECT_SSH"}))
-    ConnectionType.add_member(:connect_ssm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECT_SSM", traits: {"smithy.api#enumValue" => "CONNECT_SSM"}))
-    CreateEnvironmentEC2Request.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentEC2Request.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentDescription, location_name: "description"))
-    CreateEnvironmentEC2Request.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
-    CreateEnvironmentEC2Request.add_member(:instance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentEC2Request.add_member(:subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
-    CreateEnvironmentEC2Request.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentEC2Request.add_member(:automatic_stop_time_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticStopTimeMinutes, location_name: "automaticStopTimeMinutes"))
-    CreateEnvironmentEC2Request.add_member(:owner_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserArn, location_name: "ownerArn"))
-    CreateEnvironmentEC2Request.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateEnvironmentEC2Request.add_member(:connection_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
-    CreateEnvironmentEC2Request.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "dryRun"))
+    ConnectionType.add_member(:connect_ssh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECT_SSH", traits: {"smithy.api#enumValue" => "CONNECT_SSH"}))
+    ConnectionType.add_member(:connect_ssm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECT_SSM", traits: {"smithy.api#enumValue" => "CONNECT_SSM"}))
+    CreateEnvironmentEC2Request.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentEC2Request.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDescription, location_name: "description"))
+    CreateEnvironmentEC2Request.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "clientRequestToken"))
+    CreateEnvironmentEC2Request.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, location_name: "instanceType", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentEC2Request.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, location_name: "subnetId"))
+    CreateEnvironmentEC2Request.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageId, location_name: "imageId", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentEC2Request.add_member(:automatic_stop_time_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticStopTimeMinutes, location_name: "automaticStopTimeMinutes"))
+    CreateEnvironmentEC2Request.add_member(:owner_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserArn, location_name: "ownerArn"))
+    CreateEnvironmentEC2Request.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CreateEnvironmentEC2Request.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, location_name: "connectionType"))
+    CreateEnvironmentEC2Request.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, location_name: "dryRun"))
     CreateEnvironmentEC2Request.type = Types::CreateEnvironmentEC2Request
-    CreateEnvironmentEC2Result.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
+    CreateEnvironmentEC2Result.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId"))
     CreateEnvironmentEC2Result.type = Types::CreateEnvironmentEC2Result
-    CreateEnvironmentMembershipRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentMembershipRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentMembershipRequest.add_member(:permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberPermissions, location_name: "permissions", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentMembershipRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentMembershipRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentMembershipRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberPermissions, location_name: "permissions", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentMembershipRequest.type = Types::CreateEnvironmentMembershipRequest
-    CreateEnvironmentMembershipResult.add_member(:membership, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentMember, location_name: "membership", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentMembershipResult.add_member(:membership, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentMember, location_name: "membership", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentMembershipResult.type = Types::CreateEnvironmentMembershipResult
-    DeleteEnvironmentMembershipRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
-    DeleteEnvironmentMembershipRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
+    DeleteEnvironmentMembershipRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
+    DeleteEnvironmentMembershipRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
     DeleteEnvironmentMembershipRequest.type = Types::DeleteEnvironmentMembershipRequest
     DeleteEnvironmentMembershipResult.type = Types::DeleteEnvironmentMembershipResult
-    DeleteEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
+    DeleteEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
     DeleteEnvironmentRequest.type = Types::DeleteEnvironmentRequest
     DeleteEnvironmentResult.type = Types::DeleteEnvironmentResult
-    DescribeEnvironmentMembershipsRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn"))
-    DescribeEnvironmentMembershipsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
-    DescribeEnvironmentMembershipsRequest.add_member(:permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionsList, location_name: "permissions"))
-    DescribeEnvironmentMembershipsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    DescribeEnvironmentMembershipsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeEnvironmentMembershipsRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserArn, location_name: "userArn"))
+    DescribeEnvironmentMembershipsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId"))
+    DescribeEnvironmentMembershipsRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionsList, location_name: "permissions"))
+    DescribeEnvironmentMembershipsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
+    DescribeEnvironmentMembershipsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     DescribeEnvironmentMembershipsRequest.type = Types::DescribeEnvironmentMembershipsRequest
-    DescribeEnvironmentMembershipsResult.add_member(:memberships, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentMembersList, location_name: "memberships"))
-    DescribeEnvironmentMembershipsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeEnvironmentMembershipsResult.add_member(:memberships, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentMembersList, location_name: "memberships"))
+    DescribeEnvironmentMembershipsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
     DescribeEnvironmentMembershipsResult.type = Types::DescribeEnvironmentMembershipsResult
-    DescribeEnvironmentStatusRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
+    DescribeEnvironmentStatusRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
     DescribeEnvironmentStatusRequest.type = Types::DescribeEnvironmentStatusRequest
-    DescribeEnvironmentStatusResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    DescribeEnvironmentStatusResult.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    DescribeEnvironmentStatusResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    DescribeEnvironmentStatusResult.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
     DescribeEnvironmentStatusResult.type = Types::DescribeEnvironmentStatusResult
-    DescribeEnvironmentsRequest.add_member(:environment_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoundedEnvironmentIdList, location_name: "environmentIds", traits: {"smithy.api#required" => {}}))
+    DescribeEnvironmentsRequest.add_member(:environment_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedEnvironmentIdList, location_name: "environmentIds", traits: {"smithy.api#required" => {}}))
     DescribeEnvironmentsRequest.type = Types::DescribeEnvironmentsRequest
-    DescribeEnvironmentsResult.add_member(:environments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentList, location_name: "environments"))
+    DescribeEnvironmentsResult.add_member(:environments, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentList, location_name: "environments"))
     DescribeEnvironmentsResult.type = Types::DescribeEnvironmentsResult
-    Environment.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "id"))
-    Environment.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name"))
-    Environment.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentDescription, location_name: "description"))
-    Environment.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    Environment.add_member(:connection_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
-    Environment.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    Environment.add_member(:owner_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ownerArn", traits: {"smithy.api#required" => {}}))
-    Environment.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentLifecycle, location_name: "lifecycle"))
-    Environment.add_member(:managed_credentials_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedCredentialsStatus, location_name: "managedCredentialsStatus"))
+    Environment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "id"))
+    Environment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "name"))
+    Environment.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDescription, location_name: "description"))
+    Environment.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    Environment.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, location_name: "connectionType"))
+    Environment.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    Environment.add_member(:owner_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ownerArn", traits: {"smithy.api#required" => {}}))
+    Environment.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentLifecycle, location_name: "lifecycle"))
+    Environment.add_member(:managed_credentials_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedCredentialsStatus, location_name: "managedCredentialsStatus"))
     Environment.type = Types::Environment
-    EnvironmentIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId)
-    EnvironmentLifecycle.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentLifecycleStatus, location_name: "status"))
-    EnvironmentLifecycle.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "reason"))
-    EnvironmentLifecycle.add_member(:failure_resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "failureResource"))
+    EnvironmentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId)
+    EnvironmentLifecycle.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentLifecycleStatus, location_name: "status"))
+    EnvironmentLifecycle.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "reason"))
+    EnvironmentLifecycle.add_member(:failure_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "failureResource"))
     EnvironmentLifecycle.type = Types::EnvironmentLifecycle
-    EnvironmentLifecycleStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    EnvironmentLifecycleStatus.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
-    EnvironmentLifecycleStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    EnvironmentLifecycleStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    EnvironmentLifecycleStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    EnvironmentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Environment)
-    EnvironmentMember.add_member(:permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permissions, location_name: "permissions", traits: {"smithy.api#required" => {}}))
-    EnvironmentMember.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "userId", traits: {"smithy.api#required" => {}}))
-    EnvironmentMember.add_member(:user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
-    EnvironmentMember.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
-    EnvironmentMember.add_member(:last_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastAccess"))
+    EnvironmentLifecycleStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    EnvironmentLifecycleStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    EnvironmentLifecycleStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    EnvironmentLifecycleStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    EnvironmentLifecycleStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    EnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Environment)
+    EnvironmentMember.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions, location_name: "permissions", traits: {"smithy.api#required" => {}}))
+    EnvironmentMember.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "userId", traits: {"smithy.api#required" => {}}))
+    EnvironmentMember.add_member(:user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
+    EnvironmentMember.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
+    EnvironmentMember.add_member(:last_access, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastAccess"))
     EnvironmentMember.type = Types::EnvironmentMember
-    EnvironmentMembersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentMember)
-    EnvironmentStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "error"}))
-    EnvironmentStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "creating"}))
-    EnvironmentStatus.add_member(:connecting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECTING", traits: {"smithy.api#enumValue" => "connecting"}))
-    EnvironmentStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "ready"}))
-    EnvironmentStatus.add_member(:stopping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPING", traits: {"smithy.api#enumValue" => "stopping"}))
-    EnvironmentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "stopped"}))
-    EnvironmentStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "deleting"}))
-    EnvironmentType.add_member(:ssh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSH", traits: {"smithy.api#enumValue" => "ssh"}))
-    EnvironmentType.add_member(:ec2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2", traits: {"smithy.api#enumValue" => "ec2"}))
-    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    ForbiddenException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    ForbiddenException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    EnvironmentMembersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentMember)
+    EnvironmentStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "error"}))
+    EnvironmentStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "creating"}))
+    EnvironmentStatus.add_member(:connecting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECTING", traits: {"smithy.api#enumValue" => "connecting"}))
+    EnvironmentStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "ready"}))
+    EnvironmentStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPING", traits: {"smithy.api#enumValue" => "stopping"}))
+    EnvironmentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "stopped"}))
+    EnvironmentStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "deleting"}))
+    EnvironmentType.add_member(:ssh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSH", traits: {"smithy.api#enumValue" => "ssh"}))
+    EnvironmentType.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2", traits: {"smithy.api#enumValue" => "ec2"}))
+    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ForbiddenException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    ForbiddenException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     ForbiddenException.type = Types::ForbiddenException
-    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    InternalServerErrorException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    InternalServerErrorException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InternalServerErrorException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    InternalServerErrorException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     InternalServerErrorException.type = Types::InternalServerErrorException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    LimitExceededException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    LimitExceededException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     LimitExceededException.type = Types::LimitExceededException
-    ListEnvironmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListEnvironmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListEnvironmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
+    ListEnvironmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListEnvironmentsRequest.type = Types::ListEnvironmentsRequest
-    ListEnvironmentsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListEnvironmentsResult.add_member(:environment_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentIdList, location_name: "environmentIds"))
+    ListEnvironmentsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
+    ListEnvironmentsResult.add_member(:environment_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentIdList, location_name: "environmentIds"))
     ListEnvironmentsResult.type = Types::ListEnvironmentsResult
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ManagedCredentialsAction.add_member(:enable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLE", traits: {"smithy.api#enumValue" => "ENABLE"}))
-    ManagedCredentialsAction.add_member(:disable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
-    ManagedCredentialsStatus.add_member(:enabled_on_create, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED_ON_CREATE", traits: {"smithy.api#enumValue" => "ENABLED_ON_CREATE"}))
-    ManagedCredentialsStatus.add_member(:enabled_by_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED_BY_OWNER", traits: {"smithy.api#enumValue" => "ENABLED_BY_OWNER"}))
-    ManagedCredentialsStatus.add_member(:disabled_by_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_BY_DEFAULT", traits: {"smithy.api#enumValue" => "DISABLED_BY_DEFAULT"}))
-    ManagedCredentialsStatus.add_member(:disabled_by_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_BY_OWNER", traits: {"smithy.api#enumValue" => "DISABLED_BY_OWNER"}))
-    ManagedCredentialsStatus.add_member(:disabled_by_collaborator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "DISABLED_BY_COLLABORATOR"}))
-    ManagedCredentialsStatus.add_member(:pending_removal_by_collaborator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_REMOVAL_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "PENDING_REMOVAL_BY_COLLABORATOR"}))
-    ManagedCredentialsStatus.add_member(:pending_start_removal_by_collaborator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_START_REMOVAL_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "PENDING_START_REMOVAL_BY_COLLABORATOR"}))
-    ManagedCredentialsStatus.add_member(:pending_removal_by_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_REMOVAL_BY_OWNER", traits: {"smithy.api#enumValue" => "PENDING_REMOVAL_BY_OWNER"}))
-    ManagedCredentialsStatus.add_member(:pending_start_removal_by_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_START_REMOVAL_BY_OWNER", traits: {"smithy.api#enumValue" => "PENDING_START_REMOVAL_BY_OWNER"}))
-    ManagedCredentialsStatus.add_member(:failed_removal_by_collaborator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_REMOVAL_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "FAILED_REMOVAL_BY_COLLABORATOR"}))
-    ManagedCredentialsStatus.add_member(:failed_removal_by_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_REMOVAL_BY_OWNER", traits: {"smithy.api#enumValue" => "FAILED_REMOVAL_BY_OWNER"}))
-    MemberPermissions.add_member(:read_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_WRITE", traits: {"smithy.api#enumValue" => "read-write"}))
-    MemberPermissions.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ONLY", traits: {"smithy.api#enumValue" => "read-only"}))
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    NotFoundException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    ManagedCredentialsAction.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLE", traits: {"smithy.api#enumValue" => "ENABLE"}))
+    ManagedCredentialsAction.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
+    ManagedCredentialsStatus.add_member(:enabled_on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED_ON_CREATE", traits: {"smithy.api#enumValue" => "ENABLED_ON_CREATE"}))
+    ManagedCredentialsStatus.add_member(:enabled_by_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED_BY_OWNER", traits: {"smithy.api#enumValue" => "ENABLED_BY_OWNER"}))
+    ManagedCredentialsStatus.add_member(:disabled_by_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_BY_DEFAULT", traits: {"smithy.api#enumValue" => "DISABLED_BY_DEFAULT"}))
+    ManagedCredentialsStatus.add_member(:disabled_by_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_BY_OWNER", traits: {"smithy.api#enumValue" => "DISABLED_BY_OWNER"}))
+    ManagedCredentialsStatus.add_member(:disabled_by_collaborator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "DISABLED_BY_COLLABORATOR"}))
+    ManagedCredentialsStatus.add_member(:pending_removal_by_collaborator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_REMOVAL_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "PENDING_REMOVAL_BY_COLLABORATOR"}))
+    ManagedCredentialsStatus.add_member(:pending_start_removal_by_collaborator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_START_REMOVAL_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "PENDING_START_REMOVAL_BY_COLLABORATOR"}))
+    ManagedCredentialsStatus.add_member(:pending_removal_by_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_REMOVAL_BY_OWNER", traits: {"smithy.api#enumValue" => "PENDING_REMOVAL_BY_OWNER"}))
+    ManagedCredentialsStatus.add_member(:pending_start_removal_by_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_START_REMOVAL_BY_OWNER", traits: {"smithy.api#enumValue" => "PENDING_START_REMOVAL_BY_OWNER"}))
+    ManagedCredentialsStatus.add_member(:failed_removal_by_collaborator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_REMOVAL_BY_COLLABORATOR", traits: {"smithy.api#enumValue" => "FAILED_REMOVAL_BY_COLLABORATOR"}))
+    ManagedCredentialsStatus.add_member(:failed_removal_by_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_REMOVAL_BY_OWNER", traits: {"smithy.api#enumValue" => "FAILED_REMOVAL_BY_OWNER"}))
+    MemberPermissions.add_member(:read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_WRITE", traits: {"smithy.api#enumValue" => "read-write"}))
+    MemberPermissions.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ONLY", traits: {"smithy.api#enumValue" => "read-only"}))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    NotFoundException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     NotFoundException.type = Types::NotFoundException
-    Permissions.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OWNER", traits: {"smithy.api#enumValue" => "owner"}))
-    Permissions.add_member(:read_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_WRITE", traits: {"smithy.api#enumValue" => "read-write"}))
-    Permissions.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ONLY", traits: {"smithy.api#enumValue" => "read-only"}))
-    PermissionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permissions)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Permissions.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OWNER", traits: {"smithy.api#enumValue" => "owner"}))
+    Permissions.add_member(:read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_WRITE", traits: {"smithy.api#enumValue" => "read-write"}))
+    Permissions.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ONLY", traits: {"smithy.api#enumValue" => "read-only"}))
+    PermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    TooManyRequestsException.add_member(:class_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "className"))
-    TooManyRequestsException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    TooManyRequestsException.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "className"))
+    TooManyRequestsException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "code", traits: {"smithy.api#default" => 0}))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateEnvironmentMembershipRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
-    UpdateEnvironmentMembershipRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
-    UpdateEnvironmentMembershipRequest.add_member(:permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberPermissions, location_name: "permissions", traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentMembershipRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentMembershipRequest.add_member(:user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserArn, location_name: "userArn", traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentMembershipRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberPermissions, location_name: "permissions", traits: {"smithy.api#required" => {}}))
     UpdateEnvironmentMembershipRequest.type = Types::UpdateEnvironmentMembershipRequest
-    UpdateEnvironmentMembershipResult.add_member(:membership, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentMember, location_name: "membership"))
+    UpdateEnvironmentMembershipResult.add_member(:membership, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentMember, location_name: "membership"))
     UpdateEnvironmentMembershipResult.type = Types::UpdateEnvironmentMembershipResult
-    UpdateEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
-    UpdateEnvironmentRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name"))
-    UpdateEnvironmentRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentDescription, location_name: "description"))
-    UpdateEnvironmentRequest.add_member(:managed_credentials_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedCredentialsAction, location_name: "managedCredentialsAction"))
+    UpdateEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, location_name: "environmentId", traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "name"))
+    UpdateEnvironmentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDescription, location_name: "description"))
+    UpdateEnvironmentRequest.add_member(:managed_credentials_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedCredentialsAction, location_name: "managedCredentialsAction"))
     UpdateEnvironmentRequest.type = Types::UpdateEnvironmentRequest
     UpdateEnvironmentResult.type = Types::UpdateEnvironmentResult
 
@@ -257,175 +257,175 @@ module Aws::Cloud9
       service.add_operation(:create_environment_ec2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#CreateEnvironmentEC2"
         operation.name = "CreateEnvironmentEC2"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentEC2Request)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentEC2Result)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateEnvironmentEC2Request
+        operation.output = CreateEnvironmentEC2Result
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_environment_membership, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#CreateEnvironmentMembership"
         operation.name = "CreateEnvironmentMembership"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentMembershipRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentMembershipResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateEnvironmentMembershipRequest
+        operation.output = CreateEnvironmentMembershipResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#DeleteEnvironment"
         operation.name = "DeleteEnvironment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteEnvironmentRequest
+        operation.output = DeleteEnvironmentResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment_membership, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#DeleteEnvironmentMembership"
         operation.name = "DeleteEnvironmentMembership"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentMembershipRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentMembershipResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteEnvironmentMembershipRequest
+        operation.output = DeleteEnvironmentMembershipResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_environment_memberships, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#DescribeEnvironmentMemberships"
         operation.name = "DescribeEnvironmentMemberships"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEnvironmentMembershipsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEnvironmentMembershipsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeEnvironmentMembershipsRequest
+        operation.output = DescribeEnvironmentMembershipsResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeEnvironmentMemberships.new
       end)
       service.add_operation(:describe_environment_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#DescribeEnvironmentStatus"
         operation.name = "DescribeEnvironmentStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEnvironmentStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEnvironmentStatusResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeEnvironmentStatusRequest
+        operation.output = DescribeEnvironmentStatusResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_environments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#DescribeEnvironments"
         operation.name = "DescribeEnvironments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEnvironmentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEnvironmentsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeEnvironmentsRequest
+        operation.output = DescribeEnvironmentsResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:list_environments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#ListEnvironments"
         operation.name = "ListEnvironments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEnvironmentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEnvironmentsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListEnvironmentsRequest
+        operation.output = ListEnvironmentsResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListEnvironments.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentAccessException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentAccessException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentAccessException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentAccessException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#UpdateEnvironment"
         operation.name = "UpdateEnvironment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateEnvironmentRequest
+        operation.output = UpdateEnvironmentResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_environment_membership, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloud9#UpdateEnvironmentMembership"
         operation.name = "UpdateEnvironmentMembership"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentMembershipRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentMembershipResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateEnvironmentMembershipRequest
+        operation.output = UpdateEnvironmentMembershipResult
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
     end

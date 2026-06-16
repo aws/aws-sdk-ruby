@@ -118,247 +118,247 @@ module Aws::ServiceQuotas
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.servicequotas#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.servicequotas#UntagResourceResponse", name: "UntagResourceResponse")
 
-    AWSServiceAccessNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AWSServiceAccessNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     AWSServiceAccessNotEnabledException.type = Types::AWSServiceAccessNotEnabledException
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AppliedLevelEnum.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
-    AppliedLevelEnum.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
-    AppliedLevelEnum.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    AppliedLevelEnum.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
+    AppliedLevelEnum.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
+    AppliedLevelEnum.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     AssociateServiceQuotaTemplateRequest.type = Types::AssociateServiceQuotaTemplateRequest
     AssociateServiceQuotaTemplateResponse.type = Types::AssociateServiceQuotaTemplateResponse
-    CreateSupportCaseRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId", traits: {"smithy.api#required" => {}}))
+    CreateSupportCaseRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId", traits: {"smithy.api#required" => {}}))
     CreateSupportCaseRequest.type = Types::CreateSupportCaseRequest
     CreateSupportCaseResponse.type = Types::CreateSupportCaseResponse
-    DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
-    DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
+    DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
     DeleteServiceQuotaIncreaseRequestFromTemplateRequest.type = Types::DeleteServiceQuotaIncreaseRequestFromTemplateRequest
     DeleteServiceQuotaIncreaseRequestFromTemplateResponse.type = Types::DeleteServiceQuotaIncreaseRequestFromTemplateResponse
-    DependencyAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DependencyAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     DependencyAccessDeniedException.type = Types::DependencyAccessDeniedException
     DisassociateServiceQuotaTemplateRequest.type = Types::DisassociateServiceQuotaTemplateRequest
     DisassociateServiceQuotaTemplateResponse.type = Types::DisassociateServiceQuotaTemplateResponse
-    ErrorCode.add_member(:dependency_access_denied_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEPENDENCY_ACCESS_DENIED_ERROR", traits: {"smithy.api#enumValue" => "DEPENDENCY_ACCESS_DENIED_ERROR"}))
-    ErrorCode.add_member(:dependency_throttling_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEPENDENCY_THROTTLING_ERROR", traits: {"smithy.api#enumValue" => "DEPENDENCY_THROTTLING_ERROR"}))
-    ErrorCode.add_member(:dependency_service_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEPENDENCY_SERVICE_ERROR", traits: {"smithy.api#enumValue" => "DEPENDENCY_SERVICE_ERROR"}))
-    ErrorCode.add_member(:service_quota_not_available_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_QUOTA_NOT_AVAILABLE_ERROR", traits: {"smithy.api#enumValue" => "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"}))
-    ErrorReason.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    ErrorReason.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ErrorCode.add_member(:dependency_access_denied_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEPENDENCY_ACCESS_DENIED_ERROR", traits: {"smithy.api#enumValue" => "DEPENDENCY_ACCESS_DENIED_ERROR"}))
+    ErrorCode.add_member(:dependency_throttling_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEPENDENCY_THROTTLING_ERROR", traits: {"smithy.api#enumValue" => "DEPENDENCY_THROTTLING_ERROR"}))
+    ErrorCode.add_member(:dependency_service_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEPENDENCY_SERVICE_ERROR", traits: {"smithy.api#enumValue" => "DEPENDENCY_SERVICE_ERROR"}))
+    ErrorCode.add_member(:service_quota_not_available_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_QUOTA_NOT_AVAILABLE_ERROR", traits: {"smithy.api#enumValue" => "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"}))
+    ErrorReason.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    ErrorReason.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "ErrorMessage"))
     ErrorReason.type = Types::ErrorReason
-    GetAWSDefaultServiceQuotaRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    GetAWSDefaultServiceQuotaRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    GetAWSDefaultServiceQuotaRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    GetAWSDefaultServiceQuotaRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
     GetAWSDefaultServiceQuotaRequest.type = Types::GetAWSDefaultServiceQuotaRequest
-    GetAWSDefaultServiceQuotaResponse.add_member(:quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuota, location_name: "Quota"))
+    GetAWSDefaultServiceQuotaResponse.add_member(:quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuota, location_name: "Quota"))
     GetAWSDefaultServiceQuotaResponse.type = Types::GetAWSDefaultServiceQuotaResponse
     GetAssociationForServiceQuotaTemplateRequest.type = Types::GetAssociationForServiceQuotaTemplateRequest
-    GetAssociationForServiceQuotaTemplateResponse.add_member(:service_quota_template_association_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaTemplateAssociationStatus, location_name: "ServiceQuotaTemplateAssociationStatus"))
+    GetAssociationForServiceQuotaTemplateResponse.add_member(:service_quota_template_association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaTemplateAssociationStatus, location_name: "ServiceQuotaTemplateAssociationStatus"))
     GetAssociationForServiceQuotaTemplateResponse.type = Types::GetAssociationForServiceQuotaTemplateResponse
-    GetRequestedServiceQuotaChangeRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId", traits: {"smithy.api#required" => {}}))
+    GetRequestedServiceQuotaChangeRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId", traits: {"smithy.api#required" => {}}))
     GetRequestedServiceQuotaChangeRequest.type = Types::GetRequestedServiceQuotaChangeRequest
-    GetRequestedServiceQuotaChangeResponse.add_member(:requested_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedServiceQuotaChange, location_name: "RequestedQuota"))
+    GetRequestedServiceQuotaChangeResponse.add_member(:requested_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedServiceQuotaChange, location_name: "RequestedQuota"))
     GetRequestedServiceQuotaChangeResponse.type = Types::GetRequestedServiceQuotaChangeResponse
-    GetServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    GetServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
-    GetServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
+    GetServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    GetServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    GetServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
     GetServiceQuotaIncreaseRequestFromTemplateRequest.type = Types::GetServiceQuotaIncreaseRequestFromTemplateRequest
-    GetServiceQuotaIncreaseRequestFromTemplateResponse.add_member(:service_quota_increase_request_in_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaIncreaseRequestInTemplate, location_name: "ServiceQuotaIncreaseRequestInTemplate"))
+    GetServiceQuotaIncreaseRequestFromTemplateResponse.add_member(:service_quota_increase_request_in_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaIncreaseRequestInTemplate, location_name: "ServiceQuotaIncreaseRequestInTemplate"))
     GetServiceQuotaIncreaseRequestFromTemplateResponse.type = Types::GetServiceQuotaIncreaseRequestFromTemplateResponse
-    GetServiceQuotaRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    GetServiceQuotaRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
-    GetServiceQuotaRequest.add_member(:context_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaContextId, location_name: "ContextId"))
+    GetServiceQuotaRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    GetServiceQuotaRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    GetServiceQuotaRequest.add_member(:context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextId, location_name: "ContextId"))
     GetServiceQuotaRequest.type = Types::GetServiceQuotaRequest
-    GetServiceQuotaResponse.add_member(:quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuota, location_name: "Quota"))
+    GetServiceQuotaResponse.add_member(:quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuota, location_name: "Quota"))
     GetServiceQuotaResponse.type = Types::GetServiceQuotaResponse
-    IllegalArgumentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    IllegalArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     IllegalArgumentException.type = Types::IllegalArgumentException
-    InputTagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    InputTags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    InvalidPaginationTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InputTagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    InputTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    InvalidPaginationTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     InvalidPaginationTokenException.type = Types::InvalidPaginationTokenException
-    InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     InvalidResourceStateException.type = Types::InvalidResourceStateException
-    ListAWSDefaultServiceQuotasRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    ListAWSDefaultServiceQuotasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAWSDefaultServiceQuotasRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAWSDefaultServiceQuotasRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    ListAWSDefaultServiceQuotasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListAWSDefaultServiceQuotasRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListAWSDefaultServiceQuotasRequest.type = Types::ListAWSDefaultServiceQuotasRequest
-    ListAWSDefaultServiceQuotasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAWSDefaultServiceQuotasResponse.add_member(:quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaListDefinition, location_name: "Quotas"))
+    ListAWSDefaultServiceQuotasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListAWSDefaultServiceQuotasResponse.add_member(:quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaListDefinition, location_name: "Quotas"))
     ListAWSDefaultServiceQuotasResponse.type = Types::ListAWSDefaultServiceQuotasResponse
-    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
-    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestStatus, location_name: "Status"))
-    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:quota_requested_at_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedLevelEnum, location_name: "QuotaRequestedAtLevel"))
+    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestStatus, location_name: "Status"))
+    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListRequestedServiceQuotaChangeHistoryByQuotaRequest.add_member(:quota_requested_at_level, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedLevelEnum, location_name: "QuotaRequestedAtLevel"))
     ListRequestedServiceQuotaChangeHistoryByQuotaRequest.type = Types::ListRequestedServiceQuotaChangeHistoryByQuotaRequest
-    ListRequestedServiceQuotaChangeHistoryByQuotaResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListRequestedServiceQuotaChangeHistoryByQuotaResponse.add_member(:requested_quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedServiceQuotaChangeHistoryListDefinition, location_name: "RequestedQuotas"))
+    ListRequestedServiceQuotaChangeHistoryByQuotaResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListRequestedServiceQuotaChangeHistoryByQuotaResponse.add_member(:requested_quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedServiceQuotaChangeHistoryListDefinition, location_name: "RequestedQuotas"))
     ListRequestedServiceQuotaChangeHistoryByQuotaResponse.type = Types::ListRequestedServiceQuotaChangeHistoryByQuotaResponse
-    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
-    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestStatus, location_name: "Status"))
-    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:quota_requested_at_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedLevelEnum, location_name: "QuotaRequestedAtLevel"))
+    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode"))
+    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestStatus, location_name: "Status"))
+    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListRequestedServiceQuotaChangeHistoryRequest.add_member(:quota_requested_at_level, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedLevelEnum, location_name: "QuotaRequestedAtLevel"))
     ListRequestedServiceQuotaChangeHistoryRequest.type = Types::ListRequestedServiceQuotaChangeHistoryRequest
-    ListRequestedServiceQuotaChangeHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListRequestedServiceQuotaChangeHistoryResponse.add_member(:requested_quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedServiceQuotaChangeHistoryListDefinition, location_name: "RequestedQuotas"))
+    ListRequestedServiceQuotaChangeHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListRequestedServiceQuotaChangeHistoryResponse.add_member(:requested_quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedServiceQuotaChangeHistoryListDefinition, location_name: "RequestedQuotas"))
     ListRequestedServiceQuotaChangeHistoryResponse.type = Types::ListRequestedServiceQuotaChangeHistoryResponse
-    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
-    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
-    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode"))
+    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
+    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListServiceQuotaIncreaseRequestsInTemplateRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListServiceQuotaIncreaseRequestsInTemplateRequest.type = Types::ListServiceQuotaIncreaseRequestsInTemplateRequest
-    ListServiceQuotaIncreaseRequestsInTemplateResponse.add_member(:service_quota_increase_request_in_template_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaIncreaseRequestInTemplateList, location_name: "ServiceQuotaIncreaseRequestInTemplateList"))
-    ListServiceQuotaIncreaseRequestsInTemplateResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListServiceQuotaIncreaseRequestsInTemplateResponse.add_member(:service_quota_increase_request_in_template_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaIncreaseRequestInTemplateList, location_name: "ServiceQuotaIncreaseRequestInTemplateList"))
+    ListServiceQuotaIncreaseRequestsInTemplateResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListServiceQuotaIncreaseRequestsInTemplateResponse.type = Types::ListServiceQuotaIncreaseRequestsInTemplateResponse
-    ListServiceQuotasRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    ListServiceQuotasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListServiceQuotasRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListServiceQuotasRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
-    ListServiceQuotasRequest.add_member(:quota_applied_at_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedLevelEnum, location_name: "QuotaAppliedAtLevel"))
+    ListServiceQuotasRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    ListServiceQuotasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListServiceQuotasRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListServiceQuotasRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode"))
+    ListServiceQuotasRequest.add_member(:quota_applied_at_level, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedLevelEnum, location_name: "QuotaAppliedAtLevel"))
     ListServiceQuotasRequest.type = Types::ListServiceQuotasRequest
-    ListServiceQuotasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListServiceQuotasResponse.add_member(:quotas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaListDefinition, location_name: "Quotas"))
+    ListServiceQuotasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListServiceQuotasResponse.add_member(:quotas, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaListDefinition, location_name: "Quotas"))
     ListServiceQuotasResponse.type = Types::ListServiceQuotasResponse
-    ListServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListServicesRequest.type = Types::ListServicesRequest
-    ListServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceInfoListDefinition, location_name: "Services"))
+    ListServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInfoListDefinition, location_name: "Services"))
     ListServicesResponse.type = Types::ListServicesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputTags, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputTags, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MetricDimensionsMapDefinition.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensionName)
-    MetricDimensionsMapDefinition.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensionValue)
-    MetricInfo.add_member(:metric_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaMetricNamespace, location_name: "MetricNamespace"))
-    MetricInfo.add_member(:metric_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaMetricName, location_name: "MetricName"))
-    MetricInfo.add_member(:metric_dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDimensionsMapDefinition, location_name: "MetricDimensions"))
-    MetricInfo.add_member(:metric_statistic_recommendation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Statistic, location_name: "MetricStatisticRecommendation"))
+    MetricDimensionsMapDefinition.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionName)
+    MetricDimensionsMapDefinition.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionValue)
+    MetricInfo.add_member(:metric_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaMetricNamespace, location_name: "MetricNamespace"))
+    MetricInfo.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaMetricName, location_name: "MetricName"))
+    MetricInfo.add_member(:metric_dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionsMapDefinition, location_name: "MetricDimensions"))
+    MetricInfo.add_member(:metric_statistic_recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic, location_name: "MetricStatisticRecommendation"))
     MetricInfo.type = Types::MetricInfo
-    NoAvailableOrganizationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    NoAvailableOrganizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     NoAvailableOrganizationException.type = Types::NoAvailableOrganizationException
-    NoSuchResourceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    NoSuchResourceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     NoSuchResourceException.type = Types::NoSuchResourceException
-    OrganizationNotInAllFeaturesModeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    OrganizationNotInAllFeaturesModeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     OrganizationNotInAllFeaturesModeException.type = Types::OrganizationNotInAllFeaturesModeException
-    OutputTags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    PeriodUnit.add_member(:microsecond, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECOND", traits: {"smithy.api#enumValue" => "MICROSECOND"}))
-    PeriodUnit.add_member(:millisecond, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECOND", traits: {"smithy.api#enumValue" => "MILLISECOND"}))
-    PeriodUnit.add_member(:second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECOND", traits: {"smithy.api#enumValue" => "SECOND"}))
-    PeriodUnit.add_member(:minute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTE", traits: {"smithy.api#enumValue" => "MINUTE"}))
-    PeriodUnit.add_member(:hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOUR", traits: {"smithy.api#enumValue" => "HOUR"}))
-    PeriodUnit.add_member(:day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAY", traits: {"smithy.api#enumValue" => "DAY"}))
-    PeriodUnit.add_member(:week, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEK", traits: {"smithy.api#enumValue" => "WEEK"}))
-    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
-    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
-    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:desired_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaValue, location_name: "DesiredValue", traits: {"smithy.api#required" => {}}))
+    OutputTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    PeriodUnit.add_member(:microsecond, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECOND", traits: {"smithy.api#enumValue" => "MICROSECOND"}))
+    PeriodUnit.add_member(:millisecond, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECOND", traits: {"smithy.api#enumValue" => "MILLISECOND"}))
+    PeriodUnit.add_member(:second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECOND", traits: {"smithy.api#enumValue" => "SECOND"}))
+    PeriodUnit.add_member(:minute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MINUTE", traits: {"smithy.api#enumValue" => "MINUTE"}))
+    PeriodUnit.add_member(:hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOUR", traits: {"smithy.api#enumValue" => "HOUR"}))
+    PeriodUnit.add_member(:day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAY", traits: {"smithy.api#enumValue" => "DAY"}))
+    PeriodUnit.add_member(:week, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEEK", traits: {"smithy.api#enumValue" => "WEEK"}))
+    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
+    PutServiceQuotaIncreaseRequestIntoTemplateRequest.add_member(:desired_value, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaValue, location_name: "DesiredValue", traits: {"smithy.api#required" => {}}))
     PutServiceQuotaIncreaseRequestIntoTemplateRequest.type = Types::PutServiceQuotaIncreaseRequestIntoTemplateRequest
-    PutServiceQuotaIncreaseRequestIntoTemplateResponse.add_member(:service_quota_increase_request_in_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaIncreaseRequestInTemplate, location_name: "ServiceQuotaIncreaseRequestInTemplate"))
+    PutServiceQuotaIncreaseRequestIntoTemplateResponse.add_member(:service_quota_increase_request_in_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaIncreaseRequestInTemplate, location_name: "ServiceQuotaIncreaseRequestInTemplate"))
     PutServiceQuotaIncreaseRequestIntoTemplateResponse.type = Types::PutServiceQuotaIncreaseRequestIntoTemplateResponse
-    QuotaContextInfo.add_member(:context_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaContextScope, location_name: "ContextScope"))
-    QuotaContextInfo.add_member(:context_scope_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaContextScopeType, location_name: "ContextScopeType"))
-    QuotaContextInfo.add_member(:context_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaContextId, location_name: "ContextId"))
+    QuotaContextInfo.add_member(:context_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextScope, location_name: "ContextScope"))
+    QuotaContextInfo.add_member(:context_scope_type, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextScopeType, location_name: "ContextScopeType"))
+    QuotaContextInfo.add_member(:context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextId, location_name: "ContextId"))
     QuotaContextInfo.type = Types::QuotaContextInfo
-    QuotaContextScope.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
-    QuotaContextScope.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
-    QuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    QuotaContextScope.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
+    QuotaContextScope.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
+    QuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     QuotaExceededException.type = Types::QuotaExceededException
-    QuotaPeriod.add_member(:period_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PeriodValue, location_name: "PeriodValue"))
-    QuotaPeriod.add_member(:period_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PeriodUnit, location_name: "PeriodUnit"))
+    QuotaPeriod.add_member(:period_value, ::Smithy::Schema::Shapes::MemberShape.new(target: PeriodValue, location_name: "PeriodValue"))
+    QuotaPeriod.add_member(:period_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: PeriodUnit, location_name: "PeriodUnit"))
     QuotaPeriod.type = Types::QuotaPeriod
-    RequestServiceQuotaIncreaseRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    RequestServiceQuotaIncreaseRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
-    RequestServiceQuotaIncreaseRequest.add_member(:desired_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaValue, location_name: "DesiredValue", traits: {"smithy.api#required" => {}}))
-    RequestServiceQuotaIncreaseRequest.add_member(:context_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaContextId, location_name: "ContextId"))
-    RequestServiceQuotaIncreaseRequest.add_member(:support_case_allowed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportCaseAllowed, location_name: "SupportCaseAllowed"))
+    RequestServiceQuotaIncreaseRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    RequestServiceQuotaIncreaseRequest.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    RequestServiceQuotaIncreaseRequest.add_member(:desired_value, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaValue, location_name: "DesiredValue", traits: {"smithy.api#required" => {}}))
+    RequestServiceQuotaIncreaseRequest.add_member(:context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextId, location_name: "ContextId"))
+    RequestServiceQuotaIncreaseRequest.add_member(:support_case_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportCaseAllowed, location_name: "SupportCaseAllowed"))
     RequestServiceQuotaIncreaseRequest.type = Types::RequestServiceQuotaIncreaseRequest
-    RequestServiceQuotaIncreaseResponse.add_member(:requested_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedServiceQuotaChange, location_name: "RequestedQuota"))
+    RequestServiceQuotaIncreaseResponse.add_member(:requested_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedServiceQuotaChange, location_name: "RequestedQuota"))
     RequestServiceQuotaIncreaseResponse.type = Types::RequestServiceQuotaIncreaseResponse
-    RequestStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    RequestStatus.add_member(:case_opened, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CASE_OPENED", traits: {"smithy.api#enumValue" => "CASE_OPENED"}))
-    RequestStatus.add_member(:approved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
-    RequestStatus.add_member(:denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENIED", traits: {"smithy.api#enumValue" => "DENIED"}))
-    RequestStatus.add_member(:case_closed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CASE_CLOSED", traits: {"smithy.api#enumValue" => "CASE_CLOSED"}))
-    RequestStatus.add_member(:not_approved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPROVED", traits: {"smithy.api#enumValue" => "NOT_APPROVED"}))
-    RequestStatus.add_member(:invalid_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REQUEST", traits: {"smithy.api#enumValue" => "INVALID_REQUEST"}))
-    RequestedServiceQuotaChange.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "Id"))
-    RequestedServiceQuotaChange.add_member(:case_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerServiceEngagementId, location_name: "CaseId"))
-    RequestedServiceQuotaChange.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
-    RequestedServiceQuotaChange.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
-    RequestedServiceQuotaChange.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
-    RequestedServiceQuotaChange.add_member(:quota_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaName, location_name: "QuotaName"))
-    RequestedServiceQuotaChange.add_member(:desired_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaValue, location_name: "DesiredValue"))
-    RequestedServiceQuotaChange.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestStatus, location_name: "Status"))
-    RequestedServiceQuotaChange.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "Created"))
-    RequestedServiceQuotaChange.add_member(:last_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "LastUpdated"))
-    RequestedServiceQuotaChange.add_member(:requester, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Requester, location_name: "Requester"))
-    RequestedServiceQuotaChange.add_member(:quota_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaArn, location_name: "QuotaArn"))
-    RequestedServiceQuotaChange.add_member(:global_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlobalQuota, location_name: "GlobalQuota", traits: {"smithy.api#default" => false}))
-    RequestedServiceQuotaChange.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaUnit, location_name: "Unit"))
-    RequestedServiceQuotaChange.add_member(:quota_requested_at_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedLevelEnum, location_name: "QuotaRequestedAtLevel"))
-    RequestedServiceQuotaChange.add_member(:quota_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaContextInfo, location_name: "QuotaContext"))
+    RequestStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    RequestStatus.add_member(:case_opened, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CASE_OPENED", traits: {"smithy.api#enumValue" => "CASE_OPENED"}))
+    RequestStatus.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
+    RequestStatus.add_member(:denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENIED", traits: {"smithy.api#enumValue" => "DENIED"}))
+    RequestStatus.add_member(:case_closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CASE_CLOSED", traits: {"smithy.api#enumValue" => "CASE_CLOSED"}))
+    RequestStatus.add_member(:not_approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPROVED", traits: {"smithy.api#enumValue" => "NOT_APPROVED"}))
+    RequestStatus.add_member(:invalid_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REQUEST", traits: {"smithy.api#enumValue" => "INVALID_REQUEST"}))
+    RequestedServiceQuotaChange.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "Id"))
+    RequestedServiceQuotaChange.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerServiceEngagementId, location_name: "CaseId"))
+    RequestedServiceQuotaChange.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode"))
+    RequestedServiceQuotaChange.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "ServiceName"))
+    RequestedServiceQuotaChange.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode"))
+    RequestedServiceQuotaChange.add_member(:quota_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaName, location_name: "QuotaName"))
+    RequestedServiceQuotaChange.add_member(:desired_value, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaValue, location_name: "DesiredValue"))
+    RequestedServiceQuotaChange.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestStatus, location_name: "Status"))
+    RequestedServiceQuotaChange.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "Created"))
+    RequestedServiceQuotaChange.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "LastUpdated"))
+    RequestedServiceQuotaChange.add_member(:requester, ::Smithy::Schema::Shapes::MemberShape.new(target: Requester, location_name: "Requester"))
+    RequestedServiceQuotaChange.add_member(:quota_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaArn, location_name: "QuotaArn"))
+    RequestedServiceQuotaChange.add_member(:global_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalQuota, location_name: "GlobalQuota", traits: {"smithy.api#default" => false}))
+    RequestedServiceQuotaChange.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaUnit, location_name: "Unit"))
+    RequestedServiceQuotaChange.add_member(:quota_requested_at_level, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedLevelEnum, location_name: "QuotaRequestedAtLevel"))
+    RequestedServiceQuotaChange.add_member(:quota_context, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextInfo, location_name: "QuotaContext"))
     RequestedServiceQuotaChange.type = Types::RequestedServiceQuotaChange
-    RequestedServiceQuotaChangeHistoryListDefinition.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestedServiceQuotaChange)
-    ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    RequestedServiceQuotaChangeHistoryListDefinition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedServiceQuotaChange)
+    ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
-    ServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ServiceException.type = Types::ServiceException
-    ServiceInfo.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
-    ServiceInfo.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
+    ServiceInfo.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode"))
+    ServiceInfo.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "ServiceName"))
     ServiceInfo.type = Types::ServiceInfo
-    ServiceInfoListDefinition.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceInfo)
-    ServiceQuota.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
-    ServiceQuota.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
-    ServiceQuota.add_member(:quota_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaArn, location_name: "QuotaArn"))
-    ServiceQuota.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
-    ServiceQuota.add_member(:quota_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaName, location_name: "QuotaName"))
-    ServiceQuota.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaValue, location_name: "Value"))
-    ServiceQuota.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaUnit, location_name: "Unit"))
-    ServiceQuota.add_member(:adjustable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaAdjustable, location_name: "Adjustable", traits: {"smithy.api#default" => false}))
-    ServiceQuota.add_member(:global_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlobalQuota, location_name: "GlobalQuota", traits: {"smithy.api#default" => false}))
-    ServiceQuota.add_member(:usage_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricInfo, location_name: "UsageMetric"))
-    ServiceQuota.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaPeriod, location_name: "Period"))
-    ServiceQuota.add_member(:error_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorReason, location_name: "ErrorReason"))
-    ServiceQuota.add_member(:quota_applied_at_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedLevelEnum, location_name: "QuotaAppliedAtLevel"))
-    ServiceQuota.add_member(:quota_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaContextInfo, location_name: "QuotaContext"))
-    ServiceQuota.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaDescription, location_name: "Description"))
+    ServiceInfoListDefinition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInfo)
+    ServiceQuota.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode"))
+    ServiceQuota.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "ServiceName"))
+    ServiceQuota.add_member(:quota_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaArn, location_name: "QuotaArn"))
+    ServiceQuota.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode"))
+    ServiceQuota.add_member(:quota_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaName, location_name: "QuotaName"))
+    ServiceQuota.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaValue, location_name: "Value"))
+    ServiceQuota.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaUnit, location_name: "Unit"))
+    ServiceQuota.add_member(:adjustable, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaAdjustable, location_name: "Adjustable", traits: {"smithy.api#default" => false}))
+    ServiceQuota.add_member(:global_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalQuota, location_name: "GlobalQuota", traits: {"smithy.api#default" => false}))
+    ServiceQuota.add_member(:usage_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricInfo, location_name: "UsageMetric"))
+    ServiceQuota.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaPeriod, location_name: "Period"))
+    ServiceQuota.add_member(:error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorReason, location_name: "ErrorReason"))
+    ServiceQuota.add_member(:quota_applied_at_level, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedLevelEnum, location_name: "QuotaAppliedAtLevel"))
+    ServiceQuota.add_member(:quota_context, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextInfo, location_name: "QuotaContext"))
+    ServiceQuota.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaDescription, location_name: "Description"))
     ServiceQuota.type = Types::ServiceQuota
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:quota_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaName, location_name: "QuotaName"))
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:desired_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaValue, location_name: "DesiredValue"))
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaUnit, location_name: "Unit"))
-    ServiceQuotaIncreaseRequestInTemplate.add_member(:global_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlobalQuota, location_name: "GlobalQuota", traits: {"smithy.api#default" => false}))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode"))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "ServiceName"))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "QuotaCode"))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:quota_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaName, location_name: "QuotaName"))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:desired_value, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaValue, location_name: "DesiredValue"))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaUnit, location_name: "Unit"))
+    ServiceQuotaIncreaseRequestInTemplate.add_member(:global_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalQuota, location_name: "GlobalQuota", traits: {"smithy.api#default" => false}))
     ServiceQuotaIncreaseRequestInTemplate.type = Types::ServiceQuotaIncreaseRequestInTemplate
-    ServiceQuotaIncreaseRequestInTemplateList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaIncreaseRequestInTemplate)
-    ServiceQuotaListDefinition.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuota)
-    ServiceQuotaTemplateAssociationStatus.add_member(:associated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "ASSOCIATED"}))
-    ServiceQuotaTemplateAssociationStatus.add_member(:disassociated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "DISASSOCIATED"}))
-    ServiceQuotaTemplateNotInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ServiceQuotaIncreaseRequestInTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaIncreaseRequestInTemplate)
+    ServiceQuotaListDefinition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuota)
+    ServiceQuotaTemplateAssociationStatus.add_member(:associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "ASSOCIATED"}))
+    ServiceQuotaTemplateAssociationStatus.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "DISASSOCIATED"}))
+    ServiceQuotaTemplateNotInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     ServiceQuotaTemplateNotInUseException.type = Types::ServiceQuotaTemplateNotInUseException
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagPolicyViolationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TagPolicyViolationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     TagPolicyViolationException.type = Types::TagPolicyViolationException
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TemplatesNotAvailableInRegionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TemplatesNotAvailableInRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     TemplatesNotAvailableInRegionException.type = Types::TemplatesNotAvailableInRegionException
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "Message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagKeys, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
 
@@ -370,285 +370,285 @@ module Aws::ServiceQuotas
       service.add_operation(:associate_service_quota_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#AssociateServiceQuotaTemplate"
         operation.name = "AssociateServiceQuotaTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateServiceQuotaTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateServiceQuotaTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = AssociateServiceQuotaTemplateRequest
+        operation.output = AssociateServiceQuotaTemplateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSServiceAccessNotEnabledException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << OrganizationNotInAllFeaturesModeException
+        operation.errors << ServiceException
+        operation.errors << TemplatesNotAvailableInRegionException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:create_support_case, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#CreateSupportCase"
         operation.name = "CreateSupportCase"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSupportCaseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSupportCaseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateSupportCaseRequest
+        operation.output = CreateSupportCaseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InvalidResourceStateException
+        operation.errors << NoSuchResourceException
+        operation.errors << ResourceAlreadyExistsException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_service_quota_increase_request_from_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#DeleteServiceQuotaIncreaseRequestFromTemplate"
         operation.name = "DeleteServiceQuotaIncreaseRequestFromTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceQuotaIncreaseRequestFromTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceQuotaIncreaseRequestFromTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteServiceQuotaIncreaseRequestFromTemplateRequest
+        operation.output = DeleteServiceQuotaIncreaseRequestFromTemplateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSServiceAccessNotEnabledException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TemplatesNotAvailableInRegionException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:disassociate_service_quota_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#DisassociateServiceQuotaTemplate"
         operation.name = "DisassociateServiceQuotaTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateServiceQuotaTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateServiceQuotaTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaTemplateNotInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DisassociateServiceQuotaTemplateRequest
+        operation.output = DisassociateServiceQuotaTemplateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSServiceAccessNotEnabledException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << ServiceException
+        operation.errors << ServiceQuotaTemplateNotInUseException
+        operation.errors << TemplatesNotAvailableInRegionException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_aws_default_service_quota, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#GetAWSDefaultServiceQuota"
         operation.name = "GetAWSDefaultServiceQuota"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAWSDefaultServiceQuotaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAWSDefaultServiceQuotaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetAWSDefaultServiceQuotaRequest
+        operation.output = GetAWSDefaultServiceQuotaResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_association_for_service_quota_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#GetAssociationForServiceQuotaTemplate"
         operation.name = "GetAssociationForServiceQuotaTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAssociationForServiceQuotaTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAssociationForServiceQuotaTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaTemplateNotInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetAssociationForServiceQuotaTemplateRequest
+        operation.output = GetAssociationForServiceQuotaTemplateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSServiceAccessNotEnabledException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << ServiceException
+        operation.errors << ServiceQuotaTemplateNotInUseException
+        operation.errors << TemplatesNotAvailableInRegionException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_requested_service_quota_change, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#GetRequestedServiceQuotaChange"
         operation.name = "GetRequestedServiceQuotaChange"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRequestedServiceQuotaChangeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRequestedServiceQuotaChangeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetRequestedServiceQuotaChangeRequest
+        operation.output = GetRequestedServiceQuotaChangeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_service_quota, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#GetServiceQuota"
         operation.name = "GetServiceQuota"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceQuotaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceQuotaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetServiceQuotaRequest
+        operation.output = GetServiceQuotaResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_service_quota_increase_request_from_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#GetServiceQuotaIncreaseRequestFromTemplate"
         operation.name = "GetServiceQuotaIncreaseRequestFromTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceQuotaIncreaseRequestFromTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceQuotaIncreaseRequestFromTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetServiceQuotaIncreaseRequestFromTemplateRequest
+        operation.output = GetServiceQuotaIncreaseRequestFromTemplateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSServiceAccessNotEnabledException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TemplatesNotAvailableInRegionException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:list_aws_default_service_quotas, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#ListAWSDefaultServiceQuotas"
         operation.name = "ListAWSDefaultServiceQuotas"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAWSDefaultServiceQuotasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAWSDefaultServiceQuotasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListAWSDefaultServiceQuotasRequest
+        operation.output = ListAWSDefaultServiceQuotasResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InvalidPaginationTokenException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAWSDefaultServiceQuotas.new
       end)
       service.add_operation(:list_requested_service_quota_change_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#ListRequestedServiceQuotaChangeHistory"
         operation.name = "ListRequestedServiceQuotaChangeHistory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRequestedServiceQuotaChangeHistoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRequestedServiceQuotaChangeHistoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListRequestedServiceQuotaChangeHistoryRequest
+        operation.output = ListRequestedServiceQuotaChangeHistoryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InvalidPaginationTokenException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRequestedServiceQuotaChangeHistory.new
       end)
       service.add_operation(:list_requested_service_quota_change_history_by_quota, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#ListRequestedServiceQuotaChangeHistoryByQuota"
         operation.name = "ListRequestedServiceQuotaChangeHistoryByQuota"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRequestedServiceQuotaChangeHistoryByQuotaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRequestedServiceQuotaChangeHistoryByQuotaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListRequestedServiceQuotaChangeHistoryByQuotaRequest
+        operation.output = ListRequestedServiceQuotaChangeHistoryByQuotaResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InvalidPaginationTokenException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRequestedServiceQuotaChangeHistoryByQuota.new
       end)
       service.add_operation(:list_service_quota_increase_requests_in_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#ListServiceQuotaIncreaseRequestsInTemplate"
         operation.name = "ListServiceQuotaIncreaseRequestsInTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceQuotaIncreaseRequestsInTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceQuotaIncreaseRequestsInTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListServiceQuotaIncreaseRequestsInTemplateRequest
+        operation.output = ListServiceQuotaIncreaseRequestsInTemplateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSServiceAccessNotEnabledException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << ServiceException
+        operation.errors << TemplatesNotAvailableInRegionException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListServiceQuotaIncreaseRequestsInTemplate.new
       end)
       service.add_operation(:list_service_quotas, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#ListServiceQuotas"
         operation.name = "ListServiceQuotas"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceQuotasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceQuotasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListServiceQuotasRequest
+        operation.output = ListServiceQuotasResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InvalidPaginationTokenException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListServiceQuotas.new
       end)
       service.add_operation(:list_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#ListServices"
         operation.name = "ListServices"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServicesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServicesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListServicesRequest
+        operation.output = ListServicesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InvalidPaginationTokenException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListServices.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:put_service_quota_increase_request_into_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#PutServiceQuotaIncreaseRequestIntoTemplate"
         operation.name = "PutServiceQuotaIncreaseRequestIntoTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutServiceQuotaIncreaseRequestIntoTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutServiceQuotaIncreaseRequestIntoTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutServiceQuotaIncreaseRequestIntoTemplateRequest
+        operation.output = PutServiceQuotaIncreaseRequestIntoTemplateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSServiceAccessNotEnabledException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << NoSuchResourceException
+        operation.errors << QuotaExceededException
+        operation.errors << ServiceException
+        operation.errors << TemplatesNotAvailableInRegionException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:request_service_quota_increase, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#RequestServiceQuotaIncrease"
         operation.name = "RequestServiceQuotaIncrease"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestServiceQuotaIncreaseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestServiceQuotaIncreaseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = RequestServiceQuotaIncreaseRequest
+        operation.output = RequestServiceQuotaIncreaseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DependencyAccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InvalidResourceStateException
+        operation.errors << NoSuchResourceException
+        operation.errors << QuotaExceededException
+        operation.errors << ResourceAlreadyExistsException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagPolicyViolationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TagPolicyViolationException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicequotas#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IllegalArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchResourceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << NoSuchResourceException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
     end

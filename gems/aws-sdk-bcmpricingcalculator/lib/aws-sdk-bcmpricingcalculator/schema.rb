@@ -233,742 +233,742 @@ module Aws::BCMPricingCalculator
     WorkloadEstimateUsageMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bcmpricingcalculator#WorkloadEstimateUsageMaxResults", name: "WorkloadEstimateUsageMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 300}})
     WorkloadEstimateUsageQuantity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#WorkloadEstimateUsageQuantity", name: "WorkloadEstimateUsageQuantity")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddReservedInstanceAction.add_member(:reserved_instances_offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "reservedInstancesOfferingId"))
-    AddReservedInstanceAction.add_member(:instance_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedInstanceInstanceCount, location_name: "instanceCount"))
+    AddReservedInstanceAction.add_member(:reserved_instances_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "reservedInstancesOfferingId"))
+    AddReservedInstanceAction.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstanceInstanceCount, location_name: "instanceCount"))
     AddReservedInstanceAction.type = Types::AddReservedInstanceAction
-    AddSavingsPlanAction.add_member(:savings_plan_offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "savingsPlanOfferingId"))
-    AddSavingsPlanAction.add_member(:commitment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SavingsPlanCommitment, location_name: "commitment"))
+    AddSavingsPlanAction.add_member(:savings_plan_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "savingsPlanOfferingId"))
+    AddSavingsPlanAction.add_member(:commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlanCommitment, location_name: "commitment"))
     AddSavingsPlanAction.type = Types::AddSavingsPlanAction
-    BatchCreateBillScenarioCommitmentModificationEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationEntry)
-    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:commitment_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioCommitmentModificationAction, location_name: "commitmentAction", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioCommitmentModificationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioCommitmentModificationEntry)
+    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioCommitmentModificationEntry.add_member(:commitment_action, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioCommitmentModificationAction, location_name: "commitmentAction", traits: {"smithy.api#required" => {}}))
     BatchCreateBillScenarioCommitmentModificationEntry.type = Types::BatchCreateBillScenarioCommitmentModificationEntry
-    BatchCreateBillScenarioCommitmentModificationError.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key"))
-    BatchCreateBillScenarioCommitmentModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
-    BatchCreateBillScenarioCommitmentModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationErrorCode, location_name: "errorCode"))
+    BatchCreateBillScenarioCommitmentModificationError.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key"))
+    BatchCreateBillScenarioCommitmentModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchCreateBillScenarioCommitmentModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioCommitmentModificationErrorCode, location_name: "errorCode"))
     BatchCreateBillScenarioCommitmentModificationError.type = Types::BatchCreateBillScenarioCommitmentModificationError
-    BatchCreateBillScenarioCommitmentModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    BatchCreateBillScenarioCommitmentModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    BatchCreateBillScenarioCommitmentModificationErrorCode.add_member(:invalid_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ACCOUNT", traits: {"smithy.api#enumValue" => "INVALID_ACCOUNT"}))
-    BatchCreateBillScenarioCommitmentModificationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationError)
-    BatchCreateBillScenarioCommitmentModificationItem.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key"))
-    BatchCreateBillScenarioCommitmentModificationItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchCreateBillScenarioCommitmentModificationItem.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchCreateBillScenarioCommitmentModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BatchCreateBillScenarioCommitmentModificationItem.add_member(:commitment_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioCommitmentModificationAction, location_name: "commitmentAction"))
+    BatchCreateBillScenarioCommitmentModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    BatchCreateBillScenarioCommitmentModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    BatchCreateBillScenarioCommitmentModificationErrorCode.add_member(:invalid_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ACCOUNT", traits: {"smithy.api#enumValue" => "INVALID_ACCOUNT"}))
+    BatchCreateBillScenarioCommitmentModificationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioCommitmentModificationError)
+    BatchCreateBillScenarioCommitmentModificationItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key"))
+    BatchCreateBillScenarioCommitmentModificationItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchCreateBillScenarioCommitmentModificationItem.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchCreateBillScenarioCommitmentModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BatchCreateBillScenarioCommitmentModificationItem.add_member(:commitment_action, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioCommitmentModificationAction, location_name: "commitmentAction"))
     BatchCreateBillScenarioCommitmentModificationItem.type = Types::BatchCreateBillScenarioCommitmentModificationItem
-    BatchCreateBillScenarioCommitmentModificationItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationItem)
-    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:commitment_modifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationEntries, location_name: "commitmentModifications", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    BatchCreateBillScenarioCommitmentModificationItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioCommitmentModificationItem)
+    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:commitment_modifications, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioCommitmentModificationEntries, location_name: "commitmentModifications", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
     BatchCreateBillScenarioCommitmentModificationRequest.type = Types::BatchCreateBillScenarioCommitmentModificationRequest
-    BatchCreateBillScenarioCommitmentModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationItems, location_name: "items"))
-    BatchCreateBillScenarioCommitmentModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationErrors, location_name: "errors"))
+    BatchCreateBillScenarioCommitmentModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioCommitmentModificationItems, location_name: "items"))
+    BatchCreateBillScenarioCommitmentModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioCommitmentModificationErrors, location_name: "errors"))
     BatchCreateBillScenarioCommitmentModificationResponse.type = Types::BatchCreateBillScenarioCommitmentModificationResponse
-    BatchCreateBillScenarioUsageModificationEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationEntry)
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:amounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageAmounts, location_name: "amounts"))
-    BatchCreateBillScenarioUsageModificationEntry.add_member(:historical_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoricalUsageEntity, location_name: "historicalUsage"))
+    BatchCreateBillScenarioUsageModificationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioUsageModificationEntry)
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "availabilityZone"))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:amounts, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAmounts, location_name: "amounts"))
+    BatchCreateBillScenarioUsageModificationEntry.add_member(:historical_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalUsageEntity, location_name: "historicalUsage"))
     BatchCreateBillScenarioUsageModificationEntry.type = Types::BatchCreateBillScenarioUsageModificationEntry
-    BatchCreateBillScenarioUsageModificationError.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key"))
-    BatchCreateBillScenarioUsageModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
-    BatchCreateBillScenarioUsageModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationErrorCode, location_name: "errorCode"))
+    BatchCreateBillScenarioUsageModificationError.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key"))
+    BatchCreateBillScenarioUsageModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchCreateBillScenarioUsageModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioUsageModificationErrorCode, location_name: "errorCode"))
     BatchCreateBillScenarioUsageModificationError.type = Types::BatchCreateBillScenarioUsageModificationError
-    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
-    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
-    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    BatchCreateBillScenarioUsageModificationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationError)
-    BatchCreateBillScenarioUsageModificationItem.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:quantities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageQuantities, location_name: "quantities"))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoricalUsageEntity, location_name: "historicalUsage"))
-    BatchCreateBillScenarioUsageModificationItem.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key"))
+    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
+    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
+    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    BatchCreateBillScenarioUsageModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    BatchCreateBillScenarioUsageModificationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioUsageModificationError)
+    BatchCreateBillScenarioUsageModificationItem.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "availabilityZone"))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:quantities, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantities, location_name: "quantities"))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalUsageEntity, location_name: "historicalUsage"))
+    BatchCreateBillScenarioUsageModificationItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key"))
     BatchCreateBillScenarioUsageModificationItem.type = Types::BatchCreateBillScenarioUsageModificationItem
-    BatchCreateBillScenarioUsageModificationItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationItem)
-    BatchCreateBillScenarioUsageModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationRequest.add_member(:usage_modifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationEntries, location_name: "usageModifications", traits: {"smithy.api#required" => {}}))
-    BatchCreateBillScenarioUsageModificationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    BatchCreateBillScenarioUsageModificationItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioUsageModificationItem)
+    BatchCreateBillScenarioUsageModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationRequest.add_member(:usage_modifications, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioUsageModificationEntries, location_name: "usageModifications", traits: {"smithy.api#required" => {}}))
+    BatchCreateBillScenarioUsageModificationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
     BatchCreateBillScenarioUsageModificationRequest.type = Types::BatchCreateBillScenarioUsageModificationRequest
-    BatchCreateBillScenarioUsageModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationItems, location_name: "items"))
-    BatchCreateBillScenarioUsageModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationErrors, location_name: "errors"))
+    BatchCreateBillScenarioUsageModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioUsageModificationItems, location_name: "items"))
+    BatchCreateBillScenarioUsageModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateBillScenarioUsageModificationErrors, location_name: "errors"))
     BatchCreateBillScenarioUsageModificationResponse.type = Types::BatchCreateBillScenarioUsageModificationResponse
-    BatchCreateWorkloadEstimateUsageCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
-    BatchCreateWorkloadEstimateUsageCode.add_member(:not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
-    BatchCreateWorkloadEstimateUsageCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    BatchCreateWorkloadEstimateUsageCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    BatchCreateWorkloadEstimateUsageEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageEntry)
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageEntry.add_member(:historical_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoricalUsageEntity, location_name: "historicalUsage"))
+    BatchCreateWorkloadEstimateUsageCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
+    BatchCreateWorkloadEstimateUsageCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
+    BatchCreateWorkloadEstimateUsageCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    BatchCreateWorkloadEstimateUsageCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    BatchCreateWorkloadEstimateUsageEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateWorkloadEstimateUsageEntry)
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageEntry.add_member(:historical_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalUsageEntity, location_name: "historicalUsage"))
     BatchCreateWorkloadEstimateUsageEntry.type = Types::BatchCreateWorkloadEstimateUsageEntry
-    BatchCreateWorkloadEstimateUsageError.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key"))
-    BatchCreateWorkloadEstimateUsageError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageCode, location_name: "errorCode"))
-    BatchCreateWorkloadEstimateUsageError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchCreateWorkloadEstimateUsageError.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key"))
+    BatchCreateWorkloadEstimateUsageError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateWorkloadEstimateUsageCode, location_name: "errorCode"))
+    BatchCreateWorkloadEstimateUsageError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
     BatchCreateWorkloadEstimateUsageError.type = Types::BatchCreateWorkloadEstimateUsageError
-    BatchCreateWorkloadEstimateUsageErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageError)
-    BatchCreateWorkloadEstimateUsageItem.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:quantity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUsageQuantity, location_name: "quantity"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "cost"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currency"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateCostStatus, location_name: "status"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoricalUsageEntity, location_name: "historicalUsage"))
-    BatchCreateWorkloadEstimateUsageItem.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "key"))
+    BatchCreateWorkloadEstimateUsageErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateWorkloadEstimateUsageError)
+    BatchCreateWorkloadEstimateUsageItem.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUsageQuantity, location_name: "quantity"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "cost"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "currency"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateCostStatus, location_name: "status"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalUsageEntity, location_name: "historicalUsage"))
+    BatchCreateWorkloadEstimateUsageItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "key"))
     BatchCreateWorkloadEstimateUsageItem.type = Types::BatchCreateWorkloadEstimateUsageItem
-    BatchCreateWorkloadEstimateUsageItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageItem)
-    BatchCreateWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageRequest.add_member(:usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageEntries, location_name: "usage", traits: {"smithy.api#required" => {}}))
-    BatchCreateWorkloadEstimateUsageRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    BatchCreateWorkloadEstimateUsageItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateWorkloadEstimateUsageItem)
+    BatchCreateWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageRequest.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateWorkloadEstimateUsageEntries, location_name: "usage", traits: {"smithy.api#required" => {}}))
+    BatchCreateWorkloadEstimateUsageRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
     BatchCreateWorkloadEstimateUsageRequest.type = Types::BatchCreateWorkloadEstimateUsageRequest
-    BatchCreateWorkloadEstimateUsageResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageItems, location_name: "items"))
-    BatchCreateWorkloadEstimateUsageResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageErrors, location_name: "errors"))
+    BatchCreateWorkloadEstimateUsageResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateWorkloadEstimateUsageItems, location_name: "items"))
+    BatchCreateWorkloadEstimateUsageResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateWorkloadEstimateUsageErrors, location_name: "errors"))
     BatchCreateWorkloadEstimateUsageResponse.type = Types::BatchCreateWorkloadEstimateUsageResponse
-    BatchDeleteBillScenarioCommitmentModificationEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId)
-    BatchDeleteBillScenarioCommitmentModificationError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchDeleteBillScenarioCommitmentModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationErrorCode, location_name: "errorCode"))
-    BatchDeleteBillScenarioCommitmentModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchDeleteBillScenarioCommitmentModificationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId)
+    BatchDeleteBillScenarioCommitmentModificationError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchDeleteBillScenarioCommitmentModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioCommitmentModificationErrorCode, location_name: "errorCode"))
+    BatchDeleteBillScenarioCommitmentModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
     BatchDeleteBillScenarioCommitmentModificationError.type = Types::BatchDeleteBillScenarioCommitmentModificationError
-    BatchDeleteBillScenarioCommitmentModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
-    BatchDeleteBillScenarioCommitmentModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    BatchDeleteBillScenarioCommitmentModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    BatchDeleteBillScenarioCommitmentModificationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationError)
-    BatchDeleteBillScenarioCommitmentModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    BatchDeleteBillScenarioCommitmentModificationRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationEntries, location_name: "ids", traits: {"smithy.api#required" => {}}))
+    BatchDeleteBillScenarioCommitmentModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
+    BatchDeleteBillScenarioCommitmentModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    BatchDeleteBillScenarioCommitmentModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    BatchDeleteBillScenarioCommitmentModificationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioCommitmentModificationError)
+    BatchDeleteBillScenarioCommitmentModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    BatchDeleteBillScenarioCommitmentModificationRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioCommitmentModificationEntries, location_name: "ids", traits: {"smithy.api#required" => {}}))
     BatchDeleteBillScenarioCommitmentModificationRequest.type = Types::BatchDeleteBillScenarioCommitmentModificationRequest
-    BatchDeleteBillScenarioCommitmentModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationErrors, location_name: "errors"))
+    BatchDeleteBillScenarioCommitmentModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioCommitmentModificationErrors, location_name: "errors"))
     BatchDeleteBillScenarioCommitmentModificationResponse.type = Types::BatchDeleteBillScenarioCommitmentModificationResponse
-    BatchDeleteBillScenarioUsageModificationEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId)
-    BatchDeleteBillScenarioUsageModificationError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchDeleteBillScenarioUsageModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
-    BatchDeleteBillScenarioUsageModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationErrorCode, location_name: "errorCode"))
+    BatchDeleteBillScenarioUsageModificationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId)
+    BatchDeleteBillScenarioUsageModificationError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchDeleteBillScenarioUsageModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchDeleteBillScenarioUsageModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioUsageModificationErrorCode, location_name: "errorCode"))
     BatchDeleteBillScenarioUsageModificationError.type = Types::BatchDeleteBillScenarioUsageModificationError
-    BatchDeleteBillScenarioUsageModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
-    BatchDeleteBillScenarioUsageModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    BatchDeleteBillScenarioUsageModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    BatchDeleteBillScenarioUsageModificationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationError)
-    BatchDeleteBillScenarioUsageModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    BatchDeleteBillScenarioUsageModificationRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationEntries, location_name: "ids", traits: {"smithy.api#required" => {}}))
+    BatchDeleteBillScenarioUsageModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
+    BatchDeleteBillScenarioUsageModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    BatchDeleteBillScenarioUsageModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    BatchDeleteBillScenarioUsageModificationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioUsageModificationError)
+    BatchDeleteBillScenarioUsageModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    BatchDeleteBillScenarioUsageModificationRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioUsageModificationEntries, location_name: "ids", traits: {"smithy.api#required" => {}}))
     BatchDeleteBillScenarioUsageModificationRequest.type = Types::BatchDeleteBillScenarioUsageModificationRequest
-    BatchDeleteBillScenarioUsageModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationErrors, location_name: "errors"))
+    BatchDeleteBillScenarioUsageModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteBillScenarioUsageModificationErrors, location_name: "errors"))
     BatchDeleteBillScenarioUsageModificationResponse.type = Types::BatchDeleteBillScenarioUsageModificationResponse
-    BatchDeleteWorkloadEstimateUsageEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId)
-    BatchDeleteWorkloadEstimateUsageError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchDeleteWorkloadEstimateUsageError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
-    BatchDeleteWorkloadEstimateUsageError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUpdateUsageErrorCode, location_name: "errorCode"))
+    BatchDeleteWorkloadEstimateUsageEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId)
+    BatchDeleteWorkloadEstimateUsageError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchDeleteWorkloadEstimateUsageError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchDeleteWorkloadEstimateUsageError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUpdateUsageErrorCode, location_name: "errorCode"))
     BatchDeleteWorkloadEstimateUsageError.type = Types::BatchDeleteWorkloadEstimateUsageError
-    BatchDeleteWorkloadEstimateUsageErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteWorkloadEstimateUsageError)
-    BatchDeleteWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
-    BatchDeleteWorkloadEstimateUsageRequest.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteWorkloadEstimateUsageEntries, location_name: "ids", traits: {"smithy.api#required" => {}}))
+    BatchDeleteWorkloadEstimateUsageErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteWorkloadEstimateUsageError)
+    BatchDeleteWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
+    BatchDeleteWorkloadEstimateUsageRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteWorkloadEstimateUsageEntries, location_name: "ids", traits: {"smithy.api#required" => {}}))
     BatchDeleteWorkloadEstimateUsageRequest.type = Types::BatchDeleteWorkloadEstimateUsageRequest
-    BatchDeleteWorkloadEstimateUsageResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteWorkloadEstimateUsageErrors, location_name: "errors"))
+    BatchDeleteWorkloadEstimateUsageResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteWorkloadEstimateUsageErrors, location_name: "errors"))
     BatchDeleteWorkloadEstimateUsageResponse.type = Types::BatchDeleteWorkloadEstimateUsageResponse
-    BatchUpdateBillScenarioCommitmentModificationEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationEntry)
-    BatchUpdateBillScenarioCommitmentModificationEntry.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    BatchUpdateBillScenarioCommitmentModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
+    BatchUpdateBillScenarioCommitmentModificationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioCommitmentModificationEntry)
+    BatchUpdateBillScenarioCommitmentModificationEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    BatchUpdateBillScenarioCommitmentModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
     BatchUpdateBillScenarioCommitmentModificationEntry.type = Types::BatchUpdateBillScenarioCommitmentModificationEntry
-    BatchUpdateBillScenarioCommitmentModificationError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchUpdateBillScenarioCommitmentModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationErrorCode, location_name: "errorCode"))
-    BatchUpdateBillScenarioCommitmentModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchUpdateBillScenarioCommitmentModificationError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchUpdateBillScenarioCommitmentModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioCommitmentModificationErrorCode, location_name: "errorCode"))
+    BatchUpdateBillScenarioCommitmentModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
     BatchUpdateBillScenarioCommitmentModificationError.type = Types::BatchUpdateBillScenarioCommitmentModificationError
-    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
-    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
-    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    BatchUpdateBillScenarioCommitmentModificationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationError)
-    BatchUpdateBillScenarioCommitmentModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    BatchUpdateBillScenarioCommitmentModificationRequest.add_member(:commitment_modifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationEntries, location_name: "commitmentModifications", traits: {"smithy.api#required" => {}}))
+    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
+    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
+    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    BatchUpdateBillScenarioCommitmentModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    BatchUpdateBillScenarioCommitmentModificationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioCommitmentModificationError)
+    BatchUpdateBillScenarioCommitmentModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    BatchUpdateBillScenarioCommitmentModificationRequest.add_member(:commitment_modifications, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioCommitmentModificationEntries, location_name: "commitmentModifications", traits: {"smithy.api#required" => {}}))
     BatchUpdateBillScenarioCommitmentModificationRequest.type = Types::BatchUpdateBillScenarioCommitmentModificationRequest
-    BatchUpdateBillScenarioCommitmentModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioCommitmentModificationItems, location_name: "items"))
-    BatchUpdateBillScenarioCommitmentModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationErrors, location_name: "errors"))
+    BatchUpdateBillScenarioCommitmentModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioCommitmentModificationItems, location_name: "items"))
+    BatchUpdateBillScenarioCommitmentModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioCommitmentModificationErrors, location_name: "errors"))
     BatchUpdateBillScenarioCommitmentModificationResponse.type = Types::BatchUpdateBillScenarioCommitmentModificationResponse
-    BatchUpdateBillScenarioUsageModificationEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationEntry)
-    BatchUpdateBillScenarioUsageModificationEntry.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    BatchUpdateBillScenarioUsageModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchUpdateBillScenarioUsageModificationEntry.add_member(:amounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageAmounts, location_name: "amounts"))
+    BatchUpdateBillScenarioUsageModificationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioUsageModificationEntry)
+    BatchUpdateBillScenarioUsageModificationEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    BatchUpdateBillScenarioUsageModificationEntry.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchUpdateBillScenarioUsageModificationEntry.add_member(:amounts, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAmounts, location_name: "amounts"))
     BatchUpdateBillScenarioUsageModificationEntry.type = Types::BatchUpdateBillScenarioUsageModificationEntry
-    BatchUpdateBillScenarioUsageModificationError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchUpdateBillScenarioUsageModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
-    BatchUpdateBillScenarioUsageModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationErrorCode, location_name: "errorCode"))
+    BatchUpdateBillScenarioUsageModificationError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchUpdateBillScenarioUsageModificationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchUpdateBillScenarioUsageModificationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioUsageModificationErrorCode, location_name: "errorCode"))
     BatchUpdateBillScenarioUsageModificationError.type = Types::BatchUpdateBillScenarioUsageModificationError
-    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
-    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
-    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    BatchUpdateBillScenarioUsageModificationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationError)
-    BatchUpdateBillScenarioUsageModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    BatchUpdateBillScenarioUsageModificationRequest.add_member(:usage_modifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationEntries, location_name: "usageModifications", traits: {"smithy.api#required" => {}}))
+    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
+    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
+    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    BatchUpdateBillScenarioUsageModificationErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    BatchUpdateBillScenarioUsageModificationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioUsageModificationError)
+    BatchUpdateBillScenarioUsageModificationRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    BatchUpdateBillScenarioUsageModificationRequest.add_member(:usage_modifications, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioUsageModificationEntries, location_name: "usageModifications", traits: {"smithy.api#required" => {}}))
     BatchUpdateBillScenarioUsageModificationRequest.type = Types::BatchUpdateBillScenarioUsageModificationRequest
-    BatchUpdateBillScenarioUsageModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioUsageModificationItems, location_name: "items"))
-    BatchUpdateBillScenarioUsageModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationErrors, location_name: "errors"))
+    BatchUpdateBillScenarioUsageModificationResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioUsageModificationItems, location_name: "items"))
+    BatchUpdateBillScenarioUsageModificationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateBillScenarioUsageModificationErrors, location_name: "errors"))
     BatchUpdateBillScenarioUsageModificationResponse.type = Types::BatchUpdateBillScenarioUsageModificationResponse
-    BatchUpdateWorkloadEstimateUsageEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateWorkloadEstimateUsageEntry)
-    BatchUpdateWorkloadEstimateUsageEntry.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    BatchUpdateWorkloadEstimateUsageEntry.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BatchUpdateWorkloadEstimateUsageEntry.add_member(:amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
+    BatchUpdateWorkloadEstimateUsageEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateWorkloadEstimateUsageEntry)
+    BatchUpdateWorkloadEstimateUsageEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    BatchUpdateWorkloadEstimateUsageEntry.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BatchUpdateWorkloadEstimateUsageEntry.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
     BatchUpdateWorkloadEstimateUsageEntry.type = Types::BatchUpdateWorkloadEstimateUsageEntry
-    BatchUpdateWorkloadEstimateUsageError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BatchUpdateWorkloadEstimateUsageError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
-    BatchUpdateWorkloadEstimateUsageError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUpdateUsageErrorCode, location_name: "errorCode"))
+    BatchUpdateWorkloadEstimateUsageError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BatchUpdateWorkloadEstimateUsageError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "errorMessage"))
+    BatchUpdateWorkloadEstimateUsageError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUpdateUsageErrorCode, location_name: "errorCode"))
     BatchUpdateWorkloadEstimateUsageError.type = Types::BatchUpdateWorkloadEstimateUsageError
-    BatchUpdateWorkloadEstimateUsageErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateWorkloadEstimateUsageError)
-    BatchUpdateWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
-    BatchUpdateWorkloadEstimateUsageRequest.add_member(:usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateWorkloadEstimateUsageEntries, location_name: "usage", traits: {"smithy.api#required" => {}}))
+    BatchUpdateWorkloadEstimateUsageErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateWorkloadEstimateUsageError)
+    BatchUpdateWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
+    BatchUpdateWorkloadEstimateUsageRequest.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateWorkloadEstimateUsageEntries, location_name: "usage", traits: {"smithy.api#required" => {}}))
     BatchUpdateWorkloadEstimateUsageRequest.type = Types::BatchUpdateWorkloadEstimateUsageRequest
-    BatchUpdateWorkloadEstimateUsageResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUsageItems, location_name: "items"))
-    BatchUpdateWorkloadEstimateUsageResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateWorkloadEstimateUsageErrors, location_name: "errors"))
+    BatchUpdateWorkloadEstimateUsageResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUsageItems, location_name: "items"))
+    BatchUpdateWorkloadEstimateUsageResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateWorkloadEstimateUsageErrors, location_name: "errors"))
     BatchUpdateWorkloadEstimateUsageResponse.type = Types::BatchUpdateWorkloadEstimateUsageResponse
-    BillEstimateCommitmentSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateCommitmentSummary)
-    BillEstimateCommitmentSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BillEstimateCommitmentSummary.add_member(:purchase_agreement_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PurchaseAgreementType, location_name: "purchaseAgreementType"))
-    BillEstimateCommitmentSummary.add_member(:offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "offeringId"))
-    BillEstimateCommitmentSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BillEstimateCommitmentSummary.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "region"))
-    BillEstimateCommitmentSummary.add_member(:term_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "termLength"))
-    BillEstimateCommitmentSummary.add_member(:payment_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "paymentOption"))
-    BillEstimateCommitmentSummary.add_member(:upfront_payment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostAmount, location_name: "upfrontPayment"))
-    BillEstimateCommitmentSummary.add_member(:monthly_payment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostAmount, location_name: "monthlyPayment"))
+    BillEstimateCommitmentSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCommitmentSummary)
+    BillEstimateCommitmentSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BillEstimateCommitmentSummary.add_member(:purchase_agreement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PurchaseAgreementType, location_name: "purchaseAgreementType"))
+    BillEstimateCommitmentSummary.add_member(:offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "offeringId"))
+    BillEstimateCommitmentSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BillEstimateCommitmentSummary.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "region"))
+    BillEstimateCommitmentSummary.add_member(:term_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "termLength"))
+    BillEstimateCommitmentSummary.add_member(:payment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "paymentOption"))
+    BillEstimateCommitmentSummary.add_member(:upfront_payment, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAmount, location_name: "upfrontPayment"))
+    BillEstimateCommitmentSummary.add_member(:monthly_payment, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAmount, location_name: "monthlyPayment"))
     BillEstimateCommitmentSummary.type = Types::BillEstimateCommitmentSummary
-    BillEstimateCostSummary.add_member(:total_cost_difference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostDifference, location_name: "totalCostDifference"))
-    BillEstimateCostSummary.add_member(:service_cost_differences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCostDifferenceMap, location_name: "serviceCostDifferences"))
+    BillEstimateCostSummary.add_member(:total_cost_difference, ::Smithy::Schema::Shapes::MemberShape.new(target: CostDifference, location_name: "totalCostDifference"))
+    BillEstimateCostSummary.add_member(:service_cost_differences, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCostDifferenceMap, location_name: "serviceCostDifferences"))
     BillEstimateCostSummary.type = Types::BillEstimateCostSummary
-    BillEstimateInputCommitmentModificationSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateInputCommitmentModificationSummary)
-    BillEstimateInputCommitmentModificationSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BillEstimateInputCommitmentModificationSummary.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BillEstimateInputCommitmentModificationSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BillEstimateInputCommitmentModificationSummary.add_member(:commitment_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioCommitmentModificationAction, location_name: "commitmentAction"))
+    BillEstimateInputCommitmentModificationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateInputCommitmentModificationSummary)
+    BillEstimateInputCommitmentModificationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BillEstimateInputCommitmentModificationSummary.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BillEstimateInputCommitmentModificationSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BillEstimateInputCommitmentModificationSummary.add_member(:commitment_action, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioCommitmentModificationAction, location_name: "commitmentAction"))
     BillEstimateInputCommitmentModificationSummary.type = Types::BillEstimateInputCommitmentModificationSummary
-    BillEstimateInputUsageModificationSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateInputUsageModificationSummary)
-    BillEstimateInputUsageModificationSummary.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    BillEstimateInputUsageModificationSummary.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    BillEstimateInputUsageModificationSummary.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    BillEstimateInputUsageModificationSummary.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
-    BillEstimateInputUsageModificationSummary.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
-    BillEstimateInputUsageModificationSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BillEstimateInputUsageModificationSummary.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BillEstimateInputUsageModificationSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BillEstimateInputUsageModificationSummary.add_member(:quantities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageQuantities, location_name: "quantities"))
-    BillEstimateInputUsageModificationSummary.add_member(:historical_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoricalUsageEntity, location_name: "historicalUsage"))
+    BillEstimateInputUsageModificationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateInputUsageModificationSummary)
+    BillEstimateInputUsageModificationSummary.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    BillEstimateInputUsageModificationSummary.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    BillEstimateInputUsageModificationSummary.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    BillEstimateInputUsageModificationSummary.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
+    BillEstimateInputUsageModificationSummary.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "availabilityZone"))
+    BillEstimateInputUsageModificationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BillEstimateInputUsageModificationSummary.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BillEstimateInputUsageModificationSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BillEstimateInputUsageModificationSummary.add_member(:quantities, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantities, location_name: "quantities"))
+    BillEstimateInputUsageModificationSummary.add_member(:historical_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalUsageEntity, location_name: "historicalUsage"))
     BillEstimateInputUsageModificationSummary.type = Types::BillEstimateInputUsageModificationSummary
-    BillEstimateLineItemSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateLineItemSummary)
-    BillEstimateLineItemSummary.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    BillEstimateLineItemSummary.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    BillEstimateLineItemSummary.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    BillEstimateLineItemSummary.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
-    BillEstimateLineItemSummary.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
-    BillEstimateLineItemSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BillEstimateLineItemSummary.add_member(:line_item_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "lineItemId"))
-    BillEstimateLineItemSummary.add_member(:line_item_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "lineItemType"))
-    BillEstimateLineItemSummary.add_member(:payer_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "payerAccountId"))
-    BillEstimateLineItemSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BillEstimateLineItemSummary.add_member(:estimated_usage_quantity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageQuantityResult, location_name: "estimatedUsageQuantity"))
-    BillEstimateLineItemSummary.add_member(:estimated_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostAmount, location_name: "estimatedCost"))
-    BillEstimateLineItemSummary.add_member(:historical_usage_quantity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageQuantityResult, location_name: "historicalUsageQuantity"))
-    BillEstimateLineItemSummary.add_member(:historical_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostAmount, location_name: "historicalCost"))
-    BillEstimateLineItemSummary.add_member(:savings_plan_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SavingsPlanArns, location_name: "savingsPlanArns"))
+    BillEstimateLineItemSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateLineItemSummary)
+    BillEstimateLineItemSummary.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    BillEstimateLineItemSummary.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    BillEstimateLineItemSummary.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    BillEstimateLineItemSummary.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
+    BillEstimateLineItemSummary.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "availabilityZone"))
+    BillEstimateLineItemSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BillEstimateLineItemSummary.add_member(:line_item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "lineItemId"))
+    BillEstimateLineItemSummary.add_member(:line_item_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "lineItemType"))
+    BillEstimateLineItemSummary.add_member(:payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "payerAccountId"))
+    BillEstimateLineItemSummary.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BillEstimateLineItemSummary.add_member(:estimated_usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantityResult, location_name: "estimatedUsageQuantity"))
+    BillEstimateLineItemSummary.add_member(:estimated_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAmount, location_name: "estimatedCost"))
+    BillEstimateLineItemSummary.add_member(:historical_usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantityResult, location_name: "historicalUsageQuantity"))
+    BillEstimateLineItemSummary.add_member(:historical_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAmount, location_name: "historicalCost"))
+    BillEstimateLineItemSummary.add_member(:savings_plan_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlanArns, location_name: "savingsPlanArns"))
     BillEstimateLineItemSummary.type = Types::BillEstimateLineItemSummary
-    BillEstimateStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    BillEstimateStatus.add_member(:complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
-    BillEstimateStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    BillEstimateSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateSummary)
-    BillEstimateSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
-    BillEstimateSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateName, location_name: "name"))
-    BillEstimateSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateStatus, location_name: "status"))
-    BillEstimateSummary.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    BillEstimateSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    BillEstimateSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    BillEstimateStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    BillEstimateStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
+    BillEstimateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    BillEstimateSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateSummary)
+    BillEstimateSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
+    BillEstimateSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateName, location_name: "name"))
+    BillEstimateSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateStatus, location_name: "status"))
+    BillEstimateSummary.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    BillEstimateSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    BillEstimateSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
     BillEstimateSummary.type = Types::BillEstimateSummary
-    BillInterval.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "start"))
-    BillInterval.add_member(:end, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "end"))
+    BillInterval.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "start"))
+    BillInterval.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "end"))
     BillInterval.type = Types::BillInterval
-    BillScenarioCommitmentModificationAction.add_member(:add_reserved_instance_action, Types::BillScenarioCommitmentModificationAction::AddReservedInstanceAction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddReservedInstanceAction, location_name: "addReservedInstanceAction"))
-    BillScenarioCommitmentModificationAction.add_member(:add_savings_plan_action, Types::BillScenarioCommitmentModificationAction::AddSavingsPlanAction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddSavingsPlanAction, location_name: "addSavingsPlanAction"))
-    BillScenarioCommitmentModificationAction.add_member(:negate_reserved_instance_action, Types::BillScenarioCommitmentModificationAction::NegateReservedInstanceAction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NegateReservedInstanceAction, location_name: "negateReservedInstanceAction"))
-    BillScenarioCommitmentModificationAction.add_member(:negate_savings_plan_action, Types::BillScenarioCommitmentModificationAction::NegateSavingsPlanAction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NegateSavingsPlanAction, location_name: "negateSavingsPlanAction"))
-    BillScenarioCommitmentModificationAction.add_member(:unknown, Types::BillScenarioCommitmentModificationAction::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    BillScenarioCommitmentModificationAction.add_member(:add_reserved_instance_action, Types::BillScenarioCommitmentModificationAction::AddReservedInstanceAction, ::Smithy::Schema::Shapes::MemberShape.new(target: AddReservedInstanceAction, location_name: "addReservedInstanceAction"))
+    BillScenarioCommitmentModificationAction.add_member(:add_savings_plan_action, Types::BillScenarioCommitmentModificationAction::AddSavingsPlanAction, ::Smithy::Schema::Shapes::MemberShape.new(target: AddSavingsPlanAction, location_name: "addSavingsPlanAction"))
+    BillScenarioCommitmentModificationAction.add_member(:negate_reserved_instance_action, Types::BillScenarioCommitmentModificationAction::NegateReservedInstanceAction, ::Smithy::Schema::Shapes::MemberShape.new(target: NegateReservedInstanceAction, location_name: "negateReservedInstanceAction"))
+    BillScenarioCommitmentModificationAction.add_member(:negate_savings_plan_action, Types::BillScenarioCommitmentModificationAction::NegateSavingsPlanAction, ::Smithy::Schema::Shapes::MemberShape.new(target: NegateSavingsPlanAction, location_name: "negateSavingsPlanAction"))
+    BillScenarioCommitmentModificationAction.add_member(:unknown, Types::BillScenarioCommitmentModificationAction::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     BillScenarioCommitmentModificationAction.type = Types::BillScenarioCommitmentModificationAction
-    BillScenarioCommitmentModificationItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BillScenarioCommitmentModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BillScenarioCommitmentModificationItem.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BillScenarioCommitmentModificationItem.add_member(:commitment_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioCommitmentModificationAction, location_name: "commitmentAction"))
+    BillScenarioCommitmentModificationItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BillScenarioCommitmentModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BillScenarioCommitmentModificationItem.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BillScenarioCommitmentModificationItem.add_member(:commitment_action, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioCommitmentModificationAction, location_name: "commitmentAction"))
     BillScenarioCommitmentModificationItem.type = Types::BillScenarioCommitmentModificationItem
-    BillScenarioCommitmentModificationItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioCommitmentModificationItem)
-    BillScenarioStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
-    BillScenarioStatus.add_member(:locked, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCKED", traits: {"smithy.api#enumValue" => "LOCKED"}))
-    BillScenarioStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    BillScenarioStatus.add_member(:stale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STALE", traits: {"smithy.api#enumValue" => "STALE"}))
-    BillScenarioSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioSummary)
-    BillScenarioSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
-    BillScenarioSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioName, location_name: "name"))
-    BillScenarioSummary.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    BillScenarioSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioStatus, location_name: "status"))
-    BillScenarioSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    BillScenarioSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    BillScenarioSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    BillScenarioCommitmentModificationItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioCommitmentModificationItem)
+    BillScenarioStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
+    BillScenarioStatus.add_member(:locked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCKED", traits: {"smithy.api#enumValue" => "LOCKED"}))
+    BillScenarioStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    BillScenarioStatus.add_member(:stale, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STALE", traits: {"smithy.api#enumValue" => "STALE"}))
+    BillScenarioSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioSummary)
+    BillScenarioSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
+    BillScenarioSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, location_name: "name"))
+    BillScenarioSummary.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    BillScenarioSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioStatus, location_name: "status"))
+    BillScenarioSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    BillScenarioSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    BillScenarioSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     BillScenarioSummary.type = Types::BillScenarioSummary
-    BillScenarioUsageModificationItem.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    BillScenarioUsageModificationItem.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    BillScenarioUsageModificationItem.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    BillScenarioUsageModificationItem.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
-    BillScenarioUsageModificationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
-    BillScenarioUsageModificationItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    BillScenarioUsageModificationItem.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    BillScenarioUsageModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    BillScenarioUsageModificationItem.add_member(:quantities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageQuantities, location_name: "quantities"))
-    BillScenarioUsageModificationItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoricalUsageEntity, location_name: "historicalUsage"))
+    BillScenarioUsageModificationItem.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    BillScenarioUsageModificationItem.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    BillScenarioUsageModificationItem.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    BillScenarioUsageModificationItem.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
+    BillScenarioUsageModificationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "availabilityZone"))
+    BillScenarioUsageModificationItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    BillScenarioUsageModificationItem.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    BillScenarioUsageModificationItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    BillScenarioUsageModificationItem.add_member(:quantities, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantities, location_name: "quantities"))
+    BillScenarioUsageModificationItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalUsageEntity, location_name: "historicalUsage"))
     BillScenarioUsageModificationItem.type = Types::BillScenarioUsageModificationItem
-    BillScenarioUsageModificationItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioUsageModificationItem)
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    BillScenarioUsageModificationItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioUsageModificationItem)
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CostAmount.add_member(:amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
-    CostAmount.add_member(:currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currency"))
+    CostAmount.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
+    CostAmount.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "currency"))
     CostAmount.type = Types::CostAmount
-    CostDifference.add_member(:historical_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostAmount, location_name: "historicalCost"))
-    CostDifference.add_member(:estimated_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostAmount, location_name: "estimatedCost"))
+    CostDifference.add_member(:historical_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAmount, location_name: "historicalCost"))
+    CostDifference.add_member(:estimated_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAmount, location_name: "estimatedCost"))
     CostDifference.type = Types::CostDifference
-    CreateBillEstimateRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
-    CreateBillEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateBillEstimateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
-    CreateBillEstimateRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#notProperty" => {}}))
+    CreateBillEstimateRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
+    CreateBillEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateBillEstimateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    CreateBillEstimateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#notProperty" => {}}))
     CreateBillEstimateRequest.type = Types::CreateBillEstimateRequest
-    CreateBillEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
-    CreateBillEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateName, location_name: "name"))
-    CreateBillEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateStatus, location_name: "status"))
-    CreateBillEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
-    CreateBillEstimateResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    CreateBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateCostSummary, location_name: "costSummary"))
-    CreateBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    CreateBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    CreateBillEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
+    CreateBillEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateName, location_name: "name"))
+    CreateBillEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateStatus, location_name: "status"))
+    CreateBillEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    CreateBillEstimateResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    CreateBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCostSummary, location_name: "costSummary"))
+    CreateBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    CreateBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
     CreateBillEstimateResponse.type = Types::CreateBillEstimateResponse
-    CreateBillScenarioRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateBillScenarioRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
-    CreateBillScenarioRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#notProperty" => {}}))
+    CreateBillScenarioRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateBillScenarioRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    CreateBillScenarioRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#notProperty" => {}}))
     CreateBillScenarioRequest.type = Types::CreateBillScenarioRequest
-    CreateBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
-    CreateBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioName, location_name: "name"))
-    CreateBillScenarioResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    CreateBillScenarioResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioStatus, location_name: "status"))
-    CreateBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    CreateBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    CreateBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    CreateBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
+    CreateBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, location_name: "name"))
+    CreateBillScenarioResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    CreateBillScenarioResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioStatus, location_name: "status"))
+    CreateBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    CreateBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    CreateBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     CreateBillScenarioResponse.type = Types::CreateBillScenarioResponse
-    CreateWorkloadEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateWorkloadEstimateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
-    CreateWorkloadEstimateRequest.add_member(:rate_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateRateType, location_name: "rateType", traits: {"smithy.api#notProperty" => {}}))
-    CreateWorkloadEstimateRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#notProperty" => {}}))
+    CreateWorkloadEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateWorkloadEstimateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    CreateWorkloadEstimateRequest.add_member(:rate_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateRateType, location_name: "rateType", traits: {"smithy.api#notProperty" => {}}))
+    CreateWorkloadEstimateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#notProperty" => {}}))
     CreateWorkloadEstimateRequest.type = Types::CreateWorkloadEstimateRequest
-    CreateWorkloadEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
-    CreateWorkloadEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateName, location_name: "name"))
-    CreateWorkloadEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    CreateWorkloadEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    CreateWorkloadEstimateResponse.add_member(:rate_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateRateType, location_name: "rateType"))
-    CreateWorkloadEstimateResponse.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
-    CreateWorkloadEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateStatus, location_name: "status"))
-    CreateWorkloadEstimateResponse.add_member(:total_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
-    CreateWorkloadEstimateResponse.add_member(:cost_currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "costCurrency"))
-    CreateWorkloadEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    CreateWorkloadEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
+    CreateWorkloadEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateName, location_name: "name"))
+    CreateWorkloadEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    CreateWorkloadEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    CreateWorkloadEstimateResponse.add_member(:rate_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateRateType, location_name: "rateType"))
+    CreateWorkloadEstimateResponse.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
+    CreateWorkloadEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateStatus, location_name: "status"))
+    CreateWorkloadEstimateResponse.add_member(:total_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
+    CreateWorkloadEstimateResponse.add_member(:cost_currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "costCurrency"))
+    CreateWorkloadEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     CreateWorkloadEstimateResponse.type = Types::CreateWorkloadEstimateResponse
-    CurrencyCode.add_member(:usd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USD", traits: {"smithy.api#enumValue" => "USD"}))
-    DataUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    CurrencyCode.add_member(:usd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USD", traits: {"smithy.api#enumValue" => "USD"}))
+    DataUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     DataUnavailableException.type = Types::DataUnavailableException
-    DeleteBillEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
+    DeleteBillEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
     DeleteBillEstimateRequest.type = Types::DeleteBillEstimateRequest
     DeleteBillEstimateResponse.type = Types::DeleteBillEstimateResponse
-    DeleteBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
+    DeleteBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
     DeleteBillScenarioRequest.type = Types::DeleteBillScenarioRequest
     DeleteBillScenarioResponse.type = Types::DeleteBillScenarioResponse
-    DeleteWorkloadEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
+    DeleteWorkloadEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
     DeleteWorkloadEstimateRequest.type = Types::DeleteWorkloadEstimateRequest
     DeleteWorkloadEstimateResponse.type = Types::DeleteWorkloadEstimateResponse
-    Expression.add_member(:and, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionList, location_name: "and"))
-    Expression.add_member(:or, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionList, location_name: "or"))
-    Expression.add_member(:not, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "not"))
-    Expression.add_member(:cost_categories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionFilter, location_name: "costCategories"))
-    Expression.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionFilter, location_name: "dimensions"))
-    Expression.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionFilter, location_name: "tags"))
+    Expression.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionList, location_name: "and"))
+    Expression.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionList, location_name: "or"))
+    Expression.add_member(:not, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, location_name: "not"))
+    Expression.add_member(:cost_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionFilter, location_name: "costCategories"))
+    Expression.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionFilter, location_name: "dimensions"))
+    Expression.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionFilter, location_name: "tags"))
     Expression.type = Types::Expression
-    ExpressionFilter.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "key"))
-    ExpressionFilter.add_member(:match_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "matchOptions"))
-    ExpressionFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "values"))
+    ExpressionFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "key"))
+    ExpressionFilter.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "matchOptions"))
+    ExpressionFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "values"))
     ExpressionFilter.type = Types::ExpressionFilter
-    ExpressionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression)
-    FilterTimestamp.add_member(:after_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "afterTimestamp"))
-    FilterTimestamp.add_member(:before_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "beforeTimestamp"))
+    ExpressionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Expression)
+    FilterTimestamp.add_member(:after_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "afterTimestamp"))
+    FilterTimestamp.add_member(:before_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "beforeTimestamp"))
     FilterTimestamp.type = Types::FilterTimestamp
-    GetBillEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
+    GetBillEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
     GetBillEstimateRequest.type = Types::GetBillEstimateRequest
-    GetBillEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
-    GetBillEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateName, location_name: "name"))
-    GetBillEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateStatus, location_name: "status"))
-    GetBillEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
-    GetBillEstimateResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    GetBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateCostSummary, location_name: "costSummary"))
-    GetBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    GetBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    GetBillEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
+    GetBillEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateName, location_name: "name"))
+    GetBillEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateStatus, location_name: "status"))
+    GetBillEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    GetBillEstimateResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    GetBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCostSummary, location_name: "costSummary"))
+    GetBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    GetBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
     GetBillEstimateResponse.type = Types::GetBillEstimateResponse
-    GetBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
+    GetBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
     GetBillScenarioRequest.type = Types::GetBillScenarioRequest
-    GetBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
-    GetBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioName, location_name: "name"))
-    GetBillScenarioResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    GetBillScenarioResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioStatus, location_name: "status"))
-    GetBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    GetBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    GetBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    GetBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
+    GetBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, location_name: "name"))
+    GetBillScenarioResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    GetBillScenarioResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioStatus, location_name: "status"))
+    GetBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    GetBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    GetBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     GetBillScenarioResponse.type = Types::GetBillScenarioResponse
     GetPreferencesRequest.type = Types::GetPreferencesRequest
-    GetPreferencesResponse.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "managementAccountRateTypeSelections"))
-    GetPreferencesResponse.add_member(:member_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "memberAccountRateTypeSelections"))
-    GetPreferencesResponse.add_member(:standalone_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
+    GetPreferencesResponse.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "managementAccountRateTypeSelections"))
+    GetPreferencesResponse.add_member(:member_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "memberAccountRateTypeSelections"))
+    GetPreferencesResponse.add_member(:standalone_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
     GetPreferencesResponse.type = Types::GetPreferencesResponse
-    GetWorkloadEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
+    GetWorkloadEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
     GetWorkloadEstimateRequest.type = Types::GetWorkloadEstimateRequest
-    GetWorkloadEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
-    GetWorkloadEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateName, location_name: "name"))
-    GetWorkloadEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    GetWorkloadEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    GetWorkloadEstimateResponse.add_member(:rate_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateRateType, location_name: "rateType"))
-    GetWorkloadEstimateResponse.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
-    GetWorkloadEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateStatus, location_name: "status"))
-    GetWorkloadEstimateResponse.add_member(:total_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
-    GetWorkloadEstimateResponse.add_member(:cost_currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "costCurrency"))
-    GetWorkloadEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    GetWorkloadEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
+    GetWorkloadEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateName, location_name: "name"))
+    GetWorkloadEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    GetWorkloadEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    GetWorkloadEstimateResponse.add_member(:rate_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateRateType, location_name: "rateType"))
+    GetWorkloadEstimateResponse.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
+    GetWorkloadEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateStatus, location_name: "status"))
+    GetWorkloadEstimateResponse.add_member(:total_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
+    GetWorkloadEstimateResponse.add_member(:cost_currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "costCurrency"))
+    GetWorkloadEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     GetWorkloadEstimateResponse.type = Types::GetWorkloadEstimateResponse
-    HistoricalUsageEntity.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    HistoricalUsageEntity.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    HistoricalUsageEntity.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    HistoricalUsageEntity.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
-    HistoricalUsageEntity.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
-    HistoricalUsageEntity.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval", traits: {"smithy.api#required" => {}}))
-    HistoricalUsageEntity.add_member(:filter_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "filterExpression", traits: {"smithy.api#required" => {}}))
+    HistoricalUsageEntity.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    HistoricalUsageEntity.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    HistoricalUsageEntity.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    HistoricalUsageEntity.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
+    HistoricalUsageEntity.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId", traits: {"smithy.api#required" => {}}))
+    HistoricalUsageEntity.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval", traits: {"smithy.api#required" => {}}))
+    HistoricalUsageEntity.add_member(:filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, location_name: "filterExpression", traits: {"smithy.api#required" => {}}))
     HistoricalUsageEntity.type = Types::HistoricalUsageEntity
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    ListBillEstimateCommitmentsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
-    ListBillEstimateCommitmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillEstimateCommitmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillEstimateCommitmentsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
+    ListBillEstimateCommitmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateCommitmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillEstimateCommitmentsRequest.type = Types::ListBillEstimateCommitmentsRequest
-    ListBillEstimateCommitmentsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateCommitmentSummaries, location_name: "items"))
-    ListBillEstimateCommitmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateCommitmentsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCommitmentSummaries, location_name: "items"))
+    ListBillEstimateCommitmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillEstimateCommitmentsResponse.type = Types::ListBillEstimateCommitmentsResponse
-    ListBillEstimateInputCommitmentModificationsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
-    ListBillEstimateInputCommitmentModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillEstimateInputCommitmentModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillEstimateInputCommitmentModificationsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
+    ListBillEstimateInputCommitmentModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateInputCommitmentModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillEstimateInputCommitmentModificationsRequest.type = Types::ListBillEstimateInputCommitmentModificationsRequest
-    ListBillEstimateInputCommitmentModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateInputCommitmentModificationSummaries, location_name: "items"))
-    ListBillEstimateInputCommitmentModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateInputCommitmentModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateInputCommitmentModificationSummaries, location_name: "items"))
+    ListBillEstimateInputCommitmentModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillEstimateInputCommitmentModificationsResponse.type = Types::ListBillEstimateInputCommitmentModificationsResponse
-    ListBillEstimateInputUsageModificationsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
-    ListBillEstimateInputUsageModificationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageFilters, location_name: "filters"))
-    ListBillEstimateInputUsageModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillEstimateInputUsageModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillEstimateInputUsageModificationsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
+    ListBillEstimateInputUsageModificationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListUsageFilters, location_name: "filters"))
+    ListBillEstimateInputUsageModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateInputUsageModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillEstimateInputUsageModificationsRequest.type = Types::ListBillEstimateInputUsageModificationsRequest
-    ListBillEstimateInputUsageModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateInputUsageModificationSummaries, location_name: "items"))
-    ListBillEstimateInputUsageModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateInputUsageModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateInputUsageModificationSummaries, location_name: "items"))
+    ListBillEstimateInputUsageModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillEstimateInputUsageModificationsResponse.type = Types::ListBillEstimateInputUsageModificationsResponse
-    ListBillEstimateLineItemsFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateLineItemsFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ListBillEstimateLineItemsFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateLineItemsFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
-    ListBillEstimateLineItemsFilter.add_member(:match_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchOption, location_name: "matchOption"))
+    ListBillEstimateLineItemsFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimateLineItemsFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ListBillEstimateLineItemsFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimateLineItemsFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
+    ListBillEstimateLineItemsFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, location_name: "matchOption"))
     ListBillEstimateLineItemsFilter.type = Types::ListBillEstimateLineItemsFilter
-    ListBillEstimateLineItemsFilterName.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "USAGE_ACCOUNT_ID"}))
-    ListBillEstimateLineItemsFilterName.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_CODE", traits: {"smithy.api#enumValue" => "SERVICE_CODE"}))
-    ListBillEstimateLineItemsFilterName.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_TYPE", traits: {"smithy.api#enumValue" => "USAGE_TYPE"}))
-    ListBillEstimateLineItemsFilterName.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPERATION", traits: {"smithy.api#enumValue" => "OPERATION"}))
-    ListBillEstimateLineItemsFilterName.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
-    ListBillEstimateLineItemsFilterName.add_member(:line_item_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINE_ITEM_TYPE", traits: {"smithy.api#enumValue" => "LINE_ITEM_TYPE"}))
-    ListBillEstimateLineItemsFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ListBillEstimateLineItemsFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateLineItemsFilter)
-    ListBillEstimateLineItemsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
-    ListBillEstimateLineItemsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateLineItemsFilters, location_name: "filters"))
-    ListBillEstimateLineItemsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillEstimateLineItemsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillEstimateLineItemsFilterName.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "USAGE_ACCOUNT_ID"}))
+    ListBillEstimateLineItemsFilterName.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_CODE", traits: {"smithy.api#enumValue" => "SERVICE_CODE"}))
+    ListBillEstimateLineItemsFilterName.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_TYPE", traits: {"smithy.api#enumValue" => "USAGE_TYPE"}))
+    ListBillEstimateLineItemsFilterName.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPERATION", traits: {"smithy.api#enumValue" => "OPERATION"}))
+    ListBillEstimateLineItemsFilterName.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
+    ListBillEstimateLineItemsFilterName.add_member(:line_item_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINE_ITEM_TYPE", traits: {"smithy.api#enumValue" => "LINE_ITEM_TYPE"}))
+    ListBillEstimateLineItemsFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ListBillEstimateLineItemsFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimateLineItemsFilter)
+    ListBillEstimateLineItemsRequest.add_member(:bill_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billEstimateId", traits: {"smithy.api#required" => {}}))
+    ListBillEstimateLineItemsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimateLineItemsFilters, location_name: "filters"))
+    ListBillEstimateLineItemsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateLineItemsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillEstimateLineItemsRequest.type = Types::ListBillEstimateLineItemsRequest
-    ListBillEstimateLineItemsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateLineItemSummaries, location_name: "items"))
-    ListBillEstimateLineItemsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillEstimateLineItemsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateLineItemSummaries, location_name: "items"))
+    ListBillEstimateLineItemsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillEstimateLineItemsResponse.type = Types::ListBillEstimateLineItemsResponse
-    ListBillEstimatesFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimatesFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ListBillEstimatesFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimatesFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
-    ListBillEstimatesFilter.add_member(:match_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchOption, location_name: "matchOption"))
+    ListBillEstimatesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimatesFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ListBillEstimatesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimatesFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
+    ListBillEstimatesFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, location_name: "matchOption"))
     ListBillEstimatesFilter.type = Types::ListBillEstimatesFilter
-    ListBillEstimatesFilterName.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
-    ListBillEstimatesFilterName.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
-    ListBillEstimatesFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ListBillEstimatesFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimatesFilter)
-    ListBillEstimatesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimatesFilters, location_name: "filters"))
-    ListBillEstimatesRequest.add_member(:created_at_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterTimestamp, location_name: "createdAtFilter"))
-    ListBillEstimatesRequest.add_member(:expires_at_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterTimestamp, location_name: "expiresAtFilter"))
-    ListBillEstimatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillEstimatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillEstimatesFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
+    ListBillEstimatesFilterName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    ListBillEstimatesFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ListBillEstimatesFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimatesFilter)
+    ListBillEstimatesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillEstimatesFilters, location_name: "filters"))
+    ListBillEstimatesRequest.add_member(:created_at_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterTimestamp, location_name: "createdAtFilter"))
+    ListBillEstimatesRequest.add_member(:expires_at_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterTimestamp, location_name: "expiresAtFilter"))
+    ListBillEstimatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillEstimatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillEstimatesRequest.type = Types::ListBillEstimatesRequest
-    ListBillEstimatesResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateSummaries, location_name: "items"))
-    ListBillEstimatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillEstimatesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateSummaries, location_name: "items"))
+    ListBillEstimatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillEstimatesResponse.type = Types::ListBillEstimatesResponse
-    ListBillScenarioCommitmentModificationsRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    ListBillScenarioCommitmentModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillScenarioCommitmentModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillScenarioCommitmentModificationsRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    ListBillScenarioCommitmentModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillScenarioCommitmentModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillScenarioCommitmentModificationsRequest.type = Types::ListBillScenarioCommitmentModificationsRequest
-    ListBillScenarioCommitmentModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioCommitmentModificationItems, location_name: "items"))
-    ListBillScenarioCommitmentModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillScenarioCommitmentModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioCommitmentModificationItems, location_name: "items"))
+    ListBillScenarioCommitmentModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillScenarioCommitmentModificationsResponse.type = Types::ListBillScenarioCommitmentModificationsResponse
-    ListBillScenarioUsageModificationsRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
-    ListBillScenarioUsageModificationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageFilters, location_name: "filters"))
-    ListBillScenarioUsageModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillScenarioUsageModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillScenarioUsageModificationsRequest.add_member(:bill_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "billScenarioId", traits: {"smithy.api#required" => {}}))
+    ListBillScenarioUsageModificationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListUsageFilters, location_name: "filters"))
+    ListBillScenarioUsageModificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillScenarioUsageModificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillScenarioUsageModificationsRequest.type = Types::ListBillScenarioUsageModificationsRequest
-    ListBillScenarioUsageModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioUsageModificationItems, location_name: "items"))
-    ListBillScenarioUsageModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillScenarioUsageModificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioUsageModificationItems, location_name: "items"))
+    ListBillScenarioUsageModificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillScenarioUsageModificationsResponse.type = Types::ListBillScenarioUsageModificationsResponse
-    ListBillScenariosFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenariosFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ListBillScenariosFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenariosFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
-    ListBillScenariosFilter.add_member(:match_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchOption, location_name: "matchOption"))
+    ListBillScenariosFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillScenariosFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ListBillScenariosFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillScenariosFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
+    ListBillScenariosFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, location_name: "matchOption"))
     ListBillScenariosFilter.type = Types::ListBillScenariosFilter
-    ListBillScenariosFilterName.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
-    ListBillScenariosFilterName.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
-    ListBillScenariosFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ListBillScenariosFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenariosFilter)
-    ListBillScenariosRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenariosFilters, location_name: "filters"))
-    ListBillScenariosRequest.add_member(:created_at_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterTimestamp, location_name: "createdAtFilter"))
-    ListBillScenariosRequest.add_member(:expires_at_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterTimestamp, location_name: "expiresAtFilter"))
-    ListBillScenariosRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListBillScenariosRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillScenariosFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
+    ListBillScenariosFilterName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    ListBillScenariosFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ListBillScenariosFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillScenariosFilter)
+    ListBillScenariosRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillScenariosFilters, location_name: "filters"))
+    ListBillScenariosRequest.add_member(:created_at_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterTimestamp, location_name: "createdAtFilter"))
+    ListBillScenariosRequest.add_member(:expires_at_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterTimestamp, location_name: "expiresAtFilter"))
+    ListBillScenariosRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListBillScenariosRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListBillScenariosRequest.type = Types::ListBillScenariosRequest
-    ListBillScenariosResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioSummaries, location_name: "items"))
-    ListBillScenariosResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListBillScenariosResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioSummaries, location_name: "items"))
+    ListBillScenariosResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListBillScenariosResponse.type = Types::ListBillScenariosResponse
-    ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListUsageFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ListUsageFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
-    ListUsageFilter.add_member(:match_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchOption, location_name: "matchOption"))
+    ListUsageFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ListUsageFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ListUsageFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListUsageFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
+    ListUsageFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, location_name: "matchOption"))
     ListUsageFilter.type = Types::ListUsageFilter
-    ListUsageFilterName.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "USAGE_ACCOUNT_ID"}))
-    ListUsageFilterName.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_CODE", traits: {"smithy.api#enumValue" => "SERVICE_CODE"}))
-    ListUsageFilterName.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_TYPE", traits: {"smithy.api#enumValue" => "USAGE_TYPE"}))
-    ListUsageFilterName.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPERATION", traits: {"smithy.api#enumValue" => "OPERATION"}))
-    ListUsageFilterName.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
-    ListUsageFilterName.add_member(:usage_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_GROUP", traits: {"smithy.api#enumValue" => "USAGE_GROUP"}))
-    ListUsageFilterName.add_member(:historical_usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_USAGE_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "HISTORICAL_USAGE_ACCOUNT_ID"}))
-    ListUsageFilterName.add_member(:historical_service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_SERVICE_CODE", traits: {"smithy.api#enumValue" => "HISTORICAL_SERVICE_CODE"}))
-    ListUsageFilterName.add_member(:historical_usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_USAGE_TYPE", traits: {"smithy.api#enumValue" => "HISTORICAL_USAGE_TYPE"}))
-    ListUsageFilterName.add_member(:historical_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_OPERATION", traits: {"smithy.api#enumValue" => "HISTORICAL_OPERATION"}))
-    ListUsageFilterName.add_member(:historical_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_LOCATION", traits: {"smithy.api#enumValue" => "HISTORICAL_LOCATION"}))
-    ListUsageFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ListUsageFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageFilter)
-    ListWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
-    ListWorkloadEstimateUsageRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsageFilters, location_name: "filters"))
-    ListWorkloadEstimateUsageRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListWorkloadEstimateUsageRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUsageMaxResults, location_name: "maxResults"))
+    ListUsageFilterName.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "USAGE_ACCOUNT_ID"}))
+    ListUsageFilterName.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_CODE", traits: {"smithy.api#enumValue" => "SERVICE_CODE"}))
+    ListUsageFilterName.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_TYPE", traits: {"smithy.api#enumValue" => "USAGE_TYPE"}))
+    ListUsageFilterName.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPERATION", traits: {"smithy.api#enumValue" => "OPERATION"}))
+    ListUsageFilterName.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
+    ListUsageFilterName.add_member(:usage_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USAGE_GROUP", traits: {"smithy.api#enumValue" => "USAGE_GROUP"}))
+    ListUsageFilterName.add_member(:historical_usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_USAGE_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "HISTORICAL_USAGE_ACCOUNT_ID"}))
+    ListUsageFilterName.add_member(:historical_service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_SERVICE_CODE", traits: {"smithy.api#enumValue" => "HISTORICAL_SERVICE_CODE"}))
+    ListUsageFilterName.add_member(:historical_usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_USAGE_TYPE", traits: {"smithy.api#enumValue" => "HISTORICAL_USAGE_TYPE"}))
+    ListUsageFilterName.add_member(:historical_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_OPERATION", traits: {"smithy.api#enumValue" => "HISTORICAL_OPERATION"}))
+    ListUsageFilterName.add_member(:historical_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HISTORICAL_LOCATION", traits: {"smithy.api#enumValue" => "HISTORICAL_LOCATION"}))
+    ListUsageFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ListUsageFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListUsageFilter)
+    ListWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "workloadEstimateId", traits: {"smithy.api#required" => {}}))
+    ListWorkloadEstimateUsageRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListUsageFilters, location_name: "filters"))
+    ListWorkloadEstimateUsageRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListWorkloadEstimateUsageRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUsageMaxResults, location_name: "maxResults"))
     ListWorkloadEstimateUsageRequest.type = Types::ListWorkloadEstimateUsageRequest
-    ListWorkloadEstimateUsageResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUsageItems, location_name: "items"))
-    ListWorkloadEstimateUsageResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListWorkloadEstimateUsageResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUsageItems, location_name: "items"))
+    ListWorkloadEstimateUsageResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListWorkloadEstimateUsageResponse.type = Types::ListWorkloadEstimateUsageResponse
-    ListWorkloadEstimatesFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimatesFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ListWorkloadEstimatesFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimatesFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
-    ListWorkloadEstimatesFilter.add_member(:match_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchOption, location_name: "matchOption"))
+    ListWorkloadEstimatesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ListWorkloadEstimatesFilterName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ListWorkloadEstimatesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListWorkloadEstimatesFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
+    ListWorkloadEstimatesFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, location_name: "matchOption"))
     ListWorkloadEstimatesFilter.type = Types::ListWorkloadEstimatesFilter
-    ListWorkloadEstimatesFilterName.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
-    ListWorkloadEstimatesFilterName.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
-    ListWorkloadEstimatesFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ListWorkloadEstimatesFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimatesFilter)
-    ListWorkloadEstimatesRequest.add_member(:created_at_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterTimestamp, location_name: "createdAtFilter"))
-    ListWorkloadEstimatesRequest.add_member(:expires_at_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterTimestamp, location_name: "expiresAtFilter"))
-    ListWorkloadEstimatesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimatesFilters, location_name: "filters"))
-    ListWorkloadEstimatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListWorkloadEstimatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListWorkloadEstimatesFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
+    ListWorkloadEstimatesFilterName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    ListWorkloadEstimatesFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ListWorkloadEstimatesFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListWorkloadEstimatesFilter)
+    ListWorkloadEstimatesRequest.add_member(:created_at_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterTimestamp, location_name: "createdAtFilter"))
+    ListWorkloadEstimatesRequest.add_member(:expires_at_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterTimestamp, location_name: "expiresAtFilter"))
+    ListWorkloadEstimatesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListWorkloadEstimatesFilters, location_name: "filters"))
+    ListWorkloadEstimatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
+    ListWorkloadEstimatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListWorkloadEstimatesRequest.type = Types::ListWorkloadEstimatesRequest
-    ListWorkloadEstimatesResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateSummaries, location_name: "items"))
-    ListWorkloadEstimatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListWorkloadEstimatesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateSummaries, location_name: "items"))
+    ListWorkloadEstimatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, location_name: "nextToken"))
     ListWorkloadEstimatesResponse.type = Types::ListWorkloadEstimatesResponse
-    MatchOption.add_member(:equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
-    MatchOption.add_member(:starts_with, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STARTS_WITH", traits: {"smithy.api#enumValue" => "STARTS_WITH"}))
-    MatchOption.add_member(:contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
-    NegateReservedInstanceAction.add_member(:reserved_instances_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "reservedInstancesId"))
+    MatchOption.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    MatchOption.add_member(:starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STARTS_WITH", traits: {"smithy.api#enumValue" => "STARTS_WITH"}))
+    MatchOption.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
+    NegateReservedInstanceAction.add_member(:reserved_instances_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "reservedInstancesId"))
     NegateReservedInstanceAction.type = Types::NegateReservedInstanceAction
-    NegateSavingsPlanAction.add_member(:savings_plan_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: "savingsPlanId"))
+    NegateSavingsPlanAction.add_member(:savings_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, location_name: "savingsPlanId"))
     NegateSavingsPlanAction.type = Types::NegateSavingsPlanAction
-    PurchaseAgreementType.add_member(:savings_plans, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAVINGS_PLANS", traits: {"smithy.api#enumValue" => "SAVINGS_PLANS"}))
-    PurchaseAgreementType.add_member(:reserved_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESERVED_INSTANCE", traits: {"smithy.api#enumValue" => "RESERVED_INSTANCE"}))
-    RateType.add_member(:before_discounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEFORE_DISCOUNTS", traits: {"smithy.api#enumValue" => "BEFORE_DISCOUNTS"}))
-    RateType.add_member(:after_discounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS"}))
-    RateType.add_member(:after_discounts_and_commitments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS_AND_COMMITMENTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS_AND_COMMITMENTS"}))
-    RateTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateType)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    PurchaseAgreementType.add_member(:savings_plans, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAVINGS_PLANS", traits: {"smithy.api#enumValue" => "SAVINGS_PLANS"}))
+    PurchaseAgreementType.add_member(:reserved_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESERVED_INSTANCE", traits: {"smithy.api#enumValue" => "RESERVED_INSTANCE"}))
+    RateType.add_member(:before_discounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEFORE_DISCOUNTS", traits: {"smithy.api#enumValue" => "BEFORE_DISCOUNTS"}))
+    RateType.add_member(:after_discounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS"}))
+    RateType.add_member(:after_discounts_and_commitments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS_AND_COMMITMENTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS_AND_COMMITMENTS"}))
+    RateTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RateType)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceTagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagKey)
-    SavingsPlanArns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ServiceCostDifferenceMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ServiceCostDifferenceMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CostDifference)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode"))
-    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode"))
+    ResourceTagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey)
+    SavingsPlanArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ServiceCostDifferenceMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ServiceCostDifferenceMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CostDifference)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode"))
+    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagKey)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagValue)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode"))
-    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode"))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceCode"))
+    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "quotaCode"))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagKeys, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKeys, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateBillEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
-    UpdateBillEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateName, location_name: "name"))
-    UpdateBillEstimateRequest.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    UpdateBillEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
+    UpdateBillEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateName, location_name: "name"))
+    UpdateBillEstimateRequest.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
     UpdateBillEstimateRequest.type = Types::UpdateBillEstimateRequest
-    UpdateBillEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
-    UpdateBillEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateName, location_name: "name"))
-    UpdateBillEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateStatus, location_name: "status"))
-    UpdateBillEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
-    UpdateBillEstimateResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    UpdateBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillEstimateCostSummary, location_name: "costSummary"))
-    UpdateBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    UpdateBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    UpdateBillEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billEstimateId"}))
+    UpdateBillEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateName, location_name: "name"))
+    UpdateBillEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateStatus, location_name: "status"))
+    UpdateBillEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    UpdateBillEstimateResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    UpdateBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCostSummary, location_name: "costSummary"))
+    UpdateBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    UpdateBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
     UpdateBillEstimateResponse.type = Types::UpdateBillEstimateResponse
-    UpdateBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
-    UpdateBillScenarioRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioName, location_name: "name"))
-    UpdateBillScenarioRequest.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    UpdateBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
+    UpdateBillScenarioRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, location_name: "name"))
+    UpdateBillScenarioRequest.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
     UpdateBillScenarioRequest.type = Types::UpdateBillScenarioRequest
-    UpdateBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
-    UpdateBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioName, location_name: "name"))
-    UpdateBillScenarioResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillInterval, location_name: "billInterval"))
-    UpdateBillScenarioResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillScenarioStatus, location_name: "status"))
-    UpdateBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    UpdateBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    UpdateBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    UpdateBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
+    UpdateBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, location_name: "name"))
+    UpdateBillScenarioResponse.add_member(:bill_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BillInterval, location_name: "billInterval"))
+    UpdateBillScenarioResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioStatus, location_name: "status"))
+    UpdateBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    UpdateBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    UpdateBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     UpdateBillScenarioResponse.type = Types::UpdateBillScenarioResponse
-    UpdatePreferencesRequest.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "managementAccountRateTypeSelections"))
-    UpdatePreferencesRequest.add_member(:member_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "memberAccountRateTypeSelections"))
-    UpdatePreferencesRequest.add_member(:standalone_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
+    UpdatePreferencesRequest.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "managementAccountRateTypeSelections"))
+    UpdatePreferencesRequest.add_member(:member_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "memberAccountRateTypeSelections"))
+    UpdatePreferencesRequest.add_member(:standalone_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
     UpdatePreferencesRequest.type = Types::UpdatePreferencesRequest
-    UpdatePreferencesResponse.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "managementAccountRateTypeSelections"))
-    UpdatePreferencesResponse.add_member(:member_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "memberAccountRateTypeSelections"))
-    UpdatePreferencesResponse.add_member(:standalone_account_rate_type_selections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
+    UpdatePreferencesResponse.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "managementAccountRateTypeSelections"))
+    UpdatePreferencesResponse.add_member(:member_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "memberAccountRateTypeSelections"))
+    UpdatePreferencesResponse.add_member(:standalone_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
     UpdatePreferencesResponse.type = Types::UpdatePreferencesResponse
-    UpdateWorkloadEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
-    UpdateWorkloadEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateName, location_name: "name"))
-    UpdateWorkloadEstimateRequest.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    UpdateWorkloadEstimateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
+    UpdateWorkloadEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateName, location_name: "name"))
+    UpdateWorkloadEstimateRequest.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
     UpdateWorkloadEstimateRequest.type = Types::UpdateWorkloadEstimateRequest
-    UpdateWorkloadEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
-    UpdateWorkloadEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateName, location_name: "name"))
-    UpdateWorkloadEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    UpdateWorkloadEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    UpdateWorkloadEstimateResponse.add_member(:rate_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateRateType, location_name: "rateType"))
-    UpdateWorkloadEstimateResponse.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
-    UpdateWorkloadEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateStatus, location_name: "status"))
-    UpdateWorkloadEstimateResponse.add_member(:total_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
-    UpdateWorkloadEstimateResponse.add_member(:cost_currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "costCurrency"))
-    UpdateWorkloadEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    UpdateWorkloadEstimateResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
+    UpdateWorkloadEstimateResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateName, location_name: "name"))
+    UpdateWorkloadEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    UpdateWorkloadEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    UpdateWorkloadEstimateResponse.add_member(:rate_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateRateType, location_name: "rateType"))
+    UpdateWorkloadEstimateResponse.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
+    UpdateWorkloadEstimateResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateStatus, location_name: "status"))
+    UpdateWorkloadEstimateResponse.add_member(:total_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
+    UpdateWorkloadEstimateResponse.add_member(:cost_currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "costCurrency"))
+    UpdateWorkloadEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     UpdateWorkloadEstimateResponse.type = Types::UpdateWorkloadEstimateResponse
-    UsageAmount.add_member(:start_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "startHour", traits: {"smithy.api#required" => {}}))
-    UsageAmount.add_member(:amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount", traits: {"smithy.api#required" => {}}))
+    UsageAmount.add_member(:start_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "startHour", traits: {"smithy.api#required" => {}}))
+    UsageAmount.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount", traits: {"smithy.api#required" => {}}))
     UsageAmount.type = Types::UsageAmount
-    UsageAmounts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageAmount)
-    UsageQuantities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageQuantity)
-    UsageQuantity.add_member(:start_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "startHour"))
-    UsageQuantity.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "unit"))
-    UsageQuantity.add_member(:amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
+    UsageAmounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAmount)
+    UsageQuantities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantity)
+    UsageQuantity.add_member(:start_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "startHour"))
+    UsageQuantity.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "unit"))
+    UsageQuantity.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
     UsageQuantity.type = Types::UsageQuantity
-    UsageQuantityResult.add_member(:amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
-    UsageQuantityResult.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "unit"))
+    UsageQuantityResult.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
+    UsageQuantityResult.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "unit"))
     UsageQuantityResult.type = Types::UsageQuantityResult
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
-    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "reason"))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
-    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
-    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
-    ValidationExceptionReason.add_member(:invalid_request_from_member, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REQUEST_FROM_MEMBER", traits: {"smithy.api#enumValue" => "invalidRequestFromMember"}))
-    ValidationExceptionReason.add_member(:disallowed_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISALLOWED_RATE", traits: {"smithy.api#enumValue" => "disallowedRate"}))
-    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
-    WorkloadEstimateCostStatus.add_member(:valid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALID", traits: {"smithy.api#enumValue" => "VALID"}))
-    WorkloadEstimateCostStatus.add_member(:invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID", traits: {"smithy.api#enumValue" => "INVALID"}))
-    WorkloadEstimateCostStatus.add_member(:stale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STALE", traits: {"smithy.api#enumValue" => "STALE"}))
-    WorkloadEstimateRateType.add_member(:before_discounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEFORE_DISCOUNTS", traits: {"smithy.api#enumValue" => "BEFORE_DISCOUNTS"}))
-    WorkloadEstimateRateType.add_member(:after_discounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS"}))
-    WorkloadEstimateRateType.add_member(:after_discounts_and_commitments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS_AND_COMMITMENTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS_AND_COMMITMENTS"}))
-    WorkloadEstimateStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    WorkloadEstimateStatus.add_member(:valid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALID", traits: {"smithy.api#enumValue" => "VALID"}))
-    WorkloadEstimateStatus.add_member(:invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID", traits: {"smithy.api#enumValue" => "INVALID"}))
-    WorkloadEstimateStatus.add_member(:action_needed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTION_NEEDED", traits: {"smithy.api#enumValue" => "ACTION_NEEDED"}))
-    WorkloadEstimateSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateSummary)
-    WorkloadEstimateSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
-    WorkloadEstimateSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateName, location_name: "name"))
-    WorkloadEstimateSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
-    WorkloadEstimateSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
-    WorkloadEstimateSummary.add_member(:rate_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateRateType, location_name: "rateType"))
-    WorkloadEstimateSummary.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
-    WorkloadEstimateSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateStatus, location_name: "status"))
-    WorkloadEstimateSummary.add_member(:total_cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
-    WorkloadEstimateSummary.add_member(:cost_currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "costCurrency"))
-    WorkloadEstimateSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
+    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
+    ValidationExceptionReason.add_member(:invalid_request_from_member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REQUEST_FROM_MEMBER", traits: {"smithy.api#enumValue" => "invalidRequestFromMember"}))
+    ValidationExceptionReason.add_member(:disallowed_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISALLOWED_RATE", traits: {"smithy.api#enumValue" => "disallowedRate"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
+    WorkloadEstimateCostStatus.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALID", traits: {"smithy.api#enumValue" => "VALID"}))
+    WorkloadEstimateCostStatus.add_member(:invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID", traits: {"smithy.api#enumValue" => "INVALID"}))
+    WorkloadEstimateCostStatus.add_member(:stale, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STALE", traits: {"smithy.api#enumValue" => "STALE"}))
+    WorkloadEstimateRateType.add_member(:before_discounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEFORE_DISCOUNTS", traits: {"smithy.api#enumValue" => "BEFORE_DISCOUNTS"}))
+    WorkloadEstimateRateType.add_member(:after_discounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS"}))
+    WorkloadEstimateRateType.add_member(:after_discounts_and_commitments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_DISCOUNTS_AND_COMMITMENTS", traits: {"smithy.api#enumValue" => "AFTER_DISCOUNTS_AND_COMMITMENTS"}))
+    WorkloadEstimateStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    WorkloadEstimateStatus.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VALID", traits: {"smithy.api#enumValue" => "VALID"}))
+    WorkloadEstimateStatus.add_member(:invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID", traits: {"smithy.api#enumValue" => "INVALID"}))
+    WorkloadEstimateStatus.add_member(:action_needed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTION_NEEDED", traits: {"smithy.api#enumValue" => "ACTION_NEEDED"}))
+    WorkloadEstimateSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateSummary)
+    WorkloadEstimateSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workloadEstimateId"}))
+    WorkloadEstimateSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateName, location_name: "name"))
+    WorkloadEstimateSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "createdAt"))
+    WorkloadEstimateSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiresAt"))
+    WorkloadEstimateSummary.add_member(:rate_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateRateType, location_name: "rateType"))
+    WorkloadEstimateSummary.add_member(:rate_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "rateTimestamp"))
+    WorkloadEstimateSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateStatus, location_name: "status"))
+    WorkloadEstimateSummary.add_member(:total_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "totalCost"))
+    WorkloadEstimateSummary.add_member(:cost_currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "costCurrency"))
+    WorkloadEstimateSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "failureMessage"))
     WorkloadEstimateSummary.type = Types::WorkloadEstimateSummary
-    WorkloadEstimateUpdateUsageErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
-    WorkloadEstimateUpdateUsageErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
-    WorkloadEstimateUpdateUsageErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
-    WorkloadEstimateUpdateUsageErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    WorkloadEstimateUsageItem.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    WorkloadEstimateUsageItem.add_member(:usage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
-    WorkloadEstimateUsageItem.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
-    WorkloadEstimateUsageItem.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
-    WorkloadEstimateUsageItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
-    WorkloadEstimateUsageItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "usageAccountId"))
-    WorkloadEstimateUsageItem.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageGroup, location_name: "group"))
-    WorkloadEstimateUsageItem.add_member(:quantity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUsageQuantity, location_name: "quantity"))
-    WorkloadEstimateUsageItem.add_member(:cost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "cost"))
-    WorkloadEstimateUsageItem.add_member(:currency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currency"))
-    WorkloadEstimateUsageItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateCostStatus, location_name: "status"))
-    WorkloadEstimateUsageItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoricalUsageEntity, location_name: "historicalUsage"))
+    WorkloadEstimateUpdateUsageErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BAD_REQUEST", traits: {"smithy.api#enumValue" => "BAD_REQUEST"}))
+    WorkloadEstimateUpdateUsageErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
+    WorkloadEstimateUpdateUsageErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFLICT", traits: {"smithy.api#enumValue" => "CONFLICT"}))
+    WorkloadEstimateUpdateUsageErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    WorkloadEstimateUsageItem.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    WorkloadEstimateUsageItem.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, location_name: "usageType", traits: {"smithy.api#required" => {}}))
+    WorkloadEstimateUsageItem.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "operation", traits: {"smithy.api#required" => {}}))
+    WorkloadEstimateUsageItem.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "location"))
+    WorkloadEstimateUsageItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "id"))
+    WorkloadEstimateUsageItem.add_member(:usage_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "usageAccountId"))
+    WorkloadEstimateUsageItem.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageGroup, location_name: "group"))
+    WorkloadEstimateUsageItem.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUsageQuantity, location_name: "quantity"))
+    WorkloadEstimateUsageItem.add_member(:cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "cost"))
+    WorkloadEstimateUsageItem.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "currency"))
+    WorkloadEstimateUsageItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateCostStatus, location_name: "status"))
+    WorkloadEstimateUsageItem.add_member(:historical_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalUsageEntity, location_name: "historicalUsage"))
     WorkloadEstimateUsageItem.type = Types::WorkloadEstimateUsageItem
-    WorkloadEstimateUsageItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadEstimateUsageItem)
-    WorkloadEstimateUsageQuantity.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "unit"))
-    WorkloadEstimateUsageQuantity.add_member(:amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
+    WorkloadEstimateUsageItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateUsageItem)
+    WorkloadEstimateUsageQuantity.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "unit"))
+    WorkloadEstimateUsageQuantity.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "amount"))
     WorkloadEstimateUsageQuantity.type = Types::WorkloadEstimateUsageQuantity
 
     AWSBCMPricingCalculator = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -979,491 +979,491 @@ module Aws::BCMPricingCalculator
       service.add_operation(:batch_create_bill_scenario_commitment_modification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchCreateBillScenarioCommitmentModification"
         operation.name = "BatchCreateBillScenarioCommitmentModification"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = BatchCreateBillScenarioCommitmentModificationRequest
+        operation.output = BatchCreateBillScenarioCommitmentModificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"name" => "CreateBillScenarioCommitmentModification", "documentation" => "Grants permission to create new commitments or remove existing commitment from a specified bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_create_bill_scenario_usage_modification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchCreateBillScenarioUsageModification"
         operation.name = "BatchCreateBillScenarioUsageModification"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = BatchCreateBillScenarioUsageModificationRequest
+        operation.output = BatchCreateBillScenarioUsageModificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"name" => "CreateBillScenarioUsageModification", "documentation" => "Grants permission to create usage in the specified bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_create_workload_estimate_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchCreateWorkloadEstimateUsage"
         operation.name = "BatchCreateWorkloadEstimateUsage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = BatchCreateWorkloadEstimateUsageRequest
+        operation.output = BatchCreateWorkloadEstimateUsageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"name" => "CreateWorkloadEstimateUsage", "documentation" => "Grants permission to create usage in the specified workload estimate"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_delete_bill_scenario_commitment_modification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchDeleteBillScenarioCommitmentModification"
         operation.name = "BatchDeleteBillScenarioCommitmentModification"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = BatchDeleteBillScenarioCommitmentModificationRequest
+        operation.output = BatchDeleteBillScenarioCommitmentModificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"name" => "DeleteBillScenarioCommitmentModification", "documentation" => "Grants permission to delete newly added commitments from the specified bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_delete_bill_scenario_usage_modification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchDeleteBillScenarioUsageModification"
         operation.name = "BatchDeleteBillScenarioUsageModification"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = BatchDeleteBillScenarioUsageModificationRequest
+        operation.output = BatchDeleteBillScenarioUsageModificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"name" => "DeleteBillScenarioUsageModification", "documentation" => "Grants permission to delete newly added usage from the specified bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_delete_workload_estimate_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchDeleteWorkloadEstimateUsage"
         operation.name = "BatchDeleteWorkloadEstimateUsage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteWorkloadEstimateUsageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteWorkloadEstimateUsageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = BatchDeleteWorkloadEstimateUsageRequest
+        operation.output = BatchDeleteWorkloadEstimateUsageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"name" => "DeleteWorkloadEstimateUsage", "documentation" => "Grants permission to delete newly added usage from the specified workload estimate"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_update_bill_scenario_commitment_modification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchUpdateBillScenarioCommitmentModification"
         operation.name = "BatchUpdateBillScenarioCommitmentModification"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = BatchUpdateBillScenarioCommitmentModificationRequest
+        operation.output = BatchUpdateBillScenarioCommitmentModificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"name" => "UpdateBillScenarioCommitmentModification", "documentation" => "Grants permission to update commitment group of commitments in the specified bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_update_bill_scenario_usage_modification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchUpdateBillScenarioUsageModification"
         operation.name = "BatchUpdateBillScenarioUsageModification"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = BatchUpdateBillScenarioUsageModificationRequest
+        operation.output = BatchUpdateBillScenarioUsageModificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"name" => "UpdateBillScenarioUsageModification", "documentation" => "Grants permission to update usage amount, usage hour, and usage group in the specified bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_update_workload_estimate_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchUpdateWorkloadEstimateUsage"
         operation.name = "BatchUpdateWorkloadEstimateUsage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateWorkloadEstimateUsageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateWorkloadEstimateUsageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = BatchUpdateWorkloadEstimateUsageRequest
+        operation.output = BatchUpdateWorkloadEstimateUsageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"name" => "UpdateWorkloadEstimateUsage", "documentation" => "Grants permission to update usage amount and usage group in the specified workload estimate based on the usage id"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_bill_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#CreateBillEstimate"
         operation.name = "CreateBillEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBillEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBillEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = CreateBillEstimateRequest
+        operation.output = CreateBillEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a new bill estimate. Charge is incurred for successful bill estimates"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_bill_scenario, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#CreateBillScenario"
         operation.name = "CreateBillScenario"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBillScenarioRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBillScenarioResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = CreateBillScenarioRequest
+        operation.output = CreateBillScenarioResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a new bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_workload_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#CreateWorkloadEstimate"
         operation.name = "CreateWorkloadEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkloadEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkloadEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = CreateWorkloadEstimateRequest
+        operation.output = CreateWorkloadEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a new Workload estimate"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_bill_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#DeleteBillEstimate"
         operation.name = "DeleteBillEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBillEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBillEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
+        operation.input = DeleteBillEstimateRequest
+        operation.output = DeleteBillEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete bill estimate"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_bill_scenario, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#DeleteBillScenario"
         operation.name = "DeleteBillScenario"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBillScenarioRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBillScenarioResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
+        operation.input = DeleteBillScenarioRequest
+        operation.output = DeleteBillScenarioResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_workload_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#DeleteWorkloadEstimate"
         operation.name = "DeleteWorkloadEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWorkloadEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWorkloadEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
+        operation.input = DeleteWorkloadEstimateRequest
+        operation.output = DeleteWorkloadEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified workload estimate"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_bill_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#GetBillEstimate"
         operation.name = "GetBillEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBillEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBillEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetBillEstimateRequest
+        operation.output = GetBillEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve details of a bill estimate including estimated cost"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_bill_scenario, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#GetBillScenario"
         operation.name = "GetBillScenario"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBillScenarioRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBillScenarioResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetBillScenarioRequest
+        operation.output = GetBillScenarioResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve information associated with a bill scenario"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_preferences, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#GetPreferences"
         operation.name = "GetPreferences"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPreferencesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPreferencesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
+        operation.input = GetPreferencesRequest
+        operation.output = GetPreferencesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve applicable rate type preferences for the account"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_workload_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#GetWorkloadEstimate"
         operation.name = "GetWorkloadEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetWorkloadEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetWorkloadEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetWorkloadEstimateRequest
+        operation.output = GetWorkloadEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve information associated with a workload estimate"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetWorkloadEstimate", "params" => {"identifier" => "9bb1df8b-5978-4fcb-9c5c-99f5b2670076"}, "expect" => {"failure" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams"}]}
       end)
       service.add_operation(:list_bill_estimate_commitments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillEstimateCommitments"
         operation.name = "ListBillEstimateCommitments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateCommitmentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateCommitmentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListBillEstimateCommitmentsRequest
+        operation.output = ListBillEstimateCommitmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list commitments associated with the specified bill estimate"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillEstimateCommitments.new
       end)
       service.add_operation(:list_bill_estimate_input_commitment_modifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillEstimateInputCommitmentModifications"
         operation.name = "ListBillEstimateInputCommitmentModifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateInputCommitmentModificationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateInputCommitmentModificationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListBillEstimateInputCommitmentModificationsRequest
+        operation.output = ListBillEstimateInputCommitmentModificationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list added or removed commitments for a specified bill estimate"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillEstimateInputCommitmentModifications.new
       end)
       service.add_operation(:list_bill_estimate_input_usage_modifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillEstimateInputUsageModifications"
         operation.name = "ListBillEstimateInputUsageModifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateInputUsageModificationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateInputUsageModificationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListBillEstimateInputUsageModificationsRequest
+        operation.output = ListBillEstimateInputUsageModificationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list added or modified usage for a specified bill estimate"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillEstimateInputUsageModifications.new
       end)
       service.add_operation(:list_bill_estimate_line_items, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillEstimateLineItems"
         operation.name = "ListBillEstimateLineItems"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateLineItemsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimateLineItemsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListBillEstimateLineItemsRequest
+        operation.output = ListBillEstimateLineItemsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list result line items for a specified bill estimate"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillEstimateLineItems.new
       end)
       service.add_operation(:list_bill_estimates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillEstimates"
         operation.name = "ListBillEstimates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillEstimatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
+        operation.input = ListBillEstimatesRequest
+        operation.output = ListBillEstimatesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list bill estimates"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillEstimates.new
       end)
       service.add_operation(:list_bill_scenario_commitment_modifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillScenarioCommitmentModifications"
         operation.name = "ListBillScenarioCommitmentModifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenarioCommitmentModificationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenarioCommitmentModificationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListBillScenarioCommitmentModificationsRequest
+        operation.output = ListBillScenarioCommitmentModificationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list commitments included in a bill scenario"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillScenarioCommitmentModifications.new
       end)
       service.add_operation(:list_bill_scenario_usage_modifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillScenarioUsageModifications"
         operation.name = "ListBillScenarioUsageModifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenarioUsageModificationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenarioUsageModificationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListBillScenarioUsageModificationsRequest
+        operation.output = ListBillScenarioUsageModificationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list usage lines of a specified bill scenario"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillScenarioUsageModifications.new
       end)
       service.add_operation(:list_bill_scenarios, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListBillScenarios"
         operation.name = "ListBillScenarios"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenariosRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBillScenariosResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
+        operation.input = ListBillScenariosRequest
+        operation.output = ListBillScenariosResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list bill scenarios"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBillScenarios.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to return a list of tags for a resource"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_workload_estimate_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListWorkloadEstimateUsage"
         operation.name = "ListWorkloadEstimateUsage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimateUsageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimateUsageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListWorkloadEstimateUsageRequest
+        operation.output = ListWorkloadEstimateUsageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list usage lines for the specified workload estimate"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListWorkloadEstimateUsage.new
       end)
       service.add_operation(:list_workload_estimates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#ListWorkloadEstimates"
         operation.name = "ListWorkloadEstimates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkloadEstimatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
+        operation.input = ListWorkloadEstimatesRequest
+        operation.output = ListWorkloadEstimatesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list workload estimates"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListWorkloadEstimates.new
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to add a tag to a resource"}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to remove a tag from a resource"}}
       end)
       service.add_operation(:update_bill_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#UpdateBillEstimate"
         operation.name = "UpdateBillEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBillEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBillEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateBillEstimateRequest
+        operation.output = UpdateBillEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update bill estimate name and expiration date time"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_bill_scenario, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#UpdateBillScenario"
         operation.name = "UpdateBillScenario"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBillScenarioRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBillScenarioResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateBillScenarioRequest
+        operation.output = UpdateBillScenarioResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update name and expiration date time of the specified bill scenario"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_preferences, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#UpdatePreferences"
         operation.name = "UpdatePreferences"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePreferencesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePreferencesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.input = UpdatePreferencesRequest
+        operation.output = UpdatePreferencesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << DataUnavailableException
+        operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update rate type preferences for the account"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_workload_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#UpdateWorkloadEstimate"
         operation.name = "UpdateWorkloadEstimate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateWorkloadEstimateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateWorkloadEstimateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateWorkloadEstimateRequest
+        operation.output = UpdateWorkloadEstimateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << DataUnavailableException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update name and expiration date time of the specified workload estimate"}, "smithy.api#idempotent" => {}}
       end)
     end

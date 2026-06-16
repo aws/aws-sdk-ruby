@@ -123,445 +123,445 @@ module Aws::Glacier
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glacier#long", name: "Long", traits: {"smithy.api#default" => 0})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glacier#string", name: "String")
 
-    AbortMultipartUploadInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AbortMultipartUploadInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AbortMultipartUploadInput.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AbortMultipartUploadInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AbortMultipartUploadInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AbortMultipartUploadInput.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AbortMultipartUploadInput.type = Types::AbortMultipartUploadInput
-    AbortVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AbortVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AbortVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AbortVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AbortVaultLockInput.type = Types::AbortVaultLockInput
-    AccessControlPolicyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grant)
-    ActionCode.add_member(:archive_retrieval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ArchiveRetrieval", traits: {"smithy.api#enumValue" => "ArchiveRetrieval"}))
-    ActionCode.add_member(:inventory_retrieval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InventoryRetrieval", traits: {"smithy.api#enumValue" => "InventoryRetrieval"}))
-    ActionCode.add_member(:select, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Select", traits: {"smithy.api#enumValue" => "Select"}))
-    AddTagsToVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AddTagsToVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AddTagsToVaultInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    AccessControlPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Grant)
+    ActionCode.add_member(:archive_retrieval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ArchiveRetrieval", traits: {"smithy.api#enumValue" => "ArchiveRetrieval"}))
+    ActionCode.add_member(:inventory_retrieval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InventoryRetrieval", traits: {"smithy.api#enumValue" => "InventoryRetrieval"}))
+    ActionCode.add_member(:select, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Select", traits: {"smithy.api#enumValue" => "Select"}))
+    AddTagsToVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AddTagsToVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AddTagsToVaultInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     AddTagsToVaultInput.type = Types::AddTagsToVaultInput
-    CSVInput.add_member(:file_header_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileHeaderInfo, location_name: "FileHeaderInfo"))
-    CSVInput.add_member(:comments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Comments"))
-    CSVInput.add_member(:quote_escape_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "QuoteEscapeCharacter"))
-    CSVInput.add_member(:record_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RecordDelimiter"))
-    CSVInput.add_member(:field_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FieldDelimiter"))
-    CSVInput.add_member(:quote_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "QuoteCharacter"))
+    CSVInput.add_member(:file_header_info, ::Smithy::Schema::Shapes::MemberShape.new(target: FileHeaderInfo, location_name: "FileHeaderInfo"))
+    CSVInput.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Comments"))
+    CSVInput.add_member(:quote_escape_character, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "QuoteEscapeCharacter"))
+    CSVInput.add_member(:record_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RecordDelimiter"))
+    CSVInput.add_member(:field_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FieldDelimiter"))
+    CSVInput.add_member(:quote_character, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "QuoteCharacter"))
     CSVInput.type = Types::CSVInput
-    CSVOutput.add_member(:quote_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuoteFields, location_name: "QuoteFields"))
-    CSVOutput.add_member(:quote_escape_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "QuoteEscapeCharacter"))
-    CSVOutput.add_member(:record_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RecordDelimiter"))
-    CSVOutput.add_member(:field_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FieldDelimiter"))
-    CSVOutput.add_member(:quote_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "QuoteCharacter"))
+    CSVOutput.add_member(:quote_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: QuoteFields, location_name: "QuoteFields"))
+    CSVOutput.add_member(:quote_escape_character, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "QuoteEscapeCharacter"))
+    CSVOutput.add_member(:record_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RecordDelimiter"))
+    CSVOutput.add_member(:field_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FieldDelimiter"))
+    CSVOutput.add_member(:quote_character, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "QuoteCharacter"))
     CSVOutput.type = Types::CSVOutput
-    CannedACL.add_member(:private, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Private", traits: {"smithy.api#enumValue" => "private"}))
-    CannedACL.add_member(:public_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PublicRead", traits: {"smithy.api#enumValue" => "public-read"}))
-    CannedACL.add_member(:public_read_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PublicReadWrite", traits: {"smithy.api#enumValue" => "public-read-write"}))
-    CannedACL.add_member(:aws_exec_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AwsExecRead", traits: {"smithy.api#enumValue" => "aws-exec-read"}))
-    CannedACL.add_member(:authenticated_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AuthenticatedRead", traits: {"smithy.api#enumValue" => "authenticated-read"}))
-    CannedACL.add_member(:bucket_owner_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketOwnerRead", traits: {"smithy.api#enumValue" => "bucket-owner-read"}))
-    CannedACL.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketOwnerFullControl", traits: {"smithy.api#enumValue" => "bucket-owner-full-control"}))
-    CompleteMultipartUploadInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CompleteMultipartUploadInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CompleteMultipartUploadInput.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CompleteMultipartUploadInput.add_member(:archive_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "archiveSize", traits: {"smithy.api#httpHeader" => "x-amz-archive-size"}))
-    CompleteMultipartUploadInput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
+    CannedACL.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Private", traits: {"smithy.api#enumValue" => "private"}))
+    CannedACL.add_member(:public_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PublicRead", traits: {"smithy.api#enumValue" => "public-read"}))
+    CannedACL.add_member(:public_read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PublicReadWrite", traits: {"smithy.api#enumValue" => "public-read-write"}))
+    CannedACL.add_member(:aws_exec_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AwsExecRead", traits: {"smithy.api#enumValue" => "aws-exec-read"}))
+    CannedACL.add_member(:authenticated_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AuthenticatedRead", traits: {"smithy.api#enumValue" => "authenticated-read"}))
+    CannedACL.add_member(:bucket_owner_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketOwnerRead", traits: {"smithy.api#enumValue" => "bucket-owner-read"}))
+    CannedACL.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketOwnerFullControl", traits: {"smithy.api#enumValue" => "bucket-owner-full-control"}))
+    CompleteMultipartUploadInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteMultipartUploadInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteMultipartUploadInput.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteMultipartUploadInput.add_member(:archive_size, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "archiveSize", traits: {"smithy.api#httpHeader" => "x-amz-archive-size"}))
+    CompleteMultipartUploadInput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
     CompleteMultipartUploadInput.type = Types::CompleteMultipartUploadInput
-    CompleteMultipartUploadOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
-    CompleteMultipartUploadOutput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
-    CompleteMultipartUploadOutput.add_member(:archive_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "archiveId", traits: {"smithy.api#httpHeader" => "x-amz-archive-id"}))
+    CompleteMultipartUploadOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
+    CompleteMultipartUploadOutput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
+    CompleteMultipartUploadOutput.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "archiveId", traits: {"smithy.api#httpHeader" => "x-amz-archive-id"}))
     CompleteMultipartUploadOutput.type = Types::CompleteMultipartUploadOutput
-    CompleteVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CompleteVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CompleteVaultLockInput.add_member(:lock_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lockId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CompleteVaultLockInput.add_member(:lock_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lockId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CompleteVaultLockInput.type = Types::CompleteVaultLockInput
-    CreateVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateVaultInput.type = Types::CreateVaultInput
-    CreateVaultOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
+    CreateVaultOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
     CreateVaultOutput.type = Types::CreateVaultOutput
-    DataRetrievalPolicy.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRetrievalRulesList, location_name: "Rules"))
+    DataRetrievalPolicy.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetrievalRulesList, location_name: "Rules"))
     DataRetrievalPolicy.type = Types::DataRetrievalPolicy
-    DataRetrievalRule.add_member(:strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Strategy"))
-    DataRetrievalRule.add_member(:bytes_per_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableLong, location_name: "BytesPerHour"))
+    DataRetrievalRule.add_member(:strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Strategy"))
+    DataRetrievalRule.add_member(:bytes_per_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, location_name: "BytesPerHour"))
     DataRetrievalRule.type = Types::DataRetrievalRule
-    DataRetrievalRulesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRetrievalRule)
-    DeleteArchiveInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteArchiveInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteArchiveInput.add_member(:archive_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "archiveId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DataRetrievalRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetrievalRule)
+    DeleteArchiveInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteArchiveInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteArchiveInput.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "archiveId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteArchiveInput.type = Types::DeleteArchiveInput
-    DeleteVaultAccessPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVaultAccessPolicyInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVaultAccessPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVaultAccessPolicyInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVaultAccessPolicyInput.type = Types::DeleteVaultAccessPolicyInput
-    DeleteVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVaultInput.type = Types::DeleteVaultInput
-    DeleteVaultNotificationsInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteVaultNotificationsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVaultNotificationsInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVaultNotificationsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVaultNotificationsInput.type = Types::DeleteVaultNotificationsInput
-    DescribeJobInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeJobInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeJobInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeJobInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeJobInput.type = Types::DescribeJobInput
-    DescribeJobOutput.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "JobId"))
-    DescribeJobOutput.add_member(:job_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "JobDescription"))
-    DescribeJobOutput.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionCode, location_name: "Action"))
-    DescribeJobOutput.add_member(:archive_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArchiveId"))
-    DescribeJobOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultARN"))
-    DescribeJobOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreationDate"))
-    DescribeJobOutput.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "Completed", traits: {"smithy.api#default" => false}))
-    DescribeJobOutput.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: "StatusCode"))
-    DescribeJobOutput.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
-    DescribeJobOutput.add_member(:archive_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "ArchiveSizeInBytes"))
-    DescribeJobOutput.add_member(:inventory_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "InventorySizeInBytes"))
-    DescribeJobOutput.add_member(:sns_topic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SNSTopic"))
-    DescribeJobOutput.add_member(:completion_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CompletionDate"))
-    DescribeJobOutput.add_member(:sha256_tree_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SHA256TreeHash"))
-    DescribeJobOutput.add_member(:archive_sha256_tree_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArchiveSHA256TreeHash"))
-    DescribeJobOutput.add_member(:retrieval_byte_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RetrievalByteRange"))
-    DescribeJobOutput.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Tier"))
-    DescribeJobOutput.add_member(:inventory_retrieval_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryRetrievalJobDescription, location_name: "InventoryRetrievalParameters"))
-    DescribeJobOutput.add_member(:job_output_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "JobOutputPath"))
-    DescribeJobOutput.add_member(:select_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
-    DescribeJobOutput.add_member(:output_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
+    DescribeJobOutput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "JobId"))
+    DescribeJobOutput.add_member(:job_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "JobDescription"))
+    DescribeJobOutput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionCode, location_name: "Action"))
+    DescribeJobOutput.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArchiveId"))
+    DescribeJobOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultARN"))
+    DescribeJobOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreationDate"))
+    DescribeJobOutput.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "Completed", traits: {"smithy.api#default" => false}))
+    DescribeJobOutput.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, location_name: "StatusCode"))
+    DescribeJobOutput.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StatusMessage"))
+    DescribeJobOutput.add_member(:archive_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, location_name: "ArchiveSizeInBytes"))
+    DescribeJobOutput.add_member(:inventory_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, location_name: "InventorySizeInBytes"))
+    DescribeJobOutput.add_member(:sns_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SNSTopic"))
+    DescribeJobOutput.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CompletionDate"))
+    DescribeJobOutput.add_member(:sha256_tree_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SHA256TreeHash"))
+    DescribeJobOutput.add_member(:archive_sha256_tree_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArchiveSHA256TreeHash"))
+    DescribeJobOutput.add_member(:retrieval_byte_range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RetrievalByteRange"))
+    DescribeJobOutput.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Tier"))
+    DescribeJobOutput.add_member(:inventory_retrieval_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryRetrievalJobDescription, location_name: "InventoryRetrievalParameters"))
+    DescribeJobOutput.add_member(:job_output_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "JobOutputPath"))
+    DescribeJobOutput.add_member(:select_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectParameters, location_name: "SelectParameters"))
+    DescribeJobOutput.add_member(:output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocation, location_name: "OutputLocation"))
     DescribeJobOutput.type = Types::DescribeJobOutput
-    DescribeVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeVaultInput.type = Types::DescribeVaultInput
-    DescribeVaultOperationOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultARN"))
-    DescribeVaultOperationOutput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultName"))
-    DescribeVaultOperationOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreationDate"))
-    DescribeVaultOperationOutput.add_member(:last_inventory_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastInventoryDate"))
-    DescribeVaultOperationOutput.add_member(:number_of_archives, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfArchives", traits: {"smithy.api#default" => 0}))
-    DescribeVaultOperationOutput.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "SizeInBytes", traits: {"smithy.api#default" => 0}))
+    DescribeVaultOperationOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultARN"))
+    DescribeVaultOperationOutput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultName"))
+    DescribeVaultOperationOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreationDate"))
+    DescribeVaultOperationOutput.add_member(:last_inventory_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastInventoryDate"))
+    DescribeVaultOperationOutput.add_member(:number_of_archives, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "NumberOfArchives", traits: {"smithy.api#default" => 0}))
+    DescribeVaultOperationOutput.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "SizeInBytes", traits: {"smithy.api#default" => 0}))
     DescribeVaultOperationOutput.type = Types::DescribeVaultOperationOutput
-    DescribeVaultOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultARN"))
-    DescribeVaultOutput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultName"))
-    DescribeVaultOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreationDate"))
-    DescribeVaultOutput.add_member(:last_inventory_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastInventoryDate"))
-    DescribeVaultOutput.add_member(:number_of_archives, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfArchives", traits: {"smithy.api#default" => 0}))
-    DescribeVaultOutput.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "SizeInBytes", traits: {"smithy.api#default" => 0}))
+    DescribeVaultOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultARN"))
+    DescribeVaultOutput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultName"))
+    DescribeVaultOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreationDate"))
+    DescribeVaultOutput.add_member(:last_inventory_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastInventoryDate"))
+    DescribeVaultOutput.add_member(:number_of_archives, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "NumberOfArchives", traits: {"smithy.api#default" => 0}))
+    DescribeVaultOutput.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "SizeInBytes", traits: {"smithy.api#default" => 0}))
     DescribeVaultOutput.type = Types::DescribeVaultOutput
-    Encryption.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
-    Encryption.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KMSKeyId"))
-    Encryption.add_member(:kms_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KMSContext"))
+    Encryption.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "EncryptionType"))
+    Encryption.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KMSKeyId"))
+    Encryption.add_member(:kms_context, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KMSContext"))
     Encryption.type = Types::Encryption
-    EncryptionType.add_member(:kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMS", traits: {"smithy.api#enumValue" => "aws:kms"}))
-    EncryptionType.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3", traits: {"smithy.api#enumValue" => "AES256"}))
-    ExpressionType.add_member(:sql, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
-    FileHeaderInfo.add_member(:use, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Use", traits: {"smithy.api#enumValue" => "USE"}))
-    FileHeaderInfo.add_member(:ignore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Ignore", traits: {"smithy.api#enumValue" => "IGNORE"}))
-    FileHeaderInfo.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "None", traits: {"smithy.api#enumValue" => "NONE"}))
-    GetDataRetrievalPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EncryptionType.add_member(:kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMS", traits: {"smithy.api#enumValue" => "aws:kms"}))
+    EncryptionType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3", traits: {"smithy.api#enumValue" => "AES256"}))
+    ExpressionType.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
+    FileHeaderInfo.add_member(:use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Use", traits: {"smithy.api#enumValue" => "USE"}))
+    FileHeaderInfo.add_member(:ignore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Ignore", traits: {"smithy.api#enumValue" => "IGNORE"}))
+    FileHeaderInfo.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "None", traits: {"smithy.api#enumValue" => "NONE"}))
+    GetDataRetrievalPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDataRetrievalPolicyInput.type = Types::GetDataRetrievalPolicyInput
-    GetDataRetrievalPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRetrievalPolicy, location_name: "Policy"))
+    GetDataRetrievalPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetrievalPolicy, location_name: "Policy"))
     GetDataRetrievalPolicyOutput.type = Types::GetDataRetrievalPolicyOutput
-    GetJobOutputInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetJobOutputInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetJobOutputInput.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetJobOutputInput.add_member(:range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "range", traits: {"smithy.api#httpHeader" => "Range"}))
+    GetJobOutputInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetJobOutputInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetJobOutputInput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetJobOutputInput.add_member(:range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "range", traits: {"smithy.api#httpHeader" => "Range"}))
     GetJobOutputInput.type = Types::GetJobOutputInput
-    GetJobOutputOutput.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stream, location_name: "body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
-    GetJobOutputOutput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
-    GetJobOutputOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Httpstatus, location_name: "status", traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}}))
-    GetJobOutputOutput.add_member(:content_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "contentRange", traits: {"smithy.api#httpHeader" => "Content-Range"}))
-    GetJobOutputOutput.add_member(:accept_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "acceptRanges", traits: {"smithy.api#httpHeader" => "Accept-Ranges"}))
-    GetJobOutputOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
-    GetJobOutputOutput.add_member(:archive_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "archiveDescription", traits: {"smithy.api#httpHeader" => "x-amz-archive-description"}))
+    GetJobOutputOutput.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, location_name: "body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetJobOutputOutput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
+    GetJobOutputOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Httpstatus, location_name: "status", traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}}))
+    GetJobOutputOutput.add_member(:content_range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "contentRange", traits: {"smithy.api#httpHeader" => "Content-Range"}))
+    GetJobOutputOutput.add_member(:accept_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "acceptRanges", traits: {"smithy.api#httpHeader" => "Accept-Ranges"}))
+    GetJobOutputOutput.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    GetJobOutputOutput.add_member(:archive_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "archiveDescription", traits: {"smithy.api#httpHeader" => "x-amz-archive-description"}))
     GetJobOutputOutput[:http_payload] = :body
     GetJobOutputOutput[:http_payload_member] = GetJobOutputOutput.member(:body)
     GetJobOutputOutput.type = Types::GetJobOutputOutput
-    GetVaultAccessPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetVaultAccessPolicyInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVaultAccessPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVaultAccessPolicyInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVaultAccessPolicyInput.type = Types::GetVaultAccessPolicyInput
-    GetVaultAccessPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VaultAccessPolicy, location_name: "policy", traits: {"smithy.api#httpPayload" => {}}))
+    GetVaultAccessPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultAccessPolicy, location_name: "policy", traits: {"smithy.api#httpPayload" => {}}))
     GetVaultAccessPolicyOutput[:http_payload] = :policy
     GetVaultAccessPolicyOutput[:http_payload_member] = GetVaultAccessPolicyOutput.member(:policy)
     GetVaultAccessPolicyOutput.type = Types::GetVaultAccessPolicyOutput
-    GetVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVaultLockInput.type = Types::GetVaultLockInput
-    GetVaultLockOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
-    GetVaultLockOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "State"))
-    GetVaultLockOutput.add_member(:expiration_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ExpirationDate"))
-    GetVaultLockOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreationDate"))
+    GetVaultLockOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Policy"))
+    GetVaultLockOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "State"))
+    GetVaultLockOutput.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ExpirationDate"))
+    GetVaultLockOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreationDate"))
     GetVaultLockOutput.type = Types::GetVaultLockOutput
-    GetVaultNotificationsInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetVaultNotificationsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVaultNotificationsInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVaultNotificationsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVaultNotificationsInput.type = Types::GetVaultNotificationsInput
-    GetVaultNotificationsOutput.add_member(:vault_notification_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VaultNotificationConfig, location_name: "vaultNotificationConfig", traits: {"smithy.api#httpPayload" => {}}))
+    GetVaultNotificationsOutput.add_member(:vault_notification_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultNotificationConfig, location_name: "vaultNotificationConfig", traits: {"smithy.api#httpPayload" => {}}))
     GetVaultNotificationsOutput[:http_payload] = :vault_notification_config
     GetVaultNotificationsOutput[:http_payload_member] = GetVaultNotificationsOutput.member(:vault_notification_config)
     GetVaultNotificationsOutput.type = Types::GetVaultNotificationsOutput
-    GlacierJobDescription.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "JobId"))
-    GlacierJobDescription.add_member(:job_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "JobDescription"))
-    GlacierJobDescription.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionCode, location_name: "Action"))
-    GlacierJobDescription.add_member(:archive_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArchiveId"))
-    GlacierJobDescription.add_member(:vault_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultARN"))
-    GlacierJobDescription.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreationDate"))
-    GlacierJobDescription.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "Completed", traits: {"smithy.api#default" => false}))
-    GlacierJobDescription.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: "StatusCode"))
-    GlacierJobDescription.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
-    GlacierJobDescription.add_member(:archive_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "ArchiveSizeInBytes"))
-    GlacierJobDescription.add_member(:inventory_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "InventorySizeInBytes"))
-    GlacierJobDescription.add_member(:sns_topic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SNSTopic"))
-    GlacierJobDescription.add_member(:completion_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CompletionDate"))
-    GlacierJobDescription.add_member(:sha256_tree_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SHA256TreeHash"))
-    GlacierJobDescription.add_member(:archive_sha256_tree_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArchiveSHA256TreeHash"))
-    GlacierJobDescription.add_member(:retrieval_byte_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RetrievalByteRange"))
-    GlacierJobDescription.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Tier"))
-    GlacierJobDescription.add_member(:inventory_retrieval_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryRetrievalJobDescription, location_name: "InventoryRetrievalParameters"))
-    GlacierJobDescription.add_member(:job_output_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "JobOutputPath"))
-    GlacierJobDescription.add_member(:select_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
-    GlacierJobDescription.add_member(:output_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
+    GlacierJobDescription.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "JobId"))
+    GlacierJobDescription.add_member(:job_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "JobDescription"))
+    GlacierJobDescription.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionCode, location_name: "Action"))
+    GlacierJobDescription.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArchiveId"))
+    GlacierJobDescription.add_member(:vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultARN"))
+    GlacierJobDescription.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreationDate"))
+    GlacierJobDescription.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "Completed", traits: {"smithy.api#default" => false}))
+    GlacierJobDescription.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, location_name: "StatusCode"))
+    GlacierJobDescription.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StatusMessage"))
+    GlacierJobDescription.add_member(:archive_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, location_name: "ArchiveSizeInBytes"))
+    GlacierJobDescription.add_member(:inventory_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, location_name: "InventorySizeInBytes"))
+    GlacierJobDescription.add_member(:sns_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SNSTopic"))
+    GlacierJobDescription.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CompletionDate"))
+    GlacierJobDescription.add_member(:sha256_tree_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SHA256TreeHash"))
+    GlacierJobDescription.add_member(:archive_sha256_tree_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArchiveSHA256TreeHash"))
+    GlacierJobDescription.add_member(:retrieval_byte_range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RetrievalByteRange"))
+    GlacierJobDescription.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Tier"))
+    GlacierJobDescription.add_member(:inventory_retrieval_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryRetrievalJobDescription, location_name: "InventoryRetrievalParameters"))
+    GlacierJobDescription.add_member(:job_output_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "JobOutputPath"))
+    GlacierJobDescription.add_member(:select_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectParameters, location_name: "SelectParameters"))
+    GlacierJobDescription.add_member(:output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocation, location_name: "OutputLocation"))
     GlacierJobDescription.type = Types::GlacierJobDescription
-    Grant.add_member(:grantee, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
-    Grant.add_member(:permission, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
+    Grant.add_member(:grantee, ::Smithy::Schema::Shapes::MemberShape.new(target: Grantee, location_name: "Grantee"))
+    Grant.add_member(:permission, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, location_name: "Permission"))
     Grant.type = Types::Grant
-    Grantee.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    Grantee.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
-    Grantee.add_member(:uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "URI"))
-    Grantee.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ID"))
-    Grantee.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EmailAddress"))
+    Grantee.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Grantee.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DisplayName"))
+    Grantee.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "URI"))
+    Grantee.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ID"))
+    Grantee.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EmailAddress"))
     Grantee.type = Types::Grantee
-    InitiateJobInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    InitiateJobInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    InitiateJobInput.add_member(:job_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobParameters, location_name: "jobParameters", traits: {"smithy.api#httpPayload" => {}}))
+    InitiateJobInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    InitiateJobInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    InitiateJobInput.add_member(:job_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: JobParameters, location_name: "jobParameters", traits: {"smithy.api#httpPayload" => {}}))
     InitiateJobInput[:http_payload] = :job_parameters
     InitiateJobInput[:http_payload_member] = InitiateJobInput.member(:job_parameters)
     InitiateJobInput.type = Types::InitiateJobInput
-    InitiateJobOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
-    InitiateJobOutput.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "jobId", traits: {"smithy.api#httpHeader" => "x-amz-job-id"}))
-    InitiateJobOutput.add_member(:job_output_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "jobOutputPath", traits: {"smithy.api#httpHeader" => "x-amz-job-output-path"}))
+    InitiateJobOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
+    InitiateJobOutput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "jobId", traits: {"smithy.api#httpHeader" => "x-amz-job-id"}))
+    InitiateJobOutput.add_member(:job_output_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "jobOutputPath", traits: {"smithy.api#httpHeader" => "x-amz-job-output-path"}))
     InitiateJobOutput.type = Types::InitiateJobOutput
-    InitiateMultipartUploadInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    InitiateMultipartUploadInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    InitiateMultipartUploadInput.add_member(:archive_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "archiveDescription", traits: {"smithy.api#httpHeader" => "x-amz-archive-description"}))
-    InitiateMultipartUploadInput.add_member(:part_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "partSize", traits: {"smithy.api#httpHeader" => "x-amz-part-size"}))
+    InitiateMultipartUploadInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    InitiateMultipartUploadInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    InitiateMultipartUploadInput.add_member(:archive_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "archiveDescription", traits: {"smithy.api#httpHeader" => "x-amz-archive-description"}))
+    InitiateMultipartUploadInput.add_member(:part_size, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "partSize", traits: {"smithy.api#httpHeader" => "x-amz-part-size"}))
     InitiateMultipartUploadInput.type = Types::InitiateMultipartUploadInput
-    InitiateMultipartUploadOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
-    InitiateMultipartUploadOutput.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "uploadId", traits: {"smithy.api#httpHeader" => "x-amz-multipart-upload-id"}))
+    InitiateMultipartUploadOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
+    InitiateMultipartUploadOutput.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "uploadId", traits: {"smithy.api#httpHeader" => "x-amz-multipart-upload-id"}))
     InitiateMultipartUploadOutput.type = Types::InitiateMultipartUploadOutput
-    InitiateVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    InitiateVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    InitiateVaultLockInput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VaultLockPolicy, location_name: "policy", traits: {"smithy.api#httpPayload" => {}}))
+    InitiateVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    InitiateVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    InitiateVaultLockInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultLockPolicy, location_name: "policy", traits: {"smithy.api#httpPayload" => {}}))
     InitiateVaultLockInput[:http_payload] = :policy
     InitiateVaultLockInput[:http_payload_member] = InitiateVaultLockInput.member(:policy)
     InitiateVaultLockInput.type = Types::InitiateVaultLockInput
-    InitiateVaultLockOutput.add_member(:lock_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lockId", traits: {"smithy.api#httpHeader" => "x-amz-lock-id"}))
+    InitiateVaultLockOutput.add_member(:lock_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lockId", traits: {"smithy.api#httpHeader" => "x-amz-lock-id"}))
     InitiateVaultLockOutput.type = Types::InitiateVaultLockOutput
-    InputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CSVInput, location_name: "csv"))
+    InputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: CSVInput, location_name: "csv"))
     InputSerialization.type = Types::InputSerialization
-    InsufficientCapacityException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    InsufficientCapacityException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    InsufficientCapacityException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InsufficientCapacityException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    InsufficientCapacityException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    InsufficientCapacityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     InsufficientCapacityException.type = Types::InsufficientCapacityException
-    InvalidParameterValueException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    InvalidParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidParameterValueException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    InvalidParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
-    InventoryRetrievalJobDescription.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Format"))
-    InventoryRetrievalJobDescription.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "StartDate"))
-    InventoryRetrievalJobDescription.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: "EndDate"))
-    InventoryRetrievalJobDescription.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Limit"))
-    InventoryRetrievalJobDescription.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    InventoryRetrievalJobDescription.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Format"))
+    InventoryRetrievalJobDescription.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartDate"))
+    InventoryRetrievalJobDescription.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndDate"))
+    InventoryRetrievalJobDescription.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Limit"))
+    InventoryRetrievalJobDescription.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Marker"))
     InventoryRetrievalJobDescription.type = Types::InventoryRetrievalJobDescription
-    InventoryRetrievalJobInput.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StartDate"))
-    InventoryRetrievalJobInput.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EndDate"))
-    InventoryRetrievalJobInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Limit"))
-    InventoryRetrievalJobInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    InventoryRetrievalJobInput.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StartDate"))
+    InventoryRetrievalJobInput.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EndDate"))
+    InventoryRetrievalJobInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Limit"))
+    InventoryRetrievalJobInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Marker"))
     InventoryRetrievalJobInput.type = Types::InventoryRetrievalJobInput
-    JobList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlacierJobDescription)
-    JobParameters.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Format"))
-    JobParameters.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Type"))
-    JobParameters.add_member(:archive_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArchiveId"))
-    JobParameters.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    JobParameters.add_member(:sns_topic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SNSTopic"))
-    JobParameters.add_member(:retrieval_byte_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RetrievalByteRange"))
-    JobParameters.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Tier"))
-    JobParameters.add_member(:inventory_retrieval_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryRetrievalJobInput, location_name: "InventoryRetrievalParameters"))
-    JobParameters.add_member(:select_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
-    JobParameters.add_member(:output_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
+    JobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlacierJobDescription)
+    JobParameters.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Format"))
+    JobParameters.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Type"))
+    JobParameters.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArchiveId"))
+    JobParameters.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    JobParameters.add_member(:sns_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SNSTopic"))
+    JobParameters.add_member(:retrieval_byte_range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RetrievalByteRange"))
+    JobParameters.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Tier"))
+    JobParameters.add_member(:inventory_retrieval_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryRetrievalJobInput, location_name: "InventoryRetrievalParameters"))
+    JobParameters.add_member(:select_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectParameters, location_name: "SelectParameters"))
+    JobParameters.add_member(:output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocation, location_name: "OutputLocation"))
     JobParameters.type = Types::JobParameters
-    LimitExceededException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListJobsInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListJobsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListJobsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListJobsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
-    ListJobsInput.add_member(:statuscode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "statuscode", traits: {"smithy.api#httpQuery" => "statuscode"}))
-    ListJobsInput.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "completed", traits: {"smithy.api#httpQuery" => "completed"}))
+    ListJobsInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListJobsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListJobsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListJobsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
+    ListJobsInput.add_member(:statuscode, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "statuscode", traits: {"smithy.api#httpQuery" => "statuscode"}))
+    ListJobsInput.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "completed", traits: {"smithy.api#httpQuery" => "completed"}))
     ListJobsInput.type = Types::ListJobsInput
-    ListJobsOutput.add_member(:job_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobList, location_name: "JobList"))
-    ListJobsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListJobsOutput.add_member(:job_list, ::Smithy::Schema::Shapes::MemberShape.new(target: JobList, location_name: "JobList"))
+    ListJobsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Marker"))
     ListJobsOutput.type = Types::ListJobsOutput
-    ListMultipartUploadsInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListMultipartUploadsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListMultipartUploadsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListMultipartUploadsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
+    ListMultipartUploadsInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListMultipartUploadsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListMultipartUploadsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListMultipartUploadsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
     ListMultipartUploadsInput.type = Types::ListMultipartUploadsInput
-    ListMultipartUploadsOutput.add_member(:uploads_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadsList, location_name: "UploadsList"))
-    ListMultipartUploadsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListMultipartUploadsOutput.add_member(:uploads_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadsList, location_name: "UploadsList"))
+    ListMultipartUploadsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Marker"))
     ListMultipartUploadsOutput.type = Types::ListMultipartUploadsOutput
-    ListPartsInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListPartsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListPartsInput.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListPartsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
-    ListPartsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListPartsInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListPartsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListPartsInput.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListPartsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
+    ListPartsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
     ListPartsInput.type = Types::ListPartsInput
-    ListPartsOutput.add_member(:multipart_upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultipartUploadId"))
-    ListPartsOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultARN"))
-    ListPartsOutput.add_member(:archive_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArchiveDescription"))
-    ListPartsOutput.add_member(:part_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "PartSizeInBytes", traits: {"smithy.api#default" => 0}))
-    ListPartsOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreationDate"))
-    ListPartsOutput.add_member(:parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartList, location_name: "Parts"))
-    ListPartsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListPartsOutput.add_member(:multipart_upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultipartUploadId"))
+    ListPartsOutput.add_member(:vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultARN"))
+    ListPartsOutput.add_member(:archive_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArchiveDescription"))
+    ListPartsOutput.add_member(:part_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "PartSizeInBytes", traits: {"smithy.api#default" => 0}))
+    ListPartsOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreationDate"))
+    ListPartsOutput.add_member(:parts, ::Smithy::Schema::Shapes::MemberShape.new(target: PartList, location_name: "Parts"))
+    ListPartsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Marker"))
     ListPartsOutput.type = Types::ListPartsOutput
-    ListProvisionedCapacityInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListProvisionedCapacityInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListProvisionedCapacityInput.type = Types::ListProvisionedCapacityInput
-    ListProvisionedCapacityOutput.add_member(:provisioned_capacity_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedCapacityList, location_name: "ProvisionedCapacityList"))
+    ListProvisionedCapacityOutput.add_member(:provisioned_capacity_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedCapacityList, location_name: "ProvisionedCapacityList"))
     ListProvisionedCapacityOutput.type = Types::ListProvisionedCapacityOutput
-    ListTagsForVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListTagsForVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForVaultInput.type = Types::ListTagsForVaultInput
-    ListTagsForVaultOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForVaultOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForVaultOutput.type = Types::ListTagsForVaultOutput
-    ListVaultsInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListVaultsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
-    ListVaultsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListVaultsInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListVaultsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker", traits: {"smithy.api#httpQuery" => "marker"}))
+    ListVaultsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "limit", traits: {"smithy.api#httpQuery" => "limit"}))
     ListVaultsInput.type = Types::ListVaultsInput
-    ListVaultsOutput.add_member(:vault_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VaultList, location_name: "VaultList"))
-    ListVaultsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListVaultsOutput.add_member(:vault_list, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultList, location_name: "VaultList"))
+    ListVaultsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Marker"))
     ListVaultsOutput.type = Types::ListVaultsOutput
-    MissingParameterValueException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    MissingParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    MissingParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    MissingParameterValueException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    MissingParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    MissingParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     MissingParameterValueException.type = Types::MissingParameterValueException
-    NotificationEventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    OutputLocation.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "S3"))
+    NotificationEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    OutputLocation.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "S3"))
     OutputLocation.type = Types::OutputLocation
-    OutputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CSVOutput, location_name: "csv"))
+    OutputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: CSVOutput, location_name: "csv"))
     OutputSerialization.type = Types::OutputSerialization
-    PartList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartListElement)
-    PartListElement.add_member(:range_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RangeInBytes"))
-    PartListElement.add_member(:sha256_tree_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SHA256TreeHash"))
+    PartList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartListElement)
+    PartListElement.add_member(:range_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RangeInBytes"))
+    PartListElement.add_member(:sha256_tree_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SHA256TreeHash"))
     PartListElement.type = Types::PartListElement
-    Permission.add_member(:full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_CONTROL", traits: {"smithy.api#enumValue" => "FULL_CONTROL"}))
-    Permission.add_member(:write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE", traits: {"smithy.api#enumValue" => "WRITE"}))
-    Permission.add_member(:write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE_ACP", traits: {"smithy.api#enumValue" => "WRITE_ACP"}))
-    Permission.add_member(:read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
-    Permission.add_member(:read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ACP", traits: {"smithy.api#enumValue" => "READ_ACP"}))
-    PolicyEnforcedException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    PolicyEnforcedException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    PolicyEnforcedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    Permission.add_member(:full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_CONTROL", traits: {"smithy.api#enumValue" => "FULL_CONTROL"}))
+    Permission.add_member(:write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE", traits: {"smithy.api#enumValue" => "WRITE"}))
+    Permission.add_member(:write_acp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE_ACP", traits: {"smithy.api#enumValue" => "WRITE_ACP"}))
+    Permission.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    Permission.add_member(:read_acp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ACP", traits: {"smithy.api#enumValue" => "READ_ACP"}))
+    PolicyEnforcedException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    PolicyEnforcedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    PolicyEnforcedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     PolicyEnforcedException.type = Types::PolicyEnforcedException
-    ProvisionedCapacityDescription.add_member(:capacity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CapacityId"))
-    ProvisionedCapacityDescription.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StartDate"))
-    ProvisionedCapacityDescription.add_member(:expiration_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ExpirationDate"))
+    ProvisionedCapacityDescription.add_member(:capacity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CapacityId"))
+    ProvisionedCapacityDescription.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StartDate"))
+    ProvisionedCapacityDescription.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ExpirationDate"))
     ProvisionedCapacityDescription.type = Types::ProvisionedCapacityDescription
-    ProvisionedCapacityList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedCapacityDescription)
-    PurchaseProvisionedCapacityInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ProvisionedCapacityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedCapacityDescription)
+    PurchaseProvisionedCapacityInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PurchaseProvisionedCapacityInput.type = Types::PurchaseProvisionedCapacityInput
-    PurchaseProvisionedCapacityOutput.add_member(:capacity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "capacityId", traits: {"smithy.api#httpHeader" => "x-amz-capacity-id"}))
+    PurchaseProvisionedCapacityOutput.add_member(:capacity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "capacityId", traits: {"smithy.api#httpHeader" => "x-amz-capacity-id"}))
     PurchaseProvisionedCapacityOutput.type = Types::PurchaseProvisionedCapacityOutput
-    QuoteFields.add_member(:always, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Always", traits: {"smithy.api#enumValue" => "ALWAYS"}))
-    QuoteFields.add_member(:as_needed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AsNeeded", traits: {"smithy.api#enumValue" => "ASNEEDED"}))
-    RemoveTagsFromVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RemoveTagsFromVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RemoveTagsFromVaultInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
+    QuoteFields.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Always", traits: {"smithy.api#enumValue" => "ALWAYS"}))
+    QuoteFields.add_member(:as_needed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AsNeeded", traits: {"smithy.api#enumValue" => "ASNEEDED"}))
+    RemoveTagsFromVaultInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RemoveTagsFromVaultInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RemoveTagsFromVaultInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys"))
     RemoveTagsFromVaultInput.type = Types::RemoveTagsFromVaultInput
-    RequestTimeoutException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    RequestTimeoutException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    RequestTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestTimeoutException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    RequestTimeoutException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    RequestTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     RequestTimeoutException.type = Types::RequestTimeoutException
-    ResourceNotFoundException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    S3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
-    S3Location.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Prefix"))
-    S3Location.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
-    S3Location.add_member(:canned_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CannedACL, location_name: "CannedACL"))
-    S3Location.add_member(:access_control_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlPolicyList, location_name: "AccessControlList"))
-    S3Location.add_member(:tagging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hashmap, location_name: "Tagging"))
-    S3Location.add_member(:user_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hashmap, location_name: "UserMetadata"))
-    S3Location.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    S3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "BucketName"))
+    S3Location.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Prefix"))
+    S3Location.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, location_name: "Encryption"))
+    S3Location.add_member(:canned_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: CannedACL, location_name: "CannedACL"))
+    S3Location.add_member(:access_control_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlPolicyList, location_name: "AccessControlList"))
+    S3Location.add_member(:tagging, ::Smithy::Schema::Shapes::MemberShape.new(target: Hashmap, location_name: "Tagging"))
+    S3Location.add_member(:user_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Hashmap, location_name: "UserMetadata"))
+    S3Location.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, location_name: "StorageClass"))
     S3Location.type = Types::S3Location
-    SelectParameters.add_member(:input_serialization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSerialization, location_name: "InputSerialization"))
-    SelectParameters.add_member(:expression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionType, location_name: "ExpressionType"))
-    SelectParameters.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Expression"))
-    SelectParameters.add_member(:output_serialization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputSerialization, location_name: "OutputSerialization"))
+    SelectParameters.add_member(:input_serialization, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSerialization, location_name: "InputSerialization"))
+    SelectParameters.add_member(:expression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionType, location_name: "ExpressionType"))
+    SelectParameters.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Expression"))
+    SelectParameters.add_member(:output_serialization, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputSerialization, location_name: "OutputSerialization"))
     SelectParameters.type = Types::SelectParameters
-    ServiceUnavailableException.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceUnavailableException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    SetDataRetrievalPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SetDataRetrievalPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRetrievalPolicy, location_name: "Policy"))
+    SetDataRetrievalPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SetDataRetrievalPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetrievalPolicy, location_name: "Policy"))
     SetDataRetrievalPolicyInput.type = Types::SetDataRetrievalPolicyInput
-    SetVaultAccessPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SetVaultAccessPolicyInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SetVaultAccessPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VaultAccessPolicy, location_name: "policy", traits: {"smithy.api#httpPayload" => {}}))
+    SetVaultAccessPolicyInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SetVaultAccessPolicyInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SetVaultAccessPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultAccessPolicy, location_name: "policy", traits: {"smithy.api#httpPayload" => {}}))
     SetVaultAccessPolicyInput[:http_payload] = :policy
     SetVaultAccessPolicyInput[:http_payload_member] = SetVaultAccessPolicyInput.member(:policy)
     SetVaultAccessPolicyInput.type = Types::SetVaultAccessPolicyInput
-    SetVaultNotificationsInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SetVaultNotificationsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    SetVaultNotificationsInput.add_member(:vault_notification_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VaultNotificationConfig, location_name: "vaultNotificationConfig", traits: {"smithy.api#httpPayload" => {}}))
+    SetVaultNotificationsInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SetVaultNotificationsInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SetVaultNotificationsInput.add_member(:vault_notification_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultNotificationConfig, location_name: "vaultNotificationConfig", traits: {"smithy.api#httpPayload" => {}}))
     SetVaultNotificationsInput[:http_payload] = :vault_notification_config
     SetVaultNotificationsInput[:http_payload_member] = SetVaultNotificationsInput.member(:vault_notification_config)
     SetVaultNotificationsInput.type = Types::SetVaultNotificationsInput
-    StatusCode.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
-    StatusCode.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Succeeded", traits: {"smithy.api#enumValue" => "Succeeded"}))
-    StatusCode.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
-    StorageClass.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Standard", traits: {"smithy.api#enumValue" => "STANDARD"}))
-    StorageClass.add_member(:reduced_redundancy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReducedRedundancy", traits: {"smithy.api#enumValue" => "REDUCED_REDUNDANCY"}))
-    StorageClass.add_member(:standard_infrequent_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StandardInfrequentAccess", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    Type.add_member(:amazon_customer_by_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmazonCustomerByEmail", traits: {"smithy.api#enumValue" => "AmazonCustomerByEmail"}))
-    Type.add_member(:canonical_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CanonicalUser", traits: {"smithy.api#enumValue" => "CanonicalUser"}))
-    Type.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Group", traits: {"smithy.api#enumValue" => "Group"}))
-    UploadArchiveInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UploadArchiveInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UploadArchiveInput.add_member(:archive_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "archiveDescription", traits: {"smithy.api#httpHeader" => "x-amz-archive-description"}))
-    UploadArchiveInput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
-    UploadArchiveInput.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stream, location_name: "body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    StatusCode.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
+    StatusCode.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Succeeded", traits: {"smithy.api#enumValue" => "Succeeded"}))
+    StatusCode.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
+    StorageClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Standard", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    StorageClass.add_member(:reduced_redundancy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReducedRedundancy", traits: {"smithy.api#enumValue" => "REDUCED_REDUNDANCY"}))
+    StorageClass.add_member(:standard_infrequent_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StandardInfrequentAccess", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    Type.add_member(:amazon_customer_by_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmazonCustomerByEmail", traits: {"smithy.api#enumValue" => "AmazonCustomerByEmail"}))
+    Type.add_member(:canonical_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CanonicalUser", traits: {"smithy.api#enumValue" => "CanonicalUser"}))
+    Type.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Group", traits: {"smithy.api#enumValue" => "Group"}))
+    UploadArchiveInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadArchiveInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadArchiveInput.add_member(:archive_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "archiveDescription", traits: {"smithy.api#httpHeader" => "x-amz-archive-description"}))
+    UploadArchiveInput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
+    UploadArchiveInput.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, location_name: "body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     UploadArchiveInput[:http_payload] = :body
     UploadArchiveInput[:http_payload_member] = UploadArchiveInput.member(:body)
     UploadArchiveInput.type = Types::UploadArchiveInput
-    UploadArchiveOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
-    UploadArchiveOutput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
-    UploadArchiveOutput.add_member(:archive_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "archiveId", traits: {"smithy.api#httpHeader" => "x-amz-archive-id"}))
+    UploadArchiveOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "location", traits: {"smithy.api#httpHeader" => "Location"}))
+    UploadArchiveOutput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
+    UploadArchiveOutput.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "archiveId", traits: {"smithy.api#httpHeader" => "x-amz-archive-id"}))
     UploadArchiveOutput.type = Types::UploadArchiveOutput
-    UploadListElement.add_member(:multipart_upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultipartUploadId"))
-    UploadListElement.add_member(:vault_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VaultARN"))
-    UploadListElement.add_member(:archive_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArchiveDescription"))
-    UploadListElement.add_member(:part_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "PartSizeInBytes", traits: {"smithy.api#default" => 0}))
-    UploadListElement.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "CreationDate"))
+    UploadListElement.add_member(:multipart_upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultipartUploadId"))
+    UploadListElement.add_member(:vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VaultARN"))
+    UploadListElement.add_member(:archive_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArchiveDescription"))
+    UploadListElement.add_member(:part_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "PartSizeInBytes", traits: {"smithy.api#default" => 0}))
+    UploadListElement.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CreationDate"))
     UploadListElement.type = Types::UploadListElement
-    UploadMultipartPartInput.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UploadMultipartPartInput.add_member(:vault_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UploadMultipartPartInput.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UploadMultipartPartInput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
-    UploadMultipartPartInput.add_member(:range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "range", traits: {"smithy.api#httpHeader" => "Content-Range"}))
-    UploadMultipartPartInput.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stream, location_name: "body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    UploadMultipartPartInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadMultipartPartInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadMultipartPartInput.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "uploadId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadMultipartPartInput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
+    UploadMultipartPartInput.add_member(:range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "range", traits: {"smithy.api#httpHeader" => "Content-Range"}))
+    UploadMultipartPartInput.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, location_name: "body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     UploadMultipartPartInput[:http_payload] = :body
     UploadMultipartPartInput[:http_payload_member] = UploadMultipartPartInput.member(:body)
     UploadMultipartPartInput.type = Types::UploadMultipartPartInput
-    UploadMultipartPartOutput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
+    UploadMultipartPartOutput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
     UploadMultipartPartOutput.type = Types::UploadMultipartPartOutput
-    UploadsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadListElement)
-    VaultAccessPolicy.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    UploadsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UploadListElement)
+    VaultAccessPolicy.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Policy"))
     VaultAccessPolicy.type = Types::VaultAccessPolicy
-    VaultList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVaultOutput)
-    VaultLockPolicy.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    VaultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeVaultOutput)
+    VaultLockPolicy.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Policy"))
     VaultLockPolicy.type = Types::VaultLockPolicy
-    VaultNotificationConfig.add_member(:sns_topic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SNSTopic"))
-    VaultNotificationConfig.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEventList, location_name: "Events"))
+    VaultNotificationConfig.add_member(:sns_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SNSTopic"))
+    VaultNotificationConfig.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEventList, location_name: "Events"))
     VaultNotificationConfig.type = Types::VaultNotificationConfig
-    Hashmap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Hashmap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
+    Hashmap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Hashmap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
 
     Glacier = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.glacier#Glacier"
@@ -571,370 +571,370 @@ module Aws::Glacier
       service.add_operation(:abort_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#AbortMultipartUpload"
         operation.name = "AbortMultipartUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortMultipartUploadInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = AbortMultipartUploadInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 204}}
       end)
       service.add_operation(:abort_vault_lock, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#AbortVaultLock"
         operation.name = "AbortVaultLock"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortVaultLockInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = AbortVaultLockInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy", "code" => 204}}
       end)
       service.add_operation(:add_tags_to_vault, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#AddTagsToVault"
         operation.name = "AddTagsToVault"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsToVaultInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = AddTagsToVaultInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << LimitExceededException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/tags?operation=add", "code" => 204}}
       end)
       service.add_operation(:complete_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#CompleteMultipartUpload"
         operation.name = "CompleteMultipartUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteMultipartUploadInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteMultipartUploadOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = CompleteMultipartUploadInput
+        operation.output = CompleteMultipartUploadOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 201}}
       end)
       service.add_operation(:complete_vault_lock, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#CompleteVaultLock"
         operation.name = "CompleteVaultLock"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteVaultLockInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = CompleteVaultLockInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy/{lockId}", "code" => 204}}
       end)
       service.add_operation(:create_vault, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#CreateVault"
         operation.name = "CreateVault"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVaultInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVaultOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = CreateVaultInput
+        operation.output = CreateVaultOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << LimitExceededException
+        operation.errors << MissingParameterValueException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}", "code" => 201}}
       end)
       service.add_operation(:delete_archive, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#DeleteArchive"
         operation.name = "DeleteArchive"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteArchiveInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteArchiveInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/archives/{archiveId}", "code" => 204}}
       end)
       service.add_operation(:delete_vault, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#DeleteVault"
         operation.name = "DeleteVault"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVaultInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteVaultInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}", "code" => 204}}
       end)
       service.add_operation(:delete_vault_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#DeleteVaultAccessPolicy"
         operation.name = "DeleteVaultAccessPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVaultAccessPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteVaultAccessPolicyInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/access-policy", "code" => 204}}
       end)
       service.add_operation(:delete_vault_notifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#DeleteVaultNotifications"
         operation.name = "DeleteVaultNotifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVaultNotificationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteVaultNotificationsInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/notification-configuration", "code" => 204}}
       end)
       service.add_operation(:describe_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#DescribeJob"
         operation.name = "DescribeJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DescribeJobInput
+        operation.output = DescribeJobOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/jobs/{jobId}", "code" => 200}}
       end)
       service.add_operation(:describe_vault, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#DescribeVault"
         operation.name = "DescribeVault"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVaultInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVaultOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DescribeVaultInput
+        operation.output = DescribeVaultOperationOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}", "code" => 200}}
       end)
       service.add_operation(:get_data_retrieval_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#GetDataRetrievalPolicy"
         operation.name = "GetDataRetrievalPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataRetrievalPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataRetrievalPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetDataRetrievalPolicyInput
+        operation.output = GetDataRetrievalPolicyOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/policies/data-retrieval", "code" => 200}}
       end)
       service.add_operation(:get_job_output, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#GetJobOutput"
         operation.name = "GetJobOutput"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetJobOutputInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetJobOutputOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetJobOutputInput
+        operation.output = GetJobOutputOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output", "code" => 200}}
       end)
       service.add_operation(:get_vault_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#GetVaultAccessPolicy"
         operation.name = "GetVaultAccessPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVaultAccessPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVaultAccessPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetVaultAccessPolicyInput
+        operation.output = GetVaultAccessPolicyOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/access-policy", "code" => 200}}
       end)
       service.add_operation(:get_vault_lock, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#GetVaultLock"
         operation.name = "GetVaultLock"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVaultLockInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVaultLockOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetVaultLockInput
+        operation.output = GetVaultLockOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy", "code" => 200}}
       end)
       service.add_operation(:get_vault_notifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#GetVaultNotifications"
         operation.name = "GetVaultNotifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVaultNotificationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVaultNotificationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetVaultNotificationsInput
+        operation.output = GetVaultNotificationsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/notification-configuration", "code" => 200}}
       end)
       service.add_operation(:initiate_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#InitiateJob"
         operation.name = "InitiateJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientCapacityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyEnforcedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = InitiateJobInput
+        operation.output = InitiateJobOutput
+        operation.errors << InsufficientCapacityException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << PolicyEnforcedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/jobs", "code" => 202}}
       end)
       service.add_operation(:initiate_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#InitiateMultipartUpload"
         operation.name = "InitiateMultipartUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateMultipartUploadInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateMultipartUploadOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = InitiateMultipartUploadInput
+        operation.output = InitiateMultipartUploadOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads", "code" => 201}}
       end)
       service.add_operation(:initiate_vault_lock, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#InitiateVaultLock"
         operation.name = "InitiateVaultLock"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateVaultLockInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateVaultLockOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = InitiateVaultLockInput
+        operation.output = InitiateVaultLockOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy", "code" => 201}}
       end)
       service.add_operation(:list_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#ListJobs"
         operation.name = "ListJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListJobsInput
+        operation.output = ListJobsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/jobs", "code" => 200}}
         operation[:paginator] = Paginators::ListJobs.new
       end)
       service.add_operation(:list_multipart_uploads, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#ListMultipartUploads"
         operation.name = "ListMultipartUploads"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMultipartUploadsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMultipartUploadsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListMultipartUploadsInput
+        operation.output = ListMultipartUploadsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads", "code" => 200}}
         operation[:paginator] = Paginators::ListMultipartUploads.new
       end)
       service.add_operation(:list_parts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#ListParts"
         operation.name = "ListParts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPartsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPartsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListPartsInput
+        operation.output = ListPartsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 200}}
         operation[:paginator] = Paginators::ListParts.new
       end)
       service.add_operation(:list_provisioned_capacity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#ListProvisionedCapacity"
         operation.name = "ListProvisionedCapacity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProvisionedCapacityInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProvisionedCapacityOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListProvisionedCapacityInput
+        operation.output = ListProvisionedCapacityOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/provisioned-capacity", "code" => 200}}
       end)
       service.add_operation(:list_tags_for_vault, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#ListTagsForVault"
         operation.name = "ListTagsForVault"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForVaultInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForVaultOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListTagsForVaultInput
+        operation.output = ListTagsForVaultOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/tags", "code" => 200}}
       end)
       service.add_operation(:list_vaults, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#ListVaults"
         operation.name = "ListVaults"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVaultsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVaultsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListVaultsInput
+        operation.output = ListVaultsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults", "code" => 200}}
         operation[:paginator] = Paginators::ListVaults.new
       end)
       service.add_operation(:purchase_provisioned_capacity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#PurchaseProvisionedCapacity"
         operation.name = "PurchaseProvisionedCapacity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PurchaseProvisionedCapacityInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PurchaseProvisionedCapacityOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = PurchaseProvisionedCapacityInput
+        operation.output = PurchaseProvisionedCapacityOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << LimitExceededException
+        operation.errors << MissingParameterValueException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/provisioned-capacity", "code" => 201}}
       end)
       service.add_operation(:remove_tags_from_vault, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#RemoveTagsFromVault"
         operation.name = "RemoveTagsFromVault"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsFromVaultInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = RemoveTagsFromVaultInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/tags?operation=remove", "code" => 204}}
       end)
       service.add_operation(:set_data_retrieval_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#SetDataRetrievalPolicy"
         operation.name = "SetDataRetrievalPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetDataRetrievalPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = SetDataRetrievalPolicyInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/policies/data-retrieval", "code" => 204}}
       end)
       service.add_operation(:set_vault_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#SetVaultAccessPolicy"
         operation.name = "SetVaultAccessPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetVaultAccessPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = SetVaultAccessPolicyInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}/access-policy", "code" => 204}}
       end)
       service.add_operation(:set_vault_notifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#SetVaultNotifications"
         operation.name = "SetVaultNotifications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetVaultNotificationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = SetVaultNotificationsInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}/notification-configuration", "code" => 204}}
       end)
       service.add_operation(:upload_archive, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#UploadArchive"
         operation.name = "UploadArchive"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadArchiveInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadArchiveOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = UploadArchiveInput
+        operation.output = UploadArchiveOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/archives", "code" => 201}}
       end)
       service.add_operation(:upload_multipart_part, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#UploadMultipartPart"
         operation.name = "UploadMultipartPart"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadMultipartPartInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadMultipartPartOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTimeoutException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = UploadMultipartPartInput
+        operation.output = UploadMultipartPartOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 204}}
       end)
     end

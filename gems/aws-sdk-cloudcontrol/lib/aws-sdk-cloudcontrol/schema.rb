@@ -74,139 +74,139 @@ module Aws::CloudControl
     UpdateResourceOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudcontrol#UpdateResourceOperationInput", name: "UpdateResourceOperationInput")
     UpdateResourceOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudcontrol#UpdateResourceOperationOutput", name: "UpdateResourceOperationOutput")
 
-    AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AlreadyExistsException.type = Types::AlreadyExistsException
-    CancelResourceRequestOperationInput.add_member(:request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestToken, location_name: "RequestToken", traits: {"smithy.api#required" => {}}))
+    CancelResourceRequestOperationInput.add_member(:request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestToken, location_name: "RequestToken", traits: {"smithy.api#required" => {}}))
     CancelResourceRequestOperationInput.type = Types::CancelResourceRequestOperationInput
-    CancelResourceRequestOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressEvent, location_name: "ProgressEvent"))
+    CancelResourceRequestOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent, location_name: "ProgressEvent"))
     CancelResourceRequestOperationOutput.type = Types::CancelResourceRequestOperationOutput
-    ClientTokenConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientTokenConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ClientTokenConflictException.type = Types::ClientTokenConflictException
-    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ConcurrentOperationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConcurrentOperationException.type = Types::ConcurrentOperationException
-    CreateResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
-    CreateResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
-    CreateResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    CreateResourceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateResourceOperationInput.add_member(:desired_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Properties, location_name: "DesiredState", traits: {"smithy.api#required" => {}}))
+    CreateResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
+    CreateResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeVersionId, location_name: "TypeVersionId"))
+    CreateResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    CreateResourceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateResourceOperationInput.add_member(:desired_state, ::Smithy::Schema::Shapes::MemberShape.new(target: Properties, location_name: "DesiredState", traits: {"smithy.api#required" => {}}))
     CreateResourceOperationInput.type = Types::CreateResourceOperationInput
-    CreateResourceOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressEvent, location_name: "ProgressEvent"))
+    CreateResourceOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent, location_name: "ProgressEvent"))
     CreateResourceOperationOutput.type = Types::CreateResourceOperationOutput
-    DeleteResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
-    DeleteResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
-    DeleteResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    DeleteResourceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DeleteResourceOperationInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    DeleteResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
+    DeleteResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeVersionId, location_name: "TypeVersionId"))
+    DeleteResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    DeleteResourceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteResourceOperationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
     DeleteResourceOperationInput.type = Types::DeleteResourceOperationInput
-    DeleteResourceOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressEvent, location_name: "ProgressEvent"))
+    DeleteResourceOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent, location_name: "ProgressEvent"))
     DeleteResourceOperationOutput.type = Types::DeleteResourceOperationOutput
-    GeneralServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    GeneralServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     GeneralServiceException.type = Types::GeneralServiceException
-    GetResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
-    GetResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
-    GetResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    GetResourceOperationInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    GetResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
+    GetResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeVersionId, location_name: "TypeVersionId"))
+    GetResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    GetResourceOperationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
     GetResourceOperationInput.type = Types::GetResourceOperationInput
-    GetResourceOperationOutput.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
-    GetResourceOperationOutput.add_member(:resource_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "ResourceDescription"))
+    GetResourceOperationOutput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName"))
+    GetResourceOperationOutput.add_member(:resource_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "ResourceDescription"))
     GetResourceOperationOutput.type = Types::GetResourceOperationOutput
-    GetResourceRequestStatusOperationInput.add_member(:request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestToken, location_name: "RequestToken", traits: {"smithy.api#required" => {}}))
+    GetResourceRequestStatusOperationInput.add_member(:request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestToken, location_name: "RequestToken", traits: {"smithy.api#required" => {}}))
     GetResourceRequestStatusOperationInput.type = Types::GetResourceRequestStatusOperationInput
-    GetResourceRequestStatusOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressEvent, location_name: "ProgressEvent"))
-    GetResourceRequestStatusOperationOutput.add_member(:hooks_progress_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HooksProgressEvent, location_name: "HooksProgressEvent"))
+    GetResourceRequestStatusOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent, location_name: "ProgressEvent"))
+    GetResourceRequestStatusOperationOutput.add_member(:hooks_progress_event, ::Smithy::Schema::Shapes::MemberShape.new(target: HooksProgressEvent, location_name: "HooksProgressEvent"))
     GetResourceRequestStatusOperationOutput.type = Types::GetResourceRequestStatusOperationOutput
-    HandlerFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    HandlerFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     HandlerFailureException.type = Types::HandlerFailureException
-    HandlerInternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    HandlerInternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     HandlerInternalFailureException.type = Types::HandlerInternalFailureException
-    HookProgressEvent.add_member(:hook_type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "HookTypeName"))
-    HookProgressEvent.add_member(:hook_type_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "HookTypeVersionId"))
-    HookProgressEvent.add_member(:hook_type_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookTypeArn, location_name: "HookTypeArn"))
-    HookProgressEvent.add_member(:invocation_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "InvocationPoint"))
-    HookProgressEvent.add_member(:hook_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookStatus, location_name: "HookStatus"))
-    HookProgressEvent.add_member(:hook_event_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "HookEventTime"))
-    HookProgressEvent.add_member(:hook_status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "HookStatusMessage"))
-    HookProgressEvent.add_member(:failure_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "FailureMode"))
+    HookProgressEvent.add_member(:hook_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "HookTypeName"))
+    HookProgressEvent.add_member(:hook_type_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeVersionId, location_name: "HookTypeVersionId"))
+    HookProgressEvent.add_member(:hook_type_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTypeArn, location_name: "HookTypeArn"))
+    HookProgressEvent.add_member(:invocation_point, ::Smithy::Schema::Shapes::MemberShape.new(target: HookInvocationPoint, location_name: "InvocationPoint"))
+    HookProgressEvent.add_member(:hook_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HookStatus, location_name: "HookStatus"))
+    HookProgressEvent.add_member(:hook_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "HookEventTime"))
+    HookProgressEvent.add_member(:hook_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "HookStatusMessage"))
+    HookProgressEvent.add_member(:failure_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HookFailureMode, location_name: "FailureMode"))
     HookProgressEvent.type = Types::HookProgressEvent
-    HooksProgressEvent.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookProgressEvent)
-    InvalidCredentialsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    HooksProgressEvent.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HookProgressEvent)
+    InvalidCredentialsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidCredentialsException.type = Types::InvalidCredentialsException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    ListResourceRequestsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListResourceRequestsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListResourceRequestsOperationInput.add_member(:resource_request_status_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceRequestStatusFilter, location_name: "ResourceRequestStatusFilter"))
+    ListResourceRequestsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListResourceRequestsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListResourceRequestsOperationInput.add_member(:resource_request_status_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequestStatusFilter, location_name: "ResourceRequestStatusFilter"))
     ListResourceRequestsOperationInput.type = Types::ListResourceRequestsOperationInput
-    ListResourceRequestsOutput.add_member(:resource_request_status_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceRequestStatusSummaries, location_name: "ResourceRequestStatusSummaries"))
-    ListResourceRequestsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceRequestsOutput.add_member(:resource_request_status_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequestStatusSummaries, location_name: "ResourceRequestStatusSummaries"))
+    ListResourceRequestsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListResourceRequestsOutput.type = Types::ListResourceRequestsOutput
-    ListResourcesOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
-    ListResourcesOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
-    ListResourcesOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    ListResourcesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerNextToken, location_name: "NextToken"))
-    ListResourcesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListResourcesOperationInput.add_member(:resource_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Properties, location_name: "ResourceModel"))
+    ListResourcesOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
+    ListResourcesOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeVersionId, location_name: "TypeVersionId"))
+    ListResourcesOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    ListResourcesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HandlerNextToken, location_name: "NextToken"))
+    ListResourcesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListResourcesOperationInput.add_member(:resource_model, ::Smithy::Schema::Shapes::MemberShape.new(target: Properties, location_name: "ResourceModel"))
     ListResourcesOperationInput.type = Types::ListResourcesOperationInput
-    ListResourcesOutput.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
-    ListResourcesOutput.add_member(:resource_descriptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescriptions, location_name: "ResourceDescriptions"))
-    ListResourcesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerNextToken, location_name: "NextToken"))
+    ListResourcesOutput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName"))
+    ListResourcesOutput.add_member(:resource_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescriptions, location_name: "ResourceDescriptions"))
+    ListResourcesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HandlerNextToken, location_name: "NextToken"))
     ListResourcesOutput.type = Types::ListResourcesOutput
-    NetworkFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NetworkFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NetworkFailureException.type = Types::NetworkFailureException
-    NotStabilizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotStabilizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotStabilizedException.type = Types::NotStabilizedException
-    NotUpdatableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotUpdatableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotUpdatableException.type = Types::NotUpdatableException
-    OperationStatuses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationStatus)
-    Operations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation)
-    PrivateTypeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    OperationStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus)
+    Operations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operation)
+    PrivateTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     PrivateTypeException.type = Types::PrivateTypeException
-    ProgressEvent.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
-    ProgressEvent.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier"))
-    ProgressEvent.add_member(:request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestToken, location_name: "RequestToken"))
-    ProgressEvent.add_member(:hooks_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestToken, location_name: "HooksRequestToken"))
-    ProgressEvent.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
-    ProgressEvent.add_member(:operation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationStatus, location_name: "OperationStatus"))
-    ProgressEvent.add_member(:event_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventTime"))
-    ProgressEvent.add_member(:resource_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Properties, location_name: "ResourceModel"))
-    ProgressEvent.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
-    ProgressEvent.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerErrorCode, location_name: "ErrorCode"))
-    ProgressEvent.add_member(:retry_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "RetryAfter"))
+    ProgressEvent.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName"))
+    ProgressEvent.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier"))
+    ProgressEvent.add_member(:request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestToken, location_name: "RequestToken"))
+    ProgressEvent.add_member(:hooks_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestToken, location_name: "HooksRequestToken"))
+    ProgressEvent.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "Operation"))
+    ProgressEvent.add_member(:operation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, location_name: "OperationStatus"))
+    ProgressEvent.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EventTime"))
+    ProgressEvent.add_member(:resource_model, ::Smithy::Schema::Shapes::MemberShape.new(target: Properties, location_name: "ResourceModel"))
+    ProgressEvent.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, location_name: "StatusMessage"))
+    ProgressEvent.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: HandlerErrorCode, location_name: "ErrorCode"))
+    ProgressEvent.add_member(:retry_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "RetryAfter"))
     ProgressEvent.type = Types::ProgressEvent
-    RequestTokenNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestTokenNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     RequestTokenNotFoundException.type = Types::RequestTokenNotFoundException
-    ResourceConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceConflictException.type = Types::ResourceConflictException
-    ResourceDescription.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier"))
-    ResourceDescription.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Properties, location_name: "Properties"))
+    ResourceDescription.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier"))
+    ResourceDescription.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: Properties, location_name: "Properties"))
     ResourceDescription.type = Types::ResourceDescription
-    ResourceDescriptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceRequestStatusFilter.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operations, location_name: "Operations"))
-    ResourceRequestStatusFilter.add_member(:operation_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationStatuses, location_name: "OperationStatuses"))
+    ResourceRequestStatusFilter.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: Operations, location_name: "Operations"))
+    ResourceRequestStatusFilter.add_member(:operation_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatuses, location_name: "OperationStatuses"))
     ResourceRequestStatusFilter.type = Types::ResourceRequestStatusFilter
-    ResourceRequestStatusSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressEvent)
-    ServiceInternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceRequestStatusSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent)
+    ServiceInternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceInternalErrorException.type = Types::ServiceInternalErrorException
-    ServiceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceLimitExceededException.type = Types::ServiceLimitExceededException
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    TypeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TypeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     TypeNotFoundException.type = Types::TypeNotFoundException
-    UnsupportedActionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnsupportedActionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UnsupportedActionException.type = Types::UnsupportedActionException
-    UpdateResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
-    UpdateResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
-    UpdateResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    UpdateResourceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateResourceOperationInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
-    UpdateResourceOperationInput.add_member(:patch_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PatchDocument, location_name: "PatchDocument", traits: {"smithy.api#required" => {}}))
+    UpdateResourceOperationInput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "TypeName", traits: {"smithy.api#required" => {}}))
+    UpdateResourceOperationInput.add_member(:type_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeVersionId, location_name: "TypeVersionId"))
+    UpdateResourceOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    UpdateResourceOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateResourceOperationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}}))
+    UpdateResourceOperationInput.add_member(:patch_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PatchDocument, location_name: "PatchDocument", traits: {"smithy.api#required" => {}}))
     UpdateResourceOperationInput.type = Types::UpdateResourceOperationInput
-    UpdateResourceOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressEvent, location_name: "ProgressEvent"))
+    UpdateResourceOperationOutput.add_member(:progress_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent, location_name: "ProgressEvent"))
     UpdateResourceOperationOutput.type = Types::UpdateResourceOperationOutput
 
     CloudApiService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -217,153 +217,153 @@ module Aws::CloudControl
       service.add_operation(:cancel_resource_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#CancelResourceRequest"
         operation.name = "CancelResourceRequest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelResourceRequestOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelResourceRequestOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTokenNotFoundException)
+        operation.input = CancelResourceRequestOperationInput
+        operation.output = CancelResourceRequestOperationOutput
+        operation.errors << ConcurrentModificationException
+        operation.errors << RequestTokenNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#CreateResource"
         operation.name = "CreateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerInternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCredentialsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotStabilizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotUpdatableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceInternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedActionException)
+        operation.input = CreateResourceOperationInput
+        operation.output = CreateResourceOperationOutput
+        operation.errors << AlreadyExistsException
+        operation.errors << ClientTokenConflictException
+        operation.errors << ConcurrentOperationException
+        operation.errors << GeneralServiceException
+        operation.errors << HandlerFailureException
+        operation.errors << HandlerInternalFailureException
+        operation.errors << InvalidCredentialsException
+        operation.errors << InvalidRequestException
+        operation.errors << NetworkFailureException
+        operation.errors << NotStabilizedException
+        operation.errors << NotUpdatableException
+        operation.errors << PrivateTypeException
+        operation.errors << ResourceConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceInternalErrorException
+        operation.errors << ServiceLimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << TypeNotFoundException
+        operation.errors << UnsupportedActionException
         operation.traits = {}
       end)
       service.add_operation(:delete_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#DeleteResource"
         operation.name = "DeleteResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerInternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCredentialsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotStabilizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotUpdatableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceInternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedActionException)
+        operation.input = DeleteResourceOperationInput
+        operation.output = DeleteResourceOperationOutput
+        operation.errors << AlreadyExistsException
+        operation.errors << ClientTokenConflictException
+        operation.errors << ConcurrentOperationException
+        operation.errors << GeneralServiceException
+        operation.errors << HandlerFailureException
+        operation.errors << HandlerInternalFailureException
+        operation.errors << InvalidCredentialsException
+        operation.errors << InvalidRequestException
+        operation.errors << NetworkFailureException
+        operation.errors << NotStabilizedException
+        operation.errors << NotUpdatableException
+        operation.errors << PrivateTypeException
+        operation.errors << ResourceConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceInternalErrorException
+        operation.errors << ServiceLimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << TypeNotFoundException
+        operation.errors << UnsupportedActionException
         operation.traits = {}
       end)
       service.add_operation(:get_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#GetResource"
         operation.name = "GetResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerInternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCredentialsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotStabilizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotUpdatableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceInternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedActionException)
+        operation.input = GetResourceOperationInput
+        operation.output = GetResourceOperationOutput
+        operation.errors << AlreadyExistsException
+        operation.errors << GeneralServiceException
+        operation.errors << HandlerFailureException
+        operation.errors << HandlerInternalFailureException
+        operation.errors << InvalidCredentialsException
+        operation.errors << InvalidRequestException
+        operation.errors << NetworkFailureException
+        operation.errors << NotStabilizedException
+        operation.errors << NotUpdatableException
+        operation.errors << PrivateTypeException
+        operation.errors << ResourceConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceInternalErrorException
+        operation.errors << ServiceLimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << TypeNotFoundException
+        operation.errors << UnsupportedActionException
         operation.traits = {}
       end)
       service.add_operation(:get_resource_request_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#GetResourceRequestStatus"
         operation.name = "GetResourceRequestStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceRequestStatusOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceRequestStatusOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTokenNotFoundException)
+        operation.input = GetResourceRequestStatusOperationInput
+        operation.output = GetResourceRequestStatusOperationOutput
+        operation.errors << RequestTokenNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:list_resource_requests, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#ListResourceRequests"
         operation.name = "ListResourceRequests"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceRequestsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceRequestsOutput)
+        operation.input = ListResourceRequestsOperationInput
+        operation.output = ListResourceRequestsOutput
         operation.traits = {}
         operation[:paginator] = Paginators::ListResourceRequests.new
       end)
       service.add_operation(:list_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#ListResources"
         operation.name = "ListResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourcesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourcesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerInternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCredentialsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotStabilizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotUpdatableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceInternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedActionException)
+        operation.input = ListResourcesOperationInput
+        operation.output = ListResourcesOutput
+        operation.errors << AlreadyExistsException
+        operation.errors << GeneralServiceException
+        operation.errors << HandlerFailureException
+        operation.errors << HandlerInternalFailureException
+        operation.errors << InvalidCredentialsException
+        operation.errors << InvalidRequestException
+        operation.errors << NetworkFailureException
+        operation.errors << NotStabilizedException
+        operation.errors << NotUpdatableException
+        operation.errors << PrivateTypeException
+        operation.errors << ResourceConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceInternalErrorException
+        operation.errors << ServiceLimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << TypeNotFoundException
+        operation.errors << UnsupportedActionException
         operation.traits = {}
         operation[:paginator] = Paginators::ListResources.new
       end)
       service.add_operation(:update_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudcontrol#UpdateResource"
         operation.name = "UpdateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentOperationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HandlerInternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCredentialsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotStabilizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotUpdatableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceInternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedActionException)
+        operation.input = UpdateResourceOperationInput
+        operation.output = UpdateResourceOperationOutput
+        operation.errors << AlreadyExistsException
+        operation.errors << ClientTokenConflictException
+        operation.errors << ConcurrentOperationException
+        operation.errors << GeneralServiceException
+        operation.errors << HandlerFailureException
+        operation.errors << HandlerInternalFailureException
+        operation.errors << InvalidCredentialsException
+        operation.errors << InvalidRequestException
+        operation.errors << NetworkFailureException
+        operation.errors << NotStabilizedException
+        operation.errors << NotUpdatableException
+        operation.errors << PrivateTypeException
+        operation.errors << ResourceConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceInternalErrorException
+        operation.errors << ServiceLimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << TypeNotFoundException
+        operation.errors << UnsupportedActionException
         operation.traits = {}
       end)
     end

@@ -60,152 +60,152 @@ module Aws::PcaConnectorScep
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pcaconnectorscep#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.pcaconnectorscep#ValidationExceptionReason", name: "ValidationExceptionReason")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     BadRequestException.type = Types::BadRequestException
-    Challenge.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeArn, location_name: "Arn"))
-    Challenge.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn"))
-    Challenge.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    Challenge.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
-    Challenge.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Password"))
+    Challenge.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeArn, location_name: "Arn"))
+    Challenge.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn"))
+    Challenge.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    Challenge.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
+    Challenge.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, location_name: "Password"))
     Challenge.type = Types::Challenge
-    ChallengeMetadata.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeArn, location_name: "Arn"))
-    ChallengeMetadata.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn"))
-    ChallengeMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    ChallengeMetadata.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
+    ChallengeMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeArn, location_name: "Arn"))
+    ChallengeMetadata.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn"))
+    ChallengeMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    ChallengeMetadata.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
     ChallengeMetadata.type = Types::ChallengeMetadata
-    ChallengeMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeMetadataSummary)
-    ChallengeMetadataSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeArn, location_name: "Arn"))
-    ChallengeMetadataSummary.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn"))
-    ChallengeMetadataSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    ChallengeMetadataSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
+    ChallengeMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeMetadataSummary)
+    ChallengeMetadataSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeArn, location_name: "Arn"))
+    ChallengeMetadataSummary.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn"))
+    ChallengeMetadataSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    ChallengeMetadataSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
     ChallengeMetadataSummary.type = Types::ChallengeMetadataSummary
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    Connector.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "Arn"))
-    Connector.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateAuthorityArn, location_name: "CertificateAuthorityArn"))
-    Connector.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorType, location_name: "Type"))
-    Connector.add_member(:mobile_device_management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
-    Connector.add_member(:open_id_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenIdConfiguration, location_name: "OpenIdConfiguration"))
-    Connector.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorStatus, location_name: "Status"))
-    Connector.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorStatusReason, location_name: "StatusReason"))
-    Connector.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Endpoint"))
-    Connector.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    Connector.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
+    Connector.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "Arn"))
+    Connector.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthorityArn, location_name: "CertificateAuthorityArn"))
+    Connector.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, location_name: "Type"))
+    Connector.add_member(:mobile_device_management, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
+    Connector.add_member(:open_id_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenIdConfiguration, location_name: "OpenIdConfiguration"))
+    Connector.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, location_name: "Status"))
+    Connector.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatusReason, location_name: "StatusReason"))
+    Connector.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Endpoint"))
+    Connector.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    Connector.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
     Connector.type = Types::Connector
-    ConnectorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorSummary)
-    ConnectorStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    ConnectorStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ConnectorStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ConnectorStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ConnectorStatusReason.add_member(:internal_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
-    ConnectorStatusReason.add_member(:privateca_access_denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATECA_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "PRIVATECA_ACCESS_DENIED"}))
-    ConnectorStatusReason.add_member(:privateca_invalid_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATECA_INVALID_STATE", traits: {"smithy.api#enumValue" => "PRIVATECA_INVALID_STATE"}))
-    ConnectorStatusReason.add_member(:privateca_resource_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATECA_RESOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "PRIVATECA_RESOURCE_NOT_FOUND"}))
-    ConnectorSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "Arn"))
-    ConnectorSummary.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateAuthorityArn, location_name: "CertificateAuthorityArn"))
-    ConnectorSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorType, location_name: "Type"))
-    ConnectorSummary.add_member(:mobile_device_management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
-    ConnectorSummary.add_member(:open_id_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenIdConfiguration, location_name: "OpenIdConfiguration"))
-    ConnectorSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorStatus, location_name: "Status"))
-    ConnectorSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorStatusReason, location_name: "StatusReason"))
-    ConnectorSummary.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Endpoint"))
-    ConnectorSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    ConnectorSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
+    ConnectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary)
+    ConnectorStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ConnectorStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ConnectorStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ConnectorStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ConnectorStatusReason.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    ConnectorStatusReason.add_member(:privateca_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATECA_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "PRIVATECA_ACCESS_DENIED"}))
+    ConnectorStatusReason.add_member(:privateca_invalid_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATECA_INVALID_STATE", traits: {"smithy.api#enumValue" => "PRIVATECA_INVALID_STATE"}))
+    ConnectorStatusReason.add_member(:privateca_resource_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATECA_RESOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "PRIVATECA_RESOURCE_NOT_FOUND"}))
+    ConnectorSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "Arn"))
+    ConnectorSummary.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthorityArn, location_name: "CertificateAuthorityArn"))
+    ConnectorSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, location_name: "Type"))
+    ConnectorSummary.add_member(:mobile_device_management, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
+    ConnectorSummary.add_member(:open_id_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenIdConfiguration, location_name: "OpenIdConfiguration"))
+    ConnectorSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, location_name: "Status"))
+    ConnectorSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatusReason, location_name: "StatusReason"))
+    ConnectorSummary.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Endpoint"))
+    ConnectorSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    ConnectorSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "UpdatedAt"))
     ConnectorSummary.type = Types::ConnectorSummary
-    ConnectorType.add_member(:general_purpose, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GENERAL_PURPOSE", traits: {"smithy.api#enumValue" => "GENERAL_PURPOSE"}))
-    ConnectorType.add_member(:intune, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTUNE", traits: {"smithy.api#enumValue" => "INTUNE"}))
-    CreateChallengeRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#required" => {}}))
-    CreateChallengeRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateChallengeRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
+    ConnectorType.add_member(:general_purpose, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GENERAL_PURPOSE", traits: {"smithy.api#enumValue" => "GENERAL_PURPOSE"}))
+    ConnectorType.add_member(:intune, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTUNE", traits: {"smithy.api#enumValue" => "INTUNE"}))
+    CreateChallengeRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#required" => {}}))
+    CreateChallengeRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateChallengeRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
     CreateChallengeRequest.type = Types::CreateChallengeRequest
-    CreateChallengeResponse.add_member(:challenge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Challenge, location_name: "Challenge"))
+    CreateChallengeResponse.add_member(:challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: Challenge, location_name: "Challenge"))
     CreateChallengeResponse.type = Types::CreateChallengeResponse
-    CreateConnectorRequest.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateAuthorityArn, location_name: "CertificateAuthorityArn", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:mobile_device_management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
-    CreateConnectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
+    CreateConnectorRequest.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthorityArn, location_name: "CertificateAuthorityArn", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:mobile_device_management, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
+    CreateConnectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
     CreateConnectorRequest.type = Types::CreateConnectorRequest
-    CreateConnectorResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn"))
+    CreateConnectorResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn"))
     CreateConnectorResponse.type = Types::CreateConnectorResponse
-    DeleteChallengeRequest.add_member(:challenge_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeArn, location_name: "ChallengeArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteChallengeRequest.add_member(:challenge_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeArn, location_name: "ChallengeArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteChallengeRequest.type = Types::DeleteChallengeRequest
-    DeleteConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConnectorRequest.type = Types::DeleteConnectorRequest
-    GetChallengeMetadataRequest.add_member(:challenge_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeArn, location_name: "ChallengeArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetChallengeMetadataRequest.add_member(:challenge_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeArn, location_name: "ChallengeArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetChallengeMetadataRequest.type = Types::GetChallengeMetadataRequest
-    GetChallengeMetadataResponse.add_member(:challenge_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeMetadata, location_name: "ChallengeMetadata", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetChallengeMetadataResponse.add_member(:challenge_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeMetadata, location_name: "ChallengeMetadata", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetChallengeMetadataResponse.type = Types::GetChallengeMetadataResponse
-    GetChallengePasswordRequest.add_member(:challenge_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeArn, location_name: "ChallengeArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetChallengePasswordRequest.add_member(:challenge_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeArn, location_name: "ChallengeArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetChallengePasswordRequest.type = Types::GetChallengePasswordRequest
-    GetChallengePasswordResponse.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Password", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetChallengePasswordResponse.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, location_name: "Password", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetChallengePasswordResponse.type = Types::GetChallengePasswordResponse
-    GetConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConnectorRequest.type = Types::GetConnectorRequest
-    GetConnectorResponse.add_member(:connector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Connector, location_name: "Connector", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetConnectorResponse.add_member(:connector, ::Smithy::Schema::Shapes::MemberShape.new(target: Connector, location_name: "Connector", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetConnectorResponse.type = Types::GetConnectorResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    IntuneConfiguration.add_member(:azure_application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureApplicationId, location_name: "AzureApplicationId", traits: {"smithy.api#required" => {}}))
-    IntuneConfiguration.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureDomain, location_name: "Domain", traits: {"smithy.api#required" => {}}))
+    IntuneConfiguration.add_member(:azure_application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureApplicationId, location_name: "AzureApplicationId", traits: {"smithy.api#required" => {}}))
+    IntuneConfiguration.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureDomain, location_name: "Domain", traits: {"smithy.api#required" => {}}))
     IntuneConfiguration.type = Types::IntuneConfiguration
-    ListChallengeMetadataRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListChallengeMetadataRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListChallengeMetadataRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#httpQuery" => "ConnectorArn", "smithy.api#required" => {}}))
+    ListChallengeMetadataRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListChallengeMetadataRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListChallengeMetadataRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, location_name: "ConnectorArn", traits: {"smithy.api#httpQuery" => "ConnectorArn", "smithy.api#required" => {}}))
     ListChallengeMetadataRequest.type = Types::ListChallengeMetadataRequest
-    ListChallengeMetadataResponse.add_member(:challenges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChallengeMetadataList, location_name: "Challenges"))
-    ListChallengeMetadataResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChallengeMetadataResponse.add_member(:challenges, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeMetadataList, location_name: "Challenges"))
+    ListChallengeMetadataResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListChallengeMetadataResponse.type = Types::ListChallengeMetadataResponse
-    ListConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListConnectorsRequest.type = Types::ListConnectorsRequest
-    ListConnectorsResponse.add_member(:connectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorList, location_name: "Connectors"))
-    ListConnectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConnectorsResponse.add_member(:connectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorList, location_name: "Connectors"))
+    ListConnectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListConnectorsResponse.type = Types::ListConnectorsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MobileDeviceManagement.add_member(:intune, Types::MobileDeviceManagement::Intune, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntuneConfiguration, location_name: "Intune"))
-    MobileDeviceManagement.add_member(:unknown, Types::MobileDeviceManagement::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    MobileDeviceManagement.add_member(:intune, Types::MobileDeviceManagement::Intune, ::Smithy::Schema::Shapes::MemberShape.new(target: IntuneConfiguration, location_name: "Intune"))
+    MobileDeviceManagement.add_member(:unknown, Types::MobileDeviceManagement::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     MobileDeviceManagement.type = Types::MobileDeviceManagement
-    OpenIdConfiguration.add_member(:issuer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Issuer"))
-    OpenIdConfiguration.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Subject"))
-    OpenIdConfiguration.add_member(:audience, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Audience"))
+    OpenIdConfiguration.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Issuer"))
+    OpenIdConfiguration.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Subject"))
+    OpenIdConfiguration.add_member(:audience, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Audience"))
     OpenIdConfiguration.type = Types::OpenIdConfiguration
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "QuotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"aws.api#data" => "tagging", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"aws.api#data" => "tagging", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"aws.api#data" => "tagging", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"aws.api#data" => "tagging", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionReason.add_member(:ca_cert_validity_too_short, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CA_CERT_VALIDITY_TOO_SHORT", traits: {"smithy.api#enumValue" => "CA_CERT_VALIDITY_TOO_SHORT"}))
-    ValidationExceptionReason.add_member(:invalid_ca_usage_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_CA_USAGE_MODE", traits: {"smithy.api#enumValue" => "INVALID_CA_USAGE_MODE"}))
-    ValidationExceptionReason.add_member(:invalid_connector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_CONNECTOR_TYPE", traits: {"smithy.api#enumValue" => "INVALID_CONNECTOR_TYPE"}))
-    ValidationExceptionReason.add_member(:invalid_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_STATE", traits: {"smithy.api#enumValue" => "INVALID_STATE"}))
-    ValidationExceptionReason.add_member(:no_client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_CLIENT_TOKEN", traits: {"smithy.api#enumValue" => "NO_CLIENT_TOKEN"}))
-    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
-    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
+    ValidationExceptionReason.add_member(:ca_cert_validity_too_short, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CA_CERT_VALIDITY_TOO_SHORT", traits: {"smithy.api#enumValue" => "CA_CERT_VALIDITY_TOO_SHORT"}))
+    ValidationExceptionReason.add_member(:invalid_ca_usage_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_CA_USAGE_MODE", traits: {"smithy.api#enumValue" => "INVALID_CA_USAGE_MODE"}))
+    ValidationExceptionReason.add_member(:invalid_connector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_CONNECTOR_TYPE", traits: {"smithy.api#enumValue" => "INVALID_CONNECTOR_TYPE"}))
+    ValidationExceptionReason.add_member(:invalid_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_STATE", traits: {"smithy.api#enumValue" => "INVALID_STATE"}))
+    ValidationExceptionReason.add_member(:no_client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_CLIENT_TOKEN", traits: {"smithy.api#enumValue" => "NO_CLIENT_TOKEN"}))
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
 
     PcaConnectorScep = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.pcaconnectorscep#PcaConnectorScep"
@@ -215,153 +215,153 @@ module Aws::PcaConnectorScep
       service.add_operation(:create_challenge, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#CreateChallenge"
         operation.name = "CreateChallenge"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChallengeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChallengeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateChallengeRequest
+        operation.output = CreateChallengeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "POST", "uri" => "/challenges"}}
       end)
       service.add_operation(:create_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#CreateConnector"
         operation.name = "CreateConnector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConnectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConnectorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateConnectorRequest
+        operation.output = CreateConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "POST", "uri" => "/connectors"}}
       end)
       service.add_operation(:delete_challenge, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#DeleteChallenge"
         operation.name = "DeleteChallenge"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteChallengeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteChallengeRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/challenges/{ChallengeArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#DeleteConnector"
         operation.name = "DeleteConnector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConnectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteConnectorRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/connectors/{ConnectorArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_challenge_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#GetChallengeMetadata"
         operation.name = "GetChallengeMetadata"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChallengeMetadataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChallengeMetadataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetChallengeMetadataRequest
+        operation.output = GetChallengeMetadataResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/challengeMetadata/{ChallengeArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_challenge_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#GetChallengePassword"
         operation.name = "GetChallengePassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChallengePasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChallengePasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetChallengePasswordRequest
+        operation.output = GetChallengePasswordResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/challengePasswords/{ChallengeArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#GetConnector"
         operation.name = "GetConnector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConnectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConnectorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetConnectorRequest
+        operation.output = GetConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/connectors/{ConnectorArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_challenge_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#ListChallengeMetadata"
         operation.name = "ListChallengeMetadata"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChallengeMetadataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChallengeMetadataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListChallengeMetadataRequest
+        operation.output = ListChallengeMetadataResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/challengeMetadata"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListChallengeMetadata.new
       end)
       service.add_operation(:list_connectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#ListConnectors"
         operation.name = "ListConnectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectorsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectorsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListConnectorsRequest
+        operation.output = ListConnectorsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/connectors"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListConnectors.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/tags/{ResourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/tags/{ResourceArn}"}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcaconnectorscep#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/tags/{ResourceArn}"}, "smithy.api#idempotent" => {}}
       end)
     end

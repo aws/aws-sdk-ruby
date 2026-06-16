@@ -58,108 +58,108 @@ module Aws::CloudSearchDomain
     UploadDocumentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudsearchdomain#UploadDocumentsRequest", name: "UploadDocumentsRequest")
     UploadDocumentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudsearchdomain#UploadDocumentsResponse", name: "UploadDocumentsResponse")
 
-    Bucket.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "value"))
-    Bucket.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "count", traits: {"smithy.api#default" => 0}))
+    Bucket.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "value"))
+    Bucket.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "count", traits: {"smithy.api#default" => 0}))
     Bucket.type = Types::Bucket
-    BucketInfo.add_member(:buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketList, location_name: "buckets"))
+    BucketInfo.add_member(:buckets, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketList, location_name: "buckets"))
     BucketInfo.type = Types::BucketInfo
-    BucketList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Bucket)
-    ContentType.add_member(:application_json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "application_json", traits: {"smithy.api#enumValue" => "application/json"}))
-    ContentType.add_member(:application_xml, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "application_xml", traits: {"smithy.api#enumValue" => "application/xml"}))
-    DocumentServiceException.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "status"))
-    DocumentServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BucketList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket)
+    ContentType.add_member(:application_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "application_json", traits: {"smithy.api#enumValue" => "application/json"}))
+    ContentType.add_member(:application_xml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "application_xml", traits: {"smithy.api#enumValue" => "application/xml"}))
+    DocumentServiceException.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "status"))
+    DocumentServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     DocumentServiceException.type = Types::DocumentServiceException
-    DocumentServiceWarning.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DocumentServiceWarning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     DocumentServiceWarning.type = Types::DocumentServiceWarning
-    DocumentServiceWarnings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentServiceWarning)
-    Exprs.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Exprs.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Facets.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Facets.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketInfo)
-    FieldStats.add_member(:min, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "min"))
-    FieldStats.add_member(:max, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "max"))
-    FieldStats.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "count", traits: {"smithy.api#default" => 0}))
-    FieldStats.add_member(:missing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "missing", traits: {"smithy.api#default" => 0}))
-    FieldStats.add_member(:sum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "sum", traits: {"smithy.api#default" => 0}))
-    FieldStats.add_member(:sum_of_squares, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "sumOfSquares", traits: {"smithy.api#default" => 0}))
-    FieldStats.add_member(:mean, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "mean"))
-    FieldStats.add_member(:stddev, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "stddev", traits: {"smithy.api#default" => 0}))
+    DocumentServiceWarnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentServiceWarning)
+    Exprs.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Exprs.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Facets.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Facets.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BucketInfo)
+    FieldStats.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "min"))
+    FieldStats.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "max"))
+    FieldStats.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "count", traits: {"smithy.api#default" => 0}))
+    FieldStats.add_member(:missing, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "missing", traits: {"smithy.api#default" => 0}))
+    FieldStats.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "sum", traits: {"smithy.api#default" => 0}))
+    FieldStats.add_member(:sum_of_squares, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "sumOfSquares", traits: {"smithy.api#default" => 0}))
+    FieldStats.add_member(:mean, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "mean"))
+    FieldStats.add_member(:stddev, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "stddev", traits: {"smithy.api#default" => 0}))
     FieldStats.type = Types::FieldStats
-    FieldValue.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Fields.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Fields.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldValue)
-    Highlights.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Highlights.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Hit.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "id"))
-    Hit.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Fields, location_name: "fields"))
-    Hit.add_member(:exprs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Exprs, location_name: "exprs"))
-    Hit.add_member(:highlights, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Highlights, location_name: "highlights"))
+    FieldValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Fields.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Fields.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue)
+    Highlights.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Highlights.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Hit.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "id"))
+    Hit.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: Fields, location_name: "fields"))
+    Hit.add_member(:exprs, ::Smithy::Schema::Shapes::MemberShape.new(target: Exprs, location_name: "exprs"))
+    Hit.add_member(:highlights, ::Smithy::Schema::Shapes::MemberShape.new(target: Highlights, location_name: "highlights"))
     Hit.type = Types::Hit
-    HitList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hit)
-    Hits.add_member(:found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "found", traits: {"smithy.api#default" => 0}))
-    Hits.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "start", traits: {"smithy.api#default" => 0}))
-    Hits.add_member(:cursor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "cursor"))
-    Hits.add_member(:hit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HitList, location_name: "hit"))
+    HitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Hit)
+    Hits.add_member(:found, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "found", traits: {"smithy.api#default" => 0}))
+    Hits.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "start", traits: {"smithy.api#default" => 0}))
+    Hits.add_member(:cursor, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "cursor"))
+    Hits.add_member(:hit, ::Smithy::Schema::Shapes::MemberShape.new(target: HitList, location_name: "hit"))
     Hits.type = Types::Hits
-    QueryParser.add_member(:simple, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "simple", traits: {"smithy.api#enumValue" => "simple"}))
-    QueryParser.add_member(:structured, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "structured", traits: {"smithy.api#enumValue" => "structured"}))
-    QueryParser.add_member(:lucene, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "lucene", traits: {"smithy.api#enumValue" => "lucene"}))
-    QueryParser.add_member(:dismax, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "dismax", traits: {"smithy.api#enumValue" => "dismax"}))
-    SearchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    QueryParser.add_member(:simple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "simple", traits: {"smithy.api#enumValue" => "simple"}))
+    QueryParser.add_member(:structured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "structured", traits: {"smithy.api#enumValue" => "structured"}))
+    QueryParser.add_member(:lucene, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "lucene", traits: {"smithy.api#enumValue" => "lucene"}))
+    QueryParser.add_member(:dismax, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "dismax", traits: {"smithy.api#enumValue" => "dismax"}))
+    SearchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     SearchException.type = Types::SearchException
-    SearchRequest.add_member(:cursor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cursor, location_name: "cursor", traits: {"smithy.api#httpQuery" => "cursor"}))
-    SearchRequest.add_member(:expr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expr, location_name: "expr", traits: {"smithy.api#httpQuery" => "expr"}))
-    SearchRequest.add_member(:facet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Facet, location_name: "facet", traits: {"smithy.api#httpQuery" => "facet"}))
-    SearchRequest.add_member(:filter_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterQuery, location_name: "filterQuery", traits: {"smithy.api#httpQuery" => "fq"}))
-    SearchRequest.add_member(:highlight, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Highlight, location_name: "highlight", traits: {"smithy.api#httpQuery" => "highlight"}))
-    SearchRequest.add_member(:partial, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Partial, location_name: "partial", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "partial"}))
-    SearchRequest.add_member(:query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Query, location_name: "query", traits: {"smithy.api#httpQuery" => "q", "smithy.api#required" => {}}))
-    SearchRequest.add_member(:query_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryOptions, location_name: "queryOptions", traits: {"smithy.api#httpQuery" => "q.options"}))
-    SearchRequest.add_member(:query_parser, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryParser, location_name: "queryParser", traits: {"smithy.api#httpQuery" => "q.parser"}))
-    SearchRequest.add_member(:return, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Return, location_name: "return", traits: {"smithy.api#httpQuery" => "return"}))
-    SearchRequest.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "size", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "size"}))
-    SearchRequest.add_member(:sort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sort, location_name: "sort", traits: {"smithy.api#httpQuery" => "sort"}))
-    SearchRequest.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Start, location_name: "start", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "start"}))
-    SearchRequest.add_member(:stats, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stat, location_name: "stats", traits: {"smithy.api#httpQuery" => "stats"}))
+    SearchRequest.add_member(:cursor, ::Smithy::Schema::Shapes::MemberShape.new(target: Cursor, location_name: "cursor", traits: {"smithy.api#httpQuery" => "cursor"}))
+    SearchRequest.add_member(:expr, ::Smithy::Schema::Shapes::MemberShape.new(target: Expr, location_name: "expr", traits: {"smithy.api#httpQuery" => "expr"}))
+    SearchRequest.add_member(:facet, ::Smithy::Schema::Shapes::MemberShape.new(target: Facet, location_name: "facet", traits: {"smithy.api#httpQuery" => "facet"}))
+    SearchRequest.add_member(:filter_query, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterQuery, location_name: "filterQuery", traits: {"smithy.api#httpQuery" => "fq"}))
+    SearchRequest.add_member(:highlight, ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, location_name: "highlight", traits: {"smithy.api#httpQuery" => "highlight"}))
+    SearchRequest.add_member(:partial, ::Smithy::Schema::Shapes::MemberShape.new(target: Partial, location_name: "partial", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "partial"}))
+    SearchRequest.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, location_name: "query", traits: {"smithy.api#httpQuery" => "q", "smithy.api#required" => {}}))
+    SearchRequest.add_member(:query_options, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryOptions, location_name: "queryOptions", traits: {"smithy.api#httpQuery" => "q.options"}))
+    SearchRequest.add_member(:query_parser, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParser, location_name: "queryParser", traits: {"smithy.api#httpQuery" => "q.parser"}))
+    SearchRequest.add_member(:return, ::Smithy::Schema::Shapes::MemberShape.new(target: Return, location_name: "return", traits: {"smithy.api#httpQuery" => "return"}))
+    SearchRequest.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, location_name: "size", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "size"}))
+    SearchRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, location_name: "sort", traits: {"smithy.api#httpQuery" => "sort"}))
+    SearchRequest.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Start, location_name: "start", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "start"}))
+    SearchRequest.add_member(:stats, ::Smithy::Schema::Shapes::MemberShape.new(target: Stat, location_name: "stats", traits: {"smithy.api#httpQuery" => "stats"}))
     SearchRequest.type = Types::SearchRequest
-    SearchResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchStatus, location_name: "status"))
-    SearchResponse.add_member(:hits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hits, location_name: "hits"))
-    SearchResponse.add_member(:facets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Facets, location_name: "facets"))
-    SearchResponse.add_member(:stats, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stats, location_name: "stats"))
+    SearchResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchStatus, location_name: "status"))
+    SearchResponse.add_member(:hits, ::Smithy::Schema::Shapes::MemberShape.new(target: Hits, location_name: "hits"))
+    SearchResponse.add_member(:facets, ::Smithy::Schema::Shapes::MemberShape.new(target: Facets, location_name: "facets"))
+    SearchResponse.add_member(:stats, ::Smithy::Schema::Shapes::MemberShape.new(target: Stats, location_name: "stats"))
     SearchResponse.type = Types::SearchResponse
-    SearchStatus.add_member(:timems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "timems", traits: {"smithy.api#default" => 0}))
-    SearchStatus.add_member(:rid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "rid"))
+    SearchStatus.add_member(:timems, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "timems", traits: {"smithy.api#default" => 0}))
+    SearchStatus.add_member(:rid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "rid"))
     SearchStatus.type = Types::SearchStatus
-    Stats.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Stats.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldStats)
-    SuggestModel.add_member(:query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "query"))
-    SuggestModel.add_member(:found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "found", traits: {"smithy.api#default" => 0}))
-    SuggestModel.add_member(:suggestions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Suggestions, location_name: "suggestions"))
+    Stats.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Stats.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldStats)
+    SuggestModel.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "query"))
+    SuggestModel.add_member(:found, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "found", traits: {"smithy.api#default" => 0}))
+    SuggestModel.add_member(:suggestions, ::Smithy::Schema::Shapes::MemberShape.new(target: Suggestions, location_name: "suggestions"))
     SuggestModel.type = Types::SuggestModel
-    SuggestRequest.add_member(:query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Query, location_name: "query", traits: {"smithy.api#httpQuery" => "q", "smithy.api#required" => {}}))
-    SuggestRequest.add_member(:suggester, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Suggester, location_name: "suggester", traits: {"smithy.api#httpQuery" => "suggester", "smithy.api#required" => {}}))
-    SuggestRequest.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuggestionsSize, location_name: "size", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "size"}))
+    SuggestRequest.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, location_name: "query", traits: {"smithy.api#httpQuery" => "q", "smithy.api#required" => {}}))
+    SuggestRequest.add_member(:suggester, ::Smithy::Schema::Shapes::MemberShape.new(target: Suggester, location_name: "suggester", traits: {"smithy.api#httpQuery" => "suggester", "smithy.api#required" => {}}))
+    SuggestRequest.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionsSize, location_name: "size", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "size"}))
     SuggestRequest.type = Types::SuggestRequest
-    SuggestResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuggestStatus, location_name: "status"))
-    SuggestResponse.add_member(:suggest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuggestModel, location_name: "suggest"))
+    SuggestResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestStatus, location_name: "status"))
+    SuggestResponse.add_member(:suggest, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestModel, location_name: "suggest"))
     SuggestResponse.type = Types::SuggestResponse
-    SuggestStatus.add_member(:timems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "timems", traits: {"smithy.api#default" => 0}))
-    SuggestStatus.add_member(:rid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "rid"))
+    SuggestStatus.add_member(:timems, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "timems", traits: {"smithy.api#default" => 0}))
+    SuggestStatus.add_member(:rid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "rid"))
     SuggestStatus.type = Types::SuggestStatus
-    SuggestionMatch.add_member(:suggestion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "suggestion"))
-    SuggestionMatch.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "score", traits: {"smithy.api#default" => 0}))
-    SuggestionMatch.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    SuggestionMatch.add_member(:suggestion, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "suggestion"))
+    SuggestionMatch.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "score", traits: {"smithy.api#default" => 0}))
+    SuggestionMatch.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "id"))
     SuggestionMatch.type = Types::SuggestionMatch
-    Suggestions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuggestionMatch)
-    UploadDocumentsRequest.add_member(:documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blob, location_name: "documents", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
-    UploadDocumentsRequest.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
+    Suggestions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionMatch)
+    UploadDocumentsRequest.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, location_name: "documents", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UploadDocumentsRequest.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, location_name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
     UploadDocumentsRequest[:http_payload] = :documents
     UploadDocumentsRequest[:http_payload_member] = UploadDocumentsRequest.member(:documents)
     UploadDocumentsRequest.type = Types::UploadDocumentsRequest
-    UploadDocumentsResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "status"))
-    UploadDocumentsResponse.add_member(:adds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Adds, location_name: "adds", traits: {"smithy.api#default" => 0}))
-    UploadDocumentsResponse.add_member(:deletes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Deletes, location_name: "deletes", traits: {"smithy.api#default" => 0}))
-    UploadDocumentsResponse.add_member(:warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentServiceWarnings, location_name: "warnings"))
+    UploadDocumentsResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "status"))
+    UploadDocumentsResponse.add_member(:adds, ::Smithy::Schema::Shapes::MemberShape.new(target: Adds, location_name: "adds", traits: {"smithy.api#default" => 0}))
+    UploadDocumentsResponse.add_member(:deletes, ::Smithy::Schema::Shapes::MemberShape.new(target: Deletes, location_name: "deletes", traits: {"smithy.api#default" => 0}))
+    UploadDocumentsResponse.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentServiceWarnings, location_name: "warnings"))
     UploadDocumentsResponse.type = Types::UploadDocumentsResponse
 
     AmazonCloudSearch2013 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -170,25 +170,25 @@ module Aws::CloudSearchDomain
       service.add_operation(:search, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudsearchdomain#Search"
         operation.name = "Search"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchException)
+        operation.input = SearchRequest
+        operation.output = SearchResponse
+        operation.errors << SearchException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2013-01-01/search?format=sdk&pretty=true", "code" => 200}}
       end)
       service.add_operation(:suggest, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudsearchdomain#Suggest"
         operation.name = "Suggest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuggestRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuggestResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchException)
+        operation.input = SuggestRequest
+        operation.output = SuggestResponse
+        operation.errors << SearchException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2013-01-01/suggest?format=sdk&pretty=true", "code" => 200}}
       end)
       service.add_operation(:upload_documents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudsearchdomain#UploadDocuments"
         operation.name = "UploadDocuments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadDocumentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadDocumentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentServiceException)
+        operation.input = UploadDocumentsRequest
+        operation.output = UploadDocumentsResponse
+        operation.errors << DocumentServiceException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2013-01-01/documents/batch?format=sdk", "code" => 200}}
       end)
     end

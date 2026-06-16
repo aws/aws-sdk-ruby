@@ -376,984 +376,984 @@ module Aws::WorkMail
     WorkMailDomainName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workmail#WorkMailDomainName", name: "WorkMailDomainName", traits: {"smithy.api#length" => {"min" => 3, "max" => 209}, "smithy.api#pattern" => "^[a-zA-Z0-9.-]+$"})
     WorkMailIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workmail#WorkMailIdentifier", name: "WorkMailIdentifier", traits: {"smithy.api#length" => {"min" => 12, "max" => 256}})
 
-    AccessControlRule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleName, location_name: "Name"))
-    AccessControlRule.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleEffect, location_name: "Effect"))
-    AccessControlRule.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleDescription, location_name: "Description"))
-    AccessControlRule.add_member(:ip_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRangeList, location_name: "IpRanges"))
-    AccessControlRule.add_member(:not_ip_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRangeList, location_name: "NotIpRanges"))
-    AccessControlRule.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsList, location_name: "Actions"))
-    AccessControlRule.add_member(:not_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsList, location_name: "NotActions"))
-    AccessControlRule.add_member(:user_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
-    AccessControlRule.add_member(:not_user_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIdList, location_name: "NotUserIds"))
-    AccessControlRule.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    AccessControlRule.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
-    AccessControlRule.add_member(:impersonation_role_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleIdList, location_name: "ImpersonationRoleIds"))
-    AccessControlRule.add_member(:not_impersonation_role_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleIdList, location_name: "NotImpersonationRoleIds"))
+    AccessControlRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleName, location_name: "Name"))
+    AccessControlRule.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleEffect, location_name: "Effect"))
+    AccessControlRule.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleDescription, location_name: "Description"))
+    AccessControlRule.add_member(:ip_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRangeList, location_name: "IpRanges"))
+    AccessControlRule.add_member(:not_ip_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRangeList, location_name: "NotIpRanges"))
+    AccessControlRule.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsList, location_name: "Actions"))
+    AccessControlRule.add_member(:not_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsList, location_name: "NotActions"))
+    AccessControlRule.add_member(:user_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdList, location_name: "UserIds"))
+    AccessControlRule.add_member(:not_user_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdList, location_name: "NotUserIds"))
+    AccessControlRule.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    AccessControlRule.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
+    AccessControlRule.add_member(:impersonation_role_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleIdList, location_name: "ImpersonationRoleIds"))
+    AccessControlRule.add_member(:not_impersonation_role_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleIdList, location_name: "NotImpersonationRoleIds"))
     AccessControlRule.type = Types::AccessControlRule
-    AccessControlRuleEffect.add_member(:allow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
-    AccessControlRuleEffect.add_member(:deny, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
-    AccessControlRuleNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleName)
-    AccessControlRulesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRule)
-    AccessEffect.add_member(:allow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
-    AccessEffect.add_member(:deny, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
-    ActionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleAction)
-    Aliases.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress)
-    AssociateDelegateToResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    AssociateDelegateToResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    AssociateDelegateToResourceRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    AccessControlRuleEffect.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
+    AccessControlRuleEffect.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
+    AccessControlRuleNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleName)
+    AccessControlRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRule)
+    AccessEffect.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
+    AccessEffect.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
+    ActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleAction)
+    Aliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress)
+    AssociateDelegateToResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    AssociateDelegateToResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    AssociateDelegateToResourceRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
     AssociateDelegateToResourceRequest.type = Types::AssociateDelegateToResourceRequest
     AssociateDelegateToResourceResponse.type = Types::AssociateDelegateToResourceResponse
-    AssociateMemberToGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    AssociateMemberToGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
-    AssociateMemberToGroupRequest.add_member(:member_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "MemberId", traits: {"smithy.api#required" => {}}))
+    AssociateMemberToGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    AssociateMemberToGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
+    AssociateMemberToGroupRequest.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "MemberId", traits: {"smithy.api#required" => {}}))
     AssociateMemberToGroupRequest.type = Types::AssociateMemberToGroupRequest
     AssociateMemberToGroupResponse.type = Types::AssociateMemberToGroupResponse
-    AssumeImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    AssumeImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
+    AssumeImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    AssumeImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
     AssumeImpersonationRoleRequest.type = Types::AssumeImpersonationRoleRequest
-    AssumeImpersonationRoleResponse.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationToken, location_name: "Token"))
-    AssumeImpersonationRoleResponse.add_member(:expires_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiresIn, location_name: "ExpiresIn"))
+    AssumeImpersonationRoleResponse.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationToken, location_name: "Token"))
+    AssumeImpersonationRoleResponse.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresIn, location_name: "ExpiresIn"))
     AssumeImpersonationRoleResponse.type = Types::AssumeImpersonationRoleResponse
-    AvailabilityConfiguration.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
-    AvailabilityConfiguration.add_member(:provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityProviderType, location_name: "ProviderType"))
-    AvailabilityConfiguration.add_member(:ews_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedactedEwsAvailabilityProvider, location_name: "EwsProvider"))
-    AvailabilityConfiguration.add_member(:lambda_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
-    AvailabilityConfiguration.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    AvailabilityConfiguration.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    AvailabilityConfiguration.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName"))
+    AvailabilityConfiguration.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityProviderType, location_name: "ProviderType"))
+    AvailabilityConfiguration.add_member(:ews_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: RedactedEwsAvailabilityProvider, location_name: "EwsProvider"))
+    AvailabilityConfiguration.add_member(:lambda_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    AvailabilityConfiguration.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    AvailabilityConfiguration.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
     AvailabilityConfiguration.type = Types::AvailabilityConfiguration
-    AvailabilityConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityConfiguration)
-    AvailabilityProviderType.add_member(:ews, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EWS", traits: {"smithy.api#enumValue" => "EWS"}))
-    AvailabilityProviderType.add_member(:lambda, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAMBDA", traits: {"smithy.api#enumValue" => "LAMBDA"}))
-    BookingOptions.add_member(:auto_accept_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoAcceptRequests", traits: {"smithy.api#default" => false}))
-    BookingOptions.add_member(:auto_decline_recurring_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoDeclineRecurringRequests", traits: {"smithy.api#default" => false}))
-    BookingOptions.add_member(:auto_decline_conflicting_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoDeclineConflictingRequests", traits: {"smithy.api#default" => false}))
+    AvailabilityConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityConfiguration)
+    AvailabilityProviderType.add_member(:ews, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EWS", traits: {"smithy.api#enumValue" => "EWS"}))
+    AvailabilityProviderType.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAMBDA", traits: {"smithy.api#enumValue" => "LAMBDA"}))
+    BookingOptions.add_member(:auto_accept_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AutoAcceptRequests", traits: {"smithy.api#default" => false}))
+    BookingOptions.add_member(:auto_decline_recurring_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AutoDeclineRecurringRequests", traits: {"smithy.api#default" => false}))
+    BookingOptions.add_member(:auto_decline_conflicting_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AutoDeclineConflictingRequests", traits: {"smithy.api#default" => false}))
     BookingOptions.type = Types::BookingOptions
-    CancelMailboxExportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CancelMailboxExportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportJobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
-    CancelMailboxExportJobRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CancelMailboxExportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CancelMailboxExportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    CancelMailboxExportJobRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     CancelMailboxExportJobRequest.type = Types::CancelMailboxExportJobRequest
     CancelMailboxExportJobResponse.type = Types::CancelMailboxExportJobResponse
-    CreateAliasRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    CreateAliasRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    CreateAliasRequest.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Alias", traits: {"smithy.api#required" => {}}))
+    CreateAliasRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CreateAliasRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    CreateAliasRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Alias", traits: {"smithy.api#required" => {}}))
     CreateAliasRequest.type = Types::CreateAliasRequest
     CreateAliasResponse.type = Types::CreateAliasResponse
-    CreateAvailabilityConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    CreateAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
-    CreateAvailabilityConfigurationRequest.add_member(:ews_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EwsAvailabilityProvider, location_name: "EwsProvider"))
-    CreateAvailabilityConfigurationRequest.add_member(:lambda_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    CreateAvailabilityConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CreateAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    CreateAvailabilityConfigurationRequest.add_member(:ews_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: EwsAvailabilityProvider, location_name: "EwsProvider"))
+    CreateAvailabilityConfigurationRequest.add_member(:lambda_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
     CreateAvailabilityConfigurationRequest.type = Types::CreateAvailabilityConfigurationRequest
     CreateAvailabilityConfigurationResponse.type = Types::CreateAvailabilityConfigurationResponse
-    CreateGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    CreateGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateGroupRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
+    CreateGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CreateGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateGroupRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
     CreateGroupRequest.type = Types::CreateGroupRequest
-    CreateGroupResponse.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GroupId"))
+    CreateGroupResponse.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "GroupId"))
     CreateGroupResponse.type = Types::CreateGroupResponse
-    CreateIdentityCenterApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterApplicationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateIdentityCenterApplicationRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn", traits: {"smithy.api#required" => {}}))
-    CreateIdentityCenterApplicationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateIdentityCenterApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterApplicationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateIdentityCenterApplicationRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, location_name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    CreateIdentityCenterApplicationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateIdentityCenterApplicationRequest.type = Types::CreateIdentityCenterApplicationRequest
-    CreateIdentityCenterApplicationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
+    CreateIdentityCenterApplicationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "ApplicationArn"))
     CreateIdentityCenterApplicationResponse.type = Types::CreateIdentityCenterApplicationResponse
-    CreateImpersonationRoleRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    CreateImpersonationRoleRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateImpersonationRoleRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    CreateImpersonationRoleRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleDescription, location_name: "Description"))
-    CreateImpersonationRoleRequest.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleList, location_name: "Rules", traits: {"smithy.api#required" => {}}))
+    CreateImpersonationRoleRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CreateImpersonationRoleRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateImpersonationRoleRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    CreateImpersonationRoleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleDescription, location_name: "Description"))
+    CreateImpersonationRoleRequest.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleList, location_name: "Rules", traits: {"smithy.api#required" => {}}))
     CreateImpersonationRoleRequest.type = Types::CreateImpersonationRoleRequest
-    CreateImpersonationRoleResponse.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
+    CreateImpersonationRoleResponse.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
     CreateImpersonationRoleResponse.type = Types::CreateImpersonationRoleResponse
-    CreateMobileDeviceAccessRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    CreateMobileDeviceAccessRuleRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateMobileDeviceAccessRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateMobileDeviceAccessRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
-    CreateMobileDeviceAccessRuleRequest.add_member(:device_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "DeviceTypes"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "NotDeviceTypes"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:device_models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "DeviceModels"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "NotDeviceModels"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:device_operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:device_user_agents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "DeviceUserAgents"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_user_agents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CreateMobileDeviceAccessRuleRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateMobileDeviceAccessRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateMobileDeviceAccessRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_types, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeList, location_name: "DeviceTypes"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_types, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeList, location_name: "NotDeviceTypes"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModelList, location_name: "DeviceModels"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModelList, location_name: "NotDeviceModels"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_user_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgentList, location_name: "DeviceUserAgents"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_user_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
     CreateMobileDeviceAccessRuleRequest.type = Types::CreateMobileDeviceAccessRuleRequest
-    CreateMobileDeviceAccessRuleResponse.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
+    CreateMobileDeviceAccessRuleResponse.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
     CreateMobileDeviceAccessRuleResponse.type = Types::CreateMobileDeviceAccessRuleResponse
-    CreateOrganizationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
-    CreateOrganizationRequest.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationName, location_name: "Alias", traits: {"smithy.api#required" => {}}))
-    CreateOrganizationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateOrganizationRequest.add_member(:domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domains, location_name: "Domains"))
-    CreateOrganizationRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
-    CreateOrganizationRequest.add_member(:enable_interoperability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInteroperability", traits: {"smithy.api#default" => false}))
+    CreateOrganizationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, location_name: "DirectoryId"))
+    CreateOrganizationRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationName, location_name: "Alias", traits: {"smithy.api#required" => {}}))
+    CreateOrganizationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateOrganizationRequest.add_member(:domains, ::Smithy::Schema::Shapes::MemberShape.new(target: Domains, location_name: "Domains"))
+    CreateOrganizationRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn"))
+    CreateOrganizationRequest.add_member(:enable_interoperability, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "EnableInteroperability", traits: {"smithy.api#default" => false}))
     CreateOrganizationRequest.type = Types::CreateOrganizationRequest
-    CreateOrganizationResponse.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    CreateOrganizationResponse.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId"))
     CreateOrganizationResponse.type = Types::CreateOrganizationResponse
-    CreateResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    CreateResourceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateResourceRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    CreateResourceRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    CreateResourceRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
+    CreateResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CreateResourceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateResourceRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    CreateResourceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    CreateResourceRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
     CreateResourceRequest.type = Types::CreateResourceRequest
-    CreateResourceResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    CreateResourceResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId"))
     CreateResourceResponse.type = Types::CreateResourceResponse
-    CreateUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "DisplayName", traits: {"smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
-    CreateUserRequest.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserRole, location_name: "Role"))
-    CreateUserRequest.add_member(:first_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "FirstName"))
-    CreateUserRequest.add_member(:last_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "LastName"))
-    CreateUserRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
-    CreateUserRequest.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
+    CreateUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "DisplayName", traits: {"smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, location_name: "Password"))
+    CreateUserRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: UserRole, location_name: "Role"))
+    CreateUserRequest.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "FirstName"))
+    CreateUserRequest.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "LastName"))
+    CreateUserRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
+    CreateUserRequest.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
     CreateUserRequest.type = Types::CreateUserRequest
-    CreateUserResponse.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
+    CreateUserResponse.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId"))
     CreateUserResponse.type = Types::CreateUserResponse
-    Delegate.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    Delegate.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Delegate.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    Delegate.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     Delegate.type = Types::Delegate
-    DeleteAccessControlRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteAccessControlRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    DeleteAccessControlRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteAccessControlRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
     DeleteAccessControlRuleRequest.type = Types::DeleteAccessControlRuleRequest
     DeleteAccessControlRuleResponse.type = Types::DeleteAccessControlRuleResponse
-    DeleteAliasRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteAliasRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    DeleteAliasRequest.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Alias", traits: {"smithy.api#required" => {}}))
+    DeleteAliasRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteAliasRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    DeleteAliasRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Alias", traits: {"smithy.api#required" => {}}))
     DeleteAliasRequest.type = Types::DeleteAliasRequest
     DeleteAliasResponse.type = Types::DeleteAliasResponse
-    DeleteAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    DeleteAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
     DeleteAvailabilityConfigurationRequest.type = Types::DeleteAvailabilityConfigurationRequest
     DeleteAvailabilityConfigurationResponse.type = Types::DeleteAvailabilityConfigurationResponse
-    DeleteEmailMonitoringConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteEmailMonitoringConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     DeleteEmailMonitoringConfigurationRequest.type = Types::DeleteEmailMonitoringConfigurationRequest
     DeleteEmailMonitoringConfigurationResponse.type = Types::DeleteEmailMonitoringConfigurationResponse
-    DeleteGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
+    DeleteGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
     DeleteGroupRequest.type = Types::DeleteGroupRequest
     DeleteGroupResponse.type = Types::DeleteGroupResponse
-    DeleteIdentityCenterApplicationRequest.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn", traits: {"smithy.api#required" => {}}))
+    DeleteIdentityCenterApplicationRequest.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "ApplicationArn", traits: {"smithy.api#required" => {}}))
     DeleteIdentityCenterApplicationRequest.type = Types::DeleteIdentityCenterApplicationRequest
     DeleteIdentityCenterApplicationResponse.type = Types::DeleteIdentityCenterApplicationResponse
-    DeleteIdentityProviderConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteIdentityProviderConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     DeleteIdentityProviderConfigurationRequest.type = Types::DeleteIdentityProviderConfigurationRequest
     DeleteIdentityProviderConfigurationResponse.type = Types::DeleteIdentityProviderConfigurationResponse
-    DeleteImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
+    DeleteImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
     DeleteImpersonationRoleRequest.type = Types::DeleteImpersonationRoleRequest
     DeleteImpersonationRoleResponse.type = Types::DeleteImpersonationRoleResponse
-    DeleteMailboxPermissionsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteMailboxPermissionsRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    DeleteMailboxPermissionsRequest.add_member(:grantee_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GranteeId", traits: {"smithy.api#required" => {}}))
+    DeleteMailboxPermissionsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteMailboxPermissionsRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    DeleteMailboxPermissionsRequest.add_member(:grantee_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GranteeId", traits: {"smithy.api#required" => {}}))
     DeleteMailboxPermissionsRequest.type = Types::DeleteMailboxPermissionsRequest
     DeleteMailboxPermissionsResponse.type = Types::DeleteMailboxPermissionsResponse
-    DeleteMobileDeviceAccessOverrideRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteMobileDeviceAccessOverrideRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
-    DeleteMobileDeviceAccessOverrideRequest.add_member(:device_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId", traits: {"smithy.api#required" => {}}))
+    DeleteMobileDeviceAccessOverrideRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteMobileDeviceAccessOverrideRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    DeleteMobileDeviceAccessOverrideRequest.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, location_name: "DeviceId", traits: {"smithy.api#required" => {}}))
     DeleteMobileDeviceAccessOverrideRequest.type = Types::DeleteMobileDeviceAccessOverrideRequest
     DeleteMobileDeviceAccessOverrideResponse.type = Types::DeleteMobileDeviceAccessOverrideResponse
-    DeleteMobileDeviceAccessRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteMobileDeviceAccessRuleRequest.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId", traits: {"smithy.api#required" => {}}))
+    DeleteMobileDeviceAccessRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteMobileDeviceAccessRuleRequest.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId", traits: {"smithy.api#required" => {}}))
     DeleteMobileDeviceAccessRuleRequest.type = Types::DeleteMobileDeviceAccessRuleRequest
     DeleteMobileDeviceAccessRuleResponse.type = Types::DeleteMobileDeviceAccessRuleResponse
-    DeleteOrganizationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    DeleteOrganizationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteOrganizationRequest.add_member(:delete_directory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteDirectory", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    DeleteOrganizationRequest.add_member(:force_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceDelete", traits: {"smithy.api#default" => false}))
-    DeleteOrganizationRequest.add_member(:delete_identity_center_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteIdentityCenterApplication", traits: {"smithy.api#default" => false}))
+    DeleteOrganizationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteOrganizationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteOrganizationRequest.add_member(:delete_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DeleteDirectory", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeleteOrganizationRequest.add_member(:force_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ForceDelete", traits: {"smithy.api#default" => false}))
+    DeleteOrganizationRequest.add_member(:delete_identity_center_application, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DeleteIdentityCenterApplication", traits: {"smithy.api#default" => false}))
     DeleteOrganizationRequest.type = Types::DeleteOrganizationRequest
-    DeleteOrganizationResponse.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
-    DeleteOrganizationResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    DeleteOrganizationResponse.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId"))
+    DeleteOrganizationResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "State"))
     DeleteOrganizationResponse.type = Types::DeleteOrganizationResponse
-    DeletePersonalAccessTokenRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeletePersonalAccessTokenRequest.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenId, location_name: "PersonalAccessTokenId", traits: {"smithy.api#required" => {}}))
+    DeletePersonalAccessTokenRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeletePersonalAccessTokenRequest.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenId, location_name: "PersonalAccessTokenId", traits: {"smithy.api#required" => {}}))
     DeletePersonalAccessTokenRequest.type = Types::DeletePersonalAccessTokenRequest
     DeletePersonalAccessTokenResponse.type = Types::DeletePersonalAccessTokenResponse
-    DeleteResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DeleteResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
     DeleteResourceRequest.type = Types::DeleteResourceRequest
     DeleteResourceResponse.type = Types::DeleteResourceResponse
-    DeleteRetentionPolicyRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteRetentionPolicyRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortString, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    DeleteRetentionPolicyRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteRetentionPolicyRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortString, location_name: "Id", traits: {"smithy.api#required" => {}}))
     DeleteRetentionPolicyRequest.type = Types::DeleteRetentionPolicyRequest
     DeleteRetentionPolicyResponse.type = Types::DeleteRetentionPolicyResponse
-    DeleteUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeleteUserRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    DeleteUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeleteUserRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
     DeleteUserRequest.type = Types::DeleteUserRequest
     DeleteUserResponse.type = Types::DeleteUserResponse
-    DeregisterFromWorkMailRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeregisterFromWorkMailRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    DeregisterFromWorkMailRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeregisterFromWorkMailRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
     DeregisterFromWorkMailRequest.type = Types::DeregisterFromWorkMailRequest
     DeregisterFromWorkMailResponse.type = Types::DeregisterFromWorkMailResponse
-    DeregisterMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DeregisterMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    DeregisterMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DeregisterMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
     DeregisterMailDomainRequest.type = Types::DeregisterMailDomainRequest
     DeregisterMailDomainResponse.type = Types::DeregisterMailDomainResponse
-    DescribeEmailMonitoringConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeEmailMonitoringConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     DescribeEmailMonitoringConfigurationRequest.type = Types::DescribeEmailMonitoringConfigurationRequest
-    DescribeEmailMonitoringConfigurationResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    DescribeEmailMonitoringConfigurationResponse.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
+    DescribeEmailMonitoringConfigurationResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    DescribeEmailMonitoringConfigurationResponse.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, location_name: "LogGroupArn"))
     DescribeEmailMonitoringConfigurationResponse.type = Types::DescribeEmailMonitoringConfigurationResponse
-    DescribeEntityRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DescribeEntityRequest.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email", traits: {"smithy.api#required" => {}}))
+    DescribeEntityRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeEntityRequest.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email", traits: {"smithy.api#required" => {}}))
     DescribeEntityRequest.type = Types::DescribeEntityRequest
-    DescribeEntityResponse.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId"))
-    DescribeEntityResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    DescribeEntityResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityType, location_name: "Type"))
+    DescribeEntityResponse.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "EntityId"))
+    DescribeEntityResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    DescribeEntityResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, location_name: "Type"))
     DescribeEntityResponse.type = Types::DescribeEntityResponse
-    DescribeGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DescribeGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
+    DescribeGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
     DescribeGroupRequest.type = Types::DescribeGroupRequest
-    DescribeGroupResponse.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GroupId"))
-    DescribeGroupResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
-    DescribeGroupResponse.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
-    DescribeGroupResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    DescribeGroupResponse.add_member(:enabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
-    DescribeGroupResponse.add_member(:disabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
-    DescribeGroupResponse.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
+    DescribeGroupResponse.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "GroupId"))
+    DescribeGroupResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "Name"))
+    DescribeGroupResponse.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email"))
+    DescribeGroupResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    DescribeGroupResponse.add_member(:enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EnabledDate"))
+    DescribeGroupResponse.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DisabledDate"))
+    DescribeGroupResponse.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
     DescribeGroupResponse.type = Types::DescribeGroupResponse
-    DescribeIdentityProviderConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeIdentityProviderConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     DescribeIdentityProviderConfigurationRequest.type = Types::DescribeIdentityProviderConfigurationRequest
-    DescribeIdentityProviderConfigurationResponse.add_member(:authentication_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderAuthenticationMode, location_name: "AuthenticationMode"))
-    DescribeIdentityProviderConfigurationResponse.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
-    DescribeIdentityProviderConfigurationResponse.add_member(:personal_access_token_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenConfiguration, location_name: "PersonalAccessTokenConfiguration"))
+    DescribeIdentityProviderConfigurationResponse.add_member(:authentication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderAuthenticationMode, location_name: "AuthenticationMode"))
+    DescribeIdentityProviderConfigurationResponse.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
+    DescribeIdentityProviderConfigurationResponse.add_member(:personal_access_token_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenConfiguration, location_name: "PersonalAccessTokenConfiguration"))
     DescribeIdentityProviderConfigurationResponse.type = Types::DescribeIdentityProviderConfigurationResponse
-    DescribeInboundDmarcSettingsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeInboundDmarcSettingsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     DescribeInboundDmarcSettingsRequest.type = Types::DescribeInboundDmarcSettingsRequest
-    DescribeInboundDmarcSettingsResponse.add_member(:enforced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "Enforced", traits: {"smithy.api#default" => false}))
+    DescribeInboundDmarcSettingsResponse.add_member(:enforced, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "Enforced", traits: {"smithy.api#default" => false}))
     DescribeInboundDmarcSettingsResponse.type = Types::DescribeInboundDmarcSettingsResponse
-    DescribeMailboxExportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportJobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
-    DescribeMailboxExportJobRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeMailboxExportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeMailboxExportJobRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     DescribeMailboxExportJobRequest.type = Types::DescribeMailboxExportJobRequest
-    DescribeMailboxExportJobResponse.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId"))
-    DescribeMailboxExportJobResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DescribeMailboxExportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    DescribeMailboxExportJobResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
-    DescribeMailboxExportJobResponse.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
-    DescribeMailboxExportJobResponse.add_member(:s3_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Prefix"))
-    DescribeMailboxExportJobResponse.add_member(:s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Path"))
-    DescribeMailboxExportJobResponse.add_member(:estimated_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "EstimatedProgress", traits: {"smithy.api#default" => 0}))
-    DescribeMailboxExportJobResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportJobState, location_name: "State"))
-    DescribeMailboxExportJobResponse.add_member(:error_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportErrorInfo, location_name: "ErrorInfo"))
-    DescribeMailboxExportJobResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
-    DescribeMailboxExportJobResponse.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    DescribeMailboxExportJobResponse.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "EntityId"))
+    DescribeMailboxExportJobResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DescribeMailboxExportJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    DescribeMailboxExportJobResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn"))
+    DescribeMailboxExportJobResponse.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "S3BucketName"))
+    DescribeMailboxExportJobResponse.add_member(:s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "S3Prefix"))
+    DescribeMailboxExportJobResponse.add_member(:s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "S3Path"))
+    DescribeMailboxExportJobResponse.add_member(:estimated_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "EstimatedProgress", traits: {"smithy.api#default" => 0}))
+    DescribeMailboxExportJobResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJobState, location_name: "State"))
+    DescribeMailboxExportJobResponse.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportErrorInfo, location_name: "ErrorInfo"))
+    DescribeMailboxExportJobResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTime"))
+    DescribeMailboxExportJobResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
     DescribeMailboxExportJobResponse.type = Types::DescribeMailboxExportJobResponse
-    DescribeOrganizationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeOrganizationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     DescribeOrganizationRequest.type = Types::DescribeOrganizationRequest
-    DescribeOrganizationResponse.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
-    DescribeOrganizationResponse.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationName, location_name: "Alias"))
-    DescribeOrganizationResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "State"))
-    DescribeOrganizationResponse.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DirectoryId"))
-    DescribeOrganizationResponse.add_member(:directory_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DirectoryType"))
-    DescribeOrganizationResponse.add_member(:default_mail_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DefaultMailDomain"))
-    DescribeOrganizationResponse.add_member(:completed_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedDate"))
-    DescribeOrganizationResponse.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    DescribeOrganizationResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ARN"))
-    DescribeOrganizationResponse.add_member(:migration_admin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "MigrationAdmin"))
-    DescribeOrganizationResponse.add_member(:interoperability_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "InteroperabilityEnabled", traits: {"smithy.api#default" => false}))
+    DescribeOrganizationResponse.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId"))
+    DescribeOrganizationResponse.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationName, location_name: "Alias"))
+    DescribeOrganizationResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "State"))
+    DescribeOrganizationResponse.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DirectoryId"))
+    DescribeOrganizationResponse.add_member(:directory_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DirectoryType"))
+    DescribeOrganizationResponse.add_member(:default_mail_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DefaultMailDomain"))
+    DescribeOrganizationResponse.add_member(:completed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CompletedDate"))
+    DescribeOrganizationResponse.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    DescribeOrganizationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ARN"))
+    DescribeOrganizationResponse.add_member(:migration_admin, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "MigrationAdmin"))
+    DescribeOrganizationResponse.add_member(:interoperability_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "InteroperabilityEnabled", traits: {"smithy.api#default" => false}))
     DescribeOrganizationResponse.type = Types::DescribeOrganizationResponse
-    DescribeResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DescribeResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DescribeResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
     DescribeResourceRequest.type = Types::DescribeResourceRequest
-    DescribeResourceResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
-    DescribeResourceResponse.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
-    DescribeResourceResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    DescribeResourceResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
-    DescribeResourceResponse.add_member(:booking_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BookingOptions, location_name: "BookingOptions"))
-    DescribeResourceResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    DescribeResourceResponse.add_member(:enabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
-    DescribeResourceResponse.add_member(:disabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
-    DescribeResourceResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    DescribeResourceResponse.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
+    DescribeResourceResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId"))
+    DescribeResourceResponse.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email"))
+    DescribeResourceResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    DescribeResourceResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "Type"))
+    DescribeResourceResponse.add_member(:booking_options, ::Smithy::Schema::Shapes::MemberShape.new(target: BookingOptions, location_name: "BookingOptions"))
+    DescribeResourceResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    DescribeResourceResponse.add_member(:enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EnabledDate"))
+    DescribeResourceResponse.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DisabledDate"))
+    DescribeResourceResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    DescribeResourceResponse.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
     DescribeResourceResponse.type = Types::DescribeResourceResponse
-    DescribeUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DescribeUserRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    DescribeUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DescribeUserRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
     DescribeUserRequest.type = Types::DescribeUserRequest
-    DescribeUserResponse.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
-    DescribeUserResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "Name"))
-    DescribeUserResponse.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
-    DescribeUserResponse.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "DisplayName"))
-    DescribeUserResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    DescribeUserResponse.add_member(:user_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserRole, location_name: "UserRole"))
-    DescribeUserResponse.add_member(:enabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
-    DescribeUserResponse.add_member(:disabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
-    DescribeUserResponse.add_member(:mailbox_provisioned_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "MailboxProvisionedDate"))
-    DescribeUserResponse.add_member(:mailbox_deprovisioned_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "MailboxDeprovisionedDate"))
-    DescribeUserResponse.add_member(:first_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "FirstName"))
-    DescribeUserResponse.add_member(:last_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "LastName"))
-    DescribeUserResponse.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
-    DescribeUserResponse.add_member(:initials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Initials"))
-    DescribeUserResponse.add_member(:telephone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Telephone"))
-    DescribeUserResponse.add_member(:street, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Street"))
-    DescribeUserResponse.add_member(:job_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "JobTitle"))
-    DescribeUserResponse.add_member(:city, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "City"))
-    DescribeUserResponse.add_member(:company, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Company"))
-    DescribeUserResponse.add_member(:zip_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "ZipCode"))
-    DescribeUserResponse.add_member(:department, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Department"))
-    DescribeUserResponse.add_member(:country, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Country"))
-    DescribeUserResponse.add_member(:office, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Office"))
-    DescribeUserResponse.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
-    DescribeUserResponse.add_member(:identity_provider_identity_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderIdentityStoreId, location_name: "IdentityProviderIdentityStoreId"))
+    DescribeUserResponse.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId"))
+    DescribeUserResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "Name"))
+    DescribeUserResponse.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email"))
+    DescribeUserResponse.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "DisplayName"))
+    DescribeUserResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    DescribeUserResponse.add_member(:user_role, ::Smithy::Schema::Shapes::MemberShape.new(target: UserRole, location_name: "UserRole"))
+    DescribeUserResponse.add_member(:enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EnabledDate"))
+    DescribeUserResponse.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DisabledDate"))
+    DescribeUserResponse.add_member(:mailbox_provisioned_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "MailboxProvisionedDate"))
+    DescribeUserResponse.add_member(:mailbox_deprovisioned_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "MailboxDeprovisionedDate"))
+    DescribeUserResponse.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "FirstName"))
+    DescribeUserResponse.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "LastName"))
+    DescribeUserResponse.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "HiddenFromGlobalAddressList", traits: {"smithy.api#default" => false}))
+    DescribeUserResponse.add_member(:initials, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Initials"))
+    DescribeUserResponse.add_member(:telephone, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Telephone"))
+    DescribeUserResponse.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Street"))
+    DescribeUserResponse.add_member(:job_title, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "JobTitle"))
+    DescribeUserResponse.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "City"))
+    DescribeUserResponse.add_member(:company, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Company"))
+    DescribeUserResponse.add_member(:zip_code, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "ZipCode"))
+    DescribeUserResponse.add_member(:department, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Department"))
+    DescribeUserResponse.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Country"))
+    DescribeUserResponse.add_member(:office, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Office"))
+    DescribeUserResponse.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
+    DescribeUserResponse.add_member(:identity_provider_identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderIdentityStoreId, location_name: "IdentityProviderIdentityStoreId"))
     DescribeUserResponse.type = Types::DescribeUserResponse
-    DeviceModelList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModel)
-    DeviceOperatingSystemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystem)
-    DeviceTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceType)
-    DeviceUserAgentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgent)
-    DirectoryInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DeviceModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModel)
+    DeviceOperatingSystemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystem)
+    DeviceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType)
+    DeviceUserAgentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgent)
+    DirectoryInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     DirectoryInUseException.type = Types::DirectoryInUseException
-    DirectoryServiceAuthenticationFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DirectoryServiceAuthenticationFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     DirectoryServiceAuthenticationFailedException.type = Types::DirectoryServiceAuthenticationFailedException
-    DirectoryUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DirectoryUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     DirectoryUnavailableException.type = Types::DirectoryUnavailableException
-    DisassociateDelegateFromResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DisassociateDelegateFromResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    DisassociateDelegateFromResourceRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    DisassociateDelegateFromResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DisassociateDelegateFromResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DisassociateDelegateFromResourceRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
     DisassociateDelegateFromResourceRequest.type = Types::DisassociateDelegateFromResourceRequest
     DisassociateDelegateFromResourceResponse.type = Types::DisassociateDelegateFromResourceResponse
-    DisassociateMemberFromGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    DisassociateMemberFromGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
-    DisassociateMemberFromGroupRequest.add_member(:member_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "MemberId", traits: {"smithy.api#required" => {}}))
+    DisassociateMemberFromGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    DisassociateMemberFromGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
+    DisassociateMemberFromGroupRequest.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "MemberId", traits: {"smithy.api#required" => {}}))
     DisassociateMemberFromGroupRequest.type = Types::DisassociateMemberFromGroupRequest
     DisassociateMemberFromGroupResponse.type = Types::DisassociateMemberFromGroupResponse
-    DnsRecord.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Type"))
-    DnsRecord.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Hostname"))
-    DnsRecord.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    DnsRecord.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Type"))
+    DnsRecord.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Hostname"))
+    DnsRecord.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
     DnsRecord.type = Types::DnsRecord
-    DnsRecordVerificationStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    DnsRecordVerificationStatus.add_member(:verified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED", traits: {"smithy.api#enumValue" => "VERIFIED"}))
-    DnsRecordVerificationStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DnsRecords.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsRecord)
-    Domain.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
-    Domain.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HostedZoneId, location_name: "HostedZoneId"))
+    DnsRecordVerificationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    DnsRecordVerificationStatus.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFIED", traits: {"smithy.api#enumValue" => "VERIFIED"}))
+    DnsRecordVerificationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DnsRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecord)
+    Domain.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    Domain.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneId, location_name: "HostedZoneId"))
     Domain.type = Types::Domain
-    Domains.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domain)
-    EmailAddressInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    Domains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Domain)
+    EmailAddressInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     EmailAddressInUseException.type = Types::EmailAddressInUseException
-    EntityAlreadyRegisteredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EntityAlreadyRegisteredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     EntityAlreadyRegisteredException.type = Types::EntityAlreadyRegisteredException
-    EntityNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EntityNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     EntityNotFoundException.type = Types::EntityNotFoundException
-    EntityState.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    EntityState.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    EntityState.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    EntityStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EntityState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    EntityState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    EntityState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    EntityStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     EntityStateException.type = Types::EntityStateException
-    EntityType.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
-    EntityType.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    EntityType.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
-    EwsAvailabilityProvider.add_member(:ews_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "EwsEndpoint", traits: {"smithy.api#required" => {}}))
-    EwsAvailabilityProvider.add_member(:ews_username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExternalUserName, location_name: "EwsUsername", traits: {"smithy.api#required" => {}}))
-    EwsAvailabilityProvider.add_member(:ews_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Password, location_name: "EwsPassword", traits: {"smithy.api#required" => {}}))
+    EntityType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
+    EntityType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    EntityType.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
+    EwsAvailabilityProvider.add_member(:ews_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "EwsEndpoint", traits: {"smithy.api#required" => {}}))
+    EwsAvailabilityProvider.add_member(:ews_username, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalUserName, location_name: "EwsUsername", traits: {"smithy.api#required" => {}}))
+    EwsAvailabilityProvider.add_member(:ews_password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, location_name: "EwsPassword", traits: {"smithy.api#required" => {}}))
     EwsAvailabilityProvider.type = Types::EwsAvailabilityProvider
-    FolderConfiguration.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    FolderConfiguration.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
-    FolderConfiguration.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "Period"))
+    FolderConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    FolderConfiguration.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
+    FolderConfiguration.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "Period"))
     FolderConfiguration.type = Types::FolderConfiguration
-    FolderConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderConfiguration)
-    FolderName.add_member(:inbox, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INBOX", traits: {"smithy.api#enumValue" => "INBOX"}))
-    FolderName.add_member(:deleted_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED_ITEMS", traits: {"smithy.api#enumValue" => "DELETED_ITEMS"}))
-    FolderName.add_member(:sent_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SENT_ITEMS", traits: {"smithy.api#enumValue" => "SENT_ITEMS"}))
-    FolderName.add_member(:drafts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DRAFTS", traits: {"smithy.api#enumValue" => "DRAFTS"}))
-    FolderName.add_member(:junk_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JUNK_EMAIL", traits: {"smithy.api#enumValue" => "JUNK_EMAIL"}))
-    GetAccessControlEffectRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetAccessControlEffectRequest.add_member(:ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress", traits: {"smithy.api#required" => {}}))
-    GetAccessControlEffectRequest.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
-    GetAccessControlEffectRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
-    GetAccessControlEffectRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
+    FolderConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FolderConfiguration)
+    FolderName.add_member(:inbox, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INBOX", traits: {"smithy.api#enumValue" => "INBOX"}))
+    FolderName.add_member(:deleted_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED_ITEMS", traits: {"smithy.api#enumValue" => "DELETED_ITEMS"}))
+    FolderName.add_member(:sent_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SENT_ITEMS", traits: {"smithy.api#enumValue" => "SENT_ITEMS"}))
+    FolderName.add_member(:drafts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DRAFTS", traits: {"smithy.api#enumValue" => "DRAFTS"}))
+    FolderName.add_member(:junk_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JUNK_EMAIL", traits: {"smithy.api#enumValue" => "JUNK_EMAIL"}))
+    GetAccessControlEffectRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetAccessControlEffectRequest.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, location_name: "IpAddress", traits: {"smithy.api#required" => {}}))
+    GetAccessControlEffectRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
+    GetAccessControlEffectRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId"))
+    GetAccessControlEffectRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
     GetAccessControlEffectRequest.type = Types::GetAccessControlEffectRequest
-    GetAccessControlEffectResponse.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleEffect, location_name: "Effect"))
-    GetAccessControlEffectResponse.add_member(:matched_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleNameList, location_name: "MatchedRules"))
+    GetAccessControlEffectResponse.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleEffect, location_name: "Effect"))
+    GetAccessControlEffectResponse.add_member(:matched_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleNameList, location_name: "MatchedRules"))
     GetAccessControlEffectResponse.type = Types::GetAccessControlEffectResponse
-    GetDefaultRetentionPolicyRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetDefaultRetentionPolicyRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     GetDefaultRetentionPolicyRequest.type = Types::GetDefaultRetentionPolicyRequest
-    GetDefaultRetentionPolicyResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortString, location_name: "Id"))
-    GetDefaultRetentionPolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortString, location_name: "Name"))
-    GetDefaultRetentionPolicyResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    GetDefaultRetentionPolicyResponse.add_member(:folder_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderConfigurations, location_name: "FolderConfigurations"))
+    GetDefaultRetentionPolicyResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortString, location_name: "Id"))
+    GetDefaultRetentionPolicyResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortString, location_name: "Name"))
+    GetDefaultRetentionPolicyResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    GetDefaultRetentionPolicyResponse.add_member(:folder_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderConfigurations, location_name: "FolderConfigurations"))
     GetDefaultRetentionPolicyResponse.type = Types::GetDefaultRetentionPolicyResponse
-    GetImpersonationRoleEffectRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetImpersonationRoleEffectRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
-    GetImpersonationRoleEffectRequest.add_member(:target_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "TargetUser", traits: {"smithy.api#required" => {}}))
+    GetImpersonationRoleEffectRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetImpersonationRoleEffectRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
+    GetImpersonationRoleEffectRequest.add_member(:target_user, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "TargetUser", traits: {"smithy.api#required" => {}}))
     GetImpersonationRoleEffectRequest.type = Types::GetImpersonationRoleEffectRequest
-    GetImpersonationRoleEffectResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleType, location_name: "Type"))
-    GetImpersonationRoleEffectResponse.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessEffect, location_name: "Effect"))
-    GetImpersonationRoleEffectResponse.add_member(:matched_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationMatchedRuleList, location_name: "MatchedRules"))
+    GetImpersonationRoleEffectResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleType, location_name: "Type"))
+    GetImpersonationRoleEffectResponse.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessEffect, location_name: "Effect"))
+    GetImpersonationRoleEffectResponse.add_member(:matched_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationMatchedRuleList, location_name: "MatchedRules"))
     GetImpersonationRoleEffectResponse.type = Types::GetImpersonationRoleEffectResponse
-    GetImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
+    GetImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
     GetImpersonationRoleRequest.type = Types::GetImpersonationRoleRequest
-    GetImpersonationRoleResponse.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
-    GetImpersonationRoleResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleName, location_name: "Name"))
-    GetImpersonationRoleResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleType, location_name: "Type"))
-    GetImpersonationRoleResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleDescription, location_name: "Description"))
-    GetImpersonationRoleResponse.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleList, location_name: "Rules"))
-    GetImpersonationRoleResponse.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    GetImpersonationRoleResponse.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    GetImpersonationRoleResponse.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
+    GetImpersonationRoleResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleName, location_name: "Name"))
+    GetImpersonationRoleResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleType, location_name: "Type"))
+    GetImpersonationRoleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleDescription, location_name: "Description"))
+    GetImpersonationRoleResponse.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleList, location_name: "Rules"))
+    GetImpersonationRoleResponse.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    GetImpersonationRoleResponse.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
     GetImpersonationRoleResponse.type = Types::GetImpersonationRoleResponse
-    GetMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    GetMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
     GetMailDomainRequest.type = Types::GetMailDomainRequest
-    GetMailDomainResponse.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsRecords, location_name: "Records"))
-    GetMailDomainResponse.add_member(:is_test_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "IsTestDomain", traits: {"smithy.api#default" => false}))
-    GetMailDomainResponse.add_member(:is_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault", traits: {"smithy.api#default" => false}))
-    GetMailDomainResponse.add_member(:ownership_verification_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsRecordVerificationStatus, location_name: "OwnershipVerificationStatus"))
-    GetMailDomainResponse.add_member(:dkim_verification_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsRecordVerificationStatus, location_name: "DkimVerificationStatus"))
+    GetMailDomainResponse.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecords, location_name: "Records"))
+    GetMailDomainResponse.add_member(:is_test_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "IsTestDomain", traits: {"smithy.api#default" => false}))
+    GetMailDomainResponse.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "IsDefault", traits: {"smithy.api#default" => false}))
+    GetMailDomainResponse.add_member(:ownership_verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecordVerificationStatus, location_name: "OwnershipVerificationStatus"))
+    GetMailDomainResponse.add_member(:dkim_verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecordVerificationStatus, location_name: "DkimVerificationStatus"))
     GetMailDomainResponse.type = Types::GetMailDomainResponse
-    GetMailboxDetailsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetMailboxDetailsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    GetMailboxDetailsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetMailboxDetailsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
     GetMailboxDetailsRequest.type = Types::GetMailboxDetailsRequest
-    GetMailboxDetailsResponse.add_member(:mailbox_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxQuota, location_name: "MailboxQuota"))
-    GetMailboxDetailsResponse.add_member(:mailbox_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxSize, location_name: "MailboxSize", traits: {"smithy.api#default" => 0}))
+    GetMailboxDetailsResponse.add_member(:mailbox_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxQuota, location_name: "MailboxQuota"))
+    GetMailboxDetailsResponse.add_member(:mailbox_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxSize, location_name: "MailboxSize", traits: {"smithy.api#default" => 0}))
     GetMailboxDetailsResponse.type = Types::GetMailboxDetailsResponse
-    GetMobileDeviceAccessEffectRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetMobileDeviceAccessEffectRequest.add_member(:device_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceType, location_name: "DeviceType"))
-    GetMobileDeviceAccessEffectRequest.add_member(:device_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModel, location_name: "DeviceModel"))
-    GetMobileDeviceAccessEffectRequest.add_member(:device_operating_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystem, location_name: "DeviceOperatingSystem"))
-    GetMobileDeviceAccessEffectRequest.add_member(:device_user_agent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgent, location_name: "DeviceUserAgent"))
+    GetMobileDeviceAccessEffectRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, location_name: "DeviceType"))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_model, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModel, location_name: "DeviceModel"))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystem, location_name: "DeviceOperatingSystem"))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_user_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgent, location_name: "DeviceUserAgent"))
     GetMobileDeviceAccessEffectRequest.type = Types::GetMobileDeviceAccessEffectRequest
-    GetMobileDeviceAccessEffectResponse.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect"))
-    GetMobileDeviceAccessEffectResponse.add_member(:matched_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessMatchedRuleList, location_name: "MatchedRules"))
+    GetMobileDeviceAccessEffectResponse.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, location_name: "Effect"))
+    GetMobileDeviceAccessEffectResponse.add_member(:matched_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessMatchedRuleList, location_name: "MatchedRules"))
     GetMobileDeviceAccessEffectResponse.type = Types::GetMobileDeviceAccessEffectResponse
-    GetMobileDeviceAccessOverrideRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetMobileDeviceAccessOverrideRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
-    GetMobileDeviceAccessOverrideRequest.add_member(:device_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId", traits: {"smithy.api#required" => {}}))
+    GetMobileDeviceAccessOverrideRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetMobileDeviceAccessOverrideRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    GetMobileDeviceAccessOverrideRequest.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, location_name: "DeviceId", traits: {"smithy.api#required" => {}}))
     GetMobileDeviceAccessOverrideRequest.type = Types::GetMobileDeviceAccessOverrideRequest
-    GetMobileDeviceAccessOverrideResponse.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
-    GetMobileDeviceAccessOverrideResponse.add_member(:device_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
-    GetMobileDeviceAccessOverrideResponse.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect"))
-    GetMobileDeviceAccessOverrideResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
-    GetMobileDeviceAccessOverrideResponse.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    GetMobileDeviceAccessOverrideResponse.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    GetMobileDeviceAccessOverrideResponse.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId"))
+    GetMobileDeviceAccessOverrideResponse.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, location_name: "DeviceId"))
+    GetMobileDeviceAccessOverrideResponse.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, location_name: "Effect"))
+    GetMobileDeviceAccessOverrideResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    GetMobileDeviceAccessOverrideResponse.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    GetMobileDeviceAccessOverrideResponse.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
     GetMobileDeviceAccessOverrideResponse.type = Types::GetMobileDeviceAccessOverrideResponse
-    GetPersonalAccessTokenMetadataRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    GetPersonalAccessTokenMetadataRequest.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenId, location_name: "PersonalAccessTokenId", traits: {"smithy.api#required" => {}}))
+    GetPersonalAccessTokenMetadataRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    GetPersonalAccessTokenMetadataRequest.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenId, location_name: "PersonalAccessTokenId", traits: {"smithy.api#required" => {}}))
     GetPersonalAccessTokenMetadataRequest.type = Types::GetPersonalAccessTokenMetadataRequest
-    GetPersonalAccessTokenMetadataResponse.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenId, location_name: "PersonalAccessTokenId"))
-    GetPersonalAccessTokenMetadataResponse.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
-    GetPersonalAccessTokenMetadataResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenName, location_name: "Name"))
-    GetPersonalAccessTokenMetadataResponse.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    GetPersonalAccessTokenMetadataResponse.add_member(:date_last_used, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateLastUsed"))
-    GetPersonalAccessTokenMetadataResponse.add_member(:expires_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresTime"))
-    GetPersonalAccessTokenMetadataResponse.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenScopeList, location_name: "Scopes"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenId, location_name: "PersonalAccessTokenId"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenName, location_name: "Name"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:date_last_used, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateLastUsed"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:expires_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ExpiresTime"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenScopeList, location_name: "Scopes"))
     GetPersonalAccessTokenMetadataResponse.type = Types::GetPersonalAccessTokenMetadataResponse
-    Group.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "Id"))
-    Group.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
-    Group.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
-    Group.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    Group.add_member(:enabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
-    Group.add_member(:disabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
+    Group.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "Id"))
+    Group.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email"))
+    Group.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "Name"))
+    Group.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    Group.add_member(:enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EnabledDate"))
+    Group.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DisabledDate"))
     Group.type = Types::Group
-    GroupIdentifier.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GroupId"))
-    GroupIdentifier.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    GroupIdentifier.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "GroupId"))
+    GroupIdentifier.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "GroupName"))
     GroupIdentifier.type = Types::GroupIdentifier
-    GroupIdentifiers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier)
-    Groups.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Group)
-    IdentityCenterConfiguration.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn", traits: {"smithy.api#required" => {}}))
-    IdentityCenterConfiguration.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn", traits: {"smithy.api#required" => {}}))
+    GroupIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier)
+    Groups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group)
+    IdentityCenterConfiguration.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, location_name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    IdentityCenterConfiguration.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "ApplicationArn", traits: {"smithy.api#required" => {}}))
     IdentityCenterConfiguration.type = Types::IdentityCenterConfiguration
-    IdentityProviderAuthenticationMode.add_member(:identity_provider_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IDENTITY_PROVIDER_ONLY", traits: {"smithy.api#enumValue" => "IDENTITY_PROVIDER_ONLY"}))
-    IdentityProviderAuthenticationMode.add_member(:identity_provider_and_directory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IDENTITY_PROVIDER_AND_DIRECTORY", traits: {"smithy.api#enumValue" => "IDENTITY_PROVIDER_AND_DIRECTORY"}))
-    ImpersonationMatchedRule.add_member(:impersonation_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleId, location_name: "ImpersonationRuleId"))
-    ImpersonationMatchedRule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleName, location_name: "Name"))
+    IdentityProviderAuthenticationMode.add_member(:identity_provider_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IDENTITY_PROVIDER_ONLY", traits: {"smithy.api#enumValue" => "IDENTITY_PROVIDER_ONLY"}))
+    IdentityProviderAuthenticationMode.add_member(:identity_provider_and_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IDENTITY_PROVIDER_AND_DIRECTORY", traits: {"smithy.api#enumValue" => "IDENTITY_PROVIDER_AND_DIRECTORY"}))
+    ImpersonationMatchedRule.add_member(:impersonation_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleId, location_name: "ImpersonationRuleId"))
+    ImpersonationMatchedRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleName, location_name: "Name"))
     ImpersonationMatchedRule.type = Types::ImpersonationMatchedRule
-    ImpersonationMatchedRuleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationMatchedRule)
-    ImpersonationRole.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
-    ImpersonationRole.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleName, location_name: "Name"))
-    ImpersonationRole.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleType, location_name: "Type"))
-    ImpersonationRole.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    ImpersonationRole.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    ImpersonationMatchedRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationMatchedRule)
+    ImpersonationRole.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId"))
+    ImpersonationRole.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleName, location_name: "Name"))
+    ImpersonationRole.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleType, location_name: "Type"))
+    ImpersonationRole.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    ImpersonationRole.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
     ImpersonationRole.type = Types::ImpersonationRole
-    ImpersonationRoleIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId)
-    ImpersonationRoleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRole)
-    ImpersonationRoleType.add_member(:full_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_ACCESS", traits: {"smithy.api#enumValue" => "FULL_ACCESS"}))
-    ImpersonationRoleType.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ONLY", traits: {"smithy.api#enumValue" => "READ_ONLY"}))
-    ImpersonationRule.add_member(:impersonation_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleId, location_name: "ImpersonationRuleId", traits: {"smithy.api#required" => {}}))
-    ImpersonationRule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleName, location_name: "Name"))
-    ImpersonationRule.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleDescription, location_name: "Description"))
-    ImpersonationRule.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
-    ImpersonationRule.add_member(:target_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetUsers, location_name: "TargetUsers"))
-    ImpersonationRule.add_member(:not_target_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetUsers, location_name: "NotTargetUsers"))
+    ImpersonationRoleIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId)
+    ImpersonationRoleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRole)
+    ImpersonationRoleType.add_member(:full_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_ACCESS", traits: {"smithy.api#enumValue" => "FULL_ACCESS"}))
+    ImpersonationRoleType.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ONLY", traits: {"smithy.api#enumValue" => "READ_ONLY"}))
+    ImpersonationRule.add_member(:impersonation_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleId, location_name: "ImpersonationRuleId", traits: {"smithy.api#required" => {}}))
+    ImpersonationRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleName, location_name: "Name"))
+    ImpersonationRule.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleDescription, location_name: "Description"))
+    ImpersonationRule.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
+    ImpersonationRule.add_member(:target_users, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetUsers, location_name: "TargetUsers"))
+    ImpersonationRule.add_member(:not_target_users, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetUsers, location_name: "NotTargetUsers"))
     ImpersonationRule.type = Types::ImpersonationRule
-    ImpersonationRuleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRule)
-    InvalidConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ImpersonationRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRule)
+    InvalidConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidConfigurationException.type = Types::InvalidConfigurationException
-    InvalidCustomSesConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidCustomSesConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidCustomSesConfigurationException.type = Types::InvalidCustomSesConfigurationException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidPasswordException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidPasswordException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidPasswordException.type = Types::InvalidPasswordException
-    IpRangeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRange)
-    Jobs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportJob)
-    LambdaAvailabilityProvider.add_member(:lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaArn, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
+    IpRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRange)
+    Jobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJob)
+    LambdaAvailabilityProvider.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, location_name: "LambdaArn", traits: {"smithy.api#required" => {}}))
     LambdaAvailabilityProvider.type = Types::LambdaAvailabilityProvider
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListAccessControlRulesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListAccessControlRulesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     ListAccessControlRulesRequest.type = Types::ListAccessControlRulesRequest
-    ListAccessControlRulesResponse.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRulesList, location_name: "Rules"))
+    ListAccessControlRulesResponse.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRulesList, location_name: "Rules"))
     ListAccessControlRulesResponse.type = Types::ListAccessControlRulesResponse
-    ListAliasesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListAliasesRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    ListAliasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAliasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAliasesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListAliasesRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    ListAliasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListAliasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListAliasesRequest.type = Types::ListAliasesRequest
-    ListAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
-    ListAliasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAliasesResponse.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: Aliases, location_name: "Aliases"))
+    ListAliasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAliasesResponse.type = Types::ListAliasesResponse
-    ListAvailabilityConfigurationsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListAvailabilityConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListAvailabilityConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailabilityConfigurationsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListAvailabilityConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListAvailabilityConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAvailabilityConfigurationsRequest.type = Types::ListAvailabilityConfigurationsRequest
-    ListAvailabilityConfigurationsResponse.add_member(:availability_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityConfigurationList, location_name: "AvailabilityConfigurations"))
-    ListAvailabilityConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailabilityConfigurationsResponse.add_member(:availability_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityConfigurationList, location_name: "AvailabilityConfigurations"))
+    ListAvailabilityConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAvailabilityConfigurationsResponse.type = Types::ListAvailabilityConfigurationsResponse
-    ListGroupMembersRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListGroupMembersRequest.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
-    ListGroupMembersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListGroupMembersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGroupMembersRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListGroupMembersRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
+    ListGroupMembersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListGroupMembersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListGroupMembersRequest.type = Types::ListGroupMembersRequest
-    ListGroupMembersResponse.add_member(:members, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Members, location_name: "Members"))
-    ListGroupMembersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupMembersResponse.add_member(:members, ::Smithy::Schema::Shapes::MemberShape.new(target: Members, location_name: "Members"))
+    ListGroupMembersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListGroupMembersResponse.type = Types::ListGroupMembersResponse
-    ListGroupsFilters.add_member(:name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NamePrefix"))
-    ListGroupsFilters.add_member(:primary_email_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "PrimaryEmailPrefix"))
-    ListGroupsFilters.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
+    ListGroupsFilters.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NamePrefix"))
+    ListGroupsFilters.add_member(:primary_email_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PrimaryEmailPrefix"))
+    ListGroupsFilters.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
     ListGroupsFilters.type = Types::ListGroupsFilters
-    ListGroupsForEntityFilters.add_member(:group_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "GroupNamePrefix"))
+    ListGroupsForEntityFilters.add_member(:group_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "GroupNamePrefix"))
     ListGroupsForEntityFilters.type = Types::ListGroupsForEntityFilters
-    ListGroupsForEntityRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListGroupsForEntityRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    ListGroupsForEntityRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsForEntityFilters, location_name: "Filters"))
-    ListGroupsForEntityRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListGroupsForEntityRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGroupsForEntityRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListGroupsForEntityRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    ListGroupsForEntityRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupsForEntityFilters, location_name: "Filters"))
+    ListGroupsForEntityRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListGroupsForEntityRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListGroupsForEntityRequest.type = Types::ListGroupsForEntityRequest
-    ListGroupsForEntityResponse.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifiers, location_name: "Groups"))
-    ListGroupsForEntityResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupsForEntityResponse.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifiers, location_name: "Groups"))
+    ListGroupsForEntityResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListGroupsForEntityResponse.type = Types::ListGroupsForEntityResponse
-    ListGroupsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListGroupsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsFilters, location_name: "Filters"))
+    ListGroupsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListGroupsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupsFilters, location_name: "Filters"))
     ListGroupsRequest.type = Types::ListGroupsRequest
-    ListGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
-    ListGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: Groups, location_name: "Groups"))
+    ListGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListGroupsResponse.type = Types::ListGroupsResponse
-    ListImpersonationRolesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListImpersonationRolesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListImpersonationRolesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListImpersonationRolesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListImpersonationRolesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListImpersonationRolesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListImpersonationRolesRequest.type = Types::ListImpersonationRolesRequest
-    ListImpersonationRolesResponse.add_member(:roles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleList, location_name: "Roles"))
-    ListImpersonationRolesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListImpersonationRolesResponse.add_member(:roles, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleList, location_name: "Roles"))
+    ListImpersonationRolesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListImpersonationRolesResponse.type = Types::ListImpersonationRolesResponse
-    ListMailDomainsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListMailDomainsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListMailDomainsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailDomainsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListMailDomainsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListMailDomainsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListMailDomainsRequest.type = Types::ListMailDomainsRequest
-    ListMailDomainsResponse.add_member(:mail_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomains, location_name: "MailDomains"))
-    ListMailDomainsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailDomainsResponse.add_member(:mail_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: MailDomains, location_name: "MailDomains"))
+    ListMailDomainsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListMailDomainsResponse.type = Types::ListMailDomainsResponse
-    ListMailboxExportJobsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListMailboxExportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListMailboxExportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMailboxExportJobsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListMailboxExportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListMailboxExportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListMailboxExportJobsRequest.type = Types::ListMailboxExportJobsRequest
-    ListMailboxExportJobsResponse.add_member(:jobs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Jobs, location_name: "Jobs"))
-    ListMailboxExportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailboxExportJobsResponse.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: Jobs, location_name: "Jobs"))
+    ListMailboxExportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListMailboxExportJobsResponse.type = Types::ListMailboxExportJobsResponse
-    ListMailboxPermissionsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListMailboxPermissionsRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    ListMailboxPermissionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListMailboxPermissionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMailboxPermissionsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListMailboxPermissionsRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    ListMailboxPermissionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListMailboxPermissionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListMailboxPermissionsRequest.type = Types::ListMailboxPermissionsRequest
-    ListMailboxPermissionsResponse.add_member(:permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permissions, location_name: "Permissions"))
-    ListMailboxPermissionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailboxPermissionsResponse.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions, location_name: "Permissions"))
+    ListMailboxPermissionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListMailboxPermissionsResponse.type = Types::ListMailboxPermissionsResponse
-    ListMobileDeviceAccessOverridesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListMobileDeviceAccessOverridesRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId"))
-    ListMobileDeviceAccessOverridesRequest.add_member(:device_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
-    ListMobileDeviceAccessOverridesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListMobileDeviceAccessOverridesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMobileDeviceAccessOverridesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListMobileDeviceAccessOverridesRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId"))
+    ListMobileDeviceAccessOverridesRequest.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, location_name: "DeviceId"))
+    ListMobileDeviceAccessOverridesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListMobileDeviceAccessOverridesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListMobileDeviceAccessOverridesRequest.type = Types::ListMobileDeviceAccessOverridesRequest
-    ListMobileDeviceAccessOverridesResponse.add_member(:overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessOverridesList, location_name: "Overrides"))
-    ListMobileDeviceAccessOverridesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMobileDeviceAccessOverridesResponse.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessOverridesList, location_name: "Overrides"))
+    ListMobileDeviceAccessOverridesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListMobileDeviceAccessOverridesResponse.type = Types::ListMobileDeviceAccessOverridesResponse
-    ListMobileDeviceAccessRulesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListMobileDeviceAccessRulesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     ListMobileDeviceAccessRulesRequest.type = Types::ListMobileDeviceAccessRulesRequest
-    ListMobileDeviceAccessRulesResponse.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRulesList, location_name: "Rules"))
+    ListMobileDeviceAccessRulesResponse.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRulesList, location_name: "Rules"))
     ListMobileDeviceAccessRulesResponse.type = Types::ListMobileDeviceAccessRulesResponse
-    ListOrganizationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListOrganizationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListOrganizationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListOrganizationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListOrganizationsRequest.type = Types::ListOrganizationsRequest
-    ListOrganizationsResponse.add_member(:organization_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationSummaries, location_name: "OrganizationSummaries"))
-    ListOrganizationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOrganizationsResponse.add_member(:organization_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationSummaries, location_name: "OrganizationSummaries"))
+    ListOrganizationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListOrganizationsResponse.type = Types::ListOrganizationsResponse
-    ListPersonalAccessTokensRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListPersonalAccessTokensRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId"))
-    ListPersonalAccessTokensRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListPersonalAccessTokensRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPersonalAccessTokensRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListPersonalAccessTokensRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId"))
+    ListPersonalAccessTokensRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListPersonalAccessTokensRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListPersonalAccessTokensRequest.type = Types::ListPersonalAccessTokensRequest
-    ListPersonalAccessTokensResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListPersonalAccessTokensResponse.add_member(:personal_access_token_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenSummaryList, location_name: "PersonalAccessTokenSummaries"))
+    ListPersonalAccessTokensResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListPersonalAccessTokensResponse.add_member(:personal_access_token_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenSummaryList, location_name: "PersonalAccessTokenSummaries"))
     ListPersonalAccessTokensResponse.type = Types::ListPersonalAccessTokensResponse
-    ListResourceDelegatesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListResourceDelegatesRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ListResourceDelegatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListResourceDelegatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListResourceDelegatesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListResourceDelegatesRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ListResourceDelegatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListResourceDelegatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListResourceDelegatesRequest.type = Types::ListResourceDelegatesRequest
-    ListResourceDelegatesResponse.add_member(:delegates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDelegates, location_name: "Delegates"))
-    ListResourceDelegatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceDelegatesResponse.add_member(:delegates, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDelegates, location_name: "Delegates"))
+    ListResourceDelegatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListResourceDelegatesResponse.type = Types::ListResourceDelegatesResponse
-    ListResourcesFilters.add_member(:name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NamePrefix"))
-    ListResourcesFilters.add_member(:primary_email_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "PrimaryEmailPrefix"))
-    ListResourcesFilters.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
+    ListResourcesFilters.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NamePrefix"))
+    ListResourcesFilters.add_member(:primary_email_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PrimaryEmailPrefix"))
+    ListResourcesFilters.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
     ListResourcesFilters.type = Types::ListResourcesFilters
-    ListResourcesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListResourcesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourcesFilters, location_name: "Filters"))
+    ListResourcesRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListResourcesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourcesFilters, location_name: "Filters"))
     ListResourcesRequest.type = Types::ListResourcesRequest
-    ListResourcesResponse.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Resources, location_name: "Resources"))
-    ListResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourcesResponse.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Resources, location_name: "Resources"))
+    ListResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListResourcesResponse.type = Types::ListResourcesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListUsersFilters.add_member(:username_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "UsernamePrefix"))
-    ListUsersFilters.add_member(:display_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "DisplayNamePrefix"))
-    ListUsersFilters.add_member(:primary_email_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "PrimaryEmailPrefix"))
-    ListUsersFilters.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    ListUsersFilters.add_member(:identity_provider_user_id_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderUserIdPrefix, location_name: "IdentityProviderUserIdPrefix"))
+    ListUsersFilters.add_member(:username_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "UsernamePrefix"))
+    ListUsersFilters.add_member(:display_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "DisplayNamePrefix"))
+    ListUsersFilters.add_member(:primary_email_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PrimaryEmailPrefix"))
+    ListUsersFilters.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    ListUsersFilters.add_member(:identity_provider_user_id_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderUserIdPrefix, location_name: "IdentityProviderUserIdPrefix"))
     ListUsersFilters.type = Types::ListUsersFilters
-    ListUsersRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ListUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListUsersRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersFilters, location_name: "Filters"))
+    ListUsersRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ListUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListUsersRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListUsersFilters, location_name: "Filters"))
     ListUsersRequest.type = Types::ListUsersRequest
-    ListUsersResponse.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Users, location_name: "Users"))
-    ListUsersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListUsersResponse.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: Users, location_name: "Users"))
+    ListUsersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListUsersResponse.type = Types::ListUsersResponse
-    MailDomainInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MailDomainInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     MailDomainInUseException.type = Types::MailDomainInUseException
-    MailDomainNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MailDomainNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     MailDomainNotFoundException.type = Types::MailDomainNotFoundException
-    MailDomainStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MailDomainStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     MailDomainStateException.type = Types::MailDomainStateException
-    MailDomainSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
-    MailDomainSummary.add_member(:default_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultDomain", traits: {"smithy.api#default" => false}))
+    MailDomainSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName"))
+    MailDomainSummary.add_member(:default_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DefaultDomain", traits: {"smithy.api#default" => false}))
     MailDomainSummary.type = Types::MailDomainSummary
-    MailDomains.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainSummary)
-    MailboxExportJob.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportJobId, location_name: "JobId"))
-    MailboxExportJob.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId"))
-    MailboxExportJob.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    MailboxExportJob.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
-    MailboxExportJob.add_member(:s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Path"))
-    MailboxExportJob.add_member(:estimated_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "EstimatedProgress", traits: {"smithy.api#default" => 0}))
-    MailboxExportJob.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportJobState, location_name: "State"))
-    MailboxExportJob.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
-    MailboxExportJob.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    MailDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MailDomainSummary)
+    MailboxExportJob.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJobId, location_name: "JobId"))
+    MailboxExportJob.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "EntityId"))
+    MailboxExportJob.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    MailboxExportJob.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "S3BucketName"))
+    MailboxExportJob.add_member(:s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "S3Path"))
+    MailboxExportJob.add_member(:estimated_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "EstimatedProgress", traits: {"smithy.api#default" => 0}))
+    MailboxExportJob.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJobState, location_name: "State"))
+    MailboxExportJob.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartTime"))
+    MailboxExportJob.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
     MailboxExportJob.type = Types::MailboxExportJob
-    MailboxExportJobState.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    MailboxExportJobState.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    MailboxExportJobState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    MailboxExportJobState.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
-    Member.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Id"))
-    Member.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    Member.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberType, location_name: "Type"))
-    Member.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    Member.add_member(:enabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
-    Member.add_member(:disabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
+    MailboxExportJobState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    MailboxExportJobState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    MailboxExportJobState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    MailboxExportJobState.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    Member.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id"))
+    Member.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    Member.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberType, location_name: "Type"))
+    Member.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    Member.add_member(:enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EnabledDate"))
+    Member.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DisabledDate"))
     Member.type = Types::Member
-    MemberType.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
-    MemberType.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    Members.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Member)
-    MobileDeviceAccessMatchedRule.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
-    MobileDeviceAccessMatchedRule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, location_name: "Name"))
+    MemberType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
+    MemberType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    Members.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member)
+    MobileDeviceAccessMatchedRule.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
+    MobileDeviceAccessMatchedRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleName, location_name: "Name"))
     MobileDeviceAccessMatchedRule.type = Types::MobileDeviceAccessMatchedRule
-    MobileDeviceAccessMatchedRuleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessMatchedRule)
-    MobileDeviceAccessOverride.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
-    MobileDeviceAccessOverride.add_member(:device_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
-    MobileDeviceAccessOverride.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect"))
-    MobileDeviceAccessOverride.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
-    MobileDeviceAccessOverride.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    MobileDeviceAccessOverride.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    MobileDeviceAccessMatchedRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessMatchedRule)
+    MobileDeviceAccessOverride.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId"))
+    MobileDeviceAccessOverride.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, location_name: "DeviceId"))
+    MobileDeviceAccessOverride.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, location_name: "Effect"))
+    MobileDeviceAccessOverride.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    MobileDeviceAccessOverride.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    MobileDeviceAccessOverride.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
     MobileDeviceAccessOverride.type = Types::MobileDeviceAccessOverride
-    MobileDeviceAccessOverridesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessOverride)
-    MobileDeviceAccessRule.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
-    MobileDeviceAccessRule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, location_name: "Name"))
-    MobileDeviceAccessRule.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
-    MobileDeviceAccessRule.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect"))
-    MobileDeviceAccessRule.add_member(:device_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "DeviceTypes"))
-    MobileDeviceAccessRule.add_member(:not_device_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "NotDeviceTypes"))
-    MobileDeviceAccessRule.add_member(:device_models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "DeviceModels"))
-    MobileDeviceAccessRule.add_member(:not_device_models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "NotDeviceModels"))
-    MobileDeviceAccessRule.add_member(:device_operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
-    MobileDeviceAccessRule.add_member(:not_device_operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
-    MobileDeviceAccessRule.add_member(:device_user_agents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "DeviceUserAgents"))
-    MobileDeviceAccessRule.add_member(:not_device_user_agents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
-    MobileDeviceAccessRule.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    MobileDeviceAccessRule.add_member(:date_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    MobileDeviceAccessOverridesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessOverride)
+    MobileDeviceAccessRule.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
+    MobileDeviceAccessRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleName, location_name: "Name"))
+    MobileDeviceAccessRule.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    MobileDeviceAccessRule.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, location_name: "Effect"))
+    MobileDeviceAccessRule.add_member(:device_types, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeList, location_name: "DeviceTypes"))
+    MobileDeviceAccessRule.add_member(:not_device_types, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeList, location_name: "NotDeviceTypes"))
+    MobileDeviceAccessRule.add_member(:device_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModelList, location_name: "DeviceModels"))
+    MobileDeviceAccessRule.add_member(:not_device_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModelList, location_name: "NotDeviceModels"))
+    MobileDeviceAccessRule.add_member(:device_operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
+    MobileDeviceAccessRule.add_member(:not_device_operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
+    MobileDeviceAccessRule.add_member(:device_user_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgentList, location_name: "DeviceUserAgents"))
+    MobileDeviceAccessRule.add_member(:not_device_user_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
+    MobileDeviceAccessRule.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    MobileDeviceAccessRule.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateModified"))
     MobileDeviceAccessRule.type = Types::MobileDeviceAccessRule
-    MobileDeviceAccessRuleEffect.add_member(:allow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
-    MobileDeviceAccessRuleEffect.add_member(:deny, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
-    MobileDeviceAccessRulesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRule)
-    NameAvailabilityException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MobileDeviceAccessRuleEffect.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
+    MobileDeviceAccessRuleEffect.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
+    MobileDeviceAccessRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRule)
+    NameAvailabilityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     NameAvailabilityException.type = Types::NameAvailabilityException
-    OrganizationNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    OrganizationNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     OrganizationNotFoundException.type = Types::OrganizationNotFoundException
-    OrganizationStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    OrganizationStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     OrganizationStateException.type = Types::OrganizationStateException
-    OrganizationSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationSummary)
-    OrganizationSummary.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
-    OrganizationSummary.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationName, location_name: "Alias"))
-    OrganizationSummary.add_member(:default_mail_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DefaultMailDomain"))
-    OrganizationSummary.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    OrganizationSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    OrganizationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationSummary)
+    OrganizationSummary.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId"))
+    OrganizationSummary.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationName, location_name: "Alias"))
+    OrganizationSummary.add_member(:default_mail_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DefaultMailDomain"))
+    OrganizationSummary.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    OrganizationSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "State"))
     OrganizationSummary.type = Types::OrganizationSummary
-    Permission.add_member(:grantee_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GranteeId", traits: {"smithy.api#required" => {}}))
-    Permission.add_member(:grantee_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberType, location_name: "GranteeType", traits: {"smithy.api#required" => {}}))
-    Permission.add_member(:permission_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionValues, location_name: "PermissionValues", traits: {"smithy.api#required" => {}}))
+    Permission.add_member(:grantee_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "GranteeId", traits: {"smithy.api#required" => {}}))
+    Permission.add_member(:grantee_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberType, location_name: "GranteeType", traits: {"smithy.api#required" => {}}))
+    Permission.add_member(:permission_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionValues, location_name: "PermissionValues", traits: {"smithy.api#required" => {}}))
     Permission.type = Types::Permission
-    PermissionType.add_member(:full_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_ACCESS", traits: {"smithy.api#enumValue" => "FULL_ACCESS"}))
-    PermissionType.add_member(:send_as, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEND_AS", traits: {"smithy.api#enumValue" => "SEND_AS"}))
-    PermissionType.add_member(:send_on_behalf, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEND_ON_BEHALF", traits: {"smithy.api#enumValue" => "SEND_ON_BEHALF"}))
-    PermissionValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionType)
-    Permissions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permission)
-    PersonalAccessTokenConfiguration.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenConfigurationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    PersonalAccessTokenConfiguration.add_member(:lifetime_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenLifetimeInDays, location_name: "LifetimeInDays"))
+    PermissionType.add_member(:full_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_ACCESS", traits: {"smithy.api#enumValue" => "FULL_ACCESS"}))
+    PermissionType.add_member(:send_as, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEND_AS", traits: {"smithy.api#enumValue" => "SEND_AS"}))
+    PermissionType.add_member(:send_on_behalf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEND_ON_BEHALF", traits: {"smithy.api#enumValue" => "SEND_ON_BEHALF"}))
+    PermissionValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionType)
+    Permissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission)
+    PersonalAccessTokenConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenConfigurationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    PersonalAccessTokenConfiguration.add_member(:lifetime_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenLifetimeInDays, location_name: "LifetimeInDays"))
     PersonalAccessTokenConfiguration.type = Types::PersonalAccessTokenConfiguration
-    PersonalAccessTokenConfigurationStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    PersonalAccessTokenConfigurationStatus.add_member(:inactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    PersonalAccessTokenScopeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenScope)
-    PersonalAccessTokenSummary.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenId, location_name: "PersonalAccessTokenId"))
-    PersonalAccessTokenSummary.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
-    PersonalAccessTokenSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenName, location_name: "Name"))
-    PersonalAccessTokenSummary.add_member(:date_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
-    PersonalAccessTokenSummary.add_member(:date_last_used, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateLastUsed"))
-    PersonalAccessTokenSummary.add_member(:expires_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresTime"))
-    PersonalAccessTokenSummary.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenScopeList, location_name: "Scopes"))
+    PersonalAccessTokenConfigurationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    PersonalAccessTokenConfigurationStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    PersonalAccessTokenScopeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenScope)
+    PersonalAccessTokenSummary.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenId, location_name: "PersonalAccessTokenId"))
+    PersonalAccessTokenSummary.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId"))
+    PersonalAccessTokenSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenName, location_name: "Name"))
+    PersonalAccessTokenSummary.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateCreated"))
+    PersonalAccessTokenSummary.add_member(:date_last_used, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DateLastUsed"))
+    PersonalAccessTokenSummary.add_member(:expires_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ExpiresTime"))
+    PersonalAccessTokenSummary.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenScopeList, location_name: "Scopes"))
     PersonalAccessTokenSummary.type = Types::PersonalAccessTokenSummary
-    PersonalAccessTokenSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenSummary)
-    PutAccessControlRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    PutAccessControlRuleRequest.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
-    PutAccessControlRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlRuleDescription, location_name: "Description", traits: {"smithy.api#required" => {}}))
-    PutAccessControlRuleRequest.add_member(:ip_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRangeList, location_name: "IpRanges"))
-    PutAccessControlRuleRequest.add_member(:not_ip_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRangeList, location_name: "NotIpRanges"))
-    PutAccessControlRuleRequest.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsList, location_name: "Actions"))
-    PutAccessControlRuleRequest.add_member(:not_actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsList, location_name: "NotActions"))
-    PutAccessControlRuleRequest.add_member(:user_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
-    PutAccessControlRuleRequest.add_member(:not_user_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIdList, location_name: "NotUserIds"))
-    PutAccessControlRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    PutAccessControlRuleRequest.add_member(:impersonation_role_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleIdList, location_name: "ImpersonationRoleIds"))
-    PutAccessControlRuleRequest.add_member(:not_impersonation_role_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleIdList, location_name: "NotImpersonationRoleIds"))
+    PersonalAccessTokenSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenSummary)
+    PutAccessControlRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    PutAccessControlRuleRequest.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
+    PutAccessControlRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleDescription, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    PutAccessControlRuleRequest.add_member(:ip_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRangeList, location_name: "IpRanges"))
+    PutAccessControlRuleRequest.add_member(:not_ip_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRangeList, location_name: "NotIpRanges"))
+    PutAccessControlRuleRequest.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsList, location_name: "Actions"))
+    PutAccessControlRuleRequest.add_member(:not_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsList, location_name: "NotActions"))
+    PutAccessControlRuleRequest.add_member(:user_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdList, location_name: "UserIds"))
+    PutAccessControlRuleRequest.add_member(:not_user_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdList, location_name: "NotUserIds"))
+    PutAccessControlRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    PutAccessControlRuleRequest.add_member(:impersonation_role_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleIdList, location_name: "ImpersonationRoleIds"))
+    PutAccessControlRuleRequest.add_member(:not_impersonation_role_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleIdList, location_name: "NotImpersonationRoleIds"))
     PutAccessControlRuleRequest.type = Types::PutAccessControlRuleRequest
     PutAccessControlRuleResponse.type = Types::PutAccessControlRuleResponse
-    PutEmailMonitoringConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    PutEmailMonitoringConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    PutEmailMonitoringConfigurationRequest.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn", traits: {"smithy.api#required" => {}}))
+    PutEmailMonitoringConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    PutEmailMonitoringConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    PutEmailMonitoringConfigurationRequest.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, location_name: "LogGroupArn", traits: {"smithy.api#required" => {}}))
     PutEmailMonitoringConfigurationRequest.type = Types::PutEmailMonitoringConfigurationRequest
     PutEmailMonitoringConfigurationResponse.type = Types::PutEmailMonitoringConfigurationResponse
-    PutIdentityProviderConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    PutIdentityProviderConfigurationRequest.add_member(:authentication_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderAuthenticationMode, location_name: "AuthenticationMode", traits: {"smithy.api#required" => {}}))
-    PutIdentityProviderConfigurationRequest.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration", traits: {"smithy.api#required" => {}}))
-    PutIdentityProviderConfigurationRequest.add_member(:personal_access_token_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersonalAccessTokenConfiguration, location_name: "PersonalAccessTokenConfiguration", traits: {"smithy.api#required" => {}}))
+    PutIdentityProviderConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    PutIdentityProviderConfigurationRequest.add_member(:authentication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderAuthenticationMode, location_name: "AuthenticationMode", traits: {"smithy.api#required" => {}}))
+    PutIdentityProviderConfigurationRequest.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration", traits: {"smithy.api#required" => {}}))
+    PutIdentityProviderConfigurationRequest.add_member(:personal_access_token_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenConfiguration, location_name: "PersonalAccessTokenConfiguration", traits: {"smithy.api#required" => {}}))
     PutIdentityProviderConfigurationRequest.type = Types::PutIdentityProviderConfigurationRequest
     PutIdentityProviderConfigurationResponse.type = Types::PutIdentityProviderConfigurationResponse
-    PutInboundDmarcSettingsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    PutInboundDmarcSettingsRequest.add_member(:enforced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enforced", traits: {"smithy.api#required" => {}}))
+    PutInboundDmarcSettingsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    PutInboundDmarcSettingsRequest.add_member(:enforced, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "Enforced", traits: {"smithy.api#required" => {}}))
     PutInboundDmarcSettingsRequest.type = Types::PutInboundDmarcSettingsRequest
     PutInboundDmarcSettingsResponse.type = Types::PutInboundDmarcSettingsResponse
-    PutMailboxPermissionsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    PutMailboxPermissionsRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    PutMailboxPermissionsRequest.add_member(:grantee_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GranteeId", traits: {"smithy.api#required" => {}}))
-    PutMailboxPermissionsRequest.add_member(:permission_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionValues, location_name: "PermissionValues", traits: {"smithy.api#required" => {}}))
+    PutMailboxPermissionsRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    PutMailboxPermissionsRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    PutMailboxPermissionsRequest.add_member(:grantee_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GranteeId", traits: {"smithy.api#required" => {}}))
+    PutMailboxPermissionsRequest.add_member(:permission_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionValues, location_name: "PermissionValues", traits: {"smithy.api#required" => {}}))
     PutMailboxPermissionsRequest.type = Types::PutMailboxPermissionsRequest
     PutMailboxPermissionsResponse.type = Types::PutMailboxPermissionsResponse
-    PutMobileDeviceAccessOverrideRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    PutMobileDeviceAccessOverrideRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
-    PutMobileDeviceAccessOverrideRequest.add_member(:device_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId", traits: {"smithy.api#required" => {}}))
-    PutMobileDeviceAccessOverrideRequest.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
-    PutMobileDeviceAccessOverrideRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    PutMobileDeviceAccessOverrideRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    PutMobileDeviceAccessOverrideRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    PutMobileDeviceAccessOverrideRequest.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, location_name: "DeviceId", traits: {"smithy.api#required" => {}}))
+    PutMobileDeviceAccessOverrideRequest.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
+    PutMobileDeviceAccessOverrideRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleDescription, location_name: "Description"))
     PutMobileDeviceAccessOverrideRequest.type = Types::PutMobileDeviceAccessOverrideRequest
     PutMobileDeviceAccessOverrideResponse.type = Types::PutMobileDeviceAccessOverrideResponse
-    PutRetentionPolicyRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    PutRetentionPolicyRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortString, location_name: "Id"))
-    PutRetentionPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortString, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    PutRetentionPolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
-    PutRetentionPolicyRequest.add_member(:folder_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderConfigurations, location_name: "FolderConfigurations", traits: {"smithy.api#required" => {}}))
+    PutRetentionPolicyRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    PutRetentionPolicyRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortString, location_name: "Id"))
+    PutRetentionPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortString, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    PutRetentionPolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription, location_name: "Description"))
+    PutRetentionPolicyRequest.add_member(:folder_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderConfigurations, location_name: "FolderConfigurations", traits: {"smithy.api#required" => {}}))
     PutRetentionPolicyRequest.type = Types::PutRetentionPolicyRequest
     PutRetentionPolicyResponse.type = Types::PutRetentionPolicyResponse
-    RedactedEwsAvailabilityProvider.add_member(:ews_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "EwsEndpoint"))
-    RedactedEwsAvailabilityProvider.add_member(:ews_username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExternalUserName, location_name: "EwsUsername"))
+    RedactedEwsAvailabilityProvider.add_member(:ews_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "EwsEndpoint"))
+    RedactedEwsAvailabilityProvider.add_member(:ews_username, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalUserName, location_name: "EwsUsername"))
     RedactedEwsAvailabilityProvider.type = Types::RedactedEwsAvailabilityProvider
-    RegisterMailDomainRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    RegisterMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    RegisterMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    RegisterMailDomainRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    RegisterMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    RegisterMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
     RegisterMailDomainRequest.type = Types::RegisterMailDomainRequest
     RegisterMailDomainResponse.type = Types::RegisterMailDomainResponse
-    RegisterToWorkMailRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    RegisterToWorkMailRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    RegisterToWorkMailRequest.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email", traits: {"smithy.api#required" => {}}))
+    RegisterToWorkMailRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    RegisterToWorkMailRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    RegisterToWorkMailRequest.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email", traits: {"smithy.api#required" => {}}))
     RegisterToWorkMailRequest.type = Types::RegisterToWorkMailRequest
     RegisterToWorkMailResponse.type = Types::RegisterToWorkMailResponse
-    ReservedNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ReservedNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ReservedNameException.type = Types::ReservedNameException
-    ResetPasswordRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    ResetPasswordRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
-    ResetPasswordRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Password, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    ResetPasswordRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    ResetPasswordRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    ResetPasswordRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, location_name: "Password", traits: {"smithy.api#required" => {}}))
     ResetPasswordRequest.type = Types::ResetPasswordRequest
     ResetPasswordResponse.type = Types::ResetPasswordResponse
-    Resource.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "Id"))
-    Resource.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
-    Resource.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    Resource.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
-    Resource.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    Resource.add_member(:enabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
-    Resource.add_member(:disabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
-    Resource.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    Resource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "Id"))
+    Resource.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email"))
+    Resource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    Resource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "Type"))
+    Resource.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    Resource.add_member(:enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EnabledDate"))
+    Resource.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DisabledDate"))
+    Resource.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
     Resource.type = Types::Resource
-    ResourceDelegates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delegate)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceDelegates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Delegate)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceType.add_member(:room, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROOM", traits: {"smithy.api#enumValue" => "ROOM"}))
-    ResourceType.add_member(:equipment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUIPMENT", traits: {"smithy.api#enumValue" => "EQUIPMENT"}))
-    Resources.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Resource)
-    RetentionAction.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    RetentionAction.add_member(:delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
-    RetentionAction.add_member(:permanently_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERMANENTLY_DELETE", traits: {"smithy.api#enumValue" => "PERMANENTLY_DELETE"}))
-    StartMailboxExportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    StartMailboxExportJobRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    StartMailboxExportJobRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    StartMailboxExportJobRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    StartMailboxExportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
-    StartMailboxExportJobRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn", traits: {"smithy.api#required" => {}}))
-    StartMailboxExportJobRequest.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName", traits: {"smithy.api#required" => {}}))
-    StartMailboxExportJobRequest.add_member(:s3_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Prefix", traits: {"smithy.api#required" => {}}))
+    ResourceType.add_member(:room, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROOM", traits: {"smithy.api#enumValue" => "ROOM"}))
+    ResourceType.add_member(:equipment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUIPMENT", traits: {"smithy.api#enumValue" => "EQUIPMENT"}))
+    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource)
+    RetentionAction.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    RetentionAction.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
+    RetentionAction.add_member(:permanently_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERMANENTLY_DELETE", traits: {"smithy.api#enumValue" => "PERMANENTLY_DELETE"}))
+    StartMailboxExportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartMailboxExportJobRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    StartMailboxExportJobRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    StartMailboxExportJobRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    StartMailboxExportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    StartMailboxExportJobRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn", traits: {"smithy.api#required" => {}}))
+    StartMailboxExportJobRequest.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "S3BucketName", traits: {"smithy.api#required" => {}}))
+    StartMailboxExportJobRequest.add_member(:s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "S3Prefix", traits: {"smithy.api#required" => {}}))
     StartMailboxExportJobRequest.type = Types::StartMailboxExportJobRequest
-    StartMailboxExportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxExportJobId, location_name: "JobId"))
+    StartMailboxExportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJobId, location_name: "JobId"))
     StartMailboxExportJobResponse.type = Types::StartMailboxExportJobResponse
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetUsers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier)
-    TestAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    TestAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
-    TestAvailabilityConfigurationRequest.add_member(:ews_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EwsAvailabilityProvider, location_name: "EwsProvider"))
-    TestAvailabilityConfigurationRequest.add_member(:lambda_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    TargetUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier)
+    TestAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    TestAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName"))
+    TestAvailabilityConfigurationRequest.add_member(:ews_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: EwsAvailabilityProvider, location_name: "EwsProvider"))
+    TestAvailabilityConfigurationRequest.add_member(:lambda_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
     TestAvailabilityConfigurationRequest.type = Types::TestAvailabilityConfigurationRequest
-    TestAvailabilityConfigurationResponse.add_member(:test_passed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "TestPassed", traits: {"smithy.api#default" => false}))
-    TestAvailabilityConfigurationResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    TestAvailabilityConfigurationResponse.add_member(:test_passed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "TestPassed", traits: {"smithy.api#default" => false}))
+    TestAvailabilityConfigurationResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FailureReason"))
     TestAvailabilityConfigurationResponse.type = Types::TestAvailabilityConfigurationResponse
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UnsupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     UnsupportedOperationException.type = Types::UnsupportedOperationException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
-    UpdateAvailabilityConfigurationRequest.add_member(:ews_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EwsAvailabilityProvider, location_name: "EwsProvider"))
-    UpdateAvailabilityConfigurationRequest.add_member(:lambda_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
+    UpdateAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    UpdateAvailabilityConfigurationRequest.add_member(:ews_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: EwsAvailabilityProvider, location_name: "EwsProvider"))
+    UpdateAvailabilityConfigurationRequest.add_member(:lambda_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaAvailabilityProvider, location_name: "LambdaProvider"))
     UpdateAvailabilityConfigurationRequest.type = Types::UpdateAvailabilityConfigurationRequest
     UpdateAvailabilityConfigurationResponse.type = Types::UpdateAvailabilityConfigurationResponse
-    UpdateDefaultMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateDefaultMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
+    UpdateDefaultMailDomainRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateDefaultMailDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailDomainName, location_name: "DomainName", traits: {"smithy.api#required" => {}}))
     UpdateDefaultMailDomainRequest.type = Types::UpdateDefaultMailDomainRequest
     UpdateDefaultMailDomainResponse.type = Types::UpdateDefaultMailDomainResponse
-    UpdateGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
-    UpdateGroupRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "HiddenFromGlobalAddressList"))
+    UpdateGroupRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateGroupRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "GroupId", traits: {"smithy.api#required" => {}}))
+    UpdateGroupRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "HiddenFromGlobalAddressList"))
     UpdateGroupRequest.type = Types::UpdateGroupRequest
     UpdateGroupResponse.type = Types::UpdateGroupResponse
-    UpdateImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
-    UpdateImpersonationRoleRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateImpersonationRoleRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    UpdateImpersonationRoleRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRoleDescription, location_name: "Description"))
-    UpdateImpersonationRoleRequest.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpersonationRuleList, location_name: "Rules", traits: {"smithy.api#required" => {}}))
+    UpdateImpersonationRoleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateImpersonationRoleRequest.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, location_name: "ImpersonationRoleId", traits: {"smithy.api#required" => {}}))
+    UpdateImpersonationRoleRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateImpersonationRoleRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    UpdateImpersonationRoleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleDescription, location_name: "Description"))
+    UpdateImpersonationRoleRequest.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleList, location_name: "Rules", traits: {"smithy.api#required" => {}}))
     UpdateImpersonationRoleRequest.type = Types::UpdateImpersonationRoleRequest
     UpdateImpersonationRoleResponse.type = Types::UpdateImpersonationRoleResponse
-    UpdateMailboxQuotaRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateMailboxQuotaRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
-    UpdateMailboxQuotaRequest.add_member(:mailbox_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailboxQuota, location_name: "MailboxQuota", traits: {"smithy.api#required" => {}}))
+    UpdateMailboxQuotaRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateMailboxQuotaRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    UpdateMailboxQuotaRequest.add_member(:mailbox_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxQuota, location_name: "MailboxQuota", traits: {"smithy.api#required" => {}}))
     UpdateMailboxQuotaRequest.type = Types::UpdateMailboxQuotaRequest
     UpdateMailboxQuotaResponse.type = Types::UpdateMailboxQuotaResponse
-    UpdateMobileDeviceAccessRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId", traits: {"smithy.api#required" => {}}))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:effect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:device_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "DeviceTypes"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "NotDeviceTypes"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:device_models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "DeviceModels"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_models, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "NotDeviceModels"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:device_operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:device_user_agents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "DeviceUserAgents"))
-    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_user_agents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId", traits: {"smithy.api#required" => {}}))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, location_name: "Effect", traits: {"smithy.api#required" => {}}))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_types, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeList, location_name: "DeviceTypes"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_types, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeList, location_name: "NotDeviceTypes"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModelList, location_name: "DeviceModels"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModelList, location_name: "NotDeviceModels"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_user_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgentList, location_name: "DeviceUserAgents"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_user_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
     UpdateMobileDeviceAccessRuleRequest.type = Types::UpdateMobileDeviceAccessRuleRequest
     UpdateMobileDeviceAccessRuleResponse.type = Types::UpdateMobileDeviceAccessRuleResponse
-    UpdatePrimaryEmailAddressRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdatePrimaryEmailAddressRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
-    UpdatePrimaryEmailAddressRequest.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email", traits: {"smithy.api#required" => {}}))
+    UpdatePrimaryEmailAddressRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdatePrimaryEmailAddressRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "EntityId", traits: {"smithy.api#required" => {}}))
+    UpdatePrimaryEmailAddressRequest.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email", traits: {"smithy.api#required" => {}}))
     UpdatePrimaryEmailAddressRequest.type = Types::UpdatePrimaryEmailAddressRequest
     UpdatePrimaryEmailAddressResponse.type = Types::UpdatePrimaryEmailAddressResponse
-    UpdateResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    UpdateResourceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    UpdateResourceRequest.add_member(:booking_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BookingOptions, location_name: "BookingOptions"))
-    UpdateResourceRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NewResourceDescription, location_name: "Description"))
-    UpdateResourceRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
-    UpdateResourceRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "HiddenFromGlobalAddressList"))
+    UpdateResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    UpdateResourceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    UpdateResourceRequest.add_member(:booking_options, ::Smithy::Schema::Shapes::MemberShape.new(target: BookingOptions, location_name: "BookingOptions"))
+    UpdateResourceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NewResourceDescription, location_name: "Description"))
+    UpdateResourceRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "Type"))
+    UpdateResourceRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "HiddenFromGlobalAddressList"))
     UpdateResourceRequest.type = Types::UpdateResourceRequest
     UpdateResourceResponse.type = Types::UpdateResourceResponse
-    UpdateUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
-    UpdateUserRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
-    UpdateUserRequest.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserRole, location_name: "Role"))
-    UpdateUserRequest.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "DisplayName"))
-    UpdateUserRequest.add_member(:first_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "FirstName"))
-    UpdateUserRequest.add_member(:last_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "LastName"))
-    UpdateUserRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "HiddenFromGlobalAddressList"))
-    UpdateUserRequest.add_member(:initials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Initials"))
-    UpdateUserRequest.add_member(:telephone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Telephone"))
-    UpdateUserRequest.add_member(:street, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Street"))
-    UpdateUserRequest.add_member(:job_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "JobTitle"))
-    UpdateUserRequest.add_member(:city, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "City"))
-    UpdateUserRequest.add_member(:company, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Company"))
-    UpdateUserRequest.add_member(:zip_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "ZipCode"))
-    UpdateUserRequest.add_member(:department, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Department"))
-    UpdateUserRequest.add_member(:country, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Country"))
-    UpdateUserRequest.add_member(:office, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Office"))
-    UpdateUserRequest.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderUserIdForUpdate, location_name: "IdentityProviderUserId"))
+    UpdateUserRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, location_name: "OrganizationId", traits: {"smithy.api#required" => {}}))
+    UpdateUserRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, location_name: "UserId", traits: {"smithy.api#required" => {}}))
+    UpdateUserRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: UserRole, location_name: "Role"))
+    UpdateUserRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "DisplayName"))
+    UpdateUserRequest.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "FirstName"))
+    UpdateUserRequest.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "LastName"))
+    UpdateUserRequest.add_member(:hidden_from_global_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "HiddenFromGlobalAddressList"))
+    UpdateUserRequest.add_member(:initials, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Initials"))
+    UpdateUserRequest.add_member(:telephone, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Telephone"))
+    UpdateUserRequest.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Street"))
+    UpdateUserRequest.add_member(:job_title, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "JobTitle"))
+    UpdateUserRequest.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "City"))
+    UpdateUserRequest.add_member(:company, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Company"))
+    UpdateUserRequest.add_member(:zip_code, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "ZipCode"))
+    UpdateUserRequest.add_member(:department, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Department"))
+    UpdateUserRequest.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Country"))
+    UpdateUserRequest.add_member(:office, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttribute, location_name: "Office"))
+    UpdateUserRequest.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderUserIdForUpdate, location_name: "IdentityProviderUserId"))
     UpdateUserRequest.type = Types::UpdateUserRequest
     UpdateUserResponse.type = Types::UpdateUserResponse
-    User.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "Id"))
-    User.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
-    User.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "Name"))
-    User.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
-    User.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
-    User.add_member(:user_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserRole, location_name: "UserRole"))
-    User.add_member(:enabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
-    User.add_member(:disabled_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
-    User.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
-    User.add_member(:identity_provider_identity_store_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderIdentityStoreId, location_name: "IdentityProviderIdentityStoreId"))
+    User.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, location_name: "Id"))
+    User.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "Email"))
+    User.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "Name"))
+    User.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DisplayName"))
+    User.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityState, location_name: "State"))
+    User.add_member(:user_role, ::Smithy::Schema::Shapes::MemberShape.new(target: UserRole, location_name: "UserRole"))
+    User.add_member(:enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EnabledDate"))
+    User.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DisabledDate"))
+    User.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
+    User.add_member(:identity_provider_identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderIdentityStoreId, location_name: "IdentityProviderIdentityStoreId"))
     User.type = Types::User
-    UserIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkMailIdentifier)
-    UserRole.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    UserRole.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
-    UserRole.add_member(:system_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYSTEM_USER", traits: {"smithy.api#enumValue" => "SYSTEM_USER"}))
-    UserRole.add_member(:remote_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOTE_USER", traits: {"smithy.api#enumValue" => "REMOTE_USER"}))
-    Users.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: User)
+    UserIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier)
+    UserRole.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    UserRole.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
+    UserRole.add_member(:system_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYSTEM_USER", traits: {"smithy.api#enumValue" => "SYSTEM_USER"}))
+    UserRole.add_member(:remote_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOTE_USER", traits: {"smithy.api#enumValue" => "REMOTE_USER"}))
+    Users.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User)
 
     WorkMailService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.workmail#WorkMailService"
@@ -1363,1091 +1363,1091 @@ module Aws::WorkMail
       service.add_operation(:associate_delegate_to_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#AssociateDelegateToResource"
         operation.name = "AssociateDelegateToResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateDelegateToResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateDelegateToResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = AssociateDelegateToResourceRequest
+        operation.output = AssociateDelegateToResourceResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:associate_member_to_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#AssociateMemberToGroup"
         operation.name = "AssociateMemberToGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateMemberToGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateMemberToGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = AssociateMemberToGroupRequest
+        operation.output = AssociateMemberToGroupResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:assume_impersonation_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#AssumeImpersonationRole"
         operation.name = "AssumeImpersonationRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssumeImpersonationRoleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssumeImpersonationRoleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = AssumeImpersonationRoleRequest
+        operation.output = AssumeImpersonationRoleResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:cancel_mailbox_export_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CancelMailboxExportJob"
         operation.name = "CancelMailboxExportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelMailboxExportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelMailboxExportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = CancelMailboxExportJobRequest
+        operation.output = CancelMailboxExportJobResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateAlias"
         operation.name = "CreateAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAliasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAliasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = CreateAliasRequest
+        operation.output = CreateAliasResponse
+        operation.errors << EmailAddressInUseException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << MailDomainNotFoundException
+        operation.errors << MailDomainStateException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_availability_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateAvailabilityConfiguration"
         operation.name = "CreateAvailabilityConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAvailabilityConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAvailabilityConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameAvailabilityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = CreateAvailabilityConfigurationRequest
+        operation.output = CreateAvailabilityConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NameAvailabilityException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateGroup"
         operation.name = "CreateGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameAvailabilityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateGroupRequest
+        operation.output = CreateGroupResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidParameterException
+        operation.errors << NameAvailabilityException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ReservedNameException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_identity_center_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateIdentityCenterApplication"
         operation.name = "CreateIdentityCenterApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIdentityCenterApplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIdentityCenterApplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.input = CreateIdentityCenterApplicationRequest
+        operation.output = CreateIdentityCenterApplicationResponse
+        operation.errors << InvalidParameterException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_impersonation_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateImpersonationRole"
         operation.name = "CreateImpersonationRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateImpersonationRoleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateImpersonationRoleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = CreateImpersonationRoleRequest
+        operation.output = CreateImpersonationRoleResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:create_mobile_device_access_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateMobileDeviceAccessRule"
         operation.name = "CreateMobileDeviceAccessRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMobileDeviceAccessRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMobileDeviceAccessRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = CreateMobileDeviceAccessRuleRequest
+        operation.output = CreateMobileDeviceAccessRuleResponse
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:create_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateOrganization"
         operation.name = "CreateOrganization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOrganizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOrganizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameAvailabilityException)
+        operation.input = CreateOrganizationRequest
+        operation.output = CreateOrganizationResponse
+        operation.errors << DirectoryInUseException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NameAvailabilityException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateResource"
         operation.name = "CreateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameAvailabilityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateResourceRequest
+        operation.output = CreateResourceResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidParameterException
+        operation.errors << NameAvailabilityException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ReservedNameException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#CreateUser"
         operation.name = "CreateUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameAvailabilityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = CreateUserRequest
+        operation.output = CreateUserResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << NameAvailabilityException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ReservedNameException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_access_control_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteAccessControlRule"
         operation.name = "DeleteAccessControlRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAccessControlRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAccessControlRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteAccessControlRuleRequest
+        operation.output = DeleteAccessControlRuleResponse
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:delete_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteAlias"
         operation.name = "DeleteAlias"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAliasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAliasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteAliasRequest
+        operation.output = DeleteAliasResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_availability_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteAvailabilityConfiguration"
         operation.name = "DeleteAvailabilityConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAvailabilityConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAvailabilityConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteAvailabilityConfigurationRequest
+        operation.output = DeleteAvailabilityConfigurationResponse
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_email_monitoring_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteEmailMonitoringConfiguration"
         operation.name = "DeleteEmailMonitoringConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEmailMonitoringConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEmailMonitoringConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteEmailMonitoringConfigurationRequest
+        operation.output = DeleteEmailMonitoringConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteGroup"
         operation.name = "DeleteGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeleteGroupRequest
+        operation.output = DeleteGroupResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_identity_center_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteIdentityCenterApplication"
         operation.name = "DeleteIdentityCenterApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIdentityCenterApplicationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIdentityCenterApplicationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteIdentityCenterApplicationRequest
+        operation.output = DeleteIdentityCenterApplicationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_identity_provider_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteIdentityProviderConfiguration"
         operation.name = "DeleteIdentityProviderConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIdentityProviderConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIdentityProviderConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteIdentityProviderConfigurationRequest
+        operation.output = DeleteIdentityProviderConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_impersonation_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteImpersonationRole"
         operation.name = "DeleteImpersonationRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteImpersonationRoleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteImpersonationRoleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteImpersonationRoleRequest
+        operation.output = DeleteImpersonationRoleResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:delete_mailbox_permissions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteMailboxPermissions"
         operation.name = "DeleteMailboxPermissions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMailboxPermissionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMailboxPermissionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteMailboxPermissionsRequest
+        operation.output = DeleteMailboxPermissionsResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_mobile_device_access_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteMobileDeviceAccessOverride"
         operation.name = "DeleteMobileDeviceAccessOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMobileDeviceAccessOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMobileDeviceAccessOverrideResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteMobileDeviceAccessOverrideRequest
+        operation.output = DeleteMobileDeviceAccessOverrideResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:delete_mobile_device_access_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteMobileDeviceAccessRule"
         operation.name = "DeleteMobileDeviceAccessRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMobileDeviceAccessRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMobileDeviceAccessRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteMobileDeviceAccessRuleRequest
+        operation.output = DeleteMobileDeviceAccessRuleResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:delete_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteOrganization"
         operation.name = "DeleteOrganization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOrganizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOrganizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteOrganizationRequest
+        operation.output = DeleteOrganizationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_personal_access_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeletePersonalAccessToken"
         operation.name = "DeletePersonalAccessToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePersonalAccessTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePersonalAccessTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeletePersonalAccessTokenRequest
+        operation.output = DeletePersonalAccessTokenResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteResource"
         operation.name = "DeleteResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeleteResourceRequest
+        operation.output = DeleteResourceResponse
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_retention_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteRetentionPolicy"
         operation.name = "DeleteRetentionPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRetentionPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRetentionPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeleteRetentionPolicyRequest
+        operation.output = DeleteRetentionPolicyResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeleteUser"
         operation.name = "DeleteUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DeleteUserRequest
+        operation.output = DeleteUserResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:deregister_from_work_mail, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeregisterFromWorkMail"
         operation.name = "DeregisterFromWorkMail"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterFromWorkMailRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterFromWorkMailResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeregisterFromWorkMailRequest
+        operation.output = DeregisterFromWorkMailResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:deregister_mail_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DeregisterMailDomain"
         operation.name = "DeregisterMailDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterMailDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterMailDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCustomSesConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DeregisterMailDomainRequest
+        operation.output = DeregisterMailDomainResponse
+        operation.errors << InvalidCustomSesConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << MailDomainInUseException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_email_monitoring_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeEmailMonitoringConfiguration"
         operation.name = "DescribeEmailMonitoringConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEmailMonitoringConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEmailMonitoringConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeEmailMonitoringConfigurationRequest
+        operation.output = DescribeEmailMonitoringConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_entity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeEntity"
         operation.name = "DescribeEntity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DescribeEntityRequest
+        operation.output = DescribeEntityResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeGroup"
         operation.name = "DescribeGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DescribeGroupRequest
+        operation.output = DescribeGroupResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_identity_provider_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeIdentityProviderConfiguration"
         operation.name = "DescribeIdentityProviderConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeIdentityProviderConfigurationRequest
+        operation.output = DescribeIdentityProviderConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_inbound_dmarc_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeInboundDmarcSettings"
         operation.name = "DescribeInboundDmarcSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeInboundDmarcSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeInboundDmarcSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DescribeInboundDmarcSettingsRequest
+        operation.output = DescribeInboundDmarcSettingsResponse
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_mailbox_export_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeMailboxExportJob"
         operation.name = "DescribeMailboxExportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMailboxExportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMailboxExportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DescribeMailboxExportJobRequest
+        operation.output = DescribeMailboxExportJobResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeOrganization"
         operation.name = "DescribeOrganization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        operation.input = DescribeOrganizationRequest
+        operation.output = DescribeOrganizationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeResource"
         operation.name = "DescribeResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DescribeResourceRequest
+        operation.output = DescribeResourceResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DescribeUser"
         operation.name = "DescribeUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = DescribeUserRequest
+        operation.output = DescribeUserResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:disassociate_delegate_from_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DisassociateDelegateFromResource"
         operation.name = "DisassociateDelegateFromResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateDelegateFromResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateDelegateFromResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DisassociateDelegateFromResourceRequest
+        operation.output = DisassociateDelegateFromResourceResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:disassociate_member_from_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#DisassociateMemberFromGroup"
         operation.name = "DisassociateMemberFromGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateMemberFromGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateMemberFromGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = DisassociateMemberFromGroupRequest
+        operation.output = DisassociateMemberFromGroupResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_access_control_effect, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetAccessControlEffect"
         operation.name = "GetAccessControlEffect"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccessControlEffectRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccessControlEffectResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetAccessControlEffectRequest
+        operation.output = GetAccessControlEffectResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_default_retention_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetDefaultRetentionPolicy"
         operation.name = "GetDefaultRetentionPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDefaultRetentionPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDefaultRetentionPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = GetDefaultRetentionPolicyRequest
+        operation.output = GetDefaultRetentionPolicyResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_impersonation_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetImpersonationRole"
         operation.name = "GetImpersonationRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImpersonationRoleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImpersonationRoleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetImpersonationRoleRequest
+        operation.output = GetImpersonationRoleResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_impersonation_role_effect, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetImpersonationRoleEffect"
         operation.name = "GetImpersonationRoleEffect"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImpersonationRoleEffectRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetImpersonationRoleEffectResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetImpersonationRoleEffectRequest
+        operation.output = GetImpersonationRoleEffectResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_mail_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetMailDomain"
         operation.name = "GetMailDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMailDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMailDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = GetMailDomainRequest
+        operation.output = GetMailDomainResponse
+        operation.errors << InvalidParameterException
+        operation.errors << MailDomainNotFoundException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_mailbox_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetMailboxDetails"
         operation.name = "GetMailboxDetails"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMailboxDetailsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMailboxDetailsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = GetMailboxDetailsRequest
+        operation.output = GetMailboxDetailsResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_mobile_device_access_effect, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetMobileDeviceAccessEffect"
         operation.name = "GetMobileDeviceAccessEffect"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMobileDeviceAccessEffectRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMobileDeviceAccessEffectResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = GetMobileDeviceAccessEffectRequest
+        operation.output = GetMobileDeviceAccessEffectResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:get_mobile_device_access_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetMobileDeviceAccessOverride"
         operation.name = "GetMobileDeviceAccessOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMobileDeviceAccessOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMobileDeviceAccessOverrideResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetMobileDeviceAccessOverrideRequest
+        operation.output = GetMobileDeviceAccessOverrideResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_personal_access_token_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#GetPersonalAccessTokenMetadata"
         operation.name = "GetPersonalAccessTokenMetadata"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPersonalAccessTokenMetadataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPersonalAccessTokenMetadataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetPersonalAccessTokenMetadataRequest
+        operation.output = GetPersonalAccessTokenMetadataResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:list_access_control_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListAccessControlRules"
         operation.name = "ListAccessControlRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAccessControlRulesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAccessControlRulesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListAccessControlRulesRequest
+        operation.output = ListAccessControlRulesResponse
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:list_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListAliases"
         operation.name = "ListAliases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAliasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAliasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListAliasesRequest
+        operation.output = ListAliasesResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListAliases.new
       end)
       service.add_operation(:list_availability_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListAvailabilityConfigurations"
         operation.name = "ListAvailabilityConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAvailabilityConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAvailabilityConfigurationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListAvailabilityConfigurationsRequest
+        operation.output = ListAvailabilityConfigurationsResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAvailabilityConfigurations.new
       end)
       service.add_operation(:list_group_members, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListGroupMembers"
         operation.name = "ListGroupMembers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupMembersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupMembersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListGroupMembersRequest
+        operation.output = ListGroupMembersResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListGroupMembers.new
       end)
       service.add_operation(:list_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListGroups"
         operation.name = "ListGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListGroupsRequest
+        operation.output = ListGroupsResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListGroups.new
       end)
       service.add_operation(:list_groups_for_entity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListGroupsForEntity"
         operation.name = "ListGroupsForEntity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsForEntityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsForEntityResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListGroupsForEntityRequest
+        operation.output = ListGroupsForEntityResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListGroupsForEntity.new
       end)
       service.add_operation(:list_impersonation_roles, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListImpersonationRoles"
         operation.name = "ListImpersonationRoles"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListImpersonationRolesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListImpersonationRolesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListImpersonationRolesRequest
+        operation.output = ListImpersonationRolesResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
         operation[:paginator] = Paginators::ListImpersonationRoles.new
       end)
       service.add_operation(:list_mail_domains, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListMailDomains"
         operation.name = "ListMailDomains"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMailDomainsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMailDomainsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListMailDomainsRequest
+        operation.output = ListMailDomainsResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListMailDomains.new
       end)
       service.add_operation(:list_mailbox_export_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListMailboxExportJobs"
         operation.name = "ListMailboxExportJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMailboxExportJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMailboxExportJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListMailboxExportJobsRequest
+        operation.output = ListMailboxExportJobsResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListMailboxExportJobs.new
       end)
       service.add_operation(:list_mailbox_permissions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListMailboxPermissions"
         operation.name = "ListMailboxPermissions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMailboxPermissionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMailboxPermissionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListMailboxPermissionsRequest
+        operation.output = ListMailboxPermissionsResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListMailboxPermissions.new
       end)
       service.add_operation(:list_mobile_device_access_overrides, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListMobileDeviceAccessOverrides"
         operation.name = "ListMobileDeviceAccessOverrides"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMobileDeviceAccessOverridesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMobileDeviceAccessOverridesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListMobileDeviceAccessOverridesRequest
+        operation.output = ListMobileDeviceAccessOverridesResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
         operation[:paginator] = Paginators::ListMobileDeviceAccessOverrides.new
       end)
       service.add_operation(:list_mobile_device_access_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListMobileDeviceAccessRules"
         operation.name = "ListMobileDeviceAccessRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMobileDeviceAccessRulesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMobileDeviceAccessRulesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListMobileDeviceAccessRulesRequest
+        operation.output = ListMobileDeviceAccessRulesResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:list_organizations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListOrganizations"
         operation.name = "ListOrganizations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOrganizationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOrganizationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.input = ListOrganizationsRequest
+        operation.output = ListOrganizationsResponse
+        operation.errors << InvalidParameterException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListOrganizations.new
       end)
       service.add_operation(:list_personal_access_tokens, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListPersonalAccessTokens"
         operation.name = "ListPersonalAccessTokens"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPersonalAccessTokensRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPersonalAccessTokensResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListPersonalAccessTokensRequest
+        operation.output = ListPersonalAccessTokensResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListPersonalAccessTokens.new
       end)
       service.add_operation(:list_resource_delegates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListResourceDelegates"
         operation.name = "ListResourceDelegates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceDelegatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceDelegatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = ListResourceDelegatesRequest
+        operation.output = ListResourceDelegatesResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListResourceDelegates.new
       end)
       service.add_operation(:list_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListResources"
         operation.name = "ListResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourcesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = ListResourcesRequest
+        operation.output = ListResourcesResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListResources.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:list_users, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ListUsers"
         operation.name = "ListUsers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListUsersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = ListUsersRequest
+        operation.output = ListUsersResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListUsers.new
       end)
       service.add_operation(:put_access_control_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#PutAccessControlRule"
         operation.name = "PutAccessControlRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccessControlRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccessControlRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutAccessControlRuleRequest
+        operation.output = PutAccessControlRuleResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:put_email_monitoring_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#PutEmailMonitoringConfiguration"
         operation.name = "PutEmailMonitoringConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailMonitoringConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailMonitoringConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutEmailMonitoringConfigurationRequest
+        operation.output = PutEmailMonitoringConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_identity_provider_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#PutIdentityProviderConfiguration"
         operation.name = "PutIdentityProviderConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutIdentityProviderConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutIdentityProviderConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutIdentityProviderConfigurationRequest
+        operation.output = PutIdentityProviderConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_inbound_dmarc_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#PutInboundDmarcSettings"
         operation.name = "PutInboundDmarcSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutInboundDmarcSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutInboundDmarcSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = PutInboundDmarcSettingsRequest
+        operation.output = PutInboundDmarcSettingsResponse
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_mailbox_permissions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#PutMailboxPermissions"
         operation.name = "PutMailboxPermissions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMailboxPermissionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMailboxPermissionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = PutMailboxPermissionsRequest
+        operation.output = PutMailboxPermissionsResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_mobile_device_access_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#PutMobileDeviceAccessOverride"
         operation.name = "PutMobileDeviceAccessOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMobileDeviceAccessOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMobileDeviceAccessOverrideResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = PutMobileDeviceAccessOverrideRequest
+        operation.output = PutMobileDeviceAccessOverrideResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:put_retention_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#PutRetentionPolicy"
         operation.name = "PutRetentionPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRetentionPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRetentionPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = PutRetentionPolicyRequest
+        operation.output = PutRetentionPolicyResponse
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:register_mail_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#RegisterMailDomain"
         operation.name = "RegisterMailDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterMailDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterMailDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = RegisterMailDomainRequest
+        operation.output = RegisterMailDomainResponse
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << MailDomainInUseException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:register_to_work_mail, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#RegisterToWorkMail"
         operation.name = "RegisterToWorkMail"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterToWorkMailRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterToWorkMailResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyRegisteredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = RegisterToWorkMailRequest
+        operation.output = RegisterToWorkMailResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EmailAddressInUseException
+        operation.errors << EntityAlreadyRegisteredException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << MailDomainNotFoundException
+        operation.errors << MailDomainStateException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:reset_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#ResetPassword"
         operation.name = "ResetPassword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetPasswordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetPasswordResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPasswordException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = ResetPasswordRequest
+        operation.output = ResetPasswordResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidPasswordException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_mailbox_export_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#StartMailboxExportJob"
         operation.name = "StartMailboxExportJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartMailboxExportJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartMailboxExportJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = StartMailboxExportJobRequest
+        operation.output = StartMailboxExportJobResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:test_availability_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#TestAvailabilityConfiguration"
         operation.name = "TestAvailabilityConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TestAvailabilityConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TestAvailabilityConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = TestAvailabilityConfigurationRequest
+        operation.output = TestAvailabilityConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_availability_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateAvailabilityConfiguration"
         operation.name = "UpdateAvailabilityConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAvailabilityConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAvailabilityConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateAvailabilityConfigurationRequest
+        operation.output = UpdateAvailabilityConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_default_mail_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateDefaultMailDomain"
         operation.name = "UpdateDefaultMailDomain"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDefaultMailDomainRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDefaultMailDomainResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = UpdateDefaultMailDomainRequest
+        operation.output = UpdateDefaultMailDomainResponse
+        operation.errors << InvalidParameterException
+        operation.errors << MailDomainNotFoundException
+        operation.errors << MailDomainStateException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateGroup"
         operation.name = "UpdateGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdateGroupRequest
+        operation.output = UpdateGroupResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_impersonation_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateImpersonationRole"
         operation.name = "UpdateImpersonationRole"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateImpersonationRoleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateImpersonationRoleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateImpersonationRoleRequest
+        operation.output = UpdateImpersonationRoleResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_mailbox_quota, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateMailboxQuota"
         operation.name = "UpdateMailboxQuota"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMailboxQuotaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMailboxQuotaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = UpdateMailboxQuotaRequest
+        operation.output = UpdateMailboxQuotaResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_mobile_device_access_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateMobileDeviceAccessRule"
         operation.name = "UpdateMobileDeviceAccessRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMobileDeviceAccessRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMobileDeviceAccessRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.input = UpdateMobileDeviceAccessRuleRequest
+        operation.output = UpdateMobileDeviceAccessRuleResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
         operation.traits = {}
       end)
       service.add_operation(:update_primary_email_address, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdatePrimaryEmailAddress"
         operation.name = "UpdatePrimaryEmailAddress"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePrimaryEmailAddressRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePrimaryEmailAddressResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdatePrimaryEmailAddressRequest
+        operation.output = UpdatePrimaryEmailAddressResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EmailAddressInUseException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << MailDomainNotFoundException
+        operation.errors << MailDomainStateException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateResource"
         operation.name = "UpdateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameAvailabilityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdateResourceRequest
+        operation.output = UpdateResourceResponse
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EmailAddressInUseException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidConfigurationException
+        operation.errors << InvalidParameterException
+        operation.errors << MailDomainNotFoundException
+        operation.errors << MailDomainStateException
+        operation.errors << NameAvailabilityException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workmail#UpdateUser"
         operation.name = "UpdateUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.input = UpdateUserRequest
+        operation.output = UpdateUserResponse
+        operation.errors << DirectoryServiceAuthenticationFailedException
+        operation.errors << DirectoryUnavailableException
+        operation.errors << EntityNotFoundException
+        operation.errors << EntityStateException
+        operation.errors << InvalidParameterException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << OrganizationStateException
+        operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
     end

@@ -121,384 +121,384 @@ module Aws::GameLiftStreams
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gameliftstreams#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     WebSdkProtocolUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gameliftstreams#WebSdkProtocolUrl", name: "WebSdkProtocolUrl")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddStreamGroupLocationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    AddStreamGroupLocationsInput.add_member(:location_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationConfigurations, location_name: "LocationConfigurations", traits: {"smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
+    AddStreamGroupLocationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    AddStreamGroupLocationsInput.add_member(:location_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationConfigurations, location_name: "LocationConfigurations", traits: {"smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
     AddStreamGroupLocationsInput.type = Types::AddStreamGroupLocationsInput
-    AddStreamGroupLocationsOutput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    AddStreamGroupLocationsOutput.add_member(:locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationStates, location_name: "Locations", traits: {"smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
+    AddStreamGroupLocationsOutput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    AddStreamGroupLocationsOutput.add_member(:locations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStates, location_name: "Locations", traits: {"smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
     AddStreamGroupLocationsOutput.type = Types::AddStreamGroupLocationsOutput
-    ApplicationStatus.add_member(:initialized, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INITIALIZED", traits: {"smithy.api#enumValue" => "INITIALIZED"}))
-    ApplicationStatus.add_member(:processing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
-    ApplicationStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
-    ApplicationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ApplicationStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    ApplicationStatusReason.add_member(:internal_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "internalError"}))
-    ApplicationStatusReason.add_member(:access_denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "accessDenied"}))
-    ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    ApplicationSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    ApplicationSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "Status"))
-    ApplicationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    ApplicationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
-    ApplicationSummary.add_member(:runtime_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironment"))
+    ApplicationStatus.add_member(:initialized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INITIALIZED", traits: {"smithy.api#enumValue" => "INITIALIZED"}))
+    ApplicationStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
+    ApplicationStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
+    ApplicationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ApplicationStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    ApplicationStatusReason.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "internalError"}))
+    ApplicationStatusReason.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "accessDenied"}))
+    ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    ApplicationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    ApplicationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, location_name: "Status"))
+    ApplicationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    ApplicationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
+    ApplicationSummary.add_member(:runtime_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironment, location_name: "RuntimeEnvironment"))
     ApplicationSummary.type = Types::ApplicationSummary
-    ApplicationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSummary)
-    ArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    AssociateApplicationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    AssociateApplicationsInput.add_member(:application_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifiers, location_name: "ApplicationIdentifiers", traits: {"smithy.api#required" => {}}))
+    ApplicationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary)
+    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    AssociateApplicationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    AssociateApplicationsInput.add_member(:application_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifiers, location_name: "ApplicationIdentifiers", traits: {"smithy.api#required" => {}}))
     AssociateApplicationsInput.type = Types::AssociateApplicationsInput
-    AssociateApplicationsOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    AssociateApplicationsOutput.add_member(:application_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "ApplicationArns"))
+    AssociateApplicationsOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    AssociateApplicationsOutput.add_member(:application_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "ApplicationArns"))
     AssociateApplicationsOutput.type = Types::AssociateApplicationsOutput
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateApplicationInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description", traits: {"smithy.api#required" => {}}))
-    CreateApplicationInput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"smithy.api#required" => {}}))
-    CreateApplicationInput.add_member(:executable_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutablePath, location_name: "ExecutablePath", traits: {"smithy.api#required" => {}}))
-    CreateApplicationInput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSourceUri, location_name: "ApplicationSourceUri", traits: {"smithy.api#required" => {}}))
-    CreateApplicationInput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
-    CreateApplicationInput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
-    CreateApplicationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
-    CreateApplicationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateApplicationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    CreateApplicationInput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"smithy.api#required" => {}}))
+    CreateApplicationInput.add_member(:executable_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutablePath, location_name: "ExecutablePath", traits: {"smithy.api#required" => {}}))
+    CreateApplicationInput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSourceUri, location_name: "ApplicationSourceUri", traits: {"smithy.api#required" => {}}))
+    CreateApplicationInput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, location_name: "ApplicationLogPaths"))
+    CreateApplicationInput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
+    CreateApplicationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    CreateApplicationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateApplicationInput.type = Types::CreateApplicationInput
-    CreateApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    CreateApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateApplicationOutput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    CreateApplicationOutput.add_member(:executable_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutablePath, location_name: "ExecutablePath"))
-    CreateApplicationOutput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
-    CreateApplicationOutput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
-    CreateApplicationOutput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
-    CreateApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    CreateApplicationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateApplicationOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateApplicationOutput.add_member(:replication_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatuses, location_name: "ReplicationStatuses", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateApplicationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateApplicationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateApplicationOutput.add_member(:associated_stream_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedStreamGroups", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    CreateApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateApplicationOutput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    CreateApplicationOutput.add_member(:executable_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutablePath, location_name: "ExecutablePath"))
+    CreateApplicationOutput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, location_name: "ApplicationLogPaths"))
+    CreateApplicationOutput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
+    CreateApplicationOutput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
+    CreateApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    CreateApplicationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateApplicationOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateApplicationOutput.add_member(:replication_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatuses, location_name: "ReplicationStatuses", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateApplicationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateApplicationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateApplicationOutput.add_member(:associated_stream_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "AssociatedStreamGroups", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     CreateApplicationOutput.type = Types::CreateApplicationOutput
-    CreateStreamGroupInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description", traits: {"smithy.api#required" => {}}))
-    CreateStreamGroupInput.add_member(:stream_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamClass, location_name: "StreamClass", traits: {"smithy.api#required" => {}}))
-    CreateStreamGroupInput.add_member(:default_application_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "DefaultApplicationIdentifier", traits: {"smithy.api#notProperty" => {}}))
-    CreateStreamGroupInput.add_member(:location_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationConfigurations, location_name: "LocationConfigurations", traits: {"smithy.api#notProperty" => {}}))
-    CreateStreamGroupInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
-    CreateStreamGroupInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateStreamGroupInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    CreateStreamGroupInput.add_member(:stream_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamClass, location_name: "StreamClass", traits: {"smithy.api#required" => {}}))
+    CreateStreamGroupInput.add_member(:default_application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "DefaultApplicationIdentifier", traits: {"smithy.api#notProperty" => {}}))
+    CreateStreamGroupInput.add_member(:location_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationConfigurations, location_name: "LocationConfigurations", traits: {"smithy.api#notProperty" => {}}))
+    CreateStreamGroupInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    CreateStreamGroupInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateStreamGroupInput.type = Types::CreateStreamGroupInput
-    CreateStreamGroupOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    CreateStreamGroupOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateStreamGroupOutput.add_member(:default_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    CreateStreamGroupOutput.add_member(:location_states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationStates, location_name: "LocationStates", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateStreamGroupOutput.add_member(:stream_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamClass, location_name: "StreamClass", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    CreateStreamGroupOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    CreateStreamGroupOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateStreamGroupOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateStreamGroupOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateStreamGroupOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    CreateStreamGroupOutput.add_member(:associated_applications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateStreamGroupOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    CreateStreamGroupOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateStreamGroupOutput.add_member(:default_application, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultApplication, location_name: "DefaultApplication", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    CreateStreamGroupOutput.add_member(:location_states, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStates, location_name: "LocationStates", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateStreamGroupOutput.add_member(:stream_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamClass, location_name: "StreamClass", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    CreateStreamGroupOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    CreateStreamGroupOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateStreamGroupOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateStreamGroupOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateStreamGroupOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateStreamGroupOutput.add_member(:associated_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "AssociatedApplications", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     CreateStreamGroupOutput.type = Types::CreateStreamGroupOutput
-    CreateStreamSessionConnectionInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateStreamSessionConnectionInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateStreamSessionConnectionInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateStreamSessionConnectionInput.add_member(:signal_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignalRequest, location_name: "SignalRequest", traits: {"smithy.api#required" => {}}))
+    CreateStreamSessionConnectionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateStreamSessionConnectionInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateStreamSessionConnectionInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateStreamSessionConnectionInput.add_member(:signal_request, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalRequest, location_name: "SignalRequest", traits: {"smithy.api#required" => {}}))
     CreateStreamSessionConnectionInput.type = Types::CreateStreamSessionConnectionInput
-    CreateStreamSessionConnectionOutput.add_member(:signal_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignalResponse, location_name: "SignalResponse"))
+    CreateStreamSessionConnectionOutput.add_member(:signal_response, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalResponse, location_name: "SignalResponse"))
     CreateStreamSessionConnectionOutput.type = Types::CreateStreamSessionConnectionOutput
-    DefaultApplication.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    DefaultApplication.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DefaultApplication.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    DefaultApplication.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
     DefaultApplication.type = Types::DefaultApplication
-    DeleteApplicationInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    DeleteApplicationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     DeleteApplicationInput.type = Types::DeleteApplicationInput
-    DeleteStreamGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    DeleteStreamGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     DeleteStreamGroupInput.type = Types::DeleteStreamGroupInput
-    DisassociateApplicationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    DisassociateApplicationsInput.add_member(:application_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifiers, location_name: "ApplicationIdentifiers", traits: {"smithy.api#required" => {}}))
+    DisassociateApplicationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    DisassociateApplicationsInput.add_member(:application_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifiers, location_name: "ApplicationIdentifiers", traits: {"smithy.api#required" => {}}))
     DisassociateApplicationsInput.type = Types::DisassociateApplicationsInput
-    DisassociateApplicationsOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    DisassociateApplicationsOutput.add_member(:application_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "ApplicationArns"))
+    DisassociateApplicationsOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    DisassociateApplicationsOutput.add_member(:application_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "ApplicationArns"))
     DisassociateApplicationsOutput.type = Types::DisassociateApplicationsOutput
-    EnvironmentVariables.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[_a-zA-Z][_a-zA-Z0-9]*$"})
-    EnvironmentVariables.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
-    ExportFilesMetadata.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilesStatus, location_name: "Status"))
-    ExportFilesMetadata.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilesReason, location_name: "StatusReason"))
-    ExportFilesMetadata.add_member(:output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputUri, location_name: "OutputUri"))
+    EnvironmentVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[_a-zA-Z][_a-zA-Z0-9]*$"})
+    EnvironmentVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    ExportFilesMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesStatus, location_name: "Status"))
+    ExportFilesMetadata.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesReason, location_name: "StatusReason"))
+    ExportFilesMetadata.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUri, location_name: "OutputUri"))
     ExportFilesMetadata.type = Types::ExportFilesMetadata
-    ExportFilesStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    ExportFilesStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ExportFilesStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    ExportStreamSessionFilesInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ExportStreamSessionFilesInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ExportStreamSessionFilesInput.add_member(:output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputUri, location_name: "OutputUri", traits: {"smithy.api#required" => {}}))
+    ExportFilesStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    ExportFilesStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ExportFilesStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ExportStreamSessionFilesInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ExportStreamSessionFilesInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ExportStreamSessionFilesInput.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUri, location_name: "OutputUri", traits: {"smithy.api#required" => {}}))
     ExportStreamSessionFilesInput.type = Types::ExportStreamSessionFilesInput
     ExportStreamSessionFilesOutput.type = Types::ExportStreamSessionFilesOutput
-    FilePaths.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePath)
-    GameLaunchArgList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    GetApplicationInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    FilePaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath)
+    GameLaunchArgList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    GetApplicationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     GetApplicationInput.type = Types::GetApplicationInput
-    GetApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    GetApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    GetApplicationOutput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    GetApplicationOutput.add_member(:executable_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutablePath, location_name: "ExecutablePath"))
-    GetApplicationOutput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
-    GetApplicationOutput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
-    GetApplicationOutput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
-    GetApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    GetApplicationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetApplicationOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetApplicationOutput.add_member(:replication_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatuses, location_name: "ReplicationStatuses", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetApplicationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetApplicationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetApplicationOutput.add_member(:associated_stream_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedStreamGroups", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    GetApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    GetApplicationOutput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    GetApplicationOutput.add_member(:executable_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutablePath, location_name: "ExecutablePath"))
+    GetApplicationOutput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, location_name: "ApplicationLogPaths"))
+    GetApplicationOutput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
+    GetApplicationOutput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
+    GetApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    GetApplicationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetApplicationOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetApplicationOutput.add_member(:replication_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatuses, location_name: "ReplicationStatuses", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetApplicationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetApplicationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetApplicationOutput.add_member(:associated_stream_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "AssociatedStreamGroups", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetApplicationOutput.type = Types::GetApplicationOutput
-    GetStreamGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    GetStreamGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     GetStreamGroupInput.type = Types::GetStreamGroupInput
-    GetStreamGroupOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    GetStreamGroupOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    GetStreamGroupOutput.add_member(:default_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    GetStreamGroupOutput.add_member(:location_states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationStates, location_name: "LocationStates", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetStreamGroupOutput.add_member(:stream_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamClass, location_name: "StreamClass", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    GetStreamGroupOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    GetStreamGroupOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetStreamGroupOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetStreamGroupOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetStreamGroupOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetStreamGroupOutput.add_member(:associated_applications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetStreamGroupOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    GetStreamGroupOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    GetStreamGroupOutput.add_member(:default_application, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultApplication, location_name: "DefaultApplication", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    GetStreamGroupOutput.add_member(:location_states, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStates, location_name: "LocationStates", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetStreamGroupOutput.add_member(:stream_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamClass, location_name: "StreamClass", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    GetStreamGroupOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    GetStreamGroupOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetStreamGroupOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetStreamGroupOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetStreamGroupOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetStreamGroupOutput.add_member(:associated_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "AssociatedApplications", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetStreamGroupOutput.type = Types::GetStreamGroupOutput
-    GetStreamSessionInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetStreamSessionInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetStreamSessionInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetStreamSessionInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetStreamSessionInput.type = Types::GetStreamSessionInput
-    GetStreamSessionOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    GetStreamSessionOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    GetStreamSessionOutput.add_member(:stream_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "StreamGroupId"))
-    GetStreamSessionOutput.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
-    GetStreamSessionOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionStatus, location_name: "Status"))
-    GetStreamSessionOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionStatusReason, location_name: "StatusReason"))
-    GetStreamSessionOutput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
-    GetStreamSessionOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationName, location_name: "Location"))
-    GetStreamSessionOutput.add_member(:signal_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignalRequest, location_name: "SignalRequest"))
-    GetStreamSessionOutput.add_member(:signal_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignalResponse, location_name: "SignalResponse"))
-    GetStreamSessionOutput.add_member(:connection_timeout_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionTimeoutSeconds, location_name: "ConnectionTimeoutSeconds"))
-    GetStreamSessionOutput.add_member(:session_length_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
-    GetStreamSessionOutput.add_member(:additional_launch_args, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
-    GetStreamSessionOutput.add_member(:additional_environment_variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
-    GetStreamSessionOutput.add_member(:log_file_location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileLocationUri, location_name: "LogFileLocationUri"))
-    GetStreamSessionOutput.add_member(:web_sdk_protocol_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebSdkProtocolUrl, location_name: "WebSdkProtocolUrl"))
-    GetStreamSessionOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
-    GetStreamSessionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    GetStreamSessionOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
-    GetStreamSessionOutput.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
+    GetStreamSessionOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    GetStreamSessionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    GetStreamSessionOutput.add_member(:stream_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "StreamGroupId"))
+    GetStreamSessionOutput.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "UserId"))
+    GetStreamSessionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionStatus, location_name: "Status"))
+    GetStreamSessionOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionStatusReason, location_name: "StatusReason"))
+    GetStreamSessionOutput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "Protocol"))
+    GetStreamSessionOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, location_name: "Location"))
+    GetStreamSessionOutput.add_member(:signal_request, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalRequest, location_name: "SignalRequest"))
+    GetStreamSessionOutput.add_member(:signal_response, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalResponse, location_name: "SignalResponse"))
+    GetStreamSessionOutput.add_member(:connection_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionTimeoutSeconds, location_name: "ConnectionTimeoutSeconds"))
+    GetStreamSessionOutput.add_member(:session_length_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
+    GetStreamSessionOutput.add_member(:additional_launch_args, ::Smithy::Schema::Shapes::MemberShape.new(target: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
+    GetStreamSessionOutput.add_member(:additional_environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    GetStreamSessionOutput.add_member(:log_file_location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: FileLocationUri, location_name: "LogFileLocationUri"))
+    GetStreamSessionOutput.add_member(:web_sdk_protocol_url, ::Smithy::Schema::Shapes::MemberShape.new(target: WebSdkProtocolUrl, location_name: "WebSdkProtocolUrl"))
+    GetStreamSessionOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
+    GetStreamSessionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    GetStreamSessionOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ApplicationArn"))
+    GetStreamSessionOutput.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
     GetStreamSessionOutput.type = Types::GetStreamSessionOutput
-    Identifiers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    Identifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    ListApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListApplicationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListApplicationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListApplicationsInput.type = Types::ListApplicationsInput
-    ListApplicationsOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSummaryList, location_name: "Items"))
-    ListApplicationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListApplicationsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummaryList, location_name: "Items"))
+    ListApplicationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListApplicationsOutput.type = Types::ListApplicationsOutput
-    ListStreamGroupsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListStreamGroupsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListStreamGroupsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListStreamGroupsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListStreamGroupsInput.type = Types::ListStreamGroupsInput
-    ListStreamGroupsOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupSummaryList, location_name: "Items"))
-    ListStreamGroupsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamGroupsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupSummaryList, location_name: "Items"))
+    ListStreamGroupsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListStreamGroupsOutput.type = Types::ListStreamGroupsOutput
-    ListStreamSessionsByAccountInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionStatus, location_name: "Status", traits: {"smithy.api#httpQuery" => "Status"}))
-    ListStreamSessionsByAccountInput.add_member(:export_files_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilesStatus, location_name: "ExportFilesStatus", traits: {"smithy.api#httpQuery" => "ExportFilesStatus"}))
-    ListStreamSessionsByAccountInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListStreamSessionsByAccountInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListStreamSessionsByAccountInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionStatus, location_name: "Status", traits: {"smithy.api#httpQuery" => "Status"}))
+    ListStreamSessionsByAccountInput.add_member(:export_files_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesStatus, location_name: "ExportFilesStatus", traits: {"smithy.api#httpQuery" => "ExportFilesStatus"}))
+    ListStreamSessionsByAccountInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListStreamSessionsByAccountInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListStreamSessionsByAccountInput.type = Types::ListStreamSessionsByAccountInput
-    ListStreamSessionsByAccountOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionSummaryList, location_name: "Items"))
-    ListStreamSessionsByAccountOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamSessionsByAccountOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummaryList, location_name: "Items"))
+    ListStreamSessionsByAccountOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListStreamSessionsByAccountOutput.type = Types::ListStreamSessionsByAccountOutput
-    ListStreamSessionsInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionStatus, location_name: "Status", traits: {"smithy.api#httpQuery" => "Status"}))
-    ListStreamSessionsInput.add_member(:export_files_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilesStatus, location_name: "ExportFilesStatus", traits: {"smithy.api#httpQuery" => "ExportFilesStatus"}))
-    ListStreamSessionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListStreamSessionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
-    ListStreamSessionsInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListStreamSessionsInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionStatus, location_name: "Status", traits: {"smithy.api#httpQuery" => "Status"}))
+    ListStreamSessionsInput.add_member(:export_files_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesStatus, location_name: "ExportFilesStatus", traits: {"smithy.api#httpQuery" => "ExportFilesStatus"}))
+    ListStreamSessionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListStreamSessionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListStreamSessionsInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListStreamSessionsInput.type = Types::ListStreamSessionsInput
-    ListStreamSessionsOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionSummaryList, location_name: "Items"))
-    ListStreamSessionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamSessionsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummaryList, location_name: "Items"))
+    ListStreamSessionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListStreamSessionsOutput.type = Types::ListStreamSessionsOutput
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LocationConfiguration.add_member(:location_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationName, location_name: "LocationName", traits: {"smithy.api#required" => {}}))
-    LocationConfiguration.add_member(:always_on_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlwaysOnCapacity, location_name: "AlwaysOnCapacity"))
-    LocationConfiguration.add_member(:on_demand_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnDemandCapacity, location_name: "OnDemandCapacity"))
+    LocationConfiguration.add_member(:location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, location_name: "LocationName", traits: {"smithy.api#required" => {}}))
+    LocationConfiguration.add_member(:always_on_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: AlwaysOnCapacity, location_name: "AlwaysOnCapacity"))
+    LocationConfiguration.add_member(:on_demand_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandCapacity, location_name: "OnDemandCapacity"))
     LocationConfiguration.type = Types::LocationConfiguration
-    LocationConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationConfiguration)
-    LocationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationName)
-    LocationState.add_member(:location_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationName, location_name: "LocationName"))
-    LocationState.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupLocationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    LocationState.add_member(:always_on_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlwaysOnCapacity, location_name: "AlwaysOnCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    LocationState.add_member(:on_demand_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnDemandCapacity, location_name: "OnDemandCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    LocationState.add_member(:requested_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityValue, location_name: "RequestedCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    LocationState.add_member(:allocated_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityValue, location_name: "AllocatedCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    LocationState.add_member(:idle_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityValue, location_name: "IdleCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    LocationConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationConfiguration)
+    LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName)
+    LocationState.add_member(:location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, location_name: "LocationName"))
+    LocationState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupLocationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    LocationState.add_member(:always_on_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: AlwaysOnCapacity, location_name: "AlwaysOnCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    LocationState.add_member(:on_demand_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandCapacity, location_name: "OnDemandCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    LocationState.add_member(:requested_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityValue, location_name: "RequestedCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    LocationState.add_member(:allocated_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityValue, location_name: "AllocatedCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    LocationState.add_member(:idle_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityValue, location_name: "IdleCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     LocationState.type = Types::LocationState
-    LocationStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationState)
-    LocationsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    Protocol.add_member(:webrtc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEBRTC", traits: {"smithy.api#enumValue" => "WebRTC"}))
-    RemoveStreamGroupLocationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    RemoveStreamGroupLocationsInput.add_member(:locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationsList, location_name: "Locations", traits: {"smithy.api#httpQuery" => "locations", "smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
+    LocationStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationState)
+    LocationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    Protocol.add_member(:webrtc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEBRTC", traits: {"smithy.api#enumValue" => "WebRTC"}))
+    RemoveStreamGroupLocationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    RemoveStreamGroupLocationsInput.add_member(:locations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationsList, location_name: "Locations", traits: {"smithy.api#httpQuery" => "locations", "smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
     RemoveStreamGroupLocationsInput.type = Types::RemoveStreamGroupLocationsInput
-    ReplicationStatus.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationName, location_name: "Location"))
-    ReplicationStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatusType, location_name: "Status"))
+    ReplicationStatus.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, location_name: "Location"))
+    ReplicationStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusType, location_name: "Status"))
     ReplicationStatus.type = Types::ReplicationStatus
-    ReplicationStatusType.add_member(:replicating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLICATING", traits: {"smithy.api#enumValue" => "REPLICATING"}))
-    ReplicationStatusType.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    ReplicationStatuses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatus)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ReplicationStatusType.add_member(:replicating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLICATING", traits: {"smithy.api#enumValue" => "REPLICATING"}))
+    ReplicationStatusType.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ReplicationStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RuntimeEnvironment.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironmentType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    RuntimeEnvironment.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironmentVersion, location_name: "Version", traits: {"smithy.api#required" => {}}))
+    RuntimeEnvironment.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    RuntimeEnvironment.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentVersion, location_name: "Version", traits: {"smithy.api#required" => {}}))
     RuntimeEnvironment.type = Types::RuntimeEnvironment
-    RuntimeEnvironmentType.add_member(:proton, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROTON", traits: {"smithy.api#enumValue" => "PROTON"}))
-    RuntimeEnvironmentType.add_member(:windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
-    RuntimeEnvironmentType.add_member(:ubuntu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UBUNTU", traits: {"smithy.api#enumValue" => "UBUNTU"}))
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    RuntimeEnvironmentType.add_member(:proton, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROTON", traits: {"smithy.api#enumValue" => "PROTON"}))
+    RuntimeEnvironmentType.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
+    RuntimeEnvironmentType.add_member(:ubuntu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UBUNTU", traits: {"smithy.api#enumValue" => "UBUNTU"}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StartStreamSessionInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartStreamSessionInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    StartStreamSessionInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartStreamSessionInput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
-    StartStreamSessionInput.add_member(:signal_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignalRequest, location_name: "SignalRequest", traits: {"smithy.api#required" => {}}))
-    StartStreamSessionInput.add_member(:application_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "ApplicationIdentifier", traits: {"smithy.api#required" => {}}))
-    StartStreamSessionInput.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
-    StartStreamSessionInput.add_member(:locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationList, location_name: "Locations"))
-    StartStreamSessionInput.add_member(:connection_timeout_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionTimeoutSeconds, location_name: "ConnectionTimeoutSeconds"))
-    StartStreamSessionInput.add_member(:session_length_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
-    StartStreamSessionInput.add_member(:additional_launch_args, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
-    StartStreamSessionInput.add_member(:additional_environment_variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    StartStreamSessionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartStreamSessionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    StartStreamSessionInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartStreamSessionInput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
+    StartStreamSessionInput.add_member(:signal_request, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalRequest, location_name: "SignalRequest", traits: {"smithy.api#required" => {}}))
+    StartStreamSessionInput.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "ApplicationIdentifier", traits: {"smithy.api#required" => {}}))
+    StartStreamSessionInput.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "UserId"))
+    StartStreamSessionInput.add_member(:locations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationList, location_name: "Locations"))
+    StartStreamSessionInput.add_member(:connection_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionTimeoutSeconds, location_name: "ConnectionTimeoutSeconds"))
+    StartStreamSessionInput.add_member(:session_length_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
+    StartStreamSessionInput.add_member(:additional_launch_args, ::Smithy::Schema::Shapes::MemberShape.new(target: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
+    StartStreamSessionInput.add_member(:additional_environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
     StartStreamSessionInput.type = Types::StartStreamSessionInput
-    StartStreamSessionOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    StartStreamSessionOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    StartStreamSessionOutput.add_member(:stream_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "StreamGroupId"))
-    StartStreamSessionOutput.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
-    StartStreamSessionOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionStatus, location_name: "Status"))
-    StartStreamSessionOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionStatusReason, location_name: "StatusReason"))
-    StartStreamSessionOutput.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
-    StartStreamSessionOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationName, location_name: "Location"))
-    StartStreamSessionOutput.add_member(:signal_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignalRequest, location_name: "SignalRequest"))
-    StartStreamSessionOutput.add_member(:signal_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SignalResponse, location_name: "SignalResponse"))
-    StartStreamSessionOutput.add_member(:connection_timeout_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionTimeoutSeconds, location_name: "ConnectionTimeoutSeconds"))
-    StartStreamSessionOutput.add_member(:session_length_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
-    StartStreamSessionOutput.add_member(:additional_launch_args, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
-    StartStreamSessionOutput.add_member(:additional_environment_variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
-    StartStreamSessionOutput.add_member(:log_file_location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileLocationUri, location_name: "LogFileLocationUri"))
-    StartStreamSessionOutput.add_member(:web_sdk_protocol_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebSdkProtocolUrl, location_name: "WebSdkProtocolUrl"))
-    StartStreamSessionOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
-    StartStreamSessionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    StartStreamSessionOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
-    StartStreamSessionOutput.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
+    StartStreamSessionOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    StartStreamSessionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    StartStreamSessionOutput.add_member(:stream_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "StreamGroupId"))
+    StartStreamSessionOutput.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "UserId"))
+    StartStreamSessionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionStatus, location_name: "Status"))
+    StartStreamSessionOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionStatusReason, location_name: "StatusReason"))
+    StartStreamSessionOutput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "Protocol"))
+    StartStreamSessionOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, location_name: "Location"))
+    StartStreamSessionOutput.add_member(:signal_request, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalRequest, location_name: "SignalRequest"))
+    StartStreamSessionOutput.add_member(:signal_response, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalResponse, location_name: "SignalResponse"))
+    StartStreamSessionOutput.add_member(:connection_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionTimeoutSeconds, location_name: "ConnectionTimeoutSeconds"))
+    StartStreamSessionOutput.add_member(:session_length_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
+    StartStreamSessionOutput.add_member(:additional_launch_args, ::Smithy::Schema::Shapes::MemberShape.new(target: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
+    StartStreamSessionOutput.add_member(:additional_environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    StartStreamSessionOutput.add_member(:log_file_location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: FileLocationUri, location_name: "LogFileLocationUri"))
+    StartStreamSessionOutput.add_member(:web_sdk_protocol_url, ::Smithy::Schema::Shapes::MemberShape.new(target: WebSdkProtocolUrl, location_name: "WebSdkProtocolUrl"))
+    StartStreamSessionOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
+    StartStreamSessionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    StartStreamSessionOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ApplicationArn"))
+    StartStreamSessionOutput.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
     StartStreamSessionOutput.type = Types::StartStreamSessionOutput
-    StreamClass.add_member(:gen4n_high, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen4n_high", traits: {"smithy.api#enumValue" => "gen4n_high"}))
-    StreamClass.add_member(:gen4n_ultra, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen4n_ultra", traits: {"smithy.api#enumValue" => "gen4n_ultra"}))
-    StreamClass.add_member(:gen4n_win2022, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen4n_win2022", traits: {"smithy.api#enumValue" => "gen4n_win2022"}))
-    StreamClass.add_member(:gen5n_high, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen5n_high", traits: {"smithy.api#enumValue" => "gen5n_high"}))
-    StreamClass.add_member(:gen5n_ultra, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen5n_ultra", traits: {"smithy.api#enumValue" => "gen5n_ultra"}))
-    StreamClass.add_member(:gen5n_win2022, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen5n_win2022", traits: {"smithy.api#enumValue" => "gen5n_win2022"}))
-    StreamGroupLocationStatus.add_member(:activating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
-    StreamGroupLocationStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    StreamGroupLocationStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    StreamGroupLocationStatus.add_member(:removing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVING", traits: {"smithy.api#enumValue" => "REMOVING"}))
-    StreamGroupStatus.add_member(:activating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
-    StreamGroupStatus.add_member(:updating_locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING_LOCATIONS", traits: {"smithy.api#enumValue" => "UPDATING_LOCATIONS"}))
-    StreamGroupStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    StreamGroupStatus.add_member(:active_with_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE_WITH_ERRORS", traits: {"smithy.api#enumValue" => "ACTIVE_WITH_ERRORS"}))
-    StreamGroupStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    StreamGroupStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    StreamGroupStatusReason.add_member(:internal_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "internalError"}))
-    StreamGroupStatusReason.add_member(:no_available_instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_AVAILABLE_INSTANCES", traits: {"smithy.api#enumValue" => "noAvailableInstances"}))
-    StreamGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    StreamGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    StreamGroupSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    StreamGroupSummary.add_member(:default_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication"))
-    StreamGroupSummary.add_member(:stream_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamClass, location_name: "StreamClass"))
-    StreamGroupSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupStatus, location_name: "Status"))
-    StreamGroupSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    StreamGroupSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
+    StreamClass.add_member(:gen4n_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen4n_high", traits: {"smithy.api#enumValue" => "gen4n_high"}))
+    StreamClass.add_member(:gen4n_ultra, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen4n_ultra", traits: {"smithy.api#enumValue" => "gen4n_ultra"}))
+    StreamClass.add_member(:gen4n_win2022, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen4n_win2022", traits: {"smithy.api#enumValue" => "gen4n_win2022"}))
+    StreamClass.add_member(:gen5n_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen5n_high", traits: {"smithy.api#enumValue" => "gen5n_high"}))
+    StreamClass.add_member(:gen5n_ultra, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen5n_ultra", traits: {"smithy.api#enumValue" => "gen5n_ultra"}))
+    StreamClass.add_member(:gen5n_win2022, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "gen5n_win2022", traits: {"smithy.api#enumValue" => "gen5n_win2022"}))
+    StreamGroupLocationStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    StreamGroupLocationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    StreamGroupLocationStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    StreamGroupLocationStatus.add_member(:removing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVING", traits: {"smithy.api#enumValue" => "REMOVING"}))
+    StreamGroupStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    StreamGroupStatus.add_member(:updating_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING_LOCATIONS", traits: {"smithy.api#enumValue" => "UPDATING_LOCATIONS"}))
+    StreamGroupStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    StreamGroupStatus.add_member(:active_with_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE_WITH_ERRORS", traits: {"smithy.api#enumValue" => "ACTIVE_WITH_ERRORS"}))
+    StreamGroupStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    StreamGroupStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    StreamGroupStatusReason.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "internalError"}))
+    StreamGroupStatusReason.add_member(:no_available_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_AVAILABLE_INSTANCES", traits: {"smithy.api#enumValue" => "noAvailableInstances"}))
+    StreamGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    StreamGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    StreamGroupSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    StreamGroupSummary.add_member(:default_application, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultApplication, location_name: "DefaultApplication"))
+    StreamGroupSummary.add_member(:stream_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamClass, location_name: "StreamClass"))
+    StreamGroupSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupStatus, location_name: "Status"))
+    StreamGroupSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    StreamGroupSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
     StreamGroupSummary.type = Types::StreamGroupSummary
-    StreamGroupSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupSummary)
-    StreamSessionStatus.add_member(:activating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
-    StreamSessionStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    StreamSessionStatus.add_member(:connected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECTED", traits: {"smithy.api#enumValue" => "CONNECTED"}))
-    StreamSessionStatus.add_member(:pending_client_reconnection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_CLIENT_RECONNECTION", traits: {"smithy.api#enumValue" => "PENDING_CLIENT_RECONNECTION"}))
-    StreamSessionStatus.add_member(:reconnecting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RECONNECTING", traits: {"smithy.api#enumValue" => "RECONNECTING"}))
-    StreamSessionStatus.add_member(:terminating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
-    StreamSessionStatus.add_member(:terminated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
-    StreamSessionStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    StreamSessionStatusReason.add_member(:internal_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "internalError"}))
-    StreamSessionStatusReason.add_member(:invalid_signal_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_SIGNAL_REQUEST", traits: {"smithy.api#enumValue" => "invalidSignalRequest"}))
-    StreamSessionStatusReason.add_member(:placement_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLACEMENT_TIMEOUT", traits: {"smithy.api#enumValue" => "placementTimeout"}))
-    StreamSessionStatusReason.add_member(:app_log_s3_destination_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APP_LOG_S3_DESTINATION_ERROR", traits: {"smithy.api#enumValue" => "applicationLogS3DestinationError"}))
-    StreamSessionSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    StreamSessionSummary.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
-    StreamSessionSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionStatus, location_name: "Status"))
-    StreamSessionSummary.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
-    StreamSessionSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
-    StreamSessionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
-    StreamSessionSummary.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
-    StreamSessionSummary.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
-    StreamSessionSummary.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationName, location_name: "Location"))
+    StreamGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupSummary)
+    StreamSessionStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    StreamSessionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    StreamSessionStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONNECTED", traits: {"smithy.api#enumValue" => "CONNECTED"}))
+    StreamSessionStatus.add_member(:pending_client_reconnection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_CLIENT_RECONNECTION", traits: {"smithy.api#enumValue" => "PENDING_CLIENT_RECONNECTION"}))
+    StreamSessionStatus.add_member(:reconnecting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RECONNECTING", traits: {"smithy.api#enumValue" => "RECONNECTING"}))
+    StreamSessionStatus.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
+    StreamSessionStatus.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
+    StreamSessionStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    StreamSessionStatusReason.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "internalError"}))
+    StreamSessionStatusReason.add_member(:invalid_signal_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_SIGNAL_REQUEST", traits: {"smithy.api#enumValue" => "invalidSignalRequest"}))
+    StreamSessionStatusReason.add_member(:placement_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLACEMENT_TIMEOUT", traits: {"smithy.api#enumValue" => "placementTimeout"}))
+    StreamSessionStatusReason.add_member(:app_log_s3_destination_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APP_LOG_S3_DESTINATION_ERROR", traits: {"smithy.api#enumValue" => "applicationLogS3DestinationError"}))
+    StreamSessionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    StreamSessionSummary.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "UserId"))
+    StreamSessionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionStatus, location_name: "Status"))
+    StreamSessionSummary.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "Protocol"))
+    StreamSessionSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt"))
+    StreamSessionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt"))
+    StreamSessionSummary.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ApplicationArn"))
+    StreamSessionSummary.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
+    StreamSessionSummary.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, location_name: "Location"))
     StreamSessionSummary.type = Types::StreamSessionSummary
-    StreamSessionSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionSummary)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    StreamSessionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummary)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TerminateStreamSessionInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TerminateStreamSessionInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TerminateStreamSessionInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TerminateStreamSessionInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TerminateStreamSessionInput.type = Types::TerminateStreamSessionInput
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateApplicationInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    UpdateApplicationInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateApplicationInput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
-    UpdateApplicationInput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
+    UpdateApplicationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    UpdateApplicationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateApplicationInput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, location_name: "ApplicationLogPaths"))
+    UpdateApplicationInput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
     UpdateApplicationInput.type = Types::UpdateApplicationInput
-    UpdateApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    UpdateApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateApplicationOutput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    UpdateApplicationOutput.add_member(:executable_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutablePath, location_name: "ExecutablePath"))
-    UpdateApplicationOutput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
-    UpdateApplicationOutput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
-    UpdateApplicationOutput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
-    UpdateApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    UpdateApplicationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateApplicationOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateApplicationOutput.add_member(:replication_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatuses, location_name: "ReplicationStatuses", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateApplicationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateApplicationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateApplicationOutput.add_member(:associated_stream_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedStreamGroups", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    UpdateApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateApplicationOutput.add_member(:runtime_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironment, location_name: "RuntimeEnvironment", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    UpdateApplicationOutput.add_member(:executable_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutablePath, location_name: "ExecutablePath"))
+    UpdateApplicationOutput.add_member(:application_log_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, location_name: "ApplicationLogPaths"))
+    UpdateApplicationOutput.add_member(:application_log_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
+    UpdateApplicationOutput.add_member(:application_source_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
+    UpdateApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    UpdateApplicationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateApplicationOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateApplicationOutput.add_member(:replication_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatuses, location_name: "ReplicationStatuses", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateApplicationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateApplicationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateApplicationOutput.add_member(:associated_stream_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "AssociatedStreamGroups", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     UpdateApplicationOutput.type = Types::UpdateApplicationOutput
-    UpdateStreamGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    UpdateStreamGroupInput.add_member(:location_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationConfigurations, location_name: "LocationConfigurations", traits: {"smithy.api#notProperty" => {}}))
-    UpdateStreamGroupInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateStreamGroupInput.add_member(:default_application_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "DefaultApplicationIdentifier", traits: {"smithy.api#notProperty" => {}}))
+    UpdateStreamGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    UpdateStreamGroupInput.add_member(:location_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationConfigurations, location_name: "LocationConfigurations", traits: {"smithy.api#notProperty" => {}}))
+    UpdateStreamGroupInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateStreamGroupInput.add_member(:default_application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "DefaultApplicationIdentifier", traits: {"smithy.api#notProperty" => {}}))
     UpdateStreamGroupInput.type = Types::UpdateStreamGroupInput
-    UpdateStreamGroupOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
-    UpdateStreamGroupOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateStreamGroupOutput.add_member(:default_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    UpdateStreamGroupOutput.add_member(:location_states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationStates, location_name: "LocationStates", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateStreamGroupOutput.add_member(:stream_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamClass, location_name: "StreamClass", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
-    UpdateStreamGroupOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
-    UpdateStreamGroupOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateStreamGroupOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamGroupStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateStreamGroupOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateStreamGroupOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    UpdateStreamGroupOutput.add_member(:associated_applications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateStreamGroupOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, location_name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
+    UpdateStreamGroupOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateStreamGroupOutput.add_member(:default_application, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultApplication, location_name: "DefaultApplication", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    UpdateStreamGroupOutput.add_member(:location_states, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStates, location_name: "LocationStates", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateStreamGroupOutput.add_member(:stream_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamClass, location_name: "StreamClass", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    UpdateStreamGroupOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "Id"))
+    UpdateStreamGroupOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupStatus, location_name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateStreamGroupOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupStatusReason, location_name: "StatusReason", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateStreamGroupOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateStreamGroupOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateStreamGroupOutput.add_member(:associated_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, location_name: "AssociatedApplications", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     UpdateStreamGroupOutput.type = Types::UpdateStreamGroupOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
 
     GameLiftStreams = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -509,298 +509,298 @@ module Aws::GameLiftStreams
       service.add_operation(:add_stream_group_locations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#AddStreamGroupLocations"
         operation.name = "AddStreamGroupLocations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddStreamGroupLocationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddStreamGroupLocationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AddStreamGroupLocationsInput
+        operation.output = AddStreamGroupLocationsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to attach a StreamGroup remote location", "resources" => {"required" => {"stream group" => {}}}, "requiredActions" => ["ec2:DescribeRegions"]}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/streamgroups/{Identifier}/locations"}}
       end)
       service.add_operation(:associate_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#AssociateApplications"
         operation.name = "AssociateApplications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateApplicationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateApplicationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateApplicationsInput
+        operation.output = AssociateApplicationsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to associate Applications to a StreamGroup", "resources" => {"required" => {"stream group" => {}, "application" => {}}}}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/streamgroups/{Identifier}/associations"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#CreateApplication"
         operation.name = "CreateApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateApplicationInput
+        operation.output = CreateApplicationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create application", "requiredActions" => ["gameliftstreams:TagResource", "s3:ListBucket", "s3:GetObject"]}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/applications"}}
       end)
       service.add_operation(:create_stream_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#CreateStreamGroup"
         operation.name = "CreateStreamGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStreamGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStreamGroupOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateStreamGroupInput
+        operation.output = CreateStreamGroupOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create a StreamGroup", "requiredActions" => ["gameliftstreams:TagResource"]}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/streamgroups"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_stream_session_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#CreateStreamSessionConnection"
         operation.name = "CreateStreamSessionConnection"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStreamSessionConnectionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStreamSessionConnectionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateStreamSessionConnectionInput
+        operation.output = CreateStreamSessionConnectionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to create a stream session connection", "resources" => {"required" => {"stream group" => {}}}}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}/connections"}}
       end)
       service.add_operation(:delete_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#DeleteApplication"
         operation.name = "DeleteApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteApplicationInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an application"}, "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/applications/{Identifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_stream_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#DeleteStreamGroup"
         operation.name = "DeleteStreamGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteStreamGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteStreamGroupInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a StreamGroup"}, "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/streamgroups/{Identifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:disassociate_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#DisassociateApplications"
         operation.name = "DisassociateApplications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateApplicationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateApplicationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateApplicationsInput
+        operation.output = DisassociateApplicationsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to disassociate Applications from a StreamGroup", "resources" => {"required" => {"stream group" => {}, "application" => {}}}}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/streamgroups/{Identifier}/disassociations"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:export_stream_session_files, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#ExportStreamSessionFiles"
         operation.name = "ExportStreamSessionFiles"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportStreamSessionFilesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportStreamSessionFilesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ExportStreamSessionFilesInput
+        operation.output = ExportStreamSessionFilesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to export stream session files that your application generates", "requiredActions" => ["s3:PutObject"], "resources" => {"required" => {"stream group" => {}}}}, "smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}/exportfiles"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#GetApplication"
         operation.name = "GetApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetApplicationInput
+        operation.output = GetApplicationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get an application"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/applications/{Identifier}"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetApplication", "params" => {"Identifier" => "aBcDeFgHi"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.gameliftstreams#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:get_stream_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#GetStreamGroup"
         operation.name = "GetStreamGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamGroupOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetStreamGroupInput
+        operation.output = GetStreamGroupOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants `permission` to get a StreamGroup"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/streamgroups/{Identifier}"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetStreamGroup", "params" => {"Identifier" => "12ab34cd5"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.gameliftstreams#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:get_stream_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#GetStreamSession"
         operation.name = "GetStreamSession"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamSessionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamSessionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetStreamSessionInput
+        operation.output = GetStreamSessionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to get a stream session", "resources" => {"required" => {"stream group" => {}}}}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetStreamSession", "params" => {"Identifier" => "abcdefghi", "StreamSessionIdentifier" => "jklmnopqr"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.gameliftstreams#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:list_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#ListApplications"
         operation.name = "ListApplications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListApplicationsInput
+        operation.output = ListApplicationsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list applications"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/applications"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListApplications", "params" => {}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
         operation[:paginator] = Paginators::ListApplications.new
       end)
       service.add_operation(:list_stream_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#ListStreamGroups"
         operation.name = "ListStreamGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamGroupsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamGroupsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStreamGroupsInput
+        operation.output = ListStreamGroupsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list StreamGroups"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/streamgroups"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListStreamGroups", "params" => {}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
         operation[:paginator] = Paginators::ListStreamGroups.new
       end)
       service.add_operation(:list_stream_sessions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#ListStreamSessions"
         operation.name = "ListStreamSessions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamSessionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamSessionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStreamSessionsInput
+        operation.output = ListStreamSessionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to list stream sessions", "resources" => {"required" => {"stream group" => {}}}}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/streamgroups/{Identifier}/streamsessions"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListStreamSessions", "params" => {"Identifier" => "abcdefghi"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.gameliftstreams#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
         operation[:paginator] = Paginators::ListStreamSessions.new
       end)
       service.add_operation(:list_stream_sessions_by_account, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#ListStreamSessionsByAccount"
         operation.name = "ListStreamSessionsByAccount"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamSessionsByAccountInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamSessionsByAccountOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStreamSessionsByAccountInput
+        operation.output = ListStreamSessionsByAccountOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to list stream sessions"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/streamsessions"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListStreamSessionsByAccount", "params" => {}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
         operation[:paginator] = Paginators::ListStreamSessionsByAccount.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list tags for a resource", "resources" => {"optional" => {"stream group" => {}, "application" => {}}}}, "smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "GET"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListTagsForResource", "params" => {"ResourceArn" => "arn:aws:gameliftstreams:us-west-2:012345678901:abcdefghi"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.gameliftstreams#ValidationException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:remove_stream_group_locations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#RemoveStreamGroupLocations"
         operation.name = "RemoveStreamGroupLocations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveStreamGroupLocationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RemoveStreamGroupLocationsInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to detach a StreamGroup remote location", "resources" => {"required" => {"stream group" => {}}}}, "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/streamgroups/{Identifier}/locations"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_stream_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#StartStreamSession"
         operation.name = "StartStreamSession"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartStreamSessionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartStreamSessionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartStreamSessionInput
+        operation.output = StartStreamSessionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to create a stream session", "resources" => {"required" => {"stream group" => {}}}}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/streamgroups/{Identifier}/streamsessions"}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to tag a resource", "resources" => {"optional" => {"stream group" => {}, "application" => {}}}}, "smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:terminate_stream_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#TerminateStreamSession"
         operation.name = "TerminateStreamSession"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminateStreamSessionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TerminateStreamSessionInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to terminate a stream session", "resources" => {"required" => {"stream group" => {}}}}, "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to untag a resource", "resources" => {"optional" => {"stream group" => {}, "application" => {}}}}, "smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#UpdateApplication"
         operation.name = "UpdateApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateApplicationInput
+        operation.output = UpdateApplicationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update an application"}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/applications/{Identifier}"}}
       end)
       service.add_operation(:update_stream_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gameliftstreams#UpdateStreamGroup"
         operation.name = "UpdateStreamGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStreamGroupInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStreamGroupOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateStreamGroupInput
+        operation.output = UpdateStreamGroupOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a StreamGroup"}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/streamgroups/{Identifier}"}}
       end)
     end

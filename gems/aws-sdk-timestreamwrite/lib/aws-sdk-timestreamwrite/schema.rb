@@ -133,316 +133,316 @@ module Aws::TimestreamWrite
     WriteRecordsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.timestreamwrite#WriteRecordsRequest", name: "WriteRecordsRequest")
     WriteRecordsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.timestreamwrite#WriteRecordsResponse", name: "WriteRecordsResponse")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    BatchLoadDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
-    BatchLoadProgressReport.add_member(:records_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "RecordsProcessed", traits: {"smithy.api#default" => 0}))
-    BatchLoadProgressReport.add_member(:records_ingested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "RecordsIngested", traits: {"smithy.api#default" => 0}))
-    BatchLoadProgressReport.add_member(:parse_failures, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "ParseFailures", traits: {"smithy.api#default" => 0}))
-    BatchLoadProgressReport.add_member(:record_ingestion_failures, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "RecordIngestionFailures", traits: {"smithy.api#default" => 0}))
-    BatchLoadProgressReport.add_member(:file_failures, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FileFailures", traits: {"smithy.api#default" => 0}))
-    BatchLoadProgressReport.add_member(:bytes_metered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "BytesMetered", traits: {"smithy.api#default" => 0}))
+    BatchLoadDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    BatchLoadProgressReport.add_member(:records_processed, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "RecordsProcessed", traits: {"smithy.api#default" => 0}))
+    BatchLoadProgressReport.add_member(:records_ingested, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "RecordsIngested", traits: {"smithy.api#default" => 0}))
+    BatchLoadProgressReport.add_member(:parse_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "ParseFailures", traits: {"smithy.api#default" => 0}))
+    BatchLoadProgressReport.add_member(:record_ingestion_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "RecordIngestionFailures", traits: {"smithy.api#default" => 0}))
+    BatchLoadProgressReport.add_member(:file_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FileFailures", traits: {"smithy.api#default" => 0}))
+    BatchLoadProgressReport.add_member(:bytes_metered, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "BytesMetered", traits: {"smithy.api#default" => 0}))
     BatchLoadProgressReport.type = Types::BatchLoadProgressReport
-    BatchLoadStatus.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
-    BatchLoadStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    BatchLoadStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    BatchLoadStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    BatchLoadStatus.add_member(:progress_stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROGRESS_STOPPED", traits: {"smithy.api#enumValue" => "PROGRESS_STOPPED"}))
-    BatchLoadStatus.add_member(:pending_resume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_RESUME", traits: {"smithy.api#enumValue" => "PENDING_RESUME"}))
-    BatchLoadTask.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTaskId, location_name: "TaskId"))
-    BatchLoadTask.add_member(:task_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadStatus, location_name: "TaskStatus"))
-    BatchLoadTask.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName"))
-    BatchLoadTask.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TableName"))
-    BatchLoadTask.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
-    BatchLoadTask.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
-    BatchLoadTask.add_member(:resumable_until, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ResumableUntil"))
+    BatchLoadStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    BatchLoadStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    BatchLoadStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    BatchLoadStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    BatchLoadStatus.add_member(:progress_stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROGRESS_STOPPED", traits: {"smithy.api#enumValue" => "PROGRESS_STOPPED"}))
+    BatchLoadStatus.add_member(:pending_resume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_RESUME", traits: {"smithy.api#enumValue" => "PENDING_RESUME"}))
+    BatchLoadTask.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTaskId, location_name: "TaskId"))
+    BatchLoadTask.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadStatus, location_name: "TaskStatus"))
+    BatchLoadTask.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName"))
+    BatchLoadTask.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TableName"))
+    BatchLoadTask.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "CreationTime"))
+    BatchLoadTask.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdatedTime"))
+    BatchLoadTask.add_member(:resumable_until, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ResumableUntil"))
     BatchLoadTask.type = Types::BatchLoadTask
-    BatchLoadTaskDescription.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTaskId, location_name: "TaskId"))
-    BatchLoadTaskDescription.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "ErrorMessage"))
-    BatchLoadTaskDescription.add_member(:data_source_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "DataSourceConfiguration"))
-    BatchLoadTaskDescription.add_member(:progress_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadProgressReport, location_name: "ProgressReport"))
-    BatchLoadTaskDescription.add_member(:report_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "ReportConfiguration"))
-    BatchLoadTaskDescription.add_member(:data_model_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataModelConfiguration, location_name: "DataModelConfiguration"))
-    BatchLoadTaskDescription.add_member(:target_database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TargetDatabaseName"))
-    BatchLoadTaskDescription.add_member(:target_table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TargetTableName"))
-    BatchLoadTaskDescription.add_member(:task_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadStatus, location_name: "TaskStatus"))
-    BatchLoadTaskDescription.add_member(:record_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordVersion, location_name: "RecordVersion", traits: {"smithy.api#default" => 0}))
-    BatchLoadTaskDescription.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
-    BatchLoadTaskDescription.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
-    BatchLoadTaskDescription.add_member(:resumable_until, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ResumableUntil"))
+    BatchLoadTaskDescription.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTaskId, location_name: "TaskId"))
+    BatchLoadTaskDescription.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "ErrorMessage"))
+    BatchLoadTaskDescription.add_member(:data_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceConfiguration, location_name: "DataSourceConfiguration"))
+    BatchLoadTaskDescription.add_member(:progress_report, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadProgressReport, location_name: "ProgressReport"))
+    BatchLoadTaskDescription.add_member(:report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfiguration, location_name: "ReportConfiguration"))
+    BatchLoadTaskDescription.add_member(:data_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataModelConfiguration, location_name: "DataModelConfiguration"))
+    BatchLoadTaskDescription.add_member(:target_database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TargetDatabaseName"))
+    BatchLoadTaskDescription.add_member(:target_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TargetTableName"))
+    BatchLoadTaskDescription.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadStatus, location_name: "TaskStatus"))
+    BatchLoadTaskDescription.add_member(:record_version, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordVersion, location_name: "RecordVersion", traits: {"smithy.api#default" => 0}))
+    BatchLoadTaskDescription.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "CreationTime"))
+    BatchLoadTaskDescription.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdatedTime"))
+    BatchLoadTaskDescription.add_member(:resumable_until, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ResumableUntil"))
     BatchLoadTaskDescription.type = Types::BatchLoadTaskDescription
-    BatchLoadTaskList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTask)
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    BatchLoadTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTask)
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateBatchLoadTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateBatchLoadTaskRequest.add_member(:data_model_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataModelConfiguration, location_name: "DataModelConfiguration"))
-    CreateBatchLoadTaskRequest.add_member(:data_source_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "DataSourceConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateBatchLoadTaskRequest.add_member(:report_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "ReportConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateBatchLoadTaskRequest.add_member(:target_database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCreateAPIName, location_name: "TargetDatabaseName", traits: {"smithy.api#required" => {}}))
-    CreateBatchLoadTaskRequest.add_member(:target_table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCreateAPIName, location_name: "TargetTableName", traits: {"smithy.api#required" => {}}))
-    CreateBatchLoadTaskRequest.add_member(:record_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordVersion, location_name: "RecordVersion", traits: {"smithy.api#default" => nil}))
+    CreateBatchLoadTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateBatchLoadTaskRequest.add_member(:data_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataModelConfiguration, location_name: "DataModelConfiguration"))
+    CreateBatchLoadTaskRequest.add_member(:data_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceConfiguration, location_name: "DataSourceConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateBatchLoadTaskRequest.add_member(:report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfiguration, location_name: "ReportConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateBatchLoadTaskRequest.add_member(:target_database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCreateAPIName, location_name: "TargetDatabaseName", traits: {"smithy.api#required" => {}}))
+    CreateBatchLoadTaskRequest.add_member(:target_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCreateAPIName, location_name: "TargetTableName", traits: {"smithy.api#required" => {}}))
+    CreateBatchLoadTaskRequest.add_member(:record_version, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordVersion, location_name: "RecordVersion", traits: {"smithy.api#default" => nil}))
     CreateBatchLoadTaskRequest.type = Types::CreateBatchLoadTaskRequest
-    CreateBatchLoadTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTaskId, location_name: "TaskId", traits: {"smithy.api#required" => {}}))
+    CreateBatchLoadTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTaskId, location_name: "TaskId", traits: {"smithy.api#required" => {}}))
     CreateBatchLoadTaskResponse.type = Types::CreateBatchLoadTaskResponse
-    CreateDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCreateAPIName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    CreateDatabaseRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId"))
-    CreateDatabaseRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCreateAPIName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    CreateDatabaseRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "KmsKeyId"))
+    CreateDatabaseRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateDatabaseRequest.type = Types::CreateDatabaseRequest
-    CreateDatabaseResponse.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Database, location_name: "Database"))
+    CreateDatabaseResponse.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, location_name: "Database"))
     CreateDatabaseResponse.type = Types::CreateDatabaseResponse
-    CreateTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCreateAPIName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    CreateTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCreateAPIName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
-    CreateTableRequest.add_member(:retention_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
-    CreateTableRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateTableRequest.add_member(:magnetic_store_write_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
-    CreateTableRequest.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schema, location_name: "Schema"))
+    CreateTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCreateAPIName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    CreateTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCreateAPIName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    CreateTableRequest.add_member(:retention_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionProperties, location_name: "RetentionProperties"))
+    CreateTableRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateTableRequest.add_member(:magnetic_store_write_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
+    CreateTableRequest.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, location_name: "Schema"))
     CreateTableRequest.type = Types::CreateTableRequest
-    CreateTableResponse.add_member(:table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
+    CreateTableResponse.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, location_name: "Table"))
     CreateTableResponse.type = Types::CreateTableResponse
-    CsvConfiguration.add_member(:column_separator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue1, location_name: "ColumnSeparator"))
-    CsvConfiguration.add_member(:escape_char, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue1, location_name: "EscapeChar"))
-    CsvConfiguration.add_member(:quote_char, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue1, location_name: "QuoteChar"))
-    CsvConfiguration.add_member(:null_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue256, location_name: "NullValue"))
-    CsvConfiguration.add_member(:trim_white_space, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "TrimWhiteSpace"))
+    CsvConfiguration.add_member(:column_separator, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue1, location_name: "ColumnSeparator"))
+    CsvConfiguration.add_member(:escape_char, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue1, location_name: "EscapeChar"))
+    CsvConfiguration.add_member(:quote_char, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue1, location_name: "QuoteChar"))
+    CsvConfiguration.add_member(:null_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue256, location_name: "NullValue"))
+    CsvConfiguration.add_member(:trim_white_space, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "TrimWhiteSpace"))
     CsvConfiguration.type = Types::CsvConfiguration
-    DataModel.add_member(:time_column, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue256, location_name: "TimeColumn"))
-    DataModel.add_member(:time_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeUnit, location_name: "TimeUnit"))
-    DataModel.add_member(:dimension_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionMappings, location_name: "DimensionMappings", traits: {"smithy.api#required" => {}}))
-    DataModel.add_member(:multi_measure_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiMeasureMappings, location_name: "MultiMeasureMappings"))
-    DataModel.add_member(:mixed_measure_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MixedMeasureMappingList, location_name: "MixedMeasureMappings"))
-    DataModel.add_member(:measure_name_column, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue256, location_name: "MeasureNameColumn"))
+    DataModel.add_member(:time_column, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue256, location_name: "TimeColumn"))
+    DataModel.add_member(:time_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeUnit, location_name: "TimeUnit"))
+    DataModel.add_member(:dimension_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMappings, location_name: "DimensionMappings", traits: {"smithy.api#required" => {}}))
+    DataModel.add_member(:multi_measure_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureMappings, location_name: "MultiMeasureMappings"))
+    DataModel.add_member(:mixed_measure_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MixedMeasureMappingList, location_name: "MixedMeasureMappings"))
+    DataModel.add_member(:measure_name_column, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue256, location_name: "MeasureNameColumn"))
     DataModel.type = Types::DataModel
-    DataModelConfiguration.add_member(:data_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataModel, location_name: "DataModel"))
-    DataModelConfiguration.add_member(:data_model_s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataModelS3Configuration, location_name: "DataModelS3Configuration"))
+    DataModelConfiguration.add_member(:data_model, ::Smithy::Schema::Shapes::MemberShape.new(target: DataModel, location_name: "DataModel"))
+    DataModelConfiguration.add_member(:data_model_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataModelS3Configuration, location_name: "DataModelS3Configuration"))
     DataModelConfiguration.type = Types::DataModelConfiguration
-    DataModelS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "BucketName"))
-    DataModelS3Configuration.add_member(:object_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "ObjectKey"))
+    DataModelS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "BucketName"))
+    DataModelS3Configuration.add_member(:object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "ObjectKey"))
     DataModelS3Configuration.type = Types::DataModelS3Configuration
-    DataSourceConfiguration.add_member(:data_source_s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSourceS3Configuration, location_name: "DataSourceS3Configuration", traits: {"smithy.api#required" => {}}))
-    DataSourceConfiguration.add_member(:csv_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CsvConfiguration, location_name: "CsvConfiguration"))
-    DataSourceConfiguration.add_member(:data_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadDataFormat, location_name: "DataFormat", traits: {"smithy.api#required" => {}}))
+    DataSourceConfiguration.add_member(:data_source_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceS3Configuration, location_name: "DataSourceS3Configuration", traits: {"smithy.api#required" => {}}))
+    DataSourceConfiguration.add_member(:csv_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CsvConfiguration, location_name: "CsvConfiguration"))
+    DataSourceConfiguration.add_member(:data_format, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadDataFormat, location_name: "DataFormat", traits: {"smithy.api#required" => {}}))
     DataSourceConfiguration.type = Types::DataSourceConfiguration
-    DataSourceS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
-    DataSourceS3Configuration.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "ObjectKeyPrefix"))
+    DataSourceS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
+    DataSourceS3Configuration.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "ObjectKeyPrefix"))
     DataSourceS3Configuration.type = Types::DataSourceS3Configuration
-    Database.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
-    Database.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName"))
-    Database.add_member(:table_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "TableCount", traits: {"smithy.api#default" => 0}))
-    Database.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId"))
-    Database.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
-    Database.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
+    Database.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Arn"))
+    Database.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName"))
+    Database.add_member(:table_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "TableCount", traits: {"smithy.api#default" => 0}))
+    Database.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "KmsKeyId"))
+    Database.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "CreationTime"))
+    Database.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdatedTime"))
     Database.type = Types::Database
-    DatabaseList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Database)
-    DeleteDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    DatabaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Database)
+    DeleteDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     DeleteDatabaseRequest.type = Types::DeleteDatabaseRequest
-    DeleteTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    DeleteTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    DeleteTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    DeleteTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
     DeleteTableRequest.type = Types::DeleteTableRequest
-    DescribeBatchLoadTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTaskId, location_name: "TaskId", traits: {"smithy.api#required" => {}}))
+    DescribeBatchLoadTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTaskId, location_name: "TaskId", traits: {"smithy.api#required" => {}}))
     DescribeBatchLoadTaskRequest.type = Types::DescribeBatchLoadTaskRequest
-    DescribeBatchLoadTaskResponse.add_member(:batch_load_task_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTaskDescription, location_name: "BatchLoadTaskDescription", traits: {"smithy.api#required" => {}}))
+    DescribeBatchLoadTaskResponse.add_member(:batch_load_task_description, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTaskDescription, location_name: "BatchLoadTaskDescription", traits: {"smithy.api#required" => {}}))
     DescribeBatchLoadTaskResponse.type = Types::DescribeBatchLoadTaskResponse
-    DescribeDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    DescribeDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     DescribeDatabaseRequest.type = Types::DescribeDatabaseRequest
-    DescribeDatabaseResponse.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Database, location_name: "Database"))
+    DescribeDatabaseResponse.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, location_name: "Database"))
     DescribeDatabaseResponse.type = Types::DescribeDatabaseResponse
     DescribeEndpointsRequest.type = Types::DescribeEndpointsRequest
-    DescribeEndpointsResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints", traits: {"smithy.api#required" => {}}))
+    DescribeEndpointsResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoints, location_name: "Endpoints", traits: {"smithy.api#required" => {}}))
     DescribeEndpointsResponse.type = Types::DescribeEndpointsResponse
-    DescribeTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    DescribeTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    DescribeTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    DescribeTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
     DescribeTableRequest.type = Types::DescribeTableRequest
-    DescribeTableResponse.add_member(:table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
+    DescribeTableResponse.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, location_name: "Table"))
     DescribeTableResponse.type = Types::DescribeTableResponse
-    Dimension.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Dimension.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
-    Dimension.add_member(:dimension_value_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionValueType, location_name: "DimensionValueType"))
+    Dimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Dimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Dimension.add_member(:dimension_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueType, location_name: "DimensionValueType"))
     Dimension.type = Types::Dimension
-    DimensionMapping.add_member(:source_column, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "SourceColumn"))
-    DimensionMapping.add_member(:destination_column, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "DestinationColumn"))
+    DimensionMapping.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "SourceColumn"))
+    DimensionMapping.add_member(:destination_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "DestinationColumn"))
     DimensionMapping.type = Types::DimensionMapping
-    DimensionMappings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionMapping)
-    DimensionValueType.add_member(:varchar, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
-    Dimensions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimension)
-    Endpoint.add_member(:address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Address", traits: {"smithy.api#required" => {}}))
-    Endpoint.add_member(:cache_period_in_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "CachePeriodInMinutes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    DimensionMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMapping)
+    DimensionValueType.add_member(:varchar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
+    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension)
+    Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Address", traits: {"smithy.api#required" => {}}))
+    Endpoint.add_member(:cache_period_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "CachePeriodInMinutes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Endpoint.type = Types::Endpoint
-    Endpoints.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    InvalidEndpointException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidEndpointException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidEndpointException.type = Types::InvalidEndpointException
-    ListBatchLoadTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListBatchLoadTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxResults"))
-    ListBatchLoadTasksRequest.add_member(:task_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadStatus, location_name: "TaskStatus"))
+    ListBatchLoadTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListBatchLoadTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "MaxResults"))
+    ListBatchLoadTasksRequest.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadStatus, location_name: "TaskStatus"))
     ListBatchLoadTasksRequest.type = Types::ListBatchLoadTasksRequest
-    ListBatchLoadTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListBatchLoadTasksResponse.add_member(:batch_load_tasks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTaskList, location_name: "BatchLoadTasks"))
+    ListBatchLoadTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListBatchLoadTasksResponse.add_member(:batch_load_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTaskList, location_name: "BatchLoadTasks"))
     ListBatchLoadTasksResponse.type = Types::ListBatchLoadTasksResponse
-    ListDatabasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListDatabasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "MaxResults"))
+    ListDatabasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListDatabasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationLimit, location_name: "MaxResults"))
     ListDatabasesRequest.type = Types::ListDatabasesRequest
-    ListDatabasesResponse.add_member(:databases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseList, location_name: "Databases"))
-    ListDatabasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDatabasesResponse.add_member(:databases, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseList, location_name: "Databases"))
+    ListDatabasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDatabasesResponse.type = Types::ListDatabasesResponse
-    ListTablesRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName"))
-    ListTablesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListTablesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "MaxResults"))
+    ListTablesRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName"))
+    ListTablesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListTablesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationLimit, location_name: "MaxResults"))
     ListTablesRequest.type = Types::ListTablesRequest
-    ListTablesResponse.add_member(:tables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableList, location_name: "Tables"))
-    ListTablesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTablesResponse.add_member(:tables, ::Smithy::Schema::Shapes::MemberShape.new(target: TableList, location_name: "Tables"))
+    ListTablesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListTablesResponse.type = Types::ListTablesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MagneticStoreRejectedDataLocation.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Configuration, location_name: "S3Configuration"))
+    MagneticStoreRejectedDataLocation.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, location_name: "S3Configuration"))
     MagneticStoreRejectedDataLocation.type = Types::MagneticStoreRejectedDataLocation
-    MagneticStoreWriteProperties.add_member(:enable_magnetic_store_writes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableMagneticStoreWrites", traits: {"smithy.api#required" => {}}))
-    MagneticStoreWriteProperties.add_member(:magnetic_store_rejected_data_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MagneticStoreRejectedDataLocation, location_name: "MagneticStoreRejectedDataLocation"))
+    MagneticStoreWriteProperties.add_member(:enable_magnetic_store_writes, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "EnableMagneticStoreWrites", traits: {"smithy.api#required" => {}}))
+    MagneticStoreWriteProperties.add_member(:magnetic_store_rejected_data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: MagneticStoreRejectedDataLocation, location_name: "MagneticStoreRejectedDataLocation"))
     MagneticStoreWriteProperties.type = Types::MagneticStoreWriteProperties
-    MeasureValue.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    MeasureValue.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "Value", traits: {"smithy.api#required" => {}}))
-    MeasureValue.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeasureValueType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    MeasureValue.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    MeasureValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    MeasureValue.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValueType, location_name: "Type", traits: {"smithy.api#required" => {}}))
     MeasureValue.type = Types::MeasureValue
-    MeasureValueType.add_member(:double, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
-    MeasureValueType.add_member(:bigint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIGINT", traits: {"smithy.api#enumValue" => "BIGINT"}))
-    MeasureValueType.add_member(:varchar, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
-    MeasureValueType.add_member(:boolean, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
-    MeasureValueType.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
-    MeasureValueType.add_member(:multi, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI", traits: {"smithy.api#enumValue" => "MULTI"}))
-    MeasureValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeasureValue)
-    MixedMeasureMapping.add_member(:measure_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "MeasureName"))
-    MixedMeasureMapping.add_member(:source_column, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "SourceColumn"))
-    MixedMeasureMapping.add_member(:target_measure_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "TargetMeasureName"))
-    MixedMeasureMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeasureValueType, location_name: "MeasureValueType", traits: {"smithy.api#required" => {}}))
-    MixedMeasureMapping.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiMeasureAttributeMappingList, location_name: "MultiMeasureAttributeMappings"))
+    MeasureValueType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
+    MeasureValueType.add_member(:bigint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIGINT", traits: {"smithy.api#enumValue" => "BIGINT"}))
+    MeasureValueType.add_member(:varchar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
+    MeasureValueType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
+    MeasureValueType.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
+    MeasureValueType.add_member(:multi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI", traits: {"smithy.api#enumValue" => "MULTI"}))
+    MeasureValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValue)
+    MixedMeasureMapping.add_member(:measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "MeasureName"))
+    MixedMeasureMapping.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "SourceColumn"))
+    MixedMeasureMapping.add_member(:target_measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "TargetMeasureName"))
+    MixedMeasureMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValueType, location_name: "MeasureValueType", traits: {"smithy.api#required" => {}}))
+    MixedMeasureMapping.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMappingList, location_name: "MultiMeasureAttributeMappings"))
     MixedMeasureMapping.type = Types::MixedMeasureMapping
-    MixedMeasureMappingList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MixedMeasureMapping)
-    MultiMeasureAttributeMapping.add_member(:source_column, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "SourceColumn", traits: {"smithy.api#required" => {}}))
-    MultiMeasureAttributeMapping.add_member(:target_multi_measure_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "TargetMultiMeasureAttributeName"))
-    MultiMeasureAttributeMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScalarMeasureValueType, location_name: "MeasureValueType"))
+    MixedMeasureMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MixedMeasureMapping)
+    MultiMeasureAttributeMapping.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "SourceColumn", traits: {"smithy.api#required" => {}}))
+    MultiMeasureAttributeMapping.add_member(:target_multi_measure_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "TargetMultiMeasureAttributeName"))
+    MultiMeasureAttributeMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarMeasureValueType, location_name: "MeasureValueType"))
     MultiMeasureAttributeMapping.type = Types::MultiMeasureAttributeMapping
-    MultiMeasureAttributeMappingList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiMeasureAttributeMapping)
-    MultiMeasureMappings.add_member(:target_multi_measure_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "TargetMultiMeasureName"))
-    MultiMeasureMappings.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiMeasureAttributeMappingList, location_name: "MultiMeasureAttributeMappings", traits: {"smithy.api#required" => {}}))
+    MultiMeasureAttributeMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMapping)
+    MultiMeasureMappings.add_member(:target_multi_measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "TargetMultiMeasureName"))
+    MultiMeasureMappings.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMappingList, location_name: "MultiMeasureAttributeMappings", traits: {"smithy.api#required" => {}}))
     MultiMeasureMappings.type = Types::MultiMeasureMappings
-    PartitionKey.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKeyType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    PartitionKey.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "Name"))
-    PartitionKey.add_member(:enforcement_in_record, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKeyEnforcementLevel, location_name: "EnforcementInRecord"))
+    PartitionKey.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKeyType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    PartitionKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "Name"))
+    PartitionKey.add_member(:enforcement_in_record, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKeyEnforcementLevel, location_name: "EnforcementInRecord"))
     PartitionKey.type = Types::PartitionKey
-    PartitionKeyEnforcementLevel.add_member(:required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
-    PartitionKeyEnforcementLevel.add_member(:optional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
-    PartitionKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKey)
-    PartitionKeyType.add_member(:dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
-    PartitionKeyType.add_member(:measure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEASURE", traits: {"smithy.api#enumValue" => "MEASURE"}))
-    Record.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    Record.add_member(:measure_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaName, location_name: "MeasureName"))
-    Record.add_member(:measure_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "MeasureValue"))
-    Record.add_member(:measure_value_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeasureValueType, location_name: "MeasureValueType"))
-    Record.add_member(:time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue256, location_name: "Time"))
-    Record.add_member(:time_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeUnit, location_name: "TimeUnit"))
-    Record.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordVersion, location_name: "Version", traits: {"smithy.api#default" => nil}))
-    Record.add_member(:measure_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeasureValues, location_name: "MeasureValues"))
+    PartitionKeyEnforcementLevel.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
+    PartitionKeyEnforcementLevel.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
+    PartitionKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey)
+    PartitionKeyType.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
+    PartitionKeyType.add_member(:measure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MEASURE", traits: {"smithy.api#enumValue" => "MEASURE"}))
+    Record.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, location_name: "Dimensions"))
+    Record.add_member(:measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, location_name: "MeasureName"))
+    Record.add_member(:measure_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "MeasureValue"))
+    Record.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValueType, location_name: "MeasureValueType"))
+    Record.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue256, location_name: "Time"))
+    Record.add_member(:time_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeUnit, location_name: "TimeUnit"))
+    Record.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordVersion, location_name: "Version", traits: {"smithy.api#default" => nil}))
+    Record.add_member(:measure_values, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValues, location_name: "MeasureValues"))
     Record.type = Types::Record
-    Records.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Record)
-    RecordsIngested.add_member(:total, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Total", traits: {"smithy.api#default" => 0}))
-    RecordsIngested.add_member(:memory_store, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "MemoryStore", traits: {"smithy.api#default" => 0}))
-    RecordsIngested.add_member(:magnetic_store, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "MagneticStore", traits: {"smithy.api#default" => 0}))
+    Records.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record)
+    RecordsIngested.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Total", traits: {"smithy.api#default" => 0}))
+    RecordsIngested.add_member(:memory_store, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "MemoryStore", traits: {"smithy.api#default" => 0}))
+    RecordsIngested.add_member(:magnetic_store, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "MagneticStore", traits: {"smithy.api#default" => 0}))
     RecordsIngested.type = Types::RecordsIngested
-    RejectedRecord.add_member(:record_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordIndex, location_name: "RecordIndex", traits: {"smithy.api#default" => 0}))
-    RejectedRecord.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Reason"))
-    RejectedRecord.add_member(:existing_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordVersion, location_name: "ExistingVersion", traits: {"smithy.api#default" => nil}))
+    RejectedRecord.add_member(:record_index, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordIndex, location_name: "RecordIndex", traits: {"smithy.api#default" => 0}))
+    RejectedRecord.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Reason"))
+    RejectedRecord.add_member(:existing_version, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordVersion, location_name: "ExistingVersion", traits: {"smithy.api#default" => nil}))
     RejectedRecord.type = Types::RejectedRecord
-    RejectedRecords.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RejectedRecord)
-    RejectedRecordsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    RejectedRecordsException.add_member(:rejected_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RejectedRecords, location_name: "RejectedRecords"))
+    RejectedRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RejectedRecord)
+    RejectedRecordsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    RejectedRecordsException.add_member(:rejected_records, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectedRecords, location_name: "RejectedRecords"))
     RejectedRecordsException.type = Types::RejectedRecordsException
-    ReportConfiguration.add_member(:report_s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportS3Configuration, location_name: "ReportS3Configuration"))
+    ReportConfiguration.add_member(:report_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportS3Configuration, location_name: "ReportS3Configuration"))
     ReportConfiguration.type = Types::ReportConfiguration
-    ReportS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
-    ReportS3Configuration.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
-    ReportS3Configuration.add_member(:encryption_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3EncryptionOption, location_name: "EncryptionOption"))
-    ReportS3Configuration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId"))
+    ReportS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
+    ReportS3Configuration.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
+    ReportS3Configuration.add_member(:encryption_option, ::Smithy::Schema::Shapes::MemberShape.new(target: S3EncryptionOption, location_name: "EncryptionOption"))
+    ReportS3Configuration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "KmsKeyId"))
     ReportS3Configuration.type = Types::ReportS3Configuration
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResumeBatchLoadTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchLoadTaskId, location_name: "TaskId", traits: {"smithy.api#required" => {}}))
+    ResumeBatchLoadTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTaskId, location_name: "TaskId", traits: {"smithy.api#required" => {}}))
     ResumeBatchLoadTaskRequest.type = Types::ResumeBatchLoadTaskRequest
     ResumeBatchLoadTaskResponse.type = Types::ResumeBatchLoadTaskResponse
-    RetentionProperties.add_member(:memory_store_retention_period_in_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemoryStoreRetentionPeriodInHours, location_name: "MemoryStoreRetentionPeriodInHours", traits: {"smithy.api#required" => {}}))
-    RetentionProperties.add_member(:magnetic_store_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MagneticStoreRetentionPeriodInDays, location_name: "MagneticStoreRetentionPeriodInDays", traits: {"smithy.api#required" => {}}))
+    RetentionProperties.add_member(:memory_store_retention_period_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStoreRetentionPeriodInHours, location_name: "MemoryStoreRetentionPeriodInHours", traits: {"smithy.api#required" => {}}))
+    RetentionProperties.add_member(:magnetic_store_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MagneticStoreRetentionPeriodInDays, location_name: "MagneticStoreRetentionPeriodInDays", traits: {"smithy.api#required" => {}}))
     RetentionProperties.type = Types::RetentionProperties
-    S3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "BucketName"))
-    S3Configuration.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
-    S3Configuration.add_member(:encryption_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3EncryptionOption, location_name: "EncryptionOption"))
-    S3Configuration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId"))
+    S3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "BucketName"))
+    S3Configuration.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
+    S3Configuration.add_member(:encryption_option, ::Smithy::Schema::Shapes::MemberShape.new(target: S3EncryptionOption, location_name: "EncryptionOption"))
+    S3Configuration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "KmsKeyId"))
     S3Configuration.type = Types::S3Configuration
-    S3EncryptionOption.add_member(:sse_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_S3", traits: {"smithy.api#enumValue" => "SSE_S3"}))
-    S3EncryptionOption.add_member(:sse_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_KMS", traits: {"smithy.api#enumValue" => "SSE_KMS"}))
-    ScalarMeasureValueType.add_member(:double, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
-    ScalarMeasureValueType.add_member(:bigint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIGINT", traits: {"smithy.api#enumValue" => "BIGINT"}))
-    ScalarMeasureValueType.add_member(:boolean, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
-    ScalarMeasureValueType.add_member(:varchar, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
-    ScalarMeasureValueType.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
-    Schema.add_member(:composite_partition_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKeyList, location_name: "CompositePartitionKey"))
+    S3EncryptionOption.add_member(:sse_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_S3", traits: {"smithy.api#enumValue" => "SSE_S3"}))
+    S3EncryptionOption.add_member(:sse_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_KMS", traits: {"smithy.api#enumValue" => "SSE_KMS"}))
+    ScalarMeasureValueType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
+    ScalarMeasureValueType.add_member(:bigint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIGINT", traits: {"smithy.api#enumValue" => "BIGINT"}))
+    ScalarMeasureValueType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
+    ScalarMeasureValueType.add_member(:varchar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
+    ScalarMeasureValueType.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
+    Schema.add_member(:composite_partition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKeyList, location_name: "CompositePartitionKey"))
     Schema.type = Types::Schema
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Table.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
-    Table.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TableName"))
-    Table.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName"))
-    Table.add_member(:table_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableStatus, location_name: "TableStatus"))
-    Table.add_member(:retention_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
-    Table.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
-    Table.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
-    Table.add_member(:magnetic_store_write_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
-    Table.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schema, location_name: "Schema"))
+    Table.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Arn"))
+    Table.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TableName"))
+    Table.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName"))
+    Table.add_member(:table_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatus, location_name: "TableStatus"))
+    Table.add_member(:retention_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionProperties, location_name: "RetentionProperties"))
+    Table.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "CreationTime"))
+    Table.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdatedTime"))
+    Table.add_member(:magnetic_store_write_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
+    Table.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, location_name: "Schema"))
     Table.type = Types::Table
-    TableList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Table)
-    TableStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    TableStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    TableStatus.add_member(:restoring, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTORING", traits: {"smithy.api#enumValue" => "RESTORING"}))
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    TableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Table)
+    TableStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    TableStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    TableStatus.add_member(:restoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTORING", traits: {"smithy.api#enumValue" => "RESTORING"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    TimeUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECONDS", traits: {"smithy.api#enumValue" => "MILLISECONDS"}))
-    TimeUnit.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
-    TimeUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECONDS", traits: {"smithy.api#enumValue" => "MICROSECONDS"}))
-    TimeUnit.add_member(:nanoseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NANOSECONDS", traits: {"smithy.api#enumValue" => "NANOSECONDS"}))
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    TimeUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MILLISECONDS", traits: {"smithy.api#enumValue" => "MILLISECONDS"}))
+    TimeUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
+    TimeUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MICROSECONDS", traits: {"smithy.api#enumValue" => "MICROSECONDS"}))
+    TimeUnit.add_member(:nanoseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NANOSECONDS", traits: {"smithy.api#enumValue" => "NANOSECONDS"}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    UpdateDatabaseRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId", traits: {"smithy.api#required" => {}}))
+    UpdateDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    UpdateDatabaseRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue2048, location_name: "KmsKeyId", traits: {"smithy.api#required" => {}}))
     UpdateDatabaseRequest.type = Types::UpdateDatabaseRequest
-    UpdateDatabaseResponse.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Database, location_name: "Database"))
+    UpdateDatabaseResponse.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, location_name: "Database"))
     UpdateDatabaseResponse.type = Types::UpdateDatabaseResponse
-    UpdateTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    UpdateTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
-    UpdateTableRequest.add_member(:retention_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
-    UpdateTableRequest.add_member(:magnetic_store_write_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
-    UpdateTableRequest.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schema, location_name: "Schema"))
+    UpdateTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    UpdateTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    UpdateTableRequest.add_member(:retention_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionProperties, location_name: "RetentionProperties"))
+    UpdateTableRequest.add_member(:magnetic_store_write_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
+    UpdateTableRequest.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, location_name: "Schema"))
     UpdateTableRequest.type = Types::UpdateTableRequest
-    UpdateTableResponse.add_member(:table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
+    UpdateTableResponse.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, location_name: "Table"))
     UpdateTableResponse.type = Types::UpdateTableResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    WriteRecordsRequest.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    WriteRecordsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
-    WriteRecordsRequest.add_member(:common_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Record, location_name: "CommonAttributes"))
-    WriteRecordsRequest.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Records, location_name: "Records", traits: {"smithy.api#required" => {}}))
+    WriteRecordsRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    WriteRecordsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    WriteRecordsRequest.add_member(:common_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, location_name: "CommonAttributes"))
+    WriteRecordsRequest.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: Records, location_name: "Records", traits: {"smithy.api#required" => {}}))
     WriteRecordsRequest.type = Types::WriteRecordsRequest
-    WriteRecordsResponse.add_member(:records_ingested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordsIngested, location_name: "RecordsIngested"))
+    WriteRecordsResponse.add_member(:records_ingested, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordsIngested, location_name: "RecordsIngested"))
     WriteRecordsResponse.type = Types::WriteRecordsResponse
 
     Timestream20181101 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -453,248 +453,248 @@ module Aws::TimestreamWrite
       service.add_operation(:create_batch_load_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#CreateBatchLoadTask"
         operation.name = "CreateBatchLoadTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBatchLoadTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBatchLoadTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateBatchLoadTaskRequest
+        operation.output = CreateBatchLoadTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:create_database, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#CreateDatabase"
         operation.name = "CreateDatabase"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDatabaseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDatabaseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateDatabaseRequest
+        operation.output = CreateDatabaseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:create_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#CreateTable"
         operation.name = "CreateTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTableRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTableResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateTableRequest
+        operation.output = CreateTableResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:delete_database, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#DeleteDatabase"
         operation.name = "DeleteDatabase"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDatabaseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteDatabaseRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:delete_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#DeleteTable"
         operation.name = "DeleteTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTableRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteTableRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:describe_batch_load_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#DescribeBatchLoadTask"
         operation.name = "DescribeBatchLoadTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBatchLoadTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBatchLoadTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DescribeBatchLoadTaskRequest
+        operation.output = DescribeBatchLoadTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:describe_database, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#DescribeDatabase"
         operation.name = "DescribeDatabase"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDatabaseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDatabaseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeDatabaseRequest
+        operation.output = DescribeDatabaseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:describe_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#DescribeEndpoints"
         operation.name = "DescribeEndpoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeEndpointsRequest
+        operation.output = DescribeEndpointsResponse
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#DescribeTable"
         operation.name = "DescribeTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTableRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTableResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeTableRequest
+        operation.output = DescribeTableResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:list_batch_load_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#ListBatchLoadTasks"
         operation.name = "ListBatchLoadTasks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBatchLoadTasksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBatchLoadTasksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListBatchLoadTasksRequest
+        operation.output = ListBatchLoadTasksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
         operation[:paginator] = Paginators::ListBatchLoadTasks.new
       end)
       service.add_operation(:list_databases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#ListDatabases"
         operation.name = "ListDatabases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDatabasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDatabasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListDatabasesRequest
+        operation.output = ListDatabasesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
         operation[:paginator] = Paginators::ListDatabases.new
       end)
       service.add_operation(:list_tables, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#ListTables"
         operation.name = "ListTables"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTablesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTablesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTablesRequest
+        operation.output = ListTablesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
         operation[:paginator] = Paginators::ListTables.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:resume_batch_load_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#ResumeBatchLoadTask"
         operation.name = "ResumeBatchLoadTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResumeBatchLoadTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResumeBatchLoadTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ResumeBatchLoadTaskRequest
+        operation.output = ResumeBatchLoadTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:update_database, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#UpdateDatabase"
         operation.name = "UpdateDatabase"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDatabaseRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDatabaseResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateDatabaseRequest
+        operation.output = UpdateDatabaseResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:update_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#UpdateTable"
         operation.name = "UpdateTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTableRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTableResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateTableRequest
+        operation.output = UpdateTableResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
       service.add_operation(:write_records, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.timestreamwrite#WriteRecords"
         operation.name = "WriteRecords"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WriteRecordsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WriteRecordsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEndpointException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RejectedRecordsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = WriteRecordsRequest
+        operation.output = WriteRecordsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidEndpointException
+        operation.errors << RejectedRecordsException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
     end

@@ -99,205 +99,205 @@ module Aws::S3Vectors
     VectorKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#VectorKey", name: "VectorKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     VectorMetadata = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.s3vectors#VectorMetadata", name: "VectorMetadata")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    CreateIndexInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
-    CreateIndexInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName", traits: {"smithy.api#required" => {}}))
-    CreateIndexInput.add_member(:data_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataType, location_name: "dataType", traits: {"smithy.api#required" => {}}))
-    CreateIndexInput.add_member(:dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimension, location_name: "dimension", traits: {"smithy.api#required" => {}}))
-    CreateIndexInput.add_member(:distance_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DistanceMetric, location_name: "distanceMetric", traits: {"smithy.api#required" => {}}))
-    CreateIndexInput.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
+    CreateIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    CreateIndexInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn"))
+    CreateIndexInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName", traits: {"smithy.api#required" => {}}))
+    CreateIndexInput.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataType, location_name: "dataType", traits: {"smithy.api#required" => {}}))
+    CreateIndexInput.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, location_name: "dimension", traits: {"smithy.api#required" => {}}))
+    CreateIndexInput.add_member(:distance_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMetric, location_name: "distanceMetric", traits: {"smithy.api#required" => {}}))
+    CreateIndexInput.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfiguration, location_name: "metadataConfiguration"))
     CreateIndexInput.type = Types::CreateIndexInput
     CreateIndexOutput.type = Types::CreateIndexOutput
-    CreateVectorBucketInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
-    CreateVectorBucketInput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    CreateVectorBucketInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
+    CreateVectorBucketInput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateVectorBucketInput.type = Types::CreateVectorBucketInput
     CreateVectorBucketOutput.type = Types::CreateVectorBucketOutput
-    DataType.add_member(:float32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FLOAT32", traits: {"smithy.api#enumValue" => "float32"}))
-    DeleteIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    DeleteIndexInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
-    DeleteIndexInput.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
+    DataType.add_member(:float32, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FLOAT32", traits: {"smithy.api#enumValue" => "float32"}))
+    DeleteIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    DeleteIndexInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName"))
+    DeleteIndexInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn"))
     DeleteIndexInput.type = Types::DeleteIndexInput
     DeleteIndexOutput.type = Types::DeleteIndexOutput
-    DeleteVectorBucketInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    DeleteVectorBucketInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
+    DeleteVectorBucketInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    DeleteVectorBucketInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn"))
     DeleteVectorBucketInput.type = Types::DeleteVectorBucketInput
     DeleteVectorBucketOutput.type = Types::DeleteVectorBucketOutput
-    DeleteVectorBucketPolicyInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    DeleteVectorBucketPolicyInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
+    DeleteVectorBucketPolicyInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    DeleteVectorBucketPolicyInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn"))
     DeleteVectorBucketPolicyInput.type = Types::DeleteVectorBucketPolicyInput
     DeleteVectorBucketPolicyOutput.type = Types::DeleteVectorBucketPolicyOutput
-    DeleteVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    DeleteVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
-    DeleteVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
-    DeleteVectorsInput.add_member(:keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorsInputList, location_name: "keys", traits: {"smithy.api#required" => {}}))
+    DeleteVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    DeleteVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName"))
+    DeleteVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn"))
+    DeleteVectorsInput.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteVectorsInputList, location_name: "keys", traits: {"smithy.api#required" => {}}))
     DeleteVectorsInput.type = Types::DeleteVectorsInput
-    DeleteVectorsInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorKey)
+    DeleteVectorsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey)
     DeleteVectorsOutput.type = Types::DeleteVectorsOutput
-    DistanceMetric.add_member(:euclidean, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EUCLIDEAN", traits: {"smithy.api#enumValue" => "euclidean"}))
-    DistanceMetric.add_member(:cosine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COSINE", traits: {"smithy.api#enumValue" => "cosine"}))
-    EncryptionConfiguration.add_member(:sse_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseType, location_name: "sseType", traits: {"smithy.api#default" => "AES256"}))
-    EncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    DistanceMetric.add_member(:euclidean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EUCLIDEAN", traits: {"smithy.api#enumValue" => "euclidean"}))
+    DistanceMetric.add_member(:cosine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COSINE", traits: {"smithy.api#enumValue" => "cosine"}))
+    EncryptionConfiguration.add_member(:sse_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SseType, location_name: "sseType", traits: {"smithy.api#default" => "AES256"}))
+    EncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "kmsKeyArn"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
-    Float32VectorData.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float)
-    GetIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    GetIndexInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
-    GetIndexInput.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
+    Float32VectorData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float)
+    GetIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    GetIndexInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName"))
+    GetIndexInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn"))
     GetIndexInput.type = Types::GetIndexInput
-    GetIndexOutput.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Index, location_name: "index", traits: {"smithy.api#required" => {}}))
+    GetIndexOutput.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Index, location_name: "index", traits: {"smithy.api#required" => {}}))
     GetIndexOutput.type = Types::GetIndexOutput
-    GetOutputVector.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    GetOutputVector.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorData, location_name: "data"))
-    GetOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
+    GetOutputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    GetOutputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, location_name: "data"))
+    GetOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, location_name: "metadata"))
     GetOutputVector.type = Types::GetOutputVector
-    GetVectorBucketInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    GetVectorBucketInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
+    GetVectorBucketInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    GetVectorBucketInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn"))
     GetVectorBucketInput.type = Types::GetVectorBucketInput
-    GetVectorBucketOutput.add_member(:vector_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucket, location_name: "vectorBucket", traits: {"smithy.api#required" => {}}))
+    GetVectorBucketOutput.add_member(:vector_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucket, location_name: "vectorBucket", traits: {"smithy.api#required" => {}}))
     GetVectorBucketOutput.type = Types::GetVectorBucketOutput
-    GetVectorBucketPolicyInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    GetVectorBucketPolicyInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
+    GetVectorBucketPolicyInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    GetVectorBucketPolicyInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn"))
     GetVectorBucketPolicyInput.type = Types::GetVectorBucketPolicyInput
-    GetVectorBucketPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketPolicy, location_name: "policy"))
+    GetVectorBucketPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketPolicy, location_name: "policy"))
     GetVectorBucketPolicyOutput.type = Types::GetVectorBucketPolicyOutput
-    GetVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    GetVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
-    GetVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
-    GetVectorsInput.add_member(:keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorsInputList, location_name: "keys", traits: {"smithy.api#required" => {}}))
-    GetVectorsInput.add_member(:return_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnData", traits: {"smithy.api#default" => false}))
-    GetVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnMetadata", traits: {"smithy.api#default" => false}))
+    GetVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    GetVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName"))
+    GetVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn"))
+    GetVectorsInput.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: GetVectorsInputList, location_name: "keys", traits: {"smithy.api#required" => {}}))
+    GetVectorsInput.add_member(:return_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnData", traits: {"smithy.api#default" => false}))
+    GetVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnMetadata", traits: {"smithy.api#default" => false}))
     GetVectorsInput.type = Types::GetVectorsInput
-    GetVectorsInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorKey)
-    GetVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorsOutputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
+    GetVectorsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey)
+    GetVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: GetVectorsOutputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
     GetVectorsOutput.type = Types::GetVectorsOutput
-    GetVectorsOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOutputVector)
-    Index.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
-    Index.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName", traits: {"smithy.api#required" => {}}))
-    Index.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn", traits: {"smithy.api#required" => {}}))
-    Index.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    Index.add_member(:data_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataType, location_name: "dataType", traits: {"smithy.api#required" => {}}))
-    Index.add_member(:dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimension, location_name: "dimension", traits: {"smithy.api#required" => {}}))
-    Index.add_member(:distance_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DistanceMetric, location_name: "distanceMetric", traits: {"smithy.api#required" => {}}))
-    Index.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
+    GetVectorsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetOutputVector)
+    Index.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
+    Index.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName", traits: {"smithy.api#required" => {}}))
+    Index.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn", traits: {"smithy.api#required" => {}}))
+    Index.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    Index.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataType, location_name: "dataType", traits: {"smithy.api#required" => {}}))
+    Index.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, location_name: "dimension", traits: {"smithy.api#required" => {}}))
+    Index.add_member(:distance_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMetric, location_name: "distanceMetric", traits: {"smithy.api#required" => {}}))
+    Index.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfiguration, location_name: "metadataConfiguration"))
     Index.type = Types::Index
-    IndexSummary.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
-    IndexSummary.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName", traits: {"smithy.api#required" => {}}))
-    IndexSummary.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn", traits: {"smithy.api#required" => {}}))
-    IndexSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    IndexSummary.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
+    IndexSummary.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName", traits: {"smithy.api#required" => {}}))
+    IndexSummary.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn", traits: {"smithy.api#required" => {}}))
+    IndexSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
     IndexSummary.type = Types::IndexSummary
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    KmsDisabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    KmsDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     KmsDisabledException.type = Types::KmsDisabledException
-    KmsInvalidKeyUsageException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    KmsInvalidKeyUsageException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     KmsInvalidKeyUsageException.type = Types::KmsInvalidKeyUsageException
-    KmsInvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    KmsInvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     KmsInvalidStateException.type = Types::KmsInvalidStateException
-    KmsNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    KmsNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     KmsNotFoundException.type = Types::KmsNotFoundException
-    ListIndexesInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    ListIndexesInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
-    ListIndexesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesMaxResults, location_name: "maxResults"))
-    ListIndexesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesNextToken, location_name: "nextToken"))
-    ListIndexesInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesPrefix, location_name: "prefix"))
+    ListIndexesInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    ListIndexesInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn"))
+    ListIndexesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIndexesMaxResults, location_name: "maxResults"))
+    ListIndexesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIndexesNextToken, location_name: "nextToken"))
+    ListIndexesInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIndexesPrefix, location_name: "prefix"))
     ListIndexesInput.type = Types::ListIndexesInput
-    ListIndexesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesNextToken, location_name: "nextToken"))
-    ListIndexesOutput.add_member(:indexes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesOutputList, location_name: "indexes", traits: {"smithy.api#required" => {}}))
+    ListIndexesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIndexesNextToken, location_name: "nextToken"))
+    ListIndexesOutput.add_member(:indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIndexesOutputList, location_name: "indexes", traits: {"smithy.api#required" => {}}))
     ListIndexesOutput.type = Types::ListIndexesOutput
-    ListIndexesOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexSummary)
-    ListOutputVector.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    ListOutputVector.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorData, location_name: "data"))
-    ListOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
+    ListIndexesOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexSummary)
+    ListOutputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    ListOutputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, location_name: "data"))
+    ListOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, location_name: "metadata"))
     ListOutputVector.type = Types::ListOutputVector
-    ListVectorBucketsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorBucketsMaxResults, location_name: "maxResults"))
-    ListVectorBucketsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorBucketsNextToken, location_name: "nextToken"))
-    ListVectorBucketsInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorBucketsPrefix, location_name: "prefix"))
+    ListVectorBucketsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsMaxResults, location_name: "maxResults"))
+    ListVectorBucketsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsNextToken, location_name: "nextToken"))
+    ListVectorBucketsInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsPrefix, location_name: "prefix"))
     ListVectorBucketsInput.type = Types::ListVectorBucketsInput
-    ListVectorBucketsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorBucketsNextToken, location_name: "nextToken"))
-    ListVectorBucketsOutput.add_member(:vector_buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorBucketsOutputList, location_name: "vectorBuckets", traits: {"smithy.api#required" => {}}))
+    ListVectorBucketsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsNextToken, location_name: "nextToken"))
+    ListVectorBucketsOutput.add_member(:vector_buckets, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsOutputList, location_name: "vectorBuckets", traits: {"smithy.api#required" => {}}))
     ListVectorBucketsOutput.type = Types::ListVectorBucketsOutput
-    ListVectorBucketsOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketSummary)
-    ListVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    ListVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
-    ListVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
-    ListVectorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsMaxResults, location_name: "maxResults", traits: {"smithy.api#default" => 500}))
-    ListVectorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsNextToken, location_name: "nextToken"))
-    ListVectorsInput.add_member(:segment_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsSegmentCount, location_name: "segmentCount", traits: {"smithy.api#default" => 1}))
-    ListVectorsInput.add_member(:segment_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsSegmentIndex, location_name: "segmentIndex", traits: {"smithy.api#default" => 0}))
-    ListVectorsInput.add_member(:return_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnData", traits: {"smithy.api#default" => false}))
-    ListVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnMetadata", traits: {"smithy.api#default" => false}))
+    ListVectorBucketsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketSummary)
+    ListVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    ListVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName"))
+    ListVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn"))
+    ListVectorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsMaxResults, location_name: "maxResults", traits: {"smithy.api#default" => 500}))
+    ListVectorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsNextToken, location_name: "nextToken"))
+    ListVectorsInput.add_member(:segment_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsSegmentCount, location_name: "segmentCount", traits: {"smithy.api#default" => 1}))
+    ListVectorsInput.add_member(:segment_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsSegmentIndex, location_name: "segmentIndex", traits: {"smithy.api#default" => 0}))
+    ListVectorsInput.add_member(:return_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnData", traits: {"smithy.api#default" => false}))
+    ListVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnMetadata", traits: {"smithy.api#default" => false}))
     ListVectorsInput.type = Types::ListVectorsInput
-    ListVectorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsNextToken, location_name: "nextToken"))
-    ListVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsOutputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
+    ListVectorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsNextToken, location_name: "nextToken"))
+    ListVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsOutputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
     ListVectorsOutput.type = Types::ListVectorsOutput
-    ListVectorsOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOutputVector)
-    MetadataConfiguration.add_member(:non_filterable_metadata_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonFilterableMetadataKeys, location_name: "nonFilterableMetadataKeys", traits: {"smithy.api#required" => {}}))
+    ListVectorsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListOutputVector)
+    MetadataConfiguration.add_member(:non_filterable_metadata_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: NonFilterableMetadataKeys, location_name: "nonFilterableMetadataKeys", traits: {"smithy.api#required" => {}}))
     MetadataConfiguration.type = Types::MetadataConfiguration
-    NonFilterableMetadataKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataKey)
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    NonFilterableMetadataKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey)
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     NotFoundException.type = Types::NotFoundException
-    PutInputVector.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    PutInputVector.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorData, location_name: "data", traits: {"smithy.api#required" => {}}))
-    PutInputVector.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata", traits: {"smithy.api#default" => {}}))
+    PutInputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    PutInputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, location_name: "data", traits: {"smithy.api#required" => {}}))
+    PutInputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, location_name: "metadata", traits: {"smithy.api#default" => {}}))
     PutInputVector.type = Types::PutInputVector
-    PutVectorBucketPolicyInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    PutVectorBucketPolicyInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
-    PutVectorBucketPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketPolicy, location_name: "policy", traits: {"smithy.api#required" => {}}))
+    PutVectorBucketPolicyInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    PutVectorBucketPolicyInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn"))
+    PutVectorBucketPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketPolicy, location_name: "policy", traits: {"smithy.api#required" => {}}))
     PutVectorBucketPolicyInput.type = Types::PutVectorBucketPolicyInput
     PutVectorBucketPolicyOutput.type = Types::PutVectorBucketPolicyOutput
-    PutVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    PutVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
-    PutVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
-    PutVectorsInput.add_member(:vectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutVectorsInputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
+    PutVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    PutVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName"))
+    PutVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn"))
+    PutVectorsInput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: PutVectorsInputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
     PutVectorsInput.type = Types::PutVectorsInput
-    PutVectorsInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutInputVector)
+    PutVectorsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutInputVector)
     PutVectorsOutput.type = Types::PutVectorsOutput
-    QueryOutputVector.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    QueryOutputVector.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorData, location_name: "data"))
-    QueryOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
-    QueryOutputVector.add_member(:distance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "distance"))
+    QueryOutputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    QueryOutputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, location_name: "data"))
+    QueryOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, location_name: "metadata"))
+    QueryOutputVector.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "distance"))
     QueryOutputVector.type = Types::QueryOutputVector
-    QueryVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
-    QueryVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
-    QueryVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
-    QueryVectorsInput.add_member(:top_k, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopK, location_name: "topK", traits: {"smithy.api#required" => {}}))
-    QueryVectorsInput.add_member(:query_vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorData, location_name: "queryVector", traits: {"smithy.api#required" => {}}))
-    QueryVectorsInput.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Document, location_name: "filter"))
-    QueryVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnMetadata", traits: {"smithy.api#default" => false}))
-    QueryVectorsInput.add_member(:return_distance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnDistance", traits: {"smithy.api#default" => false}))
+    QueryVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName"))
+    QueryVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, location_name: "indexName"))
+    QueryVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, location_name: "indexArn"))
+    QueryVectorsInput.add_member(:top_k, ::Smithy::Schema::Shapes::MemberShape.new(target: TopK, location_name: "topK", traits: {"smithy.api#required" => {}}))
+    QueryVectorsInput.add_member(:query_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, location_name: "queryVector", traits: {"smithy.api#required" => {}}))
+    QueryVectorsInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, location_name: "filter"))
+    QueryVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnMetadata", traits: {"smithy.api#default" => false}))
+    QueryVectorsInput.add_member(:return_distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "returnDistance", traits: {"smithy.api#default" => false}))
     QueryVectorsInput.type = Types::QueryVectorsInput
-    QueryVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryVectorsOutputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
+    QueryVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryVectorsOutputList, location_name: "vectors", traits: {"smithy.api#required" => {}}))
     QueryVectorsOutput.type = Types::QueryVectorsOutput
-    QueryVectorsOutputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryOutputVector)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    QueryVectorsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryOutputVector)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    SseType.add_member(:aes256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES256", traits: {"smithy.api#enumValue" => "AES256"}))
-    SseType.add_member(:aws_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_KMS", traits: {"smithy.api#enumValue" => "aws:kms"}))
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    SseType.add_member(:aes256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES256", traits: {"smithy.api#enumValue" => "AES256"}))
+    SseType.add_member(:aws_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_KMS", traits: {"smithy.api#enumValue" => "aws:kms"}))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "path", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    VectorBucket.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
-    VectorBucket.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn", traits: {"smithy.api#required" => {}}))
-    VectorBucket.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    VectorBucket.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    VectorBucket.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
+    VectorBucket.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn", traits: {"smithy.api#required" => {}}))
+    VectorBucket.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    VectorBucket.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     VectorBucket.type = Types::VectorBucket
-    VectorBucketSummary.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
-    VectorBucketSummary.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn", traits: {"smithy.api#required" => {}}))
-    VectorBucketSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
+    VectorBucketSummary.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, location_name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
+    VectorBucketSummary.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, location_name: "vectorBucketArn", traits: {"smithy.api#required" => {}}))
+    VectorBucketSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
     VectorBucketSummary.type = Types::VectorBucketSummary
-    VectorData.add_member(:float32, Types::VectorData::Float32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float32VectorData, location_name: "float32"))
-    VectorData.add_member(:unknown, Types::VectorData::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VectorData.add_member(:float32, Types::VectorData::Float32, ::Smithy::Schema::Shapes::MemberShape.new(target: Float32VectorData, location_name: "float32"))
+    VectorData.add_member(:unknown, Types::VectorData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VectorData.type = Types::VectorData
 
     S3Vectors = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -308,243 +308,243 @@ module Aws::S3Vectors
       service.add_operation(:create_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#CreateIndex"
         operation.name = "CreateIndex"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIndexInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIndexOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = CreateIndexInput
+        operation.output = CreateIndexOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/CreateIndex", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_vector_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#CreateVectorBucket"
         operation.name = "CreateVectorBucket"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVectorBucketInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVectorBucketOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = CreateVectorBucketInput
+        operation.output = CreateVectorBucketOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/CreateVectorBucket", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#DeleteIndex"
         operation.name = "DeleteIndex"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIndexInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIndexOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteIndexInput
+        operation.output = DeleteIndexOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/DeleteIndex", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_vector_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#DeleteVectorBucket"
         operation.name = "DeleteVectorBucket"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorBucketInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorBucketOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteVectorBucketInput
+        operation.output = DeleteVectorBucketOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/DeleteVectorBucket", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_vector_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#DeleteVectorBucketPolicy"
         operation.name = "DeleteVectorBucketPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorBucketPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorBucketPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteVectorBucketPolicyInput
+        operation.output = DeleteVectorBucketPolicyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/DeleteVectorBucketPolicy", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_vectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#DeleteVectors"
         operation.name = "DeleteVectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidKeyUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = DeleteVectorsInput
+        operation.output = DeleteVectorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << KmsDisabledException
+        operation.errors << KmsInvalidKeyUsageException
+        operation.errors << KmsInvalidStateException
+        operation.errors << KmsNotFoundException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/DeleteVectors", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#GetIndex"
         operation.name = "GetIndex"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIndexInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIndexOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetIndexInput
+        operation.output = GetIndexOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/GetIndex", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_vector_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#GetVectorBucket"
         operation.name = "GetVectorBucket"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorBucketInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorBucketOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetVectorBucketInput
+        operation.output = GetVectorBucketOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/GetVectorBucket", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_vector_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#GetVectorBucketPolicy"
         operation.name = "GetVectorBucketPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorBucketPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorBucketPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetVectorBucketPolicyInput
+        operation.output = GetVectorBucketPolicyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/GetVectorBucketPolicy", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_vectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#GetVectors"
         operation.name = "GetVectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidKeyUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = GetVectorsInput
+        operation.output = GetVectorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << KmsDisabledException
+        operation.errors << KmsInvalidKeyUsageException
+        operation.errors << KmsInvalidStateException
+        operation.errors << KmsNotFoundException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/GetVectors", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_indexes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#ListIndexes"
         operation.name = "ListIndexes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListIndexesInput
+        operation.output = ListIndexesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/ListIndexes", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListIndexes.new
       end)
       service.add_operation(:list_vector_buckets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#ListVectorBuckets"
         operation.name = "ListVectorBuckets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorBucketsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorBucketsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListVectorBucketsInput
+        operation.output = ListVectorBucketsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/ListVectorBuckets", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVectorBuckets.new
       end)
       service.add_operation(:list_vectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#ListVectors"
         operation.name = "ListVectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = ListVectorsInput
+        operation.output = ListVectorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/ListVectors", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVectors.new
       end)
       service.add_operation(:put_vector_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#PutVectorBucketPolicy"
         operation.name = "PutVectorBucketPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutVectorBucketPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutVectorBucketPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = PutVectorBucketPolicyInput
+        operation.output = PutVectorBucketPolicyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/PutVectorBucketPolicy", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_vectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#PutVectors"
         operation.name = "PutVectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutVectorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutVectorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidKeyUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = PutVectorsInput
+        operation.output = PutVectorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << KmsDisabledException
+        operation.errors << KmsInvalidKeyUsageException
+        operation.errors << KmsInvalidStateException
+        operation.errors << KmsNotFoundException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/PutVectors", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:query_vectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#QueryVectors"
         operation.name = "QueryVectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryVectorsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryVectorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidKeyUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsInvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = QueryVectorsInput
+        operation.output = QueryVectorsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << KmsDisabledException
+        operation.errors << KmsInvalidKeyUsageException
+        operation.errors << KmsInvalidStateException
+        operation.errors << KmsNotFoundException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/QueryVectors", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
     end

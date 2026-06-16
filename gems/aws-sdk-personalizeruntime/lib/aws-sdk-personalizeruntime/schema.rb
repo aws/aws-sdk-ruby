@@ -46,71 +46,71 @@ module Aws::PersonalizeRuntime
     Score = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.personalizeruntime#Score", name: "Score")
     UserID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.personalizeruntime#UserID", name: "UserID", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
 
-    ActionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictedAction)
-    ColumnNamesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnName)
-    Context.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeName)
-    Context.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValue)
-    FilterValues.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterAttributeName)
-    FilterValues.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterAttributeValue)
-    GetActionRecommendationsRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
-    GetActionRecommendationsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserID, location_name: "userId"))
-    GetActionRecommendationsRequest.add_member(:num_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumResults, location_name: "numResults", traits: {"smithy.api#default" => 0}))
-    GetActionRecommendationsRequest.add_member(:filter_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
-    GetActionRecommendationsRequest.add_member(:filter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
+    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedAction)
+    ColumnNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName)
+    Context.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName)
+    Context.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
+    FilterValues.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeName)
+    FilterValues.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeValue)
+    GetActionRecommendationsRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "campaignArn"))
+    GetActionRecommendationsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserID, location_name: "userId"))
+    GetActionRecommendationsRequest.add_member(:num_results, ::Smithy::Schema::Shapes::MemberShape.new(target: NumResults, location_name: "numResults", traits: {"smithy.api#default" => 0}))
+    GetActionRecommendationsRequest.add_member(:filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "filterArn"))
+    GetActionRecommendationsRequest.add_member(:filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "filterValues"))
     GetActionRecommendationsRequest.type = Types::GetActionRecommendationsRequest
-    GetActionRecommendationsResponse.add_member(:action_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionList, location_name: "actionList"))
-    GetActionRecommendationsResponse.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationID, location_name: "recommendationId"))
+    GetActionRecommendationsResponse.add_member(:action_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, location_name: "actionList"))
+    GetActionRecommendationsResponse.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationID, location_name: "recommendationId"))
     GetActionRecommendationsResponse.type = Types::GetActionRecommendationsResponse
-    GetPersonalizedRankingRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn", traits: {"smithy.api#required" => {}}))
-    GetPersonalizedRankingRequest.add_member(:input_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputList, location_name: "inputList", traits: {"smithy.api#required" => {}}))
-    GetPersonalizedRankingRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserID, location_name: "userId", traits: {"smithy.api#required" => {}}))
-    GetPersonalizedRankingRequest.add_member(:context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Context, location_name: "context"))
-    GetPersonalizedRankingRequest.add_member(:filter_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
-    GetPersonalizedRankingRequest.add_member(:filter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
-    GetPersonalizedRankingRequest.add_member(:metadata_columns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataColumns, location_name: "metadataColumns"))
+    GetPersonalizedRankingRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "campaignArn", traits: {"smithy.api#required" => {}}))
+    GetPersonalizedRankingRequest.add_member(:input_list, ::Smithy::Schema::Shapes::MemberShape.new(target: InputList, location_name: "inputList", traits: {"smithy.api#required" => {}}))
+    GetPersonalizedRankingRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserID, location_name: "userId", traits: {"smithy.api#required" => {}}))
+    GetPersonalizedRankingRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: Context, location_name: "context"))
+    GetPersonalizedRankingRequest.add_member(:filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "filterArn"))
+    GetPersonalizedRankingRequest.add_member(:filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "filterValues"))
+    GetPersonalizedRankingRequest.add_member(:metadata_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataColumns, location_name: "metadataColumns"))
     GetPersonalizedRankingRequest.type = Types::GetPersonalizedRankingRequest
-    GetPersonalizedRankingResponse.add_member(:personalized_ranking, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemList, location_name: "personalizedRanking"))
-    GetPersonalizedRankingResponse.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationID, location_name: "recommendationId"))
+    GetPersonalizedRankingResponse.add_member(:personalized_ranking, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemList, location_name: "personalizedRanking"))
+    GetPersonalizedRankingResponse.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationID, location_name: "recommendationId"))
     GetPersonalizedRankingResponse.type = Types::GetPersonalizedRankingResponse
-    GetRecommendationsRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
-    GetRecommendationsRequest.add_member(:item_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemID, location_name: "itemId"))
-    GetRecommendationsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserID, location_name: "userId"))
-    GetRecommendationsRequest.add_member(:num_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumResults, location_name: "numResults", traits: {"smithy.api#default" => 0}))
-    GetRecommendationsRequest.add_member(:context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Context, location_name: "context"))
-    GetRecommendationsRequest.add_member(:filter_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
-    GetRecommendationsRequest.add_member(:filter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
-    GetRecommendationsRequest.add_member(:recommender_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
-    GetRecommendationsRequest.add_member(:promotions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromotionList, location_name: "promotions"))
-    GetRecommendationsRequest.add_member(:metadata_columns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataColumns, location_name: "metadataColumns"))
+    GetRecommendationsRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "campaignArn"))
+    GetRecommendationsRequest.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemID, location_name: "itemId"))
+    GetRecommendationsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserID, location_name: "userId"))
+    GetRecommendationsRequest.add_member(:num_results, ::Smithy::Schema::Shapes::MemberShape.new(target: NumResults, location_name: "numResults", traits: {"smithy.api#default" => 0}))
+    GetRecommendationsRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: Context, location_name: "context"))
+    GetRecommendationsRequest.add_member(:filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "filterArn"))
+    GetRecommendationsRequest.add_member(:filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "filterValues"))
+    GetRecommendationsRequest.add_member(:recommender_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "recommenderArn"))
+    GetRecommendationsRequest.add_member(:promotions, ::Smithy::Schema::Shapes::MemberShape.new(target: PromotionList, location_name: "promotions"))
+    GetRecommendationsRequest.add_member(:metadata_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataColumns, location_name: "metadataColumns"))
     GetRecommendationsRequest.type = Types::GetRecommendationsRequest
-    GetRecommendationsResponse.add_member(:item_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemList, location_name: "itemList"))
-    GetRecommendationsResponse.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationID, location_name: "recommendationId"))
+    GetRecommendationsResponse.add_member(:item_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemList, location_name: "itemList"))
+    GetRecommendationsResponse.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationID, location_name: "recommendationId"))
     GetRecommendationsResponse.type = Types::GetRecommendationsResponse
-    InputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemID)
-    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemID)
+    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidInputException.type = Types::InvalidInputException
-    ItemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictedItem)
-    Metadata.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnName)
-    Metadata.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnValue)
-    MetadataColumns.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetType)
-    MetadataColumns.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnNamesList)
-    PredictedAction.add_member(:action_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionID, location_name: "actionId"))
-    PredictedAction.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "score"))
+    ItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedItem)
+    Metadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName)
+    Metadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnValue)
+    MetadataColumns.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType)
+    MetadataColumns.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNamesList)
+    PredictedAction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionID, location_name: "actionId"))
+    PredictedAction.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "score"))
     PredictedAction.type = Types::PredictedAction
-    PredictedItem.add_member(:item_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemID, location_name: "itemId"))
-    PredictedItem.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Score, location_name: "score"))
-    PredictedItem.add_member(:promotion_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "promotionName"))
-    PredictedItem.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
-    PredictedItem.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReasonList, location_name: "reason"))
+    PredictedItem.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemID, location_name: "itemId"))
+    PredictedItem.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, location_name: "score"))
+    PredictedItem.add_member(:promotion_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "promotionName"))
+    PredictedItem.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "metadata"))
+    PredictedItem.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonList, location_name: "reason"))
     PredictedItem.type = Types::PredictedItem
-    Promotion.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    Promotion.add_member(:percent_promoted_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PercentPromotedItems, location_name: "percentPromotedItems"))
-    Promotion.add_member(:filter_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
-    Promotion.add_member(:filter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
+    Promotion.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    Promotion.add_member(:percent_promoted_items, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentPromotedItems, location_name: "percentPromotedItems"))
+    Promotion.add_member(:filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "filterArn"))
+    Promotion.add_member(:filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "filterValues"))
     Promotion.type = Types::Promotion
-    PromotionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Promotion)
-    ReasonList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reason)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    PromotionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Promotion)
+    ReasonList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Reason)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
 
     AmazonPersonalizeRuntime = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -121,28 +121,28 @@ module Aws::PersonalizeRuntime
       service.add_operation(:get_action_recommendations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeruntime#GetActionRecommendations"
         operation.name = "GetActionRecommendations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetActionRecommendationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetActionRecommendationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetActionRecommendationsRequest
+        operation.output = GetActionRecommendationsResponse
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/action-recommendations", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_personalized_ranking, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeruntime#GetPersonalizedRanking"
         operation.name = "GetPersonalizedRanking"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPersonalizedRankingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPersonalizedRankingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetPersonalizedRankingRequest
+        operation.output = GetPersonalizedRankingResponse
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/personalize-ranking", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_recommendations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeruntime#GetRecommendations"
         operation.name = "GetRecommendations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecommendationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecommendationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetRecommendationsRequest
+        operation.output = GetRecommendationsResponse
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/recommendations", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end

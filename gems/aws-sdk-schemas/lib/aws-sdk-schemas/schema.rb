@@ -102,319 +102,319 @@ module Aws::Schemas
     Stringmin20max1600 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.schemas#__stringMin20Max1600", name: "Stringmin20max1600", traits: {"smithy.api#length" => {"min" => 20, "max" => 1600}})
     Timestampiso8601 = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.schemas#__timestampIso8601", name: "Timestampiso8601", traits: {"smithy.api#timestampFormat" => "date-time"})
 
-    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BadRequestException.type = Types::BadRequestException
-    CodeGenerationStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
-    CodeGenerationStatus.add_member(:create_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_COMPLETE", traits: {"smithy.api#enumValue" => "CREATE_COMPLETE"}))
-    CodeGenerationStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    ConflictException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CodeGenerationStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    CodeGenerationStatus.add_member(:create_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_COMPLETE", traits: {"smithy.api#enumValue" => "CREATE_COMPLETE"}))
+    CodeGenerationStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateDiscovererRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin0max256, location_name: "Description"))
-    CreateDiscovererRequest.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin20max1600, location_name: "SourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateDiscovererRequest.add_member(:cross_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "CrossAccount"))
-    CreateDiscovererRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreateDiscovererRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256, location_name: "Description"))
+    CreateDiscovererRequest.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max1600, location_name: "SourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateDiscovererRequest.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "CrossAccount"))
+    CreateDiscovererRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreateDiscovererRequest.type = Types::CreateDiscovererRequest
-    CreateDiscovererResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateDiscovererResponse.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererArn"))
-    CreateDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId"))
-    CreateDiscovererResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
-    CreateDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
-    CreateDiscovererResponse.add_member(:cross_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "CrossAccount"))
-    CreateDiscovererResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreateDiscovererResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateDiscovererResponse.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererArn"))
+    CreateDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId"))
+    CreateDiscovererResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceArn"))
+    CreateDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererState, location_name: "State"))
+    CreateDiscovererResponse.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "CrossAccount"))
+    CreateDiscovererResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreateDiscovererResponse.type = Types::CreateDiscovererResponse
-    CreateRegistryRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin0max256, location_name: "Description"))
-    CreateRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateRegistryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreateRegistryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256, location_name: "Description"))
+    CreateRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRegistryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreateRegistryRequest.type = Types::CreateRegistryRequest
-    CreateRegistryResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateRegistryResponse.add_member(:registry_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryArn"))
-    CreateRegistryResponse.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName"))
-    CreateRegistryResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreateRegistryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateRegistryResponse.add_member(:registry_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryArn"))
+    CreateRegistryResponse.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName"))
+    CreateRegistryResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreateRegistryResponse.type = Types::CreateRegistryResponse
-    CreateSchemaRequest.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin1max100000, location_name: "Content", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateSchemaRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin0max256, location_name: "Description"))
-    CreateSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateSchemaRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
-    CreateSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateSchemaRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max100000, location_name: "Content", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateSchemaRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256, location_name: "Description"))
+    CreateSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateSchemaRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreateSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateSchemaRequest.type = Types::CreateSchemaRequest
-    CreateSchemaResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateSchemaResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "LastModified"))
-    CreateSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaArn"))
-    CreateSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    CreateSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    CreateSchemaResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
-    CreateSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Type"))
-    CreateSchemaResponse.add_member(:version_created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "VersionCreatedDate"))
+    CreateSchemaResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateSchemaResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "LastModified"))
+    CreateSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaArn"))
+    CreateSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName"))
+    CreateSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    CreateSchemaResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreateSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Type"))
+    CreateSchemaResponse.add_member(:version_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "VersionCreatedDate"))
     CreateSchemaResponse.type = Types::CreateSchemaResponse
-    DeleteDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDiscovererRequest.type = Types::DeleteDiscovererRequest
-    DeleteRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRegistryRequest.type = Types::DeleteRegistryRequest
-    DeleteResourcePolicyRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpQuery" => "registryName"}))
+    DeleteResourcePolicyRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpQuery" => "registryName"}))
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
-    DeleteSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSchemaRequest.type = Types::DeleteSchemaRequest
-    DeleteSchemaVersionRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteSchemaVersionRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteSchemaVersionRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSchemaVersionRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSchemaVersionRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSchemaVersionRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSchemaVersionRequest.type = Types::DeleteSchemaVersionRequest
-    DescribeCodeBindingRequest.add_member(:language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Language", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeCodeBindingRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeCodeBindingRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeCodeBindingRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
+    DescribeCodeBindingRequest.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Language", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeCodeBindingRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeCodeBindingRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeCodeBindingRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
     DescribeCodeBindingRequest.type = Types::DescribeCodeBindingRequest
-    DescribeCodeBindingResponse.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "CreationDate"))
-    DescribeCodeBindingResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "LastModified"))
-    DescribeCodeBindingResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    DescribeCodeBindingResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeGenerationStatus, location_name: "Status"))
+    DescribeCodeBindingResponse.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "CreationDate"))
+    DescribeCodeBindingResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "LastModified"))
+    DescribeCodeBindingResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    DescribeCodeBindingResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationStatus, location_name: "Status"))
     DescribeCodeBindingResponse.type = Types::DescribeCodeBindingResponse
-    DescribeDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeDiscovererRequest.type = Types::DescribeDiscovererRequest
-    DescribeDiscovererResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    DescribeDiscovererResponse.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererArn"))
-    DescribeDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId"))
-    DescribeDiscovererResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
-    DescribeDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
-    DescribeDiscovererResponse.add_member(:cross_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "CrossAccount"))
-    DescribeDiscovererResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    DescribeDiscovererResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    DescribeDiscovererResponse.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererArn"))
+    DescribeDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId"))
+    DescribeDiscovererResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceArn"))
+    DescribeDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererState, location_name: "State"))
+    DescribeDiscovererResponse.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "CrossAccount"))
+    DescribeDiscovererResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     DescribeDiscovererResponse.type = Types::DescribeDiscovererResponse
-    DescribeRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeRegistryRequest.type = Types::DescribeRegistryRequest
-    DescribeRegistryResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    DescribeRegistryResponse.add_member(:registry_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryArn"))
-    DescribeRegistryResponse.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName"))
-    DescribeRegistryResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    DescribeRegistryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    DescribeRegistryResponse.add_member(:registry_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryArn"))
+    DescribeRegistryResponse.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName"))
+    DescribeRegistryResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     DescribeRegistryResponse.type = Types::DescribeRegistryResponse
-    DescribeSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeSchemaRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
+    DescribeSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeSchemaRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
     DescribeSchemaRequest.type = Types::DescribeSchemaRequest
-    DescribeSchemaResponse.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Content"))
-    DescribeSchemaResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    DescribeSchemaResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "LastModified"))
-    DescribeSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaArn"))
-    DescribeSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    DescribeSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    DescribeSchemaResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
-    DescribeSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Type"))
-    DescribeSchemaResponse.add_member(:version_created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "VersionCreatedDate"))
+    DescribeSchemaResponse.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Content"))
+    DescribeSchemaResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    DescribeSchemaResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "LastModified"))
+    DescribeSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaArn"))
+    DescribeSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName"))
+    DescribeSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    DescribeSchemaResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    DescribeSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Type"))
+    DescribeSchemaResponse.add_member(:version_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "VersionCreatedDate"))
     DescribeSchemaResponse.type = Types::DescribeSchemaResponse
-    DiscovererState.add_member(:started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STARTED", traits: {"smithy.api#enumValue" => "STARTED"}))
-    DiscovererState.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    DiscovererSummary.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererArn"))
-    DiscovererSummary.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId"))
-    DiscovererSummary.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
-    DiscovererSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
-    DiscovererSummary.add_member(:cross_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "CrossAccount"))
-    DiscovererSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    DiscovererState.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STARTED", traits: {"smithy.api#enumValue" => "STARTED"}))
+    DiscovererState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    DiscovererSummary.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererArn"))
+    DiscovererSummary.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId"))
+    DiscovererSummary.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceArn"))
+    DiscovererSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererState, location_name: "State"))
+    DiscovererSummary.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "CrossAccount"))
+    DiscovererSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     DiscovererSummary.type = Types::DiscovererSummary
-    ExportSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ExportSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ExportSchemaRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
-    ExportSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "type", "smithy.api#required" => {}}))
+    ExportSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ExportSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ExportSchemaRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
+    ExportSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "type", "smithy.api#required" => {}}))
     ExportSchemaRequest.type = Types::ExportSchemaRequest
-    ExportSchemaResponse.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Content"))
-    ExportSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaArn"))
-    ExportSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    ExportSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    ExportSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ExportSchemaResponse.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Content"))
+    ExportSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaArn"))
+    ExportSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName"))
+    ExportSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    ExportSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Type"))
     ExportSchemaResponse.type = Types::ExportSchemaResponse
-    ForbiddenException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ForbiddenException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ForbiddenException.type = Types::ForbiddenException
-    GetCodeBindingSourceRequest.add_member(:language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Language", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetCodeBindingSourceRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetCodeBindingSourceRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetCodeBindingSourceRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
+    GetCodeBindingSourceRequest.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Language", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCodeBindingSourceRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCodeBindingSourceRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCodeBindingSourceRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
     GetCodeBindingSourceRequest.type = Types::GetCodeBindingSourceRequest
-    GetCodeBindingSourceResponse.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Body, location_name: "Body", traits: {"smithy.api#httpPayload" => {}}))
+    GetCodeBindingSourceResponse.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Body, location_name: "Body", traits: {"smithy.api#httpPayload" => {}}))
     GetCodeBindingSourceResponse[:http_payload] = :body
     GetCodeBindingSourceResponse[:http_payload_member] = GetCodeBindingSourceResponse.member(:body)
     GetCodeBindingSourceResponse.type = Types::GetCodeBindingSourceResponse
-    GetDiscoveredSchemaRequest.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofgetdiscoveredschemaversioniteminput, location_name: "Events", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    GetDiscoveredSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDiscoveredSchemaRequest.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofgetdiscoveredschemaversioniteminput, location_name: "Events", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDiscoveredSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetDiscoveredSchemaRequest.type = Types::GetDiscoveredSchemaRequest
-    GetDiscoveredSchemaResponse.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Content"))
+    GetDiscoveredSchemaResponse.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Content"))
     GetDiscoveredSchemaResponse.type = Types::GetDiscoveredSchemaResponse
-    GetResourcePolicyRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpQuery" => "registryName"}))
+    GetResourcePolicyRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpQuery" => "registryName"}))
     GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
-    GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonString, location_name: "Policy"))
-    GetResourcePolicyResponse.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
+    GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonString, location_name: "Policy"))
+    GetResourcePolicyResponse.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RevisionId"))
     GetResourcePolicyResponse.type = Types::GetResourcePolicyResponse
-    GoneException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    GoneException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GoneException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GoneException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GoneException.type = Types::GoneException
-    InternalServerErrorException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InternalServerErrorException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InternalServerErrorException.type = Types::InternalServerErrorException
-    ListDiscoverersRequest.add_member(:discoverer_id_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererIdPrefix", traits: {"smithy.api#httpQuery" => "discovererIdPrefix"}))
-    ListDiscoverersRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListDiscoverersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListDiscoverersRequest.add_member(:source_arn_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceArnPrefix", traits: {"smithy.api#httpQuery" => "sourceArnPrefix"}))
+    ListDiscoverersRequest.add_member(:discoverer_id_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererIdPrefix", traits: {"smithy.api#httpQuery" => "discovererIdPrefix"}))
+    ListDiscoverersRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListDiscoverersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListDiscoverersRequest.add_member(:source_arn_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceArnPrefix", traits: {"smithy.api#httpQuery" => "sourceArnPrefix"}))
     ListDiscoverersRequest.type = Types::ListDiscoverersRequest
-    ListDiscoverersResponse.add_member(:discoverers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofdiscoverersummary, location_name: "Discoverers"))
-    ListDiscoverersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDiscoverersResponse.add_member(:discoverers, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofdiscoverersummary, location_name: "Discoverers"))
+    ListDiscoverersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDiscoverersResponse.type = Types::ListDiscoverersResponse
-    ListRegistriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListRegistriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListRegistriesRequest.add_member(:registry_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryNamePrefix", traits: {"smithy.api#httpQuery" => "registryNamePrefix"}))
-    ListRegistriesRequest.add_member(:scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Scope", traits: {"smithy.api#httpQuery" => "scope"}))
+    ListRegistriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListRegistriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListRegistriesRequest.add_member(:registry_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryNamePrefix", traits: {"smithy.api#httpQuery" => "registryNamePrefix"}))
+    ListRegistriesRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Scope", traits: {"smithy.api#httpQuery" => "scope"}))
     ListRegistriesRequest.type = Types::ListRegistriesRequest
-    ListRegistriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListRegistriesResponse.add_member(:registries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofregistrysummary, location_name: "Registries"))
+    ListRegistriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListRegistriesResponse.add_member(:registries, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofregistrysummary, location_name: "Registries"))
     ListRegistriesResponse.type = Types::ListRegistriesResponse
-    ListSchemaVersionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListSchemaVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListSchemaVersionsRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListSchemaVersionsRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListSchemaVersionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListSchemaVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSchemaVersionsRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListSchemaVersionsRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListSchemaVersionsRequest.type = Types::ListSchemaVersionsRequest
-    ListSchemaVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListSchemaVersionsResponse.add_member(:schema_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofschemaversionsummary, location_name: "SchemaVersions"))
+    ListSchemaVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListSchemaVersionsResponse.add_member(:schema_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofschemaversionsummary, location_name: "SchemaVersions"))
     ListSchemaVersionsResponse.type = Types::ListSchemaVersionsResponse
-    ListSchemasRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    ListSchemasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListSchemasRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListSchemasRequest.add_member(:schema_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaNamePrefix", traits: {"smithy.api#httpQuery" => "schemaNamePrefix"}))
+    ListSchemasRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    ListSchemasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSchemasRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListSchemasRequest.add_member(:schema_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaNamePrefix", traits: {"smithy.api#httpQuery" => "schemaNamePrefix"}))
     ListSchemasRequest.type = Types::ListSchemasRequest
-    ListSchemasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListSchemasResponse.add_member(:schemas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofschemasummary, location_name: "Schemas"))
+    ListSchemasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListSchemasResponse.add_member(:schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofschemasummary, location_name: "Schemas"))
     ListSchemasResponse.type = Types::ListSchemasResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     NotFoundException.type = Types::NotFoundException
-    PreconditionFailedException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    PreconditionFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PreconditionFailedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PreconditionFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PreconditionFailedException.type = Types::PreconditionFailedException
-    PutCodeBindingRequest.add_member(:language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Language", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutCodeBindingRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutCodeBindingRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutCodeBindingRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
+    PutCodeBindingRequest.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Language", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutCodeBindingRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutCodeBindingRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutCodeBindingRequest.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion", traits: {"smithy.api#httpQuery" => "schemaVersion"}))
     PutCodeBindingRequest.type = Types::PutCodeBindingRequest
-    PutCodeBindingResponse.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "CreationDate"))
-    PutCodeBindingResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "LastModified"))
-    PutCodeBindingResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    PutCodeBindingResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeGenerationStatus, location_name: "Status"))
+    PutCodeBindingResponse.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "CreationDate"))
+    PutCodeBindingResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "LastModified"))
+    PutCodeBindingResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    PutCodeBindingResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationStatus, location_name: "Status"))
     PutCodeBindingResponse.type = Types::PutCodeBindingResponse
-    PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonString, location_name: "Policy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    PutResourcePolicyRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpQuery" => "registryName"}))
-    PutResourcePolicyRequest.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
+    PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonString, location_name: "Policy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpQuery" => "registryName"}))
+    PutResourcePolicyRequest.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RevisionId"))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
-    PutResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonString, location_name: "Policy"))
-    PutResourcePolicyResponse.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
+    PutResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonString, location_name: "Policy"))
+    PutResourcePolicyResponse.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RevisionId"))
     PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
-    RegistrySummary.add_member(:registry_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryArn"))
-    RegistrySummary.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName"))
-    RegistrySummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    RegistrySummary.add_member(:registry_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryArn"))
+    RegistrySummary.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName"))
+    RegistrySummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     RegistrySummary.type = Types::RegistrySummary
-    SchemaSummary.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "LastModified"))
-    SchemaSummary.add_member(:schema_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaArn"))
-    SchemaSummary.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    SchemaSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
-    SchemaSummary.add_member(:version_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "VersionCount"))
+    SchemaSummary.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "LastModified"))
+    SchemaSummary.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaArn"))
+    SchemaSummary.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName"))
+    SchemaSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    SchemaSummary.add_member(:version_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "VersionCount"))
     SchemaSummary.type = Types::SchemaSummary
-    SchemaVersionSummary.add_member(:schema_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaArn"))
-    SchemaVersionSummary.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    SchemaVersionSummary.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    SchemaVersionSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    SchemaVersionSummary.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaArn"))
+    SchemaVersionSummary.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName"))
+    SchemaVersionSummary.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    SchemaVersionSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type"))
     SchemaVersionSummary.type = Types::SchemaVersionSummary
-    SearchSchemaSummary.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName"))
-    SearchSchemaSummary.add_member(:schema_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaArn"))
-    SearchSchemaSummary.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    SearchSchemaSummary.add_member(:schema_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofsearchschemaversionsummary, location_name: "SchemaVersions"))
+    SearchSchemaSummary.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName"))
+    SearchSchemaSummary.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaArn"))
+    SearchSchemaSummary.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName"))
+    SearchSchemaSummary.add_member(:schema_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsearchschemaversionsummary, location_name: "SchemaVersions"))
     SearchSchemaSummary.type = Types::SearchSchemaSummary
-    SearchSchemaVersionSummary.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "CreatedDate"))
-    SearchSchemaVersionSummary.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    SearchSchemaVersionSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    SearchSchemaVersionSummary.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "CreatedDate"))
+    SearchSchemaVersionSummary.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    SearchSchemaVersionSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type"))
     SearchSchemaVersionSummary.type = Types::SearchSchemaVersionSummary
-    SearchSchemasRequest.add_member(:keywords, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Keywords", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "keywords", "smithy.api#required" => {}}))
-    SearchSchemasRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
-    SearchSchemasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    SearchSchemasRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SearchSchemasRequest.add_member(:keywords, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Keywords", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "keywords", "smithy.api#required" => {}}))
+    SearchSchemasRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Limit", traits: {"smithy.api#httpQuery" => "limit"}))
+    SearchSchemasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    SearchSchemasRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SearchSchemasRequest.type = Types::SearchSchemasRequest
-    SearchSchemasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchSchemasResponse.add_member(:schemas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofsearchschemasummary, location_name: "Schemas"))
+    SearchSchemasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    SearchSchemasResponse.add_member(:schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsearchschemasummary, location_name: "Schemas"))
     SearchSchemasResponse.type = Types::SearchSchemasResponse
-    ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    StartDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartDiscovererRequest.type = Types::StartDiscovererRequest
-    StartDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId"))
-    StartDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
+    StartDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId"))
+    StartDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererState, location_name: "State"))
     StartDiscovererResponse.type = Types::StartDiscovererResponse
-    StopDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopDiscovererRequest.type = Types::StopDiscovererRequest
-    StopDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId"))
-    StopDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
+    StopDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId"))
+    StopDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererState, location_name: "State"))
     StopDiscovererResponse.type = Types::StopDiscovererResponse
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    TooManyRequestsException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    TooManyRequestsException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    Type.add_member(:open_api3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenApi3", traits: {"smithy.api#enumValue" => "OpenApi3"}))
-    Type.add_member(:json_schema_draft4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JSONSchemaDraft4", traits: {"smithy.api#enumValue" => "JSONSchemaDraft4"}))
-    UnauthorizedException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Type.add_member(:open_api3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenApi3", traits: {"smithy.api#enumValue" => "OpenApi3"}))
+    Type.add_member(:json_schema_draft4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JSONSchemaDraft4", traits: {"smithy.api#enumValue" => "JSONSchemaDraft4"}))
+    UnauthorizedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UnauthorizedException.type = Types::UnauthorizedException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofString, location_name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, location_name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    UpdateDiscovererRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin0max256, location_name: "Description"))
-    UpdateDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateDiscovererRequest.add_member(:cross_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "CrossAccount"))
+    UpdateDiscovererRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256, location_name: "Description"))
+    UpdateDiscovererRequest.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateDiscovererRequest.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "CrossAccount"))
     UpdateDiscovererRequest.type = Types::UpdateDiscovererRequest
-    UpdateDiscovererResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    UpdateDiscovererResponse.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererArn"))
-    UpdateDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DiscovererId"))
-    UpdateDiscovererResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
-    UpdateDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
-    UpdateDiscovererResponse.add_member(:cross_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "CrossAccount"))
-    UpdateDiscovererResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    UpdateDiscovererResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    UpdateDiscovererResponse.add_member(:discoverer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererArn"))
+    UpdateDiscovererResponse.add_member(:discoverer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DiscovererId"))
+    UpdateDiscovererResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceArn"))
+    UpdateDiscovererResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererState, location_name: "State"))
+    UpdateDiscovererResponse.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "CrossAccount"))
+    UpdateDiscovererResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     UpdateDiscovererResponse.type = Types::UpdateDiscovererResponse
-    UpdateRegistryRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin0max256, location_name: "Description"))
-    UpdateRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRegistryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256, location_name: "Description"))
+    UpdateRegistryRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateRegistryRequest.type = Types::UpdateRegistryRequest
-    UpdateRegistryResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    UpdateRegistryResponse.add_member(:registry_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryArn"))
-    UpdateRegistryResponse.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName"))
-    UpdateRegistryResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    UpdateRegistryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    UpdateRegistryResponse.add_member(:registry_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryArn"))
+    UpdateRegistryResponse.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName"))
+    UpdateRegistryResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     UpdateRegistryResponse.type = Types::UpdateRegistryResponse
-    UpdateSchemaRequest.add_member(:client_token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin0max36, location_name: "ClientTokenId", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateSchemaRequest.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin1max100000, location_name: "Content"))
-    UpdateSchemaRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin0max256, location_name: "Description"))
-    UpdateSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    UpdateSchemaRequest.add_member(:client_token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max36, location_name: "ClientTokenId", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateSchemaRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max100000, location_name: "Content"))
+    UpdateSchemaRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256, location_name: "Description"))
+    UpdateSchemaRequest.add_member(:registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RegistryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateSchemaRequest.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateSchemaRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, location_name: "Type"))
     UpdateSchemaRequest.type = Types::UpdateSchemaRequest
-    UpdateSchemaResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    UpdateSchemaResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "LastModified"))
-    UpdateSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaArn"))
-    UpdateSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
-    UpdateSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SchemaVersion"))
-    UpdateSchemaResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
-    UpdateSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Type"))
-    UpdateSchemaResponse.add_member(:version_created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "VersionCreatedDate"))
+    UpdateSchemaResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    UpdateSchemaResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "LastModified"))
+    UpdateSchemaResponse.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaArn"))
+    UpdateSchemaResponse.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaName"))
+    UpdateSchemaResponse.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SchemaVersion"))
+    UpdateSchemaResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    UpdateSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Type"))
+    UpdateSchemaResponse.add_member(:version_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "VersionCreatedDate"))
     UpdateSchemaResponse.type = Types::UpdateSchemaResponse
-    Listofdiscoverersummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscovererSummary)
-    Listofgetdiscoveredschemaversioniteminput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDiscoveredSchemaVersionItemInput)
-    Listofregistrysummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrySummary)
-    Listofschemasummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaSummary)
-    Listofschemaversionsummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaVersionSummary)
-    Listofsearchschemasummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchSchemaSummary)
-    Listofsearchschemaversionsummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchSchemaVersionSummary)
-    ListofString.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
+    Listofdiscoverersummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererSummary)
+    Listofgetdiscoveredschemaversioniteminput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetDiscoveredSchemaVersionItemInput)
+    Listofregistrysummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrySummary)
+    Listofschemasummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaSummary)
+    Listofschemaversionsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaVersionSummary)
+    Listofsearchschemasummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaSummary)
+    Listofsearchschemaversionsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaVersionSummary)
+    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
 
     Schemas = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.schemas#schemas"
@@ -424,398 +424,398 @@ module Aws::Schemas
       service.add_operation(:create_discoverer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#CreateDiscoverer"
         operation.name = "CreateDiscoverer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDiscovererRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDiscovererResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = CreateDiscovererRequest
+        operation.output = CreateDiscovererResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/discoverers", "code" => 201}}
       end)
       service.add_operation(:create_registry, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#CreateRegistry"
         operation.name = "CreateRegistry"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = CreateRegistryRequest
+        operation.output = CreateRegistryResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/registries/name/{RegistryName}", "code" => 201}}
       end)
       service.add_operation(:create_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#CreateSchema"
         operation.name = "CreateSchema"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSchemaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSchemaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = CreateSchemaRequest
+        operation.output = CreateSchemaResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}", "code" => 201}}
       end)
       service.add_operation(:delete_discoverer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DeleteDiscoverer"
         operation.name = "DeleteDiscoverer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDiscovererRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteDiscovererRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/discoverers/id/{DiscovererId}", "code" => 204}}
       end)
       service.add_operation(:delete_registry, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DeleteRegistry"
         operation.name = "DeleteRegistry"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegistryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteRegistryRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/registries/name/{RegistryName}", "code" => 204}}
       end)
       service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DeleteResourcePolicy"
         operation.name = "DeleteResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteResourcePolicyRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/policy", "code" => 204}}
       end)
       service.add_operation(:delete_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DeleteSchema"
         operation.name = "DeleteSchema"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSchemaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteSchemaRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}", "code" => 204}}
       end)
       service.add_operation(:delete_schema_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DeleteSchemaVersion"
         operation.name = "DeleteSchemaVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSchemaVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteSchemaVersionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/version/{SchemaVersion}", "code" => 204}}
       end)
       service.add_operation(:describe_code_binding, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DescribeCodeBinding"
         operation.name = "DescribeCodeBinding"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCodeBindingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCodeBindingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeCodeBindingRequest
+        operation.output = DescribeCodeBindingResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/language/{Language}", "code" => 200}}
       end)
       service.add_operation(:describe_discoverer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DescribeDiscoverer"
         operation.name = "DescribeDiscoverer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDiscovererRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDiscovererResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeDiscovererRequest
+        operation.output = DescribeDiscovererResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/discoverers/id/{DiscovererId}", "code" => 200}}
       end)
       service.add_operation(:describe_registry, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DescribeRegistry"
         operation.name = "DescribeRegistry"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeRegistryRequest
+        operation.output = DescribeRegistryResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}", "code" => 200}}
       end)
       service.add_operation(:describe_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#DescribeSchema"
         operation.name = "DescribeSchema"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSchemaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSchemaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeSchemaRequest
+        operation.output = DescribeSchemaResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}", "code" => 200}}
       end)
       service.add_operation(:export_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#ExportSchema"
         operation.name = "ExportSchema"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportSchemaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportSchemaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ExportSchemaRequest
+        operation.output = ExportSchemaResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/export", "code" => 200}}
       end)
       service.add_operation(:get_code_binding_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#GetCodeBindingSource"
         operation.name = "GetCodeBindingSource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCodeBindingSourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCodeBindingSourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = GetCodeBindingSourceRequest
+        operation.output = GetCodeBindingSourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/language/{Language}/source", "code" => 200}}
       end)
       service.add_operation(:get_discovered_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#GetDiscoveredSchema"
         operation.name = "GetDiscoveredSchema"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDiscoveredSchemaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDiscoveredSchemaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = GetDiscoveredSchemaRequest
+        operation.output = GetDiscoveredSchemaResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/discover", "code" => 200}}
       end)
       service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#GetResourcePolicy"
         operation.name = "GetResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = GetResourcePolicyRequest
+        operation.output = GetResourcePolicyResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/policy", "code" => 200}}
       end)
       service.add_operation(:list_discoverers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#ListDiscoverers"
         operation.name = "ListDiscoverers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDiscoverersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDiscoverersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListDiscoverersRequest
+        operation.output = ListDiscoverersResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/discoverers", "code" => 200}}
         operation[:paginator] = Paginators::ListDiscoverers.new
       end)
       service.add_operation(:list_registries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#ListRegistries"
         operation.name = "ListRegistries"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegistriesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegistriesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListRegistriesRequest
+        operation.output = ListRegistriesResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries", "code" => 200}}
         operation[:paginator] = Paginators::ListRegistries.new
       end)
       service.add_operation(:list_schema_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#ListSchemaVersions"
         operation.name = "ListSchemaVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchemaVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchemaVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListSchemaVersionsRequest
+        operation.output = ListSchemaVersionsResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/versions", "code" => 200}}
         operation[:paginator] = Paginators::ListSchemaVersions.new
       end)
       service.add_operation(:list_schemas, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#ListSchemas"
         operation.name = "ListSchemas"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchemasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSchemasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListSchemasRequest
+        operation.output = ListSchemasResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}/schemas", "code" => 200}}
         operation[:paginator] = Paginators::ListSchemas.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:put_code_binding, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#PutCodeBinding"
         operation.name = "PutCodeBinding"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutCodeBindingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutCodeBindingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: GoneException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = PutCodeBindingRequest
+        operation.output = PutCodeBindingResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << GoneException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/language/{Language}", "code" => 202}}
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#PutResourcePolicy"
         operation.name = "PutResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreconditionFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = PutResourcePolicyRequest
+        operation.output = PutResourcePolicyResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << PreconditionFailedException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/policy", "code" => 200}}
       end)
       service.add_operation(:search_schemas, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#SearchSchemas"
         operation.name = "SearchSchemas"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchSchemasRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchSchemasResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = SearchSchemasRequest
+        operation.output = SearchSchemasResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/registries/name/{RegistryName}/schemas/search", "code" => 200}}
         operation[:paginator] = Paginators::SearchSchemas.new
       end)
       service.add_operation(:start_discoverer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#StartDiscoverer"
         operation.name = "StartDiscoverer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDiscovererRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDiscovererResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = StartDiscovererRequest
+        operation.output = StartDiscovererResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/discoverers/id/{DiscovererId}/start", "code" => 200}}
       end)
       service.add_operation(:stop_discoverer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#StopDiscoverer"
         operation.name = "StopDiscoverer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopDiscovererRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopDiscovererResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = StopDiscovererRequest
+        operation.output = StopDiscovererResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/discoverers/id/{DiscovererId}/stop", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = TagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 204}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 204}}
       end)
       service.add_operation(:update_discoverer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#UpdateDiscoverer"
         operation.name = "UpdateDiscoverer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDiscovererRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDiscovererResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = UpdateDiscovererRequest
+        operation.output = UpdateDiscovererResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/discoverers/id/{DiscovererId}", "code" => 200}}
       end)
       service.add_operation(:update_registry, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#UpdateRegistry"
         operation.name = "UpdateRegistry"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRegistryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRegistryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = UpdateRegistryRequest
+        operation.output = UpdateRegistryResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/registries/name/{RegistryName}", "code" => 200}}
       end)
       service.add_operation(:update_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#UpdateSchema"
         operation.name = "UpdateSchema"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSchemaRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSchemaResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.input = UpdateSchemaRequest
+        operation.output = UpdateSchemaResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}", "code" => 200}}
       end)
     end

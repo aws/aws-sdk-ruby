@@ -442,1476 +442,1476 @@ module Aws::Comprehend
     VpcConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.comprehend#VpcConfig", name: "VpcConfig")
     WarningsListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.comprehend#WarningsListItem", name: "WarningsListItem")
 
-    AttributeNamesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNamesListItem)
-    AugmentedManifestsDocumentTypeFormat.add_member(:plain_text_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT_DOCUMENT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT_DOCUMENT"}))
-    AugmentedManifestsDocumentTypeFormat.add_member(:semi_structured_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEMI_STRUCTURED_DOCUMENT", traits: {"smithy.api#enumValue" => "SEMI_STRUCTURED_DOCUMENT"}))
-    AugmentedManifestsListItem.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    AugmentedManifestsListItem.add_member(:split, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Split, location_name: "Split"))
-    AugmentedManifestsListItem.add_member(:attribute_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNamesList, location_name: "AttributeNames", traits: {"smithy.api#required" => {}}))
-    AugmentedManifestsListItem.add_member(:annotation_data_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "AnnotationDataS3Uri"))
-    AugmentedManifestsListItem.add_member(:source_documents_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "SourceDocumentsS3Uri"))
-    AugmentedManifestsListItem.add_member(:document_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AugmentedManifestsDocumentTypeFormat, location_name: "DocumentType"))
+    AttributeNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNamesListItem)
+    AugmentedManifestsDocumentTypeFormat.add_member(:plain_text_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT_DOCUMENT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT_DOCUMENT"}))
+    AugmentedManifestsDocumentTypeFormat.add_member(:semi_structured_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEMI_STRUCTURED_DOCUMENT", traits: {"smithy.api#enumValue" => "SEMI_STRUCTURED_DOCUMENT"}))
+    AugmentedManifestsListItem.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    AugmentedManifestsListItem.add_member(:split, ::Smithy::Schema::Shapes::MemberShape.new(target: Split, location_name: "Split"))
+    AugmentedManifestsListItem.add_member(:attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNamesList, location_name: "AttributeNames", traits: {"smithy.api#required" => {}}))
+    AugmentedManifestsListItem.add_member(:annotation_data_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "AnnotationDataS3Uri"))
+    AugmentedManifestsListItem.add_member(:source_documents_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "SourceDocumentsS3Uri"))
+    AugmentedManifestsListItem.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AugmentedManifestsDocumentTypeFormat, location_name: "DocumentType"))
     AugmentedManifestsListItem.type = Types::AugmentedManifestsListItem
-    BatchDetectDominantLanguageItemResult.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
-    BatchDetectDominantLanguageItemResult.add_member(:languages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDominantLanguages, location_name: "Languages"))
+    BatchDetectDominantLanguageItemResult.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Index"))
+    BatchDetectDominantLanguageItemResult.add_member(:languages, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDominantLanguages, location_name: "Languages"))
     BatchDetectDominantLanguageItemResult.type = Types::BatchDetectDominantLanguageItemResult
-    BatchDetectDominantLanguageRequest.add_member(:text_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
+    BatchDetectDominantLanguageRequest.add_member(:text_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
     BatchDetectDominantLanguageRequest.type = Types::BatchDetectDominantLanguageRequest
-    BatchDetectDominantLanguageResponse.add_member(:result_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDetectDominantLanguageResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
-    BatchDetectDominantLanguageResponse.add_member(:error_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
+    BatchDetectDominantLanguageResponse.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDetectDominantLanguageResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
+    BatchDetectDominantLanguageResponse.add_member(:error_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
     BatchDetectDominantLanguageResponse.type = Types::BatchDetectDominantLanguageResponse
-    BatchDetectEntitiesItemResult.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
-    BatchDetectEntitiesItemResult.add_member(:entities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfEntities, location_name: "Entities"))
+    BatchDetectEntitiesItemResult.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Index"))
+    BatchDetectEntitiesItemResult.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEntities, location_name: "Entities"))
     BatchDetectEntitiesItemResult.type = Types::BatchDetectEntitiesItemResult
-    BatchDetectEntitiesRequest.add_member(:text_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
-    BatchDetectEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    BatchDetectEntitiesRequest.add_member(:text_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
+    BatchDetectEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     BatchDetectEntitiesRequest.type = Types::BatchDetectEntitiesRequest
-    BatchDetectEntitiesResponse.add_member(:result_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDetectEntitiesResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
-    BatchDetectEntitiesResponse.add_member(:error_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
+    BatchDetectEntitiesResponse.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDetectEntitiesResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
+    BatchDetectEntitiesResponse.add_member(:error_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
     BatchDetectEntitiesResponse.type = Types::BatchDetectEntitiesResponse
-    BatchDetectKeyPhrasesItemResult.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
-    BatchDetectKeyPhrasesItemResult.add_member(:key_phrases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfKeyPhrases, location_name: "KeyPhrases"))
+    BatchDetectKeyPhrasesItemResult.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Index"))
+    BatchDetectKeyPhrasesItemResult.add_member(:key_phrases, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfKeyPhrases, location_name: "KeyPhrases"))
     BatchDetectKeyPhrasesItemResult.type = Types::BatchDetectKeyPhrasesItemResult
-    BatchDetectKeyPhrasesRequest.add_member(:text_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
-    BatchDetectKeyPhrasesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    BatchDetectKeyPhrasesRequest.add_member(:text_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
+    BatchDetectKeyPhrasesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     BatchDetectKeyPhrasesRequest.type = Types::BatchDetectKeyPhrasesRequest
-    BatchDetectKeyPhrasesResponse.add_member(:result_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDetectKeyPhrasesResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
-    BatchDetectKeyPhrasesResponse.add_member(:error_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
+    BatchDetectKeyPhrasesResponse.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDetectKeyPhrasesResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
+    BatchDetectKeyPhrasesResponse.add_member(:error_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
     BatchDetectKeyPhrasesResponse.type = Types::BatchDetectKeyPhrasesResponse
-    BatchDetectSentimentItemResult.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
-    BatchDetectSentimentItemResult.add_member(:sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentType, location_name: "Sentiment"))
-    BatchDetectSentimentItemResult.add_member(:sentiment_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentScore, location_name: "SentimentScore"))
+    BatchDetectSentimentItemResult.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Index"))
+    BatchDetectSentimentItemResult.add_member(:sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentType, location_name: "Sentiment"))
+    BatchDetectSentimentItemResult.add_member(:sentiment_score, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentScore, location_name: "SentimentScore"))
     BatchDetectSentimentItemResult.type = Types::BatchDetectSentimentItemResult
-    BatchDetectSentimentRequest.add_member(:text_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
-    BatchDetectSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    BatchDetectSentimentRequest.add_member(:text_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
+    BatchDetectSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     BatchDetectSentimentRequest.type = Types::BatchDetectSentimentRequest
-    BatchDetectSentimentResponse.add_member(:result_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDetectSentimentResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
-    BatchDetectSentimentResponse.add_member(:error_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
+    BatchDetectSentimentResponse.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDetectSentimentResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
+    BatchDetectSentimentResponse.add_member(:error_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
     BatchDetectSentimentResponse.type = Types::BatchDetectSentimentResponse
-    BatchDetectSyntaxItemResult.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
-    BatchDetectSyntaxItemResult.add_member(:syntax_tokens, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
+    BatchDetectSyntaxItemResult.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Index"))
+    BatchDetectSyntaxItemResult.add_member(:syntax_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
     BatchDetectSyntaxItemResult.type = Types::BatchDetectSyntaxItemResult
-    BatchDetectSyntaxRequest.add_member(:text_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
-    BatchDetectSyntaxRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SyntaxLanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    BatchDetectSyntaxRequest.add_member(:text_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
+    BatchDetectSyntaxRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntaxLanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     BatchDetectSyntaxRequest.type = Types::BatchDetectSyntaxRequest
-    BatchDetectSyntaxResponse.add_member(:result_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDetectSyntaxResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
-    BatchDetectSyntaxResponse.add_member(:error_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
+    BatchDetectSyntaxResponse.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDetectSyntaxResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
+    BatchDetectSyntaxResponse.add_member(:error_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
     BatchDetectSyntaxResponse.type = Types::BatchDetectSyntaxResponse
-    BatchDetectTargetedSentimentItemResult.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
-    BatchDetectTargetedSentimentItemResult.add_member(:entities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfTargetedSentimentEntities, location_name: "Entities"))
+    BatchDetectTargetedSentimentItemResult.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Index"))
+    BatchDetectTargetedSentimentItemResult.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTargetedSentimentEntities, location_name: "Entities"))
     BatchDetectTargetedSentimentItemResult.type = Types::BatchDetectTargetedSentimentItemResult
-    BatchDetectTargetedSentimentRequest.add_member(:text_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
-    BatchDetectTargetedSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    BatchDetectTargetedSentimentRequest.add_member(:text_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputStringList, location_name: "TextList", traits: {"smithy.api#required" => {}}))
+    BatchDetectTargetedSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     BatchDetectTargetedSentimentRequest.type = Types::BatchDetectTargetedSentimentRequest
-    BatchDetectTargetedSentimentResponse.add_member(:result_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDetectTargetedSentimentResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
-    BatchDetectTargetedSentimentResponse.add_member(:error_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
+    BatchDetectTargetedSentimentResponse.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDetectTargetedSentimentResult, location_name: "ResultList", traits: {"smithy.api#required" => {}}))
+    BatchDetectTargetedSentimentResponse.add_member(:error_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemErrorList, location_name: "ErrorList", traits: {"smithy.api#required" => {}}))
     BatchDetectTargetedSentimentResponse.type = Types::BatchDetectTargetedSentimentResponse
-    BatchItemError.add_member(:index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
-    BatchItemError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    BatchItemError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    BatchItemError.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Index"))
+    BatchItemError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    BatchItemError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
     BatchItemError.type = Types::BatchItemError
-    BatchItemErrorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchItemError)
-    BatchSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BatchItemErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemError)
+    BatchSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     BatchSizeLimitExceededException.type = Types::BatchSizeLimitExceededException
-    Block.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Id"))
-    Block.add_member(:block_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockType, location_name: "BlockType"))
-    Block.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Text"))
-    Block.add_member(:page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
-    Block.add_member(:geometry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
-    Block.add_member(:relationships, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfRelationships, location_name: "Relationships"))
+    Block.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id"))
+    Block.add_member(:block_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockType, location_name: "BlockType"))
+    Block.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Text"))
+    Block.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Page"))
+    Block.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: Geometry, location_name: "Geometry"))
+    Block.add_member(:relationships, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfRelationships, location_name: "Relationships"))
     Block.type = Types::Block
-    BlockReference.add_member(:block_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "BlockId"))
-    BlockReference.add_member(:begin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
-    BlockReference.add_member(:end_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
-    BlockReference.add_member(:child_blocks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfChildBlocks, location_name: "ChildBlocks"))
+    BlockReference.add_member(:block_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "BlockId"))
+    BlockReference.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "BeginOffset"))
+    BlockReference.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "EndOffset"))
+    BlockReference.add_member(:child_blocks, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfChildBlocks, location_name: "ChildBlocks"))
     BlockReference.type = Types::BlockReference
-    BlockType.add_member(:line, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINE", traits: {"smithy.api#enumValue" => "LINE"}))
-    BlockType.add_member(:word, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORD", traits: {"smithy.api#enumValue" => "WORD"}))
-    BoundingBox.add_member(:height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Height"))
-    BoundingBox.add_member(:left, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Left"))
-    BoundingBox.add_member(:top, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Top"))
-    BoundingBox.add_member(:width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Width"))
+    BlockType.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINE", traits: {"smithy.api#enumValue" => "LINE"}))
+    BlockType.add_member(:word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WORD", traits: {"smithy.api#enumValue" => "WORD"}))
+    BoundingBox.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Height"))
+    BoundingBox.add_member(:left, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Left"))
+    BoundingBox.add_member(:top, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Top"))
+    BoundingBox.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Width"))
     BoundingBox.type = Types::BoundingBox
-    ChildBlock.add_member(:child_block_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ChildBlockId"))
-    ChildBlock.add_member(:begin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
-    ChildBlock.add_member(:end_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    ChildBlock.add_member(:child_block_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ChildBlockId"))
+    ChildBlock.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "BeginOffset"))
+    ChildBlock.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "EndOffset"))
     ChildBlock.type = Types::ChildBlock
-    ClassifierEvaluationMetrics.add_member(:accuracy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Accuracy"))
-    ClassifierEvaluationMetrics.add_member(:precision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
-    ClassifierEvaluationMetrics.add_member(:recall, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
-    ClassifierEvaluationMetrics.add_member(:f1_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "F1Score"))
-    ClassifierEvaluationMetrics.add_member(:micro_precision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "MicroPrecision"))
-    ClassifierEvaluationMetrics.add_member(:micro_recall, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "MicroRecall"))
-    ClassifierEvaluationMetrics.add_member(:micro_f1_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "MicroF1Score"))
-    ClassifierEvaluationMetrics.add_member(:hamming_loss, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "HammingLoss"))
+    ClassifierEvaluationMetrics.add_member(:accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Accuracy"))
+    ClassifierEvaluationMetrics.add_member(:precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Precision"))
+    ClassifierEvaluationMetrics.add_member(:recall, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Recall"))
+    ClassifierEvaluationMetrics.add_member(:f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "F1Score"))
+    ClassifierEvaluationMetrics.add_member(:micro_precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "MicroPrecision"))
+    ClassifierEvaluationMetrics.add_member(:micro_recall, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "MicroRecall"))
+    ClassifierEvaluationMetrics.add_member(:micro_f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "MicroF1Score"))
+    ClassifierEvaluationMetrics.add_member(:hamming_loss, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "HammingLoss"))
     ClassifierEvaluationMetrics.type = Types::ClassifierEvaluationMetrics
-    ClassifierMetadata.add_member(:number_of_labels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfLabels"))
-    ClassifierMetadata.add_member(:number_of_trained_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTrainedDocuments"))
-    ClassifierMetadata.add_member(:number_of_test_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTestDocuments"))
-    ClassifierMetadata.add_member(:evaluation_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClassifierEvaluationMetrics, location_name: "EvaluationMetrics"))
+    ClassifierMetadata.add_member(:number_of_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfLabels"))
+    ClassifierMetadata.add_member(:number_of_trained_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfTrainedDocuments"))
+    ClassifierMetadata.add_member(:number_of_test_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfTestDocuments"))
+    ClassifierMetadata.add_member(:evaluation_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ClassifierEvaluationMetrics, location_name: "EvaluationMetrics"))
     ClassifierMetadata.type = Types::ClassifierMetadata
-    ClassifyDocumentRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text"))
-    ClassifyDocumentRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
-    ClassifyDocumentRequest.add_member(:bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SemiStructuredDocumentBlob, location_name: "Bytes"))
-    ClassifyDocumentRequest.add_member(:document_reader_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
+    ClassifyDocumentRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text"))
+    ClassifyDocumentRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
+    ClassifyDocumentRequest.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: SemiStructuredDocumentBlob, location_name: "Bytes"))
+    ClassifyDocumentRequest.add_member(:document_reader_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     ClassifyDocumentRequest.type = Types::ClassifyDocumentRequest
-    ClassifyDocumentResponse.add_member(:classes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfClasses, location_name: "Classes"))
-    ClassifyDocumentResponse.add_member(:labels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfLabels, location_name: "Labels"))
-    ClassifyDocumentResponse.add_member(:document_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
-    ClassifyDocumentResponse.add_member(:document_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDocumentType, location_name: "DocumentType"))
-    ClassifyDocumentResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfErrors, location_name: "Errors"))
-    ClassifyDocumentResponse.add_member(:warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfWarnings, location_name: "Warnings"))
+    ClassifyDocumentResponse.add_member(:classes, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfClasses, location_name: "Classes"))
+    ClassifyDocumentResponse.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfLabels, location_name: "Labels"))
+    ClassifyDocumentResponse.add_member(:document_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadata, location_name: "DocumentMetadata"))
+    ClassifyDocumentResponse.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDocumentType, location_name: "DocumentType"))
+    ClassifyDocumentResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfErrors, location_name: "Errors"))
+    ClassifyDocumentResponse.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfWarnings, location_name: "Warnings"))
     ClassifyDocumentResponse.type = Types::ClassifyDocumentResponse
-    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ContainsPiiEntitiesRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Text", traits: {"smithy.api#required" => {}}))
-    ContainsPiiEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    ContainsPiiEntitiesRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    ContainsPiiEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     ContainsPiiEntitiesRequest.type = Types::ContainsPiiEntitiesRequest
-    ContainsPiiEntitiesResponse.add_member(:labels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfEntityLabels, location_name: "Labels"))
+    ContainsPiiEntitiesResponse.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEntityLabels, location_name: "Labels"))
     ContainsPiiEntitiesResponse.type = Types::ContainsPiiEntitiesResponse
-    CreateDatasetRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
-    CreateDatasetRequest.add_member(:dataset_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DatasetName", traits: {"smithy.api#required" => {}}))
-    CreateDatasetRequest.add_member(:dataset_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetType, location_name: "DatasetType"))
-    CreateDatasetRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateDatasetRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetInputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    CreateDatasetRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateDatasetRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDatasetRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
+    CreateDatasetRequest.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "DatasetName", traits: {"smithy.api#required" => {}}))
+    CreateDatasetRequest.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, location_name: "DatasetType"))
+    CreateDatasetRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateDatasetRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetInputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    CreateDatasetRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateDatasetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateDatasetRequest.type = Types::CreateDatasetRequest
-    CreateDatasetResponse.add_member(:dataset_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendDatasetArn, location_name: "DatasetArn"))
+    CreateDatasetResponse.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendDatasetArn, location_name: "DatasetArn"))
     CreateDatasetResponse.type = Types::CreateDatasetResponse
-    CreateDocumentClassifierRequest.add_member(:document_classifier_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DocumentClassifierName", traits: {"smithy.api#required" => {}}))
-    CreateDocumentClassifierRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
-    CreateDocumentClassifierRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateDocumentClassifierRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateDocumentClassifierRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierInputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    CreateDocumentClassifierRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierOutputDataConfig, location_name: "OutputDataConfig"))
-    CreateDocumentClassifierRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateDocumentClassifierRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    CreateDocumentClassifierRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    CreateDocumentClassifierRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    CreateDocumentClassifierRequest.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
-    CreateDocumentClassifierRequest.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
-    CreateDocumentClassifierRequest.add_member(:model_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "ModelPolicy"))
+    CreateDocumentClassifierRequest.add_member(:document_classifier_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "DocumentClassifierName", traits: {"smithy.api#required" => {}}))
+    CreateDocumentClassifierRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "VersionName"))
+    CreateDocumentClassifierRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateDocumentClassifierRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateDocumentClassifierRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierInputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    CreateDocumentClassifierRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierOutputDataConfig, location_name: "OutputDataConfig"))
+    CreateDocumentClassifierRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateDocumentClassifierRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    CreateDocumentClassifierRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    CreateDocumentClassifierRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    CreateDocumentClassifierRequest.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierMode, location_name: "Mode"))
+    CreateDocumentClassifierRequest.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "ModelKmsKeyId"))
+    CreateDocumentClassifierRequest.add_member(:model_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "ModelPolicy"))
     CreateDocumentClassifierRequest.type = Types::CreateDocumentClassifierRequest
-    CreateDocumentClassifierResponse.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    CreateDocumentClassifierResponse.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
     CreateDocumentClassifierResponse.type = Types::CreateDocumentClassifierResponse
-    CreateEndpointRequest.add_member(:endpoint_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendEndpointName, location_name: "EndpointName", traits: {"smithy.api#required" => {}}))
-    CreateEndpointRequest.add_member(:model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
-    CreateEndpointRequest.add_member(:desired_inference_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "DesiredInferenceUnits", traits: {"smithy.api#required" => {}}))
-    CreateEndpointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateEndpointRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    CreateEndpointRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    CreateEndpointRequest.add_member(:endpoint_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendEndpointName, location_name: "EndpointName", traits: {"smithy.api#required" => {}}))
+    CreateEndpointRequest.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ModelArn"))
+    CreateEndpointRequest.add_member(:desired_inference_units, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceUnitsInteger, location_name: "DesiredInferenceUnits", traits: {"smithy.api#required" => {}}))
+    CreateEndpointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateEndpointRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    CreateEndpointRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     CreateEndpointRequest.type = Types::CreateEndpointRequest
-    CreateEndpointResponse.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn"))
-    CreateEndpointResponse.add_member(:model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
+    CreateEndpointResponse.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendEndpointArn, location_name: "EndpointArn"))
+    CreateEndpointResponse.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ModelArn"))
     CreateEndpointResponse.type = Types::CreateEndpointResponse
-    CreateEntityRecognizerRequest.add_member(:recognizer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "RecognizerName", traits: {"smithy.api#required" => {}}))
-    CreateEntityRecognizerRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
-    CreateEntityRecognizerRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateEntityRecognizerRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateEntityRecognizerRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerInputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    CreateEntityRecognizerRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateEntityRecognizerRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    CreateEntityRecognizerRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    CreateEntityRecognizerRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    CreateEntityRecognizerRequest.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
-    CreateEntityRecognizerRequest.add_member(:model_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "ModelPolicy"))
+    CreateEntityRecognizerRequest.add_member(:recognizer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "RecognizerName", traits: {"smithy.api#required" => {}}))
+    CreateEntityRecognizerRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "VersionName"))
+    CreateEntityRecognizerRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateEntityRecognizerRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateEntityRecognizerRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerInputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    CreateEntityRecognizerRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateEntityRecognizerRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    CreateEntityRecognizerRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    CreateEntityRecognizerRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    CreateEntityRecognizerRequest.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "ModelKmsKeyId"))
+    CreateEntityRecognizerRequest.add_member(:model_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "ModelPolicy"))
     CreateEntityRecognizerRequest.type = Types::CreateEntityRecognizerRequest
-    CreateEntityRecognizerResponse.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
+    CreateEntityRecognizerResponse.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
     CreateEntityRecognizerResponse.type = Types::CreateEntityRecognizerResponse
-    CreateFlywheelRequest.add_member(:flywheel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "FlywheelName", traits: {"smithy.api#required" => {}}))
-    CreateFlywheelRequest.add_member(:active_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ActiveModelArn"))
-    CreateFlywheelRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateFlywheelRequest.add_member(:task_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskConfig, location_name: "TaskConfig"))
-    CreateFlywheelRequest.add_member(:model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelType, location_name: "ModelType"))
-    CreateFlywheelRequest.add_member(:data_lake_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelS3Uri, location_name: "DataLakeS3Uri", traits: {"smithy.api#required" => {}}))
-    CreateFlywheelRequest.add_member(:data_security_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSecurityConfig, location_name: "DataSecurityConfig"))
-    CreateFlywheelRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateFlywheelRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFlywheelRequest.add_member(:flywheel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "FlywheelName", traits: {"smithy.api#required" => {}}))
+    CreateFlywheelRequest.add_member(:active_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ActiveModelArn"))
+    CreateFlywheelRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateFlywheelRequest.add_member(:task_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskConfig, location_name: "TaskConfig"))
+    CreateFlywheelRequest.add_member(:model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelType, location_name: "ModelType"))
+    CreateFlywheelRequest.add_member(:data_lake_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelS3Uri, location_name: "DataLakeS3Uri", traits: {"smithy.api#required" => {}}))
+    CreateFlywheelRequest.add_member(:data_security_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSecurityConfig, location_name: "DataSecurityConfig"))
+    CreateFlywheelRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateFlywheelRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateFlywheelRequest.type = Types::CreateFlywheelRequest
-    CreateFlywheelResponse.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
-    CreateFlywheelResponse.add_member(:active_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ActiveModelArn"))
+    CreateFlywheelResponse.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    CreateFlywheelResponse.add_member(:active_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ActiveModelArn"))
     CreateFlywheelResponse.type = Types::CreateFlywheelResponse
-    CustomerInputStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString)
-    DataSecurityConfig.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
-    DataSecurityConfig.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    DataSecurityConfig.add_member(:data_lake_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "DataLakeKmsKeyId"))
-    DataSecurityConfig.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CustomerInputStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString)
+    DataSecurityConfig.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "ModelKmsKeyId"))
+    DataSecurityConfig.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    DataSecurityConfig.add_member(:data_lake_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "DataLakeKmsKeyId"))
+    DataSecurityConfig.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
     DataSecurityConfig.type = Types::DataSecurityConfig
-    DatasetAugmentedManifestsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetAugmentedManifestsListItem)
-    DatasetAugmentedManifestsListItem.add_member(:attribute_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNamesList, location_name: "AttributeNames", traits: {"smithy.api#required" => {}}))
-    DatasetAugmentedManifestsListItem.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    DatasetAugmentedManifestsListItem.add_member(:annotation_data_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "AnnotationDataS3Uri"))
-    DatasetAugmentedManifestsListItem.add_member(:source_documents_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "SourceDocumentsS3Uri"))
-    DatasetAugmentedManifestsListItem.add_member(:document_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AugmentedManifestsDocumentTypeFormat, location_name: "DocumentType"))
+    DatasetAugmentedManifestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetAugmentedManifestsListItem)
+    DatasetAugmentedManifestsListItem.add_member(:attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNamesList, location_name: "AttributeNames", traits: {"smithy.api#required" => {}}))
+    DatasetAugmentedManifestsListItem.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    DatasetAugmentedManifestsListItem.add_member(:annotation_data_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "AnnotationDataS3Uri"))
+    DatasetAugmentedManifestsListItem.add_member(:source_documents_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "SourceDocumentsS3Uri"))
+    DatasetAugmentedManifestsListItem.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AugmentedManifestsDocumentTypeFormat, location_name: "DocumentType"))
     DatasetAugmentedManifestsListItem.type = Types::DatasetAugmentedManifestsListItem
-    DatasetDataFormat.add_member(:comprehend_csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND_CSV", traits: {"smithy.api#enumValue" => "COMPREHEND_CSV"}))
-    DatasetDataFormat.add_member(:augmented_manifest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUGMENTED_MANIFEST", traits: {"smithy.api#enumValue" => "AUGMENTED_MANIFEST"}))
-    DatasetDocumentClassifierInputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    DatasetDocumentClassifierInputDataConfig.add_member(:label_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LabelDelimiter, location_name: "LabelDelimiter"))
+    DatasetDataFormat.add_member(:comprehend_csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND_CSV", traits: {"smithy.api#enumValue" => "COMPREHEND_CSV"}))
+    DatasetDataFormat.add_member(:augmented_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUGMENTED_MANIFEST", traits: {"smithy.api#enumValue" => "AUGMENTED_MANIFEST"}))
+    DatasetDocumentClassifierInputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    DatasetDocumentClassifierInputDataConfig.add_member(:label_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelDelimiter, location_name: "LabelDelimiter"))
     DatasetDocumentClassifierInputDataConfig.type = Types::DatasetDocumentClassifierInputDataConfig
-    DatasetEntityRecognizerAnnotations.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    DatasetEntityRecognizerAnnotations.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
     DatasetEntityRecognizerAnnotations.type = Types::DatasetEntityRecognizerAnnotations
-    DatasetEntityRecognizerDocuments.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    DatasetEntityRecognizerDocuments.add_member(:input_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
+    DatasetEntityRecognizerDocuments.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    DatasetEntityRecognizerDocuments.add_member(:input_format, ::Smithy::Schema::Shapes::MemberShape.new(target: InputFormat, location_name: "InputFormat"))
     DatasetEntityRecognizerDocuments.type = Types::DatasetEntityRecognizerDocuments
-    DatasetEntityRecognizerEntityList.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    DatasetEntityRecognizerEntityList.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
     DatasetEntityRecognizerEntityList.type = Types::DatasetEntityRecognizerEntityList
-    DatasetEntityRecognizerInputDataConfig.add_member(:annotations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetEntityRecognizerAnnotations, location_name: "Annotations"))
-    DatasetEntityRecognizerInputDataConfig.add_member(:documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetEntityRecognizerDocuments, location_name: "Documents", traits: {"smithy.api#required" => {}}))
-    DatasetEntityRecognizerInputDataConfig.add_member(:entity_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetEntityRecognizerEntityList, location_name: "EntityList"))
+    DatasetEntityRecognizerInputDataConfig.add_member(:annotations, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntityRecognizerAnnotations, location_name: "Annotations"))
+    DatasetEntityRecognizerInputDataConfig.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntityRecognizerDocuments, location_name: "Documents", traits: {"smithy.api#required" => {}}))
+    DatasetEntityRecognizerInputDataConfig.add_member(:entity_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntityRecognizerEntityList, location_name: "EntityList"))
     DatasetEntityRecognizerInputDataConfig.type = Types::DatasetEntityRecognizerInputDataConfig
-    DatasetFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "Status"))
-    DatasetFilter.add_member(:dataset_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetType, location_name: "DatasetType"))
-    DatasetFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
-    DatasetFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    DatasetFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, location_name: "Status"))
+    DatasetFilter.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, location_name: "DatasetType"))
+    DatasetFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeAfter"))
+    DatasetFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeBefore"))
     DatasetFilter.type = Types::DatasetFilter
-    DatasetInputDataConfig.add_member(:augmented_manifests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetAugmentedManifestsList, location_name: "AugmentedManifests"))
-    DatasetInputDataConfig.add_member(:data_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetDataFormat, location_name: "DataFormat"))
-    DatasetInputDataConfig.add_member(:document_classifier_input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetDocumentClassifierInputDataConfig, location_name: "DocumentClassifierInputDataConfig"))
-    DatasetInputDataConfig.add_member(:entity_recognizer_input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetEntityRecognizerInputDataConfig, location_name: "EntityRecognizerInputDataConfig"))
+    DatasetInputDataConfig.add_member(:augmented_manifests, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetAugmentedManifestsList, location_name: "AugmentedManifests"))
+    DatasetInputDataConfig.add_member(:data_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetDataFormat, location_name: "DataFormat"))
+    DatasetInputDataConfig.add_member(:document_classifier_input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetDocumentClassifierInputDataConfig, location_name: "DocumentClassifierInputDataConfig"))
+    DatasetInputDataConfig.add_member(:entity_recognizer_input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntityRecognizerInputDataConfig, location_name: "EntityRecognizerInputDataConfig"))
     DatasetInputDataConfig.type = Types::DatasetInputDataConfig
-    DatasetProperties.add_member(:dataset_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendDatasetArn, location_name: "DatasetArn"))
-    DatasetProperties.add_member(:dataset_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DatasetName"))
-    DatasetProperties.add_member(:dataset_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetType, location_name: "DatasetType"))
-    DatasetProperties.add_member(:dataset_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "DatasetS3Uri"))
-    DatasetProperties.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DatasetProperties.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "Status"))
-    DatasetProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    DatasetProperties.add_member(:number_of_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberOfDocuments, location_name: "NumberOfDocuments"))
-    DatasetProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    DatasetProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    DatasetProperties.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendDatasetArn, location_name: "DatasetArn"))
+    DatasetProperties.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "DatasetName"))
+    DatasetProperties.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, location_name: "DatasetType"))
+    DatasetProperties.add_member(:dataset_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "DatasetS3Uri"))
+    DatasetProperties.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DatasetProperties.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, location_name: "Status"))
+    DatasetProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    DatasetProperties.add_member(:number_of_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfDocuments, location_name: "NumberOfDocuments"))
+    DatasetProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    DatasetProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
     DatasetProperties.type = Types::DatasetProperties
-    DatasetPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetProperties)
-    DatasetStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    DatasetStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    DatasetStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DatasetType.add_member(:train, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAIN", traits: {"smithy.api#enumValue" => "TRAIN"}))
-    DatasetType.add_member(:test, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEST", traits: {"smithy.api#enumValue" => "TEST"}))
-    DeleteDocumentClassifierRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn", traits: {"smithy.api#required" => {}}))
+    DatasetPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetProperties)
+    DatasetStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    DatasetStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    DatasetStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DatasetType.add_member(:train, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAIN", traits: {"smithy.api#enumValue" => "TRAIN"}))
+    DatasetType.add_member(:test, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEST", traits: {"smithy.api#enumValue" => "TEST"}))
+    DeleteDocumentClassifierRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn", traits: {"smithy.api#required" => {}}))
     DeleteDocumentClassifierRequest.type = Types::DeleteDocumentClassifierRequest
     DeleteDocumentClassifierResponse.type = Types::DeleteDocumentClassifierResponse
-    DeleteEndpointRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
+    DeleteEndpointRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
     DeleteEndpointRequest.type = Types::DeleteEndpointRequest
     DeleteEndpointResponse.type = Types::DeleteEndpointResponse
-    DeleteEntityRecognizerRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn", traits: {"smithy.api#required" => {}}))
+    DeleteEntityRecognizerRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn", traits: {"smithy.api#required" => {}}))
     DeleteEntityRecognizerRequest.type = Types::DeleteEntityRecognizerRequest
     DeleteEntityRecognizerResponse.type = Types::DeleteEntityRecognizerResponse
-    DeleteFlywheelRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
+    DeleteFlywheelRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
     DeleteFlywheelRequest.type = Types::DeleteFlywheelRequest
     DeleteFlywheelResponse.type = Types::DeleteFlywheelResponse
-    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    DeleteResourcePolicyRequest.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DeleteResourcePolicyRequest.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRevisionId, location_name: "PolicyRevisionId"))
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
     DeleteResourcePolicyResponse.type = Types::DeleteResourcePolicyResponse
-    DescribeDatasetRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendDatasetArn, location_name: "DatasetArn", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendDatasetArn, location_name: "DatasetArn", traits: {"smithy.api#required" => {}}))
     DescribeDatasetRequest.type = Types::DescribeDatasetRequest
-    DescribeDatasetResponse.add_member(:dataset_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetProperties, location_name: "DatasetProperties"))
+    DescribeDatasetResponse.add_member(:dataset_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetProperties, location_name: "DatasetProperties"))
     DescribeDatasetResponse.type = Types::DescribeDatasetResponse
-    DescribeDocumentClassificationJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeDocumentClassificationJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeDocumentClassificationJobRequest.type = Types::DescribeDocumentClassificationJobRequest
-    DescribeDocumentClassificationJobResponse.add_member(:document_classification_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassificationJobProperties, location_name: "DocumentClassificationJobProperties"))
+    DescribeDocumentClassificationJobResponse.add_member(:document_classification_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassificationJobProperties, location_name: "DocumentClassificationJobProperties"))
     DescribeDocumentClassificationJobResponse.type = Types::DescribeDocumentClassificationJobResponse
-    DescribeDocumentClassifierRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn", traits: {"smithy.api#required" => {}}))
+    DescribeDocumentClassifierRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn", traits: {"smithy.api#required" => {}}))
     DescribeDocumentClassifierRequest.type = Types::DescribeDocumentClassifierRequest
-    DescribeDocumentClassifierResponse.add_member(:document_classifier_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierProperties, location_name: "DocumentClassifierProperties"))
+    DescribeDocumentClassifierResponse.add_member(:document_classifier_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierProperties, location_name: "DocumentClassifierProperties"))
     DescribeDocumentClassifierResponse.type = Types::DescribeDocumentClassifierResponse
-    DescribeDominantLanguageDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeDominantLanguageDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeDominantLanguageDetectionJobRequest.type = Types::DescribeDominantLanguageDetectionJobRequest
-    DescribeDominantLanguageDetectionJobResponse.add_member(:dominant_language_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobProperties, location_name: "DominantLanguageDetectionJobProperties"))
+    DescribeDominantLanguageDetectionJobResponse.add_member(:dominant_language_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DominantLanguageDetectionJobProperties, location_name: "DominantLanguageDetectionJobProperties"))
     DescribeDominantLanguageDetectionJobResponse.type = Types::DescribeDominantLanguageDetectionJobResponse
-    DescribeEndpointRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
+    DescribeEndpointRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
     DescribeEndpointRequest.type = Types::DescribeEndpointRequest
-    DescribeEndpointResponse.add_member(:endpoint_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointProperties, location_name: "EndpointProperties"))
+    DescribeEndpointResponse.add_member(:endpoint_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointProperties, location_name: "EndpointProperties"))
     DescribeEndpointResponse.type = Types::DescribeEndpointResponse
-    DescribeEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeEntitiesDetectionJobRequest.type = Types::DescribeEntitiesDetectionJobRequest
-    DescribeEntitiesDetectionJobResponse.add_member(:entities_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitiesDetectionJobProperties, location_name: "EntitiesDetectionJobProperties"))
+    DescribeEntitiesDetectionJobResponse.add_member(:entities_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitiesDetectionJobProperties, location_name: "EntitiesDetectionJobProperties"))
     DescribeEntitiesDetectionJobResponse.type = Types::DescribeEntitiesDetectionJobResponse
-    DescribeEntityRecognizerRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn", traits: {"smithy.api#required" => {}}))
+    DescribeEntityRecognizerRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn", traits: {"smithy.api#required" => {}}))
     DescribeEntityRecognizerRequest.type = Types::DescribeEntityRecognizerRequest
-    DescribeEntityRecognizerResponse.add_member(:entity_recognizer_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerProperties, location_name: "EntityRecognizerProperties"))
+    DescribeEntityRecognizerResponse.add_member(:entity_recognizer_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerProperties, location_name: "EntityRecognizerProperties"))
     DescribeEntityRecognizerResponse.type = Types::DescribeEntityRecognizerResponse
-    DescribeEventsDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeEventsDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeEventsDetectionJobRequest.type = Types::DescribeEventsDetectionJobRequest
-    DescribeEventsDetectionJobResponse.add_member(:events_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventsDetectionJobProperties, location_name: "EventsDetectionJobProperties"))
+    DescribeEventsDetectionJobResponse.add_member(:events_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsDetectionJobProperties, location_name: "EventsDetectionJobProperties"))
     DescribeEventsDetectionJobResponse.type = Types::DescribeEventsDetectionJobResponse
-    DescribeFlywheelIterationRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
-    DescribeFlywheelIterationRequest.add_member(:flywheel_iteration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationId, location_name: "FlywheelIterationId", traits: {"smithy.api#required" => {}}))
+    DescribeFlywheelIterationRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
+    DescribeFlywheelIterationRequest.add_member(:flywheel_iteration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationId, location_name: "FlywheelIterationId", traits: {"smithy.api#required" => {}}))
     DescribeFlywheelIterationRequest.type = Types::DescribeFlywheelIterationRequest
-    DescribeFlywheelIterationResponse.add_member(:flywheel_iteration_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationProperties, location_name: "FlywheelIterationProperties"))
+    DescribeFlywheelIterationResponse.add_member(:flywheel_iteration_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationProperties, location_name: "FlywheelIterationProperties"))
     DescribeFlywheelIterationResponse.type = Types::DescribeFlywheelIterationResponse
-    DescribeFlywheelRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
+    DescribeFlywheelRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
     DescribeFlywheelRequest.type = Types::DescribeFlywheelRequest
-    DescribeFlywheelResponse.add_member(:flywheel_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelProperties, location_name: "FlywheelProperties"))
+    DescribeFlywheelResponse.add_member(:flywheel_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelProperties, location_name: "FlywheelProperties"))
     DescribeFlywheelResponse.type = Types::DescribeFlywheelResponse
-    DescribeKeyPhrasesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeKeyPhrasesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeKeyPhrasesDetectionJobRequest.type = Types::DescribeKeyPhrasesDetectionJobRequest
-    DescribeKeyPhrasesDetectionJobResponse.add_member(:key_phrases_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobProperties, location_name: "KeyPhrasesDetectionJobProperties"))
+    DescribeKeyPhrasesDetectionJobResponse.add_member(:key_phrases_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPhrasesDetectionJobProperties, location_name: "KeyPhrasesDetectionJobProperties"))
     DescribeKeyPhrasesDetectionJobResponse.type = Types::DescribeKeyPhrasesDetectionJobResponse
-    DescribePiiEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribePiiEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribePiiEntitiesDetectionJobRequest.type = Types::DescribePiiEntitiesDetectionJobRequest
-    DescribePiiEntitiesDetectionJobResponse.add_member(:pii_entities_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobProperties, location_name: "PiiEntitiesDetectionJobProperties"))
+    DescribePiiEntitiesDetectionJobResponse.add_member(:pii_entities_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntitiesDetectionJobProperties, location_name: "PiiEntitiesDetectionJobProperties"))
     DescribePiiEntitiesDetectionJobResponse.type = Types::DescribePiiEntitiesDetectionJobResponse
-    DescribeResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DescribeResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DescribeResourcePolicyRequest.type = Types::DescribeResourcePolicyRequest
-    DescribeResourcePolicyResponse.add_member(:resource_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "ResourcePolicy"))
-    DescribeResourcePolicyResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    DescribeResourcePolicyResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
-    DescribeResourcePolicyResponse.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    DescribeResourcePolicyResponse.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "ResourcePolicy"))
+    DescribeResourcePolicyResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    DescribeResourcePolicyResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastModifiedTime"))
+    DescribeResourcePolicyResponse.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRevisionId, location_name: "PolicyRevisionId"))
     DescribeResourcePolicyResponse.type = Types::DescribeResourcePolicyResponse
-    DescribeSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeSentimentDetectionJobRequest.type = Types::DescribeSentimentDetectionJobRequest
-    DescribeSentimentDetectionJobResponse.add_member(:sentiment_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentDetectionJobProperties, location_name: "SentimentDetectionJobProperties"))
+    DescribeSentimentDetectionJobResponse.add_member(:sentiment_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentDetectionJobProperties, location_name: "SentimentDetectionJobProperties"))
     DescribeSentimentDetectionJobResponse.type = Types::DescribeSentimentDetectionJobResponse
-    DescribeTargetedSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeTargetedSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeTargetedSentimentDetectionJobRequest.type = Types::DescribeTargetedSentimentDetectionJobRequest
-    DescribeTargetedSentimentDetectionJobResponse.add_member(:targeted_sentiment_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobProperties, location_name: "TargetedSentimentDetectionJobProperties"))
+    DescribeTargetedSentimentDetectionJobResponse.add_member(:targeted_sentiment_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedSentimentDetectionJobProperties, location_name: "TargetedSentimentDetectionJobProperties"))
     DescribeTargetedSentimentDetectionJobResponse.type = Types::DescribeTargetedSentimentDetectionJobResponse
-    DescribeTopicsDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeTopicsDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeTopicsDetectionJobRequest.type = Types::DescribeTopicsDetectionJobRequest
-    DescribeTopicsDetectionJobResponse.add_member(:topics_detection_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicsDetectionJobProperties, location_name: "TopicsDetectionJobProperties"))
+    DescribeTopicsDetectionJobResponse.add_member(:topics_detection_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicsDetectionJobProperties, location_name: "TopicsDetectionJobProperties"))
     DescribeTopicsDetectionJobResponse.type = Types::DescribeTopicsDetectionJobResponse
-    DetectDominantLanguageRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    DetectDominantLanguageRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
     DetectDominantLanguageRequest.type = Types::DetectDominantLanguageRequest
-    DetectDominantLanguageResponse.add_member(:languages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDominantLanguages, location_name: "Languages"))
+    DetectDominantLanguageResponse.add_member(:languages, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDominantLanguages, location_name: "Languages"))
     DetectDominantLanguageResponse.type = Types::DetectDominantLanguageResponse
-    DetectEntitiesRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text"))
-    DetectEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    DetectEntitiesRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerEndpointArn, location_name: "EndpointArn"))
-    DetectEntitiesRequest.add_member(:bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SemiStructuredDocumentBlob, location_name: "Bytes"))
-    DetectEntitiesRequest.add_member(:document_reader_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
+    DetectEntitiesRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text"))
+    DetectEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    DetectEntitiesRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerEndpointArn, location_name: "EndpointArn"))
+    DetectEntitiesRequest.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: SemiStructuredDocumentBlob, location_name: "Bytes"))
+    DetectEntitiesRequest.add_member(:document_reader_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     DetectEntitiesRequest.type = Types::DetectEntitiesRequest
-    DetectEntitiesResponse.add_member(:entities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfEntities, location_name: "Entities"))
-    DetectEntitiesResponse.add_member(:document_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
-    DetectEntitiesResponse.add_member(:document_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDocumentType, location_name: "DocumentType"))
-    DetectEntitiesResponse.add_member(:blocks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfBlocks, location_name: "Blocks"))
-    DetectEntitiesResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfErrors, location_name: "Errors"))
+    DetectEntitiesResponse.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEntities, location_name: "Entities"))
+    DetectEntitiesResponse.add_member(:document_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadata, location_name: "DocumentMetadata"))
+    DetectEntitiesResponse.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDocumentType, location_name: "DocumentType"))
+    DetectEntitiesResponse.add_member(:blocks, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfBlocks, location_name: "Blocks"))
+    DetectEntitiesResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfErrors, location_name: "Errors"))
     DetectEntitiesResponse.type = Types::DetectEntitiesResponse
-    DetectKeyPhrasesRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
-    DetectKeyPhrasesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    DetectKeyPhrasesRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    DetectKeyPhrasesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     DetectKeyPhrasesRequest.type = Types::DetectKeyPhrasesRequest
-    DetectKeyPhrasesResponse.add_member(:key_phrases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfKeyPhrases, location_name: "KeyPhrases"))
+    DetectKeyPhrasesResponse.add_member(:key_phrases, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfKeyPhrases, location_name: "KeyPhrases"))
     DetectKeyPhrasesResponse.type = Types::DetectKeyPhrasesResponse
-    DetectPiiEntitiesRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Text", traits: {"smithy.api#required" => {}}))
-    DetectPiiEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    DetectPiiEntitiesRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    DetectPiiEntitiesRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     DetectPiiEntitiesRequest.type = Types::DetectPiiEntitiesRequest
-    DetectPiiEntitiesResponse.add_member(:entities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfPiiEntities, location_name: "Entities"))
+    DetectPiiEntitiesResponse.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfPiiEntities, location_name: "Entities"))
     DetectPiiEntitiesResponse.type = Types::DetectPiiEntitiesResponse
-    DetectSentimentRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
-    DetectSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    DetectSentimentRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    DetectSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     DetectSentimentRequest.type = Types::DetectSentimentRequest
-    DetectSentimentResponse.add_member(:sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentType, location_name: "Sentiment"))
-    DetectSentimentResponse.add_member(:sentiment_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentScore, location_name: "SentimentScore"))
+    DetectSentimentResponse.add_member(:sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentType, location_name: "Sentiment"))
+    DetectSentimentResponse.add_member(:sentiment_score, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentScore, location_name: "SentimentScore"))
     DetectSentimentResponse.type = Types::DetectSentimentResponse
-    DetectSyntaxRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
-    DetectSyntaxRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SyntaxLanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    DetectSyntaxRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    DetectSyntaxRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntaxLanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     DetectSyntaxRequest.type = Types::DetectSyntaxRequest
-    DetectSyntaxResponse.add_member(:syntax_tokens, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
+    DetectSyntaxResponse.add_member(:syntax_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
     DetectSyntaxResponse.type = Types::DetectSyntaxResponse
-    DetectTargetedSentimentRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
-    DetectTargetedSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    DetectTargetedSentimentRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    DetectTargetedSentimentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     DetectTargetedSentimentRequest.type = Types::DetectTargetedSentimentRequest
-    DetectTargetedSentimentResponse.add_member(:entities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfTargetedSentimentEntities, location_name: "Entities"))
+    DetectTargetedSentimentResponse.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTargetedSentimentEntities, location_name: "Entities"))
     DetectTargetedSentimentResponse.type = Types::DetectTargetedSentimentResponse
-    DetectToxicContentRequest.add_member(:text_segments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfTextSegments, location_name: "TextSegments", traits: {"smithy.api#required" => {}}))
-    DetectToxicContentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    DetectToxicContentRequest.add_member(:text_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTextSegments, location_name: "TextSegments", traits: {"smithy.api#required" => {}}))
+    DetectToxicContentRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     DetectToxicContentRequest.type = Types::DetectToxicContentRequest
-    DetectToxicContentResponse.add_member(:result_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfToxicLabels, location_name: "ResultList"))
+    DetectToxicContentResponse.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfToxicLabels, location_name: "ResultList"))
     DetectToxicContentResponse.type = Types::DetectToxicContentResponse
-    DocumentClass.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    DocumentClass.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
-    DocumentClass.add_member(:page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
+    DocumentClass.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    DocumentClass.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
+    DocumentClass.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Page"))
     DocumentClass.type = Types::DocumentClass
-    DocumentClassificationConfig.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
-    DocumentClassificationConfig.add_member(:labels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LabelsList, location_name: "Labels"))
+    DocumentClassificationConfig.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
+    DocumentClassificationConfig.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelsList, location_name: "Labels"))
     DocumentClassificationConfig.type = Types::DocumentClassificationConfig
-    DocumentClassificationJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    DocumentClassificationJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    DocumentClassificationJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    DocumentClassificationJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    DocumentClassificationJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    DocumentClassificationJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    DocumentClassificationJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    DocumentClassificationJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     DocumentClassificationJobFilter.type = Types::DocumentClassificationJobFilter
-    DocumentClassificationJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    DocumentClassificationJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    DocumentClassificationJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    DocumentClassificationJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    DocumentClassificationJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    DocumentClassificationJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    DocumentClassificationJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    DocumentClassificationJobProperties.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
-    DocumentClassificationJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    DocumentClassificationJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    DocumentClassificationJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    DocumentClassificationJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    DocumentClassificationJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    DocumentClassificationJobProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    DocumentClassificationJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    DocumentClassificationJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    DocumentClassificationJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    DocumentClassificationJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    DocumentClassificationJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    DocumentClassificationJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    DocumentClassificationJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    DocumentClassificationJobProperties.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    DocumentClassificationJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    DocumentClassificationJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    DocumentClassificationJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    DocumentClassificationJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    DocumentClassificationJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    DocumentClassificationJobProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     DocumentClassificationJobProperties.type = Types::DocumentClassificationJobProperties
-    DocumentClassificationJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassificationJobProperties)
-    DocumentClassifierAugmentedManifestsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AugmentedManifestsListItem)
-    DocumentClassifierDataFormat.add_member(:comprehend_csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND_CSV", traits: {"smithy.api#enumValue" => "COMPREHEND_CSV"}))
-    DocumentClassifierDataFormat.add_member(:augmented_manifest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUGMENTED_MANIFEST", traits: {"smithy.api#enumValue" => "AUGMENTED_MANIFEST"}))
-    DocumentClassifierDocumentTypeFormat.add_member(:plain_text_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT_DOCUMENT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT_DOCUMENT"}))
-    DocumentClassifierDocumentTypeFormat.add_member(:semi_structured_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEMI_STRUCTURED_DOCUMENT", traits: {"smithy.api#enumValue" => "SEMI_STRUCTURED_DOCUMENT"}))
-    DocumentClassifierDocuments.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    DocumentClassifierDocuments.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
+    DocumentClassificationJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassificationJobProperties)
+    DocumentClassifierAugmentedManifestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AugmentedManifestsListItem)
+    DocumentClassifierDataFormat.add_member(:comprehend_csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND_CSV", traits: {"smithy.api#enumValue" => "COMPREHEND_CSV"}))
+    DocumentClassifierDataFormat.add_member(:augmented_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUGMENTED_MANIFEST", traits: {"smithy.api#enumValue" => "AUGMENTED_MANIFEST"}))
+    DocumentClassifierDocumentTypeFormat.add_member(:plain_text_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT_DOCUMENT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT_DOCUMENT"}))
+    DocumentClassifierDocumentTypeFormat.add_member(:semi_structured_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEMI_STRUCTURED_DOCUMENT", traits: {"smithy.api#enumValue" => "SEMI_STRUCTURED_DOCUMENT"}))
+    DocumentClassifierDocuments.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    DocumentClassifierDocuments.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "TestS3Uri"))
     DocumentClassifierDocuments.type = Types::DocumentClassifierDocuments
-    DocumentClassifierFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
-    DocumentClassifierFilter.add_member(:document_classifier_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DocumentClassifierName"))
-    DocumentClassifierFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    DocumentClassifierFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    DocumentClassifierFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatus, location_name: "Status"))
+    DocumentClassifierFilter.add_member(:document_classifier_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "DocumentClassifierName"))
+    DocumentClassifierFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    DocumentClassifierFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     DocumentClassifierFilter.type = Types::DocumentClassifierFilter
-    DocumentClassifierInputDataConfig.add_member(:data_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierDataFormat, location_name: "DataFormat"))
-    DocumentClassifierInputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
-    DocumentClassifierInputDataConfig.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
-    DocumentClassifierInputDataConfig.add_member(:label_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LabelDelimiter, location_name: "LabelDelimiter"))
-    DocumentClassifierInputDataConfig.add_member(:augmented_manifests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierAugmentedManifestsList, location_name: "AugmentedManifests"))
-    DocumentClassifierInputDataConfig.add_member(:document_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierDocumentTypeFormat, location_name: "DocumentType"))
-    DocumentClassifierInputDataConfig.add_member(:documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierDocuments, location_name: "Documents"))
-    DocumentClassifierInputDataConfig.add_member(:document_reader_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
+    DocumentClassifierInputDataConfig.add_member(:data_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierDataFormat, location_name: "DataFormat"))
+    DocumentClassifierInputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri"))
+    DocumentClassifierInputDataConfig.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "TestS3Uri"))
+    DocumentClassifierInputDataConfig.add_member(:label_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelDelimiter, location_name: "LabelDelimiter"))
+    DocumentClassifierInputDataConfig.add_member(:augmented_manifests, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierAugmentedManifestsList, location_name: "AugmentedManifests"))
+    DocumentClassifierInputDataConfig.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierDocumentTypeFormat, location_name: "DocumentType"))
+    DocumentClassifierInputDataConfig.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierDocuments, location_name: "Documents"))
+    DocumentClassifierInputDataConfig.add_member(:document_reader_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     DocumentClassifierInputDataConfig.type = Types::DocumentClassifierInputDataConfig
-    DocumentClassifierMode.add_member(:multi_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_CLASS", traits: {"smithy.api#enumValue" => "MULTI_CLASS"}))
-    DocumentClassifierMode.add_member(:multi_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_LABEL", traits: {"smithy.api#enumValue" => "MULTI_LABEL"}))
-    DocumentClassifierOutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
-    DocumentClassifierOutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    DocumentClassifierOutputDataConfig.add_member(:flywheel_stats_s3_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "FlywheelStatsS3Prefix"))
+    DocumentClassifierMode.add_member(:multi_class, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_CLASS", traits: {"smithy.api#enumValue" => "MULTI_CLASS"}))
+    DocumentClassifierMode.add_member(:multi_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_LABEL", traits: {"smithy.api#enumValue" => "MULTI_LABEL"}))
+    DocumentClassifierOutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri"))
+    DocumentClassifierOutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    DocumentClassifierOutputDataConfig.add_member(:flywheel_stats_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "FlywheelStatsS3Prefix"))
     DocumentClassifierOutputDataConfig.type = Types::DocumentClassifierOutputDataConfig
-    DocumentClassifierProperties.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
-    DocumentClassifierProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    DocumentClassifierProperties.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
-    DocumentClassifierProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    DocumentClassifierProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    DocumentClassifierProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    DocumentClassifierProperties.add_member(:training_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingStartTime"))
-    DocumentClassifierProperties.add_member(:training_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
-    DocumentClassifierProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierInputDataConfig, location_name: "InputDataConfig"))
-    DocumentClassifierProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierOutputDataConfig, location_name: "OutputDataConfig"))
-    DocumentClassifierProperties.add_member(:classifier_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClassifierMetadata, location_name: "ClassifierMetadata"))
-    DocumentClassifierProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    DocumentClassifierProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    DocumentClassifierProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    DocumentClassifierProperties.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
-    DocumentClassifierProperties.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
-    DocumentClassifierProperties.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
-    DocumentClassifierProperties.add_member(:source_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "SourceModelArn"))
-    DocumentClassifierProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    DocumentClassifierProperties.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    DocumentClassifierProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    DocumentClassifierProperties.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatus, location_name: "Status"))
+    DocumentClassifierProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    DocumentClassifierProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    DocumentClassifierProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    DocumentClassifierProperties.add_member(:training_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "TrainingStartTime"))
+    DocumentClassifierProperties.add_member(:training_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "TrainingEndTime"))
+    DocumentClassifierProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierInputDataConfig, location_name: "InputDataConfig"))
+    DocumentClassifierProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierOutputDataConfig, location_name: "OutputDataConfig"))
+    DocumentClassifierProperties.add_member(:classifier_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClassifierMetadata, location_name: "ClassifierMetadata"))
+    DocumentClassifierProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    DocumentClassifierProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    DocumentClassifierProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    DocumentClassifierProperties.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierMode, location_name: "Mode"))
+    DocumentClassifierProperties.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "ModelKmsKeyId"))
+    DocumentClassifierProperties.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "VersionName"))
+    DocumentClassifierProperties.add_member(:source_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "SourceModelArn"))
+    DocumentClassifierProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     DocumentClassifierProperties.type = Types::DocumentClassifierProperties
-    DocumentClassifierPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierProperties)
-    DocumentClassifierSummariesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierSummary)
-    DocumentClassifierSummary.add_member(:document_classifier_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DocumentClassifierName"))
-    DocumentClassifierSummary.add_member(:number_of_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfVersions"))
-    DocumentClassifierSummary.add_member(:latest_version_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestVersionCreatedAt"))
-    DocumentClassifierSummary.add_member(:latest_version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "LatestVersionName"))
-    DocumentClassifierSummary.add_member(:latest_version_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelStatus, location_name: "LatestVersionStatus"))
+    DocumentClassifierPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierProperties)
+    DocumentClassifierSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierSummary)
+    DocumentClassifierSummary.add_member(:document_classifier_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "DocumentClassifierName"))
+    DocumentClassifierSummary.add_member(:number_of_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfVersions"))
+    DocumentClassifierSummary.add_member(:latest_version_created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LatestVersionCreatedAt"))
+    DocumentClassifierSummary.add_member(:latest_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "LatestVersionName"))
+    DocumentClassifierSummary.add_member(:latest_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatus, location_name: "LatestVersionStatus"))
     DocumentClassifierSummary.type = Types::DocumentClassifierSummary
-    DocumentLabel.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    DocumentLabel.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
-    DocumentLabel.add_member(:page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
+    DocumentLabel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    DocumentLabel.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
+    DocumentLabel.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Page"))
     DocumentLabel.type = Types::DocumentLabel
-    DocumentMetadata.add_member(:pages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Pages"))
-    DocumentMetadata.add_member(:extracted_characters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfExtractedCharacters, location_name: "ExtractedCharacters"))
+    DocumentMetadata.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Pages"))
+    DocumentMetadata.add_member(:extracted_characters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfExtractedCharacters, location_name: "ExtractedCharacters"))
     DocumentMetadata.type = Types::DocumentMetadata
-    DocumentReadAction.add_member(:textract_detect_document_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_DETECT_DOCUMENT_TEXT", traits: {"smithy.api#enumValue" => "TEXTRACT_DETECT_DOCUMENT_TEXT"}))
-    DocumentReadAction.add_member(:textract_analyze_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_ANALYZE_DOCUMENT", traits: {"smithy.api#enumValue" => "TEXTRACT_ANALYZE_DOCUMENT"}))
-    DocumentReadFeatureTypes.add_member(:tables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TABLES", traits: {"smithy.api#enumValue" => "TABLES"}))
-    DocumentReadFeatureTypes.add_member(:forms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORMS", traits: {"smithy.api#enumValue" => "FORMS"}))
-    DocumentReadMode.add_member(:service_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_DEFAULT", traits: {"smithy.api#enumValue" => "SERVICE_DEFAULT"}))
-    DocumentReadMode.add_member(:force_document_read_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORCE_DOCUMENT_READ_ACTION", traits: {"smithy.api#enumValue" => "FORCE_DOCUMENT_READ_ACTION"}))
-    DocumentReaderConfig.add_member(:document_read_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentReadAction, location_name: "DocumentReadAction", traits: {"smithy.api#required" => {}}))
-    DocumentReaderConfig.add_member(:document_read_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentReadMode, location_name: "DocumentReadMode"))
-    DocumentReaderConfig.add_member(:feature_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDocumentReadFeatureTypes, location_name: "FeatureTypes"))
+    DocumentReadAction.add_member(:textract_detect_document_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_DETECT_DOCUMENT_TEXT", traits: {"smithy.api#enumValue" => "TEXTRACT_DETECT_DOCUMENT_TEXT"}))
+    DocumentReadAction.add_member(:textract_analyze_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_ANALYZE_DOCUMENT", traits: {"smithy.api#enumValue" => "TEXTRACT_ANALYZE_DOCUMENT"}))
+    DocumentReadFeatureTypes.add_member(:tables, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TABLES", traits: {"smithy.api#enumValue" => "TABLES"}))
+    DocumentReadFeatureTypes.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORMS", traits: {"smithy.api#enumValue" => "FORMS"}))
+    DocumentReadMode.add_member(:service_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_DEFAULT", traits: {"smithy.api#enumValue" => "SERVICE_DEFAULT"}))
+    DocumentReadMode.add_member(:force_document_read_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORCE_DOCUMENT_READ_ACTION", traits: {"smithy.api#enumValue" => "FORCE_DOCUMENT_READ_ACTION"}))
+    DocumentReaderConfig.add_member(:document_read_action, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentReadAction, location_name: "DocumentReadAction", traits: {"smithy.api#required" => {}}))
+    DocumentReaderConfig.add_member(:document_read_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentReadMode, location_name: "DocumentReadMode"))
+    DocumentReaderConfig.add_member(:feature_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDocumentReadFeatureTypes, location_name: "FeatureTypes"))
     DocumentReaderConfig.type = Types::DocumentReaderConfig
-    DocumentType.add_member(:native_pdf, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NATIVE_PDF", traits: {"smithy.api#enumValue" => "NATIVE_PDF"}))
-    DocumentType.add_member(:scanned_pdf, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCANNED_PDF", traits: {"smithy.api#enumValue" => "SCANNED_PDF"}))
-    DocumentType.add_member(:ms_word, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MS_WORD", traits: {"smithy.api#enumValue" => "MS_WORD"}))
-    DocumentType.add_member(:image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMAGE", traits: {"smithy.api#enumValue" => "IMAGE"}))
-    DocumentType.add_member(:plain_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT"}))
-    DocumentType.add_member(:textract_detect_document_text_json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON", traits: {"smithy.api#enumValue" => "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON"}))
-    DocumentType.add_member(:textract_analyze_document_json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_ANALYZE_DOCUMENT_JSON", traits: {"smithy.api#enumValue" => "TEXTRACT_ANALYZE_DOCUMENT_JSON"}))
-    DocumentTypeListItem.add_member(:page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
-    DocumentTypeListItem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentType, location_name: "Type"))
+    DocumentType.add_member(:native_pdf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NATIVE_PDF", traits: {"smithy.api#enumValue" => "NATIVE_PDF"}))
+    DocumentType.add_member(:scanned_pdf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCANNED_PDF", traits: {"smithy.api#enumValue" => "SCANNED_PDF"}))
+    DocumentType.add_member(:ms_word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MS_WORD", traits: {"smithy.api#enumValue" => "MS_WORD"}))
+    DocumentType.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IMAGE", traits: {"smithy.api#enumValue" => "IMAGE"}))
+    DocumentType.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT"}))
+    DocumentType.add_member(:textract_detect_document_text_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON", traits: {"smithy.api#enumValue" => "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON"}))
+    DocumentType.add_member(:textract_analyze_document_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_ANALYZE_DOCUMENT_JSON", traits: {"smithy.api#enumValue" => "TEXTRACT_ANALYZE_DOCUMENT_JSON"}))
+    DocumentTypeListItem.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Page"))
+    DocumentTypeListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentType, location_name: "Type"))
     DocumentTypeListItem.type = Types::DocumentTypeListItem
-    DominantLanguage.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
-    DominantLanguage.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    DominantLanguage.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LanguageCode"))
+    DominantLanguage.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
     DominantLanguage.type = Types::DominantLanguage
-    DominantLanguageDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    DominantLanguageDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    DominantLanguageDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    DominantLanguageDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    DominantLanguageDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    DominantLanguageDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    DominantLanguageDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    DominantLanguageDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     DominantLanguageDetectionJobFilter.type = Types::DominantLanguageDetectionJobFilter
-    DominantLanguageDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    DominantLanguageDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    DominantLanguageDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    DominantLanguageDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    DominantLanguageDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    DominantLanguageDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    DominantLanguageDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    DominantLanguageDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    DominantLanguageDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    DominantLanguageDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    DominantLanguageDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    DominantLanguageDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    DominantLanguageDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    DominantLanguageDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    DominantLanguageDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    DominantLanguageDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    DominantLanguageDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    DominantLanguageDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    DominantLanguageDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    DominantLanguageDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    DominantLanguageDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    DominantLanguageDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    DominantLanguageDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    DominantLanguageDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
     DominantLanguageDetectionJobProperties.type = Types::DominantLanguageDetectionJobProperties
-    DominantLanguageDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobProperties)
-    EndpointFilter.add_member(:model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
-    EndpointFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status"))
-    EndpointFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
-    EndpointFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    DominantLanguageDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DominantLanguageDetectionJobProperties)
+    EndpointFilter.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ModelArn"))
+    EndpointFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStatus, location_name: "Status"))
+    EndpointFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeBefore"))
+    EndpointFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeAfter"))
     EndpointFilter.type = Types::EndpointFilter
-    EndpointProperties.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn"))
-    EndpointProperties.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status"))
-    EndpointProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    EndpointProperties.add_member(:model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
-    EndpointProperties.add_member(:desired_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "DesiredModelArn"))
-    EndpointProperties.add_member(:desired_inference_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "DesiredInferenceUnits"))
-    EndpointProperties.add_member(:current_inference_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "CurrentInferenceUnits"))
-    EndpointProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    EndpointProperties.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
-    EndpointProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    EndpointProperties.add_member(:desired_data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DesiredDataAccessRoleArn"))
-    EndpointProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    EndpointProperties.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendEndpointArn, location_name: "EndpointArn"))
+    EndpointProperties.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStatus, location_name: "Status"))
+    EndpointProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    EndpointProperties.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ModelArn"))
+    EndpointProperties.add_member(:desired_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "DesiredModelArn"))
+    EndpointProperties.add_member(:desired_inference_units, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceUnitsInteger, location_name: "DesiredInferenceUnits"))
+    EndpointProperties.add_member(:current_inference_units, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceUnitsInteger, location_name: "CurrentInferenceUnits"))
+    EndpointProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    EndpointProperties.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastModifiedTime"))
+    EndpointProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    EndpointProperties.add_member(:desired_data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DesiredDataAccessRoleArn"))
+    EndpointProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     EndpointProperties.type = Types::EndpointProperties
-    EndpointPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointProperties)
-    EndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    EndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    EndpointStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    EndpointStatus.add_member(:in_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_SERVICE", traits: {"smithy.api#enumValue" => "IN_SERVICE"}))
-    EndpointStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    EntitiesDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    EntitiesDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    EntitiesDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    EntitiesDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    EndpointPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointProperties)
+    EndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    EndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    EndpointStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    EndpointStatus.add_member(:in_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_SERVICE", traits: {"smithy.api#enumValue" => "IN_SERVICE"}))
+    EndpointStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    EntitiesDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    EntitiesDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    EntitiesDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    EntitiesDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     EntitiesDetectionJobFilter.type = Types::EntitiesDetectionJobFilter
-    EntitiesDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    EntitiesDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    EntitiesDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    EntitiesDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    EntitiesDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    EntitiesDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    EntitiesDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    EntitiesDetectionJobProperties.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
-    EntitiesDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    EntitiesDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    EntitiesDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    EntitiesDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    EntitiesDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    EntitiesDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    EntitiesDetectionJobProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    EntitiesDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    EntitiesDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    EntitiesDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    EntitiesDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    EntitiesDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    EntitiesDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    EntitiesDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    EntitiesDetectionJobProperties.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
+    EntitiesDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    EntitiesDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    EntitiesDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    EntitiesDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    EntitiesDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    EntitiesDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    EntitiesDetectionJobProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     EntitiesDetectionJobProperties.type = Types::EntitiesDetectionJobProperties
-    EntitiesDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitiesDetectionJobProperties)
-    Entity.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
-    Entity.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityType, location_name: "Type"))
-    Entity.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Text"))
-    Entity.add_member(:begin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
-    Entity.add_member(:end_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
-    Entity.add_member(:block_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfBlockReferences, location_name: "BlockReferences"))
+    EntitiesDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntitiesDetectionJobProperties)
+    Entity.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
+    Entity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, location_name: "Type"))
+    Entity.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Text"))
+    Entity.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "BeginOffset"))
+    Entity.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "EndOffset"))
+    Entity.add_member(:block_references, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfBlockReferences, location_name: "BlockReferences"))
     Entity.type = Types::Entity
-    EntityLabel.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntityType, location_name: "Name"))
-    EntityLabel.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    EntityLabel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntityType, location_name: "Name"))
+    EntityLabel.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
     EntityLabel.type = Types::EntityLabel
-    EntityRecognitionConfig.add_member(:entity_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityTypesList, location_name: "EntityTypes", traits: {"smithy.api#required" => {}}))
+    EntityRecognitionConfig.add_member(:entity_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityTypesList, location_name: "EntityTypes", traits: {"smithy.api#required" => {}}))
     EntityRecognitionConfig.type = Types::EntityRecognitionConfig
-    EntityRecognizerAnnotations.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    EntityRecognizerAnnotations.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
+    EntityRecognizerAnnotations.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    EntityRecognizerAnnotations.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "TestS3Uri"))
     EntityRecognizerAnnotations.type = Types::EntityRecognizerAnnotations
-    EntityRecognizerAugmentedManifestsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AugmentedManifestsListItem)
-    EntityRecognizerDataFormat.add_member(:comprehend_csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND_CSV", traits: {"smithy.api#enumValue" => "COMPREHEND_CSV"}))
-    EntityRecognizerDataFormat.add_member(:augmented_manifest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUGMENTED_MANIFEST", traits: {"smithy.api#enumValue" => "AUGMENTED_MANIFEST"}))
-    EntityRecognizerDocuments.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    EntityRecognizerDocuments.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
-    EntityRecognizerDocuments.add_member(:input_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
+    EntityRecognizerAugmentedManifestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AugmentedManifestsListItem)
+    EntityRecognizerDataFormat.add_member(:comprehend_csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPREHEND_CSV", traits: {"smithy.api#enumValue" => "COMPREHEND_CSV"}))
+    EntityRecognizerDataFormat.add_member(:augmented_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUGMENTED_MANIFEST", traits: {"smithy.api#enumValue" => "AUGMENTED_MANIFEST"}))
+    EntityRecognizerDocuments.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    EntityRecognizerDocuments.add_member(:test_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "TestS3Uri"))
+    EntityRecognizerDocuments.add_member(:input_format, ::Smithy::Schema::Shapes::MemberShape.new(target: InputFormat, location_name: "InputFormat"))
     EntityRecognizerDocuments.type = Types::EntityRecognizerDocuments
-    EntityRecognizerEntityList.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    EntityRecognizerEntityList.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
     EntityRecognizerEntityList.type = Types::EntityRecognizerEntityList
-    EntityRecognizerEvaluationMetrics.add_member(:precision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
-    EntityRecognizerEvaluationMetrics.add_member(:recall, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
-    EntityRecognizerEvaluationMetrics.add_member(:f1_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "F1Score"))
+    EntityRecognizerEvaluationMetrics.add_member(:precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Precision"))
+    EntityRecognizerEvaluationMetrics.add_member(:recall, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Recall"))
+    EntityRecognizerEvaluationMetrics.add_member(:f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "F1Score"))
     EntityRecognizerEvaluationMetrics.type = Types::EntityRecognizerEvaluationMetrics
-    EntityRecognizerFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
-    EntityRecognizerFilter.add_member(:recognizer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "RecognizerName"))
-    EntityRecognizerFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    EntityRecognizerFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    EntityRecognizerFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatus, location_name: "Status"))
+    EntityRecognizerFilter.add_member(:recognizer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "RecognizerName"))
+    EntityRecognizerFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    EntityRecognizerFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     EntityRecognizerFilter.type = Types::EntityRecognizerFilter
-    EntityRecognizerInputDataConfig.add_member(:data_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerDataFormat, location_name: "DataFormat"))
-    EntityRecognizerInputDataConfig.add_member(:entity_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityTypesList, location_name: "EntityTypes", traits: {"smithy.api#required" => {}}))
-    EntityRecognizerInputDataConfig.add_member(:documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerDocuments, location_name: "Documents"))
-    EntityRecognizerInputDataConfig.add_member(:annotations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerAnnotations, location_name: "Annotations"))
-    EntityRecognizerInputDataConfig.add_member(:entity_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerEntityList, location_name: "EntityList"))
-    EntityRecognizerInputDataConfig.add_member(:augmented_manifests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerAugmentedManifestsList, location_name: "AugmentedManifests"))
+    EntityRecognizerInputDataConfig.add_member(:data_format, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerDataFormat, location_name: "DataFormat"))
+    EntityRecognizerInputDataConfig.add_member(:entity_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityTypesList, location_name: "EntityTypes", traits: {"smithy.api#required" => {}}))
+    EntityRecognizerInputDataConfig.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerDocuments, location_name: "Documents"))
+    EntityRecognizerInputDataConfig.add_member(:annotations, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerAnnotations, location_name: "Annotations"))
+    EntityRecognizerInputDataConfig.add_member(:entity_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerEntityList, location_name: "EntityList"))
+    EntityRecognizerInputDataConfig.add_member(:augmented_manifests, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerAugmentedManifestsList, location_name: "AugmentedManifests"))
     EntityRecognizerInputDataConfig.type = Types::EntityRecognizerInputDataConfig
-    EntityRecognizerMetadata.add_member(:number_of_trained_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTrainedDocuments"))
-    EntityRecognizerMetadata.add_member(:number_of_test_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTestDocuments"))
-    EntityRecognizerMetadata.add_member(:evaluation_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerEvaluationMetrics, location_name: "EvaluationMetrics"))
-    EntityRecognizerMetadata.add_member(:entity_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerMetadataEntityTypesList, location_name: "EntityTypes"))
+    EntityRecognizerMetadata.add_member(:number_of_trained_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfTrainedDocuments"))
+    EntityRecognizerMetadata.add_member(:number_of_test_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfTestDocuments"))
+    EntityRecognizerMetadata.add_member(:evaluation_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerEvaluationMetrics, location_name: "EvaluationMetrics"))
+    EntityRecognizerMetadata.add_member(:entity_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerMetadataEntityTypesList, location_name: "EntityTypes"))
     EntityRecognizerMetadata.type = Types::EntityRecognizerMetadata
-    EntityRecognizerMetadataEntityTypesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerMetadataEntityTypesListItem)
-    EntityRecognizerMetadataEntityTypesListItem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Type"))
-    EntityRecognizerMetadataEntityTypesListItem.add_member(:evaluation_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityTypesEvaluationMetrics, location_name: "EvaluationMetrics"))
-    EntityRecognizerMetadataEntityTypesListItem.add_member(:number_of_train_mentions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTrainMentions"))
+    EntityRecognizerMetadataEntityTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerMetadataEntityTypesListItem)
+    EntityRecognizerMetadataEntityTypesListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Type"))
+    EntityRecognizerMetadataEntityTypesListItem.add_member(:evaluation_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityTypesEvaluationMetrics, location_name: "EvaluationMetrics"))
+    EntityRecognizerMetadataEntityTypesListItem.add_member(:number_of_train_mentions, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfTrainMentions"))
     EntityRecognizerMetadataEntityTypesListItem.type = Types::EntityRecognizerMetadataEntityTypesListItem
-    EntityRecognizerOutputDataConfig.add_member(:flywheel_stats_s3_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "FlywheelStatsS3Prefix"))
+    EntityRecognizerOutputDataConfig.add_member(:flywheel_stats_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "FlywheelStatsS3Prefix"))
     EntityRecognizerOutputDataConfig.type = Types::EntityRecognizerOutputDataConfig
-    EntityRecognizerProperties.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
-    EntityRecognizerProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    EntityRecognizerProperties.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
-    EntityRecognizerProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    EntityRecognizerProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    EntityRecognizerProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    EntityRecognizerProperties.add_member(:training_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingStartTime"))
-    EntityRecognizerProperties.add_member(:training_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
-    EntityRecognizerProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerInputDataConfig, location_name: "InputDataConfig"))
-    EntityRecognizerProperties.add_member(:recognizer_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerMetadata, location_name: "RecognizerMetadata"))
-    EntityRecognizerProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    EntityRecognizerProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    EntityRecognizerProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    EntityRecognizerProperties.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
-    EntityRecognizerProperties.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
-    EntityRecognizerProperties.add_member(:source_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "SourceModelArn"))
-    EntityRecognizerProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
-    EntityRecognizerProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerOutputDataConfig, location_name: "OutputDataConfig"))
+    EntityRecognizerProperties.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
+    EntityRecognizerProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    EntityRecognizerProperties.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatus, location_name: "Status"))
+    EntityRecognizerProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    EntityRecognizerProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    EntityRecognizerProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    EntityRecognizerProperties.add_member(:training_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "TrainingStartTime"))
+    EntityRecognizerProperties.add_member(:training_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "TrainingEndTime"))
+    EntityRecognizerProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerInputDataConfig, location_name: "InputDataConfig"))
+    EntityRecognizerProperties.add_member(:recognizer_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerMetadata, location_name: "RecognizerMetadata"))
+    EntityRecognizerProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    EntityRecognizerProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    EntityRecognizerProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    EntityRecognizerProperties.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "ModelKmsKeyId"))
+    EntityRecognizerProperties.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "VersionName"))
+    EntityRecognizerProperties.add_member(:source_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "SourceModelArn"))
+    EntityRecognizerProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    EntityRecognizerProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerOutputDataConfig, location_name: "OutputDataConfig"))
     EntityRecognizerProperties.type = Types::EntityRecognizerProperties
-    EntityRecognizerPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerProperties)
-    EntityRecognizerSummariesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerSummary)
-    EntityRecognizerSummary.add_member(:recognizer_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "RecognizerName"))
-    EntityRecognizerSummary.add_member(:number_of_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfVersions"))
-    EntityRecognizerSummary.add_member(:latest_version_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestVersionCreatedAt"))
-    EntityRecognizerSummary.add_member(:latest_version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "LatestVersionName"))
-    EntityRecognizerSummary.add_member(:latest_version_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelStatus, location_name: "LatestVersionStatus"))
+    EntityRecognizerPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerProperties)
+    EntityRecognizerSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerSummary)
+    EntityRecognizerSummary.add_member(:recognizer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "RecognizerName"))
+    EntityRecognizerSummary.add_member(:number_of_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfVersions"))
+    EntityRecognizerSummary.add_member(:latest_version_created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LatestVersionCreatedAt"))
+    EntityRecognizerSummary.add_member(:latest_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "LatestVersionName"))
+    EntityRecognizerSummary.add_member(:latest_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatus, location_name: "LatestVersionStatus"))
     EntityRecognizerSummary.type = Types::EntityRecognizerSummary
-    EntityType.add_member(:person, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSON", traits: {"smithy.api#enumValue" => "PERSON"}))
-    EntityType.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
-    EntityType.add_member(:organization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
-    EntityType.add_member(:commercial_item, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMMERCIAL_ITEM", traits: {"smithy.api#enumValue" => "COMMERCIAL_ITEM"}))
-    EntityType.add_member(:event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
-    EntityType.add_member(:date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
-    EntityType.add_member(:quantity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUANTITY", traits: {"smithy.api#enumValue" => "QUANTITY"}))
-    EntityType.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TITLE", traits: {"smithy.api#enumValue" => "TITLE"}))
-    EntityType.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
-    EntityTypesEvaluationMetrics.add_member(:precision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
-    EntityTypesEvaluationMetrics.add_member(:recall, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
-    EntityTypesEvaluationMetrics.add_member(:f1_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "F1Score"))
+    EntityType.add_member(:person, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSON", traits: {"smithy.api#enumValue" => "PERSON"}))
+    EntityType.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
+    EntityType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
+    EntityType.add_member(:commercial_item, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMMERCIAL_ITEM", traits: {"smithy.api#enumValue" => "COMMERCIAL_ITEM"}))
+    EntityType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
+    EntityType.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
+    EntityType.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUANTITY", traits: {"smithy.api#enumValue" => "QUANTITY"}))
+    EntityType.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TITLE", traits: {"smithy.api#enumValue" => "TITLE"}))
+    EntityType.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
+    EntityTypesEvaluationMetrics.add_member(:precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Precision"))
+    EntityTypesEvaluationMetrics.add_member(:recall, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Recall"))
+    EntityTypesEvaluationMetrics.add_member(:f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "F1Score"))
     EntityTypesEvaluationMetrics.type = Types::EntityTypesEvaluationMetrics
-    EntityTypesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityTypesListItem)
-    EntityTypesListItem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityTypeName, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    EntityTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityTypesListItem)
+    EntityTypesListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityTypeName, location_name: "Type", traits: {"smithy.api#required" => {}}))
     EntityTypesListItem.type = Types::EntityTypesListItem
-    ErrorsListItem.add_member(:page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
-    ErrorsListItem.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageBasedErrorCode, location_name: "ErrorCode"))
-    ErrorsListItem.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    ErrorsListItem.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Page"))
+    ErrorsListItem.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PageBasedErrorCode, location_name: "ErrorCode"))
+    ErrorsListItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
     ErrorsListItem.type = Types::ErrorsListItem
-    EventsDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    EventsDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    EventsDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    EventsDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    EventsDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    EventsDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    EventsDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    EventsDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     EventsDetectionJobFilter.type = Types::EventsDetectionJobFilter
-    EventsDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    EventsDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    EventsDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    EventsDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    EventsDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    EventsDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    EventsDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    EventsDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    EventsDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    EventsDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    EventsDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    EventsDetectionJobProperties.add_member(:target_event_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetEventTypes, location_name: "TargetEventTypes"))
+    EventsDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    EventsDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    EventsDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    EventsDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    EventsDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    EventsDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    EventsDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    EventsDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    EventsDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    EventsDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    EventsDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    EventsDetectionJobProperties.add_member(:target_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetEventTypes, location_name: "TargetEventTypes"))
     EventsDetectionJobProperties.type = Types::EventsDetectionJobProperties
-    EventsDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventsDetectionJobProperties)
-    ExtractedCharactersListItem.add_member(:page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
-    ExtractedCharactersListItem.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Count"))
+    EventsDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventsDetectionJobProperties)
+    ExtractedCharactersListItem.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Page"))
+    ExtractedCharactersListItem.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Count"))
     ExtractedCharactersListItem.type = Types::ExtractedCharactersListItem
-    FlywheelFilter.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelStatus, location_name: "Status"))
-    FlywheelFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
-    FlywheelFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    FlywheelFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelStatus, location_name: "Status"))
+    FlywheelFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeAfter"))
+    FlywheelFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeBefore"))
     FlywheelFilter.type = Types::FlywheelFilter
-    FlywheelIterationFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
-    FlywheelIterationFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    FlywheelIterationFilter.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeAfter"))
+    FlywheelIterationFilter.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeBefore"))
     FlywheelIterationFilter.type = Types::FlywheelIterationFilter
-    FlywheelIterationProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
-    FlywheelIterationProperties.add_member(:flywheel_iteration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationId, location_name: "FlywheelIterationId"))
-    FlywheelIterationProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    FlywheelIterationProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    FlywheelIterationProperties.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationStatus, location_name: "Status"))
-    FlywheelIterationProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    FlywheelIterationProperties.add_member(:evaluated_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "EvaluatedModelArn"))
-    FlywheelIterationProperties.add_member(:evaluated_model_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelModelEvaluationMetrics, location_name: "EvaluatedModelMetrics"))
-    FlywheelIterationProperties.add_member(:trained_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "TrainedModelArn"))
-    FlywheelIterationProperties.add_member(:trained_model_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelModelEvaluationMetrics, location_name: "TrainedModelMetrics"))
-    FlywheelIterationProperties.add_member(:evaluation_manifest_s3_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "EvaluationManifestS3Prefix"))
+    FlywheelIterationProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    FlywheelIterationProperties.add_member(:flywheel_iteration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationId, location_name: "FlywheelIterationId"))
+    FlywheelIterationProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    FlywheelIterationProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    FlywheelIterationProperties.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationStatus, location_name: "Status"))
+    FlywheelIterationProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    FlywheelIterationProperties.add_member(:evaluated_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "EvaluatedModelArn"))
+    FlywheelIterationProperties.add_member(:evaluated_model_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelModelEvaluationMetrics, location_name: "EvaluatedModelMetrics"))
+    FlywheelIterationProperties.add_member(:trained_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "TrainedModelArn"))
+    FlywheelIterationProperties.add_member(:trained_model_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelModelEvaluationMetrics, location_name: "TrainedModelMetrics"))
+    FlywheelIterationProperties.add_member(:evaluation_manifest_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "EvaluationManifestS3Prefix"))
     FlywheelIterationProperties.type = Types::FlywheelIterationProperties
-    FlywheelIterationPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationProperties)
-    FlywheelIterationStatus.add_member(:training, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING", traits: {"smithy.api#enumValue" => "TRAINING"}))
-    FlywheelIterationStatus.add_member(:evaluating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVALUATING", traits: {"smithy.api#enumValue" => "EVALUATING"}))
-    FlywheelIterationStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    FlywheelIterationStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    FlywheelIterationStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
-    FlywheelIterationStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    FlywheelModelEvaluationMetrics.add_member(:average_f1_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "AverageF1Score"))
-    FlywheelModelEvaluationMetrics.add_member(:average_precision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "AveragePrecision"))
-    FlywheelModelEvaluationMetrics.add_member(:average_recall, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "AverageRecall"))
-    FlywheelModelEvaluationMetrics.add_member(:average_accuracy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "AverageAccuracy"))
+    FlywheelIterationPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationProperties)
+    FlywheelIterationStatus.add_member(:training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING", traits: {"smithy.api#enumValue" => "TRAINING"}))
+    FlywheelIterationStatus.add_member(:evaluating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVALUATING", traits: {"smithy.api#enumValue" => "EVALUATING"}))
+    FlywheelIterationStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    FlywheelIterationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    FlywheelIterationStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
+    FlywheelIterationStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    FlywheelModelEvaluationMetrics.add_member(:average_f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "AverageF1Score"))
+    FlywheelModelEvaluationMetrics.add_member(:average_precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "AveragePrecision"))
+    FlywheelModelEvaluationMetrics.add_member(:average_recall, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "AverageRecall"))
+    FlywheelModelEvaluationMetrics.add_member(:average_accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "AverageAccuracy"))
     FlywheelModelEvaluationMetrics.type = Types::FlywheelModelEvaluationMetrics
-    FlywheelProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
-    FlywheelProperties.add_member(:active_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ActiveModelArn"))
-    FlywheelProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    FlywheelProperties.add_member(:task_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskConfig, location_name: "TaskConfig"))
-    FlywheelProperties.add_member(:data_lake_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "DataLakeS3Uri"))
-    FlywheelProperties.add_member(:data_security_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSecurityConfig, location_name: "DataSecurityConfig"))
-    FlywheelProperties.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelStatus, location_name: "Status"))
-    FlywheelProperties.add_member(:model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelType, location_name: "ModelType"))
-    FlywheelProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    FlywheelProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    FlywheelProperties.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
-    FlywheelProperties.add_member(:latest_flywheel_iteration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationId, location_name: "LatestFlywheelIteration"))
+    FlywheelProperties.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    FlywheelProperties.add_member(:active_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ActiveModelArn"))
+    FlywheelProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    FlywheelProperties.add_member(:task_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskConfig, location_name: "TaskConfig"))
+    FlywheelProperties.add_member(:data_lake_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "DataLakeS3Uri"))
+    FlywheelProperties.add_member(:data_security_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSecurityConfig, location_name: "DataSecurityConfig"))
+    FlywheelProperties.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelStatus, location_name: "Status"))
+    FlywheelProperties.add_member(:model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelType, location_name: "ModelType"))
+    FlywheelProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    FlywheelProperties.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    FlywheelProperties.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastModifiedTime"))
+    FlywheelProperties.add_member(:latest_flywheel_iteration, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationId, location_name: "LatestFlywheelIteration"))
     FlywheelProperties.type = Types::FlywheelProperties
-    FlywheelStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    FlywheelStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    FlywheelStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    FlywheelStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    FlywheelStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    FlywheelSummary.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
-    FlywheelSummary.add_member(:active_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ActiveModelArn"))
-    FlywheelSummary.add_member(:data_lake_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "DataLakeS3Uri"))
-    FlywheelSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelStatus, location_name: "Status"))
-    FlywheelSummary.add_member(:model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModelType, location_name: "ModelType"))
-    FlywheelSummary.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    FlywheelSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    FlywheelSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
-    FlywheelSummary.add_member(:latest_flywheel_iteration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationId, location_name: "LatestFlywheelIteration"))
+    FlywheelStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    FlywheelStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    FlywheelStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    FlywheelStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    FlywheelStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    FlywheelSummary.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    FlywheelSummary.add_member(:active_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ActiveModelArn"))
+    FlywheelSummary.add_member(:data_lake_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "DataLakeS3Uri"))
+    FlywheelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelStatus, location_name: "Status"))
+    FlywheelSummary.add_member(:model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelType, location_name: "ModelType"))
+    FlywheelSummary.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    FlywheelSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    FlywheelSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastModifiedTime"))
+    FlywheelSummary.add_member(:latest_flywheel_iteration, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationId, location_name: "LatestFlywheelIteration"))
     FlywheelSummary.type = Types::FlywheelSummary
-    FlywheelSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelSummary)
-    Geometry.add_member(:bounding_box, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
-    Geometry.add_member(:polygon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
+    FlywheelSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelSummary)
+    Geometry.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, location_name: "BoundingBox"))
+    Geometry.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: Polygon, location_name: "Polygon"))
     Geometry.type = Types::Geometry
-    ImportModelRequest.add_member(:source_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "SourceModelArn", traits: {"smithy.api#required" => {}}))
-    ImportModelRequest.add_member(:model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "ModelName"))
-    ImportModelRequest.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
-    ImportModelRequest.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
-    ImportModelRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    ImportModelRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportModelRequest.add_member(:source_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "SourceModelArn", traits: {"smithy.api#required" => {}}))
+    ImportModelRequest.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArnName, location_name: "ModelName"))
+    ImportModelRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, location_name: "VersionName"))
+    ImportModelRequest.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "ModelKmsKeyId"))
+    ImportModelRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    ImportModelRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ImportModelRequest.type = Types::ImportModelRequest
-    ImportModelResponse.add_member(:model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
+    ImportModelResponse.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ModelArn"))
     ImportModelResponse.type = Types::ImportModelResponse
-    InputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    InputDataConfig.add_member(:input_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
-    InputDataConfig.add_member(:document_reader_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
+    InputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    InputDataConfig.add_member(:input_format, ::Smithy::Schema::Shapes::MemberShape.new(target: InputFormat, location_name: "InputFormat"))
+    InputDataConfig.add_member(:document_reader_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     InputDataConfig.type = Types::InputDataConfig
-    InputFormat.add_member(:one_doc_per_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_DOC_PER_FILE", traits: {"smithy.api#enumValue" => "ONE_DOC_PER_FILE"}))
-    InputFormat.add_member(:one_doc_per_line, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_DOC_PER_LINE", traits: {"smithy.api#enumValue" => "ONE_DOC_PER_LINE"}))
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InputFormat.add_member(:one_doc_per_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_DOC_PER_FILE", traits: {"smithy.api#enumValue" => "ONE_DOC_PER_FILE"}))
+    InputFormat.add_member(:one_doc_per_line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONE_DOC_PER_LINE", traits: {"smithy.api#enumValue" => "ONE_DOC_PER_LINE"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    InvalidFilterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidFilterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidFilterException.type = Types::InvalidFilterException
-    InvalidRequestDetail.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestDetailReason, location_name: "Reason"))
+    InvalidRequestDetail.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidRequestDetailReason, location_name: "Reason"))
     InvalidRequestDetail.type = Types::InvalidRequestDetail
-    InvalidRequestDetailReason.add_member(:document_size_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOCUMENT_SIZE_EXCEEDED", traits: {"smithy.api#enumValue" => "DOCUMENT_SIZE_EXCEEDED"}))
-    InvalidRequestDetailReason.add_member(:unsupported_doc_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED_DOC_TYPE", traits: {"smithy.api#enumValue" => "UNSUPPORTED_DOC_TYPE"}))
-    InvalidRequestDetailReason.add_member(:page_limit_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "PAGE_LIMIT_EXCEEDED"}))
-    InvalidRequestDetailReason.add_member(:textract_access_denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "TEXTRACT_ACCESS_DENIED"}))
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    InvalidRequestException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestReason, location_name: "Reason"))
-    InvalidRequestException.add_member(:detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestDetail, location_name: "Detail"))
+    InvalidRequestDetailReason.add_member(:document_size_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOCUMENT_SIZE_EXCEEDED", traits: {"smithy.api#enumValue" => "DOCUMENT_SIZE_EXCEEDED"}))
+    InvalidRequestDetailReason.add_member(:unsupported_doc_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNSUPPORTED_DOC_TYPE", traits: {"smithy.api#enumValue" => "UNSUPPORTED_DOC_TYPE"}))
+    InvalidRequestDetailReason.add_member(:page_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "PAGE_LIMIT_EXCEEDED"}))
+    InvalidRequestDetailReason.add_member(:textract_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "TEXTRACT_ACCESS_DENIED"}))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    InvalidRequestException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidRequestReason, location_name: "Reason"))
+    InvalidRequestException.add_member(:detail, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidRequestDetail, location_name: "Detail"))
     InvalidRequestException.type = Types::InvalidRequestException
-    InvalidRequestReason.add_member(:invalid_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DOCUMENT", traits: {"smithy.api#enumValue" => "INVALID_DOCUMENT"}))
-    JobNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestReason.add_member(:invalid_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DOCUMENT", traits: {"smithy.api#enumValue" => "INVALID_DOCUMENT"}))
+    JobNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     JobNotFoundException.type = Types::JobNotFoundException
-    JobStatus.add_member(:submitted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
-    JobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    JobStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    JobStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    JobStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
-    JobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    KeyPhrase.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
-    KeyPhrase.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Text"))
-    KeyPhrase.add_member(:begin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
-    KeyPhrase.add_member(:end_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    JobStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    JobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    JobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    JobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    JobStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
+    JobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    KeyPhrase.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
+    KeyPhrase.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Text"))
+    KeyPhrase.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "BeginOffset"))
+    KeyPhrase.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "EndOffset"))
     KeyPhrase.type = Types::KeyPhrase
-    KeyPhrasesDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    KeyPhrasesDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    KeyPhrasesDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    KeyPhrasesDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    KeyPhrasesDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    KeyPhrasesDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    KeyPhrasesDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    KeyPhrasesDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     KeyPhrasesDetectionJobFilter.type = Types::KeyPhrasesDetectionJobFilter
-    KeyPhrasesDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    KeyPhrasesDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    KeyPhrasesDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    KeyPhrasesDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    KeyPhrasesDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    KeyPhrasesDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    KeyPhrasesDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    KeyPhrasesDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    KeyPhrasesDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    KeyPhrasesDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    KeyPhrasesDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    KeyPhrasesDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    KeyPhrasesDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    KeyPhrasesDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    KeyPhrasesDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    KeyPhrasesDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    KeyPhrasesDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    KeyPhrasesDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    KeyPhrasesDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    KeyPhrasesDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    KeyPhrasesDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    KeyPhrasesDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    KeyPhrasesDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    KeyPhrasesDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    KeyPhrasesDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    KeyPhrasesDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
     KeyPhrasesDetectionJobProperties.type = Types::KeyPhrasesDetectionJobProperties
-    KeyPhrasesDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobProperties)
-    KmsKeyValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KeyPhrasesDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPhrasesDetectionJobProperties)
+    KmsKeyValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     KmsKeyValidationException.type = Types::KmsKeyValidationException
-    LabelsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LabelListItem)
-    LanguageCode.add_member(:en, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN", traits: {"smithy.api#enumValue" => "en"}))
-    LanguageCode.add_member(:es, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES", traits: {"smithy.api#enumValue" => "es"}))
-    LanguageCode.add_member(:fr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR", traits: {"smithy.api#enumValue" => "fr"}))
-    LanguageCode.add_member(:de, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE", traits: {"smithy.api#enumValue" => "de"}))
-    LanguageCode.add_member(:it, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT", traits: {"smithy.api#enumValue" => "it"}))
-    LanguageCode.add_member(:pt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PT", traits: {"smithy.api#enumValue" => "pt"}))
-    LanguageCode.add_member(:ar, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AR", traits: {"smithy.api#enumValue" => "ar"}))
-    LanguageCode.add_member(:hi, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HI", traits: {"smithy.api#enumValue" => "hi"}))
-    LanguageCode.add_member(:ja, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JA", traits: {"smithy.api#enumValue" => "ja"}))
-    LanguageCode.add_member(:ko, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KO", traits: {"smithy.api#enumValue" => "ko"}))
-    LanguageCode.add_member(:zh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH", traits: {"smithy.api#enumValue" => "zh"}))
-    LanguageCode.add_member(:zh_tw, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH_TW", traits: {"smithy.api#enumValue" => "zh-TW"}))
-    ListDatasetsRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
-    ListDatasetsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetFilter, location_name: "Filter"))
-    ListDatasetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListDatasetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    LabelsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelListItem)
+    LanguageCode.add_member(:en, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN", traits: {"smithy.api#enumValue" => "en"}))
+    LanguageCode.add_member(:es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES", traits: {"smithy.api#enumValue" => "es"}))
+    LanguageCode.add_member(:fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR", traits: {"smithy.api#enumValue" => "fr"}))
+    LanguageCode.add_member(:de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE", traits: {"smithy.api#enumValue" => "de"}))
+    LanguageCode.add_member(:it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT", traits: {"smithy.api#enumValue" => "it"}))
+    LanguageCode.add_member(:pt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PT", traits: {"smithy.api#enumValue" => "pt"}))
+    LanguageCode.add_member(:ar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AR", traits: {"smithy.api#enumValue" => "ar"}))
+    LanguageCode.add_member(:hi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HI", traits: {"smithy.api#enumValue" => "hi"}))
+    LanguageCode.add_member(:ja, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JA", traits: {"smithy.api#enumValue" => "ja"}))
+    LanguageCode.add_member(:ko, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KO", traits: {"smithy.api#enumValue" => "ko"}))
+    LanguageCode.add_member(:zh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH", traits: {"smithy.api#enumValue" => "zh"}))
+    LanguageCode.add_member(:zh_tw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH_TW", traits: {"smithy.api#enumValue" => "zh-TW"}))
+    ListDatasetsRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    ListDatasetsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetFilter, location_name: "Filter"))
+    ListDatasetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListDatasetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListDatasetsRequest.type = Types::ListDatasetsRequest
-    ListDatasetsResponse.add_member(:dataset_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatasetPropertiesList, location_name: "DatasetPropertiesList"))
-    ListDatasetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDatasetsResponse.add_member(:dataset_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetPropertiesList, location_name: "DatasetPropertiesList"))
+    ListDatasetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDatasetsResponse.type = Types::ListDatasetsResponse
-    ListDocumentClassificationJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassificationJobFilter, location_name: "Filter"))
-    ListDocumentClassificationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListDocumentClassificationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListDocumentClassificationJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassificationJobFilter, location_name: "Filter"))
+    ListDocumentClassificationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListDocumentClassificationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListDocumentClassificationJobsRequest.type = Types::ListDocumentClassificationJobsRequest
-    ListDocumentClassificationJobsResponse.add_member(:document_classification_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassificationJobPropertiesList, location_name: "DocumentClassificationJobPropertiesList"))
-    ListDocumentClassificationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassificationJobsResponse.add_member(:document_classification_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassificationJobPropertiesList, location_name: "DocumentClassificationJobPropertiesList"))
+    ListDocumentClassificationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDocumentClassificationJobsResponse.type = Types::ListDocumentClassificationJobsResponse
-    ListDocumentClassifierSummariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListDocumentClassifierSummariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListDocumentClassifierSummariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListDocumentClassifierSummariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListDocumentClassifierSummariesRequest.type = Types::ListDocumentClassifierSummariesRequest
-    ListDocumentClassifierSummariesResponse.add_member(:document_classifier_summaries_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierSummariesList, location_name: "DocumentClassifierSummariesList"))
-    ListDocumentClassifierSummariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassifierSummariesResponse.add_member(:document_classifier_summaries_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierSummariesList, location_name: "DocumentClassifierSummariesList"))
+    ListDocumentClassifierSummariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDocumentClassifierSummariesResponse.type = Types::ListDocumentClassifierSummariesResponse
-    ListDocumentClassifiersRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierFilter, location_name: "Filter"))
-    ListDocumentClassifiersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListDocumentClassifiersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListDocumentClassifiersRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierFilter, location_name: "Filter"))
+    ListDocumentClassifiersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListDocumentClassifiersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListDocumentClassifiersRequest.type = Types::ListDocumentClassifiersRequest
-    ListDocumentClassifiersResponse.add_member(:document_classifier_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierPropertiesList, location_name: "DocumentClassifierPropertiesList"))
-    ListDocumentClassifiersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassifiersResponse.add_member(:document_classifier_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierPropertiesList, location_name: "DocumentClassifierPropertiesList"))
+    ListDocumentClassifiersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDocumentClassifiersResponse.type = Types::ListDocumentClassifiersResponse
-    ListDominantLanguageDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobFilter, location_name: "Filter"))
-    ListDominantLanguageDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListDominantLanguageDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListDominantLanguageDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DominantLanguageDetectionJobFilter, location_name: "Filter"))
+    ListDominantLanguageDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListDominantLanguageDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListDominantLanguageDetectionJobsRequest.type = Types::ListDominantLanguageDetectionJobsRequest
-    ListDominantLanguageDetectionJobsResponse.add_member(:dominant_language_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobPropertiesList, location_name: "DominantLanguageDetectionJobPropertiesList"))
-    ListDominantLanguageDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDominantLanguageDetectionJobsResponse.add_member(:dominant_language_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DominantLanguageDetectionJobPropertiesList, location_name: "DominantLanguageDetectionJobPropertiesList"))
+    ListDominantLanguageDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListDominantLanguageDetectionJobsResponse.type = Types::ListDominantLanguageDetectionJobsResponse
-    ListEndpointsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointFilter, location_name: "Filter"))
-    ListEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEndpointsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointFilter, location_name: "Filter"))
+    ListEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListEndpointsRequest.type = Types::ListEndpointsRequest
-    ListEndpointsResponse.add_member(:endpoint_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointPropertiesList, location_name: "EndpointPropertiesList"))
-    ListEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEndpointsResponse.add_member(:endpoint_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointPropertiesList, location_name: "EndpointPropertiesList"))
+    ListEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListEndpointsResponse.type = Types::ListEndpointsResponse
-    ListEntitiesDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitiesDetectionJobFilter, location_name: "Filter"))
-    ListEntitiesDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEntitiesDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEntitiesDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitiesDetectionJobFilter, location_name: "Filter"))
+    ListEntitiesDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListEntitiesDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListEntitiesDetectionJobsRequest.type = Types::ListEntitiesDetectionJobsRequest
-    ListEntitiesDetectionJobsResponse.add_member(:entities_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitiesDetectionJobPropertiesList, location_name: "EntitiesDetectionJobPropertiesList"))
-    ListEntitiesDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEntitiesDetectionJobsResponse.add_member(:entities_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitiesDetectionJobPropertiesList, location_name: "EntitiesDetectionJobPropertiesList"))
+    ListEntitiesDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListEntitiesDetectionJobsResponse.type = Types::ListEntitiesDetectionJobsResponse
-    ListEntityRecognizerSummariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEntityRecognizerSummariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEntityRecognizerSummariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListEntityRecognizerSummariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListEntityRecognizerSummariesRequest.type = Types::ListEntityRecognizerSummariesRequest
-    ListEntityRecognizerSummariesResponse.add_member(:entity_recognizer_summaries_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerSummariesList, location_name: "EntityRecognizerSummariesList"))
-    ListEntityRecognizerSummariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEntityRecognizerSummariesResponse.add_member(:entity_recognizer_summaries_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerSummariesList, location_name: "EntityRecognizerSummariesList"))
+    ListEntityRecognizerSummariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListEntityRecognizerSummariesResponse.type = Types::ListEntityRecognizerSummariesResponse
-    ListEntityRecognizersRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerFilter, location_name: "Filter"))
-    ListEntityRecognizersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEntityRecognizersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEntityRecognizersRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerFilter, location_name: "Filter"))
+    ListEntityRecognizersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListEntityRecognizersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListEntityRecognizersRequest.type = Types::ListEntityRecognizersRequest
-    ListEntityRecognizersResponse.add_member(:entity_recognizer_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerPropertiesList, location_name: "EntityRecognizerPropertiesList"))
-    ListEntityRecognizersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEntityRecognizersResponse.add_member(:entity_recognizer_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerPropertiesList, location_name: "EntityRecognizerPropertiesList"))
+    ListEntityRecognizersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListEntityRecognizersResponse.type = Types::ListEntityRecognizersResponse
-    ListEventsDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventsDetectionJobFilter, location_name: "Filter"))
-    ListEventsDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEventsDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEventsDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsDetectionJobFilter, location_name: "Filter"))
+    ListEventsDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListEventsDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListEventsDetectionJobsRequest.type = Types::ListEventsDetectionJobsRequest
-    ListEventsDetectionJobsResponse.add_member(:events_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventsDetectionJobPropertiesList, location_name: "EventsDetectionJobPropertiesList"))
-    ListEventsDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEventsDetectionJobsResponse.add_member(:events_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsDetectionJobPropertiesList, location_name: "EventsDetectionJobPropertiesList"))
+    ListEventsDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListEventsDetectionJobsResponse.type = Types::ListEventsDetectionJobsResponse
-    ListFlywheelIterationHistoryRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
-    ListFlywheelIterationHistoryRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationFilter, location_name: "Filter"))
-    ListFlywheelIterationHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListFlywheelIterationHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListFlywheelIterationHistoryRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
+    ListFlywheelIterationHistoryRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationFilter, location_name: "Filter"))
+    ListFlywheelIterationHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListFlywheelIterationHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListFlywheelIterationHistoryRequest.type = Types::ListFlywheelIterationHistoryRequest
-    ListFlywheelIterationHistoryResponse.add_member(:flywheel_iteration_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationPropertiesList, location_name: "FlywheelIterationPropertiesList"))
-    ListFlywheelIterationHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFlywheelIterationHistoryResponse.add_member(:flywheel_iteration_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationPropertiesList, location_name: "FlywheelIterationPropertiesList"))
+    ListFlywheelIterationHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListFlywheelIterationHistoryResponse.type = Types::ListFlywheelIterationHistoryResponse
-    ListFlywheelsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelFilter, location_name: "Filter"))
-    ListFlywheelsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListFlywheelsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListFlywheelsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelFilter, location_name: "Filter"))
+    ListFlywheelsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListFlywheelsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListFlywheelsRequest.type = Types::ListFlywheelsRequest
-    ListFlywheelsResponse.add_member(:flywheel_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelSummaryList, location_name: "FlywheelSummaryList"))
-    ListFlywheelsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFlywheelsResponse.add_member(:flywheel_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelSummaryList, location_name: "FlywheelSummaryList"))
+    ListFlywheelsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListFlywheelsResponse.type = Types::ListFlywheelsResponse
-    ListKeyPhrasesDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobFilter, location_name: "Filter"))
-    ListKeyPhrasesDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListKeyPhrasesDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListKeyPhrasesDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPhrasesDetectionJobFilter, location_name: "Filter"))
+    ListKeyPhrasesDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListKeyPhrasesDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListKeyPhrasesDetectionJobsRequest.type = Types::ListKeyPhrasesDetectionJobsRequest
-    ListKeyPhrasesDetectionJobsResponse.add_member(:key_phrases_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobPropertiesList, location_name: "KeyPhrasesDetectionJobPropertiesList"))
-    ListKeyPhrasesDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListKeyPhrasesDetectionJobsResponse.add_member(:key_phrases_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPhrasesDetectionJobPropertiesList, location_name: "KeyPhrasesDetectionJobPropertiesList"))
+    ListKeyPhrasesDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListKeyPhrasesDetectionJobsResponse.type = Types::ListKeyPhrasesDetectionJobsResponse
-    ListOfBlockReferences.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockReference)
-    ListOfBlocks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Block)
-    ListOfChildBlocks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChildBlock)
-    ListOfClasses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClass)
-    ListOfDescriptiveMentionIndices.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer)
-    ListOfDetectDominantLanguageResult.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectDominantLanguageItemResult)
-    ListOfDetectEntitiesResult.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectEntitiesItemResult)
-    ListOfDetectKeyPhrasesResult.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectKeyPhrasesItemResult)
-    ListOfDetectSentimentResult.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectSentimentItemResult)
-    ListOfDetectSyntaxResult.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectSyntaxItemResult)
-    ListOfDetectTargetedSentimentResult.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectTargetedSentimentItemResult)
-    ListOfDocumentReadFeatureTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentReadFeatureTypes)
-    ListOfDocumentType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentTypeListItem)
-    ListOfDominantLanguages.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DominantLanguage)
-    ListOfEntities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Entity)
-    ListOfEntityLabels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityLabel)
-    ListOfErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorsListItem)
-    ListOfExtractedCharacters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExtractedCharactersListItem)
-    ListOfKeyPhrases.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyPhrase)
-    ListOfLabels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentLabel)
-    ListOfMentions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedSentimentMention)
-    ListOfPiiEntities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntity)
-    ListOfPiiEntityTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntityType)
-    ListOfRelationships.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelationshipsListItem)
-    ListOfSyntaxTokens.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SyntaxToken)
-    ListOfTargetedSentimentEntities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedSentimentEntity)
-    ListOfTextSegments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSegment)
-    ListOfToxicContent.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ToxicContent)
-    ListOfToxicLabels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ToxicLabels)
-    ListOfWarnings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WarningsListItem)
-    ListPiiEntitiesDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobFilter, location_name: "Filter"))
-    ListPiiEntitiesDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListPiiEntitiesDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListOfBlockReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockReference)
+    ListOfBlocks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Block)
+    ListOfChildBlocks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChildBlock)
+    ListOfClasses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClass)
+    ListOfDescriptiveMentionIndices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer)
+    ListOfDetectDominantLanguageResult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetectDominantLanguageItemResult)
+    ListOfDetectEntitiesResult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetectEntitiesItemResult)
+    ListOfDetectKeyPhrasesResult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetectKeyPhrasesItemResult)
+    ListOfDetectSentimentResult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetectSentimentItemResult)
+    ListOfDetectSyntaxResult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetectSyntaxItemResult)
+    ListOfDetectTargetedSentimentResult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetectTargetedSentimentItemResult)
+    ListOfDocumentReadFeatureTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentReadFeatureTypes)
+    ListOfDocumentType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentTypeListItem)
+    ListOfDominantLanguages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DominantLanguage)
+    ListOfEntities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entity)
+    ListOfEntityLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityLabel)
+    ListOfErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorsListItem)
+    ListOfExtractedCharacters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractedCharactersListItem)
+    ListOfKeyPhrases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPhrase)
+    ListOfLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentLabel)
+    ListOfMentions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedSentimentMention)
+    ListOfPiiEntities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntity)
+    ListOfPiiEntityTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntityType)
+    ListOfRelationships.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipsListItem)
+    ListOfSyntaxTokens.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SyntaxToken)
+    ListOfTargetedSentimentEntities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedSentimentEntity)
+    ListOfTextSegments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextSegment)
+    ListOfToxicContent.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicContent)
+    ListOfToxicLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicLabels)
+    ListOfWarnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WarningsListItem)
+    ListPiiEntitiesDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntitiesDetectionJobFilter, location_name: "Filter"))
+    ListPiiEntitiesDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListPiiEntitiesDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListPiiEntitiesDetectionJobsRequest.type = Types::ListPiiEntitiesDetectionJobsRequest
-    ListPiiEntitiesDetectionJobsResponse.add_member(:pii_entities_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobPropertiesList, location_name: "PiiEntitiesDetectionJobPropertiesList"))
-    ListPiiEntitiesDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListPiiEntitiesDetectionJobsResponse.add_member(:pii_entities_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntitiesDetectionJobPropertiesList, location_name: "PiiEntitiesDetectionJobPropertiesList"))
+    ListPiiEntitiesDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListPiiEntitiesDetectionJobsResponse.type = Types::ListPiiEntitiesDetectionJobsResponse
-    ListSentimentDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentDetectionJobFilter, location_name: "Filter"))
-    ListSentimentDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListSentimentDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListSentimentDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentDetectionJobFilter, location_name: "Filter"))
+    ListSentimentDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListSentimentDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListSentimentDetectionJobsRequest.type = Types::ListSentimentDetectionJobsRequest
-    ListSentimentDetectionJobsResponse.add_member(:sentiment_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentDetectionJobPropertiesList, location_name: "SentimentDetectionJobPropertiesList"))
-    ListSentimentDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListSentimentDetectionJobsResponse.add_member(:sentiment_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentDetectionJobPropertiesList, location_name: "SentimentDetectionJobPropertiesList"))
+    ListSentimentDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListSentimentDetectionJobsResponse.type = Types::ListSentimentDetectionJobsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "ResourceArn"))
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "ResourceArn"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTargetedSentimentDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobFilter, location_name: "Filter"))
-    ListTargetedSentimentDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListTargetedSentimentDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListTargetedSentimentDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedSentimentDetectionJobFilter, location_name: "Filter"))
+    ListTargetedSentimentDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListTargetedSentimentDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListTargetedSentimentDetectionJobsRequest.type = Types::ListTargetedSentimentDetectionJobsRequest
-    ListTargetedSentimentDetectionJobsResponse.add_member(:targeted_sentiment_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobPropertiesList, location_name: "TargetedSentimentDetectionJobPropertiesList"))
-    ListTargetedSentimentDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTargetedSentimentDetectionJobsResponse.add_member(:targeted_sentiment_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedSentimentDetectionJobPropertiesList, location_name: "TargetedSentimentDetectionJobPropertiesList"))
+    ListTargetedSentimentDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListTargetedSentimentDetectionJobsResponse.type = Types::ListTargetedSentimentDetectionJobsResponse
-    ListTopicsDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicsDetectionJobFilter, location_name: "Filter"))
-    ListTopicsDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListTopicsDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListTopicsDetectionJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicsDetectionJobFilter, location_name: "Filter"))
+    ListTopicsDetectionJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListTopicsDetectionJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListTopicsDetectionJobsRequest.type = Types::ListTopicsDetectionJobsRequest
-    ListTopicsDetectionJobsResponse.add_member(:topics_detection_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicsDetectionJobPropertiesList, location_name: "TopicsDetectionJobPropertiesList"))
-    ListTopicsDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListTopicsDetectionJobsResponse.add_member(:topics_detection_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicsDetectionJobPropertiesList, location_name: "TopicsDetectionJobPropertiesList"))
+    ListTopicsDetectionJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListTopicsDetectionJobsResponse.type = Types::ListTopicsDetectionJobsResponse
-    MentionSentiment.add_member(:sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentType, location_name: "Sentiment"))
-    MentionSentiment.add_member(:sentiment_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentScore, location_name: "SentimentScore"))
+    MentionSentiment.add_member(:sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentType, location_name: "Sentiment"))
+    MentionSentiment.add_member(:sentiment_score, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentScore, location_name: "SentimentScore"))
     MentionSentiment.type = Types::MentionSentiment
-    ModelStatus.add_member(:submitted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
-    ModelStatus.add_member(:training, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING", traits: {"smithy.api#enumValue" => "TRAINING"}))
-    ModelStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ModelStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
-    ModelStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    ModelStatus.add_member(:in_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_ERROR", traits: {"smithy.api#enumValue" => "IN_ERROR"}))
-    ModelStatus.add_member(:trained, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINED", traits: {"smithy.api#enumValue" => "TRAINED"}))
-    ModelStatus.add_member(:trained_with_warning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINED_WITH_WARNING", traits: {"smithy.api#enumValue" => "TRAINED_WITH_WARNING"}))
-    ModelType.add_member(:document_classifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOCUMENT_CLASSIFIER", traits: {"smithy.api#enumValue" => "DOCUMENT_CLASSIFIER"}))
-    ModelType.add_member(:entity_recognizer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENTITY_RECOGNIZER", traits: {"smithy.api#enumValue" => "ENTITY_RECOGNIZER"}))
-    OutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    OutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    ModelStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    ModelStatus.add_member(:training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING", traits: {"smithy.api#enumValue" => "TRAINING"}))
+    ModelStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ModelStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
+    ModelStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    ModelStatus.add_member(:in_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_ERROR", traits: {"smithy.api#enumValue" => "IN_ERROR"}))
+    ModelStatus.add_member(:trained, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINED", traits: {"smithy.api#enumValue" => "TRAINED"}))
+    ModelStatus.add_member(:trained_with_warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINED_WITH_WARNING", traits: {"smithy.api#enumValue" => "TRAINED_WITH_WARNING"}))
+    ModelType.add_member(:document_classifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOCUMENT_CLASSIFIER", traits: {"smithy.api#enumValue" => "DOCUMENT_CLASSIFIER"}))
+    ModelType.add_member(:entity_recognizer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENTITY_RECOGNIZER", traits: {"smithy.api#enumValue" => "ENTITY_RECOGNIZER"}))
+    OutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    OutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
     OutputDataConfig.type = Types::OutputDataConfig
-    PageBasedErrorCode.add_member(:textract_bad_page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_BAD_PAGE", traits: {"smithy.api#enumValue" => "TEXTRACT_BAD_PAGE"}))
-    PageBasedErrorCode.add_member(:textract_provisioned_throughput_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED", traits: {"smithy.api#enumValue" => "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"}))
-    PageBasedErrorCode.add_member(:page_characters_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_CHARACTERS_EXCEEDED", traits: {"smithy.api#enumValue" => "PAGE_CHARACTERS_EXCEEDED"}))
-    PageBasedErrorCode.add_member(:page_size_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_SIZE_EXCEEDED", traits: {"smithy.api#enumValue" => "PAGE_SIZE_EXCEEDED"}))
-    PageBasedErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
-    PageBasedWarningCode.add_member(:inferencing_plaintext_with_native_trained_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL", traits: {"smithy.api#enumValue" => "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL"}))
-    PageBasedWarningCode.add_member(:inferencing_native_document_with_plaintext_trained_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL", traits: {"smithy.api#enumValue" => "INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL"}))
-    PartOfSpeechTag.add_member(:tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartOfSpeechTagType, location_name: "Tag"))
-    PartOfSpeechTag.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    PageBasedErrorCode.add_member(:textract_bad_page, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_BAD_PAGE", traits: {"smithy.api#enumValue" => "TEXTRACT_BAD_PAGE"}))
+    PageBasedErrorCode.add_member(:textract_provisioned_throughput_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED", traits: {"smithy.api#enumValue" => "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"}))
+    PageBasedErrorCode.add_member(:page_characters_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_CHARACTERS_EXCEEDED", traits: {"smithy.api#enumValue" => "PAGE_CHARACTERS_EXCEEDED"}))
+    PageBasedErrorCode.add_member(:page_size_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAGE_SIZE_EXCEEDED", traits: {"smithy.api#enumValue" => "PAGE_SIZE_EXCEEDED"}))
+    PageBasedErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    PageBasedWarningCode.add_member(:inferencing_plaintext_with_native_trained_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL", traits: {"smithy.api#enumValue" => "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL"}))
+    PageBasedWarningCode.add_member(:inferencing_native_document_with_plaintext_trained_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL", traits: {"smithy.api#enumValue" => "INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL"}))
+    PartOfSpeechTag.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: PartOfSpeechTagType, location_name: "Tag"))
+    PartOfSpeechTag.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
     PartOfSpeechTag.type = Types::PartOfSpeechTag
-    PartOfSpeechTagType.add_member(:adj, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADJ", traits: {"smithy.api#enumValue" => "ADJ"}))
-    PartOfSpeechTagType.add_member(:adp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADP", traits: {"smithy.api#enumValue" => "ADP"}))
-    PartOfSpeechTagType.add_member(:adv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADV", traits: {"smithy.api#enumValue" => "ADV"}))
-    PartOfSpeechTagType.add_member(:aux, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUX", traits: {"smithy.api#enumValue" => "AUX"}))
-    PartOfSpeechTagType.add_member(:conj, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONJ", traits: {"smithy.api#enumValue" => "CONJ"}))
-    PartOfSpeechTagType.add_member(:cconj, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CCONJ", traits: {"smithy.api#enumValue" => "CCONJ"}))
-    PartOfSpeechTagType.add_member(:det, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DET", traits: {"smithy.api#enumValue" => "DET"}))
-    PartOfSpeechTagType.add_member(:intj, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTJ", traits: {"smithy.api#enumValue" => "INTJ"}))
-    PartOfSpeechTagType.add_member(:noun, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOUN", traits: {"smithy.api#enumValue" => "NOUN"}))
-    PartOfSpeechTagType.add_member(:num, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NUM", traits: {"smithy.api#enumValue" => "NUM"}))
-    PartOfSpeechTagType.add_member(:o, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "O", traits: {"smithy.api#enumValue" => "O"}))
-    PartOfSpeechTagType.add_member(:part, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PART", traits: {"smithy.api#enumValue" => "PART"}))
-    PartOfSpeechTagType.add_member(:pron, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRON", traits: {"smithy.api#enumValue" => "PRON"}))
-    PartOfSpeechTagType.add_member(:propn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROPN", traits: {"smithy.api#enumValue" => "PROPN"}))
-    PartOfSpeechTagType.add_member(:punct, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PUNCT", traits: {"smithy.api#enumValue" => "PUNCT"}))
-    PartOfSpeechTagType.add_member(:sconj, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCONJ", traits: {"smithy.api#enumValue" => "SCONJ"}))
-    PartOfSpeechTagType.add_member(:sym, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYM", traits: {"smithy.api#enumValue" => "SYM"}))
-    PartOfSpeechTagType.add_member(:verb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERB", traits: {"smithy.api#enumValue" => "VERB"}))
-    PiiEntitiesDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    PiiEntitiesDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    PiiEntitiesDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    PiiEntitiesDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    PartOfSpeechTagType.add_member(:adj, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADJ", traits: {"smithy.api#enumValue" => "ADJ"}))
+    PartOfSpeechTagType.add_member(:adp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADP", traits: {"smithy.api#enumValue" => "ADP"}))
+    PartOfSpeechTagType.add_member(:adv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADV", traits: {"smithy.api#enumValue" => "ADV"}))
+    PartOfSpeechTagType.add_member(:aux, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUX", traits: {"smithy.api#enumValue" => "AUX"}))
+    PartOfSpeechTagType.add_member(:conj, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONJ", traits: {"smithy.api#enumValue" => "CONJ"}))
+    PartOfSpeechTagType.add_member(:cconj, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CCONJ", traits: {"smithy.api#enumValue" => "CCONJ"}))
+    PartOfSpeechTagType.add_member(:det, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DET", traits: {"smithy.api#enumValue" => "DET"}))
+    PartOfSpeechTagType.add_member(:intj, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTJ", traits: {"smithy.api#enumValue" => "INTJ"}))
+    PartOfSpeechTagType.add_member(:noun, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOUN", traits: {"smithy.api#enumValue" => "NOUN"}))
+    PartOfSpeechTagType.add_member(:num, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NUM", traits: {"smithy.api#enumValue" => "NUM"}))
+    PartOfSpeechTagType.add_member(:o, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "O", traits: {"smithy.api#enumValue" => "O"}))
+    PartOfSpeechTagType.add_member(:part, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PART", traits: {"smithy.api#enumValue" => "PART"}))
+    PartOfSpeechTagType.add_member(:pron, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRON", traits: {"smithy.api#enumValue" => "PRON"}))
+    PartOfSpeechTagType.add_member(:propn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROPN", traits: {"smithy.api#enumValue" => "PROPN"}))
+    PartOfSpeechTagType.add_member(:punct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PUNCT", traits: {"smithy.api#enumValue" => "PUNCT"}))
+    PartOfSpeechTagType.add_member(:sconj, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCONJ", traits: {"smithy.api#enumValue" => "SCONJ"}))
+    PartOfSpeechTagType.add_member(:sym, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYM", traits: {"smithy.api#enumValue" => "SYM"}))
+    PartOfSpeechTagType.add_member(:verb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERB", traits: {"smithy.api#enumValue" => "VERB"}))
+    PiiEntitiesDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    PiiEntitiesDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    PiiEntitiesDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    PiiEntitiesDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     PiiEntitiesDetectionJobFilter.type = Types::PiiEntitiesDetectionJobFilter
-    PiiEntitiesDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    PiiEntitiesDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    PiiEntitiesDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    PiiEntitiesDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    PiiEntitiesDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    PiiEntitiesDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    PiiEntitiesDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    PiiEntitiesDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    PiiEntitiesDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiOutputDataConfig, location_name: "OutputDataConfig"))
-    PiiEntitiesDetectionJobProperties.add_member(:redaction_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedactionConfig, location_name: "RedactionConfig"))
-    PiiEntitiesDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    PiiEntitiesDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    PiiEntitiesDetectionJobProperties.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntitiesDetectionMode, location_name: "Mode"))
+    PiiEntitiesDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    PiiEntitiesDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    PiiEntitiesDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    PiiEntitiesDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    PiiEntitiesDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    PiiEntitiesDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    PiiEntitiesDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    PiiEntitiesDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    PiiEntitiesDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiOutputDataConfig, location_name: "OutputDataConfig"))
+    PiiEntitiesDetectionJobProperties.add_member(:redaction_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RedactionConfig, location_name: "RedactionConfig"))
+    PiiEntitiesDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    PiiEntitiesDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    PiiEntitiesDetectionJobProperties.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntitiesDetectionMode, location_name: "Mode"))
     PiiEntitiesDetectionJobProperties.type = Types::PiiEntitiesDetectionJobProperties
-    PiiEntitiesDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobProperties)
-    PiiEntitiesDetectionMaskMode.add_member(:mask, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MASK", traits: {"smithy.api#enumValue" => "MASK"}))
-    PiiEntitiesDetectionMaskMode.add_member(:replace_with_pii_entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLACE_WITH_PII_ENTITY_TYPE", traits: {"smithy.api#enumValue" => "REPLACE_WITH_PII_ENTITY_TYPE"}))
-    PiiEntitiesDetectionMode.add_member(:only_redaction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLY_REDACTION", traits: {"smithy.api#enumValue" => "ONLY_REDACTION"}))
-    PiiEntitiesDetectionMode.add_member(:only_offsets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLY_OFFSETS", traits: {"smithy.api#enumValue" => "ONLY_OFFSETS"}))
-    PiiEntity.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
-    PiiEntity.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntityType, location_name: "Type"))
-    PiiEntity.add_member(:begin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
-    PiiEntity.add_member(:end_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    PiiEntitiesDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntitiesDetectionJobProperties)
+    PiiEntitiesDetectionMaskMode.add_member(:mask, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MASK", traits: {"smithy.api#enumValue" => "MASK"}))
+    PiiEntitiesDetectionMaskMode.add_member(:replace_with_pii_entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLACE_WITH_PII_ENTITY_TYPE", traits: {"smithy.api#enumValue" => "REPLACE_WITH_PII_ENTITY_TYPE"}))
+    PiiEntitiesDetectionMode.add_member(:only_redaction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLY_REDACTION", traits: {"smithy.api#enumValue" => "ONLY_REDACTION"}))
+    PiiEntitiesDetectionMode.add_member(:only_offsets, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLY_OFFSETS", traits: {"smithy.api#enumValue" => "ONLY_OFFSETS"}))
+    PiiEntity.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
+    PiiEntity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntityType, location_name: "Type"))
+    PiiEntity.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "BeginOffset"))
+    PiiEntity.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "EndOffset"))
     PiiEntity.type = Types::PiiEntity
-    PiiEntityType.add_member(:bank_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "BANK_ACCOUNT_NUMBER"}))
-    PiiEntityType.add_member(:bank_routing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BANK_ROUTING", traits: {"smithy.api#enumValue" => "BANK_ROUTING"}))
-    PiiEntityType.add_member(:credit_debit_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREDIT_DEBIT_NUMBER", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_NUMBER"}))
-    PiiEntityType.add_member(:credit_debit_cvv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREDIT_DEBIT_CVV", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_CVV"}))
-    PiiEntityType.add_member(:credit_debit_expiry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREDIT_DEBIT_EXPIRY", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_EXPIRY"}))
-    PiiEntityType.add_member(:pin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PIN", traits: {"smithy.api#enumValue" => "PIN"}))
-    PiiEntityType.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
-    PiiEntityType.add_member(:address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDRESS", traits: {"smithy.api#enumValue" => "ADDRESS"}))
-    PiiEntityType.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
-    PiiEntityType.add_member(:phone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE", traits: {"smithy.api#enumValue" => "PHONE"}))
-    PiiEntityType.add_member(:ssn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSN", traits: {"smithy.api#enumValue" => "SSN"}))
-    PiiEntityType.add_member(:date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATE_TIME", traits: {"smithy.api#enumValue" => "DATE_TIME"}))
-    PiiEntityType.add_member(:passport_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSPORT_NUMBER", traits: {"smithy.api#enumValue" => "PASSPORT_NUMBER"}))
-    PiiEntityType.add_member(:driver_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DRIVER_ID", traits: {"smithy.api#enumValue" => "DRIVER_ID"}))
-    PiiEntityType.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
-    PiiEntityType.add_member(:age, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AGE", traits: {"smithy.api#enumValue" => "AGE"}))
-    PiiEntityType.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USERNAME", traits: {"smithy.api#enumValue" => "USERNAME"}))
-    PiiEntityType.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
-    PiiEntityType.add_member(:aws_access_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_ACCESS_KEY", traits: {"smithy.api#enumValue" => "AWS_ACCESS_KEY"}))
-    PiiEntityType.add_member(:aws_secret_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_SECRET_KEY", traits: {"smithy.api#enumValue" => "AWS_SECRET_KEY"}))
-    PiiEntityType.add_member(:ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IP_ADDRESS", traits: {"smithy.api#enumValue" => "IP_ADDRESS"}))
-    PiiEntityType.add_member(:mac_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MAC_ADDRESS", traits: {"smithy.api#enumValue" => "MAC_ADDRESS"}))
-    PiiEntityType.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    PiiEntityType.add_member(:license_plate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LICENSE_PLATE", traits: {"smithy.api#enumValue" => "LICENSE_PLATE"}))
-    PiiEntityType.add_member(:vehicle_identification_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VEHICLE_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "VEHICLE_IDENTIFICATION_NUMBER"}))
-    PiiEntityType.add_member(:uk_national_insurance_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UK_NATIONAL_INSURANCE_NUMBER", traits: {"smithy.api#enumValue" => "UK_NATIONAL_INSURANCE_NUMBER"}))
-    PiiEntityType.add_member(:ca_social_insurance_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CA_SOCIAL_INSURANCE_NUMBER", traits: {"smithy.api#enumValue" => "CA_SOCIAL_INSURANCE_NUMBER"}))
-    PiiEntityType.add_member(:us_individual_tax_identification_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"}))
-    PiiEntityType.add_member(:uk_unique_taxpayer_reference_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", traits: {"smithy.api#enumValue" => "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"}))
-    PiiEntityType.add_member(:in_permanent_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PERMANENT_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "IN_PERMANENT_ACCOUNT_NUMBER"}))
-    PiiEntityType.add_member(:in_nrega, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_NREGA", traits: {"smithy.api#enumValue" => "IN_NREGA"}))
-    PiiEntityType.add_member(:international_bank_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNATIONAL_BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "INTERNATIONAL_BANK_ACCOUNT_NUMBER"}))
-    PiiEntityType.add_member(:swift_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SWIFT_CODE", traits: {"smithy.api#enumValue" => "SWIFT_CODE"}))
-    PiiEntityType.add_member(:uk_national_health_service_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UK_NATIONAL_HEALTH_SERVICE_NUMBER", traits: {"smithy.api#enumValue" => "UK_NATIONAL_HEALTH_SERVICE_NUMBER"}))
-    PiiEntityType.add_member(:ca_health_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CA_HEALTH_NUMBER", traits: {"smithy.api#enumValue" => "CA_HEALTH_NUMBER"}))
-    PiiEntityType.add_member(:in_aadhaar, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_AADHAAR", traits: {"smithy.api#enumValue" => "IN_AADHAAR"}))
-    PiiEntityType.add_member(:in_voter_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_VOTER_NUMBER", traits: {"smithy.api#enumValue" => "IN_VOTER_NUMBER"}))
-    PiiOutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    PiiOutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    PiiEntityType.add_member(:bank_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "BANK_ACCOUNT_NUMBER"}))
+    PiiEntityType.add_member(:bank_routing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BANK_ROUTING", traits: {"smithy.api#enumValue" => "BANK_ROUTING"}))
+    PiiEntityType.add_member(:credit_debit_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREDIT_DEBIT_NUMBER", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_NUMBER"}))
+    PiiEntityType.add_member(:credit_debit_cvv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREDIT_DEBIT_CVV", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_CVV"}))
+    PiiEntityType.add_member(:credit_debit_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREDIT_DEBIT_EXPIRY", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_EXPIRY"}))
+    PiiEntityType.add_member(:pin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PIN", traits: {"smithy.api#enumValue" => "PIN"}))
+    PiiEntityType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
+    PiiEntityType.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDRESS", traits: {"smithy.api#enumValue" => "ADDRESS"}))
+    PiiEntityType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    PiiEntityType.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PHONE", traits: {"smithy.api#enumValue" => "PHONE"}))
+    PiiEntityType.add_member(:ssn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSN", traits: {"smithy.api#enumValue" => "SSN"}))
+    PiiEntityType.add_member(:date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATE_TIME", traits: {"smithy.api#enumValue" => "DATE_TIME"}))
+    PiiEntityType.add_member(:passport_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSPORT_NUMBER", traits: {"smithy.api#enumValue" => "PASSPORT_NUMBER"}))
+    PiiEntityType.add_member(:driver_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DRIVER_ID", traits: {"smithy.api#enumValue" => "DRIVER_ID"}))
+    PiiEntityType.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
+    PiiEntityType.add_member(:age, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AGE", traits: {"smithy.api#enumValue" => "AGE"}))
+    PiiEntityType.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USERNAME", traits: {"smithy.api#enumValue" => "USERNAME"}))
+    PiiEntityType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
+    PiiEntityType.add_member(:aws_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_ACCESS_KEY", traits: {"smithy.api#enumValue" => "AWS_ACCESS_KEY"}))
+    PiiEntityType.add_member(:aws_secret_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_SECRET_KEY", traits: {"smithy.api#enumValue" => "AWS_SECRET_KEY"}))
+    PiiEntityType.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IP_ADDRESS", traits: {"smithy.api#enumValue" => "IP_ADDRESS"}))
+    PiiEntityType.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MAC_ADDRESS", traits: {"smithy.api#enumValue" => "MAC_ADDRESS"}))
+    PiiEntityType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    PiiEntityType.add_member(:license_plate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LICENSE_PLATE", traits: {"smithy.api#enumValue" => "LICENSE_PLATE"}))
+    PiiEntityType.add_member(:vehicle_identification_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VEHICLE_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "VEHICLE_IDENTIFICATION_NUMBER"}))
+    PiiEntityType.add_member(:uk_national_insurance_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UK_NATIONAL_INSURANCE_NUMBER", traits: {"smithy.api#enumValue" => "UK_NATIONAL_INSURANCE_NUMBER"}))
+    PiiEntityType.add_member(:ca_social_insurance_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CA_SOCIAL_INSURANCE_NUMBER", traits: {"smithy.api#enumValue" => "CA_SOCIAL_INSURANCE_NUMBER"}))
+    PiiEntityType.add_member(:us_individual_tax_identification_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"}))
+    PiiEntityType.add_member(:uk_unique_taxpayer_reference_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", traits: {"smithy.api#enumValue" => "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"}))
+    PiiEntityType.add_member(:in_permanent_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PERMANENT_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "IN_PERMANENT_ACCOUNT_NUMBER"}))
+    PiiEntityType.add_member(:in_nrega, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_NREGA", traits: {"smithy.api#enumValue" => "IN_NREGA"}))
+    PiiEntityType.add_member(:international_bank_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNATIONAL_BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "INTERNATIONAL_BANK_ACCOUNT_NUMBER"}))
+    PiiEntityType.add_member(:swift_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SWIFT_CODE", traits: {"smithy.api#enumValue" => "SWIFT_CODE"}))
+    PiiEntityType.add_member(:uk_national_health_service_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UK_NATIONAL_HEALTH_SERVICE_NUMBER", traits: {"smithy.api#enumValue" => "UK_NATIONAL_HEALTH_SERVICE_NUMBER"}))
+    PiiEntityType.add_member(:ca_health_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CA_HEALTH_NUMBER", traits: {"smithy.api#enumValue" => "CA_HEALTH_NUMBER"}))
+    PiiEntityType.add_member(:in_aadhaar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_AADHAAR", traits: {"smithy.api#enumValue" => "IN_AADHAAR"}))
+    PiiEntityType.add_member(:in_voter_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_VOTER_NUMBER", traits: {"smithy.api#enumValue" => "IN_VOTER_NUMBER"}))
+    PiiOutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    PiiOutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
     PiiOutputDataConfig.type = Types::PiiOutputDataConfig
-    Point.add_member(:x, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "X"))
-    Point.add_member(:y, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Y"))
+    Point.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "X"))
+    Point.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Y"))
     Point.type = Types::Point
-    Polygon.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Point)
-    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    PutResourcePolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "ResourcePolicy", traits: {"smithy.api#required" => {}}))
-    PutResourcePolicyRequest.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    Polygon.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Point)
+    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, location_name: "ResourcePolicy", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRevisionId, location_name: "PolicyRevisionId"))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
-    PutResourcePolicyResponse.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyResponse.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRevisionId, location_name: "PolicyRevisionId"))
     PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
-    RedactionConfig.add_member(:pii_entity_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfPiiEntityTypes, location_name: "PiiEntityTypes"))
-    RedactionConfig.add_member(:mask_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntitiesDetectionMaskMode, location_name: "MaskMode"))
-    RedactionConfig.add_member(:mask_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaskCharacter, location_name: "MaskCharacter"))
+    RedactionConfig.add_member(:pii_entity_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfPiiEntityTypes, location_name: "PiiEntityTypes"))
+    RedactionConfig.add_member(:mask_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntitiesDetectionMaskMode, location_name: "MaskMode"))
+    RedactionConfig.add_member(:mask_character, ::Smithy::Schema::Shapes::MemberShape.new(target: MaskCharacter, location_name: "MaskCharacter"))
     RedactionConfig.type = Types::RedactionConfig
-    RelationshipType.add_member(:child, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHILD", traits: {"smithy.api#enumValue" => "CHILD"}))
-    RelationshipsListItem.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "Ids"))
-    RelationshipsListItem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelationshipType, location_name: "Type"))
+    RelationshipType.add_member(:child, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHILD", traits: {"smithy.api#enumValue" => "CHILD"}))
+    RelationshipsListItem.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "Ids"))
+    RelationshipsListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipType, location_name: "Type"))
     RelationshipsListItem.type = Types::RelationshipsListItem
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ResourceLimitExceededException.type = Types::ResourceLimitExceededException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ResourceUnavailableException.type = Types::ResourceUnavailableException
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId)
-    SentimentDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    SentimentDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    SentimentDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    SentimentDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId)
+    SentimentDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    SentimentDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    SentimentDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    SentimentDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     SentimentDetectionJobFilter.type = Types::SentimentDetectionJobFilter
-    SentimentDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    SentimentDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    SentimentDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    SentimentDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    SentimentDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    SentimentDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    SentimentDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    SentimentDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    SentimentDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    SentimentDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    SentimentDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    SentimentDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    SentimentDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    SentimentDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    SentimentDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    SentimentDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    SentimentDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    SentimentDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    SentimentDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    SentimentDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    SentimentDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    SentimentDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    SentimentDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    SentimentDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    SentimentDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    SentimentDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
     SentimentDetectionJobProperties.type = Types::SentimentDetectionJobProperties
-    SentimentDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentDetectionJobProperties)
-    SentimentScore.add_member(:positive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Positive"))
-    SentimentScore.add_member(:negative, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Negative"))
-    SentimentScore.add_member(:neutral, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Neutral"))
-    SentimentScore.add_member(:mixed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Mixed"))
+    SentimentDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentDetectionJobProperties)
+    SentimentScore.add_member(:positive, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Positive"))
+    SentimentScore.add_member(:negative, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Negative"))
+    SentimentScore.add_member(:neutral, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Neutral"))
+    SentimentScore.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Mixed"))
     SentimentScore.type = Types::SentimentScore
-    SentimentType.add_member(:positive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POSITIVE", traits: {"smithy.api#enumValue" => "POSITIVE"}))
-    SentimentType.add_member(:negative, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEGATIVE", traits: {"smithy.api#enumValue" => "NEGATIVE"}))
-    SentimentType.add_member(:neutral, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEUTRAL", traits: {"smithy.api#enumValue" => "NEUTRAL"}))
-    SentimentType.add_member(:mixed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
-    Split.add_member(:train, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAIN", traits: {"smithy.api#enumValue" => "TRAIN"}))
-    Split.add_member(:test, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEST", traits: {"smithy.api#enumValue" => "TEST"}))
-    StartDocumentClassificationJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartDocumentClassificationJobRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
-    StartDocumentClassificationJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartDocumentClassificationJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartDocumentClassificationJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartDocumentClassificationJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartDocumentClassificationJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    StartDocumentClassificationJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    StartDocumentClassificationJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    StartDocumentClassificationJobRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    SentimentType.add_member(:positive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POSITIVE", traits: {"smithy.api#enumValue" => "POSITIVE"}))
+    SentimentType.add_member(:negative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEGATIVE", traits: {"smithy.api#enumValue" => "NEGATIVE"}))
+    SentimentType.add_member(:neutral, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEUTRAL", traits: {"smithy.api#enumValue" => "NEUTRAL"}))
+    SentimentType.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
+    Split.add_member(:train, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAIN", traits: {"smithy.api#enumValue" => "TRAIN"}))
+    Split.add_member(:test, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEST", traits: {"smithy.api#enumValue" => "TEST"}))
+    StartDocumentClassificationJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartDocumentClassificationJobRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    StartDocumentClassificationJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartDocumentClassificationJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartDocumentClassificationJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartDocumentClassificationJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartDocumentClassificationJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartDocumentClassificationJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    StartDocumentClassificationJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    StartDocumentClassificationJobRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     StartDocumentClassificationJobRequest.type = Types::StartDocumentClassificationJobRequest
-    StartDocumentClassificationJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartDocumentClassificationJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartDocumentClassificationJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    StartDocumentClassificationJobResponse.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
+    StartDocumentClassificationJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartDocumentClassificationJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartDocumentClassificationJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    StartDocumentClassificationJobResponse.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
     StartDocumentClassificationJobResponse.type = Types::StartDocumentClassificationJobResponse
-    StartDominantLanguageDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartDominantLanguageDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartDominantLanguageDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartDominantLanguageDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartDominantLanguageDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartDominantLanguageDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    StartDominantLanguageDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    StartDominantLanguageDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartDominantLanguageDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartDominantLanguageDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartDominantLanguageDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartDominantLanguageDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartDominantLanguageDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartDominantLanguageDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartDominantLanguageDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    StartDominantLanguageDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     StartDominantLanguageDetectionJobRequest.type = Types::StartDominantLanguageDetectionJobRequest
-    StartDominantLanguageDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartDominantLanguageDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartDominantLanguageDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartDominantLanguageDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartDominantLanguageDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartDominantLanguageDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartDominantLanguageDetectionJobResponse.type = Types::StartDominantLanguageDetectionJobResponse
-    StartEntitiesDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartEntitiesDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartEntitiesDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartEntitiesDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartEntitiesDetectionJobRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
-    StartEntitiesDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    StartEntitiesDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartEntitiesDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    StartEntitiesDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    StartEntitiesDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    StartEntitiesDetectionJobRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    StartEntitiesDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartEntitiesDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartEntitiesDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartEntitiesDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartEntitiesDetectionJobRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
+    StartEntitiesDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    StartEntitiesDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartEntitiesDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartEntitiesDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    StartEntitiesDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    StartEntitiesDetectionJobRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     StartEntitiesDetectionJobRequest.type = Types::StartEntitiesDetectionJobRequest
-    StartEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartEntitiesDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    StartEntitiesDetectionJobResponse.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
+    StartEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartEntitiesDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    StartEntitiesDetectionJobResponse.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
     StartEntitiesDetectionJobResponse.type = Types::StartEntitiesDetectionJobResponse
-    StartEventsDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartEventsDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartEventsDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartEventsDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartEventsDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    StartEventsDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartEventsDetectionJobRequest.add_member(:target_event_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetEventTypes, location_name: "TargetEventTypes", traits: {"smithy.api#required" => {}}))
-    StartEventsDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartEventsDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartEventsDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartEventsDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartEventsDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartEventsDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    StartEventsDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartEventsDetectionJobRequest.add_member(:target_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetEventTypes, location_name: "TargetEventTypes", traits: {"smithy.api#required" => {}}))
+    StartEventsDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     StartEventsDetectionJobRequest.type = Types::StartEventsDetectionJobRequest
-    StartEventsDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartEventsDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartEventsDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartEventsDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartEventsDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartEventsDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartEventsDetectionJobResponse.type = Types::StartEventsDetectionJobResponse
-    StartFlywheelIterationRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
-    StartFlywheelIterationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken"))
+    StartFlywheelIterationRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
+    StartFlywheelIterationRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken"))
     StartFlywheelIterationRequest.type = Types::StartFlywheelIterationRequest
-    StartFlywheelIterationResponse.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
-    StartFlywheelIterationResponse.add_member(:flywheel_iteration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelIterationId, location_name: "FlywheelIterationId"))
+    StartFlywheelIterationResponse.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    StartFlywheelIterationResponse.add_member(:flywheel_iteration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelIterationId, location_name: "FlywheelIterationId"))
     StartFlywheelIterationResponse.type = Types::StartFlywheelIterationResponse
-    StartKeyPhrasesDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartKeyPhrasesDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartKeyPhrasesDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartKeyPhrasesDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartKeyPhrasesDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    StartKeyPhrasesDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartKeyPhrasesDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    StartKeyPhrasesDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    StartKeyPhrasesDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartKeyPhrasesDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartKeyPhrasesDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartKeyPhrasesDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartKeyPhrasesDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartKeyPhrasesDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    StartKeyPhrasesDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartKeyPhrasesDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartKeyPhrasesDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    StartKeyPhrasesDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     StartKeyPhrasesDetectionJobRequest.type = Types::StartKeyPhrasesDetectionJobRequest
-    StartKeyPhrasesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartKeyPhrasesDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartKeyPhrasesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartKeyPhrasesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartKeyPhrasesDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartKeyPhrasesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartKeyPhrasesDetectionJobResponse.type = Types::StartKeyPhrasesDetectionJobResponse
-    StartPiiEntitiesDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartPiiEntitiesDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartPiiEntitiesDetectionJobRequest.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PiiEntitiesDetectionMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
-    StartPiiEntitiesDetectionJobRequest.add_member(:redaction_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedactionConfig, location_name: "RedactionConfig"))
-    StartPiiEntitiesDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartPiiEntitiesDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartPiiEntitiesDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    StartPiiEntitiesDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartPiiEntitiesDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartPiiEntitiesDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartPiiEntitiesDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartPiiEntitiesDetectionJobRequest.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntitiesDetectionMode, location_name: "Mode", traits: {"smithy.api#required" => {}}))
+    StartPiiEntitiesDetectionJobRequest.add_member(:redaction_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RedactionConfig, location_name: "RedactionConfig"))
+    StartPiiEntitiesDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartPiiEntitiesDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartPiiEntitiesDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    StartPiiEntitiesDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartPiiEntitiesDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     StartPiiEntitiesDetectionJobRequest.type = Types::StartPiiEntitiesDetectionJobRequest
-    StartPiiEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartPiiEntitiesDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartPiiEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartPiiEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartPiiEntitiesDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartPiiEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartPiiEntitiesDetectionJobResponse.type = Types::StartPiiEntitiesDetectionJobResponse
-    StartSentimentDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartSentimentDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartSentimentDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartSentimentDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartSentimentDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    StartSentimentDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartSentimentDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    StartSentimentDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    StartSentimentDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartSentimentDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartSentimentDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartSentimentDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartSentimentDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartSentimentDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    StartSentimentDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartSentimentDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartSentimentDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    StartSentimentDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     StartSentimentDetectionJobRequest.type = Types::StartSentimentDetectionJobRequest
-    StartSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartSentimentDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartSentimentDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartSentimentDetectionJobResponse.type = Types::StartSentimentDetectionJobResponse
-    StartTargetedSentimentDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartTargetedSentimentDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartTargetedSentimentDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartTargetedSentimentDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartTargetedSentimentDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    StartTargetedSentimentDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartTargetedSentimentDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    StartTargetedSentimentDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    StartTargetedSentimentDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartTargetedSentimentDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartTargetedSentimentDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartTargetedSentimentDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    StartTargetedSentimentDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartTargetedSentimentDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    StartTargetedSentimentDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     StartTargetedSentimentDetectionJobRequest.type = Types::StartTargetedSentimentDetectionJobRequest
-    StartTargetedSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartTargetedSentimentDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartTargetedSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartTargetedSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartTargetedSentimentDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartTargetedSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartTargetedSentimentDetectionJobResponse.type = Types::StartTargetedSentimentDetectionJobResponse
-    StartTopicsDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartTopicsDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartTopicsDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartTopicsDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartTopicsDetectionJobRequest.add_member(:number_of_topics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberOfTopicsInteger, location_name: "NumberOfTopics"))
-    StartTopicsDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartTopicsDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    StartTopicsDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
-    StartTopicsDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartTopicsDetectionJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartTopicsDetectionJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartTopicsDetectionJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartTopicsDetectionJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartTopicsDetectionJobRequest.add_member(:number_of_topics, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfTopicsInteger, location_name: "NumberOfTopics"))
+    StartTopicsDetectionJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenString, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartTopicsDetectionJobRequest.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    StartTopicsDetectionJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
+    StartTopicsDetectionJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     StartTopicsDetectionJobRequest.type = Types::StartTopicsDetectionJobRequest
-    StartTopicsDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartTopicsDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    StartTopicsDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartTopicsDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartTopicsDetectionJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    StartTopicsDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartTopicsDetectionJobResponse.type = Types::StartTopicsDetectionJobResponse
-    StopDominantLanguageDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopDominantLanguageDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopDominantLanguageDetectionJobRequest.type = Types::StopDominantLanguageDetectionJobRequest
-    StopDominantLanguageDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopDominantLanguageDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopDominantLanguageDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopDominantLanguageDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopDominantLanguageDetectionJobResponse.type = Types::StopDominantLanguageDetectionJobResponse
-    StopEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopEntitiesDetectionJobRequest.type = Types::StopEntitiesDetectionJobRequest
-    StopEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopEntitiesDetectionJobResponse.type = Types::StopEntitiesDetectionJobResponse
-    StopEventsDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopEventsDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopEventsDetectionJobRequest.type = Types::StopEventsDetectionJobRequest
-    StopEventsDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopEventsDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopEventsDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopEventsDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopEventsDetectionJobResponse.type = Types::StopEventsDetectionJobResponse
-    StopKeyPhrasesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopKeyPhrasesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopKeyPhrasesDetectionJobRequest.type = Types::StopKeyPhrasesDetectionJobRequest
-    StopKeyPhrasesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopKeyPhrasesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopKeyPhrasesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopKeyPhrasesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopKeyPhrasesDetectionJobResponse.type = Types::StopKeyPhrasesDetectionJobResponse
-    StopPiiEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopPiiEntitiesDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopPiiEntitiesDetectionJobRequest.type = Types::StopPiiEntitiesDetectionJobRequest
-    StopPiiEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopPiiEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopPiiEntitiesDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopPiiEntitiesDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopPiiEntitiesDetectionJobResponse.type = Types::StopPiiEntitiesDetectionJobResponse
-    StopSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopSentimentDetectionJobRequest.type = Types::StopSentimentDetectionJobRequest
-    StopSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopSentimentDetectionJobResponse.type = Types::StopSentimentDetectionJobResponse
-    StopTargetedSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopTargetedSentimentDetectionJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopTargetedSentimentDetectionJobRequest.type = Types::StopTargetedSentimentDetectionJobRequest
-    StopTargetedSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopTargetedSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopTargetedSentimentDetectionJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopTargetedSentimentDetectionJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopTargetedSentimentDetectionJobResponse.type = Types::StopTargetedSentimentDetectionJobResponse
-    StopTrainingDocumentClassifierRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn", traits: {"smithy.api#required" => {}}))
+    StopTrainingDocumentClassifierRequest.add_member(:document_classifier_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassifierArn, location_name: "DocumentClassifierArn", traits: {"smithy.api#required" => {}}))
     StopTrainingDocumentClassifierRequest.type = Types::StopTrainingDocumentClassifierRequest
     StopTrainingDocumentClassifierResponse.type = Types::StopTrainingDocumentClassifierResponse
-    StopTrainingEntityRecognizerRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn", traits: {"smithy.api#required" => {}}))
+    StopTrainingEntityRecognizerRequest.add_member(:entity_recognizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognizerArn, location_name: "EntityRecognizerArn", traits: {"smithy.api#required" => {}}))
     StopTrainingEntityRecognizerRequest.type = Types::StopTrainingEntityRecognizerRequest
     StopTrainingEntityRecognizerResponse.type = Types::StopTrainingEntityRecognizerResponse
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Subnets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
-    SyntaxLanguageCode.add_member(:en, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN", traits: {"smithy.api#enumValue" => "en"}))
-    SyntaxLanguageCode.add_member(:es, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES", traits: {"smithy.api#enumValue" => "es"}))
-    SyntaxLanguageCode.add_member(:fr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR", traits: {"smithy.api#enumValue" => "fr"}))
-    SyntaxLanguageCode.add_member(:de, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE", traits: {"smithy.api#enumValue" => "de"}))
-    SyntaxLanguageCode.add_member(:it, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT", traits: {"smithy.api#enumValue" => "it"}))
-    SyntaxLanguageCode.add_member(:pt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PT", traits: {"smithy.api#enumValue" => "pt"}))
-    SyntaxToken.add_member(:token_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "TokenId"))
-    SyntaxToken.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Text"))
-    SyntaxToken.add_member(:begin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
-    SyntaxToken.add_member(:end_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
-    SyntaxToken.add_member(:part_of_speech, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartOfSpeechTag, location_name: "PartOfSpeech"))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId)
+    SyntaxLanguageCode.add_member(:en, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN", traits: {"smithy.api#enumValue" => "en"}))
+    SyntaxLanguageCode.add_member(:es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES", traits: {"smithy.api#enumValue" => "es"}))
+    SyntaxLanguageCode.add_member(:fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR", traits: {"smithy.api#enumValue" => "fr"}))
+    SyntaxLanguageCode.add_member(:de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE", traits: {"smithy.api#enumValue" => "de"}))
+    SyntaxLanguageCode.add_member(:it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT", traits: {"smithy.api#enumValue" => "it"}))
+    SyntaxLanguageCode.add_member(:pt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PT", traits: {"smithy.api#enumValue" => "pt"}))
+    SyntaxToken.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "TokenId"))
+    SyntaxToken.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Text"))
+    SyntaxToken.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "BeginOffset"))
+    SyntaxToken.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "EndOffset"))
+    SyntaxToken.add_member(:part_of_speech, ::Smithy::Schema::Shapes::MemberShape.new(target: PartOfSpeechTag, location_name: "PartOfSpeech"))
     SyntaxToken.type = Types::SyntaxToken
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetEventTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeString)
-    TargetedSentimentDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    TargetedSentimentDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    TargetedSentimentDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    TargetedSentimentDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    TargetEventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeString)
+    TargetedSentimentDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    TargetedSentimentDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    TargetedSentimentDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    TargetedSentimentDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     TargetedSentimentDetectionJobFilter.type = Types::TargetedSentimentDetectionJobFilter
-    TargetedSentimentDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    TargetedSentimentDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    TargetedSentimentDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    TargetedSentimentDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    TargetedSentimentDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    TargetedSentimentDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    TargetedSentimentDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    TargetedSentimentDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    TargetedSentimentDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    TargetedSentimentDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    TargetedSentimentDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    TargetedSentimentDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    TargetedSentimentDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    TargetedSentimentDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    TargetedSentimentDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    TargetedSentimentDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    TargetedSentimentDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    TargetedSentimentDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    TargetedSentimentDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    TargetedSentimentDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    TargetedSentimentDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    TargetedSentimentDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    TargetedSentimentDetectionJobProperties.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    TargetedSentimentDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    TargetedSentimentDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    TargetedSentimentDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
     TargetedSentimentDetectionJobProperties.type = Types::TargetedSentimentDetectionJobProperties
-    TargetedSentimentDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobProperties)
-    TargetedSentimentEntity.add_member(:descriptive_mention_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDescriptiveMentionIndices, location_name: "DescriptiveMentionIndex"))
-    TargetedSentimentEntity.add_member(:mentions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfMentions, location_name: "Mentions"))
+    TargetedSentimentDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedSentimentDetectionJobProperties)
+    TargetedSentimentEntity.add_member(:descriptive_mention_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDescriptiveMentionIndices, location_name: "DescriptiveMentionIndex"))
+    TargetedSentimentEntity.add_member(:mentions, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfMentions, location_name: "Mentions"))
     TargetedSentimentEntity.type = Types::TargetedSentimentEntity
-    TargetedSentimentEntityType.add_member(:person, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSON", traits: {"smithy.api#enumValue" => "PERSON"}))
-    TargetedSentimentEntityType.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
-    TargetedSentimentEntityType.add_member(:organization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
-    TargetedSentimentEntityType.add_member(:facility, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FACILITY", traits: {"smithy.api#enumValue" => "FACILITY"}))
-    TargetedSentimentEntityType.add_member(:brand, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BRAND", traits: {"smithy.api#enumValue" => "BRAND"}))
-    TargetedSentimentEntityType.add_member(:commercial_item, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMMERCIAL_ITEM", traits: {"smithy.api#enumValue" => "COMMERCIAL_ITEM"}))
-    TargetedSentimentEntityType.add_member(:movie, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MOVIE", traits: {"smithy.api#enumValue" => "MOVIE"}))
-    TargetedSentimentEntityType.add_member(:music, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MUSIC", traits: {"smithy.api#enumValue" => "MUSIC"}))
-    TargetedSentimentEntityType.add_member(:book, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOK", traits: {"smithy.api#enumValue" => "BOOK"}))
-    TargetedSentimentEntityType.add_member(:software, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SOFTWARE", traits: {"smithy.api#enumValue" => "SOFTWARE"}))
-    TargetedSentimentEntityType.add_member(:game, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GAME", traits: {"smithy.api#enumValue" => "GAME"}))
-    TargetedSentimentEntityType.add_member(:personal_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSONAL_TITLE", traits: {"smithy.api#enumValue" => "PERSONAL_TITLE"}))
-    TargetedSentimentEntityType.add_member(:event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
-    TargetedSentimentEntityType.add_member(:date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
-    TargetedSentimentEntityType.add_member(:quantity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUANTITY", traits: {"smithy.api#enumValue" => "QUANTITY"}))
-    TargetedSentimentEntityType.add_member(:attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ATTRIBUTE", traits: {"smithy.api#enumValue" => "ATTRIBUTE"}))
-    TargetedSentimentEntityType.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
-    TargetedSentimentMention.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
-    TargetedSentimentMention.add_member(:group_score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "GroupScore"))
-    TargetedSentimentMention.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Text"))
-    TargetedSentimentMention.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedSentimentEntityType, location_name: "Type"))
-    TargetedSentimentMention.add_member(:mention_sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MentionSentiment, location_name: "MentionSentiment"))
-    TargetedSentimentMention.add_member(:begin_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
-    TargetedSentimentMention.add_member(:end_offset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    TargetedSentimentEntityType.add_member(:person, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSON", traits: {"smithy.api#enumValue" => "PERSON"}))
+    TargetedSentimentEntityType.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCATION", traits: {"smithy.api#enumValue" => "LOCATION"}))
+    TargetedSentimentEntityType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
+    TargetedSentimentEntityType.add_member(:facility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FACILITY", traits: {"smithy.api#enumValue" => "FACILITY"}))
+    TargetedSentimentEntityType.add_member(:brand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BRAND", traits: {"smithy.api#enumValue" => "BRAND"}))
+    TargetedSentimentEntityType.add_member(:commercial_item, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMMERCIAL_ITEM", traits: {"smithy.api#enumValue" => "COMMERCIAL_ITEM"}))
+    TargetedSentimentEntityType.add_member(:movie, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MOVIE", traits: {"smithy.api#enumValue" => "MOVIE"}))
+    TargetedSentimentEntityType.add_member(:music, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MUSIC", traits: {"smithy.api#enumValue" => "MUSIC"}))
+    TargetedSentimentEntityType.add_member(:book, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOOK", traits: {"smithy.api#enumValue" => "BOOK"}))
+    TargetedSentimentEntityType.add_member(:software, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SOFTWARE", traits: {"smithy.api#enumValue" => "SOFTWARE"}))
+    TargetedSentimentEntityType.add_member(:game, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GAME", traits: {"smithy.api#enumValue" => "GAME"}))
+    TargetedSentimentEntityType.add_member(:personal_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PERSONAL_TITLE", traits: {"smithy.api#enumValue" => "PERSONAL_TITLE"}))
+    TargetedSentimentEntityType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
+    TargetedSentimentEntityType.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
+    TargetedSentimentEntityType.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUANTITY", traits: {"smithy.api#enumValue" => "QUANTITY"}))
+    TargetedSentimentEntityType.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ATTRIBUTE", traits: {"smithy.api#enumValue" => "ATTRIBUTE"}))
+    TargetedSentimentEntityType.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
+    TargetedSentimentMention.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
+    TargetedSentimentMention.add_member(:group_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "GroupScore"))
+    TargetedSentimentMention.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Text"))
+    TargetedSentimentMention.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedSentimentEntityType, location_name: "Type"))
+    TargetedSentimentMention.add_member(:mention_sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: MentionSentiment, location_name: "MentionSentiment"))
+    TargetedSentimentMention.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "BeginOffset"))
+    TargetedSentimentMention.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "EndOffset"))
     TargetedSentimentMention.type = Types::TargetedSentimentMention
-    TaskConfig.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
-    TaskConfig.add_member(:document_classification_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentClassificationConfig, location_name: "DocumentClassificationConfig"))
-    TaskConfig.add_member(:entity_recognition_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityRecognitionConfig, location_name: "EntityRecognitionConfig"))
+    TaskConfig.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    TaskConfig.add_member(:document_classification_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentClassificationConfig, location_name: "DocumentClassificationConfig"))
+    TaskConfig.add_member(:entity_recognition_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRecognitionConfig, location_name: "EntityRecognitionConfig"))
     TaskConfig.type = Types::TaskConfig
-    TextSegment.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    TextSegment.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerInputString, location_name: "Text", traits: {"smithy.api#required" => {}}))
     TextSegment.type = Types::TextSegment
-    TextSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TextSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     TextSizeLimitExceededException.type = Types::TextSizeLimitExceededException
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    TooManyTagKeysException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyTagKeysException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     TooManyTagKeysException.type = Types::TooManyTagKeysException
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    TopicsDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    TopicsDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    TopicsDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
-    TopicsDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
+    TopicsDetectionJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    TopicsDetectionJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    TopicsDetectionJobFilter.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeBefore"))
+    TopicsDetectionJobFilter.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTimeAfter"))
     TopicsDetectionJobFilter.type = Types::TopicsDetectionJobFilter
-    TopicsDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    TopicsDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
-    TopicsDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    TopicsDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    TopicsDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
-    TopicsDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTime"))
-    TopicsDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    TopicsDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    TopicsDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    TopicsDetectionJobProperties.add_member(:number_of_topics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTopics"))
-    TopicsDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    TopicsDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    TopicsDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    TopicsDetectionJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    TopicsDetectionJobProperties.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "JobArn"))
+    TopicsDetectionJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    TopicsDetectionJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    TopicsDetectionJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyLengthString, location_name: "Message"))
+    TopicsDetectionJobProperties.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmitTime"))
+    TopicsDetectionJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    TopicsDetectionJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    TopicsDetectionJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    TopicsDetectionJobProperties.add_member(:number_of_topics, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NumberOfTopics"))
+    TopicsDetectionJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    TopicsDetectionJobProperties.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    TopicsDetectionJobProperties.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
     TopicsDetectionJobProperties.type = Types::TopicsDetectionJobProperties
-    TopicsDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicsDetectionJobProperties)
-    ToxicContent.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ToxicContentType, location_name: "Name"))
-    ToxicContent.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    TopicsDetectionJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicsDetectionJobProperties)
+    ToxicContent.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicContentType, location_name: "Name"))
+    ToxicContent.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Score"))
     ToxicContent.type = Types::ToxicContent
-    ToxicContentType.add_member(:graphic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GRAPHIC", traits: {"smithy.api#enumValue" => "GRAPHIC"}))
-    ToxicContentType.add_member(:harassment_or_abuse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HARASSMENT_OR_ABUSE", traits: {"smithy.api#enumValue" => "HARASSMENT_OR_ABUSE"}))
-    ToxicContentType.add_member(:hate_speech, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HATE_SPEECH", traits: {"smithy.api#enumValue" => "HATE_SPEECH"}))
-    ToxicContentType.add_member(:insult, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSULT", traits: {"smithy.api#enumValue" => "INSULT"}))
-    ToxicContentType.add_member(:profanity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROFANITY", traits: {"smithy.api#enumValue" => "PROFANITY"}))
-    ToxicContentType.add_member(:sexual, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEXUAL", traits: {"smithy.api#enumValue" => "SEXUAL"}))
-    ToxicContentType.add_member(:violence_or_threat, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VIOLENCE_OR_THREAT", traits: {"smithy.api#enumValue" => "VIOLENCE_OR_THREAT"}))
-    ToxicLabels.add_member(:labels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfToxicContent, location_name: "Labels"))
-    ToxicLabels.add_member(:toxicity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Float, location_name: "Toxicity"))
+    ToxicContentType.add_member(:graphic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GRAPHIC", traits: {"smithy.api#enumValue" => "GRAPHIC"}))
+    ToxicContentType.add_member(:harassment_or_abuse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HARASSMENT_OR_ABUSE", traits: {"smithy.api#enumValue" => "HARASSMENT_OR_ABUSE"}))
+    ToxicContentType.add_member(:hate_speech, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HATE_SPEECH", traits: {"smithy.api#enumValue" => "HATE_SPEECH"}))
+    ToxicContentType.add_member(:insult, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSULT", traits: {"smithy.api#enumValue" => "INSULT"}))
+    ToxicContentType.add_member(:profanity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROFANITY", traits: {"smithy.api#enumValue" => "PROFANITY"}))
+    ToxicContentType.add_member(:sexual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEXUAL", traits: {"smithy.api#enumValue" => "SEXUAL"}))
+    ToxicContentType.add_member(:violence_or_threat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VIOLENCE_OR_THREAT", traits: {"smithy.api#enumValue" => "VIOLENCE_OR_THREAT"}))
+    ToxicLabels.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfToxicContent, location_name: "Labels"))
+    ToxicLabels.add_member(:toxicity, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, location_name: "Toxicity"))
     ToxicLabels.type = Types::ToxicLabels
-    UnsupportedLanguageException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedLanguageException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     UnsupportedLanguageException.type = Types::UnsupportedLanguageException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateDataSecurityConfig.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
-    UpdateDataSecurityConfig.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
-    UpdateDataSecurityConfig.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    UpdateDataSecurityConfig.add_member(:model_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "ModelKmsKeyId"))
+    UpdateDataSecurityConfig.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    UpdateDataSecurityConfig.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, location_name: "VpcConfig"))
     UpdateDataSecurityConfig.type = Types::UpdateDataSecurityConfig
-    UpdateEndpointRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
-    UpdateEndpointRequest.add_member(:desired_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "DesiredModelArn"))
-    UpdateEndpointRequest.add_member(:desired_inference_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "DesiredInferenceUnits"))
-    UpdateEndpointRequest.add_member(:desired_data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DesiredDataAccessRoleArn"))
-    UpdateEndpointRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
+    UpdateEndpointRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendEndpointArn, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
+    UpdateEndpointRequest.add_member(:desired_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "DesiredModelArn"))
+    UpdateEndpointRequest.add_member(:desired_inference_units, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceUnitsInteger, location_name: "DesiredInferenceUnits"))
+    UpdateEndpointRequest.add_member(:desired_data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DesiredDataAccessRoleArn"))
+    UpdateEndpointRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     UpdateEndpointRequest.type = Types::UpdateEndpointRequest
-    UpdateEndpointResponse.add_member(:desired_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "DesiredModelArn"))
+    UpdateEndpointResponse.add_member(:desired_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "DesiredModelArn"))
     UpdateEndpointResponse.type = Types::UpdateEndpointResponse
-    UpdateFlywheelRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
-    UpdateFlywheelRequest.add_member(:active_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ActiveModelArn"))
-    UpdateFlywheelRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    UpdateFlywheelRequest.add_member(:data_security_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDataSecurityConfig, location_name: "DataSecurityConfig"))
+    UpdateFlywheelRequest.add_member(:flywheel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendFlywheelArn, location_name: "FlywheelArn", traits: {"smithy.api#required" => {}}))
+    UpdateFlywheelRequest.add_member(:active_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendModelArn, location_name: "ActiveModelArn"))
+    UpdateFlywheelRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    UpdateFlywheelRequest.add_member(:data_security_config, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDataSecurityConfig, location_name: "DataSecurityConfig"))
     UpdateFlywheelRequest.type = Types::UpdateFlywheelRequest
-    UpdateFlywheelResponse.add_member(:flywheel_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlywheelProperties, location_name: "FlywheelProperties"))
+    UpdateFlywheelResponse.add_member(:flywheel_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: FlywheelProperties, location_name: "FlywheelProperties"))
     UpdateFlywheelResponse.type = Types::UpdateFlywheelResponse
-    VpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds", traits: {"smithy.api#required" => {}}))
-    VpcConfig.add_member(:subnets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets", traits: {"smithy.api#required" => {}}))
+    VpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds", traits: {"smithy.api#required" => {}}))
+    VpcConfig.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets", traits: {"smithy.api#required" => {}}))
     VpcConfig.type = Types::VpcConfig
-    WarningsListItem.add_member(:page, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
-    WarningsListItem.add_member(:warn_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageBasedWarningCode, location_name: "WarnCode"))
-    WarningsListItem.add_member(:warn_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "WarnMessage"))
+    WarningsListItem.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Page"))
+    WarningsListItem.add_member(:warn_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PageBasedWarningCode, location_name: "WarnCode"))
+    WarningsListItem.add_member(:warn_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "WarnMessage"))
     WarningsListItem.type = Types::WarningsListItem
 
     Comprehend20171127 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -1922,1008 +1922,1008 @@ module Aws::Comprehend
       service.add_operation(:batch_detect_dominant_language, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#BatchDetectDominantLanguage"
         operation.name = "BatchDetectDominantLanguage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectDominantLanguageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectDominantLanguageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        operation.input = BatchDetectDominantLanguageRequest
+        operation.output = BatchDetectDominantLanguageResponse
+        operation.errors << BatchSizeLimitExceededException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:batch_detect_entities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#BatchDetectEntities"
         operation.name = "BatchDetectEntities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectEntitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectEntitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = BatchDetectEntitiesRequest
+        operation.output = BatchDetectEntitiesResponse
+        operation.errors << BatchSizeLimitExceededException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:batch_detect_key_phrases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#BatchDetectKeyPhrases"
         operation.name = "BatchDetectKeyPhrases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectKeyPhrasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectKeyPhrasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = BatchDetectKeyPhrasesRequest
+        operation.output = BatchDetectKeyPhrasesResponse
+        operation.errors << BatchSizeLimitExceededException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:batch_detect_sentiment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#BatchDetectSentiment"
         operation.name = "BatchDetectSentiment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectSentimentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectSentimentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = BatchDetectSentimentRequest
+        operation.output = BatchDetectSentimentResponse
+        operation.errors << BatchSizeLimitExceededException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:batch_detect_syntax, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#BatchDetectSyntax"
         operation.name = "BatchDetectSyntax"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectSyntaxRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectSyntaxResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = BatchDetectSyntaxRequest
+        operation.output = BatchDetectSyntaxResponse
+        operation.errors << BatchSizeLimitExceededException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:batch_detect_targeted_sentiment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#BatchDetectTargetedSentiment"
         operation.name = "BatchDetectTargetedSentiment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectTargetedSentimentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDetectTargetedSentimentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = BatchDetectTargetedSentimentRequest
+        operation.output = BatchDetectTargetedSentimentResponse
+        operation.errors << BatchSizeLimitExceededException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:classify_document, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ClassifyDocument"
         operation.name = "ClassifyDocument"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClassifyDocumentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClassifyDocumentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        operation.input = ClassifyDocumentRequest
+        operation.output = ClassifyDocumentResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TextSizeLimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:contains_pii_entities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ContainsPiiEntities"
         operation.name = "ContainsPiiEntities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainsPiiEntitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainsPiiEntitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = ContainsPiiEntitiesRequest
+        operation.output = ContainsPiiEntitiesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:create_dataset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#CreateDataset"
         operation.name = "CreateDataset"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDatasetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDatasetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreateDatasetRequest
+        operation.output = CreateDatasetResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:create_document_classifier, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#CreateDocumentClassifier"
         operation.name = "CreateDocumentClassifier"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDocumentClassifierRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDocumentClassifierResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = CreateDocumentClassifierRequest
+        operation.output = CreateDocumentClassifierResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:create_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#CreateEndpoint"
         operation.name = "CreateEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreateEndpointRequest
+        operation.output = CreateEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:create_entity_recognizer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#CreateEntityRecognizer"
         operation.name = "CreateEntityRecognizer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEntityRecognizerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEntityRecognizerResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = CreateEntityRecognizerRequest
+        operation.output = CreateEntityRecognizerResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:create_flywheel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#CreateFlywheel"
         operation.name = "CreateFlywheel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFlywheelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateFlywheelResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = CreateFlywheelRequest
+        operation.output = CreateFlywheelResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:delete_document_classifier, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DeleteDocumentClassifier"
         operation.name = "DeleteDocumentClassifier"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDocumentClassifierRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDocumentClassifierResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteDocumentClassifierRequest
+        operation.output = DeleteDocumentClassifierResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DeleteEndpoint"
         operation.name = "DeleteEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteEndpointRequest
+        operation.output = DeleteEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_entity_recognizer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DeleteEntityRecognizer"
         operation.name = "DeleteEntityRecognizer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEntityRecognizerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEntityRecognizerResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteEntityRecognizerRequest
+        operation.output = DeleteEntityRecognizerResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_flywheel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DeleteFlywheel"
         operation.name = "DeleteFlywheel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFlywheelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFlywheelResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteFlywheelRequest
+        operation.output = DeleteFlywheelResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DeleteResourcePolicy"
         operation.name = "DeleteResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteResourcePolicyRequest
+        operation.output = DeleteResourcePolicyResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:describe_dataset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeDataset"
         operation.name = "DescribeDataset"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDatasetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDatasetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeDatasetRequest
+        operation.output = DescribeDatasetResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_document_classification_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeDocumentClassificationJob"
         operation.name = "DescribeDocumentClassificationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDocumentClassificationJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDocumentClassificationJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeDocumentClassificationJobRequest
+        operation.output = DescribeDocumentClassificationJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_document_classifier, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeDocumentClassifier"
         operation.name = "DescribeDocumentClassifier"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDocumentClassifierRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDocumentClassifierResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeDocumentClassifierRequest
+        operation.output = DescribeDocumentClassifierResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_dominant_language_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeDominantLanguageDetectionJob"
         operation.name = "DescribeDominantLanguageDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDominantLanguageDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDominantLanguageDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeDominantLanguageDetectionJobRequest
+        operation.output = DescribeDominantLanguageDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeEndpoint"
         operation.name = "DescribeEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeEndpointRequest
+        operation.output = DescribeEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_entities_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeEntitiesDetectionJob"
         operation.name = "DescribeEntitiesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntitiesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntitiesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeEntitiesDetectionJobRequest
+        operation.output = DescribeEntitiesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_entity_recognizer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeEntityRecognizer"
         operation.name = "DescribeEntityRecognizer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityRecognizerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEntityRecognizerResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeEntityRecognizerRequest
+        operation.output = DescribeEntityRecognizerResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_events_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeEventsDetectionJob"
         operation.name = "DescribeEventsDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeEventsDetectionJobRequest
+        operation.output = DescribeEventsDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_flywheel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeFlywheel"
         operation.name = "DescribeFlywheel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFlywheelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFlywheelResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeFlywheelRequest
+        operation.output = DescribeFlywheelResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_flywheel_iteration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeFlywheelIteration"
         operation.name = "DescribeFlywheelIteration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFlywheelIterationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeFlywheelIterationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeFlywheelIterationRequest
+        operation.output = DescribeFlywheelIterationResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_key_phrases_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeKeyPhrasesDetectionJob"
         operation.name = "DescribeKeyPhrasesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeKeyPhrasesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeKeyPhrasesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeKeyPhrasesDetectionJobRequest
+        operation.output = DescribeKeyPhrasesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_pii_entities_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribePiiEntitiesDetectionJob"
         operation.name = "DescribePiiEntitiesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePiiEntitiesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePiiEntitiesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribePiiEntitiesDetectionJobRequest
+        operation.output = DescribePiiEntitiesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeResourcePolicy"
         operation.name = "DescribeResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeResourcePolicyRequest
+        operation.output = DescribeResourcePolicyResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:describe_sentiment_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeSentimentDetectionJob"
         operation.name = "DescribeSentimentDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSentimentDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSentimentDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeSentimentDetectionJobRequest
+        operation.output = DescribeSentimentDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_targeted_sentiment_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJob"
         operation.name = "DescribeTargetedSentimentDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTargetedSentimentDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTargetedSentimentDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeTargetedSentimentDetectionJobRequest
+        operation.output = DescribeTargetedSentimentDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_topics_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DescribeTopicsDetectionJob"
         operation.name = "DescribeTopicsDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTopicsDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTopicsDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeTopicsDetectionJobRequest
+        operation.output = DescribeTopicsDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:detect_dominant_language, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectDominantLanguage"
         operation.name = "DetectDominantLanguage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectDominantLanguageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectDominantLanguageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        operation.input = DetectDominantLanguageRequest
+        operation.output = DetectDominantLanguageResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:detect_entities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectEntities"
         operation.name = "DetectEntities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectEntitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectEntitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = DetectEntitiesRequest
+        operation.output = DetectEntitiesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:detect_key_phrases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectKeyPhrases"
         operation.name = "DetectKeyPhrases"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectKeyPhrasesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectKeyPhrasesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = DetectKeyPhrasesRequest
+        operation.output = DetectKeyPhrasesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:detect_pii_entities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectPiiEntities"
         operation.name = "DetectPiiEntities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectPiiEntitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectPiiEntitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = DetectPiiEntitiesRequest
+        operation.output = DetectPiiEntitiesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:detect_sentiment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectSentiment"
         operation.name = "DetectSentiment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectSentimentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectSentimentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = DetectSentimentRequest
+        operation.output = DetectSentimentResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:detect_syntax, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectSyntax"
         operation.name = "DetectSyntax"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectSyntaxRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectSyntaxResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = DetectSyntaxRequest
+        operation.output = DetectSyntaxResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:detect_targeted_sentiment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectTargetedSentiment"
         operation.name = "DetectTargetedSentiment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectTargetedSentimentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectTargetedSentimentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = DetectTargetedSentimentRequest
+        operation.output = DetectTargetedSentimentResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:detect_toxic_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#DetectToxicContent"
         operation.name = "DetectToxicContent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectToxicContentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectToxicContentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        operation.input = DetectToxicContentRequest
+        operation.output = DetectToxicContentResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << UnsupportedLanguageException
         operation.traits = {}
       end)
       service.add_operation(:import_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ImportModel"
         operation.name = "ImportModel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportModelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportModelResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = ImportModelRequest
+        operation.output = ImportModelResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:list_datasets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListDatasets"
         operation.name = "ListDatasets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDatasetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDatasetsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDatasetsRequest
+        operation.output = ListDatasetsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDatasets.new
       end)
       service.add_operation(:list_document_classification_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListDocumentClassificationJobs"
         operation.name = "ListDocumentClassificationJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDocumentClassificationJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDocumentClassificationJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDocumentClassificationJobsRequest
+        operation.output = ListDocumentClassificationJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDocumentClassificationJobs.new
       end)
       service.add_operation(:list_document_classifier_summaries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListDocumentClassifierSummaries"
         operation.name = "ListDocumentClassifierSummaries"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDocumentClassifierSummariesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDocumentClassifierSummariesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDocumentClassifierSummariesRequest
+        operation.output = ListDocumentClassifierSummariesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDocumentClassifierSummaries.new
       end)
       service.add_operation(:list_document_classifiers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListDocumentClassifiers"
         operation.name = "ListDocumentClassifiers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDocumentClassifiersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDocumentClassifiersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDocumentClassifiersRequest
+        operation.output = ListDocumentClassifiersResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDocumentClassifiers.new
       end)
       service.add_operation(:list_dominant_language_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListDominantLanguageDetectionJobs"
         operation.name = "ListDominantLanguageDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDominantLanguageDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDominantLanguageDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDominantLanguageDetectionJobsRequest
+        operation.output = ListDominantLanguageDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDominantLanguageDetectionJobs.new
       end)
       service.add_operation(:list_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListEndpoints"
         operation.name = "ListEndpoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEndpointsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEndpointsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListEndpointsRequest
+        operation.output = ListEndpointsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListEndpoints.new
       end)
       service.add_operation(:list_entities_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListEntitiesDetectionJobs"
         operation.name = "ListEntitiesDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntitiesDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntitiesDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListEntitiesDetectionJobsRequest
+        operation.output = ListEntitiesDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListEntitiesDetectionJobs.new
       end)
       service.add_operation(:list_entity_recognizer_summaries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListEntityRecognizerSummaries"
         operation.name = "ListEntityRecognizerSummaries"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntityRecognizerSummariesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntityRecognizerSummariesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListEntityRecognizerSummariesRequest
+        operation.output = ListEntityRecognizerSummariesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListEntityRecognizerSummaries.new
       end)
       service.add_operation(:list_entity_recognizers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListEntityRecognizers"
         operation.name = "ListEntityRecognizers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntityRecognizersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEntityRecognizersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListEntityRecognizersRequest
+        operation.output = ListEntityRecognizersResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListEntityRecognizers.new
       end)
       service.add_operation(:list_events_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListEventsDetectionJobs"
         operation.name = "ListEventsDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEventsDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEventsDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListEventsDetectionJobsRequest
+        operation.output = ListEventsDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListEventsDetectionJobs.new
       end)
       service.add_operation(:list_flywheel_iteration_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListFlywheelIterationHistory"
         operation.name = "ListFlywheelIterationHistory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFlywheelIterationHistoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFlywheelIterationHistoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListFlywheelIterationHistoryRequest
+        operation.output = ListFlywheelIterationHistoryResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFlywheelIterationHistory.new
       end)
       service.add_operation(:list_flywheels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListFlywheels"
         operation.name = "ListFlywheels"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFlywheelsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFlywheelsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListFlywheelsRequest
+        operation.output = ListFlywheelsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFlywheels.new
       end)
       service.add_operation(:list_key_phrases_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListKeyPhrasesDetectionJobs"
         operation.name = "ListKeyPhrasesDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeyPhrasesDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeyPhrasesDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListKeyPhrasesDetectionJobsRequest
+        operation.output = ListKeyPhrasesDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListKeyPhrasesDetectionJobs.new
       end)
       service.add_operation(:list_pii_entities_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListPiiEntitiesDetectionJobs"
         operation.name = "ListPiiEntitiesDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPiiEntitiesDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPiiEntitiesDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListPiiEntitiesDetectionJobsRequest
+        operation.output = ListPiiEntitiesDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPiiEntitiesDetectionJobs.new
       end)
       service.add_operation(:list_sentiment_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListSentimentDetectionJobs"
         operation.name = "ListSentimentDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSentimentDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSentimentDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListSentimentDetectionJobsRequest
+        operation.output = ListSentimentDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListSentimentDetectionJobs.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:list_targeted_sentiment_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListTargetedSentimentDetectionJobs"
         operation.name = "ListTargetedSentimentDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetedSentimentDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetedSentimentDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTargetedSentimentDetectionJobsRequest
+        operation.output = ListTargetedSentimentDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTargetedSentimentDetectionJobs.new
       end)
       service.add_operation(:list_topics_detection_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#ListTopicsDetectionJobs"
         operation.name = "ListTopicsDetectionJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTopicsDetectionJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTopicsDetectionJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTopicsDetectionJobsRequest
+        operation.output = ListTopicsDetectionJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTopicsDetectionJobs.new
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#PutResourcePolicy"
         operation.name = "PutResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutResourcePolicyRequest
+        operation.output = PutResourcePolicyResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:start_document_classification_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartDocumentClassificationJob"
         operation.name = "StartDocumentClassificationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDocumentClassificationJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDocumentClassificationJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartDocumentClassificationJobRequest
+        operation.output = StartDocumentClassificationJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_dominant_language_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartDominantLanguageDetectionJob"
         operation.name = "StartDominantLanguageDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDominantLanguageDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartDominantLanguageDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartDominantLanguageDetectionJobRequest
+        operation.output = StartDominantLanguageDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_entities_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartEntitiesDetectionJob"
         operation.name = "StartEntitiesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEntitiesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEntitiesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartEntitiesDetectionJobRequest
+        operation.output = StartEntitiesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_events_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartEventsDetectionJob"
         operation.name = "StartEventsDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEventsDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEventsDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartEventsDetectionJobRequest
+        operation.output = StartEventsDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_flywheel_iteration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartFlywheelIteration"
         operation.name = "StartFlywheelIteration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartFlywheelIterationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartFlywheelIterationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = StartFlywheelIterationRequest
+        operation.output = StartFlywheelIterationResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:start_key_phrases_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartKeyPhrasesDetectionJob"
         operation.name = "StartKeyPhrasesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartKeyPhrasesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartKeyPhrasesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartKeyPhrasesDetectionJobRequest
+        operation.output = StartKeyPhrasesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_pii_entities_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartPiiEntitiesDetectionJob"
         operation.name = "StartPiiEntitiesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartPiiEntitiesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartPiiEntitiesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartPiiEntitiesDetectionJobRequest
+        operation.output = StartPiiEntitiesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_sentiment_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartSentimentDetectionJob"
         operation.name = "StartSentimentDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSentimentDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSentimentDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartSentimentDetectionJobRequest
+        operation.output = StartSentimentDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_targeted_sentiment_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartTargetedSentimentDetectionJob"
         operation.name = "StartTargetedSentimentDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTargetedSentimentDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTargetedSentimentDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartTargetedSentimentDetectionJobRequest
+        operation.output = StartTargetedSentimentDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:start_topics_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StartTopicsDetectionJob"
         operation.name = "StartTopicsDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTopicsDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTopicsDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = StartTopicsDetectionJobRequest
+        operation.output = StartTopicsDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:stop_dominant_language_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopDominantLanguageDetectionJob"
         operation.name = "StopDominantLanguageDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopDominantLanguageDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopDominantLanguageDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
+        operation.input = StopDominantLanguageDetectionJobRequest
+        operation.output = StopDominantLanguageDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_entities_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopEntitiesDetectionJob"
         operation.name = "StopEntitiesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEntitiesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEntitiesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
+        operation.input = StopEntitiesDetectionJobRequest
+        operation.output = StopEntitiesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_events_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopEventsDetectionJob"
         operation.name = "StopEventsDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEventsDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEventsDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
+        operation.input = StopEventsDetectionJobRequest
+        operation.output = StopEventsDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_key_phrases_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopKeyPhrasesDetectionJob"
         operation.name = "StopKeyPhrasesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopKeyPhrasesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopKeyPhrasesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
+        operation.input = StopKeyPhrasesDetectionJobRequest
+        operation.output = StopKeyPhrasesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_pii_entities_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopPiiEntitiesDetectionJob"
         operation.name = "StopPiiEntitiesDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopPiiEntitiesDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopPiiEntitiesDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
+        operation.input = StopPiiEntitiesDetectionJobRequest
+        operation.output = StopPiiEntitiesDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_sentiment_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopSentimentDetectionJob"
         operation.name = "StopSentimentDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopSentimentDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopSentimentDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
+        operation.input = StopSentimentDetectionJobRequest
+        operation.output = StopSentimentDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_targeted_sentiment_detection_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopTargetedSentimentDetectionJob"
         operation.name = "StopTargetedSentimentDetectionJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTargetedSentimentDetectionJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTargetedSentimentDetectionJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobNotFoundException)
+        operation.input = StopTargetedSentimentDetectionJobRequest
+        operation.output = StopTargetedSentimentDetectionJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << JobNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:stop_training_document_classifier, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopTrainingDocumentClassifier"
         operation.name = "StopTrainingDocumentClassifier"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTrainingDocumentClassifierRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTrainingDocumentClassifierResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = StopTrainingDocumentClassifierRequest
+        operation.output = StopTrainingDocumentClassifierResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:stop_training_entity_recognizer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#StopTrainingEntityRecognizer"
         operation.name = "StopTrainingEntityRecognizer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTrainingEntityRecognizerRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTrainingEntityRecognizerResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = StopTrainingEntityRecognizerRequest
+        operation.output = StopTrainingEntityRecognizerResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagKeysException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagKeysException
         operation.traits = {}
       end)
       service.add_operation(:update_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#UpdateEndpoint"
         operation.name = "UpdateEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateEndpointRequest
+        operation.output = UpdateEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:update_flywheel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.comprehend#UpdateFlywheel"
         operation.name = "UpdateFlywheel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFlywheelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateFlywheelResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateFlywheelRequest
+        operation.output = UpdateFlywheelResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << KmsKeyValidationException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
     end

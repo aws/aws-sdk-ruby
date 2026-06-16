@@ -51,89 +51,89 @@ module Aws::Pricing
     Value = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pricing#Value", name: "Value", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pricing#errorMessage", name: "ErrorMessage")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AttributeNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    AttributeValue.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    AttributeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    AttributeValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
     AttributeValue.type = Types::AttributeValue
-    AttributeValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValue)
-    DescribeServicesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
-    DescribeServicesRequest.add_member(:format_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
-    DescribeServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    AttributeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
+    DescribeServicesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceCode"))
+    DescribeServicesRequest.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, location_name: "FormatVersion"))
+    DescribeServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
     DescribeServicesRequest.type = Types::DescribeServicesRequest
-    DescribeServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceList, location_name: "Services"))
-    DescribeServicesResponse.add_member(:format_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
-    DescribeServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceList, location_name: "Services"))
+    DescribeServicesResponse.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, location_name: "FormatVersion"))
+    DescribeServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeServicesResponse.type = Types::DescribeServicesResponse
-    ExpiredNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ExpiredNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ExpiredNextTokenException.type = Types::ExpiredNextTokenException
-    FileFormats.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileFormat)
-    Filter.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    Filter.add_member(:field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Field, location_name: "Field", traits: {"smithy.api#required" => {}}))
-    Filter.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    FileFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat)
+    Filter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Filter.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, location_name: "Field", traits: {"smithy.api#required" => {}}))
+    Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterType.add_member(:term_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERM_MATCH", traits: {"smithy.api#enumValue" => "TERM_MATCH"}))
-    FilterType.add_member(:equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
-    FilterType.add_member(:contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
-    FilterType.add_member(:any_of, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ANY_OF", traits: {"smithy.api#enumValue" => "ANY_OF"}))
-    FilterType.add_member(:none_of, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE_OF", traits: {"smithy.api#enumValue" => "NONE_OF"}))
-    Filters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    GetAttributeValuesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    GetAttributeValuesRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
-    GetAttributeValuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    GetAttributeValuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    FilterType.add_member(:term_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TERM_MATCH", traits: {"smithy.api#enumValue" => "TERM_MATCH"}))
+    FilterType.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    FilterType.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
+    FilterType.add_member(:any_of, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ANY_OF", traits: {"smithy.api#enumValue" => "ANY_OF"}))
+    FilterType.add_member(:none_of, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE_OF", traits: {"smithy.api#enumValue" => "NONE_OF"}))
+    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    GetAttributeValuesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    GetAttributeValuesRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
+    GetAttributeValuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    GetAttributeValuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
     GetAttributeValuesRequest.type = Types::GetAttributeValuesRequest
-    GetAttributeValuesResponse.add_member(:attribute_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "AttributeValues"))
-    GetAttributeValuesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetAttributeValuesResponse.add_member(:attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueList, location_name: "AttributeValues"))
+    GetAttributeValuesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     GetAttributeValuesResponse.type = Types::GetAttributeValuesResponse
-    GetPriceListFileUrlRequest.add_member(:price_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PriceListArn, location_name: "PriceListArn", traits: {"smithy.api#required" => {}}))
-    GetPriceListFileUrlRequest.add_member(:file_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileFormat, location_name: "FileFormat", traits: {"smithy.api#required" => {}}))
+    GetPriceListFileUrlRequest.add_member(:price_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceListArn, location_name: "PriceListArn", traits: {"smithy.api#required" => {}}))
+    GetPriceListFileUrlRequest.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, location_name: "FileFormat", traits: {"smithy.api#required" => {}}))
     GetPriceListFileUrlRequest.type = Types::GetPriceListFileUrlRequest
-    GetPriceListFileUrlResponse.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Url"))
+    GetPriceListFileUrlResponse.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Url"))
     GetPriceListFileUrlResponse.type = Types::GetPriceListFileUrlResponse
-    GetProductsRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    GetProductsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
-    GetProductsRequest.add_member(:format_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
-    GetProductsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    GetProductsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    GetProductsRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    GetProductsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters"))
+    GetProductsRequest.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, location_name: "FormatVersion"))
+    GetProductsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    GetProductsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
     GetProductsRequest.type = Types::GetProductsRequest
-    GetProductsResponse.add_member(:format_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
-    GetProductsResponse.add_member(:price_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PriceListJsonItems, location_name: "PriceList"))
-    GetProductsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetProductsResponse.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, location_name: "FormatVersion"))
+    GetProductsResponse.add_member(:price_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceListJsonItems, location_name: "PriceList"))
+    GetProductsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     GetProductsResponse.type = Types::GetProductsResponse
-    InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalErrorException.type = Types::InternalErrorException
-    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    ListPriceListsRequest.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    ListPriceListsRequest.add_member(:effective_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EffectiveDate, location_name: "EffectiveDate", traits: {"smithy.api#required" => {}}))
-    ListPriceListsRequest.add_member(:region_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionCode, location_name: "RegionCode"))
-    ListPriceListsRequest.add_member(:currency_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "CurrencyCode", traits: {"smithy.api#required" => {}}))
-    ListPriceListsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListPriceListsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ListPriceListsRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    ListPriceListsRequest.add_member(:effective_date, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDate, location_name: "EffectiveDate", traits: {"smithy.api#required" => {}}))
+    ListPriceListsRequest.add_member(:region_code, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCode, location_name: "RegionCode"))
+    ListPriceListsRequest.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "CurrencyCode", traits: {"smithy.api#required" => {}}))
+    ListPriceListsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListPriceListsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
     ListPriceListsRequest.type = Types::ListPriceListsRequest
-    ListPriceListsResponse.add_member(:price_lists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PriceLists, location_name: "PriceLists"))
-    ListPriceListsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListPriceListsResponse.add_member(:price_lists, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceLists, location_name: "PriceLists"))
+    ListPriceListsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListPriceListsResponse.type = Types::ListPriceListsResponse
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotFoundException.type = Types::NotFoundException
-    PriceList.add_member(:price_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PriceListArn, location_name: "PriceListArn"))
-    PriceList.add_member(:region_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionCode, location_name: "RegionCode"))
-    PriceList.add_member(:currency_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "CurrencyCode"))
-    PriceList.add_member(:file_formats, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileFormats, location_name: "FileFormats"))
+    PriceList.add_member(:price_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceListArn, location_name: "PriceListArn"))
+    PriceList.add_member(:region_code, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCode, location_name: "RegionCode"))
+    PriceList.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, location_name: "CurrencyCode"))
+    PriceList.add_member(:file_formats, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormats, location_name: "FileFormats"))
     PriceList.type = Types::PriceList
-    PriceListJsonItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonPriceListJsonItem)
-    PriceLists.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PriceList)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PriceListJsonItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonPriceListJsonItem)
+    PriceLists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PriceList)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    Service.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
-    Service.add_member(:attribute_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
+    Service.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceCode", traits: {"smithy.api#required" => {}}))
+    Service.add_member(:attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameList, location_name: "AttributeNames"))
     Service.type = Types::Service
-    ServiceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Service)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Service)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
 
     AWSPriceListService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -144,71 +144,71 @@ module Aws::Pricing
       service.add_operation(:describe_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pricing#DescribeServices"
         operation.name = "DescribeServices"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeServicesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeServicesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DescribeServicesRequest
+        operation.output = DescribeServicesResponse
+        operation.errors << ExpiredNextTokenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << NotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeServices.new
       end)
       service.add_operation(:get_attribute_values, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pricing#GetAttributeValues"
         operation.name = "GetAttributeValues"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAttributeValuesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAttributeValuesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetAttributeValuesRequest
+        operation.output = GetAttributeValuesResponse
+        operation.errors << ExpiredNextTokenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << NotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::GetAttributeValues.new
       end)
       service.add_operation(:get_price_list_file_url, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pricing#GetPriceListFileUrl"
         operation.name = "GetPriceListFileUrl"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPriceListFileUrlRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPriceListFileUrlResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetPriceListFileUrlRequest
+        operation.output = GetPriceListFileUrlResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotFoundException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:get_products, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pricing#GetProducts"
         operation.name = "GetProducts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProductsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProductsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetProductsRequest
+        operation.output = GetProductsResponse
+        operation.errors << ExpiredNextTokenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << NotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::GetProducts.new
       end)
       service.add_operation(:list_price_lists, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pricing#ListPriceLists"
         operation.name = "ListPriceLists"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPriceListsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPriceListsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListPriceListsRequest
+        operation.output = ListPriceListsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ExpiredNextTokenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << NotFoundException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPriceLists.new
       end)

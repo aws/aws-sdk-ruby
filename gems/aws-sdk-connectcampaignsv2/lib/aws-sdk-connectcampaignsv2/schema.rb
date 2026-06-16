@@ -192,396 +192,396 @@ module Aws::ConnectCampaignsV2
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     XAmazonErrorType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#XAmazonErrorType", name: "XAmazonErrorType")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    AccessDeniedException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     AccessDeniedException.type = Types::AccessDeniedException
     AgentlessConfig.type = Types::AgentlessConfig
-    AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enableAnswerMachineDetection", traits: {"smithy.api#required" => {}}))
-    AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "awaitAnswerMachinePrompt", traits: {"smithy.api#default" => nil}))
+    AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enableAnswerMachineDetection", traits: {"smithy.api#required" => {}}))
+    AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "awaitAnswerMachinePrompt", traits: {"smithy.api#default" => nil}))
     AnswerMachineDetectionConfig.type = Types::AnswerMachineDetectionConfig
-    Attributes.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeName)
-    Attributes.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValue)
-    Campaign.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    Campaign.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    Campaign.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    Campaign.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
-    Campaign.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSubtypeConfig, location_name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
-    Campaign.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "source"))
-    Campaign.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn"))
-    Campaign.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
-    Campaign.add_member(:communication_time_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationTimeConfig, location_name: "communicationTimeConfig"))
-    Campaign.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimitsConfig, location_name: "communicationLimitsOverride"))
-    Campaign.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName)
+    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
+    Campaign.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    Campaign.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    Campaign.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    Campaign.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
+    Campaign.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeConfig, location_name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
+    Campaign.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "source"))
+    Campaign.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "connectCampaignFlowArn"))
+    Campaign.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, location_name: "schedule"))
+    Campaign.add_member(:communication_time_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfig, location_name: "communicationTimeConfig"))
+    Campaign.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitsConfig, location_name: "communicationLimitsOverride"))
+    Campaign.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     Campaign.type = Types::Campaign
-    CampaignFilters.add_member(:instance_id_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceIdFilter, location_name: "instanceIdFilter"))
+    CampaignFilters.add_member(:instance_id_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdFilter, location_name: "instanceIdFilter"))
     CampaignFilters.type = Types::CampaignFilters
-    CampaignIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId)
-    CampaignSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#required" => {}}))
-    CampaignSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    CampaignSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CampaignSummary.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
-    CampaignSummary.add_member(:channel_subtypes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSubtypeList, location_name: "channelSubtypes", traits: {"smithy.api#required" => {}}))
-    CampaignSummary.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
-    CampaignSummary.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn"))
+    CampaignIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId)
+    CampaignSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#required" => {}}))
+    CampaignSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    CampaignSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CampaignSummary.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
+    CampaignSummary.add_member(:channel_subtypes, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeList, location_name: "channelSubtypes", traits: {"smithy.api#required" => {}}))
+    CampaignSummary.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, location_name: "schedule"))
+    CampaignSummary.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "connectCampaignFlowArn"))
     CampaignSummary.type = Types::CampaignSummary
-    CampaignSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignSummary)
-    ChannelSubtypeConfig.add_member(:telephony, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TelephonyChannelSubtypeConfig, location_name: "telephony"))
-    ChannelSubtypeConfig.add_member(:sms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsChannelSubtypeConfig, location_name: "sms"))
-    ChannelSubtypeConfig.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailChannelSubtypeConfig, location_name: "email"))
+    CampaignSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary)
+    ChannelSubtypeConfig.add_member(:telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyChannelSubtypeConfig, location_name: "telephony"))
+    ChannelSubtypeConfig.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsChannelSubtypeConfig, location_name: "sms"))
+    ChannelSubtypeConfig.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailChannelSubtypeConfig, location_name: "email"))
     ChannelSubtypeConfig.type = Types::ChannelSubtypeConfig
-    ChannelSubtypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSubtype)
-    ChannelSubtypeParameters.add_member(:telephony, Types::ChannelSubtypeParameters::Telephony, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TelephonyChannelSubtypeParameters, location_name: "telephony"))
-    ChannelSubtypeParameters.add_member(:sms, Types::ChannelSubtypeParameters::Sms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsChannelSubtypeParameters, location_name: "sms"))
-    ChannelSubtypeParameters.add_member(:email, Types::ChannelSubtypeParameters::Email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailChannelSubtypeParameters, location_name: "email"))
-    ChannelSubtypeParameters.add_member(:unknown, Types::ChannelSubtypeParameters::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ChannelSubtypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtype)
+    ChannelSubtypeParameters.add_member(:telephony, Types::ChannelSubtypeParameters::Telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyChannelSubtypeParameters, location_name: "telephony"))
+    ChannelSubtypeParameters.add_member(:sms, Types::ChannelSubtypeParameters::Sms, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsChannelSubtypeParameters, location_name: "sms"))
+    ChannelSubtypeParameters.add_member(:email, Types::ChannelSubtypeParameters::Email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailChannelSubtypeParameters, location_name: "email"))
+    ChannelSubtypeParameters.add_member(:unknown, Types::ChannelSubtypeParameters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ChannelSubtypeParameters.type = Types::ChannelSubtypeParameters
-    CommunicationLimit.add_member(:max_count_per_recipient, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCountPerRecipient", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
-    CommunicationLimit.add_member(:frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "frequency", traits: {"smithy.api#range" => {"min" => 1, "max" => 30}, "smithy.api#required" => {}}))
-    CommunicationLimit.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimitTimeUnit, location_name: "unit", traits: {"smithy.api#required" => {}}))
+    CommunicationLimit.add_member(:max_count_per_recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxCountPerRecipient", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
+    CommunicationLimit.add_member(:frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "frequency", traits: {"smithy.api#range" => {"min" => 1, "max" => 30}, "smithy.api#required" => {}}))
+    CommunicationLimit.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitTimeUnit, location_name: "unit", traits: {"smithy.api#required" => {}}))
     CommunicationLimit.type = Types::CommunicationLimit
-    CommunicationLimitList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimit)
-    CommunicationLimits.add_member(:communication_limits_list, Types::CommunicationLimits::CommunicationLimitsList, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimitList, location_name: "communicationLimitsList"))
-    CommunicationLimits.add_member(:unknown, Types::CommunicationLimits::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CommunicationLimitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimit)
+    CommunicationLimits.add_member(:communication_limits_list, Types::CommunicationLimits::CommunicationLimitsList, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitList, location_name: "communicationLimitsList"))
+    CommunicationLimits.add_member(:unknown, Types::CommunicationLimits::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CommunicationLimits.type = Types::CommunicationLimits
-    CommunicationLimitsConfig.add_member(:all_channel_subtypes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimits, location_name: "allChannelSubtypes"))
-    CommunicationLimitsConfig.add_member(:instance_limits_handling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceLimitsHandling, location_name: "instanceLimitsHandling"))
+    CommunicationLimitsConfig.add_member(:all_channel_subtypes, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimits, location_name: "allChannelSubtypes"))
+    CommunicationLimitsConfig.add_member(:instance_limits_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceLimitsHandling, location_name: "instanceLimitsHandling"))
     CommunicationLimitsConfig.type = Types::CommunicationLimitsConfig
-    CommunicationTimeConfig.add_member(:local_time_zone_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalTimeZoneConfig, location_name: "localTimeZoneConfig", traits: {"smithy.api#required" => {}}))
-    CommunicationTimeConfig.add_member(:telephony, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeWindow, location_name: "telephony"))
-    CommunicationTimeConfig.add_member(:sms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeWindow, location_name: "sms"))
-    CommunicationTimeConfig.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeWindow, location_name: "email"))
+    CommunicationTimeConfig.add_member(:local_time_zone_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneConfig, location_name: "localTimeZoneConfig", traits: {"smithy.api#required" => {}}))
+    CommunicationTimeConfig.add_member(:telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, location_name: "telephony"))
+    CommunicationTimeConfig.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, location_name: "sms"))
+    CommunicationTimeConfig.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, location_name: "email"))
     CommunicationTimeConfig.type = Types::CommunicationTimeConfig
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ConflictException.type = Types::ConflictException
-    CreateCampaignRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateCampaignRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
-    CreateCampaignRequest.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSubtypeConfig, location_name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
-    CreateCampaignRequest.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "source"))
-    CreateCampaignRequest.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn"))
-    CreateCampaignRequest.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
-    CreateCampaignRequest.add_member(:communication_time_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationTimeConfig, location_name: "communicationTimeConfig"))
-    CreateCampaignRequest.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimitsConfig, location_name: "communicationLimitsOverride"))
-    CreateCampaignRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCampaignRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateCampaignRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
+    CreateCampaignRequest.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeConfig, location_name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
+    CreateCampaignRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "source"))
+    CreateCampaignRequest.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "connectCampaignFlowArn"))
+    CreateCampaignRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, location_name: "schedule"))
+    CreateCampaignRequest.add_member(:communication_time_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfig, location_name: "communicationTimeConfig"))
+    CreateCampaignRequest.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitsConfig, location_name: "communicationLimitsOverride"))
+    CreateCampaignRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateCampaignRequest.type = Types::CreateCampaignRequest
-    CreateCampaignResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id"))
-    CreateCampaignResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignArn, location_name: "arn"))
-    CreateCampaignResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCampaignResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id"))
+    CreateCampaignResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, location_name: "arn"))
+    CreateCampaignResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     CreateCampaignResponse.type = Types::CreateCampaignResponse
-    CustomerProfilesIntegrationConfig.add_member(:domain_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "domainArn", traits: {"smithy.api#required" => {}}))
-    CustomerProfilesIntegrationConfig.add_member(:object_type_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTypeNamesMap, location_name: "objectTypeNames", traits: {"smithy.api#required" => {}}))
+    CustomerProfilesIntegrationConfig.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "domainArn", traits: {"smithy.api#required" => {}}))
+    CustomerProfilesIntegrationConfig.add_member(:object_type_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeNamesMap, location_name: "objectTypeNames", traits: {"smithy.api#required" => {}}))
     CustomerProfilesIntegrationConfig.type = Types::CustomerProfilesIntegrationConfig
-    CustomerProfilesIntegrationIdentifier.add_member(:domain_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "domainArn", traits: {"smithy.api#required" => {}}))
+    CustomerProfilesIntegrationIdentifier.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "domainArn", traits: {"smithy.api#required" => {}}))
     CustomerProfilesIntegrationIdentifier.type = Types::CustomerProfilesIntegrationIdentifier
-    CustomerProfilesIntegrationSummary.add_member(:domain_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "domainArn", traits: {"smithy.api#required" => {}}))
-    CustomerProfilesIntegrationSummary.add_member(:object_type_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTypeNamesMap, location_name: "objectTypeNames", traits: {"smithy.api#required" => {}}))
+    CustomerProfilesIntegrationSummary.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "domainArn", traits: {"smithy.api#required" => {}}))
+    CustomerProfilesIntegrationSummary.add_member(:object_type_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeNamesMap, location_name: "objectTypeNames", traits: {"smithy.api#required" => {}}))
     CustomerProfilesIntegrationSummary.type = Types::CustomerProfilesIntegrationSummary
-    DailyHours.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DayOfWeek)
-    DailyHours.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeRangeList)
-    DeleteCampaignChannelSubtypeConfigRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteCampaignChannelSubtypeConfigRequest.add_member(:channel_subtype, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSubtype, location_name: "channelSubtype", traits: {"smithy.api#httpQuery" => "channelSubtype", "smithy.api#required" => {}}))
+    DailyHours.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek)
+    DailyHours.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeList)
+    DeleteCampaignChannelSubtypeConfigRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCampaignChannelSubtypeConfigRequest.add_member(:channel_subtype, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtype, location_name: "channelSubtype", traits: {"smithy.api#httpQuery" => "channelSubtype", "smithy.api#required" => {}}))
     DeleteCampaignChannelSubtypeConfigRequest.type = Types::DeleteCampaignChannelSubtypeConfigRequest
-    DeleteCampaignCommunicationLimitsRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteCampaignCommunicationLimitsRequest.add_member(:config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimitsConfigType, location_name: "config", traits: {"smithy.api#httpQuery" => "config", "smithy.api#required" => {}}))
+    DeleteCampaignCommunicationLimitsRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCampaignCommunicationLimitsRequest.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitsConfigType, location_name: "config", traits: {"smithy.api#httpQuery" => "config", "smithy.api#required" => {}}))
     DeleteCampaignCommunicationLimitsRequest.type = Types::DeleteCampaignCommunicationLimitsRequest
-    DeleteCampaignCommunicationTimeRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteCampaignCommunicationTimeRequest.add_member(:config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationTimeConfigType, location_name: "config", traits: {"smithy.api#httpQuery" => "config", "smithy.api#required" => {}}))
+    DeleteCampaignCommunicationTimeRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCampaignCommunicationTimeRequest.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfigType, location_name: "config", traits: {"smithy.api#httpQuery" => "config", "smithy.api#required" => {}}))
     DeleteCampaignCommunicationTimeRequest.type = Types::DeleteCampaignCommunicationTimeRequest
-    DeleteCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCampaignRequest.type = Types::DeleteCampaignRequest
-    DeleteConnectInstanceConfigRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteConnectInstanceConfigRequest.add_member(:campaign_deletion_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignDeletionPolicy, location_name: "campaignDeletionPolicy", traits: {"smithy.api#httpQuery" => "campaignDeletionPolicy"}))
+    DeleteConnectInstanceConfigRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConnectInstanceConfigRequest.add_member(:campaign_deletion_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignDeletionPolicy, location_name: "campaignDeletionPolicy", traits: {"smithy.api#httpQuery" => "campaignDeletionPolicy"}))
     DeleteConnectInstanceConfigRequest.type = Types::DeleteConnectInstanceConfigRequest
-    DeleteConnectInstanceIntegrationRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteConnectInstanceIntegrationRequest.add_member(:integration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationIdentifier, location_name: "integrationIdentifier", traits: {"smithy.api#required" => {}}))
+    DeleteConnectInstanceIntegrationRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConnectInstanceIntegrationRequest.add_member(:integration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationIdentifier, location_name: "integrationIdentifier", traits: {"smithy.api#required" => {}}))
     DeleteConnectInstanceIntegrationRequest.type = Types::DeleteConnectInstanceIntegrationRequest
-    DeleteInstanceOnboardingJobRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteInstanceOnboardingJobRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteInstanceOnboardingJobRequest.type = Types::DeleteInstanceOnboardingJobRequest
-    DescribeCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeCampaignRequest.type = Types::DescribeCampaignRequest
-    DescribeCampaignResponse.add_member(:campaign, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Campaign, location_name: "campaign"))
+    DescribeCampaignResponse.add_member(:campaign, ::Smithy::Schema::Shapes::MemberShape.new(target: Campaign, location_name: "campaign"))
     DescribeCampaignResponse.type = Types::DescribeCampaignResponse
-    EmailChannelSubtypeConfig.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Capacity, location_name: "capacity"))
-    EmailChannelSubtypeConfig.add_member(:outbound_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailOutboundMode, location_name: "outboundMode", traits: {"smithy.api#required" => {}}))
-    EmailChannelSubtypeConfig.add_member(:default_outbound_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailOutboundConfig, location_name: "defaultOutboundConfig", traits: {"smithy.api#required" => {}}))
+    EmailChannelSubtypeConfig.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, location_name: "capacity"))
+    EmailChannelSubtypeConfig.add_member(:outbound_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailOutboundMode, location_name: "outboundMode", traits: {"smithy.api#required" => {}}))
+    EmailChannelSubtypeConfig.add_member(:default_outbound_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailOutboundConfig, location_name: "defaultOutboundConfig", traits: {"smithy.api#required" => {}}))
     EmailChannelSubtypeConfig.type = Types::EmailChannelSubtypeConfig
-    EmailChannelSubtypeParameters.add_member(:destination_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "destinationEmailAddress", traits: {"smithy.api#required" => {}}))
-    EmailChannelSubtypeParameters.add_member(:connect_source_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "connectSourceEmailAddress"))
-    EmailChannelSubtypeParameters.add_member(:template_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "templateArn"))
-    EmailChannelSubtypeParameters.add_member(:template_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "templateParameters", traits: {"smithy.api#required" => {}}))
+    EmailChannelSubtypeParameters.add_member(:destination_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "destinationEmailAddress", traits: {"smithy.api#required" => {}}))
+    EmailChannelSubtypeParameters.add_member(:connect_source_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "connectSourceEmailAddress"))
+    EmailChannelSubtypeParameters.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "templateArn"))
+    EmailChannelSubtypeParameters.add_member(:template_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "templateParameters", traits: {"smithy.api#required" => {}}))
     EmailChannelSubtypeParameters.type = Types::EmailChannelSubtypeParameters
-    EmailOutboundConfig.add_member(:connect_source_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "connectSourceEmailAddress", traits: {"smithy.api#required" => {}}))
-    EmailOutboundConfig.add_member(:source_email_address_display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailDisplayName, location_name: "sourceEmailAddressDisplayName"))
-    EmailOutboundConfig.add_member(:wisdom_template_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "wisdomTemplateArn", traits: {"smithy.api#required" => {}}))
+    EmailOutboundConfig.add_member(:connect_source_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "connectSourceEmailAddress", traits: {"smithy.api#required" => {}}))
+    EmailOutboundConfig.add_member(:source_email_address_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailDisplayName, location_name: "sourceEmailAddressDisplayName"))
+    EmailOutboundConfig.add_member(:wisdom_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "wisdomTemplateArn", traits: {"smithy.api#required" => {}}))
     EmailOutboundConfig.type = Types::EmailOutboundConfig
-    EmailOutboundMode.add_member(:agentless, Types::EmailOutboundMode::Agentless, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentlessConfig, location_name: "agentless"))
-    EmailOutboundMode.add_member(:unknown, Types::EmailOutboundMode::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EmailOutboundMode.add_member(:agentless, Types::EmailOutboundMode::Agentless, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentlessConfig, location_name: "agentless"))
+    EmailOutboundMode.add_member(:unknown, Types::EmailOutboundMode::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EmailOutboundMode.type = Types::EmailOutboundMode
-    EncryptionConfig.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    EncryptionConfig.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "encryptionType"))
-    EncryptionConfig.add_member(:key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "keyArn"))
+    EncryptionConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    EncryptionConfig.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "encryptionType"))
+    EncryptionConfig.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, location_name: "keyArn"))
     EncryptionConfig.type = Types::EncryptionConfig
-    EventTrigger.add_member(:customer_profiles_domain_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "customerProfilesDomainArn"))
+    EventTrigger.add_member(:customer_profiles_domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "customerProfilesDomainArn"))
     EventTrigger.type = Types::EventTrigger
-    FailedCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "campaignId"))
-    FailedCampaignStateResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCampaignStateBatchFailureCode, location_name: "failureCode"))
+    FailedCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "campaignId"))
+    FailedCampaignStateResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GetCampaignStateBatchFailureCode, location_name: "failureCode"))
     FailedCampaignStateResponse.type = Types::FailedCampaignStateResponse
-    FailedCampaignStateResponseList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedCampaignStateResponse)
-    FailedProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    FailedProfileOutboundRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileOutboundRequestId, location_name: "id"))
-    FailedProfileOutboundRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileOutboundRequestFailureCode, location_name: "failureCode"))
+    FailedCampaignStateResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCampaignStateResponse)
+    FailedProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    FailedProfileOutboundRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequestId, location_name: "id"))
+    FailedProfileOutboundRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequestFailureCode, location_name: "failureCode"))
     FailedProfileOutboundRequest.type = Types::FailedProfileOutboundRequest
-    FailedProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedProfileOutboundRequest)
-    FailedRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    FailedRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DialRequestId, location_name: "id"))
-    FailedRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureCode, location_name: "failureCode"))
+    FailedProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedProfileOutboundRequest)
+    FailedRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    FailedRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequestId, location_name: "id"))
+    FailedRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, location_name: "failureCode"))
     FailedRequest.type = Types::FailedRequest
-    FailedRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedRequest)
-    GetCampaignStateBatchRequest.add_member(:campaign_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignIdList, location_name: "campaignIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#required" => {}}))
+    FailedRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequest)
+    GetCampaignStateBatchRequest.add_member(:campaign_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignIdList, location_name: "campaignIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#required" => {}}))
     GetCampaignStateBatchRequest.type = Types::GetCampaignStateBatchRequest
-    GetCampaignStateBatchResponse.add_member(:successful_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuccessfulCampaignStateResponseList, location_name: "successfulRequests"))
-    GetCampaignStateBatchResponse.add_member(:failed_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedCampaignStateResponseList, location_name: "failedRequests"))
+    GetCampaignStateBatchResponse.add_member(:successful_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponseList, location_name: "successfulRequests"))
+    GetCampaignStateBatchResponse.add_member(:failed_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCampaignStateResponseList, location_name: "failedRequests"))
     GetCampaignStateBatchResponse.type = Types::GetCampaignStateBatchResponse
-    GetCampaignStateRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCampaignStateRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetCampaignStateRequest.type = Types::GetCampaignStateRequest
-    GetCampaignStateResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignState, location_name: "state"))
+    GetCampaignStateResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignState, location_name: "state"))
     GetCampaignStateResponse.type = Types::GetCampaignStateResponse
-    GetConnectInstanceConfigRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConnectInstanceConfigRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConnectInstanceConfigRequest.type = Types::GetConnectInstanceConfigRequest
-    GetConnectInstanceConfigResponse.add_member(:connect_instance_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceConfig, location_name: "connectInstanceConfig"))
+    GetConnectInstanceConfigResponse.add_member(:connect_instance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceConfig, location_name: "connectInstanceConfig"))
     GetConnectInstanceConfigResponse.type = Types::GetConnectInstanceConfigResponse
-    GetInstanceCommunicationLimitsRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetInstanceCommunicationLimitsRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetInstanceCommunicationLimitsRequest.type = Types::GetInstanceCommunicationLimitsRequest
-    GetInstanceCommunicationLimitsResponse.add_member(:communication_limits_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceCommunicationLimitsConfig, location_name: "communicationLimitsConfig"))
+    GetInstanceCommunicationLimitsResponse.add_member(:communication_limits_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceCommunicationLimitsConfig, location_name: "communicationLimitsConfig"))
     GetInstanceCommunicationLimitsResponse.type = Types::GetInstanceCommunicationLimitsResponse
-    GetInstanceOnboardingJobStatusRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetInstanceOnboardingJobStatusRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetInstanceOnboardingJobStatusRequest.type = Types::GetInstanceOnboardingJobStatusRequest
-    GetInstanceOnboardingJobStatusResponse.add_member(:connect_instance_onboarding_job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceOnboardingJobStatus, location_name: "connectInstanceOnboardingJobStatus"))
+    GetInstanceOnboardingJobStatusResponse.add_member(:connect_instance_onboarding_job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceOnboardingJobStatus, location_name: "connectInstanceOnboardingJobStatus"))
     GetInstanceOnboardingJobStatusResponse.type = Types::GetInstanceOnboardingJobStatusResponse
-    InstanceCommunicationLimitsConfig.add_member(:all_channel_subtypes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimits, location_name: "allChannelSubtypes"))
+    InstanceCommunicationLimitsConfig.add_member(:all_channel_subtypes, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimits, location_name: "allChannelSubtypes"))
     InstanceCommunicationLimitsConfig.type = Types::InstanceCommunicationLimitsConfig
-    InstanceConfig.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
-    InstanceConfig.add_member(:service_linked_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleArn, location_name: "serviceLinkedRoleArn", traits: {"smithy.api#required" => {}}))
-    InstanceConfig.add_member(:encryption_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "encryptionConfig", traits: {"smithy.api#required" => {}}))
+    InstanceConfig.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
+    InstanceConfig.add_member(:service_linked_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLinkedRoleArn, location_name: "serviceLinkedRoleArn", traits: {"smithy.api#required" => {}}))
+    InstanceConfig.add_member(:encryption_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfig, location_name: "encryptionConfig", traits: {"smithy.api#required" => {}}))
     InstanceConfig.type = Types::InstanceConfig
-    InstanceIdFilter.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "value", traits: {"smithy.api#required" => {}}))
-    InstanceIdFilter.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceIdFilterOperator, location_name: "operator", traits: {"smithy.api#required" => {}}))
+    InstanceIdFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "value", traits: {"smithy.api#required" => {}}))
+    InstanceIdFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdFilterOperator, location_name: "operator", traits: {"smithy.api#required" => {}}))
     InstanceIdFilter.type = Types::InstanceIdFilter
-    InstanceOnboardingJobStatus.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
-    InstanceOnboardingJobStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceOnboardingJobStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
-    InstanceOnboardingJobStatus.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceOnboardingJobFailureCode, location_name: "failureCode"))
+    InstanceOnboardingJobStatus.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
+    InstanceOnboardingJobStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceOnboardingJobStatusCode, location_name: "status", traits: {"smithy.api#required" => {}}))
+    InstanceOnboardingJobStatus.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceOnboardingJobFailureCode, location_name: "failureCode"))
     InstanceOnboardingJobStatus.type = Types::InstanceOnboardingJobStatus
-    IntegrationConfig.add_member(:customer_profiles, Types::IntegrationConfig::CustomerProfiles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerProfilesIntegrationConfig, location_name: "customerProfiles"))
-    IntegrationConfig.add_member(:q_connect, Types::IntegrationConfig::QConnect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QConnectIntegrationConfig, location_name: "qConnect"))
-    IntegrationConfig.add_member(:unknown, Types::IntegrationConfig::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IntegrationConfig.add_member(:customer_profiles, Types::IntegrationConfig::CustomerProfiles, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesIntegrationConfig, location_name: "customerProfiles"))
+    IntegrationConfig.add_member(:q_connect, Types::IntegrationConfig::QConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: QConnectIntegrationConfig, location_name: "qConnect"))
+    IntegrationConfig.add_member(:unknown, Types::IntegrationConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationConfig.type = Types::IntegrationConfig
-    IntegrationIdentifier.add_member(:customer_profiles, Types::IntegrationIdentifier::CustomerProfiles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerProfilesIntegrationIdentifier, location_name: "customerProfiles"))
-    IntegrationIdentifier.add_member(:q_connect, Types::IntegrationIdentifier::QConnect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QConnectIntegrationIdentifier, location_name: "qConnect"))
-    IntegrationIdentifier.add_member(:unknown, Types::IntegrationIdentifier::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IntegrationIdentifier.add_member(:customer_profiles, Types::IntegrationIdentifier::CustomerProfiles, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesIntegrationIdentifier, location_name: "customerProfiles"))
+    IntegrationIdentifier.add_member(:q_connect, Types::IntegrationIdentifier::QConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: QConnectIntegrationIdentifier, location_name: "qConnect"))
+    IntegrationIdentifier.add_member(:unknown, Types::IntegrationIdentifier::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationIdentifier.type = Types::IntegrationIdentifier
-    IntegrationSummary.add_member(:customer_profiles, Types::IntegrationSummary::CustomerProfiles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerProfilesIntegrationSummary, location_name: "customerProfiles"))
-    IntegrationSummary.add_member(:q_connect, Types::IntegrationSummary::QConnect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QConnectIntegrationSummary, location_name: "qConnect"))
-    IntegrationSummary.add_member(:unknown, Types::IntegrationSummary::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IntegrationSummary.add_member(:customer_profiles, Types::IntegrationSummary::CustomerProfiles, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesIntegrationSummary, location_name: "customerProfiles"))
+    IntegrationSummary.add_member(:q_connect, Types::IntegrationSummary::QConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: QConnectIntegrationSummary, location_name: "qConnect"))
+    IntegrationSummary.add_member(:unknown, Types::IntegrationSummary::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationSummary.type = Types::IntegrationSummary
-    IntegrationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationSummary)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    IntegrationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSummary)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InternalServerException.type = Types::InternalServerException
-    InvalidCampaignStateException.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    InvalidCampaignStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InvalidCampaignStateException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    InvalidCampaignStateException.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    InvalidCampaignStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InvalidCampaignStateException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InvalidCampaignStateException.type = Types::InvalidCampaignStateException
-    InvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InvalidStateException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    InvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InvalidStateException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InvalidStateException.type = Types::InvalidStateException
-    ListCampaignsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    ListCampaignsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListCampaignsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignFilters, location_name: "filters"))
+    ListCampaignsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
+    ListCampaignsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListCampaignsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignFilters, location_name: "filters"))
     ListCampaignsRequest.type = Types::ListCampaignsRequest
-    ListCampaignsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListCampaignsResponse.add_member(:campaign_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignSummaryList, location_name: "campaignSummaryList"))
+    ListCampaignsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListCampaignsResponse.add_member(:campaign_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummaryList, location_name: "campaignSummaryList"))
     ListCampaignsResponse.type = Types::ListCampaignsResponse
-    ListConnectInstanceIntegrationsRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListConnectInstanceIntegrationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListConnectInstanceIntegrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListConnectInstanceIntegrationsRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListConnectInstanceIntegrationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListConnectInstanceIntegrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListConnectInstanceIntegrationsRequest.type = Types::ListConnectInstanceIntegrationsRequest
-    ListConnectInstanceIntegrationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListConnectInstanceIntegrationsResponse.add_member(:integration_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationSummaryList, location_name: "integrationSummaryList"))
+    ListConnectInstanceIntegrationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListConnectInstanceIntegrationsResponse.add_member(:integration_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSummaryList, location_name: "integrationSummaryList"))
     ListConnectInstanceIntegrationsResponse.type = Types::ListConnectInstanceIntegrationsResponse
-    ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LocalTimeZoneConfig.add_member(:default_time_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeZone, location_name: "defaultTimeZone"))
-    LocalTimeZoneConfig.add_member(:local_time_zone_detection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalTimeZoneDetection, location_name: "localTimeZoneDetection"))
+    LocalTimeZoneConfig.add_member(:default_time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, location_name: "defaultTimeZone"))
+    LocalTimeZoneConfig.add_member(:local_time_zone_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetection, location_name: "localTimeZoneDetection"))
     LocalTimeZoneConfig.type = Types::LocalTimeZoneConfig
-    LocalTimeZoneDetection.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalTimeZoneDetectionType)
-    ObjectTypeNamesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventType)
-    ObjectTypeNamesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTypeName)
-    OpenHours.add_member(:daily_hours, Types::OpenHours::DailyHours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyHours, location_name: "dailyHours"))
-    OpenHours.add_member(:unknown, Types::OpenHours::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    LocalTimeZoneDetection.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetectionType)
+    ObjectTypeNamesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType)
+    ObjectTypeNamesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeName)
+    OpenHours.add_member(:daily_hours, Types::OpenHours::DailyHours, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyHours, location_name: "dailyHours"))
+    OpenHours.add_member(:unknown, Types::OpenHours::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OpenHours.type = Types::OpenHours
-    OutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#required" => {}}))
-    OutboundRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "expirationTime", traits: {"smithy.api#required" => {}}))
-    OutboundRequest.add_member(:channel_subtype_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSubtypeParameters, location_name: "channelSubtypeParameters", traits: {"smithy.api#required" => {}}))
+    OutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#required" => {}}))
+    OutboundRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "expirationTime", traits: {"smithy.api#required" => {}}))
+    OutboundRequest.add_member(:channel_subtype_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeParameters, location_name: "channelSubtypeParameters", traits: {"smithy.api#required" => {}}))
     OutboundRequest.type = Types::OutboundRequest
-    OutboundRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutboundRequest)
-    PauseCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    OutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundRequest)
+    PauseCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PauseCampaignRequest.type = Types::PauseCampaignRequest
-    PredictiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthAllocation, location_name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
+    PredictiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthAllocation, location_name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
     PredictiveConfig.type = Types::PredictiveConfig
-    ProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#required" => {}}))
-    ProfileOutboundRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileId, location_name: "profileId", traits: {"smithy.api#required" => {}}))
-    ProfileOutboundRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "expirationTime"))
+    ProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#required" => {}}))
+    ProfileOutboundRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, location_name: "profileId", traits: {"smithy.api#required" => {}}))
+    ProfileOutboundRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "expirationTime"))
     ProfileOutboundRequest.type = Types::ProfileOutboundRequest
-    ProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileOutboundRequest)
-    ProgressiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandwidthAllocation, location_name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
+    ProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequest)
+    ProgressiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthAllocation, location_name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
     ProgressiveConfig.type = Types::ProgressiveConfig
-    PutConnectInstanceIntegrationRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutConnectInstanceIntegrationRequest.add_member(:integration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationConfig, location_name: "integrationConfig", traits: {"smithy.api#required" => {}}))
+    PutConnectInstanceIntegrationRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutConnectInstanceIntegrationRequest.add_member(:integration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationConfig, location_name: "integrationConfig", traits: {"smithy.api#required" => {}}))
     PutConnectInstanceIntegrationRequest.type = Types::PutConnectInstanceIntegrationRequest
-    PutInstanceCommunicationLimitsRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutInstanceCommunicationLimitsRequest.add_member(:communication_limits_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceCommunicationLimitsConfig, location_name: "communicationLimitsConfig", traits: {"smithy.api#required" => {}}))
+    PutInstanceCommunicationLimitsRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutInstanceCommunicationLimitsRequest.add_member(:communication_limits_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceCommunicationLimitsConfig, location_name: "communicationLimitsConfig", traits: {"smithy.api#required" => {}}))
     PutInstanceCommunicationLimitsRequest.type = Types::PutInstanceCommunicationLimitsRequest
-    PutOutboundRequestBatchRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutOutboundRequestBatchRequest.add_member(:outbound_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutboundRequestList, location_name: "outboundRequests", traits: {"smithy.api#required" => {}}))
+    PutOutboundRequestBatchRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutOutboundRequestBatchRequest.add_member(:outbound_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundRequestList, location_name: "outboundRequests", traits: {"smithy.api#required" => {}}))
     PutOutboundRequestBatchRequest.type = Types::PutOutboundRequestBatchRequest
-    PutOutboundRequestBatchResponse.add_member(:successful_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuccessfulRequestList, location_name: "successfulRequests"))
-    PutOutboundRequestBatchResponse.add_member(:failed_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedRequestList, location_name: "failedRequests"))
+    PutOutboundRequestBatchResponse.add_member(:successful_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequestList, location_name: "successfulRequests"))
+    PutOutboundRequestBatchResponse.add_member(:failed_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequestList, location_name: "failedRequests"))
     PutOutboundRequestBatchResponse.type = Types::PutOutboundRequestBatchResponse
-    PutProfileOutboundRequestBatchRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutProfileOutboundRequestBatchRequest.add_member(:profile_outbound_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileOutboundRequestList, location_name: "profileOutboundRequests", traits: {"smithy.api#required" => {}}))
+    PutProfileOutboundRequestBatchRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutProfileOutboundRequestBatchRequest.add_member(:profile_outbound_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequestList, location_name: "profileOutboundRequests", traits: {"smithy.api#required" => {}}))
     PutProfileOutboundRequestBatchRequest.type = Types::PutProfileOutboundRequestBatchRequest
-    PutProfileOutboundRequestBatchResponse.add_member(:successful_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuccessfulProfileOutboundRequestList, location_name: "successfulRequests"))
-    PutProfileOutboundRequestBatchResponse.add_member(:failed_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedProfileOutboundRequestList, location_name: "failedRequests"))
+    PutProfileOutboundRequestBatchResponse.add_member(:successful_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulProfileOutboundRequestList, location_name: "successfulRequests"))
+    PutProfileOutboundRequestBatchResponse.add_member(:failed_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedProfileOutboundRequestList, location_name: "failedRequests"))
     PutProfileOutboundRequestBatchResponse.type = Types::PutProfileOutboundRequestBatchResponse
-    QConnectIntegrationConfig.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
+    QConnectIntegrationConfig.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
     QConnectIntegrationConfig.type = Types::QConnectIntegrationConfig
-    QConnectIntegrationIdentifier.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
+    QConnectIntegrationIdentifier.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
     QConnectIntegrationIdentifier.type = Types::QConnectIntegrationIdentifier
-    QConnectIntegrationSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
+    QConnectIntegrationSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
     QConnectIntegrationSummary.type = Types::QConnectIntegrationSummary
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RestrictedPeriod.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestrictedPeriodName, location_name: "name"))
-    RestrictedPeriod.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Date, location_name: "startDate", traits: {"smithy.api#required" => {}}))
-    RestrictedPeriod.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Date, location_name: "endDate", traits: {"smithy.api#required" => {}}))
+    RestrictedPeriod.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriodName, location_name: "name"))
+    RestrictedPeriod.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Date, location_name: "startDate", traits: {"smithy.api#required" => {}}))
+    RestrictedPeriod.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Date, location_name: "endDate", traits: {"smithy.api#required" => {}}))
     RestrictedPeriod.type = Types::RestrictedPeriod
-    RestrictedPeriodList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestrictedPeriod)
-    RestrictedPeriods.add_member(:restricted_period_list, Types::RestrictedPeriods::RestrictedPeriodList, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestrictedPeriodList, location_name: "restrictedPeriodList"))
-    RestrictedPeriods.add_member(:unknown, Types::RestrictedPeriods::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RestrictedPeriodList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriod)
+    RestrictedPeriods.add_member(:restricted_period_list, Types::RestrictedPeriods::RestrictedPeriodList, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriodList, location_name: "restrictedPeriodList"))
+    RestrictedPeriods.add_member(:unknown, Types::RestrictedPeriods::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RestrictedPeriods.type = Types::RestrictedPeriods
-    ResumeCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ResumeCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ResumeCampaignRequest.type = Types::ResumeCampaignRequest
-    Schedule.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    Schedule.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "endTime", traits: {"smithy.api#required" => {}}))
-    Schedule.add_member(:refresh_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Duration, location_name: "refreshFrequency"))
+    Schedule.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    Schedule.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "endTime", traits: {"smithy.api#required" => {}}))
+    Schedule.add_member(:refresh_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Duration, location_name: "refreshFrequency"))
     Schedule.type = Types::Schedule
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SmsChannelSubtypeConfig.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Capacity, location_name: "capacity"))
-    SmsChannelSubtypeConfig.add_member(:outbound_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsOutboundMode, location_name: "outboundMode", traits: {"smithy.api#required" => {}}))
-    SmsChannelSubtypeConfig.add_member(:default_outbound_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmsOutboundConfig, location_name: "defaultOutboundConfig", traits: {"smithy.api#required" => {}}))
+    SmsChannelSubtypeConfig.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, location_name: "capacity"))
+    SmsChannelSubtypeConfig.add_member(:outbound_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsOutboundMode, location_name: "outboundMode", traits: {"smithy.api#required" => {}}))
+    SmsChannelSubtypeConfig.add_member(:default_outbound_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsOutboundConfig, location_name: "defaultOutboundConfig", traits: {"smithy.api#required" => {}}))
     SmsChannelSubtypeConfig.type = Types::SmsChannelSubtypeConfig
-    SmsChannelSubtypeParameters.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationPhoneNumber, location_name: "destinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    SmsChannelSubtypeParameters.add_member(:connect_source_phone_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "connectSourcePhoneNumberArn"))
-    SmsChannelSubtypeParameters.add_member(:template_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "templateArn"))
-    SmsChannelSubtypeParameters.add_member(:template_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "templateParameters", traits: {"smithy.api#required" => {}}))
+    SmsChannelSubtypeParameters.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationPhoneNumber, location_name: "destinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    SmsChannelSubtypeParameters.add_member(:connect_source_phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "connectSourcePhoneNumberArn"))
+    SmsChannelSubtypeParameters.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "templateArn"))
+    SmsChannelSubtypeParameters.add_member(:template_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "templateParameters", traits: {"smithy.api#required" => {}}))
     SmsChannelSubtypeParameters.type = Types::SmsChannelSubtypeParameters
-    SmsOutboundConfig.add_member(:connect_source_phone_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "connectSourcePhoneNumberArn", traits: {"smithy.api#required" => {}}))
-    SmsOutboundConfig.add_member(:wisdom_template_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "wisdomTemplateArn", traits: {"smithy.api#required" => {}}))
+    SmsOutboundConfig.add_member(:connect_source_phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "connectSourcePhoneNumberArn", traits: {"smithy.api#required" => {}}))
+    SmsOutboundConfig.add_member(:wisdom_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "wisdomTemplateArn", traits: {"smithy.api#required" => {}}))
     SmsOutboundConfig.type = Types::SmsOutboundConfig
-    SmsOutboundMode.add_member(:agentless, Types::SmsOutboundMode::Agentless, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentlessConfig, location_name: "agentless"))
-    SmsOutboundMode.add_member(:unknown, Types::SmsOutboundMode::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SmsOutboundMode.add_member(:agentless, Types::SmsOutboundMode::Agentless, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentlessConfig, location_name: "agentless"))
+    SmsOutboundMode.add_member(:unknown, Types::SmsOutboundMode::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SmsOutboundMode.type = Types::SmsOutboundMode
-    Source.add_member(:customer_profiles_segment_arn, Types::Source::CustomerProfilesSegmentArn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "customerProfilesSegmentArn"))
-    Source.add_member(:event_trigger, Types::Source::EventTrigger, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTrigger, location_name: "eventTrigger"))
-    Source.add_member(:unknown, Types::Source::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    Source.add_member(:customer_profiles_segment_arn, Types::Source::CustomerProfilesSegmentArn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "customerProfilesSegmentArn"))
+    Source.add_member(:event_trigger, Types::Source::EventTrigger, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTrigger, location_name: "eventTrigger"))
+    Source.add_member(:unknown, Types::Source::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Source.type = Types::Source
-    StartCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartCampaignRequest.type = Types::StartCampaignRequest
-    StartInstanceOnboardingJobRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartInstanceOnboardingJobRequest.add_member(:encryption_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "encryptionConfig", traits: {"smithy.api#required" => {}}))
+    StartInstanceOnboardingJobRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartInstanceOnboardingJobRequest.add_member(:encryption_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfig, location_name: "encryptionConfig", traits: {"smithy.api#required" => {}}))
     StartInstanceOnboardingJobRequest.type = Types::StartInstanceOnboardingJobRequest
-    StartInstanceOnboardingJobResponse.add_member(:connect_instance_onboarding_job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceOnboardingJobStatus, location_name: "connectInstanceOnboardingJobStatus"))
+    StartInstanceOnboardingJobResponse.add_member(:connect_instance_onboarding_job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceOnboardingJobStatus, location_name: "connectInstanceOnboardingJobStatus"))
     StartInstanceOnboardingJobResponse.type = Types::StartInstanceOnboardingJobResponse
-    StopCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopCampaignRequest.type = Types::StopCampaignRequest
-    SuccessfulCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "campaignId"))
-    SuccessfulCampaignStateResponse.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignState, location_name: "state"))
+    SuccessfulCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "campaignId"))
+    SuccessfulCampaignStateResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignState, location_name: "state"))
     SuccessfulCampaignStateResponse.type = Types::SuccessfulCampaignStateResponse
-    SuccessfulCampaignStateResponseList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuccessfulCampaignStateResponse)
-    SuccessfulProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    SuccessfulProfileOutboundRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileOutboundRequestId, location_name: "id"))
+    SuccessfulCampaignStateResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponse)
+    SuccessfulProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    SuccessfulProfileOutboundRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequestId, location_name: "id"))
     SuccessfulProfileOutboundRequest.type = Types::SuccessfulProfileOutboundRequest
-    SuccessfulProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuccessfulProfileOutboundRequest)
-    SuccessfulRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    SuccessfulRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DialRequestId, location_name: "id"))
+    SuccessfulProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulProfileOutboundRequest)
+    SuccessfulRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken"))
+    SuccessfulRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequestId, location_name: "id"))
     SuccessfulRequest.type = Types::SuccessfulRequest
-    SuccessfulRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SuccessfulRequest)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    SuccessfulRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequest)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    TelephonyChannelSubtypeConfig.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Capacity, location_name: "capacity"))
-    TelephonyChannelSubtypeConfig.add_member(:connect_queue_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueId, location_name: "connectQueueId"))
-    TelephonyChannelSubtypeConfig.add_member(:outbound_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TelephonyOutboundMode, location_name: "outboundMode", traits: {"smithy.api#required" => {}}))
-    TelephonyChannelSubtypeConfig.add_member(:default_outbound_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TelephonyOutboundConfig, location_name: "defaultOutboundConfig", traits: {"smithy.api#required" => {}}))
+    TelephonyChannelSubtypeConfig.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, location_name: "capacity"))
+    TelephonyChannelSubtypeConfig.add_member(:connect_queue_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, location_name: "connectQueueId"))
+    TelephonyChannelSubtypeConfig.add_member(:outbound_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyOutboundMode, location_name: "outboundMode", traits: {"smithy.api#required" => {}}))
+    TelephonyChannelSubtypeConfig.add_member(:default_outbound_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyOutboundConfig, location_name: "defaultOutboundConfig", traits: {"smithy.api#required" => {}}))
     TelephonyChannelSubtypeConfig.type = Types::TelephonyChannelSubtypeConfig
-    TelephonyChannelSubtypeParameters.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationPhoneNumber, location_name: "destinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    TelephonyChannelSubtypeParameters.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes", traits: {"smithy.api#required" => {}}))
-    TelephonyChannelSubtypeParameters.add_member(:connect_source_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
-    TelephonyChannelSubtypeParameters.add_member(:answer_machine_detection_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
+    TelephonyChannelSubtypeParameters.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationPhoneNumber, location_name: "destinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    TelephonyChannelSubtypeParameters.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "attributes", traits: {"smithy.api#required" => {}}))
+    TelephonyChannelSubtypeParameters.add_member(:connect_source_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
+    TelephonyChannelSubtypeParameters.add_member(:answer_machine_detection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
     TelephonyChannelSubtypeParameters.type = Types::TelephonyChannelSubtypeParameters
-    TelephonyOutboundConfig.add_member(:connect_contact_flow_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "connectContactFlowId", traits: {"smithy.api#required" => {}}))
-    TelephonyOutboundConfig.add_member(:connect_source_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
-    TelephonyOutboundConfig.add_member(:answer_machine_detection_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
+    TelephonyOutboundConfig.add_member(:connect_contact_flow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowId, location_name: "connectContactFlowId", traits: {"smithy.api#required" => {}}))
+    TelephonyOutboundConfig.add_member(:connect_source_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
+    TelephonyOutboundConfig.add_member(:answer_machine_detection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
     TelephonyOutboundConfig.type = Types::TelephonyOutboundConfig
-    TelephonyOutboundMode.add_member(:progressive, Types::TelephonyOutboundMode::Progressive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressiveConfig, location_name: "progressive"))
-    TelephonyOutboundMode.add_member(:predictive, Types::TelephonyOutboundMode::Predictive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictiveConfig, location_name: "predictive"))
-    TelephonyOutboundMode.add_member(:agentless, Types::TelephonyOutboundMode::Agentless, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentlessConfig, location_name: "agentless"))
-    TelephonyOutboundMode.add_member(:unknown, Types::TelephonyOutboundMode::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    TelephonyOutboundMode.add_member(:progressive, Types::TelephonyOutboundMode::Progressive, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressiveConfig, location_name: "progressive"))
+    TelephonyOutboundMode.add_member(:predictive, Types::TelephonyOutboundMode::Predictive, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveConfig, location_name: "predictive"))
+    TelephonyOutboundMode.add_member(:agentless, Types::TelephonyOutboundMode::Agentless, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentlessConfig, location_name: "agentless"))
+    TelephonyOutboundMode.add_member(:unknown, Types::TelephonyOutboundMode::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TelephonyOutboundMode.type = Types::TelephonyOutboundMode
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ThrottlingException.type = Types::ThrottlingException
-    TimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Time, location_name: "startTime", traits: {"smithy.api#required" => {}}))
-    TimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Time, location_name: "endTime", traits: {"smithy.api#required" => {}}))
+    TimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Time, location_name: "startTime", traits: {"smithy.api#required" => {}}))
+    TimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Time, location_name: "endTime", traits: {"smithy.api#required" => {}}))
     TimeRange.type = Types::TimeRange
-    TimeRangeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeRange)
-    TimeWindow.add_member(:open_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OpenHours, location_name: "openHours", traits: {"smithy.api#required" => {}}))
-    TimeWindow.add_member(:restricted_periods, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestrictedPeriods, location_name: "restrictedPeriods"))
+    TimeRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRange)
+    TimeWindow.add_member(:open_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenHours, location_name: "openHours", traits: {"smithy.api#required" => {}}))
+    TimeWindow.add_member(:restricted_periods, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriods, location_name: "restrictedPeriods"))
     TimeWindow.type = Types::TimeWindow
-    UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    UpdateCampaignChannelSubtypeConfigRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCampaignChannelSubtypeConfigRequest.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSubtypeConfig, location_name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignChannelSubtypeConfigRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignChannelSubtypeConfigRequest.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeConfig, location_name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
     UpdateCampaignChannelSubtypeConfigRequest.type = Types::UpdateCampaignChannelSubtypeConfigRequest
-    UpdateCampaignCommunicationLimitsRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCampaignCommunicationLimitsRequest.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationLimitsConfig, location_name: "communicationLimitsOverride", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignCommunicationLimitsRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignCommunicationLimitsRequest.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitsConfig, location_name: "communicationLimitsOverride", traits: {"smithy.api#required" => {}}))
     UpdateCampaignCommunicationLimitsRequest.type = Types::UpdateCampaignCommunicationLimitsRequest
-    UpdateCampaignCommunicationTimeRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCampaignCommunicationTimeRequest.add_member(:communication_time_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommunicationTimeConfig, location_name: "communicationTimeConfig", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignCommunicationTimeRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignCommunicationTimeRequest.add_member(:communication_time_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfig, location_name: "communicationTimeConfig", traits: {"smithy.api#required" => {}}))
     UpdateCampaignCommunicationTimeRequest.type = Types::UpdateCampaignCommunicationTimeRequest
-    UpdateCampaignFlowAssociationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCampaignFlowAssociationRequest.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignFlowAssociationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignFlowAssociationRequest.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "connectCampaignFlowArn", traits: {"smithy.api#required" => {}}))
     UpdateCampaignFlowAssociationRequest.type = Types::UpdateCampaignFlowAssociationRequest
-    UpdateCampaignNameRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCampaignNameRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignNameRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignNameRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, location_name: "name", traits: {"smithy.api#required" => {}}))
     UpdateCampaignNameRequest.type = Types::UpdateCampaignNameRequest
-    UpdateCampaignScheduleRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCampaignScheduleRequest.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignScheduleRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignScheduleRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, location_name: "schedule", traits: {"smithy.api#required" => {}}))
     UpdateCampaignScheduleRequest.type = Types::UpdateCampaignScheduleRequest
-    UpdateCampaignSourceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCampaignSourceRequest.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "source", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignSourceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignSourceRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "source", traits: {"smithy.api#required" => {}}))
     UpdateCampaignSourceRequest.type = Types::UpdateCampaignSourceRequest
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, location_name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ValidationException.type = Types::ValidationException
 
     AmazonConnectCampaignServiceV2 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -592,439 +592,439 @@ module Aws::ConnectCampaignsV2
       service.add_operation(:create_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#CreateCampaign"
         operation.name = "CreateCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCampaignResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateCampaignRequest
+        operation.output = CreateCampaignResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteCampaign"
         operation.name = "DeleteCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteCampaignRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_campaign_channel_subtype_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteCampaignChannelSubtypeConfig"
         operation.name = "DeleteCampaignChannelSubtypeConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCampaignChannelSubtypeConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteCampaignChannelSubtypeConfigRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/channel-subtype-config", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_campaign_communication_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteCampaignCommunicationLimits"
         operation.name = "DeleteCampaignCommunicationLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCampaignCommunicationLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteCampaignCommunicationLimitsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/communication-limits", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_campaign_communication_time, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteCampaignCommunicationTime"
         operation.name = "DeleteCampaignCommunicationTime"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCampaignCommunicationTimeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteCampaignCommunicationTimeRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/communication-time", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_connect_instance_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteConnectInstanceConfig"
         operation.name = "DeleteConnectInstanceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConnectInstanceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteConnectInstanceConfigRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/config", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_connect_instance_integration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteConnectInstanceIntegration"
         operation.name = "DeleteConnectInstanceIntegration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConnectInstanceIntegrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteConnectInstanceIntegrationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/integrations/delete", "method" => "POST"}}
       end)
       service.add_operation(:delete_instance_onboarding_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteInstanceOnboardingJob"
         operation.name = "DeleteInstanceOnboardingJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteInstanceOnboardingJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteInstanceOnboardingJobRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/onboarding", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DescribeCampaign"
         operation.name = "DescribeCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCampaignResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeCampaignRequest
+        operation.output = DescribeCampaignResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_campaign_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#GetCampaignState"
         operation.name = "GetCampaignState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCampaignStateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCampaignStateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetCampaignStateRequest
+        operation.output = GetCampaignStateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/state", "method" => "GET"}}
       end)
       service.add_operation(:get_campaign_state_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#GetCampaignStateBatch"
         operation.name = "GetCampaignStateBatch"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCampaignStateBatchRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCampaignStateBatchResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetCampaignStateBatchRequest
+        operation.output = GetCampaignStateBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns-state", "method" => "POST"}}
       end)
       service.add_operation(:get_connect_instance_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#GetConnectInstanceConfig"
         operation.name = "GetConnectInstanceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConnectInstanceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConnectInstanceConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetConnectInstanceConfigRequest
+        operation.output = GetConnectInstanceConfigResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/config", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_instance_communication_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#GetInstanceCommunicationLimits"
         operation.name = "GetInstanceCommunicationLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstanceCommunicationLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstanceCommunicationLimitsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetInstanceCommunicationLimitsRequest
+        operation.output = GetInstanceCommunicationLimitsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/communication-limits", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_instance_onboarding_job_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#GetInstanceOnboardingJobStatus"
         operation.name = "GetInstanceOnboardingJobStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstanceOnboardingJobStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstanceOnboardingJobStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetInstanceOnboardingJobStatusRequest
+        operation.output = GetInstanceOnboardingJobStatusResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/onboarding", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_campaigns, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#ListCampaigns"
         operation.name = "ListCampaigns"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCampaignsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCampaignsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListCampaignsRequest
+        operation.output = ListCampaignsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns-summary", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListCampaigns.new
       end)
       service.add_operation(:list_connect_instance_integrations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#ListConnectInstanceIntegrations"
         operation.name = "ListConnectInstanceIntegrations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectInstanceIntegrationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectInstanceIntegrationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListConnectInstanceIntegrationsRequest
+        operation.output = ListConnectInstanceIntegrationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/integrations", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListConnectInstanceIntegrations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/tags/{arn}", "method" => "GET"}}
       end)
       service.add_operation(:pause_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#PauseCampaign"
         operation.name = "PauseCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PauseCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PauseCampaignRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/pause", "method" => "POST"}}
       end)
       service.add_operation(:put_connect_instance_integration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#PutConnectInstanceIntegration"
         operation.name = "PutConnectInstanceIntegration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConnectInstanceIntegrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutConnectInstanceIntegrationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/integrations", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_instance_communication_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#PutInstanceCommunicationLimits"
         operation.name = "PutInstanceCommunicationLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutInstanceCommunicationLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutInstanceCommunicationLimitsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/communication-limits", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_outbound_request_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#PutOutboundRequestBatch"
         operation.name = "PutOutboundRequestBatch"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOutboundRequestBatchRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOutboundRequestBatchResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutOutboundRequestBatchRequest
+        operation.output = PutOutboundRequestBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/outbound-requests", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_profile_outbound_request_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#PutProfileOutboundRequestBatch"
         operation.name = "PutProfileOutboundRequestBatch"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutProfileOutboundRequestBatchRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutProfileOutboundRequestBatchResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutProfileOutboundRequestBatchRequest
+        operation.output = PutProfileOutboundRequestBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/profile-outbound-requests", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:resume_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#ResumeCampaign"
         operation.name = "ResumeCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResumeCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ResumeCampaignRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/resume", "method" => "POST"}}
       end)
       service.add_operation(:start_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#StartCampaign"
         operation.name = "StartCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartCampaignRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/start", "method" => "POST"}}
       end)
       service.add_operation(:start_instance_onboarding_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#StartInstanceOnboardingJob"
         operation.name = "StartInstanceOnboardingJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartInstanceOnboardingJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartInstanceOnboardingJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartInstanceOnboardingJobRequest
+        operation.output = StartInstanceOnboardingJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/connect-instance/{connectInstanceId}/onboarding", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:stop_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#StopCampaign"
         operation.name = "StopCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopCampaignRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/stop", "method" => "POST"}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/tags/{arn}", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/tags/{arn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_channel_subtype_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignChannelSubtypeConfig"
         operation.name = "UpdateCampaignChannelSubtypeConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCampaignChannelSubtypeConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCampaignChannelSubtypeConfigRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/channel-subtype-config", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_communication_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignCommunicationLimits"
         operation.name = "UpdateCampaignCommunicationLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCampaignCommunicationLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCampaignCommunicationLimitsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/communication-limits", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_communication_time, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignCommunicationTime"
         operation.name = "UpdateCampaignCommunicationTime"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCampaignCommunicationTimeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCampaignCommunicationTimeRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/communication-time", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_flow_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignFlowAssociation"
         operation.name = "UpdateCampaignFlowAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCampaignFlowAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCampaignFlowAssociationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/flow", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_name, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignName"
         operation.name = "UpdateCampaignName"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCampaignNameRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCampaignNameRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/name", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignSchedule"
         operation.name = "UpdateCampaignSchedule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCampaignScheduleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCampaignScheduleRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/schedule", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignSource"
         operation.name = "UpdateCampaignSource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCampaignSourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCampaignStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCampaignSourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/source", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
     end

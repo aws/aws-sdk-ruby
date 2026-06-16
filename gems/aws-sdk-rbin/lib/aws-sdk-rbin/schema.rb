@@ -65,164 +65,164 @@ module Aws::Rbin
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rbin#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rbin#ValidationExceptionReason", name: "ValidationExceptionReason")
 
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "Reason"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionReason, location_name: "Reason"))
     ConflictException.type = Types::ConflictException
-    ConflictExceptionReason.add_member(:invalid_rule_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_RULE_STATE", traits: {"smithy.api#enumValue" => "INVALID_RULE_STATE"}))
-    CreateRuleRequest.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod", traits: {"smithy.api#required" => {}}))
-    CreateRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateRuleRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRuleRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    CreateRuleRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    CreateRuleRequest.add_member(:lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockConfiguration, location_name: "LockConfiguration"))
-    CreateRuleRequest.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    ConflictExceptionReason.add_member(:invalid_rule_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_RULE_STATE", traits: {"smithy.api#enumValue" => "INVALID_RULE_STATE"}))
+    CreateRuleRequest.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod", traits: {"smithy.api#required" => {}}))
+    CreateRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateRuleRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateRuleRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    CreateRuleRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    CreateRuleRequest.add_member(:lock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LockConfiguration, location_name: "LockConfiguration"))
+    CreateRuleRequest.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     CreateRuleRequest.type = Types::CreateRuleRequest
-    CreateRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier"))
-    CreateRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
-    CreateRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateRuleResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    CreateRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    CreateRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleStatus, location_name: "Status"))
-    CreateRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockConfiguration, location_name: "LockConfiguration"))
-    CreateRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockState, location_name: "LockState"))
-    CreateRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
-    CreateRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    CreateRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier"))
+    CreateRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod"))
+    CreateRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateRuleResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    CreateRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    CreateRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatus, location_name: "Status"))
+    CreateRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LockConfiguration, location_name: "LockConfiguration"))
+    CreateRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, location_name: "LockState"))
+    CreateRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "RuleArn"))
+    CreateRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     CreateRuleResponse.type = Types::CreateRuleResponse
-    DeleteRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRuleRequest.type = Types::DeleteRuleRequest
     DeleteRuleResponse.type = Types::DeleteRuleResponse
-    ExcludeResourceTags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTag)
-    GetRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ExcludeResourceTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag)
+    GetRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRuleRequest.type = Types::GetRuleRequest
-    GetRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier"))
-    GetRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    GetRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    GetRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
-    GetRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    GetRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleStatus, location_name: "Status"))
-    GetRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockConfiguration, location_name: "LockConfiguration"))
-    GetRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockState, location_name: "LockState"))
-    GetRuleResponse.add_member(:lock_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LockEndTime"))
-    GetRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
-    GetRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    GetRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier"))
+    GetRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    GetRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    GetRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod"))
+    GetRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    GetRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatus, location_name: "Status"))
+    GetRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LockConfiguration, location_name: "LockConfiguration"))
+    GetRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, location_name: "LockState"))
+    GetRuleResponse.add_member(:lock_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LockEndTime"))
+    GetRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "RuleArn"))
+    GetRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     GetRuleResponse.type = Types::GetRuleResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    ListRulesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListRulesRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    ListRulesRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    ListRulesRequest.add_member(:lock_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockState, location_name: "LockState"))
-    ListRulesRequest.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    ListRulesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListRulesRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ListRulesRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    ListRulesRequest.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, location_name: "LockState"))
+    ListRulesRequest.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     ListRulesRequest.type = Types::ListRulesRequest
-    ListRulesResponse.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleSummaryList, location_name: "Rules"))
-    ListRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRulesResponse.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummaryList, location_name: "Rules"))
+    ListRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRulesResponse.type = Types::ListRulesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LockConfiguration.add_member(:unlock_delay, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnlockDelay, location_name: "UnlockDelay", traits: {"smithy.api#required" => {}}))
+    LockConfiguration.add_member(:unlock_delay, ::Smithy::Schema::Shapes::MemberShape.new(target: UnlockDelay, location_name: "UnlockDelay", traits: {"smithy.api#required" => {}}))
     LockConfiguration.type = Types::LockConfiguration
-    LockRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    LockRuleRequest.add_member(:lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockConfiguration, location_name: "LockConfiguration", traits: {"smithy.api#required" => {}}))
+    LockRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    LockRuleRequest.add_member(:lock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LockConfiguration, location_name: "LockConfiguration", traits: {"smithy.api#required" => {}}))
     LockRuleRequest.type = Types::LockRuleRequest
-    LockRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier"))
-    LockRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    LockRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    LockRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
-    LockRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    LockRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleStatus, location_name: "Status"))
-    LockRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockConfiguration, location_name: "LockConfiguration"))
-    LockRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockState, location_name: "LockState"))
-    LockRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
-    LockRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    LockRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier"))
+    LockRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    LockRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    LockRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod"))
+    LockRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    LockRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatus, location_name: "Status"))
+    LockRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LockConfiguration, location_name: "LockConfiguration"))
+    LockRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, location_name: "LockState"))
+    LockRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "RuleArn"))
+    LockRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     LockRuleResponse.type = Types::LockRuleResponse
-    LockState.add_member(:locked, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCKED", traits: {"smithy.api#enumValue" => "locked"}))
-    LockState.add_member(:pending_unlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_UNLOCK", traits: {"smithy.api#enumValue" => "pending_unlock"}))
-    LockState.add_member(:unlocked, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNLOCKED", traits: {"smithy.api#enumValue" => "unlocked"}))
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    ResourceNotFoundException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundExceptionReason, location_name: "Reason"))
+    LockState.add_member(:locked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOCKED", traits: {"smithy.api#enumValue" => "locked"}))
+    LockState.add_member(:pending_unlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_UNLOCK", traits: {"smithy.api#enumValue" => "pending_unlock"}))
+    LockState.add_member(:unlocked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNLOCKED", traits: {"smithy.api#enumValue" => "unlocked"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNotFoundExceptionReason, location_name: "Reason"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceNotFoundExceptionReason.add_member(:rule_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RULE_NOT_FOUND", traits: {"smithy.api#enumValue" => "RULE_NOT_FOUND"}))
-    ResourceTag.add_member(:resource_tag_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagKey, location_name: "ResourceTagKey", traits: {"smithy.api#required" => {}}))
-    ResourceTag.add_member(:resource_tag_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagValue, location_name: "ResourceTagValue"))
+    ResourceNotFoundExceptionReason.add_member(:rule_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RULE_NOT_FOUND", traits: {"smithy.api#enumValue" => "RULE_NOT_FOUND"}))
+    ResourceTag.add_member(:resource_tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, location_name: "ResourceTagKey", traits: {"smithy.api#required" => {}}))
+    ResourceTag.add_member(:resource_tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, location_name: "ResourceTagValue"))
     ResourceTag.type = Types::ResourceTag
-    ResourceTags.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTag)
-    ResourceType.add_member(:ebs_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EBS_SNAPSHOT", traits: {"smithy.api#enumValue" => "EBS_SNAPSHOT"}))
-    ResourceType.add_member(:ec2_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_IMAGE", traits: {"smithy.api#enumValue" => "EC2_IMAGE"}))
-    RetentionPeriod.add_member(:retention_period_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodValue, location_name: "RetentionPeriodValue", traits: {"smithy.api#required" => {}}))
-    RetentionPeriod.add_member(:retention_period_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodUnit, location_name: "RetentionPeriodUnit", traits: {"smithy.api#required" => {}}))
+    ResourceTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag)
+    ResourceType.add_member(:ebs_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EBS_SNAPSHOT", traits: {"smithy.api#enumValue" => "EBS_SNAPSHOT"}))
+    ResourceType.add_member(:ec2_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2_IMAGE", traits: {"smithy.api#enumValue" => "EC2_IMAGE"}))
+    RetentionPeriod.add_member(:retention_period_value, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodValue, location_name: "RetentionPeriodValue", traits: {"smithy.api#required" => {}}))
+    RetentionPeriod.add_member(:retention_period_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodUnit, location_name: "RetentionPeriodUnit", traits: {"smithy.api#required" => {}}))
     RetentionPeriod.type = Types::RetentionPeriod
-    RetentionPeriodUnit.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
-    RuleStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "pending"}))
-    RuleStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "available"}))
-    RuleSummary.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier"))
-    RuleSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    RuleSummary.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
-    RuleSummary.add_member(:lock_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockState, location_name: "LockState"))
-    RuleSummary.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
+    RetentionPeriodUnit.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
+    RuleStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "pending"}))
+    RuleStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "available"}))
+    RuleSummary.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier"))
+    RuleSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    RuleSummary.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod"))
+    RuleSummary.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, location_name: "LockState"))
+    RuleSummary.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "RuleArn"))
     RuleSummary.type = Types::RuleSummary
-    RuleSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleSummary)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    ServiceQuotaExceededException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededExceptionReason, location_name: "Reason"))
+    RuleSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaExceededExceptionReason, location_name: "Reason"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ServiceQuotaExceededExceptionReason.add_member(:service_quota_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "SERVICE_QUOTA_EXCEEDED"}))
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededExceptionReason.add_member(:service_quota_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "SERVICE_QUOTA_EXCEEDED"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    UnlockDelay.add_member(:unlock_delay_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnlockDelayValue, location_name: "UnlockDelayValue", traits: {"smithy.api#required" => {}}))
-    UnlockDelay.add_member(:unlock_delay_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnlockDelayUnit, location_name: "UnlockDelayUnit", traits: {"smithy.api#required" => {}}))
+    UnlockDelay.add_member(:unlock_delay_value, ::Smithy::Schema::Shapes::MemberShape.new(target: UnlockDelayValue, location_name: "UnlockDelayValue", traits: {"smithy.api#required" => {}}))
+    UnlockDelay.add_member(:unlock_delay_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: UnlockDelayUnit, location_name: "UnlockDelayUnit", traits: {"smithy.api#required" => {}}))
     UnlockDelay.type = Types::UnlockDelay
-    UnlockDelayUnit.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
-    UnlockRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UnlockDelayUnit.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
+    UnlockRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UnlockRuleRequest.type = Types::UnlockRuleRequest
-    UnlockRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier"))
-    UnlockRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UnlockRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    UnlockRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
-    UnlockRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    UnlockRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleStatus, location_name: "Status"))
-    UnlockRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockConfiguration, location_name: "LockConfiguration"))
-    UnlockRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockState, location_name: "LockState"))
-    UnlockRuleResponse.add_member(:lock_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LockEndTime"))
-    UnlockRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
-    UnlockRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    UnlockRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier"))
+    UnlockRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UnlockRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    UnlockRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod"))
+    UnlockRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    UnlockRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatus, location_name: "Status"))
+    UnlockRuleResponse.add_member(:lock_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LockConfiguration, location_name: "LockConfiguration"))
+    UnlockRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, location_name: "LockState"))
+    UnlockRuleResponse.add_member(:lock_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LockEndTime"))
+    UnlockRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "RuleArn"))
+    UnlockRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     UnlockRuleResponse.type = Types::UnlockRuleResponse
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateRuleRequest.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
-    UpdateRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateRuleRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    UpdateRuleRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    UpdateRuleRequest.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    UpdateRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRuleRequest.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod"))
+    UpdateRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateRuleRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    UpdateRuleRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    UpdateRuleRequest.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     UpdateRuleRequest.type = Types::UpdateRuleRequest
-    UpdateRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: "Identifier"))
-    UpdateRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
-    UpdateRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    UpdateRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
-    UpdateRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleStatus, location_name: "Status"))
-    UpdateRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockState, location_name: "LockState"))
-    UpdateRuleResponse.add_member(:lock_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LockEndTime"))
-    UpdateRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
-    UpdateRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
+    UpdateRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, location_name: "Identifier"))
+    UpdateRuleResponse.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, location_name: "RetentionPeriod"))
+    UpdateRuleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateRuleResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    UpdateRuleResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, location_name: "ResourceTags"))
+    UpdateRuleResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatus, location_name: "Status"))
+    UpdateRuleResponse.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, location_name: "LockState"))
+    UpdateRuleResponse.add_member(:lock_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "LockEndTime"))
+    UpdateRuleResponse.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, location_name: "RuleArn"))
+    UpdateRuleResponse.add_member(:exclude_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeResourceTags, location_name: "ExcludeResourceTags"))
     UpdateRuleResponse.type = Types::UpdateRuleResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionReason.add_member(:invalid_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PAGE_TOKEN", traits: {"smithy.api#enumValue" => "INVALID_PAGE_TOKEN"}))
-    ValidationExceptionReason.add_member(:invalid_parameter_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PARAMETER_VALUE", traits: {"smithy.api#enumValue" => "INVALID_PARAMETER_VALUE"}))
+    ValidationExceptionReason.add_member(:invalid_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PAGE_TOKEN", traits: {"smithy.api#enumValue" => "INVALID_PAGE_TOKEN"}))
+    ValidationExceptionReason.add_member(:invalid_parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PARAMETER_VALUE", traits: {"smithy.api#enumValue" => "INVALID_PARAMETER_VALUE"}))
 
     AmazonRecycleBin = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.rbin#AmazonRecycleBin"
@@ -232,107 +232,107 @@ module Aws::Rbin
       service.add_operation(:create_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#CreateRule"
         operation.name = "CreateRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRuleRequest
+        operation.output = CreateRuleResponse
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/rules", "code" => 201}}
       end)
       service.add_operation(:delete_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#DeleteRule"
         operation.name = "DeleteRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRuleRequest
+        operation.output = DeleteRuleResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/rules/{Identifier}", "code" => 204}}
       end)
       service.add_operation(:get_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#GetRule"
         operation.name = "GetRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRuleRequest
+        operation.output = GetRuleResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/rules/{Identifier}", "code" => 200}}
       end)
       service.add_operation(:list_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#ListRules"
         operation.name = "ListRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRulesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRulesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRulesRequest
+        operation.output = ListRulesResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/list-rules", "code" => 200}}
         operation[:paginator] = Paginators::ListRules.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:lock_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#LockRule"
         operation.name = "LockRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = LockRuleRequest
+        operation.output = LockRuleResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/rules/{Identifier}/lock", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 201}}
       end)
       service.add_operation(:unlock_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#UnlockRule"
         operation.name = "UnlockRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnlockRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnlockRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UnlockRuleRequest
+        operation.output = UnlockRuleResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/rules/{Identifier}/unlock", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 204}}
       end)
       service.add_operation(:update_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rbin#UpdateRule"
         operation.name = "UpdateRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateRuleRequest
+        operation.output = UpdateRuleResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/rules/{Identifier}", "code" => 200}}
       end)
     end

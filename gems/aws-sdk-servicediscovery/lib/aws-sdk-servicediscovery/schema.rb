@@ -182,447 +182,447 @@ module Aws::ServiceDiscovery
     UpdateServiceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.servicediscovery#UpdateServiceRequest", name: "UpdateServiceRequest")
     UpdateServiceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.servicediscovery#UpdateServiceResponse", name: "UpdateServiceResponse")
 
-    Attributes.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttrKey)
-    Attributes.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttrValue)
-    CreateHttpNamespaceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNameHttp, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateHttpNamespaceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateHttpNamespaceRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    CreateHttpNamespaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttrKey)
+    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttrValue)
+    CreateHttpNamespaceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceNameHttp, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateHttpNamespaceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateHttpNamespaceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    CreateHttpNamespaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateHttpNamespaceRequest.type = Types::CreateHttpNamespaceRequest
-    CreateHttpNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    CreateHttpNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     CreateHttpNamespaceResponse.type = Types::CreateHttpNamespaceResponse
-    CreatePrivateDnsNamespaceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNamePrivate, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreatePrivateDnsNamespaceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreatePrivateDnsNamespaceRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    CreatePrivateDnsNamespaceRequest.add_member(:vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "Vpc", traits: {"smithy.api#required" => {}}))
-    CreatePrivateDnsNamespaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreatePrivateDnsNamespaceRequest.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateDnsNamespaceProperties, location_name: "Properties"))
+    CreatePrivateDnsNamespaceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceNamePrivate, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreatePrivateDnsNamespaceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreatePrivateDnsNamespaceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    CreatePrivateDnsNamespaceRequest.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "Vpc", traits: {"smithy.api#required" => {}}))
+    CreatePrivateDnsNamespaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreatePrivateDnsNamespaceRequest.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsNamespaceProperties, location_name: "Properties"))
     CreatePrivateDnsNamespaceRequest.type = Types::CreatePrivateDnsNamespaceRequest
-    CreatePrivateDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    CreatePrivateDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     CreatePrivateDnsNamespaceResponse.type = Types::CreatePrivateDnsNamespaceResponse
-    CreatePublicDnsNamespaceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNamePublic, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreatePublicDnsNamespaceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreatePublicDnsNamespaceRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    CreatePublicDnsNamespaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreatePublicDnsNamespaceRequest.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicDnsNamespaceProperties, location_name: "Properties"))
+    CreatePublicDnsNamespaceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceNamePublic, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreatePublicDnsNamespaceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreatePublicDnsNamespaceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    CreatePublicDnsNamespaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreatePublicDnsNamespaceRequest.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicDnsNamespaceProperties, location_name: "Properties"))
     CreatePublicDnsNamespaceRequest.type = Types::CreatePublicDnsNamespaceRequest
-    CreatePublicDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    CreatePublicDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     CreatePublicDnsNamespaceResponse.type = Types::CreatePublicDnsNamespaceResponse
-    CreateServiceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateServiceRequest.add_member(:namespace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "NamespaceId"))
-    CreateServiceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateServiceRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    CreateServiceRequest.add_member(:dns_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsConfig, location_name: "DnsConfig"))
-    CreateServiceRequest.add_member(:health_check_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
-    CreateServiceRequest.add_member(:health_check_custom_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
-    CreateServiceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateServiceRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceTypeOption, location_name: "Type"))
+    CreateServiceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateServiceRequest.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "NamespaceId"))
+    CreateServiceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateServiceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    CreateServiceRequest.add_member(:dns_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsConfig, location_name: "DnsConfig"))
+    CreateServiceRequest.add_member(:health_check_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckConfig, location_name: "HealthCheckConfig"))
+    CreateServiceRequest.add_member(:health_check_custom_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
+    CreateServiceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateServiceRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTypeOption, location_name: "Type"))
     CreateServiceRequest.type = Types::CreateServiceRequest
-    CreateServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
+    CreateServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, location_name: "Service"))
     CreateServiceResponse.type = Types::CreateServiceResponse
-    CustomHealthNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CustomHealthNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     CustomHealthNotFound.type = Types::CustomHealthNotFound
-    CustomHealthStatus.add_member(:healthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
-    CustomHealthStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
-    DeleteNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    CustomHealthStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
+    CustomHealthStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
+    DeleteNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
     DeleteNamespaceRequest.type = Types::DeleteNamespaceRequest
-    DeleteNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    DeleteNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     DeleteNamespaceResponse.type = Types::DeleteNamespaceResponse
-    DeleteServiceAttributesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    DeleteServiceAttributesRequest.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributeKeyList, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
+    DeleteServiceAttributesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    DeleteServiceAttributesRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAttributeKeyList, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
     DeleteServiceAttributesRequest.type = Types::DeleteServiceAttributesRequest
     DeleteServiceAttributesResponse.type = Types::DeleteServiceAttributesResponse
-    DeleteServiceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    DeleteServiceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
     DeleteServiceRequest.type = Types::DeleteServiceRequest
     DeleteServiceResponse.type = Types::DeleteServiceResponse
-    DeregisterInstanceRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    DeregisterInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
+    DeregisterInstanceRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    DeregisterInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
     DeregisterInstanceRequest.type = Types::DeregisterInstanceRequest
-    DeregisterInstanceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    DeregisterInstanceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     DeregisterInstanceResponse.type = Types::DeregisterInstanceResponse
-    DiscoverInstancesRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceName, location_name: "NamespaceName", traits: {"smithy.api#required" => {}}))
-    DiscoverInstancesRequest.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName", traits: {"smithy.api#required" => {}}))
-    DiscoverInstancesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoverMaxResults, location_name: "MaxResults"))
-    DiscoverInstancesRequest.add_member(:query_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "QueryParameters"))
-    DiscoverInstancesRequest.add_member(:optional_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "OptionalParameters"))
-    DiscoverInstancesRequest.add_member(:health_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthStatusFilter, location_name: "HealthStatus"))
-    DiscoverInstancesRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerAccount"))
+    DiscoverInstancesRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, location_name: "NamespaceName", traits: {"smithy.api#required" => {}}))
+    DiscoverInstancesRequest.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "ServiceName", traits: {"smithy.api#required" => {}}))
+    DiscoverInstancesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoverMaxResults, location_name: "MaxResults"))
+    DiscoverInstancesRequest.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "QueryParameters"))
+    DiscoverInstancesRequest.add_member(:optional_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "OptionalParameters"))
+    DiscoverInstancesRequest.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatusFilter, location_name: "HealthStatus"))
+    DiscoverInstancesRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerAccount"))
     DiscoverInstancesRequest.type = Types::DiscoverInstancesRequest
-    DiscoverInstancesResponse.add_member(:instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpInstanceSummaryList, location_name: "Instances"))
-    DiscoverInstancesResponse.add_member(:instances_revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Revision, location_name: "InstancesRevision"))
+    DiscoverInstancesResponse.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpInstanceSummaryList, location_name: "Instances"))
+    DiscoverInstancesResponse.add_member(:instances_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, location_name: "InstancesRevision"))
     DiscoverInstancesResponse.type = Types::DiscoverInstancesResponse
-    DiscoverInstancesRevisionRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceName, location_name: "NamespaceName", traits: {"smithy.api#required" => {}}))
-    DiscoverInstancesRevisionRequest.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName", traits: {"smithy.api#required" => {}}))
-    DiscoverInstancesRevisionRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerAccount"))
+    DiscoverInstancesRevisionRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, location_name: "NamespaceName", traits: {"smithy.api#required" => {}}))
+    DiscoverInstancesRevisionRequest.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "ServiceName", traits: {"smithy.api#required" => {}}))
+    DiscoverInstancesRevisionRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerAccount"))
     DiscoverInstancesRevisionRequest.type = Types::DiscoverInstancesRevisionRequest
-    DiscoverInstancesRevisionResponse.add_member(:instances_revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Revision, location_name: "InstancesRevision"))
+    DiscoverInstancesRevisionResponse.add_member(:instances_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, location_name: "InstancesRevision"))
     DiscoverInstancesRevisionResponse.type = Types::DiscoverInstancesRevisionResponse
-    DnsConfig.add_member(:namespace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "NamespaceId", traits: {"smithy.api#deprecated" => {"message" => "Top level attribute in request should be used to reference namespace-id"}}))
-    DnsConfig.add_member(:routing_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingPolicy, location_name: "RoutingPolicy"))
-    DnsConfig.add_member(:dns_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsRecordList, location_name: "DnsRecords", traits: {"smithy.api#required" => {}}))
+    DnsConfig.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "NamespaceId", traits: {"smithy.api#deprecated" => {"message" => "Top level attribute in request should be used to reference namespace-id"}}))
+    DnsConfig.add_member(:routing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingPolicy, location_name: "RoutingPolicy"))
+    DnsConfig.add_member(:dns_records, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecordList, location_name: "DnsRecords", traits: {"smithy.api#required" => {}}))
     DnsConfig.type = Types::DnsConfig
-    DnsConfigChange.add_member(:dns_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsRecordList, location_name: "DnsRecords", traits: {"smithy.api#required" => {}}))
+    DnsConfigChange.add_member(:dns_records, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecordList, location_name: "DnsRecords", traits: {"smithy.api#required" => {}}))
     DnsConfigChange.type = Types::DnsConfigChange
-    DnsProperties.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "HostedZoneId"))
-    DnsProperties.add_member(:soa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SOA, location_name: "SOA"))
+    DnsProperties.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "HostedZoneId"))
+    DnsProperties.add_member(:soa, ::Smithy::Schema::Shapes::MemberShape.new(target: SOA, location_name: "SOA"))
     DnsProperties.type = Types::DnsProperties
-    DnsRecord.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    DnsRecord.add_member(:ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordTTL, location_name: "TTL", traits: {"smithy.api#required" => {}}))
+    DnsRecord.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    DnsRecord.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordTTL, location_name: "TTL", traits: {"smithy.api#required" => {}}))
     DnsRecord.type = Types::DnsRecord
-    DnsRecordList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsRecord)
-    DuplicateRequest.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    DuplicateRequest.add_member(:duplicate_operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "DuplicateOperationId"))
+    DnsRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecord)
+    DuplicateRequest.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    DuplicateRequest.add_member(:duplicate_operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "DuplicateOperationId"))
     DuplicateRequest.type = Types::DuplicateRequest
-    FilterCondition.add_member(:eq, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQ", traits: {"smithy.api#enumValue" => "EQ"}))
-    FilterCondition.add_member(:in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN", traits: {"smithy.api#enumValue" => "IN"}))
-    FilterCondition.add_member(:between, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BETWEEN", traits: {"smithy.api#enumValue" => "BETWEEN"}))
-    FilterCondition.add_member(:begins_with, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
-    FilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue, traits: {"smithy.api#xmlName" => "item"})
-    GetInstanceRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    GetInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
+    FilterCondition.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQ", traits: {"smithy.api#enumValue" => "EQ"}))
+    FilterCondition.add_member(:in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN", traits: {"smithy.api#enumValue" => "IN"}))
+    FilterCondition.add_member(:between, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BETWEEN", traits: {"smithy.api#enumValue" => "BETWEEN"}))
+    FilterCondition.add_member(:begins_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
+    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, traits: {"smithy.api#xmlName" => "item"})
+    GetInstanceRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    GetInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
     GetInstanceRequest.type = Types::GetInstanceRequest
-    GetInstanceResponse.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ResourceOwner"))
-    GetInstanceResponse.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Instance, location_name: "Instance"))
+    GetInstanceResponse.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "ResourceOwner"))
+    GetInstanceResponse.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, location_name: "Instance"))
     GetInstanceResponse.type = Types::GetInstanceResponse
-    GetInstancesHealthStatusRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    GetInstancesHealthStatusRequest.add_member(:instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceIdList, location_name: "Instances"))
-    GetInstancesHealthStatusRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    GetInstancesHealthStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetInstancesHealthStatusRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    GetInstancesHealthStatusRequest.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdList, location_name: "Instances"))
+    GetInstancesHealthStatusRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    GetInstancesHealthStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetInstancesHealthStatusRequest.type = Types::GetInstancesHealthStatusRequest
-    GetInstancesHealthStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceHealthStatusMap, location_name: "Status"))
-    GetInstancesHealthStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetInstancesHealthStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthStatusMap, location_name: "Status"))
+    GetInstancesHealthStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetInstancesHealthStatusResponse.type = Types::GetInstancesHealthStatusResponse
-    GetNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    GetNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
     GetNamespaceRequest.type = Types::GetNamespaceRequest
-    GetNamespaceResponse.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    GetNamespaceResponse.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, location_name: "Namespace"))
     GetNamespaceResponse.type = Types::GetNamespaceResponse
-    GetOperationRequest.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId", traits: {"smithy.api#required" => {}}))
-    GetOperationRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerAccount"))
+    GetOperationRequest.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId", traits: {"smithy.api#required" => {}}))
+    GetOperationRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerAccount"))
     GetOperationRequest.type = Types::GetOperationRequest
-    GetOperationResponse.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
+    GetOperationResponse.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, location_name: "Operation"))
     GetOperationResponse.type = Types::GetOperationResponse
-    GetServiceAttributesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    GetServiceAttributesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
     GetServiceAttributesRequest.type = Types::GetServiceAttributesRequest
-    GetServiceAttributesResponse.add_member(:service_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributes, location_name: "ServiceAttributes"))
+    GetServiceAttributesResponse.add_member(:service_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAttributes, location_name: "ServiceAttributes"))
     GetServiceAttributesResponse.type = Types::GetServiceAttributesResponse
-    GetServiceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    GetServiceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
     GetServiceRequest.type = Types::GetServiceRequest
-    GetServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
+    GetServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, location_name: "Service"))
     GetServiceResponse.type = Types::GetServiceResponse
-    HealthCheckConfig.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    HealthCheckConfig.add_member(:resource_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePath, location_name: "ResourcePath"))
-    HealthCheckConfig.add_member(:failure_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold"))
+    HealthCheckConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    HealthCheckConfig.add_member(:resource_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePath, location_name: "ResourcePath"))
+    HealthCheckConfig.add_member(:failure_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureThreshold, location_name: "FailureThreshold"))
     HealthCheckConfig.type = Types::HealthCheckConfig
-    HealthCheckCustomConfig.add_member(:failure_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold", traits: {"smithy.api#deprecated" => {"message" => "Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1."}}))
+    HealthCheckCustomConfig.add_member(:failure_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureThreshold, location_name: "FailureThreshold", traits: {"smithy.api#deprecated" => {"message" => "Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1."}}))
     HealthCheckCustomConfig.type = Types::HealthCheckCustomConfig
-    HealthCheckType.add_member(:http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
-    HealthCheckType.add_member(:https, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
-    HealthCheckType.add_member(:tcp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
-    HealthStatus.add_member(:healthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
-    HealthStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
-    HealthStatus.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    HealthStatusFilter.add_member(:healthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
-    HealthStatusFilter.add_member(:unhealthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
-    HealthStatusFilter.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    HealthStatusFilter.add_member(:healthy_or_else_all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY_OR_ELSE_ALL", traits: {"smithy.api#enumValue" => "HEALTHY_OR_ELSE_ALL"}))
-    HttpInstanceSummary.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "InstanceId"))
-    HttpInstanceSummary.add_member(:namespace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNameHttp, location_name: "NamespaceName"))
-    HttpInstanceSummary.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
-    HttpInstanceSummary.add_member(:health_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthStatus, location_name: "HealthStatus"))
-    HttpInstanceSummary.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    HealthCheckType.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
+    HealthCheckType.add_member(:https, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
+    HealthCheckType.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
+    HealthStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
+    HealthStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
+    HealthStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    HealthStatusFilter.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
+    HealthStatusFilter.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
+    HealthStatusFilter.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    HealthStatusFilter.add_member(:healthy_or_else_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEALTHY_OR_ELSE_ALL", traits: {"smithy.api#enumValue" => "HEALTHY_OR_ELSE_ALL"}))
+    HttpInstanceSummary.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "InstanceId"))
+    HttpInstanceSummary.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceNameHttp, location_name: "NamespaceName"))
+    HttpInstanceSummary.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "ServiceName"))
+    HttpInstanceSummary.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatus, location_name: "HealthStatus"))
+    HttpInstanceSummary.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "Attributes"))
     HttpInstanceSummary.type = Types::HttpInstanceSummary
-    HttpInstanceSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpInstanceSummary)
-    HttpNamespaceChange.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    HttpInstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpInstanceSummary)
+    HttpNamespaceChange.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description", traits: {"smithy.api#required" => {}}))
     HttpNamespaceChange.type = Types::HttpNamespaceChange
-    HttpProperties.add_member(:http_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceName, location_name: "HttpName"))
+    HttpProperties.add_member(:http_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, location_name: "HttpName"))
     HttpProperties.type = Types::HttpProperties
-    Instance.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    Instance.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId"))
-    Instance.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
-    Instance.add_member(:created_by_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "CreatedByAccount"))
+    Instance.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    Instance.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId"))
+    Instance.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "Attributes"))
+    Instance.add_member(:created_by_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "CreatedByAccount"))
     Instance.type = Types::Instance
-    InstanceHealthStatusMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId)
-    InstanceHealthStatusMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthStatus)
-    InstanceIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, traits: {"smithy.api#xmlName" => "InstanceId"})
-    InstanceNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InstanceHealthStatusMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId)
+    InstanceHealthStatusMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatus)
+    InstanceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, traits: {"smithy.api#xmlName" => "InstanceId"})
+    InstanceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InstanceNotFound.type = Types::InstanceNotFound
-    InstanceSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    InstanceSummary.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
-    InstanceSummary.add_member(:created_by_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "CreatedByAccount"))
+    InstanceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "Id"))
+    InstanceSummary.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "Attributes"))
+    InstanceSummary.add_member(:created_by_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "CreatedByAccount"))
     InstanceSummary.type = Types::InstanceSummary
-    InstanceSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceSummary, traits: {"smithy.api#xmlName" => "InstanceSummary"})
-    InvalidInput.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, traits: {"smithy.api#xmlName" => "InstanceSummary"})
+    InvalidInput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidInput.type = Types::InvalidInput
-    ListInstancesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    ListInstancesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListInstancesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInstancesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    ListInstancesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListInstancesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListInstancesRequest.type = Types::ListInstancesRequest
-    ListInstancesResponse.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ResourceOwner"))
-    ListInstancesResponse.add_member(:instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceSummaryList, location_name: "Instances"))
-    ListInstancesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInstancesResponse.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "ResourceOwner"))
+    ListInstancesResponse.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummaryList, location_name: "Instances"))
+    ListInstancesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListInstancesResponse.type = Types::ListInstancesResponse
-    ListNamespacesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListNamespacesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListNamespacesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceFilters, location_name: "Filters"))
+    ListNamespacesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListNamespacesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListNamespacesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceFilters, location_name: "Filters"))
     ListNamespacesRequest.type = Types::ListNamespacesRequest
-    ListNamespacesResponse.add_member(:namespaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceSummariesList, location_name: "Namespaces"))
-    ListNamespacesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListNamespacesResponse.add_member(:namespaces, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceSummariesList, location_name: "Namespaces"))
+    ListNamespacesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListNamespacesResponse.type = Types::ListNamespacesResponse
-    ListOperationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListOperationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListOperationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationFilters, location_name: "Filters"))
+    ListOperationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListOperationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListOperationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationFilters, location_name: "Filters"))
     ListOperationsRequest.type = Types::ListOperationsRequest
-    ListOperationsResponse.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationSummaryList, location_name: "Operations"))
-    ListOperationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOperationsResponse.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationSummaryList, location_name: "Operations"))
+    ListOperationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListOperationsResponse.type = Types::ListOperationsResponse
-    ListServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListServicesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFilters, location_name: "Filters"))
+    ListServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListServicesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceFilters, location_name: "Filters"))
     ListServicesRequest.type = Types::ListServicesRequest
-    ListServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceSummariesList, location_name: "Services"))
-    ListServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummariesList, location_name: "Services"))
+    ListServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListServicesResponse.type = Types::ListServicesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    Namespace.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    Namespace.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    Namespace.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ResourceOwner"))
-    Namespace.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceName, location_name: "Name"))
-    Namespace.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceType, location_name: "Type"))
-    Namespace.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    Namespace.add_member(:service_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCount, location_name: "ServiceCount"))
-    Namespace.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceProperties, location_name: "Properties"))
-    Namespace.add_member(:create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
-    Namespace.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId"))
+    Namespace.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "Id"))
+    Namespace.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    Namespace.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "ResourceOwner"))
+    Namespace.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, location_name: "Name"))
+    Namespace.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceType, location_name: "Type"))
+    Namespace.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    Namespace.add_member(:service_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, location_name: "ServiceCount"))
+    Namespace.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceProperties, location_name: "Properties"))
+    Namespace.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreateDate"))
+    Namespace.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId"))
     Namespace.type = Types::Namespace
-    NamespaceAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    NamespaceAlreadyExists.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId"))
-    NamespaceAlreadyExists.add_member(:namespace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "NamespaceId"))
+    NamespaceAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    NamespaceAlreadyExists.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId"))
+    NamespaceAlreadyExists.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "NamespaceId"))
     NamespaceAlreadyExists.type = Types::NamespaceAlreadyExists
-    NamespaceFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    NamespaceFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
-    NamespaceFilter.add_member(:condition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterCondition, location_name: "Condition"))
+    NamespaceFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    NamespaceFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    NamespaceFilter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, location_name: "Condition"))
     NamespaceFilter.type = Types::NamespaceFilter
-    NamespaceFilterName.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TYPE", traits: {"smithy.api#enumValue" => "TYPE"}))
-    NamespaceFilterName.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
-    NamespaceFilterName.add_member(:http_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP_NAME", traits: {"smithy.api#enumValue" => "HTTP_NAME"}))
-    NamespaceFilterName.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_OWNER", traits: {"smithy.api#enumValue" => "RESOURCE_OWNER"}))
-    NamespaceFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceFilter, traits: {"smithy.api#xmlName" => "item"})
-    NamespaceNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NamespaceFilterName.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TYPE", traits: {"smithy.api#enumValue" => "TYPE"}))
+    NamespaceFilterName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    NamespaceFilterName.add_member(:http_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP_NAME", traits: {"smithy.api#enumValue" => "HTTP_NAME"}))
+    NamespaceFilterName.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_OWNER", traits: {"smithy.api#enumValue" => "RESOURCE_OWNER"}))
+    NamespaceFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceFilter, traits: {"smithy.api#xmlName" => "item"})
+    NamespaceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NamespaceNotFound.type = Types::NamespaceNotFound
-    NamespaceProperties.add_member(:dns_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsProperties, location_name: "DnsProperties"))
-    NamespaceProperties.add_member(:http_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpProperties, location_name: "HttpProperties"))
+    NamespaceProperties.add_member(:dns_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsProperties, location_name: "DnsProperties"))
+    NamespaceProperties.add_member(:http_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpProperties, location_name: "HttpProperties"))
     NamespaceProperties.type = Types::NamespaceProperties
-    NamespaceSummariesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceSummary)
-    NamespaceSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    NamespaceSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    NamespaceSummary.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ResourceOwner"))
-    NamespaceSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceName, location_name: "Name"))
-    NamespaceSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceType, location_name: "Type"))
-    NamespaceSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    NamespaceSummary.add_member(:service_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCount, location_name: "ServiceCount"))
-    NamespaceSummary.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceProperties, location_name: "Properties"))
-    NamespaceSummary.add_member(:create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
+    NamespaceSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceSummary)
+    NamespaceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "Id"))
+    NamespaceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    NamespaceSummary.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "ResourceOwner"))
+    NamespaceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, location_name: "Name"))
+    NamespaceSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceType, location_name: "Type"))
+    NamespaceSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    NamespaceSummary.add_member(:service_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, location_name: "ServiceCount"))
+    NamespaceSummary.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceProperties, location_name: "Properties"))
+    NamespaceSummary.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreateDate"))
     NamespaceSummary.type = Types::NamespaceSummary
-    NamespaceType.add_member(:dns_public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS_PUBLIC", traits: {"smithy.api#enumValue" => "DNS_PUBLIC"}))
-    NamespaceType.add_member(:dns_private, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS_PRIVATE", traits: {"smithy.api#enumValue" => "DNS_PRIVATE"}))
-    NamespaceType.add_member(:http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
-    Operation.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "Id"))
-    Operation.add_member(:owner_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerAccount"))
-    Operation.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationType, location_name: "Type"))
-    Operation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationStatus, location_name: "Status"))
-    Operation.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "ErrorMessage"))
-    Operation.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Code, location_name: "ErrorCode"))
-    Operation.add_member(:create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
-    Operation.add_member(:update_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateDate"))
-    Operation.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTargetsMap, location_name: "Targets"))
+    NamespaceType.add_member(:dns_public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS_PUBLIC", traits: {"smithy.api#enumValue" => "DNS_PUBLIC"}))
+    NamespaceType.add_member(:dns_private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS_PRIVATE", traits: {"smithy.api#enumValue" => "DNS_PRIVATE"}))
+    NamespaceType.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
+    Operation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "Id"))
+    Operation.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "OwnerAccount"))
+    Operation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationType, location_name: "Type"))
+    Operation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, location_name: "Status"))
+    Operation.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "ErrorMessage"))
+    Operation.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Code, location_name: "ErrorCode"))
+    Operation.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreateDate"))
+    Operation.add_member(:update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "UpdateDate"))
+    Operation.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationTargetsMap, location_name: "Targets"))
     Operation.type = Types::Operation
-    OperationFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    OperationFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
-    OperationFilter.add_member(:condition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterCondition, location_name: "Condition"))
+    OperationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    OperationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    OperationFilter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, location_name: "Condition"))
     OperationFilter.type = Types::OperationFilter
-    OperationFilterName.add_member(:namespace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAMESPACE_ID", traits: {"smithy.api#enumValue" => "NAMESPACE_ID"}))
-    OperationFilterName.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_ID", traits: {"smithy.api#enumValue" => "SERVICE_ID"}))
-    OperationFilterName.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
-    OperationFilterName.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TYPE", traits: {"smithy.api#enumValue" => "TYPE"}))
-    OperationFilterName.add_member(:update_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_DATE", traits: {"smithy.api#enumValue" => "UPDATE_DATE"}))
-    OperationFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationFilter, traits: {"smithy.api#xmlName" => "item"})
-    OperationNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    OperationFilterName.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAMESPACE_ID", traits: {"smithy.api#enumValue" => "NAMESPACE_ID"}))
+    OperationFilterName.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE_ID", traits: {"smithy.api#enumValue" => "SERVICE_ID"}))
+    OperationFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
+    OperationFilterName.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TYPE", traits: {"smithy.api#enumValue" => "TYPE"}))
+    OperationFilterName.add_member(:update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_DATE", traits: {"smithy.api#enumValue" => "UPDATE_DATE"}))
+    OperationFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationFilter, traits: {"smithy.api#xmlName" => "item"})
+    OperationNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     OperationNotFound.type = Types::OperationNotFound
-    OperationStatus.add_member(:submitted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
-    OperationStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    OperationStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    OperationStatus.add_member(:fail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAIL", traits: {"smithy.api#enumValue" => "FAIL"}))
-    OperationSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "Id"))
-    OperationSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationStatus, location_name: "Status"))
+    OperationStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    OperationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    OperationStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    OperationStatus.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAIL", traits: {"smithy.api#enumValue" => "FAIL"}))
+    OperationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "Id"))
+    OperationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, location_name: "Status"))
     OperationSummary.type = Types::OperationSummary
-    OperationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationSummary, traits: {"smithy.api#xmlName" => "OperationSummary"})
-    OperationTargetType.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAMESPACE", traits: {"smithy.api#enumValue" => "NAMESPACE"}))
-    OperationTargetType.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
-    OperationTargetType.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
-    OperationTargetsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTargetType)
-    OperationTargetsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId)
-    OperationType.add_member(:create_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_NAMESPACE", traits: {"smithy.api#enumValue" => "CREATE_NAMESPACE"}))
-    OperationType.add_member(:delete_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_NAMESPACE", traits: {"smithy.api#enumValue" => "DELETE_NAMESPACE"}))
-    OperationType.add_member(:update_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_NAMESPACE", traits: {"smithy.api#enumValue" => "UPDATE_NAMESPACE"}))
-    OperationType.add_member(:update_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SERVICE", traits: {"smithy.api#enumValue" => "UPDATE_SERVICE"}))
-    OperationType.add_member(:register_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTER_INSTANCE", traits: {"smithy.api#enumValue" => "REGISTER_INSTANCE"}))
-    OperationType.add_member(:deregister_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTER_INSTANCE", traits: {"smithy.api#enumValue" => "DEREGISTER_INSTANCE"}))
-    PrivateDnsNamespaceChange.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    PrivateDnsNamespaceChange.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateDnsNamespacePropertiesChange, location_name: "Properties"))
+    OperationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationSummary, traits: {"smithy.api#xmlName" => "OperationSummary"})
+    OperationTargetType.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAMESPACE", traits: {"smithy.api#enumValue" => "NAMESPACE"}))
+    OperationTargetType.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
+    OperationTargetType.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
+    OperationTargetsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationTargetType)
+    OperationTargetsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId)
+    OperationType.add_member(:create_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_NAMESPACE", traits: {"smithy.api#enumValue" => "CREATE_NAMESPACE"}))
+    OperationType.add_member(:delete_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_NAMESPACE", traits: {"smithy.api#enumValue" => "DELETE_NAMESPACE"}))
+    OperationType.add_member(:update_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_NAMESPACE", traits: {"smithy.api#enumValue" => "UPDATE_NAMESPACE"}))
+    OperationType.add_member(:update_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SERVICE", traits: {"smithy.api#enumValue" => "UPDATE_SERVICE"}))
+    OperationType.add_member(:register_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGISTER_INSTANCE", traits: {"smithy.api#enumValue" => "REGISTER_INSTANCE"}))
+    OperationType.add_member(:deregister_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEREGISTER_INSTANCE", traits: {"smithy.api#enumValue" => "DEREGISTER_INSTANCE"}))
+    PrivateDnsNamespaceChange.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    PrivateDnsNamespaceChange.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsNamespacePropertiesChange, location_name: "Properties"))
     PrivateDnsNamespaceChange.type = Types::PrivateDnsNamespaceChange
-    PrivateDnsNamespaceProperties.add_member(:dns_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateDnsPropertiesMutable, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
+    PrivateDnsNamespaceProperties.add_member(:dns_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsPropertiesMutable, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
     PrivateDnsNamespaceProperties.type = Types::PrivateDnsNamespaceProperties
-    PrivateDnsNamespacePropertiesChange.add_member(:dns_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateDnsPropertiesMutableChange, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
+    PrivateDnsNamespacePropertiesChange.add_member(:dns_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsPropertiesMutableChange, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
     PrivateDnsNamespacePropertiesChange.type = Types::PrivateDnsNamespacePropertiesChange
-    PrivateDnsPropertiesMutable.add_member(:soa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SOA, location_name: "SOA", traits: {"smithy.api#required" => {}}))
+    PrivateDnsPropertiesMutable.add_member(:soa, ::Smithy::Schema::Shapes::MemberShape.new(target: SOA, location_name: "SOA", traits: {"smithy.api#required" => {}}))
     PrivateDnsPropertiesMutable.type = Types::PrivateDnsPropertiesMutable
-    PrivateDnsPropertiesMutableChange.add_member(:soa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SOAChange, location_name: "SOA", traits: {"smithy.api#required" => {}}))
+    PrivateDnsPropertiesMutableChange.add_member(:soa, ::Smithy::Schema::Shapes::MemberShape.new(target: SOAChange, location_name: "SOA", traits: {"smithy.api#required" => {}}))
     PrivateDnsPropertiesMutableChange.type = Types::PrivateDnsPropertiesMutableChange
-    PublicDnsNamespaceChange.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    PublicDnsNamespaceChange.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicDnsNamespacePropertiesChange, location_name: "Properties"))
+    PublicDnsNamespaceChange.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    PublicDnsNamespaceChange.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicDnsNamespacePropertiesChange, location_name: "Properties"))
     PublicDnsNamespaceChange.type = Types::PublicDnsNamespaceChange
-    PublicDnsNamespaceProperties.add_member(:dns_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicDnsPropertiesMutable, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
+    PublicDnsNamespaceProperties.add_member(:dns_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicDnsPropertiesMutable, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
     PublicDnsNamespaceProperties.type = Types::PublicDnsNamespaceProperties
-    PublicDnsNamespacePropertiesChange.add_member(:dns_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicDnsPropertiesMutableChange, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
+    PublicDnsNamespacePropertiesChange.add_member(:dns_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicDnsPropertiesMutableChange, location_name: "DnsProperties", traits: {"smithy.api#required" => {}}))
     PublicDnsNamespacePropertiesChange.type = Types::PublicDnsNamespacePropertiesChange
-    PublicDnsPropertiesMutable.add_member(:soa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SOA, location_name: "SOA", traits: {"smithy.api#required" => {}}))
+    PublicDnsPropertiesMutable.add_member(:soa, ::Smithy::Schema::Shapes::MemberShape.new(target: SOA, location_name: "SOA", traits: {"smithy.api#required" => {}}))
     PublicDnsPropertiesMutable.type = Types::PublicDnsPropertiesMutable
-    PublicDnsPropertiesMutableChange.add_member(:soa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SOAChange, location_name: "SOA", traits: {"smithy.api#required" => {}}))
+    PublicDnsPropertiesMutableChange.add_member(:soa, ::Smithy::Schema::Shapes::MemberShape.new(target: SOAChange, location_name: "SOA", traits: {"smithy.api#required" => {}}))
     PublicDnsPropertiesMutableChange.type = Types::PublicDnsPropertiesMutableChange
-    RecordType.add_member(:srv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SRV", traits: {"smithy.api#enumValue" => "SRV"}))
-    RecordType.add_member(:a, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "A", traits: {"smithy.api#enumValue" => "A"}))
-    RecordType.add_member(:aaaa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AAAA", traits: {"smithy.api#enumValue" => "AAAA"}))
-    RecordType.add_member(:cname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CNAME", traits: {"smithy.api#enumValue" => "CNAME"}))
-    RegisterInstanceRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    RegisterInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
-    RegisterInstanceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    RegisterInstanceRequest.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
+    RecordType.add_member(:srv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SRV", traits: {"smithy.api#enumValue" => "SRV"}))
+    RecordType.add_member(:a, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "A", traits: {"smithy.api#enumValue" => "A"}))
+    RecordType.add_member(:aaaa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AAAA", traits: {"smithy.api#enumValue" => "AAAA"}))
+    RecordType.add_member(:cname, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CNAME", traits: {"smithy.api#enumValue" => "CNAME"}))
+    RegisterInstanceRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    RegisterInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
+    RegisterInstanceRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    RegisterInstanceRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
     RegisterInstanceRequest.type = Types::RegisterInstanceRequest
-    RegisterInstanceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    RegisterInstanceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     RegisterInstanceResponse.type = Types::RegisterInstanceResponse
-    RequestLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     RequestLimitExceeded.type = Types::RequestLimitExceeded
-    ResourceInUse.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceInUse.type = Types::ResourceInUse
-    ResourceLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceLimitExceeded.type = Types::ResourceLimitExceeded
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoutingPolicy.add_member(:multivalue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTIVALUE", traits: {"smithy.api#enumValue" => "MULTIVALUE"}))
-    RoutingPolicy.add_member(:weighted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEIGHTED", traits: {"smithy.api#enumValue" => "WEIGHTED"}))
-    SOA.add_member(:ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordTTL, location_name: "TTL", traits: {"smithy.api#required" => {}}))
+    RoutingPolicy.add_member(:multivalue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTIVALUE", traits: {"smithy.api#enumValue" => "MULTIVALUE"}))
+    RoutingPolicy.add_member(:weighted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WEIGHTED", traits: {"smithy.api#enumValue" => "WEIGHTED"}))
+    SOA.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordTTL, location_name: "TTL", traits: {"smithy.api#required" => {}}))
     SOA.type = Types::SOA
-    SOAChange.add_member(:ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordTTL, location_name: "TTL", traits: {"smithy.api#required" => {}}))
+    SOAChange.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordTTL, location_name: "TTL", traits: {"smithy.api#required" => {}}))
     SOAChange.type = Types::SOAChange
-    Service.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    Service.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    Service.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ResourceOwner"))
-    Service.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "Name"))
-    Service.add_member(:namespace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "NamespaceId"))
-    Service.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    Service.add_member(:instance_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCount, location_name: "InstanceCount"))
-    Service.add_member(:dns_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsConfig, location_name: "DnsConfig"))
-    Service.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "Type"))
-    Service.add_member(:health_check_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
-    Service.add_member(:health_check_custom_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
-    Service.add_member(:create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
-    Service.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId"))
-    Service.add_member(:created_by_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "CreatedByAccount"))
+    Service.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "Id"))
+    Service.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    Service.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "ResourceOwner"))
+    Service.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "Name"))
+    Service.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "NamespaceId"))
+    Service.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    Service.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, location_name: "InstanceCount"))
+    Service.add_member(:dns_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsConfig, location_name: "DnsConfig"))
+    Service.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "Type"))
+    Service.add_member(:health_check_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckConfig, location_name: "HealthCheckConfig"))
+    Service.add_member(:health_check_custom_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
+    Service.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreateDate"))
+    Service.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId"))
+    Service.add_member(:created_by_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "CreatedByAccount"))
     Service.type = Types::Service
-    ServiceAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    ServiceAlreadyExists.add_member(:creator_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId"))
-    ServiceAlreadyExists.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ServiceId"))
-    ServiceAlreadyExists.add_member(:service_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceArn"))
+    ServiceAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ServiceAlreadyExists.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "CreatorRequestId"))
+    ServiceAlreadyExists.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ServiceId"))
+    ServiceAlreadyExists.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceArn"))
     ServiceAlreadyExists.type = Types::ServiceAlreadyExists
-    ServiceAttributeKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributeKey)
-    ServiceAttributes.add_member(:service_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceArn"))
-    ServiceAttributes.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ResourceOwner"))
-    ServiceAttributes.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributesMap, location_name: "Attributes"))
+    ServiceAttributeKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAttributeKey)
+    ServiceAttributes.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceArn"))
+    ServiceAttributes.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "ResourceOwner"))
+    ServiceAttributes.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAttributesMap, location_name: "Attributes"))
     ServiceAttributes.type = Types::ServiceAttributes
-    ServiceAttributesLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceAttributesLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceAttributesLimitExceededException.type = Types::ServiceAttributesLimitExceededException
-    ServiceAttributesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributeKey)
-    ServiceAttributesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributeValue)
-    ServiceChange.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    ServiceChange.add_member(:dns_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsConfigChange, location_name: "DnsConfig"))
-    ServiceChange.add_member(:health_check_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
+    ServiceAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAttributeKey)
+    ServiceAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAttributeValue)
+    ServiceChange.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    ServiceChange.add_member(:dns_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsConfigChange, location_name: "DnsConfig"))
+    ServiceChange.add_member(:health_check_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckConfig, location_name: "HealthCheckConfig"))
     ServiceChange.type = Types::ServiceChange
-    ServiceFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ServiceFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
-    ServiceFilter.add_member(:condition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterCondition, location_name: "Condition"))
+    ServiceFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ServiceFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    ServiceFilter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, location_name: "Condition"))
     ServiceFilter.type = Types::ServiceFilter
-    ServiceFilterName.add_member(:namespace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAMESPACE_ID", traits: {"smithy.api#enumValue" => "NAMESPACE_ID"}))
-    ServiceFilterName.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_OWNER", traits: {"smithy.api#enumValue" => "RESOURCE_OWNER"}))
-    ServiceFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFilter, traits: {"smithy.api#xmlName" => "item"})
-    ServiceNotFound.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceFilterName.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAMESPACE_ID", traits: {"smithy.api#enumValue" => "NAMESPACE_ID"}))
+    ServiceFilterName.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_OWNER", traits: {"smithy.api#enumValue" => "RESOURCE_OWNER"}))
+    ServiceFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceFilter, traits: {"smithy.api#xmlName" => "item"})
+    ServiceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceNotFound.type = Types::ServiceNotFound
-    ServiceSummariesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceSummary)
-    ServiceSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    ServiceSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    ServiceSummary.add_member(:resource_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ResourceOwner"))
-    ServiceSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: "Name"))
-    ServiceSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceType, location_name: "Type"))
-    ServiceSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    ServiceSummary.add_member(:instance_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCount, location_name: "InstanceCount"))
-    ServiceSummary.add_member(:dns_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsConfig, location_name: "DnsConfig"))
-    ServiceSummary.add_member(:health_check_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
-    ServiceSummary.add_member(:health_check_custom_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
-    ServiceSummary.add_member(:create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
-    ServiceSummary.add_member(:created_by_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "CreatedByAccount"))
+    ServiceSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary)
+    ServiceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "Id"))
+    ServiceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    ServiceSummary.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "ResourceOwner"))
+    ServiceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, location_name: "Name"))
+    ServiceSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, location_name: "Type"))
+    ServiceSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, location_name: "Description"))
+    ServiceSummary.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, location_name: "InstanceCount"))
+    ServiceSummary.add_member(:dns_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsConfig, location_name: "DnsConfig"))
+    ServiceSummary.add_member(:health_check_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckConfig, location_name: "HealthCheckConfig"))
+    ServiceSummary.add_member(:health_check_custom_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
+    ServiceSummary.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreateDate"))
+    ServiceSummary.add_member(:created_by_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, location_name: "CreatedByAccount"))
     ServiceSummary.type = Types::ServiceSummary
-    ServiceType.add_member(:http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
-    ServiceType.add_member(:dns_http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS_HTTP", traits: {"smithy.api#enumValue" => "DNS_HTTP"}))
-    ServiceType.add_member(:dns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS", traits: {"smithy.api#enumValue" => "DNS"}))
-    ServiceTypeOption.add_member(:http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    ServiceType.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
+    ServiceType.add_member(:dns_http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS_HTTP", traits: {"smithy.api#enumValue" => "DNS_HTTP"}))
+    ServiceType.add_member(:dns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DNS", traits: {"smithy.api#enumValue" => "DNS"}))
+    ServiceTypeOption.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceName"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateHttpNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    UpdateHttpNamespaceRequest.add_member(:updater_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdateHttpNamespaceRequest.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpNamespaceChange, location_name: "Namespace", traits: {"smithy.api#required" => {}}))
+    UpdateHttpNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    UpdateHttpNamespaceRequest.add_member(:updater_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "UpdaterRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateHttpNamespaceRequest.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpNamespaceChange, location_name: "Namespace", traits: {"smithy.api#required" => {}}))
     UpdateHttpNamespaceRequest.type = Types::UpdateHttpNamespaceRequest
-    UpdateHttpNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    UpdateHttpNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     UpdateHttpNamespaceResponse.type = Types::UpdateHttpNamespaceResponse
-    UpdateInstanceCustomHealthStatusRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    UpdateInstanceCustomHealthStatusRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
-    UpdateInstanceCustomHealthStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomHealthStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdateInstanceCustomHealthStatusRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    UpdateInstanceCustomHealthStatusRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
+    UpdateInstanceCustomHealthStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHealthStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
     UpdateInstanceCustomHealthStatusRequest.type = Types::UpdateInstanceCustomHealthStatusRequest
-    UpdatePrivateDnsNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    UpdatePrivateDnsNamespaceRequest.add_member(:updater_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdatePrivateDnsNamespaceRequest.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateDnsNamespaceChange, location_name: "Namespace", traits: {"smithy.api#required" => {}}))
+    UpdatePrivateDnsNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    UpdatePrivateDnsNamespaceRequest.add_member(:updater_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "UpdaterRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdatePrivateDnsNamespaceRequest.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsNamespaceChange, location_name: "Namespace", traits: {"smithy.api#required" => {}}))
     UpdatePrivateDnsNamespaceRequest.type = Types::UpdatePrivateDnsNamespaceRequest
-    UpdatePrivateDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    UpdatePrivateDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     UpdatePrivateDnsNamespaceResponse.type = Types::UpdatePrivateDnsNamespaceResponse
-    UpdatePublicDnsNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    UpdatePublicDnsNamespaceRequest.add_member(:updater_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
-    UpdatePublicDnsNamespaceRequest.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicDnsNamespaceChange, location_name: "Namespace", traits: {"smithy.api#required" => {}}))
+    UpdatePublicDnsNamespaceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    UpdatePublicDnsNamespaceRequest.add_member(:updater_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "UpdaterRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdatePublicDnsNamespaceRequest.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicDnsNamespaceChange, location_name: "Namespace", traits: {"smithy.api#required" => {}}))
     UpdatePublicDnsNamespaceRequest.type = Types::UpdatePublicDnsNamespaceRequest
-    UpdatePublicDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    UpdatePublicDnsNamespaceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     UpdatePublicDnsNamespaceResponse.type = Types::UpdatePublicDnsNamespaceResponse
-    UpdateServiceAttributesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
-    UpdateServiceAttributesRequest.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributesMap, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
+    UpdateServiceAttributesRequest.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ServiceId", traits: {"smithy.api#required" => {}}))
+    UpdateServiceAttributesRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAttributesMap, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
     UpdateServiceAttributesRequest.type = Types::UpdateServiceAttributesRequest
     UpdateServiceAttributesResponse.type = Types::UpdateServiceAttributesResponse
-    UpdateServiceRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    UpdateServiceRequest.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceChange, location_name: "Service", traits: {"smithy.api#required" => {}}))
+    UpdateServiceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    UpdateServiceRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceChange, location_name: "Service", traits: {"smithy.api#required" => {}}))
     UpdateServiceRequest.type = Types::UpdateServiceRequest
-    UpdateServiceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    UpdateServiceResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, location_name: "OperationId"))
     UpdateServiceResponse.type = Types::UpdateServiceResponse
 
     Route53AutoNamingV20170314 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -633,311 +633,311 @@ module Aws::ServiceDiscovery
       service.add_operation(:create_http_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#CreateHttpNamespace"
         operation.name = "CreateHttpNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateHttpNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateHttpNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceAlreadyExists)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreateHttpNamespaceRequest
+        operation.output = CreateHttpNamespaceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << NamespaceAlreadyExists
+        operation.errors << ResourceLimitExceeded
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:create_private_dns_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#CreatePrivateDnsNamespace"
         operation.name = "CreatePrivateDnsNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePrivateDnsNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePrivateDnsNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceAlreadyExists)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreatePrivateDnsNamespaceRequest
+        operation.output = CreatePrivateDnsNamespaceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << NamespaceAlreadyExists
+        operation.errors << ResourceLimitExceeded
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:create_public_dns_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#CreatePublicDnsNamespace"
         operation.name = "CreatePublicDnsNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePublicDnsNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePublicDnsNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceAlreadyExists)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreatePublicDnsNamespaceRequest
+        operation.output = CreatePublicDnsNamespaceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << NamespaceAlreadyExists
+        operation.errors << ResourceLimitExceeded
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:create_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#CreateService"
         operation.name = "CreateService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateServiceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateServiceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAlreadyExists)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreateServiceRequest
+        operation.output = CreateServiceResponse
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
+        operation.errors << ResourceLimitExceeded
+        operation.errors << ServiceAlreadyExists
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:delete_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#DeleteNamespace"
         operation.name = "DeleteNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUse)
+        operation.input = DeleteNamespaceRequest
+        operation.output = DeleteNamespaceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
+        operation.errors << ResourceInUse
         operation.traits = {}
       end)
       service.add_operation(:delete_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#DeleteService"
         operation.name = "DeleteService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = DeleteServiceRequest
+        operation.output = DeleteServiceResponse
+        operation.errors << InvalidInput
+        operation.errors << ResourceInUse
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:delete_service_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#DeleteServiceAttributes"
         operation.name = "DeleteServiceAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = DeleteServiceAttributesRequest
+        operation.output = DeleteServiceAttributesResponse
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:deregister_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#DeregisterInstance"
         operation.name = "DeregisterInstance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterInstanceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterInstanceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = DeregisterInstanceRequest
+        operation.output = DeregisterInstanceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InstanceNotFound
+        operation.errors << InvalidInput
+        operation.errors << ResourceInUse
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:discover_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#DiscoverInstances"
         operation.name = "DiscoverInstances"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoverInstancesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoverInstancesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = DiscoverInstancesRequest
+        operation.output = DiscoverInstancesResponse
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
+        operation.errors << RequestLimitExceeded
+        operation.errors << ServiceNotFound
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data-"}}
       end)
       service.add_operation(:discover_instances_revision, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#DiscoverInstancesRevision"
         operation.name = "DiscoverInstancesRevision"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoverInstancesRevisionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoverInstancesRevisionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = DiscoverInstancesRevisionRequest
+        operation.output = DiscoverInstancesRevisionResponse
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
+        operation.errors << RequestLimitExceeded
+        operation.errors << ServiceNotFound
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data-"}}
       end)
       service.add_operation(:get_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#GetInstance"
         operation.name = "GetInstance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstanceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstanceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = GetInstanceRequest
+        operation.output = GetInstanceResponse
+        operation.errors << InstanceNotFound
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:get_instances_health_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#GetInstancesHealthStatus"
         operation.name = "GetInstancesHealthStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstancesHealthStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetInstancesHealthStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = GetInstancesHealthStatusRequest
+        operation.output = GetInstancesHealthStatusResponse
+        operation.errors << InstanceNotFound
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
         operation[:paginator] = Paginators::GetInstancesHealthStatus.new
       end)
       service.add_operation(:get_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#GetNamespace"
         operation.name = "GetNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
+        operation.input = GetNamespaceRequest
+        operation.output = GetNamespaceResponse
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
         operation.traits = {}
       end)
       service.add_operation(:get_operation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#GetOperation"
         operation.name = "GetOperation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOperationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOperationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationNotFound)
+        operation.input = GetOperationRequest
+        operation.output = GetOperationResponse
+        operation.errors << InvalidInput
+        operation.errors << OperationNotFound
         operation.traits = {}
       end)
       service.add_operation(:get_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#GetService"
         operation.name = "GetService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = GetServiceRequest
+        operation.output = GetServiceResponse
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:get_service_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#GetServiceAttributes"
         operation.name = "GetServiceAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = GetServiceAttributesRequest
+        operation.output = GetServiceAttributesResponse
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:list_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#ListInstances"
         operation.name = "ListInstances"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListInstancesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListInstancesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = ListInstancesRequest
+        operation.output = ListInstancesResponse
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
         operation[:paginator] = Paginators::ListInstances.new
       end)
       service.add_operation(:list_namespaces, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#ListNamespaces"
         operation.name = "ListNamespaces"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListNamespacesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListNamespacesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
+        operation.input = ListNamespacesRequest
+        operation.output = ListNamespacesResponse
+        operation.errors << InvalidInput
         operation.traits = {}
         operation[:paginator] = Paginators::ListNamespaces.new
       end)
       service.add_operation(:list_operations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#ListOperations"
         operation.name = "ListOperations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOperationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOperationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
+        operation.input = ListOperationsRequest
+        operation.output = ListOperationsResponse
+        operation.errors << InvalidInput
         operation.traits = {}
         operation[:paginator] = Paginators::ListOperations.new
       end)
       service.add_operation(:list_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#ListServices"
         operation.name = "ListServices"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServicesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServicesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
+        operation.input = ListServicesRequest
+        operation.output = ListServicesResponse
+        operation.errors << InvalidInput
         operation.traits = {}
         operation[:paginator] = Paginators::ListServices.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InvalidInput
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:register_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#RegisterInstance"
         operation.name = "RegisterInstance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterInstanceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterInstanceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = RegisterInstanceRequest
+        operation.output = RegisterInstanceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << ResourceInUse
+        operation.errors << ResourceLimitExceeded
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InvalidInput
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InvalidInput
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_http_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#UpdateHttpNamespace"
         operation.name = "UpdateHttpNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateHttpNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateHttpNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUse)
+        operation.input = UpdateHttpNamespaceRequest
+        operation.output = UpdateHttpNamespaceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
+        operation.errors << ResourceInUse
         operation.traits = {}
       end)
       service.add_operation(:update_instance_custom_health_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatus"
         operation.name = "UpdateInstanceCustomHealthStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateInstanceCustomHealthStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomHealthNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = UpdateInstanceCustomHealthStatusRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << CustomHealthNotFound
+        operation.errors << InstanceNotFound
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:update_private_dns_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespace"
         operation.name = "UpdatePrivateDnsNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePrivateDnsNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePrivateDnsNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUse)
+        operation.input = UpdatePrivateDnsNamespaceRequest
+        operation.output = UpdatePrivateDnsNamespaceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
+        operation.errors << ResourceInUse
         operation.traits = {}
       end)
       service.add_operation(:update_public_dns_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#UpdatePublicDnsNamespace"
         operation.name = "UpdatePublicDnsNamespace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePublicDnsNamespaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePublicDnsNamespaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceNotFound)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUse)
+        operation.input = UpdatePublicDnsNamespaceRequest
+        operation.output = UpdatePublicDnsNamespaceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << NamespaceNotFound
+        operation.errors << ResourceInUse
         operation.traits = {}
       end)
       service.add_operation(:update_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#UpdateService"
         operation.name = "UpdateService"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateRequest)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = UpdateServiceRequest
+        operation.output = UpdateServiceResponse
+        operation.errors << DuplicateRequest
+        operation.errors << InvalidInput
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
       service.add_operation(:update_service_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.servicediscovery#UpdateServiceAttributes"
         operation.name = "UpdateServiceAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAttributesLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceNotFound)
+        operation.input = UpdateServiceAttributesRequest
+        operation.output = UpdateServiceAttributesResponse
+        operation.errors << InvalidInput
+        operation.errors << ServiceAttributesLimitExceededException
+        operation.errors << ServiceNotFound
         operation.traits = {}
       end)
     end

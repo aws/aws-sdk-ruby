@@ -92,235 +92,235 @@ module Aws::ResourceExplorer2
     ViewList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourceexplorer2#ViewList", name: "ViewList")
     ViewName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourceexplorer2#ViewName", name: "ViewName", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9\\-]{1,64}$"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId)
-    AssociateDefaultViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
+    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId)
+    AssociateDefaultViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
     AssociateDefaultViewOperationInput.type = Types::AssociateDefaultViewOperationInput
-    AssociateDefaultViewOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
+    AssociateDefaultViewOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
     AssociateDefaultViewOperationOutput.type = Types::AssociateDefaultViewOperationOutput
-    BatchGetViewError.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#required" => {}}))
-    BatchGetViewError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
+    BatchGetViewError.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#required" => {}}))
+    BatchGetViewError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
     BatchGetViewError.type = Types::BatchGetViewError
-    BatchGetViewErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetViewError)
-    BatchGetViewOperationInput.add_member(:view_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewArnList, location_name: "ViewArns", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
+    BatchGetViewErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetViewError)
+    BatchGetViewOperationInput.add_member(:view_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewArnList, location_name: "ViewArns", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
     BatchGetViewOperationInput.type = Types::BatchGetViewOperationInput
-    BatchGetViewOperationOutput.add_member(:views, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewList, location_name: "Views"))
-    BatchGetViewOperationOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetViewErrors, location_name: "Errors"))
+    BatchGetViewOperationOutput.add_member(:views, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewList, location_name: "Views"))
+    BatchGetViewOperationOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetViewErrors, location_name: "Errors"))
     BatchGetViewOperationOutput.type = Types::BatchGetViewOperationOutput
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateIndexOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
-    CreateIndexOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
+    CreateIndexOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
+    CreateIndexOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
     CreateIndexOperationInput.type = Types::CreateIndexOperationInput
-    CreateIndexOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    CreateIndexOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexState, location_name: "State"))
-    CreateIndexOperationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    CreateIndexOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    CreateIndexOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexState, location_name: "State"))
+    CreateIndexOperationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CreateIndexOperationOutput.type = Types::CreateIndexOperationOutput
-    CreateViewOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 1, "max" => 2048}}))
-    CreateViewOperationInput.add_member(:view_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewName, location_name: "ViewName", traits: {"smithy.api#required" => {}}))
-    CreateViewOperationInput.add_member(:included_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
-    CreateViewOperationInput.add_member(:scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Scope", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
-    CreateViewOperationInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
-    CreateViewOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
+    CreateViewOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    CreateViewOperationInput.add_member(:view_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewName, location_name: "ViewName", traits: {"smithy.api#required" => {}}))
+    CreateViewOperationInput.add_member(:included_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedPropertyList, location_name: "IncludedProperties"))
+    CreateViewOperationInput.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Scope", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    CreateViewOperationInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, location_name: "Filters"))
+    CreateViewOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
     CreateViewOperationInput.type = Types::CreateViewOperationInput
-    CreateViewOperationOutput.add_member(:view, ::Smithy::Schema::Shapes::ShapeRef.new(shape: View, location_name: "View"))
+    CreateViewOperationOutput.add_member(:view, ::Smithy::Schema::Shapes::MemberShape.new(target: View, location_name: "View"))
     CreateViewOperationOutput.type = Types::CreateViewOperationOutput
-    DeleteIndexOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    DeleteIndexOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
     DeleteIndexOperationInput.type = Types::DeleteIndexOperationInput
-    DeleteIndexOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    DeleteIndexOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexState, location_name: "State"))
-    DeleteIndexOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    DeleteIndexOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    DeleteIndexOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexState, location_name: "State"))
+    DeleteIndexOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     DeleteIndexOperationOutput.type = Types::DeleteIndexOperationOutput
-    DeleteViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
+    DeleteViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
     DeleteViewOperationInput.type = Types::DeleteViewOperationInput
-    DeleteViewOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
+    DeleteViewOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
     DeleteViewOperationOutput.type = Types::DeleteViewOperationOutput
-    GetAccountLevelServiceConfigurationOutput.add_member(:org_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrgConfiguration, location_name: "OrgConfiguration"))
+    GetAccountLevelServiceConfigurationOutput.add_member(:org_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OrgConfiguration, location_name: "OrgConfiguration"))
     GetAccountLevelServiceConfigurationOutput.type = Types::GetAccountLevelServiceConfigurationOutput
-    GetDefaultViewOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
+    GetDefaultViewOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
     GetDefaultViewOperationOutput.type = Types::GetDefaultViewOperationOutput
-    GetIndexOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    GetIndexOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexType, location_name: "Type"))
-    GetIndexOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexState, location_name: "State"))
-    GetIndexOperationOutput.add_member(:replicating_from, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: "ReplicatingFrom"))
-    GetIndexOperationOutput.add_member(:replicating_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: "ReplicatingTo"))
-    GetIndexOperationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetIndexOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    GetIndexOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetIndexOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    GetIndexOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, location_name: "Type"))
+    GetIndexOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexState, location_name: "State"))
+    GetIndexOperationOutput.add_member(:replicating_from, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, location_name: "ReplicatingFrom"))
+    GetIndexOperationOutput.add_member(:replicating_to, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, location_name: "ReplicatingTo"))
+    GetIndexOperationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetIndexOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetIndexOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     GetIndexOperationOutput.type = Types::GetIndexOperationOutput
-    GetManagedViewInput.add_member(:managed_view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ManagedViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
+    GetManagedViewInput.add_member(:managed_view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ManagedViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
     GetManagedViewInput.type = Types::GetManagedViewInput
-    GetManagedViewOutput.add_member(:managed_view, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedView, location_name: "ManagedView"))
+    GetManagedViewOutput.add_member(:managed_view, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedView, location_name: "ManagedView"))
     GetManagedViewOutput.type = Types::GetManagedViewOutput
-    GetViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
+    GetViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
     GetViewOperationInput.type = Types::GetViewOperationInput
-    GetViewOperationOutput.add_member(:view, ::Smithy::Schema::Shapes::ShapeRef.new(shape: View, location_name: "View", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
-    GetViewOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetViewOperationOutput.add_member(:view, ::Smithy::Schema::Shapes::MemberShape.new(target: View, location_name: "View", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetViewOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     GetViewOperationOutput.type = Types::GetViewOperationOutput
-    IncludedProperty.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
+    IncludedProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
     IncludedProperty.type = Types::IncludedProperty
-    IncludedPropertyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludedProperty)
-    Index.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
-    Index.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    Index.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexType, location_name: "Type"))
+    IncludedPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedProperty)
+    Index.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
+    Index.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    Index.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, location_name: "Type"))
     Index.type = Types::Index
-    IndexList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Index)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    IndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Index)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    ListIndexesForMembersInput.add_member(:account_id_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
-    ListIndexesForMembersInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 10}}))
-    ListIndexesForMembersInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ListIndexesForMembersInput.add_member(:account_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, location_name: "AccountIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
+    ListIndexesForMembersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 10}}))
+    ListIndexesForMembersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
     ListIndexesForMembersInput.type = Types::ListIndexesForMembersInput
-    ListIndexesForMembersOutput.add_member(:indexes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberIndexList, location_name: "Indexes"))
-    ListIndexesForMembersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListIndexesForMembersOutput.add_member(:indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberIndexList, location_name: "Indexes"))
+    ListIndexesForMembersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListIndexesForMembersOutput.type = Types::ListIndexesForMembersOutput
-    ListIndexesOperationInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexType, location_name: "Type"))
-    ListIndexesOperationInput.add_member(:regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
-    ListIndexesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListIndexesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ListIndexesOperationInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, location_name: "Type"))
+    ListIndexesOperationInput.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, location_name: "Regions", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
+    ListIndexesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListIndexesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
     ListIndexesOperationInput.type = Types::ListIndexesOperationInput
-    ListIndexesOperationOutput.add_member(:indexes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexList, location_name: "Indexes"))
-    ListIndexesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListIndexesOperationOutput.add_member(:indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexList, location_name: "Indexes"))
+    ListIndexesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListIndexesOperationOutput.type = Types::ListIndexesOperationOutput
-    ListManagedViewsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}}))
-    ListManagedViewsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
-    ListManagedViewsInput.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServicePrincipal", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}}))
+    ListManagedViewsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListManagedViewsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ListManagedViewsInput.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServicePrincipal", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}}))
     ListManagedViewsInput.type = Types::ListManagedViewsInput
-    ListManagedViewsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
-    ListManagedViewsOutput.add_member(:managed_views, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedViewArnList, location_name: "ManagedViews"))
+    ListManagedViewsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListManagedViewsOutput.add_member(:managed_views, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedViewArnList, location_name: "ManagedViews"))
     ListManagedViewsOutput.type = Types::ListManagedViewsOutput
-    ListResourcesInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
-    ListResourcesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
-    ListResourcesInput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}}))
-    ListResourcesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ListResourcesInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, location_name: "Filters"))
+    ListResourcesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
+    ListResourcesInput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}}))
+    ListResourcesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
     ListResourcesInput.type = Types::ListResourcesInput
-    ListResourcesOutput.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceList, location_name: "Resources"))
-    ListResourcesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
-    ListResourcesOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}}))
+    ListResourcesOutput.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, location_name: "Resources"))
+    ListResourcesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ListResourcesOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}}))
     ListResourcesOutput.type = Types::ListResourcesOutput
-    ListSupportedResourceTypesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
-    ListSupportedResourceTypesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
+    ListSupportedResourceTypesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListSupportedResourceTypesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
     ListSupportedResourceTypesOperationInput.type = Types::ListSupportedResourceTypesOperationInput
-    ListSupportedResourceTypesOperationOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "ResourceTypes"))
-    ListSupportedResourceTypesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListSupportedResourceTypesOperationOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeList, location_name: "ResourceTypes"))
+    ListSupportedResourceTypesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListSupportedResourceTypesOperationOutput.type = Types::ListSupportedResourceTypesOperationOutput
-    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceOperationInput.type = Types::ListTagsForResourceOperationInput
-    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceOperationOutput.type = Types::ListTagsForResourceOperationOutput
-    ListViewsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
-    ListViewsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListViewsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListViewsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}}))
     ListViewsOperationInput.type = Types::ListViewsOperationInput
-    ListViewsOperationOutput.add_member(:views, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewArnList, location_name: "Views"))
-    ListViewsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListViewsOperationOutput.add_member(:views, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewArnList, location_name: "Views"))
+    ListViewsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListViewsOperationOutput.type = Types::ListViewsOperationOutput
-    ManagedView.add_member(:managed_view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ManagedViewArn"))
-    ManagedView.add_member(:managed_view_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ManagedViewName"))
-    ManagedView.add_member(:trusted_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TrustedService"))
-    ManagedView.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ManagedView.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Owner"))
-    ManagedView.add_member(:scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Scope"))
-    ManagedView.add_member(:included_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
-    ManagedView.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
-    ManagedView.add_member(:resource_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourcePolicy"))
-    ManagedView.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Version"))
+    ManagedView.add_member(:managed_view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ManagedViewArn"))
+    ManagedView.add_member(:managed_view_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ManagedViewName"))
+    ManagedView.add_member(:trusted_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TrustedService"))
+    ManagedView.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ManagedView.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Owner"))
+    ManagedView.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Scope"))
+    ManagedView.add_member(:included_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedPropertyList, location_name: "IncludedProperties"))
+    ManagedView.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, location_name: "Filters"))
+    ManagedView.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourcePolicy"))
+    ManagedView.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Version"))
     ManagedView.type = Types::ManagedView
-    ManagedViewArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    MemberIndex.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "AccountId"))
-    MemberIndex.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
-    MemberIndex.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    MemberIndex.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexType, location_name: "Type"))
+    ManagedViewArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    MemberIndex.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "AccountId"))
+    MemberIndex.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
+    MemberIndex.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    MemberIndex.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, location_name: "Type"))
     MemberIndex.type = Types::MemberIndex
-    MemberIndexList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberIndex)
-    OrgConfiguration.add_member(:aws_service_access_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AWSServiceAccessStatus, location_name: "AWSServiceAccessStatus", traits: {"smithy.api#required" => {}}))
-    OrgConfiguration.add_member(:service_linked_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServiceLinkedRole"))
+    MemberIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberIndex)
+    OrgConfiguration.add_member(:aws_service_access_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSServiceAccessStatus, location_name: "AWSServiceAccessStatus", traits: {"smithy.api#required" => {}}))
+    OrgConfiguration.add_member(:service_linked_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ServiceLinkedRole"))
     OrgConfiguration.type = Types::OrgConfiguration
-    RegionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    Resource.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    Resource.add_member(:owning_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OwningAccountId"))
-    Resource.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
-    Resource.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType"))
-    Resource.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Service"))
-    Resource.add_member(:last_reported_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastReportedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    Resource.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePropertyList, location_name: "Properties"))
+    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    Resource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    Resource.add_member(:owning_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OwningAccountId"))
+    Resource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
+    Resource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType"))
+    Resource.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Service"))
+    Resource.add_member(:last_reported_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastReportedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    Resource.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePropertyList, location_name: "Properties"))
     Resource.type = Types::Resource
-    ResourceCount.add_member(:total_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalResources"))
-    ResourceCount.add_member(:complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Complete"))
+    ResourceCount.add_member(:total_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalResources"))
+    ResourceCount.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Complete"))
     ResourceCount.type = Types::ResourceCount
-    ResourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Resource)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceProperty.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
-    ResourceProperty.add_member(:last_reported_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastReportedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    ResourceProperty.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Document, location_name: "Data"))
+    ResourceProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
+    ResourceProperty.add_member(:last_reported_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastReportedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    ResourceProperty.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, location_name: "Data"))
     ResourceProperty.type = Types::ResourceProperty
-    ResourcePropertyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceProperty)
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedResourceType)
-    SearchFilter.add_member(:filter_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "FilterString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#required" => {}}))
+    ResourcePropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceProperty)
+    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedResourceType)
+    SearchFilter.add_member(:filter_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "FilterString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#required" => {}}))
     SearchFilter.type = Types::SearchFilter
-    SearchOperationInput.add_member(:query_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryString, location_name: "QueryString", traits: {"smithy.api#required" => {}}))
-    SearchOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
-    SearchOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}}))
-    SearchOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    SearchOperationInput.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, location_name: "QueryString", traits: {"smithy.api#required" => {}}))
+    SearchOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
+    SearchOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}}))
+    SearchOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
     SearchOperationInput.type = Types::SearchOperationInput
-    SearchOperationOutput.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceList, location_name: "Resources"))
-    SearchOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
-    SearchOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}}))
-    SearchOperationOutput.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCount, location_name: "Count"))
+    SearchOperationOutput.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, location_name: "Resources"))
+    SearchOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    SearchOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}}))
+    SearchOperationOutput.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, location_name: "Count"))
     SearchOperationOutput.type = Types::SearchOperationOutput
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    SupportedResourceType.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Service"))
-    SupportedResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType"))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    SupportedResourceType.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Service"))
+    SupportedResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType"))
     SupportedResourceType.type = Types::SupportedResourceType
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     UnauthorizedException.type = Types::UnauthorizedException
-    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceOperationInput.type = Types::UntagResourceOperationInput
     UntagResourceOperationOutput.type = Types::UntagResourceOperationOutput
-    UpdateIndexTypeOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    UpdateIndexTypeOperationInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexType, location_name: "Type", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}}))
+    UpdateIndexTypeOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    UpdateIndexTypeOperationInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, location_name: "Type", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}}))
     UpdateIndexTypeOperationInput.type = Types::UpdateIndexTypeOperationInput
-    UpdateIndexTypeOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
-    UpdateIndexTypeOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexType, location_name: "Type"))
-    UpdateIndexTypeOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexState, location_name: "State"))
-    UpdateIndexTypeOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    UpdateIndexTypeOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn"))
+    UpdateIndexTypeOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, location_name: "Type"))
+    UpdateIndexTypeOperationOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexState, location_name: "State"))
+    UpdateIndexTypeOperationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     UpdateIndexTypeOperationOutput.type = Types::UpdateIndexTypeOperationOutput
-    UpdateViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
-    UpdateViewOperationInput.add_member(:included_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
-    UpdateViewOperationInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
+    UpdateViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
+    UpdateViewOperationInput.add_member(:included_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedPropertyList, location_name: "IncludedProperties"))
+    UpdateViewOperationInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, location_name: "Filters"))
     UpdateViewOperationInput.type = Types::UpdateViewOperationInput
-    UpdateViewOperationOutput.add_member(:view, ::Smithy::Schema::Shapes::ShapeRef.new(shape: View, location_name: "View"))
+    UpdateViewOperationOutput.add_member(:view, ::Smithy::Schema::Shapes::MemberShape.new(target: View, location_name: "View"))
     UpdateViewOperationOutput.type = Types::UpdateViewOperationOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "FieldList"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "FieldList"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:validation_issue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ValidationIssue", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:validation_issue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ValidationIssue", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    View.add_member(:view_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
-    View.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Owner"))
-    View.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    View.add_member(:scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Scope"))
-    View.add_member(:included_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
-    View.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    View.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ViewArn"))
+    View.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Owner"))
+    View.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    View.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Scope"))
+    View.add_member(:included_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedPropertyList, location_name: "IncludedProperties"))
+    View.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, location_name: "Filters"))
     View.type = Types::View
-    ViewArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ViewList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: View)
+    ViewArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ViewList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: View)
 
     ResourceExplorer = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.resourceexplorer2#ResourceExplorer"
@@ -330,304 +330,304 @@ module Aws::ResourceExplorer2
       service.add_operation(:associate_default_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#AssociateDefaultView"
         operation.name = "AssociateDefaultView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateDefaultViewOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateDefaultViewOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateDefaultViewOperationInput
+        operation.output = AssociateDefaultViewOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/AssociateDefaultView"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:batch_get_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#BatchGetView"
         operation.name = "BatchGetView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetViewOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetViewOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchGetViewOperationInput
+        operation.output = BatchGetViewOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchGetView"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:create_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#CreateIndex"
         operation.name = "CreateIndex"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIndexOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateIndexOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateIndexOperationInput
+        operation.output = CreateIndexOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateIndex"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#CreateView"
         operation.name = "CreateView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateViewOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateViewOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateViewOperationInput
+        operation.output = CreateViewOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateView"}}
       end)
       service.add_operation(:delete_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#DeleteIndex"
         operation.name = "DeleteIndex"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIndexOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteIndexOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteIndexOperationInput
+        operation.output = DeleteIndexOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteIndex"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#DeleteView"
         operation.name = "DeleteView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteViewOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteViewOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteViewOperationInput
+        operation.output = DeleteViewOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteView"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:disassociate_default_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#DisassociateDefaultView"
         operation.name = "DisassociateDefaultView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DisassociateDefaultView"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_account_level_service_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#GetAccountLevelServiceConfiguration"
         operation.name = "GetAccountLevelServiceConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountLevelServiceConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = GetAccountLevelServiceConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetAccountLevelServiceConfiguration"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_default_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#GetDefaultView"
         operation.name = "GetDefaultView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDefaultViewOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = GetDefaultViewOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetDefaultView"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#GetIndex"
         operation.name = "GetIndex"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetIndexOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = GetIndexOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetIndex"}}
       end)
       service.add_operation(:get_managed_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#GetManagedView"
         operation.name = "GetManagedView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetManagedViewInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetManagedViewOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetManagedViewInput
+        operation.output = GetManagedViewOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetManagedView"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#GetView"
         operation.name = "GetView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetViewOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetViewOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetViewOperationInput
+        operation.output = GetViewOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetView"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_indexes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#ListIndexes"
         operation.name = "ListIndexes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListIndexesOperationInput
+        operation.output = ListIndexesOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListIndexes"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListIndexes.new
       end)
       service.add_operation(:list_indexes_for_members, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#ListIndexesForMembers"
         operation.name = "ListIndexesForMembers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesForMembersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListIndexesForMembersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListIndexesForMembersInput
+        operation.output = ListIndexesForMembersOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListIndexesForMembers"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListIndexesForMembers.new
       end)
       service.add_operation(:list_managed_views, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#ListManagedViews"
         operation.name = "ListManagedViews"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListManagedViewsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListManagedViewsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListManagedViewsInput
+        operation.output = ListManagedViewsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListManagedViews"}}
         operation[:paginator] = Paginators::ListManagedViews.new
       end)
       service.add_operation(:list_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#ListResources"
         operation.name = "ListResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourcesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourcesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListResourcesInput
+        operation.output = ListResourcesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListResources"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListResources.new
       end)
       service.add_operation(:list_supported_resource_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#ListSupportedResourceTypes"
         operation.name = "ListSupportedResourceTypes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSupportedResourceTypesOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSupportedResourceTypesOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSupportedResourceTypesOperationInput
+        operation.output = ListSupportedResourceTypesOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListSupportedResourceTypes"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSupportedResourceTypes.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceOperationInput
+        operation.output = ListTagsForResourceOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_views, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#ListViews"
         operation.name = "ListViews"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListViewsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListViewsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListViewsOperationInput
+        operation.output = ListViewsOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListViews"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListViews.new
       end)
       service.add_operation(:search, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#Search"
         operation.name = "Search"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SearchOperationInput
+        operation.output = SearchOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/Search"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::Search.new
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceOperationInput
+        operation.output = TagResourceOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceOperationInput
+        operation.output = UntagResourceOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}"}}
       end)
       service.add_operation(:update_index_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#UpdateIndexType"
         operation.name = "UpdateIndexType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateIndexTypeOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateIndexTypeOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateIndexTypeOperationInput
+        operation.output = UpdateIndexTypeOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateIndexType"}}
       end)
       service.add_operation(:update_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourceexplorer2#UpdateView"
         operation.name = "UpdateView"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateViewOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateViewOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateViewOperationInput
+        operation.output = UpdateViewOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateView"}}
       end)
     end

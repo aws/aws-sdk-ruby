@@ -289,817 +289,817 @@ module Aws::DataSync
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.datasync#long", name: "Long", traits: {"smithy.api#default" => 0})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datasync#string", name: "String")
 
-    AgentArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArn)
-    AgentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentListEntry)
-    AgentListEntry.add_member(:agent_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn"))
-    AgentListEntry.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
-    AgentListEntry.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus, location_name: "Status"))
-    AgentListEntry.add_member(:platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Platform, location_name: "Platform"))
+    AgentArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn)
+    AgentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentListEntry)
+    AgentListEntry.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, location_name: "AgentArn"))
+    AgentListEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Name"))
+    AgentListEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, location_name: "Status"))
+    AgentListEntry.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: Platform, location_name: "Platform"))
     AgentListEntry.type = Types::AgentListEntry
-    AgentStatus.add_member(:online, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLINE", traits: {"smithy.api#enumValue" => "ONLINE"}))
-    AgentStatus.add_member(:offline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFFLINE", traits: {"smithy.api#enumValue" => "OFFLINE"}))
-    Atime.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    Atime.add_member(:best_effort, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEST_EFFORT", traits: {"smithy.api#enumValue" => "BEST_EFFORT"}))
-    AzureAccessTier.add_member(:hot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOT", traits: {"smithy.api#enumValue" => "HOT"}))
-    AzureAccessTier.add_member(:cool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COOL", traits: {"smithy.api#enumValue" => "COOL"}))
-    AzureAccessTier.add_member(:archive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARCHIVE", traits: {"smithy.api#enumValue" => "ARCHIVE"}))
-    AzureBlobAuthenticationType.add_member(:sas, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAS", traits: {"smithy.api#enumValue" => "SAS"}))
-    AzureBlobAuthenticationType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    AzureBlobSasConfiguration.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobSasToken, location_name: "Token", traits: {"smithy.api#required" => {}}))
+    AgentStatus.add_member(:online, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLINE", traits: {"smithy.api#enumValue" => "ONLINE"}))
+    AgentStatus.add_member(:offline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFFLINE", traits: {"smithy.api#enumValue" => "OFFLINE"}))
+    Atime.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    Atime.add_member(:best_effort, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEST_EFFORT", traits: {"smithy.api#enumValue" => "BEST_EFFORT"}))
+    AzureAccessTier.add_member(:hot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HOT", traits: {"smithy.api#enumValue" => "HOT"}))
+    AzureAccessTier.add_member(:cool, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COOL", traits: {"smithy.api#enumValue" => "COOL"}))
+    AzureAccessTier.add_member(:archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARCHIVE", traits: {"smithy.api#enumValue" => "ARCHIVE"}))
+    AzureBlobAuthenticationType.add_member(:sas, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SAS", traits: {"smithy.api#enumValue" => "SAS"}))
+    AzureBlobAuthenticationType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    AzureBlobSasConfiguration.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobSasToken, location_name: "Token", traits: {"smithy.api#required" => {}}))
     AzureBlobSasConfiguration.type = Types::AzureBlobSasConfiguration
-    AzureBlobType.add_member(:block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BLOCK", traits: {"smithy.api#enumValue" => "BLOCK"}))
-    CancelTaskExecutionRequest.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn", traits: {"smithy.api#required" => {}}))
+    AzureBlobType.add_member(:block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BLOCK", traits: {"smithy.api#enumValue" => "BLOCK"}))
+    CancelTaskExecutionRequest.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, location_name: "TaskExecutionArn", traits: {"smithy.api#required" => {}}))
     CancelTaskExecutionRequest.type = Types::CancelTaskExecutionRequest
     CancelTaskExecutionResponse.type = Types::CancelTaskExecutionResponse
-    CmkSecretConfig.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
-    CmkSecretConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    CmkSecretConfig.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn"))
+    CmkSecretConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn"))
     CmkSecretConfig.type = Types::CmkSecretConfig
-    CreateAgentRequest.add_member(:activation_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivationKey, location_name: "ActivationKey", traits: {"smithy.api#required" => {}}))
-    CreateAgentRequest.add_member(:agent_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "AgentName"))
-    CreateAgentRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
-    CreateAgentRequest.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
-    CreateAgentRequest.add_member(:subnet_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PLSubnetArnList, location_name: "SubnetArns"))
-    CreateAgentRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
+    CreateAgentRequest.add_member(:activation_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationKey, location_name: "ActivationKey", traits: {"smithy.api#required" => {}}))
+    CreateAgentRequest.add_member(:agent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "AgentName"))
+    CreateAgentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
+    CreateAgentRequest.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, location_name: "VpcEndpointId"))
+    CreateAgentRequest.add_member(:subnet_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PLSubnetArnList, location_name: "SubnetArns"))
+    CreateAgentRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
     CreateAgentRequest.type = Types::CreateAgentRequest
-    CreateAgentResponse.add_member(:agent_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn"))
+    CreateAgentResponse.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, location_name: "AgentArn"))
     CreateAgentResponse.type = Types::CreateAgentResponse
-    CreateLocationAzureBlobRequest.add_member(:container_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobContainerUrl, location_name: "ContainerUrl", traits: {"smithy.api#required" => {}}))
-    CreateLocationAzureBlobRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, location_name: "AuthenticationType", traits: {"smithy.api#required" => {}}))
-    CreateLocationAzureBlobRequest.add_member(:sas_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
-    CreateLocationAzureBlobRequest.add_member(:blob_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
-    CreateLocationAzureBlobRequest.add_member(:access_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
-    CreateLocationAzureBlobRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobSubdirectory, location_name: "Subdirectory"))
-    CreateLocationAzureBlobRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    CreateLocationAzureBlobRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
-    CreateLocationAzureBlobRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
-    CreateLocationAzureBlobRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
+    CreateLocationAzureBlobRequest.add_member(:container_url, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobContainerUrl, location_name: "ContainerUrl", traits: {"smithy.api#required" => {}}))
+    CreateLocationAzureBlobRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobAuthenticationType, location_name: "AuthenticationType", traits: {"smithy.api#required" => {}}))
+    CreateLocationAzureBlobRequest.add_member(:sas_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
+    CreateLocationAzureBlobRequest.add_member(:blob_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobType, location_name: "BlobType"))
+    CreateLocationAzureBlobRequest.add_member(:access_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureAccessTier, location_name: "AccessTier"))
+    CreateLocationAzureBlobRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobSubdirectory, location_name: "Subdirectory"))
+    CreateLocationAzureBlobRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    CreateLocationAzureBlobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
+    CreateLocationAzureBlobRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    CreateLocationAzureBlobRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSecretConfig, location_name: "CustomSecretConfig"))
     CreateLocationAzureBlobRequest.type = Types::CreateLocationAzureBlobRequest
-    CreateLocationAzureBlobResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationAzureBlobResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationAzureBlobResponse.type = Types::CreateLocationAzureBlobResponse
-    CreateLocationEfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsSubdirectory, location_name: "Subdirectory"))
-    CreateLocationEfsRequest.add_member(:efs_filesystem_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsFilesystemArn, location_name: "EfsFilesystemArn", traits: {"smithy.api#required" => {}}))
-    CreateLocationEfsRequest.add_member(:ec2_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2Config, location_name: "Ec2Config", traits: {"smithy.api#required" => {}}))
-    CreateLocationEfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
-    CreateLocationEfsRequest.add_member(:access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsAccessPointArn, location_name: "AccessPointArn"))
-    CreateLocationEfsRequest.add_member(:file_system_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "FileSystemAccessRoleArn"))
-    CreateLocationEfsRequest.add_member(:in_transit_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsInTransitEncryption, location_name: "InTransitEncryption"))
+    CreateLocationEfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsSubdirectory, location_name: "Subdirectory"))
+    CreateLocationEfsRequest.add_member(:efs_filesystem_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsFilesystemArn, location_name: "EfsFilesystemArn", traits: {"smithy.api#required" => {}}))
+    CreateLocationEfsRequest.add_member(:ec2_config, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2Config, location_name: "Ec2Config", traits: {"smithy.api#required" => {}}))
+    CreateLocationEfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
+    CreateLocationEfsRequest.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsAccessPointArn, location_name: "AccessPointArn"))
+    CreateLocationEfsRequest.add_member(:file_system_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "FileSystemAccessRoleArn"))
+    CreateLocationEfsRequest.add_member(:in_transit_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsInTransitEncryption, location_name: "InTransitEncryption"))
     CreateLocationEfsRequest.type = Types::CreateLocationEfsRequest
-    CreateLocationEfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationEfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationEfsResponse.type = Types::CreateLocationEfsResponse
-    CreateLocationFsxLustreRequest.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxFilesystemArn, location_name: "FsxFilesystemArn", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxLustreRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxLustreRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxLustreSubdirectory, location_name: "Subdirectory"))
-    CreateLocationFsxLustreRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationFsxLustreRequest.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxFilesystemArn, location_name: "FsxFilesystemArn", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxLustreRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxLustreRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxLustreSubdirectory, location_name: "Subdirectory"))
+    CreateLocationFsxLustreRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
     CreateLocationFsxLustreRequest.type = Types::CreateLocationFsxLustreRequest
-    CreateLocationFsxLustreResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationFsxLustreResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationFsxLustreResponse.type = Types::CreateLocationFsxLustreResponse
-    CreateLocationFsxOntapRequest.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxOntapRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxOntapRequest.add_member(:storage_virtual_machine_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineArn, location_name: "StorageVirtualMachineArn", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxOntapRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxOntapSubdirectory, location_name: "Subdirectory"))
-    CreateLocationFsxOntapRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationFsxOntapRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxOntapRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxOntapRequest.add_member(:storage_virtual_machine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineArn, location_name: "StorageVirtualMachineArn", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxOntapRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxOntapSubdirectory, location_name: "Subdirectory"))
+    CreateLocationFsxOntapRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
     CreateLocationFsxOntapRequest.type = Types::CreateLocationFsxOntapRequest
-    CreateLocationFsxOntapResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationFsxOntapResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationFsxOntapResponse.type = Types::CreateLocationFsxOntapResponse
-    CreateLocationFsxOpenZfsRequest.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxFilesystemArn, location_name: "FsxFilesystemArn", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxOpenZfsRequest.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxOpenZfsRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxOpenZfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxOpenZfsSubdirectory, location_name: "Subdirectory"))
-    CreateLocationFsxOpenZfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationFsxOpenZfsRequest.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxFilesystemArn, location_name: "FsxFilesystemArn", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxOpenZfsRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxOpenZfsRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxOpenZfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxOpenZfsSubdirectory, location_name: "Subdirectory"))
+    CreateLocationFsxOpenZfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
     CreateLocationFsxOpenZfsRequest.type = Types::CreateLocationFsxOpenZfsRequest
-    CreateLocationFsxOpenZfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationFsxOpenZfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationFsxOpenZfsResponse.type = Types::CreateLocationFsxOpenZfsResponse
-    CreateLocationFsxWindowsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxWindowsSubdirectory, location_name: "Subdirectory"))
-    CreateLocationFsxWindowsRequest.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxFilesystemArn, location_name: "FsxFilesystemArn", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxWindowsRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxWindowsRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
-    CreateLocationFsxWindowsRequest.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User", traits: {"smithy.api#required" => {}}))
-    CreateLocationFsxWindowsRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
-    CreateLocationFsxWindowsRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxWindowsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxWindowsSubdirectory, location_name: "Subdirectory"))
+    CreateLocationFsxWindowsRequest.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxFilesystemArn, location_name: "FsxFilesystemArn", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxWindowsRequest.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxWindowsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
+    CreateLocationFsxWindowsRequest.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User", traits: {"smithy.api#required" => {}}))
+    CreateLocationFsxWindowsRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbDomain, location_name: "Domain"))
+    CreateLocationFsxWindowsRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
     CreateLocationFsxWindowsRequest.type = Types::CreateLocationFsxWindowsRequest
-    CreateLocationFsxWindowsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationFsxWindowsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationFsxWindowsResponse.type = Types::CreateLocationFsxWindowsResponse
-    CreateLocationHdfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsSubdirectory, location_name: "Subdirectory"))
-    CreateLocationHdfsRequest.add_member(:name_nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsNameNodeList, location_name: "NameNodes", traits: {"smithy.api#required" => {}}))
-    CreateLocationHdfsRequest.add_member(:block_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsBlockSize, location_name: "BlockSize"))
-    CreateLocationHdfsRequest.add_member(:replication_factor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsReplicationFactor, location_name: "ReplicationFactor"))
-    CreateLocationHdfsRequest.add_member(:kms_key_provider_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
-    CreateLocationHdfsRequest.add_member(:qop_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QopConfiguration, location_name: "QopConfiguration"))
-    CreateLocationHdfsRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsAuthenticationType, location_name: "AuthenticationType", traits: {"smithy.api#required" => {}}))
-    CreateLocationHdfsRequest.add_member(:simple_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsUser, location_name: "SimpleUser"))
-    CreateLocationHdfsRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
-    CreateLocationHdfsRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
-    CreateLocationHdfsRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
-    CreateLocationHdfsRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns", traits: {"smithy.api#required" => {}}))
-    CreateLocationHdfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationHdfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsSubdirectory, location_name: "Subdirectory"))
+    CreateLocationHdfsRequest.add_member(:name_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsNameNodeList, location_name: "NameNodes", traits: {"smithy.api#required" => {}}))
+    CreateLocationHdfsRequest.add_member(:block_size, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsBlockSize, location_name: "BlockSize"))
+    CreateLocationHdfsRequest.add_member(:replication_factor, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsReplicationFactor, location_name: "ReplicationFactor"))
+    CreateLocationHdfsRequest.add_member(:kms_key_provider_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
+    CreateLocationHdfsRequest.add_member(:qop_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: QopConfiguration, location_name: "QopConfiguration"))
+    CreateLocationHdfsRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsAuthenticationType, location_name: "AuthenticationType", traits: {"smithy.api#required" => {}}))
+    CreateLocationHdfsRequest.add_member(:simple_user, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsUser, location_name: "SimpleUser"))
+    CreateLocationHdfsRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    CreateLocationHdfsRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    CreateLocationHdfsRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
+    CreateLocationHdfsRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns", traits: {"smithy.api#required" => {}}))
+    CreateLocationHdfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
     CreateLocationHdfsRequest.type = Types::CreateLocationHdfsRequest
-    CreateLocationHdfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationHdfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationHdfsResponse.type = Types::CreateLocationHdfsResponse
-    CreateLocationNfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsSubdirectory, location_name: "Subdirectory", traits: {"smithy.api#required" => {}}))
-    CreateLocationNfsRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerHostname, location_name: "ServerHostname", traits: {"smithy.api#required" => {}}))
-    CreateLocationNfsRequest.add_member(:on_prem_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnPremConfig, location_name: "OnPremConfig", traits: {"smithy.api#required" => {}}))
-    CreateLocationNfsRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
-    CreateLocationNfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationNfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsSubdirectory, location_name: "Subdirectory", traits: {"smithy.api#required" => {}}))
+    CreateLocationNfsRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerHostname, location_name: "ServerHostname", traits: {"smithy.api#required" => {}}))
+    CreateLocationNfsRequest.add_member(:on_prem_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OnPremConfig, location_name: "OnPremConfig", traits: {"smithy.api#required" => {}}))
+    CreateLocationNfsRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsMountOptions, location_name: "MountOptions"))
+    CreateLocationNfsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
     CreateLocationNfsRequest.type = Types::CreateLocationNfsRequest
-    CreateLocationNfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationNfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationNfsResponse.type = Types::CreateLocationNfsResponse
-    CreateLocationObjectStorageRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerHostname, location_name: "ServerHostname", traits: {"smithy.api#required" => {}}))
-    CreateLocationObjectStorageRequest.add_member(:server_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageServerPort, location_name: "ServerPort"))
-    CreateLocationObjectStorageRequest.add_member(:server_protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
-    CreateLocationObjectStorageRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
-    CreateLocationObjectStorageRequest.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageBucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
-    CreateLocationObjectStorageRequest.add_member(:access_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
-    CreateLocationObjectStorageRequest.add_member(:secret_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
-    CreateLocationObjectStorageRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    CreateLocationObjectStorageRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
-    CreateLocationObjectStorageRequest.add_member(:server_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
-    CreateLocationObjectStorageRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
-    CreateLocationObjectStorageRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
+    CreateLocationObjectStorageRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerHostname, location_name: "ServerHostname", traits: {"smithy.api#required" => {}}))
+    CreateLocationObjectStorageRequest.add_member(:server_port, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageServerPort, location_name: "ServerPort"))
+    CreateLocationObjectStorageRequest.add_member(:server_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
+    CreateLocationObjectStorageRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Subdirectory, location_name: "Subdirectory"))
+    CreateLocationObjectStorageRequest.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageBucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
+    CreateLocationObjectStorageRequest.add_member(:access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageAccessKey, location_name: "AccessKey"))
+    CreateLocationObjectStorageRequest.add_member(:secret_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageSecretKey, location_name: "SecretKey"))
+    CreateLocationObjectStorageRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    CreateLocationObjectStorageRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
+    CreateLocationObjectStorageRequest.add_member(:server_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageCertificate, location_name: "ServerCertificate"))
+    CreateLocationObjectStorageRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    CreateLocationObjectStorageRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSecretConfig, location_name: "CustomSecretConfig"))
     CreateLocationObjectStorageRequest.type = Types::CreateLocationObjectStorageRequest
-    CreateLocationObjectStorageResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationObjectStorageResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationObjectStorageResponse.type = Types::CreateLocationObjectStorageResponse
-    CreateLocationS3Request.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
-    CreateLocationS3Request.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn", traits: {"smithy.api#required" => {}}))
-    CreateLocationS3Request.add_member(:s3_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
-    CreateLocationS3Request.add_member(:s3_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config", traits: {"smithy.api#required" => {}}))
-    CreateLocationS3Request.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    CreateLocationS3Request.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationS3Request.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Subdirectory, location_name: "Subdirectory"))
+    CreateLocationS3Request.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketArn, location_name: "S3BucketArn", traits: {"smithy.api#required" => {}}))
+    CreateLocationS3Request.add_member(:s3_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: S3StorageClass, location_name: "S3StorageClass"))
+    CreateLocationS3Request.add_member(:s3_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Config, location_name: "S3Config", traits: {"smithy.api#required" => {}}))
+    CreateLocationS3Request.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    CreateLocationS3Request.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
     CreateLocationS3Request.type = Types::CreateLocationS3Request
-    CreateLocationS3Response.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationS3Response.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationS3Response.type = Types::CreateLocationS3Response
-    CreateLocationSmbRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbSubdirectory, location_name: "Subdirectory", traits: {"smithy.api#required" => {}}))
-    CreateLocationSmbRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerHostname, location_name: "ServerHostname", traits: {"smithy.api#required" => {}}))
-    CreateLocationSmbRequest.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
-    CreateLocationSmbRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
-    CreateLocationSmbRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
-    CreateLocationSmbRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns", traits: {"smithy.api#required" => {}}))
-    CreateLocationSmbRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
-    CreateLocationSmbRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
-    CreateLocationSmbRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))
-    CreateLocationSmbRequest.add_member(:dns_ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpList, location_name: "DnsIpAddresses"))
-    CreateLocationSmbRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
-    CreateLocationSmbRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
-    CreateLocationSmbRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
+    CreateLocationSmbRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbSubdirectory, location_name: "Subdirectory", traits: {"smithy.api#required" => {}}))
+    CreateLocationSmbRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerHostname, location_name: "ServerHostname", traits: {"smithy.api#required" => {}}))
+    CreateLocationSmbRequest.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User"))
+    CreateLocationSmbRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbDomain, location_name: "Domain"))
+    CreateLocationSmbRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbPassword, location_name: "Password"))
+    CreateLocationSmbRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns", traits: {"smithy.api#required" => {}}))
+    CreateLocationSmbRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbMountOptions, location_name: "MountOptions"))
+    CreateLocationSmbRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
+    CreateLocationSmbRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbAuthenticationType, location_name: "AuthenticationType"))
+    CreateLocationSmbRequest.add_member(:dns_ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpList, location_name: "DnsIpAddresses"))
+    CreateLocationSmbRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    CreateLocationSmbRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    CreateLocationSmbRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
     CreateLocationSmbRequest.type = Types::CreateLocationSmbRequest
-    CreateLocationSmbResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationSmbResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
     CreateLocationSmbResponse.type = Types::CreateLocationSmbResponse
-    CreateTaskRequest.add_member(:source_location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "SourceLocationArn", traits: {"smithy.api#required" => {}}))
-    CreateTaskRequest.add_member(:destination_location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "DestinationLocationArn", traits: {"smithy.api#required" => {}}))
-    CreateTaskRequest.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
-    CreateTaskRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
-    CreateTaskRequest.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
-    CreateTaskRequest.add_member(:excludes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
-    CreateTaskRequest.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskSchedule, location_name: "Schedule"))
-    CreateTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
-    CreateTaskRequest.add_member(:includes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
-    CreateTaskRequest.add_member(:manifest_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
-    CreateTaskRequest.add_member(:task_report_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
-    CreateTaskRequest.add_member(:task_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
+    CreateTaskRequest.add_member(:source_location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "SourceLocationArn", traits: {"smithy.api#required" => {}}))
+    CreateTaskRequest.add_member(:destination_location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "DestinationLocationArn", traits: {"smithy.api#required" => {}}))
+    CreateTaskRequest.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
+    CreateTaskRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Name"))
+    CreateTaskRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "Options"))
+    CreateTaskRequest.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Excludes"))
+    CreateTaskRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSchedule, location_name: "Schedule"))
+    CreateTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
+    CreateTaskRequest.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Includes"))
+    CreateTaskRequest.add_member(:manifest_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestConfig, location_name: "ManifestConfig"))
+    CreateTaskRequest.add_member(:task_report_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskReportConfig, location_name: "TaskReportConfig"))
+    CreateTaskRequest.add_member(:task_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskMode, location_name: "TaskMode"))
     CreateTaskRequest.type = Types::CreateTaskRequest
-    CreateTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
+    CreateTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn"))
     CreateTaskResponse.type = Types::CreateTaskResponse
-    CustomSecretConfig.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
-    CustomSecretConfig.add_member(:secret_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArnOrEmptyString, location_name: "SecretAccessRoleArn"))
+    CustomSecretConfig.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn"))
+    CustomSecretConfig.add_member(:secret_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArnOrEmptyString, location_name: "SecretAccessRoleArn"))
     CustomSecretConfig.type = Types::CustomSecretConfig
-    DeleteAgentRequest.add_member(:agent_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn", traits: {"smithy.api#required" => {}}))
+    DeleteAgentRequest.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, location_name: "AgentArn", traits: {"smithy.api#required" => {}}))
     DeleteAgentRequest.type = Types::DeleteAgentRequest
     DeleteAgentResponse.type = Types::DeleteAgentResponse
-    DeleteLocationRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DeleteLocationRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DeleteLocationRequest.type = Types::DeleteLocationRequest
     DeleteLocationResponse.type = Types::DeleteLocationResponse
-    DeleteTaskRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
+    DeleteTaskRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
     DeleteTaskRequest.type = Types::DeleteTaskRequest
     DeleteTaskResponse.type = Types::DeleteTaskResponse
-    DescribeAgentRequest.add_member(:agent_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn", traits: {"smithy.api#required" => {}}))
+    DescribeAgentRequest.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, location_name: "AgentArn", traits: {"smithy.api#required" => {}}))
     DescribeAgentRequest.type = Types::DescribeAgentRequest
-    DescribeAgentResponse.add_member(:agent_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn"))
-    DescribeAgentResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
-    DescribeAgentResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus, location_name: "Status"))
-    DescribeAgentResponse.add_member(:last_connection_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "LastConnectionTime"))
-    DescribeAgentResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeAgentResponse.add_member(:endpoint_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
-    DescribeAgentResponse.add_member(:private_link_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivateLinkConfig, location_name: "PrivateLinkConfig"))
-    DescribeAgentResponse.add_member(:platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Platform, location_name: "Platform"))
+    DescribeAgentResponse.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, location_name: "AgentArn"))
+    DescribeAgentResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Name"))
+    DescribeAgentResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, location_name: "Status"))
+    DescribeAgentResponse.add_member(:last_connection_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "LastConnectionTime"))
+    DescribeAgentResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeAgentResponse.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType, location_name: "EndpointType"))
+    DescribeAgentResponse.add_member(:private_link_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateLinkConfig, location_name: "PrivateLinkConfig"))
+    DescribeAgentResponse.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: Platform, location_name: "Platform"))
     DescribeAgentResponse.type = Types::DescribeAgentResponse
-    DescribeLocationAzureBlobRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationAzureBlobRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationAzureBlobRequest.type = Types::DescribeLocationAzureBlobRequest
-    DescribeLocationAzureBlobResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationAzureBlobResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationAzureBlobResponse.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
-    DescribeLocationAzureBlobResponse.add_member(:blob_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
-    DescribeLocationAzureBlobResponse.add_member(:access_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
-    DescribeLocationAzureBlobResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    DescribeLocationAzureBlobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeLocationAzureBlobResponse.add_member(:managed_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
-    DescribeLocationAzureBlobResponse.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
-    DescribeLocationAzureBlobResponse.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
+    DescribeLocationAzureBlobResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationAzureBlobResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationAzureBlobResponse.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
+    DescribeLocationAzureBlobResponse.add_member(:blob_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobType, location_name: "BlobType"))
+    DescribeLocationAzureBlobResponse.add_member(:access_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureAccessTier, location_name: "AccessTier"))
+    DescribeLocationAzureBlobResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationAzureBlobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeLocationAzureBlobResponse.add_member(:managed_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    DescribeLocationAzureBlobResponse.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    DescribeLocationAzureBlobResponse.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSecretConfig, location_name: "CustomSecretConfig"))
     DescribeLocationAzureBlobResponse.type = Types::DescribeLocationAzureBlobResponse
-    DescribeLocationEfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationEfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationEfsRequest.type = Types::DescribeLocationEfsRequest
-    DescribeLocationEfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationEfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationEfsResponse.add_member(:ec2_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2Config, location_name: "Ec2Config"))
-    DescribeLocationEfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeLocationEfsResponse.add_member(:access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsAccessPointArn, location_name: "AccessPointArn"))
-    DescribeLocationEfsResponse.add_member(:file_system_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "FileSystemAccessRoleArn"))
-    DescribeLocationEfsResponse.add_member(:in_transit_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsInTransitEncryption, location_name: "InTransitEncryption"))
+    DescribeLocationEfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationEfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationEfsResponse.add_member(:ec2_config, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2Config, location_name: "Ec2Config"))
+    DescribeLocationEfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeLocationEfsResponse.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsAccessPointArn, location_name: "AccessPointArn"))
+    DescribeLocationEfsResponse.add_member(:file_system_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "FileSystemAccessRoleArn"))
+    DescribeLocationEfsResponse.add_member(:in_transit_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsInTransitEncryption, location_name: "InTransitEncryption"))
     DescribeLocationEfsResponse.type = Types::DescribeLocationEfsResponse
-    DescribeLocationFsxLustreRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationFsxLustreRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationFsxLustreRequest.type = Types::DescribeLocationFsxLustreRequest
-    DescribeLocationFsxLustreResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationFsxLustreResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationFsxLustreResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
-    DescribeLocationFsxLustreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationFsxLustreResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationFsxLustreResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationFsxLustreResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
+    DescribeLocationFsxLustreResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
     DescribeLocationFsxLustreResponse.type = Types::DescribeLocationFsxLustreResponse
-    DescribeLocationFsxOntapRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationFsxOntapRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationFsxOntapRequest.type = Types::DescribeLocationFsxOntapRequest
-    DescribeLocationFsxOntapResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeLocationFsxOntapResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationFsxOntapResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationFsxOntapResponse.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocol, location_name: "Protocol"))
-    DescribeLocationFsxOntapResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
-    DescribeLocationFsxOntapResponse.add_member(:storage_virtual_machine_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageVirtualMachineArn, location_name: "StorageVirtualMachineArn"))
-    DescribeLocationFsxOntapResponse.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxFilesystemArn, location_name: "FsxFilesystemArn"))
+    DescribeLocationFsxOntapResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeLocationFsxOntapResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationFsxOntapResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationFsxOntapResponse.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocol, location_name: "Protocol"))
+    DescribeLocationFsxOntapResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
+    DescribeLocationFsxOntapResponse.add_member(:storage_virtual_machine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineArn, location_name: "StorageVirtualMachineArn"))
+    DescribeLocationFsxOntapResponse.add_member(:fsx_filesystem_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxFilesystemArn, location_name: "FsxFilesystemArn"))
     DescribeLocationFsxOntapResponse.type = Types::DescribeLocationFsxOntapResponse
-    DescribeLocationFsxOpenZfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationFsxOpenZfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationFsxOpenZfsRequest.type = Types::DescribeLocationFsxOpenZfsRequest
-    DescribeLocationFsxOpenZfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationFsxOpenZfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationFsxOpenZfsResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
-    DescribeLocationFsxOpenZfsResponse.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocol, location_name: "Protocol"))
-    DescribeLocationFsxOpenZfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationFsxOpenZfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationFsxOpenZfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationFsxOpenZfsResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
+    DescribeLocationFsxOpenZfsResponse.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocol, location_name: "Protocol"))
+    DescribeLocationFsxOpenZfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
     DescribeLocationFsxOpenZfsResponse.type = Types::DescribeLocationFsxOpenZfsResponse
-    DescribeLocationFsxWindowsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationFsxWindowsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationFsxWindowsRequest.type = Types::DescribeLocationFsxWindowsRequest
-    DescribeLocationFsxWindowsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationFsxWindowsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationFsxWindowsResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
-    DescribeLocationFsxWindowsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeLocationFsxWindowsResponse.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
-    DescribeLocationFsxWindowsResponse.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
+    DescribeLocationFsxWindowsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationFsxWindowsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationFsxWindowsResponse.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
+    DescribeLocationFsxWindowsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeLocationFsxWindowsResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User"))
+    DescribeLocationFsxWindowsResponse.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbDomain, location_name: "Domain"))
     DescribeLocationFsxWindowsResponse.type = Types::DescribeLocationFsxWindowsResponse
-    DescribeLocationHdfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationHdfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationHdfsRequest.type = Types::DescribeLocationHdfsRequest
-    DescribeLocationHdfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationHdfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationHdfsResponse.add_member(:name_nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsNameNodeList, location_name: "NameNodes"))
-    DescribeLocationHdfsResponse.add_member(:block_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsBlockSize, location_name: "BlockSize"))
-    DescribeLocationHdfsResponse.add_member(:replication_factor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsReplicationFactor, location_name: "ReplicationFactor"))
-    DescribeLocationHdfsResponse.add_member(:kms_key_provider_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
-    DescribeLocationHdfsResponse.add_member(:qop_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QopConfiguration, location_name: "QopConfiguration"))
-    DescribeLocationHdfsResponse.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsAuthenticationType, location_name: "AuthenticationType"))
-    DescribeLocationHdfsResponse.add_member(:simple_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsUser, location_name: "SimpleUser"))
-    DescribeLocationHdfsResponse.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
-    DescribeLocationHdfsResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    DescribeLocationHdfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationHdfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationHdfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationHdfsResponse.add_member(:name_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsNameNodeList, location_name: "NameNodes"))
+    DescribeLocationHdfsResponse.add_member(:block_size, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsBlockSize, location_name: "BlockSize"))
+    DescribeLocationHdfsResponse.add_member(:replication_factor, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsReplicationFactor, location_name: "ReplicationFactor"))
+    DescribeLocationHdfsResponse.add_member(:kms_key_provider_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
+    DescribeLocationHdfsResponse.add_member(:qop_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: QopConfiguration, location_name: "QopConfiguration"))
+    DescribeLocationHdfsResponse.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsAuthenticationType, location_name: "AuthenticationType"))
+    DescribeLocationHdfsResponse.add_member(:simple_user, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsUser, location_name: "SimpleUser"))
+    DescribeLocationHdfsResponse.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    DescribeLocationHdfsResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationHdfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
     DescribeLocationHdfsResponse.type = Types::DescribeLocationHdfsResponse
-    DescribeLocationNfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationNfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationNfsRequest.type = Types::DescribeLocationNfsRequest
-    DescribeLocationNfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationNfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationNfsResponse.add_member(:on_prem_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnPremConfig, location_name: "OnPremConfig"))
-    DescribeLocationNfsResponse.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
-    DescribeLocationNfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationNfsResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationNfsResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationNfsResponse.add_member(:on_prem_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OnPremConfig, location_name: "OnPremConfig"))
+    DescribeLocationNfsResponse.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsMountOptions, location_name: "MountOptions"))
+    DescribeLocationNfsResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
     DescribeLocationNfsResponse.type = Types::DescribeLocationNfsResponse
-    DescribeLocationObjectStorageRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationObjectStorageRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationObjectStorageRequest.type = Types::DescribeLocationObjectStorageRequest
-    DescribeLocationObjectStorageResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationObjectStorageResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationObjectStorageResponse.add_member(:access_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
-    DescribeLocationObjectStorageResponse.add_member(:server_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageServerPort, location_name: "ServerPort"))
-    DescribeLocationObjectStorageResponse.add_member(:server_protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
-    DescribeLocationObjectStorageResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    DescribeLocationObjectStorageResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeLocationObjectStorageResponse.add_member(:server_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
-    DescribeLocationObjectStorageResponse.add_member(:managed_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
-    DescribeLocationObjectStorageResponse.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
-    DescribeLocationObjectStorageResponse.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
+    DescribeLocationObjectStorageResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationObjectStorageResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationObjectStorageResponse.add_member(:access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageAccessKey, location_name: "AccessKey"))
+    DescribeLocationObjectStorageResponse.add_member(:server_port, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageServerPort, location_name: "ServerPort"))
+    DescribeLocationObjectStorageResponse.add_member(:server_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
+    DescribeLocationObjectStorageResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationObjectStorageResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeLocationObjectStorageResponse.add_member(:server_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageCertificate, location_name: "ServerCertificate"))
+    DescribeLocationObjectStorageResponse.add_member(:managed_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    DescribeLocationObjectStorageResponse.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    DescribeLocationObjectStorageResponse.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSecretConfig, location_name: "CustomSecretConfig"))
     DescribeLocationObjectStorageResponse.type = Types::DescribeLocationObjectStorageResponse
-    DescribeLocationS3Request.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationS3Request.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationS3Request.type = Types::DescribeLocationS3Request
-    DescribeLocationS3Response.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationS3Response.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationS3Response.add_member(:s3_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
-    DescribeLocationS3Response.add_member(:s3_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
-    DescribeLocationS3Response.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    DescribeLocationS3Response.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationS3Response.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationS3Response.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationS3Response.add_member(:s3_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: S3StorageClass, location_name: "S3StorageClass"))
+    DescribeLocationS3Response.add_member(:s3_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Config, location_name: "S3Config"))
+    DescribeLocationS3Response.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationS3Response.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
     DescribeLocationS3Response.type = Types::DescribeLocationS3Response
-    DescribeLocationSmbRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    DescribeLocationSmbRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
     DescribeLocationSmbRequest.type = Types::DescribeLocationSmbRequest
-    DescribeLocationSmbResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    DescribeLocationSmbResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
-    DescribeLocationSmbResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    DescribeLocationSmbResponse.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
-    DescribeLocationSmbResponse.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
-    DescribeLocationSmbResponse.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
-    DescribeLocationSmbResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeLocationSmbResponse.add_member(:dns_ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpList, location_name: "DnsIpAddresses"))
-    DescribeLocationSmbResponse.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
-    DescribeLocationSmbResponse.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))
+    DescribeLocationSmbResponse.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    DescribeLocationSmbResponse.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
+    DescribeLocationSmbResponse.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationSmbResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User"))
+    DescribeLocationSmbResponse.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbDomain, location_name: "Domain"))
+    DescribeLocationSmbResponse.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbMountOptions, location_name: "MountOptions"))
+    DescribeLocationSmbResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeLocationSmbResponse.add_member(:dns_ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpList, location_name: "DnsIpAddresses"))
+    DescribeLocationSmbResponse.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    DescribeLocationSmbResponse.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbAuthenticationType, location_name: "AuthenticationType"))
     DescribeLocationSmbResponse.type = Types::DescribeLocationSmbResponse
-    DescribeTaskExecutionRequest.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn", traits: {"smithy.api#required" => {}}))
+    DescribeTaskExecutionRequest.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, location_name: "TaskExecutionArn", traits: {"smithy.api#required" => {}}))
     DescribeTaskExecutionRequest.type = Types::DescribeTaskExecutionRequest
-    DescribeTaskExecutionResponse.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
-    DescribeTaskExecutionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "Status"))
-    DescribeTaskExecutionResponse.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
-    DescribeTaskExecutionResponse.add_member(:excludes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
-    DescribeTaskExecutionResponse.add_member(:includes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
-    DescribeTaskExecutionResponse.add_member(:manifest_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
-    DescribeTaskExecutionResponse.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "StartTime"))
-    DescribeTaskExecutionResponse.add_member(:estimated_files_to_transfer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "EstimatedFilesToTransfer", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:estimated_bytes_to_transfer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "EstimatedBytesToTransfer", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:files_transferred, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FilesTransferred", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:bytes_written, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "BytesWritten", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:bytes_transferred, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "BytesTransferred", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:bytes_compressed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "BytesCompressed", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionResultDetail, location_name: "Result"))
-    DescribeTaskExecutionResponse.add_member(:task_report_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
-    DescribeTaskExecutionResponse.add_member(:files_deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FilesDeleted", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:files_skipped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FilesSkipped", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:files_verified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FilesVerified", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:report_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportResult, location_name: "ReportResult"))
-    DescribeTaskExecutionResponse.add_member(:estimated_files_to_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "EstimatedFilesToDelete", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:task_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
-    DescribeTaskExecutionResponse.add_member(:files_prepared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FilesPrepared", traits: {"smithy.api#default" => 0}))
-    DescribeTaskExecutionResponse.add_member(:files_listed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionFilesListedDetail, location_name: "FilesListed"))
-    DescribeTaskExecutionResponse.add_member(:files_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionFilesFailedDetail, location_name: "FilesFailed"))
-    DescribeTaskExecutionResponse.add_member(:launch_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "LaunchTime"))
-    DescribeTaskExecutionResponse.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "EndTime"))
+    DescribeTaskExecutionResponse.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, location_name: "TaskExecutionArn"))
+    DescribeTaskExecutionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionStatus, location_name: "Status"))
+    DescribeTaskExecutionResponse.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "Options"))
+    DescribeTaskExecutionResponse.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Excludes"))
+    DescribeTaskExecutionResponse.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Includes"))
+    DescribeTaskExecutionResponse.add_member(:manifest_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestConfig, location_name: "ManifestConfig"))
+    DescribeTaskExecutionResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "StartTime"))
+    DescribeTaskExecutionResponse.add_member(:estimated_files_to_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "EstimatedFilesToTransfer", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:estimated_bytes_to_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "EstimatedBytesToTransfer", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:files_transferred, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FilesTransferred", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:bytes_written, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "BytesWritten", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:bytes_transferred, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "BytesTransferred", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:bytes_compressed, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "BytesCompressed", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionResultDetail, location_name: "Result"))
+    DescribeTaskExecutionResponse.add_member(:task_report_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskReportConfig, location_name: "TaskReportConfig"))
+    DescribeTaskExecutionResponse.add_member(:files_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FilesDeleted", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:files_skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FilesSkipped", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:files_verified, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FilesVerified", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:report_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportResult, location_name: "ReportResult"))
+    DescribeTaskExecutionResponse.add_member(:estimated_files_to_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "EstimatedFilesToDelete", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:task_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskMode, location_name: "TaskMode"))
+    DescribeTaskExecutionResponse.add_member(:files_prepared, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FilesPrepared", traits: {"smithy.api#default" => 0}))
+    DescribeTaskExecutionResponse.add_member(:files_listed, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionFilesListedDetail, location_name: "FilesListed"))
+    DescribeTaskExecutionResponse.add_member(:files_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionFilesFailedDetail, location_name: "FilesFailed"))
+    DescribeTaskExecutionResponse.add_member(:launch_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "LaunchTime"))
+    DescribeTaskExecutionResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "EndTime"))
     DescribeTaskExecutionResponse.type = Types::DescribeTaskExecutionResponse
-    DescribeTaskRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
+    DescribeTaskRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
     DescribeTaskRequest.type = Types::DescribeTaskRequest
-    DescribeTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
-    DescribeTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskStatus, location_name: "Status"))
-    DescribeTaskResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
-    DescribeTaskResponse.add_member(:current_task_execution_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "CurrentTaskExecutionArn"))
-    DescribeTaskResponse.add_member(:source_location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "SourceLocationArn"))
-    DescribeTaskResponse.add_member(:destination_location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "DestinationLocationArn"))
-    DescribeTaskResponse.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
-    DescribeTaskResponse.add_member(:source_network_interface_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceNetworkInterfaceArns, location_name: "SourceNetworkInterfaceArns"))
-    DescribeTaskResponse.add_member(:destination_network_interface_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationNetworkInterfaceArns, location_name: "DestinationNetworkInterfaceArns"))
-    DescribeTaskResponse.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
-    DescribeTaskResponse.add_member(:excludes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
-    DescribeTaskResponse.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskSchedule, location_name: "Schedule"))
-    DescribeTaskResponse.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    DescribeTaskResponse.add_member(:error_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorDetail"))
-    DescribeTaskResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeTaskResponse.add_member(:includes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
-    DescribeTaskResponse.add_member(:manifest_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
-    DescribeTaskResponse.add_member(:task_report_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
-    DescribeTaskResponse.add_member(:schedule_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskScheduleDetails, location_name: "ScheduleDetails"))
-    DescribeTaskResponse.add_member(:task_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
+    DescribeTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn"))
+    DescribeTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, location_name: "Status"))
+    DescribeTaskResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Name"))
+    DescribeTaskResponse.add_member(:current_task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, location_name: "CurrentTaskExecutionArn"))
+    DescribeTaskResponse.add_member(:source_location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "SourceLocationArn"))
+    DescribeTaskResponse.add_member(:destination_location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "DestinationLocationArn"))
+    DescribeTaskResponse.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
+    DescribeTaskResponse.add_member(:source_network_interface_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkInterfaceArns, location_name: "SourceNetworkInterfaceArns"))
+    DescribeTaskResponse.add_member(:destination_network_interface_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationNetworkInterfaceArns, location_name: "DestinationNetworkInterfaceArns"))
+    DescribeTaskResponse.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "Options"))
+    DescribeTaskResponse.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Excludes"))
+    DescribeTaskResponse.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSchedule, location_name: "Schedule"))
+    DescribeTaskResponse.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    DescribeTaskResponse.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorDetail"))
+    DescribeTaskResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "CreationTime"))
+    DescribeTaskResponse.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Includes"))
+    DescribeTaskResponse.add_member(:manifest_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestConfig, location_name: "ManifestConfig"))
+    DescribeTaskResponse.add_member(:task_report_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskReportConfig, location_name: "TaskReportConfig"))
+    DescribeTaskResponse.add_member(:schedule_details, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskScheduleDetails, location_name: "ScheduleDetails"))
+    DescribeTaskResponse.add_member(:task_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskMode, location_name: "TaskMode"))
     DescribeTaskResponse.type = Types::DescribeTaskResponse
-    DestinationNetworkInterfaceArns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
-    DnsIpList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerIpAddress)
-    Ec2Config.add_member(:subnet_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SubnetArn, location_name: "SubnetArn", traits: {"smithy.api#required" => {}}))
-    Ec2Config.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
+    DestinationNetworkInterfaceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceArn)
+    DnsIpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerIpAddress)
+    Ec2Config.add_member(:subnet_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SubnetArn, location_name: "SubnetArn", traits: {"smithy.api#required" => {}}))
+    Ec2Config.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
     Ec2Config.type = Types::Ec2Config
-    Ec2SecurityGroupArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
-    EfsInTransitEncryption.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    EfsInTransitEncryption.add_member(:tls1_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TLS1_2", traits: {"smithy.api#enumValue" => "TLS1_2"}))
-    EndpointType.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
-    EndpointType.add_member(:private_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATE_LINK", traits: {"smithy.api#enumValue" => "PRIVATE_LINK"}))
-    EndpointType.add_member(:fips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIPS", traits: {"smithy.api#enumValue" => "FIPS"}))
-    EndpointType.add_member(:fips_private_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIPS_PRIVATE_LINK", traits: {"smithy.api#enumValue" => "FIPS_PRIVATE_LINK"}))
-    FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterRule)
-    FilterRule.add_member(:filter_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterType, location_name: "FilterType"))
-    FilterRule.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue, location_name: "Value"))
+    Ec2SecurityGroupArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArn)
+    EfsInTransitEncryption.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    EfsInTransitEncryption.add_member(:tls1_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TLS1_2", traits: {"smithy.api#enumValue" => "TLS1_2"}))
+    EndpointType.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
+    EndpointType.add_member(:private_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVATE_LINK", traits: {"smithy.api#enumValue" => "PRIVATE_LINK"}))
+    EndpointType.add_member(:fips, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIPS", traits: {"smithy.api#enumValue" => "FIPS"}))
+    EndpointType.add_member(:fips_private_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIPS_PRIVATE_LINK", traits: {"smithy.api#enumValue" => "FIPS_PRIVATE_LINK"}))
+    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRule)
+    FilterRule.add_member(:filter_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterType, location_name: "FilterType"))
+    FilterRule.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, location_name: "Value"))
     FilterRule.type = Types::FilterRule
-    FilterType.add_member(:simple_pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLE_PATTERN", traits: {"smithy.api#enumValue" => "SIMPLE_PATTERN"}))
-    FilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterAttributeValue)
-    FsxProtocol.add_member(:nfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocolNfs, location_name: "NFS"))
-    FsxProtocol.add_member(:smb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocolSmb, location_name: "SMB"))
+    FilterType.add_member(:simple_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLE_PATTERN", traits: {"smithy.api#enumValue" => "SIMPLE_PATTERN"}))
+    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeValue)
+    FsxProtocol.add_member(:nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocolNfs, location_name: "NFS"))
+    FsxProtocol.add_member(:smb, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocolSmb, location_name: "SMB"))
     FsxProtocol.type = Types::FsxProtocol
-    FsxProtocolNfs.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
+    FsxProtocolNfs.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsMountOptions, location_name: "MountOptions"))
     FsxProtocolNfs.type = Types::FsxProtocolNfs
-    FsxProtocolSmb.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
-    FsxProtocolSmb.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
-    FsxProtocolSmb.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
-    FsxProtocolSmb.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User", traits: {"smithy.api#required" => {}}))
+    FsxProtocolSmb.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbDomain, location_name: "Domain"))
+    FsxProtocolSmb.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbMountOptions, location_name: "MountOptions"))
+    FsxProtocolSmb.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbPassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    FsxProtocolSmb.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User", traits: {"smithy.api#required" => {}}))
     FsxProtocolSmb.type = Types::FsxProtocolSmb
-    FsxUpdateProtocol.add_member(:nfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocolNfs, location_name: "NFS"))
-    FsxUpdateProtocol.add_member(:smb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxUpdateProtocolSmb, location_name: "SMB"))
+    FsxUpdateProtocol.add_member(:nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocolNfs, location_name: "NFS"))
+    FsxUpdateProtocol.add_member(:smb, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxUpdateProtocolSmb, location_name: "SMB"))
     FsxUpdateProtocol.type = Types::FsxUpdateProtocol
-    FsxUpdateProtocolSmb.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSmbDomain, location_name: "Domain"))
-    FsxUpdateProtocolSmb.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
-    FsxUpdateProtocolSmb.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
-    FsxUpdateProtocolSmb.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
+    FsxUpdateProtocolSmb.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateSmbDomain, location_name: "Domain"))
+    FsxUpdateProtocolSmb.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbMountOptions, location_name: "MountOptions"))
+    FsxUpdateProtocolSmb.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbPassword, location_name: "Password"))
+    FsxUpdateProtocolSmb.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User"))
     FsxUpdateProtocolSmb.type = Types::FsxUpdateProtocolSmb
-    Gid.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    Gid.add_member(:int_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INT_VALUE", traits: {"smithy.api#enumValue" => "INT_VALUE"}))
-    Gid.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
-    Gid.add_member(:both, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTH", traits: {"smithy.api#enumValue" => "BOTH"}))
-    HdfsAuthenticationType.add_member(:simple, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLE", traits: {"smithy.api#enumValue" => "SIMPLE"}))
-    HdfsAuthenticationType.add_member(:kerberos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KERBEROS", traits: {"smithy.api#enumValue" => "KERBEROS"}))
-    HdfsDataTransferProtection.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    HdfsDataTransferProtection.add_member(:authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTHENTICATION", traits: {"smithy.api#enumValue" => "AUTHENTICATION"}))
-    HdfsDataTransferProtection.add_member(:integrity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTEGRITY", traits: {"smithy.api#enumValue" => "INTEGRITY"}))
-    HdfsDataTransferProtection.add_member(:privacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVACY", traits: {"smithy.api#enumValue" => "PRIVACY"}))
-    HdfsNameNode.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsServerHostname, location_name: "Hostname", traits: {"smithy.api#required" => {}}))
-    HdfsNameNode.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsServerPort, location_name: "Port", traits: {"smithy.api#required" => {}}))
+    Gid.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    Gid.add_member(:int_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INT_VALUE", traits: {"smithy.api#enumValue" => "INT_VALUE"}))
+    Gid.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    Gid.add_member(:both, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTH", traits: {"smithy.api#enumValue" => "BOTH"}))
+    HdfsAuthenticationType.add_member(:simple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SIMPLE", traits: {"smithy.api#enumValue" => "SIMPLE"}))
+    HdfsAuthenticationType.add_member(:kerberos, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KERBEROS", traits: {"smithy.api#enumValue" => "KERBEROS"}))
+    HdfsDataTransferProtection.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    HdfsDataTransferProtection.add_member(:authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTHENTICATION", traits: {"smithy.api#enumValue" => "AUTHENTICATION"}))
+    HdfsDataTransferProtection.add_member(:integrity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTEGRITY", traits: {"smithy.api#enumValue" => "INTEGRITY"}))
+    HdfsDataTransferProtection.add_member(:privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVACY", traits: {"smithy.api#enumValue" => "PRIVACY"}))
+    HdfsNameNode.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsServerHostname, location_name: "Hostname", traits: {"smithy.api#required" => {}}))
+    HdfsNameNode.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsServerPort, location_name: "Port", traits: {"smithy.api#required" => {}}))
     HdfsNameNode.type = Types::HdfsNameNode
-    HdfsNameNodeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsNameNode)
-    HdfsRpcProtection.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    HdfsRpcProtection.add_member(:authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTHENTICATION", traits: {"smithy.api#enumValue" => "AUTHENTICATION"}))
-    HdfsRpcProtection.add_member(:integrity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTEGRITY", traits: {"smithy.api#enumValue" => "INTEGRITY"}))
-    HdfsRpcProtection.add_member(:privacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVACY", traits: {"smithy.api#enumValue" => "PRIVACY"}))
-    InputTagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagListEntry)
-    InternalException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    InternalException.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
+    HdfsNameNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsNameNode)
+    HdfsRpcProtection.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    HdfsRpcProtection.add_member(:authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTHENTICATION", traits: {"smithy.api#enumValue" => "AUTHENTICATION"}))
+    HdfsRpcProtection.add_member(:integrity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTEGRITY", traits: {"smithy.api#enumValue" => "INTEGRITY"}))
+    HdfsRpcProtection.add_member(:privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRIVACY", traits: {"smithy.api#enumValue" => "PRIVACY"}))
+    InputTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagListEntry)
+    InternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InternalException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "errorCode"))
     InternalException.type = Types::InternalException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    InvalidRequestException.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
-    InvalidRequestException.add_member(:datasync_error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "datasyncErrorCode"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InvalidRequestException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "errorCode"))
+    InvalidRequestException.add_member(:datasync_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "datasyncErrorCode"))
     InvalidRequestException.type = Types::InvalidRequestException
-    ListAgentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListAgentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAgentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListAgentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAgentsRequest.type = Types::ListAgentsRequest
-    ListAgentsResponse.add_member(:agents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentList, location_name: "Agents"))
-    ListAgentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAgentsResponse.add_member(:agents, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentList, location_name: "Agents"))
+    ListAgentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAgentsResponse.type = Types::ListAgentsResponse
-    ListLocationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListLocationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListLocationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationFilters, location_name: "Filters"))
+    ListLocationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListLocationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListLocationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationFilters, location_name: "Filters"))
     ListLocationsRequest.type = Types::ListLocationsRequest
-    ListLocationsResponse.add_member(:locations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationList, location_name: "Locations"))
-    ListLocationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLocationsResponse.add_member(:locations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationList, location_name: "Locations"))
+    ListLocationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListLocationsResponse.type = Types::ListLocationsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputTagList, location_name: "Tags"))
-    ListTagsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputTagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTaskExecutionsRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
-    ListTaskExecutionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListTaskExecutionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTaskExecutionsRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn"))
+    ListTaskExecutionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListTaskExecutionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTaskExecutionsRequest.type = Types::ListTaskExecutionsRequest
-    ListTaskExecutionsResponse.add_member(:task_executions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionList, location_name: "TaskExecutions"))
-    ListTaskExecutionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTaskExecutionsResponse.add_member(:task_executions, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionList, location_name: "TaskExecutions"))
+    ListTaskExecutionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTaskExecutionsResponse.type = Types::ListTaskExecutionsResponse
-    ListTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListTasksRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskFilters, location_name: "Filters"))
+    ListTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListTasksRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFilters, location_name: "Filters"))
     ListTasksRequest.type = Types::ListTasksRequest
-    ListTasksResponse.add_member(:tasks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskList, location_name: "Tasks"))
-    ListTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTasksResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskList, location_name: "Tasks"))
+    ListTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTasksResponse.type = Types::ListTasksResponse
-    LocationFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    LocationFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
-    LocationFilter.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operator, location_name: "Operator", traits: {"smithy.api#required" => {}}))
+    LocationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    LocationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    LocationFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, location_name: "Operator", traits: {"smithy.api#required" => {}}))
     LocationFilter.type = Types::LocationFilter
-    LocationFilterName.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocationUri", traits: {"smithy.api#enumValue" => "LocationUri"}))
-    LocationFilterName.add_member(:location_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocationType", traits: {"smithy.api#enumValue" => "LocationType"}))
-    LocationFilterName.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
-    LocationFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationFilter)
-    LocationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationListEntry)
-    LocationListEntry.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
-    LocationListEntry.add_member(:location_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    LocationFilterName.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocationUri", traits: {"smithy.api#enumValue" => "LocationUri"}))
+    LocationFilterName.add_member(:location_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocationType", traits: {"smithy.api#enumValue" => "LocationType"}))
+    LocationFilterName.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
+    LocationFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationFilter)
+    LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationListEntry)
+    LocationListEntry.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn"))
+    LocationListEntry.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, location_name: "LocationUri"))
     LocationListEntry.type = Types::LocationListEntry
-    LogLevel.add_member(:off, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
-    LogLevel.add_member(:basic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
-    LogLevel.add_member(:transfer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFER", traits: {"smithy.api#enumValue" => "TRANSFER"}))
-    ManagedSecretConfig.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    LogLevel.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
+    LogLevel.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
+    LogLevel.add_member(:transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFER", traits: {"smithy.api#enumValue" => "TRANSFER"}))
+    ManagedSecretConfig.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn"))
     ManagedSecretConfig.type = Types::ManagedSecretConfig
-    ManifestAction.add_member(:transfer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFER", traits: {"smithy.api#enumValue" => "TRANSFER"}))
-    ManifestConfig.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManifestAction, location_name: "Action"))
-    ManifestConfig.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManifestFormat, location_name: "Format"))
-    ManifestConfig.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceManifestConfig, location_name: "Source"))
+    ManifestAction.add_member(:transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFER", traits: {"smithy.api#enumValue" => "TRANSFER"}))
+    ManifestConfig.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestAction, location_name: "Action"))
+    ManifestConfig.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestFormat, location_name: "Format"))
+    ManifestConfig.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceManifestConfig, location_name: "Source"))
     ManifestConfig.type = Types::ManifestConfig
-    ManifestFormat.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
-    Mtime.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    Mtime.add_member(:preserve, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
-    NfsMountOptions.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsVersion, location_name: "Version"))
+    ManifestFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    Mtime.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    Mtime.add_member(:preserve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
+    NfsMountOptions.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsVersion, location_name: "Version"))
     NfsMountOptions.type = Types::NfsMountOptions
-    NfsVersion.add_member(:automatic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
-    NfsVersion.add_member(:nfs3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS3", traits: {"smithy.api#enumValue" => "NFS3"}))
-    NfsVersion.add_member(:nfs4_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS4_0", traits: {"smithy.api#enumValue" => "NFS4_0"}))
-    NfsVersion.add_member(:nfs4_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS4_1", traits: {"smithy.api#enumValue" => "NFS4_1"}))
-    ObjectStorageServerProtocol.add_member(:https, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
-    ObjectStorageServerProtocol.add_member(:http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
-    ObjectTags.add_member(:preserve, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
-    ObjectTags.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    ObjectVersionIds.add_member(:include, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
-    ObjectVersionIds.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    OnPremConfig.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns", traits: {"smithy.api#required" => {}}))
+    NfsVersion.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    NfsVersion.add_member(:nfs3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS3", traits: {"smithy.api#enumValue" => "NFS3"}))
+    NfsVersion.add_member(:nfs4_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS4_0", traits: {"smithy.api#enumValue" => "NFS4_0"}))
+    NfsVersion.add_member(:nfs4_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NFS4_1", traits: {"smithy.api#enumValue" => "NFS4_1"}))
+    ObjectStorageServerProtocol.add_member(:https, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
+    ObjectStorageServerProtocol.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
+    ObjectTags.add_member(:preserve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
+    ObjectTags.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    ObjectVersionIds.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
+    ObjectVersionIds.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    OnPremConfig.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns", traits: {"smithy.api#required" => {}}))
     OnPremConfig.type = Types::OnPremConfig
-    Operator.add_member(:eq, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQ", traits: {"smithy.api#enumValue" => "Equals"}))
-    Operator.add_member(:ne, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NE", traits: {"smithy.api#enumValue" => "NotEquals"}))
-    Operator.add_member(:in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN", traits: {"smithy.api#enumValue" => "In"}))
-    Operator.add_member(:le, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LE", traits: {"smithy.api#enumValue" => "LessThanOrEqual"}))
-    Operator.add_member(:lt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LT", traits: {"smithy.api#enumValue" => "LessThan"}))
-    Operator.add_member(:ge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GE", traits: {"smithy.api#enumValue" => "GreaterThanOrEqual"}))
-    Operator.add_member(:gt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GT", traits: {"smithy.api#enumValue" => "GreaterThan"}))
-    Operator.add_member(:contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "Contains"}))
-    Operator.add_member(:not_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_CONTAINS", traits: {"smithy.api#enumValue" => "NotContains"}))
-    Operator.add_member(:begins_with, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BeginsWith"}))
-    Options.add_member(:verify_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyMode, location_name: "VerifyMode"))
-    Options.add_member(:overwrite_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverwriteMode, location_name: "OverwriteMode"))
-    Options.add_member(:atime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Atime, location_name: "Atime"))
-    Options.add_member(:mtime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Mtime, location_name: "Mtime"))
-    Options.add_member(:uid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uid, location_name: "Uid"))
-    Options.add_member(:gid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Gid, location_name: "Gid"))
-    Options.add_member(:preserve_deleted_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreserveDeletedFiles, location_name: "PreserveDeletedFiles"))
-    Options.add_member(:preserve_devices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreserveDevices, location_name: "PreserveDevices"))
-    Options.add_member(:posix_permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PosixPermissions, location_name: "PosixPermissions"))
-    Options.add_member(:bytes_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BytesPerSecond, location_name: "BytesPerSecond"))
-    Options.add_member(:task_queueing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskQueueing, location_name: "TaskQueueing"))
-    Options.add_member(:log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
-    Options.add_member(:transfer_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransferMode, location_name: "TransferMode"))
-    Options.add_member(:security_descriptor_copy_flags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbSecurityDescriptorCopyFlags, location_name: "SecurityDescriptorCopyFlags"))
-    Options.add_member(:object_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTags, location_name: "ObjectTags"))
+    Operator.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQ", traits: {"smithy.api#enumValue" => "Equals"}))
+    Operator.add_member(:ne, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NE", traits: {"smithy.api#enumValue" => "NotEquals"}))
+    Operator.add_member(:in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN", traits: {"smithy.api#enumValue" => "In"}))
+    Operator.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LE", traits: {"smithy.api#enumValue" => "LessThanOrEqual"}))
+    Operator.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LT", traits: {"smithy.api#enumValue" => "LessThan"}))
+    Operator.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GE", traits: {"smithy.api#enumValue" => "GreaterThanOrEqual"}))
+    Operator.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GT", traits: {"smithy.api#enumValue" => "GreaterThan"}))
+    Operator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTAINS", traits: {"smithy.api#enumValue" => "Contains"}))
+    Operator.add_member(:not_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_CONTAINS", traits: {"smithy.api#enumValue" => "NotContains"}))
+    Operator.add_member(:begins_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BeginsWith"}))
+    Options.add_member(:verify_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifyMode, location_name: "VerifyMode"))
+    Options.add_member(:overwrite_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteMode, location_name: "OverwriteMode"))
+    Options.add_member(:atime, ::Smithy::Schema::Shapes::MemberShape.new(target: Atime, location_name: "Atime"))
+    Options.add_member(:mtime, ::Smithy::Schema::Shapes::MemberShape.new(target: Mtime, location_name: "Mtime"))
+    Options.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: Uid, location_name: "Uid"))
+    Options.add_member(:gid, ::Smithy::Schema::Shapes::MemberShape.new(target: Gid, location_name: "Gid"))
+    Options.add_member(:preserve_deleted_files, ::Smithy::Schema::Shapes::MemberShape.new(target: PreserveDeletedFiles, location_name: "PreserveDeletedFiles"))
+    Options.add_member(:preserve_devices, ::Smithy::Schema::Shapes::MemberShape.new(target: PreserveDevices, location_name: "PreserveDevices"))
+    Options.add_member(:posix_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PosixPermissions, location_name: "PosixPermissions"))
+    Options.add_member(:bytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: BytesPerSecond, location_name: "BytesPerSecond"))
+    Options.add_member(:task_queueing, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskQueueing, location_name: "TaskQueueing"))
+    Options.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, location_name: "LogLevel"))
+    Options.add_member(:transfer_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TransferMode, location_name: "TransferMode"))
+    Options.add_member(:security_descriptor_copy_flags, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbSecurityDescriptorCopyFlags, location_name: "SecurityDescriptorCopyFlags"))
+    Options.add_member(:object_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTags, location_name: "ObjectTags"))
     Options.type = Types::Options
-    OutputTagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagListEntry)
-    OverwriteMode.add_member(:always, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
-    OverwriteMode.add_member(:never, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
-    PLSecurityGroupArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
-    PLSubnetArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2SubnetArn)
-    PhaseStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    PhaseStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    PhaseStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    Platform.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentVersion, location_name: "Version"))
+    OutputTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagListEntry)
+    OverwriteMode.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
+    OverwriteMode.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
+    PLSecurityGroupArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArn)
+    PLSubnetArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SubnetArn)
+    PhaseStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    PhaseStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    PhaseStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    Platform.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentVersion, location_name: "Version"))
     Platform.type = Types::Platform
-    PosixPermissions.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    PosixPermissions.add_member(:preserve, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
-    PreserveDeletedFiles.add_member(:preserve, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
-    PreserveDeletedFiles.add_member(:remove, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVE", traits: {"smithy.api#enumValue" => "REMOVE"}))
-    PreserveDevices.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    PreserveDevices.add_member(:preserve, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
-    PrivateLinkConfig.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
-    PrivateLinkConfig.add_member(:private_link_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint, location_name: "PrivateLinkEndpoint"))
-    PrivateLinkConfig.add_member(:subnet_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PLSubnetArnList, location_name: "SubnetArns"))
-    PrivateLinkConfig.add_member(:security_group_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
+    PosixPermissions.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    PosixPermissions.add_member(:preserve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
+    PreserveDeletedFiles.add_member(:preserve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
+    PreserveDeletedFiles.add_member(:remove, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REMOVE", traits: {"smithy.api#enumValue" => "REMOVE"}))
+    PreserveDevices.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    PreserveDevices.add_member(:preserve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PRESERVE", traits: {"smithy.api#enumValue" => "PRESERVE"}))
+    PrivateLinkConfig.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, location_name: "VpcEndpointId"))
+    PrivateLinkConfig.add_member(:private_link_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, location_name: "PrivateLinkEndpoint"))
+    PrivateLinkConfig.add_member(:subnet_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PLSubnetArnList, location_name: "SubnetArns"))
+    PrivateLinkConfig.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
     PrivateLinkConfig.type = Types::PrivateLinkConfig
-    QopConfiguration.add_member(:rpc_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsRpcProtection, location_name: "RpcProtection"))
-    QopConfiguration.add_member(:data_transfer_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsDataTransferProtection, location_name: "DataTransferProtection"))
+    QopConfiguration.add_member(:rpc_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsRpcProtection, location_name: "RpcProtection"))
+    QopConfiguration.add_member(:data_transfer_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsDataTransferProtection, location_name: "DataTransferProtection"))
     QopConfiguration.type = Types::QopConfiguration
-    ReportDestination.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportDestinationS3, location_name: "S3"))
+    ReportDestination.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportDestinationS3, location_name: "S3"))
     ReportDestination.type = Types::ReportDestination
-    ReportDestinationS3.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
-    ReportDestinationS3.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn", traits: {"smithy.api#required" => {}}))
-    ReportDestinationS3.add_member(:bucket_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "BucketAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    ReportDestinationS3.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Subdirectory, location_name: "Subdirectory"))
+    ReportDestinationS3.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketArn, location_name: "S3BucketArn", traits: {"smithy.api#required" => {}}))
+    ReportDestinationS3.add_member(:bucket_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "BucketAccessRoleArn", traits: {"smithy.api#required" => {}}))
     ReportDestinationS3.type = Types::ReportDestinationS3
-    ReportLevel.add_member(:errors_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERRORS_ONLY", traits: {"smithy.api#enumValue" => "ERRORS_ONLY"}))
-    ReportLevel.add_member(:successes_and_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESSES_AND_ERRORS", traits: {"smithy.api#enumValue" => "SUCCESSES_AND_ERRORS"}))
-    ReportOutputType.add_member(:summary_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUMMARY_ONLY", traits: {"smithy.api#enumValue" => "SUMMARY_ONLY"}))
-    ReportOutputType.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
-    ReportOverride.add_member(:report_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportLevel, location_name: "ReportLevel"))
+    ReportLevel.add_member(:errors_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERRORS_ONLY", traits: {"smithy.api#enumValue" => "ERRORS_ONLY"}))
+    ReportLevel.add_member(:successes_and_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESSES_AND_ERRORS", traits: {"smithy.api#enumValue" => "SUCCESSES_AND_ERRORS"}))
+    ReportOutputType.add_member(:summary_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUMMARY_ONLY", traits: {"smithy.api#enumValue" => "SUMMARY_ONLY"}))
+    ReportOutputType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    ReportOverride.add_member(:report_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportLevel, location_name: "ReportLevel"))
     ReportOverride.type = Types::ReportOverride
-    ReportOverrides.add_member(:transferred, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Transferred"))
-    ReportOverrides.add_member(:verified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Verified"))
-    ReportOverrides.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Deleted"))
-    ReportOverrides.add_member(:skipped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Skipped"))
+    ReportOverrides.add_member(:transferred, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOverride, location_name: "Transferred"))
+    ReportOverrides.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOverride, location_name: "Verified"))
+    ReportOverrides.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOverride, location_name: "Deleted"))
+    ReportOverrides.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOverride, location_name: "Skipped"))
     ReportOverrides.type = Types::ReportOverrides
-    ReportResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhaseStatus, location_name: "Status"))
-    ReportResult.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    ReportResult.add_member(:error_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorDetail"))
+    ReportResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhaseStatus, location_name: "Status"))
+    ReportResult.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    ReportResult.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorDetail"))
     ReportResult.type = Types::ReportResult
-    S3Config.add_member(:bucket_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "BucketAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    S3Config.add_member(:bucket_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "BucketAccessRoleArn", traits: {"smithy.api#required" => {}}))
     S3Config.type = Types::S3Config
-    S3ManifestConfig.add_member(:manifest_object_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "ManifestObjectPath", traits: {"smithy.api#required" => {}}))
-    S3ManifestConfig.add_member(:bucket_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "BucketAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    S3ManifestConfig.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn", traits: {"smithy.api#required" => {}}))
-    S3ManifestConfig.add_member(:manifest_object_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersionId, location_name: "ManifestObjectVersionId"))
+    S3ManifestConfig.add_member(:manifest_object_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Subdirectory, location_name: "ManifestObjectPath", traits: {"smithy.api#required" => {}}))
+    S3ManifestConfig.add_member(:bucket_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "BucketAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    S3ManifestConfig.add_member(:s3_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketArn, location_name: "S3BucketArn", traits: {"smithy.api#required" => {}}))
+    S3ManifestConfig.add_member(:manifest_object_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersionId, location_name: "ManifestObjectVersionId"))
     S3ManifestConfig.type = Types::S3ManifestConfig
-    S3StorageClass.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
-    S3StorageClass.add_member(:standard_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD_IA", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
-    S3StorageClass.add_member(:onezone_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONEZONE_IA", traits: {"smithy.api#enumValue" => "ONEZONE_IA"}))
-    S3StorageClass.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
-    S3StorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
-    S3StorageClass.add_member(:deep_archive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE"}))
-    S3StorageClass.add_member(:outposts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOSTS", traits: {"smithy.api#enumValue" => "OUTPOSTS"}))
-    S3StorageClass.add_member(:glacier_instant_retrieval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER_INSTANT_RETRIEVAL", traits: {"smithy.api#enumValue" => "GLACIER_INSTANT_RETRIEVAL"}))
-    ScheduleDisabledBy.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    ScheduleDisabledBy.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
-    ScheduleStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    ScheduleStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    SmbAuthenticationType.add_member(:ntlm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NTLM", traits: {"smithy.api#enumValue" => "NTLM"}))
-    SmbAuthenticationType.add_member(:kerberos, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KERBEROS", traits: {"smithy.api#enumValue" => "KERBEROS"}))
-    SmbMountOptions.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbVersion, location_name: "Version"))
+    S3StorageClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    S3StorageClass.add_member(:standard_ia, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD_IA", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
+    S3StorageClass.add_member(:onezone_ia, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONEZONE_IA", traits: {"smithy.api#enumValue" => "ONEZONE_IA"}))
+    S3StorageClass.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
+    S3StorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
+    S3StorageClass.add_member(:deep_archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE"}))
+    S3StorageClass.add_member(:outposts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOSTS", traits: {"smithy.api#enumValue" => "OUTPOSTS"}))
+    S3StorageClass.add_member(:glacier_instant_retrieval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER_INSTANT_RETRIEVAL", traits: {"smithy.api#enumValue" => "GLACIER_INSTANT_RETRIEVAL"}))
+    ScheduleDisabledBy.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    ScheduleDisabledBy.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
+    ScheduleStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ScheduleStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    SmbAuthenticationType.add_member(:ntlm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NTLM", traits: {"smithy.api#enumValue" => "NTLM"}))
+    SmbAuthenticationType.add_member(:kerberos, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KERBEROS", traits: {"smithy.api#enumValue" => "KERBEROS"}))
+    SmbMountOptions.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbVersion, location_name: "Version"))
     SmbMountOptions.type = Types::SmbMountOptions
-    SmbSecurityDescriptorCopyFlags.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    SmbSecurityDescriptorCopyFlags.add_member(:owner_dacl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OWNER_DACL", traits: {"smithy.api#enumValue" => "OWNER_DACL"}))
-    SmbSecurityDescriptorCopyFlags.add_member(:owner_dacl_sacl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OWNER_DACL_SACL", traits: {"smithy.api#enumValue" => "OWNER_DACL_SACL"}))
-    SmbVersion.add_member(:automatic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
-    SmbVersion.add_member(:smb2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB2", traits: {"smithy.api#enumValue" => "SMB2"}))
-    SmbVersion.add_member(:smb3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB3", traits: {"smithy.api#enumValue" => "SMB3"}))
-    SmbVersion.add_member(:smb1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB1", traits: {"smithy.api#enumValue" => "SMB1"}))
-    SmbVersion.add_member(:smb2_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB2_0", traits: {"smithy.api#enumValue" => "SMB2_0"}))
-    SourceManifestConfig.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ManifestConfig, location_name: "S3", traits: {"smithy.api#required" => {}}))
+    SmbSecurityDescriptorCopyFlags.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    SmbSecurityDescriptorCopyFlags.add_member(:owner_dacl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OWNER_DACL", traits: {"smithy.api#enumValue" => "OWNER_DACL"}))
+    SmbSecurityDescriptorCopyFlags.add_member(:owner_dacl_sacl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OWNER_DACL_SACL", traits: {"smithy.api#enumValue" => "OWNER_DACL_SACL"}))
+    SmbVersion.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    SmbVersion.add_member(:smb2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB2", traits: {"smithy.api#enumValue" => "SMB2"}))
+    SmbVersion.add_member(:smb3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB3", traits: {"smithy.api#enumValue" => "SMB3"}))
+    SmbVersion.add_member(:smb1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB1", traits: {"smithy.api#enumValue" => "SMB1"}))
+    SmbVersion.add_member(:smb2_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMB2_0", traits: {"smithy.api#enumValue" => "SMB2_0"}))
+    SourceManifestConfig.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ManifestConfig, location_name: "S3", traits: {"smithy.api#required" => {}}))
     SourceManifestConfig.type = Types::SourceManifestConfig
-    SourceNetworkInterfaceArns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
-    StartTaskExecutionRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
-    StartTaskExecutionRequest.add_member(:override_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "OverrideOptions"))
-    StartTaskExecutionRequest.add_member(:includes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
-    StartTaskExecutionRequest.add_member(:excludes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
-    StartTaskExecutionRequest.add_member(:manifest_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
-    StartTaskExecutionRequest.add_member(:task_report_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
-    StartTaskExecutionRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    SourceNetworkInterfaceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceArn)
+    StartTaskExecutionRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
+    StartTaskExecutionRequest.add_member(:override_options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "OverrideOptions"))
+    StartTaskExecutionRequest.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Includes"))
+    StartTaskExecutionRequest.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Excludes"))
+    StartTaskExecutionRequest.add_member(:manifest_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestConfig, location_name: "ManifestConfig"))
+    StartTaskExecutionRequest.add_member(:task_report_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskReportConfig, location_name: "TaskReportConfig"))
+    StartTaskExecutionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags"))
     StartTaskExecutionRequest.type = Types::StartTaskExecutionRequest
-    StartTaskExecutionResponse.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
+    StartTaskExecutionResponse.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, location_name: "TaskExecutionArn"))
     StartTaskExecutionResponse.type = Types::StartTaskExecutionResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagListEntry.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    TagListEntry.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagListEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    TagListEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     TagListEntry.type = Types::TagListEntry
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TaskExecutionFilesFailedDetail.add_member(:prepare, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "Prepare", traits: {"smithy.api#default" => 0}))
-    TaskExecutionFilesFailedDetail.add_member(:transfer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "Transfer", traits: {"smithy.api#default" => 0}))
-    TaskExecutionFilesFailedDetail.add_member(:verify, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "Verify", traits: {"smithy.api#default" => 0}))
-    TaskExecutionFilesFailedDetail.add_member(:delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "Delete", traits: {"smithy.api#default" => 0}))
+    TaskExecutionFilesFailedDetail.add_member(:prepare, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "Prepare", traits: {"smithy.api#default" => 0}))
+    TaskExecutionFilesFailedDetail.add_member(:transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "Transfer", traits: {"smithy.api#default" => 0}))
+    TaskExecutionFilesFailedDetail.add_member(:verify, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "Verify", traits: {"smithy.api#default" => 0}))
+    TaskExecutionFilesFailedDetail.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "Delete", traits: {"smithy.api#default" => 0}))
     TaskExecutionFilesFailedDetail.type = Types::TaskExecutionFilesFailedDetail
-    TaskExecutionFilesListedDetail.add_member(:at_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "AtSource", traits: {"smithy.api#default" => 0}))
-    TaskExecutionFilesListedDetail.add_member(:at_destination_for_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "AtDestinationForDelete", traits: {"smithy.api#default" => 0}))
+    TaskExecutionFilesListedDetail.add_member(:at_source, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "AtSource", traits: {"smithy.api#default" => 0}))
+    TaskExecutionFilesListedDetail.add_member(:at_destination_for_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "AtDestinationForDelete", traits: {"smithy.api#default" => 0}))
     TaskExecutionFilesListedDetail.type = Types::TaskExecutionFilesListedDetail
-    TaskExecutionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionListEntry)
-    TaskExecutionListEntry.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
-    TaskExecutionListEntry.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "Status"))
-    TaskExecutionListEntry.add_member(:task_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
+    TaskExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionListEntry)
+    TaskExecutionListEntry.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, location_name: "TaskExecutionArn"))
+    TaskExecutionListEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionStatus, location_name: "Status"))
+    TaskExecutionListEntry.add_member(:task_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskMode, location_name: "TaskMode"))
     TaskExecutionListEntry.type = Types::TaskExecutionListEntry
-    TaskExecutionResultDetail.add_member(:prepare_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "PrepareDuration"))
-    TaskExecutionResultDetail.add_member(:prepare_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhaseStatus, location_name: "PrepareStatus"))
-    TaskExecutionResultDetail.add_member(:total_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "TotalDuration"))
-    TaskExecutionResultDetail.add_member(:transfer_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "TransferDuration"))
-    TaskExecutionResultDetail.add_member(:transfer_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhaseStatus, location_name: "TransferStatus"))
-    TaskExecutionResultDetail.add_member(:verify_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "VerifyDuration"))
-    TaskExecutionResultDetail.add_member(:verify_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhaseStatus, location_name: "VerifyStatus"))
-    TaskExecutionResultDetail.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    TaskExecutionResultDetail.add_member(:error_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorDetail"))
+    TaskExecutionResultDetail.add_member(:prepare_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "PrepareDuration"))
+    TaskExecutionResultDetail.add_member(:prepare_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhaseStatus, location_name: "PrepareStatus"))
+    TaskExecutionResultDetail.add_member(:total_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "TotalDuration"))
+    TaskExecutionResultDetail.add_member(:transfer_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "TransferDuration"))
+    TaskExecutionResultDetail.add_member(:transfer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhaseStatus, location_name: "TransferStatus"))
+    TaskExecutionResultDetail.add_member(:verify_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "VerifyDuration"))
+    TaskExecutionResultDetail.add_member(:verify_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhaseStatus, location_name: "VerifyStatus"))
+    TaskExecutionResultDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    TaskExecutionResultDetail.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorDetail"))
     TaskExecutionResultDetail.type = Types::TaskExecutionResultDetail
-    TaskExecutionStatus.add_member(:queued, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
-    TaskExecutionStatus.add_member(:cancelling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLING", traits: {"smithy.api#enumValue" => "CANCELLING"}))
-    TaskExecutionStatus.add_member(:launching, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAUNCHING", traits: {"smithy.api#enumValue" => "LAUNCHING"}))
-    TaskExecutionStatus.add_member(:preparing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREPARING", traits: {"smithy.api#enumValue" => "PREPARING"}))
-    TaskExecutionStatus.add_member(:transferring, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFERRING", traits: {"smithy.api#enumValue" => "TRANSFERRING"}))
-    TaskExecutionStatus.add_member(:verifying, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFYING", traits: {"smithy.api#enumValue" => "VERIFYING"}))
-    TaskExecutionStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    TaskExecutionStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    TaskFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    TaskFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
-    TaskFilter.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operator, location_name: "Operator", traits: {"smithy.api#required" => {}}))
+    TaskExecutionStatus.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
+    TaskExecutionStatus.add_member(:cancelling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANCELLING", traits: {"smithy.api#enumValue" => "CANCELLING"}))
+    TaskExecutionStatus.add_member(:launching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAUNCHING", traits: {"smithy.api#enumValue" => "LAUNCHING"}))
+    TaskExecutionStatus.add_member(:preparing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREPARING", traits: {"smithy.api#enumValue" => "PREPARING"}))
+    TaskExecutionStatus.add_member(:transferring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRANSFERRING", traits: {"smithy.api#enumValue" => "TRANSFERRING"}))
+    TaskExecutionStatus.add_member(:verifying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VERIFYING", traits: {"smithy.api#enumValue" => "VERIFYING"}))
+    TaskExecutionStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    TaskExecutionStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    TaskFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    TaskFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    TaskFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, location_name: "Operator", traits: {"smithy.api#required" => {}}))
     TaskFilter.type = Types::TaskFilter
-    TaskFilterName.add_member(:location_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocationId", traits: {"smithy.api#enumValue" => "LocationId"}))
-    TaskFilterName.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
-    TaskFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskFilter)
-    TaskList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskListEntry)
-    TaskListEntry.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
-    TaskListEntry.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskStatus, location_name: "Status"))
-    TaskListEntry.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
-    TaskListEntry.add_member(:task_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
+    TaskFilterName.add_member(:location_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocationId", traits: {"smithy.api#enumValue" => "LocationId"}))
+    TaskFilterName.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
+    TaskFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFilter)
+    TaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListEntry)
+    TaskListEntry.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn"))
+    TaskListEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, location_name: "Status"))
+    TaskListEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Name"))
+    TaskListEntry.add_member(:task_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskMode, location_name: "TaskMode"))
     TaskListEntry.type = Types::TaskListEntry
-    TaskMode.add_member(:basic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
-    TaskMode.add_member(:enhanced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENHANCED", traits: {"smithy.api#enumValue" => "ENHANCED"}))
-    TaskQueueing.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    TaskQueueing.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    TaskReportConfig.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportDestination, location_name: "Destination"))
-    TaskReportConfig.add_member(:output_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportOutputType, location_name: "OutputType"))
-    TaskReportConfig.add_member(:report_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportLevel, location_name: "ReportLevel"))
-    TaskReportConfig.add_member(:object_version_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionIds, location_name: "ObjectVersionIds"))
-    TaskReportConfig.add_member(:overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportOverrides, location_name: "Overrides"))
+    TaskMode.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
+    TaskMode.add_member(:enhanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENHANCED", traits: {"smithy.api#enumValue" => "ENHANCED"}))
+    TaskQueueing.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    TaskQueueing.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    TaskReportConfig.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportDestination, location_name: "Destination"))
+    TaskReportConfig.add_member(:output_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOutputType, location_name: "OutputType"))
+    TaskReportConfig.add_member(:report_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportLevel, location_name: "ReportLevel"))
+    TaskReportConfig.add_member(:object_version_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionIds, location_name: "ObjectVersionIds"))
+    TaskReportConfig.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOverrides, location_name: "Overrides"))
     TaskReportConfig.type = Types::TaskReportConfig
-    TaskSchedule.add_member(:schedule_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleExpressionCron, location_name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
-    TaskSchedule.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleStatus, location_name: "Status"))
+    TaskSchedule.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpressionCron, location_name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
+    TaskSchedule.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleStatus, location_name: "Status"))
     TaskSchedule.type = Types::TaskSchedule
-    TaskScheduleDetails.add_member(:status_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "StatusUpdateTime"))
-    TaskScheduleDetails.add_member(:disabled_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleDisabledReason, location_name: "DisabledReason"))
-    TaskScheduleDetails.add_member(:disabled_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScheduleDisabledBy, location_name: "DisabledBy"))
+    TaskScheduleDetails.add_member(:status_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "StatusUpdateTime"))
+    TaskScheduleDetails.add_member(:disabled_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleDisabledReason, location_name: "DisabledReason"))
+    TaskScheduleDetails.add_member(:disabled_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleDisabledBy, location_name: "DisabledBy"))
     TaskScheduleDetails.type = Types::TaskScheduleDetails
-    TaskStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    TaskStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    TaskStatus.add_member(:queued, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
-    TaskStatus.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    TaskStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
-    TransferMode.add_member(:changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHANGED", traits: {"smithy.api#enumValue" => "CHANGED"}))
-    TransferMode.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    Uid.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    Uid.add_member(:int_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INT_VALUE", traits: {"smithy.api#enumValue" => "INT_VALUE"}))
-    Uid.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
-    Uid.add_member(:both, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTH", traits: {"smithy.api#enumValue" => "BOTH"}))
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "Keys", traits: {"smithy.api#required" => {}}))
+    TaskStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    TaskStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    TaskStatus.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
+    TaskStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    TaskStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
+    TransferMode.add_member(:changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHANGED", traits: {"smithy.api#enumValue" => "CHANGED"}))
+    TransferMode.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    Uid.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    Uid.add_member(:int_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INT_VALUE", traits: {"smithy.api#enumValue" => "INT_VALUE"}))
+    Uid.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    Uid.add_member(:both, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOTH", traits: {"smithy.api#enumValue" => "BOTH"}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "Keys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateAgentRequest.add_member(:agent_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn", traits: {"smithy.api#required" => {}}))
-    UpdateAgentRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
+    UpdateAgentRequest.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, location_name: "AgentArn", traits: {"smithy.api#required" => {}}))
+    UpdateAgentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Name"))
     UpdateAgentRequest.type = Types::UpdateAgentRequest
     UpdateAgentResponse.type = Types::UpdateAgentResponse
-    UpdateLocationAzureBlobRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationAzureBlobRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobSubdirectory, location_name: "Subdirectory"))
-    UpdateLocationAzureBlobRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
-    UpdateLocationAzureBlobRequest.add_member(:sas_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
-    UpdateLocationAzureBlobRequest.add_member(:blob_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
-    UpdateLocationAzureBlobRequest.add_member(:access_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
-    UpdateLocationAzureBlobRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    UpdateLocationAzureBlobRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
-    UpdateLocationAzureBlobRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
+    UpdateLocationAzureBlobRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationAzureBlobRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationAzureBlobRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
+    UpdateLocationAzureBlobRequest.add_member(:sas_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
+    UpdateLocationAzureBlobRequest.add_member(:blob_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureBlobType, location_name: "BlobType"))
+    UpdateLocationAzureBlobRequest.add_member(:access_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureAccessTier, location_name: "AccessTier"))
+    UpdateLocationAzureBlobRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationAzureBlobRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    UpdateLocationAzureBlobRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSecretConfig, location_name: "CustomSecretConfig"))
     UpdateLocationAzureBlobRequest.type = Types::UpdateLocationAzureBlobRequest
     UpdateLocationAzureBlobResponse.type = Types::UpdateLocationAzureBlobResponse
-    UpdateLocationEfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationEfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsSubdirectory, location_name: "Subdirectory"))
-    UpdateLocationEfsRequest.add_member(:access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedEfsAccessPointArn, location_name: "AccessPointArn"))
-    UpdateLocationEfsRequest.add_member(:file_system_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedEfsIamRoleArn, location_name: "FileSystemAccessRoleArn"))
-    UpdateLocationEfsRequest.add_member(:in_transit_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EfsInTransitEncryption, location_name: "InTransitEncryption"))
+    UpdateLocationEfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationEfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationEfsRequest.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedEfsAccessPointArn, location_name: "AccessPointArn"))
+    UpdateLocationEfsRequest.add_member(:file_system_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedEfsIamRoleArn, location_name: "FileSystemAccessRoleArn"))
+    UpdateLocationEfsRequest.add_member(:in_transit_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsInTransitEncryption, location_name: "InTransitEncryption"))
     UpdateLocationEfsRequest.type = Types::UpdateLocationEfsRequest
     UpdateLocationEfsResponse.type = Types::UpdateLocationEfsResponse
-    UpdateLocationFsxLustreRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationFsxLustreRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationFsxLustreRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationFsxLustreRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbSubdirectory, location_name: "Subdirectory"))
     UpdateLocationFsxLustreRequest.type = Types::UpdateLocationFsxLustreRequest
     UpdateLocationFsxLustreResponse.type = Types::UpdateLocationFsxLustreResponse
-    UpdateLocationFsxOntapRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationFsxOntapRequest.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxUpdateProtocol, location_name: "Protocol"))
-    UpdateLocationFsxOntapRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxOntapSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationFsxOntapRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationFsxOntapRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxUpdateProtocol, location_name: "Protocol"))
+    UpdateLocationFsxOntapRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxOntapSubdirectory, location_name: "Subdirectory"))
     UpdateLocationFsxOntapRequest.type = Types::UpdateLocationFsxOntapRequest
     UpdateLocationFsxOntapResponse.type = Types::UpdateLocationFsxOntapResponse
-    UpdateLocationFsxOpenZfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationFsxOpenZfsRequest.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxProtocol, location_name: "Protocol"))
-    UpdateLocationFsxOpenZfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationFsxOpenZfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationFsxOpenZfsRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocol, location_name: "Protocol"))
+    UpdateLocationFsxOpenZfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbSubdirectory, location_name: "Subdirectory"))
     UpdateLocationFsxOpenZfsRequest.type = Types::UpdateLocationFsxOpenZfsRequest
     UpdateLocationFsxOpenZfsResponse.type = Types::UpdateLocationFsxOpenZfsResponse
-    UpdateLocationFsxWindowsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationFsxWindowsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FsxWindowsSubdirectory, location_name: "Subdirectory"))
-    UpdateLocationFsxWindowsRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSmbDomain, location_name: "Domain"))
-    UpdateLocationFsxWindowsRequest.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
-    UpdateLocationFsxWindowsRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
+    UpdateLocationFsxWindowsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationFsxWindowsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxWindowsSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationFsxWindowsRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateSmbDomain, location_name: "Domain"))
+    UpdateLocationFsxWindowsRequest.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User"))
+    UpdateLocationFsxWindowsRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbPassword, location_name: "Password"))
     UpdateLocationFsxWindowsRequest.type = Types::UpdateLocationFsxWindowsRequest
     UpdateLocationFsxWindowsResponse.type = Types::UpdateLocationFsxWindowsResponse
-    UpdateLocationHdfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationHdfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsSubdirectory, location_name: "Subdirectory"))
-    UpdateLocationHdfsRequest.add_member(:name_nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsNameNodeList, location_name: "NameNodes"))
-    UpdateLocationHdfsRequest.add_member(:block_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsBlockSize, location_name: "BlockSize"))
-    UpdateLocationHdfsRequest.add_member(:replication_factor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsReplicationFactor, location_name: "ReplicationFactor"))
-    UpdateLocationHdfsRequest.add_member(:kms_key_provider_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
-    UpdateLocationHdfsRequest.add_member(:qop_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QopConfiguration, location_name: "QopConfiguration"))
-    UpdateLocationHdfsRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsAuthenticationType, location_name: "AuthenticationType"))
-    UpdateLocationHdfsRequest.add_member(:simple_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HdfsUser, location_name: "SimpleUser"))
-    UpdateLocationHdfsRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
-    UpdateLocationHdfsRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
-    UpdateLocationHdfsRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
-    UpdateLocationHdfsRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationHdfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationHdfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationHdfsRequest.add_member(:name_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsNameNodeList, location_name: "NameNodes"))
+    UpdateLocationHdfsRequest.add_member(:block_size, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsBlockSize, location_name: "BlockSize"))
+    UpdateLocationHdfsRequest.add_member(:replication_factor, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsReplicationFactor, location_name: "ReplicationFactor"))
+    UpdateLocationHdfsRequest.add_member(:kms_key_provider_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
+    UpdateLocationHdfsRequest.add_member(:qop_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: QopConfiguration, location_name: "QopConfiguration"))
+    UpdateLocationHdfsRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsAuthenticationType, location_name: "AuthenticationType"))
+    UpdateLocationHdfsRequest.add_member(:simple_user, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsUser, location_name: "SimpleUser"))
+    UpdateLocationHdfsRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    UpdateLocationHdfsRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    UpdateLocationHdfsRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
+    UpdateLocationHdfsRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
     UpdateLocationHdfsRequest.type = Types::UpdateLocationHdfsRequest
     UpdateLocationHdfsResponse.type = Types::UpdateLocationHdfsResponse
-    UpdateLocationNfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationNfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsSubdirectory, location_name: "Subdirectory"))
-    UpdateLocationNfsRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerHostname, location_name: "ServerHostname"))
-    UpdateLocationNfsRequest.add_member(:on_prem_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnPremConfig, location_name: "OnPremConfig"))
-    UpdateLocationNfsRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
+    UpdateLocationNfsRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationNfsRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationNfsRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerHostname, location_name: "ServerHostname"))
+    UpdateLocationNfsRequest.add_member(:on_prem_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OnPremConfig, location_name: "OnPremConfig"))
+    UpdateLocationNfsRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: NfsMountOptions, location_name: "MountOptions"))
     UpdateLocationNfsRequest.type = Types::UpdateLocationNfsRequest
     UpdateLocationNfsResponse.type = Types::UpdateLocationNfsResponse
-    UpdateLocationObjectStorageRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationObjectStorageRequest.add_member(:server_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageServerPort, location_name: "ServerPort"))
-    UpdateLocationObjectStorageRequest.add_member(:server_protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
-    UpdateLocationObjectStorageRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
-    UpdateLocationObjectStorageRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerHostname, location_name: "ServerHostname"))
-    UpdateLocationObjectStorageRequest.add_member(:access_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
-    UpdateLocationObjectStorageRequest.add_member(:secret_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
-    UpdateLocationObjectStorageRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    UpdateLocationObjectStorageRequest.add_member(:server_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
-    UpdateLocationObjectStorageRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
-    UpdateLocationObjectStorageRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
+    UpdateLocationObjectStorageRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationObjectStorageRequest.add_member(:server_port, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageServerPort, location_name: "ServerPort"))
+    UpdateLocationObjectStorageRequest.add_member(:server_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
+    UpdateLocationObjectStorageRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Subdirectory, location_name: "Subdirectory"))
+    UpdateLocationObjectStorageRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerHostname, location_name: "ServerHostname"))
+    UpdateLocationObjectStorageRequest.add_member(:access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageAccessKey, location_name: "AccessKey"))
+    UpdateLocationObjectStorageRequest.add_member(:secret_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageSecretKey, location_name: "SecretKey"))
+    UpdateLocationObjectStorageRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationObjectStorageRequest.add_member(:server_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectStorageCertificate, location_name: "ServerCertificate"))
+    UpdateLocationObjectStorageRequest.add_member(:cmk_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    UpdateLocationObjectStorageRequest.add_member(:custom_secret_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSecretConfig, location_name: "CustomSecretConfig"))
     UpdateLocationObjectStorageRequest.type = Types::UpdateLocationObjectStorageRequest
     UpdateLocationObjectStorageResponse.type = Types::UpdateLocationObjectStorageResponse
-    UpdateLocationS3Request.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationS3Request.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
-    UpdateLocationS3Request.add_member(:s3_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
-    UpdateLocationS3Request.add_member(:s3_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
+    UpdateLocationS3Request.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationS3Request.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Subdirectory, location_name: "Subdirectory"))
+    UpdateLocationS3Request.add_member(:s3_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: S3StorageClass, location_name: "S3StorageClass"))
+    UpdateLocationS3Request.add_member(:s3_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Config, location_name: "S3Config"))
     UpdateLocationS3Request.type = Types::UpdateLocationS3Request
     UpdateLocationS3Response.type = Types::UpdateLocationS3Response
-    UpdateLocationSmbRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
-    UpdateLocationSmbRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbSubdirectory, location_name: "Subdirectory"))
-    UpdateLocationSmbRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerHostname, location_name: "ServerHostname"))
-    UpdateLocationSmbRequest.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
-    UpdateLocationSmbRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
-    UpdateLocationSmbRequest.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
-    UpdateLocationSmbRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
-    UpdateLocationSmbRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
-    UpdateLocationSmbRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))
-    UpdateLocationSmbRequest.add_member(:dns_ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpList, location_name: "DnsIpAddresses"))
-    UpdateLocationSmbRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
-    UpdateLocationSmbRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
-    UpdateLocationSmbRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
+    UpdateLocationSmbRequest.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, location_name: "LocationArn", traits: {"smithy.api#required" => {}}))
+    UpdateLocationSmbRequest.add_member(:subdirectory, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationSmbRequest.add_member(:server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerHostname, location_name: "ServerHostname"))
+    UpdateLocationSmbRequest.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbUser, location_name: "User"))
+    UpdateLocationSmbRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbDomain, location_name: "Domain"))
+    UpdateLocationSmbRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbPassword, location_name: "Password"))
+    UpdateLocationSmbRequest.add_member(:agent_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationSmbRequest.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbMountOptions, location_name: "MountOptions"))
+    UpdateLocationSmbRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbAuthenticationType, location_name: "AuthenticationType"))
+    UpdateLocationSmbRequest.add_member(:dns_ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpList, location_name: "DnsIpAddresses"))
+    UpdateLocationSmbRequest.add_member(:kerberos_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    UpdateLocationSmbRequest.add_member(:kerberos_keytab, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    UpdateLocationSmbRequest.add_member(:kerberos_krb5_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
     UpdateLocationSmbRequest.type = Types::UpdateLocationSmbRequest
     UpdateLocationSmbResponse.type = Types::UpdateLocationSmbResponse
-    UpdateTaskExecutionRequest.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn", traits: {"smithy.api#required" => {}}))
-    UpdateTaskExecutionRequest.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "Options", traits: {"smithy.api#required" => {}}))
+    UpdateTaskExecutionRequest.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, location_name: "TaskExecutionArn", traits: {"smithy.api#required" => {}}))
+    UpdateTaskExecutionRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "Options", traits: {"smithy.api#required" => {}}))
     UpdateTaskExecutionRequest.type = Types::UpdateTaskExecutionRequest
     UpdateTaskExecutionResponse.type = Types::UpdateTaskExecutionResponse
-    UpdateTaskRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
-    UpdateTaskRequest.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
-    UpdateTaskRequest.add_member(:excludes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
-    UpdateTaskRequest.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskSchedule, location_name: "Schedule"))
-    UpdateTaskRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
-    UpdateTaskRequest.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
-    UpdateTaskRequest.add_member(:includes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
-    UpdateTaskRequest.add_member(:manifest_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
-    UpdateTaskRequest.add_member(:task_report_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
+    UpdateTaskRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, location_name: "TaskArn", traits: {"smithy.api#required" => {}}))
+    UpdateTaskRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, location_name: "Options"))
+    UpdateTaskRequest.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Excludes"))
+    UpdateTaskRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSchedule, location_name: "Schedule"))
+    UpdateTaskRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Name"))
+    UpdateTaskRequest.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
+    UpdateTaskRequest.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Includes"))
+    UpdateTaskRequest.add_member(:manifest_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestConfig, location_name: "ManifestConfig"))
+    UpdateTaskRequest.add_member(:task_report_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskReportConfig, location_name: "TaskReportConfig"))
     UpdateTaskRequest.type = Types::UpdateTaskRequest
     UpdateTaskResponse.type = Types::UpdateTaskResponse
-    VerifyMode.add_member(:point_in_time_consistent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POINT_IN_TIME_CONSISTENT", traits: {"smithy.api#enumValue" => "POINT_IN_TIME_CONSISTENT"}))
-    VerifyMode.add_member(:only_files_transferred, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLY_FILES_TRANSFERRED", traits: {"smithy.api#enumValue" => "ONLY_FILES_TRANSFERRED"}))
-    VerifyMode.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    VerifyMode.add_member(:point_in_time_consistent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POINT_IN_TIME_CONSISTENT", traits: {"smithy.api#enumValue" => "POINT_IN_TIME_CONSISTENT"}))
+    VerifyMode.add_member(:only_files_transferred, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONLY_FILES_TRANSFERRED", traits: {"smithy.api#enumValue" => "ONLY_FILES_TRANSFERRED"}))
+    VerifyMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
 
     FmrsService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.datasync#FmrsService"
@@ -1109,483 +1109,483 @@ module Aws::DataSync
       service.add_operation(:cancel_task_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CancelTaskExecution"
         operation.name = "CancelTaskExecution"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelTaskExecutionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelTaskExecutionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CancelTaskExecutionRequest
+        operation.output = CancelTaskExecutionResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateAgent"
         operation.name = "CreateAgent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAgentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAgentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateAgentRequest
+        operation.output = CreateAgentResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_azure_blob, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationAzureBlob"
         operation.name = "CreateLocationAzureBlob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationAzureBlobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationAzureBlobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationAzureBlobRequest
+        operation.output = CreateLocationAzureBlobResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_efs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationEfs"
         operation.name = "CreateLocationEfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationEfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationEfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationEfsRequest
+        operation.output = CreateLocationEfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_fsx_lustre, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationFsxLustre"
         operation.name = "CreateLocationFsxLustre"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxLustreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxLustreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationFsxLustreRequest
+        operation.output = CreateLocationFsxLustreResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_fsx_ontap, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationFsxOntap"
         operation.name = "CreateLocationFsxOntap"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxOntapRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxOntapResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationFsxOntapRequest
+        operation.output = CreateLocationFsxOntapResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_fsx_open_zfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationFsxOpenZfs"
         operation.name = "CreateLocationFsxOpenZfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxOpenZfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxOpenZfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationFsxOpenZfsRequest
+        operation.output = CreateLocationFsxOpenZfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_fsx_windows, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationFsxWindows"
         operation.name = "CreateLocationFsxWindows"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxWindowsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationFsxWindowsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationFsxWindowsRequest
+        operation.output = CreateLocationFsxWindowsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_hdfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationHdfs"
         operation.name = "CreateLocationHdfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationHdfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationHdfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationHdfsRequest
+        operation.output = CreateLocationHdfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_nfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationNfs"
         operation.name = "CreateLocationNfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationNfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationNfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationNfsRequest
+        operation.output = CreateLocationNfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_object_storage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationObjectStorage"
         operation.name = "CreateLocationObjectStorage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationObjectStorageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationObjectStorageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationObjectStorageRequest
+        operation.output = CreateLocationObjectStorageResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_s3, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationS3"
         operation.name = "CreateLocationS3"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationS3Request)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationS3Response)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationS3Request
+        operation.output = CreateLocationS3Response
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_location_smb, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateLocationSmb"
         operation.name = "CreateLocationSmb"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationSmbRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateLocationSmbResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateLocationSmbRequest
+        operation.output = CreateLocationSmbResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:create_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#CreateTask"
         operation.name = "CreateTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreateTaskRequest
+        operation.output = CreateTaskResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DeleteAgent"
         operation.name = "DeleteAgent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAgentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAgentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DeleteAgentRequest
+        operation.output = DeleteAgentResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_location, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DeleteLocation"
         operation.name = "DeleteLocation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLocationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLocationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DeleteLocationRequest
+        operation.output = DeleteLocationResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:delete_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DeleteTask"
         operation.name = "DeleteTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DeleteTaskRequest
+        operation.output = DeleteTaskResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeAgent"
         operation.name = "DescribeAgent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAgentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAgentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeAgentRequest
+        operation.output = DescribeAgentResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_azure_blob, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationAzureBlob"
         operation.name = "DescribeLocationAzureBlob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationAzureBlobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationAzureBlobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationAzureBlobRequest
+        operation.output = DescribeLocationAzureBlobResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_efs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationEfs"
         operation.name = "DescribeLocationEfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationEfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationEfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationEfsRequest
+        operation.output = DescribeLocationEfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_fsx_lustre, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationFsxLustre"
         operation.name = "DescribeLocationFsxLustre"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxLustreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxLustreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationFsxLustreRequest
+        operation.output = DescribeLocationFsxLustreResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_fsx_ontap, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationFsxOntap"
         operation.name = "DescribeLocationFsxOntap"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxOntapRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxOntapResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationFsxOntapRequest
+        operation.output = DescribeLocationFsxOntapResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_fsx_open_zfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationFsxOpenZfs"
         operation.name = "DescribeLocationFsxOpenZfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxOpenZfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxOpenZfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationFsxOpenZfsRequest
+        operation.output = DescribeLocationFsxOpenZfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_fsx_windows, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationFsxWindows"
         operation.name = "DescribeLocationFsxWindows"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxWindowsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationFsxWindowsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationFsxWindowsRequest
+        operation.output = DescribeLocationFsxWindowsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_hdfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationHdfs"
         operation.name = "DescribeLocationHdfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationHdfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationHdfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationHdfsRequest
+        operation.output = DescribeLocationHdfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_nfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationNfs"
         operation.name = "DescribeLocationNfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationNfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationNfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationNfsRequest
+        operation.output = DescribeLocationNfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_object_storage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationObjectStorage"
         operation.name = "DescribeLocationObjectStorage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationObjectStorageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationObjectStorageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationObjectStorageRequest
+        operation.output = DescribeLocationObjectStorageResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_s3, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationS3"
         operation.name = "DescribeLocationS3"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationS3Request)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationS3Response)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationS3Request
+        operation.output = DescribeLocationS3Response
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_location_smb, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeLocationSmb"
         operation.name = "DescribeLocationSmb"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationSmbRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeLocationSmbResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeLocationSmbRequest
+        operation.output = DescribeLocationSmbResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeTask"
         operation.name = "DescribeTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeTaskRequest
+        operation.output = DescribeTaskResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:describe_task_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#DescribeTaskExecution"
         operation.name = "DescribeTaskExecution"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTaskExecutionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTaskExecutionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = DescribeTaskExecutionRequest
+        operation.output = DescribeTaskExecutionResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:list_agents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#ListAgents"
         operation.name = "ListAgents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAgentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAgentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ListAgentsRequest
+        operation.output = ListAgentsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAgents.new
       end)
       service.add_operation(:list_locations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#ListLocations"
         operation.name = "ListLocations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLocationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLocationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ListLocationsRequest
+        operation.output = ListLocationsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListLocations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:list_task_executions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#ListTaskExecutions"
         operation.name = "ListTaskExecutions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTaskExecutionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTaskExecutionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ListTaskExecutionsRequest
+        operation.output = ListTaskExecutionsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTaskExecutions.new
       end)
       service.add_operation(:list_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#ListTasks"
         operation.name = "ListTasks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTasksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTasksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ListTasksRequest
+        operation.output = ListTasksResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTasks.new
       end)
       service.add_operation(:start_task_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#StartTaskExecution"
         operation.name = "StartTaskExecution"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTaskExecutionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTaskExecutionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = StartTaskExecutionRequest
+        operation.output = StartTaskExecutionResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateAgent"
         operation.name = "UpdateAgent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAgentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAgentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateAgentRequest
+        operation.output = UpdateAgentResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_azure_blob, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationAzureBlob"
         operation.name = "UpdateLocationAzureBlob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationAzureBlobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationAzureBlobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationAzureBlobRequest
+        operation.output = UpdateLocationAzureBlobResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_efs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationEfs"
         operation.name = "UpdateLocationEfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationEfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationEfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationEfsRequest
+        operation.output = UpdateLocationEfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_fsx_lustre, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationFsxLustre"
         operation.name = "UpdateLocationFsxLustre"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxLustreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxLustreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationFsxLustreRequest
+        operation.output = UpdateLocationFsxLustreResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_fsx_ontap, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationFsxOntap"
         operation.name = "UpdateLocationFsxOntap"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxOntapRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxOntapResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationFsxOntapRequest
+        operation.output = UpdateLocationFsxOntapResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_fsx_open_zfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationFsxOpenZfs"
         operation.name = "UpdateLocationFsxOpenZfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxOpenZfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxOpenZfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationFsxOpenZfsRequest
+        operation.output = UpdateLocationFsxOpenZfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_fsx_windows, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationFsxWindows"
         operation.name = "UpdateLocationFsxWindows"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxWindowsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationFsxWindowsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationFsxWindowsRequest
+        operation.output = UpdateLocationFsxWindowsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_hdfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationHdfs"
         operation.name = "UpdateLocationHdfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationHdfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationHdfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationHdfsRequest
+        operation.output = UpdateLocationHdfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_nfs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationNfs"
         operation.name = "UpdateLocationNfs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationNfsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationNfsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationNfsRequest
+        operation.output = UpdateLocationNfsResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_object_storage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationObjectStorage"
         operation.name = "UpdateLocationObjectStorage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationObjectStorageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationObjectStorageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationObjectStorageRequest
+        operation.output = UpdateLocationObjectStorageResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_s3, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationS3"
         operation.name = "UpdateLocationS3"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationS3Request)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationS3Response)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationS3Request
+        operation.output = UpdateLocationS3Response
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_location_smb, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateLocationSmb"
         operation.name = "UpdateLocationSmb"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationSmbRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateLocationSmbResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateLocationSmbRequest
+        operation.output = UpdateLocationSmbResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateTask"
         operation.name = "UpdateTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTaskResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateTaskRequest
+        operation.output = UpdateTaskResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_task_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datasync#UpdateTaskExecution"
         operation.name = "UpdateTaskExecution"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTaskExecutionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTaskExecutionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = UpdateTaskExecutionRequest
+        operation.output = UpdateTaskExecutionResponse
+        operation.errors << InternalException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
     end

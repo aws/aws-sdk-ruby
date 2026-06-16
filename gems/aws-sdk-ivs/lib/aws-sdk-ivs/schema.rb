@@ -197,425 +197,425 @@ module Aws::Ivs
     ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#errorCode", name: "ErrorCode")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#errorMessage", name: "ErrorMessage")
 
-    AccessDeniedException.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    AccessDeniedException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AudioConfiguration.add_member(:codec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "codec"))
-    AudioConfiguration.add_member(:target_bitrate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate", traits: {"smithy.api#default" => 0}))
-    AudioConfiguration.add_member(:sample_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate", traits: {"smithy.api#default" => 0}))
-    AudioConfiguration.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "channels", traits: {"smithy.api#default" => 0}))
-    AudioConfiguration.add_member(:track, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "track"))
+    AudioConfiguration.add_member(:codec, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "codec"))
+    AudioConfiguration.add_member(:target_bitrate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "targetBitrate", traits: {"smithy.api#default" => 0}))
+    AudioConfiguration.add_member(:sample_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "sampleRate", traits: {"smithy.api#default" => 0}))
+    AudioConfiguration.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "channels", traits: {"smithy.api#default" => 0}))
+    AudioConfiguration.add_member(:track, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "track"))
     AudioConfiguration.type = Types::AudioConfiguration
-    AudioConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioConfiguration)
-    BatchError.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    BatchError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
-    BatchError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AudioConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudioConfiguration)
+    BatchError.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    BatchError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "code"))
+    BatchError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     BatchError.type = Types::BatchError
-    BatchErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchError)
-    BatchGetChannelInput.add_member(:arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArnList, location_name: "arns", traits: {"smithy.api#required" => {}}))
+    BatchErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchError)
+    BatchGetChannelInput.add_member(:arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArnList, location_name: "arns", traits: {"smithy.api#required" => {}}))
     BatchGetChannelInput.type = Types::BatchGetChannelInput
-    BatchGetChannelOutput.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channels, location_name: "channels"))
-    BatchGetChannelOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchErrors, location_name: "errors"))
+    BatchGetChannelOutput.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, location_name: "channels"))
+    BatchGetChannelOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrors, location_name: "errors"))
     BatchGetChannelOutput.type = Types::BatchGetChannelOutput
-    BatchGetStreamKeyInput.add_member(:arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyArnList, location_name: "arns", traits: {"smithy.api#required" => {}}))
+    BatchGetStreamKeyInput.add_member(:arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArnList, location_name: "arns", traits: {"smithy.api#required" => {}}))
     BatchGetStreamKeyInput.type = Types::BatchGetStreamKeyInput
-    BatchGetStreamKeyOutput.add_member(:stream_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeys, location_name: "streamKeys"))
-    BatchGetStreamKeyOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchErrors, location_name: "errors"))
+    BatchGetStreamKeyOutput.add_member(:stream_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeys, location_name: "streamKeys"))
+    BatchGetStreamKeyOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrors, location_name: "errors"))
     BatchGetStreamKeyOutput.type = Types::BatchGetStreamKeyOutput
-    BatchStartViewerSessionRevocationError.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    BatchStartViewerSessionRevocationError.add_member(:viewer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewerId, location_name: "viewerId", traits: {"smithy.api#required" => {}}))
-    BatchStartViewerSessionRevocationError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
-    BatchStartViewerSessionRevocationError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BatchStartViewerSessionRevocationError.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    BatchStartViewerSessionRevocationError.add_member(:viewer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerId, location_name: "viewerId", traits: {"smithy.api#required" => {}}))
+    BatchStartViewerSessionRevocationError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "code"))
+    BatchStartViewerSessionRevocationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     BatchStartViewerSessionRevocationError.type = Types::BatchStartViewerSessionRevocationError
-    BatchStartViewerSessionRevocationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationError)
-    BatchStartViewerSessionRevocationInput.add_member(:viewer_sessions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationViewerSessionList, location_name: "viewerSessions", traits: {"smithy.api#required" => {}}))
+    BatchStartViewerSessionRevocationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationError)
+    BatchStartViewerSessionRevocationInput.add_member(:viewer_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationViewerSessionList, location_name: "viewerSessions", traits: {"smithy.api#required" => {}}))
     BatchStartViewerSessionRevocationInput.type = Types::BatchStartViewerSessionRevocationInput
-    BatchStartViewerSessionRevocationOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationErrors, location_name: "errors"))
+    BatchStartViewerSessionRevocationOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationErrors, location_name: "errors"))
     BatchStartViewerSessionRevocationOutput.type = Types::BatchStartViewerSessionRevocationOutput
-    BatchStartViewerSessionRevocationViewerSession.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewerId, location_name: "viewerId", traits: {"smithy.api#required" => {}}))
-    BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_session_versions_less_than_or_equal_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewerSessionVersion, location_name: "viewerSessionVersionsLessThanOrEqualTo", traits: {"smithy.api#default" => 0}))
+    BatchStartViewerSessionRevocationViewerSession.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerId, location_name: "viewerId", traits: {"smithy.api#required" => {}}))
+    BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_session_versions_less_than_or_equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerSessionVersion, location_name: "viewerSessionVersionsLessThanOrEqualTo", traits: {"smithy.api#default" => 0}))
     BatchStartViewerSessionRevocationViewerSession.type = Types::BatchStartViewerSessionRevocationViewerSession
-    BatchStartViewerSessionRevocationViewerSessionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationViewerSession)
-    Channel.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
-    Channel.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    Channel.add_member(:latency_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
-    Channel.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
-    Channel.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
-    Channel.add_member(:ingest_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IngestEndpoint, location_name: "ingestEndpoint"))
-    Channel.add_member(:playback_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
-    Channel.add_member(:authorized, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized", traits: {"smithy.api#default" => false}))
-    Channel.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    Channel.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
-    Channel.add_member(:preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
-    Channel.add_member(:srt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Srt, location_name: "srt"))
-    Channel.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
-    Channel.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
-    Channel.add_member(:container_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
+    BatchStartViewerSessionRevocationViewerSessionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationViewerSession)
+    Channel.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "arn"))
+    Channel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "name"))
+    Channel.add_member(:latency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelLatencyMode, location_name: "latencyMode"))
+    Channel.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "type"))
+    Channel.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    Channel.add_member(:ingest_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestEndpoint, location_name: "ingestEndpoint"))
+    Channel.add_member(:playback_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackURL, location_name: "playbackUrl"))
+    Channel.add_member(:authorized, ::Smithy::Schema::Shapes::MemberShape.new(target: IsAuthorized, location_name: "authorized", traits: {"smithy.api#default" => false}))
+    Channel.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    Channel.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: InsecureIngest, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
+    Channel.add_member(:preset, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscodePreset, location_name: "preset"))
+    Channel.add_member(:srt, ::Smithy::Schema::Shapes::MemberShape.new(target: Srt, location_name: "srt"))
+    Channel.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
+    Channel.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
+    Channel.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, location_name: "containerFormat"))
     Channel.type = Types::Channel
-    ChannelArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn)
-    ChannelList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelSummary)
-    ChannelNotBroadcasting.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    ChannelArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn)
+    ChannelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary)
+    ChannelNotBroadcasting.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     ChannelNotBroadcasting.type = Types::ChannelNotBroadcasting
-    ChannelSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
-    ChannelSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    ChannelSummary.add_member(:latency_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
-    ChannelSummary.add_member(:authorized, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized", traits: {"smithy.api#default" => false}))
-    ChannelSummary.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
-    ChannelSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    ChannelSummary.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
-    ChannelSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
-    ChannelSummary.add_member(:preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
-    ChannelSummary.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
+    ChannelSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "arn"))
+    ChannelSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "name"))
+    ChannelSummary.add_member(:latency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelLatencyMode, location_name: "latencyMode"))
+    ChannelSummary.add_member(:authorized, ::Smithy::Schema::Shapes::MemberShape.new(target: IsAuthorized, location_name: "authorized", traits: {"smithy.api#default" => false}))
+    ChannelSummary.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    ChannelSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    ChannelSummary.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: InsecureIngest, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
+    ChannelSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "type"))
+    ChannelSummary.add_member(:preset, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscodePreset, location_name: "preset"))
+    ChannelSummary.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     ChannelSummary.type = Types::ChannelSummary
-    ChannelType.add_member(:basic_channel_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BasicChannelType", traits: {"smithy.api#enumValue" => "BASIC"}))
-    ChannelType.add_member(:standard_channel_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StandardChannelType", traits: {"smithy.api#enumValue" => "STANDARD"}))
-    ChannelType.add_member(:advanced_sd_channel_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AdvancedSDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_SD"}))
-    ChannelType.add_member(:advanced_hd_channel_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AdvancedHDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_HD"}))
-    Channels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel)
-    ConflictException.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    ChannelType.add_member(:basic_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BasicChannelType", traits: {"smithy.api#enumValue" => "BASIC"}))
+    ChannelType.add_member(:standard_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StandardChannelType", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    ChannelType.add_member(:advanced_sd_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AdvancedSDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_SD"}))
+    ChannelType.add_member(:advanced_hd_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AdvancedHDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_HD"}))
+    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel)
+    ConflictException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     ConflictException.type = Types::ConflictException
-    CreateChannelInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    CreateChannelInput.add_member(:latency_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
-    CreateChannelInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
-    CreateChannelInput.add_member(:authorized, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized", traits: {"smithy.api#default" => false}))
-    CreateChannelInput.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
-    CreateChannelInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateChannelInput.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
-    CreateChannelInput.add_member(:preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
-    CreateChannelInput.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
-    CreateChannelInput.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
-    CreateChannelInput.add_member(:container_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
+    CreateChannelInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "name"))
+    CreateChannelInput.add_member(:latency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelLatencyMode, location_name: "latencyMode"))
+    CreateChannelInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "type"))
+    CreateChannelInput.add_member(:authorized, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "authorized", traits: {"smithy.api#default" => false}))
+    CreateChannelInput.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    CreateChannelInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    CreateChannelInput.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
+    CreateChannelInput.add_member(:preset, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscodePreset, location_name: "preset"))
+    CreateChannelInput.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
+    CreateChannelInput.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
+    CreateChannelInput.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, location_name: "containerFormat"))
     CreateChannelInput.type = Types::CreateChannelInput
-    CreateChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
-    CreateChannelOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKey, location_name: "streamKey"))
+    CreateChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, location_name: "channel"))
+    CreateChannelOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, location_name: "streamKey"))
     CreateChannelOutput.type = Types::CreateChannelOutput
-    CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
-    CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
-    CreatePlaybackRestrictionPolicyRequest.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
-    CreatePlaybackRestrictionPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
-    CreatePlaybackRestrictionPolicyRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyName, location_name: "name"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     CreatePlaybackRestrictionPolicyRequest.type = Types::CreatePlaybackRestrictionPolicyRequest
-    CreatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
+    CreatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
     CreatePlaybackRestrictionPolicyResponse.type = Types::CreatePlaybackRestrictionPolicyResponse
-    CreateRecordingConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
-    CreateRecordingConfigurationInput.add_member(:destination_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateRecordingConfigurationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateRecordingConfigurationInput.add_member(:thumbnail_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
-    CreateRecordingConfigurationInput.add_member(:recording_reconnect_window_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds", traits: {"smithy.api#default" => 0}))
-    CreateRecordingConfigurationInput.add_member(:rendition_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
+    CreateRecordingConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationName, location_name: "name"))
+    CreateRecordingConfigurationInput.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, location_name: "destinationConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateRecordingConfigurationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    CreateRecordingConfigurationInput.add_member(:thumbnail_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
+    CreateRecordingConfigurationInput.add_member(:recording_reconnect_window_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds", traits: {"smithy.api#default" => 0}))
+    CreateRecordingConfigurationInput.add_member(:rendition_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfiguration, location_name: "renditionConfiguration"))
     CreateRecordingConfigurationInput.type = Types::CreateRecordingConfigurationInput
-    CreateRecordingConfigurationOutput.add_member(:recording_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
+    CreateRecordingConfigurationOutput.add_member(:recording_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfiguration, location_name: "recordingConfiguration"))
     CreateRecordingConfigurationOutput.type = Types::CreateRecordingConfigurationOutput
-    CreateStreamKeyInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    CreateStreamKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateStreamKeyInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    CreateStreamKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     CreateStreamKeyInput.type = Types::CreateStreamKeyInput
-    CreateStreamKeyOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKey, location_name: "streamKey"))
+    CreateStreamKeyOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, location_name: "streamKey"))
     CreateStreamKeyOutput.type = Types::CreateStreamKeyOutput
-    DeleteChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    DeleteChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     DeleteChannelInput.type = Types::DeleteChannelInput
-    DeletePlaybackKeyPairInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    DeletePlaybackKeyPairInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     DeletePlaybackKeyPairInput.type = Types::DeletePlaybackKeyPairInput
     DeletePlaybackKeyPairOutput.type = Types::DeletePlaybackKeyPairOutput
-    DeletePlaybackRestrictionPolicyRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    DeletePlaybackRestrictionPolicyRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     DeletePlaybackRestrictionPolicyRequest.type = Types::DeletePlaybackRestrictionPolicyRequest
-    DeleteRecordingConfigurationInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    DeleteRecordingConfigurationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     DeleteRecordingConfigurationInput.type = Types::DeleteRecordingConfigurationInput
-    DeleteStreamKeyInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    DeleteStreamKeyInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     DeleteStreamKeyInput.type = Types::DeleteStreamKeyInput
-    DestinationConfiguration.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "s3"))
+    DestinationConfiguration.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DestinationConfiguration, location_name: "s3"))
     DestinationConfiguration.type = Types::DestinationConfiguration
-    GetChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     GetChannelInput.type = Types::GetChannelInput
-    GetChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    GetChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, location_name: "channel"))
     GetChannelOutput.type = Types::GetChannelOutput
-    GetPlaybackKeyPairInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetPlaybackKeyPairInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     GetPlaybackKeyPairInput.type = Types::GetPlaybackKeyPairInput
-    GetPlaybackKeyPairOutput.add_member(:key_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPair, location_name: "keyPair"))
+    GetPlaybackKeyPairOutput.add_member(:key_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPair, location_name: "keyPair"))
     GetPlaybackKeyPairOutput.type = Types::GetPlaybackKeyPairOutput
-    GetPlaybackRestrictionPolicyRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetPlaybackRestrictionPolicyRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     GetPlaybackRestrictionPolicyRequest.type = Types::GetPlaybackRestrictionPolicyRequest
-    GetPlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
+    GetPlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
     GetPlaybackRestrictionPolicyResponse.type = Types::GetPlaybackRestrictionPolicyResponse
-    GetRecordingConfigurationInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetRecordingConfigurationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     GetRecordingConfigurationInput.type = Types::GetRecordingConfigurationInput
-    GetRecordingConfigurationOutput.add_member(:recording_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
+    GetRecordingConfigurationOutput.add_member(:recording_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfiguration, location_name: "recordingConfiguration"))
     GetRecordingConfigurationOutput.type = Types::GetRecordingConfigurationOutput
-    GetStreamInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    GetStreamInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
     GetStreamInput.type = Types::GetStreamInput
-    GetStreamKeyInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    GetStreamKeyInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     GetStreamKeyInput.type = Types::GetStreamKeyInput
-    GetStreamKeyOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKey, location_name: "streamKey"))
+    GetStreamKeyOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, location_name: "streamKey"))
     GetStreamKeyOutput.type = Types::GetStreamKeyOutput
-    GetStreamOutput.add_member(:stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stream, location_name: "stream"))
+    GetStreamOutput.add_member(:stream, ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, location_name: "stream"))
     GetStreamOutput.type = Types::GetStreamOutput
-    GetStreamSessionInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    GetStreamSessionInput.add_member(:stream_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    GetStreamSessionInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    GetStreamSessionInput.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, location_name: "streamId"))
     GetStreamSessionInput.type = Types::GetStreamSessionInput
-    GetStreamSessionOutput.add_member(:stream_session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSession, location_name: "streamSession"))
+    GetStreamSessionOutput.add_member(:stream_session, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSession, location_name: "streamSession"))
     GetStreamSessionOutput.type = Types::GetStreamSessionOutput
-    ImportPlaybackKeyPairInput.add_member(:public_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackPublicKeyMaterial, location_name: "publicKeyMaterial", traits: {"smithy.api#required" => {}}))
-    ImportPlaybackKeyPairInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
-    ImportPlaybackKeyPairInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ImportPlaybackKeyPairInput.add_member(:public_key_material, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackPublicKeyMaterial, location_name: "publicKeyMaterial", traits: {"smithy.api#required" => {}}))
+    ImportPlaybackKeyPairInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairName, location_name: "name"))
+    ImportPlaybackKeyPairInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     ImportPlaybackKeyPairInput.type = Types::ImportPlaybackKeyPairInput
-    ImportPlaybackKeyPairOutput.add_member(:key_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPair, location_name: "keyPair"))
+    ImportPlaybackKeyPairOutput.add_member(:key_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPair, location_name: "keyPair"))
     ImportPlaybackKeyPairOutput.type = Types::ImportPlaybackKeyPairOutput
-    IngestConfiguration.add_member(:video, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoConfiguration, location_name: "video"))
-    IngestConfiguration.add_member(:audio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioConfiguration, location_name: "audio"))
+    IngestConfiguration.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoConfiguration, location_name: "video"))
+    IngestConfiguration.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioConfiguration, location_name: "audio"))
     IngestConfiguration.type = Types::IngestConfiguration
-    IngestConfigurations.add_member(:video_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoConfigurationList, location_name: "videoConfigurations", traits: {"smithy.api#required" => {}}))
-    IngestConfigurations.add_member(:audio_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioConfigurationList, location_name: "audioConfigurations", traits: {"smithy.api#required" => {}}))
+    IngestConfigurations.add_member(:video_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoConfigurationList, location_name: "videoConfigurations", traits: {"smithy.api#required" => {}}))
+    IngestConfigurations.add_member(:audio_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioConfigurationList, location_name: "audioConfigurations", traits: {"smithy.api#required" => {}}))
     IngestConfigurations.type = Types::IngestConfigurations
-    InternalServerException.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    InternalServerException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     InternalServerException.type = Types::InternalServerException
-    ListChannelsInput.add_member(:filter_by_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "filterByName"))
-    ListChannelsInput.add_member(:filter_by_recording_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "filterByRecordingConfigurationArn"))
-    ListChannelsInput.add_member(:filter_by_playback_restriction_policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "filterByPlaybackRestrictionPolicyArn"))
-    ListChannelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListChannelsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxChannelResults, location_name: "maxResults"))
+    ListChannelsInput.add_member(:filter_by_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "filterByName"))
+    ListChannelsInput.add_member(:filter_by_recording_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRecordingConfigurationArn, location_name: "filterByRecordingConfigurationArn"))
+    ListChannelsInput.add_member(:filter_by_playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, location_name: "filterByPlaybackRestrictionPolicyArn"))
+    ListChannelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListChannelsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxChannelResults, location_name: "maxResults"))
     ListChannelsInput.type = Types::ListChannelsInput
-    ListChannelsOutput.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelList, location_name: "channels", traits: {"smithy.api#required" => {}}))
-    ListChannelsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListChannelsOutput.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelList, location_name: "channels", traits: {"smithy.api#required" => {}}))
+    ListChannelsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListChannelsOutput.type = Types::ListChannelsOutput
-    ListPlaybackKeyPairsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListPlaybackKeyPairsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxPlaybackKeyPairResults, location_name: "maxResults"))
+    ListPlaybackKeyPairsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListPlaybackKeyPairsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPlaybackKeyPairResults, location_name: "maxResults"))
     ListPlaybackKeyPairsInput.type = Types::ListPlaybackKeyPairsInput
-    ListPlaybackKeyPairsOutput.add_member(:key_pairs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairList, location_name: "keyPairs", traits: {"smithy.api#required" => {}}))
-    ListPlaybackKeyPairsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPlaybackKeyPairsOutput.add_member(:key_pairs, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairList, location_name: "keyPairs", traits: {"smithy.api#required" => {}}))
+    ListPlaybackKeyPairsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListPlaybackKeyPairsOutput.type = Types::ListPlaybackKeyPairsOutput
-    ListPlaybackRestrictionPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListPlaybackRestrictionPoliciesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxPlaybackRestrictionPolicyResults, location_name: "maxResults"))
+    ListPlaybackRestrictionPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListPlaybackRestrictionPoliciesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPlaybackRestrictionPolicyResults, location_name: "maxResults"))
     ListPlaybackRestrictionPoliciesRequest.type = Types::ListPlaybackRestrictionPoliciesRequest
-    ListPlaybackRestrictionPoliciesResponse.add_member(:playback_restriction_policies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyList, location_name: "playbackRestrictionPolicies", traits: {"smithy.api#required" => {}}))
-    ListPlaybackRestrictionPoliciesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPlaybackRestrictionPoliciesResponse.add_member(:playback_restriction_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyList, location_name: "playbackRestrictionPolicies", traits: {"smithy.api#required" => {}}))
+    ListPlaybackRestrictionPoliciesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListPlaybackRestrictionPoliciesResponse.type = Types::ListPlaybackRestrictionPoliciesResponse
-    ListRecordingConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListRecordingConfigurationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRecordingConfigurationResults, location_name: "maxResults"))
+    ListRecordingConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListRecordingConfigurationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRecordingConfigurationResults, location_name: "maxResults"))
     ListRecordingConfigurationsInput.type = Types::ListRecordingConfigurationsInput
-    ListRecordingConfigurationsOutput.add_member(:recording_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationList, location_name: "recordingConfigurations", traits: {"smithy.api#required" => {}}))
-    ListRecordingConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecordingConfigurationsOutput.add_member(:recording_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationList, location_name: "recordingConfigurations", traits: {"smithy.api#required" => {}}))
+    ListRecordingConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListRecordingConfigurationsOutput.type = Types::ListRecordingConfigurationsOutput
-    ListStreamKeysInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    ListStreamKeysInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListStreamKeysInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxStreamKeyResults, location_name: "maxResults"))
+    ListStreamKeysInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    ListStreamKeysInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListStreamKeysInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStreamKeyResults, location_name: "maxResults"))
     ListStreamKeysInput.type = Types::ListStreamKeysInput
-    ListStreamKeysOutput.add_member(:stream_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyList, location_name: "streamKeys", traits: {"smithy.api#required" => {}}))
-    ListStreamKeysOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamKeysOutput.add_member(:stream_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyList, location_name: "streamKeys", traits: {"smithy.api#required" => {}}))
+    ListStreamKeysOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListStreamKeysOutput.type = Types::ListStreamKeysOutput
-    ListStreamSessionsInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    ListStreamSessionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListStreamSessionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
+    ListStreamSessionsInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    ListStreamSessionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListStreamSessionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStreamResults, location_name: "maxResults"))
     ListStreamSessionsInput.type = Types::ListStreamSessionsInput
-    ListStreamSessionsOutput.add_member(:stream_sessions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionList, location_name: "streamSessions", traits: {"smithy.api#required" => {}}))
-    ListStreamSessionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamSessionsOutput.add_member(:stream_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionList, location_name: "streamSessions", traits: {"smithy.api#required" => {}}))
+    ListStreamSessionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListStreamSessionsOutput.type = Types::ListStreamSessionsOutput
-    ListStreamsInput.add_member(:filter_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamFilters, location_name: "filterBy"))
-    ListStreamsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListStreamsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
+    ListStreamsInput.add_member(:filter_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamFilters, location_name: "filterBy"))
+    ListStreamsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListStreamsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStreamResults, location_name: "maxResults"))
     ListStreamsInput.type = Types::ListStreamsInput
-    ListStreamsOutput.add_member(:streams, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamList, location_name: "streams", traits: {"smithy.api#required" => {}}))
-    ListStreamsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamsOutput.add_member(:streams, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamList, location_name: "streams", traits: {"smithy.api#required" => {}}))
+    ListStreamsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
     ListStreamsOutput.type = Types::ListStreamsOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    MultitrackInputConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsMultitrackInputEnabled, location_name: "enabled", traits: {"smithy.api#default" => false}))
-    MultitrackInputConfiguration.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultitrackPolicy, location_name: "policy"))
-    MultitrackInputConfiguration.add_member(:maximum_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultitrackMaximumResolution, location_name: "maximumResolution"))
+    MultitrackInputConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: IsMultitrackInputEnabled, location_name: "enabled", traits: {"smithy.api#default" => false}))
+    MultitrackInputConfiguration.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackPolicy, location_name: "policy"))
+    MultitrackInputConfiguration.add_member(:maximum_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackMaximumResolution, location_name: "maximumResolution"))
     MultitrackInputConfiguration.type = Types::MultitrackInputConfiguration
-    MultitrackMaximumResolution.add_member(:sd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SD", traits: {"smithy.api#enumValue" => "SD"}))
-    MultitrackMaximumResolution.add_member(:hd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
-    MultitrackMaximumResolution.add_member(:full_hd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
-    MultitrackPolicy.add_member(:allow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
-    MultitrackPolicy.add_member(:require, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRE", traits: {"smithy.api#enumValue" => "REQUIRE"}))
-    PendingVerification.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    MultitrackMaximumResolution.add_member(:sd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SD", traits: {"smithy.api#enumValue" => "SD"}))
+    MultitrackMaximumResolution.add_member(:hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
+    MultitrackMaximumResolution.add_member(:full_hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
+    MultitrackPolicy.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
+    MultitrackPolicy.add_member(:require, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRE", traits: {"smithy.api#enumValue" => "REQUIRE"}))
+    PendingVerification.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     PendingVerification.type = Types::PendingVerification
-    PlaybackKeyPair.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, location_name: "arn"))
-    PlaybackKeyPair.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
-    PlaybackKeyPair.add_member(:fingerprint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairFingerprint, location_name: "fingerprint"))
-    PlaybackKeyPair.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PlaybackKeyPair.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairArn, location_name: "arn"))
+    PlaybackKeyPair.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairName, location_name: "name"))
+    PlaybackKeyPair.add_member(:fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairFingerprint, location_name: "fingerprint"))
+    PlaybackKeyPair.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     PlaybackKeyPair.type = Types::PlaybackKeyPair
-    PlaybackKeyPairList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairSummary)
-    PlaybackKeyPairSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, location_name: "arn"))
-    PlaybackKeyPairSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
-    PlaybackKeyPairSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PlaybackKeyPairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairSummary)
+    PlaybackKeyPairSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairArn, location_name: "arn"))
+    PlaybackKeyPairSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairName, location_name: "name"))
+    PlaybackKeyPairSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     PlaybackKeyPairSummary.type = Types::PlaybackKeyPairSummary
-    PlaybackRestrictionPolicy.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    PlaybackRestrictionPolicy.add_member(:allowed_countries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries", traits: {"smithy.api#required" => {}}))
-    PlaybackRestrictionPolicy.add_member(:allowed_origins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins", traits: {"smithy.api#required" => {}}))
-    PlaybackRestrictionPolicy.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
-    PlaybackRestrictionPolicy.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
-    PlaybackRestrictionPolicy.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PlaybackRestrictionPolicy.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    PlaybackRestrictionPolicy.add_member(:allowed_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries", traits: {"smithy.api#required" => {}}))
+    PlaybackRestrictionPolicy.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins", traits: {"smithy.api#required" => {}}))
+    PlaybackRestrictionPolicy.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    PlaybackRestrictionPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyName, location_name: "name"))
+    PlaybackRestrictionPolicy.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     PlaybackRestrictionPolicy.type = Types::PlaybackRestrictionPolicy
-    PlaybackRestrictionPolicyAllowedCountryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountry)
-    PlaybackRestrictionPolicyAllowedOriginList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOrigin)
-    PlaybackRestrictionPolicyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicySummary)
-    PlaybackRestrictionPolicySummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    PlaybackRestrictionPolicySummary.add_member(:allowed_countries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries", traits: {"smithy.api#required" => {}}))
-    PlaybackRestrictionPolicySummary.add_member(:allowed_origins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins", traits: {"smithy.api#required" => {}}))
-    PlaybackRestrictionPolicySummary.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
-    PlaybackRestrictionPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
-    PlaybackRestrictionPolicySummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PlaybackRestrictionPolicyAllowedCountryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountry)
+    PlaybackRestrictionPolicyAllowedOriginList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOrigin)
+    PlaybackRestrictionPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicySummary)
+    PlaybackRestrictionPolicySummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    PlaybackRestrictionPolicySummary.add_member(:allowed_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries", traits: {"smithy.api#required" => {}}))
+    PlaybackRestrictionPolicySummary.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins", traits: {"smithy.api#required" => {}}))
+    PlaybackRestrictionPolicySummary.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    PlaybackRestrictionPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyName, location_name: "name"))
+    PlaybackRestrictionPolicySummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     PlaybackRestrictionPolicySummary.type = Types::PlaybackRestrictionPolicySummary
-    PutMetadataInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    PutMetadataInput.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
+    PutMetadataInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    PutMetadataInput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamMetadata, location_name: "metadata", traits: {"smithy.api#required" => {}}))
     PutMetadataInput.type = Types::PutMetadataInput
-    RecordingConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    RecordingConfiguration.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
-    RecordingConfiguration.add_member(:destination_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration", traits: {"smithy.api#required" => {}}))
-    RecordingConfiguration.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    RecordingConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    RecordingConfiguration.add_member(:thumbnail_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
-    RecordingConfiguration.add_member(:recording_reconnect_window_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds", traits: {"smithy.api#default" => 0}))
-    RecordingConfiguration.add_member(:rendition_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
+    RecordingConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    RecordingConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationName, location_name: "name"))
+    RecordingConfiguration.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, location_name: "destinationConfiguration", traits: {"smithy.api#required" => {}}))
+    RecordingConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    RecordingConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    RecordingConfiguration.add_member(:thumbnail_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
+    RecordingConfiguration.add_member(:recording_reconnect_window_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds", traits: {"smithy.api#default" => 0}))
+    RecordingConfiguration.add_member(:rendition_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfiguration, location_name: "renditionConfiguration"))
     RecordingConfiguration.type = Types::RecordingConfiguration
-    RecordingConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationSummary)
-    RecordingConfigurationSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    RecordingConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
-    RecordingConfigurationSummary.add_member(:destination_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration", traits: {"smithy.api#required" => {}}))
-    RecordingConfigurationSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfigurationState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    RecordingConfigurationSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RecordingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationSummary)
+    RecordingConfigurationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    RecordingConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationName, location_name: "name"))
+    RecordingConfigurationSummary.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, location_name: "destinationConfiguration", traits: {"smithy.api#required" => {}}))
+    RecordingConfigurationSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    RecordingConfigurationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     RecordingConfigurationSummary.type = Types::RecordingConfigurationSummary
-    RenditionConfiguration.add_member(:rendition_selection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenditionConfigurationRenditionSelection, location_name: "renditionSelection"))
-    RenditionConfiguration.add_member(:renditions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenditionConfigurationRenditionList, location_name: "renditions"))
+    RenditionConfiguration.add_member(:rendition_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfigurationRenditionSelection, location_name: "renditionSelection"))
+    RenditionConfiguration.add_member(:renditions, ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfigurationRenditionList, location_name: "renditions"))
     RenditionConfiguration.type = Types::RenditionConfiguration
-    RenditionConfigurationRendition.add_member(:sd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SD", traits: {"smithy.api#enumValue" => "SD"}))
-    RenditionConfigurationRendition.add_member(:hd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
-    RenditionConfigurationRendition.add_member(:full_hd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
-    RenditionConfigurationRendition.add_member(:lowest_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOWEST_RESOLUTION", traits: {"smithy.api#enumValue" => "LOWEST_RESOLUTION"}))
-    RenditionConfigurationRenditionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenditionConfigurationRendition)
-    ResourceNotFoundException.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    RenditionConfigurationRendition.add_member(:sd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SD", traits: {"smithy.api#enumValue" => "SD"}))
+    RenditionConfigurationRendition.add_member(:hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
+    RenditionConfigurationRendition.add_member(:full_hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
+    RenditionConfigurationRendition.add_member(:lowest_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOWEST_RESOLUTION", traits: {"smithy.api#enumValue" => "LOWEST_RESOLUTION"}))
+    RenditionConfigurationRenditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfigurationRendition)
+    ResourceNotFoundException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    S3DestinationConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3DestinationBucketName, location_name: "bucketName", traits: {"smithy.api#required" => {}}))
+    S3DestinationConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DestinationBucketName, location_name: "bucketName", traits: {"smithy.api#required" => {}}))
     S3DestinationConfiguration.type = Types::S3DestinationConfiguration
-    ServiceQuotaExceededException.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    ServiceQuotaExceededException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Srt.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SrtEndpoint, location_name: "endpoint"))
-    Srt.add_member(:passphrase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SrtPassphrase, location_name: "passphrase"))
+    Srt.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtEndpoint, location_name: "endpoint"))
+    Srt.add_member(:passphrase, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtPassphrase, location_name: "passphrase"))
     Srt.type = Types::Srt
-    StartViewerSessionRevocationInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    StartViewerSessionRevocationInput.add_member(:viewer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewerId, location_name: "viewerId", traits: {"smithy.api#required" => {}}))
-    StartViewerSessionRevocationInput.add_member(:viewer_session_versions_less_than_or_equal_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewerSessionVersion, location_name: "viewerSessionVersionsLessThanOrEqualTo", traits: {"smithy.api#default" => 0}))
+    StartViewerSessionRevocationInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    StartViewerSessionRevocationInput.add_member(:viewer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerId, location_name: "viewerId", traits: {"smithy.api#required" => {}}))
+    StartViewerSessionRevocationInput.add_member(:viewer_session_versions_less_than_or_equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerSessionVersion, location_name: "viewerSessionVersionsLessThanOrEqualTo", traits: {"smithy.api#default" => 0}))
     StartViewerSessionRevocationInput.type = Types::StartViewerSessionRevocationInput
     StartViewerSessionRevocationOutput.type = Types::StartViewerSessionRevocationOutput
-    StopStreamInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    StopStreamInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
     StopStreamInput.type = Types::StopStreamInput
     StopStreamOutput.type = Types::StopStreamOutput
-    Stream.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
-    Stream.add_member(:stream_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
-    Stream.add_member(:playback_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
-    Stream.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
-    Stream.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
-    Stream.add_member(:health, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
-    Stream.add_member(:viewer_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount", traits: {"smithy.api#default" => 0}))
+    Stream.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn"))
+    Stream.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, location_name: "streamId"))
+    Stream.add_member(:playback_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackURL, location_name: "playbackUrl"))
+    Stream.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStartTime, location_name: "startTime"))
+    Stream.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamState, location_name: "state"))
+    Stream.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamHealth, location_name: "health"))
+    Stream.add_member(:viewer_count, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamViewerCount, location_name: "viewerCount", traits: {"smithy.api#default" => 0}))
     Stream.type = Types::Stream
-    StreamEvent.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    StreamEvent.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "type"))
-    StreamEvent.add_member(:event_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "eventTime"))
-    StreamEvent.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    StreamEvent.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    StreamEvent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "type"))
+    StreamEvent.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "eventTime"))
+    StreamEvent.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
     StreamEvent.type = Types::StreamEvent
-    StreamEvents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamEvent)
-    StreamFilters.add_member(:health, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
+    StreamEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamEvent)
+    StreamFilters.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamHealth, location_name: "health"))
     StreamFilters.type = Types::StreamFilters
-    StreamKey.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyArn, location_name: "arn"))
-    StreamKey.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyValue, location_name: "value"))
-    StreamKey.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
-    StreamKey.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    StreamKey.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, location_name: "arn"))
+    StreamKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyValue, location_name: "value"))
+    StreamKey.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn"))
+    StreamKey.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     StreamKey.type = Types::StreamKey
-    StreamKeyArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyArn)
-    StreamKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeySummary)
-    StreamKeySummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKeyArn, location_name: "arn"))
-    StreamKeySummary.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
-    StreamKeySummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    StreamKeyArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn)
+    StreamKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeySummary)
+    StreamKeySummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, location_name: "arn"))
+    StreamKeySummary.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn"))
+    StreamKeySummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     StreamKeySummary.type = Types::StreamKeySummary
-    StreamKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamKey)
-    StreamList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSummary)
-    StreamSession.add_member(:stream_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
-    StreamSession.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
-    StreamSession.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
-    StreamSession.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
-    StreamSession.add_member(:ingest_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
-    StreamSession.add_member(:ingest_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IngestConfigurations, location_name: "ingestConfigurations"))
-    StreamSession.add_member(:recording_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
-    StreamSession.add_member(:truncated_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamEvents, location_name: "truncatedEvents"))
+    StreamKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey)
+    StreamList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary)
+    StreamSession.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, location_name: "streamId"))
+    StreamSession.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "startTime"))
+    StreamSession.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "endTime"))
+    StreamSession.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, location_name: "channel"))
+    StreamSession.add_member(:ingest_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfiguration, location_name: "ingestConfiguration"))
+    StreamSession.add_member(:ingest_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfigurations, location_name: "ingestConfigurations"))
+    StreamSession.add_member(:recording_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfiguration, location_name: "recordingConfiguration"))
+    StreamSession.add_member(:truncated_events, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamEvents, location_name: "truncatedEvents"))
     StreamSession.type = Types::StreamSession
-    StreamSessionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamSessionSummary)
-    StreamSessionSummary.add_member(:stream_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
-    StreamSessionSummary.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
-    StreamSessionSummary.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
-    StreamSessionSummary.add_member(:has_error_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "hasErrorEvent", traits: {"smithy.api#default" => false}))
+    StreamSessionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummary)
+    StreamSessionSummary.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, location_name: "streamId"))
+    StreamSessionSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "startTime"))
+    StreamSessionSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, location_name: "endTime"))
+    StreamSessionSummary.add_member(:has_error_event, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "hasErrorEvent", traits: {"smithy.api#default" => false}))
     StreamSessionSummary.type = Types::StreamSessionSummary
-    StreamSummary.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
-    StreamSummary.add_member(:stream_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
-    StreamSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
-    StreamSummary.add_member(:health, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
-    StreamSummary.add_member(:viewer_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount", traits: {"smithy.api#default" => 0}))
-    StreamSummary.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
+    StreamSummary.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn"))
+    StreamSummary.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, location_name: "streamId"))
+    StreamSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamState, location_name: "state"))
+    StreamSummary.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamHealth, location_name: "health"))
+    StreamSummary.add_member(:viewer_count, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamViewerCount, location_name: "viewerCount", traits: {"smithy.api#default" => 0}))
+    StreamSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStartTime, location_name: "startTime"))
     StreamSummary.type = Types::StreamSummary
-    StreamUnavailable.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    StreamUnavailable.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     StreamUnavailable.type = Types::StreamUnavailable
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    ThrottlingException.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    ThrottlingException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     ThrottlingException.type = Types::ThrottlingException
-    ThumbnailConfiguration.add_member(:recording_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingMode, location_name: "recordingMode"))
-    ThumbnailConfiguration.add_member(:target_interval_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetIntervalSeconds, location_name: "targetIntervalSeconds"))
-    ThumbnailConfiguration.add_member(:resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailConfigurationResolution, location_name: "resolution"))
-    ThumbnailConfiguration.add_member(:storage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailConfigurationStorageList, location_name: "storage"))
+    ThumbnailConfiguration.add_member(:recording_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingMode, location_name: "recordingMode"))
+    ThumbnailConfiguration.add_member(:target_interval_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIntervalSeconds, location_name: "targetIntervalSeconds"))
+    ThumbnailConfiguration.add_member(:resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfigurationResolution, location_name: "resolution"))
+    ThumbnailConfiguration.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfigurationStorageList, location_name: "storage"))
     ThumbnailConfiguration.type = Types::ThumbnailConfiguration
-    ThumbnailConfigurationResolution.add_member(:sd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SD", traits: {"smithy.api#enumValue" => "SD"}))
-    ThumbnailConfigurationResolution.add_member(:hd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
-    ThumbnailConfigurationResolution.add_member(:full_hd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
-    ThumbnailConfigurationResolution.add_member(:lowest_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOWEST_RESOLUTION", traits: {"smithy.api#enumValue" => "LOWEST_RESOLUTION"}))
-    ThumbnailConfigurationStorageList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThumbnailConfigurationStorage)
-    TranscodePreset.add_member(:higher_bandwidth_transcode_preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HigherBandwidthTranscodePreset", traits: {"smithy.api#enumValue" => "HIGHER_BANDWIDTH_DELIVERY"}))
-    TranscodePreset.add_member(:constrained_bandwidth_transcode_preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConstrainedBandwidthTranscodePreset", traits: {"smithy.api#enumValue" => "CONSTRAINED_BANDWIDTH_DELIVERY"}))
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    ThumbnailConfigurationResolution.add_member(:sd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SD", traits: {"smithy.api#enumValue" => "SD"}))
+    ThumbnailConfigurationResolution.add_member(:hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
+    ThumbnailConfigurationResolution.add_member(:full_hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
+    ThumbnailConfigurationResolution.add_member(:lowest_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LOWEST_RESOLUTION", traits: {"smithy.api#enumValue" => "LOWEST_RESOLUTION"}))
+    ThumbnailConfigurationStorageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfigurationStorage)
+    TranscodePreset.add_member(:higher_bandwidth_transcode_preset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HigherBandwidthTranscodePreset", traits: {"smithy.api#enumValue" => "HIGHER_BANDWIDTH_DELIVERY"}))
+    TranscodePreset.add_member(:constrained_bandwidth_transcode_preset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConstrainedBandwidthTranscodePreset", traits: {"smithy.api#enumValue" => "CONSTRAINED_BANDWIDTH_DELIVERY"}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    UpdateChannelInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    UpdateChannelInput.add_member(:latency_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
-    UpdateChannelInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
-    UpdateChannelInput.add_member(:authorized, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized", traits: {"smithy.api#default" => false}))
-    UpdateChannelInput.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
-    UpdateChannelInput.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
-    UpdateChannelInput.add_member(:preset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
-    UpdateChannelInput.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
-    UpdateChannelInput.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
-    UpdateChannelInput.add_member(:container_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
+    UpdateChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    UpdateChannelInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "name"))
+    UpdateChannelInput.add_member(:latency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelLatencyMode, location_name: "latencyMode"))
+    UpdateChannelInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, location_name: "type"))
+    UpdateChannelInput.add_member(:authorized, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "authorized", traits: {"smithy.api#default" => false}))
+    UpdateChannelInput.add_member(:recording_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    UpdateChannelInput.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "insecureIngest", traits: {"smithy.api#default" => false}))
+    UpdateChannelInput.add_member(:preset, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscodePreset, location_name: "preset"))
+    UpdateChannelInput.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
+    UpdateChannelInput.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
+    UpdateChannelInput.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, location_name: "containerFormat"))
     UpdateChannelInput.type = Types::UpdateChannelInput
-    UpdateChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    UpdateChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, location_name: "channel"))
     UpdateChannelOutput.type = Types::UpdateChannelOutput
-    UpdatePlaybackRestrictionPolicyRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
-    UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
-    UpdatePlaybackRestrictionPolicyRequest.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
-    UpdatePlaybackRestrictionPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:enable_strict_origin_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyName, location_name: "name"))
     UpdatePlaybackRestrictionPolicyRequest.type = Types::UpdatePlaybackRestrictionPolicyRequest
-    UpdatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
+    UpdatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
     UpdatePlaybackRestrictionPolicyResponse.type = Types::UpdatePlaybackRestrictionPolicyResponse
-    ValidationException.add_member(:exception_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "exceptionMessage"))
+    ValidationException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "exceptionMessage"))
     ValidationException.type = Types::ValidationException
-    VideoConfiguration.add_member(:avc_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "avcProfile"))
-    VideoConfiguration.add_member(:avc_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "avcLevel"))
-    VideoConfiguration.add_member(:codec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "codec"))
-    VideoConfiguration.add_member(:encoder, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "encoder"))
-    VideoConfiguration.add_member(:target_bitrate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate", traits: {"smithy.api#default" => 0}))
-    VideoConfiguration.add_member(:target_framerate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "targetFramerate", traits: {"smithy.api#default" => 0}))
-    VideoConfiguration.add_member(:video_height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "videoHeight", traits: {"smithy.api#default" => 0}))
-    VideoConfiguration.add_member(:video_width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "videoWidth", traits: {"smithy.api#default" => 0}))
-    VideoConfiguration.add_member(:level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "level"))
-    VideoConfiguration.add_member(:track, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "track"))
-    VideoConfiguration.add_member(:profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "profile"))
+    VideoConfiguration.add_member(:avc_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "avcProfile"))
+    VideoConfiguration.add_member(:avc_level, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "avcLevel"))
+    VideoConfiguration.add_member(:codec, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "codec"))
+    VideoConfiguration.add_member(:encoder, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "encoder"))
+    VideoConfiguration.add_member(:target_bitrate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "targetBitrate", traits: {"smithy.api#default" => 0}))
+    VideoConfiguration.add_member(:target_framerate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "targetFramerate", traits: {"smithy.api#default" => 0}))
+    VideoConfiguration.add_member(:video_height, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "videoHeight", traits: {"smithy.api#default" => 0}))
+    VideoConfiguration.add_member(:video_width, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "videoWidth", traits: {"smithy.api#default" => 0}))
+    VideoConfiguration.add_member(:level, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "level"))
+    VideoConfiguration.add_member(:track, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "track"))
+    VideoConfiguration.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "profile"))
     VideoConfiguration.type = Types::VideoConfiguration
-    VideoConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoConfiguration)
+    VideoConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VideoConfiguration)
 
     AmazonInteractiveVideoService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ivs#AmazonInteractiveVideoService"
@@ -625,385 +625,385 @@ module Aws::Ivs
       service.add_operation(:batch_get_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#BatchGetChannel"
         operation.name = "BatchGetChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetChannelOutput)
+        operation.input = BatchGetChannelInput
+        operation.output = BatchGetChannelOutput
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchGetChannel"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:batch_get_stream_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#BatchGetStreamKey"
         operation.name = "BatchGetStreamKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetStreamKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetStreamKeyOutput)
+        operation.input = BatchGetStreamKeyInput
+        operation.output = BatchGetStreamKeyOutput
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchGetStreamKey"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:batch_start_viewer_session_revocation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#BatchStartViewerSessionRevocation"
         operation.name = "BatchStartViewerSessionRevocation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchStartViewerSessionRevocationInput
+        operation.output = BatchStartViewerSessionRevocationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << PendingVerification
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchStartViewerSessionRevocation"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:create_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#CreateChannel"
         operation.name = "CreateChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateChannelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateChannelInput
+        operation.output = CreateChannelOutput
+        operation.errors << AccessDeniedException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateChannel"}}
       end)
       service.add_operation(:create_playback_restriction_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#CreatePlaybackRestrictionPolicy"
         operation.name = "CreatePlaybackRestrictionPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePlaybackRestrictionPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePlaybackRestrictionPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreatePlaybackRestrictionPolicyRequest
+        operation.output = CreatePlaybackRestrictionPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << PendingVerification
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreatePlaybackRestrictionPolicy"}}
       end)
       service.add_operation(:create_recording_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#CreateRecordingConfiguration"
         operation.name = "CreateRecordingConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRecordingConfigurationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRecordingConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRecordingConfigurationInput
+        operation.output = CreateRecordingConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << PendingVerification
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateRecordingConfiguration"}}
       end)
       service.add_operation(:create_stream_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#CreateStreamKey"
         operation.name = "CreateStreamKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStreamKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateStreamKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateStreamKeyInput
+        operation.output = CreateStreamKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateStreamKey"}}
       end)
       service.add_operation(:delete_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#DeleteChannel"
         operation.name = "DeleteChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteChannelInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteChannel", "code" => 204}}
       end)
       service.add_operation(:delete_playback_key_pair, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#DeletePlaybackKeyPair"
         operation.name = "DeletePlaybackKeyPair"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePlaybackKeyPairInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePlaybackKeyPairOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeletePlaybackKeyPairInput
+        operation.output = DeletePlaybackKeyPairOutput
+        operation.errors << AccessDeniedException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeletePlaybackKeyPair"}}
       end)
       service.add_operation(:delete_playback_restriction_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#DeletePlaybackRestrictionPolicy"
         operation.name = "DeletePlaybackRestrictionPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePlaybackRestrictionPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeletePlaybackRestrictionPolicyRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeletePlaybackRestrictionPolicy", "code" => 204}}
       end)
       service.add_operation(:delete_recording_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#DeleteRecordingConfiguration"
         operation.name = "DeleteRecordingConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRecordingConfigurationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRecordingConfigurationInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteRecordingConfiguration", "code" => 204}}
       end)
       service.add_operation(:delete_stream_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#DeleteStreamKey"
         operation.name = "DeleteStreamKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteStreamKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteStreamKeyInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteStreamKey", "code" => 204}}
       end)
       service.add_operation(:get_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetChannel"
         operation.name = "GetChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetChannelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetChannelInput
+        operation.output = GetChannelOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetChannel"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_playback_key_pair, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetPlaybackKeyPair"
         operation.name = "GetPlaybackKeyPair"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPlaybackKeyPairInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPlaybackKeyPairOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetPlaybackKeyPairInput
+        operation.output = GetPlaybackKeyPairOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetPlaybackKeyPair"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_playback_restriction_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetPlaybackRestrictionPolicy"
         operation.name = "GetPlaybackRestrictionPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPlaybackRestrictionPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPlaybackRestrictionPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetPlaybackRestrictionPolicyRequest
+        operation.output = GetPlaybackRestrictionPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetPlaybackRestrictionPolicy"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_recording_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetRecordingConfiguration"
         operation.name = "GetRecordingConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecordingConfigurationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecordingConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRecordingConfigurationInput
+        operation.output = GetRecordingConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetRecordingConfiguration"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetStream"
         operation.name = "GetStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetStreamInput
+        operation.output = GetStreamOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ChannelNotBroadcasting
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetStream"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_stream_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetStreamKey"
         operation.name = "GetStreamKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetStreamKeyInput
+        operation.output = GetStreamKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetStreamKey"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_stream_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetStreamSession"
         operation.name = "GetStreamSession"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamSessionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamSessionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetStreamSessionInput
+        operation.output = GetStreamSessionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetStreamSession"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:import_playback_key_pair, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ImportPlaybackKeyPair"
         operation.name = "ImportPlaybackKeyPair"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportPlaybackKeyPairInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportPlaybackKeyPairOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ImportPlaybackKeyPairInput
+        operation.output = ImportPlaybackKeyPairOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << PendingVerification
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ImportPlaybackKeyPair"}}
       end)
       service.add_operation(:list_channels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListChannels"
         operation.name = "ListChannels"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChannelsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListChannelsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListChannelsInput
+        operation.output = ListChannelsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListChannels"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListChannels.new
       end)
       service.add_operation(:list_playback_key_pairs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListPlaybackKeyPairs"
         operation.name = "ListPlaybackKeyPairs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPlaybackKeyPairsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPlaybackKeyPairsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPlaybackKeyPairsInput
+        operation.output = ListPlaybackKeyPairsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListPlaybackKeyPairs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListPlaybackKeyPairs.new
       end)
       service.add_operation(:list_playback_restriction_policies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListPlaybackRestrictionPolicies"
         operation.name = "ListPlaybackRestrictionPolicies"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPlaybackRestrictionPoliciesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPlaybackRestrictionPoliciesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPlaybackRestrictionPoliciesRequest
+        operation.output = ListPlaybackRestrictionPoliciesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << PendingVerification
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListPlaybackRestrictionPolicies"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListPlaybackRestrictionPolicies.new
       end)
       service.add_operation(:list_recording_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListRecordingConfigurations"
         operation.name = "ListRecordingConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRecordingConfigurationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRecordingConfigurationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRecordingConfigurationsInput
+        operation.output = ListRecordingConfigurationsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListRecordingConfigurations"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRecordingConfigurations.new
       end)
       service.add_operation(:list_stream_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListStreamKeys"
         operation.name = "ListStreamKeys"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamKeysInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamKeysOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStreamKeysInput
+        operation.output = ListStreamKeysOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListStreamKeys"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListStreamKeys.new
       end)
       service.add_operation(:list_stream_sessions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListStreamSessions"
         operation.name = "ListStreamSessions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamSessionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamSessionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStreamSessionsInput
+        operation.output = ListStreamSessionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListStreamSessions"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListStreamSessions.new
       end)
       service.add_operation(:list_streams, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListStreams"
         operation.name = "ListStreams"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStreamsInput
+        operation.output = ListStreamsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListStreams"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListStreams.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:put_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#PutMetadata"
         operation.name = "PutMetadata"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMetadataInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutMetadataInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ChannelNotBroadcasting
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/PutMetadata", "code" => 204}}
       end)
       service.add_operation(:start_viewer_session_revocation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#StartViewerSessionRevocation"
         operation.name = "StartViewerSessionRevocation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartViewerSessionRevocationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartViewerSessionRevocationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartViewerSessionRevocationInput
+        operation.output = StartViewerSessionRevocationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/StartViewerSessionRevocation"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:stop_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#StopStream"
         operation.name = "StopStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopStreamOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamUnavailable)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopStreamInput
+        operation.output = StopStreamOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ChannelNotBroadcasting
+        operation.errors << ResourceNotFoundException
+        operation.errors << StreamUnavailable
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/StopStream"}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}"}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#UpdateChannel"
         operation.name = "UpdateChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChannelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateChannelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateChannelInput
+        operation.output = UpdateChannelOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateChannel"}}
       end)
       service.add_operation(:update_playback_restriction_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#UpdatePlaybackRestrictionPolicy"
         operation.name = "UpdatePlaybackRestrictionPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePlaybackRestrictionPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePlaybackRestrictionPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdatePlaybackRestrictionPolicyRequest
+        operation.output = UpdatePlaybackRestrictionPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdatePlaybackRestrictionPolicy"}}
       end)
     end

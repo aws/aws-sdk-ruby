@@ -94,177 +94,177 @@ module Aws::SimSpaceWeaver
     UntagResourceOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.simspaceweaver#UntagResourceOperationOutput", name: "UntagResourceOperationOutput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.simspaceweaver#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AppPortMappings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppPortMapping)
-    CloudWatchLogsLogGroup.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
+    AppPortMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppPortMapping)
+    CloudWatchLogsLogGroup.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, location_name: "LogGroupArn"))
     CloudWatchLogsLogGroup.type = Types::CloudWatchLogsLogGroup
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateSnapshotInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
-    CreateSnapshotInput.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Destination, location_name: "Destination", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    CreateSnapshotInput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, location_name: "Destination", traits: {"smithy.api#required" => {}}))
     CreateSnapshotInput.type = Types::CreateSnapshotInput
     CreateSnapshotOutput.type = Types::CreateSnapshotOutput
-    DeleteAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
-    DeleteAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#httpQuery" => "domain", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "DomainName"}))
-    DeleteAppOperationInput.add_member(:app, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "App", traits: {"smithy.api#httpQuery" => "app", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AppName"}))
+    DeleteAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    DeleteAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#httpQuery" => "domain", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "DomainName"}))
+    DeleteAppOperationInput.add_member(:app, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "App", traits: {"smithy.api#httpQuery" => "app", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AppName"}))
     DeleteAppOperationInput.type = Types::DeleteAppOperationInput
     DeleteAppOperationOutput.type = Types::DeleteAppOperationOutput
-    DeleteSimulationOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    DeleteSimulationOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
     DeleteSimulationOperationInput.type = Types::DeleteSimulationOperationInput
     DeleteSimulationOperationOutput.type = Types::DeleteSimulationOperationOutput
-    DescribeAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
-    DescribeAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#httpQuery" => "domain", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "DomainName"}))
-    DescribeAppOperationInput.add_member(:app, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverLongResourceName, location_name: "App", traits: {"smithy.api#httpQuery" => "app", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AppName"}))
+    DescribeAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    DescribeAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#httpQuery" => "domain", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "DomainName"}))
+    DescribeAppOperationInput.add_member(:app, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverLongResourceName, location_name: "App", traits: {"smithy.api#httpQuery" => "app", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AppName"}))
     DescribeAppOperationInput.type = Types::DescribeAppOperationInput
-    DescribeAppOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverLongResourceName, location_name: "Name"))
-    DescribeAppOperationOutput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation"))
-    DescribeAppOperationOutput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain"))
-    DescribeAppOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppStatus, location_name: "Status"))
-    DescribeAppOperationOutput.add_member(:target_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppTargetStatus, location_name: "TargetStatus"))
-    DescribeAppOperationOutput.add_member(:launch_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchOverrides, location_name: "LaunchOverrides"))
-    DescribeAppOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DescribeAppOperationOutput.add_member(:endpoint_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppEndpointInfo, location_name: "EndpointInfo"))
+    DescribeAppOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverLongResourceName, location_name: "Name"))
+    DescribeAppOperationOutput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation"))
+    DescribeAppOperationOutput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain"))
+    DescribeAppOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppStatus, location_name: "Status"))
+    DescribeAppOperationOutput.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppTargetStatus, location_name: "TargetStatus"))
+    DescribeAppOperationOutput.add_member(:launch_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchOverrides, location_name: "LaunchOverrides"))
+    DescribeAppOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DescribeAppOperationOutput.add_member(:endpoint_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppEndpointInfo, location_name: "EndpointInfo"))
     DescribeAppOperationOutput.type = Types::DescribeAppOperationOutput
-    DescribeSimulationOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    DescribeSimulationOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
     DescribeSimulationOperationInput.type = Types::DescribeSimulationOperationInput
-    DescribeSimulationOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
-    DescribeSimulationOperationOutput.add_member(:execution_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "ExecutionId"))
-    DescribeSimulationOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverArn, location_name: "Arn"))
-    DescribeSimulationOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    DescribeSimulationOperationOutput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    DescribeSimulationOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    DescribeSimulationOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationStatus, location_name: "Status"))
-    DescribeSimulationOperationOutput.add_member(:target_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationTargetStatus, location_name: "TargetStatus"))
-    DescribeSimulationOperationOutput.add_member(:schema_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "SchemaS3Location"))
-    DescribeSimulationOperationOutput.add_member(:schema_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalString, location_name: "SchemaError", traits: {"smithy.api#deprecated" => {"message" => "SchemaError is no longer used, check StartError instead."}}))
-    DescribeSimulationOperationOutput.add_member(:logging_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
-    DescribeSimulationOperationOutput.add_member(:live_simulation_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LiveSimulationState, location_name: "LiveSimulationState"))
-    DescribeSimulationOperationOutput.add_member(:maximum_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLiveString, location_name: "MaximumDuration"))
-    DescribeSimulationOperationOutput.add_member(:snapshot_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "SnapshotS3Location"))
-    DescribeSimulationOperationOutput.add_member(:start_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalString, location_name: "StartError"))
+    DescribeSimulationOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Name"))
+    DescribeSimulationOperationOutput.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "ExecutionId"))
+    DescribeSimulationOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, location_name: "Arn"))
+    DescribeSimulationOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    DescribeSimulationOperationOutput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn"))
+    DescribeSimulationOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    DescribeSimulationOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationStatus, location_name: "Status"))
+    DescribeSimulationOperationOutput.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationTargetStatus, location_name: "TargetStatus"))
+    DescribeSimulationOperationOutput.add_member(:schema_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "SchemaS3Location"))
+    DescribeSimulationOperationOutput.add_member(:schema_error, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalString, location_name: "SchemaError", traits: {"smithy.api#deprecated" => {"message" => "SchemaError is no longer used, check StartError instead."}}))
+    DescribeSimulationOperationOutput.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    DescribeSimulationOperationOutput.add_member(:live_simulation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveSimulationState, location_name: "LiveSimulationState"))
+    DescribeSimulationOperationOutput.add_member(:maximum_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveString, location_name: "MaximumDuration"))
+    DescribeSimulationOperationOutput.add_member(:snapshot_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "SnapshotS3Location"))
+    DescribeSimulationOperationOutput.add_member(:start_error, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalString, location_name: "StartError"))
     DescribeSimulationOperationOutput.type = Types::DescribeSimulationOperationOutput
-    Domain.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
-    Domain.add_member(:lifecycle, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleManagementStrategy, location_name: "Lifecycle"))
+    Domain.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Name"))
+    Domain.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleManagementStrategy, location_name: "Lifecycle"))
     Domain.type = Types::Domain
-    DomainList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domain)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    DomainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Domain)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    LaunchCommandList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString)
-    LaunchOverrides.add_member(:launch_commands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchCommandList, location_name: "LaunchCommands"))
+    LaunchCommandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString)
+    LaunchOverrides.add_member(:launch_commands, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchCommandList, location_name: "LaunchCommands"))
     LaunchOverrides.type = Types::LaunchOverrides
-    ListAppsOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
-    ListAppsOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#httpQuery" => "domain"}))
-    ListAppsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListAppsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalString, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAppsOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    ListAppsOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#httpQuery" => "domain"}))
+    ListAppsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAppsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalString, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAppsOperationInput.type = Types::ListAppsOperationInput
-    ListAppsOperationOutput.add_member(:apps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppList, location_name: "Apps"))
-    ListAppsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalString, location_name: "NextToken"))
+    ListAppsOperationOutput.add_member(:apps, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppList, location_name: "Apps"))
+    ListAppsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalString, location_name: "NextToken"))
     ListAppsOperationOutput.type = Types::ListAppsOperationOutput
-    ListSimulationsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListSimulationsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalString, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSimulationsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListSimulationsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalString, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListSimulationsOperationInput.type = Types::ListSimulationsOperationInput
-    ListSimulationsOperationOutput.add_member(:simulations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationList, location_name: "Simulations"))
-    ListSimulationsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalString, location_name: "NextToken"))
+    ListSimulationsOperationOutput.add_member(:simulations, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationList, location_name: "Simulations"))
+    ListSimulationsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalString, location_name: "NextToken"))
     ListSimulationsOperationOutput.type = Types::ListSimulationsOperationOutput
-    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceOperationInput.type = Types::ListTagsForResourceOperationInput
-    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceOperationOutput.type = Types::ListTagsForResourceOperationOutput
-    LiveSimulationState.add_member(:domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainList, location_name: "Domains"))
-    LiveSimulationState.add_member(:clocks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationClockList, location_name: "Clocks"))
+    LiveSimulationState.add_member(:domains, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainList, location_name: "Domains"))
+    LiveSimulationState.add_member(:clocks, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationClockList, location_name: "Clocks"))
     LiveSimulationState.type = Types::LiveSimulationState
-    LogDestination.add_member(:cloud_watch_logs_log_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroup, location_name: "CloudWatchLogsLogGroup"))
+    LogDestination.add_member(:cloud_watch_logs_log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsLogGroup, location_name: "CloudWatchLogsLogGroup"))
     LogDestination.type = Types::LogDestination
-    LogDestinations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDestination)
-    LoggingConfiguration.add_member(:destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDestinations, location_name: "Destinations"))
+    LogDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestination)
+    LoggingConfiguration.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinations, location_name: "Destinations"))
     LoggingConfiguration.type = Types::LoggingConfiguration
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    S3Destination.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
-    S3Destination.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
+    S3Destination.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
+    S3Destination.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
     S3Destination.type = Types::S3Destination
-    S3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
-    S3Location.add_member(:object_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "ObjectKey", traits: {"smithy.api#required" => {}}))
+    S3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
+    S3Location.add_member(:object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, location_name: "ObjectKey", traits: {"smithy.api#required" => {}}))
     S3Location.type = Types::S3Location
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SimulationAppEndpointInfo.add_member(:address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Address"))
-    SimulationAppEndpointInfo.add_member(:ingress_port_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppPortMappings, location_name: "IngressPortMappings"))
+    SimulationAppEndpointInfo.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Address"))
+    SimulationAppEndpointInfo.add_member(:ingress_port_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: AppPortMappings, location_name: "IngressPortMappings"))
     SimulationAppEndpointInfo.type = Types::SimulationAppEndpointInfo
-    SimulationAppList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppMetadata)
-    SimulationAppMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverLongResourceName, location_name: "Name"))
-    SimulationAppMetadata.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation"))
-    SimulationAppMetadata.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain"))
-    SimulationAppMetadata.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppStatus, location_name: "Status"))
-    SimulationAppMetadata.add_member(:target_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationAppTargetStatus, location_name: "TargetStatus"))
+    SimulationAppList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppMetadata)
+    SimulationAppMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverLongResourceName, location_name: "Name"))
+    SimulationAppMetadata.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation"))
+    SimulationAppMetadata.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain"))
+    SimulationAppMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppStatus, location_name: "Status"))
+    SimulationAppMetadata.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppTargetStatus, location_name: "TargetStatus"))
     SimulationAppMetadata.type = Types::SimulationAppMetadata
-    SimulationAppPortMapping.add_member(:declared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: "Declared"))
-    SimulationAppPortMapping.add_member(:actual, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: "Actual"))
+    SimulationAppPortMapping.add_member(:declared, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, location_name: "Declared"))
+    SimulationAppPortMapping.add_member(:actual, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, location_name: "Actual"))
     SimulationAppPortMapping.type = Types::SimulationAppPortMapping
-    SimulationClock.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClockStatus, location_name: "Status"))
-    SimulationClock.add_member(:target_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClockTargetStatus, location_name: "TargetStatus"))
+    SimulationClock.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClockStatus, location_name: "Status"))
+    SimulationClock.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClockTargetStatus, location_name: "TargetStatus"))
     SimulationClock.type = Types::SimulationClock
-    SimulationClockList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationClock)
-    SimulationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationMetadata)
-    SimulationMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
-    SimulationMetadata.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverArn, location_name: "Arn"))
-    SimulationMetadata.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    SimulationMetadata.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationStatus, location_name: "Status"))
-    SimulationMetadata.add_member(:target_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulationTargetStatus, location_name: "TargetStatus"))
+    SimulationClockList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationClock)
+    SimulationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationMetadata)
+    SimulationMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Name"))
+    SimulationMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, location_name: "Arn"))
+    SimulationMetadata.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
+    SimulationMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationStatus, location_name: "Status"))
+    SimulationMetadata.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationTargetStatus, location_name: "TargetStatus"))
     SimulationMetadata.type = Types::SimulationMetadata
-    StartAppOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
-    StartAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#required" => {}}))
-    StartAppOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    StartAppOperationInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    StartAppOperationInput.add_member(:launch_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchOverrides, location_name: "LaunchOverrides"))
+    StartAppOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    StartAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#required" => {}}))
+    StartAppOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    StartAppOperationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    StartAppOperationInput.add_member(:launch_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchOverrides, location_name: "LaunchOverrides"))
     StartAppOperationInput.type = Types::StartAppOperationInput
-    StartAppOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
-    StartAppOperationOutput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain"))
-    StartAppOperationOutput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation"))
+    StartAppOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Name"))
+    StartAppOperationOutput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain"))
+    StartAppOperationOutput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation"))
     StartAppOperationOutput.type = Types::StartAppOperationOutput
-    StartClockOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    StartClockOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
     StartClockOperationInput.type = Types::StartClockOperationInput
     StartClockOperationOutput.type = Types::StartClockOperationOutput
-    StartSimulationOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    StartSimulationOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    StartSimulationOperationInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    StartSimulationOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
-    StartSimulationOperationInput.add_member(:schema_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "SchemaS3Location"))
-    StartSimulationOperationInput.add_member(:maximum_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLiveString, location_name: "MaximumDuration"))
-    StartSimulationOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    StartSimulationOperationInput.add_member(:snapshot_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "SnapshotS3Location"))
+    StartSimulationOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartSimulationOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    StartSimulationOperationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    StartSimulationOperationInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    StartSimulationOperationInput.add_member(:schema_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "SchemaS3Location"))
+    StartSimulationOperationInput.add_member(:maximum_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveString, location_name: "MaximumDuration"))
+    StartSimulationOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    StartSimulationOperationInput.add_member(:snapshot_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "SnapshotS3Location"))
     StartSimulationOperationInput.type = Types::StartSimulationOperationInput
-    StartSimulationOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverArn, location_name: "Arn"))
-    StartSimulationOperationOutput.add_member(:execution_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "ExecutionId"))
-    StartSimulationOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    StartSimulationOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, location_name: "Arn"))
+    StartSimulationOperationOutput.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "ExecutionId"))
+    StartSimulationOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
     StartSimulationOperationOutput.type = Types::StartSimulationOperationOutput
-    StopAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
-    StopAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "DomainName"}))
-    StopAppOperationInput.add_member(:app, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "App", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AppName"}))
+    StopAppOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    StopAppOperationInput.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Domain", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "DomainName"}))
+    StopAppOperationInput.add_member(:app, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "App", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AppName"}))
     StopAppOperationInput.type = Types::StopAppOperationInput
     StopAppOperationOutput.type = Types::StopAppOperationOutput
-    StopClockOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    StopClockOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
     StopClockOperationInput.type = Types::StopClockOperationInput
     StopClockOperationOutput.type = Types::StopClockOperationOutput
-    StopSimulationOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
+    StopSimulationOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, location_name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
     StopSimulationOperationInput.type = Types::StopSimulationOperationInput
     StopSimulationOperationOutput.type = Types::StopSimulationOperationOutput
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimSpaceWeaverArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceOperationInput.type = Types::UntagResourceOperationInput
     UntagResourceOperationOutput.type = Types::UntagResourceOperationOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Message"))
     ValidationException.type = Types::ValidationException
 
     SimSpaceWeaver = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -275,182 +275,182 @@ module Aws::SimSpaceWeaver
       service.add_operation(:create_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#CreateSnapshot"
         operation.name = "CreateSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateSnapshotInput
+        operation.output = CreateSnapshotOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create a snapshot", "smithy.api#http" => {"method" => "POST", "uri" => "/createsnapshot", "code" => 200}}
       end)
       service.add_operation(:delete_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#DeleteApp"
         operation.name = "DeleteApp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAppOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAppOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteAppOperationInput
+        operation.output = DeleteAppOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to delete an app", "smithy.api#http" => {"method" => "DELETE", "uri" => "/deleteapp", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_simulation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#DeleteSimulation"
         operation.name = "DeleteSimulation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSimulationOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSimulationOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteSimulationOperationInput
+        operation.output = DeleteSimulationOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to delete a simulation", "smithy.api#http" => {"method" => "DELETE", "uri" => "/deletesimulation", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#DescribeApp"
         operation.name = "DescribeApp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeAppOperationInput
+        operation.output = DescribeAppOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to describe an app", "smithy.api#http" => {"method" => "GET", "uri" => "/describeapp", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_simulation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#DescribeSimulation"
         operation.name = "DescribeSimulation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSimulationOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSimulationOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeSimulationOperationInput
+        operation.output = DescribeSimulationOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to describe a simulation", "smithy.api#http" => {"method" => "GET", "uri" => "/describesimulation", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_apps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#ListApps"
         operation.name = "ListApps"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAppsOperationInput
+        operation.output = ListAppsOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list apps", "smithy.api#http" => {"method" => "GET", "uri" => "/listapps", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListApps.new
       end)
       service.add_operation(:list_simulations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#ListSimulations"
         operation.name = "ListSimulations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSimulationsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSimulationsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListSimulationsOperationInput
+        operation.output = ListSimulationsOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list simulations", "smithy.api#http" => {"method" => "GET", "uri" => "/listsimulations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSimulations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceOperationInput
+        operation.output = ListTagsForResourceOperationOutput
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list the tags for a resource", "smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:start_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#StartApp"
         operation.name = "StartApp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAppOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAppOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartAppOperationInput
+        operation.output = StartAppOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start an app", "smithy.api#http" => {"method" => "POST", "uri" => "/startapp", "code" => 200}}
       end)
       service.add_operation(:start_clock, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#StartClock"
         operation.name = "StartClock"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartClockOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartClockOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartClockOperationInput
+        operation.output = StartClockOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start a simulation clock", "smithy.api#http" => {"method" => "POST", "uri" => "/startclock", "code" => 200}}
       end)
       service.add_operation(:start_simulation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#StartSimulation"
         operation.name = "StartSimulation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSimulationOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartSimulationOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartSimulationOperationInput
+        operation.output = StartSimulationOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start a simulation", "aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/startsimulation", "code" => 200}}
       end)
       service.add_operation(:stop_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#StopApp"
         operation.name = "StopApp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopAppOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopAppOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopAppOperationInput
+        operation.output = StopAppOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to stop an app", "smithy.api#http" => {"method" => "POST", "uri" => "/stopapp", "code" => 200}}
       end)
       service.add_operation(:stop_clock, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#StopClock"
         operation.name = "StopClock"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopClockOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopClockOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopClockOperationInput
+        operation.output = StopClockOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to stop a simulation clock", "smithy.api#http" => {"method" => "POST", "uri" => "/stopclock", "code" => 200}}
       end)
       service.add_operation(:stop_simulation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#StopSimulation"
         operation.name = "StopSimulation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopSimulationOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopSimulationOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopSimulationOperationInput
+        operation.output = StopSimulationOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to stop a simulation", "smithy.api#http" => {"method" => "POST", "uri" => "/stopsimulation", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceOperationInput
+        operation.output = TagResourceOperationOutput
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to tag a resource", "aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.simspaceweaver#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceOperationInput
+        operation.output = UntagResourceOperationOutput
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to untag a resource", "aws.iam#conditionKeys" => ["aws:TagKeys"], "smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
     end

@@ -159,499 +159,499 @@ module Aws::MachineLearning
     VipURL = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.machinelearning#VipURL", name: "VipURL", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^https://[a-zA-Z0-9-.]*\\.amazon(aws)?\\.com[/]?$"})
     FloatLabel = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.machinelearning#floatLabel", name: "FloatLabel")
 
-    AddTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
-    AddTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    AddTagsInput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    AddTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    AddTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    AddTagsInput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
     AddTagsInput.type = Types::AddTagsInput
-    AddTagsOutput.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "ResourceId"))
-    AddTagsOutput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceType, location_name: "ResourceType"))
+    AddTagsOutput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "ResourceId"))
+    AddTagsOutput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceType, location_name: "ResourceType"))
     AddTagsOutput.type = Types::AddTagsOutput
-    Algorithm.add_member(:sgd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SGD", traits: {"smithy.api#enumValue" => "sgd"}))
-    BatchPrediction.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId"))
-    BatchPrediction.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    BatchPrediction.add_member(:batch_prediction_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionDataSourceId"))
-    BatchPrediction.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "InputDataLocationS3"))
-    BatchPrediction.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    BatchPrediction.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    BatchPrediction.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    BatchPrediction.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    BatchPrediction.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    BatchPrediction.add_member(:output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "OutputUri"))
-    BatchPrediction.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    BatchPrediction.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    BatchPrediction.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    BatchPrediction.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
-    BatchPrediction.add_member(:total_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "TotalRecordCount"))
-    BatchPrediction.add_member(:invalid_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "InvalidRecordCount"))
+    Algorithm.add_member(:sgd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SGD", traits: {"smithy.api#enumValue" => "sgd"}))
+    BatchPrediction.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId"))
+    BatchPrediction.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    BatchPrediction.add_member(:batch_prediction_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionDataSourceId"))
+    BatchPrediction.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "InputDataLocationS3"))
+    BatchPrediction.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    BatchPrediction.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    BatchPrediction.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    BatchPrediction.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "Name"))
+    BatchPrediction.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    BatchPrediction.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "OutputUri"))
+    BatchPrediction.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    BatchPrediction.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    BatchPrediction.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    BatchPrediction.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
+    BatchPrediction.add_member(:total_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "TotalRecordCount"))
+    BatchPrediction.add_member(:invalid_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "InvalidRecordCount"))
     BatchPrediction.type = Types::BatchPrediction
-    BatchPredictionFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
-    BatchPredictionFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
-    BatchPredictionFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
-    BatchPredictionFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
-    BatchPredictionFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
-    BatchPredictionFilterVariable.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL_ID", traits: {"smithy.api#enumValue" => "MLModelId"}))
-    BatchPredictionFilterVariable.add_member(:datasource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATASOURCE_ID", traits: {"smithy.api#enumValue" => "DataSourceId"}))
-    BatchPredictionFilterVariable.add_member(:data_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_URI", traits: {"smithy.api#enumValue" => "DataURI"}))
-    BatchPredictions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPrediction)
-    CreateBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
-    CreateBatchPredictionInput.add_member(:batch_prediction_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "BatchPredictionName"))
-    CreateBatchPredictionInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
-    CreateBatchPredictionInput.add_member(:batch_prediction_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionDataSourceId", traits: {"smithy.api#required" => {}}))
-    CreateBatchPredictionInput.add_member(:output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "OutputUri", traits: {"smithy.api#required" => {}}))
+    BatchPredictionFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
+    BatchPredictionFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
+    BatchPredictionFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    BatchPredictionFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    BatchPredictionFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
+    BatchPredictionFilterVariable.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL_ID", traits: {"smithy.api#enumValue" => "MLModelId"}))
+    BatchPredictionFilterVariable.add_member(:datasource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATASOURCE_ID", traits: {"smithy.api#enumValue" => "DataSourceId"}))
+    BatchPredictionFilterVariable.add_member(:data_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_URI", traits: {"smithy.api#enumValue" => "DataURI"}))
+    BatchPredictions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPrediction)
+    CreateBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
+    CreateBatchPredictionInput.add_member(:batch_prediction_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "BatchPredictionName"))
+    CreateBatchPredictionInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    CreateBatchPredictionInput.add_member(:batch_prediction_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionDataSourceId", traits: {"smithy.api#required" => {}}))
+    CreateBatchPredictionInput.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "OutputUri", traits: {"smithy.api#required" => {}}))
     CreateBatchPredictionInput.type = Types::CreateBatchPredictionInput
-    CreateBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId"))
+    CreateBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId"))
     CreateBatchPredictionOutput.type = Types::CreateBatchPredictionOutput
-    CreateDataSourceFromRDSInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromRDSInput.add_member(:data_source_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "DataSourceName"))
-    CreateDataSourceFromRDSInput.add_member(:rds_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDataSpec, location_name: "RDSData", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromRDSInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromRDSInput.add_member(:compute_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
+    CreateDataSourceFromRDSInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromRDSInput.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "DataSourceName"))
+    CreateDataSourceFromRDSInput.add_member(:rds_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDataSpec, location_name: "RDSData", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromRDSInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, location_name: "RoleARN", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromRDSInput.add_member(:compute_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
     CreateDataSourceFromRDSInput.type = Types::CreateDataSourceFromRDSInput
-    CreateDataSourceFromRDSOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId"))
+    CreateDataSourceFromRDSOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId"))
     CreateDataSourceFromRDSOutput.type = Types::CreateDataSourceFromRDSOutput
-    CreateDataSourceFromRedshiftInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromRedshiftInput.add_member(:data_source_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "DataSourceName"))
-    CreateDataSourceFromRedshiftInput.add_member(:data_spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDataSpec, location_name: "DataSpec", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromRedshiftInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromRedshiftInput.add_member(:compute_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
+    CreateDataSourceFromRedshiftInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromRedshiftInput.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "DataSourceName"))
+    CreateDataSourceFromRedshiftInput.add_member(:data_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDataSpec, location_name: "DataSpec", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromRedshiftInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, location_name: "RoleARN", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromRedshiftInput.add_member(:compute_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
     CreateDataSourceFromRedshiftInput.type = Types::CreateDataSourceFromRedshiftInput
-    CreateDataSourceFromRedshiftOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId"))
+    CreateDataSourceFromRedshiftOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId"))
     CreateDataSourceFromRedshiftOutput.type = Types::CreateDataSourceFromRedshiftOutput
-    CreateDataSourceFromS3Input.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromS3Input.add_member(:data_source_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "DataSourceName"))
-    CreateDataSourceFromS3Input.add_member(:data_spec, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3DataSpec, location_name: "DataSpec", traits: {"smithy.api#required" => {}}))
-    CreateDataSourceFromS3Input.add_member(:compute_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
+    CreateDataSourceFromS3Input.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromS3Input.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "DataSourceName"))
+    CreateDataSourceFromS3Input.add_member(:data_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataSpec, location_name: "DataSpec", traits: {"smithy.api#required" => {}}))
+    CreateDataSourceFromS3Input.add_member(:compute_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
     CreateDataSourceFromS3Input.type = Types::CreateDataSourceFromS3Input
-    CreateDataSourceFromS3Output.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId"))
+    CreateDataSourceFromS3Output.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId"))
     CreateDataSourceFromS3Output.type = Types::CreateDataSourceFromS3Output
-    CreateEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
-    CreateEvaluationInput.add_member(:evaluation_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "EvaluationName"))
-    CreateEvaluationInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
-    CreateEvaluationInput.add_member(:evaluation_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationDataSourceId", traits: {"smithy.api#required" => {}}))
+    CreateEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
+    CreateEvaluationInput.add_member(:evaluation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "EvaluationName"))
+    CreateEvaluationInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    CreateEvaluationInput.add_member(:evaluation_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationDataSourceId", traits: {"smithy.api#required" => {}}))
     CreateEvaluationInput.type = Types::CreateEvaluationInput
-    CreateEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId"))
+    CreateEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId"))
     CreateEvaluationOutput.type = Types::CreateEvaluationOutput
-    CreateMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
-    CreateMLModelInput.add_member(:ml_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "MLModelName"))
-    CreateMLModelInput.add_member(:ml_model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModelType, location_name: "MLModelType", traits: {"smithy.api#required" => {}}))
-    CreateMLModelInput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "Parameters"))
-    CreateMLModelInput.add_member(:training_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "TrainingDataSourceId", traits: {"smithy.api#required" => {}}))
-    CreateMLModelInput.add_member(:recipe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Recipe, location_name: "Recipe"))
-    CreateMLModelInput.add_member(:recipe_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "RecipeUri"))
+    CreateMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    CreateMLModelInput.add_member(:ml_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "MLModelName"))
+    CreateMLModelInput.add_member(:ml_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MLModelType, location_name: "MLModelType", traits: {"smithy.api#required" => {}}))
+    CreateMLModelInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingParameters, location_name: "Parameters"))
+    CreateMLModelInput.add_member(:training_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "TrainingDataSourceId", traits: {"smithy.api#required" => {}}))
+    CreateMLModelInput.add_member(:recipe, ::Smithy::Schema::Shapes::MemberShape.new(target: Recipe, location_name: "Recipe"))
+    CreateMLModelInput.add_member(:recipe_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "RecipeUri"))
     CreateMLModelInput.type = Types::CreateMLModelInput
-    CreateMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
+    CreateMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
     CreateMLModelOutput.type = Types::CreateMLModelOutput
-    CreateRealtimeEndpointInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    CreateRealtimeEndpointInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
     CreateRealtimeEndpointInput.type = Types::CreateRealtimeEndpointInput
-    CreateRealtimeEndpointOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    CreateRealtimeEndpointOutput.add_member(:realtime_endpoint_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeEndpointInfo, location_name: "RealtimeEndpointInfo"))
+    CreateRealtimeEndpointOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    CreateRealtimeEndpointOutput.add_member(:realtime_endpoint_info, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeEndpointInfo, location_name: "RealtimeEndpointInfo"))
     CreateRealtimeEndpointOutput.type = Types::CreateRealtimeEndpointOutput
-    DataSource.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId"))
-    DataSource.add_member(:data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "DataLocationS3"))
-    DataSource.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRearrangement, location_name: "DataRearrangement"))
-    DataSource.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    DataSource.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    DataSource.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    DataSource.add_member(:data_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "DataSizeInBytes"))
-    DataSource.add_member(:number_of_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "NumberOfFiles"))
-    DataSource.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    DataSource.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    DataSource.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    DataSource.add_member(:redshift_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftMetadata, location_name: "RedshiftMetadata"))
-    DataSource.add_member(:rds_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSMetadata, location_name: "RDSMetadata"))
-    DataSource.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
-    DataSource.add_member(:compute_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
-    DataSource.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    DataSource.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    DataSource.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
+    DataSource.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId"))
+    DataSource.add_member(:data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "DataLocationS3"))
+    DataSource.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRearrangement, location_name: "DataRearrangement"))
+    DataSource.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    DataSource.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    DataSource.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    DataSource.add_member(:data_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "DataSizeInBytes"))
+    DataSource.add_member(:number_of_files, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "NumberOfFiles"))
+    DataSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "Name"))
+    DataSource.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    DataSource.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    DataSource.add_member(:redshift_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftMetadata, location_name: "RedshiftMetadata"))
+    DataSource.add_member(:rds_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSMetadata, location_name: "RDSMetadata"))
+    DataSource.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, location_name: "RoleARN"))
+    DataSource.add_member(:compute_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
+    DataSource.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    DataSource.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    DataSource.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
     DataSource.type = Types::DataSource
-    DataSourceFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
-    DataSourceFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
-    DataSourceFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
-    DataSourceFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
-    DataSourceFilterVariable.add_member(:data_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_URI", traits: {"smithy.api#enumValue" => "DataLocationS3"}))
-    DataSourceFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
-    DataSources.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSource)
-    DeleteBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
+    DataSourceFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
+    DataSourceFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
+    DataSourceFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    DataSourceFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    DataSourceFilterVariable.add_member(:data_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_URI", traits: {"smithy.api#enumValue" => "DataLocationS3"}))
+    DataSourceFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
+    DataSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource)
+    DeleteBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
     DeleteBatchPredictionInput.type = Types::DeleteBatchPredictionInput
-    DeleteBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId"))
+    DeleteBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId"))
     DeleteBatchPredictionOutput.type = Types::DeleteBatchPredictionOutput
-    DeleteDataSourceInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
+    DeleteDataSourceInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
     DeleteDataSourceInput.type = Types::DeleteDataSourceInput
-    DeleteDataSourceOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId"))
+    DeleteDataSourceOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId"))
     DeleteDataSourceOutput.type = Types::DeleteDataSourceOutput
-    DeleteEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
+    DeleteEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
     DeleteEvaluationInput.type = Types::DeleteEvaluationInput
-    DeleteEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId"))
+    DeleteEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId"))
     DeleteEvaluationOutput.type = Types::DeleteEvaluationOutput
-    DeleteMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    DeleteMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
     DeleteMLModelInput.type = Types::DeleteMLModelInput
-    DeleteMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
+    DeleteMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
     DeleteMLModelOutput.type = Types::DeleteMLModelOutput
-    DeleteRealtimeEndpointInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    DeleteRealtimeEndpointInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
     DeleteRealtimeEndpointInput.type = Types::DeleteRealtimeEndpointInput
-    DeleteRealtimeEndpointOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    DeleteRealtimeEndpointOutput.add_member(:realtime_endpoint_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeEndpointInfo, location_name: "RealtimeEndpointInfo"))
+    DeleteRealtimeEndpointOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    DeleteRealtimeEndpointOutput.add_member(:realtime_endpoint_info, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeEndpointInfo, location_name: "RealtimeEndpointInfo"))
     DeleteRealtimeEndpointOutput.type = Types::DeleteRealtimeEndpointOutput
-    DeleteTagsInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
-    DeleteTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    DeleteTagsInput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    DeleteTagsInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    DeleteTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DeleteTagsInput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
     DeleteTagsInput.type = Types::DeleteTagsInput
-    DeleteTagsOutput.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "ResourceId"))
-    DeleteTagsOutput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceType, location_name: "ResourceType"))
+    DeleteTagsOutput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "ResourceId"))
+    DeleteTagsOutput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceType, location_name: "ResourceType"))
     DeleteTagsOutput.type = Types::DeleteTagsOutput
-    DescribeBatchPredictionsInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPredictionFilterVariable, location_name: "FilterVariable"))
-    DescribeBatchPredictionsInput.add_member(:eq, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "EQ"))
-    DescribeBatchPredictionsInput.add_member(:gt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GT"))
-    DescribeBatchPredictionsInput.add_member(:lt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LT"))
-    DescribeBatchPredictionsInput.add_member(:ge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GE"))
-    DescribeBatchPredictionsInput.add_member(:le, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LE"))
-    DescribeBatchPredictionsInput.add_member(:ne, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "NE"))
-    DescribeBatchPredictionsInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "Prefix"))
-    DescribeBatchPredictionsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    DescribeBatchPredictionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
-    DescribeBatchPredictionsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeBatchPredictionsInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPredictionFilterVariable, location_name: "FilterVariable"))
+    DescribeBatchPredictionsInput.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "EQ"))
+    DescribeBatchPredictionsInput.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GT"))
+    DescribeBatchPredictionsInput.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LT"))
+    DescribeBatchPredictionsInput.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GE"))
+    DescribeBatchPredictionsInput.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LE"))
+    DescribeBatchPredictionsInput.add_member(:ne, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "NE"))
+    DescribeBatchPredictionsInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "Prefix"))
+    DescribeBatchPredictionsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
+    DescribeBatchPredictionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
+    DescribeBatchPredictionsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "Limit"))
     DescribeBatchPredictionsInput.type = Types::DescribeBatchPredictionsInput
-    DescribeBatchPredictionsOutput.add_member(:results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPredictions, location_name: "Results"))
-    DescribeBatchPredictionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
+    DescribeBatchPredictionsOutput.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPredictions, location_name: "Results"))
+    DescribeBatchPredictionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
     DescribeBatchPredictionsOutput.type = Types::DescribeBatchPredictionsOutput
-    DescribeDataSourcesInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSourceFilterVariable, location_name: "FilterVariable"))
-    DescribeDataSourcesInput.add_member(:eq, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "EQ"))
-    DescribeDataSourcesInput.add_member(:gt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GT"))
-    DescribeDataSourcesInput.add_member(:lt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LT"))
-    DescribeDataSourcesInput.add_member(:ge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GE"))
-    DescribeDataSourcesInput.add_member(:le, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LE"))
-    DescribeDataSourcesInput.add_member(:ne, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "NE"))
-    DescribeDataSourcesInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "Prefix"))
-    DescribeDataSourcesInput.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    DescribeDataSourcesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
-    DescribeDataSourcesInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeDataSourcesInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFilterVariable, location_name: "FilterVariable"))
+    DescribeDataSourcesInput.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "EQ"))
+    DescribeDataSourcesInput.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GT"))
+    DescribeDataSourcesInput.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LT"))
+    DescribeDataSourcesInput.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GE"))
+    DescribeDataSourcesInput.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LE"))
+    DescribeDataSourcesInput.add_member(:ne, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "NE"))
+    DescribeDataSourcesInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "Prefix"))
+    DescribeDataSourcesInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
+    DescribeDataSourcesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
+    DescribeDataSourcesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "Limit"))
     DescribeDataSourcesInput.type = Types::DescribeDataSourcesInput
-    DescribeDataSourcesOutput.add_member(:results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSources, location_name: "Results"))
-    DescribeDataSourcesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
+    DescribeDataSourcesOutput.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSources, location_name: "Results"))
+    DescribeDataSourcesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
     DescribeDataSourcesOutput.type = Types::DescribeDataSourcesOutput
-    DescribeEvaluationsInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationFilterVariable, location_name: "FilterVariable"))
-    DescribeEvaluationsInput.add_member(:eq, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "EQ"))
-    DescribeEvaluationsInput.add_member(:gt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GT"))
-    DescribeEvaluationsInput.add_member(:lt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LT"))
-    DescribeEvaluationsInput.add_member(:ge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GE"))
-    DescribeEvaluationsInput.add_member(:le, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LE"))
-    DescribeEvaluationsInput.add_member(:ne, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "NE"))
-    DescribeEvaluationsInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "Prefix"))
-    DescribeEvaluationsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    DescribeEvaluationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
-    DescribeEvaluationsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeEvaluationsInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFilterVariable, location_name: "FilterVariable"))
+    DescribeEvaluationsInput.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "EQ"))
+    DescribeEvaluationsInput.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GT"))
+    DescribeEvaluationsInput.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LT"))
+    DescribeEvaluationsInput.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GE"))
+    DescribeEvaluationsInput.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LE"))
+    DescribeEvaluationsInput.add_member(:ne, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "NE"))
+    DescribeEvaluationsInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "Prefix"))
+    DescribeEvaluationsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
+    DescribeEvaluationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
+    DescribeEvaluationsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "Limit"))
     DescribeEvaluationsInput.type = Types::DescribeEvaluationsInput
-    DescribeEvaluationsOutput.add_member(:results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Evaluations, location_name: "Results"))
-    DescribeEvaluationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
+    DescribeEvaluationsOutput.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: Evaluations, location_name: "Results"))
+    DescribeEvaluationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
     DescribeEvaluationsOutput.type = Types::DescribeEvaluationsOutput
-    DescribeMLModelsInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModelFilterVariable, location_name: "FilterVariable"))
-    DescribeMLModelsInput.add_member(:eq, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "EQ"))
-    DescribeMLModelsInput.add_member(:gt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GT"))
-    DescribeMLModelsInput.add_member(:lt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LT"))
-    DescribeMLModelsInput.add_member(:ge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "GE"))
-    DescribeMLModelsInput.add_member(:le, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "LE"))
-    DescribeMLModelsInput.add_member(:ne, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "NE"))
-    DescribeMLModelsInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparatorValue, location_name: "Prefix"))
-    DescribeMLModelsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    DescribeMLModelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
-    DescribeMLModelsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeMLModelsInput.add_member(:filter_variable, ::Smithy::Schema::Shapes::MemberShape.new(target: MLModelFilterVariable, location_name: "FilterVariable"))
+    DescribeMLModelsInput.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "EQ"))
+    DescribeMLModelsInput.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GT"))
+    DescribeMLModelsInput.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LT"))
+    DescribeMLModelsInput.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "GE"))
+    DescribeMLModelsInput.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "LE"))
+    DescribeMLModelsInput.add_member(:ne, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "NE"))
+    DescribeMLModelsInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparatorValue, location_name: "Prefix"))
+    DescribeMLModelsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
+    DescribeMLModelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
+    DescribeMLModelsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageLimit, location_name: "Limit"))
     DescribeMLModelsInput.type = Types::DescribeMLModelsInput
-    DescribeMLModelsOutput.add_member(:results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModels, location_name: "Results"))
-    DescribeMLModelsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "NextToken"))
+    DescribeMLModelsOutput.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: MLModels, location_name: "Results"))
+    DescribeMLModelsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "NextToken"))
     DescribeMLModelsOutput.type = Types::DescribeMLModelsOutput
-    DescribeTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    DescribeTagsInput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    DescribeTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DescribeTagsInput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
     DescribeTagsInput.type = Types::DescribeTagsInput
-    DescribeTagsOutput.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "ResourceId"))
-    DescribeTagsOutput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourceType, location_name: "ResourceType"))
-    DescribeTagsOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    DescribeTagsOutput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "ResourceId"))
+    DescribeTagsOutput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceType, location_name: "ResourceType"))
+    DescribeTagsOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     DescribeTagsOutput.type = Types::DescribeTagsOutput
-    DetailsAttributes.add_member(:predictive_model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREDICTIVE_MODEL_TYPE", traits: {"smithy.api#enumValue" => "PredictiveModelType"}))
-    DetailsAttributes.add_member(:algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALGORITHM", traits: {"smithy.api#enumValue" => "Algorithm"}))
-    DetailsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailsAttributes)
-    DetailsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailsValue)
-    EDPSecurityGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPSecurityGroupId)
-    EntityStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    EntityStatus.add_member(:inprogress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INPROGRESS", traits: {"smithy.api#enumValue" => "INPROGRESS"}))
-    EntityStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    EntityStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    EntityStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    Evaluation.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId"))
-    Evaluation.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    Evaluation.add_member(:evaluation_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationDataSourceId"))
-    Evaluation.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "InputDataLocationS3"))
-    Evaluation.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    Evaluation.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    Evaluation.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    Evaluation.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    Evaluation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    Evaluation.add_member(:performance_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerformanceMetrics, location_name: "PerformanceMetrics"))
-    Evaluation.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    Evaluation.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    Evaluation.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    Evaluation.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
+    DetailsAttributes.add_member(:predictive_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PREDICTIVE_MODEL_TYPE", traits: {"smithy.api#enumValue" => "PredictiveModelType"}))
+    DetailsAttributes.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALGORITHM", traits: {"smithy.api#enumValue" => "Algorithm"}))
+    DetailsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsAttributes)
+    DetailsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsValue)
+    EDPSecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EDPSecurityGroupId)
+    EntityStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    EntityStatus.add_member(:inprogress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INPROGRESS", traits: {"smithy.api#enumValue" => "INPROGRESS"}))
+    EntityStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    EntityStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    EntityStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    Evaluation.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId"))
+    Evaluation.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    Evaluation.add_member(:evaluation_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationDataSourceId"))
+    Evaluation.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "InputDataLocationS3"))
+    Evaluation.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    Evaluation.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    Evaluation.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    Evaluation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "Name"))
+    Evaluation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    Evaluation.add_member(:performance_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceMetrics, location_name: "PerformanceMetrics"))
+    Evaluation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    Evaluation.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    Evaluation.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    Evaluation.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
     Evaluation.type = Types::Evaluation
-    EvaluationFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
-    EvaluationFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
-    EvaluationFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
-    EvaluationFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
-    EvaluationFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
-    EvaluationFilterVariable.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL_ID", traits: {"smithy.api#enumValue" => "MLModelId"}))
-    EvaluationFilterVariable.add_member(:datasource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATASOURCE_ID", traits: {"smithy.api#enumValue" => "DataSourceId"}))
-    EvaluationFilterVariable.add_member(:data_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_URI", traits: {"smithy.api#enumValue" => "DataURI"}))
-    Evaluations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Evaluation)
-    GetBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
+    EvaluationFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
+    EvaluationFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
+    EvaluationFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    EvaluationFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    EvaluationFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
+    EvaluationFilterVariable.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL_ID", traits: {"smithy.api#enumValue" => "MLModelId"}))
+    EvaluationFilterVariable.add_member(:datasource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATASOURCE_ID", traits: {"smithy.api#enumValue" => "DataSourceId"}))
+    EvaluationFilterVariable.add_member(:data_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATA_URI", traits: {"smithy.api#enumValue" => "DataURI"}))
+    Evaluations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Evaluation)
+    GetBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
     GetBatchPredictionInput.type = Types::GetBatchPredictionInput
-    GetBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId"))
-    GetBatchPredictionOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    GetBatchPredictionOutput.add_member(:batch_prediction_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionDataSourceId"))
-    GetBatchPredictionOutput.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "InputDataLocationS3"))
-    GetBatchPredictionOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    GetBatchPredictionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    GetBatchPredictionOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    GetBatchPredictionOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    GetBatchPredictionOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    GetBatchPredictionOutput.add_member(:output_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "OutputUri"))
-    GetBatchPredictionOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "LogUri"))
-    GetBatchPredictionOutput.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    GetBatchPredictionOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    GetBatchPredictionOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    GetBatchPredictionOutput.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
-    GetBatchPredictionOutput.add_member(:total_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "TotalRecordCount"))
-    GetBatchPredictionOutput.add_member(:invalid_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "InvalidRecordCount"))
+    GetBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId"))
+    GetBatchPredictionOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    GetBatchPredictionOutput.add_member(:batch_prediction_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionDataSourceId"))
+    GetBatchPredictionOutput.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "InputDataLocationS3"))
+    GetBatchPredictionOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    GetBatchPredictionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    GetBatchPredictionOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    GetBatchPredictionOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "Name"))
+    GetBatchPredictionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    GetBatchPredictionOutput.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "OutputUri"))
+    GetBatchPredictionOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: PresignedS3Url, location_name: "LogUri"))
+    GetBatchPredictionOutput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    GetBatchPredictionOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    GetBatchPredictionOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    GetBatchPredictionOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
+    GetBatchPredictionOutput.add_member(:total_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "TotalRecordCount"))
+    GetBatchPredictionOutput.add_member(:invalid_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "InvalidRecordCount"))
     GetBatchPredictionOutput.type = Types::GetBatchPredictionOutput
-    GetDataSourceInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
-    GetDataSourceInput.add_member(:verbose, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Verbose, location_name: "Verbose", traits: {"smithy.api#default" => false}))
+    GetDataSourceInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
+    GetDataSourceInput.add_member(:verbose, ::Smithy::Schema::Shapes::MemberShape.new(target: Verbose, location_name: "Verbose", traits: {"smithy.api#default" => false}))
     GetDataSourceInput.type = Types::GetDataSourceInput
-    GetDataSourceOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId"))
-    GetDataSourceOutput.add_member(:data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "DataLocationS3"))
-    GetDataSourceOutput.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRearrangement, location_name: "DataRearrangement"))
-    GetDataSourceOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    GetDataSourceOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    GetDataSourceOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    GetDataSourceOutput.add_member(:data_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "DataSizeInBytes"))
-    GetDataSourceOutput.add_member(:number_of_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "NumberOfFiles"))
-    GetDataSourceOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    GetDataSourceOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    GetDataSourceOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "LogUri"))
-    GetDataSourceOutput.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    GetDataSourceOutput.add_member(:redshift_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftMetadata, location_name: "RedshiftMetadata"))
-    GetDataSourceOutput.add_member(:rds_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSMetadata, location_name: "RDSMetadata"))
-    GetDataSourceOutput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
-    GetDataSourceOutput.add_member(:compute_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
-    GetDataSourceOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    GetDataSourceOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    GetDataSourceOutput.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
-    GetDataSourceOutput.add_member(:data_source_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSchema, location_name: "DataSourceSchema"))
+    GetDataSourceOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId"))
+    GetDataSourceOutput.add_member(:data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "DataLocationS3"))
+    GetDataSourceOutput.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRearrangement, location_name: "DataRearrangement"))
+    GetDataSourceOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    GetDataSourceOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    GetDataSourceOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    GetDataSourceOutput.add_member(:data_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "DataSizeInBytes"))
+    GetDataSourceOutput.add_member(:number_of_files, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "NumberOfFiles"))
+    GetDataSourceOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "Name"))
+    GetDataSourceOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    GetDataSourceOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: PresignedS3Url, location_name: "LogUri"))
+    GetDataSourceOutput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    GetDataSourceOutput.add_member(:redshift_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftMetadata, location_name: "RedshiftMetadata"))
+    GetDataSourceOutput.add_member(:rds_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSMetadata, location_name: "RDSMetadata"))
+    GetDataSourceOutput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, location_name: "RoleARN"))
+    GetDataSourceOutput.add_member(:compute_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeStatistics, location_name: "ComputeStatistics", traits: {"smithy.api#default" => false}))
+    GetDataSourceOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    GetDataSourceOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    GetDataSourceOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
+    GetDataSourceOutput.add_member(:data_source_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSchema, location_name: "DataSourceSchema"))
     GetDataSourceOutput.type = Types::GetDataSourceOutput
-    GetEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
+    GetEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
     GetEvaluationInput.type = Types::GetEvaluationInput
-    GetEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId"))
-    GetEvaluationOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    GetEvaluationOutput.add_member(:evaluation_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationDataSourceId"))
-    GetEvaluationOutput.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "InputDataLocationS3"))
-    GetEvaluationOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    GetEvaluationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    GetEvaluationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    GetEvaluationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    GetEvaluationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    GetEvaluationOutput.add_member(:performance_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerformanceMetrics, location_name: "PerformanceMetrics"))
-    GetEvaluationOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "LogUri"))
-    GetEvaluationOutput.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    GetEvaluationOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    GetEvaluationOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    GetEvaluationOutput.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
+    GetEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId"))
+    GetEvaluationOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    GetEvaluationOutput.add_member(:evaluation_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationDataSourceId"))
+    GetEvaluationOutput.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "InputDataLocationS3"))
+    GetEvaluationOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    GetEvaluationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    GetEvaluationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    GetEvaluationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "Name"))
+    GetEvaluationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    GetEvaluationOutput.add_member(:performance_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceMetrics, location_name: "PerformanceMetrics"))
+    GetEvaluationOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: PresignedS3Url, location_name: "LogUri"))
+    GetEvaluationOutput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    GetEvaluationOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    GetEvaluationOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    GetEvaluationOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
     GetEvaluationOutput.type = Types::GetEvaluationOutput
-    GetMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
-    GetMLModelInput.add_member(:verbose, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Verbose, location_name: "Verbose", traits: {"smithy.api#default" => false}))
+    GetMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    GetMLModelInput.add_member(:verbose, ::Smithy::Schema::Shapes::MemberShape.new(target: Verbose, location_name: "Verbose", traits: {"smithy.api#default" => false}))
     GetMLModelInput.type = Types::GetMLModelInput
-    GetMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    GetMLModelOutput.add_member(:training_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "TrainingDataSourceId"))
-    GetMLModelOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    GetMLModelOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    GetMLModelOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    GetMLModelOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModelName, location_name: "Name"))
-    GetMLModelOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    GetMLModelOutput.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "SizeInBytes"))
-    GetMLModelOutput.add_member(:endpoint_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeEndpointInfo, location_name: "EndpointInfo"))
-    GetMLModelOutput.add_member(:training_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
-    GetMLModelOutput.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "InputDataLocationS3"))
-    GetMLModelOutput.add_member(:ml_model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModelType, location_name: "MLModelType"))
-    GetMLModelOutput.add_member(:score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScoreThreshold, location_name: "ScoreThreshold"))
-    GetMLModelOutput.add_member(:score_threshold_last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "ScoreThresholdLastUpdatedAt"))
-    GetMLModelOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "LogUri"))
-    GetMLModelOutput.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    GetMLModelOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    GetMLModelOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    GetMLModelOutput.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
-    GetMLModelOutput.add_member(:recipe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Recipe, location_name: "Recipe"))
-    GetMLModelOutput.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSchema, location_name: "Schema"))
+    GetMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    GetMLModelOutput.add_member(:training_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "TrainingDataSourceId"))
+    GetMLModelOutput.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    GetMLModelOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    GetMLModelOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    GetMLModelOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MLModelName, location_name: "Name"))
+    GetMLModelOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    GetMLModelOutput.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "SizeInBytes"))
+    GetMLModelOutput.add_member(:endpoint_info, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeEndpointInfo, location_name: "EndpointInfo"))
+    GetMLModelOutput.add_member(:training_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingParameters, location_name: "TrainingParameters"))
+    GetMLModelOutput.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "InputDataLocationS3"))
+    GetMLModelOutput.add_member(:ml_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MLModelType, location_name: "MLModelType"))
+    GetMLModelOutput.add_member(:score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreThreshold, location_name: "ScoreThreshold"))
+    GetMLModelOutput.add_member(:score_threshold_last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "ScoreThresholdLastUpdatedAt"))
+    GetMLModelOutput.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: PresignedS3Url, location_name: "LogUri"))
+    GetMLModelOutput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    GetMLModelOutput.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    GetMLModelOutput.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    GetMLModelOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
+    GetMLModelOutput.add_member(:recipe, ::Smithy::Schema::Shapes::MemberShape.new(target: Recipe, location_name: "Recipe"))
+    GetMLModelOutput.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSchema, location_name: "Schema"))
     GetMLModelOutput.type = Types::GetMLModelOutput
-    IdempotentParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
-    IdempotentParameterMismatchException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
+    IdempotentParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    IdempotentParameterMismatchException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
     IdempotentParameterMismatchException.type = Types::IdempotentParameterMismatchException
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
-    InternalServerException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InternalServerException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
     InternalServerException.type = Types::InternalServerException
-    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
-    InvalidInputException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
+    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidInputException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
     InvalidInputException.type = Types::InvalidInputException
-    InvalidTagException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidTagException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidTagException.type = Types::InvalidTagException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
-    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
     LimitExceededException.type = Types::LimitExceededException
-    MLModel.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
-    MLModel.add_member(:training_data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "TrainingDataSourceId"))
-    MLModel.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
-    MLModel.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    MLModel.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "LastUpdatedAt"))
-    MLModel.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModelName, location_name: "Name"))
-    MLModel.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
-    MLModel.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "SizeInBytes"))
-    MLModel.add_member(:endpoint_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeEndpointInfo, location_name: "EndpointInfo"))
-    MLModel.add_member(:training_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
-    MLModel.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "InputDataLocationS3"))
-    MLModel.add_member(:algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Algorithm, location_name: "Algorithm"))
-    MLModel.add_member(:ml_model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModelType, location_name: "MLModelType"))
-    MLModel.add_member(:score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScoreThreshold, location_name: "ScoreThreshold"))
-    MLModel.add_member(:score_threshold_last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "ScoreThresholdLastUpdatedAt"))
-    MLModel.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
-    MLModel.add_member(:compute_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
-    MLModel.add_member(:finished_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
-    MLModel.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
+    MLModel.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
+    MLModel.add_member(:training_data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "TrainingDataSourceId"))
+    MLModel.add_member(:created_by_iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsUserArn, location_name: "CreatedByIamUser"))
+    MLModel.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    MLModel.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "LastUpdatedAt"))
+    MLModel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MLModelName, location_name: "Name"))
+    MLModel.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityStatus, location_name: "Status"))
+    MLModel.add_member(:size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "SizeInBytes"))
+    MLModel.add_member(:endpoint_info, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeEndpointInfo, location_name: "EndpointInfo"))
+    MLModel.add_member(:training_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingParameters, location_name: "TrainingParameters"))
+    MLModel.add_member(:input_data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "InputDataLocationS3"))
+    MLModel.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: Algorithm, location_name: "Algorithm"))
+    MLModel.add_member(:ml_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MLModelType, location_name: "MLModelType"))
+    MLModel.add_member(:score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreThreshold, location_name: "ScoreThreshold"))
+    MLModel.add_member(:score_threshold_last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "ScoreThresholdLastUpdatedAt"))
+    MLModel.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
+    MLModel.add_member(:compute_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, location_name: "ComputeTime"))
+    MLModel.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "FinishedAt"))
+    MLModel.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "StartedAt"))
     MLModel.type = Types::MLModel
-    MLModelFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
-    MLModelFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
-    MLModelFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
-    MLModelFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
-    MLModelFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
-    MLModelFilterVariable.add_member(:training_datasource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING_DATASOURCE_ID", traits: {"smithy.api#enumValue" => "TrainingDataSourceId"}))
-    MLModelFilterVariable.add_member(:real_time_endpoint_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REAL_TIME_ENDPOINT_STATUS", traits: {"smithy.api#enumValue" => "RealtimeEndpointStatus"}))
-    MLModelFilterVariable.add_member(:ml_model_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL_TYPE", traits: {"smithy.api#enumValue" => "MLModelType"}))
-    MLModelFilterVariable.add_member(:algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALGORITHM", traits: {"smithy.api#enumValue" => "Algorithm"}))
-    MLModelFilterVariable.add_member(:training_data_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING_DATA_URI", traits: {"smithy.api#enumValue" => "TrainingDataURI"}))
-    MLModelType.add_member(:regression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGRESSION", traits: {"smithy.api#enumValue" => "REGRESSION"}))
-    MLModelType.add_member(:binary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BINARY", traits: {"smithy.api#enumValue" => "BINARY"}))
-    MLModelType.add_member(:multiclass, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTICLASS", traits: {"smithy.api#enumValue" => "MULTICLASS"}))
-    MLModels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MLModel)
-    PerformanceMetrics.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerformanceMetricsProperties, location_name: "Properties"))
+    MLModelFilterVariable.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_AT", traits: {"smithy.api#enumValue" => "CreatedAt"}))
+    MLModelFilterVariable.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAST_UPDATED_AT", traits: {"smithy.api#enumValue" => "LastUpdatedAt"}))
+    MLModelFilterVariable.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    MLModelFilterVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    MLModelFilterVariable.add_member(:iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAMUser"}))
+    MLModelFilterVariable.add_member(:training_datasource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING_DATASOURCE_ID", traits: {"smithy.api#enumValue" => "TrainingDataSourceId"}))
+    MLModelFilterVariable.add_member(:real_time_endpoint_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REAL_TIME_ENDPOINT_STATUS", traits: {"smithy.api#enumValue" => "RealtimeEndpointStatus"}))
+    MLModelFilterVariable.add_member(:ml_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL_TYPE", traits: {"smithy.api#enumValue" => "MLModelType"}))
+    MLModelFilterVariable.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALGORITHM", traits: {"smithy.api#enumValue" => "Algorithm"}))
+    MLModelFilterVariable.add_member(:training_data_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRAINING_DATA_URI", traits: {"smithy.api#enumValue" => "TrainingDataURI"}))
+    MLModelType.add_member(:regression, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REGRESSION", traits: {"smithy.api#enumValue" => "REGRESSION"}))
+    MLModelType.add_member(:binary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BINARY", traits: {"smithy.api#enumValue" => "BINARY"}))
+    MLModelType.add_member(:multiclass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTICLASS", traits: {"smithy.api#enumValue" => "MULTICLASS"}))
+    MLModels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MLModel)
+    PerformanceMetrics.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceMetricsProperties, location_name: "Properties"))
     PerformanceMetrics.type = Types::PerformanceMetrics
-    PerformanceMetricsProperties.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerformanceMetricsPropertyKey)
-    PerformanceMetricsProperties.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PerformanceMetricsPropertyValue)
-    PredictInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
-    PredictInput.add_member(:record, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Record, location_name: "Record", traits: {"smithy.api#required" => {}}))
-    PredictInput.add_member(:predict_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VipURL, location_name: "PredictEndpoint", traits: {"smithy.api#required" => {}}))
+    PerformanceMetricsProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceMetricsPropertyKey)
+    PerformanceMetricsProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceMetricsPropertyValue)
+    PredictInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    PredictInput.add_member(:record, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, location_name: "Record", traits: {"smithy.api#required" => {}}))
+    PredictInput.add_member(:predict_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: VipURL, location_name: "PredictEndpoint", traits: {"smithy.api#required" => {}}))
     PredictInput.type = Types::PredictInput
-    PredictOutput.add_member(:prediction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prediction, location_name: "Prediction"))
+    PredictOutput.add_member(:prediction, ::Smithy::Schema::Shapes::MemberShape.new(target: Prediction, location_name: "Prediction"))
     PredictOutput.type = Types::PredictOutput
-    Prediction.add_member(:predicted_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Label, location_name: "predictedLabel"))
-    Prediction.add_member(:predicted_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FloatLabel, location_name: "predictedValue"))
-    Prediction.add_member(:predicted_scores, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScoreValuePerLabelMap, location_name: "predictedScores"))
-    Prediction.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailsMap, location_name: "details"))
+    Prediction.add_member(:predicted_label, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, location_name: "predictedLabel"))
+    Prediction.add_member(:predicted_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FloatLabel, location_name: "predictedValue"))
+    Prediction.add_member(:predicted_scores, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreValuePerLabelMap, location_name: "predictedScores"))
+    Prediction.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsMap, location_name: "details"))
     Prediction.type = Types::Prediction
-    PredictorNotMountedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    PredictorNotMountedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     PredictorNotMountedException.type = Types::PredictorNotMountedException
-    RDSDataSpec.add_member(:database_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDatabase, location_name: "DatabaseInformation", traits: {"smithy.api#required" => {}}))
-    RDSDataSpec.add_member(:select_sql_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSSelectSqlQuery, location_name: "SelectSqlQuery", traits: {"smithy.api#required" => {}}))
-    RDSDataSpec.add_member(:database_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDatabaseCredentials, location_name: "DatabaseCredentials", traits: {"smithy.api#required" => {}}))
-    RDSDataSpec.add_member(:s3_staging_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "S3StagingLocation", traits: {"smithy.api#required" => {}}))
-    RDSDataSpec.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRearrangement, location_name: "DataRearrangement"))
-    RDSDataSpec.add_member(:data_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSchema, location_name: "DataSchema"))
-    RDSDataSpec.add_member(:data_schema_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "DataSchemaUri"))
-    RDSDataSpec.add_member(:resource_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPResourceRole, location_name: "ResourceRole", traits: {"smithy.api#required" => {}}))
-    RDSDataSpec.add_member(:service_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPServiceRole, location_name: "ServiceRole", traits: {"smithy.api#required" => {}}))
-    RDSDataSpec.add_member(:subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPSubnetId, location_name: "SubnetId", traits: {"smithy.api#required" => {}}))
-    RDSDataSpec.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPSecurityGroupIds, location_name: "SecurityGroupIds", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:database_information, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDatabase, location_name: "DatabaseInformation", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:select_sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSSelectSqlQuery, location_name: "SelectSqlQuery", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:database_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDatabaseCredentials, location_name: "DatabaseCredentials", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:s3_staging_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "S3StagingLocation", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRearrangement, location_name: "DataRearrangement"))
+    RDSDataSpec.add_member(:data_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSchema, location_name: "DataSchema"))
+    RDSDataSpec.add_member(:data_schema_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "DataSchemaUri"))
+    RDSDataSpec.add_member(:resource_role, ::Smithy::Schema::Shapes::MemberShape.new(target: EDPResourceRole, location_name: "ResourceRole", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:service_role, ::Smithy::Schema::Shapes::MemberShape.new(target: EDPServiceRole, location_name: "ServiceRole", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EDPSubnetId, location_name: "SubnetId", traits: {"smithy.api#required" => {}}))
+    RDSDataSpec.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: EDPSecurityGroupIds, location_name: "SecurityGroupIds", traits: {"smithy.api#required" => {}}))
     RDSDataSpec.type = Types::RDSDataSpec
-    RDSDatabase.add_member(:instance_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSInstanceIdentifier, location_name: "InstanceIdentifier", traits: {"smithy.api#required" => {}}))
-    RDSDatabase.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDatabaseName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    RDSDatabase.add_member(:instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSInstanceIdentifier, location_name: "InstanceIdentifier", traits: {"smithy.api#required" => {}}))
+    RDSDatabase.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDatabaseName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     RDSDatabase.type = Types::RDSDatabase
-    RDSDatabaseCredentials.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDatabaseUsername, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    RDSDatabaseCredentials.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDatabasePassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    RDSDatabaseCredentials.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDatabaseUsername, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    RDSDatabaseCredentials.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDatabasePassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
     RDSDatabaseCredentials.type = Types::RDSDatabaseCredentials
-    RDSMetadata.add_member(:database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDatabase, location_name: "Database"))
-    RDSMetadata.add_member(:database_user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSDatabaseUsername, location_name: "DatabaseUserName"))
-    RDSMetadata.add_member(:select_sql_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RDSSelectSqlQuery, location_name: "SelectSqlQuery"))
-    RDSMetadata.add_member(:resource_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPResourceRole, location_name: "ResourceRole"))
-    RDSMetadata.add_member(:service_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPServiceRole, location_name: "ServiceRole"))
-    RDSMetadata.add_member(:data_pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EDPPipelineId, location_name: "DataPipelineId"))
+    RDSMetadata.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDatabase, location_name: "Database"))
+    RDSMetadata.add_member(:database_user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSDatabaseUsername, location_name: "DatabaseUserName"))
+    RDSMetadata.add_member(:select_sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RDSSelectSqlQuery, location_name: "SelectSqlQuery"))
+    RDSMetadata.add_member(:resource_role, ::Smithy::Schema::Shapes::MemberShape.new(target: EDPResourceRole, location_name: "ResourceRole"))
+    RDSMetadata.add_member(:service_role, ::Smithy::Schema::Shapes::MemberShape.new(target: EDPServiceRole, location_name: "ServiceRole"))
+    RDSMetadata.add_member(:data_pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EDPPipelineId, location_name: "DataPipelineId"))
     RDSMetadata.type = Types::RDSMetadata
-    RealtimeEndpointInfo.add_member(:peak_requests_per_second, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerType, location_name: "PeakRequestsPerSecond", traits: {"smithy.api#default" => 0}))
-    RealtimeEndpointInfo.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochTime, location_name: "CreatedAt"))
-    RealtimeEndpointInfo.add_member(:endpoint_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VipURL, location_name: "EndpointUrl"))
-    RealtimeEndpointInfo.add_member(:endpoint_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeEndpointStatus, location_name: "EndpointStatus"))
+    RealtimeEndpointInfo.add_member(:peak_requests_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, location_name: "PeakRequestsPerSecond", traits: {"smithy.api#default" => 0}))
+    RealtimeEndpointInfo.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochTime, location_name: "CreatedAt"))
+    RealtimeEndpointInfo.add_member(:endpoint_url, ::Smithy::Schema::Shapes::MemberShape.new(target: VipURL, location_name: "EndpointUrl"))
+    RealtimeEndpointInfo.add_member(:endpoint_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeEndpointStatus, location_name: "EndpointStatus"))
     RealtimeEndpointInfo.type = Types::RealtimeEndpointInfo
-    RealtimeEndpointStatus.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    RealtimeEndpointStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
-    RealtimeEndpointStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    RealtimeEndpointStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    Record.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableName)
-    Record.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableValue)
-    RedshiftDataSpec.add_member(:database_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDatabase, location_name: "DatabaseInformation", traits: {"smithy.api#required" => {}}))
-    RedshiftDataSpec.add_member(:select_sql_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftSelectSqlQuery, location_name: "SelectSqlQuery", traits: {"smithy.api#required" => {}}))
-    RedshiftDataSpec.add_member(:database_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDatabaseCredentials, location_name: "DatabaseCredentials", traits: {"smithy.api#required" => {}}))
-    RedshiftDataSpec.add_member(:s3_staging_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "S3StagingLocation", traits: {"smithy.api#required" => {}}))
-    RedshiftDataSpec.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRearrangement, location_name: "DataRearrangement"))
-    RedshiftDataSpec.add_member(:data_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSchema, location_name: "DataSchema"))
-    RedshiftDataSpec.add_member(:data_schema_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "DataSchemaUri"))
+    RealtimeEndpointStatus.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    RealtimeEndpointStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
+    RealtimeEndpointStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    RealtimeEndpointStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    Record.key = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName)
+    Record.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue)
+    RedshiftDataSpec.add_member(:database_information, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatabase, location_name: "DatabaseInformation", traits: {"smithy.api#required" => {}}))
+    RedshiftDataSpec.add_member(:select_sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftSelectSqlQuery, location_name: "SelectSqlQuery", traits: {"smithy.api#required" => {}}))
+    RedshiftDataSpec.add_member(:database_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatabaseCredentials, location_name: "DatabaseCredentials", traits: {"smithy.api#required" => {}}))
+    RedshiftDataSpec.add_member(:s3_staging_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "S3StagingLocation", traits: {"smithy.api#required" => {}}))
+    RedshiftDataSpec.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRearrangement, location_name: "DataRearrangement"))
+    RedshiftDataSpec.add_member(:data_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSchema, location_name: "DataSchema"))
+    RedshiftDataSpec.add_member(:data_schema_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "DataSchemaUri"))
     RedshiftDataSpec.type = Types::RedshiftDataSpec
-    RedshiftDatabase.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDatabaseName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
-    RedshiftDatabase.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftClusterIdentifier, location_name: "ClusterIdentifier", traits: {"smithy.api#required" => {}}))
+    RedshiftDatabase.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatabaseName, location_name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    RedshiftDatabase.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftClusterIdentifier, location_name: "ClusterIdentifier", traits: {"smithy.api#required" => {}}))
     RedshiftDatabase.type = Types::RedshiftDatabase
-    RedshiftDatabaseCredentials.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDatabaseUsername, location_name: "Username", traits: {"smithy.api#required" => {}}))
-    RedshiftDatabaseCredentials.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDatabasePassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
+    RedshiftDatabaseCredentials.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatabaseUsername, location_name: "Username", traits: {"smithy.api#required" => {}}))
+    RedshiftDatabaseCredentials.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatabasePassword, location_name: "Password", traits: {"smithy.api#required" => {}}))
     RedshiftDatabaseCredentials.type = Types::RedshiftDatabaseCredentials
-    RedshiftMetadata.add_member(:redshift_database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDatabase, location_name: "RedshiftDatabase"))
-    RedshiftMetadata.add_member(:database_user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftDatabaseUsername, location_name: "DatabaseUserName"))
-    RedshiftMetadata.add_member(:select_sql_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftSelectSqlQuery, location_name: "SelectSqlQuery"))
+    RedshiftMetadata.add_member(:redshift_database, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatabase, location_name: "RedshiftDatabase"))
+    RedshiftMetadata.add_member(:database_user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatabaseUsername, location_name: "DatabaseUserName"))
+    RedshiftMetadata.add_member(:select_sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftSelectSqlQuery, location_name: "SelectSqlQuery"))
     RedshiftMetadata.type = Types::RedshiftMetadata
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
-    ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "code", traits: {"smithy.api#default" => 0}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    S3DataSpec.add_member(:data_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "DataLocationS3", traits: {"smithy.api#required" => {}}))
-    S3DataSpec.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRearrangement, location_name: "DataRearrangement"))
-    S3DataSpec.add_member(:data_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSchema, location_name: "DataSchema"))
-    S3DataSpec.add_member(:data_schema_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Url, location_name: "DataSchemaLocationS3"))
+    S3DataSpec.add_member(:data_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "DataLocationS3", traits: {"smithy.api#required" => {}}))
+    S3DataSpec.add_member(:data_rearrangement, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRearrangement, location_name: "DataRearrangement"))
+    S3DataSpec.add_member(:data_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSchema, location_name: "DataSchema"))
+    S3DataSpec.add_member(:data_schema_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, location_name: "DataSchemaLocationS3"))
     S3DataSpec.type = Types::S3DataSpec
-    ScoreValuePerLabelMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Label)
-    ScoreValuePerLabelMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScoreValue)
-    SortOrder.add_member(:asc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASC", traits: {"smithy.api#enumValue" => "asc"}))
-    SortOrder.add_member(:dsc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DSC", traits: {"smithy.api#enumValue" => "dsc"}))
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    ScoreValuePerLabelMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Label)
+    ScoreValuePerLabelMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreValue)
+    SortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASC", traits: {"smithy.api#enumValue" => "asc"}))
+    SortOrder.add_member(:dsc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DSC", traits: {"smithy.api#enumValue" => "dsc"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key"))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     TagLimitExceededException.type = Types::TagLimitExceededException
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TaggableResourceType.add_member(:batch_prediction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BATCH_PREDICTION", traits: {"smithy.api#enumValue" => "BatchPrediction"}))
-    TaggableResourceType.add_member(:datasource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATASOURCE", traits: {"smithy.api#enumValue" => "DataSource"}))
-    TaggableResourceType.add_member(:evaluation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVALUATION", traits: {"smithy.api#enumValue" => "Evaluation"}))
-    TaggableResourceType.add_member(:ml_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL", traits: {"smithy.api#enumValue" => "MLModel"}))
-    TrainingParameters.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    TrainingParameters.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType)
-    UpdateBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
-    UpdateBatchPredictionInput.add_member(:batch_prediction_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "BatchPredictionName", traits: {"smithy.api#required" => {}}))
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TaggableResourceType.add_member(:batch_prediction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BATCH_PREDICTION", traits: {"smithy.api#enumValue" => "BatchPrediction"}))
+    TaggableResourceType.add_member(:datasource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DATASOURCE", traits: {"smithy.api#enumValue" => "DataSource"}))
+    TaggableResourceType.add_member(:evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVALUATION", traits: {"smithy.api#enumValue" => "Evaluation"}))
+    TaggableResourceType.add_member(:ml_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ML_MODEL", traits: {"smithy.api#enumValue" => "MLModel"}))
+    TrainingParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    TrainingParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType)
+    UpdateBatchPredictionInput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId", traits: {"smithy.api#required" => {}}))
+    UpdateBatchPredictionInput.add_member(:batch_prediction_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "BatchPredictionName", traits: {"smithy.api#required" => {}}))
     UpdateBatchPredictionInput.type = Types::UpdateBatchPredictionInput
-    UpdateBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "BatchPredictionId"))
+    UpdateBatchPredictionOutput.add_member(:batch_prediction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "BatchPredictionId"))
     UpdateBatchPredictionOutput.type = Types::UpdateBatchPredictionOutput
-    UpdateDataSourceInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
-    UpdateDataSourceInput.add_member(:data_source_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "DataSourceName", traits: {"smithy.api#required" => {}}))
+    UpdateDataSourceInput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId", traits: {"smithy.api#required" => {}}))
+    UpdateDataSourceInput.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "DataSourceName", traits: {"smithy.api#required" => {}}))
     UpdateDataSourceInput.type = Types::UpdateDataSourceInput
-    UpdateDataSourceOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "DataSourceId"))
+    UpdateDataSourceOutput.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "DataSourceId"))
     UpdateDataSourceOutput.type = Types::UpdateDataSourceOutput
-    UpdateEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
-    UpdateEvaluationInput.add_member(:evaluation_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "EvaluationName", traits: {"smithy.api#required" => {}}))
+    UpdateEvaluationInput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId", traits: {"smithy.api#required" => {}}))
+    UpdateEvaluationInput.add_member(:evaluation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "EvaluationName", traits: {"smithy.api#required" => {}}))
     UpdateEvaluationInput.type = Types::UpdateEvaluationInput
-    UpdateEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "EvaluationId"))
+    UpdateEvaluationOutput.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "EvaluationId"))
     UpdateEvaluationOutput.type = Types::UpdateEvaluationOutput
-    UpdateMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
-    UpdateMLModelInput.add_member(:ml_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: "MLModelName"))
-    UpdateMLModelInput.add_member(:score_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScoreThreshold, location_name: "ScoreThreshold"))
+    UpdateMLModelInput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId", traits: {"smithy.api#required" => {}}))
+    UpdateMLModelInput.add_member(:ml_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, location_name: "MLModelName"))
+    UpdateMLModelInput.add_member(:score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreThreshold, location_name: "ScoreThreshold"))
     UpdateMLModelInput.type = Types::UpdateMLModelInput
-    UpdateMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
+    UpdateMLModelOutput.add_member(:ml_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, location_name: "MLModelId"))
     UpdateMLModelOutput.type = Types::UpdateMLModelOutput
 
     AmazonML20141212 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -662,286 +662,286 @@ module Aws::MachineLearning
       service.add_operation(:add_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#AddTags"
         operation.name = "AddTags"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagLimitExceededException)
+        operation.input = AddTagsInput
+        operation.output = AddTagsOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << InvalidTagException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TagLimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:create_batch_prediction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#CreateBatchPrediction"
         operation.name = "CreateBatchPrediction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBatchPredictionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBatchPredictionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = CreateBatchPredictionInput
+        operation.output = CreateBatchPredictionOutput
+        operation.errors << IdempotentParameterMismatchException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
       end)
       service.add_operation(:create_data_source_from_rds, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#CreateDataSourceFromRDS"
         operation.name = "CreateDataSourceFromRDS"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataSourceFromRDSInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataSourceFromRDSOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = CreateDataSourceFromRDSInput
+        operation.output = CreateDataSourceFromRDSOutput
+        operation.errors << IdempotentParameterMismatchException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
       end)
       service.add_operation(:create_data_source_from_redshift, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#CreateDataSourceFromRedshift"
         operation.name = "CreateDataSourceFromRedshift"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataSourceFromRedshiftInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataSourceFromRedshiftOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = CreateDataSourceFromRedshiftInput
+        operation.output = CreateDataSourceFromRedshiftOutput
+        operation.errors << IdempotentParameterMismatchException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
       end)
       service.add_operation(:create_data_source_from_s3, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#CreateDataSourceFromS3"
         operation.name = "CreateDataSourceFromS3"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataSourceFromS3Input)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDataSourceFromS3Output)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = CreateDataSourceFromS3Input
+        operation.output = CreateDataSourceFromS3Output
+        operation.errors << IdempotentParameterMismatchException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
       end)
       service.add_operation(:create_evaluation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#CreateEvaluation"
         operation.name = "CreateEvaluation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEvaluationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEvaluationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = CreateEvaluationInput
+        operation.output = CreateEvaluationOutput
+        operation.errors << IdempotentParameterMismatchException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
       end)
       service.add_operation(:create_ml_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#CreateMLModel"
         operation.name = "CreateMLModel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMLModelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMLModelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = CreateMLModelInput
+        operation.output = CreateMLModelOutput
+        operation.errors << IdempotentParameterMismatchException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
       end)
       service.add_operation(:create_realtime_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#CreateRealtimeEndpoint"
         operation.name = "CreateRealtimeEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRealtimeEndpointInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRealtimeEndpointOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = CreateRealtimeEndpointInput
+        operation.output = CreateRealtimeEndpointOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_batch_prediction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DeleteBatchPrediction"
         operation.name = "DeleteBatchPrediction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBatchPredictionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBatchPredictionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteBatchPredictionInput
+        operation.output = DeleteBatchPredictionOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_data_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DeleteDataSource"
         operation.name = "DeleteDataSource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDataSourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDataSourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteDataSourceInput
+        operation.output = DeleteDataSourceOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_evaluation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DeleteEvaluation"
         operation.name = "DeleteEvaluation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEvaluationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEvaluationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteEvaluationInput
+        operation.output = DeleteEvaluationOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_ml_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DeleteMLModel"
         operation.name = "DeleteMLModel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMLModelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMLModelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteMLModelInput
+        operation.output = DeleteMLModelOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_realtime_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DeleteRealtimeEndpoint"
         operation.name = "DeleteRealtimeEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRealtimeEndpointInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRealtimeEndpointOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteRealtimeEndpointInput
+        operation.output = DeleteRealtimeEndpointOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DeleteTags"
         operation.name = "DeleteTags"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTagsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTagsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DeleteTagsInput
+        operation.output = DeleteTagsOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << InvalidTagException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:describe_batch_predictions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DescribeBatchPredictions"
         operation.name = "DescribeBatchPredictions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBatchPredictionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeBatchPredictionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = DescribeBatchPredictionsInput
+        operation.output = DescribeBatchPredictionsOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeBatchPredictions.new
       end)
       service.add_operation(:describe_data_sources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DescribeDataSources"
         operation.name = "DescribeDataSources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDataSourcesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDataSourcesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = DescribeDataSourcesInput
+        operation.output = DescribeDataSourcesOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeDataSources.new
       end)
       service.add_operation(:describe_evaluations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DescribeEvaluations"
         operation.name = "DescribeEvaluations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEvaluationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEvaluationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = DescribeEvaluationsInput
+        operation.output = DescribeEvaluationsOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeEvaluations.new
       end)
       service.add_operation(:describe_ml_models, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DescribeMLModels"
         operation.name = "DescribeMLModels"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMLModelsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMLModelsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = DescribeMLModelsInput
+        operation.output = DescribeMLModelsOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeMLModels.new
       end)
       service.add_operation(:describe_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#DescribeTags"
         operation.name = "DescribeTags"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTagsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTagsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeTagsInput
+        operation.output = DescribeTagsOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_batch_prediction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#GetBatchPrediction"
         operation.name = "GetBatchPrediction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBatchPredictionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBatchPredictionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetBatchPredictionInput
+        operation.output = GetBatchPredictionOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_data_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#GetDataSource"
         operation.name = "GetDataSource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataSourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDataSourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetDataSourceInput
+        operation.output = GetDataSourceOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_evaluation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#GetEvaluation"
         operation.name = "GetEvaluation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEvaluationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEvaluationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetEvaluationInput
+        operation.output = GetEvaluationOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_ml_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#GetMLModel"
         operation.name = "GetMLModel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMLModelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMLModelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetMLModelInput
+        operation.output = GetMLModelOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:predict, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#Predict"
         operation.name = "Predict"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredictorNotMountedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PredictInput
+        operation.output = PredictOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << LimitExceededException
+        operation.errors << PredictorNotMountedException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_batch_prediction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#UpdateBatchPrediction"
         operation.name = "UpdateBatchPrediction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBatchPredictionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBatchPredictionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateBatchPredictionInput
+        operation.output = UpdateBatchPredictionOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_data_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#UpdateDataSource"
         operation.name = "UpdateDataSource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDataSourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDataSourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateDataSourceInput
+        operation.output = UpdateDataSourceOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_evaluation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#UpdateEvaluation"
         operation.name = "UpdateEvaluation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEvaluationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEvaluationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateEvaluationInput
+        operation.output = UpdateEvaluationOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_ml_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.machinelearning#UpdateMLModel"
         operation.name = "UpdateMLModel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMLModelInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMLModelOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UpdateMLModelInput
+        operation.output = UpdateMLModelOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
     end

@@ -43,67 +43,67 @@ module Aws::PersonalizeEvents
     UserId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.personalizeevents#UserId", name: "UserId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
     UserList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.personalizeevents#UserList", name: "UserList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
 
-    Action.add_member(:action_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "actionId", traits: {"smithy.api#required" => {}}))
-    Action.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonActionProperties, location_name: "properties"))
+    Action.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "actionId", traits: {"smithy.api#required" => {}}))
+    Action.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonActionProperties, location_name: "properties"))
     Action.type = Types::Action
-    ActionImpression.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId)
-    ActionInteraction.add_member(:action_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "actionId", traits: {"smithy.api#required" => {}}))
-    ActionInteraction.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
-    ActionInteraction.add_member(:session_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "sessionId", traits: {"smithy.api#required" => {}}))
-    ActionInteraction.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "timestamp", traits: {"smithy.api#required" => {}}))
-    ActionInteraction.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "eventType", traits: {"smithy.api#required" => {}}))
-    ActionInteraction.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "eventId"))
-    ActionInteraction.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
-    ActionInteraction.add_member(:impression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionImpression, location_name: "impression"))
-    ActionInteraction.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonActionInteractionProperties, location_name: "properties"))
+    ActionImpression.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId)
+    ActionInteraction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "actionId", traits: {"smithy.api#required" => {}}))
+    ActionInteraction.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "userId"))
+    ActionInteraction.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "sessionId", traits: {"smithy.api#required" => {}}))
+    ActionInteraction.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "timestamp", traits: {"smithy.api#required" => {}}))
+    ActionInteraction.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "eventType", traits: {"smithy.api#required" => {}}))
+    ActionInteraction.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "eventId"))
+    ActionInteraction.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, location_name: "recommendationId"))
+    ActionInteraction.add_member(:impression, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionImpression, location_name: "impression"))
+    ActionInteraction.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonActionInteractionProperties, location_name: "properties"))
     ActionInteraction.type = Types::ActionInteraction
-    ActionInteractionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionInteraction)
-    ActionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Action)
-    Event.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "eventId"))
-    Event.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "eventType", traits: {"smithy.api#required" => {}}))
-    Event.add_member(:event_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FloatType, location_name: "eventValue"))
-    Event.add_member(:item_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemId, location_name: "itemId"))
-    Event.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonEventPropertiesJSON, location_name: "properties"))
-    Event.add_member(:sent_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "sentAt", traits: {"smithy.api#required" => {}}))
-    Event.add_member(:recommendation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
-    Event.add_member(:impression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Impression, location_name: "impression"))
-    Event.add_member(:metric_attribution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricAttribution, location_name: "metricAttribution"))
+    ActionInteractionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionInteraction)
+    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action)
+    Event.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "eventId"))
+    Event.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "eventType", traits: {"smithy.api#required" => {}}))
+    Event.add_member(:event_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FloatType, location_name: "eventValue"))
+    Event.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemId, location_name: "itemId"))
+    Event.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonEventPropertiesJSON, location_name: "properties"))
+    Event.add_member(:sent_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "sentAt", traits: {"smithy.api#required" => {}}))
+    Event.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, location_name: "recommendationId"))
+    Event.add_member(:impression, ::Smithy::Schema::Shapes::MemberShape.new(target: Impression, location_name: "impression"))
+    Event.add_member(:metric_attribution, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAttribution, location_name: "metricAttribution"))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Event)
-    Impression.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemId)
-    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event)
+    Impression.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemId)
+    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidInputException.type = Types::InvalidInputException
-    Item.add_member(:item_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "itemId", traits: {"smithy.api#required" => {}}))
-    Item.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonItemProperties, location_name: "properties"))
+    Item.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "itemId", traits: {"smithy.api#required" => {}}))
+    Item.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonItemProperties, location_name: "properties"))
     Item.type = Types::Item
-    ItemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Item)
-    MetricAttribution.add_member(:event_attribution_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventAttributionSource, location_name: "eventAttributionSource", traits: {"smithy.api#required" => {}}))
+    ItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Item)
+    MetricAttribution.add_member(:event_attribution_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventAttributionSource, location_name: "eventAttributionSource", traits: {"smithy.api#required" => {}}))
     MetricAttribution.type = Types::MetricAttribution
-    PutActionInteractionsRequest.add_member(:tracking_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "trackingId", traits: {"smithy.api#required" => {}}))
-    PutActionInteractionsRequest.add_member(:action_interactions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionInteractionsList, location_name: "actionInteractions", traits: {"smithy.api#required" => {}}))
+    PutActionInteractionsRequest.add_member(:tracking_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "trackingId", traits: {"smithy.api#required" => {}}))
+    PutActionInteractionsRequest.add_member(:action_interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionInteractionsList, location_name: "actionInteractions", traits: {"smithy.api#required" => {}}))
     PutActionInteractionsRequest.type = Types::PutActionInteractionsRequest
-    PutActionsRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn", traits: {"smithy.api#required" => {}}))
-    PutActionsRequest.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionList, location_name: "actions", traits: {"smithy.api#required" => {}}))
+    PutActionsRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "datasetArn", traits: {"smithy.api#required" => {}}))
+    PutActionsRequest.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, location_name: "actions", traits: {"smithy.api#required" => {}}))
     PutActionsRequest.type = Types::PutActionsRequest
-    PutEventsRequest.add_member(:tracking_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "trackingId", traits: {"smithy.api#required" => {}}))
-    PutEventsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
-    PutEventsRequest.add_member(:session_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "sessionId", traits: {"smithy.api#required" => {}}))
-    PutEventsRequest.add_member(:event_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventList, location_name: "eventList", traits: {"smithy.api#required" => {}}))
+    PutEventsRequest.add_member(:tracking_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "trackingId", traits: {"smithy.api#required" => {}}))
+    PutEventsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "userId"))
+    PutEventsRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "sessionId", traits: {"smithy.api#required" => {}}))
+    PutEventsRequest.add_member(:event_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EventList, location_name: "eventList", traits: {"smithy.api#required" => {}}))
     PutEventsRequest.type = Types::PutEventsRequest
-    PutItemsRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn", traits: {"smithy.api#required" => {}}))
-    PutItemsRequest.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemList, location_name: "items", traits: {"smithy.api#required" => {}}))
+    PutItemsRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "datasetArn", traits: {"smithy.api#required" => {}}))
+    PutItemsRequest.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemList, location_name: "items", traits: {"smithy.api#required" => {}}))
     PutItemsRequest.type = Types::PutItemsRequest
-    PutUsersRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn", traits: {"smithy.api#required" => {}}))
-    PutUsersRequest.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "users", traits: {"smithy.api#required" => {}}))
+    PutUsersRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "datasetArn", traits: {"smithy.api#required" => {}}))
+    PutUsersRequest.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "users", traits: {"smithy.api#required" => {}}))
     PutUsersRequest.type = Types::PutUsersRequest
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    User.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: "userId", traits: {"smithy.api#required" => {}}))
-    User.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SynthesizedJsonUserProperties, location_name: "properties"))
+    User.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, location_name: "userId", traits: {"smithy.api#required" => {}}))
+    User.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonUserProperties, location_name: "properties"))
     User.type = Types::User
-    UserList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: User)
+    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User)
 
     AmazonPersonalizeEvents = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.personalizeevents#AmazonPersonalizeEvents"
@@ -113,49 +113,49 @@ module Aws::PersonalizeEvents
       service.add_operation(:put_action_interactions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeevents#PutActionInteractions"
         operation.name = "PutActionInteractions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutActionInteractionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutActionInteractionsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidInputException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/action-interactions", "code" => 200}}
       end)
       service.add_operation(:put_actions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeevents#PutActions"
         operation.name = "PutActions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutActionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutActionsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidInputException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/actions", "code" => 200}}
       end)
       service.add_operation(:put_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeevents#PutEvents"
         operation.name = "PutEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEventsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.input = PutEventsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidInputException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/events", "code" => 200}}
       end)
       service.add_operation(:put_items, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeevents#PutItems"
         operation.name = "PutItems"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutItemsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutItemsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidInputException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/items", "code" => 200}}
       end)
       service.add_operation(:put_users, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalizeevents#PutUsers"
         operation.name = "PutUsers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutUsersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = PutUsersRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidInputException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/users", "code" => 200}}
       end)
     end

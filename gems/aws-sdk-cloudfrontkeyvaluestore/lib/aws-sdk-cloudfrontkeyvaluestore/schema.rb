@@ -35,80 +35,80 @@ module Aws::CloudFrontKeyValueStore
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudfrontkeyvaluestore#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Value = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudfrontkeyvaluestore#Value", name: "Value", traits: {"smithy.api#sensitive" => {}})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    DeleteKeyRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
-    DeleteKeyRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteKeyRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Etag, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match", "smithy.api#required" => {}}))
+    DeleteKeyRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
+    DeleteKeyRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteKeyRequest.add_member(:if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match", "smithy.api#required" => {}}))
     DeleteKeyRequest.type = Types::DeleteKeyRequest
-    DeleteKeyRequestListItem.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    DeleteKeyRequestListItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
     DeleteKeyRequestListItem.type = Types::DeleteKeyRequestListItem
-    DeleteKeyRequestsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyRequestListItem)
-    DeleteKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
-    DeleteKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
-    DeleteKeyResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
+    DeleteKeyRequestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteKeyRequestListItem)
+    DeleteKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
+    DeleteKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
+    DeleteKeyResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
     DeleteKeyResponse.type = Types::DeleteKeyResponse
-    DescribeKeyValueStoreRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
+    DescribeKeyValueStoreRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
     DescribeKeyValueStoreRequest.type = Types::DescribeKeyValueStoreRequest
-    DescribeKeyValueStoreResponse.add_member(:item_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
-    DescribeKeyValueStoreResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
-    DescribeKeyValueStoreResponse.add_member(:kvs_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KvsARN, location_name: "KvsARN", traits: {"smithy.api#required" => {}}))
-    DescribeKeyValueStoreResponse.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "Created", traits: {"smithy.api#required" => {}}))
-    DescribeKeyValueStoreResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
-    DescribeKeyValueStoreResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastModified"))
-    DescribeKeyValueStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Status"))
-    DescribeKeyValueStoreResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "FailureReason"))
+    DescribeKeyValueStoreResponse.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
+    DescribeKeyValueStoreResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
+    DescribeKeyValueStoreResponse.add_member(:kvs_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KvsARN, location_name: "KvsARN", traits: {"smithy.api#required" => {}}))
+    DescribeKeyValueStoreResponse.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "Created", traits: {"smithy.api#required" => {}}))
+    DescribeKeyValueStoreResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
+    DescribeKeyValueStoreResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "LastModified"))
+    DescribeKeyValueStoreResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Status"))
+    DescribeKeyValueStoreResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "FailureReason"))
     DescribeKeyValueStoreResponse.type = Types::DescribeKeyValueStoreResponse
-    GetKeyRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
-    GetKeyRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetKeyRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
+    GetKeyRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetKeyRequest.type = Types::GetKeyRequest
-    GetKeyResponse.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    GetKeyResponse.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
-    GetKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
-    GetKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
+    GetKeyResponse.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    GetKeyResponse.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    GetKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
+    GetKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
     GetKeyResponse.type = Types::GetKeyResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    ListKeysRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
-    ListKeysRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListKeysRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#default" => 10, "smithy.api#httpQuery" => "MaxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListKeysRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
+    ListKeysRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListKeysRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#default" => 10, "smithy.api#httpQuery" => "MaxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
     ListKeysRequest.type = Types::ListKeysRequest
-    ListKeysResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
-    ListKeysResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeysResponseList, location_name: "Items"))
+    ListKeysResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListKeysResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListKeysResponseList, location_name: "Items"))
     ListKeysResponse.type = Types::ListKeysResponse
-    ListKeysResponseList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeysResponseListItem)
-    ListKeysResponseListItem.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    ListKeysResponseListItem.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    ListKeysResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListKeysResponseListItem)
+    ListKeysResponseListItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    ListKeysResponseListItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
     ListKeysResponseListItem.type = Types::ListKeysResponseListItem
-    PutKeyRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutKeyRequest.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
-    PutKeyRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
-    PutKeyRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Etag, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match", "smithy.api#required" => {}}))
+    PutKeyRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutKeyRequest.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    PutKeyRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
+    PutKeyRequest.add_member(:if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match", "smithy.api#required" => {}}))
     PutKeyRequest.type = Types::PutKeyRequest
-    PutKeyRequestListItem.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    PutKeyRequestListItem.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    PutKeyRequestListItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    PutKeyRequestListItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
     PutKeyRequestListItem.type = Types::PutKeyRequestListItem
-    PutKeyRequestsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutKeyRequestListItem)
-    PutKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
-    PutKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
-    PutKeyResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
+    PutKeyRequestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutKeyRequestListItem)
+    PutKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
+    PutKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
+    PutKeyResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
     PutKeyResponse.type = Types::PutKeyResponse
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    UpdateKeysRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
-    UpdateKeysRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Etag, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match", "smithy.api#required" => {}}))
-    UpdateKeysRequest.add_member(:puts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutKeyRequestsList, location_name: "Puts"))
-    UpdateKeysRequest.add_member(:deletes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyRequestsList, location_name: "Deletes"))
+    UpdateKeysRequest.add_member(:kvs_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KvsARN, location_name: "KvsARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "KvsARN"}}))
+    UpdateKeysRequest.add_member(:if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match", "smithy.api#required" => {}}))
+    UpdateKeysRequest.add_member(:puts, ::Smithy::Schema::Shapes::MemberShape.new(target: PutKeyRequestsList, location_name: "Puts"))
+    UpdateKeysRequest.add_member(:deletes, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteKeyRequestsList, location_name: "Deletes"))
     UpdateKeysRequest.type = Types::UpdateKeysRequest
-    UpdateKeysResponse.add_member(:item_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
-    UpdateKeysResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
-    UpdateKeysResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
+    UpdateKeysResponse.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ItemCount", traits: {"smithy.api#required" => {}}))
+    UpdateKeysResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
+    UpdateKeysResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
     UpdateKeysResponse.type = Types::UpdateKeysResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ValidationException.type = Types::ValidationException
 
     CloudFrontKeyValueStore = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -119,75 +119,75 @@ module Aws::CloudFrontKeyValueStore
       service.add_operation(:delete_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudfrontkeyvaluestore#DeleteKey"
         operation.name = "DeleteKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteKeyRequest
+        operation.output = DeleteKeyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/key-value-stores/{KvsARN}/keys/{Key}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_key_value_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStore"
         operation.name = "DescribeKeyValueStore"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeKeyValueStoreRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeKeyValueStoreResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = DescribeKeyValueStoreRequest
+        operation.output = DescribeKeyValueStoreResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/key-value-stores/{KvsARN}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudfrontkeyvaluestore#GetKey"
         operation.name = "GetKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetKeyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetKeyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetKeyRequest
+        operation.output = GetKeyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/key-value-stores/{KvsARN}/keys/{Key}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudfrontkeyvaluestore#ListKeys"
         operation.name = "ListKeys"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeysRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeysResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListKeysRequest
+        operation.output = ListKeysResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/key-value-stores/{KvsARN}/keys"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListKeys.new
       end)
       service.add_operation(:put_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudfrontkeyvaluestore#PutKey"
         operation.name = "PutKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutKeyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutKeyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutKeyRequest
+        operation.output = PutKeyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/key-value-stores/{KvsARN}/keys/{Key}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeys"
         operation.name = "UpdateKeys"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateKeysRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateKeysResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateKeysRequest
+        operation.output = UpdateKeysResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/key-value-stores/{KvsARN}/keys"}, "smithy.api#idempotent" => {}}
       end)
     end

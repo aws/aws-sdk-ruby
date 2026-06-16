@@ -255,736 +255,736 @@ module Aws::MemoryDB
     UserNotFoundFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#UserNotFoundFault", name: "UserNotFoundFault", traits: {"aws.protocols#awsQueryError" => {"code" => "UserNotFound", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     UserQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#UserQuotaExceededFault", name: "UserQuotaExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "UserQuotaExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    ACL.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    ACL.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    ACL.add_member(:user_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNameList, location_name: "UserNames"))
-    ACL.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MinimumEngineVersion"))
-    ACL.add_member(:pending_changes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLPendingChanges, location_name: "PendingChanges"))
-    ACL.add_member(:clusters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLClusterNameList, location_name: "Clusters"))
-    ACL.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ACL.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    ACL.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    ACL.add_member(:user_names, ::Smithy::Schema::Shapes::MemberShape.new(target: UserNameList, location_name: "UserNames"))
+    ACL.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MinimumEngineVersion"))
+    ACL.add_member(:pending_changes, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLPendingChanges, location_name: "PendingChanges"))
+    ACL.add_member(:clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLClusterNameList, location_name: "Clusters"))
+    ACL.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
     ACL.type = Types::ACL
-    ACLAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ACLAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ACLAlreadyExistsFault.type = Types::ACLAlreadyExistsFault
-    ACLClusterNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ACLList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACL)
-    ACLNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLName)
-    ACLNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ACLClusterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ACLList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ACL)
+    ACLNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ACLName)
+    ACLNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ACLNotFoundFault.type = Types::ACLNotFoundFault
-    ACLPendingChanges.add_member(:user_names_to_remove, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNameList, location_name: "UserNamesToRemove"))
-    ACLPendingChanges.add_member(:user_names_to_add, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNameList, location_name: "UserNamesToAdd"))
+    ACLPendingChanges.add_member(:user_names_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: UserNameList, location_name: "UserNamesToRemove"))
+    ACLPendingChanges.add_member(:user_names_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: UserNameList, location_name: "UserNamesToAdd"))
     ACLPendingChanges.type = Types::ACLPendingChanges
-    ACLQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ACLQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ACLQuotaExceededFault.type = Types::ACLQuotaExceededFault
-    ACLsUpdateStatus.add_member(:acl_to_apply, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLName, location_name: "ACLToApply"))
+    ACLsUpdateStatus.add_member(:acl_to_apply, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLName, location_name: "ACLToApply"))
     ACLsUpdateStatus.type = Types::ACLsUpdateStatus
-    APICallRateForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    APICallRateForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     APICallRateForCustomerExceededFault.type = Types::APICallRateForCustomerExceededFault
-    AZStatus.add_member(:single_az, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SingleAZ", traits: {"smithy.api#enumValue" => "singleaz"}))
-    AZStatus.add_member(:multi_az, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MultiAZ", traits: {"smithy.api#enumValue" => "multiaz"}))
-    Authentication.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "Type"))
-    Authentication.add_member(:password_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "PasswordCount"))
+    AZStatus.add_member(:single_az, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SingleAZ", traits: {"smithy.api#enumValue" => "singleaz"}))
+    AZStatus.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MultiAZ", traits: {"smithy.api#enumValue" => "multiaz"}))
+    Authentication.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationType, location_name: "Type"))
+    Authentication.add_member(:password_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "PasswordCount"))
     Authentication.type = Types::Authentication
-    AuthenticationMode.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputAuthenticationType, location_name: "Type"))
-    AuthenticationMode.add_member(:passwords, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PasswordListInput, location_name: "Passwords"))
+    AuthenticationMode.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InputAuthenticationType, location_name: "Type"))
+    AuthenticationMode.add_member(:passwords, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordListInput, location_name: "Passwords"))
     AuthenticationMode.type = Types::AuthenticationMode
-    AuthenticationType.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "password"}))
-    AuthenticationType.add_member(:no_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_PASSWORD", traits: {"smithy.api#enumValue" => "no-password"}))
-    AuthenticationType.add_member(:iam, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM", traits: {"smithy.api#enumValue" => "iam"}))
-    AvailabilityZone.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    AuthenticationType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "password"}))
+    AuthenticationType.add_member(:no_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_PASSWORD", traits: {"smithy.api#enumValue" => "no-password"}))
+    AuthenticationType.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM", traits: {"smithy.api#enumValue" => "iam"}))
+    AvailabilityZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
     AvailabilityZone.type = Types::AvailabilityZone
-    BatchUpdateClusterRequest.add_member(:cluster_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNameList, location_name: "ClusterNames", traits: {"smithy.api#required" => {}}))
-    BatchUpdateClusterRequest.add_member(:service_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateRequest, location_name: "ServiceUpdate"))
+    BatchUpdateClusterRequest.add_member(:cluster_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameList, location_name: "ClusterNames", traits: {"smithy.api#required" => {}}))
+    BatchUpdateClusterRequest.add_member(:service_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateRequest, location_name: "ServiceUpdate"))
     BatchUpdateClusterRequest.type = Types::BatchUpdateClusterRequest
-    BatchUpdateClusterResponse.add_member(:processed_clusters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterList, location_name: "ProcessedClusters"))
-    BatchUpdateClusterResponse.add_member(:unprocessed_clusters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessedClusterList, location_name: "UnprocessedClusters"))
+    BatchUpdateClusterResponse.add_member(:processed_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterList, location_name: "ProcessedClusters"))
+    BatchUpdateClusterResponse.add_member(:unprocessed_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedClusterList, location_name: "UnprocessedClusters"))
     BatchUpdateClusterResponse.type = Types::BatchUpdateClusterResponse
-    Cluster.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    Cluster.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    Cluster.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    Cluster.add_member(:pending_updates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterPendingUpdates, location_name: "PendingUpdates"))
-    Cluster.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName"))
-    Cluster.add_member(:number_of_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfShards"))
-    Cluster.add_member(:shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardList, location_name: "Shards"))
-    Cluster.add_member(:availability_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AZStatus, location_name: "AvailabilityMode"))
-    Cluster.add_member(:cluster_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint, location_name: "ClusterEndpoint"))
-    Cluster.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    Cluster.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    Cluster.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    Cluster.add_member(:engine_patch_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EnginePatchVersion"))
-    Cluster.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
-    Cluster.add_member(:parameter_group_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupStatus"))
-    Cluster.add_member(:security_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupMembershipList, location_name: "SecurityGroups"))
-    Cluster.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName"))
-    Cluster.add_member(:tls_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TLSEnabled"))
-    Cluster.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    Cluster.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
-    Cluster.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
-    Cluster.add_member(:sns_topic_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicStatus"))
-    Cluster.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
-    Cluster.add_member(:maintenance_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceWindow"))
-    Cluster.add_member(:snapshot_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
-    Cluster.add_member(:acl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLName, location_name: "ACLName"))
-    Cluster.add_member(:auto_minor_version_upgrade, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
-    Cluster.add_member(:data_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
-    Cluster.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
-    Cluster.add_member(:ip_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
+    Cluster.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    Cluster.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    Cluster.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    Cluster.add_member(:pending_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPendingUpdates, location_name: "PendingUpdates"))
+    Cluster.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName"))
+    Cluster.add_member(:number_of_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NumberOfShards"))
+    Cluster.add_member(:shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardList, location_name: "Shards"))
+    Cluster.add_member(:availability_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AZStatus, location_name: "AvailabilityMode"))
+    Cluster.add_member(:cluster_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, location_name: "ClusterEndpoint"))
+    Cluster.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    Cluster.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    Cluster.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    Cluster.add_member(:engine_patch_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EnginePatchVersion"))
+    Cluster.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName"))
+    Cluster.add_member(:parameter_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupStatus"))
+    Cluster.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembershipList, location_name: "SecurityGroups"))
+    Cluster.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SubnetGroupName"))
+    Cluster.add_member(:tls_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "TLSEnabled"))
+    Cluster.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KmsKeyId"))
+    Cluster.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
+    Cluster.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnsTopicArn"))
+    Cluster.add_member(:sns_topic_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnsTopicStatus"))
+    Cluster.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+    Cluster.add_member(:maintenance_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MaintenanceWindow"))
+    Cluster.add_member(:snapshot_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotWindow"))
+    Cluster.add_member(:acl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLName, location_name: "ACLName"))
+    Cluster.add_member(:auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
+    Cluster.add_member(:data_tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: DataTieringStatus, location_name: "DataTiering"))
+    Cluster.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
+    Cluster.add_member(:ip_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: IpDiscovery, location_name: "IpDiscovery"))
     Cluster.type = Types::Cluster
-    ClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ClusterAlreadyExistsFault.type = Types::ClusterAlreadyExistsFault
-    ClusterConfiguration.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    ClusterConfiguration.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    ClusterConfiguration.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    ClusterConfiguration.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    ClusterConfiguration.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    ClusterConfiguration.add_member(:maintenance_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceWindow"))
-    ClusterConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TopicArn"))
-    ClusterConfiguration.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
-    ClusterConfiguration.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
-    ClusterConfiguration.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName"))
-    ClusterConfiguration.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
-    ClusterConfiguration.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
-    ClusterConfiguration.add_member(:snapshot_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
-    ClusterConfiguration.add_member(:num_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumShards"))
-    ClusterConfiguration.add_member(:shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardDetails, location_name: "Shards"))
-    ClusterConfiguration.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionParameterGroupName"))
-    ClusterConfiguration.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName"))
+    ClusterConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    ClusterConfiguration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    ClusterConfiguration.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    ClusterConfiguration.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    ClusterConfiguration.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    ClusterConfiguration.add_member(:maintenance_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MaintenanceWindow"))
+    ClusterConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TopicArn"))
+    ClusterConfiguration.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "Port"))
+    ClusterConfiguration.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName"))
+    ClusterConfiguration.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SubnetGroupName"))
+    ClusterConfiguration.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VpcId"))
+    ClusterConfiguration.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+    ClusterConfiguration.add_member(:snapshot_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotWindow"))
+    ClusterConfiguration.add_member(:num_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NumShards"))
+    ClusterConfiguration.add_member(:shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardDetails, location_name: "Shards"))
+    ClusterConfiguration.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionParameterGroupName"))
+    ClusterConfiguration.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName"))
     ClusterConfiguration.type = Types::ClusterConfiguration
-    ClusterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cluster, traits: {"smithy.api#xmlName" => "Cluster"})
-    ClusterNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, traits: {"smithy.api#xmlName" => "Cluster"})
+    ClusterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ClusterNotFoundFault.type = Types::ClusterNotFoundFault
-    ClusterPendingUpdates.add_member(:resharding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReshardingStatus, location_name: "Resharding"))
-    ClusterPendingUpdates.add_member(:ac_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLsUpdateStatus, location_name: "ACLs"))
-    ClusterPendingUpdates.add_member(:service_updates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingModifiedServiceUpdateList, location_name: "ServiceUpdates"))
+    ClusterPendingUpdates.add_member(:resharding, ::Smithy::Schema::Shapes::MemberShape.new(target: ReshardingStatus, location_name: "Resharding"))
+    ClusterPendingUpdates.add_member(:ac_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLsUpdateStatus, location_name: "ACLs"))
+    ClusterPendingUpdates.add_member(:service_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingModifiedServiceUpdateList, location_name: "ServiceUpdates"))
     ClusterPendingUpdates.type = Types::ClusterPendingUpdates
-    ClusterQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ClusterQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ClusterQuotaForCustomerExceededFault.type = Types::ClusterQuotaForCustomerExceededFault
-    CopySnapshotRequest.add_member(:source_snapshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceSnapshotName", traits: {"smithy.api#required" => {}}))
-    CopySnapshotRequest.add_member(:target_snapshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TargetSnapshotName", traits: {"smithy.api#required" => {}}))
-    CopySnapshotRequest.add_member(:target_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetBucket, location_name: "TargetBucket"))
-    CopySnapshotRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CopySnapshotRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CopySnapshotRequest.add_member(:source_snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceSnapshotName", traits: {"smithy.api#required" => {}}))
+    CopySnapshotRequest.add_member(:target_snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TargetSnapshotName", traits: {"smithy.api#required" => {}}))
+    CopySnapshotRequest.add_member(:target_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetBucket, location_name: "TargetBucket"))
+    CopySnapshotRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "KmsKeyId"))
+    CopySnapshotRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CopySnapshotRequest.type = Types::CopySnapshotRequest
-    CopySnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
+    CopySnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, location_name: "Snapshot"))
     CopySnapshotResponse.type = Types::CopySnapshotResponse
-    CreateACLRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
-    CreateACLRequest.add_member(:user_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNameListInput, location_name: "UserNames"))
-    CreateACLRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateACLRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
+    CreateACLRequest.add_member(:user_names, ::Smithy::Schema::Shapes::MemberShape.new(target: UserNameListInput, location_name: "UserNames"))
+    CreateACLRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateACLRequest.type = Types::CreateACLRequest
-    CreateACLResponse.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACL, location_name: "ACL"))
+    CreateACLResponse.add_member(:acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ACL, location_name: "ACL"))
     CreateACLResponse.type = Types::CreateACLResponse
-    CreateClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
-    CreateClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType", traits: {"smithy.api#required" => {}}))
-    CreateClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName"))
-    CreateClusterRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
-    CreateClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateClusterRequest.add_member(:num_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumShards"))
-    CreateClusterRequest.add_member(:num_replicas_per_shard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumReplicasPerShard"))
-    CreateClusterRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName"))
-    CreateClusterRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
-    CreateClusterRequest.add_member(:maintenance_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceWindow"))
-    CreateClusterRequest.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
-    CreateClusterRequest.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
-    CreateClusterRequest.add_member(:tls_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TLSEnabled"))
-    CreateClusterRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    CreateClusterRequest.add_member(:snapshot_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotArnsList, location_name: "SnapshotArns"))
-    CreateClusterRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotName"))
-    CreateClusterRequest.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
-    CreateClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateClusterRequest.add_member(:snapshot_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
-    CreateClusterRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLName, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
-    CreateClusterRequest.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    CreateClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    CreateClusterRequest.add_member(:auto_minor_version_upgrade, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
-    CreateClusterRequest.add_member(:data_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DataTiering"))
-    CreateClusterRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
-    CreateClusterRequest.add_member(:ip_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
+    CreateClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
+    CreateClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType", traits: {"smithy.api#required" => {}}))
+    CreateClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName"))
+    CreateClusterRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName"))
+    CreateClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateClusterRequest.add_member(:num_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NumShards"))
+    CreateClusterRequest.add_member(:num_replicas_per_shard, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NumReplicasPerShard"))
+    CreateClusterRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SubnetGroupName"))
+    CreateClusterRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
+    CreateClusterRequest.add_member(:maintenance_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MaintenanceWindow"))
+    CreateClusterRequest.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "Port"))
+    CreateClusterRequest.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnsTopicArn"))
+    CreateClusterRequest.add_member(:tls_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "TLSEnabled"))
+    CreateClusterRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KmsKeyId"))
+    CreateClusterRequest.add_member(:snapshot_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotArnsList, location_name: "SnapshotArns"))
+    CreateClusterRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotName"))
+    CreateClusterRequest.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+    CreateClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateClusterRequest.add_member(:snapshot_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotWindow"))
+    CreateClusterRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLName, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
+    CreateClusterRequest.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    CreateClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    CreateClusterRequest.add_member(:auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
+    CreateClusterRequest.add_member(:data_tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "DataTiering"))
+    CreateClusterRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, location_name: "NetworkType"))
+    CreateClusterRequest.add_member(:ip_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: IpDiscovery, location_name: "IpDiscovery"))
     CreateClusterRequest.type = Types::CreateClusterRequest
-    CreateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    CreateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, location_name: "Cluster"))
     CreateClusterResponse.type = Types::CreateClusterResponse
-    CreateMultiRegionClusterRequest.add_member(:multi_region_cluster_name_suffix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterNameSuffix", traits: {"smithy.api#required" => {}}))
-    CreateMultiRegionClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateMultiRegionClusterRequest.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    CreateMultiRegionClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    CreateMultiRegionClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType", traits: {"smithy.api#required" => {}}))
-    CreateMultiRegionClusterRequest.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionParameterGroupName"))
-    CreateMultiRegionClusterRequest.add_member(:num_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumShards"))
-    CreateMultiRegionClusterRequest.add_member(:tls_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TLSEnabled"))
-    CreateMultiRegionClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateMultiRegionClusterRequest.add_member(:multi_region_cluster_name_suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterNameSuffix", traits: {"smithy.api#required" => {}}))
+    CreateMultiRegionClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateMultiRegionClusterRequest.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    CreateMultiRegionClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    CreateMultiRegionClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType", traits: {"smithy.api#required" => {}}))
+    CreateMultiRegionClusterRequest.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionParameterGroupName"))
+    CreateMultiRegionClusterRequest.add_member(:num_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NumShards"))
+    CreateMultiRegionClusterRequest.add_member(:tls_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "TLSEnabled"))
+    CreateMultiRegionClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateMultiRegionClusterRequest.type = Types::CreateMultiRegionClusterRequest
-    CreateMultiRegionClusterResponse.add_member(:multi_region_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionCluster, location_name: "MultiRegionCluster"))
+    CreateMultiRegionClusterResponse.add_member(:multi_region_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionCluster, location_name: "MultiRegionCluster"))
     CreateMultiRegionClusterResponse.type = Types::CreateMultiRegionClusterResponse
-    CreateParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
-    CreateParameterGroupRequest.add_member(:family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Family", traits: {"smithy.api#required" => {}}))
-    CreateParameterGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateParameterGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
+    CreateParameterGroupRequest.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Family", traits: {"smithy.api#required" => {}}))
+    CreateParameterGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateParameterGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateParameterGroupRequest.type = Types::CreateParameterGroupRequest
-    CreateParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroup, location_name: "ParameterGroup"))
+    CreateParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, location_name: "ParameterGroup"))
     CreateParameterGroupResponse.type = Types::CreateParameterGroupResponse
-    CreateSnapshotRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
-    CreateSnapshotRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotName", traits: {"smithy.api#required" => {}}))
-    CreateSnapshotRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    CreateSnapshotRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateSnapshotRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotName", traits: {"smithy.api#required" => {}}))
+    CreateSnapshotRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KmsKeyId"))
+    CreateSnapshotRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateSnapshotRequest.type = Types::CreateSnapshotRequest
-    CreateSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
+    CreateSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, location_name: "Snapshot"))
     CreateSnapshotResponse.type = Types::CreateSnapshotResponse
-    CreateSubnetGroupRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName", traits: {"smithy.api#required" => {}}))
-    CreateSubnetGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateSubnetGroupRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIdentifierList, location_name: "SubnetIds", traits: {"smithy.api#required" => {}}))
-    CreateSubnetGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateSubnetGroupRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SubnetGroupName", traits: {"smithy.api#required" => {}}))
+    CreateSubnetGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    CreateSubnetGroupRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdentifierList, location_name: "SubnetIds", traits: {"smithy.api#required" => {}}))
+    CreateSubnetGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateSubnetGroupRequest.type = Types::CreateSubnetGroupRequest
-    CreateSubnetGroupResponse.add_member(:subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroup, location_name: "SubnetGroup"))
+    CreateSubnetGroupResponse.add_member(:subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup, location_name: "SubnetGroup"))
     CreateSubnetGroupResponse.type = Types::CreateSubnetGroupResponse
-    CreateUserRequest.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:authentication_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "AuthenticationMode", traits: {"smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:access_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessString, location_name: "AccessString", traits: {"smithy.api#required" => {}}))
-    CreateUserRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateUserRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:authentication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationMode, location_name: "AuthenticationMode", traits: {"smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:access_string, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessString, location_name: "AccessString", traits: {"smithy.api#required" => {}}))
+    CreateUserRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateUserRequest.type = Types::CreateUserRequest
-    CreateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: User, location_name: "User"))
+    CreateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: User, location_name: "User"))
     CreateUserResponse.type = Types::CreateUserResponse
-    DataTieringStatus.add_member(:true, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRUE", traits: {"smithy.api#enumValue" => "true"}))
-    DataTieringStatus.add_member(:false, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FALSE", traits: {"smithy.api#enumValue" => "false"}))
-    DefaultUserRequired.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    DataTieringStatus.add_member(:true, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRUE", traits: {"smithy.api#enumValue" => "true"}))
+    DataTieringStatus.add_member(:false, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FALSE", traits: {"smithy.api#enumValue" => "false"}))
+    DefaultUserRequired.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     DefaultUserRequired.type = Types::DefaultUserRequired
-    DeleteACLRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
+    DeleteACLRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
     DeleteACLRequest.type = Types::DeleteACLRequest
-    DeleteACLResponse.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACL, location_name: "ACL"))
+    DeleteACLResponse.add_member(:acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ACL, location_name: "ACL"))
     DeleteACLResponse.type = Types::DeleteACLResponse
-    DeleteClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
-    DeleteClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName"))
-    DeleteClusterRequest.add_member(:final_snapshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FinalSnapshotName"))
+    DeleteClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
+    DeleteClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName"))
+    DeleteClusterRequest.add_member(:final_snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FinalSnapshotName"))
     DeleteClusterRequest.type = Types::DeleteClusterRequest
-    DeleteClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    DeleteClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, location_name: "Cluster"))
     DeleteClusterResponse.type = Types::DeleteClusterResponse
-    DeleteMultiRegionClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName", traits: {"smithy.api#required" => {}}))
+    DeleteMultiRegionClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName", traits: {"smithy.api#required" => {}}))
     DeleteMultiRegionClusterRequest.type = Types::DeleteMultiRegionClusterRequest
-    DeleteMultiRegionClusterResponse.add_member(:multi_region_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionCluster, location_name: "MultiRegionCluster"))
+    DeleteMultiRegionClusterResponse.add_member(:multi_region_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionCluster, location_name: "MultiRegionCluster"))
     DeleteMultiRegionClusterResponse.type = Types::DeleteMultiRegionClusterResponse
-    DeleteParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
+    DeleteParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
     DeleteParameterGroupRequest.type = Types::DeleteParameterGroupRequest
-    DeleteParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroup, location_name: "ParameterGroup"))
+    DeleteParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, location_name: "ParameterGroup"))
     DeleteParameterGroupResponse.type = Types::DeleteParameterGroupResponse
-    DeleteSnapshotRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotName", traits: {"smithy.api#required" => {}}))
+    DeleteSnapshotRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotName", traits: {"smithy.api#required" => {}}))
     DeleteSnapshotRequest.type = Types::DeleteSnapshotRequest
-    DeleteSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
+    DeleteSnapshotResponse.add_member(:snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, location_name: "Snapshot"))
     DeleteSnapshotResponse.type = Types::DeleteSnapshotResponse
-    DeleteSubnetGroupRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName", traits: {"smithy.api#required" => {}}))
+    DeleteSubnetGroupRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SubnetGroupName", traits: {"smithy.api#required" => {}}))
     DeleteSubnetGroupRequest.type = Types::DeleteSubnetGroupRequest
-    DeleteSubnetGroupResponse.add_member(:subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroup, location_name: "SubnetGroup"))
+    DeleteSubnetGroupResponse.add_member(:subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup, location_name: "SubnetGroup"))
     DeleteSubnetGroupResponse.type = Types::DeleteSubnetGroupResponse
-    DeleteUserRequest.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
+    DeleteUserRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
     DeleteUserRequest.type = Types::DeleteUserRequest
-    DeleteUserResponse.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: User, location_name: "User"))
+    DeleteUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: User, location_name: "User"))
     DeleteUserResponse.type = Types::DeleteUserResponse
-    DescribeACLsRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ACLName"))
-    DescribeACLsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeACLsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeACLsRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ACLName"))
+    DescribeACLsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeACLsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeACLsRequest.type = Types::DescribeACLsRequest
-    DescribeACLsResponse.add_member(:ac_ls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLList, location_name: "ACLs"))
-    DescribeACLsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeACLsResponse.add_member(:ac_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLList, location_name: "ACLs"))
+    DescribeACLsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeACLsResponse.type = Types::DescribeACLsResponse
-    DescribeClustersRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName"))
-    DescribeClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeClustersRequest.add_member(:show_shard_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ShowShardDetails"))
+    DescribeClustersRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName"))
+    DescribeClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeClustersRequest.add_member(:show_shard_details, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "ShowShardDetails"))
     DescribeClustersRequest.type = Types::DescribeClustersRequest
-    DescribeClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeClustersResponse.add_member(:clusters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterList, location_name: "Clusters"))
+    DescribeClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeClustersResponse.add_member(:clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterList, location_name: "Clusters"))
     DescribeClustersResponse.type = Types::DescribeClustersResponse
-    DescribeEngineVersionsRequest.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    DescribeEngineVersionsRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    DescribeEngineVersionsRequest.add_member(:parameter_group_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupFamily"))
-    DescribeEngineVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeEngineVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeEngineVersionsRequest.add_member(:default_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultOnly", traits: {"smithy.api#default" => false}))
+    DescribeEngineVersionsRequest.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    DescribeEngineVersionsRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    DescribeEngineVersionsRequest.add_member(:parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupFamily"))
+    DescribeEngineVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeEngineVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeEngineVersionsRequest.add_member(:default_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DefaultOnly", traits: {"smithy.api#default" => false}))
     DescribeEngineVersionsRequest.type = Types::DescribeEngineVersionsRequest
-    DescribeEngineVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeEngineVersionsResponse.add_member(:engine_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineVersionInfoList, location_name: "EngineVersions"))
+    DescribeEngineVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeEngineVersionsResponse.add_member(:engine_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersionInfoList, location_name: "EngineVersions"))
     DescribeEngineVersionsResponse.type = Types::DescribeEngineVersionsResponse
-    DescribeEventsRequest.add_member(:source_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceName"))
-    DescribeEventsRequest.add_member(:source_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
-    DescribeEventsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
-    DescribeEventsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
-    DescribeEventsRequest.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Duration"))
-    DescribeEventsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeEventsRequest.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceName"))
+    DescribeEventsRequest.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, location_name: "SourceType"))
+    DescribeEventsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "StartTime"))
+    DescribeEventsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "EndTime"))
+    DescribeEventsRequest.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "Duration"))
+    DescribeEventsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeEventsRequest.type = Types::DescribeEventsRequest
-    DescribeEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeEventsResponse.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
+    DescribeEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeEventsResponse.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventList, location_name: "Events"))
     DescribeEventsResponse.type = Types::DescribeEventsResponse
-    DescribeMultiRegionClustersRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName"))
-    DescribeMultiRegionClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeMultiRegionClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeMultiRegionClustersRequest.add_member(:show_cluster_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ShowClusterDetails"))
+    DescribeMultiRegionClustersRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName"))
+    DescribeMultiRegionClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeMultiRegionClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeMultiRegionClustersRequest.add_member(:show_cluster_details, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "ShowClusterDetails"))
     DescribeMultiRegionClustersRequest.type = Types::DescribeMultiRegionClustersRequest
-    DescribeMultiRegionClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeMultiRegionClustersResponse.add_member(:multi_region_clusters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterList, location_name: "MultiRegionClusters"))
+    DescribeMultiRegionClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeMultiRegionClustersResponse.add_member(:multi_region_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionClusterList, location_name: "MultiRegionClusters"))
     DescribeMultiRegionClustersResponse.type = Types::DescribeMultiRegionClustersResponse
-    DescribeParameterGroupsRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
-    DescribeParameterGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeParameterGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeParameterGroupsRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName"))
+    DescribeParameterGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeParameterGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeParameterGroupsRequest.type = Types::DescribeParameterGroupsRequest
-    DescribeParameterGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeParameterGroupsResponse.add_member(:parameter_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupList, location_name: "ParameterGroups"))
+    DescribeParameterGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeParameterGroupsResponse.add_member(:parameter_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroupList, location_name: "ParameterGroups"))
     DescribeParameterGroupsResponse.type = Types::DescribeParameterGroupsResponse
-    DescribeParametersRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
-    DescribeParametersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeParametersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeParametersRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
+    DescribeParametersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeParametersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeParametersRequest.type = Types::DescribeParametersRequest
-    DescribeParametersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeParametersResponse.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
+    DescribeParametersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeParametersResponse.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersList, location_name: "Parameters"))
     DescribeParametersResponse.type = Types::DescribeParametersResponse
-    DescribeReservedNodesOfferingsRequest.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
-    DescribeReservedNodesOfferingsRequest.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    DescribeReservedNodesOfferingsRequest.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Duration"))
-    DescribeReservedNodesOfferingsRequest.add_member(:offering_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
-    DescribeReservedNodesOfferingsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeReservedNodesOfferingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReservedNodesOfferingsRequest.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservedNodesOfferingId"))
+    DescribeReservedNodesOfferingsRequest.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    DescribeReservedNodesOfferingsRequest.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Duration"))
+    DescribeReservedNodesOfferingsRequest.add_member(:offering_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OfferingType"))
+    DescribeReservedNodesOfferingsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeReservedNodesOfferingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeReservedNodesOfferingsRequest.type = Types::DescribeReservedNodesOfferingsRequest
-    DescribeReservedNodesOfferingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeReservedNodesOfferingsResponse.add_member(:reserved_nodes_offerings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodesOfferingList, location_name: "ReservedNodesOfferings"))
+    DescribeReservedNodesOfferingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeReservedNodesOfferingsResponse.add_member(:reserved_nodes_offerings, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNodesOfferingList, location_name: "ReservedNodesOfferings"))
     DescribeReservedNodesOfferingsResponse.type = Types::DescribeReservedNodesOfferingsResponse
-    DescribeReservedNodesRequest.add_member(:reservation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservationId"))
-    DescribeReservedNodesRequest.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
-    DescribeReservedNodesRequest.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    DescribeReservedNodesRequest.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Duration"))
-    DescribeReservedNodesRequest.add_member(:offering_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
-    DescribeReservedNodesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeReservedNodesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReservedNodesRequest.add_member(:reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservationId"))
+    DescribeReservedNodesRequest.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservedNodesOfferingId"))
+    DescribeReservedNodesRequest.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    DescribeReservedNodesRequest.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Duration"))
+    DescribeReservedNodesRequest.add_member(:offering_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OfferingType"))
+    DescribeReservedNodesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeReservedNodesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeReservedNodesRequest.type = Types::DescribeReservedNodesRequest
-    DescribeReservedNodesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeReservedNodesResponse.add_member(:reserved_nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodeList, location_name: "ReservedNodes"))
+    DescribeReservedNodesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeReservedNodesResponse.add_member(:reserved_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNodeList, location_name: "ReservedNodes"))
     DescribeReservedNodesResponse.type = Types::DescribeReservedNodesResponse
-    DescribeServiceUpdatesRequest.add_member(:service_update_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
-    DescribeServiceUpdatesRequest.add_member(:cluster_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNameList, location_name: "ClusterNames"))
-    DescribeServiceUpdatesRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateStatusList, location_name: "Status"))
-    DescribeServiceUpdatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeServiceUpdatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeServiceUpdatesRequest.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceUpdateName"))
+    DescribeServiceUpdatesRequest.add_member(:cluster_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameList, location_name: "ClusterNames"))
+    DescribeServiceUpdatesRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatusList, location_name: "Status"))
+    DescribeServiceUpdatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeServiceUpdatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeServiceUpdatesRequest.type = Types::DescribeServiceUpdatesRequest
-    DescribeServiceUpdatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeServiceUpdatesResponse.add_member(:service_updates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateList, location_name: "ServiceUpdates"))
+    DescribeServiceUpdatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeServiceUpdatesResponse.add_member(:service_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateList, location_name: "ServiceUpdates"))
     DescribeServiceUpdatesResponse.type = Types::DescribeServiceUpdatesResponse
-    DescribeSnapshotsRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName"))
-    DescribeSnapshotsRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotName"))
-    DescribeSnapshotsRequest.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Source"))
-    DescribeSnapshotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeSnapshotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeSnapshotsRequest.add_member(:show_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ShowDetail"))
+    DescribeSnapshotsRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName"))
+    DescribeSnapshotsRequest.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotName"))
+    DescribeSnapshotsRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Source"))
+    DescribeSnapshotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeSnapshotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeSnapshotsRequest.add_member(:show_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "ShowDetail"))
     DescribeSnapshotsRequest.type = Types::DescribeSnapshotsRequest
-    DescribeSnapshotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeSnapshotsResponse.add_member(:snapshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotList, location_name: "Snapshots"))
+    DescribeSnapshotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeSnapshotsResponse.add_member(:snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotList, location_name: "Snapshots"))
     DescribeSnapshotsResponse.type = Types::DescribeSnapshotsResponse
-    DescribeSubnetGroupsRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName"))
-    DescribeSubnetGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeSubnetGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSubnetGroupsRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SubnetGroupName"))
+    DescribeSubnetGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeSubnetGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeSubnetGroupsRequest.type = Types::DescribeSubnetGroupsRequest
-    DescribeSubnetGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeSubnetGroupsResponse.add_member(:subnet_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupList, location_name: "SubnetGroups"))
+    DescribeSubnetGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeSubnetGroupsResponse.add_member(:subnet_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroupList, location_name: "SubnetGroups"))
     DescribeSubnetGroupsResponse.type = Types::DescribeSubnetGroupsResponse
-    DescribeUsersRequest.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
-    DescribeUsersRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    DescribeUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
-    DescribeUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeUsersRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "UserName"))
+    DescribeUsersRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    DescribeUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "MaxResults"))
+    DescribeUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeUsersRequest.type = Types::DescribeUsersRequest
-    DescribeUsersResponse.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserList, location_name: "Users"))
-    DescribeUsersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeUsersResponse.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, location_name: "Users"))
+    DescribeUsersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeUsersResponse.type = Types::DescribeUsersResponse
-    DuplicateUserNameFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    DuplicateUserNameFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     DuplicateUserNameFault.type = Types::DuplicateUserNameFault
-    Endpoint.add_member(:address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Address"))
-    Endpoint.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Port", traits: {"smithy.api#default" => 0}))
+    Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Address"))
+    Endpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Port", traits: {"smithy.api#default" => 0}))
     Endpoint.type = Types::Endpoint
-    EngineVersionInfo.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    EngineVersionInfo.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    EngineVersionInfo.add_member(:engine_patch_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EnginePatchVersion"))
-    EngineVersionInfo.add_member(:parameter_group_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupFamily"))
+    EngineVersionInfo.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    EngineVersionInfo.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    EngineVersionInfo.add_member(:engine_patch_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EnginePatchVersion"))
+    EngineVersionInfo.add_member(:parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupFamily"))
     EngineVersionInfo.type = Types::EngineVersionInfo
-    EngineVersionInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineVersionInfo)
-    Event.add_member(:source_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceName"))
-    Event.add_member(:source_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
-    Event.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    Event.add_member(:date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "Date"))
+    EngineVersionInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersionInfo)
+    Event.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceName"))
+    Event.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, location_name: "SourceType"))
+    Event.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    Event.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "Date"))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Event, traits: {"smithy.api#xmlName" => "Event"})
-    FailoverShardRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
-    FailoverShardRequest.add_member(:shard_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ShardName", traits: {"smithy.api#required" => {}}))
+    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, traits: {"smithy.api#xmlName" => "Event"})
+    FailoverShardRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
+    FailoverShardRequest.add_member(:shard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ShardName", traits: {"smithy.api#required" => {}}))
     FailoverShardRequest.type = Types::FailoverShardRequest
-    FailoverShardResponse.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    FailoverShardResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, location_name: "Cluster"))
     FailoverShardResponse.type = Types::FailoverShardResponse
-    Filter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Filter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    FilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue)
-    InputAuthenticationType.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "password"}))
-    InputAuthenticationType.add_member(:iam, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM", traits: {"smithy.api#enumValue" => "iam"}))
-    InsufficientClusterCapacityFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue)
+    InputAuthenticationType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSWORD", traits: {"smithy.api#enumValue" => "password"}))
+    InputAuthenticationType.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAM", traits: {"smithy.api#enumValue" => "iam"}))
+    InsufficientClusterCapacityFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InsufficientClusterCapacityFault.type = Types::InsufficientClusterCapacityFault
-    InvalidACLStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidACLStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidACLStateFault.type = Types::InvalidACLStateFault
-    InvalidARNFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidARNFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidARNFault.type = Types::InvalidARNFault
-    InvalidClusterStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidClusterStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidClusterStateFault.type = Types::InvalidClusterStateFault
-    InvalidCredentialsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidCredentialsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidCredentialsException.type = Types::InvalidCredentialsException
-    InvalidKMSKeyFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidKMSKeyFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidKMSKeyFault.type = Types::InvalidKMSKeyFault
-    InvalidMultiRegionClusterStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidMultiRegionClusterStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidMultiRegionClusterStateFault.type = Types::InvalidMultiRegionClusterStateFault
-    InvalidNodeStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidNodeStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidNodeStateFault.type = Types::InvalidNodeStateFault
-    InvalidParameterCombinationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterCombinationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterCombinationException.type = Types::InvalidParameterCombinationException
-    InvalidParameterGroupStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidParameterGroupStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidParameterGroupStateFault.type = Types::InvalidParameterGroupStateFault
-    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
-    InvalidSnapshotStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidSnapshotStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidSnapshotStateFault.type = Types::InvalidSnapshotStateFault
-    InvalidSubnet.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidSubnet.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidSubnet.type = Types::InvalidSubnet
-    InvalidUserStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidUserStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidUserStateFault.type = Types::InvalidUserStateFault
-    InvalidVPCNetworkStateFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidVPCNetworkStateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidVPCNetworkStateFault.type = Types::InvalidVPCNetworkStateFault
-    IpDiscovery.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
-    IpDiscovery.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
-    KeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ListAllowedMultiRegionClusterUpdatesRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName", traits: {"smithy.api#required" => {}}))
+    IpDiscovery.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
+    IpDiscovery.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
+    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ListAllowedMultiRegionClusterUpdatesRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName", traits: {"smithy.api#required" => {}}))
     ListAllowedMultiRegionClusterUpdatesRequest.type = Types::ListAllowedMultiRegionClusterUpdatesRequest
-    ListAllowedMultiRegionClusterUpdatesResponse.add_member(:scale_up_node_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleUpNodeTypes"))
-    ListAllowedMultiRegionClusterUpdatesResponse.add_member(:scale_down_node_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleDownNodeTypes"))
+    ListAllowedMultiRegionClusterUpdatesResponse.add_member(:scale_up_node_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeTypeList, location_name: "ScaleUpNodeTypes"))
+    ListAllowedMultiRegionClusterUpdatesResponse.add_member(:scale_down_node_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeTypeList, location_name: "ScaleDownNodeTypes"))
     ListAllowedMultiRegionClusterUpdatesResponse.type = Types::ListAllowedMultiRegionClusterUpdatesResponse
-    ListAllowedNodeTypeUpdatesRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
+    ListAllowedNodeTypeUpdatesRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
     ListAllowedNodeTypeUpdatesRequest.type = Types::ListAllowedNodeTypeUpdatesRequest
-    ListAllowedNodeTypeUpdatesResponse.add_member(:scale_up_node_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleUpNodeTypes"))
-    ListAllowedNodeTypeUpdatesResponse.add_member(:scale_down_node_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleDownNodeTypes"))
+    ListAllowedNodeTypeUpdatesResponse.add_member(:scale_up_node_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeTypeList, location_name: "ScaleUpNodeTypes"))
+    ListAllowedNodeTypeUpdatesResponse.add_member(:scale_down_node_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeTypeList, location_name: "ScaleDownNodeTypes"))
     ListAllowedNodeTypeUpdatesResponse.type = Types::ListAllowedNodeTypeUpdatesResponse
-    ListTagsRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsRequest.type = Types::ListTagsRequest
-    ListTagsResponse.add_member(:tag_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    ListTagsResponse.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "TagList"))
     ListTagsResponse.type = Types::ListTagsResponse
-    MultiRegionCluster.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName"))
-    MultiRegionCluster.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    MultiRegionCluster.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    MultiRegionCluster.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    MultiRegionCluster.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    MultiRegionCluster.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    MultiRegionCluster.add_member(:number_of_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfShards"))
-    MultiRegionCluster.add_member(:clusters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionalClusterList, location_name: "Clusters"))
-    MultiRegionCluster.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionParameterGroupName"))
-    MultiRegionCluster.add_member(:tls_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TLSEnabled"))
-    MultiRegionCluster.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    MultiRegionCluster.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName"))
+    MultiRegionCluster.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    MultiRegionCluster.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    MultiRegionCluster.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    MultiRegionCluster.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    MultiRegionCluster.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    MultiRegionCluster.add_member(:number_of_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NumberOfShards"))
+    MultiRegionCluster.add_member(:clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalClusterList, location_name: "Clusters"))
+    MultiRegionCluster.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionParameterGroupName"))
+    MultiRegionCluster.add_member(:tls_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, location_name: "TLSEnabled"))
+    MultiRegionCluster.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
     MultiRegionCluster.type = Types::MultiRegionCluster
-    MultiRegionClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    MultiRegionClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     MultiRegionClusterAlreadyExistsFault.type = Types::MultiRegionClusterAlreadyExistsFault
-    MultiRegionClusterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionCluster)
-    MultiRegionClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    MultiRegionClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionCluster)
+    MultiRegionClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     MultiRegionClusterNotFoundFault.type = Types::MultiRegionClusterNotFoundFault
-    MultiRegionParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    MultiRegionParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     MultiRegionParameterGroupNotFoundFault.type = Types::MultiRegionParameterGroupNotFoundFault
-    NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
-    NetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
-    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "dual_stack"}))
-    NetworkTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType)
-    NoOperationFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
+    NetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
+    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "dual_stack"}))
+    NetworkTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType)
+    NoOperationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     NoOperationFault.type = Types::NoOperationFault
-    Node.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    Node.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    Node.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
-    Node.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
-    Node.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
+    Node.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    Node.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    Node.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AvailabilityZone"))
+    Node.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "CreateTime"))
+    Node.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, location_name: "Endpoint"))
     Node.type = Types::Node
-    NodeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Node, traits: {"smithy.api#xmlName" => "Node"})
-    NodeQuotaForClusterExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    NodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Node, traits: {"smithy.api#xmlName" => "Node"})
+    NodeQuotaForClusterExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     NodeQuotaForClusterExceededFault.type = Types::NodeQuotaForClusterExceededFault
-    NodeQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    NodeQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     NodeQuotaForCustomerExceededFault.type = Types::NodeQuotaForCustomerExceededFault
-    NodeTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    Parameter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    Parameter.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
-    Parameter.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    Parameter.add_member(:data_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "DataType"))
-    Parameter.add_member(:allowed_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AllowedValues"))
-    Parameter.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MinimumEngineVersion"))
+    NodeTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    Parameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    Parameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
+    Parameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    Parameter.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DataType"))
+    Parameter.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AllowedValues"))
+    Parameter.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MinimumEngineVersion"))
     Parameter.type = Types::Parameter
-    ParameterGroup.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    ParameterGroup.add_member(:family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Family"))
-    ParameterGroup.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    ParameterGroup.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ParameterGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    ParameterGroup.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Family"))
+    ParameterGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    ParameterGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
     ParameterGroup.type = Types::ParameterGroup
-    ParameterGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ParameterGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ParameterGroupAlreadyExistsFault.type = Types::ParameterGroupAlreadyExistsFault
-    ParameterGroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroup, traits: {"smithy.api#xmlName" => "ParameterGroup"})
-    ParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ParameterGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, traits: {"smithy.api#xmlName" => "ParameterGroup"})
+    ParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ParameterGroupNotFoundFault.type = Types::ParameterGroupNotFoundFault
-    ParameterGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ParameterGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ParameterGroupQuotaExceededFault.type = Types::ParameterGroupQuotaExceededFault
-    ParameterNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ParameterNameValue.add_member(:parameter_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterName"))
-    ParameterNameValue.add_member(:parameter_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterValue"))
+    ParameterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ParameterNameValue.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterName"))
+    ParameterNameValue.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterValue"))
     ParameterNameValue.type = Types::ParameterNameValue
-    ParameterNameValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterNameValue, traits: {"smithy.api#xmlName" => "ParameterNameValue"})
-    ParametersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Parameter, traits: {"smithy.api#xmlName" => "Parameter"})
-    PasswordListInput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    PendingModifiedServiceUpdate.add_member(:service_update_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
-    PendingModifiedServiceUpdate.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateStatus, location_name: "Status"))
+    ParameterNameValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValue, traits: {"smithy.api#xmlName" => "ParameterNameValue"})
+    ParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, traits: {"smithy.api#xmlName" => "Parameter"})
+    PasswordListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    PendingModifiedServiceUpdate.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceUpdateName"))
+    PendingModifiedServiceUpdate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus, location_name: "Status"))
     PendingModifiedServiceUpdate.type = Types::PendingModifiedServiceUpdate
-    PendingModifiedServiceUpdateList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingModifiedServiceUpdate, traits: {"smithy.api#xmlName" => "PendingModifiedServiceUpdate"})
-    PurchaseReservedNodesOfferingRequest.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId", traits: {"smithy.api#required" => {}}))
-    PurchaseReservedNodesOfferingRequest.add_member(:reservation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservationId"))
-    PurchaseReservedNodesOfferingRequest.add_member(:node_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NodeCount"))
-    PurchaseReservedNodesOfferingRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PendingModifiedServiceUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingModifiedServiceUpdate, traits: {"smithy.api#xmlName" => "PendingModifiedServiceUpdate"})
+    PurchaseReservedNodesOfferingRequest.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservedNodesOfferingId", traits: {"smithy.api#required" => {}}))
+    PurchaseReservedNodesOfferingRequest.add_member(:reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservationId"))
+    PurchaseReservedNodesOfferingRequest.add_member(:node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NodeCount"))
+    PurchaseReservedNodesOfferingRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     PurchaseReservedNodesOfferingRequest.type = Types::PurchaseReservedNodesOfferingRequest
-    PurchaseReservedNodesOfferingResponse.add_member(:reserved_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ReservedNode"))
+    PurchaseReservedNodesOfferingResponse.add_member(:reserved_node, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNode, location_name: "ReservedNode"))
     PurchaseReservedNodesOfferingResponse.type = Types::PurchaseReservedNodesOfferingResponse
-    RecurringCharge.add_member(:recurring_charge_amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "RecurringChargeAmount", traits: {"smithy.api#default" => 0}))
-    RecurringCharge.add_member(:recurring_charge_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RecurringChargeFrequency"))
+    RecurringCharge.add_member(:recurring_charge_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "RecurringChargeAmount", traits: {"smithy.api#default" => 0}))
+    RecurringCharge.add_member(:recurring_charge_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RecurringChargeFrequency"))
     RecurringCharge.type = Types::RecurringCharge
-    RecurringChargeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurringCharge, traits: {"smithy.api#xmlName" => "RecurringCharge"})
-    RegionalCluster.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName"))
-    RegionalCluster.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Region"))
-    RegionalCluster.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    RegionalCluster.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    RecurringChargeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, traits: {"smithy.api#xmlName" => "RecurringCharge"})
+    RegionalCluster.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName"))
+    RegionalCluster.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Region"))
+    RegionalCluster.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    RegionalCluster.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
     RegionalCluster.type = Types::RegionalCluster
-    RegionalClusterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionalCluster, traits: {"smithy.api#xmlName" => "RegionalCluster"})
-    ReplicaConfigurationRequest.add_member(:replica_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "ReplicaCount", traits: {"smithy.api#default" => 0}))
+    RegionalClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalCluster, traits: {"smithy.api#xmlName" => "RegionalCluster"})
+    ReplicaConfigurationRequest.add_member(:replica_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "ReplicaCount", traits: {"smithy.api#default" => 0}))
     ReplicaConfigurationRequest.type = Types::ReplicaConfigurationRequest
-    ReservedNode.add_member(:reservation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservationId"))
-    ReservedNode.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
-    ReservedNode.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    ReservedNode.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
-    ReservedNode.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Duration", traits: {"smithy.api#default" => 0}))
-    ReservedNode.add_member(:fixed_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "FixedPrice", traits: {"smithy.api#default" => 0}))
-    ReservedNode.add_member(:node_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NodeCount", traits: {"smithy.api#default" => 0}))
-    ReservedNode.add_member(:offering_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
-    ReservedNode.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "State"))
-    ReservedNode.add_member(:recurring_charges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
-    ReservedNode.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ReservedNode.add_member(:reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservationId"))
+    ReservedNode.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservedNodesOfferingId"))
+    ReservedNode.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    ReservedNode.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "StartTime"))
+    ReservedNode.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Duration", traits: {"smithy.api#default" => 0}))
+    ReservedNode.add_member(:fixed_price, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "FixedPrice", traits: {"smithy.api#default" => 0}))
+    ReservedNode.add_member(:node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NodeCount", traits: {"smithy.api#default" => 0}))
+    ReservedNode.add_member(:offering_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OfferingType"))
+    ReservedNode.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "State"))
+    ReservedNode.add_member(:recurring_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedNode.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
     ReservedNode.type = Types::ReservedNode
-    ReservedNodeAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReservedNodeAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ReservedNodeAlreadyExistsFault.type = Types::ReservedNodeAlreadyExistsFault
-    ReservedNodeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNode, traits: {"smithy.api#xmlName" => "ReservedNode"})
-    ReservedNodeNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReservedNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNode, traits: {"smithy.api#xmlName" => "ReservedNode"})
+    ReservedNodeNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ReservedNodeNotFoundFault.type = Types::ReservedNodeNotFoundFault
-    ReservedNodeQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReservedNodeQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ReservedNodeQuotaExceededFault.type = Types::ReservedNodeQuotaExceededFault
-    ReservedNodesOffering.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodesOfferingId"))
-    ReservedNodesOffering.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    ReservedNodesOffering.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "Duration", traits: {"smithy.api#default" => 0}))
-    ReservedNodesOffering.add_member(:fixed_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "FixedPrice", traits: {"smithy.api#default" => 0}))
-    ReservedNodesOffering.add_member(:offering_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
-    ReservedNodesOffering.add_member(:recurring_charges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedNodesOffering.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ReservedNodesOfferingId"))
+    ReservedNodesOffering.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    ReservedNodesOffering.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "Duration", traits: {"smithy.api#default" => 0}))
+    ReservedNodesOffering.add_member(:fixed_price, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "FixedPrice", traits: {"smithy.api#default" => 0}))
+    ReservedNodesOffering.add_member(:offering_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OfferingType"))
+    ReservedNodesOffering.add_member(:recurring_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeList, location_name: "RecurringCharges"))
     ReservedNodesOffering.type = Types::ReservedNodesOffering
-    ReservedNodesOfferingList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodesOffering, traits: {"smithy.api#xmlName" => "ReservedNodesOffering"})
-    ReservedNodesOfferingNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReservedNodesOfferingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNodesOffering, traits: {"smithy.api#xmlName" => "ReservedNodesOffering"})
+    ReservedNodesOfferingNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ReservedNodesOfferingNotFoundFault.type = Types::ReservedNodesOfferingNotFoundFault
-    ResetParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
-    ResetParameterGroupRequest.add_member(:all_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AllParameters", traits: {"smithy.api#default" => false}))
-    ResetParameterGroupRequest.add_member(:parameter_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterNameList, location_name: "ParameterNames"))
+    ResetParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
+    ResetParameterGroupRequest.add_member(:all_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AllParameters", traits: {"smithy.api#default" => false}))
+    ResetParameterGroupRequest.add_member(:parameter_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameList, location_name: "ParameterNames"))
     ResetParameterGroupRequest.type = Types::ResetParameterGroupRequest
-    ResetParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroup, location_name: "ParameterGroup"))
+    ResetParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, location_name: "ParameterGroup"))
     ResetParameterGroupResponse.type = Types::ResetParameterGroupResponse
-    ReshardingStatus.add_member(:slot_migration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlotMigration, location_name: "SlotMigration"))
+    ReshardingStatus.add_member(:slot_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotMigration, location_name: "SlotMigration"))
     ReshardingStatus.type = Types::ReshardingStatus
-    SecurityGroupIdsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, traits: {"smithy.api#xmlName" => "SecurityGroupId"})
-    SecurityGroupMembership.add_member(:security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroupId"))
-    SecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    SecurityGroupIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, traits: {"smithy.api#xmlName" => "SecurityGroupId"})
+    SecurityGroupMembership.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SecurityGroupId"))
+    SecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
     SecurityGroupMembership.type = Types::SecurityGroupMembership
-    SecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupMembership)
-    ServiceLinkedRoleNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembership)
+    ServiceLinkedRoleNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ServiceLinkedRoleNotFoundFault.type = Types::ServiceLinkedRoleNotFoundFault
-    ServiceUpdate.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName"))
-    ServiceUpdate.add_member(:service_update_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
-    ServiceUpdate.add_member(:release_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "ReleaseDate"))
-    ServiceUpdate.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    ServiceUpdate.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateStatus, location_name: "Status"))
-    ServiceUpdate.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateType, location_name: "Type"))
-    ServiceUpdate.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    ServiceUpdate.add_member(:nodes_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodesUpdated"))
-    ServiceUpdate.add_member(:auto_update_start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "AutoUpdateStartDate"))
+    ServiceUpdate.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName"))
+    ServiceUpdate.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceUpdateName"))
+    ServiceUpdate.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "ReleaseDate"))
+    ServiceUpdate.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    ServiceUpdate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus, location_name: "Status"))
+    ServiceUpdate.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateType, location_name: "Type"))
+    ServiceUpdate.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    ServiceUpdate.add_member(:nodes_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodesUpdated"))
+    ServiceUpdate.add_member(:auto_update_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "AutoUpdateStartDate"))
     ServiceUpdate.type = Types::ServiceUpdate
-    ServiceUpdateList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdate, traits: {"smithy.api#xmlName" => "ServiceUpdate"})
-    ServiceUpdateNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ServiceUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdate, traits: {"smithy.api#xmlName" => "ServiceUpdate"})
+    ServiceUpdateNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ServiceUpdateNotFoundFault.type = Types::ServiceUpdateNotFoundFault
-    ServiceUpdateRequest.add_member(:service_update_name_to_apply, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateNameToApply"))
+    ServiceUpdateRequest.add_member(:service_update_name_to_apply, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ServiceUpdateNameToApply"))
     ServiceUpdateRequest.type = Types::ServiceUpdateRequest
-    ServiceUpdateStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "available"}))
-    ServiceUpdateStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "in-progress"}))
-    ServiceUpdateStatus.add_member(:complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "complete"}))
-    ServiceUpdateStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCHEDULED", traits: {"smithy.api#enumValue" => "scheduled"}))
-    ServiceUpdateStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateStatus)
-    ServiceUpdateType.add_member(:security_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY_UPDATE", traits: {"smithy.api#enumValue" => "security-update"}))
-    Shard.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    Shard.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    Shard.add_member(:slots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Slots"))
-    Shard.add_member(:nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeList, location_name: "Nodes"))
-    Shard.add_member(:number_of_nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
+    ServiceUpdateStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "available"}))
+    ServiceUpdateStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "in-progress"}))
+    ServiceUpdateStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "complete"}))
+    ServiceUpdateStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCHEDULED", traits: {"smithy.api#enumValue" => "scheduled"}))
+    ServiceUpdateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus)
+    ServiceUpdateType.add_member(:security_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SECURITY_UPDATE", traits: {"smithy.api#enumValue" => "security-update"}))
+    Shard.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    Shard.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    Shard.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Slots"))
+    Shard.add_member(:nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeList, location_name: "Nodes"))
+    Shard.add_member(:number_of_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "NumberOfNodes"))
     Shard.type = Types::Shard
-    ShardConfiguration.add_member(:slots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Slots"))
-    ShardConfiguration.add_member(:replica_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ReplicaCount"))
+    ShardConfiguration.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Slots"))
+    ShardConfiguration.add_member(:replica_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "ReplicaCount"))
     ShardConfiguration.type = Types::ShardConfiguration
-    ShardConfigurationRequest.add_member(:shard_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "ShardCount", traits: {"smithy.api#default" => 0}))
+    ShardConfigurationRequest.add_member(:shard_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "ShardCount", traits: {"smithy.api#default" => 0}))
     ShardConfigurationRequest.type = Types::ShardConfigurationRequest
-    ShardDetail.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    ShardDetail.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardConfiguration, location_name: "Configuration"))
-    ShardDetail.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Size"))
-    ShardDetail.add_member(:snapshot_creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotCreationTime"))
+    ShardDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    ShardDetail.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardConfiguration, location_name: "Configuration"))
+    ShardDetail.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Size"))
+    ShardDetail.add_member(:snapshot_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, location_name: "SnapshotCreationTime"))
     ShardDetail.type = Types::ShardDetail
-    ShardDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardDetail)
-    ShardList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Shard, traits: {"smithy.api#xmlName" => "Shard"})
-    ShardNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ShardDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShardDetail)
+    ShardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, traits: {"smithy.api#xmlName" => "Shard"})
+    ShardNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ShardNotFoundFault.type = Types::ShardNotFoundFault
-    ShardsPerClusterQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ShardsPerClusterQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ShardsPerClusterQuotaExceededFault.type = Types::ShardsPerClusterQuotaExceededFault
-    SlotMigration.add_member(:progress_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "ProgressPercentage", traits: {"smithy.api#default" => 0}))
+    SlotMigration.add_member(:progress_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "ProgressPercentage", traits: {"smithy.api#default" => 0}))
     SlotMigration.type = Types::SlotMigration
-    Snapshot.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    Snapshot.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    Snapshot.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Source"))
-    Snapshot.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    Snapshot.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
-    Snapshot.add_member(:cluster_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "ClusterConfiguration"))
-    Snapshot.add_member(:data_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
+    Snapshot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    Snapshot.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    Snapshot.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Source"))
+    Snapshot.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "KmsKeyId"))
+    Snapshot.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
+    Snapshot.add_member(:cluster_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterConfiguration, location_name: "ClusterConfiguration"))
+    Snapshot.add_member(:data_tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: DataTieringStatus, location_name: "DataTiering"))
     Snapshot.type = Types::Snapshot
-    SnapshotAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SnapshotAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SnapshotAlreadyExistsFault.type = Types::SnapshotAlreadyExistsFault
-    SnapshotArnsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, traits: {"smithy.api#xmlName" => "SnapshotArn"})
-    SnapshotList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot)
-    SnapshotNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SnapshotArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, traits: {"smithy.api#xmlName" => "SnapshotArn"})
+    SnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot)
+    SnapshotNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SnapshotNotFoundFault.type = Types::SnapshotNotFoundFault
-    SnapshotQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SnapshotQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SnapshotQuotaExceededFault.type = Types::SnapshotQuotaExceededFault
-    SourceType.add_member(:node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "node", traits: {"smithy.api#enumValue" => "node"}))
-    SourceType.add_member(:parameter_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "parameter_group", traits: {"smithy.api#enumValue" => "parameter-group"}))
-    SourceType.add_member(:subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "subnet_group", traits: {"smithy.api#enumValue" => "subnet-group"}))
-    SourceType.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cluster", traits: {"smithy.api#enumValue" => "cluster"}))
-    SourceType.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "user", traits: {"smithy.api#enumValue" => "user"}))
-    SourceType.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "acl", traits: {"smithy.api#enumValue" => "acl"}))
-    Subnet.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Identifier"))
-    Subnet.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
-    Subnet.add_member(:supported_network_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: "SupportedNetworkTypes"))
+    SourceType.add_member(:node, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "node", traits: {"smithy.api#enumValue" => "node"}))
+    SourceType.add_member(:parameter_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "parameter_group", traits: {"smithy.api#enumValue" => "parameter-group"}))
+    SourceType.add_member(:subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "subnet_group", traits: {"smithy.api#enumValue" => "subnet-group"}))
+    SourceType.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cluster", traits: {"smithy.api#enumValue" => "cluster"}))
+    SourceType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "user", traits: {"smithy.api#enumValue" => "user"}))
+    SourceType.add_member(:acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "acl", traits: {"smithy.api#enumValue" => "acl"}))
+    Subnet.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Identifier"))
+    Subnet.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "AvailabilityZone"))
+    Subnet.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkTypeList, location_name: "SupportedNetworkTypes"))
     Subnet.type = Types::Subnet
-    SubnetGroup.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    SubnetGroup.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    SubnetGroup.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
-    SubnetGroup.add_member(:subnets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
-    SubnetGroup.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
-    SubnetGroup.add_member(:supported_network_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: "SupportedNetworkTypes"))
+    SubnetGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    SubnetGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    SubnetGroup.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VpcId"))
+    SubnetGroup.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetList, location_name: "Subnets"))
+    SubnetGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
+    SubnetGroup.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkTypeList, location_name: "SupportedNetworkTypes"))
     SubnetGroup.type = Types::SubnetGroup
-    SubnetGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SubnetGroupAlreadyExistsFault.type = Types::SubnetGroupAlreadyExistsFault
-    SubnetGroupInUseFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetGroupInUseFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SubnetGroupInUseFault.type = Types::SubnetGroupInUseFault
-    SubnetGroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroup)
-    SubnetGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup)
+    SubnetGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SubnetGroupNotFoundFault.type = Types::SubnetGroupNotFoundFault
-    SubnetGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SubnetGroupQuotaExceededFault.type = Types::SubnetGroupQuotaExceededFault
-    SubnetIdentifierList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, traits: {"smithy.api#xmlName" => "SubnetIdentifier"})
-    SubnetInUse.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, traits: {"smithy.api#xmlName" => "SubnetIdentifier"})
+    SubnetInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SubnetInUse.type = Types::SubnetInUse
-    SubnetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subnet, traits: {"smithy.api#xmlName" => "Subnet"})
-    SubnetNotAllowedFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, traits: {"smithy.api#xmlName" => "Subnet"})
+    SubnetNotAllowedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SubnetNotAllowedFault.type = Types::SubnetNotAllowedFault
-    SubnetQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     SubnetQuotaExceededFault.type = Types::SubnetQuotaExceededFault
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Key"))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Key"))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, traits: {"smithy.api#xmlName" => "Tag"})
-    TagNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, traits: {"smithy.api#xmlName" => "Tag"})
+    TagNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     TagNotFoundFault.type = Types::TagNotFoundFault
-    TagQuotaPerResourceExceeded.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TagQuotaPerResourceExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     TagQuotaPerResourceExceeded.type = Types::TagQuotaPerResourceExceeded
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    TagResourceResponse.add_member(:tag_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    TagResourceResponse.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "TagList"))
     TagResourceResponse.type = Types::TagResourceResponse
-    TestFailoverNotAvailableFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TestFailoverNotAvailableFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     TestFailoverNotAvailableFault.type = Types::TestFailoverNotAvailableFault
-    UnprocessedCluster.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName"))
-    UnprocessedCluster.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorType"))
-    UnprocessedCluster.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    UnprocessedCluster.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName"))
+    UnprocessedCluster.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorType"))
+    UnprocessedCluster.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
     UnprocessedCluster.type = Types::UnprocessedCluster
-    UnprocessedClusterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessedCluster, traits: {"smithy.api#xmlName" => "UnprocessedCluster"})
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UnprocessedClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedCluster, traits: {"smithy.api#xmlName" => "UnprocessedCluster"})
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    UntagResourceResponse.add_member(:tag_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    UntagResourceResponse.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "TagList"))
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateACLRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
-    UpdateACLRequest.add_member(:user_names_to_add, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNameListInput, location_name: "UserNamesToAdd"))
-    UpdateACLRequest.add_member(:user_names_to_remove, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNameListInput, location_name: "UserNamesToRemove"))
+    UpdateACLRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ACLName", traits: {"smithy.api#required" => {}}))
+    UpdateACLRequest.add_member(:user_names_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: UserNameListInput, location_name: "UserNamesToAdd"))
+    UpdateACLRequest.add_member(:user_names_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: UserNameListInput, location_name: "UserNamesToRemove"))
     UpdateACLRequest.type = Types::UpdateACLRequest
-    UpdateACLResponse.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACL, location_name: "ACL"))
+    UpdateACLResponse.add_member(:acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ACL, location_name: "ACL"))
     UpdateACLResponse.type = Types::UpdateACLResponse
-    UpdateClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
-    UpdateClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    UpdateClusterRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
-    UpdateClusterRequest.add_member(:maintenance_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceWindow"))
-    UpdateClusterRequest.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
-    UpdateClusterRequest.add_member(:sns_topic_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicStatus"))
-    UpdateClusterRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
-    UpdateClusterRequest.add_member(:snapshot_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
-    UpdateClusterRequest.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
-    UpdateClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    UpdateClusterRequest.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    UpdateClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    UpdateClusterRequest.add_member(:replica_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaConfigurationRequest, location_name: "ReplicaConfiguration"))
-    UpdateClusterRequest.add_member(:shard_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardConfigurationRequest, location_name: "ShardConfiguration"))
-    UpdateClusterRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLName, location_name: "ACLName"))
-    UpdateClusterRequest.add_member(:ip_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
+    UpdateClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ClusterName", traits: {"smithy.api#required" => {}}))
+    UpdateClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    UpdateClusterRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
+    UpdateClusterRequest.add_member(:maintenance_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MaintenanceWindow"))
+    UpdateClusterRequest.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnsTopicArn"))
+    UpdateClusterRequest.add_member(:sns_topic_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnsTopicStatus"))
+    UpdateClusterRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName"))
+    UpdateClusterRequest.add_member(:snapshot_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SnapshotWindow"))
+    UpdateClusterRequest.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+    UpdateClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    UpdateClusterRequest.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Engine"))
+    UpdateClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    UpdateClusterRequest.add_member(:replica_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaConfigurationRequest, location_name: "ReplicaConfiguration"))
+    UpdateClusterRequest.add_member(:shard_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardConfigurationRequest, location_name: "ShardConfiguration"))
+    UpdateClusterRequest.add_member(:acl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLName, location_name: "ACLName"))
+    UpdateClusterRequest.add_member(:ip_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: IpDiscovery, location_name: "IpDiscovery"))
     UpdateClusterRequest.type = Types::UpdateClusterRequest
-    UpdateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    UpdateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, location_name: "Cluster"))
     UpdateClusterResponse.type = Types::UpdateClusterResponse
-    UpdateMultiRegionClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionClusterName", traits: {"smithy.api#required" => {}}))
-    UpdateMultiRegionClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    UpdateMultiRegionClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    UpdateMultiRegionClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    UpdateMultiRegionClusterRequest.add_member(:shard_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardConfigurationRequest, location_name: "ShardConfiguration"))
-    UpdateMultiRegionClusterRequest.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MultiRegionParameterGroupName"))
-    UpdateMultiRegionClusterRequest.add_member(:update_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStrategy, location_name: "UpdateStrategy"))
+    UpdateMultiRegionClusterRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionClusterName", traits: {"smithy.api#required" => {}}))
+    UpdateMultiRegionClusterRequest.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NodeType"))
+    UpdateMultiRegionClusterRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    UpdateMultiRegionClusterRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EngineVersion"))
+    UpdateMultiRegionClusterRequest.add_member(:shard_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardConfigurationRequest, location_name: "ShardConfiguration"))
+    UpdateMultiRegionClusterRequest.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MultiRegionParameterGroupName"))
+    UpdateMultiRegionClusterRequest.add_member(:update_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStrategy, location_name: "UpdateStrategy"))
     UpdateMultiRegionClusterRequest.type = Types::UpdateMultiRegionClusterRequest
-    UpdateMultiRegionClusterResponse.add_member(:multi_region_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionCluster, location_name: "MultiRegionCluster"))
+    UpdateMultiRegionClusterResponse.add_member(:multi_region_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionCluster, location_name: "MultiRegionCluster"))
     UpdateMultiRegionClusterResponse.type = Types::UpdateMultiRegionClusterResponse
-    UpdateParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
-    UpdateParameterGroupRequest.add_member(:parameter_name_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterNameValueList, location_name: "ParameterNameValues", traits: {"smithy.api#required" => {}}))
+    UpdateParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
+    UpdateParameterGroupRequest.add_member(:parameter_name_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValueList, location_name: "ParameterNameValues", traits: {"smithy.api#required" => {}}))
     UpdateParameterGroupRequest.type = Types::UpdateParameterGroupRequest
-    UpdateParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroup, location_name: "ParameterGroup"))
+    UpdateParameterGroupResponse.add_member(:parameter_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, location_name: "ParameterGroup"))
     UpdateParameterGroupResponse.type = Types::UpdateParameterGroupResponse
-    UpdateStrategy.add_member(:coordinated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COORDINATED", traits: {"smithy.api#enumValue" => "coordinated"}))
-    UpdateStrategy.add_member(:uncoordinated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNCOORDINATED", traits: {"smithy.api#enumValue" => "uncoordinated"}))
-    UpdateSubnetGroupRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName", traits: {"smithy.api#required" => {}}))
-    UpdateSubnetGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    UpdateSubnetGroupRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIdentifierList, location_name: "SubnetIds"))
+    UpdateStrategy.add_member(:coordinated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COORDINATED", traits: {"smithy.api#enumValue" => "coordinated"}))
+    UpdateStrategy.add_member(:uncoordinated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNCOORDINATED", traits: {"smithy.api#enumValue" => "uncoordinated"}))
+    UpdateSubnetGroupRequest.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SubnetGroupName", traits: {"smithy.api#required" => {}}))
+    UpdateSubnetGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    UpdateSubnetGroupRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdentifierList, location_name: "SubnetIds"))
     UpdateSubnetGroupRequest.type = Types::UpdateSubnetGroupRequest
-    UpdateSubnetGroupResponse.add_member(:subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroup, location_name: "SubnetGroup"))
+    UpdateSubnetGroupResponse.add_member(:subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup, location_name: "SubnetGroup"))
     UpdateSubnetGroupResponse.type = Types::UpdateSubnetGroupResponse
-    UpdateUserRequest.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
-    UpdateUserRequest.add_member(:authentication_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "AuthenticationMode"))
-    UpdateUserRequest.add_member(:access_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessString, location_name: "AccessString"))
+    UpdateUserRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "UserName", traits: {"smithy.api#required" => {}}))
+    UpdateUserRequest.add_member(:authentication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationMode, location_name: "AuthenticationMode"))
+    UpdateUserRequest.add_member(:access_string, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessString, location_name: "AccessString"))
     UpdateUserRequest.type = Types::UpdateUserRequest
-    UpdateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: User, location_name: "User"))
+    UpdateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: User, location_name: "User"))
     UpdateUserResponse.type = Types::UpdateUserResponse
-    User.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    User.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    User.add_member(:access_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AccessString"))
-    User.add_member(:acl_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNameList, location_name: "ACLNames"))
-    User.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "MinimumEngineVersion"))
-    User.add_member(:authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
-    User.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    User.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    User.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
+    User.add_member(:access_string, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AccessString"))
+    User.add_member(:acl_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLNameList, location_name: "ACLNames"))
+    User.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MinimumEngineVersion"))
+    User.add_member(:authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: Authentication, location_name: "Authentication"))
+    User.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ARN"))
     User.type = Types::User
-    UserAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UserAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     UserAlreadyExistsFault.type = Types::UserAlreadyExistsFault
-    UserList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: User)
-    UserNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName)
-    UserNameListInput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName)
-    UserNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User)
+    UserNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserName)
+    UserNameListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserName)
+    UserNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     UserNotFoundFault.type = Types::UserNotFoundFault
-    UserQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UserQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     UserQuotaExceededFault.type = Types::UserQuotaExceededFault
 
     AmazonMemoryDB = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -995,561 +995,561 @@ module Aws::MemoryDB
       service.add_operation(:batch_update_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#BatchUpdateCluster"
         operation.name = "BatchUpdateCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUpdateNotFoundFault)
+        operation.input = BatchUpdateClusterRequest
+        operation.output = BatchUpdateClusterResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceUpdateNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:copy_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CopySnapshot"
         operation.name = "CopySnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSnapshotStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        operation.input = CopySnapshotRequest
+        operation.output = CopySnapshotResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidSnapshotStateFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotAlreadyExistsFault
+        operation.errors << SnapshotNotFoundFault
+        operation.errors << SnapshotQuotaExceededFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CreateACL"
         operation.name = "CreateACL"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateACLRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateACLResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultUserRequired)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateUserNameFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = CreateACLRequest
+        operation.output = CreateACLResponse
+        operation.errors << ACLAlreadyExistsFault
+        operation.errors << ACLQuotaExceededFault
+        operation.errors << DefaultUserRequired
+        operation.errors << DuplicateUserNameFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << TagQuotaPerResourceExceeded
+        operation.errors << UserNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:create_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CreateCluster"
         operation.name = "CreateCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterQuotaForCustomerExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientClusterCapacityFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidACLStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCredentialsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMultiRegionClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeQuotaForClusterExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardsPerClusterQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        operation.input = CreateClusterRequest
+        operation.output = CreateClusterResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << ClusterAlreadyExistsFault
+        operation.errors << ClusterQuotaForCustomerExceededFault
+        operation.errors << InsufficientClusterCapacityFault
+        operation.errors << InvalidACLStateFault
+        operation.errors << InvalidCredentialsException
+        operation.errors << InvalidMultiRegionClusterStateFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidVPCNetworkStateFault
+        operation.errors << MultiRegionClusterNotFoundFault
+        operation.errors << NodeQuotaForClusterExceededFault
+        operation.errors << NodeQuotaForCustomerExceededFault
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << ShardsPerClusterQuotaExceededFault
+        operation.errors << SubnetGroupNotFoundFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_multi_region_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CreateMultiRegionCluster"
         operation.name = "CreateMultiRegionCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMultiRegionClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMultiRegionClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterQuotaForCustomerExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        operation.input = CreateMultiRegionClusterRequest
+        operation.output = CreateMultiRegionClusterResponse
+        operation.errors << ClusterQuotaForCustomerExceededFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionClusterAlreadyExistsFault
+        operation.errors << MultiRegionParameterGroupNotFoundFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_parameter_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CreateParameterGroup"
         operation.name = "CreateParameterGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateParameterGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateParameterGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        operation.input = CreateParameterGroupRequest
+        operation.output = CreateParameterGroupResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterGroupStateFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << ParameterGroupAlreadyExistsFault
+        operation.errors << ParameterGroupQuotaExceededFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CreateSnapshot"
         operation.name = "CreateSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        operation.input = CreateSnapshotRequest
+        operation.output = CreateSnapshotResponse
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotAlreadyExistsFault
+        operation.errors << SnapshotQuotaExceededFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_subnet_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CreateSubnetGroup"
         operation.name = "CreateSubnetGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSubnetGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSubnetGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSubnet)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetNotAllowedFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        operation.input = CreateSubnetGroupRequest
+        operation.output = CreateSubnetGroupResponse
+        operation.errors << InvalidSubnet
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SubnetGroupAlreadyExistsFault
+        operation.errors << SubnetGroupQuotaExceededFault
+        operation.errors << SubnetNotAllowedFault
+        operation.errors << SubnetQuotaExceededFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#CreateUser"
         operation.name = "CreateUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateUserNameFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserQuotaExceededFault)
+        operation.input = CreateUserRequest
+        operation.output = CreateUserResponse
+        operation.errors << DuplicateUserNameFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << TagQuotaPerResourceExceeded
+        operation.errors << UserAlreadyExistsFault
+        operation.errors << UserQuotaExceededFault
         operation.traits = {}
       end)
       service.add_operation(:delete_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DeleteACL"
         operation.name = "DeleteACL"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteACLRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteACLResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidACLStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DeleteACLRequest
+        operation.output = DeleteACLResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << InvalidACLStateFault
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:delete_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DeleteCluster"
         operation.name = "DeleteCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotAlreadyExistsFault)
+        operation.input = DeleteClusterRequest
+        operation.output = DeleteClusterResponse
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotAlreadyExistsFault
         operation.traits = {}
       end)
       service.add_operation(:delete_multi_region_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DeleteMultiRegionCluster"
         operation.name = "DeleteMultiRegionCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMultiRegionClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMultiRegionClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMultiRegionClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
+        operation.input = DeleteMultiRegionClusterRequest
+        operation.output = DeleteMultiRegionClusterResponse
+        operation.errors << InvalidMultiRegionClusterStateFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionClusterNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:delete_parameter_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DeleteParameterGroup"
         operation.name = "DeleteParameterGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteParameterGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteParameterGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DeleteParameterGroupRequest
+        operation.output = DeleteParameterGroupResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterGroupStateFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:delete_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DeleteSnapshot"
         operation.name = "DeleteSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSnapshotStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
+        operation.input = DeleteSnapshotRequest
+        operation.output = DeleteSnapshotResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidSnapshotStateFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:delete_subnet_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DeleteSubnetGroup"
         operation.name = "DeleteSubnetGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSubnetGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteSubnetGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupInUseFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
+        operation.input = DeleteSubnetGroupRequest
+        operation.output = DeleteSubnetGroupResponse
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SubnetGroupInUseFault
+        operation.errors << SubnetGroupNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:delete_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DeleteUser"
         operation.name = "DeleteUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = DeleteUserRequest
+        operation.output = DeleteUserResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidUserStateFault
+        operation.errors << UserNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:describe_ac_ls, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeACLs"
         operation.name = "DescribeACLs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeACLsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeACLsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        operation.input = DescribeACLsRequest
+        operation.output = DescribeACLsResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << InvalidParameterCombinationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeACLs.new
       end)
       service.add_operation(:describe_clusters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeClusters"
         operation.name = "DescribeClusters"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeClustersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeClustersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DescribeClustersRequest
+        operation.output = DescribeClustersResponse
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeClusters.new
       end)
       service.add_operation(:describe_engine_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeEngineVersions"
         operation.name = "DescribeEngineVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEngineVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEngineVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DescribeEngineVersionsRequest
+        operation.output = DescribeEngineVersionsResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeEngineVersions.new
       end)
       service.add_operation(:describe_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeEvents"
         operation.name = "DescribeEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeEventsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DescribeEventsRequest
+        operation.output = DescribeEventsResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeEvents.new
       end)
       service.add_operation(:describe_multi_region_clusters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeMultiRegionClusters"
         operation.name = "DescribeMultiRegionClusters"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMultiRegionClustersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMultiRegionClustersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
+        operation.input = DescribeMultiRegionClustersRequest
+        operation.output = DescribeMultiRegionClustersResponse
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionClusterNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeMultiRegionClusters.new
       end)
       service.add_operation(:describe_parameter_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeParameterGroups"
         operation.name = "DescribeParameterGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeParameterGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeParameterGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DescribeParameterGroupsRequest
+        operation.output = DescribeParameterGroupsResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeParameterGroups.new
       end)
       service.add_operation(:describe_parameters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeParameters"
         operation.name = "DescribeParameters"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeParametersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeParametersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DescribeParametersRequest
+        operation.output = DescribeParametersResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeParameters.new
       end)
       service.add_operation(:describe_reserved_nodes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeReservedNodes"
         operation.name = "DescribeReservedNodes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReservedNodesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReservedNodesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodeNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DescribeReservedNodesRequest
+        operation.output = DescribeReservedNodesResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ReservedNodeNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeReservedNodes.new
       end)
       service.add_operation(:describe_reserved_nodes_offerings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeReservedNodesOfferings"
         operation.name = "DescribeReservedNodesOfferings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReservedNodesOfferingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeReservedNodesOfferingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodesOfferingNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = DescribeReservedNodesOfferingsRequest
+        operation.output = DescribeReservedNodesOfferingsResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ReservedNodesOfferingNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeReservedNodesOfferings.new
       end)
       service.add_operation(:describe_service_updates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeServiceUpdates"
         operation.name = "DescribeServiceUpdates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeServiceUpdatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeServiceUpdatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DescribeServiceUpdatesRequest
+        operation.output = DescribeServiceUpdatesResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeServiceUpdates.new
       end)
       service.add_operation(:describe_snapshots, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeSnapshots"
         operation.name = "DescribeSnapshots"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSnapshotsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
+        operation.input = DescribeSnapshotsRequest
+        operation.output = DescribeSnapshotsResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeSnapshots.new
       end)
       service.add_operation(:describe_subnet_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeSubnetGroups"
         operation.name = "DescribeSubnetGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSubnetGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSubnetGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
+        operation.input = DescribeSubnetGroupsRequest
+        operation.output = DescribeSubnetGroupsResponse
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SubnetGroupNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeSubnetGroups.new
       end)
       service.add_operation(:describe_users, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeUsers"
         operation.name = "DescribeUsers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUsersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeUsersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = DescribeUsersRequest
+        operation.output = DescribeUsersResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << UserNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeUsers.new
       end)
       service.add_operation(:failover_shard, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#FailoverShard"
         operation.name = "FailoverShard"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailoverShardRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailoverShardResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: APICallRateForCustomerExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidKMSKeyFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TestFailoverNotAvailableFault)
+        operation.input = FailoverShardRequest
+        operation.output = FailoverShardResponse
+        operation.errors << APICallRateForCustomerExceededFault
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << InvalidKMSKeyFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ShardNotFoundFault
+        operation.errors << TestFailoverNotAvailableFault
         operation.traits = {}
       end)
       service.add_operation(:list_allowed_multi_region_cluster_updates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#ListAllowedMultiRegionClusterUpdates"
         operation.name = "ListAllowedMultiRegionClusterUpdates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAllowedMultiRegionClusterUpdatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAllowedMultiRegionClusterUpdatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
+        operation.input = ListAllowedMultiRegionClusterUpdatesRequest
+        operation.output = ListAllowedMultiRegionClusterUpdatesResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionClusterNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:list_allowed_node_type_updates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#ListAllowedNodeTypeUpdates"
         operation.name = "ListAllowedNodeTypeUpdates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAllowedNodeTypeUpdatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAllowedNodeTypeUpdatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = ListAllowedNodeTypeUpdatesRequest
+        operation.output = ListAllowedNodeTypeUpdatesResponse
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:list_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#ListTags"
         operation.name = "ListTags"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidARNFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = ListTagsRequest
+        operation.output = ListTagsResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidARNFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << MultiRegionClusterNotFoundFault
+        operation.errors << MultiRegionParameterGroupNotFoundFault
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotNotFoundFault
+        operation.errors << SubnetGroupNotFoundFault
+        operation.errors << UserNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:purchase_reserved_nodes_offering, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#PurchaseReservedNodesOffering"
         operation.name = "PurchaseReservedNodesOffering"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PurchaseReservedNodesOfferingRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PurchaseReservedNodesOfferingResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodeQuotaExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReservedNodesOfferingNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        operation.input = PurchaseReservedNodesOfferingRequest
+        operation.output = PurchaseReservedNodesOfferingResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ReservedNodeAlreadyExistsFault
+        operation.errors << ReservedNodeQuotaExceededFault
+        operation.errors << ReservedNodesOfferingNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:reset_parameter_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#ResetParameterGroup"
         operation.name = "ResetParameterGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetParameterGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetParameterGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = ResetParameterGroupRequest
+        operation.output = ResetParameterGroupResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterGroupStateFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidARNFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidARNFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionClusterNotFoundFault
+        operation.errors << MultiRegionParameterGroupNotFoundFault
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotNotFoundFault
+        operation.errors << SubnetGroupNotFoundFault
+        operation.errors << TagQuotaPerResourceExceeded
+        operation.errors << UserNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidARNFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidARNFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionClusterNotFoundFault
+        operation.errors << MultiRegionParameterGroupNotFoundFault
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SnapshotNotFoundFault
+        operation.errors << SubnetGroupNotFoundFault
+        operation.errors << TagNotFoundFault
+        operation.errors << UserNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:update_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#UpdateACL"
         operation.name = "UpdateACL"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateACLRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateACLResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultUserRequired)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DuplicateUserNameFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidACLStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = UpdateACLRequest
+        operation.output = UpdateACLResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << DefaultUserRequired
+        operation.errors << DuplicateUserNameFault
+        operation.errors << InvalidACLStateFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << UserNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:update_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#UpdateCluster"
         operation.name = "UpdateCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ACLNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterQuotaForCustomerExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidACLStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidKMSKeyFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNodeStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeQuotaForClusterExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoOperationFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardsPerClusterQuotaExceededFault)
+        operation.input = UpdateClusterRequest
+        operation.output = UpdateClusterResponse
+        operation.errors << ACLNotFoundFault
+        operation.errors << ClusterNotFoundFault
+        operation.errors << ClusterQuotaForCustomerExceededFault
+        operation.errors << InvalidACLStateFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << InvalidKMSKeyFault
+        operation.errors << InvalidNodeStateFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidVPCNetworkStateFault
+        operation.errors << NodeQuotaForClusterExceededFault
+        operation.errors << NodeQuotaForCustomerExceededFault
+        operation.errors << NoOperationFault
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << ShardsPerClusterQuotaExceededFault
         operation.traits = {}
       end)
       service.add_operation(:update_multi_region_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#UpdateMultiRegionCluster"
         operation.name = "UpdateMultiRegionCluster"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMultiRegionClusterRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateMultiRegionClusterResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMultiRegionClusterStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionClusterNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiRegionParameterGroupNotFoundFault)
+        operation.input = UpdateMultiRegionClusterRequest
+        operation.output = UpdateMultiRegionClusterResponse
+        operation.errors << InvalidMultiRegionClusterStateFault
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionClusterNotFoundFault
+        operation.errors << MultiRegionParameterGroupNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:update_parameter_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#UpdateParameterGroup"
         operation.name = "UpdateParameterGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateParameterGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateParameterGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        operation.input = UpdateParameterGroupRequest
+        operation.output = UpdateParameterGroupResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterGroupStateFault
+        operation.errors << InvalidParameterValueException
+        operation.errors << ParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
         operation.traits = {}
       end)
       service.add_operation(:update_subnet_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#UpdateSubnetGroup"
         operation.name = "UpdateSubnetGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSubnetGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSubnetGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSubnet)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetInUse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetNotAllowedFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
+        operation.input = UpdateSubnetGroupRequest
+        operation.output = UpdateSubnetGroupResponse
+        operation.errors << InvalidSubnet
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << SubnetGroupNotFoundFault
+        operation.errors << SubnetInUse
+        operation.errors << SubnetNotAllowedFault
+        operation.errors << SubnetQuotaExceededFault
         operation.traits = {}
       end)
       service.add_operation(:update_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#UpdateUser"
         operation.name = "UpdateUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidUserStateFault)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        operation.input = UpdateUserRequest
+        operation.output = UpdateUserResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidUserStateFault
+        operation.errors << UserNotFoundFault
         operation.traits = {}
       end)
     end

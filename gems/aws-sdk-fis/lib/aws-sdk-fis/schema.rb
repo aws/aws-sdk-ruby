@@ -269,558 +269,558 @@ module Aws::Fis
     UpdateTargetAccountConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fis#UpdateTargetAccountConfigurationResponse", name: "UpdateTargetAccountConfigurationResponse")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fis#ValidationException", name: "ValidationException", traits: {"aws.protocols#awsQueryError" => {"code" => "ValidationException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccountTargeting.add_member(:single_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_ACCOUNT", traits: {"smithy.api#enumValue" => "single-account"}))
-    AccountTargeting.add_member(:multi_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_ACCOUNT", traits: {"smithy.api#enumValue" => "multi-account"}))
-    Action.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "id"))
-    Action.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    Action.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
-    Action.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionParameterMap, location_name: "parameters"))
-    Action.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionTargetMap, location_name: "targets"))
-    Action.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    AccountTargeting.add_member(:single_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SINGLE_ACCOUNT", traits: {"smithy.api#enumValue" => "single-account"}))
+    AccountTargeting.add_member(:multi_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI_ACCOUNT", traits: {"smithy.api#enumValue" => "multi-account"}))
+    Action.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "id"))
+    Action.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    Action.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionDescription, location_name: "description"))
+    Action.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionParameterMap, location_name: "parameters"))
+    Action.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTargetMap, location_name: "targets"))
+    Action.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     Action.type = Types::Action
-    ActionParameter.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionParameterDescription, location_name: "description"))
-    ActionParameter.add_member(:required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionParameterRequired, location_name: "required", traits: {"smithy.api#default" => nil}))
+    ActionParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionParameterDescription, location_name: "description"))
+    ActionParameter.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionParameterRequired, location_name: "required", traits: {"smithy.api#default" => nil}))
     ActionParameter.type = Types::ActionParameter
-    ActionParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionParameterName)
-    ActionParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionParameter)
-    ActionSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "id"))
-    ActionSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    ActionSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
-    ActionSummary.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionTargetMap, location_name: "targets"))
-    ActionSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ActionParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionParameterName)
+    ActionParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionParameter)
+    ActionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "id"))
+    ActionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    ActionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionDescription, location_name: "description"))
+    ActionSummary.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTargetMap, location_name: "targets"))
+    ActionSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ActionSummary.type = Types::ActionSummary
-    ActionSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionSummary)
-    ActionTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
+    ActionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummary)
+    ActionTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType"))
     ActionTarget.type = Types::ActionTarget
-    ActionTargetMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionTargetName)
-    ActionTargetMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionTarget)
-    ActionsMode.add_member(:skip_all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIP_ALL", traits: {"smithy.api#enumValue" => "skip-all"}))
-    ActionsMode.add_member(:run_all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUN_ALL", traits: {"smithy.api#enumValue" => "run-all"}))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ActionTargetMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTargetName)
+    ActionTargetMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTarget)
+    ActionsMode.add_member(:skip_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIP_ALL", traits: {"smithy.api#enumValue" => "skip-all"}))
+    ActionsMode.add_member(:run_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUN_ALL", traits: {"smithy.api#enumValue" => "run-all"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateExperimentTemplateActionInput.add_member(:action_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "actionId", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateActionInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionDescription, location_name: "description"))
-    CreateExperimentTemplateActionInput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionParameterMap, location_name: "parameters"))
-    CreateExperimentTemplateActionInput.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionTargetMap, location_name: "targets"))
-    CreateExperimentTemplateActionInput.add_member(:start_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionStartAfterList, location_name: "startAfter"))
+    CreateExperimentTemplateActionInput.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "actionId", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateActionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionDescription, location_name: "description"))
+    CreateExperimentTemplateActionInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionParameterMap, location_name: "parameters"))
+    CreateExperimentTemplateActionInput.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionTargetMap, location_name: "targets"))
+    CreateExperimentTemplateActionInput.add_member(:start_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionStartAfterList, location_name: "startAfter"))
     CreateExperimentTemplateActionInput.type = Types::CreateExperimentTemplateActionInput
-    CreateExperimentTemplateActionInputMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionName)
-    CreateExperimentTemplateActionInputMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateActionInput)
-    CreateExperimentTemplateExperimentOptionsInput.add_member(:account_targeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTargeting, location_name: "accountTargeting"))
-    CreateExperimentTemplateExperimentOptionsInput.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
+    CreateExperimentTemplateActionInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionName)
+    CreateExperimentTemplateActionInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateActionInput)
+    CreateExperimentTemplateExperimentOptionsInput.add_member(:account_targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTargeting, location_name: "accountTargeting"))
+    CreateExperimentTemplateExperimentOptionsInput.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
     CreateExperimentTemplateExperimentOptionsInput.type = Types::CreateExperimentTemplateExperimentOptionsInput
-    CreateExperimentTemplateLogConfigurationInput.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateCloudWatchLogsLogConfigurationInput, location_name: "cloudWatchLogsConfiguration"))
-    CreateExperimentTemplateLogConfigurationInput.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateS3LogConfigurationInput, location_name: "s3Configuration"))
-    CreateExperimentTemplateLogConfigurationInput.add_member(:log_schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateLogConfigurationInput.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateCloudWatchLogsLogConfigurationInput, location_name: "cloudWatchLogsConfiguration"))
+    CreateExperimentTemplateLogConfigurationInput.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateS3LogConfigurationInput, location_name: "s3Configuration"))
+    CreateExperimentTemplateLogConfigurationInput.add_member(:log_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSchemaVersion, location_name: "logSchemaVersion", traits: {"smithy.api#required" => {}}))
     CreateExperimentTemplateLogConfigurationInput.type = Types::CreateExperimentTemplateLogConfigurationInput
-    CreateExperimentTemplateReportConfigurationInput.add_member(:outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationOutputsInput, location_name: "outputs"))
-    CreateExperimentTemplateReportConfigurationInput.add_member(:data_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationDataSourcesInput, location_name: "dataSources"))
-    CreateExperimentTemplateReportConfigurationInput.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "preExperimentDuration"))
-    CreateExperimentTemplateReportConfigurationInput.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "postExperimentDuration"))
+    CreateExperimentTemplateReportConfigurationInput.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationOutputsInput, location_name: "outputs"))
+    CreateExperimentTemplateReportConfigurationInput.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationDataSourcesInput, location_name: "dataSources"))
+    CreateExperimentTemplateReportConfigurationInput.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "preExperimentDuration"))
+    CreateExperimentTemplateReportConfigurationInput.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "postExperimentDuration"))
     CreateExperimentTemplateReportConfigurationInput.type = Types::CreateExperimentTemplateReportConfigurationInput
-    CreateExperimentTemplateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateExperimentTemplateRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateRequest.add_member(:stop_conditions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateStopConditionInputList, location_name: "stopConditions", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateRequest.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateTargetInputMap, location_name: "targets"))
-    CreateExperimentTemplateRequest.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateActionInputMap, location_name: "actions", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateExperimentTemplateRequest.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateLogConfigurationInput, location_name: "logConfiguration"))
-    CreateExperimentTemplateRequest.add_member(:experiment_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateExperimentOptionsInput, location_name: "experimentOptions"))
-    CreateExperimentTemplateRequest.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateReportConfigurationInput, location_name: "experimentReportConfiguration"))
+    CreateExperimentTemplateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateExperimentTemplateRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateDescription, location_name: "description", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateRequest.add_member(:stop_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateStopConditionInputList, location_name: "stopConditions", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateRequest.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateTargetInputMap, location_name: "targets"))
+    CreateExperimentTemplateRequest.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateActionInputMap, location_name: "actions", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateExperimentTemplateRequest.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateLogConfigurationInput, location_name: "logConfiguration"))
+    CreateExperimentTemplateRequest.add_member(:experiment_options, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateExperimentOptionsInput, location_name: "experimentOptions"))
+    CreateExperimentTemplateRequest.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateReportConfigurationInput, location_name: "experimentReportConfiguration"))
     CreateExperimentTemplateRequest.type = Types::CreateExperimentTemplateRequest
-    CreateExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))
+    CreateExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplate, location_name: "experimentTemplate"))
     CreateExperimentTemplateResponse.type = Types::CreateExperimentTemplateResponse
-    CreateExperimentTemplateStopConditionInput.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionSource, location_name: "source", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateStopConditionInput.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionValue, location_name: "value"))
+    CreateExperimentTemplateStopConditionInput.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionSource, location_name: "source", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateStopConditionInput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionValue, location_name: "value"))
     CreateExperimentTemplateStopConditionInput.type = Types::CreateExperimentTemplateStopConditionInput
-    CreateExperimentTemplateStopConditionInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateStopConditionInput)
-    CreateExperimentTemplateTargetInput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateTargetInput.add_member(:resource_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
-    CreateExperimentTemplateTargetInput.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
-    CreateExperimentTemplateTargetInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterInputList, location_name: "filters"))
-    CreateExperimentTemplateTargetInput.add_member(:selection_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetSelectionMode, location_name: "selectionMode", traits: {"smithy.api#required" => {}}))
-    CreateExperimentTemplateTargetInput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
+    CreateExperimentTemplateStopConditionInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateStopConditionInput)
+    CreateExperimentTemplateTargetInput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateTargetInput.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnList, location_name: "resourceArns"))
+    CreateExperimentTemplateTargetInput.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "resourceTags"))
+    CreateExperimentTemplateTargetInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterInputList, location_name: "filters"))
+    CreateExperimentTemplateTargetInput.add_member(:selection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetSelectionMode, location_name: "selectionMode", traits: {"smithy.api#required" => {}}))
+    CreateExperimentTemplateTargetInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
     CreateExperimentTemplateTargetInput.type = Types::CreateExperimentTemplateTargetInput
-    CreateExperimentTemplateTargetInputMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
-    CreateExperimentTemplateTargetInputMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateTargetInput)
-    CreateTargetAccountConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateTargetAccountConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
-    CreateTargetAccountConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationDescription, location_name: "description"))
+    CreateExperimentTemplateTargetInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetName)
+    CreateExperimentTemplateTargetInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateExperimentTemplateTargetInput)
+    CreateTargetAccountConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateTargetAccountConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn", traits: {"smithy.api#required" => {}}))
+    CreateTargetAccountConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationDescription, location_name: "description"))
     CreateTargetAccountConfigurationRequest.type = Types::CreateTargetAccountConfigurationRequest
-    CreateTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
+    CreateTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
     CreateTargetAccountConfigurationResponse.type = Types::CreateTargetAccountConfigurationResponse
-    DeleteExperimentTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteExperimentTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteExperimentTemplateRequest.type = Types::DeleteExperimentTemplateRequest
-    DeleteExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))
+    DeleteExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplate, location_name: "experimentTemplate"))
     DeleteExperimentTemplateResponse.type = Types::DeleteExperimentTemplateResponse
-    DeleteTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteTargetAccountConfigurationRequest.type = Types::DeleteTargetAccountConfigurationRequest
-    DeleteTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
+    DeleteTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
     DeleteTargetAccountConfigurationResponse.type = Types::DeleteTargetAccountConfigurationResponse
-    EmptyTargetResolutionMode.add_member(:fail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAIL", traits: {"smithy.api#enumValue" => "fail"}))
-    EmptyTargetResolutionMode.add_member(:skip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIP", traits: {"smithy.api#enumValue" => "skip"}))
-    Experiment.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentId, location_name: "id"))
-    Experiment.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    Experiment.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId"))
-    Experiment.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    Experiment.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentState, location_name: "state"))
-    Experiment.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetMap, location_name: "targets"))
-    Experiment.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionMap, location_name: "actions"))
-    Experiment.add_member(:stop_conditions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentStopConditionList, location_name: "stopConditions"))
-    Experiment.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
-    Experiment.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentStartTime, location_name: "startTime"))
-    Experiment.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentEndTime, location_name: "endTime"))
-    Experiment.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    Experiment.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentLogConfiguration, location_name: "logConfiguration"))
-    Experiment.add_member(:experiment_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentOptions, location_name: "experimentOptions"))
-    Experiment.add_member(:target_account_configurations_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationsCount, location_name: "targetAccountConfigurationsCount"))
-    Experiment.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportConfiguration, location_name: "experimentReportConfiguration"))
-    Experiment.add_member(:experiment_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReport, location_name: "experimentReport"))
+    EmptyTargetResolutionMode.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAIL", traits: {"smithy.api#enumValue" => "fail"}))
+    EmptyTargetResolutionMode.add_member(:skip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SKIP", traits: {"smithy.api#enumValue" => "skip"}))
+    Experiment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentId, location_name: "id"))
+    Experiment.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    Experiment.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId"))
+    Experiment.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    Experiment.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentState, location_name: "state"))
+    Experiment.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetMap, location_name: "targets"))
+    Experiment.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionMap, location_name: "actions"))
+    Experiment.add_member(:stop_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentStopConditionList, location_name: "stopConditions"))
+    Experiment.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime"))
+    Experiment.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentStartTime, location_name: "startTime"))
+    Experiment.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEndTime, location_name: "endTime"))
+    Experiment.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    Experiment.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentLogConfiguration, location_name: "logConfiguration"))
+    Experiment.add_member(:experiment_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentOptions, location_name: "experimentOptions"))
+    Experiment.add_member(:target_account_configurations_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationsCount, location_name: "targetAccountConfigurationsCount"))
+    Experiment.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportConfiguration, location_name: "experimentReportConfiguration"))
+    Experiment.add_member(:experiment_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReport, location_name: "experimentReport"))
     Experiment.type = Types::Experiment
-    ExperimentAction.add_member(:action_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "actionId"))
-    ExperimentAction.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionDescription, location_name: "description"))
-    ExperimentAction.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionParameterMap, location_name: "parameters"))
-    ExperimentAction.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionTargetMap, location_name: "targets"))
-    ExperimentAction.add_member(:start_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionStartAfterList, location_name: "startAfter"))
-    ExperimentAction.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionState, location_name: "state"))
-    ExperimentAction.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionStartTime, location_name: "startTime"))
-    ExperimentAction.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionEndTime, location_name: "endTime"))
+    ExperimentAction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "actionId"))
+    ExperimentAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionDescription, location_name: "description"))
+    ExperimentAction.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionParameterMap, location_name: "parameters"))
+    ExperimentAction.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionTargetMap, location_name: "targets"))
+    ExperimentAction.add_member(:start_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionStartAfterList, location_name: "startAfter"))
+    ExperimentAction.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionState, location_name: "state"))
+    ExperimentAction.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionStartTime, location_name: "startTime"))
+    ExperimentAction.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionEndTime, location_name: "endTime"))
     ExperimentAction.type = Types::ExperimentAction
-    ExperimentActionMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionName)
-    ExperimentActionMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentAction)
-    ExperimentActionParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionParameterName)
-    ExperimentActionParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionParameter)
-    ExperimentActionStartAfterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionStartAfter)
-    ExperimentActionState.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionStatus, location_name: "status"))
-    ExperimentActionState.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionStatusReason, location_name: "reason"))
+    ExperimentActionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionName)
+    ExperimentActionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentAction)
+    ExperimentActionParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionParameterName)
+    ExperimentActionParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionParameter)
+    ExperimentActionStartAfterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionStartAfter)
+    ExperimentActionState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionStatus, location_name: "status"))
+    ExperimentActionState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionStatusReason, location_name: "reason"))
     ExperimentActionState.type = Types::ExperimentActionState
-    ExperimentActionStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
-    ExperimentActionStatus.add_member(:initiating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "initiating", traits: {"smithy.api#enumValue" => "initiating"}))
-    ExperimentActionStatus.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "running", traits: {"smithy.api#enumValue" => "running"}))
-    ExperimentActionStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "completed", traits: {"smithy.api#enumValue" => "completed"}))
-    ExperimentActionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cancelled", traits: {"smithy.api#enumValue" => "cancelled"}))
-    ExperimentActionStatus.add_member(:stopping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopping", traits: {"smithy.api#enumValue" => "stopping"}))
-    ExperimentActionStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopped", traits: {"smithy.api#enumValue" => "stopped"}))
-    ExperimentActionStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "failed", traits: {"smithy.api#enumValue" => "failed"}))
-    ExperimentActionStatus.add_member(:skipped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "skipped", traits: {"smithy.api#enumValue" => "skipped"}))
-    ExperimentActionTargetMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentActionTargetName)
-    ExperimentActionTargetMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetName)
-    ExperimentCloudWatchLogsLogConfiguration.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "logGroupArn"))
+    ExperimentActionStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
+    ExperimentActionStatus.add_member(:initiating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "initiating", traits: {"smithy.api#enumValue" => "initiating"}))
+    ExperimentActionStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "running", traits: {"smithy.api#enumValue" => "running"}))
+    ExperimentActionStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "completed", traits: {"smithy.api#enumValue" => "completed"}))
+    ExperimentActionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cancelled", traits: {"smithy.api#enumValue" => "cancelled"}))
+    ExperimentActionStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopping", traits: {"smithy.api#enumValue" => "stopping"}))
+    ExperimentActionStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopped", traits: {"smithy.api#enumValue" => "stopped"}))
+    ExperimentActionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "failed", traits: {"smithy.api#enumValue" => "failed"}))
+    ExperimentActionStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "skipped", traits: {"smithy.api#enumValue" => "skipped"}))
+    ExperimentActionTargetMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentActionTargetName)
+    ExperimentActionTargetMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetName)
+    ExperimentCloudWatchLogsLogConfiguration.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupArn, location_name: "logGroupArn"))
     ExperimentCloudWatchLogsLogConfiguration.type = Types::ExperimentCloudWatchLogsLogConfiguration
-    ExperimentError.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentErrorAccountId, location_name: "accountId"))
-    ExperimentError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentErrorCode, location_name: "code"))
-    ExperimentError.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentErrorLocation, location_name: "location"))
+    ExperimentError.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentErrorAccountId, location_name: "accountId"))
+    ExperimentError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentErrorCode, location_name: "code"))
+    ExperimentError.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentErrorLocation, location_name: "location"))
     ExperimentError.type = Types::ExperimentError
-    ExperimentLogConfiguration.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentCloudWatchLogsLogConfiguration, location_name: "cloudWatchLogsConfiguration"))
-    ExperimentLogConfiguration.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentS3LogConfiguration, location_name: "s3Configuration"))
-    ExperimentLogConfiguration.add_member(:log_schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion"))
+    ExperimentLogConfiguration.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentCloudWatchLogsLogConfiguration, location_name: "cloudWatchLogsConfiguration"))
+    ExperimentLogConfiguration.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentS3LogConfiguration, location_name: "s3Configuration"))
+    ExperimentLogConfiguration.add_member(:log_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSchemaVersion, location_name: "logSchemaVersion"))
     ExperimentLogConfiguration.type = Types::ExperimentLogConfiguration
-    ExperimentOptions.add_member(:account_targeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTargeting, location_name: "accountTargeting"))
-    ExperimentOptions.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
-    ExperimentOptions.add_member(:actions_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsMode, location_name: "actionsMode"))
+    ExperimentOptions.add_member(:account_targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTargeting, location_name: "accountTargeting"))
+    ExperimentOptions.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
+    ExperimentOptions.add_member(:actions_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsMode, location_name: "actionsMode"))
     ExperimentOptions.type = Types::ExperimentOptions
-    ExperimentReport.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportState, location_name: "state"))
-    ExperimentReport.add_member(:s3_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportS3ReportList, location_name: "s3Reports"))
+    ExperimentReport.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportState, location_name: "state"))
+    ExperimentReport.add_member(:s3_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportS3ReportList, location_name: "s3Reports"))
     ExperimentReport.type = Types::ExperimentReport
-    ExperimentReportConfiguration.add_member(:outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportConfigurationOutputs, location_name: "outputs"))
-    ExperimentReportConfiguration.add_member(:data_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportConfigurationDataSources, location_name: "dataSources"))
-    ExperimentReportConfiguration.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "preExperimentDuration"))
-    ExperimentReportConfiguration.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "postExperimentDuration"))
+    ExperimentReportConfiguration.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportConfigurationOutputs, location_name: "outputs"))
+    ExperimentReportConfiguration.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportConfigurationDataSources, location_name: "dataSources"))
+    ExperimentReportConfiguration.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "preExperimentDuration"))
+    ExperimentReportConfiguration.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "postExperimentDuration"))
     ExperimentReportConfiguration.type = Types::ExperimentReportConfiguration
-    ExperimentReportConfigurationCloudWatchDashboard.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationCloudWatchDashboardIdentifier, location_name: "dashboardIdentifier"))
+    ExperimentReportConfigurationCloudWatchDashboard.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationCloudWatchDashboardIdentifier, location_name: "dashboardIdentifier"))
     ExperimentReportConfigurationCloudWatchDashboard.type = Types::ExperimentReportConfigurationCloudWatchDashboard
-    ExperimentReportConfigurationCloudWatchDashboardList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportConfigurationCloudWatchDashboard)
-    ExperimentReportConfigurationDataSources.add_member(:cloud_watch_dashboards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportConfigurationCloudWatchDashboardList, location_name: "cloudWatchDashboards"))
+    ExperimentReportConfigurationCloudWatchDashboardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportConfigurationCloudWatchDashboard)
+    ExperimentReportConfigurationDataSources.add_member(:cloud_watch_dashboards, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportConfigurationCloudWatchDashboardList, location_name: "cloudWatchDashboards"))
     ExperimentReportConfigurationDataSources.type = Types::ExperimentReportConfigurationDataSources
-    ExperimentReportConfigurationOutputs.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportConfigurationOutputsS3Configuration, location_name: "s3Configuration"))
+    ExperimentReportConfigurationOutputs.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportConfigurationOutputsS3Configuration, location_name: "s3Configuration"))
     ExperimentReportConfigurationOutputs.type = Types::ExperimentReportConfigurationOutputs
-    ExperimentReportConfigurationOutputsS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
-    ExperimentReportConfigurationOutputsS3Configuration.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationS3OutputPrefix, location_name: "prefix"))
+    ExperimentReportConfigurationOutputsS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "bucketName"))
+    ExperimentReportConfigurationOutputsS3Configuration.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationS3OutputPrefix, location_name: "prefix"))
     ExperimentReportConfigurationOutputsS3Configuration.type = Types::ExperimentReportConfigurationOutputsS3Configuration
-    ExperimentReportError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportErrorCode, location_name: "code"))
+    ExperimentReportError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportErrorCode, location_name: "code"))
     ExperimentReportError.type = Types::ExperimentReportError
-    ExperimentReportS3Report.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportS3ReportArn, location_name: "arn"))
-    ExperimentReportS3Report.add_member(:report_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportS3ReportType, location_name: "reportType"))
+    ExperimentReportS3Report.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportS3ReportArn, location_name: "arn"))
+    ExperimentReportS3Report.add_member(:report_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportS3ReportType, location_name: "reportType"))
     ExperimentReportS3Report.type = Types::ExperimentReportS3Report
-    ExperimentReportS3ReportList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportS3Report)
-    ExperimentReportState.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportStatus, location_name: "status"))
-    ExperimentReportState.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportReason, location_name: "reason"))
-    ExperimentReportState.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentReportError, location_name: "error"))
+    ExperimentReportS3ReportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportS3Report)
+    ExperimentReportState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportStatus, location_name: "status"))
+    ExperimentReportState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportReason, location_name: "reason"))
+    ExperimentReportState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportError, location_name: "error"))
     ExperimentReportState.type = Types::ExperimentReportState
-    ExperimentReportStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
-    ExperimentReportStatus.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "running", traits: {"smithy.api#enumValue" => "running"}))
-    ExperimentReportStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "completed", traits: {"smithy.api#enumValue" => "completed"}))
-    ExperimentReportStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cancelled", traits: {"smithy.api#enumValue" => "cancelled"}))
-    ExperimentReportStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "failed", traits: {"smithy.api#enumValue" => "failed"}))
-    ExperimentS3LogConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
-    ExperimentS3LogConfiguration.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "prefix"))
+    ExperimentReportStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
+    ExperimentReportStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "running", traits: {"smithy.api#enumValue" => "running"}))
+    ExperimentReportStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "completed", traits: {"smithy.api#enumValue" => "completed"}))
+    ExperimentReportStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cancelled", traits: {"smithy.api#enumValue" => "cancelled"}))
+    ExperimentReportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "failed", traits: {"smithy.api#enumValue" => "failed"}))
+    ExperimentS3LogConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "bucketName"))
+    ExperimentS3LogConfiguration.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "prefix"))
     ExperimentS3LogConfiguration.type = Types::ExperimentS3LogConfiguration
-    ExperimentState.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentStatus, location_name: "status"))
-    ExperimentState.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentStatusReason, location_name: "reason"))
-    ExperimentState.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentError, location_name: "error"))
+    ExperimentState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentStatus, location_name: "status"))
+    ExperimentState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentStatusReason, location_name: "reason"))
+    ExperimentState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentError, location_name: "error"))
     ExperimentState.type = Types::ExperimentState
-    ExperimentStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
-    ExperimentStatus.add_member(:initiating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "initiating", traits: {"smithy.api#enumValue" => "initiating"}))
-    ExperimentStatus.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "running", traits: {"smithy.api#enumValue" => "running"}))
-    ExperimentStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "completed", traits: {"smithy.api#enumValue" => "completed"}))
-    ExperimentStatus.add_member(:stopping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopping", traits: {"smithy.api#enumValue" => "stopping"}))
-    ExperimentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopped", traits: {"smithy.api#enumValue" => "stopped"}))
-    ExperimentStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "failed", traits: {"smithy.api#enumValue" => "failed"}))
-    ExperimentStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cancelled", traits: {"smithy.api#enumValue" => "cancelled"}))
-    ExperimentStopCondition.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionSource, location_name: "source"))
-    ExperimentStopCondition.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionValue, location_name: "value"))
+    ExperimentStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
+    ExperimentStatus.add_member(:initiating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "initiating", traits: {"smithy.api#enumValue" => "initiating"}))
+    ExperimentStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "running", traits: {"smithy.api#enumValue" => "running"}))
+    ExperimentStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "completed", traits: {"smithy.api#enumValue" => "completed"}))
+    ExperimentStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopping", traits: {"smithy.api#enumValue" => "stopping"}))
+    ExperimentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "stopped", traits: {"smithy.api#enumValue" => "stopped"}))
+    ExperimentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "failed", traits: {"smithy.api#enumValue" => "failed"}))
+    ExperimentStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cancelled", traits: {"smithy.api#enumValue" => "cancelled"}))
+    ExperimentStopCondition.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionSource, location_name: "source"))
+    ExperimentStopCondition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionValue, location_name: "value"))
     ExperimentStopCondition.type = Types::ExperimentStopCondition
-    ExperimentStopConditionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentStopCondition)
-    ExperimentSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentId, location_name: "id"))
-    ExperimentSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    ExperimentSummary.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId"))
-    ExperimentSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentState, location_name: "state"))
-    ExperimentSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
-    ExperimentSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    ExperimentSummary.add_member(:experiment_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentOptions, location_name: "experimentOptions"))
+    ExperimentStopConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentStopCondition)
+    ExperimentSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentId, location_name: "id"))
+    ExperimentSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    ExperimentSummary.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId"))
+    ExperimentSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentState, location_name: "state"))
+    ExperimentSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime"))
+    ExperimentSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    ExperimentSummary.add_member(:experiment_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentOptions, location_name: "experimentOptions"))
     ExperimentSummary.type = Types::ExperimentSummary
-    ExperimentSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentSummary)
-    ExperimentTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
-    ExperimentTarget.add_member(:resource_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
-    ExperimentTarget.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
-    ExperimentTarget.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetFilterList, location_name: "filters"))
-    ExperimentTarget.add_member(:selection_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetSelectionMode, location_name: "selectionMode"))
-    ExperimentTarget.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetParameterMap, location_name: "parameters"))
+    ExperimentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentSummary)
+    ExperimentTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType"))
+    ExperimentTarget.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnList, location_name: "resourceArns"))
+    ExperimentTarget.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "resourceTags"))
+    ExperimentTarget.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetFilterList, location_name: "filters"))
+    ExperimentTarget.add_member(:selection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetSelectionMode, location_name: "selectionMode"))
+    ExperimentTarget.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetParameterMap, location_name: "parameters"))
     ExperimentTarget.type = Types::ExperimentTarget
-    ExperimentTargetAccountConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    ExperimentTargetAccountConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId"))
-    ExperimentTargetAccountConfiguration.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationDescription, location_name: "description"))
+    ExperimentTargetAccountConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    ExperimentTargetAccountConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId"))
+    ExperimentTargetAccountConfiguration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationDescription, location_name: "description"))
     ExperimentTargetAccountConfiguration.type = Types::ExperimentTargetAccountConfiguration
-    ExperimentTargetAccountConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetAccountConfigurationSummary)
-    ExperimentTargetAccountConfigurationSummary.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    ExperimentTargetAccountConfigurationSummary.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId"))
-    ExperimentTargetAccountConfigurationSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationDescription, location_name: "description"))
+    ExperimentTargetAccountConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetAccountConfigurationSummary)
+    ExperimentTargetAccountConfigurationSummary.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    ExperimentTargetAccountConfigurationSummary.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId"))
+    ExperimentTargetAccountConfigurationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationDescription, location_name: "description"))
     ExperimentTargetAccountConfigurationSummary.type = Types::ExperimentTargetAccountConfigurationSummary
-    ExperimentTargetFilter.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetFilterPath, location_name: "path"))
-    ExperimentTargetFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetFilterValues, location_name: "values"))
+    ExperimentTargetFilter.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetFilterPath, location_name: "path"))
+    ExperimentTargetFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetFilterValues, location_name: "values"))
     ExperimentTargetFilter.type = Types::ExperimentTargetFilter
-    ExperimentTargetFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetFilter)
-    ExperimentTargetFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetFilterValue)
-    ExperimentTargetMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetName)
-    ExperimentTargetMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTarget)
-    ExperimentTargetParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetParameterName)
-    ExperimentTargetParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetParameterValue)
-    ExperimentTemplate.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id"))
-    ExperimentTemplate.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    ExperimentTemplate.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description"))
-    ExperimentTemplate.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetMap, location_name: "targets"))
-    ExperimentTemplate.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionMap, location_name: "actions"))
-    ExperimentTemplate.add_member(:stop_conditions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateStopConditionList, location_name: "stopConditions"))
-    ExperimentTemplate.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
-    ExperimentTemplate.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "lastUpdateTime"))
-    ExperimentTemplate.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    ExperimentTemplate.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    ExperimentTemplate.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateLogConfiguration, location_name: "logConfiguration"))
-    ExperimentTemplate.add_member(:experiment_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateExperimentOptions, location_name: "experimentOptions"))
-    ExperimentTemplate.add_member(:target_account_configurations_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationsCount, location_name: "targetAccountConfigurationsCount"))
-    ExperimentTemplate.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfiguration, location_name: "experimentReportConfiguration"))
+    ExperimentTargetFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetFilter)
+    ExperimentTargetFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetFilterValue)
+    ExperimentTargetMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetName)
+    ExperimentTargetMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTarget)
+    ExperimentTargetParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetParameterName)
+    ExperimentTargetParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetParameterValue)
+    ExperimentTemplate.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "id"))
+    ExperimentTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    ExperimentTemplate.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateDescription, location_name: "description"))
+    ExperimentTemplate.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetMap, location_name: "targets"))
+    ExperimentTemplate.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionMap, location_name: "actions"))
+    ExperimentTemplate.add_member(:stop_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateStopConditionList, location_name: "stopConditions"))
+    ExperimentTemplate.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime"))
+    ExperimentTemplate.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdateTime, location_name: "lastUpdateTime"))
+    ExperimentTemplate.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    ExperimentTemplate.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    ExperimentTemplate.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateLogConfiguration, location_name: "logConfiguration"))
+    ExperimentTemplate.add_member(:experiment_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateExperimentOptions, location_name: "experimentOptions"))
+    ExperimentTemplate.add_member(:target_account_configurations_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationsCount, location_name: "targetAccountConfigurationsCount"))
+    ExperimentTemplate.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfiguration, location_name: "experimentReportConfiguration"))
     ExperimentTemplate.type = Types::ExperimentTemplate
-    ExperimentTemplateAction.add_member(:action_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "actionId"))
-    ExperimentTemplateAction.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionDescription, location_name: "description"))
-    ExperimentTemplateAction.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionParameterMap, location_name: "parameters"))
-    ExperimentTemplateAction.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionTargetMap, location_name: "targets"))
-    ExperimentTemplateAction.add_member(:start_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionStartAfterList, location_name: "startAfter"))
+    ExperimentTemplateAction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "actionId"))
+    ExperimentTemplateAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionDescription, location_name: "description"))
+    ExperimentTemplateAction.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionParameterMap, location_name: "parameters"))
+    ExperimentTemplateAction.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionTargetMap, location_name: "targets"))
+    ExperimentTemplateAction.add_member(:start_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionStartAfterList, location_name: "startAfter"))
     ExperimentTemplateAction.type = Types::ExperimentTemplateAction
-    ExperimentTemplateActionMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionName)
-    ExperimentTemplateActionMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateAction)
-    ExperimentTemplateActionParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionParameterName)
-    ExperimentTemplateActionParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionParameter)
-    ExperimentTemplateActionStartAfterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionStartAfter)
-    ExperimentTemplateActionTargetMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionTargetName)
-    ExperimentTemplateActionTargetMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
-    ExperimentTemplateCloudWatchLogsLogConfiguration.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "logGroupArn"))
+    ExperimentTemplateActionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionName)
+    ExperimentTemplateActionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateAction)
+    ExperimentTemplateActionParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionParameterName)
+    ExperimentTemplateActionParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionParameter)
+    ExperimentTemplateActionStartAfterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionStartAfter)
+    ExperimentTemplateActionTargetMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionTargetName)
+    ExperimentTemplateActionTargetMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetName)
+    ExperimentTemplateCloudWatchLogsLogConfiguration.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupArn, location_name: "logGroupArn"))
     ExperimentTemplateCloudWatchLogsLogConfiguration.type = Types::ExperimentTemplateCloudWatchLogsLogConfiguration
-    ExperimentTemplateCloudWatchLogsLogConfigurationInput.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "logGroupArn", traits: {"smithy.api#required" => {}}))
+    ExperimentTemplateCloudWatchLogsLogConfigurationInput.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupArn, location_name: "logGroupArn", traits: {"smithy.api#required" => {}}))
     ExperimentTemplateCloudWatchLogsLogConfigurationInput.type = Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput
-    ExperimentTemplateExperimentOptions.add_member(:account_targeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountTargeting, location_name: "accountTargeting"))
-    ExperimentTemplateExperimentOptions.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
+    ExperimentTemplateExperimentOptions.add_member(:account_targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTargeting, location_name: "accountTargeting"))
+    ExperimentTemplateExperimentOptions.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
     ExperimentTemplateExperimentOptions.type = Types::ExperimentTemplateExperimentOptions
-    ExperimentTemplateLogConfiguration.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateCloudWatchLogsLogConfiguration, location_name: "cloudWatchLogsConfiguration"))
-    ExperimentTemplateLogConfiguration.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateS3LogConfiguration, location_name: "s3Configuration"))
-    ExperimentTemplateLogConfiguration.add_member(:log_schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion"))
+    ExperimentTemplateLogConfiguration.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateCloudWatchLogsLogConfiguration, location_name: "cloudWatchLogsConfiguration"))
+    ExperimentTemplateLogConfiguration.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateS3LogConfiguration, location_name: "s3Configuration"))
+    ExperimentTemplateLogConfiguration.add_member(:log_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSchemaVersion, location_name: "logSchemaVersion"))
     ExperimentTemplateLogConfiguration.type = Types::ExperimentTemplateLogConfiguration
-    ExperimentTemplateReportConfiguration.add_member(:outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationOutputs, location_name: "outputs"))
-    ExperimentTemplateReportConfiguration.add_member(:data_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationDataSources, location_name: "dataSources"))
-    ExperimentTemplateReportConfiguration.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "preExperimentDuration"))
-    ExperimentTemplateReportConfiguration.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "postExperimentDuration"))
+    ExperimentTemplateReportConfiguration.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationOutputs, location_name: "outputs"))
+    ExperimentTemplateReportConfiguration.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationDataSources, location_name: "dataSources"))
+    ExperimentTemplateReportConfiguration.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "preExperimentDuration"))
+    ExperimentTemplateReportConfiguration.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "postExperimentDuration"))
     ExperimentTemplateReportConfiguration.type = Types::ExperimentTemplateReportConfiguration
-    ExperimentTemplateReportConfigurationCloudWatchDashboard.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationCloudWatchDashboardIdentifier, location_name: "dashboardIdentifier"))
+    ExperimentTemplateReportConfigurationCloudWatchDashboard.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationCloudWatchDashboardIdentifier, location_name: "dashboardIdentifier"))
     ExperimentTemplateReportConfigurationCloudWatchDashboard.type = Types::ExperimentTemplateReportConfigurationCloudWatchDashboard
-    ExperimentTemplateReportConfigurationCloudWatchDashboardList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationCloudWatchDashboard)
-    ExperimentTemplateReportConfigurationDataSources.add_member(:cloud_watch_dashboards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationCloudWatchDashboardList, location_name: "cloudWatchDashboards"))
+    ExperimentTemplateReportConfigurationCloudWatchDashboardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationCloudWatchDashboard)
+    ExperimentTemplateReportConfigurationDataSources.add_member(:cloud_watch_dashboards, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationCloudWatchDashboardList, location_name: "cloudWatchDashboards"))
     ExperimentTemplateReportConfigurationDataSources.type = Types::ExperimentTemplateReportConfigurationDataSources
-    ExperimentTemplateReportConfigurationDataSourcesInput.add_member(:cloud_watch_dashboards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationCloudWatchDashboardInputList, location_name: "cloudWatchDashboards"))
+    ExperimentTemplateReportConfigurationDataSourcesInput.add_member(:cloud_watch_dashboards, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationCloudWatchDashboardInputList, location_name: "cloudWatchDashboards"))
     ExperimentTemplateReportConfigurationDataSourcesInput.type = Types::ExperimentTemplateReportConfigurationDataSourcesInput
-    ExperimentTemplateReportConfigurationOutputs.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationS3Output, location_name: "s3Configuration"))
+    ExperimentTemplateReportConfigurationOutputs.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationS3Output, location_name: "s3Configuration"))
     ExperimentTemplateReportConfigurationOutputs.type = Types::ExperimentTemplateReportConfigurationOutputs
-    ExperimentTemplateReportConfigurationOutputsInput.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationS3OutputInput, location_name: "s3Configuration"))
+    ExperimentTemplateReportConfigurationOutputsInput.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationS3OutputInput, location_name: "s3Configuration"))
     ExperimentTemplateReportConfigurationOutputsInput.type = Types::ExperimentTemplateReportConfigurationOutputsInput
-    ExperimentTemplateS3LogConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
-    ExperimentTemplateS3LogConfiguration.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "prefix"))
+    ExperimentTemplateS3LogConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "bucketName"))
+    ExperimentTemplateS3LogConfiguration.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "prefix"))
     ExperimentTemplateS3LogConfiguration.type = Types::ExperimentTemplateS3LogConfiguration
-    ExperimentTemplateS3LogConfigurationInput.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName", traits: {"smithy.api#required" => {}}))
-    ExperimentTemplateS3LogConfigurationInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "prefix"))
+    ExperimentTemplateS3LogConfigurationInput.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "bucketName", traits: {"smithy.api#required" => {}}))
+    ExperimentTemplateS3LogConfigurationInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, location_name: "prefix"))
     ExperimentTemplateS3LogConfigurationInput.type = Types::ExperimentTemplateS3LogConfigurationInput
-    ExperimentTemplateStopCondition.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionSource, location_name: "source"))
-    ExperimentTemplateStopCondition.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionValue, location_name: "value"))
+    ExperimentTemplateStopCondition.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionSource, location_name: "source"))
+    ExperimentTemplateStopCondition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionValue, location_name: "value"))
     ExperimentTemplateStopCondition.type = Types::ExperimentTemplateStopCondition
-    ExperimentTemplateStopConditionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateStopCondition)
-    ExperimentTemplateSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id"))
-    ExperimentTemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    ExperimentTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description"))
-    ExperimentTemplateSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
-    ExperimentTemplateSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "lastUpdateTime"))
-    ExperimentTemplateSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ExperimentTemplateStopConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateStopCondition)
+    ExperimentTemplateSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "id"))
+    ExperimentTemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    ExperimentTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateDescription, location_name: "description"))
+    ExperimentTemplateSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime"))
+    ExperimentTemplateSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdateTime, location_name: "lastUpdateTime"))
+    ExperimentTemplateSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ExperimentTemplateSummary.type = Types::ExperimentTemplateSummary
-    ExperimentTemplateSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateSummary)
-    ExperimentTemplateTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
-    ExperimentTemplateTarget.add_member(:resource_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
-    ExperimentTemplateTarget.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
-    ExperimentTemplateTarget.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterList, location_name: "filters"))
-    ExperimentTemplateTarget.add_member(:selection_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetSelectionMode, location_name: "selectionMode"))
-    ExperimentTemplateTarget.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
+    ExperimentTemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateSummary)
+    ExperimentTemplateTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType"))
+    ExperimentTemplateTarget.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnList, location_name: "resourceArns"))
+    ExperimentTemplateTarget.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "resourceTags"))
+    ExperimentTemplateTarget.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterList, location_name: "filters"))
+    ExperimentTemplateTarget.add_member(:selection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetSelectionMode, location_name: "selectionMode"))
+    ExperimentTemplateTarget.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
     ExperimentTemplateTarget.type = Types::ExperimentTemplateTarget
-    ExperimentTemplateTargetFilter.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterPath, location_name: "path"))
-    ExperimentTemplateTargetFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterValues, location_name: "values"))
+    ExperimentTemplateTargetFilter.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterPath, location_name: "path"))
+    ExperimentTemplateTargetFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterValues, location_name: "values"))
     ExperimentTemplateTargetFilter.type = Types::ExperimentTemplateTargetFilter
-    ExperimentTemplateTargetFilterInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetInputFilter)
-    ExperimentTemplateTargetFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilter)
-    ExperimentTemplateTargetFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterValue)
-    ExperimentTemplateTargetInputFilter.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterPath, location_name: "path", traits: {"smithy.api#required" => {}}))
-    ExperimentTemplateTargetInputFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
+    ExperimentTemplateTargetFilterInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetInputFilter)
+    ExperimentTemplateTargetFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilter)
+    ExperimentTemplateTargetFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterValue)
+    ExperimentTemplateTargetInputFilter.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterPath, location_name: "path", traits: {"smithy.api#required" => {}}))
+    ExperimentTemplateTargetInputFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterValues, location_name: "values", traits: {"smithy.api#required" => {}}))
     ExperimentTemplateTargetInputFilter.type = Types::ExperimentTemplateTargetInputFilter
-    ExperimentTemplateTargetMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
-    ExperimentTemplateTargetMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTarget)
-    ExperimentTemplateTargetParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterName)
-    ExperimentTemplateTargetParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterValue)
-    GetActionRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ExperimentTemplateTargetMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetName)
+    ExperimentTemplateTargetMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTarget)
+    ExperimentTemplateTargetParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetParameterName)
+    ExperimentTemplateTargetParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetParameterValue)
+    GetActionRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetActionRequest.type = Types::GetActionRequest
-    GetActionResponse.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Action, location_name: "action"))
+    GetActionResponse.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, location_name: "action"))
     GetActionResponse.type = Types::GetActionResponse
-    GetExperimentRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExperimentRequest.type = Types::GetExperimentRequest
-    GetExperimentResponse.add_member(:experiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Experiment, location_name: "experiment"))
+    GetExperimentResponse.add_member(:experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Experiment, location_name: "experiment"))
     GetExperimentResponse.type = Types::GetExperimentResponse
-    GetExperimentTargetAccountConfigurationRequest.add_member(:experiment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentId, location_name: "experimentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetExperimentTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentTargetAccountConfigurationRequest.add_member(:experiment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentId, location_name: "experimentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExperimentTargetAccountConfigurationRequest.type = Types::GetExperimentTargetAccountConfigurationRequest
-    GetExperimentTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetAccountConfiguration, location_name: "targetAccountConfiguration"))
+    GetExperimentTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetAccountConfiguration, location_name: "targetAccountConfiguration"))
     GetExperimentTargetAccountConfigurationResponse.type = Types::GetExperimentTargetAccountConfigurationResponse
-    GetExperimentTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExperimentTemplateRequest.type = Types::GetExperimentTemplateRequest
-    GetExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))
+    GetExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplate, location_name: "experimentTemplate"))
     GetExperimentTemplateResponse.type = Types::GetExperimentTemplateResponse
-    GetSafetyLeverRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSafetyLeverRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSafetyLeverRequest.type = Types::GetSafetyLeverRequest
-    GetSafetyLeverResponse.add_member(:safety_lever, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLever, location_name: "safetyLever"))
+    GetSafetyLeverResponse.add_member(:safety_lever, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLever, location_name: "safetyLever"))
     GetSafetyLeverResponse.type = Types::GetSafetyLeverResponse
-    GetTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetTargetAccountConfigurationRequest.type = Types::GetTargetAccountConfigurationRequest
-    GetTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
+    GetTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
     GetTargetAccountConfigurationResponse.type = Types::GetTargetAccountConfigurationResponse
-    GetTargetResourceTypeRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTargetResourceTypeRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetTargetResourceTypeRequest.type = Types::GetTargetResourceTypeRequest
-    GetTargetResourceTypeResponse.add_member(:target_resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceType, location_name: "targetResourceType"))
+    GetTargetResourceTypeResponse.add_member(:target_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceType, location_name: "targetResourceType"))
     GetTargetResourceTypeResponse.type = Types::GetTargetResourceTypeResponse
-    ListActionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListActionsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListActionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListActionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListActionsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListActionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListActionsRequest.type = Types::ListActionsRequest
-    ListActionsResponse.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionSummaryList, location_name: "actions"))
-    ListActionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListActionsResponse.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummaryList, location_name: "actions"))
+    ListActionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListActionsResponse.type = Types::ListActionsResponse
-    ListExperimentResolvedTargetsRequest.add_member(:experiment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentId, location_name: "experimentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListExperimentResolvedTargetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentResolvedTargetsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListExperimentResolvedTargetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListExperimentResolvedTargetsRequest.add_member(:target_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetName, location_name: "targetName", traits: {"smithy.api#httpQuery" => "targetName"}))
+    ListExperimentResolvedTargetsRequest.add_member(:experiment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentId, location_name: "experimentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListExperimentResolvedTargetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListExperimentResolvedTargetsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListExperimentResolvedTargetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListExperimentResolvedTargetsRequest.add_member(:target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, location_name: "targetName", traits: {"smithy.api#httpQuery" => "targetName"}))
     ListExperimentResolvedTargetsRequest.type = Types::ListExperimentResolvedTargetsRequest
-    ListExperimentResolvedTargetsResponse.add_member(:resolved_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResolvedTargetList, location_name: "resolvedTargets"))
-    ListExperimentResolvedTargetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListExperimentResolvedTargetsResponse.add_member(:resolved_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolvedTargetList, location_name: "resolvedTargets"))
+    ListExperimentResolvedTargetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListExperimentResolvedTargetsResponse.type = Types::ListExperimentResolvedTargetsResponse
-    ListExperimentTargetAccountConfigurationsRequest.add_member(:experiment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentId, location_name: "experimentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListExperimentTargetAccountConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListExperimentTargetAccountConfigurationsRequest.add_member(:experiment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentId, location_name: "experimentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListExperimentTargetAccountConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListExperimentTargetAccountConfigurationsRequest.type = Types::ListExperimentTargetAccountConfigurationsRequest
-    ListExperimentTargetAccountConfigurationsResponse.add_member(:target_account_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTargetAccountConfigurationList, location_name: "targetAccountConfigurations"))
-    ListExperimentTargetAccountConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListExperimentTargetAccountConfigurationsResponse.add_member(:target_account_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTargetAccountConfigurationList, location_name: "targetAccountConfigurations"))
+    ListExperimentTargetAccountConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListExperimentTargetAccountConfigurationsResponse.type = Types::ListExperimentTargetAccountConfigurationsResponse
-    ListExperimentTemplatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentTemplatesMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListExperimentTemplatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListExperimentTemplatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListExperimentTemplatesMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListExperimentTemplatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListExperimentTemplatesRequest.type = Types::ListExperimentTemplatesRequest
-    ListExperimentTemplatesResponse.add_member(:experiment_templates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateSummaryList, location_name: "experimentTemplates"))
-    ListExperimentTemplatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListExperimentTemplatesResponse.add_member(:experiment_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateSummaryList, location_name: "experimentTemplates"))
+    ListExperimentTemplatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListExperimentTemplatesResponse.type = Types::ListExperimentTemplatesResponse
-    ListExperimentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListExperimentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListExperimentsRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpQuery" => "experimentTemplateId"}))
+    ListExperimentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListExperimentsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListExperimentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListExperimentsRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpQuery" => "experimentTemplateId"}))
     ListExperimentsRequest.type = Types::ListExperimentsRequest
-    ListExperimentsResponse.add_member(:experiments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentSummaryList, location_name: "experiments"))
-    ListExperimentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListExperimentsResponse.add_member(:experiments, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentSummaryList, location_name: "experiments"))
+    ListExperimentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListExperimentsResponse.type = Types::ListExperimentsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTargetAccountConfigurationsRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListTargetAccountConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetAccountConfigurationsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListTargetAccountConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListTargetAccountConfigurationsRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTargetAccountConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTargetAccountConfigurationsMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListTargetAccountConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListTargetAccountConfigurationsRequest.type = Types::ListTargetAccountConfigurationsRequest
-    ListTargetAccountConfigurationsResponse.add_member(:target_account_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationList, location_name: "targetAccountConfigurations"))
-    ListTargetAccountConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTargetAccountConfigurationsResponse.add_member(:target_account_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationList, location_name: "targetAccountConfigurations"))
+    ListTargetAccountConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListTargetAccountConfigurationsResponse.type = Types::ListTargetAccountConfigurationsResponse
-    ListTargetResourceTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetResourceTypesMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListTargetResourceTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListTargetResourceTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTargetResourceTypesMaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListTargetResourceTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListTargetResourceTypesRequest.type = Types::ListTargetResourceTypesRequest
-    ListTargetResourceTypesResponse.add_member(:target_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeSummaryList, location_name: "targetResourceTypes"))
-    ListTargetResourceTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTargetResourceTypesResponse.add_member(:target_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeSummaryList, location_name: "targetResourceTypes"))
+    ListTargetResourceTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListTargetResourceTypesResponse.type = Types::ListTargetResourceTypesResponse
-    ReportConfigurationCloudWatchDashboardInput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationCloudWatchDashboardIdentifier, location_name: "dashboardIdentifier"))
+    ReportConfigurationCloudWatchDashboardInput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationCloudWatchDashboardIdentifier, location_name: "dashboardIdentifier"))
     ReportConfigurationCloudWatchDashboardInput.type = Types::ReportConfigurationCloudWatchDashboardInput
-    ReportConfigurationCloudWatchDashboardInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationCloudWatchDashboardInput)
-    ReportConfigurationS3Output.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
-    ReportConfigurationS3Output.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationS3OutputPrefix, location_name: "prefix"))
+    ReportConfigurationCloudWatchDashboardInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationCloudWatchDashboardInput)
+    ReportConfigurationS3Output.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "bucketName"))
+    ReportConfigurationS3Output.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationS3OutputPrefix, location_name: "prefix"))
     ReportConfigurationS3Output.type = Types::ReportConfigurationS3Output
-    ReportConfigurationS3OutputInput.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
-    ReportConfigurationS3OutputInput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationS3OutputPrefix, location_name: "prefix"))
+    ReportConfigurationS3OutputInput.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "bucketName"))
+    ReportConfigurationS3OutputInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationS3OutputPrefix, location_name: "prefix"))
     ReportConfigurationS3OutputInput.type = Types::ReportConfigurationS3OutputInput
-    ResolvedTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
-    ResolvedTarget.add_member(:target_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetName, location_name: "targetName"))
-    ResolvedTarget.add_member(:target_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetInformationMap, location_name: "targetInformation"))
+    ResolvedTarget.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType"))
+    ResolvedTarget.add_member(:target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, location_name: "targetName"))
+    ResolvedTarget.add_member(:target_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInformationMap, location_name: "targetInformation"))
     ResolvedTarget.type = Types::ResolvedTarget
-    ResolvedTargetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResolvedTarget)
-    ResourceArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResolvedTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResolvedTarget)
+    ResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SafetyLever.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverId, location_name: "id"))
-    SafetyLever.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    SafetyLever.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverState, location_name: "state"))
+    SafetyLever.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverId, location_name: "id"))
+    SafetyLever.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "arn"))
+    SafetyLever.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverState, location_name: "state"))
     SafetyLever.type = Types::SafetyLever
-    SafetyLeverState.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverStatus, location_name: "status"))
-    SafetyLeverState.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverStatusReason, location_name: "reason"))
+    SafetyLeverState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverStatus, location_name: "status"))
+    SafetyLeverState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverStatusReason, location_name: "reason"))
     SafetyLeverState.type = Types::SafetyLeverState
-    SafetyLeverStatus.add_member(:disengaged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISENGAGED", traits: {"smithy.api#enumValue" => "disengaged"}))
-    SafetyLeverStatus.add_member(:engaged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENGAGED", traits: {"smithy.api#enumValue" => "engaged"}))
-    SafetyLeverStatus.add_member(:engaging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENGAGING", traits: {"smithy.api#enumValue" => "engaging"}))
-    SafetyLeverStatusInput.add_member(:disengaged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISENGAGED", traits: {"smithy.api#enumValue" => "disengaged"}))
-    SafetyLeverStatusInput.add_member(:engaged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENGAGED", traits: {"smithy.api#enumValue" => "engaged"}))
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SafetyLeverStatus.add_member(:disengaged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISENGAGED", traits: {"smithy.api#enumValue" => "disengaged"}))
+    SafetyLeverStatus.add_member(:engaged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENGAGED", traits: {"smithy.api#enumValue" => "engaged"}))
+    SafetyLeverStatus.add_member(:engaging, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENGAGING", traits: {"smithy.api#enumValue" => "engaging"}))
+    SafetyLeverStatusInput.add_member(:disengaged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISENGAGED", traits: {"smithy.api#enumValue" => "disengaged"}))
+    SafetyLeverStatusInput.add_member(:engaged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENGAGED", traits: {"smithy.api#enumValue" => "engaged"}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StartExperimentExperimentOptionsInput.add_member(:actions_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionsMode, location_name: "actionsMode"))
+    StartExperimentExperimentOptionsInput.add_member(:actions_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsMode, location_name: "actionsMode"))
     StartExperimentExperimentOptionsInput.type = Types::StartExperimentExperimentOptionsInput
-    StartExperimentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    StartExperimentRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#required" => {}}))
-    StartExperimentRequest.add_member(:experiment_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartExperimentExperimentOptionsInput, location_name: "experimentOptions"))
-    StartExperimentRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartExperimentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartExperimentRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#required" => {}}))
+    StartExperimentRequest.add_member(:experiment_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StartExperimentExperimentOptionsInput, location_name: "experimentOptions"))
+    StartExperimentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     StartExperimentRequest.type = Types::StartExperimentRequest
-    StartExperimentResponse.add_member(:experiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Experiment, location_name: "experiment"))
+    StartExperimentResponse.add_member(:experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Experiment, location_name: "experiment"))
     StartExperimentResponse.type = Types::StartExperimentResponse
-    StopExperimentRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopExperimentRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopExperimentRequest.type = Types::StopExperimentRequest
-    StopExperimentResponse.add_member(:experiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Experiment, location_name: "experiment"))
+    StopExperimentResponse.add_member(:experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Experiment, location_name: "experiment"))
     StopExperimentResponse.type = Types::StopExperimentResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetAccountConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    TargetAccountConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId"))
-    TargetAccountConfiguration.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationDescription, location_name: "description"))
+    TargetAccountConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    TargetAccountConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId"))
+    TargetAccountConfiguration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationDescription, location_name: "description"))
     TargetAccountConfiguration.type = Types::TargetAccountConfiguration
-    TargetAccountConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationSummary)
-    TargetAccountConfigurationSummary.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    TargetAccountConfigurationSummary.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId"))
-    TargetAccountConfigurationSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationDescription, location_name: "description"))
+    TargetAccountConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationSummary)
+    TargetAccountConfigurationSummary.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    TargetAccountConfigurationSummary.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId"))
+    TargetAccountConfigurationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationDescription, location_name: "description"))
     TargetAccountConfigurationSummary.type = Types::TargetAccountConfigurationSummary
-    TargetInformationMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetInformationKey)
-    TargetInformationMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetInformationValue)
-    TargetResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
-    TargetResourceType.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeDescription, location_name: "description"))
-    TargetResourceType.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeParameterMap, location_name: "parameters"))
+    TargetInformationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInformationKey)
+    TargetInformationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInformationValue)
+    TargetResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType"))
+    TargetResourceType.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeDescription, location_name: "description"))
+    TargetResourceType.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeParameterMap, location_name: "parameters"))
     TargetResourceType.type = Types::TargetResourceType
-    TargetResourceTypeParameter.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeParameterDescription, location_name: "description"))
-    TargetResourceTypeParameter.add_member(:required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeParameterRequired, location_name: "required", traits: {"smithy.api#default" => nil}))
+    TargetResourceTypeParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeParameterDescription, location_name: "description"))
+    TargetResourceTypeParameter.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeParameterRequired, location_name: "required", traits: {"smithy.api#default" => nil}))
     TargetResourceTypeParameter.type = Types::TargetResourceTypeParameter
-    TargetResourceTypeParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeParameterName)
-    TargetResourceTypeParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeParameter)
-    TargetResourceTypeSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
-    TargetResourceTypeSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeDescription, location_name: "description"))
+    TargetResourceTypeParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeParameterName)
+    TargetResourceTypeParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeParameter)
+    TargetResourceTypeSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType"))
+    TargetResourceTypeSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeDescription, location_name: "description"))
     TargetResourceTypeSummary.type = Types::TargetResourceTypeSummary
-    TargetResourceTypeSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeSummary)
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys"}))
+    TargetResourceTypeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeSummary)
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys"}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateExperimentTemplateActionInputItem.add_member(:action_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionId, location_name: "actionId"))
-    UpdateExperimentTemplateActionInputItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionDescription, location_name: "description"))
-    UpdateExperimentTemplateActionInputItem.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionParameterMap, location_name: "parameters"))
-    UpdateExperimentTemplateActionInputItem.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionTargetMap, location_name: "targets"))
-    UpdateExperimentTemplateActionInputItem.add_member(:start_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionStartAfterList, location_name: "startAfter"))
+    UpdateExperimentTemplateActionInputItem.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, location_name: "actionId"))
+    UpdateExperimentTemplateActionInputItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionDescription, location_name: "description"))
+    UpdateExperimentTemplateActionInputItem.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionParameterMap, location_name: "parameters"))
+    UpdateExperimentTemplateActionInputItem.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionTargetMap, location_name: "targets"))
+    UpdateExperimentTemplateActionInputItem.add_member(:start_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionStartAfterList, location_name: "startAfter"))
     UpdateExperimentTemplateActionInputItem.type = Types::UpdateExperimentTemplateActionInputItem
-    UpdateExperimentTemplateActionInputMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateActionName)
-    UpdateExperimentTemplateActionInputMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateActionInputItem)
-    UpdateExperimentTemplateExperimentOptionsInput.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
+    UpdateExperimentTemplateActionInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateActionName)
+    UpdateExperimentTemplateActionInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateActionInputItem)
+    UpdateExperimentTemplateExperimentOptionsInput.add_member(:empty_target_resolution_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
     UpdateExperimentTemplateExperimentOptionsInput.type = Types::UpdateExperimentTemplateExperimentOptionsInput
-    UpdateExperimentTemplateLogConfigurationInput.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateCloudWatchLogsLogConfigurationInput, location_name: "cloudWatchLogsConfiguration"))
-    UpdateExperimentTemplateLogConfigurationInput.add_member(:s3_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateS3LogConfigurationInput, location_name: "s3Configuration"))
-    UpdateExperimentTemplateLogConfigurationInput.add_member(:log_schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion"))
+    UpdateExperimentTemplateLogConfigurationInput.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateCloudWatchLogsLogConfigurationInput, location_name: "cloudWatchLogsConfiguration"))
+    UpdateExperimentTemplateLogConfigurationInput.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateS3LogConfigurationInput, location_name: "s3Configuration"))
+    UpdateExperimentTemplateLogConfigurationInput.add_member(:log_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSchemaVersion, location_name: "logSchemaVersion"))
     UpdateExperimentTemplateLogConfigurationInput.type = Types::UpdateExperimentTemplateLogConfigurationInput
-    UpdateExperimentTemplateReportConfigurationInput.add_member(:outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationOutputsInput, location_name: "outputs"))
-    UpdateExperimentTemplateReportConfigurationInput.add_member(:data_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateReportConfigurationDataSourcesInput, location_name: "dataSources"))
-    UpdateExperimentTemplateReportConfigurationInput.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "preExperimentDuration"))
-    UpdateExperimentTemplateReportConfigurationInput.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "postExperimentDuration"))
+    UpdateExperimentTemplateReportConfigurationInput.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationOutputsInput, location_name: "outputs"))
+    UpdateExperimentTemplateReportConfigurationInput.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateReportConfigurationDataSourcesInput, location_name: "dataSources"))
+    UpdateExperimentTemplateReportConfigurationInput.add_member(:pre_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "preExperimentDuration"))
+    UpdateExperimentTemplateReportConfigurationInput.add_member(:post_experiment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfigurationDuration, location_name: "postExperimentDuration"))
     UpdateExperimentTemplateReportConfigurationInput.type = Types::UpdateExperimentTemplateReportConfigurationInput
-    UpdateExperimentTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateExperimentTemplateRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description"))
-    UpdateExperimentTemplateRequest.add_member(:stop_conditions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateStopConditionInputList, location_name: "stopConditions"))
-    UpdateExperimentTemplateRequest.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateTargetInputMap, location_name: "targets"))
-    UpdateExperimentTemplateRequest.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateActionInputMap, location_name: "actions"))
-    UpdateExperimentTemplateRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    UpdateExperimentTemplateRequest.add_member(:log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateLogConfigurationInput, location_name: "logConfiguration"))
-    UpdateExperimentTemplateRequest.add_member(:experiment_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateExperimentOptionsInput, location_name: "experimentOptions"))
-    UpdateExperimentTemplateRequest.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateReportConfigurationInput, location_name: "experimentReportConfiguration"))
+    UpdateExperimentTemplateRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateExperimentTemplateRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateDescription, location_name: "description"))
+    UpdateExperimentTemplateRequest.add_member(:stop_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateStopConditionInputList, location_name: "stopConditions"))
+    UpdateExperimentTemplateRequest.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateTargetInputMap, location_name: "targets"))
+    UpdateExperimentTemplateRequest.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateActionInputMap, location_name: "actions"))
+    UpdateExperimentTemplateRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    UpdateExperimentTemplateRequest.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateLogConfigurationInput, location_name: "logConfiguration"))
+    UpdateExperimentTemplateRequest.add_member(:experiment_options, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateExperimentOptionsInput, location_name: "experimentOptions"))
+    UpdateExperimentTemplateRequest.add_member(:experiment_report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateReportConfigurationInput, location_name: "experimentReportConfiguration"))
     UpdateExperimentTemplateRequest.type = Types::UpdateExperimentTemplateRequest
-    UpdateExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))
+    UpdateExperimentTemplateResponse.add_member(:experiment_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplate, location_name: "experimentTemplate"))
     UpdateExperimentTemplateResponse.type = Types::UpdateExperimentTemplateResponse
-    UpdateExperimentTemplateStopConditionInput.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionSource, location_name: "source", traits: {"smithy.api#required" => {}}))
-    UpdateExperimentTemplateStopConditionInput.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConditionValue, location_name: "value"))
+    UpdateExperimentTemplateStopConditionInput.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionSource, location_name: "source", traits: {"smithy.api#required" => {}}))
+    UpdateExperimentTemplateStopConditionInput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StopConditionValue, location_name: "value"))
     UpdateExperimentTemplateStopConditionInput.type = Types::UpdateExperimentTemplateStopConditionInput
-    UpdateExperimentTemplateStopConditionInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateStopConditionInput)
-    UpdateExperimentTemplateTargetInput.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    UpdateExperimentTemplateTargetInput.add_member(:resource_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
-    UpdateExperimentTemplateTargetInput.add_member(:resource_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
-    UpdateExperimentTemplateTargetInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterInputList, location_name: "filters"))
-    UpdateExperimentTemplateTargetInput.add_member(:selection_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetSelectionMode, location_name: "selectionMode", traits: {"smithy.api#required" => {}}))
-    UpdateExperimentTemplateTargetInput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
+    UpdateExperimentTemplateStopConditionInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateStopConditionInput)
+    UpdateExperimentTemplateTargetInput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTypeId, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    UpdateExperimentTemplateTargetInput.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnList, location_name: "resourceArns"))
+    UpdateExperimentTemplateTargetInput.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "resourceTags"))
+    UpdateExperimentTemplateTargetInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetFilterInputList, location_name: "filters"))
+    UpdateExperimentTemplateTargetInput.add_member(:selection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetSelectionMode, location_name: "selectionMode", traits: {"smithy.api#required" => {}}))
+    UpdateExperimentTemplateTargetInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
     UpdateExperimentTemplateTargetInput.type = Types::UpdateExperimentTemplateTargetInput
-    UpdateExperimentTemplateTargetInputMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
-    UpdateExperimentTemplateTargetInputMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateTargetInput)
-    UpdateSafetyLeverStateInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverStatusInput, location_name: "status", traits: {"smithy.api#required" => {}}))
-    UpdateSafetyLeverStateInput.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverStatusReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
+    UpdateExperimentTemplateTargetInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateTargetName)
+    UpdateExperimentTemplateTargetInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateExperimentTemplateTargetInput)
+    UpdateSafetyLeverStateInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverStatusInput, location_name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateSafetyLeverStateInput.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverStatusReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
     UpdateSafetyLeverStateInput.type = Types::UpdateSafetyLeverStateInput
-    UpdateSafetyLeverStateRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLeverId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateSafetyLeverStateRequest.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSafetyLeverStateInput, location_name: "state", traits: {"smithy.api#required" => {}}))
+    UpdateSafetyLeverStateRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLeverId, location_name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateSafetyLeverStateRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateSafetyLeverStateInput, location_name: "state", traits: {"smithy.api#required" => {}}))
     UpdateSafetyLeverStateRequest.type = Types::UpdateSafetyLeverStateRequest
-    UpdateSafetyLeverStateResponse.add_member(:safety_lever, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SafetyLever, location_name: "safetyLever"))
+    UpdateSafetyLeverStateResponse.add_member(:safety_lever, ::Smithy::Schema::Shapes::MemberShape.new(target: SafetyLever, location_name: "safetyLever"))
     UpdateSafetyLeverStateResponse.type = Types::UpdateSafetyLeverStateResponse
-    UpdateTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateTargetAccountConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    UpdateTargetAccountConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfigurationDescription, location_name: "description"))
+    UpdateTargetAccountConfigurationRequest.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentTemplateId, location_name: "experimentTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateTargetAccountConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountId, location_name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateTargetAccountConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "roleArn"))
+    UpdateTargetAccountConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfigurationDescription, location_name: "description"))
     UpdateTargetAccountConfigurationRequest.type = Types::UpdateTargetAccountConfigurationRequest
-    UpdateTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
+    UpdateTargetAccountConfigurationResponse.add_member(:target_account_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccountConfiguration, location_name: "targetAccountConfiguration"))
     UpdateTargetAccountConfigurationResponse.type = Types::UpdateTargetAccountConfigurationResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     FaultInjectionSimulator = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -831,238 +831,238 @@ module Aws::Fis
       service.add_operation(:create_experiment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#CreateExperimentTemplate"
         operation.name = "CreateExperimentTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateExperimentTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateExperimentTemplateRequest
+        operation.output = CreateExperimentTemplateResponse
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/experimentTemplates", "code" => 200}}
       end)
       service.add_operation(:create_target_account_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#CreateTargetAccountConfiguration"
         operation.name = "CreateTargetAccountConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTargetAccountConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTargetAccountConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateTargetAccountConfigurationRequest
+        operation.output = CreateTargetAccountConfigurationResponse
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", "code" => 200}}
       end)
       service.add_operation(:delete_experiment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#DeleteExperimentTemplate"
         operation.name = "DeleteExperimentTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteExperimentTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteExperimentTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteExperimentTemplateRequest
+        operation.output = DeleteExperimentTemplateResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/experimentTemplates/{id}", "code" => 200}}
       end)
       service.add_operation(:delete_target_account_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#DeleteTargetAccountConfiguration"
         operation.name = "DeleteTargetAccountConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTargetAccountConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTargetAccountConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteTargetAccountConfigurationRequest
+        operation.output = DeleteTargetAccountConfigurationResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", "code" => 200}}
       end)
       service.add_operation(:get_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#GetAction"
         operation.name = "GetAction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetActionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetActionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetActionRequest
+        operation.output = GetActionResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/actions/{id}", "code" => 200}}
       end)
       service.add_operation(:get_experiment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#GetExperiment"
         operation.name = "GetExperiment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExperimentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExperimentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetExperimentRequest
+        operation.output = GetExperimentResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experiments/{id}", "code" => 200}}
       end)
       service.add_operation(:get_experiment_target_account_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#GetExperimentTargetAccountConfiguration"
         operation.name = "GetExperimentTargetAccountConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExperimentTargetAccountConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExperimentTargetAccountConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetExperimentTargetAccountConfigurationRequest
+        operation.output = GetExperimentTargetAccountConfigurationResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experiments/{experimentId}/targetAccountConfigurations/{accountId}", "code" => 200}}
       end)
       service.add_operation(:get_experiment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#GetExperimentTemplate"
         operation.name = "GetExperimentTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExperimentTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetExperimentTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetExperimentTemplateRequest
+        operation.output = GetExperimentTemplateResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experimentTemplates/{id}", "code" => 200}}
       end)
       service.add_operation(:get_safety_lever, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#GetSafetyLever"
         operation.name = "GetSafetyLever"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSafetyLeverRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetSafetyLeverResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetSafetyLeverRequest
+        operation.output = GetSafetyLeverResponse
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/safetyLevers/{id}", "code" => 200}}
       end)
       service.add_operation(:get_target_account_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#GetTargetAccountConfiguration"
         operation.name = "GetTargetAccountConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTargetAccountConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTargetAccountConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTargetAccountConfigurationRequest
+        operation.output = GetTargetAccountConfigurationResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", "code" => 200}}
       end)
       service.add_operation(:get_target_resource_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#GetTargetResourceType"
         operation.name = "GetTargetResourceType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTargetResourceTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTargetResourceTypeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTargetResourceTypeRequest
+        operation.output = GetTargetResourceTypeResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/targetResourceTypes/{resourceType}", "code" => 200}}
       end)
       service.add_operation(:list_actions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListActions"
         operation.name = "ListActions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListActionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListActionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListActionsRequest
+        operation.output = ListActionsResponse
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/actions", "code" => 200}}
         operation[:paginator] = Paginators::ListActions.new
       end)
       service.add_operation(:list_experiment_resolved_targets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListExperimentResolvedTargets"
         operation.name = "ListExperimentResolvedTargets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentResolvedTargetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentResolvedTargetsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListExperimentResolvedTargetsRequest
+        operation.output = ListExperimentResolvedTargetsResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experiments/{experimentId}/resolvedTargets", "code" => 200}}
         operation[:paginator] = Paginators::ListExperimentResolvedTargets.new
       end)
       service.add_operation(:list_experiment_target_account_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListExperimentTargetAccountConfigurations"
         operation.name = "ListExperimentTargetAccountConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentTargetAccountConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentTargetAccountConfigurationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListExperimentTargetAccountConfigurationsRequest
+        operation.output = ListExperimentTargetAccountConfigurationsResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experiments/{experimentId}/targetAccountConfigurations", "code" => 200}}
       end)
       service.add_operation(:list_experiment_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListExperimentTemplates"
         operation.name = "ListExperimentTemplates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentTemplatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentTemplatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListExperimentTemplatesRequest
+        operation.output = ListExperimentTemplatesResponse
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experimentTemplates", "code" => 200}}
         operation[:paginator] = Paginators::ListExperimentTemplates.new
       end)
       service.add_operation(:list_experiments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListExperiments"
         operation.name = "ListExperiments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListExperimentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListExperimentsRequest
+        operation.output = ListExperimentsResponse
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experiments", "code" => 200}}
         operation[:paginator] = Paginators::ListExperiments.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:list_target_account_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListTargetAccountConfigurations"
         operation.name = "ListTargetAccountConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetAccountConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetAccountConfigurationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTargetAccountConfigurationsRequest
+        operation.output = ListTargetAccountConfigurationsResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations", "code" => 200}}
         operation[:paginator] = Paginators::ListTargetAccountConfigurations.new
       end)
       service.add_operation(:list_target_resource_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#ListTargetResourceTypes"
         operation.name = "ListTargetResourceTypes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetResourceTypesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTargetResourceTypesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTargetResourceTypesRequest
+        operation.output = ListTargetResourceTypesResponse
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/targetResourceTypes", "code" => 200}}
         operation[:paginator] = Paginators::ListTargetResourceTypes.new
       end)
       service.add_operation(:start_experiment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#StartExperiment"
         operation.name = "StartExperiment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartExperimentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartExperimentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartExperimentRequest
+        operation.output = StartExperimentResponse
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/experiments", "code" => 200}}
       end)
       service.add_operation(:stop_experiment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#StopExperiment"
         operation.name = "StopExperiment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopExperimentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopExperimentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopExperimentRequest
+        operation.output = StopExperimentResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/experiments/{id}", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:update_experiment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#UpdateExperimentTemplate"
         operation.name = "UpdateExperimentTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateExperimentTemplateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateExperimentTemplateRequest
+        operation.output = UpdateExperimentTemplateResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/experimentTemplates/{id}", "code" => 200}}
       end)
       service.add_operation(:update_safety_lever_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#UpdateSafetyLeverState"
         operation.name = "UpdateSafetyLeverState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSafetyLeverStateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSafetyLeverStateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateSafetyLeverStateRequest
+        operation.output = UpdateSafetyLeverStateResponse
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/safetyLevers/{id}/state", "code" => 200}}
       end)
       service.add_operation(:update_target_account_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fis#UpdateTargetAccountConfiguration"
         operation.name = "UpdateTargetAccountConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTargetAccountConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTargetAccountConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateTargetAccountConfigurationRequest
+        operation.output = UpdateTargetAccountConfigurationResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", "code" => 200}}
       end)
     end

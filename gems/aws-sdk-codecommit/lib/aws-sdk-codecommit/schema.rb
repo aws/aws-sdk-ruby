@@ -545,1375 +545,1375 @@ module Aws::CodeCommit
     UserInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#UserInfo", name: "UserInfo")
     Blob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.codecommit#blob", name: "Blob")
 
-    ActorDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ActorDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ActorDoesNotExistException.type = Types::ActorDoesNotExistException
-    Approval.add_member(:user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "userArn"))
-    Approval.add_member(:approval_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalState, location_name: "approvalState"))
+    Approval.add_member(:user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "userArn"))
+    Approval.add_member(:approval_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalState, location_name: "approvalState"))
     Approval.type = Types::Approval
-    ApprovalList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Approval)
-    ApprovalRule.add_member(:approval_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleId, location_name: "approvalRuleId"))
-    ApprovalRule.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName"))
-    ApprovalRule.add_member(:approval_rule_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleContent, location_name: "approvalRuleContent"))
-    ApprovalRule.add_member(:rule_content_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "ruleContentSha256"))
-    ApprovalRule.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
-    ApprovalRule.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
-    ApprovalRule.add_member(:last_modified_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "lastModifiedUser"))
-    ApprovalRule.add_member(:origin_approval_rule_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OriginApprovalRuleTemplate, location_name: "originApprovalRuleTemplate"))
+    ApprovalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Approval)
+    ApprovalRule.add_member(:approval_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleId, location_name: "approvalRuleId"))
+    ApprovalRule.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, location_name: "approvalRuleName"))
+    ApprovalRule.add_member(:approval_rule_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleContent, location_name: "approvalRuleContent"))
+    ApprovalRule.add_member(:rule_content_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleContentSha256, location_name: "ruleContentSha256"))
+    ApprovalRule.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedDate, location_name: "lastModifiedDate"))
+    ApprovalRule.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "creationDate"))
+    ApprovalRule.add_member(:last_modified_user, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "lastModifiedUser"))
+    ApprovalRule.add_member(:origin_approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginApprovalRuleTemplate, location_name: "originApprovalRuleTemplate"))
     ApprovalRule.type = Types::ApprovalRule
-    ApprovalRuleContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleContentRequiredException.type = Types::ApprovalRuleContentRequiredException
-    ApprovalRuleDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleDoesNotExistException.type = Types::ApprovalRuleDoesNotExistException
-    ApprovalRuleEventMetadata.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName"))
-    ApprovalRuleEventMetadata.add_member(:approval_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleId, location_name: "approvalRuleId"))
-    ApprovalRuleEventMetadata.add_member(:approval_rule_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleContent, location_name: "approvalRuleContent"))
+    ApprovalRuleEventMetadata.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, location_name: "approvalRuleName"))
+    ApprovalRuleEventMetadata.add_member(:approval_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleId, location_name: "approvalRuleId"))
+    ApprovalRuleEventMetadata.add_member(:approval_rule_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleContent, location_name: "approvalRuleContent"))
     ApprovalRuleEventMetadata.type = Types::ApprovalRuleEventMetadata
-    ApprovalRuleNameAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleNameAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleNameAlreadyExistsException.type = Types::ApprovalRuleNameAlreadyExistsException
-    ApprovalRuleNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleNameRequiredException.type = Types::ApprovalRuleNameRequiredException
-    ApprovalRuleOverriddenEventMetadata.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
-    ApprovalRuleOverriddenEventMetadata.add_member(:override_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverrideStatus, location_name: "overrideStatus"))
+    ApprovalRuleOverriddenEventMetadata.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId"))
+    ApprovalRuleOverriddenEventMetadata.add_member(:override_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideStatus, location_name: "overrideStatus"))
     ApprovalRuleOverriddenEventMetadata.type = Types::ApprovalRuleOverriddenEventMetadata
-    ApprovalRuleTemplate.add_member(:approval_rule_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId"))
-    ApprovalRuleTemplate.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
-    ApprovalRuleTemplate.add_member(:approval_rule_template_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription"))
-    ApprovalRuleTemplate.add_member(:approval_rule_template_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContent, location_name: "approvalRuleTemplateContent"))
-    ApprovalRuleTemplate.add_member(:rule_content_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "ruleContentSha256"))
-    ApprovalRuleTemplate.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
-    ApprovalRuleTemplate.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
-    ApprovalRuleTemplate.add_member(:last_modified_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "lastModifiedUser"))
+    ApprovalRuleTemplate.add_member(:approval_rule_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId"))
+    ApprovalRuleTemplate.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
+    ApprovalRuleTemplate.add_member(:approval_rule_template_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription"))
+    ApprovalRuleTemplate.add_member(:approval_rule_template_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateContent, location_name: "approvalRuleTemplateContent"))
+    ApprovalRuleTemplate.add_member(:rule_content_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleContentSha256, location_name: "ruleContentSha256"))
+    ApprovalRuleTemplate.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedDate, location_name: "lastModifiedDate"))
+    ApprovalRuleTemplate.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "creationDate"))
+    ApprovalRuleTemplate.add_member(:last_modified_user, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "lastModifiedUser"))
     ApprovalRuleTemplate.type = Types::ApprovalRuleTemplate
-    ApprovalRuleTemplateContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleTemplateContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleTemplateContentRequiredException.type = Types::ApprovalRuleTemplateContentRequiredException
-    ApprovalRuleTemplateDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleTemplateDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleTemplateDoesNotExistException.type = Types::ApprovalRuleTemplateDoesNotExistException
-    ApprovalRuleTemplateInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleTemplateInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleTemplateInUseException.type = Types::ApprovalRuleTemplateInUseException
-    ApprovalRuleTemplateNameAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleTemplateNameAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleTemplateNameAlreadyExistsException.type = Types::ApprovalRuleTemplateNameAlreadyExistsException
-    ApprovalRuleTemplateNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName)
-    ApprovalRuleTemplateNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalRuleTemplateNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName)
+    ApprovalRuleTemplateNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalRuleTemplateNameRequiredException.type = Types::ApprovalRuleTemplateNameRequiredException
-    ApprovalRulesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRule)
-    ApprovalRulesNotSatisfiedList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleName)
-    ApprovalRulesSatisfiedList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleName)
-    ApprovalState.add_member(:approve, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPROVE", traits: {"smithy.api#enumValue" => "APPROVE"}))
-    ApprovalState.add_member(:revoke, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REVOKE", traits: {"smithy.api#enumValue" => "REVOKE"}))
-    ApprovalStateChangedEventMetadata.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
-    ApprovalStateChangedEventMetadata.add_member(:approval_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalState, location_name: "approvalStatus"))
+    ApprovalRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRule)
+    ApprovalRulesNotSatisfiedList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName)
+    ApprovalRulesSatisfiedList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName)
+    ApprovalState.add_member(:approve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APPROVE", traits: {"smithy.api#enumValue" => "APPROVE"}))
+    ApprovalState.add_member(:revoke, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REVOKE", traits: {"smithy.api#enumValue" => "REVOKE"}))
+    ApprovalStateChangedEventMetadata.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId"))
+    ApprovalStateChangedEventMetadata.add_member(:approval_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalState, location_name: "approvalStatus"))
     ApprovalStateChangedEventMetadata.type = Types::ApprovalStateChangedEventMetadata
-    ApprovalStateRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ApprovalStateRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ApprovalStateRequiredException.type = Types::ApprovalStateRequiredException
-    AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     AssociateApprovalRuleTemplateWithRepositoryInput.type = Types::AssociateApprovalRuleTemplateWithRepositoryInput
-    AuthorDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    AuthorDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     AuthorDoesNotExistException.type = Types::AuthorDoesNotExistException
-    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchAssociateApprovalRuleTemplateWithRepositoriesError.type = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError
-    BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesError)
-    BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames", traits: {"smithy.api#required" => {}}))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAssociateApprovalRuleTemplateWithRepositoriesError)
+    BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, location_name: "repositoryNames", traits: {"smithy.api#required" => {}}))
     BatchAssociateApprovalRuleTemplateWithRepositoriesInput.type = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesInput
-    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.add_member(:associated_repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "associatedRepositoryNames", traits: {"smithy.api#required" => {}}))
-    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, location_name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.add_member(:associated_repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, location_name: "associatedRepositoryNames", traits: {"smithy.api#required" => {}}))
+    BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, location_name: "errors", traits: {"smithy.api#required" => {}}))
     BatchAssociateApprovalRuleTemplateWithRepositoriesOutput.type = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesOutput
-    BatchDescribeMergeConflictsError.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsError.add_member(:exception_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionName, location_name: "exceptionName", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsError.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsError.add_member(:exception_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionName, location_name: "exceptionName", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message", traits: {"smithy.api#required" => {}}))
     BatchDescribeMergeConflictsError.type = Types::BatchDescribeMergeConflictsError
-    BatchDescribeMergeConflictsErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeMergeConflictsError)
-    BatchDescribeMergeConflictsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsInput.add_member(:merge_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsInput.add_member(:max_merge_hunks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxMergeHunks"))
-    BatchDescribeMergeConflictsInput.add_member(:max_conflict_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxConflictFiles"))
-    BatchDescribeMergeConflictsInput.add_member(:file_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePaths, location_name: "filePaths"))
-    BatchDescribeMergeConflictsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    BatchDescribeMergeConflictsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    BatchDescribeMergeConflictsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    BatchDescribeMergeConflictsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeMergeConflictsError)
+    BatchDescribeMergeConflictsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsInput.add_member(:merge_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsInput.add_member(:max_merge_hunks, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxMergeHunks"))
+    BatchDescribeMergeConflictsInput.add_member(:max_conflict_files, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxConflictFiles"))
+    BatchDescribeMergeConflictsInput.add_member(:file_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, location_name: "filePaths"))
+    BatchDescribeMergeConflictsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    BatchDescribeMergeConflictsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    BatchDescribeMergeConflictsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     BatchDescribeMergeConflictsInput.type = Types::BatchDescribeMergeConflictsInput
-    BatchDescribeMergeConflictsOutput.add_member(:conflicts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Conflicts, location_name: "conflicts", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    BatchDescribeMergeConflictsOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeMergeConflictsErrors, location_name: "errors"))
-    BatchDescribeMergeConflictsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
-    BatchDescribeMergeConflictsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "baseCommitId"))
+    BatchDescribeMergeConflictsOutput.add_member(:conflicts, ::Smithy::Schema::Shapes::MemberShape.new(target: Conflicts, location_name: "conflicts", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    BatchDescribeMergeConflictsOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeMergeConflictsErrors, location_name: "errors"))
+    BatchDescribeMergeConflictsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
+    BatchDescribeMergeConflictsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "baseCommitId"))
     BatchDescribeMergeConflictsOutput.type = Types::BatchDescribeMergeConflictsOutput
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesError.type = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesError)
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDisassociateApprovalRuleTemplateFromRepositoriesError)
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, location_name: "repositoryNames", traits: {"smithy.api#required" => {}}))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.type = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesInput
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.add_member(:disassociated_repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "disassociatedRepositoryNames", traits: {"smithy.api#required" => {}}))
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, location_name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.add_member(:disassociated_repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, location_name: "disassociatedRepositoryNames", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, location_name: "errors", traits: {"smithy.api#required" => {}}))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.type = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput
-    BatchGetCommitsError.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    BatchGetCommitsError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    BatchGetCommitsError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchGetCommitsError.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    BatchGetCommitsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    BatchGetCommitsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchGetCommitsError.type = Types::BatchGetCommitsError
-    BatchGetCommitsErrorsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetCommitsError)
-    BatchGetCommitsInput.add_member(:commit_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdsInputList, location_name: "commitIds", traits: {"smithy.api#required" => {}}))
-    BatchGetCommitsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    BatchGetCommitsErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetCommitsError)
+    BatchGetCommitsInput.add_member(:commit_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitIdsInputList, location_name: "commitIds", traits: {"smithy.api#required" => {}}))
+    BatchGetCommitsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     BatchGetCommitsInput.type = Types::BatchGetCommitsInput
-    BatchGetCommitsOutput.add_member(:commits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitObjectsList, location_name: "commits"))
-    BatchGetCommitsOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetCommitsErrorsList, location_name: "errors"))
+    BatchGetCommitsOutput.add_member(:commits, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitObjectsList, location_name: "commits"))
+    BatchGetCommitsOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetCommitsErrorsList, location_name: "errors"))
     BatchGetCommitsOutput.type = Types::BatchGetCommitsOutput
-    BatchGetRepositoriesError.add_member(:repository_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
-    BatchGetRepositoriesError.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    BatchGetRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetRepositoriesErrorCodeEnum, location_name: "errorCode"))
-    BatchGetRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchGetRepositoriesError.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryId, location_name: "repositoryId"))
+    BatchGetRepositoriesError.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    BatchGetRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRepositoriesErrorCodeEnum, location_name: "errorCode"))
+    BatchGetRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchGetRepositoriesError.type = Types::BatchGetRepositoriesError
-    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_integrity_checks_failed_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionIntegrityChecksFailedException"}))
-    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_access_denied_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyAccessDeniedException"}))
-    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_disabled_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_DISABLED_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyDisabledException"}))
-    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_not_found_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_NOT_FOUND_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyNotFoundException"}))
-    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_unavailable_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyUnavailableException"}))
-    BatchGetRepositoriesErrorCodeEnum.add_member(:repository_does_not_exist_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPOSITORY_DOES_NOT_EXIST_EXCEPTION", traits: {"smithy.api#enumValue" => "RepositoryDoesNotExistException"}))
-    BatchGetRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetRepositoriesError)
-    BatchGetRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames", traits: {"smithy.api#required" => {}}))
+    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_integrity_checks_failed_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionIntegrityChecksFailedException"}))
+    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_access_denied_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyAccessDeniedException"}))
+    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_disabled_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_DISABLED_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyDisabledException"}))
+    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_NOT_FOUND_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyNotFoundException"}))
+    BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_unavailable_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyUnavailableException"}))
+    BatchGetRepositoriesErrorCodeEnum.add_member(:repository_does_not_exist_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPOSITORY_DOES_NOT_EXIST_EXCEPTION", traits: {"smithy.api#enumValue" => "RepositoryDoesNotExistException"}))
+    BatchGetRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRepositoriesError)
+    BatchGetRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, location_name: "repositoryNames", traits: {"smithy.api#required" => {}}))
     BatchGetRepositoriesInput.type = Types::BatchGetRepositoriesInput
-    BatchGetRepositoriesOutput.add_member(:repositories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryMetadataList, location_name: "repositories"))
-    BatchGetRepositoriesOutput.add_member(:repositories_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundList, location_name: "repositoriesNotFound"))
-    BatchGetRepositoriesOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetRepositoriesErrorsList, location_name: "errors"))
+    BatchGetRepositoriesOutput.add_member(:repositories, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryMetadataList, location_name: "repositories"))
+    BatchGetRepositoriesOutput.add_member(:repositories_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNotFoundList, location_name: "repositoriesNotFound"))
+    BatchGetRepositoriesOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRepositoriesErrorsList, location_name: "errors"))
     BatchGetRepositoriesOutput.type = Types::BatchGetRepositoriesOutput
-    BeforeCommitIdAndAfterCommitIdAreSameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    BeforeCommitIdAndAfterCommitIdAreSameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     BeforeCommitIdAndAfterCommitIdAreSameException.type = Types::BeforeCommitIdAndAfterCommitIdAreSameException
-    BlobIdDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    BlobIdDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     BlobIdDoesNotExistException.type = Types::BlobIdDoesNotExistException
-    BlobIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    BlobIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     BlobIdRequiredException.type = Types::BlobIdRequiredException
-    BlobMetadata.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
-    BlobMetadata.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "path"))
-    BlobMetadata.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Mode, location_name: "mode"))
+    BlobMetadata.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId"))
+    BlobMetadata.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "path"))
+    BlobMetadata.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: Mode, location_name: "mode"))
     BlobMetadata.type = Types::BlobMetadata
-    BranchDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    BranchDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     BranchDoesNotExistException.type = Types::BranchDoesNotExistException
-    BranchInfo.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
-    BranchInfo.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "commitId"))
+    BranchInfo.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "branchName"))
+    BranchInfo.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "commitId"))
     BranchInfo.type = Types::BranchInfo
-    BranchNameExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    BranchNameExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     BranchNameExistsException.type = Types::BranchNameExistsException
-    BranchNameIsTagNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    BranchNameIsTagNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     BranchNameIsTagNameException.type = Types::BranchNameIsTagNameException
-    BranchNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName)
-    BranchNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    BranchNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName)
+    BranchNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     BranchNameRequiredException.type = Types::BranchNameRequiredException
-    CallerReactions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionValue)
-    CannotDeleteApprovalRuleFromTemplateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CallerReactions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue)
+    CannotDeleteApprovalRuleFromTemplateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CannotDeleteApprovalRuleFromTemplateException.type = Types::CannotDeleteApprovalRuleFromTemplateException
-    CannotModifyApprovalRuleFromTemplateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CannotModifyApprovalRuleFromTemplateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CannotModifyApprovalRuleFromTemplateException.type = Types::CannotModifyApprovalRuleFromTemplateException
-    ChangeTypeEnum.add_member(:added, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDED", traits: {"smithy.api#enumValue" => "A"}))
-    ChangeTypeEnum.add_member(:modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODIFIED", traits: {"smithy.api#enumValue" => "M"}))
-    ChangeTypeEnum.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "D"}))
-    ClientRequestTokenRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ChangeTypeEnum.add_member(:added, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ADDED", traits: {"smithy.api#enumValue" => "A"}))
+    ChangeTypeEnum.add_member(:modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODIFIED", traits: {"smithy.api#enumValue" => "M"}))
+    ChangeTypeEnum.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETED", traits: {"smithy.api#enumValue" => "D"}))
+    ClientRequestTokenRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ClientRequestTokenRequiredException.type = Types::ClientRequestTokenRequiredException
-    Comment.add_member(:comment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "commentId"))
-    Comment.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "content"))
-    Comment.add_member(:in_reply_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "inReplyTo"))
-    Comment.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
-    Comment.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
-    Comment.add_member(:author_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "authorArn"))
-    Comment.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsCommentDeleted, location_name: "deleted", traits: {"smithy.api#default" => false}))
-    Comment.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
-    Comment.add_member(:caller_reactions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CallerReactions, location_name: "callerReactions"))
-    Comment.add_member(:reaction_counts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionCountsMap, location_name: "reactionCounts"))
+    Comment.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "commentId"))
+    Comment.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "content"))
+    Comment.add_member(:in_reply_to, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "inReplyTo"))
+    Comment.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "creationDate"))
+    Comment.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedDate, location_name: "lastModifiedDate"))
+    Comment.add_member(:author_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "authorArn"))
+    Comment.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: IsCommentDeleted, location_name: "deleted", traits: {"smithy.api#default" => false}))
+    Comment.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "clientRequestToken"))
+    Comment.add_member(:caller_reactions, ::Smithy::Schema::Shapes::MemberShape.new(target: CallerReactions, location_name: "callerReactions"))
+    Comment.add_member(:reaction_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionCountsMap, location_name: "reactionCounts"))
     Comment.type = Types::Comment
-    CommentContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommentContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommentContentRequiredException.type = Types::CommentContentRequiredException
-    CommentContentSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommentContentSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommentContentSizeLimitExceededException.type = Types::CommentContentSizeLimitExceededException
-    CommentDeletedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommentDeletedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommentDeletedException.type = Types::CommentDeletedException
-    CommentDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommentDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommentDoesNotExistException.type = Types::CommentDoesNotExistException
-    CommentIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommentIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommentIdRequiredException.type = Types::CommentIdRequiredException
-    CommentNotCreatedByCallerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommentNotCreatedByCallerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommentNotCreatedByCallerException.type = Types::CommentNotCreatedByCallerException
-    Comments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment)
-    CommentsForComparedCommit.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    CommentsForComparedCommit.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    CommentsForComparedCommit.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId"))
-    CommentsForComparedCommit.add_member(:before_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "beforeBlobId"))
-    CommentsForComparedCommit.add_member(:after_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "afterBlobId"))
-    CommentsForComparedCommit.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    CommentsForComparedCommit.add_member(:comments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comments, location_name: "comments"))
+    Comments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Comment)
+    CommentsForComparedCommit.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    CommentsForComparedCommit.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    CommentsForComparedCommit.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId"))
+    CommentsForComparedCommit.add_member(:before_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "beforeBlobId"))
+    CommentsForComparedCommit.add_member(:after_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "afterBlobId"))
+    CommentsForComparedCommit.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, location_name: "location"))
+    CommentsForComparedCommit.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: Comments, location_name: "comments"))
     CommentsForComparedCommit.type = Types::CommentsForComparedCommit
-    CommentsForComparedCommitData.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentsForComparedCommit)
-    CommentsForPullRequest.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId"))
-    CommentsForPullRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    CommentsForPullRequest.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    CommentsForPullRequest.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId"))
-    CommentsForPullRequest.add_member(:before_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "beforeBlobId"))
-    CommentsForPullRequest.add_member(:after_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "afterBlobId"))
-    CommentsForPullRequest.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    CommentsForPullRequest.add_member(:comments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comments, location_name: "comments"))
+    CommentsForComparedCommitData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForComparedCommit)
+    CommentsForPullRequest.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId"))
+    CommentsForPullRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    CommentsForPullRequest.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    CommentsForPullRequest.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId"))
+    CommentsForPullRequest.add_member(:before_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "beforeBlobId"))
+    CommentsForPullRequest.add_member(:after_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "afterBlobId"))
+    CommentsForPullRequest.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, location_name: "location"))
+    CommentsForPullRequest.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: Comments, location_name: "comments"))
     CommentsForPullRequest.type = Types::CommentsForPullRequest
-    CommentsForPullRequestData.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentsForPullRequest)
-    Commit.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    Commit.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
-    Commit.add_member(:parents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentList, location_name: "parents"))
-    Commit.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
-    Commit.add_member(:author, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserInfo, location_name: "author"))
-    Commit.add_member(:committer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserInfo, location_name: "committer"))
-    Commit.add_member(:additional_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdditionalData, location_name: "additionalData"))
+    CommentsForPullRequestData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForPullRequest)
+    Commit.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    Commit.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
+    Commit.add_member(:parents, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentList, location_name: "parents"))
+    Commit.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
+    Commit.add_member(:author, ::Smithy::Schema::Shapes::MemberShape.new(target: UserInfo, location_name: "author"))
+    Commit.add_member(:committer, ::Smithy::Schema::Shapes::MemberShape.new(target: UserInfo, location_name: "committer"))
+    Commit.add_member(:additional_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalData, location_name: "additionalData"))
     Commit.type = Types::Commit
-    CommitDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommitDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommitDoesNotExistException.type = Types::CommitDoesNotExistException
-    CommitIdDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommitIdDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommitIdDoesNotExistException.type = Types::CommitIdDoesNotExistException
-    CommitIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommitIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommitIdRequiredException.type = Types::CommitIdRequiredException
-    CommitIdsInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId)
-    CommitIdsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommitIdsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId)
+    CommitIdsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommitIdsLimitExceededException.type = Types::CommitIdsLimitExceededException
-    CommitIdsListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommitIdsListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommitIdsListRequiredException.type = Types::CommitIdsListRequiredException
-    CommitMessageLengthExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommitMessageLengthExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommitMessageLengthExceededException.type = Types::CommitMessageLengthExceededException
-    CommitObjectsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Commit)
-    CommitRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    CommitObjectsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Commit)
+    CommitRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     CommitRequiredException.type = Types::CommitRequiredException
-    ConcurrentReferenceUpdateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ConcurrentReferenceUpdateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ConcurrentReferenceUpdateException.type = Types::ConcurrentReferenceUpdateException
-    Conflict.add_member(:conflict_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictMetadata, location_name: "conflictMetadata"))
-    Conflict.add_member(:merge_hunks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeHunks, location_name: "mergeHunks"))
+    Conflict.add_member(:conflict_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictMetadata, location_name: "conflictMetadata"))
+    Conflict.add_member(:merge_hunks, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunks, location_name: "mergeHunks"))
     Conflict.type = Types::Conflict
-    ConflictDetailLevelTypeEnum.add_member(:file_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_LEVEL", traits: {"smithy.api#enumValue" => "FILE_LEVEL"}))
-    ConflictDetailLevelTypeEnum.add_member(:line_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINE_LEVEL", traits: {"smithy.api#enumValue" => "LINE_LEVEL"}))
-    ConflictMetadata.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath"))
-    ConflictMetadata.add_member(:file_sizes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSizes, location_name: "fileSizes"))
-    ConflictMetadata.add_member(:file_modes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModes, location_name: "fileModes"))
-    ConflictMetadata.add_member(:object_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTypes, location_name: "objectTypes"))
-    ConflictMetadata.add_member(:number_of_conflicts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberOfConflicts, location_name: "numberOfConflicts", traits: {"smithy.api#default" => 0}))
-    ConflictMetadata.add_member(:is_binary_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsBinaryFile, location_name: "isBinaryFile"))
-    ConflictMetadata.add_member(:content_conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsContentConflict, location_name: "contentConflict", traits: {"smithy.api#default" => false}))
-    ConflictMetadata.add_member(:file_mode_conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsFileModeConflict, location_name: "fileModeConflict", traits: {"smithy.api#default" => false}))
-    ConflictMetadata.add_member(:object_type_conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsObjectTypeConflict, location_name: "objectTypeConflict", traits: {"smithy.api#default" => false}))
-    ConflictMetadata.add_member(:merge_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOperations, location_name: "mergeOperations"))
+    ConflictDetailLevelTypeEnum.add_member(:file_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE_LEVEL", traits: {"smithy.api#enumValue" => "FILE_LEVEL"}))
+    ConflictDetailLevelTypeEnum.add_member(:line_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINE_LEVEL", traits: {"smithy.api#enumValue" => "LINE_LEVEL"}))
+    ConflictMetadata.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath"))
+    ConflictMetadata.add_member(:file_sizes, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSizes, location_name: "fileSizes"))
+    ConflictMetadata.add_member(:file_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModes, location_name: "fileModes"))
+    ConflictMetadata.add_member(:object_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypes, location_name: "objectTypes"))
+    ConflictMetadata.add_member(:number_of_conflicts, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfConflicts, location_name: "numberOfConflicts", traits: {"smithy.api#default" => 0}))
+    ConflictMetadata.add_member(:is_binary_file, ::Smithy::Schema::Shapes::MemberShape.new(target: IsBinaryFile, location_name: "isBinaryFile"))
+    ConflictMetadata.add_member(:content_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: IsContentConflict, location_name: "contentConflict", traits: {"smithy.api#default" => false}))
+    ConflictMetadata.add_member(:file_mode_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: IsFileModeConflict, location_name: "fileModeConflict", traits: {"smithy.api#default" => false}))
+    ConflictMetadata.add_member(:object_type_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: IsObjectTypeConflict, location_name: "objectTypeConflict", traits: {"smithy.api#default" => false}))
+    ConflictMetadata.add_member(:merge_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOperations, location_name: "mergeOperations"))
     ConflictMetadata.type = Types::ConflictMetadata
-    ConflictMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictMetadata)
-    ConflictResolution.add_member(:replace_contents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplaceContentEntries, location_name: "replaceContents"))
-    ConflictResolution.add_member(:delete_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileEntries, location_name: "deleteFiles"))
-    ConflictResolution.add_member(:set_file_modes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetFileModeEntries, location_name: "setFileModes"))
+    ConflictMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictMetadata)
+    ConflictResolution.add_member(:replace_contents, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplaceContentEntries, location_name: "replaceContents"))
+    ConflictResolution.add_member(:delete_files, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileEntries, location_name: "deleteFiles"))
+    ConflictResolution.add_member(:set_file_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: SetFileModeEntries, location_name: "setFileModes"))
     ConflictResolution.type = Types::ConflictResolution
-    ConflictResolutionStrategyTypeEnum.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    ConflictResolutionStrategyTypeEnum.add_member(:accept_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCEPT_SOURCE", traits: {"smithy.api#enumValue" => "ACCEPT_SOURCE"}))
-    ConflictResolutionStrategyTypeEnum.add_member(:accept_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCEPT_DESTINATION", traits: {"smithy.api#enumValue" => "ACCEPT_DESTINATION"}))
-    ConflictResolutionStrategyTypeEnum.add_member(:automerge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMERGE", traits: {"smithy.api#enumValue" => "AUTOMERGE"}))
-    Conflicts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Conflict)
-    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContent, location_name: "approvalRuleTemplateContent", traits: {"smithy.api#required" => {}}))
-    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription"))
+    ConflictResolutionStrategyTypeEnum.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    ConflictResolutionStrategyTypeEnum.add_member(:accept_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCEPT_SOURCE", traits: {"smithy.api#enumValue" => "ACCEPT_SOURCE"}))
+    ConflictResolutionStrategyTypeEnum.add_member(:accept_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCEPT_DESTINATION", traits: {"smithy.api#enumValue" => "ACCEPT_DESTINATION"}))
+    ConflictResolutionStrategyTypeEnum.add_member(:automerge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMERGE", traits: {"smithy.api#enumValue" => "AUTOMERGE"}))
+    Conflicts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Conflict)
+    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateContent, location_name: "approvalRuleTemplateContent", traits: {"smithy.api#required" => {}}))
+    CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription"))
     CreateApprovalRuleTemplateInput.type = Types::CreateApprovalRuleTemplateInput
-    CreateApprovalRuleTemplateOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
+    CreateApprovalRuleTemplateOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
     CreateApprovalRuleTemplateOutput.type = Types::CreateApprovalRuleTemplateOutput
-    CreateBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    CreateBranchInput.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
-    CreateBranchInput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
+    CreateBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    CreateBranchInput.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
+    CreateBranchInput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
     CreateBranchInput.type = Types::CreateBranchInput
-    CreateCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    CreateCommitInput.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
-    CreateCommitInput.add_member(:parent_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "parentCommitId"))
-    CreateCommitInput.add_member(:author_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "authorName"))
-    CreateCommitInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
-    CreateCommitInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    CreateCommitInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
-    CreateCommitInput.add_member(:put_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutFileEntries, location_name: "putFiles"))
-    CreateCommitInput.add_member(:delete_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileEntries, location_name: "deleteFiles"))
-    CreateCommitInput.add_member(:set_file_modes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetFileModeEntries, location_name: "setFileModes"))
+    CreateCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    CreateCommitInput.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
+    CreateCommitInput.add_member(:parent_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "parentCommitId"))
+    CreateCommitInput.add_member(:author_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "authorName"))
+    CreateCommitInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
+    CreateCommitInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    CreateCommitInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
+    CreateCommitInput.add_member(:put_files, ::Smithy::Schema::Shapes::MemberShape.new(target: PutFileEntries, location_name: "putFiles"))
+    CreateCommitInput.add_member(:delete_files, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileEntries, location_name: "deleteFiles"))
+    CreateCommitInput.add_member(:set_file_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: SetFileModeEntries, location_name: "setFileModes"))
     CreateCommitInput.type = Types::CreateCommitInput
-    CreateCommitOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    CreateCommitOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
-    CreateCommitOutput.add_member(:files_added, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesAdded"))
-    CreateCommitOutput.add_member(:files_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesUpdated"))
-    CreateCommitOutput.add_member(:files_deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesDeleted"))
+    CreateCommitOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    CreateCommitOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
+    CreateCommitOutput.add_member(:files_added, ::Smithy::Schema::Shapes::MemberShape.new(target: FilesMetadata, location_name: "filesAdded"))
+    CreateCommitOutput.add_member(:files_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: FilesMetadata, location_name: "filesUpdated"))
+    CreateCommitOutput.add_member(:files_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: FilesMetadata, location_name: "filesDeleted"))
     CreateCommitOutput.type = Types::CreateCommitOutput
-    CreatePullRequestApprovalRuleInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    CreatePullRequestApprovalRuleInput.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName", traits: {"smithy.api#required" => {}}))
-    CreatePullRequestApprovalRuleInput.add_member(:approval_rule_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleContent, location_name: "approvalRuleContent", traits: {"smithy.api#required" => {}}))
+    CreatePullRequestApprovalRuleInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    CreatePullRequestApprovalRuleInput.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, location_name: "approvalRuleName", traits: {"smithy.api#required" => {}}))
+    CreatePullRequestApprovalRuleInput.add_member(:approval_rule_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleContent, location_name: "approvalRuleContent", traits: {"smithy.api#required" => {}}))
     CreatePullRequestApprovalRuleInput.type = Types::CreatePullRequestApprovalRuleInput
-    CreatePullRequestApprovalRuleOutput.add_member(:approval_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRule, location_name: "approvalRule", traits: {"smithy.api#required" => {}}))
+    CreatePullRequestApprovalRuleOutput.add_member(:approval_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRule, location_name: "approvalRule", traits: {"smithy.api#required" => {}}))
     CreatePullRequestApprovalRuleOutput.type = Types::CreatePullRequestApprovalRuleOutput
-    CreatePullRequestInput.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Title, location_name: "title", traits: {"smithy.api#required" => {}}))
-    CreatePullRequestInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreatePullRequestInput.add_member(:targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetList, location_name: "targets", traits: {"smithy.api#required" => {}}))
-    CreatePullRequestInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreatePullRequestInput.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Title, location_name: "title", traits: {"smithy.api#required" => {}}))
+    CreatePullRequestInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    CreatePullRequestInput.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetList, location_name: "targets", traits: {"smithy.api#required" => {}}))
+    CreatePullRequestInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreatePullRequestInput.type = Types::CreatePullRequestInput
-    CreatePullRequestOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
+    CreatePullRequestOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
     CreatePullRequestOutput.type = Types::CreatePullRequestOutput
-    CreateRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    CreateRepositoryInput.add_member(:repository_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "repositoryDescription"))
-    CreateRepositoryInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    CreateRepositoryInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    CreateRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    CreateRepositoryInput.add_member(:repository_description, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryDescription, location_name: "repositoryDescription"))
+    CreateRepositoryInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags"))
+    CreateRepositoryInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "kmsKeyId"))
     CreateRepositoryInput.type = Types::CreateRepositoryInput
-    CreateRepositoryOutput.add_member(:repository_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryMetadata, location_name: "repositoryMetadata"))
+    CreateRepositoryOutput.add_member(:repository_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryMetadata, location_name: "repositoryMetadata"))
     CreateRepositoryOutput.type = Types::CreateRepositoryOutput
-    CreateUnreferencedMergeCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    CreateUnreferencedMergeCommitInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    CreateUnreferencedMergeCommitInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    CreateUnreferencedMergeCommitInput.add_member(:merge_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
-    CreateUnreferencedMergeCommitInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    CreateUnreferencedMergeCommitInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    CreateUnreferencedMergeCommitInput.add_member(:author_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "authorName"))
-    CreateUnreferencedMergeCommitInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
-    CreateUnreferencedMergeCommitInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    CreateUnreferencedMergeCommitInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
-    CreateUnreferencedMergeCommitInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "conflictResolution"))
+    CreateUnreferencedMergeCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    CreateUnreferencedMergeCommitInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    CreateUnreferencedMergeCommitInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    CreateUnreferencedMergeCommitInput.add_member(:merge_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
+    CreateUnreferencedMergeCommitInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    CreateUnreferencedMergeCommitInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    CreateUnreferencedMergeCommitInput.add_member(:author_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "authorName"))
+    CreateUnreferencedMergeCommitInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
+    CreateUnreferencedMergeCommitInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    CreateUnreferencedMergeCommitInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
+    CreateUnreferencedMergeCommitInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolution, location_name: "conflictResolution"))
     CreateUnreferencedMergeCommitInput.type = Types::CreateUnreferencedMergeCommitInput
-    CreateUnreferencedMergeCommitOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    CreateUnreferencedMergeCommitOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
+    CreateUnreferencedMergeCommitOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    CreateUnreferencedMergeCommitOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
     CreateUnreferencedMergeCommitOutput.type = Types::CreateUnreferencedMergeCommitOutput
-    DefaultBranchCannotBeDeletedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    DefaultBranchCannotBeDeletedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     DefaultBranchCannotBeDeletedException.type = Types::DefaultBranchCannotBeDeletedException
-    DeleteApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    DeleteApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
     DeleteApprovalRuleTemplateInput.type = Types::DeleteApprovalRuleTemplateInput
-    DeleteApprovalRuleTemplateOutput.add_member(:approval_rule_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId", traits: {"smithy.api#required" => {}}))
+    DeleteApprovalRuleTemplateOutput.add_member(:approval_rule_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId", traits: {"smithy.api#required" => {}}))
     DeleteApprovalRuleTemplateOutput.type = Types::DeleteApprovalRuleTemplateOutput
-    DeleteBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    DeleteBranchInput.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
+    DeleteBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DeleteBranchInput.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
     DeleteBranchInput.type = Types::DeleteBranchInput
-    DeleteBranchOutput.add_member(:deleted_branch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchInfo, location_name: "deletedBranch"))
+    DeleteBranchOutput.add_member(:deleted_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchInfo, location_name: "deletedBranch"))
     DeleteBranchOutput.type = Types::DeleteBranchOutput
-    DeleteCommentContentInput.add_member(:comment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
+    DeleteCommentContentInput.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
     DeleteCommentContentInput.type = Types::DeleteCommentContentInput
-    DeleteCommentContentOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    DeleteCommentContentOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
     DeleteCommentContentOutput.type = Types::DeleteCommentContentOutput
-    DeleteFileEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileEntry)
-    DeleteFileEntry.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    DeleteFileEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileEntry)
+    DeleteFileEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
     DeleteFileEntry.type = Types::DeleteFileEntry
-    DeleteFileInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    DeleteFileInput.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
-    DeleteFileInput.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    DeleteFileInput.add_member(:parent_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "parentCommitId", traits: {"smithy.api#required" => {}}))
-    DeleteFileInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
-    DeleteFileInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    DeleteFileInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    DeleteFileInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
+    DeleteFileInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DeleteFileInput.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
+    DeleteFileInput.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    DeleteFileInput.add_member(:parent_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "parentCommitId", traits: {"smithy.api#required" => {}}))
+    DeleteFileInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
+    DeleteFileInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    DeleteFileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    DeleteFileInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
     DeleteFileInput.type = Types::DeleteFileInput
-    DeleteFileOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
-    DeleteFileOutput.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
-    DeleteFileOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId", traits: {"smithy.api#required" => {}}))
-    DeleteFileOutput.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    DeleteFileOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
+    DeleteFileOutput.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
+    DeleteFileOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId", traits: {"smithy.api#required" => {}}))
+    DeleteFileOutput.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
     DeleteFileOutput.type = Types::DeleteFileOutput
-    DeletePullRequestApprovalRuleInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    DeletePullRequestApprovalRuleInput.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName", traits: {"smithy.api#required" => {}}))
+    DeletePullRequestApprovalRuleInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    DeletePullRequestApprovalRuleInput.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, location_name: "approvalRuleName", traits: {"smithy.api#required" => {}}))
     DeletePullRequestApprovalRuleInput.type = Types::DeletePullRequestApprovalRuleInput
-    DeletePullRequestApprovalRuleOutput.add_member(:approval_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleId, location_name: "approvalRuleId", traits: {"smithy.api#required" => {}}))
+    DeletePullRequestApprovalRuleOutput.add_member(:approval_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleId, location_name: "approvalRuleId", traits: {"smithy.api#required" => {}}))
     DeletePullRequestApprovalRuleOutput.type = Types::DeletePullRequestApprovalRuleOutput
-    DeleteRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DeleteRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     DeleteRepositoryInput.type = Types::DeleteRepositoryInput
-    DeleteRepositoryOutput.add_member(:repository_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
+    DeleteRepositoryOutput.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryId, location_name: "repositoryId"))
     DeleteRepositoryOutput.type = Types::DeleteRepositoryOutput
-    DescribeMergeConflictsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsInput.add_member(:merge_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsInput.add_member(:max_merge_hunks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxMergeHunks"))
-    DescribeMergeConflictsInput.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    DescribeMergeConflictsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    DescribeMergeConflictsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeMergeConflictsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsInput.add_member(:merge_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsInput.add_member(:max_merge_hunks, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxMergeHunks"))
+    DescribeMergeConflictsInput.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    DescribeMergeConflictsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    DescribeMergeConflictsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     DescribeMergeConflictsInput.type = Types::DescribeMergeConflictsInput
-    DescribeMergeConflictsOutput.add_member(:conflict_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictMetadata, location_name: "conflictMetadata", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsOutput.add_member(:merge_hunks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeHunks, location_name: "mergeHunks", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    DescribeMergeConflictsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
-    DescribeMergeConflictsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "baseCommitId"))
+    DescribeMergeConflictsOutput.add_member(:conflict_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictMetadata, location_name: "conflictMetadata", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsOutput.add_member(:merge_hunks, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunks, location_name: "mergeHunks", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    DescribeMergeConflictsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
+    DescribeMergeConflictsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "baseCommitId"))
     DescribeMergeConflictsOutput.type = Types::DescribeMergeConflictsOutput
-    DescribePullRequestEventsInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    DescribePullRequestEventsInput.add_member(:pull_request_event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestEventType, location_name: "pullRequestEventType"))
-    DescribePullRequestEventsInput.add_member(:actor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "actorArn"))
-    DescribePullRequestEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    DescribePullRequestEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribePullRequestEventsInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    DescribePullRequestEventsInput.add_member(:pull_request_event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEventType, location_name: "pullRequestEventType"))
+    DescribePullRequestEventsInput.add_member(:actor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "actorArn"))
+    DescribePullRequestEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    DescribePullRequestEventsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     DescribePullRequestEventsInput.type = Types::DescribePullRequestEventsInput
-    DescribePullRequestEventsOutput.add_member(:pull_request_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestEventList, location_name: "pullRequestEvents", traits: {"smithy.api#required" => {}}))
-    DescribePullRequestEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribePullRequestEventsOutput.add_member(:pull_request_events, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEventList, location_name: "pullRequestEvents", traits: {"smithy.api#required" => {}}))
+    DescribePullRequestEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     DescribePullRequestEventsOutput.type = Types::DescribePullRequestEventsOutput
-    Difference.add_member(:before_blob, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlobMetadata, location_name: "beforeBlob"))
-    Difference.add_member(:after_blob, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlobMetadata, location_name: "afterBlob"))
-    Difference.add_member(:change_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeTypeEnum, location_name: "changeType"))
+    Difference.add_member(:before_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: BlobMetadata, location_name: "beforeBlob"))
+    Difference.add_member(:after_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: BlobMetadata, location_name: "afterBlob"))
+    Difference.add_member(:change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeTypeEnum, location_name: "changeType"))
     Difference.type = Types::Difference
-    DifferenceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Difference)
-    DirectoryNameConflictsWithFileNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    DifferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Difference)
+    DirectoryNameConflictsWithFileNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     DirectoryNameConflictsWithFileNameException.type = Types::DirectoryNameConflictsWithFileNameException
-    DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     DisassociateApprovalRuleTemplateFromRepositoryInput.type = Types::DisassociateApprovalRuleTemplateFromRepositoryInput
-    EncryptionIntegrityChecksFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionIntegrityChecksFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionIntegrityChecksFailedException.type = Types::EncryptionIntegrityChecksFailedException
-    EncryptionKeyAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionKeyAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionKeyAccessDeniedException.type = Types::EncryptionKeyAccessDeniedException
-    EncryptionKeyDisabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionKeyDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionKeyDisabledException.type = Types::EncryptionKeyDisabledException
-    EncryptionKeyInvalidIdException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionKeyInvalidIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionKeyInvalidIdException.type = Types::EncryptionKeyInvalidIdException
-    EncryptionKeyInvalidUsageException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionKeyInvalidUsageException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionKeyInvalidUsageException.type = Types::EncryptionKeyInvalidUsageException
-    EncryptionKeyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionKeyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionKeyNotFoundException.type = Types::EncryptionKeyNotFoundException
-    EncryptionKeyRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionKeyRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionKeyRequiredException.type = Types::EncryptionKeyRequiredException
-    EncryptionKeyUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    EncryptionKeyUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     EncryptionKeyUnavailableException.type = Types::EncryptionKeyUnavailableException
-    EvaluatePullRequestApprovalRulesInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    EvaluatePullRequestApprovalRulesInput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    EvaluatePullRequestApprovalRulesInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    EvaluatePullRequestApprovalRulesInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
     EvaluatePullRequestApprovalRulesInput.type = Types::EvaluatePullRequestApprovalRulesInput
-    EvaluatePullRequestApprovalRulesOutput.add_member(:evaluation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Evaluation, location_name: "evaluation", traits: {"smithy.api#required" => {}}))
+    EvaluatePullRequestApprovalRulesOutput.add_member(:evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: Evaluation, location_name: "evaluation", traits: {"smithy.api#required" => {}}))
     EvaluatePullRequestApprovalRulesOutput.type = Types::EvaluatePullRequestApprovalRulesOutput
-    Evaluation.add_member(:approved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Approved, location_name: "approved", traits: {"smithy.api#default" => false}))
-    Evaluation.add_member(:overridden, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Overridden, location_name: "overridden", traits: {"smithy.api#default" => false}))
-    Evaluation.add_member(:approval_rules_satisfied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRulesSatisfiedList, location_name: "approvalRulesSatisfied"))
-    Evaluation.add_member(:approval_rules_not_satisfied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRulesNotSatisfiedList, location_name: "approvalRulesNotSatisfied"))
+    Evaluation.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: Approved, location_name: "approved", traits: {"smithy.api#default" => false}))
+    Evaluation.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: Overridden, location_name: "overridden", traits: {"smithy.api#default" => false}))
+    Evaluation.add_member(:approval_rules_satisfied, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRulesSatisfiedList, location_name: "approvalRulesSatisfied"))
+    Evaluation.add_member(:approval_rules_not_satisfied, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRulesNotSatisfiedList, location_name: "approvalRulesNotSatisfied"))
     Evaluation.type = Types::Evaluation
-    File.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
-    File.add_member(:absolute_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
-    File.add_member(:relative_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "relativePath"))
-    File.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
+    File.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId"))
+    File.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "absolutePath"))
+    File.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "relativePath"))
+    File.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode"))
     File.type = Types::File
-    FileContentAndSourceFileSpecifiedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileContentAndSourceFileSpecifiedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileContentAndSourceFileSpecifiedException.type = Types::FileContentAndSourceFileSpecifiedException
-    FileContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileContentRequiredException.type = Types::FileContentRequiredException
-    FileContentSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileContentSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileContentSizeLimitExceededException.type = Types::FileContentSizeLimitExceededException
-    FileDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileDoesNotExistException.type = Types::FileDoesNotExistException
-    FileEntryRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileEntryRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileEntryRequiredException.type = Types::FileEntryRequiredException
-    FileList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: File)
-    FileMetadata.add_member(:absolute_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
-    FileMetadata.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
-    FileMetadata.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
+    FileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: File)
+    FileMetadata.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "absolutePath"))
+    FileMetadata.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId"))
+    FileMetadata.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode"))
     FileMetadata.type = Types::FileMetadata
-    FileModeRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileModeRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileModeRequiredException.type = Types::FileModeRequiredException
-    FileModeTypeEnum.add_member(:executable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXECUTABLE", traits: {"smithy.api#enumValue" => "EXECUTABLE"}))
-    FileModeTypeEnum.add_member(:normal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NORMAL", traits: {"smithy.api#enumValue" => "NORMAL"}))
-    FileModeTypeEnum.add_member(:symlink, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYMLINK", traits: {"smithy.api#enumValue" => "SYMLINK"}))
-    FileModes.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "source"))
-    FileModes.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "destination"))
-    FileModes.add_member(:base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "base"))
+    FileModeTypeEnum.add_member(:executable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXECUTABLE", traits: {"smithy.api#enumValue" => "EXECUTABLE"}))
+    FileModeTypeEnum.add_member(:normal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NORMAL", traits: {"smithy.api#enumValue" => "NORMAL"}))
+    FileModeTypeEnum.add_member(:symlink, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYMLINK", traits: {"smithy.api#enumValue" => "SYMLINK"}))
+    FileModes.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "source"))
+    FileModes.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "destination"))
+    FileModes.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "base"))
     FileModes.type = Types::FileModes
-    FileNameConflictsWithDirectoryNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileNameConflictsWithDirectoryNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileNameConflictsWithDirectoryNameException.type = Types::FileNameConflictsWithDirectoryNameException
-    FilePathConflictsWithSubmodulePathException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FilePathConflictsWithSubmodulePathException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FilePathConflictsWithSubmodulePathException.type = Types::FilePathConflictsWithSubmodulePathException
-    FilePaths.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path)
-    FileSizes.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSize, location_name: "source", traits: {"smithy.api#default" => 0}))
-    FileSizes.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSize, location_name: "destination", traits: {"smithy.api#default" => 0}))
-    FileSizes.add_member(:base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSize, location_name: "base", traits: {"smithy.api#default" => 0}))
+    FilePaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Path)
+    FileSizes.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSize, location_name: "source", traits: {"smithy.api#default" => 0}))
+    FileSizes.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSize, location_name: "destination", traits: {"smithy.api#default" => 0}))
+    FileSizes.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSize, location_name: "base", traits: {"smithy.api#default" => 0}))
     FileSizes.type = Types::FileSizes
-    FileTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FileTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FileTooLargeException.type = Types::FileTooLargeException
-    FileVersion.add_member(:commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Commit, location_name: "commit"))
-    FileVersion.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
-    FileVersion.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "path"))
-    FileVersion.add_member(:revision_children, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionChildren, location_name: "revisionChildren"))
+    FileVersion.add_member(:commit, ::Smithy::Schema::Shapes::MemberShape.new(target: Commit, location_name: "commit"))
+    FileVersion.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId"))
+    FileVersion.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "path"))
+    FileVersion.add_member(:revision_children, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionChildren, location_name: "revisionChildren"))
     FileVersion.type = Types::FileVersion
-    FilesMetadata.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileMetadata)
-    Folder.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
-    Folder.add_member(:absolute_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
-    Folder.add_member(:relative_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "relativePath"))
+    FilesMetadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileMetadata)
+    Folder.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
+    Folder.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "absolutePath"))
+    Folder.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "relativePath"))
     Folder.type = Types::Folder
-    FolderContentSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FolderContentSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FolderContentSizeLimitExceededException.type = Types::FolderContentSizeLimitExceededException
-    FolderDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    FolderDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     FolderDoesNotExistException.type = Types::FolderDoesNotExistException
-    FolderList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Folder)
-    GetApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    FolderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Folder)
+    GetApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
     GetApprovalRuleTemplateInput.type = Types::GetApprovalRuleTemplateInput
-    GetApprovalRuleTemplateOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
+    GetApprovalRuleTemplateOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
     GetApprovalRuleTemplateOutput.type = Types::GetApprovalRuleTemplateOutput
-    GetBlobInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetBlobInput.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
+    GetBlobInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetBlobInput.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
     GetBlobInput.type = Types::GetBlobInput
-    GetBlobOutput.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blob, location_name: "content", traits: {"smithy.api#required" => {}}))
+    GetBlobOutput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, location_name: "content", traits: {"smithy.api#required" => {}}))
     GetBlobOutput.type = Types::GetBlobOutput
-    GetBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    GetBranchInput.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
+    GetBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    GetBranchInput.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "branchName"))
     GetBranchInput.type = Types::GetBranchInput
-    GetBranchOutput.add_member(:branch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchInfo, location_name: "branch"))
+    GetBranchOutput.add_member(:branch, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchInfo, location_name: "branch"))
     GetBranchOutput.type = Types::GetBranchOutput
-    GetCommentInput.add_member(:comment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
+    GetCommentInput.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
     GetCommentInput.type = Types::GetCommentInput
-    GetCommentOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    GetCommentOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
     GetCommentOutput.type = Types::GetCommentOutput
-    GetCommentReactionsInput.add_member(:comment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
-    GetCommentReactionsInput.add_member(:reaction_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "reactionUserArn"))
-    GetCommentReactionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    GetCommentReactionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetCommentReactionsInput.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
+    GetCommentReactionsInput.add_member(:reaction_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "reactionUserArn"))
+    GetCommentReactionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    GetCommentReactionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     GetCommentReactionsInput.type = Types::GetCommentReactionsInput
-    GetCommentReactionsOutput.add_member(:reactions_for_comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionsForCommentList, location_name: "reactionsForComment", traits: {"smithy.api#required" => {}}))
-    GetCommentReactionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetCommentReactionsOutput.add_member(:reactions_for_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionsForCommentList, location_name: "reactionsForComment", traits: {"smithy.api#required" => {}}))
+    GetCommentReactionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetCommentReactionsOutput.type = Types::GetCommentReactionsOutput
-    GetCommentsForComparedCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetCommentsForComparedCommitInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    GetCommentsForComparedCommitInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId", traits: {"smithy.api#required" => {}}))
-    GetCommentsForComparedCommitInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    GetCommentsForComparedCommitInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetCommentsForComparedCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetCommentsForComparedCommitInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    GetCommentsForComparedCommitInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId", traits: {"smithy.api#required" => {}}))
+    GetCommentsForComparedCommitInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    GetCommentsForComparedCommitInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     GetCommentsForComparedCommitInput.type = Types::GetCommentsForComparedCommitInput
-    GetCommentsForComparedCommitOutput.add_member(:comments_for_compared_commit_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentsForComparedCommitData, location_name: "commentsForComparedCommitData"))
-    GetCommentsForComparedCommitOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetCommentsForComparedCommitOutput.add_member(:comments_for_compared_commit_data, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForComparedCommitData, location_name: "commentsForComparedCommitData"))
+    GetCommentsForComparedCommitOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetCommentsForComparedCommitOutput.type = Types::GetCommentsForComparedCommitOutput
-    GetCommentsForPullRequestInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    GetCommentsForPullRequestInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    GetCommentsForPullRequestInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    GetCommentsForPullRequestInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId"))
-    GetCommentsForPullRequestInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    GetCommentsForPullRequestInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetCommentsForPullRequestInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    GetCommentsForPullRequestInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    GetCommentsForPullRequestInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    GetCommentsForPullRequestInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId"))
+    GetCommentsForPullRequestInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    GetCommentsForPullRequestInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     GetCommentsForPullRequestInput.type = Types::GetCommentsForPullRequestInput
-    GetCommentsForPullRequestOutput.add_member(:comments_for_pull_request_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentsForPullRequestData, location_name: "commentsForPullRequestData"))
-    GetCommentsForPullRequestOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetCommentsForPullRequestOutput.add_member(:comments_for_pull_request_data, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForPullRequestData, location_name: "commentsForPullRequestData"))
+    GetCommentsForPullRequestOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetCommentsForPullRequestOutput.type = Types::GetCommentsForPullRequestOutput
-    GetCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetCommitInput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
+    GetCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetCommitInput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
     GetCommitInput.type = Types::GetCommitInput
-    GetCommitOutput.add_member(:commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Commit, location_name: "commit", traits: {"smithy.api#required" => {}}))
+    GetCommitOutput.add_member(:commit, ::Smithy::Schema::Shapes::MemberShape.new(target: Commit, location_name: "commit", traits: {"smithy.api#required" => {}}))
     GetCommitOutput.type = Types::GetCommitOutput
-    GetDifferencesInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetDifferencesInput.add_member(:before_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "beforeCommitSpecifier"))
-    GetDifferencesInput.add_member(:after_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "afterCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    GetDifferencesInput.add_member(:before_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "beforePath"))
-    GetDifferencesInput.add_member(:after_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "afterPath"))
-    GetDifferencesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
-    GetDifferencesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetDifferencesInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetDifferencesInput.add_member(:before_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "beforeCommitSpecifier"))
+    GetDifferencesInput.add_member(:after_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "afterCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    GetDifferencesInput.add_member(:before_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "beforePath"))
+    GetDifferencesInput.add_member(:after_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "afterPath"))
+    GetDifferencesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "MaxResults"))
+    GetDifferencesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetDifferencesInput.type = Types::GetDifferencesInput
-    GetDifferencesOutput.add_member(:differences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DifferenceList, location_name: "differences"))
-    GetDifferencesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetDifferencesOutput.add_member(:differences, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferenceList, location_name: "differences"))
+    GetDifferencesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetDifferencesOutput.type = Types::GetDifferencesOutput
-    GetFileInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetFileInput.add_member(:commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "commitSpecifier"))
-    GetFileInput.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    GetFileInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetFileInput.add_member(:commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "commitSpecifier"))
+    GetFileInput.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
     GetFileInput.type = Types::GetFileInput
-    GetFileOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
-    GetFileOutput.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
-    GetFileOutput.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    GetFileOutput.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode", traits: {"smithy.api#required" => {}}))
-    GetFileOutput.add_member(:file_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectSize, location_name: "fileSize", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    GetFileOutput.add_member(:file_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContent, location_name: "fileContent", traits: {"smithy.api#required" => {}}))
+    GetFileOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
+    GetFileOutput.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
+    GetFileOutput.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    GetFileOutput.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode", traits: {"smithy.api#required" => {}}))
+    GetFileOutput.add_member(:file_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectSize, location_name: "fileSize", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    GetFileOutput.add_member(:file_content, ::Smithy::Schema::Shapes::MemberShape.new(target: FileContent, location_name: "fileContent", traits: {"smithy.api#required" => {}}))
     GetFileOutput.type = Types::GetFileOutput
-    GetFolderInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetFolderInput.add_member(:commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "commitSpecifier"))
-    GetFolderInput.add_member(:folder_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "folderPath", traits: {"smithy.api#required" => {}}))
+    GetFolderInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetFolderInput.add_member(:commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "commitSpecifier"))
+    GetFolderInput.add_member(:folder_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "folderPath", traits: {"smithy.api#required" => {}}))
     GetFolderInput.type = Types::GetFolderInput
-    GetFolderOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
-    GetFolderOutput.add_member(:folder_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "folderPath", traits: {"smithy.api#required" => {}}))
-    GetFolderOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
-    GetFolderOutput.add_member(:sub_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderList, location_name: "subFolders"))
-    GetFolderOutput.add_member(:files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileList, location_name: "files"))
-    GetFolderOutput.add_member(:symbolic_links, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymbolicLinkList, location_name: "symbolicLinks"))
-    GetFolderOutput.add_member(:sub_modules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubModuleList, location_name: "subModules"))
+    GetFolderOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
+    GetFolderOutput.add_member(:folder_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "folderPath", traits: {"smithy.api#required" => {}}))
+    GetFolderOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
+    GetFolderOutput.add_member(:sub_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderList, location_name: "subFolders"))
+    GetFolderOutput.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: FileList, location_name: "files"))
+    GetFolderOutput.add_member(:symbolic_links, ::Smithy::Schema::Shapes::MemberShape.new(target: SymbolicLinkList, location_name: "symbolicLinks"))
+    GetFolderOutput.add_member(:sub_modules, ::Smithy::Schema::Shapes::MemberShape.new(target: SubModuleList, location_name: "subModules"))
     GetFolderOutput.type = Types::GetFolderOutput
-    GetMergeCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetMergeCommitInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    GetMergeCommitInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    GetMergeCommitInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    GetMergeCommitInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    GetMergeCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetMergeCommitInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    GetMergeCommitInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    GetMergeCommitInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    GetMergeCommitInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
     GetMergeCommitInput.type = Types::GetMergeCommitInput
-    GetMergeCommitOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId"))
-    GetMergeCommitOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "destinationCommitId"))
-    GetMergeCommitOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "baseCommitId"))
-    GetMergeCommitOutput.add_member(:merged_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "mergedCommitId"))
+    GetMergeCommitOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId"))
+    GetMergeCommitOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "destinationCommitId"))
+    GetMergeCommitOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "baseCommitId"))
+    GetMergeCommitOutput.add_member(:merged_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "mergedCommitId"))
     GetMergeCommitOutput.type = Types::GetMergeCommitOutput
-    GetMergeConflictsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetMergeConflictsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    GetMergeConflictsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    GetMergeConflictsInput.add_member(:merge_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
-    GetMergeConflictsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    GetMergeConflictsInput.add_member(:max_conflict_files, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxConflictFiles"))
-    GetMergeConflictsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    GetMergeConflictsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetMergeConflictsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetMergeConflictsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    GetMergeConflictsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    GetMergeConflictsInput.add_member(:merge_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum, location_name: "mergeOption", traits: {"smithy.api#required" => {}}))
+    GetMergeConflictsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    GetMergeConflictsInput.add_member(:max_conflict_files, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxConflictFiles"))
+    GetMergeConflictsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    GetMergeConflictsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetMergeConflictsInput.type = Types::GetMergeConflictsInput
-    GetMergeConflictsOutput.add_member(:mergeable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsMergeable, location_name: "mergeable", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    GetMergeConflictsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
-    GetMergeConflictsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
-    GetMergeConflictsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "baseCommitId"))
-    GetMergeConflictsOutput.add_member(:conflict_metadata_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictMetadataList, location_name: "conflictMetadataList", traits: {"smithy.api#required" => {}}))
-    GetMergeConflictsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetMergeConflictsOutput.add_member(:mergeable, ::Smithy::Schema::Shapes::MemberShape.new(target: IsMergeable, location_name: "mergeable", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    GetMergeConflictsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
+    GetMergeConflictsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
+    GetMergeConflictsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "baseCommitId"))
+    GetMergeConflictsOutput.add_member(:conflict_metadata_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictMetadataList, location_name: "conflictMetadataList", traits: {"smithy.api#required" => {}}))
+    GetMergeConflictsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetMergeConflictsOutput.type = Types::GetMergeConflictsOutput
-    GetMergeOptionsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    GetMergeOptionsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    GetMergeOptionsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    GetMergeOptionsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    GetMergeOptionsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    GetMergeOptionsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetMergeOptionsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    GetMergeOptionsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    GetMergeOptionsInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    GetMergeOptionsInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
     GetMergeOptionsInput.type = Types::GetMergeOptionsInput
-    GetMergeOptionsOutput.add_member(:merge_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptions, location_name: "mergeOptions", traits: {"smithy.api#required" => {}}))
-    GetMergeOptionsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
-    GetMergeOptionsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
-    GetMergeOptionsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "baseCommitId", traits: {"smithy.api#required" => {}}))
+    GetMergeOptionsOutput.add_member(:merge_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptions, location_name: "mergeOptions", traits: {"smithy.api#required" => {}}))
+    GetMergeOptionsOutput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId", traits: {"smithy.api#required" => {}}))
+    GetMergeOptionsOutput.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "destinationCommitId", traits: {"smithy.api#required" => {}}))
+    GetMergeOptionsOutput.add_member(:base_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "baseCommitId", traits: {"smithy.api#required" => {}}))
     GetMergeOptionsOutput.type = Types::GetMergeOptionsOutput
-    GetPullRequestApprovalStatesInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    GetPullRequestApprovalStatesInput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    GetPullRequestApprovalStatesInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    GetPullRequestApprovalStatesInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
     GetPullRequestApprovalStatesInput.type = Types::GetPullRequestApprovalStatesInput
-    GetPullRequestApprovalStatesOutput.add_member(:approvals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalList, location_name: "approvals"))
+    GetPullRequestApprovalStatesOutput.add_member(:approvals, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalList, location_name: "approvals"))
     GetPullRequestApprovalStatesOutput.type = Types::GetPullRequestApprovalStatesOutput
-    GetPullRequestInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    GetPullRequestInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
     GetPullRequestInput.type = Types::GetPullRequestInput
-    GetPullRequestOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
+    GetPullRequestOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
     GetPullRequestOutput.type = Types::GetPullRequestOutput
-    GetPullRequestOverrideStateInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    GetPullRequestOverrideStateInput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    GetPullRequestOverrideStateInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    GetPullRequestOverrideStateInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
     GetPullRequestOverrideStateInput.type = Types::GetPullRequestOverrideStateInput
-    GetPullRequestOverrideStateOutput.add_member(:overridden, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Overridden, location_name: "overridden", traits: {"smithy.api#default" => false}))
-    GetPullRequestOverrideStateOutput.add_member(:overrider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "overrider"))
+    GetPullRequestOverrideStateOutput.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: Overridden, location_name: "overridden", traits: {"smithy.api#default" => false}))
+    GetPullRequestOverrideStateOutput.add_member(:overrider, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "overrider"))
     GetPullRequestOverrideStateOutput.type = Types::GetPullRequestOverrideStateOutput
-    GetRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     GetRepositoryInput.type = Types::GetRepositoryInput
-    GetRepositoryOutput.add_member(:repository_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryMetadata, location_name: "repositoryMetadata"))
+    GetRepositoryOutput.add_member(:repository_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryMetadata, location_name: "repositoryMetadata"))
     GetRepositoryOutput.type = Types::GetRepositoryOutput
-    GetRepositoryTriggersInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetRepositoryTriggersInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     GetRepositoryTriggersInput.type = Types::GetRepositoryTriggersInput
-    GetRepositoryTriggersOutput.add_member(:configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggersConfigurationId, location_name: "configurationId"))
-    GetRepositoryTriggersOutput.add_member(:triggers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggersList, location_name: "triggers"))
+    GetRepositoryTriggersOutput.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggersConfigurationId, location_name: "configurationId"))
+    GetRepositoryTriggersOutput.add_member(:triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggersList, location_name: "triggers"))
     GetRepositoryTriggersOutput.type = Types::GetRepositoryTriggersOutput
-    IdempotencyParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    IdempotencyParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     IdempotencyParameterMismatchException.type = Types::IdempotencyParameterMismatchException
-    InvalidActorArnException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidActorArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidActorArnException.type = Types::InvalidActorArnException
-    InvalidApprovalRuleContentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidApprovalRuleContentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidApprovalRuleContentException.type = Types::InvalidApprovalRuleContentException
-    InvalidApprovalRuleNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidApprovalRuleNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidApprovalRuleNameException.type = Types::InvalidApprovalRuleNameException
-    InvalidApprovalRuleTemplateContentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidApprovalRuleTemplateContentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidApprovalRuleTemplateContentException.type = Types::InvalidApprovalRuleTemplateContentException
-    InvalidApprovalRuleTemplateDescriptionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidApprovalRuleTemplateDescriptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidApprovalRuleTemplateDescriptionException.type = Types::InvalidApprovalRuleTemplateDescriptionException
-    InvalidApprovalRuleTemplateNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidApprovalRuleTemplateNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidApprovalRuleTemplateNameException.type = Types::InvalidApprovalRuleTemplateNameException
-    InvalidApprovalStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidApprovalStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidApprovalStateException.type = Types::InvalidApprovalStateException
-    InvalidAuthorArnException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidAuthorArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidAuthorArnException.type = Types::InvalidAuthorArnException
-    InvalidBlobIdException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidBlobIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidBlobIdException.type = Types::InvalidBlobIdException
-    InvalidBranchNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidBranchNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidBranchNameException.type = Types::InvalidBranchNameException
-    InvalidClientRequestTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidClientRequestTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidClientRequestTokenException.type = Types::InvalidClientRequestTokenException
-    InvalidCommentIdException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidCommentIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidCommentIdException.type = Types::InvalidCommentIdException
-    InvalidCommitException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidCommitException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidCommitException.type = Types::InvalidCommitException
-    InvalidCommitIdException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidCommitIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidCommitIdException.type = Types::InvalidCommitIdException
-    InvalidConflictDetailLevelException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidConflictDetailLevelException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidConflictDetailLevelException.type = Types::InvalidConflictDetailLevelException
-    InvalidConflictResolutionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidConflictResolutionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidConflictResolutionException.type = Types::InvalidConflictResolutionException
-    InvalidConflictResolutionStrategyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidConflictResolutionStrategyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidConflictResolutionStrategyException.type = Types::InvalidConflictResolutionStrategyException
-    InvalidContinuationTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidContinuationTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidContinuationTokenException.type = Types::InvalidContinuationTokenException
-    InvalidDeletionParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidDeletionParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidDeletionParameterException.type = Types::InvalidDeletionParameterException
-    InvalidDescriptionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidDescriptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidDescriptionException.type = Types::InvalidDescriptionException
-    InvalidDestinationCommitSpecifierException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidDestinationCommitSpecifierException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidDestinationCommitSpecifierException.type = Types::InvalidDestinationCommitSpecifierException
-    InvalidEmailException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidEmailException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidEmailException.type = Types::InvalidEmailException
-    InvalidFileLocationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidFileLocationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidFileLocationException.type = Types::InvalidFileLocationException
-    InvalidFileModeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidFileModeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidFileModeException.type = Types::InvalidFileModeException
-    InvalidFilePositionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidFilePositionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidFilePositionException.type = Types::InvalidFilePositionException
-    InvalidMaxConflictFilesException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidMaxConflictFilesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidMaxConflictFilesException.type = Types::InvalidMaxConflictFilesException
-    InvalidMaxMergeHunksException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidMaxMergeHunksException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidMaxMergeHunksException.type = Types::InvalidMaxMergeHunksException
-    InvalidMaxResultsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidMaxResultsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidMaxResultsException.type = Types::InvalidMaxResultsException
-    InvalidMergeOptionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidMergeOptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidMergeOptionException.type = Types::InvalidMergeOptionException
-    InvalidOrderException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidOrderException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidOrderException.type = Types::InvalidOrderException
-    InvalidOverrideStatusException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidOverrideStatusException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidOverrideStatusException.type = Types::InvalidOverrideStatusException
-    InvalidParentCommitIdException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidParentCommitIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidParentCommitIdException.type = Types::InvalidParentCommitIdException
-    InvalidPathException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidPathException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidPathException.type = Types::InvalidPathException
-    InvalidPullRequestEventTypeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidPullRequestEventTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidPullRequestEventTypeException.type = Types::InvalidPullRequestEventTypeException
-    InvalidPullRequestIdException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidPullRequestIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidPullRequestIdException.type = Types::InvalidPullRequestIdException
-    InvalidPullRequestStatusException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidPullRequestStatusException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidPullRequestStatusException.type = Types::InvalidPullRequestStatusException
-    InvalidPullRequestStatusUpdateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidPullRequestStatusUpdateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidPullRequestStatusUpdateException.type = Types::InvalidPullRequestStatusUpdateException
-    InvalidReactionUserArnException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidReactionUserArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidReactionUserArnException.type = Types::InvalidReactionUserArnException
-    InvalidReactionValueException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidReactionValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidReactionValueException.type = Types::InvalidReactionValueException
-    InvalidReferenceNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidReferenceNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidReferenceNameException.type = Types::InvalidReferenceNameException
-    InvalidRelativeFileVersionEnumException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRelativeFileVersionEnumException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRelativeFileVersionEnumException.type = Types::InvalidRelativeFileVersionEnumException
-    InvalidReplacementContentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidReplacementContentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidReplacementContentException.type = Types::InvalidReplacementContentException
-    InvalidReplacementTypeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidReplacementTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidReplacementTypeException.type = Types::InvalidReplacementTypeException
-    InvalidRepositoryDescriptionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryDescriptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryDescriptionException.type = Types::InvalidRepositoryDescriptionException
-    InvalidRepositoryNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryNameException.type = Types::InvalidRepositoryNameException
-    InvalidRepositoryTriggerBranchNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryTriggerBranchNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryTriggerBranchNameException.type = Types::InvalidRepositoryTriggerBranchNameException
-    InvalidRepositoryTriggerCustomDataException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryTriggerCustomDataException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryTriggerCustomDataException.type = Types::InvalidRepositoryTriggerCustomDataException
-    InvalidRepositoryTriggerDestinationArnException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryTriggerDestinationArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryTriggerDestinationArnException.type = Types::InvalidRepositoryTriggerDestinationArnException
-    InvalidRepositoryTriggerEventsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryTriggerEventsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryTriggerEventsException.type = Types::InvalidRepositoryTriggerEventsException
-    InvalidRepositoryTriggerNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryTriggerNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryTriggerNameException.type = Types::InvalidRepositoryTriggerNameException
-    InvalidRepositoryTriggerRegionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRepositoryTriggerRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRepositoryTriggerRegionException.type = Types::InvalidRepositoryTriggerRegionException
-    InvalidResourceArnException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidResourceArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidResourceArnException.type = Types::InvalidResourceArnException
-    InvalidRevisionIdException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRevisionIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRevisionIdException.type = Types::InvalidRevisionIdException
-    InvalidRuleContentSha256Exception.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidRuleContentSha256Exception.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidRuleContentSha256Exception.type = Types::InvalidRuleContentSha256Exception
-    InvalidSortByException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidSortByException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidSortByException.type = Types::InvalidSortByException
-    InvalidSourceCommitSpecifierException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidSourceCommitSpecifierException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidSourceCommitSpecifierException.type = Types::InvalidSourceCommitSpecifierException
-    InvalidSystemTagUsageException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidSystemTagUsageException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidSystemTagUsageException.type = Types::InvalidSystemTagUsageException
-    InvalidTagKeysListException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidTagKeysListException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidTagKeysListException.type = Types::InvalidTagKeysListException
-    InvalidTagsMapException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidTagsMapException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidTagsMapException.type = Types::InvalidTagsMapException
-    InvalidTargetBranchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidTargetBranchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidTargetBranchException.type = Types::InvalidTargetBranchException
-    InvalidTargetException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidTargetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidTargetException.type = Types::InvalidTargetException
-    InvalidTargetsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidTargetsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidTargetsException.type = Types::InvalidTargetsException
-    InvalidTitleException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidTitleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     InvalidTitleException.type = Types::InvalidTitleException
-    IsBinaryFile.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapitalBoolean, location_name: "source"))
-    IsBinaryFile.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapitalBoolean, location_name: "destination"))
-    IsBinaryFile.add_member(:base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapitalBoolean, location_name: "base"))
+    IsBinaryFile.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: CapitalBoolean, location_name: "source"))
+    IsBinaryFile.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CapitalBoolean, location_name: "destination"))
+    IsBinaryFile.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: CapitalBoolean, location_name: "base"))
     IsBinaryFile.type = Types::IsBinaryFile
-    ListApprovalRuleTemplatesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListApprovalRuleTemplatesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListApprovalRuleTemplatesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListApprovalRuleTemplatesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListApprovalRuleTemplatesInput.type = Types::ListApprovalRuleTemplatesInput
-    ListApprovalRuleTemplatesOutput.add_member(:approval_rule_template_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameList, location_name: "approvalRuleTemplateNames"))
-    ListApprovalRuleTemplatesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListApprovalRuleTemplatesOutput.add_member(:approval_rule_template_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateNameList, location_name: "approvalRuleTemplateNames"))
+    ListApprovalRuleTemplatesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListApprovalRuleTemplatesOutput.type = Types::ListApprovalRuleTemplatesOutput
-    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListAssociatedApprovalRuleTemplatesForRepositoryInput.type = Types::ListAssociatedApprovalRuleTemplatesForRepositoryInput
-    ListAssociatedApprovalRuleTemplatesForRepositoryOutput.add_member(:approval_rule_template_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameList, location_name: "approvalRuleTemplateNames"))
-    ListAssociatedApprovalRuleTemplatesForRepositoryOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryOutput.add_member(:approval_rule_template_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateNameList, location_name: "approvalRuleTemplateNames"))
+    ListAssociatedApprovalRuleTemplatesForRepositoryOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListAssociatedApprovalRuleTemplatesForRepositoryOutput.type = Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput
-    ListBranchesInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    ListBranchesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBranchesInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    ListBranchesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListBranchesInput.type = Types::ListBranchesInput
-    ListBranchesOutput.add_member(:branches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameList, location_name: "branches"))
-    ListBranchesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBranchesOutput.add_member(:branches, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchNameList, location_name: "branches"))
+    ListBranchesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListBranchesOutput.type = Types::ListBranchesOutput
-    ListFileCommitHistoryRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    ListFileCommitHistoryRequest.add_member(:commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "commitSpecifier"))
-    ListFileCommitHistoryRequest.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    ListFileCommitHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "maxResults"))
-    ListFileCommitHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFileCommitHistoryRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    ListFileCommitHistoryRequest.add_member(:commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "commitSpecifier"))
+    ListFileCommitHistoryRequest.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    ListFileCommitHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "maxResults"))
+    ListFileCommitHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListFileCommitHistoryRequest.type = Types::ListFileCommitHistoryRequest
-    ListFileCommitHistoryResponse.add_member(:revision_dag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionDag, location_name: "revisionDag", traits: {"smithy.api#required" => {}}))
-    ListFileCommitHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFileCommitHistoryResponse.add_member(:revision_dag, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionDag, location_name: "revisionDag", traits: {"smithy.api#required" => {}}))
+    ListFileCommitHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListFileCommitHistoryResponse.type = Types::ListFileCommitHistoryResponse
-    ListPullRequestsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    ListPullRequestsInput.add_member(:author_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "authorArn"))
-    ListPullRequestsInput.add_member(:pull_request_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestStatusEnum, location_name: "pullRequestStatus"))
-    ListPullRequestsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListPullRequestsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPullRequestsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    ListPullRequestsInput.add_member(:author_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "authorArn"))
+    ListPullRequestsInput.add_member(:pull_request_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestStatusEnum, location_name: "pullRequestStatus"))
+    ListPullRequestsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListPullRequestsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListPullRequestsInput.type = Types::ListPullRequestsInput
-    ListPullRequestsOutput.add_member(:pull_request_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdList, location_name: "pullRequestIds", traits: {"smithy.api#required" => {}}))
-    ListPullRequestsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPullRequestsOutput.add_member(:pull_request_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestIdList, location_name: "pullRequestIds", traits: {"smithy.api#required" => {}}))
+    ListPullRequestsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListPullRequestsOutput.type = Types::ListPullRequestsOutput
-    ListRepositoriesForApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    ListRepositoriesForApprovalRuleTemplateInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListRepositoriesForApprovalRuleTemplateInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListRepositoriesForApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    ListRepositoriesForApprovalRuleTemplateInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListRepositoriesForApprovalRuleTemplateInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListRepositoriesForApprovalRuleTemplateInput.type = Types::ListRepositoriesForApprovalRuleTemplateInput
-    ListRepositoriesForApprovalRuleTemplateOutput.add_member(:repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames"))
-    ListRepositoriesForApprovalRuleTemplateOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRepositoriesForApprovalRuleTemplateOutput.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, location_name: "repositoryNames"))
+    ListRepositoriesForApprovalRuleTemplateOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListRepositoriesForApprovalRuleTemplateOutput.type = Types::ListRepositoriesForApprovalRuleTemplateOutput
-    ListRepositoriesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListRepositoriesInput.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortByEnum, location_name: "sortBy"))
-    ListRepositoriesInput.add_member(:order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrderEnum, location_name: "order"))
+    ListRepositoriesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListRepositoriesInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortByEnum, location_name: "sortBy"))
+    ListRepositoriesInput.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderEnum, location_name: "order"))
     ListRepositoriesInput.type = Types::ListRepositoriesInput
-    ListRepositoriesOutput.add_member(:repositories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameIdPairList, location_name: "repositories"))
-    ListRepositoriesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRepositoriesOutput.add_member(:repositories, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameIdPairList, location_name: "repositories"))
+    ListRepositoriesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListRepositoriesOutput.type = Types::ListRepositoriesOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    Location.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath"))
-    Location.add_member(:file_position, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Position, location_name: "filePosition"))
-    Location.add_member(:relative_file_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativeFileVersionEnum, location_name: "relativeFileVersion"))
+    Location.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath"))
+    Location.add_member(:file_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, location_name: "filePosition"))
+    Location.add_member(:relative_file_version, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativeFileVersionEnum, location_name: "relativeFileVersion"))
     Location.type = Types::Location
-    ManualMergeRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ManualMergeRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ManualMergeRequiredException.type = Types::ManualMergeRequiredException
-    MaximumBranchesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumBranchesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumBranchesExceededException.type = Types::MaximumBranchesExceededException
-    MaximumConflictResolutionEntriesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumConflictResolutionEntriesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumConflictResolutionEntriesExceededException.type = Types::MaximumConflictResolutionEntriesExceededException
-    MaximumFileContentToLoadExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumFileContentToLoadExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumFileContentToLoadExceededException.type = Types::MaximumFileContentToLoadExceededException
-    MaximumFileEntriesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumFileEntriesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumFileEntriesExceededException.type = Types::MaximumFileEntriesExceededException
-    MaximumItemsToCompareExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumItemsToCompareExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumItemsToCompareExceededException.type = Types::MaximumItemsToCompareExceededException
-    MaximumNumberOfApprovalsExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumNumberOfApprovalsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumNumberOfApprovalsExceededException.type = Types::MaximumNumberOfApprovalsExceededException
-    MaximumOpenPullRequestsExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumOpenPullRequestsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumOpenPullRequestsExceededException.type = Types::MaximumOpenPullRequestsExceededException
-    MaximumRepositoryNamesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumRepositoryNamesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumRepositoryNamesExceededException.type = Types::MaximumRepositoryNamesExceededException
-    MaximumRepositoryTriggersExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumRepositoryTriggersExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumRepositoryTriggersExceededException.type = Types::MaximumRepositoryTriggersExceededException
-    MaximumRuleTemplatesAssociatedWithRepositoryException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MaximumRuleTemplatesAssociatedWithRepositoryException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MaximumRuleTemplatesAssociatedWithRepositoryException.type = Types::MaximumRuleTemplatesAssociatedWithRepositoryException
-    MergeBranchesByFastForwardInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    MergeBranchesByFastForwardInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    MergeBranchesByFastForwardInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    MergeBranchesByFastForwardInput.add_member(:target_branch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "targetBranch"))
+    MergeBranchesByFastForwardInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    MergeBranchesByFastForwardInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    MergeBranchesByFastForwardInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    MergeBranchesByFastForwardInput.add_member(:target_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "targetBranch"))
     MergeBranchesByFastForwardInput.type = Types::MergeBranchesByFastForwardInput
-    MergeBranchesByFastForwardOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    MergeBranchesByFastForwardOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
+    MergeBranchesByFastForwardOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    MergeBranchesByFastForwardOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
     MergeBranchesByFastForwardOutput.type = Types::MergeBranchesByFastForwardOutput
-    MergeBranchesBySquashInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    MergeBranchesBySquashInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    MergeBranchesBySquashInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    MergeBranchesBySquashInput.add_member(:target_branch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "targetBranch"))
-    MergeBranchesBySquashInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    MergeBranchesBySquashInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    MergeBranchesBySquashInput.add_member(:author_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "authorName"))
-    MergeBranchesBySquashInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
-    MergeBranchesBySquashInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    MergeBranchesBySquashInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
-    MergeBranchesBySquashInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "conflictResolution"))
+    MergeBranchesBySquashInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    MergeBranchesBySquashInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    MergeBranchesBySquashInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    MergeBranchesBySquashInput.add_member(:target_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "targetBranch"))
+    MergeBranchesBySquashInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    MergeBranchesBySquashInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    MergeBranchesBySquashInput.add_member(:author_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "authorName"))
+    MergeBranchesBySquashInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
+    MergeBranchesBySquashInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    MergeBranchesBySquashInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
+    MergeBranchesBySquashInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolution, location_name: "conflictResolution"))
     MergeBranchesBySquashInput.type = Types::MergeBranchesBySquashInput
-    MergeBranchesBySquashOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    MergeBranchesBySquashOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
+    MergeBranchesBySquashOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    MergeBranchesBySquashOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
     MergeBranchesBySquashOutput.type = Types::MergeBranchesBySquashOutput
-    MergeBranchesByThreeWayInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    MergeBranchesByThreeWayInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    MergeBranchesByThreeWayInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
-    MergeBranchesByThreeWayInput.add_member(:target_branch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "targetBranch"))
-    MergeBranchesByThreeWayInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    MergeBranchesByThreeWayInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    MergeBranchesByThreeWayInput.add_member(:author_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "authorName"))
-    MergeBranchesByThreeWayInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
-    MergeBranchesByThreeWayInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    MergeBranchesByThreeWayInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
-    MergeBranchesByThreeWayInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "conflictResolution"))
+    MergeBranchesByThreeWayInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    MergeBranchesByThreeWayInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    MergeBranchesByThreeWayInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, location_name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
+    MergeBranchesByThreeWayInput.add_member(:target_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "targetBranch"))
+    MergeBranchesByThreeWayInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    MergeBranchesByThreeWayInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    MergeBranchesByThreeWayInput.add_member(:author_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "authorName"))
+    MergeBranchesByThreeWayInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
+    MergeBranchesByThreeWayInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    MergeBranchesByThreeWayInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
+    MergeBranchesByThreeWayInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolution, location_name: "conflictResolution"))
     MergeBranchesByThreeWayInput.type = Types::MergeBranchesByThreeWayInput
-    MergeBranchesByThreeWayOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    MergeBranchesByThreeWayOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
+    MergeBranchesByThreeWayOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    MergeBranchesByThreeWayOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId"))
     MergeBranchesByThreeWayOutput.type = Types::MergeBranchesByThreeWayOutput
-    MergeHunk.add_member(:is_conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsHunkConflict, location_name: "isConflict", traits: {"smithy.api#default" => false}))
-    MergeHunk.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeHunkDetail, location_name: "source"))
-    MergeHunk.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeHunkDetail, location_name: "destination"))
-    MergeHunk.add_member(:base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeHunkDetail, location_name: "base"))
+    MergeHunk.add_member(:is_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: IsHunkConflict, location_name: "isConflict", traits: {"smithy.api#default" => false}))
+    MergeHunk.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunkDetail, location_name: "source"))
+    MergeHunk.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunkDetail, location_name: "destination"))
+    MergeHunk.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunkDetail, location_name: "base"))
     MergeHunk.type = Types::MergeHunk
-    MergeHunkDetail.add_member(:start_line, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LineNumber, location_name: "startLine"))
-    MergeHunkDetail.add_member(:end_line, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LineNumber, location_name: "endLine"))
-    MergeHunkDetail.add_member(:hunk_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HunkContent, location_name: "hunkContent"))
+    MergeHunkDetail.add_member(:start_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, location_name: "startLine"))
+    MergeHunkDetail.add_member(:end_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, location_name: "endLine"))
+    MergeHunkDetail.add_member(:hunk_content, ::Smithy::Schema::Shapes::MemberShape.new(target: HunkContent, location_name: "hunkContent"))
     MergeHunkDetail.type = Types::MergeHunkDetail
-    MergeHunks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeHunk)
-    MergeMetadata.add_member(:is_merged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsMerged, location_name: "isMerged", traits: {"smithy.api#default" => false}))
-    MergeMetadata.add_member(:merged_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "mergedBy"))
-    MergeMetadata.add_member(:merge_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeCommitId"))
-    MergeMetadata.add_member(:merge_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionTypeEnum, location_name: "mergeOption"))
+    MergeHunks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunk)
+    MergeMetadata.add_member(:is_merged, ::Smithy::Schema::Shapes::MemberShape.new(target: IsMerged, location_name: "isMerged", traits: {"smithy.api#default" => false}))
+    MergeMetadata.add_member(:merged_by, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "mergedBy"))
+    MergeMetadata.add_member(:merge_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "mergeCommitId"))
+    MergeMetadata.add_member(:merge_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum, location_name: "mergeOption"))
     MergeMetadata.type = Types::MergeMetadata
-    MergeOperations.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeTypeEnum, location_name: "source"))
-    MergeOperations.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeTypeEnum, location_name: "destination"))
+    MergeOperations.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeTypeEnum, location_name: "source"))
+    MergeOperations.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeTypeEnum, location_name: "destination"))
     MergeOperations.type = Types::MergeOperations
-    MergeOptionRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MergeOptionRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MergeOptionRequiredException.type = Types::MergeOptionRequiredException
-    MergeOptionTypeEnum.add_member(:fast_forward_merge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAST_FORWARD_MERGE", traits: {"smithy.api#enumValue" => "FAST_FORWARD_MERGE"}))
-    MergeOptionTypeEnum.add_member(:squash_merge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SQUASH_MERGE", traits: {"smithy.api#enumValue" => "SQUASH_MERGE"}))
-    MergeOptionTypeEnum.add_member(:three_way_merge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THREE_WAY_MERGE", traits: {"smithy.api#enumValue" => "THREE_WAY_MERGE"}))
-    MergeOptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionTypeEnum)
-    MergePullRequestByFastForwardInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    MergePullRequestByFastForwardInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    MergePullRequestByFastForwardInput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId"))
+    MergeOptionTypeEnum.add_member(:fast_forward_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAST_FORWARD_MERGE", traits: {"smithy.api#enumValue" => "FAST_FORWARD_MERGE"}))
+    MergeOptionTypeEnum.add_member(:squash_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SQUASH_MERGE", traits: {"smithy.api#enumValue" => "SQUASH_MERGE"}))
+    MergeOptionTypeEnum.add_member(:three_way_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "THREE_WAY_MERGE", traits: {"smithy.api#enumValue" => "THREE_WAY_MERGE"}))
+    MergeOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum)
+    MergePullRequestByFastForwardInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    MergePullRequestByFastForwardInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    MergePullRequestByFastForwardInput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId"))
     MergePullRequestByFastForwardInput.type = Types::MergePullRequestByFastForwardInput
-    MergePullRequestByFastForwardOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest"))
+    MergePullRequestByFastForwardOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest"))
     MergePullRequestByFastForwardOutput.type = Types::MergePullRequestByFastForwardOutput
-    MergePullRequestBySquashInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    MergePullRequestBySquashInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    MergePullRequestBySquashInput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId"))
-    MergePullRequestBySquashInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    MergePullRequestBySquashInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    MergePullRequestBySquashInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    MergePullRequestBySquashInput.add_member(:author_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "authorName"))
-    MergePullRequestBySquashInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
-    MergePullRequestBySquashInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
-    MergePullRequestBySquashInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "conflictResolution"))
+    MergePullRequestBySquashInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    MergePullRequestBySquashInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    MergePullRequestBySquashInput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId"))
+    MergePullRequestBySquashInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    MergePullRequestBySquashInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    MergePullRequestBySquashInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    MergePullRequestBySquashInput.add_member(:author_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "authorName"))
+    MergePullRequestBySquashInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
+    MergePullRequestBySquashInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
+    MergePullRequestBySquashInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolution, location_name: "conflictResolution"))
     MergePullRequestBySquashInput.type = Types::MergePullRequestBySquashInput
-    MergePullRequestBySquashOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest"))
+    MergePullRequestBySquashOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest"))
     MergePullRequestBySquashOutput.type = Types::MergePullRequestBySquashOutput
-    MergePullRequestByThreeWayInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    MergePullRequestByThreeWayInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    MergePullRequestByThreeWayInput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "sourceCommitId"))
-    MergePullRequestByThreeWayInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
-    MergePullRequestByThreeWayInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
-    MergePullRequestByThreeWayInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    MergePullRequestByThreeWayInput.add_member(:author_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "authorName"))
-    MergePullRequestByThreeWayInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
-    MergePullRequestByThreeWayInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
-    MergePullRequestByThreeWayInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "conflictResolution"))
+    MergePullRequestByThreeWayInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    MergePullRequestByThreeWayInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    MergePullRequestByThreeWayInput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "sourceCommitId"))
+    MergePullRequestByThreeWayInput.add_member(:conflict_detail_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetailLevelTypeEnum, location_name: "conflictDetailLevel"))
+    MergePullRequestByThreeWayInput.add_member(:conflict_resolution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolutionStrategyTypeEnum, location_name: "conflictResolutionStrategy"))
+    MergePullRequestByThreeWayInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    MergePullRequestByThreeWayInput.add_member(:author_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "authorName"))
+    MergePullRequestByThreeWayInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
+    MergePullRequestByThreeWayInput.add_member(:keep_empty_folders, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepEmptyFolders, location_name: "keepEmptyFolders", traits: {"smithy.api#default" => false}))
+    MergePullRequestByThreeWayInput.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictResolution, location_name: "conflictResolution"))
     MergePullRequestByThreeWayInput.type = Types::MergePullRequestByThreeWayInput
-    MergePullRequestByThreeWayOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest"))
+    MergePullRequestByThreeWayOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest"))
     MergePullRequestByThreeWayOutput.type = Types::MergePullRequestByThreeWayOutput
-    MultipleConflictResolutionEntriesException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MultipleConflictResolutionEntriesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MultipleConflictResolutionEntriesException.type = Types::MultipleConflictResolutionEntriesException
-    MultipleRepositoriesInPullRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    MultipleRepositoriesInPullRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     MultipleRepositoriesInPullRequestException.type = Types::MultipleRepositoriesInPullRequestException
-    NameLengthExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NameLengthExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     NameLengthExceededException.type = Types::NameLengthExceededException
-    NoChangeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NoChangeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     NoChangeException.type = Types::NoChangeException
-    NumberOfRuleTemplatesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NumberOfRuleTemplatesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     NumberOfRuleTemplatesExceededException.type = Types::NumberOfRuleTemplatesExceededException
-    NumberOfRulesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NumberOfRulesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     NumberOfRulesExceededException.type = Types::NumberOfRulesExceededException
-    ObjectTypeEnum.add_member(:file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE", traits: {"smithy.api#enumValue" => "FILE"}))
-    ObjectTypeEnum.add_member(:directory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY", traits: {"smithy.api#enumValue" => "DIRECTORY"}))
-    ObjectTypeEnum.add_member(:git_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIT_LINK", traits: {"smithy.api#enumValue" => "GIT_LINK"}))
-    ObjectTypeEnum.add_member(:symbolic_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYMBOLIC_LINK", traits: {"smithy.api#enumValue" => "SYMBOLIC_LINK"}))
-    ObjectTypes.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "source"))
-    ObjectTypes.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "destination"))
-    ObjectTypes.add_member(:base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "base"))
+    ObjectTypeEnum.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FILE", traits: {"smithy.api#enumValue" => "FILE"}))
+    ObjectTypeEnum.add_member(:directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIRECTORY", traits: {"smithy.api#enumValue" => "DIRECTORY"}))
+    ObjectTypeEnum.add_member(:git_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GIT_LINK", traits: {"smithy.api#enumValue" => "GIT_LINK"}))
+    ObjectTypeEnum.add_member(:symbolic_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYMBOLIC_LINK", traits: {"smithy.api#enumValue" => "SYMBOLIC_LINK"}))
+    ObjectTypes.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeEnum, location_name: "source"))
+    ObjectTypes.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeEnum, location_name: "destination"))
+    ObjectTypes.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeEnum, location_name: "base"))
     ObjectTypes.type = Types::ObjectTypes
-    OperationNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    OperationNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     OperationNotAllowedException.type = Types::OperationNotAllowedException
-    OrderEnum.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ascending"}))
-    OrderEnum.add_member(:descending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "descending"}))
-    OriginApprovalRuleTemplate.add_member(:approval_rule_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId"))
-    OriginApprovalRuleTemplate.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
+    OrderEnum.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ascending"}))
+    OrderEnum.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "descending"}))
+    OriginApprovalRuleTemplate.add_member(:approval_rule_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId"))
+    OriginApprovalRuleTemplate.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
     OriginApprovalRuleTemplate.type = Types::OriginApprovalRuleTemplate
-    OverrideAlreadySetException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    OverrideAlreadySetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     OverrideAlreadySetException.type = Types::OverrideAlreadySetException
-    OverridePullRequestApprovalRulesInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    OverridePullRequestApprovalRulesInput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
-    OverridePullRequestApprovalRulesInput.add_member(:override_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverrideStatus, location_name: "overrideStatus", traits: {"smithy.api#required" => {}}))
+    OverridePullRequestApprovalRulesInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    OverridePullRequestApprovalRulesInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    OverridePullRequestApprovalRulesInput.add_member(:override_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideStatus, location_name: "overrideStatus", traits: {"smithy.api#required" => {}}))
     OverridePullRequestApprovalRulesInput.type = Types::OverridePullRequestApprovalRulesInput
-    OverrideStatus.add_member(:override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERRIDE", traits: {"smithy.api#enumValue" => "OVERRIDE"}))
-    OverrideStatus.add_member(:revoke, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REVOKE", traits: {"smithy.api#enumValue" => "REVOKE"}))
-    OverrideStatusRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    OverrideStatus.add_member(:override, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERRIDE", traits: {"smithy.api#enumValue" => "OVERRIDE"}))
+    OverrideStatus.add_member(:revoke, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REVOKE", traits: {"smithy.api#enumValue" => "REVOKE"}))
+    OverrideStatusRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     OverrideStatusRequiredException.type = Types::OverrideStatusRequiredException
-    ParentCommitDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ParentCommitDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ParentCommitDoesNotExistException.type = Types::ParentCommitDoesNotExistException
-    ParentCommitIdOutdatedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ParentCommitIdOutdatedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ParentCommitIdOutdatedException.type = Types::ParentCommitIdOutdatedException
-    ParentCommitIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ParentCommitIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ParentCommitIdRequiredException.type = Types::ParentCommitIdRequiredException
-    ParentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId)
-    PathDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ParentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId)
+    PathDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PathDoesNotExistException.type = Types::PathDoesNotExistException
-    PathRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PathRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PathRequiredException.type = Types::PathRequiredException
-    PostCommentForComparedCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    PostCommentForComparedCommitInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    PostCommentForComparedCommitInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId", traits: {"smithy.api#required" => {}}))
-    PostCommentForComparedCommitInput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    PostCommentForComparedCommitInput.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
-    PostCommentForComparedCommitInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PostCommentForComparedCommitInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    PostCommentForComparedCommitInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    PostCommentForComparedCommitInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId", traits: {"smithy.api#required" => {}}))
+    PostCommentForComparedCommitInput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, location_name: "location"))
+    PostCommentForComparedCommitInput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
+    PostCommentForComparedCommitInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     PostCommentForComparedCommitInput.type = Types::PostCommentForComparedCommitInput
-    PostCommentForComparedCommitOutput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    PostCommentForComparedCommitOutput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    PostCommentForComparedCommitOutput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId"))
-    PostCommentForComparedCommitOutput.add_member(:before_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "beforeBlobId"))
-    PostCommentForComparedCommitOutput.add_member(:after_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "afterBlobId"))
-    PostCommentForComparedCommitOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    PostCommentForComparedCommitOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    PostCommentForComparedCommitOutput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    PostCommentForComparedCommitOutput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    PostCommentForComparedCommitOutput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId"))
+    PostCommentForComparedCommitOutput.add_member(:before_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "beforeBlobId"))
+    PostCommentForComparedCommitOutput.add_member(:after_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "afterBlobId"))
+    PostCommentForComparedCommitOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, location_name: "location"))
+    PostCommentForComparedCommitOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
     PostCommentForComparedCommitOutput.type = Types::PostCommentForComparedCommitOutput
-    PostCommentForPullRequestInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    PostCommentForPullRequestInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    PostCommentForPullRequestInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId", traits: {"smithy.api#required" => {}}))
-    PostCommentForPullRequestInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId", traits: {"smithy.api#required" => {}}))
-    PostCommentForPullRequestInput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    PostCommentForPullRequestInput.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
-    PostCommentForPullRequestInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PostCommentForPullRequestInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    PostCommentForPullRequestInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    PostCommentForPullRequestInput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId", traits: {"smithy.api#required" => {}}))
+    PostCommentForPullRequestInput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId", traits: {"smithy.api#required" => {}}))
+    PostCommentForPullRequestInput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, location_name: "location"))
+    PostCommentForPullRequestInput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
+    PostCommentForPullRequestInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     PostCommentForPullRequestInput.type = Types::PostCommentForPullRequestInput
-    PostCommentForPullRequestOutput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    PostCommentForPullRequestOutput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId"))
-    PostCommentForPullRequestOutput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    PostCommentForPullRequestOutput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId"))
-    PostCommentForPullRequestOutput.add_member(:before_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "beforeBlobId"))
-    PostCommentForPullRequestOutput.add_member(:after_blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "afterBlobId"))
-    PostCommentForPullRequestOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "location"))
-    PostCommentForPullRequestOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    PostCommentForPullRequestOutput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    PostCommentForPullRequestOutput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId"))
+    PostCommentForPullRequestOutput.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    PostCommentForPullRequestOutput.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId"))
+    PostCommentForPullRequestOutput.add_member(:before_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "beforeBlobId"))
+    PostCommentForPullRequestOutput.add_member(:after_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "afterBlobId"))
+    PostCommentForPullRequestOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, location_name: "location"))
+    PostCommentForPullRequestOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
     PostCommentForPullRequestOutput.type = Types::PostCommentForPullRequestOutput
-    PostCommentReplyInput.add_member(:in_reply_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "inReplyTo", traits: {"smithy.api#required" => {}}))
-    PostCommentReplyInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    PostCommentReplyInput.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
+    PostCommentReplyInput.add_member(:in_reply_to, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "inReplyTo", traits: {"smithy.api#required" => {}}))
+    PostCommentReplyInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PostCommentReplyInput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
     PostCommentReplyInput.type = Types::PostCommentReplyInput
-    PostCommentReplyOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    PostCommentReplyOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
     PostCommentReplyOutput.type = Types::PostCommentReplyOutput
-    PullRequest.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId"))
-    PullRequest.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Title, location_name: "title"))
-    PullRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    PullRequest.add_member(:last_activity_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastActivityDate"))
-    PullRequest.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
-    PullRequest.add_member(:pull_request_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestStatusEnum, location_name: "pullRequestStatus"))
-    PullRequest.add_member(:author_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "authorArn"))
-    PullRequest.add_member(:pull_request_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestTargetList, location_name: "pullRequestTargets"))
-    PullRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
-    PullRequest.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
-    PullRequest.add_member(:approval_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRulesList, location_name: "approvalRules"))
+    PullRequest.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId"))
+    PullRequest.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Title, location_name: "title"))
+    PullRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    PullRequest.add_member(:last_activity_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedDate, location_name: "lastActivityDate"))
+    PullRequest.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "creationDate"))
+    PullRequest.add_member(:pull_request_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestStatusEnum, location_name: "pullRequestStatus"))
+    PullRequest.add_member(:author_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "authorArn"))
+    PullRequest.add_member(:pull_request_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestTargetList, location_name: "pullRequestTargets"))
+    PullRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "clientRequestToken"))
+    PullRequest.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId"))
+    PullRequest.add_member(:approval_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRulesList, location_name: "approvalRules"))
     PullRequest.type = Types::PullRequest
-    PullRequestAlreadyClosedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PullRequestAlreadyClosedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PullRequestAlreadyClosedException.type = Types::PullRequestAlreadyClosedException
-    PullRequestApprovalRulesNotSatisfiedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PullRequestApprovalRulesNotSatisfiedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PullRequestApprovalRulesNotSatisfiedException.type = Types::PullRequestApprovalRulesNotSatisfiedException
-    PullRequestCannotBeApprovedByAuthorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PullRequestCannotBeApprovedByAuthorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PullRequestCannotBeApprovedByAuthorException.type = Types::PullRequestCannotBeApprovedByAuthorException
-    PullRequestCreatedEventMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    PullRequestCreatedEventMetadata.add_member(:source_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "sourceCommitId"))
-    PullRequestCreatedEventMetadata.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "destinationCommitId"))
-    PullRequestCreatedEventMetadata.add_member(:merge_base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeBase"))
+    PullRequestCreatedEventMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    PullRequestCreatedEventMetadata.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "sourceCommitId"))
+    PullRequestCreatedEventMetadata.add_member(:destination_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "destinationCommitId"))
+    PullRequestCreatedEventMetadata.add_member(:merge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "mergeBase"))
     PullRequestCreatedEventMetadata.type = Types::PullRequestCreatedEventMetadata
-    PullRequestDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PullRequestDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PullRequestDoesNotExistException.type = Types::PullRequestDoesNotExistException
-    PullRequestEvent.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId"))
-    PullRequestEvent.add_member(:event_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDate, location_name: "eventDate"))
-    PullRequestEvent.add_member(:pull_request_event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestEventType, location_name: "pullRequestEventType"))
-    PullRequestEvent.add_member(:actor_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "actorArn"))
-    PullRequestEvent.add_member(:pull_request_created_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestCreatedEventMetadata, location_name: "pullRequestCreatedEventMetadata"))
-    PullRequestEvent.add_member(:pull_request_status_changed_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestStatusChangedEventMetadata, location_name: "pullRequestStatusChangedEventMetadata"))
-    PullRequestEvent.add_member(:pull_request_source_reference_updated_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestSourceReferenceUpdatedEventMetadata, location_name: "pullRequestSourceReferenceUpdatedEventMetadata"))
-    PullRequestEvent.add_member(:pull_request_merged_state_changed_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestMergedStateChangedEventMetadata, location_name: "pullRequestMergedStateChangedEventMetadata"))
-    PullRequestEvent.add_member(:approval_rule_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleEventMetadata, location_name: "approvalRuleEventMetadata"))
-    PullRequestEvent.add_member(:approval_state_changed_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalStateChangedEventMetadata, location_name: "approvalStateChangedEventMetadata"))
-    PullRequestEvent.add_member(:approval_rule_overridden_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleOverriddenEventMetadata, location_name: "approvalRuleOverriddenEventMetadata"))
+    PullRequestEvent.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId"))
+    PullRequestEvent.add_member(:event_date, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDate, location_name: "eventDate"))
+    PullRequestEvent.add_member(:pull_request_event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEventType, location_name: "pullRequestEventType"))
+    PullRequestEvent.add_member(:actor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "actorArn"))
+    PullRequestEvent.add_member(:pull_request_created_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestCreatedEventMetadata, location_name: "pullRequestCreatedEventMetadata"))
+    PullRequestEvent.add_member(:pull_request_status_changed_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestStatusChangedEventMetadata, location_name: "pullRequestStatusChangedEventMetadata"))
+    PullRequestEvent.add_member(:pull_request_source_reference_updated_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestSourceReferenceUpdatedEventMetadata, location_name: "pullRequestSourceReferenceUpdatedEventMetadata"))
+    PullRequestEvent.add_member(:pull_request_merged_state_changed_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestMergedStateChangedEventMetadata, location_name: "pullRequestMergedStateChangedEventMetadata"))
+    PullRequestEvent.add_member(:approval_rule_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleEventMetadata, location_name: "approvalRuleEventMetadata"))
+    PullRequestEvent.add_member(:approval_state_changed_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalStateChangedEventMetadata, location_name: "approvalStateChangedEventMetadata"))
+    PullRequestEvent.add_member(:approval_rule_overridden_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleOverriddenEventMetadata, location_name: "approvalRuleOverriddenEventMetadata"))
     PullRequestEvent.type = Types::PullRequestEvent
-    PullRequestEventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestEvent)
-    PullRequestEventType.add_member(:pull_request_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_CREATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_CREATED"}))
-    PullRequestEventType.add_member(:pull_request_status_changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_STATUS_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_STATUS_CHANGED"}))
-    PullRequestEventType.add_member(:pull_request_source_reference_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"}))
-    PullRequestEventType.add_member(:pull_request_merge_state_changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_MERGE_STATE_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_MERGE_STATE_CHANGED"}))
-    PullRequestEventType.add_member(:pull_request_approval_rule_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_CREATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_CREATED"}))
-    PullRequestEventType.add_member(:pull_request_approval_rule_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_UPDATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_UPDATED"}))
-    PullRequestEventType.add_member(:pull_request_approval_rule_deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_DELETED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_DELETED"}))
-    PullRequestEventType.add_member(:pull_request_approval_rule_overridden, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"}))
-    PullRequestEventType.add_member(:pull_request_approval_state_changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_STATE_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_STATE_CHANGED"}))
-    PullRequestIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId)
-    PullRequestIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PullRequestEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEvent)
+    PullRequestEventType.add_member(:pull_request_created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_CREATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_CREATED"}))
+    PullRequestEventType.add_member(:pull_request_status_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_STATUS_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_STATUS_CHANGED"}))
+    PullRequestEventType.add_member(:pull_request_source_reference_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"}))
+    PullRequestEventType.add_member(:pull_request_merge_state_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_MERGE_STATE_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_MERGE_STATE_CHANGED"}))
+    PullRequestEventType.add_member(:pull_request_approval_rule_created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_CREATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_CREATED"}))
+    PullRequestEventType.add_member(:pull_request_approval_rule_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_UPDATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_UPDATED"}))
+    PullRequestEventType.add_member(:pull_request_approval_rule_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_DELETED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_DELETED"}))
+    PullRequestEventType.add_member(:pull_request_approval_rule_overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"}))
+    PullRequestEventType.add_member(:pull_request_approval_state_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PULL_REQUEST_APPROVAL_STATE_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_STATE_CHANGED"}))
+    PullRequestIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId)
+    PullRequestIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PullRequestIdRequiredException.type = Types::PullRequestIdRequiredException
-    PullRequestMergedStateChangedEventMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    PullRequestMergedStateChangedEventMetadata.add_member(:destination_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "destinationReference"))
-    PullRequestMergedStateChangedEventMetadata.add_member(:merge_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeMetadata, location_name: "mergeMetadata"))
+    PullRequestMergedStateChangedEventMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    PullRequestMergedStateChangedEventMetadata.add_member(:destination_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "destinationReference"))
+    PullRequestMergedStateChangedEventMetadata.add_member(:merge_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeMetadata, location_name: "mergeMetadata"))
     PullRequestMergedStateChangedEventMetadata.type = Types::PullRequestMergedStateChangedEventMetadata
-    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:before_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
-    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:after_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "afterCommitId"))
-    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:merge_base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeBase"))
+    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "beforeCommitId"))
+    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "afterCommitId"))
+    PullRequestSourceReferenceUpdatedEventMetadata.add_member(:merge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "mergeBase"))
     PullRequestSourceReferenceUpdatedEventMetadata.type = Types::PullRequestSourceReferenceUpdatedEventMetadata
-    PullRequestStatusChangedEventMetadata.add_member(:pull_request_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestStatusEnum, location_name: "pullRequestStatus"))
+    PullRequestStatusChangedEventMetadata.add_member(:pull_request_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestStatusEnum, location_name: "pullRequestStatus"))
     PullRequestStatusChangedEventMetadata.type = Types::PullRequestStatusChangedEventMetadata
-    PullRequestStatusEnum.add_member(:open, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
-    PullRequestStatusEnum.add_member(:closed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
-    PullRequestStatusRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PullRequestStatusEnum.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
+    PullRequestStatusEnum.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
+    PullRequestStatusRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PullRequestStatusRequiredException.type = Types::PullRequestStatusRequiredException
-    PullRequestTarget.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    PullRequestTarget.add_member(:source_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "sourceReference"))
-    PullRequestTarget.add_member(:destination_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "destinationReference"))
-    PullRequestTarget.add_member(:destination_commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "destinationCommit"))
-    PullRequestTarget.add_member(:source_commit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "sourceCommit"))
-    PullRequestTarget.add_member(:merge_base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeBase"))
-    PullRequestTarget.add_member(:merge_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeMetadata, location_name: "mergeMetadata"))
+    PullRequestTarget.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    PullRequestTarget.add_member(:source_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "sourceReference"))
+    PullRequestTarget.add_member(:destination_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "destinationReference"))
+    PullRequestTarget.add_member(:destination_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "destinationCommit"))
+    PullRequestTarget.add_member(:source_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "sourceCommit"))
+    PullRequestTarget.add_member(:merge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "mergeBase"))
+    PullRequestTarget.add_member(:merge_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeMetadata, location_name: "mergeMetadata"))
     PullRequestTarget.type = Types::PullRequestTarget
-    PullRequestTargetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestTarget)
-    PutCommentReactionInput.add_member(:comment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
-    PutCommentReactionInput.add_member(:reaction_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionValue, location_name: "reactionValue", traits: {"smithy.api#required" => {}}))
+    PullRequestTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestTarget)
+    PutCommentReactionInput.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
+    PutCommentReactionInput.add_member(:reaction_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue, location_name: "reactionValue", traits: {"smithy.api#required" => {}}))
     PutCommentReactionInput.type = Types::PutCommentReactionInput
-    PutFileEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutFileEntry)
-    PutFileEntry.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    PutFileEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
-    PutFileEntry.add_member(:file_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContent, location_name: "fileContent"))
-    PutFileEntry.add_member(:source_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceFileSpecifier, location_name: "sourceFile"))
+    PutFileEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutFileEntry)
+    PutFileEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    PutFileEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode"))
+    PutFileEntry.add_member(:file_content, ::Smithy::Schema::Shapes::MemberShape.new(target: FileContent, location_name: "fileContent"))
+    PutFileEntry.add_member(:source_file, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceFileSpecifier, location_name: "sourceFile"))
     PutFileEntry.type = Types::PutFileEntry
-    PutFileEntryConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PutFileEntryConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     PutFileEntryConflictException.type = Types::PutFileEntryConflictException
-    PutFileInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    PutFileInput.add_member(:branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
-    PutFileInput.add_member(:file_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContent, location_name: "fileContent", traits: {"smithy.api#required" => {}}))
-    PutFileInput.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    PutFileInput.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
-    PutFileInput.add_member(:parent_commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitId, location_name: "parentCommitId"))
-    PutFileInput.add_member(:commit_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
-    PutFileInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    PutFileInput.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
+    PutFileInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    PutFileInput.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "branchName", traits: {"smithy.api#required" => {}}))
+    PutFileInput.add_member(:file_content, ::Smithy::Schema::Shapes::MemberShape.new(target: FileContent, location_name: "fileContent", traits: {"smithy.api#required" => {}}))
+    PutFileInput.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    PutFileInput.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode"))
+    PutFileInput.add_member(:parent_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, location_name: "parentCommitId"))
+    PutFileInput.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "commitMessage"))
+    PutFileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    PutFileInput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
     PutFileInput.type = Types::PutFileInput
-    PutFileOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
-    PutFileOutput.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
-    PutFileOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId", traits: {"smithy.api#required" => {}}))
+    PutFileOutput.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId", traits: {"smithy.api#required" => {}}))
+    PutFileOutput.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId", traits: {"smithy.api#required" => {}}))
+    PutFileOutput.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "treeId", traits: {"smithy.api#required" => {}}))
     PutFileOutput.type = Types::PutFileOutput
-    PutRepositoryTriggersInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    PutRepositoryTriggersInput.add_member(:triggers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggersList, location_name: "triggers", traits: {"smithy.api#required" => {}}))
+    PutRepositoryTriggersInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    PutRepositoryTriggersInput.add_member(:triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggersList, location_name: "triggers", traits: {"smithy.api#required" => {}}))
     PutRepositoryTriggersInput.type = Types::PutRepositoryTriggersInput
-    PutRepositoryTriggersOutput.add_member(:configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggersConfigurationId, location_name: "configurationId"))
+    PutRepositoryTriggersOutput.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggersConfigurationId, location_name: "configurationId"))
     PutRepositoryTriggersOutput.type = Types::PutRepositoryTriggersOutput
-    ReactionCountsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionValue)
-    ReactionCountsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Count)
-    ReactionForComment.add_member(:reaction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionValueFormats, location_name: "reaction"))
-    ReactionForComment.add_member(:reaction_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionUsersList, location_name: "reactionUsers"))
-    ReactionForComment.add_member(:reactions_from_deleted_users_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Count, location_name: "reactionsFromDeletedUsersCount"))
+    ReactionCountsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue)
+    ReactionCountsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Count)
+    ReactionForComment.add_member(:reaction, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValueFormats, location_name: "reaction"))
+    ReactionForComment.add_member(:reaction_users, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionUsersList, location_name: "reactionUsers"))
+    ReactionForComment.add_member(:reactions_from_deleted_users_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, location_name: "reactionsFromDeletedUsersCount"))
     ReactionForComment.type = Types::ReactionForComment
-    ReactionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ReactionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ReactionLimitExceededException.type = Types::ReactionLimitExceededException
-    ReactionUsersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    ReactionValueFormats.add_member(:emoji, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionEmoji, location_name: "emoji"))
-    ReactionValueFormats.add_member(:short_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionShortCode, location_name: "shortCode"))
-    ReactionValueFormats.add_member(:unicode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionUnicode, location_name: "unicode"))
+    ReactionUsersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    ReactionValueFormats.add_member(:emoji, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionEmoji, location_name: "emoji"))
+    ReactionValueFormats.add_member(:short_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionShortCode, location_name: "shortCode"))
+    ReactionValueFormats.add_member(:unicode, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionUnicode, location_name: "unicode"))
     ReactionValueFormats.type = Types::ReactionValueFormats
-    ReactionValueRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ReactionValueRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ReactionValueRequiredException.type = Types::ReactionValueRequiredException
-    ReactionsForCommentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionForComment)
-    ReferenceDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ReactionsForCommentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionForComment)
+    ReferenceDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ReferenceDoesNotExistException.type = Types::ReferenceDoesNotExistException
-    ReferenceNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ReferenceNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ReferenceNameRequiredException.type = Types::ReferenceNameRequiredException
-    ReferenceTypeNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ReferenceTypeNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ReferenceTypeNotSupportedException.type = Types::ReferenceTypeNotSupportedException
-    RelativeFileVersionEnum.add_member(:before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEFORE", traits: {"smithy.api#enumValue" => "BEFORE"}))
-    RelativeFileVersionEnum.add_member(:after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER", traits: {"smithy.api#enumValue" => "AFTER"}))
-    ReplaceContentEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplaceContentEntry)
-    ReplaceContentEntry.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    ReplaceContentEntry.add_member(:replacement_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementTypeEnum, location_name: "replacementType", traits: {"smithy.api#required" => {}}))
-    ReplaceContentEntry.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContent, location_name: "content"))
-    ReplaceContentEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
+    RelativeFileVersionEnum.add_member(:before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BEFORE", traits: {"smithy.api#enumValue" => "BEFORE"}))
+    RelativeFileVersionEnum.add_member(:after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER", traits: {"smithy.api#enumValue" => "AFTER"}))
+    ReplaceContentEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplaceContentEntry)
+    ReplaceContentEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    ReplaceContentEntry.add_member(:replacement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplacementTypeEnum, location_name: "replacementType", traits: {"smithy.api#required" => {}}))
+    ReplaceContentEntry.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: FileContent, location_name: "content"))
+    ReplaceContentEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode"))
     ReplaceContentEntry.type = Types::ReplaceContentEntry
-    ReplacementContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ReplacementContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ReplacementContentRequiredException.type = Types::ReplacementContentRequiredException
-    ReplacementTypeEnum.add_member(:keep_base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEEP_BASE", traits: {"smithy.api#enumValue" => "KEEP_BASE"}))
-    ReplacementTypeEnum.add_member(:keep_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEEP_SOURCE", traits: {"smithy.api#enumValue" => "KEEP_SOURCE"}))
-    ReplacementTypeEnum.add_member(:keep_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEEP_DESTINATION", traits: {"smithy.api#enumValue" => "KEEP_DESTINATION"}))
-    ReplacementTypeEnum.add_member(:use_new_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USE_NEW_CONTENT", traits: {"smithy.api#enumValue" => "USE_NEW_CONTENT"}))
-    ReplacementTypeRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ReplacementTypeEnum.add_member(:keep_base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEEP_BASE", traits: {"smithy.api#enumValue" => "KEEP_BASE"}))
+    ReplacementTypeEnum.add_member(:keep_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEEP_SOURCE", traits: {"smithy.api#enumValue" => "KEEP_SOURCE"}))
+    ReplacementTypeEnum.add_member(:keep_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEEP_DESTINATION", traits: {"smithy.api#enumValue" => "KEEP_DESTINATION"}))
+    ReplacementTypeEnum.add_member(:use_new_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USE_NEW_CONTENT", traits: {"smithy.api#enumValue" => "USE_NEW_CONTENT"}))
+    ReplacementTypeRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ReplacementTypeRequiredException.type = Types::ReplacementTypeRequiredException
-    RepositoryDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryDoesNotExistException.type = Types::RepositoryDoesNotExistException
-    RepositoryLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryLimitExceededException.type = Types::RepositoryLimitExceededException
-    RepositoryMetadata.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    RepositoryMetadata.add_member(:repository_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
-    RepositoryMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    RepositoryMetadata.add_member(:repository_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "repositoryDescription"))
-    RepositoryMetadata.add_member(:default_branch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "defaultBranch"))
-    RepositoryMetadata.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
-    RepositoryMetadata.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
-    RepositoryMetadata.add_member(:clone_url_http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloneUrlHttp, location_name: "cloneUrlHttp"))
-    RepositoryMetadata.add_member(:clone_url_ssh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloneUrlSsh, location_name: "cloneUrlSsh"))
-    RepositoryMetadata.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    RepositoryMetadata.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    RepositoryMetadata.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "accountId"))
+    RepositoryMetadata.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryId, location_name: "repositoryId"))
+    RepositoryMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    RepositoryMetadata.add_member(:repository_description, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryDescription, location_name: "repositoryDescription"))
+    RepositoryMetadata.add_member(:default_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "defaultBranch"))
+    RepositoryMetadata.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedDate, location_name: "lastModifiedDate"))
+    RepositoryMetadata.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, location_name: "creationDate"))
+    RepositoryMetadata.add_member(:clone_url_http, ::Smithy::Schema::Shapes::MemberShape.new(target: CloneUrlHttp, location_name: "cloneUrlHttp"))
+    RepositoryMetadata.add_member(:clone_url_ssh, ::Smithy::Schema::Shapes::MemberShape.new(target: CloneUrlSsh, location_name: "cloneUrlSsh"))
+    RepositoryMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "Arn"))
+    RepositoryMetadata.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "kmsKeyId"))
     RepositoryMetadata.type = Types::RepositoryMetadata
-    RepositoryMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryMetadata)
-    RepositoryNameExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryMetadata)
+    RepositoryNameExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryNameExistsException.type = Types::RepositoryNameExistsException
-    RepositoryNameIdPair.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    RepositoryNameIdPair.add_member(:repository_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
+    RepositoryNameIdPair.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    RepositoryNameIdPair.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryId, location_name: "repositoryId"))
     RepositoryNameIdPair.type = Types::RepositoryNameIdPair
-    RepositoryNameIdPairList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameIdPair)
-    RepositoryNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName)
-    RepositoryNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryNameIdPairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameIdPair)
+    RepositoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName)
+    RepositoryNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryNameRequiredException.type = Types::RepositoryNameRequiredException
-    RepositoryNamesRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryNamesRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryNamesRequiredException.type = Types::RepositoryNamesRequiredException
-    RepositoryNotAssociatedWithPullRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryNotAssociatedWithPullRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryNotAssociatedWithPullRequestException.type = Types::RepositoryNotAssociatedWithPullRequestException
-    RepositoryNotFoundList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName)
-    RepositoryTrigger.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    RepositoryTrigger.add_member(:destination_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "destinationArn", traits: {"smithy.api#required" => {}}))
-    RepositoryTrigger.add_member(:custom_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerCustomData, location_name: "customData"))
-    RepositoryTrigger.add_member(:branches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameList, location_name: "branches"))
-    RepositoryTrigger.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerEventList, location_name: "events", traits: {"smithy.api#required" => {}}))
+    RepositoryNotFoundList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName)
+    RepositoryTrigger.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    RepositoryTrigger.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "destinationArn", traits: {"smithy.api#required" => {}}))
+    RepositoryTrigger.add_member(:custom_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerCustomData, location_name: "customData"))
+    RepositoryTrigger.add_member(:branches, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchNameList, location_name: "branches"))
+    RepositoryTrigger.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerEventList, location_name: "events", traits: {"smithy.api#required" => {}}))
     RepositoryTrigger.type = Types::RepositoryTrigger
-    RepositoryTriggerBranchNameListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryTriggerBranchNameListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryTriggerBranchNameListRequiredException.type = Types::RepositoryTriggerBranchNameListRequiredException
-    RepositoryTriggerDestinationArnRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryTriggerDestinationArnRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryTriggerDestinationArnRequiredException.type = Types::RepositoryTriggerDestinationArnRequiredException
-    RepositoryTriggerEventEnum.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "all"}))
-    RepositoryTriggerEventEnum.add_member(:update_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_REFERENCE", traits: {"smithy.api#enumValue" => "updateReference"}))
-    RepositoryTriggerEventEnum.add_member(:create_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_REFERENCE", traits: {"smithy.api#enumValue" => "createReference"}))
-    RepositoryTriggerEventEnum.add_member(:delete_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_REFERENCE", traits: {"smithy.api#enumValue" => "deleteReference"}))
-    RepositoryTriggerEventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerEventEnum)
-    RepositoryTriggerEventsListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryTriggerEventEnum.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "all"}))
+    RepositoryTriggerEventEnum.add_member(:update_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_REFERENCE", traits: {"smithy.api#enumValue" => "updateReference"}))
+    RepositoryTriggerEventEnum.add_member(:create_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_REFERENCE", traits: {"smithy.api#enumValue" => "createReference"}))
+    RepositoryTriggerEventEnum.add_member(:delete_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_REFERENCE", traits: {"smithy.api#enumValue" => "deleteReference"}))
+    RepositoryTriggerEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerEventEnum)
+    RepositoryTriggerEventsListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryTriggerEventsListRequiredException.type = Types::RepositoryTriggerEventsListRequiredException
-    RepositoryTriggerExecutionFailure.add_member(:trigger, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerName, location_name: "trigger"))
-    RepositoryTriggerExecutionFailure.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerExecutionFailureMessage, location_name: "failureMessage"))
+    RepositoryTriggerExecutionFailure.add_member(:trigger, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerName, location_name: "trigger"))
+    RepositoryTriggerExecutionFailure.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerExecutionFailureMessage, location_name: "failureMessage"))
     RepositoryTriggerExecutionFailure.type = Types::RepositoryTriggerExecutionFailure
-    RepositoryTriggerExecutionFailureList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerExecutionFailure)
-    RepositoryTriggerNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerName)
-    RepositoryTriggerNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryTriggerExecutionFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerExecutionFailure)
+    RepositoryTriggerNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerName)
+    RepositoryTriggerNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryTriggerNameRequiredException.type = Types::RepositoryTriggerNameRequiredException
-    RepositoryTriggersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTrigger)
-    RepositoryTriggersListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RepositoryTriggersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTrigger)
+    RepositoryTriggersListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RepositoryTriggersListRequiredException.type = Types::RepositoryTriggersListRequiredException
-    ResourceArnRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ResourceArnRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     ResourceArnRequiredException.type = Types::ResourceArnRequiredException
-    RestrictedSourceFileException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RestrictedSourceFileException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RestrictedSourceFileException.type = Types::RestrictedSourceFileException
-    RevisionChildren.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId)
-    RevisionDag.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileVersion)
-    RevisionIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RevisionChildren.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId)
+    RevisionDag.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileVersion)
+    RevisionIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RevisionIdRequiredException.type = Types::RevisionIdRequiredException
-    RevisionNotCurrentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RevisionNotCurrentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     RevisionNotCurrentException.type = Types::RevisionNotCurrentException
-    SameFileContentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    SameFileContentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     SameFileContentException.type = Types::SameFileContentException
-    SamePathRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    SamePathRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     SamePathRequestException.type = Types::SamePathRequestException
-    SetFileModeEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetFileModeEntry)
-    SetFileModeEntry.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    SetFileModeEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode", traits: {"smithy.api#required" => {}}))
+    SetFileModeEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SetFileModeEntry)
+    SetFileModeEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    SetFileModeEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode", traits: {"smithy.api#required" => {}}))
     SetFileModeEntry.type = Types::SetFileModeEntry
-    SortByEnum.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPOSITORY_NAME", traits: {"smithy.api#enumValue" => "repositoryName"}))
-    SortByEnum.add_member(:modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODIFIED_DATE", traits: {"smithy.api#enumValue" => "lastModifiedDate"}))
-    SourceAndDestinationAreSameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    SortByEnum.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPOSITORY_NAME", traits: {"smithy.api#enumValue" => "repositoryName"}))
+    SortByEnum.add_member(:modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MODIFIED_DATE", traits: {"smithy.api#enumValue" => "lastModifiedDate"}))
+    SourceAndDestinationAreSameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     SourceAndDestinationAreSameException.type = Types::SourceAndDestinationAreSameException
-    SourceFileOrContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    SourceFileOrContentRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     SourceFileOrContentRequiredException.type = Types::SourceFileOrContentRequiredException
-    SourceFileSpecifier.add_member(:file_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
-    SourceFileSpecifier.add_member(:is_move, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsMove, location_name: "isMove", traits: {"smithy.api#default" => false}))
+    SourceFileSpecifier.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "filePath", traits: {"smithy.api#required" => {}}))
+    SourceFileSpecifier.add_member(:is_move, ::Smithy::Schema::Shapes::MemberShape.new(target: IsMove, location_name: "isMove", traits: {"smithy.api#default" => false}))
     SourceFileSpecifier.type = Types::SourceFileSpecifier
-    SubModule.add_member(:commit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
-    SubModule.add_member(:absolute_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
-    SubModule.add_member(:relative_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "relativePath"))
+    SubModule.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "commitId"))
+    SubModule.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "absolutePath"))
+    SubModule.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "relativePath"))
     SubModule.type = Types::SubModule
-    SubModuleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubModule)
-    SymbolicLink.add_member(:blob_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
-    SymbolicLink.add_member(:absolute_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
-    SymbolicLink.add_member(:relative_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: "relativePath"))
-    SymbolicLink.add_member(:file_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
+    SubModuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubModule)
+    SymbolicLink.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, location_name: "blobId"))
+    SymbolicLink.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "absolutePath"))
+    SymbolicLink.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, location_name: "relativePath"))
+    SymbolicLink.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, location_name: "fileMode"))
     SymbolicLink.type = Types::SymbolicLink
-    SymbolicLinkList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymbolicLink)
-    TagKeysList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagKeysListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    SymbolicLinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SymbolicLink)
+    TagKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagKeysListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TagKeysListRequiredException.type = Types::TagKeysListRequiredException
-    TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TagPolicyException.type = Types::TagPolicyException
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
-    TagsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagsMapRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagsMapRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TagsMapRequiredException.type = Types::TagsMapRequiredException
-    Target.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    Target.add_member(:source_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "sourceReference", traits: {"smithy.api#required" => {}}))
-    Target.add_member(:destination_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceName, location_name: "destinationReference"))
+    Target.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    Target.add_member(:source_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "sourceReference", traits: {"smithy.api#required" => {}}))
+    Target.add_member(:destination_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, location_name: "destinationReference"))
     Target.type = Types::Target
-    TargetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Target)
-    TargetRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target)
+    TargetRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TargetRequiredException.type = Types::TargetRequiredException
-    TargetsRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TargetsRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TargetsRequiredException.type = Types::TargetsRequiredException
-    TestRepositoryTriggersInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    TestRepositoryTriggersInput.add_member(:triggers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggersList, location_name: "triggers", traits: {"smithy.api#required" => {}}))
+    TestRepositoryTriggersInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    TestRepositoryTriggersInput.add_member(:triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggersList, location_name: "triggers", traits: {"smithy.api#required" => {}}))
     TestRepositoryTriggersInput.type = Types::TestRepositoryTriggersInput
-    TestRepositoryTriggersOutput.add_member(:successful_executions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerNameList, location_name: "successfulExecutions"))
-    TestRepositoryTriggersOutput.add_member(:failed_executions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerExecutionFailureList, location_name: "failedExecutions"))
+    TestRepositoryTriggersOutput.add_member(:successful_executions, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerNameList, location_name: "successfulExecutions"))
+    TestRepositoryTriggersOutput.add_member(:failed_executions, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerExecutionFailureList, location_name: "failedExecutions"))
     TestRepositoryTriggersOutput.type = Types::TestRepositoryTriggersOutput
-    TipOfSourceReferenceIsDifferentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TipOfSourceReferenceIsDifferentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TipOfSourceReferenceIsDifferentException.type = Types::TipOfSourceReferenceIsDifferentException
-    TipsDivergenceExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TipsDivergenceExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TipsDivergenceExceededException.type = Types::TipsDivergenceExceededException
-    TitleRequiredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TitleRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TitleRequiredException.type = Types::TitleRequiredException
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeysList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
-    UpdateApprovalRuleTemplateContentInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    UpdateApprovalRuleTemplateContentInput.add_member(:new_rule_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContent, location_name: "newRuleContent", traits: {"smithy.api#required" => {}}))
-    UpdateApprovalRuleTemplateContentInput.add_member(:existing_rule_content_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "existingRuleContentSha256"))
+    UpdateApprovalRuleTemplateContentInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateContentInput.add_member(:new_rule_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateContent, location_name: "newRuleContent", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateContentInput.add_member(:existing_rule_content_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleContentSha256, location_name: "existingRuleContentSha256"))
     UpdateApprovalRuleTemplateContentInput.type = Types::UpdateApprovalRuleTemplateContentInput
-    UpdateApprovalRuleTemplateContentOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateContentOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
     UpdateApprovalRuleTemplateContentOutput.type = Types::UpdateApprovalRuleTemplateContentOutput
-    UpdateApprovalRuleTemplateDescriptionInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    UpdateApprovalRuleTemplateDescriptionInput.add_member(:approval_rule_template_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateDescriptionInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateDescriptionInput.add_member(:approval_rule_template_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateDescription, location_name: "approvalRuleTemplateDescription", traits: {"smithy.api#required" => {}}))
     UpdateApprovalRuleTemplateDescriptionInput.type = Types::UpdateApprovalRuleTemplateDescriptionInput
-    UpdateApprovalRuleTemplateDescriptionOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateDescriptionOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
     UpdateApprovalRuleTemplateDescriptionOutput.type = Types::UpdateApprovalRuleTemplateDescriptionOutput
-    UpdateApprovalRuleTemplateNameInput.add_member(:old_approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "oldApprovalRuleTemplateName", traits: {"smithy.api#required" => {}}))
-    UpdateApprovalRuleTemplateNameInput.add_member(:new_approval_rule_template_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "newApprovalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateNameInput.add_member(:old_approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "oldApprovalRuleTemplateName", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateNameInput.add_member(:new_approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, location_name: "newApprovalRuleTemplateName", traits: {"smithy.api#required" => {}}))
     UpdateApprovalRuleTemplateNameInput.type = Types::UpdateApprovalRuleTemplateNameInput
-    UpdateApprovalRuleTemplateNameOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
+    UpdateApprovalRuleTemplateNameOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplate, location_name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
     UpdateApprovalRuleTemplateNameOutput.type = Types::UpdateApprovalRuleTemplateNameOutput
-    UpdateCommentInput.add_member(:comment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
-    UpdateCommentInput.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
+    UpdateCommentInput.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, location_name: "commentId", traits: {"smithy.api#required" => {}}))
+    UpdateCommentInput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "content", traits: {"smithy.api#required" => {}}))
     UpdateCommentInput.type = Types::UpdateCommentInput
-    UpdateCommentOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    UpdateCommentOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
     UpdateCommentOutput.type = Types::UpdateCommentOutput
-    UpdateDefaultBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    UpdateDefaultBranchInput.add_member(:default_branch_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchName, location_name: "defaultBranchName", traits: {"smithy.api#required" => {}}))
+    UpdateDefaultBranchInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    UpdateDefaultBranchInput.add_member(:default_branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, location_name: "defaultBranchName", traits: {"smithy.api#required" => {}}))
     UpdateDefaultBranchInput.type = Types::UpdateDefaultBranchInput
-    UpdatePullRequestApprovalRuleContentInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    UpdatePullRequestApprovalRuleContentInput.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName", traits: {"smithy.api#required" => {}}))
-    UpdatePullRequestApprovalRuleContentInput.add_member(:existing_rule_content_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleContentSha256, location_name: "existingRuleContentSha256"))
-    UpdatePullRequestApprovalRuleContentInput.add_member(:new_rule_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleContent, location_name: "newRuleContent", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestApprovalRuleContentInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestApprovalRuleContentInput.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, location_name: "approvalRuleName", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestApprovalRuleContentInput.add_member(:existing_rule_content_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleContentSha256, location_name: "existingRuleContentSha256"))
+    UpdatePullRequestApprovalRuleContentInput.add_member(:new_rule_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleContent, location_name: "newRuleContent", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestApprovalRuleContentInput.type = Types::UpdatePullRequestApprovalRuleContentInput
-    UpdatePullRequestApprovalRuleContentOutput.add_member(:approval_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRule, location_name: "approvalRule", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestApprovalRuleContentOutput.add_member(:approval_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRule, location_name: "approvalRule", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestApprovalRuleContentOutput.type = Types::UpdatePullRequestApprovalRuleContentOutput
-    UpdatePullRequestApprovalStateInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    UpdatePullRequestApprovalStateInput.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
-    UpdatePullRequestApprovalStateInput.add_member(:approval_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalState, location_name: "approvalState", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestApprovalStateInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestApprovalStateInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, location_name: "revisionId", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestApprovalStateInput.add_member(:approval_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalState, location_name: "approvalState", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestApprovalStateInput.type = Types::UpdatePullRequestApprovalStateInput
-    UpdatePullRequestDescriptionInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    UpdatePullRequestDescriptionInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestDescriptionInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestDescriptionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestDescriptionInput.type = Types::UpdatePullRequestDescriptionInput
-    UpdatePullRequestDescriptionOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestDescriptionOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestDescriptionOutput.type = Types::UpdatePullRequestDescriptionOutput
-    UpdatePullRequestStatusInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    UpdatePullRequestStatusInput.add_member(:pull_request_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestStatusEnum, location_name: "pullRequestStatus", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestStatusInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestStatusInput.add_member(:pull_request_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestStatusEnum, location_name: "pullRequestStatus", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestStatusInput.type = Types::UpdatePullRequestStatusInput
-    UpdatePullRequestStatusOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestStatusOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestStatusOutput.type = Types::UpdatePullRequestStatusOutput
-    UpdatePullRequestTitleInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
-    UpdatePullRequestTitleInput.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Title, location_name: "title", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestTitleInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, location_name: "pullRequestId", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestTitleInput.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Title, location_name: "title", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestTitleInput.type = Types::UpdatePullRequestTitleInput
-    UpdatePullRequestTitleOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
+    UpdatePullRequestTitleOutput.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequest, location_name: "pullRequest", traits: {"smithy.api#required" => {}}))
     UpdatePullRequestTitleOutput.type = Types::UpdatePullRequestTitleOutput
-    UpdateRepositoryDescriptionInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    UpdateRepositoryDescriptionInput.add_member(:repository_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "repositoryDescription"))
+    UpdateRepositoryDescriptionInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    UpdateRepositoryDescriptionInput.add_member(:repository_description, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryDescription, location_name: "repositoryDescription"))
     UpdateRepositoryDescriptionInput.type = Types::UpdateRepositoryDescriptionInput
-    UpdateRepositoryEncryptionKeyInput.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    UpdateRepositoryEncryptionKeyInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId", traits: {"smithy.api#required" => {}}))
+    UpdateRepositoryEncryptionKeyInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    UpdateRepositoryEncryptionKeyInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "kmsKeyId", traits: {"smithy.api#required" => {}}))
     UpdateRepositoryEncryptionKeyInput.type = Types::UpdateRepositoryEncryptionKeyInput
-    UpdateRepositoryEncryptionKeyOutput.add_member(:repository_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
-    UpdateRepositoryEncryptionKeyOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
-    UpdateRepositoryEncryptionKeyOutput.add_member(:original_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "originalKmsKeyId"))
+    UpdateRepositoryEncryptionKeyOutput.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryId, location_name: "repositoryId"))
+    UpdateRepositoryEncryptionKeyOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "kmsKeyId"))
+    UpdateRepositoryEncryptionKeyOutput.add_member(:original_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, location_name: "originalKmsKeyId"))
     UpdateRepositoryEncryptionKeyOutput.type = Types::UpdateRepositoryEncryptionKeyOutput
-    UpdateRepositoryNameInput.add_member(:old_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "oldName", traits: {"smithy.api#required" => {}}))
-    UpdateRepositoryNameInput.add_member(:new_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "newName", traits: {"smithy.api#required" => {}}))
+    UpdateRepositoryNameInput.add_member(:old_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "oldName", traits: {"smithy.api#required" => {}}))
+    UpdateRepositoryNameInput.add_member(:new_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "newName", traits: {"smithy.api#required" => {}}))
     UpdateRepositoryNameInput.type = Types::UpdateRepositoryNameInput
-    UserInfo.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    UserInfo.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: "email"))
-    UserInfo.add_member(:date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "date"))
+    UserInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "name"))
+    UserInfo.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, location_name: "email"))
+    UserInfo.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "date"))
     UserInfo.type = Types::UserInfo
 
     CodeCommit20150413 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -1924,1666 +1924,1666 @@ module Aws::CodeCommit
       service.add_operation(:associate_approval_rule_template_with_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#AssociateApprovalRuleTemplateWithRepository"
         operation.name = "AssociateApprovalRuleTemplateWithRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateApprovalRuleTemplateWithRepositoryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumRuleTemplatesAssociatedWithRepositoryException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = AssociateApprovalRuleTemplateWithRepositoryInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleTemplateNameException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << MaximumRuleTemplatesAssociatedWithRepositoryException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:batch_associate_approval_rule_template_with_repositories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#BatchAssociateApprovalRuleTemplateWithRepositories"
         operation.name = "BatchAssociateApprovalRuleTemplateWithRepositories"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAssociateApprovalRuleTemplateWithRepositoriesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumRepositoryNamesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNamesRequiredException)
+        operation.input = BatchAssociateApprovalRuleTemplateWithRepositoriesInput
+        operation.output = BatchAssociateApprovalRuleTemplateWithRepositoriesOutput
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleTemplateNameException
+        operation.errors << MaximumRepositoryNamesExceededException
+        operation.errors << RepositoryNamesRequiredException
         operation.traits = {}
       end)
       service.add_operation(:batch_describe_merge_conflicts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#BatchDescribeMergeConflicts"
         operation.name = "BatchDescribeMergeConflicts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeMergeConflictsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDescribeMergeConflictsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxConflictFilesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxMergeHunksException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMergeOptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = BatchDescribeMergeConflictsInput
+        operation.output = BatchDescribeMergeConflictsOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxConflictFilesException
+        operation.errors << InvalidMaxMergeHunksException
+        operation.errors << InvalidMergeOptionException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MergeOptionRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:batch_disassociate_approval_rule_template_from_repositories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#BatchDisassociateApprovalRuleTemplateFromRepositories"
         operation.name = "BatchDisassociateApprovalRuleTemplateFromRepositories"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumRepositoryNamesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNamesRequiredException)
+        operation.input = BatchDisassociateApprovalRuleTemplateFromRepositoriesInput
+        operation.output = BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleTemplateNameException
+        operation.errors << MaximumRepositoryNamesExceededException
+        operation.errors << RepositoryNamesRequiredException
         operation.traits = {}
       end)
       service.add_operation(:batch_get_commits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#BatchGetCommits"
         operation.name = "BatchGetCommits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetCommitsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetCommitsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdsLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdsListRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = BatchGetCommitsInput
+        operation.output = BatchGetCommitsOutput
+        operation.errors << CommitIdsLimitExceededException
+        operation.errors << CommitIdsListRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:batch_get_repositories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#BatchGetRepositories"
         operation.name = "BatchGetRepositories"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetRepositoriesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetRepositoriesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumRepositoryNamesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNamesRequiredException)
+        operation.input = BatchGetRepositoriesInput
+        operation.output = BatchGetRepositoriesOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << MaximumRepositoryNamesExceededException
+        operation.errors << RepositoryNamesRequiredException
         operation.traits = {}
       end)
       service.add_operation(:create_approval_rule_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#CreateApprovalRuleTemplate"
         operation.name = "CreateApprovalRuleTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApprovalRuleTemplateInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApprovalRuleTemplateOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateDescriptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberOfRuleTemplatesExceededException)
+        operation.input = CreateApprovalRuleTemplateInput
+        operation.output = CreateApprovalRuleTemplateOutput
+        operation.errors << ApprovalRuleTemplateContentRequiredException
+        operation.errors << ApprovalRuleTemplateNameAlreadyExistsException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << InvalidApprovalRuleTemplateContentException
+        operation.errors << InvalidApprovalRuleTemplateDescriptionException
+        operation.errors << InvalidApprovalRuleTemplateNameException
+        operation.errors << NumberOfRuleTemplatesExceededException
         operation.traits = {}
       end)
       service.add_operation(:create_branch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#CreateBranch"
         operation.name = "CreateBranch"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBranchInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = CreateBranchInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BranchNameExistsException
+        operation.errors << BranchNameRequiredException
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:create_commit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#CreateCommit"
         operation.name = "CreateCommit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCommitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCommitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameIsTagNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryNameConflictsWithFileNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentAndSourceFileSpecifiedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileEntryRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileNameConflictsWithDirectoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePathConflictsWithSubmodulePathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDeletionParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParentCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileEntriesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoChangeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitIdOutdatedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutFileEntryConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestrictedSourceFileException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamePathRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceFileOrContentRequiredException)
+        operation.input = CreateCommitInput
+        operation.output = CreateCommitOutput
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameIsTagNameException
+        operation.errors << BranchNameRequiredException
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << DirectoryNameConflictsWithFileNameException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileContentAndSourceFileSpecifiedException
+        operation.errors << FileContentSizeLimitExceededException
+        operation.errors << FileDoesNotExistException
+        operation.errors << FileEntryRequiredException
+        operation.errors << FileModeRequiredException
+        operation.errors << FileNameConflictsWithDirectoryNameException
+        operation.errors << FilePathConflictsWithSubmodulePathException
+        operation.errors << FolderContentSizeLimitExceededException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidDeletionParameterException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidFileModeException
+        operation.errors << InvalidParentCommitIdException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << MaximumFileEntriesExceededException
+        operation.errors << NameLengthExceededException
+        operation.errors << NoChangeException
+        operation.errors << ParentCommitDoesNotExistException
+        operation.errors << ParentCommitIdOutdatedException
+        operation.errors << ParentCommitIdRequiredException
+        operation.errors << PathRequiredException
+        operation.errors << PutFileEntryConflictException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RestrictedSourceFileException
+        operation.errors << SamePathRequestException
+        operation.errors << SourceFileOrContentRequiredException
         operation.traits = {}
       end)
       service.add_operation(:create_pull_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#CreatePullRequest"
         operation.name = "CreatePullRequest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePullRequestInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePullRequestOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClientRequestTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDescriptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReferenceNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTargetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTargetsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTitleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumOpenPullRequestsExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipleRepositoriesInPullRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceTypeNotSupportedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceAndDestinationAreSameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetsRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TitleRequiredException)
+        operation.input = CreatePullRequestInput
+        operation.output = CreatePullRequestOutput
+        operation.errors << ClientRequestTokenRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << IdempotencyParameterMismatchException
+        operation.errors << InvalidClientRequestTokenException
+        operation.errors << InvalidDescriptionException
+        operation.errors << InvalidReferenceNameException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidTargetException
+        operation.errors << InvalidTargetsException
+        operation.errors << InvalidTitleException
+        operation.errors << MaximumOpenPullRequestsExceededException
+        operation.errors << MultipleRepositoriesInPullRequestException
+        operation.errors << ReferenceDoesNotExistException
+        operation.errors << ReferenceNameRequiredException
+        operation.errors << ReferenceTypeNotSupportedException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << SourceAndDestinationAreSameException
+        operation.errors << TargetRequiredException
+        operation.errors << TargetsRequiredException
+        operation.errors << TitleRequiredException
         operation.traits = {}
       end)
       service.add_operation(:create_pull_request_approval_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#CreatePullRequestApprovalRule"
         operation.name = "CreatePullRequestApprovalRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePullRequestApprovalRuleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePullRequestApprovalRuleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleNameAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberOfRulesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        operation.input = CreatePullRequestApprovalRuleInput
+        operation.output = CreatePullRequestApprovalRuleOutput
+        operation.errors << ApprovalRuleContentRequiredException
+        operation.errors << ApprovalRuleNameAlreadyExistsException
+        operation.errors << ApprovalRuleNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleContentException
+        operation.errors << InvalidApprovalRuleNameException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << NumberOfRulesExceededException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
         operation.traits = {}
       end)
       service.add_operation(:create_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#CreateRepository"
         operation.name = "CreateRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRepositoryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRepositoryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyInvalidIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyInvalidUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryDescriptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSystemTagUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagsMapException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationNotAllowedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreateRepositoryInput
+        operation.output = CreateRepositoryOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyInvalidIdException
+        operation.errors << EncryptionKeyInvalidUsageException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryDescriptionException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidSystemTagUsageException
+        operation.errors << InvalidTagsMapException
+        operation.errors << OperationNotAllowedException
+        operation.errors << RepositoryLimitExceededException
+        operation.errors << RepositoryNameExistsException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TagPolicyException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:create_unreferenced_merge_commit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#CreateUnreferencedMergeCommit"
         operation.name = "CreateUnreferencedMergeCommit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUnreferencedMergeCommitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateUnreferencedMergeCommitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMergeOptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualMergeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumConflictResolutionEntriesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipleConflictResolutionEntriesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementTypeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = CreateUnreferencedMergeCommitInput
+        operation.output = CreateUnreferencedMergeCommitOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << CommitRequiredException
+        operation.errors << ConcurrentReferenceUpdateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileContentSizeLimitExceededException
+        operation.errors << FileModeRequiredException
+        operation.errors << FolderContentSizeLimitExceededException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidFileModeException
+        operation.errors << InvalidMergeOptionException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidReplacementContentException
+        operation.errors << InvalidReplacementTypeException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << ManualMergeRequiredException
+        operation.errors << MaximumConflictResolutionEntriesExceededException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MergeOptionRequiredException
+        operation.errors << MultipleConflictResolutionEntriesException
+        operation.errors << NameLengthExceededException
+        operation.errors << PathRequiredException
+        operation.errors << ReplacementContentRequiredException
+        operation.errors << ReplacementTypeRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:delete_approval_rule_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DeleteApprovalRuleTemplate"
         operation.name = "DeleteApprovalRuleTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteApprovalRuleTemplateInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteApprovalRuleTemplateOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        operation.input = DeleteApprovalRuleTemplateInput
+        operation.output = DeleteApprovalRuleTemplateOutput
+        operation.errors << ApprovalRuleTemplateInUseException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << InvalidApprovalRuleTemplateNameException
         operation.traits = {}
       end)
       service.add_operation(:delete_branch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DeleteBranch"
         operation.name = "DeleteBranch"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBranchInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBranchOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultBranchCannotBeDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = DeleteBranchInput
+        operation.output = DeleteBranchOutput
+        operation.errors << BranchNameRequiredException
+        operation.errors << DefaultBranchCannotBeDeletedException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:delete_comment_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DeleteCommentContent"
         operation.name = "DeleteCommentContent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCommentContentInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCommentContentOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+        operation.input = DeleteCommentContentInput
+        operation.output = DeleteCommentContentOutput
+        operation.errors << CommentDeletedException
+        operation.errors << CommentDoesNotExistException
+        operation.errors << CommentIdRequiredException
+        operation.errors << InvalidCommentIdException
         operation.traits = {}
       end)
       service.add_operation(:delete_file, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DeleteFile"
         operation.name = "DeleteFile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameIsTagNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParentCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitIdOutdatedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = DeleteFileInput
+        operation.output = DeleteFileOutput
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameIsTagNameException
+        operation.errors << BranchNameRequiredException
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileDoesNotExistException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidParentCommitIdException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << NameLengthExceededException
+        operation.errors << ParentCommitDoesNotExistException
+        operation.errors << ParentCommitIdOutdatedException
+        operation.errors << ParentCommitIdRequiredException
+        operation.errors << PathRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:delete_pull_request_approval_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DeletePullRequestApprovalRule"
         operation.name = "DeletePullRequestApprovalRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePullRequestApprovalRuleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePullRequestApprovalRuleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CannotDeleteApprovalRuleFromTemplateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        operation.input = DeletePullRequestApprovalRuleInput
+        operation.output = DeletePullRequestApprovalRuleOutput
+        operation.errors << ApprovalRuleNameRequiredException
+        operation.errors << CannotDeleteApprovalRuleFromTemplateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleNameException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
         operation.traits = {}
       end)
       service.add_operation(:delete_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DeleteRepository"
         operation.name = "DeleteRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRepositoryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRepositoryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = DeleteRepositoryInput
+        operation.output = DeleteRepositoryOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:describe_merge_conflicts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DescribeMergeConflicts"
         operation.name = "DescribeMergeConflicts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMergeConflictsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMergeConflictsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxMergeHunksException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMergeOptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = DescribeMergeConflictsInput
+        operation.output = DescribeMergeConflictsOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileDoesNotExistException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxMergeHunksException
+        operation.errors << InvalidMergeOptionException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MergeOptionRequiredException
+        operation.errors << PathRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeMergeConflicts.new
       end)
       service.add_operation(:describe_pull_request_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DescribePullRequestEvents"
         operation.name = "DescribePullRequestEvents"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePullRequestEventsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePullRequestEventsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActorDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidActorArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestEventTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        operation.input = DescribePullRequestEventsInput
+        operation.output = DescribePullRequestEventsOutput
+        operation.errors << ActorDoesNotExistException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidActorArnException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidPullRequestEventTypeException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribePullRequestEvents.new
       end)
       service.add_operation(:disassociate_approval_rule_template_from_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#DisassociateApprovalRuleTemplateFromRepository"
         operation.name = "DisassociateApprovalRuleTemplateFromRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateApprovalRuleTemplateFromRepositoryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = DisassociateApprovalRuleTemplateFromRepositoryInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleTemplateNameException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:evaluate_pull_request_approval_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#EvaluatePullRequestApprovalRules"
         operation.name = "EvaluatePullRequestApprovalRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluatePullRequestApprovalRulesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluatePullRequestApprovalRulesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionNotCurrentException)
+        operation.input = EvaluatePullRequestApprovalRulesInput
+        operation.output = EvaluatePullRequestApprovalRulesOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRevisionIdException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << RevisionIdRequiredException
+        operation.errors << RevisionNotCurrentException
         operation.traits = {}
       end)
       service.add_operation(:get_approval_rule_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetApprovalRuleTemplate"
         operation.name = "GetApprovalRuleTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApprovalRuleTemplateInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApprovalRuleTemplateOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        operation.input = GetApprovalRuleTemplateInput
+        operation.output = GetApprovalRuleTemplateOutput
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << InvalidApprovalRuleTemplateNameException
         operation.traits = {}
       end)
       service.add_operation(:get_blob, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetBlob"
         operation.name = "GetBlob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBlobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBlobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlobIdDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlobIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileTooLargeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBlobIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetBlobInput
+        operation.output = GetBlobOutput
+        operation.errors << BlobIdDoesNotExistException
+        operation.errors << BlobIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileTooLargeException
+        operation.errors << InvalidBlobIdException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_branch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetBranch"
         operation.name = "GetBranch"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBranchInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBranchOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetBranchInput
+        operation.output = GetBranchOutput
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_comment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetComment"
         operation.name = "GetComment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+        operation.input = GetCommentInput
+        operation.output = GetCommentOutput
+        operation.errors << CommentDeletedException
+        operation.errors << CommentDoesNotExistException
+        operation.errors << CommentIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommentIdException
         operation.traits = {}
       end)
       service.add_operation(:get_comment_reactions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetCommentReactions"
         operation.name = "GetCommentReactions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentReactionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentReactionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommentIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReactionUserArnException)
+        operation.input = GetCommentReactionsInput
+        operation.output = GetCommentReactionsOutput
+        operation.errors << CommentDeletedException
+        operation.errors << CommentDoesNotExistException
+        operation.errors << CommentIdRequiredException
+        operation.errors << InvalidCommentIdException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidReactionUserArnException
         operation.traits = {}
         operation[:paginator] = Paginators::GetCommentReactions.new
       end)
       service.add_operation(:get_comments_for_compared_commit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetCommentsForComparedCommit"
         operation.name = "GetCommentsForComparedCommit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentsForComparedCommitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentsForComparedCommitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetCommentsForComparedCommitInput
+        operation.output = GetCommentsForComparedCommitOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
         operation[:paginator] = Paginators::GetCommentsForComparedCommit.new
       end)
       service.add_operation(:get_comments_for_pull_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetCommentsForPullRequest"
         operation.name = "GetCommentsForPullRequest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentsForPullRequestInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommentsForPullRequestOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
+        operation.input = GetCommentsForPullRequestInput
+        operation.output = GetCommentsForPullRequestOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RepositoryNotAssociatedWithPullRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::GetCommentsForPullRequest.new
       end)
       service.add_operation(:get_commit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetCommit"
         operation.name = "GetCommit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCommitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetCommitInput
+        operation.output = GetCommitOutput
+        operation.errors << CommitIdDoesNotExistException
+        operation.errors << CommitIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_differences, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetDifferences"
         operation.name = "GetDifferences"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDifferencesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDifferencesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetDifferencesInput
+        operation.output = GetDifferencesOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << PathDoesNotExistException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
         operation[:paginator] = Paginators::GetDifferences.new
       end)
       service.add_operation(:get_file, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetFile"
         operation.name = "GetFile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetFileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetFileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileTooLargeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetFileInput
+        operation.output = GetFileOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileDoesNotExistException
+        operation.errors << FileTooLargeException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << PathRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_folder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetFolder"
         operation.name = "GetFolder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetFolderInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetFolderOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetFolderInput
+        operation.output = GetFolderOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FolderDoesNotExistException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << PathRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_merge_commit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetMergeCommit"
         operation.name = "GetMergeCommit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMergeCommitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMergeCommitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetMergeCommitInput
+        operation.output = GetMergeCommitOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_merge_conflicts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetMergeConflicts"
         operation.name = "GetMergeConflicts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMergeConflictsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMergeConflictsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDestinationCommitSpecifierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxConflictFilesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMergeOptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSourceCommitSpecifierException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeOptionRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = GetMergeConflictsInput
+        operation.output = GetMergeConflictsOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidDestinationCommitSpecifierException
+        operation.errors << InvalidMaxConflictFilesException
+        operation.errors << InvalidMergeOptionException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidSourceCommitSpecifierException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MergeOptionRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
         operation[:paginator] = Paginators::GetMergeConflicts.new
       end)
       service.add_operation(:get_merge_options, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetMergeOptions"
         operation.name = "GetMergeOptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMergeOptionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMergeOptionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = GetMergeOptionsInput
+        operation.output = GetMergeOptionsOutput
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:get_pull_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetPullRequest"
         operation.name = "GetPullRequest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPullRequestInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPullRequestOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        operation.input = GetPullRequestInput
+        operation.output = GetPullRequestOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_pull_request_approval_states, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetPullRequestApprovalStates"
         operation.name = "GetPullRequestApprovalStates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPullRequestApprovalStatesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPullRequestApprovalStatesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
+        operation.input = GetPullRequestApprovalStatesInput
+        operation.output = GetPullRequestApprovalStatesOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRevisionIdException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << RevisionIdRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_pull_request_override_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetPullRequestOverrideState"
         operation.name = "GetPullRequestOverrideState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPullRequestOverrideStateInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPullRequestOverrideStateOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
+        operation.input = GetPullRequestOverrideStateInput
+        operation.output = GetPullRequestOverrideStateOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRevisionIdException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << RevisionIdRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetRepository"
         operation.name = "GetRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetRepositoryInput
+        operation.output = GetRepositoryOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:get_repository_triggers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetRepositoryTriggers"
         operation.name = "GetRepositoryTriggers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryTriggersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryTriggersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = GetRepositoryTriggersInput
+        operation.output = GetRepositoryTriggersOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:list_approval_rule_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListApprovalRuleTemplates"
         operation.name = "ListApprovalRuleTemplates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApprovalRuleTemplatesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApprovalRuleTemplatesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        operation.input = ListApprovalRuleTemplatesInput
+        operation.output = ListApprovalRuleTemplatesOutput
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListApprovalRuleTemplates.new
       end)
       service.add_operation(:list_associated_approval_rule_templates_for_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListAssociatedApprovalRuleTemplatesForRepository"
         operation.name = "ListAssociatedApprovalRuleTemplatesForRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedApprovalRuleTemplatesForRepositoryInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedApprovalRuleTemplatesForRepositoryOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = ListAssociatedApprovalRuleTemplatesForRepositoryInput
+        operation.output = ListAssociatedApprovalRuleTemplatesForRepositoryOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAssociatedApprovalRuleTemplatesForRepository.new
       end)
       service.add_operation(:list_branches, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListBranches"
         operation.name = "ListBranches"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBranchesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBranchesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = ListBranchesInput
+        operation.output = ListBranchesOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
         operation[:paginator] = Paginators::ListBranches.new
       end)
       service.add_operation(:list_file_commit_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListFileCommitHistory"
         operation.name = "ListFileCommitHistory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFileCommitHistoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListFileCommitHistoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = ListFileCommitHistoryRequest
+        operation.output = ListFileCommitHistoryResponse
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFileCommitHistory.new
       end)
       service.add_operation(:list_pull_requests, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListPullRequests"
         operation.name = "ListPullRequests"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPullRequestsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPullRequestsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidAuthorArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestStatusException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = ListPullRequestsInput
+        operation.output = ListPullRequestsOutput
+        operation.errors << AuthorDoesNotExistException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidAuthorArnException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidPullRequestStatusException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPullRequests.new
       end)
       service.add_operation(:list_repositories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListRepositories"
         operation.name = "ListRepositories"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRepositoriesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRepositoriesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidOrderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSortByException)
+        operation.input = ListRepositoriesInput
+        operation.output = ListRepositoriesOutput
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidOrderException
+        operation.errors << InvalidSortByException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRepositories.new
       end)
       service.add_operation(:list_repositories_for_approval_rule_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListRepositoriesForApprovalRuleTemplate"
         operation.name = "ListRepositoriesForApprovalRuleTemplate"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRepositoriesForApprovalRuleTemplateInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRepositoriesForApprovalRuleTemplateOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        operation.input = ListRepositoriesForApprovalRuleTemplateInput
+        operation.output = ListRepositoriesForApprovalRuleTemplateOutput
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleTemplateNameException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRepositoriesForApprovalRuleTemplate.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidResourceArnException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << ResourceArnRequiredException
         operation.traits = {}
       end)
       service.add_operation(:merge_branches_by_fast_forward, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#MergeBranchesByFastForward"
         operation.name = "MergeBranchesByFastForward"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeBranchesByFastForwardInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeBranchesByFastForwardOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameIsTagNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTargetBranchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualMergeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = MergeBranchesByFastForwardInput
+        operation.output = MergeBranchesByFastForwardOutput
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameIsTagNameException
+        operation.errors << BranchNameRequiredException
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitRequiredException
+        operation.errors << ConcurrentReferenceUpdateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidTargetBranchException
+        operation.errors << ManualMergeRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:merge_branches_by_squash, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#MergeBranchesBySquash"
         operation.name = "MergeBranchesBySquash"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeBranchesBySquashInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeBranchesBySquashOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameIsTagNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTargetBranchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualMergeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumConflictResolutionEntriesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipleConflictResolutionEntriesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementTypeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = MergeBranchesBySquashInput
+        operation.output = MergeBranchesBySquashOutput
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameIsTagNameException
+        operation.errors << BranchNameRequiredException
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << CommitRequiredException
+        operation.errors << ConcurrentReferenceUpdateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileContentSizeLimitExceededException
+        operation.errors << FileModeRequiredException
+        operation.errors << FolderContentSizeLimitExceededException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidFileModeException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidReplacementContentException
+        operation.errors << InvalidReplacementTypeException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidTargetBranchException
+        operation.errors << ManualMergeRequiredException
+        operation.errors << MaximumConflictResolutionEntriesExceededException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MultipleConflictResolutionEntriesException
+        operation.errors << NameLengthExceededException
+        operation.errors << PathRequiredException
+        operation.errors << ReplacementContentRequiredException
+        operation.errors << ReplacementTypeRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:merge_branches_by_three_way, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#MergeBranchesByThreeWay"
         operation.name = "MergeBranchesByThreeWay"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeBranchesByThreeWayInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeBranchesByThreeWayOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameIsTagNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileModeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTargetBranchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualMergeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumConflictResolutionEntriesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipleConflictResolutionEntriesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementTypeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = MergeBranchesByThreeWayInput
+        operation.output = MergeBranchesByThreeWayOutput
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameIsTagNameException
+        operation.errors << BranchNameRequiredException
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << CommitRequiredException
+        operation.errors << ConcurrentReferenceUpdateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileContentSizeLimitExceededException
+        operation.errors << FileModeRequiredException
+        operation.errors << FolderContentSizeLimitExceededException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidCommitException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidFileModeException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidReplacementContentException
+        operation.errors << InvalidReplacementTypeException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidTargetBranchException
+        operation.errors << ManualMergeRequiredException
+        operation.errors << MaximumConflictResolutionEntriesExceededException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MultipleConflictResolutionEntriesException
+        operation.errors << NameLengthExceededException
+        operation.errors << PathRequiredException
+        operation.errors << ReplacementContentRequiredException
+        operation.errors << ReplacementTypeRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:merge_pull_request_by_fast_forward, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#MergePullRequestByFastForward"
         operation.name = "MergePullRequestByFastForward"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergePullRequestByFastForwardInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergePullRequestByFastForwardOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualMergeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestApprovalRulesNotSatisfiedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferenceDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipOfSourceReferenceIsDifferentException)
+        operation.input = MergePullRequestByFastForwardInput
+        operation.output = MergePullRequestByFastForwardOutput
+        operation.errors << ConcurrentReferenceUpdateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << ManualMergeRequiredException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestApprovalRulesNotSatisfiedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << ReferenceDoesNotExistException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RepositoryNotAssociatedWithPullRequestException
+        operation.errors << TipOfSourceReferenceIsDifferentException
         operation.traits = {}
       end)
       service.add_operation(:merge_pull_request_by_squash, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#MergePullRequestBySquash"
         operation.name = "MergePullRequestBySquash"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergePullRequestBySquashInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergePullRequestBySquashOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualMergeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumConflictResolutionEntriesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipleConflictResolutionEntriesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestApprovalRulesNotSatisfiedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementTypeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipOfSourceReferenceIsDifferentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = MergePullRequestBySquashInput
+        operation.output = MergePullRequestBySquashOutput
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << ConcurrentReferenceUpdateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileContentSizeLimitExceededException
+        operation.errors << FolderContentSizeLimitExceededException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidFileModeException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidReplacementContentException
+        operation.errors << InvalidReplacementTypeException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << ManualMergeRequiredException
+        operation.errors << MaximumConflictResolutionEntriesExceededException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MultipleConflictResolutionEntriesException
+        operation.errors << NameLengthExceededException
+        operation.errors << PathRequiredException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestApprovalRulesNotSatisfiedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << ReplacementContentRequiredException
+        operation.errors << ReplacementTypeRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RepositoryNotAssociatedWithPullRequestException
+        operation.errors << TipOfSourceReferenceIsDifferentException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:merge_pull_request_by_three_way, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#MergePullRequestByThreeWay"
         operation.name = "MergePullRequestByThreeWay"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergePullRequestByThreeWayInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergePullRequestByThreeWayOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentReferenceUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictDetailLevelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReplacementTypeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualMergeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumConflictResolutionEntriesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipleConflictResolutionEntriesException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestApprovalRulesNotSatisfiedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplacementTypeRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipOfSourceReferenceIsDifferentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        operation.input = MergePullRequestByThreeWayInput
+        operation.output = MergePullRequestByThreeWayOutput
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << ConcurrentReferenceUpdateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileContentSizeLimitExceededException
+        operation.errors << FolderContentSizeLimitExceededException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidConflictDetailLevelException
+        operation.errors << InvalidConflictResolutionException
+        operation.errors << InvalidConflictResolutionStrategyException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidFileModeException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidReplacementContentException
+        operation.errors << InvalidReplacementTypeException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << ManualMergeRequiredException
+        operation.errors << MaximumConflictResolutionEntriesExceededException
+        operation.errors << MaximumFileContentToLoadExceededException
+        operation.errors << MaximumItemsToCompareExceededException
+        operation.errors << MultipleConflictResolutionEntriesException
+        operation.errors << NameLengthExceededException
+        operation.errors << PathRequiredException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestApprovalRulesNotSatisfiedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << ReplacementContentRequiredException
+        operation.errors << ReplacementTypeRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RepositoryNotAssociatedWithPullRequestException
+        operation.errors << TipOfSourceReferenceIsDifferentException
+        operation.errors << TipsDivergenceExceededException
         operation.traits = {}
       end)
       service.add_operation(:override_pull_request_approval_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#OverridePullRequestApprovalRules"
         operation.name = "OverridePullRequestApprovalRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverridePullRequestApprovalRulesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidOverrideStatusException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverrideAlreadySetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverrideStatusRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionNotCurrentException)
+        operation.input = OverridePullRequestApprovalRulesInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidOverrideStatusException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRevisionIdException
+        operation.errors << OverrideAlreadySetException
+        operation.errors << OverrideStatusRequiredException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << RevisionIdRequiredException
+        operation.errors << RevisionNotCurrentException
         operation.traits = {}
       end)
       service.add_operation(:post_comment_for_compared_commit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#PostCommentForComparedCommit"
         operation.name = "PostCommentForComparedCommit"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostCommentForComparedCommitInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostCommentForComparedCommitOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BeforeCommitIdAndAfterCommitIdAreSameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClientRequestTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileLocationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilePositionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRelativeFileVersionEnumException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = PostCommentForComparedCommitInput
+        operation.output = PostCommentForComparedCommitOutput
+        operation.errors << BeforeCommitIdAndAfterCommitIdAreSameException
+        operation.errors << ClientRequestTokenRequiredException
+        operation.errors << CommentContentRequiredException
+        operation.errors << CommentContentSizeLimitExceededException
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << IdempotencyParameterMismatchException
+        operation.errors << InvalidClientRequestTokenException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidFileLocationException
+        operation.errors << InvalidFilePositionException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRelativeFileVersionEnumException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << PathDoesNotExistException
+        operation.errors << PathRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:post_comment_for_pull_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#PostCommentForPullRequest"
         operation.name = "PostCommentForPullRequest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostCommentForPullRequestInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostCommentForPullRequestOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BeforeCommitIdAndAfterCommitIdAreSameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClientRequestTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileLocationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilePositionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRelativeFileVersionEnumException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
+        operation.input = PostCommentForPullRequestInput
+        operation.output = PostCommentForPullRequestOutput
+        operation.errors << BeforeCommitIdAndAfterCommitIdAreSameException
+        operation.errors << ClientRequestTokenRequiredException
+        operation.errors << CommentContentRequiredException
+        operation.errors << CommentContentSizeLimitExceededException
+        operation.errors << CommitDoesNotExistException
+        operation.errors << CommitIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << IdempotencyParameterMismatchException
+        operation.errors << InvalidClientRequestTokenException
+        operation.errors << InvalidCommitIdException
+        operation.errors << InvalidFileLocationException
+        operation.errors << InvalidFilePositionException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRelativeFileVersionEnumException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << PathDoesNotExistException
+        operation.errors << PathRequiredException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RepositoryNotAssociatedWithPullRequestException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:post_comment_reply, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#PostCommentReply"
         operation.name = "PostCommentReply"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostCommentReplyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostCommentReplyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestTokenRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyParameterMismatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidClientRequestTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+        operation.input = PostCommentReplyInput
+        operation.output = PostCommentReplyOutput
+        operation.errors << ClientRequestTokenRequiredException
+        operation.errors << CommentContentRequiredException
+        operation.errors << CommentContentSizeLimitExceededException
+        operation.errors << CommentDoesNotExistException
+        operation.errors << CommentIdRequiredException
+        operation.errors << IdempotencyParameterMismatchException
+        operation.errors << InvalidClientRequestTokenException
+        operation.errors << InvalidCommentIdException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_comment_reaction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#PutCommentReaction"
         operation.name = "PutCommentReaction"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutCommentReactionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommentIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidReactionValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReactionValueRequiredException)
+        operation.input = PutCommentReactionInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << CommentDeletedException
+        operation.errors << CommentDoesNotExistException
+        operation.errors << CommentIdRequiredException
+        operation.errors << InvalidCommentIdException
+        operation.errors << InvalidReactionValueException
+        operation.errors << ReactionLimitExceededException
+        operation.errors << ReactionValueRequiredException
         operation.traits = {}
       end)
       service.add_operation(:put_file, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#PutFile"
         operation.name = "PutFile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutFileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutFileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameIsTagNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryNameConflictsWithFileNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileNameConflictsWithDirectoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilePathConflictsWithSubmodulePathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDeletionParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidEmailException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFileModeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParentCommitIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPathException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameLengthExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitIdOutdatedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParentCommitIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PathRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SameFileContentException)
+        operation.input = PutFileInput
+        operation.output = PutFileOutput
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameIsTagNameException
+        operation.errors << BranchNameRequiredException
+        operation.errors << CommitMessageLengthExceededException
+        operation.errors << DirectoryNameConflictsWithFileNameException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileContentRequiredException
+        operation.errors << FileContentSizeLimitExceededException
+        operation.errors << FileNameConflictsWithDirectoryNameException
+        operation.errors << FilePathConflictsWithSubmodulePathException
+        operation.errors << FolderContentSizeLimitExceededException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidDeletionParameterException
+        operation.errors << InvalidEmailException
+        operation.errors << InvalidFileModeException
+        operation.errors << InvalidParentCommitIdException
+        operation.errors << InvalidPathException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << NameLengthExceededException
+        operation.errors << ParentCommitDoesNotExistException
+        operation.errors << ParentCommitIdOutdatedException
+        operation.errors << ParentCommitIdRequiredException
+        operation.errors << PathRequiredException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << SameFileContentException
         operation.traits = {}
       end)
       service.add_operation(:put_repository_triggers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#PutRepositoryTriggers"
         operation.name = "PutRepositoryTriggers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRepositoryTriggersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRepositoryTriggersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerCustomDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerDestinationArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerEventsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumBranchesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumRepositoryTriggersExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerBranchNameListRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerDestinationArnRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerEventsListRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggersListRequiredException)
+        operation.input = PutRepositoryTriggersInput
+        operation.output = PutRepositoryTriggersOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidRepositoryTriggerBranchNameException
+        operation.errors << InvalidRepositoryTriggerCustomDataException
+        operation.errors << InvalidRepositoryTriggerDestinationArnException
+        operation.errors << InvalidRepositoryTriggerEventsException
+        operation.errors << InvalidRepositoryTriggerNameException
+        operation.errors << InvalidRepositoryTriggerRegionException
+        operation.errors << MaximumBranchesExceededException
+        operation.errors << MaximumRepositoryTriggersExceededException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RepositoryTriggerBranchNameListRequiredException
+        operation.errors << RepositoryTriggerDestinationArnRequiredException
+        operation.errors << RepositoryTriggerEventsListRequiredException
+        operation.errors << RepositoryTriggerNameRequiredException
+        operation.errors << RepositoryTriggersListRequiredException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSystemTagUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagsMapException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMapRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidResourceArnException
+        operation.errors << InvalidSystemTagUsageException
+        operation.errors << InvalidTagsMapException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << ResourceArnRequiredException
+        operation.errors << TagPolicyException
+        operation.errors << TagsMapRequiredException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:test_repository_triggers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#TestRepositoryTriggers"
         operation.name = "TestRepositoryTriggers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TestRepositoryTriggersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TestRepositoryTriggersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerCustomDataException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerDestinationArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerEventsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryTriggerRegionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumBranchesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumRepositoryTriggersExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerBranchNameListRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerDestinationArnRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerEventsListRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggerNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryTriggersListRequiredException)
+        operation.input = TestRepositoryTriggersInput
+        operation.output = TestRepositoryTriggersOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidRepositoryTriggerBranchNameException
+        operation.errors << InvalidRepositoryTriggerCustomDataException
+        operation.errors << InvalidRepositoryTriggerDestinationArnException
+        operation.errors << InvalidRepositoryTriggerEventsException
+        operation.errors << InvalidRepositoryTriggerNameException
+        operation.errors << InvalidRepositoryTriggerRegionException
+        operation.errors << MaximumBranchesExceededException
+        operation.errors << MaximumRepositoryTriggersExceededException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << RepositoryTriggerBranchNameListRequiredException
+        operation.errors << RepositoryTriggerDestinationArnRequiredException
+        operation.errors << RepositoryTriggerEventsListRequiredException
+        operation.errors << RepositoryTriggerNameRequiredException
+        operation.errors << RepositoryTriggersListRequiredException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSystemTagUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagKeysListException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeysListRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = UntagResourceInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << InvalidResourceArnException
+        operation.errors << InvalidSystemTagUsageException
+        operation.errors << InvalidTagKeysListException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << ResourceArnRequiredException
+        operation.errors << TagKeysListRequiredException
+        operation.errors << TagPolicyException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:update_approval_rule_template_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateApprovalRuleTemplateContent"
         operation.name = "UpdateApprovalRuleTemplateContent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateContentInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateContentOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRuleContentSha256Exception)
+        operation.input = UpdateApprovalRuleTemplateContentInput
+        operation.output = UpdateApprovalRuleTemplateContentOutput
+        operation.errors << ApprovalRuleTemplateContentRequiredException
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << InvalidApprovalRuleTemplateContentException
+        operation.errors << InvalidApprovalRuleTemplateNameException
+        operation.errors << InvalidRuleContentSha256Exception
         operation.traits = {}
       end)
       service.add_operation(:update_approval_rule_template_description, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateApprovalRuleTemplateDescription"
         operation.name = "UpdateApprovalRuleTemplateDescription"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateDescriptionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateDescriptionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateDescriptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        operation.input = UpdateApprovalRuleTemplateDescriptionInput
+        operation.output = UpdateApprovalRuleTemplateDescriptionOutput
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << InvalidApprovalRuleTemplateDescriptionException
+        operation.errors << InvalidApprovalRuleTemplateNameException
         operation.traits = {}
       end)
       service.add_operation(:update_approval_rule_template_name, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateApprovalRuleTemplateName"
         operation.name = "UpdateApprovalRuleTemplateName"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateNameInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApprovalRuleTemplateNameOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleTemplateNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleTemplateNameException)
+        operation.input = UpdateApprovalRuleTemplateNameInput
+        operation.output = UpdateApprovalRuleTemplateNameOutput
+        operation.errors << ApprovalRuleTemplateDoesNotExistException
+        operation.errors << ApprovalRuleTemplateNameAlreadyExistsException
+        operation.errors << ApprovalRuleTemplateNameRequiredException
+        operation.errors << InvalidApprovalRuleTemplateNameException
         operation.traits = {}
       end)
       service.add_operation(:update_comment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateComment"
         operation.name = "UpdateComment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCommentInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCommentOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContentSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentNotCreatedByCallerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+        operation.input = UpdateCommentInput
+        operation.output = UpdateCommentOutput
+        operation.errors << CommentContentRequiredException
+        operation.errors << CommentContentSizeLimitExceededException
+        operation.errors << CommentDeletedException
+        operation.errors << CommentDoesNotExistException
+        operation.errors << CommentIdRequiredException
+        operation.errors << CommentNotCreatedByCallerException
+        operation.errors << InvalidCommentIdException
         operation.traits = {}
       end)
       service.add_operation(:update_default_branch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateDefaultBranch"
         operation.name = "UpdateDefaultBranch"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDefaultBranchInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BranchNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidBranchNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = UpdateDefaultBranchInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BranchDoesNotExistException
+        operation.errors << BranchNameRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidBranchNameException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:update_pull_request_approval_rule_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdatePullRequestApprovalRuleContent"
         operation.name = "UpdatePullRequestApprovalRuleContent"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestApprovalRuleContentInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestApprovalRuleContentOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleContentRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalRuleNameRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CannotModifyApprovalRuleFromTemplateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleContentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalRuleNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRuleContentSha256Exception)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        operation.input = UpdatePullRequestApprovalRuleContentInput
+        operation.output = UpdatePullRequestApprovalRuleContentOutput
+        operation.errors << ApprovalRuleContentRequiredException
+        operation.errors << ApprovalRuleDoesNotExistException
+        operation.errors << ApprovalRuleNameRequiredException
+        operation.errors << CannotModifyApprovalRuleFromTemplateException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalRuleContentException
+        operation.errors << InvalidApprovalRuleNameException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRuleContentSha256Exception
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
         operation.traits = {}
       end)
       service.add_operation(:update_pull_request_approval_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdatePullRequestApprovalState"
         operation.name = "UpdatePullRequestApprovalState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestApprovalStateInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApprovalStateRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidApprovalStateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRevisionIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumNumberOfApprovalsExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestCannotBeApprovedByAuthorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevisionNotCurrentException)
+        operation.input = UpdatePullRequestApprovalStateInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ApprovalStateRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidApprovalStateException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidRevisionIdException
+        operation.errors << MaximumNumberOfApprovalsExceededException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestCannotBeApprovedByAuthorException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << RevisionIdRequiredException
+        operation.errors << RevisionNotCurrentException
         operation.traits = {}
       end)
       service.add_operation(:update_pull_request_description, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdatePullRequestDescription"
         operation.name = "UpdatePullRequestDescription"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestDescriptionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestDescriptionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDescriptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
+        operation.input = UpdatePullRequestDescriptionInput
+        operation.output = UpdatePullRequestDescriptionOutput
+        operation.errors << InvalidDescriptionException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
         operation.traits = {}
       end)
       service.add_operation(:update_pull_request_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdatePullRequestStatus"
         operation.name = "UpdatePullRequestStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestStatusInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestStatusOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestStatusException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestStatusUpdateException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestStatusRequiredException)
+        operation.input = UpdatePullRequestStatusInput
+        operation.output = UpdatePullRequestStatusOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidPullRequestStatusException
+        operation.errors << InvalidPullRequestStatusUpdateException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << PullRequestStatusRequiredException
         operation.traits = {}
       end)
       service.add_operation(:update_pull_request_title, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdatePullRequestTitle"
         operation.name = "UpdatePullRequestTitle"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestTitleInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePullRequestTitleOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPullRequestIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTitleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestAlreadyClosedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PullRequestIdRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TitleRequiredException)
+        operation.input = UpdatePullRequestTitleInput
+        operation.output = UpdatePullRequestTitleOutput
+        operation.errors << InvalidPullRequestIdException
+        operation.errors << InvalidTitleException
+        operation.errors << PullRequestAlreadyClosedException
+        operation.errors << PullRequestDoesNotExistException
+        operation.errors << PullRequestIdRequiredException
+        operation.errors << TitleRequiredException
         operation.traits = {}
       end)
       service.add_operation(:update_repository_description, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateRepositoryDescription"
         operation.name = "UpdateRepositoryDescription"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRepositoryDescriptionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryDescriptionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = UpdateRepositoryDescriptionInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryDescriptionException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:update_repository_encryption_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateRepositoryEncryptionKey"
         operation.name = "UpdateRepositoryEncryptionKey"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRepositoryEncryptionKeyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRepositoryEncryptionKeyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyInvalidIdException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyInvalidUsageException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyRequiredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = UpdateRepositoryEncryptionKeyInput
+        operation.output = UpdateRepositoryEncryptionKeyOutput
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyInvalidIdException
+        operation.errors << EncryptionKeyInvalidUsageException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyRequiredException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
       service.add_operation(:update_repository_name, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#UpdateRepositoryName"
         operation.name = "UpdateRepositoryName"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRepositoryNameInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        operation.input = UpdateRepositoryNameInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameExistsException
+        operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
     end

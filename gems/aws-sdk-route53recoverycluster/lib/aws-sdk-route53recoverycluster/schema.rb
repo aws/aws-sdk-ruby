@@ -40,79 +40,79 @@ module Aws::Route53RecoveryCluster
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53recoverycluster#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53recoverycluster#ValidationExceptionReason", name: "ValidationExceptionReason")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    Arns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    Arns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    EndpointTemporarilyUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    EndpointTemporarilyUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
     EndpointTemporarilyUnavailableException.type = Types::EndpointTemporarilyUnavailableException
-    GetRoutingControlStateRequest.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
+    GetRoutingControlStateRequest.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
     GetRoutingControlStateRequest.type = Types::GetRoutingControlStateRequest
-    GetRoutingControlStateResponse.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
-    GetRoutingControlStateResponse.add_member(:routing_control_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControlState, location_name: "RoutingControlState", traits: {"smithy.api#required" => {}}))
-    GetRoutingControlStateResponse.add_member(:routing_control_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControlName, location_name: "RoutingControlName"))
+    GetRoutingControlStateResponse.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
+    GetRoutingControlStateResponse.add_member(:routing_control_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlState, location_name: "RoutingControlState", traits: {"smithy.api#required" => {}}))
+    GetRoutingControlStateResponse.add_member(:routing_control_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlName, location_name: "RoutingControlName"))
     GetRoutingControlStateResponse.type = Types::GetRoutingControlStateResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, location_name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    ListRoutingControlsRequest.add_member(:control_panel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ControlPanelArn"))
-    ListRoutingControlsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageToken, location_name: "NextToken"))
-    ListRoutingControlsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRoutingControlsRequest.add_member(:control_panel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ControlPanelArn"))
+    ListRoutingControlsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PageToken, location_name: "NextToken"))
+    ListRoutingControlsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListRoutingControlsRequest.type = Types::ListRoutingControlsRequest
-    ListRoutingControlsResponse.add_member(:routing_controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControls, location_name: "RoutingControls", traits: {"smithy.api#required" => {}}))
-    ListRoutingControlsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageToken, location_name: "NextToken"))
+    ListRoutingControlsResponse.add_member(:routing_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControls, location_name: "RoutingControls", traits: {"smithy.api#required" => {}}))
+    ListRoutingControlsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PageToken, location_name: "NextToken"))
     ListRoutingControlsResponse.type = Types::ListRoutingControlsResponse
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoutingControl.add_member(:control_panel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ControlPanelArn"))
-    RoutingControl.add_member(:control_panel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlPanelName, location_name: "ControlPanelName"))
-    RoutingControl.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "RoutingControlArn"))
-    RoutingControl.add_member(:routing_control_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControlName, location_name: "RoutingControlName"))
-    RoutingControl.add_member(:routing_control_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControlState, location_name: "RoutingControlState"))
-    RoutingControl.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    RoutingControl.add_member(:control_panel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ControlPanelArn"))
+    RoutingControl.add_member(:control_panel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPanelName, location_name: "ControlPanelName"))
+    RoutingControl.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "RoutingControlArn"))
+    RoutingControl.add_member(:routing_control_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlName, location_name: "RoutingControlName"))
+    RoutingControl.add_member(:routing_control_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlState, location_name: "RoutingControlState"))
+    RoutingControl.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
     RoutingControl.type = Types::RoutingControl
-    RoutingControlState.add_member(:on, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "On", traits: {"smithy.api#enumValue" => "On"}))
-    RoutingControlState.add_member(:off, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Off", traits: {"smithy.api#enumValue" => "Off"}))
-    RoutingControls.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControl)
-    ServiceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ServiceLimitExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
-    ServiceLimitExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
-    ServiceLimitExceededException.add_member(:limit_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "limitCode", traits: {"smithy.api#required" => {}}))
-    ServiceLimitExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    RoutingControlState.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "On", traits: {"smithy.api#enumValue" => "On"}))
+    RoutingControlState.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Off", traits: {"smithy.api#enumValue" => "Off"}))
+    RoutingControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControl)
+    ServiceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceLimitExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceId"))
+    ServiceLimitExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceType"))
+    ServiceLimitExceededException.add_member(:limit_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "limitCode", traits: {"smithy.api#required" => {}}))
+    ServiceLimitExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
     ServiceLimitExceededException.type = Types::ServiceLimitExceededException
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, location_name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    UpdateRoutingControlStateEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRoutingControlStateEntry)
-    UpdateRoutingControlStateEntry.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
-    UpdateRoutingControlStateEntry.add_member(:routing_control_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControlState, location_name: "RoutingControlState", traits: {"smithy.api#required" => {}}))
+    UpdateRoutingControlStateEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRoutingControlStateEntry)
+    UpdateRoutingControlStateEntry.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
+    UpdateRoutingControlStateEntry.add_member(:routing_control_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlState, location_name: "RoutingControlState", traits: {"smithy.api#required" => {}}))
     UpdateRoutingControlStateEntry.type = Types::UpdateRoutingControlStateEntry
-    UpdateRoutingControlStateRequest.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
-    UpdateRoutingControlStateRequest.add_member(:routing_control_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingControlState, location_name: "RoutingControlState", traits: {"smithy.api#required" => {}}))
-    UpdateRoutingControlStateRequest.add_member(:safety_rules_to_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arns, location_name: "SafetyRulesToOverride"))
+    UpdateRoutingControlStateRequest.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
+    UpdateRoutingControlStateRequest.add_member(:routing_control_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlState, location_name: "RoutingControlState", traits: {"smithy.api#required" => {}}))
+    UpdateRoutingControlStateRequest.add_member(:safety_rules_to_override, ::Smithy::Schema::Shapes::MemberShape.new(target: Arns, location_name: "SafetyRulesToOverride"))
     UpdateRoutingControlStateRequest.type = Types::UpdateRoutingControlStateRequest
     UpdateRoutingControlStateResponse.type = Types::UpdateRoutingControlStateResponse
-    UpdateRoutingControlStatesRequest.add_member(:update_routing_control_state_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRoutingControlStateEntries, location_name: "UpdateRoutingControlStateEntries", traits: {"smithy.api#required" => {}}))
-    UpdateRoutingControlStatesRequest.add_member(:safety_rules_to_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arns, location_name: "SafetyRulesToOverride"))
+    UpdateRoutingControlStatesRequest.add_member(:update_routing_control_state_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRoutingControlStateEntries, location_name: "UpdateRoutingControlStateEntries", traits: {"smithy.api#required" => {}}))
+    UpdateRoutingControlStatesRequest.add_member(:safety_rules_to_override, ::Smithy::Schema::Shapes::MemberShape.new(target: Arns, location_name: "SafetyRulesToOverride"))
     UpdateRoutingControlStatesRequest.type = Types::UpdateRoutingControlStatesRequest
     UpdateRoutingControlStatesResponse.type = Types::UpdateRoutingControlStatesResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
-    ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fields"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "reason"))
+    ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "fields"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
-    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
-    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
-    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
+    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
 
     ToggleCustomerAPI = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.route53recoverycluster#ToggleCustomerAPI"
@@ -122,57 +122,57 @@ module Aws::Route53RecoveryCluster
       service.add_operation(:get_routing_control_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53recoverycluster#GetRoutingControlState"
         operation.name = "GetRoutingControlState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRoutingControlStateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRoutingControlStateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointTemporarilyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRoutingControlStateRequest
+        operation.output = GetRoutingControlStateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EndpointTemporarilyUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_routing_controls, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53recoverycluster#ListRoutingControls"
         operation.name = "ListRoutingControls"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRoutingControlsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRoutingControlsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointTemporarilyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRoutingControlsRequest
+        operation.output = ListRoutingControlsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EndpointTemporarilyUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRoutingControls.new
       end)
       service.add_operation(:update_routing_control_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53recoverycluster#UpdateRoutingControlState"
         operation.name = "UpdateRoutingControlState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRoutingControlStateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRoutingControlStateResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointTemporarilyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateRoutingControlStateRequest
+        operation.output = UpdateRoutingControlStateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << EndpointTemporarilyUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_routing_control_states, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53recoverycluster#UpdateRoutingControlStates"
         operation.name = "UpdateRoutingControlStates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRoutingControlStatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateRoutingControlStatesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointTemporarilyUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateRoutingControlStatesRequest
+        operation.output = UpdateRoutingControlStatesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << EndpointTemporarilyUnavailableException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceLimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

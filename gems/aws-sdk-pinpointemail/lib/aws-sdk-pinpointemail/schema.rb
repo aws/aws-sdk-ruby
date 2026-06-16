@@ -220,456 +220,456 @@ module Aws::PinpointEmail
     VolumeStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointemail#VolumeStatistics", name: "VolumeStatistics")
     WarmupStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.pinpointemail#WarmupStatus", name: "WarmupStatus")
 
-    AccountSuspendedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccountSuspendedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     AccountSuspendedException.type = Types::AccountSuspendedException
-    AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     AlreadyExistsException.type = Types::AlreadyExistsException
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     BadRequestException.type = Types::BadRequestException
-    BehaviorOnMxFailure.add_member(:use_default_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USE_DEFAULT_VALUE", traits: {"smithy.api#enumValue" => "USE_DEFAULT_VALUE"}))
-    BehaviorOnMxFailure.add_member(:reject_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECT_MESSAGE", traits: {"smithy.api#enumValue" => "REJECT_MESSAGE"}))
-    BlacklistEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlacklistEntry)
-    BlacklistEntry.add_member(:rbl_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RblName, location_name: "RblName"))
-    BlacklistEntry.add_member(:listing_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ListingTime"))
-    BlacklistEntry.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlacklistingDescription, location_name: "Description"))
+    BehaviorOnMxFailure.add_member(:use_default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USE_DEFAULT_VALUE", traits: {"smithy.api#enumValue" => "USE_DEFAULT_VALUE"}))
+    BehaviorOnMxFailure.add_member(:reject_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECT_MESSAGE", traits: {"smithy.api#enumValue" => "REJECT_MESSAGE"}))
+    BlacklistEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistEntry)
+    BlacklistEntry.add_member(:rbl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RblName, location_name: "RblName"))
+    BlacklistEntry.add_member(:listing_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ListingTime"))
+    BlacklistEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistingDescription, location_name: "Description"))
     BlacklistEntry.type = Types::BlacklistEntry
-    BlacklistItemNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlacklistItemName)
-    BlacklistReport.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlacklistItemName)
-    BlacklistReport.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlacklistEntries)
-    Body.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "Text"))
-    Body.add_member(:html, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "Html"))
+    BlacklistItemNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemName)
+    BlacklistReport.key = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemName)
+    BlacklistReport.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistEntries)
+    Body.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "Text"))
+    Body.add_member(:html, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "Html"))
     Body.type = Types::Body
-    CloudWatchDestination.add_member(:dimension_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchDimensionConfigurations, location_name: "DimensionConfigurations", traits: {"smithy.api#required" => {}}))
+    CloudWatchDestination.add_member(:dimension_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDimensionConfigurations, location_name: "DimensionConfigurations", traits: {"smithy.api#required" => {}}))
     CloudWatchDestination.type = Types::CloudWatchDestination
-    CloudWatchDimensionConfiguration.add_member(:dimension_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionName, location_name: "DimensionName", traits: {"smithy.api#required" => {}}))
-    CloudWatchDimensionConfiguration.add_member(:dimension_value_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionValueSource, location_name: "DimensionValueSource", traits: {"smithy.api#required" => {}}))
-    CloudWatchDimensionConfiguration.add_member(:default_dimension_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultDimensionValue, location_name: "DefaultDimensionValue", traits: {"smithy.api#required" => {}}))
+    CloudWatchDimensionConfiguration.add_member(:dimension_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, location_name: "DimensionName", traits: {"smithy.api#required" => {}}))
+    CloudWatchDimensionConfiguration.add_member(:dimension_value_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueSource, location_name: "DimensionValueSource", traits: {"smithy.api#required" => {}}))
+    CloudWatchDimensionConfiguration.add_member(:default_dimension_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultDimensionValue, location_name: "DefaultDimensionValue", traits: {"smithy.api#required" => {}}))
     CloudWatchDimensionConfiguration.type = Types::CloudWatchDimensionConfiguration
-    CloudWatchDimensionConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchDimensionConfiguration)
-    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    CloudWatchDimensionConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDimensionConfiguration)
+    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ConfigurationSetNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName)
-    Content.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageData, location_name: "Data", traits: {"smithy.api#required" => {}}))
-    Content.add_member(:charset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Charset, location_name: "Charset"))
+    ConfigurationSetNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName)
+    Content.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageData, location_name: "Data", traits: {"smithy.api#required" => {}}))
+    Content.add_member(:charset, ::Smithy::Schema::Shapes::MemberShape.new(target: Charset, location_name: "Charset"))
     Content.type = Types::Content
-    CreateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
-    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationDefinition, location_name: "EventDestination", traits: {"smithy.api#required" => {}}))
+    CreateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
+    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, location_name: "EventDestination", traits: {"smithy.api#required" => {}}))
     CreateConfigurationSetEventDestinationRequest.type = Types::CreateConfigurationSetEventDestinationRequest
     CreateConfigurationSetEventDestinationResponse.type = Types::CreateConfigurationSetEventDestinationResponse
-    CreateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    CreateConfigurationSetRequest.add_member(:tracking_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrackingOptions, location_name: "TrackingOptions"))
-    CreateConfigurationSetRequest.add_member(:delivery_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryOptions, location_name: "DeliveryOptions"))
-    CreateConfigurationSetRequest.add_member(:reputation_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReputationOptions, location_name: "ReputationOptions"))
-    CreateConfigurationSetRequest.add_member(:sending_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendingOptions, location_name: "SendingOptions"))
-    CreateConfigurationSetRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    CreateConfigurationSetRequest.add_member(:tracking_options, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingOptions, location_name: "TrackingOptions"))
+    CreateConfigurationSetRequest.add_member(:delivery_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryOptions, location_name: "DeliveryOptions"))
+    CreateConfigurationSetRequest.add_member(:reputation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ReputationOptions, location_name: "ReputationOptions"))
+    CreateConfigurationSetRequest.add_member(:sending_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SendingOptions, location_name: "SendingOptions"))
+    CreateConfigurationSetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateConfigurationSetRequest.type = Types::CreateConfigurationSetRequest
     CreateConfigurationSetResponse.type = Types::CreateConfigurationSetResponse
-    CreateDedicatedIpPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "PoolName", traits: {"smithy.api#required" => {}}))
-    CreateDedicatedIpPoolRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDedicatedIpPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "PoolName", traits: {"smithy.api#required" => {}}))
+    CreateDedicatedIpPoolRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateDedicatedIpPoolRequest.type = Types::CreateDedicatedIpPoolRequest
     CreateDedicatedIpPoolResponse.type = Types::CreateDedicatedIpPoolResponse
-    CreateDeliverabilityTestReportRequest.add_member(:report_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: "ReportName"))
-    CreateDeliverabilityTestReportRequest.add_member(:from_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress", traits: {"smithy.api#required" => {}}))
-    CreateDeliverabilityTestReportRequest.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
-    CreateDeliverabilityTestReportRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDeliverabilityTestReportRequest.add_member(:report_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportName, location_name: "ReportName"))
+    CreateDeliverabilityTestReportRequest.add_member(:from_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "FromEmailAddress", traits: {"smithy.api#required" => {}}))
+    CreateDeliverabilityTestReportRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
+    CreateDeliverabilityTestReportRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateDeliverabilityTestReportRequest.type = Types::CreateDeliverabilityTestReportRequest
-    CreateDeliverabilityTestReportResponse.add_member(:report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId", traits: {"smithy.api#required" => {}}))
-    CreateDeliverabilityTestReportResponse.add_member(:deliverability_test_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverabilityTestStatus, location_name: "DeliverabilityTestStatus", traits: {"smithy.api#required" => {}}))
+    CreateDeliverabilityTestReportResponse.add_member(:report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportId, location_name: "ReportId", traits: {"smithy.api#required" => {}}))
+    CreateDeliverabilityTestReportResponse.add_member(:deliverability_test_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestStatus, location_name: "DeliverabilityTestStatus", traits: {"smithy.api#required" => {}}))
     CreateDeliverabilityTestReportResponse.type = Types::CreateDeliverabilityTestReportResponse
-    CreateEmailIdentityRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "EmailIdentity", traits: {"smithy.api#required" => {}}))
-    CreateEmailIdentityRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateEmailIdentityRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "EmailIdentity", traits: {"smithy.api#required" => {}}))
+    CreateEmailIdentityRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateEmailIdentityRequest.type = Types::CreateEmailIdentityRequest
-    CreateEmailIdentityResponse.add_member(:identity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
-    CreateEmailIdentityResponse.add_member(:verified_for_sending_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "VerifiedForSendingStatus", traits: {"smithy.api#default" => false}))
-    CreateEmailIdentityResponse.add_member(:dkim_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DkimAttributes, location_name: "DkimAttributes"))
+    CreateEmailIdentityResponse.add_member(:identity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityType, location_name: "IdentityType"))
+    CreateEmailIdentityResponse.add_member(:verified_for_sending_status, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "VerifiedForSendingStatus", traits: {"smithy.api#default" => false}))
+    CreateEmailIdentityResponse.add_member(:dkim_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimAttributes, location_name: "DkimAttributes"))
     CreateEmailIdentityResponse.type = Types::CreateEmailIdentityResponse
-    DailyVolume.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
-    DailyVolume.add_member(:volume_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeStatistics, location_name: "VolumeStatistics"))
-    DailyVolume.add_member(:domain_isp_placements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainIspPlacements, location_name: "DomainIspPlacements"))
+    DailyVolume.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartDate"))
+    DailyVolume.add_member(:volume_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStatistics, location_name: "VolumeStatistics"))
+    DailyVolume.add_member(:domain_isp_placements, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainIspPlacements, location_name: "DomainIspPlacements"))
     DailyVolume.type = Types::DailyVolume
-    DailyVolumes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyVolume)
-    DedicatedIp.add_member(:ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", traits: {"smithy.api#required" => {}}))
-    DedicatedIp.add_member(:warmup_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WarmupStatus, location_name: "WarmupStatus", traits: {"smithy.api#required" => {}}))
-    DedicatedIp.add_member(:warmup_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage100Wrapper, location_name: "WarmupPercentage", traits: {"smithy.api#required" => {}}))
-    DedicatedIp.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "PoolName"))
+    DailyVolumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DailyVolume)
+    DedicatedIp.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, location_name: "Ip", traits: {"smithy.api#required" => {}}))
+    DedicatedIp.add_member(:warmup_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmupStatus, location_name: "WarmupStatus", traits: {"smithy.api#required" => {}}))
+    DedicatedIp.add_member(:warmup_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage100Wrapper, location_name: "WarmupPercentage", traits: {"smithy.api#required" => {}}))
+    DedicatedIp.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "PoolName"))
     DedicatedIp.type = Types::DedicatedIp
-    DedicatedIpList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedIp)
-    DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DedicatedIpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedIp)
+    DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.type = Types::DeleteConfigurationSetEventDestinationRequest
     DeleteConfigurationSetEventDestinationResponse.type = Types::DeleteConfigurationSetEventDestinationResponse
-    DeleteConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetRequest.type = Types::DeleteConfigurationSetRequest
     DeleteConfigurationSetResponse.type = Types::DeleteConfigurationSetResponse
-    DeleteDedicatedIpPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "PoolName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteDedicatedIpPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "PoolName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDedicatedIpPoolRequest.type = Types::DeleteDedicatedIpPoolRequest
     DeleteDedicatedIpPoolResponse.type = Types::DeleteDedicatedIpPoolResponse
-    DeleteEmailIdentityRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEmailIdentityRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEmailIdentityRequest.type = Types::DeleteEmailIdentityRequest
     DeleteEmailIdentityResponse.type = Types::DeleteEmailIdentityResponse
-    DeliverabilityDashboardAccountStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    DeliverabilityDashboardAccountStatus.add_member(:pending_expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_EXPIRATION", traits: {"smithy.api#enumValue" => "PENDING_EXPIRATION"}))
-    DeliverabilityDashboardAccountStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    DeliverabilityTestReport.add_member(:report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId"))
-    DeliverabilityTestReport.add_member(:report_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportName, location_name: "ReportName"))
-    DeliverabilityTestReport.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverabilityTestSubject, location_name: "Subject"))
-    DeliverabilityTestReport.add_member(:from_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress"))
-    DeliverabilityTestReport.add_member(:create_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
-    DeliverabilityTestReport.add_member(:deliverability_test_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverabilityTestStatus, location_name: "DeliverabilityTestStatus"))
+    DeliverabilityDashboardAccountStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    DeliverabilityDashboardAccountStatus.add_member(:pending_expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING_EXPIRATION", traits: {"smithy.api#enumValue" => "PENDING_EXPIRATION"}))
+    DeliverabilityDashboardAccountStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    DeliverabilityTestReport.add_member(:report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportId, location_name: "ReportId"))
+    DeliverabilityTestReport.add_member(:report_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportName, location_name: "ReportName"))
+    DeliverabilityTestReport.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestSubject, location_name: "Subject"))
+    DeliverabilityTestReport.add_member(:from_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "FromEmailAddress"))
+    DeliverabilityTestReport.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreateDate"))
+    DeliverabilityTestReport.add_member(:deliverability_test_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestStatus, location_name: "DeliverabilityTestStatus"))
     DeliverabilityTestReport.type = Types::DeliverabilityTestReport
-    DeliverabilityTestReports.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverabilityTestReport)
-    DeliverabilityTestStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    DeliverabilityTestStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    DeliveryOptions.add_member(:tls_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
-    DeliveryOptions.add_member(:sending_pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "SendingPoolName"))
+    DeliverabilityTestReports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestReport)
+    DeliverabilityTestStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    DeliverabilityTestStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    DeliveryOptions.add_member(:tls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsPolicy, location_name: "TlsPolicy"))
+    DeliveryOptions.add_member(:sending_pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "SendingPoolName"))
     DeliveryOptions.type = Types::DeliveryOptions
-    Destination.add_member(:to_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressList, location_name: "ToAddresses"))
-    Destination.add_member(:cc_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressList, location_name: "CcAddresses"))
-    Destination.add_member(:bcc_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressList, location_name: "BccAddresses"))
+    Destination.add_member(:to_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressList, location_name: "ToAddresses"))
+    Destination.add_member(:cc_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressList, location_name: "CcAddresses"))
+    Destination.add_member(:bcc_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressList, location_name: "BccAddresses"))
     Destination.type = Types::Destination
-    DimensionValueSource.add_member(:message_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MESSAGE_TAG", traits: {"smithy.api#enumValue" => "MESSAGE_TAG"}))
-    DimensionValueSource.add_member(:email_header, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_HEADER", traits: {"smithy.api#enumValue" => "EMAIL_HEADER"}))
-    DimensionValueSource.add_member(:link_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINK_TAG", traits: {"smithy.api#enumValue" => "LINK_TAG"}))
-    DkimAttributes.add_member(:signing_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "SigningEnabled", traits: {"smithy.api#default" => false}))
-    DkimAttributes.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DkimStatus, location_name: "Status"))
-    DkimAttributes.add_member(:tokens, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsTokenList, location_name: "Tokens"))
+    DimensionValueSource.add_member(:message_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MESSAGE_TAG", traits: {"smithy.api#enumValue" => "MESSAGE_TAG"}))
+    DimensionValueSource.add_member(:email_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_HEADER", traits: {"smithy.api#enumValue" => "EMAIL_HEADER"}))
+    DimensionValueSource.add_member(:link_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINK_TAG", traits: {"smithy.api#enumValue" => "LINK_TAG"}))
+    DkimAttributes.add_member(:signing_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "SigningEnabled", traits: {"smithy.api#default" => false}))
+    DkimAttributes.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimStatus, location_name: "Status"))
+    DkimAttributes.add_member(:tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsTokenList, location_name: "Tokens"))
     DkimAttributes.type = Types::DkimAttributes
-    DkimStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    DkimStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    DkimStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DkimStatus.add_member(:temporary_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEMPORARY_FAILURE", traits: {"smithy.api#enumValue" => "TEMPORARY_FAILURE"}))
-    DkimStatus.add_member(:not_started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
-    DnsTokenList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsToken)
-    DomainDeliverabilityCampaign.add_member(:campaign_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId"))
-    DomainDeliverabilityCampaign.add_member(:image_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUrl, location_name: "ImageUrl"))
-    DomainDeliverabilityCampaign.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subject, location_name: "Subject"))
-    DomainDeliverabilityCampaign.add_member(:from_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "FromAddress"))
-    DomainDeliverabilityCampaign.add_member(:sending_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpList, location_name: "SendingIps"))
-    DomainDeliverabilityCampaign.add_member(:first_seen_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "FirstSeenDateTime"))
-    DomainDeliverabilityCampaign.add_member(:last_seen_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastSeenDateTime"))
-    DomainDeliverabilityCampaign.add_member(:inbox_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "InboxCount"))
-    DomainDeliverabilityCampaign.add_member(:spam_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "SpamCount"))
-    DomainDeliverabilityCampaign.add_member(:read_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "ReadRate"))
-    DomainDeliverabilityCampaign.add_member(:delete_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "DeleteRate"))
-    DomainDeliverabilityCampaign.add_member(:read_delete_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "ReadDeleteRate"))
-    DomainDeliverabilityCampaign.add_member(:projected_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "ProjectedVolume"))
-    DomainDeliverabilityCampaign.add_member(:esps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Esps, location_name: "Esps"))
+    DkimStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    DkimStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    DkimStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DkimStatus.add_member(:temporary_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEMPORARY_FAILURE", traits: {"smithy.api#enumValue" => "TEMPORARY_FAILURE"}))
+    DkimStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
+    DnsTokenList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnsToken)
+    DomainDeliverabilityCampaign.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "CampaignId"))
+    DomainDeliverabilityCampaign.add_member(:image_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUrl, location_name: "ImageUrl"))
+    DomainDeliverabilityCampaign.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, location_name: "Subject"))
+    DomainDeliverabilityCampaign.add_member(:from_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "FromAddress"))
+    DomainDeliverabilityCampaign.add_member(:sending_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: IpList, location_name: "SendingIps"))
+    DomainDeliverabilityCampaign.add_member(:first_seen_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "FirstSeenDateTime"))
+    DomainDeliverabilityCampaign.add_member(:last_seen_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastSeenDateTime"))
+    DomainDeliverabilityCampaign.add_member(:inbox_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "InboxCount"))
+    DomainDeliverabilityCampaign.add_member(:spam_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "SpamCount"))
+    DomainDeliverabilityCampaign.add_member(:read_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "ReadRate"))
+    DomainDeliverabilityCampaign.add_member(:delete_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "DeleteRate"))
+    DomainDeliverabilityCampaign.add_member(:read_delete_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "ReadDeleteRate"))
+    DomainDeliverabilityCampaign.add_member(:projected_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "ProjectedVolume"))
+    DomainDeliverabilityCampaign.add_member(:esps, ::Smithy::Schema::Shapes::MemberShape.new(target: Esps, location_name: "Esps"))
     DomainDeliverabilityCampaign.type = Types::DomainDeliverabilityCampaign
-    DomainDeliverabilityCampaignList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDeliverabilityCampaign)
-    DomainDeliverabilityTrackingOption.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
-    DomainDeliverabilityTrackingOption.add_member(:subscription_start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubscriptionStartDate"))
-    DomainDeliverabilityTrackingOption.add_member(:inbox_placement_tracking_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InboxPlacementTrackingOption, location_name: "InboxPlacementTrackingOption"))
+    DomainDeliverabilityCampaignList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityCampaign)
+    DomainDeliverabilityTrackingOption.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, location_name: "Domain"))
+    DomainDeliverabilityTrackingOption.add_member(:subscription_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubscriptionStartDate"))
+    DomainDeliverabilityTrackingOption.add_member(:inbox_placement_tracking_option, ::Smithy::Schema::Shapes::MemberShape.new(target: InboxPlacementTrackingOption, location_name: "InboxPlacementTrackingOption"))
     DomainDeliverabilityTrackingOption.type = Types::DomainDeliverabilityTrackingOption
-    DomainDeliverabilityTrackingOptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDeliverabilityTrackingOption)
-    DomainIspPlacement.add_member(:isp_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IspName, location_name: "IspName"))
-    DomainIspPlacement.add_member(:inbox_raw_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "InboxRawCount"))
-    DomainIspPlacement.add_member(:spam_raw_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "SpamRawCount"))
-    DomainIspPlacement.add_member(:inbox_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "InboxPercentage"))
-    DomainIspPlacement.add_member(:spam_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "SpamPercentage"))
+    DomainDeliverabilityTrackingOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityTrackingOption)
+    DomainIspPlacement.add_member(:isp_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IspName, location_name: "IspName"))
+    DomainIspPlacement.add_member(:inbox_raw_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "InboxRawCount"))
+    DomainIspPlacement.add_member(:spam_raw_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "SpamRawCount"))
+    DomainIspPlacement.add_member(:inbox_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "InboxPercentage"))
+    DomainIspPlacement.add_member(:spam_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "SpamPercentage"))
     DomainIspPlacement.type = Types::DomainIspPlacement
-    DomainIspPlacements.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainIspPlacement)
-    EmailAddressList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress)
-    EmailContent.add_member(:simple, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Simple"))
-    EmailContent.add_member(:raw, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RawMessage, location_name: "Raw"))
-    EmailContent.add_member(:template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Template, location_name: "Template"))
+    DomainIspPlacements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainIspPlacement)
+    EmailAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress)
+    EmailContent.add_member(:simple, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Simple"))
+    EmailContent.add_member(:raw, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMessage, location_name: "Raw"))
+    EmailContent.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: Template, location_name: "Template"))
     EmailContent.type = Types::EmailContent
-    Esps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Esp)
-    EventDestination.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    EventDestination.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled", traits: {"smithy.api#default" => false}))
-    EventDestination.add_member(:matching_event_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypes, location_name: "MatchingEventTypes", traits: {"smithy.api#required" => {}}))
-    EventDestination.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
-    EventDestination.add_member(:cloud_watch_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchDestination, location_name: "CloudWatchDestination"))
-    EventDestination.add_member(:sns_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
-    EventDestination.add_member(:pinpoint_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinpointDestination, location_name: "PinpointDestination"))
+    Esps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Esp)
+    EventDestination.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    EventDestination.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    EventDestination.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, location_name: "MatchingEventTypes", traits: {"smithy.api#required" => {}}))
+    EventDestination.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
+    EventDestination.add_member(:cloud_watch_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDestination, location_name: "CloudWatchDestination"))
+    EventDestination.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, location_name: "SnsDestination"))
+    EventDestination.add_member(:pinpoint_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: PinpointDestination, location_name: "PinpointDestination"))
     EventDestination.type = Types::EventDestination
-    EventDestinationDefinition.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled", traits: {"smithy.api#default" => false}))
-    EventDestinationDefinition.add_member(:matching_event_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypes, location_name: "MatchingEventTypes"))
-    EventDestinationDefinition.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
-    EventDestinationDefinition.add_member(:cloud_watch_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchDestination, location_name: "CloudWatchDestination"))
-    EventDestinationDefinition.add_member(:sns_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
-    EventDestinationDefinition.add_member(:pinpoint_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinpointDestination, location_name: "PinpointDestination"))
+    EventDestinationDefinition.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "Enabled", traits: {"smithy.api#default" => false}))
+    EventDestinationDefinition.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, location_name: "MatchingEventTypes"))
+    EventDestinationDefinition.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
+    EventDestinationDefinition.add_member(:cloud_watch_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDestination, location_name: "CloudWatchDestination"))
+    EventDestinationDefinition.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, location_name: "SnsDestination"))
+    EventDestinationDefinition.add_member(:pinpoint_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: PinpointDestination, location_name: "PinpointDestination"))
     EventDestinationDefinition.type = Types::EventDestinationDefinition
-    EventDestinations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestination)
-    EventType.add_member(:send, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEND", traits: {"smithy.api#enumValue" => "SEND"}))
-    EventType.add_member(:reject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECT", traits: {"smithy.api#enumValue" => "REJECT"}))
-    EventType.add_member(:bounce, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOUNCE", traits: {"smithy.api#enumValue" => "BOUNCE"}))
-    EventType.add_member(:complaint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLAINT", traits: {"smithy.api#enumValue" => "COMPLAINT"}))
-    EventType.add_member(:delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELIVERY", traits: {"smithy.api#enumValue" => "DELIVERY"}))
-    EventType.add_member(:open, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
-    EventType.add_member(:click, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLICK", traits: {"smithy.api#enumValue" => "CLICK"}))
-    EventType.add_member(:rendering_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RENDERING_FAILURE", traits: {"smithy.api#enumValue" => "RENDERING_FAILURE"}))
-    EventTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventType)
+    EventDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination)
+    EventType.add_member(:send, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SEND", traits: {"smithy.api#enumValue" => "SEND"}))
+    EventType.add_member(:reject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECT", traits: {"smithy.api#enumValue" => "REJECT"}))
+    EventType.add_member(:bounce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BOUNCE", traits: {"smithy.api#enumValue" => "BOUNCE"}))
+    EventType.add_member(:complaint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLAINT", traits: {"smithy.api#enumValue" => "COMPLAINT"}))
+    EventType.add_member(:delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELIVERY", traits: {"smithy.api#enumValue" => "DELIVERY"}))
+    EventType.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
+    EventType.add_member(:click, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CLICK", traits: {"smithy.api#enumValue" => "CLICK"}))
+    EventType.add_member(:rendering_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RENDERING_FAILURE", traits: {"smithy.api#enumValue" => "RENDERING_FAILURE"}))
+    EventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType)
     GetAccountRequest.type = Types::GetAccountRequest
-    GetAccountResponse.add_member(:send_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendQuota, location_name: "SendQuota"))
-    GetAccountResponse.add_member(:sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
-    GetAccountResponse.add_member(:dedicated_ip_auto_warmup_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "DedicatedIpAutoWarmupEnabled", traits: {"smithy.api#default" => false}))
-    GetAccountResponse.add_member(:enforcement_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeneralEnforcementStatus, location_name: "EnforcementStatus"))
-    GetAccountResponse.add_member(:production_access_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "ProductionAccessEnabled", traits: {"smithy.api#default" => false}))
+    GetAccountResponse.add_member(:send_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: SendQuota, location_name: "SendQuota"))
+    GetAccountResponse.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
+    GetAccountResponse.add_member(:dedicated_ip_auto_warmup_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "DedicatedIpAutoWarmupEnabled", traits: {"smithy.api#default" => false}))
+    GetAccountResponse.add_member(:enforcement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralEnforcementStatus, location_name: "EnforcementStatus"))
+    GetAccountResponse.add_member(:production_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "ProductionAccessEnabled", traits: {"smithy.api#default" => false}))
     GetAccountResponse.type = Types::GetAccountResponse
-    GetBlacklistReportsRequest.add_member(:blacklist_item_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlacklistItemNames, location_name: "BlacklistItemNames", traits: {"smithy.api#httpQuery" => "BlacklistItemNames", "smithy.api#required" => {}}))
+    GetBlacklistReportsRequest.add_member(:blacklist_item_names, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemNames, location_name: "BlacklistItemNames", traits: {"smithy.api#httpQuery" => "BlacklistItemNames", "smithy.api#required" => {}}))
     GetBlacklistReportsRequest.type = Types::GetBlacklistReportsRequest
-    GetBlacklistReportsResponse.add_member(:blacklist_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlacklistReport, location_name: "BlacklistReport", traits: {"smithy.api#required" => {}}))
+    GetBlacklistReportsResponse.add_member(:blacklist_report, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistReport, location_name: "BlacklistReport", traits: {"smithy.api#required" => {}}))
     GetBlacklistReportsResponse.type = Types::GetBlacklistReportsResponse
-    GetConfigurationSetEventDestinationsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConfigurationSetEventDestinationsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConfigurationSetEventDestinationsRequest.type = Types::GetConfigurationSetEventDestinationsRequest
-    GetConfigurationSetEventDestinationsResponse.add_member(:event_destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinations, location_name: "EventDestinations"))
+    GetConfigurationSetEventDestinationsResponse.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinations, location_name: "EventDestinations"))
     GetConfigurationSetEventDestinationsResponse.type = Types::GetConfigurationSetEventDestinationsResponse
-    GetConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConfigurationSetRequest.type = Types::GetConfigurationSetRequest
-    GetConfigurationSetResponse.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    GetConfigurationSetResponse.add_member(:tracking_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrackingOptions, location_name: "TrackingOptions"))
-    GetConfigurationSetResponse.add_member(:delivery_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryOptions, location_name: "DeliveryOptions"))
-    GetConfigurationSetResponse.add_member(:reputation_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReputationOptions, location_name: "ReputationOptions"))
-    GetConfigurationSetResponse.add_member(:sending_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendingOptions, location_name: "SendingOptions"))
-    GetConfigurationSetResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    GetConfigurationSetResponse.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    GetConfigurationSetResponse.add_member(:tracking_options, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingOptions, location_name: "TrackingOptions"))
+    GetConfigurationSetResponse.add_member(:delivery_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryOptions, location_name: "DeliveryOptions"))
+    GetConfigurationSetResponse.add_member(:reputation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ReputationOptions, location_name: "ReputationOptions"))
+    GetConfigurationSetResponse.add_member(:sending_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SendingOptions, location_name: "SendingOptions"))
+    GetConfigurationSetResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     GetConfigurationSetResponse.type = Types::GetConfigurationSetResponse
-    GetDedicatedIpRequest.add_member(:ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDedicatedIpRequest.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, location_name: "Ip", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDedicatedIpRequest.type = Types::GetDedicatedIpRequest
-    GetDedicatedIpResponse.add_member(:dedicated_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedIp, location_name: "DedicatedIp"))
+    GetDedicatedIpResponse.add_member(:dedicated_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedIp, location_name: "DedicatedIp"))
     GetDedicatedIpResponse.type = Types::GetDedicatedIpResponse
-    GetDedicatedIpsRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "PoolName", traits: {"smithy.api#httpQuery" => "PoolName"}))
-    GetDedicatedIpsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    GetDedicatedIpsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    GetDedicatedIpsRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "PoolName", traits: {"smithy.api#httpQuery" => "PoolName"}))
+    GetDedicatedIpsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    GetDedicatedIpsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     GetDedicatedIpsRequest.type = Types::GetDedicatedIpsRequest
-    GetDedicatedIpsResponse.add_member(:dedicated_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedIpList, location_name: "DedicatedIps"))
-    GetDedicatedIpsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetDedicatedIpsResponse.add_member(:dedicated_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedIpList, location_name: "DedicatedIps"))
+    GetDedicatedIpsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetDedicatedIpsResponse.type = Types::GetDedicatedIpsResponse
     GetDeliverabilityDashboardOptionsRequest.type = Types::GetDeliverabilityDashboardOptionsRequest
-    GetDeliverabilityDashboardOptionsResponse.add_member(:dashboard_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "DashboardEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    GetDeliverabilityDashboardOptionsResponse.add_member(:subscription_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubscriptionExpiryDate"))
-    GetDeliverabilityDashboardOptionsResponse.add_member(:account_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverabilityDashboardAccountStatus, location_name: "AccountStatus"))
-    GetDeliverabilityDashboardOptionsResponse.add_member(:active_subscribed_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDeliverabilityTrackingOptions, location_name: "ActiveSubscribedDomains"))
-    GetDeliverabilityDashboardOptionsResponse.add_member(:pending_expiration_subscribed_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDeliverabilityTrackingOptions, location_name: "PendingExpirationSubscribedDomains"))
+    GetDeliverabilityDashboardOptionsResponse.add_member(:dashboard_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "DashboardEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    GetDeliverabilityDashboardOptionsResponse.add_member(:subscription_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubscriptionExpiryDate"))
+    GetDeliverabilityDashboardOptionsResponse.add_member(:account_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityDashboardAccountStatus, location_name: "AccountStatus"))
+    GetDeliverabilityDashboardOptionsResponse.add_member(:active_subscribed_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityTrackingOptions, location_name: "ActiveSubscribedDomains"))
+    GetDeliverabilityDashboardOptionsResponse.add_member(:pending_expiration_subscribed_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityTrackingOptions, location_name: "PendingExpirationSubscribedDomains"))
     GetDeliverabilityDashboardOptionsResponse.type = Types::GetDeliverabilityDashboardOptionsResponse
-    GetDeliverabilityTestReportRequest.add_member(:report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDeliverabilityTestReportRequest.add_member(:report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportId, location_name: "ReportId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDeliverabilityTestReportRequest.type = Types::GetDeliverabilityTestReportRequest
-    GetDeliverabilityTestReportResponse.add_member(:deliverability_test_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverabilityTestReport, location_name: "DeliverabilityTestReport", traits: {"smithy.api#required" => {}}))
-    GetDeliverabilityTestReportResponse.add_member(:overall_placement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementStatistics, location_name: "OverallPlacement", traits: {"smithy.api#required" => {}}))
-    GetDeliverabilityTestReportResponse.add_member(:isp_placements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IspPlacements, location_name: "IspPlacements", traits: {"smithy.api#required" => {}}))
-    GetDeliverabilityTestReportResponse.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageContent, location_name: "Message"))
-    GetDeliverabilityTestReportResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    GetDeliverabilityTestReportResponse.add_member(:deliverability_test_report, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestReport, location_name: "DeliverabilityTestReport", traits: {"smithy.api#required" => {}}))
+    GetDeliverabilityTestReportResponse.add_member(:overall_placement, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStatistics, location_name: "OverallPlacement", traits: {"smithy.api#required" => {}}))
+    GetDeliverabilityTestReportResponse.add_member(:isp_placements, ::Smithy::Schema::Shapes::MemberShape.new(target: IspPlacements, location_name: "IspPlacements", traits: {"smithy.api#required" => {}}))
+    GetDeliverabilityTestReportResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageContent, location_name: "Message"))
+    GetDeliverabilityTestReportResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     GetDeliverabilityTestReportResponse.type = Types::GetDeliverabilityTestReportResponse
-    GetDomainDeliverabilityCampaignRequest.add_member(:campaign_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDomainDeliverabilityCampaignRequest.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, location_name: "CampaignId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDomainDeliverabilityCampaignRequest.type = Types::GetDomainDeliverabilityCampaignRequest
-    GetDomainDeliverabilityCampaignResponse.add_member(:domain_deliverability_campaign, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDeliverabilityCampaign, location_name: "DomainDeliverabilityCampaign", traits: {"smithy.api#required" => {}}))
+    GetDomainDeliverabilityCampaignResponse.add_member(:domain_deliverability_campaign, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityCampaign, location_name: "DomainDeliverabilityCampaign", traits: {"smithy.api#required" => {}}))
     GetDomainDeliverabilityCampaignResponse.type = Types::GetDomainDeliverabilityCampaignResponse
-    GetDomainStatisticsReportRequest.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "Domain", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetDomainStatisticsReportRequest.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate", traits: {"smithy.api#httpQuery" => "StartDate", "smithy.api#required" => {}}))
-    GetDomainStatisticsReportRequest.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndDate", traits: {"smithy.api#httpQuery" => "EndDate", "smithy.api#required" => {}}))
+    GetDomainStatisticsReportRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "Domain", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDomainStatisticsReportRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartDate", traits: {"smithy.api#httpQuery" => "StartDate", "smithy.api#required" => {}}))
+    GetDomainStatisticsReportRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndDate", traits: {"smithy.api#httpQuery" => "EndDate", "smithy.api#required" => {}}))
     GetDomainStatisticsReportRequest.type = Types::GetDomainStatisticsReportRequest
-    GetDomainStatisticsReportResponse.add_member(:overall_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OverallVolume, location_name: "OverallVolume", traits: {"smithy.api#required" => {}}))
-    GetDomainStatisticsReportResponse.add_member(:daily_volumes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DailyVolumes, location_name: "DailyVolumes", traits: {"smithy.api#required" => {}}))
+    GetDomainStatisticsReportResponse.add_member(:overall_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: OverallVolume, location_name: "OverallVolume", traits: {"smithy.api#required" => {}}))
+    GetDomainStatisticsReportResponse.add_member(:daily_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyVolumes, location_name: "DailyVolumes", traits: {"smithy.api#required" => {}}))
     GetDomainStatisticsReportResponse.type = Types::GetDomainStatisticsReportResponse
-    GetEmailIdentityRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetEmailIdentityRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEmailIdentityRequest.type = Types::GetEmailIdentityRequest
-    GetEmailIdentityResponse.add_member(:identity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
-    GetEmailIdentityResponse.add_member(:feedback_forwarding_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "FeedbackForwardingStatus", traits: {"smithy.api#default" => false}))
-    GetEmailIdentityResponse.add_member(:verified_for_sending_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "VerifiedForSendingStatus", traits: {"smithy.api#default" => false}))
-    GetEmailIdentityResponse.add_member(:dkim_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DkimAttributes, location_name: "DkimAttributes"))
-    GetEmailIdentityResponse.add_member(:mail_from_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailFromAttributes, location_name: "MailFromAttributes"))
-    GetEmailIdentityResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    GetEmailIdentityResponse.add_member(:identity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityType, location_name: "IdentityType"))
+    GetEmailIdentityResponse.add_member(:feedback_forwarding_status, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "FeedbackForwardingStatus", traits: {"smithy.api#default" => false}))
+    GetEmailIdentityResponse.add_member(:verified_for_sending_status, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "VerifiedForSendingStatus", traits: {"smithy.api#default" => false}))
+    GetEmailIdentityResponse.add_member(:dkim_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimAttributes, location_name: "DkimAttributes"))
+    GetEmailIdentityResponse.add_member(:mail_from_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MailFromAttributes, location_name: "MailFromAttributes"))
+    GetEmailIdentityResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     GetEmailIdentityResponse.type = Types::GetEmailIdentityResponse
-    IdentityInfo.add_member(:identity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
-    IdentityInfo.add_member(:identity_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "IdentityName"))
-    IdentityInfo.add_member(:sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
+    IdentityInfo.add_member(:identity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityType, location_name: "IdentityType"))
+    IdentityInfo.add_member(:identity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "IdentityName"))
+    IdentityInfo.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
     IdentityInfo.type = Types::IdentityInfo
-    IdentityInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityInfo)
-    IdentityType.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_ADDRESS", traits: {"smithy.api#enumValue" => "EMAIL_ADDRESS"}))
-    IdentityType.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOMAIN", traits: {"smithy.api#enumValue" => "DOMAIN"}))
-    IdentityType.add_member(:managed_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MANAGED_DOMAIN", traits: {"smithy.api#enumValue" => "MANAGED_DOMAIN"}))
-    InboxPlacementTrackingOption.add_member(:global, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "Global", traits: {"smithy.api#default" => false}))
-    InboxPlacementTrackingOption.add_member(:tracked_isps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IspNameList, location_name: "TrackedIsps"))
+    IdentityInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityInfo)
+    IdentityType.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMAIL_ADDRESS", traits: {"smithy.api#enumValue" => "EMAIL_ADDRESS"}))
+    IdentityType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOMAIN", traits: {"smithy.api#enumValue" => "DOMAIN"}))
+    IdentityType.add_member(:managed_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MANAGED_DOMAIN", traits: {"smithy.api#enumValue" => "MANAGED_DOMAIN"}))
+    InboxPlacementTrackingOption.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "Global", traits: {"smithy.api#default" => false}))
+    InboxPlacementTrackingOption.add_member(:tracked_isps, ::Smithy::Schema::Shapes::MemberShape.new(target: IspNameList, location_name: "TrackedIsps"))
     InboxPlacementTrackingOption.type = Types::InboxPlacementTrackingOption
-    IpList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ip)
-    IspNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IspName)
-    IspPlacement.add_member(:isp_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IspName, location_name: "IspName"))
-    IspPlacement.add_member(:placement_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlacementStatistics, location_name: "PlacementStatistics"))
+    IpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ip)
+    IspNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IspName)
+    IspPlacement.add_member(:isp_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IspName, location_name: "IspName"))
+    IspPlacement.add_member(:placement_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStatistics, location_name: "PlacementStatistics"))
     IspPlacement.type = Types::IspPlacement
-    IspPlacements.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IspPlacement)
-    KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "DeliveryStreamArn", traits: {"smithy.api#required" => {}}))
+    IspPlacements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IspPlacement)
+    KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "DeliveryStreamArn", traits: {"smithy.api#required" => {}}))
     KinesisFirehoseDestination.type = Types::KinesisFirehoseDestination
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListConfigurationSetsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListConfigurationSetsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     ListConfigurationSetsRequest.type = Types::ListConfigurationSetsRequest
-    ListConfigurationSetsResponse.add_member(:configuration_sets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameList, location_name: "ConfigurationSets"))
-    ListConfigurationSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationSetsResponse.add_member(:configuration_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameList, location_name: "ConfigurationSets"))
+    ListConfigurationSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListConfigurationSetsResponse.type = Types::ListConfigurationSetsResponse
-    ListDedicatedIpPoolsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListDedicatedIpPoolsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListDedicatedIpPoolsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListDedicatedIpPoolsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     ListDedicatedIpPoolsRequest.type = Types::ListDedicatedIpPoolsRequest
-    ListDedicatedIpPoolsResponse.add_member(:dedicated_ip_pools, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOfDedicatedIpPools, location_name: "DedicatedIpPools"))
-    ListDedicatedIpPoolsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDedicatedIpPoolsResponse.add_member(:dedicated_ip_pools, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfDedicatedIpPools, location_name: "DedicatedIpPools"))
+    ListDedicatedIpPoolsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListDedicatedIpPoolsResponse.type = Types::ListDedicatedIpPoolsResponse
-    ListDeliverabilityTestReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListDeliverabilityTestReportsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListDeliverabilityTestReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListDeliverabilityTestReportsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     ListDeliverabilityTestReportsRequest.type = Types::ListDeliverabilityTestReportsRequest
-    ListDeliverabilityTestReportsResponse.add_member(:deliverability_test_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverabilityTestReports, location_name: "DeliverabilityTestReports", traits: {"smithy.api#required" => {}}))
-    ListDeliverabilityTestReportsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeliverabilityTestReportsResponse.add_member(:deliverability_test_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestReports, location_name: "DeliverabilityTestReports", traits: {"smithy.api#required" => {}}))
+    ListDeliverabilityTestReportsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListDeliverabilityTestReportsResponse.type = Types::ListDeliverabilityTestReportsResponse
-    ListDomainDeliverabilityCampaignsRequest.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate", traits: {"smithy.api#httpQuery" => "StartDate", "smithy.api#required" => {}}))
-    ListDomainDeliverabilityCampaignsRequest.add_member(:end_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndDate", traits: {"smithy.api#httpQuery" => "EndDate", "smithy.api#required" => {}}))
-    ListDomainDeliverabilityCampaignsRequest.add_member(:subscribed_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Domain, location_name: "SubscribedDomain", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListDomainDeliverabilityCampaignsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListDomainDeliverabilityCampaignsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListDomainDeliverabilityCampaignsRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "StartDate", traits: {"smithy.api#httpQuery" => "StartDate", "smithy.api#required" => {}}))
+    ListDomainDeliverabilityCampaignsRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndDate", traits: {"smithy.api#httpQuery" => "EndDate", "smithy.api#required" => {}}))
+    ListDomainDeliverabilityCampaignsRequest.add_member(:subscribed_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, location_name: "SubscribedDomain", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDomainDeliverabilityCampaignsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListDomainDeliverabilityCampaignsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     ListDomainDeliverabilityCampaignsRequest.type = Types::ListDomainDeliverabilityCampaignsRequest
-    ListDomainDeliverabilityCampaignsResponse.add_member(:domain_deliverability_campaigns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDeliverabilityCampaignList, location_name: "DomainDeliverabilityCampaigns", traits: {"smithy.api#required" => {}}))
-    ListDomainDeliverabilityCampaignsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDomainDeliverabilityCampaignsResponse.add_member(:domain_deliverability_campaigns, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityCampaignList, location_name: "DomainDeliverabilityCampaigns", traits: {"smithy.api#required" => {}}))
+    ListDomainDeliverabilityCampaignsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListDomainDeliverabilityCampaignsResponse.type = Types::ListDomainDeliverabilityCampaignsResponse
-    ListEmailIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListEmailIdentitiesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListEmailIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListEmailIdentitiesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     ListEmailIdentitiesRequest.type = Types::ListEmailIdentitiesRequest
-    ListEmailIdentitiesResponse.add_member(:email_identities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityInfoList, location_name: "EmailIdentities"))
-    ListEmailIdentitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEmailIdentitiesResponse.add_member(:email_identities, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityInfoList, location_name: "EmailIdentities"))
+    ListEmailIdentitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListEmailIdentitiesResponse.type = Types::ListEmailIdentitiesResponse
-    ListOfDedicatedIpPools.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName)
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "ResourceArn", "smithy.api#required" => {}}))
+    ListOfDedicatedIpPools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName)
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "ResourceArn", "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MailFromAttributes.add_member(:mail_from_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailFromDomainName, location_name: "MailFromDomain", traits: {"smithy.api#required" => {}}))
-    MailFromAttributes.add_member(:mail_from_domain_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailFromDomainStatus, location_name: "MailFromDomainStatus", traits: {"smithy.api#required" => {}}))
-    MailFromAttributes.add_member(:behavior_on_mx_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BehaviorOnMxFailure, location_name: "BehaviorOnMxFailure", traits: {"smithy.api#required" => {}}))
+    MailFromAttributes.add_member(:mail_from_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: MailFromDomainName, location_name: "MailFromDomain", traits: {"smithy.api#required" => {}}))
+    MailFromAttributes.add_member(:mail_from_domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MailFromDomainStatus, location_name: "MailFromDomainStatus", traits: {"smithy.api#required" => {}}))
+    MailFromAttributes.add_member(:behavior_on_mx_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorOnMxFailure, location_name: "BehaviorOnMxFailure", traits: {"smithy.api#required" => {}}))
     MailFromAttributes.type = Types::MailFromAttributes
-    MailFromDomainNotVerifiedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MailFromDomainNotVerifiedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MailFromDomainNotVerifiedException.type = Types::MailFromDomainNotVerifiedException
-    MailFromDomainStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    MailFromDomainStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
-    MailFromDomainStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    MailFromDomainStatus.add_member(:temporary_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEMPORARY_FAILURE", traits: {"smithy.api#enumValue" => "TEMPORARY_FAILURE"}))
-    Message.add_member(:subject, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Content, location_name: "Subject", traits: {"smithy.api#required" => {}}))
-    Message.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Body, location_name: "Body", traits: {"smithy.api#required" => {}}))
+    MailFromDomainStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    MailFromDomainStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    MailFromDomainStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    MailFromDomainStatus.add_member(:temporary_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TEMPORARY_FAILURE", traits: {"smithy.api#enumValue" => "TEMPORARY_FAILURE"}))
+    Message.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, location_name: "Subject", traits: {"smithy.api#required" => {}}))
+    Message.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Body, location_name: "Body", traits: {"smithy.api#required" => {}}))
     Message.type = Types::Message
-    MessageRejected.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MessageRejected.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MessageRejected.type = Types::MessageRejected
-    MessageTag.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTagName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    MessageTag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    MessageTag.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    MessageTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     MessageTag.type = Types::MessageTag
-    MessageTagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTag)
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MessageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTag)
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NotFoundException.type = Types::NotFoundException
-    OverallVolume.add_member(:volume_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeStatistics, location_name: "VolumeStatistics"))
-    OverallVolume.add_member(:read_rate_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "ReadRatePercent"))
-    OverallVolume.add_member(:domain_isp_placements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainIspPlacements, location_name: "DomainIspPlacements"))
+    OverallVolume.add_member(:volume_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStatistics, location_name: "VolumeStatistics"))
+    OverallVolume.add_member(:read_rate_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "ReadRatePercent"))
+    OverallVolume.add_member(:domain_isp_placements, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainIspPlacements, location_name: "DomainIspPlacements"))
     OverallVolume.type = Types::OverallVolume
-    PinpointDestination.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ApplicationArn"))
+    PinpointDestination.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ApplicationArn"))
     PinpointDestination.type = Types::PinpointDestination
-    PlacementStatistics.add_member(:inbox_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "InboxPercentage"))
-    PlacementStatistics.add_member(:spam_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "SpamPercentage"))
-    PlacementStatistics.add_member(:missing_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "MissingPercentage"))
-    PlacementStatistics.add_member(:spf_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "SpfPercentage"))
-    PlacementStatistics.add_member(:dkim_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "DkimPercentage"))
+    PlacementStatistics.add_member(:inbox_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "InboxPercentage"))
+    PlacementStatistics.add_member(:spam_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "SpamPercentage"))
+    PlacementStatistics.add_member(:missing_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "MissingPercentage"))
+    PlacementStatistics.add_member(:spf_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "SpfPercentage"))
+    PlacementStatistics.add_member(:dkim_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "DkimPercentage"))
     PlacementStatistics.type = Types::PlacementStatistics
-    PutAccountDedicatedIpWarmupAttributesRequest.add_member(:auto_warmup_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "AutoWarmupEnabled", traits: {"smithy.api#default" => false}))
+    PutAccountDedicatedIpWarmupAttributesRequest.add_member(:auto_warmup_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "AutoWarmupEnabled", traits: {"smithy.api#default" => false}))
     PutAccountDedicatedIpWarmupAttributesRequest.type = Types::PutAccountDedicatedIpWarmupAttributesRequest
     PutAccountDedicatedIpWarmupAttributesResponse.type = Types::PutAccountDedicatedIpWarmupAttributesResponse
-    PutAccountSendingAttributesRequest.add_member(:sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
+    PutAccountSendingAttributesRequest.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
     PutAccountSendingAttributesRequest.type = Types::PutAccountSendingAttributesRequest
     PutAccountSendingAttributesResponse.type = Types::PutAccountSendingAttributesResponse
-    PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutConfigurationSetDeliveryOptionsRequest.add_member(:tls_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
-    PutConfigurationSetDeliveryOptionsRequest.add_member(:sending_pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendingPoolName, location_name: "SendingPoolName"))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:tls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsPolicy, location_name: "TlsPolicy"))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:sending_pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SendingPoolName, location_name: "SendingPoolName"))
     PutConfigurationSetDeliveryOptionsRequest.type = Types::PutConfigurationSetDeliveryOptionsRequest
     PutConfigurationSetDeliveryOptionsResponse.type = Types::PutConfigurationSetDeliveryOptionsResponse
-    PutConfigurationSetReputationOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutConfigurationSetReputationOptionsRequest.add_member(:reputation_metrics_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "ReputationMetricsEnabled", traits: {"smithy.api#default" => false}))
+    PutConfigurationSetReputationOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutConfigurationSetReputationOptionsRequest.add_member(:reputation_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "ReputationMetricsEnabled", traits: {"smithy.api#default" => false}))
     PutConfigurationSetReputationOptionsRequest.type = Types::PutConfigurationSetReputationOptionsRequest
     PutConfigurationSetReputationOptionsResponse.type = Types::PutConfigurationSetReputationOptionsResponse
-    PutConfigurationSetSendingOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutConfigurationSetSendingOptionsRequest.add_member(:sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
+    PutConfigurationSetSendingOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutConfigurationSetSendingOptionsRequest.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
     PutConfigurationSetSendingOptionsRequest.type = Types::PutConfigurationSetSendingOptionsRequest
     PutConfigurationSetSendingOptionsResponse.type = Types::PutConfigurationSetSendingOptionsResponse
-    PutConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutConfigurationSetTrackingOptionsRequest.add_member(:custom_redirect_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
+    PutConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutConfigurationSetTrackingOptionsRequest.add_member(:custom_redirect_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
     PutConfigurationSetTrackingOptionsRequest.type = Types::PutConfigurationSetTrackingOptionsRequest
     PutConfigurationSetTrackingOptionsResponse.type = Types::PutConfigurationSetTrackingOptionsResponse
-    PutDedicatedIpInPoolRequest.add_member(:ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutDedicatedIpInPoolRequest.add_member(:destination_pool_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolName, location_name: "DestinationPoolName", traits: {"smithy.api#required" => {}}))
+    PutDedicatedIpInPoolRequest.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, location_name: "Ip", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutDedicatedIpInPoolRequest.add_member(:destination_pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, location_name: "DestinationPoolName", traits: {"smithy.api#required" => {}}))
     PutDedicatedIpInPoolRequest.type = Types::PutDedicatedIpInPoolRequest
     PutDedicatedIpInPoolResponse.type = Types::PutDedicatedIpInPoolResponse
-    PutDedicatedIpWarmupAttributesRequest.add_member(:ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutDedicatedIpWarmupAttributesRequest.add_member(:warmup_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage100Wrapper, location_name: "WarmupPercentage", traits: {"smithy.api#required" => {}}))
+    PutDedicatedIpWarmupAttributesRequest.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, location_name: "Ip", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutDedicatedIpWarmupAttributesRequest.add_member(:warmup_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage100Wrapper, location_name: "WarmupPercentage", traits: {"smithy.api#required" => {}}))
     PutDedicatedIpWarmupAttributesRequest.type = Types::PutDedicatedIpWarmupAttributesRequest
     PutDedicatedIpWarmupAttributesResponse.type = Types::PutDedicatedIpWarmupAttributesResponse
-    PutDeliverabilityDashboardOptionRequest.add_member(:dashboard_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "DashboardEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PutDeliverabilityDashboardOptionRequest.add_member(:subscribed_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainDeliverabilityTrackingOptions, location_name: "SubscribedDomains"))
+    PutDeliverabilityDashboardOptionRequest.add_member(:dashboard_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "DashboardEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PutDeliverabilityDashboardOptionRequest.add_member(:subscribed_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityTrackingOptions, location_name: "SubscribedDomains"))
     PutDeliverabilityDashboardOptionRequest.type = Types::PutDeliverabilityDashboardOptionRequest
     PutDeliverabilityDashboardOptionResponse.type = Types::PutDeliverabilityDashboardOptionResponse
-    PutEmailIdentityDkimAttributesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutEmailIdentityDkimAttributesRequest.add_member(:signing_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "SigningEnabled", traits: {"smithy.api#default" => false}))
+    PutEmailIdentityDkimAttributesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutEmailIdentityDkimAttributesRequest.add_member(:signing_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "SigningEnabled", traits: {"smithy.api#default" => false}))
     PutEmailIdentityDkimAttributesRequest.type = Types::PutEmailIdentityDkimAttributesRequest
     PutEmailIdentityDkimAttributesResponse.type = Types::PutEmailIdentityDkimAttributesResponse
-    PutEmailIdentityFeedbackAttributesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutEmailIdentityFeedbackAttributesRequest.add_member(:email_forwarding_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "EmailForwardingEnabled", traits: {"smithy.api#default" => false}))
+    PutEmailIdentityFeedbackAttributesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutEmailIdentityFeedbackAttributesRequest.add_member(:email_forwarding_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "EmailForwardingEnabled", traits: {"smithy.api#default" => false}))
     PutEmailIdentityFeedbackAttributesRequest.type = Types::PutEmailIdentityFeedbackAttributesRequest
     PutEmailIdentityFeedbackAttributesResponse.type = Types::PutEmailIdentityFeedbackAttributesResponse
-    PutEmailIdentityMailFromAttributesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutEmailIdentityMailFromAttributesRequest.add_member(:mail_from_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailFromDomainName, location_name: "MailFromDomain"))
-    PutEmailIdentityMailFromAttributesRequest.add_member(:behavior_on_mx_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BehaviorOnMxFailure, location_name: "BehaviorOnMxFailure"))
+    PutEmailIdentityMailFromAttributesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutEmailIdentityMailFromAttributesRequest.add_member(:mail_from_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: MailFromDomainName, location_name: "MailFromDomain"))
+    PutEmailIdentityMailFromAttributesRequest.add_member(:behavior_on_mx_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorOnMxFailure, location_name: "BehaviorOnMxFailure"))
     PutEmailIdentityMailFromAttributesRequest.type = Types::PutEmailIdentityMailFromAttributesRequest
     PutEmailIdentityMailFromAttributesResponse.type = Types::PutEmailIdentityMailFromAttributesResponse
-    RawMessage.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RawMessageData, location_name: "Data", traits: {"smithy.api#required" => {}}))
+    RawMessage.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMessageData, location_name: "Data", traits: {"smithy.api#required" => {}}))
     RawMessage.type = Types::RawMessage
-    ReputationOptions.add_member(:reputation_metrics_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "ReputationMetricsEnabled", traits: {"smithy.api#default" => false}))
-    ReputationOptions.add_member(:last_fresh_start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastFreshStart, location_name: "LastFreshStart"))
+    ReputationOptions.add_member(:reputation_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "ReputationMetricsEnabled", traits: {"smithy.api#default" => false}))
+    ReputationOptions.add_member(:last_fresh_start, ::Smithy::Schema::Shapes::MemberShape.new(target: LastFreshStart, location_name: "LastFreshStart"))
     ReputationOptions.type = Types::ReputationOptions
-    SendEmailRequest.add_member(:from_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress"))
-    SendEmailRequest.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "Destination", traits: {"smithy.api#required" => {}}))
-    SendEmailRequest.add_member(:reply_to_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddressList, location_name: "ReplyToAddresses"))
-    SendEmailRequest.add_member(:feedback_forwarding_email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FeedbackForwardingEmailAddress"))
-    SendEmailRequest.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
-    SendEmailRequest.add_member(:email_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTagList, location_name: "EmailTags"))
-    SendEmailRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SendEmailRequest.add_member(:from_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "FromEmailAddress"))
+    SendEmailRequest.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, location_name: "Destination", traits: {"smithy.api#required" => {}}))
+    SendEmailRequest.add_member(:reply_to_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressList, location_name: "ReplyToAddresses"))
+    SendEmailRequest.add_member(:feedback_forwarding_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, location_name: "FeedbackForwardingEmailAddress"))
+    SendEmailRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
+    SendEmailRequest.add_member(:email_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagList, location_name: "EmailTags"))
+    SendEmailRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
     SendEmailRequest.type = Types::SendEmailRequest
-    SendEmailResponse.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutboundMessageId, location_name: "MessageId"))
+    SendEmailResponse.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundMessageId, location_name: "MessageId"))
     SendEmailResponse.type = Types::SendEmailResponse
-    SendQuota.add_member(:max24_hour_send, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Max24HourSend, location_name: "Max24HourSend", traits: {"smithy.api#default" => 0}))
-    SendQuota.add_member(:max_send_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSendRate, location_name: "MaxSendRate", traits: {"smithy.api#default" => 0}))
-    SendQuota.add_member(:sent_last24_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentLast24Hours, location_name: "SentLast24Hours", traits: {"smithy.api#default" => 0}))
+    SendQuota.add_member(:max24_hour_send, ::Smithy::Schema::Shapes::MemberShape.new(target: Max24HourSend, location_name: "Max24HourSend", traits: {"smithy.api#default" => 0}))
+    SendQuota.add_member(:max_send_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSendRate, location_name: "MaxSendRate", traits: {"smithy.api#default" => 0}))
+    SendQuota.add_member(:sent_last24_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: SentLast24Hours, location_name: "SentLast24Hours", traits: {"smithy.api#default" => 0}))
     SendQuota.type = Types::SendQuota
-    SendingOptions.add_member(:sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
+    SendingOptions.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, location_name: "SendingEnabled", traits: {"smithy.api#default" => false}))
     SendingOptions.type = Types::SendingOptions
-    SendingPausedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    SendingPausedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     SendingPausedException.type = Types::SendingPausedException
-    SnsDestination.add_member(:topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    SnsDestination.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
     SnsDestination.type = Types::SnsDestination
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Template.add_member(:template_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
-    Template.add_member(:template_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateData, location_name: "TemplateData"))
+    Template.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateArn, location_name: "TemplateArn"))
+    Template.add_member(:template_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateData, location_name: "TemplateData"))
     Template.type = Types::Template
-    TlsPolicy.add_member(:require, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRE", traits: {"smithy.api#enumValue" => "REQUIRE"}))
-    TlsPolicy.add_member(:optional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TlsPolicy.add_member(:require, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REQUIRE", traits: {"smithy.api#enumValue" => "REQUIRE"}))
+    TlsPolicy.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    TrackingOptions.add_member(:custom_redirect_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain", traits: {"smithy.api#required" => {}}))
+    TrackingOptions.add_member(:custom_redirect_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRedirectDomain, location_name: "CustomRedirectDomain", traits: {"smithy.api#required" => {}}))
     TrackingOptions.type = Types::TrackingOptions
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "ResourceArn", "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "TagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#httpQuery" => "ResourceArn", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "TagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationDefinition, location_name: "EventDestination", traits: {"smithy.api#required" => {}}))
+    UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, location_name: "EventDestination", traits: {"smithy.api#required" => {}}))
     UpdateConfigurationSetEventDestinationRequest.type = Types::UpdateConfigurationSetEventDestinationRequest
     UpdateConfigurationSetEventDestinationResponse.type = Types::UpdateConfigurationSetEventDestinationResponse
-    VolumeStatistics.add_member(:inbox_raw_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "InboxRawCount"))
-    VolumeStatistics.add_member(:spam_raw_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "SpamRawCount"))
-    VolumeStatistics.add_member(:projected_inbox, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "ProjectedInbox"))
-    VolumeStatistics.add_member(:projected_spam, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Volume, location_name: "ProjectedSpam"))
+    VolumeStatistics.add_member(:inbox_raw_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "InboxRawCount"))
+    VolumeStatistics.add_member(:spam_raw_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "SpamRawCount"))
+    VolumeStatistics.add_member(:projected_inbox, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "ProjectedInbox"))
+    VolumeStatistics.add_member(:projected_spam, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, location_name: "ProjectedSpam"))
     VolumeStatistics.type = Types::VolumeStatistics
-    WarmupStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    WarmupStatus.add_member(:done, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DONE", traits: {"smithy.api#enumValue" => "DONE"}))
+    WarmupStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    WarmupStatus.add_member(:done, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DONE", traits: {"smithy.api#enumValue" => "DONE"}))
 
     AmazonPinpointEmailService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.pinpointemail#AmazonPinpointEmailService"
@@ -679,447 +679,447 @@ module Aws::PinpointEmail
       service.add_operation(:create_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#CreateConfigurationSet"
         operation.name = "CreateConfigurationSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConfigurationSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConfigurationSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateConfigurationSetRequest
+        operation.output = CreateConfigurationSetResponse
+        operation.errors << AlreadyExistsException
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/email/configuration-sets", "code" => 200}}
       end)
       service.add_operation(:create_configuration_set_event_destination, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#CreateConfigurationSetEventDestination"
         operation.name = "CreateConfigurationSetEventDestination"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConfigurationSetEventDestinationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConfigurationSetEventDestinationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateConfigurationSetEventDestinationRequest
+        operation.output = CreateConfigurationSetEventDestinationResponse
+        operation.errors << AlreadyExistsException
+        operation.errors << BadRequestException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations", "code" => 200}}
       end)
       service.add_operation(:create_dedicated_ip_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#CreateDedicatedIpPool"
         operation.name = "CreateDedicatedIpPool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDedicatedIpPoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDedicatedIpPoolResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateDedicatedIpPoolRequest
+        operation.output = CreateDedicatedIpPoolResponse
+        operation.errors << AlreadyExistsException
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << LimitExceededException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/email/dedicated-ip-pools", "code" => 200}}
       end)
       service.add_operation(:create_deliverability_test_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#CreateDeliverabilityTestReport"
         operation.name = "CreateDeliverabilityTestReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDeliverabilityTestReportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateDeliverabilityTestReportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountSuspendedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageRejected)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendingPausedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateDeliverabilityTestReportRequest
+        operation.output = CreateDeliverabilityTestReportResponse
+        operation.errors << AccountSuspendedException
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << LimitExceededException
+        operation.errors << MailFromDomainNotVerifiedException
+        operation.errors << MessageRejected
+        operation.errors << NotFoundException
+        operation.errors << SendingPausedException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/email/deliverability-dashboard/test", "code" => 200}}
       end)
       service.add_operation(:create_email_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#CreateEmailIdentity"
         operation.name = "CreateEmailIdentity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEmailIdentityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEmailIdentityResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = CreateEmailIdentityRequest
+        operation.output = CreateEmailIdentityResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << LimitExceededException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/email/identities", "code" => 200}}
       end)
       service.add_operation(:delete_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#DeleteConfigurationSet"
         operation.name = "DeleteConfigurationSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteConfigurationSetRequest
+        operation.output = DeleteConfigurationSetResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}", "code" => 200}}
       end)
       service.add_operation(:delete_configuration_set_event_destination, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#DeleteConfigurationSetEventDestination"
         operation.name = "DeleteConfigurationSetEventDestination"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationSetEventDestinationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationSetEventDestinationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteConfigurationSetEventDestinationRequest
+        operation.output = DeleteConfigurationSetEventDestinationResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}", "code" => 200}}
       end)
       service.add_operation(:delete_dedicated_ip_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#DeleteDedicatedIpPool"
         operation.name = "DeleteDedicatedIpPool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDedicatedIpPoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDedicatedIpPoolResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteDedicatedIpPoolRequest
+        operation.output = DeleteDedicatedIpPoolResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/email/dedicated-ip-pools/{PoolName}", "code" => 200}}
       end)
       service.add_operation(:delete_email_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#DeleteEmailIdentity"
         operation.name = "DeleteEmailIdentity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEmailIdentityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEmailIdentityResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteEmailIdentityRequest
+        operation.output = DeleteEmailIdentityResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/email/identities/{EmailIdentity}", "code" => 200}}
       end)
       service.add_operation(:get_account, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetAccount"
         operation.name = "GetAccount"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetAccountRequest
+        operation.output = GetAccountResponse
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/account", "code" => 200}}
       end)
       service.add_operation(:get_blacklist_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetBlacklistReports"
         operation.name = "GetBlacklistReports"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBlacklistReportsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBlacklistReportsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetBlacklistReportsRequest
+        operation.output = GetBlacklistReportsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/deliverability-dashboard/blacklist-report", "code" => 200}}
       end)
       service.add_operation(:get_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetConfigurationSet"
         operation.name = "GetConfigurationSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConfigurationSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConfigurationSetResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetConfigurationSetRequest
+        operation.output = GetConfigurationSetResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}", "code" => 200}}
       end)
       service.add_operation(:get_configuration_set_event_destinations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetConfigurationSetEventDestinations"
         operation.name = "GetConfigurationSetEventDestinations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConfigurationSetEventDestinationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConfigurationSetEventDestinationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetConfigurationSetEventDestinationsRequest
+        operation.output = GetConfigurationSetEventDestinationsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations", "code" => 200}}
       end)
       service.add_operation(:get_dedicated_ip, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetDedicatedIp"
         operation.name = "GetDedicatedIp"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDedicatedIpRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDedicatedIpResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetDedicatedIpRequest
+        operation.output = GetDedicatedIpResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/dedicated-ips/{Ip}", "code" => 200}}
       end)
       service.add_operation(:get_dedicated_ips, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetDedicatedIps"
         operation.name = "GetDedicatedIps"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDedicatedIpsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDedicatedIpsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetDedicatedIpsRequest
+        operation.output = GetDedicatedIpsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/dedicated-ips", "code" => 200}}
         operation[:paginator] = Paginators::GetDedicatedIps.new
       end)
       service.add_operation(:get_deliverability_dashboard_options, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetDeliverabilityDashboardOptions"
         operation.name = "GetDeliverabilityDashboardOptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeliverabilityDashboardOptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeliverabilityDashboardOptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetDeliverabilityDashboardOptionsRequest
+        operation.output = GetDeliverabilityDashboardOptionsResponse
+        operation.errors << BadRequestException
+        operation.errors << LimitExceededException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/deliverability-dashboard", "code" => 200}}
       end)
       service.add_operation(:get_deliverability_test_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetDeliverabilityTestReport"
         operation.name = "GetDeliverabilityTestReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeliverabilityTestReportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDeliverabilityTestReportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetDeliverabilityTestReportRequest
+        operation.output = GetDeliverabilityTestReportResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/deliverability-dashboard/test-reports/{ReportId}", "code" => 200}}
       end)
       service.add_operation(:get_domain_deliverability_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetDomainDeliverabilityCampaign"
         operation.name = "GetDomainDeliverabilityCampaign"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDomainDeliverabilityCampaignRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDomainDeliverabilityCampaignResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetDomainDeliverabilityCampaignRequest
+        operation.output = GetDomainDeliverabilityCampaignResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/deliverability-dashboard/campaigns/{CampaignId}", "code" => 200}}
       end)
       service.add_operation(:get_domain_statistics_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetDomainStatisticsReport"
         operation.name = "GetDomainStatisticsReport"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDomainStatisticsReportRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDomainStatisticsReportResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetDomainStatisticsReportRequest
+        operation.output = GetDomainStatisticsReportResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/deliverability-dashboard/statistics-report/{Domain}", "code" => 200}}
       end)
       service.add_operation(:get_email_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#GetEmailIdentity"
         operation.name = "GetEmailIdentity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEmailIdentityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEmailIdentityResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetEmailIdentityRequest
+        operation.output = GetEmailIdentityResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/identities/{EmailIdentity}", "code" => 200}}
       end)
       service.add_operation(:list_configuration_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#ListConfigurationSets"
         operation.name = "ListConfigurationSets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationSetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationSetsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListConfigurationSetsRequest
+        operation.output = ListConfigurationSetsResponse
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/configuration-sets", "code" => 200}}
         operation[:paginator] = Paginators::ListConfigurationSets.new
       end)
       service.add_operation(:list_dedicated_ip_pools, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#ListDedicatedIpPools"
         operation.name = "ListDedicatedIpPools"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDedicatedIpPoolsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDedicatedIpPoolsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDedicatedIpPoolsRequest
+        operation.output = ListDedicatedIpPoolsResponse
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/dedicated-ip-pools", "code" => 200}}
         operation[:paginator] = Paginators::ListDedicatedIpPools.new
       end)
       service.add_operation(:list_deliverability_test_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#ListDeliverabilityTestReports"
         operation.name = "ListDeliverabilityTestReports"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDeliverabilityTestReportsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDeliverabilityTestReportsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDeliverabilityTestReportsRequest
+        operation.output = ListDeliverabilityTestReportsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/deliverability-dashboard/test-reports", "code" => 200}}
         operation[:paginator] = Paginators::ListDeliverabilityTestReports.new
       end)
       service.add_operation(:list_domain_deliverability_campaigns, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#ListDomainDeliverabilityCampaigns"
         operation.name = "ListDomainDeliverabilityCampaigns"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDomainDeliverabilityCampaignsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDomainDeliverabilityCampaignsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListDomainDeliverabilityCampaignsRequest
+        operation.output = ListDomainDeliverabilityCampaignsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/deliverability-dashboard/domains/{SubscribedDomain}/campaigns", "code" => 200}}
         operation[:paginator] = Paginators::ListDomainDeliverabilityCampaigns.new
       end)
       service.add_operation(:list_email_identities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#ListEmailIdentities"
         operation.name = "ListEmailIdentities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEmailIdentitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEmailIdentitiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListEmailIdentitiesRequest
+        operation.output = ListEmailIdentitiesResponse
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/identities", "code" => 200}}
         operation[:paginator] = Paginators::ListEmailIdentities.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/email/tags", "code" => 200}}
       end)
       service.add_operation(:put_account_dedicated_ip_warmup_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutAccountDedicatedIpWarmupAttributes"
         operation.name = "PutAccountDedicatedIpWarmupAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccountDedicatedIpWarmupAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccountDedicatedIpWarmupAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutAccountDedicatedIpWarmupAttributesRequest
+        operation.output = PutAccountDedicatedIpWarmupAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/account/dedicated-ips/warmup", "code" => 200}}
       end)
       service.add_operation(:put_account_sending_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutAccountSendingAttributes"
         operation.name = "PutAccountSendingAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccountSendingAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccountSendingAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutAccountSendingAttributesRequest
+        operation.output = PutAccountSendingAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/account/sending", "code" => 200}}
       end)
       service.add_operation(:put_configuration_set_delivery_options, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutConfigurationSetDeliveryOptions"
         operation.name = "PutConfigurationSetDeliveryOptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetDeliveryOptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetDeliveryOptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutConfigurationSetDeliveryOptionsRequest
+        operation.output = PutConfigurationSetDeliveryOptionsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/delivery-options", "code" => 200}}
       end)
       service.add_operation(:put_configuration_set_reputation_options, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutConfigurationSetReputationOptions"
         operation.name = "PutConfigurationSetReputationOptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetReputationOptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetReputationOptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutConfigurationSetReputationOptionsRequest
+        operation.output = PutConfigurationSetReputationOptionsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/reputation-options", "code" => 200}}
       end)
       service.add_operation(:put_configuration_set_sending_options, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutConfigurationSetSendingOptions"
         operation.name = "PutConfigurationSetSendingOptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetSendingOptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetSendingOptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutConfigurationSetSendingOptionsRequest
+        operation.output = PutConfigurationSetSendingOptionsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/sending", "code" => 200}}
       end)
       service.add_operation(:put_configuration_set_tracking_options, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutConfigurationSetTrackingOptions"
         operation.name = "PutConfigurationSetTrackingOptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetTrackingOptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationSetTrackingOptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutConfigurationSetTrackingOptionsRequest
+        operation.output = PutConfigurationSetTrackingOptionsResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/tracking-options", "code" => 200}}
       end)
       service.add_operation(:put_dedicated_ip_in_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutDedicatedIpInPool"
         operation.name = "PutDedicatedIpInPool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutDedicatedIpInPoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutDedicatedIpInPoolResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutDedicatedIpInPoolRequest
+        operation.output = PutDedicatedIpInPoolResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/dedicated-ips/{Ip}/pool", "code" => 200}}
       end)
       service.add_operation(:put_dedicated_ip_warmup_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutDedicatedIpWarmupAttributes"
         operation.name = "PutDedicatedIpWarmupAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutDedicatedIpWarmupAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutDedicatedIpWarmupAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutDedicatedIpWarmupAttributesRequest
+        operation.output = PutDedicatedIpWarmupAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/dedicated-ips/{Ip}/warmup", "code" => 200}}
       end)
       service.add_operation(:put_deliverability_dashboard_option, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutDeliverabilityDashboardOption"
         operation.name = "PutDeliverabilityDashboardOption"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutDeliverabilityDashboardOptionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutDeliverabilityDashboardOptionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutDeliverabilityDashboardOptionRequest
+        operation.output = PutDeliverabilityDashboardOptionResponse
+        operation.errors << AlreadyExistsException
+        operation.errors << BadRequestException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/deliverability-dashboard", "code" => 200}}
       end)
       service.add_operation(:put_email_identity_dkim_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutEmailIdentityDkimAttributes"
         operation.name = "PutEmailIdentityDkimAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailIdentityDkimAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailIdentityDkimAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutEmailIdentityDkimAttributesRequest
+        operation.output = PutEmailIdentityDkimAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/identities/{EmailIdentity}/dkim", "code" => 200}}
       end)
       service.add_operation(:put_email_identity_feedback_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutEmailIdentityFeedbackAttributes"
         operation.name = "PutEmailIdentityFeedbackAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailIdentityFeedbackAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailIdentityFeedbackAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutEmailIdentityFeedbackAttributesRequest
+        operation.output = PutEmailIdentityFeedbackAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/identities/{EmailIdentity}/feedback", "code" => 200}}
       end)
       service.add_operation(:put_email_identity_mail_from_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#PutEmailIdentityMailFromAttributes"
         operation.name = "PutEmailIdentityMailFromAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailIdentityMailFromAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEmailIdentityMailFromAttributesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = PutEmailIdentityMailFromAttributesRequest
+        operation.output = PutEmailIdentityMailFromAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/identities/{EmailIdentity}/mail-from", "code" => 200}}
       end)
       service.add_operation(:send_email, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#SendEmail"
         operation.name = "SendEmail"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendEmailRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendEmailResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountSuspendedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageRejected)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendingPausedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = SendEmailRequest
+        operation.output = SendEmailResponse
+        operation.errors << AccountSuspendedException
+        operation.errors << BadRequestException
+        operation.errors << LimitExceededException
+        operation.errors << MailFromDomainNotVerifiedException
+        operation.errors << MessageRejected
+        operation.errors << NotFoundException
+        operation.errors << SendingPausedException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/email/outbound-emails", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/email/tags", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConcurrentModificationException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/email/tags", "code" => 200}}
       end)
       service.add_operation(:update_configuration_set_event_destination, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointemail#UpdateConfigurationSetEventDestination"
         operation.name = "UpdateConfigurationSetEventDestination"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateConfigurationSetEventDestinationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateConfigurationSetEventDestinationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateConfigurationSetEventDestinationRequest
+        operation.output = UpdateConfigurationSetEventDestinationResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}", "code" => 200}}
       end)
     end

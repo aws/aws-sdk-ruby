@@ -43,69 +43,69 @@ module Aws::ConnectContactLens
     TranscriptContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcontactlens#TranscriptContent", name: "TranscriptContent", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "\\S"})
     TranscriptId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcontactlens#TranscriptId", name: "TranscriptId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "\\S"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    Categories.add_member(:matched_categories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchedCategories, location_name: "MatchedCategories", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Categories.add_member(:matched_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchedDetails, location_name: "MatchedDetails", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Categories.add_member(:matched_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchedCategories, location_name: "MatchedCategories", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Categories.add_member(:matched_details, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchedDetails, location_name: "MatchedDetails", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Categories.type = Types::Categories
-    CategoryDetails.add_member(:points_of_interest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointsOfInterest, location_name: "PointsOfInterest", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CategoryDetails.add_member(:points_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: PointsOfInterest, location_name: "PointsOfInterest", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CategoryDetails.type = Types::CategoryDetails
-    CharacterOffsets.add_member(:begin_offset_char, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CharacterOffset, location_name: "BeginOffsetChar", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CharacterOffsets.add_member(:end_offset_char, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CharacterOffset, location_name: "EndOffsetChar", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CharacterOffsets.add_member(:begin_offset_char, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterOffset, location_name: "BeginOffsetChar", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CharacterOffsets.add_member(:end_offset_char, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterOffset, location_name: "EndOffsetChar", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CharacterOffsets.type = Types::CharacterOffsets
-    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     InternalServiceException.type = Types::InternalServiceException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    IssueDetected.add_member(:character_offsets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CharacterOffsets, location_name: "CharacterOffsets", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    IssueDetected.add_member(:character_offsets, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterOffsets, location_name: "CharacterOffsets", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     IssueDetected.type = Types::IssueDetected
-    IssuesDetected.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IssueDetected)
-    ListRealtimeContactAnalysisSegmentsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ListRealtimeContactAnalysisSegmentsRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ListRealtimeContactAnalysisSegmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListRealtimeContactAnalysisSegmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    IssuesDetected.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetected)
+    ListRealtimeContactAnalysisSegmentsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "InstanceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListRealtimeContactAnalysisSegmentsRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, location_name: "ContactId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListRealtimeContactAnalysisSegmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListRealtimeContactAnalysisSegmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsRequest.type = Types::ListRealtimeContactAnalysisSegmentsRequest
-    ListRealtimeContactAnalysisSegmentsResponse.add_member(:segments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegments, location_name: "Segments", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ListRealtimeContactAnalysisSegmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRealtimeContactAnalysisSegmentsResponse.add_member(:segments, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeContactAnalysisSegments, location_name: "Segments", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListRealtimeContactAnalysisSegmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsResponse.type = Types::ListRealtimeContactAnalysisSegmentsResponse
-    MatchedCategories.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CategoryName)
-    MatchedDetails.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CategoryName)
-    MatchedDetails.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CategoryDetails)
-    PointOfInterest.add_member(:begin_offset_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OffsetMillis, location_name: "BeginOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    PointOfInterest.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OffsetMillis, location_name: "EndOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    MatchedCategories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName)
+    MatchedDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName)
+    MatchedDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryDetails)
+    PointOfInterest.add_member(:begin_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetMillis, location_name: "BeginOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PointOfInterest.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetMillis, location_name: "EndOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PointOfInterest.type = Types::PointOfInterest
-    PointsOfInterest.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointOfInterest)
-    PostContactSummary.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostContactSummaryContent, location_name: "Content"))
-    PostContactSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostContactSummaryStatus, location_name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    PostContactSummary.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostContactSummaryFailureCode, location_name: "FailureCode"))
+    PointsOfInterest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PointOfInterest)
+    PostContactSummary.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummaryContent, location_name: "Content"))
+    PostContactSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummaryStatus, location_name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PostContactSummary.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummaryFailureCode, location_name: "FailureCode"))
     PostContactSummary.type = Types::PostContactSummary
-    PostContactSummaryFailureCode.add_member(:quota_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "QUOTA_EXCEEDED"}))
-    PostContactSummaryFailureCode.add_member(:insufficient_conversation_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_CONVERSATION_CONTENT", traits: {"smithy.api#enumValue" => "INSUFFICIENT_CONVERSATION_CONTENT"}))
-    PostContactSummaryFailureCode.add_member(:failed_safety_guidelines, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_SAFETY_GUIDELINES", traits: {"smithy.api#enumValue" => "FAILED_SAFETY_GUIDELINES"}))
-    PostContactSummaryFailureCode.add_member(:invalid_analysis_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ANALYSIS_CONFIGURATION", traits: {"smithy.api#enumValue" => "INVALID_ANALYSIS_CONFIGURATION"}))
-    PostContactSummaryFailureCode.add_member(:internal_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
-    PostContactSummaryStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    PostContactSummaryStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    RealtimeContactAnalysisSegment.add_member(:transcript, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
-    RealtimeContactAnalysisSegment.add_member(:categories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Categories, location_name: "Categories"))
-    RealtimeContactAnalysisSegment.add_member(:post_contact_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostContactSummary, location_name: "PostContactSummary"))
+    PostContactSummaryFailureCode.add_member(:quota_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "QUOTA_EXCEEDED"}))
+    PostContactSummaryFailureCode.add_member(:insufficient_conversation_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_CONVERSATION_CONTENT", traits: {"smithy.api#enumValue" => "INSUFFICIENT_CONVERSATION_CONTENT"}))
+    PostContactSummaryFailureCode.add_member(:failed_safety_guidelines, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED_SAFETY_GUIDELINES", traits: {"smithy.api#enumValue" => "FAILED_SAFETY_GUIDELINES"}))
+    PostContactSummaryFailureCode.add_member(:invalid_analysis_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_ANALYSIS_CONFIGURATION", traits: {"smithy.api#enumValue" => "INVALID_ANALYSIS_CONFIGURATION"}))
+    PostContactSummaryFailureCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
+    PostContactSummaryStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    PostContactSummaryStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    RealtimeContactAnalysisSegment.add_member(:transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: Transcript, location_name: "Transcript"))
+    RealtimeContactAnalysisSegment.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: Categories, location_name: "Categories"))
+    RealtimeContactAnalysisSegment.add_member(:post_contact_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummary, location_name: "PostContactSummary"))
     RealtimeContactAnalysisSegment.type = Types::RealtimeContactAnalysisSegment
-    RealtimeContactAnalysisSegments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegment)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    RealtimeContactAnalysisSegments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeContactAnalysisSegment)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SentimentValue.add_member(:positive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POSITIVE", traits: {"smithy.api#enumValue" => "POSITIVE"}))
-    SentimentValue.add_member(:neutral, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEUTRAL", traits: {"smithy.api#enumValue" => "NEUTRAL"}))
-    SentimentValue.add_member(:negative, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEGATIVE", traits: {"smithy.api#enumValue" => "NEGATIVE"}))
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SentimentValue.add_member(:positive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "POSITIVE", traits: {"smithy.api#enumValue" => "POSITIVE"}))
+    SentimentValue.add_member(:neutral, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEUTRAL", traits: {"smithy.api#enumValue" => "NEUTRAL"}))
+    SentimentValue.add_member(:negative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEGATIVE", traits: {"smithy.api#enumValue" => "NEGATIVE"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    Transcript.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranscriptId, location_name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Transcript.add_member(:participant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Transcript.add_member(:participant_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Transcript.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranscriptContent, location_name: "Content", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Transcript.add_member(:begin_offset_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OffsetMillis, location_name: "BeginOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Transcript.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OffsetMillis, location_name: "EndOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    Transcript.add_member(:sentiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SentimentValue, location_name: "Sentiment"))
-    Transcript.add_member(:issues_detected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IssuesDetected, location_name: "IssuesDetected"))
+    Transcript.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptId, location_name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Transcript.add_member(:participant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantId, location_name: "ParticipantId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Transcript.add_member(:participant_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantRole, location_name: "ParticipantRole", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Transcript.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptContent, location_name: "Content", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Transcript.add_member(:begin_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetMillis, location_name: "BeginOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Transcript.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetMillis, location_name: "EndOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Transcript.add_member(:sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentValue, location_name: "Sentiment"))
+    Transcript.add_member(:issues_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuesDetected, location_name: "IssuesDetected"))
     Transcript.type = Types::Transcript
 
     AmazonConnectContactLens = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -116,13 +116,13 @@ module Aws::ConnectContactLens
       service.add_operation(:list_realtime_contact_analysis_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegments"
         operation.name = "ListRealtimeContactAnalysisSegments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRealtimeContactAnalysisSegmentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRealtimeContactAnalysisSegmentsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListRealtimeContactAnalysisSegmentsRequest
+        operation.output = ListRealtimeContactAnalysisSegmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/realtime-contact-analysis/analysis-segments", "code" => 200}}
         operation[:paginator] = Paginators::ListRealtimeContactAnalysisSegments.new
       end)

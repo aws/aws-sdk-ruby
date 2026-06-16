@@ -162,444 +162,444 @@ module Aws::SageMakerGeospatial
     ZonalStatisticsConfigInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemakergeospatial#ZonalStatisticsConfigInput", name: "ZonalStatisticsConfigInput")
     ZonalStatisticsListInput = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemakergeospatial#ZonalStatisticsListInput", name: "ZonalStatisticsListInput", traits: {"smithy.api#length" => {"min" => 1}})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AreaOfInterest.add_member(:area_of_interest_geometry, Types::AreaOfInterest::AreaOfInterestGeometry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AreaOfInterestGeometry, location_name: "AreaOfInterestGeometry"))
-    AreaOfInterest.add_member(:unknown, Types::AreaOfInterest::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AreaOfInterest.add_member(:area_of_interest_geometry, Types::AreaOfInterest::AreaOfInterestGeometry, ::Smithy::Schema::Shapes::MemberShape.new(target: AreaOfInterestGeometry, location_name: "AreaOfInterestGeometry"))
+    AreaOfInterest.add_member(:unknown, Types::AreaOfInterest::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AreaOfInterest.type = Types::AreaOfInterest
-    AreaOfInterestGeometry.add_member(:polygon_geometry, Types::AreaOfInterestGeometry::PolygonGeometry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolygonGeometryInput, location_name: "PolygonGeometry"))
-    AreaOfInterestGeometry.add_member(:multi_polygon_geometry, Types::AreaOfInterestGeometry::MultiPolygonGeometry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultiPolygonGeometryInput, location_name: "MultiPolygonGeometry"))
-    AreaOfInterestGeometry.add_member(:unknown, Types::AreaOfInterestGeometry::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AreaOfInterestGeometry.add_member(:polygon_geometry, Types::AreaOfInterestGeometry::PolygonGeometry, ::Smithy::Schema::Shapes::MemberShape.new(target: PolygonGeometryInput, location_name: "PolygonGeometry"))
+    AreaOfInterestGeometry.add_member(:multi_polygon_geometry, Types::AreaOfInterestGeometry::MultiPolygonGeometry, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiPolygonGeometryInput, location_name: "MultiPolygonGeometry"))
+    AreaOfInterestGeometry.add_member(:unknown, Types::AreaOfInterestGeometry::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AreaOfInterestGeometry.type = Types::AreaOfInterestGeometry
-    AssetValue.add_member(:href, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Href"))
+    AssetValue.add_member(:href, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Href"))
     AssetValue.type = Types::AssetValue
-    AssetsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    AssetsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetValue)
-    BandMathConfigInput.add_member(:predefined_indices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "PredefinedIndices"))
-    BandMathConfigInput.add_member(:custom_indices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomIndicesInput, location_name: "CustomIndices"))
+    AssetsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    AssetsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetValue)
+    BandMathConfigInput.add_member(:predefined_indices, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "PredefinedIndices"))
+    BandMathConfigInput.add_member(:custom_indices, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomIndicesInput, location_name: "CustomIndices"))
     BandMathConfigInput.type = Types::BandMathConfigInput
     CloudMaskingConfigInput.type = Types::CloudMaskingConfigInput
-    CloudRemovalConfigInput.add_member(:algorithm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlgorithmNameCloudRemoval, location_name: "AlgorithmName"))
-    CloudRemovalConfigInput.add_member(:interpolation_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "InterpolationValue"))
-    CloudRemovalConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
+    CloudRemovalConfigInput.add_member(:algorithm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmNameCloudRemoval, location_name: "AlgorithmName"))
+    CloudRemovalConfigInput.add_member(:interpolation_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "InterpolationValue"))
+    CloudRemovalConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "TargetBands"))
     CloudRemovalConfigInput.type = Types::CloudRemovalConfigInput
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ConflictException.type = Types::ConflictException
-    CustomIndicesInput.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationsListInput, location_name: "Operations"))
+    CustomIndicesInput.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationsListInput, location_name: "Operations"))
     CustomIndicesInput.type = Types::CustomIndicesInput
-    DataCollectionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RasterDataCollectionMetadata)
-    DeleteEarthObservationJobInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DataCollectionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RasterDataCollectionMetadata)
+    DeleteEarthObservationJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEarthObservationJobInput.type = Types::DeleteEarthObservationJobInput
     DeleteEarthObservationJobOutput.type = Types::DeleteEarthObservationJobOutput
-    DeleteVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVectorEnrichmentJobInput.type = Types::DeleteVectorEnrichmentJobInput
     DeleteVectorEnrichmentJobOutput.type = Types::DeleteVectorEnrichmentJobOutput
-    EarthObservationJobErrorDetails.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobErrorType, location_name: "Type"))
-    EarthObservationJobErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    EarthObservationJobErrorDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobErrorType, location_name: "Type"))
+    EarthObservationJobErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     EarthObservationJobErrorDetails.type = Types::EarthObservationJobErrorDetails
-    EarthObservationJobList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEarthObservationJobOutputConfig)
-    EarthObservationJobOutputBands.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputBand)
-    EoCloudCoverInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
-    EoCloudCoverInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
+    EarthObservationJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListEarthObservationJobOutputConfig)
+    EarthObservationJobOutputBands.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputBand)
+    EoCloudCoverInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
+    EoCloudCoverInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
     EoCloudCoverInput.type = Types::EoCloudCoverInput
-    ExportEarthObservationJobOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    ExportEarthObservationJobOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
-    ExportEarthObservationJobOperationInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    ExportEarthObservationJobOperationInput.add_member(:output_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputConfigInput, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
-    ExportEarthObservationJobOperationInput.add_member(:export_source_images, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ExportSourceImages"))
+    ExportEarthObservationJobOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    ExportEarthObservationJobOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
+    ExportEarthObservationJobOperationInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    ExportEarthObservationJobOperationInput.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputConfigInput, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
+    ExportEarthObservationJobOperationInput.add_member(:export_source_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ExportSourceImages"))
     ExportEarthObservationJobOperationInput.type = Types::ExportEarthObservationJobOperationInput
-    ExportEarthObservationJobOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    ExportEarthObservationJobOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ExportEarthObservationJobOperationOutput.add_member(:export_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobExportStatus, location_name: "ExportStatus", traits: {"smithy.api#required" => {}}))
-    ExportEarthObservationJobOperationOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    ExportEarthObservationJobOperationOutput.add_member(:output_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputConfigInput, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
-    ExportEarthObservationJobOperationOutput.add_member(:export_source_images, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ExportSourceImages"))
+    ExportEarthObservationJobOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    ExportEarthObservationJobOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ExportEarthObservationJobOperationOutput.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobExportStatus, location_name: "ExportStatus", traits: {"smithy.api#required" => {}}))
+    ExportEarthObservationJobOperationOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    ExportEarthObservationJobOperationOutput.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputConfigInput, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
+    ExportEarthObservationJobOperationOutput.add_member(:export_source_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ExportSourceImages"))
     ExportEarthObservationJobOperationOutput.type = Types::ExportEarthObservationJobOperationOutput
-    ExportErrorDetails.add_member(:export_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportErrorDetailsOutput, location_name: "ExportResults"))
-    ExportErrorDetails.add_member(:export_source_images, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportErrorDetailsOutput, location_name: "ExportSourceImages"))
+    ExportErrorDetails.add_member(:export_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportErrorDetailsOutput, location_name: "ExportResults"))
+    ExportErrorDetails.add_member(:export_source_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportErrorDetailsOutput, location_name: "ExportSourceImages"))
     ExportErrorDetails.type = Types::ExportErrorDetails
-    ExportErrorDetailsOutput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportErrorType, location_name: "Type"))
-    ExportErrorDetailsOutput.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ExportErrorDetailsOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportErrorType, location_name: "Type"))
+    ExportErrorDetailsOutput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ExportErrorDetailsOutput.type = Types::ExportErrorDetailsOutput
-    ExportS3DataInput.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    ExportS3DataInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
+    ExportS3DataInput.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    ExportS3DataInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
     ExportS3DataInput.type = Types::ExportS3DataInput
-    ExportVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    ExportVectorEnrichmentJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
-    ExportVectorEnrichmentJobInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    ExportVectorEnrichmentJobInput.add_member(:output_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobOutputConfig, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
+    ExportVectorEnrichmentJobInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobInput.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportVectorEnrichmentJobOutputConfig, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
     ExportVectorEnrichmentJobInput.type = Types::ExportVectorEnrichmentJobInput
-    ExportVectorEnrichmentJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    ExportVectorEnrichmentJobOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ExportVectorEnrichmentJobOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    ExportVectorEnrichmentJobOutput.add_member(:export_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobExportStatus, location_name: "ExportStatus", traits: {"smithy.api#required" => {}}))
-    ExportVectorEnrichmentJobOutput.add_member(:output_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobOutputConfig, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ExportVectorEnrichmentJobOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobOutput.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobExportStatus, location_name: "ExportStatus", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobOutput.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportVectorEnrichmentJobOutputConfig, location_name: "OutputConfig", traits: {"smithy.api#required" => {}}))
     ExportVectorEnrichmentJobOutput.type = Types::ExportVectorEnrichmentJobOutput
-    ExportVectorEnrichmentJobOutputConfig.add_member(:s3_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobS3Data, location_name: "S3Data", traits: {"smithy.api#required" => {}}))
+    ExportVectorEnrichmentJobOutputConfig.add_member(:s3_data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobS3Data, location_name: "S3Data", traits: {"smithy.api#required" => {}}))
     ExportVectorEnrichmentJobOutputConfig.type = Types::ExportVectorEnrichmentJobOutputConfig
-    Filter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Filter.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    Filter.add_member(:minimum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "Minimum"))
-    Filter.add_member(:maximum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "Maximum"))
+    Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Filter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Filter.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "Minimum"))
+    Filter.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "Maximum"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    GeoMosaicConfigInput.add_member(:algorithm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlgorithmNameGeoMosaic, location_name: "AlgorithmName"))
-    GeoMosaicConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
+    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    GeoMosaicConfigInput.add_member(:algorithm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmNameGeoMosaic, location_name: "AlgorithmName"))
+    GeoMosaicConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "TargetBands"))
     GeoMosaicConfigInput.type = Types::GeoMosaicConfigInput
-    Geometry.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    Geometry.add_member(:coordinates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinearRings, location_name: "Coordinates", traits: {"smithy.api#required" => {}}))
+    Geometry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    Geometry.add_member(:coordinates, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, location_name: "Coordinates", traits: {"smithy.api#required" => {}}))
     Geometry.type = Types::Geometry
-    GetEarthObservationJobInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetEarthObservationJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEarthObservationJobInput.type = Types::GetEarthObservationJobInput
-    GetEarthObservationJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    GetEarthObservationJobOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    GetEarthObservationJobOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetEarthObservationJobOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
-    GetEarthObservationJobOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    GetEarthObservationJobOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
-    GetEarthObservationJobOutput.add_member(:input_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputConfigOutput, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
-    GetEarthObservationJobOutput.add_member(:job_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobConfigInput, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
-    GetEarthObservationJobOutput.add_member(:output_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobOutputBands, location_name: "OutputBands"))
-    GetEarthObservationJobOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
-    GetEarthObservationJobOutput.add_member(:error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobErrorDetails, location_name: "ErrorDetails"))
-    GetEarthObservationJobOutput.add_member(:export_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobExportStatus, location_name: "ExportStatus"))
-    GetEarthObservationJobOutput.add_member(:export_error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportErrorDetails, location_name: "ExportErrorDetails"))
-    GetEarthObservationJobOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    GetEarthObservationJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    GetEarthObservationJobOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    GetEarthObservationJobOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetEarthObservationJobOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
+    GetEarthObservationJobOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    GetEarthObservationJobOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
+    GetEarthObservationJobOutput.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputConfigOutput, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
+    GetEarthObservationJobOutput.add_member(:job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigInput, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
+    GetEarthObservationJobOutput.add_member(:output_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobOutputBands, location_name: "OutputBands"))
+    GetEarthObservationJobOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
+    GetEarthObservationJobOutput.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobErrorDetails, location_name: "ErrorDetails"))
+    GetEarthObservationJobOutput.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobExportStatus, location_name: "ExportStatus"))
+    GetEarthObservationJobOutput.add_member(:export_error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportErrorDetails, location_name: "ExportErrorDetails"))
+    GetEarthObservationJobOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     GetEarthObservationJobOutput.type = Types::GetEarthObservationJobOutput
-    GetRasterDataCollectionOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRasterDataCollectionOperationInput.type = Types::GetRasterDataCollectionOperationInput
-    GetRasterDataCollectionOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    GetRasterDataCollectionOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    GetRasterDataCollectionOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    GetRasterDataCollectionOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Description", traits: {"smithy.api#required" => {}}))
-    GetRasterDataCollectionOperationOutput.add_member(:description_page_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DescriptionPageUrl", traits: {"smithy.api#required" => {}}))
-    GetRasterDataCollectionOperationOutput.add_member(:supported_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "SupportedFilters", traits: {"smithy.api#required" => {}}))
-    GetRasterDataCollectionOperationOutput.add_member(:image_source_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageSourceBandList, location_name: "ImageSourceBands", traits: {"smithy.api#required" => {}}))
-    GetRasterDataCollectionOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    GetRasterDataCollectionOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationOutput.add_member(:description_page_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DescriptionPageUrl", traits: {"smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationOutput.add_member(:supported_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "SupportedFilters", traits: {"smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationOutput.add_member(:image_source_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSourceBandList, location_name: "ImageSourceBands", traits: {"smithy.api#required" => {}}))
+    GetRasterDataCollectionOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     GetRasterDataCollectionOperationOutput.type = Types::GetRasterDataCollectionOperationOutput
-    GetTileInput.add_member(:x, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "x", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetTileInput.add_member(:y, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "y", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetTileInput.add_member(:z, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "z", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetTileInput.add_member(:image_assets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "ImageAssets", traits: {"smithy.api#httpQuery" => "ImageAssets", "smithy.api#required" => {}}))
-    GetTileInput.add_member(:target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetOptions, location_name: "Target", traits: {"smithy.api#httpQuery" => "Target", "smithy.api#required" => {}}))
-    GetTileInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#httpQuery" => "Arn", "smithy.api#required" => {}}))
-    GetTileInput.add_member(:image_mask, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ImageMask", traits: {"smithy.api#httpQuery" => "ImageMask"}))
-    GetTileInput.add_member(:output_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OutputFormat", traits: {"smithy.api#httpQuery" => "OutputFormat"}))
-    GetTileInput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TimeRangeFilter", traits: {"smithy.api#httpQuery" => "TimeRangeFilter"}))
-    GetTileInput.add_member(:property_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PropertyFilters", traits: {"smithy.api#httpQuery" => "PropertyFilters"}))
-    GetTileInput.add_member(:output_data_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputType, location_name: "OutputDataType", traits: {"smithy.api#httpQuery" => "OutputDataType"}))
-    GetTileInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#httpQuery" => "ExecutionRoleArn"}))
+    GetTileInput.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "x", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTileInput.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "y", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTileInput.add_member(:z, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "z", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTileInput.add_member(:image_assets, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "ImageAssets", traits: {"smithy.api#httpQuery" => "ImageAssets", "smithy.api#required" => {}}))
+    GetTileInput.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetOptions, location_name: "Target", traits: {"smithy.api#httpQuery" => "Target", "smithy.api#required" => {}}))
+    GetTileInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#httpQuery" => "Arn", "smithy.api#required" => {}}))
+    GetTileInput.add_member(:image_mask, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "ImageMask", traits: {"smithy.api#httpQuery" => "ImageMask"}))
+    GetTileInput.add_member(:output_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OutputFormat", traits: {"smithy.api#httpQuery" => "OutputFormat"}))
+    GetTileInput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TimeRangeFilter", traits: {"smithy.api#httpQuery" => "TimeRangeFilter"}))
+    GetTileInput.add_member(:property_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PropertyFilters", traits: {"smithy.api#httpQuery" => "PropertyFilters"}))
+    GetTileInput.add_member(:output_data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputType, location_name: "OutputDataType", traits: {"smithy.api#httpQuery" => "OutputDataType"}))
+    GetTileInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#httpQuery" => "ExecutionRoleArn"}))
     GetTileInput.type = Types::GetTileInput
-    GetTileOutput.add_member(:binary_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BinaryFile, location_name: "BinaryFile", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetTileOutput.add_member(:binary_file, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryFile, location_name: "BinaryFile", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
     GetTileOutput[:http_payload] = :binary_file
     GetTileOutput[:http_payload_member] = GetTileOutput.member(:binary_file)
     GetTileOutput.type = Types::GetTileOutput
-    GetVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVectorEnrichmentJobInput.type = Types::GetVectorEnrichmentJobInput
-    GetVectorEnrichmentJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    GetVectorEnrichmentJobOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
-    GetVectorEnrichmentJobOutput.add_member(:input_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobInputConfig, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:job_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobConfig, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    GetVectorEnrichmentJobOutput.add_member(:error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobErrorDetails, location_name: "ErrorDetails"))
-    GetVectorEnrichmentJobOutput.add_member(:export_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobExportStatus, location_name: "ExportStatus"))
-    GetVectorEnrichmentJobOutput.add_member(:export_error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobExportErrorDetails, location_name: "ExportErrorDetails"))
-    GetVectorEnrichmentJobOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    GetVectorEnrichmentJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    GetVectorEnrichmentJobOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
+    GetVectorEnrichmentJobOutput.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobInputConfig, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobConfig, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    GetVectorEnrichmentJobOutput.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobErrorDetails, location_name: "ErrorDetails"))
+    GetVectorEnrichmentJobOutput.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobExportStatus, location_name: "ExportStatus"))
+    GetVectorEnrichmentJobOutput.add_member(:export_error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobExportErrorDetails, location_name: "ExportErrorDetails"))
+    GetVectorEnrichmentJobOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     GetVectorEnrichmentJobOutput.type = Types::GetVectorEnrichmentJobOutput
-    ImageSourceBandList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    InputConfigInput.add_member(:previous_earth_observation_job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
-    InputConfigInput.add_member(:raster_data_collection_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RasterDataCollectionQueryInput, location_name: "RasterDataCollectionQuery"))
+    ImageSourceBandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    InputConfigInput.add_member(:previous_earth_observation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
+    InputConfigInput.add_member(:raster_data_collection_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RasterDataCollectionQueryInput, location_name: "RasterDataCollectionQuery"))
     InputConfigInput.type = Types::InputConfigInput
-    InputConfigOutput.add_member(:previous_earth_observation_job_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
-    InputConfigOutput.add_member(:raster_data_collection_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RasterDataCollectionQueryOutput, location_name: "RasterDataCollectionQuery"))
+    InputConfigOutput.add_member(:previous_earth_observation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
+    InputConfigOutput.add_member(:raster_data_collection_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RasterDataCollectionQueryOutput, location_name: "RasterDataCollectionQuery"))
     InputConfigOutput.type = Types::InputConfigOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     InternalServerException.type = Types::InternalServerException
-    ItemSource.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    ItemSource.add_member(:geometry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry", traits: {"smithy.api#required" => {}}))
-    ItemSource.add_member(:assets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetsMap, location_name: "Assets"))
-    ItemSource.add_member(:date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DateTime", traits: {"smithy.api#required" => {}}))
-    ItemSource.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Properties, location_name: "Properties"))
+    ItemSource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    ItemSource.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: Geometry, location_name: "Geometry", traits: {"smithy.api#required" => {}}))
+    ItemSource.add_member(:assets, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetsMap, location_name: "Assets"))
+    ItemSource.add_member(:date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DateTime", traits: {"smithy.api#required" => {}}))
+    ItemSource.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: Properties, location_name: "Properties"))
     ItemSource.type = Types::ItemSource
-    ItemSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemSource)
-    JobConfigInput.add_member(:band_math_config, Types::JobConfigInput::BandMathConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BandMathConfigInput, location_name: "BandMathConfig"))
-    JobConfigInput.add_member(:resampling_config, Types::JobConfigInput::ResamplingConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResamplingConfigInput, location_name: "ResamplingConfig"))
-    JobConfigInput.add_member(:temporal_statistics_config, Types::JobConfigInput::TemporalStatisticsConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemporalStatisticsConfigInput, location_name: "TemporalStatisticsConfig"))
-    JobConfigInput.add_member(:cloud_removal_config, Types::JobConfigInput::CloudRemovalConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudRemovalConfigInput, location_name: "CloudRemovalConfig"))
-    JobConfigInput.add_member(:zonal_statistics_config, Types::JobConfigInput::ZonalStatisticsConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalStatisticsConfigInput, location_name: "ZonalStatisticsConfig"))
-    JobConfigInput.add_member(:geo_mosaic_config, Types::JobConfigInput::GeoMosaicConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GeoMosaicConfigInput, location_name: "GeoMosaicConfig"))
-    JobConfigInput.add_member(:stack_config, Types::JobConfigInput::StackConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StackConfigInput, location_name: "StackConfig"))
-    JobConfigInput.add_member(:cloud_masking_config, Types::JobConfigInput::CloudMaskingConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudMaskingConfigInput, location_name: "CloudMaskingConfig"))
-    JobConfigInput.add_member(:land_cover_segmentation_config, Types::JobConfigInput::LandCoverSegmentationConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LandCoverSegmentationConfigInput, location_name: "LandCoverSegmentationConfig"))
-    JobConfigInput.add_member(:unknown, Types::JobConfigInput::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ItemSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemSource)
+    JobConfigInput.add_member(:band_math_config, Types::JobConfigInput::BandMathConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: BandMathConfigInput, location_name: "BandMathConfig"))
+    JobConfigInput.add_member(:resampling_config, Types::JobConfigInput::ResamplingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ResamplingConfigInput, location_name: "ResamplingConfig"))
+    JobConfigInput.add_member(:temporal_statistics_config, Types::JobConfigInput::TemporalStatisticsConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: TemporalStatisticsConfigInput, location_name: "TemporalStatisticsConfig"))
+    JobConfigInput.add_member(:cloud_removal_config, Types::JobConfigInput::CloudRemovalConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudRemovalConfigInput, location_name: "CloudRemovalConfig"))
+    JobConfigInput.add_member(:zonal_statistics_config, Types::JobConfigInput::ZonalStatisticsConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalStatisticsConfigInput, location_name: "ZonalStatisticsConfig"))
+    JobConfigInput.add_member(:geo_mosaic_config, Types::JobConfigInput::GeoMosaicConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMosaicConfigInput, location_name: "GeoMosaicConfig"))
+    JobConfigInput.add_member(:stack_config, Types::JobConfigInput::StackConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: StackConfigInput, location_name: "StackConfig"))
+    JobConfigInput.add_member(:cloud_masking_config, Types::JobConfigInput::CloudMaskingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudMaskingConfigInput, location_name: "CloudMaskingConfig"))
+    JobConfigInput.add_member(:land_cover_segmentation_config, Types::JobConfigInput::LandCoverSegmentationConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: LandCoverSegmentationConfigInput, location_name: "LandCoverSegmentationConfig"))
+    JobConfigInput.add_member(:unknown, Types::JobConfigInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     JobConfigInput.type = Types::JobConfigInput
     LandCoverSegmentationConfigInput.type = Types::LandCoverSegmentationConfigInput
-    LandsatCloudCoverLandInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
-    LandsatCloudCoverLandInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
+    LandsatCloudCoverLandInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
+    LandsatCloudCoverLandInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
     LandsatCloudCoverLandInput.type = Types::LandsatCloudCoverLandInput
-    LinearRing.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Position)
-    LinearRings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinearRing)
-    LinearRingsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinearRings)
-    ListEarthObservationJobOutputConfig.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    ListEarthObservationJobOutputConfig.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ListEarthObservationJobOutputConfig.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ListEarthObservationJobOutputConfig.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
-    ListEarthObservationJobOutputConfig.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    ListEarthObservationJobOutputConfig.add_member(:operation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OperationType", traits: {"smithy.api#required" => {}}))
-    ListEarthObservationJobOutputConfig.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    LinearRing.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position)
+    LinearRings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRing)
+    LinearRingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings)
+    ListEarthObservationJobOutputConfig.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    ListEarthObservationJobOutputConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ListEarthObservationJobOutputConfig.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ListEarthObservationJobOutputConfig.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
+    ListEarthObservationJobOutputConfig.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ListEarthObservationJobOutputConfig.add_member(:operation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OperationType", traits: {"smithy.api#required" => {}}))
+    ListEarthObservationJobOutputConfig.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     ListEarthObservationJobOutputConfig.type = Types::ListEarthObservationJobOutputConfig
-    ListEarthObservationJobsInput.add_member(:status_equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobStatus, location_name: "StatusEquals"))
-    ListEarthObservationJobsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    ListEarthObservationJobsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SortBy"))
-    ListEarthObservationJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListEarthObservationJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}}))
+    ListEarthObservationJobsInput.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobStatus, location_name: "StatusEquals"))
+    ListEarthObservationJobsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
+    ListEarthObservationJobsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SortBy"))
+    ListEarthObservationJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListEarthObservationJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}}))
     ListEarthObservationJobsInput.type = Types::ListEarthObservationJobsInput
-    ListEarthObservationJobsOutput.add_member(:earth_observation_job_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobList, location_name: "EarthObservationJobSummaries", traits: {"smithy.api#required" => {}}))
-    ListEarthObservationJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEarthObservationJobsOutput.add_member(:earth_observation_job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobList, location_name: "EarthObservationJobSummaries", traits: {"smithy.api#required" => {}}))
+    ListEarthObservationJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListEarthObservationJobsOutput.type = Types::ListEarthObservationJobsOutput
-    ListRasterDataCollectionsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListRasterDataCollectionsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults", "smithy.api#range" => {"min" => 1, "max" => 20}}))
+    ListRasterDataCollectionsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListRasterDataCollectionsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults", "smithy.api#range" => {"min" => 1, "max" => 20}}))
     ListRasterDataCollectionsOperationInput.type = Types::ListRasterDataCollectionsOperationInput
-    ListRasterDataCollectionsOperationOutput.add_member(:raster_data_collection_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionsList, location_name: "RasterDataCollectionSummaries", traits: {"smithy.api#required" => {}}))
-    ListRasterDataCollectionsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRasterDataCollectionsOperationOutput.add_member(:raster_data_collection_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionsList, location_name: "RasterDataCollectionSummaries", traits: {"smithy.api#required" => {}}))
+    ListRasterDataCollectionsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRasterDataCollectionsOperationOutput.type = Types::ListRasterDataCollectionsOperationOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListVectorEnrichmentJobOutputConfig.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    ListVectorEnrichmentJobOutputConfig.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ListVectorEnrichmentJobOutputConfig.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    ListVectorEnrichmentJobOutputConfig.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    ListVectorEnrichmentJobOutputConfig.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
-    ListVectorEnrichmentJobOutputConfig.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    ListVectorEnrichmentJobOutputConfig.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListVectorEnrichmentJobOutputConfig.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    ListVectorEnrichmentJobOutputConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ListVectorEnrichmentJobOutputConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    ListVectorEnrichmentJobOutputConfig.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ListVectorEnrichmentJobOutputConfig.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
+    ListVectorEnrichmentJobOutputConfig.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ListVectorEnrichmentJobOutputConfig.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     ListVectorEnrichmentJobOutputConfig.type = Types::ListVectorEnrichmentJobOutputConfig
-    ListVectorEnrichmentJobsInput.add_member(:status_equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StatusEquals"))
-    ListVectorEnrichmentJobsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    ListVectorEnrichmentJobsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SortBy"))
-    ListVectorEnrichmentJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListVectorEnrichmentJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}}))
+    ListVectorEnrichmentJobsInput.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StatusEquals"))
+    ListVectorEnrichmentJobsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
+    ListVectorEnrichmentJobsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SortBy"))
+    ListVectorEnrichmentJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListVectorEnrichmentJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}}))
     ListVectorEnrichmentJobsInput.type = Types::ListVectorEnrichmentJobsInput
-    ListVectorEnrichmentJobsOutput.add_member(:vector_enrichment_job_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobList, location_name: "VectorEnrichmentJobSummaries", traits: {"smithy.api#required" => {}}))
-    ListVectorEnrichmentJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListVectorEnrichmentJobsOutput.add_member(:vector_enrichment_job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobList, location_name: "VectorEnrichmentJobSummaries", traits: {"smithy.api#required" => {}}))
+    ListVectorEnrichmentJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListVectorEnrichmentJobsOutput.type = Types::ListVectorEnrichmentJobsOutput
-    MapMatchingConfig.add_member(:id_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "IdAttributeName", traits: {"smithy.api#required" => {}}))
-    MapMatchingConfig.add_member(:y_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "YAttributeName", traits: {"smithy.api#required" => {}}))
-    MapMatchingConfig.add_member(:x_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "XAttributeName", traits: {"smithy.api#required" => {}}))
-    MapMatchingConfig.add_member(:timestamp_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TimestampAttributeName", traits: {"smithy.api#required" => {}}))
+    MapMatchingConfig.add_member(:id_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "IdAttributeName", traits: {"smithy.api#required" => {}}))
+    MapMatchingConfig.add_member(:y_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "YAttributeName", traits: {"smithy.api#required" => {}}))
+    MapMatchingConfig.add_member(:x_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "XAttributeName", traits: {"smithy.api#required" => {}}))
+    MapMatchingConfig.add_member(:timestamp_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TimestampAttributeName", traits: {"smithy.api#required" => {}}))
     MapMatchingConfig.type = Types::MapMatchingConfig
-    MultiPolygonGeometryInput.add_member(:coordinates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinearRingsList, location_name: "Coordinates", traits: {"smithy.api#required" => {}}))
+    MultiPolygonGeometryInput.add_member(:coordinates, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRingsList, location_name: "Coordinates", traits: {"smithy.api#required" => {}}))
     MultiPolygonGeometryInput.type = Types::MultiPolygonGeometryInput
-    Operation.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Operation.add_member(:equation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Equation", traits: {"smithy.api#required" => {}}))
-    Operation.add_member(:output_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputType, location_name: "OutputType"))
+    Operation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Operation.add_member(:equation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Equation", traits: {"smithy.api#required" => {}}))
+    Operation.add_member(:output_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputType, location_name: "OutputType"))
     Operation.type = Types::Operation
-    OperationsListInput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operation)
-    OutputBand.add_member(:band_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "BandName", traits: {"smithy.api#required" => {}}))
-    OutputBand.add_member(:output_data_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputType, location_name: "OutputDataType", traits: {"smithy.api#required" => {}}))
+    OperationsListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operation)
+    OutputBand.add_member(:band_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "BandName", traits: {"smithy.api#required" => {}}))
+    OutputBand.add_member(:output_data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputType, location_name: "OutputDataType", traits: {"smithy.api#required" => {}}))
     OutputBand.type = Types::OutputBand
-    OutputConfigInput.add_member(:s3_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportS3DataInput, location_name: "S3Data", traits: {"smithy.api#required" => {}}))
+    OutputConfigInput.add_member(:s3_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportS3DataInput, location_name: "S3Data", traits: {"smithy.api#required" => {}}))
     OutputConfigInput.type = Types::OutputConfigInput
-    OutputResolutionResamplingInput.add_member(:user_defined, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserDefined, location_name: "UserDefined", traits: {"smithy.api#required" => {}}))
+    OutputResolutionResamplingInput.add_member(:user_defined, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDefined, location_name: "UserDefined", traits: {"smithy.api#required" => {}}))
     OutputResolutionResamplingInput.type = Types::OutputResolutionResamplingInput
-    OutputResolutionStackInput.add_member(:predefined, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedResolution, location_name: "Predefined"))
-    OutputResolutionStackInput.add_member(:user_defined, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserDefined, location_name: "UserDefined"))
+    OutputResolutionStackInput.add_member(:predefined, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedResolution, location_name: "Predefined"))
+    OutputResolutionStackInput.add_member(:user_defined, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDefined, location_name: "UserDefined"))
     OutputResolutionStackInput.type = Types::OutputResolutionStackInput
-    PlatformInput.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
-    PlatformInput.add_member(:comparison_operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "ComparisonOperator"))
+    PlatformInput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    PlatformInput.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, location_name: "ComparisonOperator"))
     PlatformInput.type = Types::PlatformInput
-    PolygonGeometryInput.add_member(:coordinates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinearRings, location_name: "Coordinates", traits: {"smithy.api#required" => {}}))
+    PolygonGeometryInput.add_member(:coordinates, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, location_name: "Coordinates", traits: {"smithy.api#required" => {}}))
     PolygonGeometryInput.type = Types::PolygonGeometryInput
-    Position.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double)
-    Properties.add_member(:eo_cloud_cover, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "EoCloudCover"))
-    Properties.add_member(:view_off_nadir, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "ViewOffNadir"))
-    Properties.add_member(:view_sun_azimuth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "ViewSunAzimuth"))
-    Properties.add_member(:view_sun_elevation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "ViewSunElevation"))
-    Properties.add_member(:platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Platform"))
-    Properties.add_member(:landsat_cloud_cover_land, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LandsatCloudCoverLand"))
+    Position.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double)
+    Properties.add_member(:eo_cloud_cover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "EoCloudCover"))
+    Properties.add_member(:view_off_nadir, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "ViewOffNadir"))
+    Properties.add_member(:view_sun_azimuth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "ViewSunAzimuth"))
+    Properties.add_member(:view_sun_elevation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "ViewSunElevation"))
+    Properties.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Platform"))
+    Properties.add_member(:landsat_cloud_cover_land, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LandsatCloudCoverLand"))
     Properties.type = Types::Properties
-    Property.add_member(:eo_cloud_cover, Types::Property::EoCloudCover, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EoCloudCoverInput, location_name: "EoCloudCover"))
-    Property.add_member(:view_off_nadir, Types::Property::ViewOffNadir, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewOffNadirInput, location_name: "ViewOffNadir"))
-    Property.add_member(:view_sun_azimuth, Types::Property::ViewSunAzimuth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewSunAzimuthInput, location_name: "ViewSunAzimuth"))
-    Property.add_member(:view_sun_elevation, Types::Property::ViewSunElevation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewSunElevationInput, location_name: "ViewSunElevation"))
-    Property.add_member(:platform, Types::Property::Platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PlatformInput, location_name: "Platform"))
-    Property.add_member(:landsat_cloud_cover_land, Types::Property::LandsatCloudCoverLand, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LandsatCloudCoverLandInput, location_name: "LandsatCloudCoverLand"))
-    Property.add_member(:unknown, Types::Property::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    Property.add_member(:eo_cloud_cover, Types::Property::EoCloudCover, ::Smithy::Schema::Shapes::MemberShape.new(target: EoCloudCoverInput, location_name: "EoCloudCover"))
+    Property.add_member(:view_off_nadir, Types::Property::ViewOffNadir, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewOffNadirInput, location_name: "ViewOffNadir"))
+    Property.add_member(:view_sun_azimuth, Types::Property::ViewSunAzimuth, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSunAzimuthInput, location_name: "ViewSunAzimuth"))
+    Property.add_member(:view_sun_elevation, Types::Property::ViewSunElevation, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSunElevationInput, location_name: "ViewSunElevation"))
+    Property.add_member(:platform, Types::Property::Platform, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformInput, location_name: "Platform"))
+    Property.add_member(:landsat_cloud_cover_land, Types::Property::LandsatCloudCoverLand, ::Smithy::Schema::Shapes::MemberShape.new(target: LandsatCloudCoverLandInput, location_name: "LandsatCloudCoverLand"))
+    Property.add_member(:unknown, Types::Property::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Property.type = Types::Property
-    PropertyFilter.add_member(:property, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Property, location_name: "Property", traits: {"smithy.api#required" => {}}))
+    PropertyFilter.add_member(:property, ::Smithy::Schema::Shapes::MemberShape.new(target: Property, location_name: "Property", traits: {"smithy.api#required" => {}}))
     PropertyFilter.type = Types::PropertyFilter
-    PropertyFilters.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropertyFiltersList, location_name: "Properties"))
-    PropertyFilters.add_member(:logical_operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogicalOperator, location_name: "LogicalOperator"))
+    PropertyFilters.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFiltersList, location_name: "Properties"))
+    PropertyFilters.add_member(:logical_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalOperator, location_name: "LogicalOperator"))
     PropertyFilters.type = Types::PropertyFilters
-    PropertyFiltersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropertyFilter)
-    RasterDataCollectionMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionMetadata.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionMetadata.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Description", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionMetadata.add_member(:description_page_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DescriptionPageUrl"))
-    RasterDataCollectionMetadata.add_member(:supported_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "SupportedFilters", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionMetadata.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    PropertyFiltersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFilter)
+    RasterDataCollectionMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Description", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionMetadata.add_member(:description_page_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DescriptionPageUrl"))
+    RasterDataCollectionMetadata.add_member(:supported_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "SupportedFilters", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionMetadata.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     RasterDataCollectionMetadata.type = Types::RasterDataCollectionMetadata
-    RasterDataCollectionQueryInput.add_member(:raster_data_collection_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionArn, location_name: "RasterDataCollectionArn", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionQueryInput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeRangeFilterInput, location_name: "TimeRangeFilter", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionQueryInput.add_member(:area_of_interest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AreaOfInterest, location_name: "AreaOfInterest"))
-    RasterDataCollectionQueryInput.add_member(:property_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "PropertyFilters"))
+    RasterDataCollectionQueryInput.add_member(:raster_data_collection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionArn, location_name: "RasterDataCollectionArn", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionQueryInput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeFilterInput, location_name: "TimeRangeFilter", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionQueryInput.add_member(:area_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: AreaOfInterest, location_name: "AreaOfInterest"))
+    RasterDataCollectionQueryInput.add_member(:property_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFilters, location_name: "PropertyFilters"))
     RasterDataCollectionQueryInput.type = Types::RasterDataCollectionQueryInput
-    RasterDataCollectionQueryOutput.add_member(:raster_data_collection_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionArn, location_name: "RasterDataCollectionArn", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionQueryOutput.add_member(:raster_data_collection_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RasterDataCollectionName", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionQueryOutput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeRangeFilterOutput, location_name: "TimeRangeFilter", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionQueryOutput.add_member(:area_of_interest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AreaOfInterest, location_name: "AreaOfInterest"))
-    RasterDataCollectionQueryOutput.add_member(:property_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "PropertyFilters"))
+    RasterDataCollectionQueryOutput.add_member(:raster_data_collection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionArn, location_name: "RasterDataCollectionArn", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionQueryOutput.add_member(:raster_data_collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RasterDataCollectionName", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionQueryOutput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeFilterOutput, location_name: "TimeRangeFilter", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionQueryOutput.add_member(:area_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: AreaOfInterest, location_name: "AreaOfInterest"))
+    RasterDataCollectionQueryOutput.add_member(:property_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFilters, location_name: "PropertyFilters"))
     RasterDataCollectionQueryOutput.type = Types::RasterDataCollectionQueryOutput
-    RasterDataCollectionQueryWithBandFilterInput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeRangeFilterInput, location_name: "TimeRangeFilter", traits: {"smithy.api#required" => {}}))
-    RasterDataCollectionQueryWithBandFilterInput.add_member(:area_of_interest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AreaOfInterest, location_name: "AreaOfInterest"))
-    RasterDataCollectionQueryWithBandFilterInput.add_member(:property_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "PropertyFilters"))
-    RasterDataCollectionQueryWithBandFilterInput.add_member(:band_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "BandFilter"))
+    RasterDataCollectionQueryWithBandFilterInput.add_member(:time_range_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeFilterInput, location_name: "TimeRangeFilter", traits: {"smithy.api#required" => {}}))
+    RasterDataCollectionQueryWithBandFilterInput.add_member(:area_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: AreaOfInterest, location_name: "AreaOfInterest"))
+    RasterDataCollectionQueryWithBandFilterInput.add_member(:property_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFilters, location_name: "PropertyFilters"))
+    RasterDataCollectionQueryWithBandFilterInput.add_member(:band_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "BandFilter"))
     RasterDataCollectionQueryWithBandFilterInput.type = Types::RasterDataCollectionQueryWithBandFilterInput
-    ResamplingConfigInput.add_member(:output_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputResolutionResamplingInput, location_name: "OutputResolution", traits: {"smithy.api#required" => {}}))
-    ResamplingConfigInput.add_member(:algorithm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlgorithmNameResampling, location_name: "AlgorithmName"))
-    ResamplingConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
+    ResamplingConfigInput.add_member(:output_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputResolutionResamplingInput, location_name: "OutputResolution", traits: {"smithy.api#required" => {}}))
+    ResamplingConfigInput.add_member(:algorithm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmNameResampling, location_name: "AlgorithmName"))
+    ResamplingConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "TargetBands"))
     ResamplingConfigInput.type = Types::ResamplingConfigInput
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ReverseGeocodingConfig.add_member(:y_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "YAttributeName", traits: {"smithy.api#required" => {}}))
-    ReverseGeocodingConfig.add_member(:x_attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "XAttributeName", traits: {"smithy.api#required" => {}}))
+    ReverseGeocodingConfig.add_member(:y_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "YAttributeName", traits: {"smithy.api#required" => {}}))
+    ReverseGeocodingConfig.add_member(:x_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "XAttributeName", traits: {"smithy.api#required" => {}}))
     ReverseGeocodingConfig.type = Types::ReverseGeocodingConfig
-    SearchRasterDataCollectionInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    SearchRasterDataCollectionInput.add_member(:raster_data_collection_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RasterDataCollectionQueryWithBandFilterInput, location_name: "RasterDataCollectionQuery", traits: {"smithy.api#required" => {}}))
-    SearchRasterDataCollectionInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchRasterDataCollectionInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    SearchRasterDataCollectionInput.add_member(:raster_data_collection_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RasterDataCollectionQueryWithBandFilterInput, location_name: "RasterDataCollectionQuery", traits: {"smithy.api#required" => {}}))
+    SearchRasterDataCollectionInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     SearchRasterDataCollectionInput.type = Types::SearchRasterDataCollectionInput
-    SearchRasterDataCollectionOutput.add_member(:approximate_result_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ApproximateResultCount", traits: {"smithy.api#required" => {}}))
-    SearchRasterDataCollectionOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    SearchRasterDataCollectionOutput.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ItemSourceList, location_name: "Items"))
+    SearchRasterDataCollectionOutput.add_member(:approximate_result_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "ApproximateResultCount", traits: {"smithy.api#required" => {}}))
+    SearchRasterDataCollectionOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    SearchRasterDataCollectionOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemSourceList, location_name: "Items"))
     SearchRasterDataCollectionOutput.type = Types::SearchRasterDataCollectionOutput
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StackConfigInput.add_member(:output_resolution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputResolutionStackInput, location_name: "OutputResolution"))
-    StackConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
+    StackConfigInput.add_member(:output_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputResolutionStackInput, location_name: "OutputResolution"))
+    StackConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "TargetBands"))
     StackConfigInput.type = Types::StackConfigInput
-    StartEarthObservationJobInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#required" => {}}))
-    StartEarthObservationJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
-    StartEarthObservationJobInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
-    StartEarthObservationJobInput.add_member(:input_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputConfigInput, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobInput.add_member(:job_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobConfigInput, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StartEarthObservationJobInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#required" => {}}))
+    StartEarthObservationJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
+    StartEarthObservationJobInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
+    StartEarthObservationJobInput.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputConfigInput, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobInput.add_member(:job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigInput, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     StartEarthObservationJobInput.type = Types::StartEarthObservationJobInput
-    StartEarthObservationJobOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    StartEarthObservationJobOperationOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobOperationOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
-    StartEarthObservationJobOperationOutput.add_member(:input_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputConfigOutput, location_name: "InputConfig"))
-    StartEarthObservationJobOperationOutput.add_member(:job_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobConfigInput, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobOperationOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    StartEarthObservationJobOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StartEarthObservationJobOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartEarthObservationJobOperationOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobOperationOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
+    StartEarthObservationJobOperationOutput.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputConfigOutput, location_name: "InputConfig"))
+    StartEarthObservationJobOperationOutput.add_member(:job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigInput, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobOperationOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    StartEarthObservationJobOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     StartEarthObservationJobOperationOutput.type = Types::StartEarthObservationJobOperationOutput
-    StartVectorEnrichmentJobInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#required" => {}}))
-    StartVectorEnrichmentJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
-    StartVectorEnrichmentJobInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
-    StartVectorEnrichmentJobInput.add_member(:input_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobInputConfig, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobInput.add_member(:job_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobConfig, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StartVectorEnrichmentJobInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#required" => {}}))
+    StartVectorEnrichmentJobInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 36, "max" => 64}}))
+    StartVectorEnrichmentJobInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
+    StartVectorEnrichmentJobInput.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobInputConfig, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobInput.add_member(:job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobConfig, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     StartVectorEnrichmentJobInput.type = Types::StartVectorEnrichmentJobInput
-    StartVectorEnrichmentJobOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
-    StartVectorEnrichmentJobOperationOutput.add_member(:input_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobInputConfig, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:job_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobConfig, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    StartVectorEnrichmentJobOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StartVectorEnrichmentJobOperationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
+    StartVectorEnrichmentJobOperationOutput.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobInputConfig, location_name: "InputConfig", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobConfig, location_name: "JobConfig", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    StartVectorEnrichmentJobOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     StartVectorEnrichmentJobOperationOutput.type = Types::StartVectorEnrichmentJobOperationOutput
-    StopEarthObservationJobInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    StopEarthObservationJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
     StopEarthObservationJobInput.type = Types::StopEarthObservationJobInput
     StopEarthObservationJobOutput.type = Types::StopEarthObservationJobOutput
-    StopVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    StopVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, location_name: "Arn", traits: {"smithy.api#required" => {}}))
     StopVectorEnrichmentJobInput.type = Types::StopVectorEnrichmentJobInput
     StopVectorEnrichmentJobOutput.type = Types::StopVectorEnrichmentJobOutput
-    StringListInput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    StringListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TemporalStatisticsConfigInput.add_member(:group_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupBy, location_name: "GroupBy"))
-    TemporalStatisticsConfigInput.add_member(:statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemporalStatisticsListInput, location_name: "Statistics", traits: {"smithy.api#required" => {}}))
-    TemporalStatisticsConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TemporalStatisticsConfigInput.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupBy, location_name: "GroupBy"))
+    TemporalStatisticsConfigInput.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: TemporalStatisticsListInput, location_name: "Statistics", traits: {"smithy.api#required" => {}}))
+    TemporalStatisticsConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "TargetBands"))
     TemporalStatisticsConfigInput.type = Types::TemporalStatisticsConfigInput
-    TemporalStatisticsListInput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemporalStatistics)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    TemporalStatisticsListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemporalStatistics)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ThrottlingException.type = Types::ThrottlingException
-    TimeRangeFilterInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
-    TimeRangeFilterInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
+    TimeRangeFilterInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}}))
+    TimeRangeFilterInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}}))
     TimeRangeFilterInput.type = Types::TimeRangeFilterInput
-    TimeRangeFilterOutput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
-    TimeRangeFilterOutput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    TimeRangeFilterOutput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "StartTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    TimeRangeFilterOutput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "EndTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     TimeRangeFilterOutput.type = Types::TimeRangeFilterOutput
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UserDefined.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "Value", traits: {"smithy.api#required" => {}}))
-    UserDefined.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Unit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
+    UserDefined.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    UserDefined.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: Unit, location_name: "Unit", traits: {"smithy.api#required" => {}}))
     UserDefined.type = Types::UserDefined
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ValidationException.type = Types::ValidationException
-    VectorEnrichmentJobConfig.add_member(:reverse_geocoding_config, Types::VectorEnrichmentJobConfig::ReverseGeocodingConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReverseGeocodingConfig, location_name: "ReverseGeocodingConfig"))
-    VectorEnrichmentJobConfig.add_member(:map_matching_config, Types::VectorEnrichmentJobConfig::MapMatchingConfig, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MapMatchingConfig, location_name: "MapMatchingConfig"))
-    VectorEnrichmentJobConfig.add_member(:unknown, Types::VectorEnrichmentJobConfig::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VectorEnrichmentJobConfig.add_member(:reverse_geocoding_config, Types::VectorEnrichmentJobConfig::ReverseGeocodingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodingConfig, location_name: "ReverseGeocodingConfig"))
+    VectorEnrichmentJobConfig.add_member(:map_matching_config, Types::VectorEnrichmentJobConfig::MapMatchingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: MapMatchingConfig, location_name: "MapMatchingConfig"))
+    VectorEnrichmentJobConfig.add_member(:unknown, Types::VectorEnrichmentJobConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VectorEnrichmentJobConfig.type = Types::VectorEnrichmentJobConfig
-    VectorEnrichmentJobDataSourceConfigInput.add_member(:s3_data, Types::VectorEnrichmentJobDataSourceConfigInput::S3Data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobS3Data, location_name: "S3Data"))
-    VectorEnrichmentJobDataSourceConfigInput.add_member(:unknown, Types::VectorEnrichmentJobDataSourceConfigInput::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    VectorEnrichmentJobDataSourceConfigInput.add_member(:s3_data, Types::VectorEnrichmentJobDataSourceConfigInput::S3Data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobS3Data, location_name: "S3Data"))
+    VectorEnrichmentJobDataSourceConfigInput.add_member(:unknown, Types::VectorEnrichmentJobDataSourceConfigInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VectorEnrichmentJobDataSourceConfigInput.type = Types::VectorEnrichmentJobDataSourceConfigInput
-    VectorEnrichmentJobErrorDetails.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobErrorType, location_name: "ErrorType"))
-    VectorEnrichmentJobErrorDetails.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ErrorMessage"))
+    VectorEnrichmentJobErrorDetails.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobErrorType, location_name: "ErrorType"))
+    VectorEnrichmentJobErrorDetails.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ErrorMessage"))
     VectorEnrichmentJobErrorDetails.type = Types::VectorEnrichmentJobErrorDetails
-    VectorEnrichmentJobExportErrorDetails.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobExportErrorType, location_name: "Type"))
-    VectorEnrichmentJobExportErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    VectorEnrichmentJobExportErrorDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobExportErrorType, location_name: "Type"))
+    VectorEnrichmentJobExportErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     VectorEnrichmentJobExportErrorDetails.type = Types::VectorEnrichmentJobExportErrorDetails
-    VectorEnrichmentJobInputConfig.add_member(:document_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobDocumentType, location_name: "DocumentType", traits: {"smithy.api#required" => {}}))
-    VectorEnrichmentJobInputConfig.add_member(:data_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorEnrichmentJobDataSourceConfigInput, location_name: "DataSourceConfig", traits: {"smithy.api#required" => {}}))
+    VectorEnrichmentJobInputConfig.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobDocumentType, location_name: "DocumentType", traits: {"smithy.api#required" => {}}))
+    VectorEnrichmentJobInputConfig.add_member(:data_source_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobDataSourceConfigInput, location_name: "DataSourceConfig", traits: {"smithy.api#required" => {}}))
     VectorEnrichmentJobInputConfig.type = Types::VectorEnrichmentJobInputConfig
-    VectorEnrichmentJobList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorEnrichmentJobOutputConfig)
-    VectorEnrichmentJobS3Data.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    VectorEnrichmentJobS3Data.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
+    VectorEnrichmentJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorEnrichmentJobOutputConfig)
+    VectorEnrichmentJobS3Data.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    VectorEnrichmentJobS3Data.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKeyId"))
     VectorEnrichmentJobS3Data.type = Types::VectorEnrichmentJobS3Data
-    ViewOffNadirInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
-    ViewOffNadirInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
+    ViewOffNadirInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
+    ViewOffNadirInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
     ViewOffNadirInput.type = Types::ViewOffNadirInput
-    ViewSunAzimuthInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
-    ViewSunAzimuthInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
+    ViewSunAzimuthInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
+    ViewSunAzimuthInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
     ViewSunAzimuthInput.type = Types::ViewSunAzimuthInput
-    ViewSunElevationInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
-    ViewSunElevationInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
+    ViewSunElevationInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "LowerBound", traits: {"smithy.api#required" => {}}))
+    ViewSunElevationInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, location_name: "UpperBound", traits: {"smithy.api#required" => {}}))
     ViewSunElevationInput.type = Types::ViewSunElevationInput
-    ZonalStatisticsConfigInput.add_member(:zone_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "ZoneS3Path", traits: {"smithy.api#required" => {}}))
-    ZonalStatisticsConfigInput.add_member(:statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalStatisticsListInput, location_name: "Statistics", traits: {"smithy.api#required" => {}}))
-    ZonalStatisticsConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
-    ZonalStatisticsConfigInput.add_member(:zone_s3_path_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "ZoneS3PathKmsKeyId"))
+    ZonalStatisticsConfigInput.add_member(:zone_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "ZoneS3Path", traits: {"smithy.api#required" => {}}))
+    ZonalStatisticsConfigInput.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalStatisticsListInput, location_name: "Statistics", traits: {"smithy.api#required" => {}}))
+    ZonalStatisticsConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, location_name: "TargetBands"))
+    ZonalStatisticsConfigInput.add_member(:zone_s3_path_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "ZoneS3PathKmsKeyId"))
     ZonalStatisticsConfigInput.type = Types::ZonalStatisticsConfigInput
-    ZonalStatisticsListInput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZonalStatistics)
+    ZonalStatisticsListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalStatistics)
 
     SageMakerGeospatial = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.sagemakergeospatial#SageMakerGeospatial"
@@ -609,245 +609,245 @@ module Aws::SageMakerGeospatial
       service.add_operation(:delete_earth_observation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#DeleteEarthObservationJob"
         operation.name = "DeleteEarthObservationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEarthObservationJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEarthObservationJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteEarthObservationJobInput
+        operation.output = DeleteEarthObservationJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/earth-observation-jobs/{Arn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_vector_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#DeleteVectorEnrichmentJob"
         operation.name = "DeleteVectorEnrichmentJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorEnrichmentJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVectorEnrichmentJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteVectorEnrichmentJobInput
+        operation.output = DeleteVectorEnrichmentJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/vector-enrichment-jobs/{Arn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:export_earth_observation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#ExportEarthObservationJob"
         operation.name = "ExportEarthObservationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportEarthObservationJobOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportEarthObservationJobOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ExportEarthObservationJobOperationInput
+        operation.output = ExportEarthObservationJobOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/export-earth-observation-job"}}
       end)
       service.add_operation(:export_vector_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#ExportVectorEnrichmentJob"
         operation.name = "ExportVectorEnrichmentJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ExportVectorEnrichmentJobInput
+        operation.output = ExportVectorEnrichmentJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/export-vector-enrichment-jobs"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_earth_observation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#GetEarthObservationJob"
         operation.name = "GetEarthObservationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEarthObservationJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEarthObservationJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetEarthObservationJobInput
+        operation.output = GetEarthObservationJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/earth-observation-jobs/{Arn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_raster_data_collection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#GetRasterDataCollection"
         operation.name = "GetRasterDataCollection"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRasterDataCollectionOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRasterDataCollectionOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRasterDataCollectionOperationInput
+        operation.output = GetRasterDataCollectionOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/raster-data-collection/{Arn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_tile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#GetTile"
         operation.name = "GetTile"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTileInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTileOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTileInput
+        operation.output = GetTileOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/tile/{z}/{x}/{y}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_vector_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#GetVectorEnrichmentJob"
         operation.name = "GetVectorEnrichmentJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorEnrichmentJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetVectorEnrichmentJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetVectorEnrichmentJobInput
+        operation.output = GetVectorEnrichmentJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/vector-enrichment-jobs/{Arn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_earth_observation_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#ListEarthObservationJobs"
         operation.name = "ListEarthObservationJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEarthObservationJobsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEarthObservationJobsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListEarthObservationJobsInput
+        operation.output = ListEarthObservationJobsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-earth-observation-jobs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEarthObservationJobs.new
       end)
       service.add_operation(:list_raster_data_collections, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#ListRasterDataCollections"
         operation.name = "ListRasterDataCollections"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRasterDataCollectionsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRasterDataCollectionsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRasterDataCollectionsOperationInput
+        operation.output = ListRasterDataCollectionsOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/raster-data-collections"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRasterDataCollections.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_vector_enrichment_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#ListVectorEnrichmentJobs"
         operation.name = "ListVectorEnrichmentJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorEnrichmentJobsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListVectorEnrichmentJobsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListVectorEnrichmentJobsInput
+        operation.output = ListVectorEnrichmentJobsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-vector-enrichment-jobs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVectorEnrichmentJobs.new
       end)
       service.add_operation(:search_raster_data_collection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#SearchRasterDataCollection"
         operation.name = "SearchRasterDataCollection"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchRasterDataCollectionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchRasterDataCollectionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SearchRasterDataCollectionInput
+        operation.output = SearchRasterDataCollectionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/search-raster-data-collection"}}
         operation[:paginator] = Paginators::SearchRasterDataCollection.new
       end)
       service.add_operation(:start_earth_observation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#StartEarthObservationJob"
         operation.name = "StartEarthObservationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEarthObservationJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartEarthObservationJobOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartEarthObservationJobInput
+        operation.output = StartEarthObservationJobOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/earth-observation-jobs"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_vector_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#StartVectorEnrichmentJob"
         operation.name = "StartVectorEnrichmentJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartVectorEnrichmentJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartVectorEnrichmentJobOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartVectorEnrichmentJobInput
+        operation.output = StartVectorEnrichmentJobOperationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/vector-enrichment-jobs"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:stop_earth_observation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#StopEarthObservationJob"
         operation.name = "StopEarthObservationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEarthObservationJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopEarthObservationJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopEarthObservationJobInput
+        operation.output = StopEarthObservationJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/earth-observation-jobs/stop"}}
       end)
       service.add_operation(:stop_vector_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#StopVectorEnrichmentJob"
         operation.name = "StopVectorEnrichmentJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopVectorEnrichmentJobInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopVectorEnrichmentJobOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopVectorEnrichmentJobInput
+        operation.output = StopVectorEnrichmentJobOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/vector-enrichment-jobs/stop"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemakergeospatial#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "DELETE"}}
       end)
     end

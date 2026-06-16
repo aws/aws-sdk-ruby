@@ -164,386 +164,386 @@ module Aws::Synthetics
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.synthetics#VpcId", name: "VpcId")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.synthetics#boolean", name: "Boolean", traits: {"smithy.api#default" => false})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ArtifactConfigInput.add_member(:s3_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3EncryptionConfig, location_name: "S3Encryption"))
+    ArtifactConfigInput.add_member(:s3_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: S3EncryptionConfig, location_name: "S3Encryption"))
     ArtifactConfigInput.type = Types::ArtifactConfigInput
-    ArtifactConfigOutput.add_member(:s3_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3EncryptionConfig, location_name: "S3Encryption"))
+    ArtifactConfigOutput.add_member(:s3_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: S3EncryptionConfig, location_name: "S3Encryption"))
     ArtifactConfigOutput.type = Types::ArtifactConfigOutput
-    AssociateResourceRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AssociateResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    AssociateResourceRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     AssociateResourceRequest.type = Types::AssociateResourceRequest
     AssociateResourceResponse.type = Types::AssociateResourceResponse
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     BadRequestException.type = Types::BadRequestException
-    BaseScreenshot.add_member(:screenshot_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ScreenshotName", traits: {"smithy.api#required" => {}}))
-    BaseScreenshot.add_member(:ignore_coordinates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshotIgnoreCoordinates, location_name: "IgnoreCoordinates"))
+    BaseScreenshot.add_member(:screenshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ScreenshotName", traits: {"smithy.api#required" => {}}))
+    BaseScreenshot.add_member(:ignore_coordinates, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshotIgnoreCoordinates, location_name: "IgnoreCoordinates"))
     BaseScreenshot.type = Types::BaseScreenshot
-    BaseScreenshotIgnoreCoordinates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshotConfigIgnoreCoordinate)
-    BaseScreenshots.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshot)
-    BlueprintTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintType)
-    BrowserConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: "BrowserType"))
+    BaseScreenshotIgnoreCoordinates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshotConfigIgnoreCoordinate)
+    BaseScreenshots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshot)
+    BlueprintTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintType)
+    BrowserConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, location_name: "BrowserType"))
     BrowserConfig.type = Types::BrowserConfig
-    BrowserConfigs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfig)
-    BrowserType.add_member(:chrome, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHROME", traits: {"smithy.api#enumValue" => "CHROME"}))
-    BrowserType.add_member(:firefox, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIREFOX", traits: {"smithy.api#enumValue" => "FIREFOX"}))
-    Canaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Canary)
-    CanariesLastRun.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryLastRun)
-    Canary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
-    Canary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name"))
-    Canary.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryCodeOutput, location_name: "Code"))
-    Canary.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
-    Canary.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryScheduleOutput, location_name: "Schedule"))
-    Canary.add_member(:run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunConfigOutput, location_name: "RunConfig"))
-    Canary.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
-    Canary.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
-    Canary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryStatus, location_name: "Status"))
-    Canary.add_member(:timeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryTimeline, location_name: "Timeline"))
-    Canary.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
-    Canary.add_member(:engine_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FunctionArn, location_name: "EngineArn"))
-    Canary.add_member(:runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion"))
-    Canary.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigOutput, location_name: "VpcConfig"))
-    Canary.add_member(:visual_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceOutput, location_name: "VisualReference"))
-    Canary.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
-    Canary.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: "BrowserConfigs"))
-    Canary.add_member(:engine_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineConfigs, location_name: "EngineConfigs"))
-    Canary.add_member(:visual_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferencesOutput, location_name: "VisualReferences"))
-    Canary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    Canary.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigOutput, location_name: "ArtifactConfig"))
-    Canary.add_member(:dry_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunConfigOutput, location_name: "DryRunConfig"))
+    BrowserConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfig)
+    BrowserType.add_member(:chrome, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHROME", traits: {"smithy.api#enumValue" => "CHROME"}))
+    BrowserType.add_member(:firefox, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIREFOX", traits: {"smithy.api#enumValue" => "FIREFOX"}))
+    Canaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Canary)
+    CanariesLastRun.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryLastRun)
+    Canary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "Id"))
+    Canary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name"))
+    Canary.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryCodeOutput, location_name: "Code"))
+    Canary.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "ExecutionRoleArn"))
+    Canary.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryScheduleOutput, location_name: "Schedule"))
+    Canary.add_member(:run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunConfigOutput, location_name: "RunConfig"))
+    Canary.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
+    Canary.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
+    Canary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryStatus, location_name: "Status"))
+    Canary.add_member(:timeline, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryTimeline, location_name: "Timeline"))
+    Canary.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArtifactS3Location"))
+    Canary.add_member(:engine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionArn, location_name: "EngineArn"))
+    Canary.add_member(:runtime_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RuntimeVersion"))
+    Canary.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigOutput, location_name: "VpcConfig"))
+    Canary.add_member(:visual_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceOutput, location_name: "VisualReference"))
+    Canary.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
+    Canary.add_member(:browser_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfigs, location_name: "BrowserConfigs"))
+    Canary.add_member(:engine_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfigs, location_name: "EngineConfigs"))
+    Canary.add_member(:visual_references, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferencesOutput, location_name: "VisualReferences"))
+    Canary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    Canary.add_member(:artifact_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactConfigOutput, location_name: "ArtifactConfig"))
+    Canary.add_member(:dry_run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunConfigOutput, location_name: "DryRunConfig"))
     Canary.type = Types::Canary
-    CanaryCodeInput.add_member(:s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "S3Bucket"))
-    CanaryCodeInput.add_member(:s3_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "S3Key"))
-    CanaryCodeInput.add_member(:s3_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "S3Version"))
-    CanaryCodeInput.add_member(:zip_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blob, location_name: "ZipFile"))
-    CanaryCodeInput.add_member(:handler, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHandler, location_name: "Handler", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
-    CanaryCodeInput.add_member(:blueprint_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintTypes, location_name: "BlueprintTypes"))
-    CanaryCodeInput.add_member(:dependencies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dependencies, location_name: "Dependencies"))
+    CanaryCodeInput.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "S3Bucket"))
+    CanaryCodeInput.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "S3Key"))
+    CanaryCodeInput.add_member(:s3_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "S3Version"))
+    CanaryCodeInput.add_member(:zip_file, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, location_name: "ZipFile"))
+    CanaryCodeInput.add_member(:handler, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeHandler, location_name: "Handler", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    CanaryCodeInput.add_member(:blueprint_types, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintTypes, location_name: "BlueprintTypes"))
+    CanaryCodeInput.add_member(:dependencies, ::Smithy::Schema::Shapes::MemberShape.new(target: Dependencies, location_name: "Dependencies"))
     CanaryCodeInput.type = Types::CanaryCodeInput
-    CanaryCodeOutput.add_member(:source_location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceLocationArn"))
-    CanaryCodeOutput.add_member(:handler, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Handler"))
-    CanaryCodeOutput.add_member(:blueprint_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintTypes, location_name: "BlueprintTypes"))
-    CanaryCodeOutput.add_member(:dependencies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dependencies, location_name: "Dependencies"))
+    CanaryCodeOutput.add_member(:source_location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceLocationArn"))
+    CanaryCodeOutput.add_member(:handler, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Handler"))
+    CanaryCodeOutput.add_member(:blueprint_types, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintTypes, location_name: "BlueprintTypes"))
+    CanaryCodeOutput.add_member(:dependencies, ::Smithy::Schema::Shapes::MemberShape.new(target: Dependencies, location_name: "Dependencies"))
     CanaryCodeOutput.type = Types::CanaryCodeOutput
-    CanaryDryRunConfigOutput.add_member(:dry_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "DryRunId"))
+    CanaryDryRunConfigOutput.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "DryRunId"))
     CanaryDryRunConfigOutput.type = Types::CanaryDryRunConfigOutput
-    CanaryLastRun.add_member(:canary_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "CanaryName"))
-    CanaryLastRun.add_member(:last_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRun, location_name: "LastRun"))
+    CanaryLastRun.add_member(:canary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "CanaryName"))
+    CanaryLastRun.add_member(:last_run, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRun, location_name: "LastRun"))
     CanaryLastRun.type = Types::CanaryLastRun
-    CanaryRun.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
-    CanaryRun.add_member(:scheduled_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "ScheduledRunId"))
-    CanaryRun.add_member(:retry_attempt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryAttempt, location_name: "RetryAttempt"))
-    CanaryRun.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name"))
-    CanaryRun.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunStatus, location_name: "Status"))
-    CanaryRun.add_member(:timeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunTimeline, location_name: "Timeline"))
-    CanaryRun.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
-    CanaryRun.add_member(:dry_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryDryRunConfigOutput, location_name: "DryRunConfig"))
-    CanaryRun.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: "BrowserType"))
+    CanaryRun.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "Id"))
+    CanaryRun.add_member(:scheduled_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "ScheduledRunId"))
+    CanaryRun.add_member(:retry_attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAttempt, location_name: "RetryAttempt"))
+    CanaryRun.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name"))
+    CanaryRun.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunStatus, location_name: "Status"))
+    CanaryRun.add_member(:timeline, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunTimeline, location_name: "Timeline"))
+    CanaryRun.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArtifactS3Location"))
+    CanaryRun.add_member(:dry_run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryDryRunConfigOutput, location_name: "DryRunConfig"))
+    CanaryRun.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, location_name: "BrowserType"))
     CanaryRun.type = Types::CanaryRun
-    CanaryRunConfigInput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
-    CanaryRunConfigInput.add_member(:memory_in_mb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
-    CanaryRunConfigInput.add_member(:active_tracing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ActiveTracing"))
-    CanaryRunConfigInput.add_member(:environment_variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "EnvironmentVariables"))
-    CanaryRunConfigInput.add_member(:ephemeral_storage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EphemeralStorageSize, location_name: "EphemeralStorage"))
+    CanaryRunConfigInput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
+    CanaryRunConfigInput.add_member(:memory_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize3008, location_name: "MemoryInMB"))
+    CanaryRunConfigInput.add_member(:active_tracing, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, location_name: "ActiveTracing"))
+    CanaryRunConfigInput.add_member(:environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, location_name: "EnvironmentVariables"))
+    CanaryRunConfigInput.add_member(:ephemeral_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralStorageSize, location_name: "EphemeralStorage"))
     CanaryRunConfigInput.type = Types::CanaryRunConfigInput
-    CanaryRunConfigOutput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
-    CanaryRunConfigOutput.add_member(:memory_in_mb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
-    CanaryRunConfigOutput.add_member(:active_tracing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ActiveTracing"))
-    CanaryRunConfigOutput.add_member(:ephemeral_storage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EphemeralStorageSize, location_name: "EphemeralStorage"))
+    CanaryRunConfigOutput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
+    CanaryRunConfigOutput.add_member(:memory_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize3008, location_name: "MemoryInMB"))
+    CanaryRunConfigOutput.add_member(:active_tracing, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, location_name: "ActiveTracing"))
+    CanaryRunConfigOutput.add_member(:ephemeral_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralStorageSize, location_name: "EphemeralStorage"))
     CanaryRunConfigOutput.type = Types::CanaryRunConfigOutput
-    CanaryRunState.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    CanaryRunState.add_member(:passed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSED", traits: {"smithy.api#enumValue" => "PASSED"}))
-    CanaryRunState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CanaryRunStateReasonCode.add_member(:canary_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANARY_FAILURE", traits: {"smithy.api#enumValue" => "CANARY_FAILURE"}))
-    CanaryRunStateReasonCode.add_member(:execution_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXECUTION_FAILURE", traits: {"smithy.api#enumValue" => "EXECUTION_FAILURE"}))
-    CanaryRunStatus.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunState, location_name: "State"))
-    CanaryRunStatus.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
-    CanaryRunStatus.add_member(:state_reason_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunStateReasonCode, location_name: "StateReasonCode"))
-    CanaryRunStatus.add_member(:test_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunTestResult, location_name: "TestResult"))
+    CanaryRunState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    CanaryRunState.add_member(:passed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSED", traits: {"smithy.api#enumValue" => "PASSED"}))
+    CanaryRunState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    CanaryRunStateReasonCode.add_member(:canary_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANARY_FAILURE", traits: {"smithy.api#enumValue" => "CANARY_FAILURE"}))
+    CanaryRunStateReasonCode.add_member(:execution_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXECUTION_FAILURE", traits: {"smithy.api#enumValue" => "EXECUTION_FAILURE"}))
+    CanaryRunStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunState, location_name: "State"))
+    CanaryRunStatus.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StateReason"))
+    CanaryRunStatus.add_member(:state_reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunStateReasonCode, location_name: "StateReasonCode"))
+    CanaryRunStatus.add_member(:test_result, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunTestResult, location_name: "TestResult"))
     CanaryRunStatus.type = Types::CanaryRunStatus
-    CanaryRunTestResult.add_member(:passed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSED", traits: {"smithy.api#enumValue" => "PASSED"}))
-    CanaryRunTestResult.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CanaryRunTestResult.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    CanaryRunTimeline.add_member(:started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Started"))
-    CanaryRunTimeline.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Completed"))
-    CanaryRunTimeline.add_member(:metric_timestamp_for_run_and_retries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "MetricTimestampForRunAndRetries"))
+    CanaryRunTestResult.add_member(:passed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PASSED", traits: {"smithy.api#enumValue" => "PASSED"}))
+    CanaryRunTestResult.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    CanaryRunTestResult.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    CanaryRunTimeline.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Started"))
+    CanaryRunTimeline.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Completed"))
+    CanaryRunTimeline.add_member(:metric_timestamp_for_run_and_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "MetricTimestampForRunAndRetries"))
     CanaryRunTimeline.type = Types::CanaryRunTimeline
-    CanaryRuns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRun)
-    CanaryScheduleInput.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Expression", traits: {"smithy.api#required" => {}}))
-    CanaryScheduleInput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxOneYearInSeconds, location_name: "DurationInSeconds"))
-    CanaryScheduleInput.add_member(:retry_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryConfigInput, location_name: "RetryConfig"))
+    CanaryRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRun)
+    CanaryScheduleInput.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Expression", traits: {"smithy.api#required" => {}}))
+    CanaryScheduleInput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxOneYearInSeconds, location_name: "DurationInSeconds"))
+    CanaryScheduleInput.add_member(:retry_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryConfigInput, location_name: "RetryConfig"))
     CanaryScheduleInput.type = Types::CanaryScheduleInput
-    CanaryScheduleOutput.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Expression"))
-    CanaryScheduleOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxOneYearInSeconds, location_name: "DurationInSeconds"))
-    CanaryScheduleOutput.add_member(:retry_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryConfigOutput, location_name: "RetryConfig"))
+    CanaryScheduleOutput.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Expression"))
+    CanaryScheduleOutput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxOneYearInSeconds, location_name: "DurationInSeconds"))
+    CanaryScheduleOutput.add_member(:retry_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryConfigOutput, location_name: "RetryConfig"))
     CanaryScheduleOutput.type = Types::CanaryScheduleOutput
-    CanaryState.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    CanaryState.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
-    CanaryState.add_member(:starting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
-    CanaryState.add_member(:running, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    CanaryState.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    CanaryState.add_member(:stopping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
-    CanaryState.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    CanaryState.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    CanaryState.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    CanaryStateReasonCode.add_member(:invalid_permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PERMISSIONS", traits: {"smithy.api#enumValue" => "INVALID_PERMISSIONS"}))
-    CanaryStateReasonCode.add_member(:create_pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
-    CanaryStateReasonCode.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
-    CanaryStateReasonCode.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    CanaryStateReasonCode.add_member(:update_pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_PENDING", traits: {"smithy.api#enumValue" => "UPDATE_PENDING"}))
-    CanaryStateReasonCode.add_member(:update_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
-    CanaryStateReasonCode.add_member(:update_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_COMPLETE", traits: {"smithy.api#enumValue" => "UPDATE_COMPLETE"}))
-    CanaryStateReasonCode.add_member(:rollback_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROLLBACK_COMPLETE", traits: {"smithy.api#enumValue" => "ROLLBACK_COMPLETE"}))
-    CanaryStateReasonCode.add_member(:rollback_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROLLBACK_FAILED", traits: {"smithy.api#enumValue" => "ROLLBACK_FAILED"}))
-    CanaryStateReasonCode.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
-    CanaryStateReasonCode.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    CanaryStateReasonCode.add_member(:sync_delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYNC_DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "SYNC_DELETE_IN_PROGRESS"}))
-    CanaryStatus.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryState, location_name: "State"))
-    CanaryStatus.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
-    CanaryStatus.add_member(:state_reason_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryStateReasonCode, location_name: "StateReasonCode"))
+    CanaryState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    CanaryState.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
+    CanaryState.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    CanaryState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    CanaryState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    CanaryState.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
+    CanaryState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    CanaryState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    CanaryState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    CanaryStateReasonCode.add_member(:invalid_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PERMISSIONS", traits: {"smithy.api#enumValue" => "INVALID_PERMISSIONS"}))
+    CanaryStateReasonCode.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
+    CanaryStateReasonCode.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    CanaryStateReasonCode.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    CanaryStateReasonCode.add_member(:update_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_PENDING", traits: {"smithy.api#enumValue" => "UPDATE_PENDING"}))
+    CanaryStateReasonCode.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
+    CanaryStateReasonCode.add_member(:update_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_COMPLETE", traits: {"smithy.api#enumValue" => "UPDATE_COMPLETE"}))
+    CanaryStateReasonCode.add_member(:rollback_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROLLBACK_COMPLETE", traits: {"smithy.api#enumValue" => "ROLLBACK_COMPLETE"}))
+    CanaryStateReasonCode.add_member(:rollback_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ROLLBACK_FAILED", traits: {"smithy.api#enumValue" => "ROLLBACK_FAILED"}))
+    CanaryStateReasonCode.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    CanaryStateReasonCode.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    CanaryStateReasonCode.add_member(:sync_delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SYNC_DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "SYNC_DELETE_IN_PROGRESS"}))
+    CanaryStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryState, location_name: "State"))
+    CanaryStatus.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StateReason"))
+    CanaryStatus.add_member(:state_reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryStateReasonCode, location_name: "StateReasonCode"))
     CanaryStatus.type = Types::CanaryStatus
-    CanaryTimeline.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
-    CanaryTimeline.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
-    CanaryTimeline.add_member(:last_started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastStarted"))
-    CanaryTimeline.add_member(:last_stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastStopped"))
+    CanaryTimeline.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Created"))
+    CanaryTimeline.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastModified"))
+    CanaryTimeline.add_member(:last_started, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastStarted"))
+    CanaryTimeline.add_member(:last_stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastStopped"))
     CanaryTimeline.type = Types::CanaryTimeline
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateCanaryRequest.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryCodeInput, location_name: "Code", traits: {"smithy.api#required" => {}}))
-    CreateCanaryRequest.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location", traits: {"smithy.api#required" => {}}))
-    CreateCanaryRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateCanaryRequest.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryScheduleInput, location_name: "Schedule", traits: {"smithy.api#required" => {}}))
-    CreateCanaryRequest.add_member(:run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunConfigInput, location_name: "RunConfig"))
-    CreateCanaryRequest.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
-    CreateCanaryRequest.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
-    CreateCanaryRequest.add_member(:runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion", traits: {"smithy.api#required" => {}}))
-    CreateCanaryRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
-    CreateCanaryRequest.add_member(:resources_to_replicate_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceList, location_name: "ResourcesToReplicateTags"))
-    CreateCanaryRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
-    CreateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: "BrowserConfigs"))
-    CreateCanaryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    CreateCanaryRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
+    CreateCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateCanaryRequest.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryCodeInput, location_name: "Code", traits: {"smithy.api#required" => {}}))
+    CreateCanaryRequest.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArtifactS3Location", traits: {"smithy.api#required" => {}}))
+    CreateCanaryRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateCanaryRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryScheduleInput, location_name: "Schedule", traits: {"smithy.api#required" => {}}))
+    CreateCanaryRequest.add_member(:run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunConfigInput, location_name: "RunConfig"))
+    CreateCanaryRequest.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
+    CreateCanaryRequest.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
+    CreateCanaryRequest.add_member(:runtime_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RuntimeVersion", traits: {"smithy.api#required" => {}}))
+    CreateCanaryRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigInput, location_name: "VpcConfig"))
+    CreateCanaryRequest.add_member(:resources_to_replicate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, location_name: "ResourcesToReplicateTags"))
+    CreateCanaryRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
+    CreateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfigs, location_name: "BrowserConfigs"))
+    CreateCanaryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    CreateCanaryRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactConfigInput, location_name: "ArtifactConfig"))
     CreateCanaryRequest.type = Types::CreateCanaryRequest
-    CreateCanaryResponse.add_member(:canary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Canary, location_name: "Canary"))
+    CreateCanaryResponse.add_member(:canary, ::Smithy::Schema::Shapes::MemberShape.new(target: Canary, location_name: "Canary"))
     CreateCanaryResponse.type = Types::CreateCanaryResponse
-    CreateGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     CreateGroupRequest.type = Types::CreateGroupRequest
-    CreateGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
+    CreateGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, location_name: "Group"))
     CreateGroupResponse.type = Types::CreateGroupResponse
-    DeleteCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteCanaryRequest.add_member(:delete_lambda, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteLambda", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "deleteLambda"}))
+    DeleteCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCanaryRequest.add_member(:delete_lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DeleteLambda", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "deleteLambda"}))
     DeleteCanaryRequest.type = Types::DeleteCanaryRequest
     DeleteCanaryResponse.type = Types::DeleteCanaryResponse
-    DeleteGroupRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteGroupRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteGroupRequest.type = Types::DeleteGroupRequest
     DeleteGroupResponse.type = Types::DeleteGroupResponse
-    Dependencies.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dependency)
-    Dependency.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyType, location_name: "Type"))
-    Dependency.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Reference", traits: {"smithy.api#required" => {}}))
+    Dependencies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dependency)
+    Dependency.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyType, location_name: "Type"))
+    Dependency.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Reference", traits: {"smithy.api#required" => {}}))
     Dependency.type = Types::Dependency
-    DependencyType.add_member(:lambda_layer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaLayer", traits: {"smithy.api#enumValue" => "LambdaLayer"}))
-    DescribeCanariesLastRunNameFilter.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName)
-    DescribeCanariesLastRunRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    DescribeCanariesLastRunRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
-    DescribeCanariesLastRunRequest.add_member(:names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCanariesLastRunNameFilter, location_name: "Names"))
-    DescribeCanariesLastRunRequest.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: "BrowserType"))
+    DependencyType.add_member(:lambda_layer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaLayer", traits: {"smithy.api#enumValue" => "LambdaLayer"}))
+    DescribeCanariesLastRunNameFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName)
+    DescribeCanariesLastRunRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    DescribeCanariesLastRunRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
+    DescribeCanariesLastRunRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeCanariesLastRunNameFilter, location_name: "Names"))
+    DescribeCanariesLastRunRequest.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, location_name: "BrowserType"))
     DescribeCanariesLastRunRequest.type = Types::DescribeCanariesLastRunRequest
-    DescribeCanariesLastRunResponse.add_member(:canaries_last_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanariesLastRun, location_name: "CanariesLastRun"))
-    DescribeCanariesLastRunResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeCanariesLastRunResponse.add_member(:canaries_last_run, ::Smithy::Schema::Shapes::MemberShape.new(target: CanariesLastRun, location_name: "CanariesLastRun"))
+    DescribeCanariesLastRunResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     DescribeCanariesLastRunResponse.type = Types::DescribeCanariesLastRunResponse
-    DescribeCanariesNameFilter.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName)
-    DescribeCanariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    DescribeCanariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxCanaryResults, location_name: "MaxResults"))
-    DescribeCanariesRequest.add_member(:names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCanariesNameFilter, location_name: "Names"))
+    DescribeCanariesNameFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName)
+    DescribeCanariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    DescribeCanariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxCanaryResults, location_name: "MaxResults"))
+    DescribeCanariesRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeCanariesNameFilter, location_name: "Names"))
     DescribeCanariesRequest.type = Types::DescribeCanariesRequest
-    DescribeCanariesResponse.add_member(:canaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Canaries, location_name: "Canaries"))
-    DescribeCanariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeCanariesResponse.add_member(:canaries, ::Smithy::Schema::Shapes::MemberShape.new(target: Canaries, location_name: "Canaries"))
+    DescribeCanariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     DescribeCanariesResponse.type = Types::DescribeCanariesResponse
-    DescribeRuntimeVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    DescribeRuntimeVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    DescribeRuntimeVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    DescribeRuntimeVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
     DescribeRuntimeVersionsRequest.type = Types::DescribeRuntimeVersionsRequest
-    DescribeRuntimeVersionsResponse.add_member(:runtime_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeVersionList, location_name: "RuntimeVersions"))
-    DescribeRuntimeVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeRuntimeVersionsResponse.add_member(:runtime_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeVersionList, location_name: "RuntimeVersions"))
+    DescribeRuntimeVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     DescribeRuntimeVersionsResponse.type = Types::DescribeRuntimeVersionsResponse
-    DisassociateResourceRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DisassociateResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DisassociateResourceRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DisassociateResourceRequest.type = Types::DisassociateResourceRequest
     DisassociateResourceResponse.type = Types::DisassociateResourceResponse
-    DryRunConfigOutput.add_member(:dry_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "DryRunId"))
-    DryRunConfigOutput.add_member(:last_dry_run_execution_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastDryRunExecutionStatus"))
+    DryRunConfigOutput.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "DryRunId"))
+    DryRunConfigOutput.add_member(:last_dry_run_execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastDryRunExecutionStatus"))
     DryRunConfigOutput.type = Types::DryRunConfigOutput
-    EncryptionMode.add_member(:sse_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_S3", traits: {"smithy.api#enumValue" => "SSE_S3"}))
-    EncryptionMode.add_member(:sse_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_KMS", traits: {"smithy.api#enumValue" => "SSE_KMS"}))
-    EngineConfig.add_member(:engine_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FunctionArn, location_name: "EngineArn"))
-    EngineConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: "BrowserType"))
+    EncryptionMode.add_member(:sse_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_S3", traits: {"smithy.api#enumValue" => "SSE_S3"}))
+    EncryptionMode.add_member(:sse_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSE_KMS", traits: {"smithy.api#enumValue" => "SSE_KMS"}))
+    EngineConfig.add_member(:engine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionArn, location_name: "EngineArn"))
+    EngineConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, location_name: "BrowserType"))
     EngineConfig.type = Types::EngineConfig
-    EngineConfigs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineConfig)
-    EnvironmentVariablesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariableName)
-    EnvironmentVariablesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
-    GetCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetCanaryRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "DryRunId", traits: {"smithy.api#httpQuery" => "dryRunId"}))
+    EngineConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfig)
+    EnvironmentVariablesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableName)
+    EnvironmentVariablesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue)
+    GetCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCanaryRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "DryRunId", traits: {"smithy.api#httpQuery" => "dryRunId"}))
     GetCanaryRequest.type = Types::GetCanaryRequest
-    GetCanaryResponse.add_member(:canary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Canary, location_name: "Canary"))
+    GetCanaryResponse.add_member(:canary, ::Smithy::Schema::Shapes::MemberShape.new(target: Canary, location_name: "Canary"))
     GetCanaryResponse.type = Types::GetCanaryResponse
-    GetCanaryRunsRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetCanaryRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    GetCanaryRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
-    GetCanaryRunsRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "DryRunId"))
-    GetCanaryRunsRequest.add_member(:run_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RunType, location_name: "RunType"))
+    GetCanaryRunsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCanaryRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    GetCanaryRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, location_name: "MaxResults"))
+    GetCanaryRunsRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "DryRunId"))
+    GetCanaryRunsRequest.add_member(:run_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RunType, location_name: "RunType"))
     GetCanaryRunsRequest.type = Types::GetCanaryRunsRequest
-    GetCanaryRunsResponse.add_member(:canary_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRuns, location_name: "CanaryRuns"))
-    GetCanaryRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetCanaryRunsResponse.add_member(:canary_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRuns, location_name: "CanaryRuns"))
+    GetCanaryRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     GetCanaryRunsResponse.type = Types::GetCanaryRunsResponse
-    GetGroupRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetGroupRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetGroupRequest.type = Types::GetGroupRequest
-    GetGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
+    GetGroupResponse.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, location_name: "Group"))
     GetGroupResponse.type = Types::GetGroupResponse
-    Group.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Id"))
-    Group.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
-    Group.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupArn, location_name: "Arn"))
-    Group.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    Group.add_member(:created_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
-    Group.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Group.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id"))
+    Group.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "Name"))
+    Group.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupArn, location_name: "Arn"))
+    Group.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    Group.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedTime"))
+    Group.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastModifiedTime"))
     Group.type = Types::Group
-    GroupSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Id"))
-    GroupSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
-    GroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupArn, location_name: "Arn"))
+    GroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id"))
+    GroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, location_name: "Name"))
+    GroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupArn, location_name: "Arn"))
     GroupSummary.type = Types::GroupSummary
-    GroupSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupSummary)
-    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    GroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary)
+    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalFailureException.type = Types::InternalFailureException
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    ListAssociatedGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListAssociatedGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxGroupResults, location_name: "MaxResults"))
-    ListAssociatedGroupsRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAssociatedGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListAssociatedGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxGroupResults, location_name: "MaxResults"))
+    ListAssociatedGroupsRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAssociatedGroupsRequest.type = Types::ListAssociatedGroupsRequest
-    ListAssociatedGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
-    ListAssociatedGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAssociatedGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummaryList, location_name: "Groups"))
+    ListAssociatedGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListAssociatedGroupsResponse.type = Types::ListAssociatedGroupsResponse
-    ListGroupResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListGroupResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxGroupResults, location_name: "MaxResults"))
-    ListGroupResourcesRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListGroupResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListGroupResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxGroupResults, location_name: "MaxResults"))
+    ListGroupResourcesRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, location_name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListGroupResourcesRequest.type = Types::ListGroupResourcesRequest
-    ListGroupResourcesResponse.add_member(:resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "Resources"))
-    ListGroupResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListGroupResourcesResponse.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "Resources"))
+    ListGroupResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListGroupResourcesResponse.type = Types::ListGroupResourcesResponse
-    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxGroupResults, location_name: "MaxResults"))
+    ListGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxGroupResults, location_name: "MaxResults"))
     ListGroupsRequest.type = Types::ListGroupsRequest
-    ListGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
-    ListGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListGroupsResponse.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummaryList, location_name: "Groups"))
+    ListGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     ListGroupsResponse.type = Types::ListGroupsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     NotFoundException.type = Types::NotFoundException
-    ProvisionedResourceCleanupSetting.add_member(:automatic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
-    ProvisionedResourceCleanupSetting.add_member(:off, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
-    RequestEntityTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ProvisionedResourceCleanupSetting.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    ProvisionedResourceCleanupSetting.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
+    RequestEntityTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     RequestEntityTooLargeException.type = Types::RequestEntityTooLargeException
-    ResourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceToTag)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceToTag)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceToTag.add_member(:lambda_function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAMBDA_FUNCTION", traits: {"smithy.api#enumValue" => "lambda-function"}))
-    RetryConfigInput.add_member(:max_retries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries", traits: {"smithy.api#required" => {}}))
+    ResourceToTag.add_member(:lambda_function, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LAMBDA_FUNCTION", traits: {"smithy.api#enumValue" => "lambda-function"}))
+    RetryConfigInput.add_member(:max_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRetries, location_name: "MaxRetries", traits: {"smithy.api#required" => {}}))
     RetryConfigInput.type = Types::RetryConfigInput
-    RetryConfigOutput.add_member(:max_retries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
+    RetryConfigOutput.add_member(:max_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRetries, location_name: "MaxRetries"))
     RetryConfigOutput.type = Types::RetryConfigOutput
-    RunType.add_member(:canary_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANARY_RUN", traits: {"smithy.api#enumValue" => "CANARY_RUN"}))
-    RunType.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DRY_RUN", traits: {"smithy.api#enumValue" => "DRY_RUN"}))
-    RuntimeVersion.add_member(:version_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "VersionName"))
-    RuntimeVersion.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    RuntimeVersion.add_member(:release_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReleaseDate"))
-    RuntimeVersion.add_member(:deprecation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeprecationDate"))
+    RunType.add_member(:canary_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CANARY_RUN", traits: {"smithy.api#enumValue" => "CANARY_RUN"}))
+    RunType.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DRY_RUN", traits: {"smithy.api#enumValue" => "DRY_RUN"}))
+    RuntimeVersion.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VersionName"))
+    RuntimeVersion.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Description"))
+    RuntimeVersion.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ReleaseDate"))
+    RuntimeVersion.add_member(:deprecation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "DeprecationDate"))
     RuntimeVersion.type = Types::RuntimeVersion
-    RuntimeVersionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeVersion)
-    S3EncryptionConfig.add_member(:encryption_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "EncryptionMode"))
-    S3EncryptionConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    RuntimeVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeVersion)
+    S3EncryptionConfig.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, location_name: "EncryptionMode"))
+    S3EncryptionConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, location_name: "KmsKeyArn"))
     S3EncryptionConfig.type = Types::S3EncryptionConfig
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StartCanaryDryRunRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartCanaryDryRunRequest.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryCodeInput, location_name: "Code"))
-    StartCanaryDryRunRequest.add_member(:runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion"))
-    StartCanaryDryRunRequest.add_member(:run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunConfigInput, location_name: "RunConfig"))
-    StartCanaryDryRunRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
-    StartCanaryDryRunRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
-    StartCanaryDryRunRequest.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
-    StartCanaryDryRunRequest.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
-    StartCanaryDryRunRequest.add_member(:visual_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceInput, location_name: "VisualReference"))
-    StartCanaryDryRunRequest.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
-    StartCanaryDryRunRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
-    StartCanaryDryRunRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
-    StartCanaryDryRunRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: "BrowserConfigs"))
-    StartCanaryDryRunRequest.add_member(:visual_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferences, location_name: "VisualReferences"))
+    StartCanaryDryRunRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartCanaryDryRunRequest.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryCodeInput, location_name: "Code"))
+    StartCanaryDryRunRequest.add_member(:runtime_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RuntimeVersion"))
+    StartCanaryDryRunRequest.add_member(:run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunConfigInput, location_name: "RunConfig"))
+    StartCanaryDryRunRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigInput, location_name: "VpcConfig"))
+    StartCanaryDryRunRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "ExecutionRoleArn"))
+    StartCanaryDryRunRequest.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
+    StartCanaryDryRunRequest.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
+    StartCanaryDryRunRequest.add_member(:visual_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceInput, location_name: "VisualReference"))
+    StartCanaryDryRunRequest.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArtifactS3Location"))
+    StartCanaryDryRunRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactConfigInput, location_name: "ArtifactConfig"))
+    StartCanaryDryRunRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
+    StartCanaryDryRunRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfigs, location_name: "BrowserConfigs"))
+    StartCanaryDryRunRequest.add_member(:visual_references, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferences, location_name: "VisualReferences"))
     StartCanaryDryRunRequest.type = Types::StartCanaryDryRunRequest
-    StartCanaryDryRunResponse.add_member(:dry_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunConfigOutput, location_name: "DryRunConfig"))
+    StartCanaryDryRunResponse.add_member(:dry_run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunConfigOutput, location_name: "DryRunConfig"))
     StartCanaryDryRunResponse.type = Types::StartCanaryDryRunResponse
-    StartCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartCanaryRequest.type = Types::StartCanaryRequest
     StartCanaryResponse.type = Types::StartCanaryResponse
-    StopCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopCanaryRequest.type = Types::StopCanaryRequest
     StopCanaryResponse.type = Types::StopCanaryResponse
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    SubnetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCanaryRequest.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryCodeInput, location_name: "Code"))
-    UpdateCanaryRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
-    UpdateCanaryRequest.add_member(:runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion"))
-    UpdateCanaryRequest.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryScheduleInput, location_name: "Schedule"))
-    UpdateCanaryRequest.add_member(:run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunConfigInput, location_name: "RunConfig"))
-    UpdateCanaryRequest.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
-    UpdateCanaryRequest.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
-    UpdateCanaryRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
-    UpdateCanaryRequest.add_member(:visual_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceInput, location_name: "VisualReference"))
-    UpdateCanaryRequest.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
-    UpdateCanaryRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
-    UpdateCanaryRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
-    UpdateCanaryRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: "DryRunId"))
-    UpdateCanaryRequest.add_member(:visual_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferences, location_name: "VisualReferences"))
-    UpdateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: "BrowserConfigs"))
+    UpdateCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCanaryRequest.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryCodeInput, location_name: "Code"))
+    UpdateCanaryRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "ExecutionRoleArn"))
+    UpdateCanaryRequest.add_member(:runtime_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RuntimeVersion"))
+    UpdateCanaryRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryScheduleInput, location_name: "Schedule"))
+    UpdateCanaryRequest.add_member(:run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRunConfigInput, location_name: "RunConfig"))
+    UpdateCanaryRequest.add_member(:success_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
+    UpdateCanaryRequest.add_member(:failure_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
+    UpdateCanaryRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigInput, location_name: "VpcConfig"))
+    UpdateCanaryRequest.add_member(:visual_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceInput, location_name: "VisualReference"))
+    UpdateCanaryRequest.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ArtifactS3Location"))
+    UpdateCanaryRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactConfigInput, location_name: "ArtifactConfig"))
+    UpdateCanaryRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
+    UpdateCanaryRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, location_name: "DryRunId"))
+    UpdateCanaryRequest.add_member(:visual_references, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferences, location_name: "VisualReferences"))
+    UpdateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfigs, location_name: "BrowserConfigs"))
     UpdateCanaryRequest.type = Types::UpdateCanaryRequest
     UpdateCanaryResponse.type = Types::UpdateCanaryResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ValidationException.type = Types::ValidationException
-    VisualReferenceInput.add_member(:base_screenshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshots, location_name: "BaseScreenshots"))
-    VisualReferenceInput.add_member(:base_canary_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "BaseCanaryRunId", traits: {"smithy.api#required" => {}}))
-    VisualReferenceInput.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: "BrowserType"))
+    VisualReferenceInput.add_member(:base_screenshots, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshots, location_name: "BaseScreenshots"))
+    VisualReferenceInput.add_member(:base_canary_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "BaseCanaryRunId", traits: {"smithy.api#required" => {}}))
+    VisualReferenceInput.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, location_name: "BrowserType"))
     VisualReferenceInput.type = Types::VisualReferenceInput
-    VisualReferenceOutput.add_member(:base_screenshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshots, location_name: "BaseScreenshots"))
-    VisualReferenceOutput.add_member(:base_canary_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "BaseCanaryRunId"))
-    VisualReferenceOutput.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: "BrowserType"))
+    VisualReferenceOutput.add_member(:base_screenshots, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshots, location_name: "BaseScreenshots"))
+    VisualReferenceOutput.add_member(:base_canary_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "BaseCanaryRunId"))
+    VisualReferenceOutput.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, location_name: "BrowserType"))
     VisualReferenceOutput.type = Types::VisualReferenceOutput
-    VisualReferences.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceInput)
-    VisualReferencesOutput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceOutput)
-    VpcConfigInput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    VpcConfigInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
-    VpcConfigInput.add_member(:ipv6_allowed_for_dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Ipv6AllowedForDualStack"))
+    VisualReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceInput)
+    VisualReferencesOutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceOutput)
+    VpcConfigInput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    VpcConfigInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    VpcConfigInput.add_member(:ipv6_allowed_for_dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, location_name: "Ipv6AllowedForDualStack"))
     VpcConfigInput.type = Types::VpcConfigInput
-    VpcConfigOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
-    VpcConfigOutput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    VpcConfigOutput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
-    VpcConfigOutput.add_member(:ipv6_allowed_for_dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Ipv6AllowedForDualStack"))
+    VpcConfigOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, location_name: "VpcId"))
+    VpcConfigOutput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "SubnetIds"))
+    VpcConfigOutput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    VpcConfigOutput.add_member(:ipv6_allowed_for_dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, location_name: "Ipv6AllowedForDualStack"))
     VpcConfigOutput.type = Types::VpcConfigOutput
 
     Synthetics = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -554,244 +554,244 @@ module Aws::Synthetics
       service.add_operation(:associate_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#AssociateResource"
         operation.name = "AssociateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateResourceRequest
+        operation.output = AssociateResourceResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/group/{GroupIdentifier}/associate", "code" => 200}}
       end)
       service.add_operation(:create_canary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#CreateCanary"
         operation.name = "CreateCanary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCanaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCanaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestEntityTooLargeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateCanaryRequest
+        operation.output = CreateCanaryResponse
+        operation.errors << InternalServerException
+        operation.errors << RequestEntityTooLargeException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/canary", "code" => 200}}
       end)
       service.add_operation(:create_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#CreateGroup"
         operation.name = "CreateGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateGroupRequest
+        operation.output = CreateGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/group", "code" => 200}}
       end)
       service.add_operation(:delete_canary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#DeleteCanary"
         operation.name = "DeleteCanary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCanaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCanaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteCanaryRequest
+        operation.output = DeleteCanaryResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/canary/{Name}", "code" => 200}}
       end)
       service.add_operation(:delete_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#DeleteGroup"
         operation.name = "DeleteGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteGroupRequest
+        operation.output = DeleteGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/group/{GroupIdentifier}", "code" => 200}}
       end)
       service.add_operation(:describe_canaries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#DescribeCanaries"
         operation.name = "DescribeCanaries"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCanariesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCanariesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeCanariesRequest
+        operation.output = DescribeCanariesResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/canaries", "code" => 200}}
         operation[:paginator] = Paginators::DescribeCanaries.new
       end)
       service.add_operation(:describe_canaries_last_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#DescribeCanariesLastRun"
         operation.name = "DescribeCanariesLastRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCanariesLastRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCanariesLastRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeCanariesLastRunRequest
+        operation.output = DescribeCanariesLastRunResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/canaries/last-run", "code" => 200}}
         operation[:paginator] = Paginators::DescribeCanariesLastRun.new
       end)
       service.add_operation(:describe_runtime_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#DescribeRuntimeVersions"
         operation.name = "DescribeRuntimeVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRuntimeVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRuntimeVersionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRuntimeVersionsRequest
+        operation.output = DescribeRuntimeVersionsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/runtime-versions", "code" => 200}}
         operation[:paginator] = Paginators::DescribeRuntimeVersions.new
       end)
       service.add_operation(:disassociate_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#DisassociateResource"
         operation.name = "DisassociateResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateResourceRequest
+        operation.output = DisassociateResourceResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/group/{GroupIdentifier}/disassociate", "code" => 200}}
       end)
       service.add_operation(:get_canary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#GetCanary"
         operation.name = "GetCanary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCanaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCanaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetCanaryRequest
+        operation.output = GetCanaryResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/canary/{Name}", "code" => 200}}
       end)
       service.add_operation(:get_canary_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#GetCanaryRuns"
         operation.name = "GetCanaryRuns"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCanaryRunsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCanaryRunsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetCanaryRunsRequest
+        operation.output = GetCanaryRunsResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/canary/{Name}/runs", "code" => 200}}
         operation[:paginator] = Paginators::GetCanaryRuns.new
       end)
       service.add_operation(:get_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#GetGroup"
         operation.name = "GetGroup"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGroupRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGroupResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetGroupRequest
+        operation.output = GetGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/group/{GroupIdentifier}", "code" => 200}}
       end)
       service.add_operation(:list_associated_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#ListAssociatedGroups"
         operation.name = "ListAssociatedGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAssociatedGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAssociatedGroupsRequest
+        operation.output = ListAssociatedGroupsResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/resource/{ResourceArn}/groups", "code" => 200}}
         operation[:paginator] = Paginators::ListAssociatedGroups.new
       end)
       service.add_operation(:list_group_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#ListGroupResources"
         operation.name = "ListGroupResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupResourcesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListGroupResourcesRequest
+        operation.output = ListGroupResourcesResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/group/{GroupIdentifier}/resources", "code" => 200}}
         operation[:paginator] = Paginators::ListGroupResources.new
       end)
       service.add_operation(:list_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#ListGroups"
         operation.name = "ListGroups"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListGroupsRequest
+        operation.output = ListGroupsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/groups", "code" => 200}}
         operation[:paginator] = Paginators::ListGroups.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:start_canary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#StartCanary"
         operation.name = "StartCanary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartCanaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartCanaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartCanaryRequest
+        operation.output = StartCanaryResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/canary/{Name}/start", "code" => 200}}
       end)
       service.add_operation(:start_canary_dry_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#StartCanaryDryRun"
         operation.name = "StartCanaryDryRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartCanaryDryRunRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartCanaryDryRunResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartCanaryDryRunRequest
+        operation.output = StartCanaryDryRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/canary/{Name}/dry-run/start", "code" => 200}}
       end)
       service.add_operation(:stop_canary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#StopCanary"
         operation.name = "StopCanary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopCanaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopCanaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopCanaryRequest
+        operation.output = StopCanaryResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/canary/{Name}/stop", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
       service.add_operation(:update_canary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#UpdateCanary"
         operation.name = "UpdateCanary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCanaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCanaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestEntityTooLargeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateCanaryRequest
+        operation.output = UpdateCanaryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestEntityTooLargeException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/canary/{Name}", "code" => 200}}
       end)
     end

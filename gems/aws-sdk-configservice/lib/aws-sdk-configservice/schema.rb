@@ -590,1935 +590,1935 @@ module Aws::ConfigService
     Value = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.configservice#Value", name: "Value")
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.configservice#Version", name: "Version")
 
-    AccountAggregationSource.add_member(:account_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountAggregationSourceAccountList, location_name: "AccountIds", traits: {"smithy.api#required" => {}}))
-    AccountAggregationSource.add_member(:all_aws_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAwsRegions", traits: {"smithy.api#default" => false}))
-    AccountAggregationSource.add_member(:aws_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorRegionList, location_name: "AwsRegions"))
+    AccountAggregationSource.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAggregationSourceAccountList, location_name: "AccountIds", traits: {"smithy.api#required" => {}}))
+    AccountAggregationSource.add_member(:all_aws_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AllAwsRegions", traits: {"smithy.api#default" => false}))
+    AccountAggregationSource.add_member(:aws_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorRegionList, location_name: "AwsRegions"))
     AccountAggregationSource.type = Types::AccountAggregationSource
-    AccountAggregationSourceAccountList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId)
-    AccountAggregationSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountAggregationSource)
-    AggregateComplianceByConfigRule.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
-    AggregateComplianceByConfigRule.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Compliance, location_name: "Compliance"))
-    AggregateComplianceByConfigRule.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    AggregateComplianceByConfigRule.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AccountAggregationSourceAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId)
+    AccountAggregationSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAggregationSource)
+    AggregateComplianceByConfigRule.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName"))
+    AggregateComplianceByConfigRule.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: Compliance, location_name: "Compliance"))
+    AggregateComplianceByConfigRule.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    AggregateComplianceByConfigRule.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
     AggregateComplianceByConfigRule.type = Types::AggregateComplianceByConfigRule
-    AggregateComplianceByConfigRuleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRule)
-    AggregateComplianceByConformancePack.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
-    AggregateComplianceByConformancePack.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConformancePackCompliance, location_name: "Compliance"))
-    AggregateComplianceByConformancePack.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    AggregateComplianceByConformancePack.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateComplianceByConfigRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateComplianceByConfigRule)
+    AggregateComplianceByConformancePack.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName"))
+    AggregateComplianceByConformancePack.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConformancePackCompliance, location_name: "Compliance"))
+    AggregateComplianceByConformancePack.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    AggregateComplianceByConformancePack.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
     AggregateComplianceByConformancePack.type = Types::AggregateComplianceByConformancePack
-    AggregateComplianceByConformancePackList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateComplianceByConformancePack)
-    AggregateComplianceCount.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName"))
-    AggregateComplianceCount.add_member(:compliance_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceSummary, location_name: "ComplianceSummary"))
+    AggregateComplianceByConformancePackList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateComplianceByConformancePack)
+    AggregateComplianceCount.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "GroupName"))
+    AggregateComplianceCount.add_member(:compliance_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceSummary, location_name: "ComplianceSummary"))
     AggregateComplianceCount.type = Types::AggregateComplianceCount
-    AggregateComplianceCountList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateComplianceCount)
-    AggregateConformancePackCompliance.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
-    AggregateConformancePackCompliance.add_member(:compliant_rule_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "CompliantRuleCount", traits: {"smithy.api#default" => 0}))
-    AggregateConformancePackCompliance.add_member(:non_compliant_rule_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NonCompliantRuleCount", traits: {"smithy.api#default" => 0}))
-    AggregateConformancePackCompliance.add_member(:total_rule_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "TotalRuleCount", traits: {"smithy.api#default" => 0}))
+    AggregateComplianceCountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateComplianceCount)
+    AggregateConformancePackCompliance.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceType, location_name: "ComplianceType"))
+    AggregateConformancePackCompliance.add_member(:compliant_rule_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "CompliantRuleCount", traits: {"smithy.api#default" => 0}))
+    AggregateConformancePackCompliance.add_member(:non_compliant_rule_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NonCompliantRuleCount", traits: {"smithy.api#default" => 0}))
+    AggregateConformancePackCompliance.add_member(:total_rule_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "TotalRuleCount", traits: {"smithy.api#default" => 0}))
     AggregateConformancePackCompliance.type = Types::AggregateConformancePackCompliance
-    AggregateConformancePackComplianceCount.add_member(:compliant_conformance_pack_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "CompliantConformancePackCount", traits: {"smithy.api#default" => 0}))
-    AggregateConformancePackComplianceCount.add_member(:non_compliant_conformance_pack_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "NonCompliantConformancePackCount", traits: {"smithy.api#default" => 0}))
+    AggregateConformancePackComplianceCount.add_member(:compliant_conformance_pack_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "CompliantConformancePackCount", traits: {"smithy.api#default" => 0}))
+    AggregateConformancePackComplianceCount.add_member(:non_compliant_conformance_pack_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "NonCompliantConformancePackCount", traits: {"smithy.api#default" => 0}))
     AggregateConformancePackComplianceCount.type = Types::AggregateConformancePackComplianceCount
-    AggregateConformancePackComplianceFilters.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
-    AggregateConformancePackComplianceFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
-    AggregateConformancePackComplianceFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    AggregateConformancePackComplianceFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateConformancePackComplianceFilters.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName"))
+    AggregateConformancePackComplianceFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceType, location_name: "ComplianceType"))
+    AggregateConformancePackComplianceFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    AggregateConformancePackComplianceFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
     AggregateConformancePackComplianceFilters.type = Types::AggregateConformancePackComplianceFilters
-    AggregateConformancePackComplianceSummary.add_member(:compliance_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceCount, location_name: "ComplianceSummary"))
-    AggregateConformancePackComplianceSummary.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName"))
+    AggregateConformancePackComplianceSummary.add_member(:compliance_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConformancePackComplianceCount, location_name: "ComplianceSummary"))
+    AggregateConformancePackComplianceSummary.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "GroupName"))
     AggregateConformancePackComplianceSummary.type = Types::AggregateConformancePackComplianceSummary
-    AggregateConformancePackComplianceSummaryFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    AggregateConformancePackComplianceSummaryFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateConformancePackComplianceSummaryFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    AggregateConformancePackComplianceSummaryFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
     AggregateConformancePackComplianceSummaryFilters.type = Types::AggregateConformancePackComplianceSummaryFilters
-    AggregateConformancePackComplianceSummaryGroupKey.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ACCOUNT_ID"}))
-    AggregateConformancePackComplianceSummaryGroupKey.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS_REGION"}))
-    AggregateConformancePackComplianceSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummary)
-    AggregateEvaluationResult.add_member(:evaluation_result_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier"))
-    AggregateEvaluationResult.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
-    AggregateEvaluationResult.add_member(:result_recorded_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ResultRecordedTime"))
-    AggregateEvaluationResult.add_member(:config_rule_invoked_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ConfigRuleInvokedTime"))
-    AggregateEvaluationResult.add_member(:annotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
-    AggregateEvaluationResult.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    AggregateEvaluationResult.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateConformancePackComplianceSummaryGroupKey.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ACCOUNT_ID"}))
+    AggregateConformancePackComplianceSummaryGroupKey.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS_REGION"}))
+    AggregateConformancePackComplianceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConformancePackComplianceSummary)
+    AggregateEvaluationResult.add_member(:evaluation_result_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier"))
+    AggregateEvaluationResult.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "ComplianceType"))
+    AggregateEvaluationResult.add_member(:result_recorded_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ResultRecordedTime"))
+    AggregateEvaluationResult.add_member(:config_rule_invoked_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ConfigRuleInvokedTime"))
+    AggregateEvaluationResult.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "Annotation"))
+    AggregateEvaluationResult.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    AggregateEvaluationResult.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
     AggregateEvaluationResult.type = Types::AggregateEvaluationResult
-    AggregateEvaluationResultList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateEvaluationResult)
-    AggregateResourceIdentifier.add_member(:source_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "SourceAccountId", traits: {"smithy.api#required" => {}}))
-    AggregateResourceIdentifier.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "SourceRegion", traits: {"smithy.api#required" => {}}))
-    AggregateResourceIdentifier.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    AggregateResourceIdentifier.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    AggregateResourceIdentifier.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "ResourceName"))
+    AggregateEvaluationResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateEvaluationResult)
+    AggregateResourceIdentifier.add_member(:source_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "SourceAccountId", traits: {"smithy.api#required" => {}}))
+    AggregateResourceIdentifier.add_member(:source_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "SourceRegion", traits: {"smithy.api#required" => {}}))
+    AggregateResourceIdentifier.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    AggregateResourceIdentifier.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    AggregateResourceIdentifier.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "ResourceName"))
     AggregateResourceIdentifier.type = Types::AggregateResourceIdentifier
-    AggregatedSourceStatus.add_member(:source_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceId"))
-    AggregatedSourceStatus.add_member(:source_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedSourceType, location_name: "SourceType"))
-    AggregatedSourceStatus.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
-    AggregatedSourceStatus.add_member(:last_update_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedSourceStatusType, location_name: "LastUpdateStatus"))
-    AggregatedSourceStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
-    AggregatedSourceStatus.add_member(:last_error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastErrorCode"))
-    AggregatedSourceStatus.add_member(:last_error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastErrorMessage"))
+    AggregatedSourceStatus.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceId"))
+    AggregatedSourceStatus.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedSourceType, location_name: "SourceType"))
+    AggregatedSourceStatus.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
+    AggregatedSourceStatus.add_member(:last_update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedSourceStatusType, location_name: "LastUpdateStatus"))
+    AggregatedSourceStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateTime"))
+    AggregatedSourceStatus.add_member(:last_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastErrorCode"))
+    AggregatedSourceStatus.add_member(:last_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastErrorMessage"))
     AggregatedSourceStatus.type = Types::AggregatedSourceStatus
-    AggregatedSourceStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedSourceStatus)
-    AggregatedSourceStatusType.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    AggregatedSourceStatusType.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    AggregatedSourceStatusType.add_member(:outdated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTDATED", traits: {"smithy.api#enumValue" => "OUTDATED"}))
-    AggregatedSourceStatusTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedSourceStatusType)
-    AggregatedSourceType.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
-    AggregatedSourceType.add_member(:organization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
-    AggregationAuthorization.add_member(:aggregation_authorization_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "AggregationAuthorizationArn"))
-    AggregationAuthorization.add_member(:authorized_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AuthorizedAccountId"))
-    AggregationAuthorization.add_member(:authorized_aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AuthorizedAwsRegion"))
-    AggregationAuthorization.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    AggregatedSourceStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedSourceStatus)
+    AggregatedSourceStatusType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    AggregatedSourceStatusType.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    AggregatedSourceStatusType.add_member(:outdated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTDATED", traits: {"smithy.api#enumValue" => "OUTDATED"}))
+    AggregatedSourceStatusTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedSourceStatusType)
+    AggregatedSourceType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
+    AggregatedSourceType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
+    AggregationAuthorization.add_member(:aggregation_authorization_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "AggregationAuthorizationArn"))
+    AggregationAuthorization.add_member(:authorized_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AuthorizedAccountId"))
+    AggregationAuthorization.add_member(:authorized_aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AuthorizedAwsRegion"))
+    AggregationAuthorization.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "CreationTime"))
     AggregationAuthorization.type = Types::AggregationAuthorization
-    AggregationAuthorizationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationAuthorization)
-    AggregatorFilterResourceType.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorFilterType, location_name: "Type"))
-    AggregatorFilterResourceType.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeValueList, location_name: "Value"))
+    AggregationAuthorizationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationAuthorization)
+    AggregatorFilterResourceType.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorFilterType, location_name: "Type"))
+    AggregatorFilterResourceType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValueList, location_name: "Value"))
     AggregatorFilterResourceType.type = Types::AggregatorFilterResourceType
-    AggregatorFilterServicePrincipal.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorFilterType, location_name: "Type"))
-    AggregatorFilterServicePrincipal.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipalValueList, location_name: "Value"))
+    AggregatorFilterServicePrincipal.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorFilterType, location_name: "Type"))
+    AggregatorFilterServicePrincipal.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalValueList, location_name: "Value"))
     AggregatorFilterServicePrincipal.type = Types::AggregatorFilterServicePrincipal
-    AggregatorFilterType.add_member(:include, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
-    AggregatorFilters.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorFilterResourceType, location_name: "ResourceType"))
-    AggregatorFilters.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorFilterServicePrincipal, location_name: "ServicePrincipal"))
+    AggregatorFilterType.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
+    AggregatorFilters.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorFilterResourceType, location_name: "ResourceType"))
+    AggregatorFilters.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorFilterServicePrincipal, location_name: "ServicePrincipal"))
     AggregatorFilters.type = Types::AggregatorFilters
-    AggregatorRegionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    AssociateResourceTypesRequest.add_member(:configuration_recorder_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ConfigurationRecorderArn", traits: {"smithy.api#required" => {}}))
-    AssociateResourceTypesRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
+    AggregatorRegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    AssociateResourceTypesRequest.add_member(:configuration_recorder_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ConfigurationRecorderArn", traits: {"smithy.api#required" => {}}))
+    AssociateResourceTypesRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeList, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
     AssociateResourceTypesRequest.type = Types::AssociateResourceTypesRequest
-    AssociateResourceTypesResponse.add_member(:configuration_recorder, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorder, location_name: "ConfigurationRecorder", traits: {"smithy.api#required" => {}}))
+    AssociateResourceTypesResponse.add_member(:configuration_recorder, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorder, location_name: "ConfigurationRecorder", traits: {"smithy.api#required" => {}}))
     AssociateResourceTypesResponse.type = Types::AssociateResourceTypesResponse
-    BaseConfigurationItem.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    BaseConfigurationItem.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    BaseConfigurationItem.add_member(:configuration_item_capture_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemCaptureTime, location_name: "configurationItemCaptureTime"))
-    BaseConfigurationItem.add_member(:configuration_item_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemStatus, location_name: "configurationItemStatus"))
-    BaseConfigurationItem.add_member(:configuration_state_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationStateId, location_name: "configurationStateId"))
-    BaseConfigurationItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
-    BaseConfigurationItem.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    BaseConfigurationItem.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
-    BaseConfigurationItem.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
-    BaseConfigurationItem.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
-    BaseConfigurationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
-    BaseConfigurationItem.add_member(:resource_creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCreationTime, location_name: "resourceCreationTime"))
-    BaseConfigurationItem.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
-    BaseConfigurationItem.add_member(:supplementary_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
-    BaseConfigurationItem.add_member(:recording_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingFrequency, location_name: "recordingFrequency"))
-    BaseConfigurationItem.add_member(:configuration_item_delivery_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemDeliveryTime, location_name: "configurationItemDeliveryTime"))
+    BaseConfigurationItem.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    BaseConfigurationItem.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "accountId"))
+    BaseConfigurationItem.add_member(:configuration_item_capture_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemCaptureTime, location_name: "configurationItemCaptureTime"))
+    BaseConfigurationItem.add_member(:configuration_item_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemStatus, location_name: "configurationItemStatus"))
+    BaseConfigurationItem.add_member(:configuration_state_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStateId, location_name: "configurationStateId"))
+    BaseConfigurationItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "arn"))
+    BaseConfigurationItem.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    BaseConfigurationItem.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId"))
+    BaseConfigurationItem.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "resourceName"))
+    BaseConfigurationItem.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "awsRegion"))
+    BaseConfigurationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "availabilityZone"))
+    BaseConfigurationItem.add_member(:resource_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCreationTime, location_name: "resourceCreationTime"))
+    BaseConfigurationItem.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, location_name: "configuration"))
+    BaseConfigurationItem.add_member(:supplementary_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
+    BaseConfigurationItem.add_member(:recording_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingFrequency, location_name: "recordingFrequency"))
+    BaseConfigurationItem.add_member(:configuration_item_delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemDeliveryTime, location_name: "configurationItemDeliveryTime"))
     BaseConfigurationItem.type = Types::BaseConfigurationItem
-    BaseConfigurationItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseConfigurationItem)
-    BatchGetAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    BatchGetAggregateResourceConfigRequest.add_member(:resource_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifiersList, location_name: "ResourceIdentifiers", traits: {"smithy.api#required" => {}}))
+    BaseConfigurationItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BaseConfigurationItem)
+    BatchGetAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    BatchGetAggregateResourceConfigRequest.add_member(:resource_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifiersList, location_name: "ResourceIdentifiers", traits: {"smithy.api#required" => {}}))
     BatchGetAggregateResourceConfigRequest.type = Types::BatchGetAggregateResourceConfigRequest
-    BatchGetAggregateResourceConfigResponse.add_member(:base_configuration_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseConfigurationItems, location_name: "BaseConfigurationItems"))
-    BatchGetAggregateResourceConfigResponse.add_member(:unprocessed_resource_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessedResourceIdentifierList, location_name: "UnprocessedResourceIdentifiers"))
+    BatchGetAggregateResourceConfigResponse.add_member(:base_configuration_items, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseConfigurationItems, location_name: "BaseConfigurationItems"))
+    BatchGetAggregateResourceConfigResponse.add_member(:unprocessed_resource_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedResourceIdentifierList, location_name: "UnprocessedResourceIdentifiers"))
     BatchGetAggregateResourceConfigResponse.type = Types::BatchGetAggregateResourceConfigResponse
-    BatchGetResourceConfigRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "resourceKeys", traits: {"smithy.api#required" => {}}))
+    BatchGetResourceConfigRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceKeys, location_name: "resourceKeys", traits: {"smithy.api#required" => {}}))
     BatchGetResourceConfigRequest.type = Types::BatchGetResourceConfigRequest
-    BatchGetResourceConfigResponse.add_member(:base_configuration_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseConfigurationItems, location_name: "baseConfigurationItems"))
-    BatchGetResourceConfigResponse.add_member(:unprocessed_resource_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "unprocessedResourceKeys"))
+    BatchGetResourceConfigResponse.add_member(:base_configuration_items, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseConfigurationItems, location_name: "baseConfigurationItems"))
+    BatchGetResourceConfigResponse.add_member(:unprocessed_resource_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceKeys, location_name: "unprocessedResourceKeys"))
     BatchGetResourceConfigResponse.type = Types::BatchGetResourceConfigResponse
-    ChronologicalOrder.add_member(:reverse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Reverse", traits: {"smithy.api#enumValue" => "Reverse"}))
-    ChronologicalOrder.add_member(:forward, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Forward", traits: {"smithy.api#enumValue" => "Forward"}))
-    Compliance.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
-    Compliance.add_member(:compliance_contributor_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceContributorCount, location_name: "ComplianceContributorCount"))
+    ChronologicalOrder.add_member(:reverse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Reverse", traits: {"smithy.api#enumValue" => "Reverse"}))
+    ChronologicalOrder.add_member(:forward, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Forward", traits: {"smithy.api#enumValue" => "Forward"}))
+    Compliance.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "ComplianceType"))
+    Compliance.add_member(:compliance_contributor_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceContributorCount, location_name: "ComplianceContributorCount"))
     Compliance.type = Types::Compliance
-    ComplianceByConfigRule.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName"))
-    ComplianceByConfigRule.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Compliance, location_name: "Compliance"))
+    ComplianceByConfigRule.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit64, location_name: "ConfigRuleName"))
+    ComplianceByConfigRule.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: Compliance, location_name: "Compliance"))
     ComplianceByConfigRule.type = Types::ComplianceByConfigRule
-    ComplianceByConfigRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceByConfigRule)
-    ComplianceByResource.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    ComplianceByResource.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
-    ComplianceByResource.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Compliance, location_name: "Compliance"))
+    ComplianceByConfigRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceByConfigRule)
+    ComplianceByResource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType"))
+    ComplianceByResource.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ResourceId"))
+    ComplianceByResource.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: Compliance, location_name: "Compliance"))
     ComplianceByResource.type = Types::ComplianceByResource
-    ComplianceByResources.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceByResource)
-    ComplianceContributorCount.add_member(:capped_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "CappedCount", traits: {"smithy.api#default" => 0}))
-    ComplianceContributorCount.add_member(:cap_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "CapExceeded", traits: {"smithy.api#default" => false}))
+    ComplianceByResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceByResource)
+    ComplianceContributorCount.add_member(:capped_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "CappedCount", traits: {"smithy.api#default" => 0}))
+    ComplianceContributorCount.add_member(:cap_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "CapExceeded", traits: {"smithy.api#default" => false}))
     ComplianceContributorCount.type = Types::ComplianceContributorCount
-    ComplianceResourceTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256)
-    ComplianceSummariesByResourceType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceSummaryByResourceType)
-    ComplianceSummary.add_member(:compliant_resource_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceContributorCount, location_name: "CompliantResourceCount"))
-    ComplianceSummary.add_member(:non_compliant_resource_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceContributorCount, location_name: "NonCompliantResourceCount"))
-    ComplianceSummary.add_member(:compliance_summary_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ComplianceSummaryTimestamp"))
+    ComplianceResourceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256)
+    ComplianceSummariesByResourceType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceSummaryByResourceType)
+    ComplianceSummary.add_member(:compliant_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceContributorCount, location_name: "CompliantResourceCount"))
+    ComplianceSummary.add_member(:non_compliant_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceContributorCount, location_name: "NonCompliantResourceCount"))
+    ComplianceSummary.add_member(:compliance_summary_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ComplianceSummaryTimestamp"))
     ComplianceSummary.type = Types::ComplianceSummary
-    ComplianceSummaryByResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    ComplianceSummaryByResourceType.add_member(:compliance_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceSummary, location_name: "ComplianceSummary"))
+    ComplianceSummaryByResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType"))
+    ComplianceSummaryByResourceType.add_member(:compliance_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceSummary, location_name: "ComplianceSummary"))
     ComplianceSummaryByResourceType.type = Types::ComplianceSummaryByResourceType
-    ComplianceType.add_member(:compliant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Compliant", traits: {"smithy.api#enumValue" => "COMPLIANT"}))
-    ComplianceType.add_member(:non_compliant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Non_Compliant", traits: {"smithy.api#enumValue" => "NON_COMPLIANT"}))
-    ComplianceType.add_member(:not_applicable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Not_Applicable", traits: {"smithy.api#enumValue" => "NOT_APPLICABLE"}))
-    ComplianceType.add_member(:insufficient_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Insufficient_Data", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
-    ComplianceTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType)
-    ConfigExportDeliveryInfo.add_member(:last_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryStatus, location_name: "lastStatus"))
-    ConfigExportDeliveryInfo.add_member(:last_error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lastErrorCode"))
-    ConfigExportDeliveryInfo.add_member(:last_error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lastErrorMessage"))
-    ConfigExportDeliveryInfo.add_member(:last_attempt_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "lastAttemptTime"))
-    ConfigExportDeliveryInfo.add_member(:last_successful_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "lastSuccessfulTime"))
-    ConfigExportDeliveryInfo.add_member(:next_delivery_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "nextDeliveryTime"))
+    ComplianceType.add_member(:compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Compliant", traits: {"smithy.api#enumValue" => "COMPLIANT"}))
+    ComplianceType.add_member(:non_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Non_Compliant", traits: {"smithy.api#enumValue" => "NON_COMPLIANT"}))
+    ComplianceType.add_member(:not_applicable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Not_Applicable", traits: {"smithy.api#enumValue" => "NOT_APPLICABLE"}))
+    ComplianceType.add_member(:insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Insufficient_Data", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
+    ComplianceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType)
+    ConfigExportDeliveryInfo.add_member(:last_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStatus, location_name: "lastStatus"))
+    ConfigExportDeliveryInfo.add_member(:last_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lastErrorCode"))
+    ConfigExportDeliveryInfo.add_member(:last_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lastErrorMessage"))
+    ConfigExportDeliveryInfo.add_member(:last_attempt_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "lastAttemptTime"))
+    ConfigExportDeliveryInfo.add_member(:last_successful_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "lastSuccessfulTime"))
+    ConfigExportDeliveryInfo.add_member(:next_delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "nextDeliveryTime"))
     ConfigExportDeliveryInfo.type = Types::ConfigExportDeliveryInfo
-    ConfigRule.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
-    ConfigRule.add_member(:config_rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ConfigRuleArn"))
-    ConfigRule.add_member(:config_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleId"))
-    ConfigRule.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmptiableStringWithCharLimit256, location_name: "Description"))
-    ConfigRule.add_member(:scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
-    ConfigRule.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: "Source", traits: {"smithy.api#required" => {}}))
-    ConfigRule.add_member(:input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
-    ConfigRule.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
-    ConfigRule.add_member(:config_rule_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleState, location_name: "ConfigRuleState"))
-    ConfigRule.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
-    ConfigRule.add_member(:evaluation_modes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationModes, location_name: "EvaluationModes"))
+    ConfigRule.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName"))
+    ConfigRule.add_member(:config_rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ConfigRuleArn"))
+    ConfigRule.add_member(:config_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit64, location_name: "ConfigRuleId"))
+    ConfigRule.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptiableStringWithCharLimit256, location_name: "Description"))
+    ConfigRule.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, location_name: "Scope"))
+    ConfigRule.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, location_name: "Source", traits: {"smithy.api#required" => {}}))
+    ConfigRule.add_member(:input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "InputParameters"))
+    ConfigRule.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    ConfigRule.add_member(:config_rule_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleState, location_name: "ConfigRuleState"))
+    ConfigRule.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "CreatedBy"))
+    ConfigRule.add_member(:evaluation_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationModes, location_name: "EvaluationModes"))
     ConfigRule.type = Types::ConfigRule
-    ConfigRuleComplianceFilters.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
-    ConfigRuleComplianceFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
-    ConfigRuleComplianceFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    ConfigRuleComplianceFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    ConfigRuleComplianceFilters.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName"))
+    ConfigRuleComplianceFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "ComplianceType"))
+    ConfigRuleComplianceFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    ConfigRuleComplianceFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
     ConfigRuleComplianceFilters.type = Types::ConfigRuleComplianceFilters
-    ConfigRuleComplianceSummaryFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    ConfigRuleComplianceSummaryFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    ConfigRuleComplianceSummaryFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    ConfigRuleComplianceSummaryFilters.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion"))
     ConfigRuleComplianceSummaryFilters.type = Types::ConfigRuleComplianceSummaryFilters
-    ConfigRuleComplianceSummaryGroupKey.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ACCOUNT_ID"}))
-    ConfigRuleComplianceSummaryGroupKey.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS_REGION"}))
-    ConfigRuleEvaluationStatus.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
-    ConfigRuleEvaluationStatus.add_member(:config_rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleArn"))
-    ConfigRuleEvaluationStatus.add_member(:config_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleId"))
-    ConfigRuleEvaluationStatus.add_member(:last_successful_invocation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastSuccessfulInvocationTime"))
-    ConfigRuleEvaluationStatus.add_member(:last_failed_invocation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastFailedInvocationTime"))
-    ConfigRuleEvaluationStatus.add_member(:last_successful_evaluation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastSuccessfulEvaluationTime"))
-    ConfigRuleEvaluationStatus.add_member(:last_failed_evaluation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastFailedEvaluationTime"))
-    ConfigRuleEvaluationStatus.add_member(:first_activated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "FirstActivatedTime"))
-    ConfigRuleEvaluationStatus.add_member(:last_deactivated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastDeactivatedTime"))
-    ConfigRuleEvaluationStatus.add_member(:last_error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastErrorCode"))
-    ConfigRuleEvaluationStatus.add_member(:last_error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastErrorMessage"))
-    ConfigRuleEvaluationStatus.add_member(:first_evaluation_started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "FirstEvaluationStarted", traits: {"smithy.api#default" => false}))
-    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastDebugLogDeliveryStatus"))
-    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LastDebugLogDeliveryStatusReason"))
-    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastDebugLogDeliveryTime"))
+    ConfigRuleComplianceSummaryGroupKey.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ACCOUNT_ID"}))
+    ConfigRuleComplianceSummaryGroupKey.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS_REGION"}))
+    ConfigRuleEvaluationStatus.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName"))
+    ConfigRuleEvaluationStatus.add_member(:config_rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConfigRuleArn"))
+    ConfigRuleEvaluationStatus.add_member(:config_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConfigRuleId"))
+    ConfigRuleEvaluationStatus.add_member(:last_successful_invocation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastSuccessfulInvocationTime"))
+    ConfigRuleEvaluationStatus.add_member(:last_failed_invocation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastFailedInvocationTime"))
+    ConfigRuleEvaluationStatus.add_member(:last_successful_evaluation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastSuccessfulEvaluationTime"))
+    ConfigRuleEvaluationStatus.add_member(:last_failed_evaluation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastFailedEvaluationTime"))
+    ConfigRuleEvaluationStatus.add_member(:first_activated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "FirstActivatedTime"))
+    ConfigRuleEvaluationStatus.add_member(:last_deactivated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastDeactivatedTime"))
+    ConfigRuleEvaluationStatus.add_member(:last_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastErrorCode"))
+    ConfigRuleEvaluationStatus.add_member(:last_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastErrorMessage"))
+    ConfigRuleEvaluationStatus.add_member(:first_evaluation_started, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "FirstEvaluationStarted", traits: {"smithy.api#default" => false}))
+    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastDebugLogDeliveryStatus"))
+    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LastDebugLogDeliveryStatusReason"))
+    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastDebugLogDeliveryTime"))
     ConfigRuleEvaluationStatus.type = Types::ConfigRuleEvaluationStatus
-    ConfigRuleEvaluationStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleEvaluationStatus)
-    ConfigRuleNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName)
-    ConfigRuleState.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ConfigRuleState.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ConfigRuleState.add_member(:deleting_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING_RESULTS", traits: {"smithy.api#enumValue" => "DELETING_RESULTS"}))
-    ConfigRuleState.add_member(:evaluating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVALUATING", traits: {"smithy.api#enumValue" => "EVALUATING"}))
-    ConfigRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRule)
-    ConfigSnapshotDeliveryProperties.add_member(:delivery_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "deliveryFrequency"))
+    ConfigRuleEvaluationStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleEvaluationStatus)
+    ConfigRuleNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName)
+    ConfigRuleState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ConfigRuleState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ConfigRuleState.add_member(:deleting_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING_RESULTS", traits: {"smithy.api#enumValue" => "DELETING_RESULTS"}))
+    ConfigRuleState.add_member(:evaluating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EVALUATING", traits: {"smithy.api#enumValue" => "EVALUATING"}))
+    ConfigRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRule)
+    ConfigSnapshotDeliveryProperties.add_member(:delivery_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionFrequency, location_name: "deliveryFrequency"))
     ConfigSnapshotDeliveryProperties.type = Types::ConfigSnapshotDeliveryProperties
-    ConfigStreamDeliveryInfo.add_member(:last_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryStatus, location_name: "lastStatus"))
-    ConfigStreamDeliveryInfo.add_member(:last_error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lastErrorCode"))
-    ConfigStreamDeliveryInfo.add_member(:last_error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lastErrorMessage"))
-    ConfigStreamDeliveryInfo.add_member(:last_status_change_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "lastStatusChangeTime"))
+    ConfigStreamDeliveryInfo.add_member(:last_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStatus, location_name: "lastStatus"))
+    ConfigStreamDeliveryInfo.add_member(:last_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lastErrorCode"))
+    ConfigStreamDeliveryInfo.add_member(:last_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lastErrorMessage"))
+    ConfigStreamDeliveryInfo.add_member(:last_status_change_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "lastStatusChangeTime"))
     ConfigStreamDeliveryInfo.type = Types::ConfigStreamDeliveryInfo
-    ConfigurationAggregator.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName"))
-    ConfigurationAggregator.add_member(:configuration_aggregator_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorArn, location_name: "ConfigurationAggregatorArn"))
-    ConfigurationAggregator.add_member(:account_aggregation_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountAggregationSourceList, location_name: "AccountAggregationSources"))
-    ConfigurationAggregator.add_member(:organization_aggregation_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
-    ConfigurationAggregator.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
-    ConfigurationAggregator.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
-    ConfigurationAggregator.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
-    ConfigurationAggregator.add_member(:aggregator_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorFilters, location_name: "AggregatorFilters"))
+    ConfigurationAggregator.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName"))
+    ConfigurationAggregator.add_member(:configuration_aggregator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorArn, location_name: "ConfigurationAggregatorArn"))
+    ConfigurationAggregator.add_member(:account_aggregation_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAggregationSourceList, location_name: "AccountAggregationSources"))
+    ConfigurationAggregator.add_member(:organization_aggregation_source, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
+    ConfigurationAggregator.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "CreationTime"))
+    ConfigurationAggregator.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdatedTime"))
+    ConfigurationAggregator.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "CreatedBy"))
+    ConfigurationAggregator.add_member(:aggregator_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorFilters, location_name: "AggregatorFilters"))
     ConfigurationAggregator.type = Types::ConfigurationAggregator
-    ConfigurationAggregatorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregator)
-    ConfigurationAggregatorNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName)
-    ConfigurationItem.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: "version"))
-    ConfigurationItem.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    ConfigurationItem.add_member(:configuration_item_capture_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemCaptureTime, location_name: "configurationItemCaptureTime"))
-    ConfigurationItem.add_member(:configuration_item_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemStatus, location_name: "configurationItemStatus"))
-    ConfigurationItem.add_member(:configuration_state_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationStateId, location_name: "configurationStateId"))
-    ConfigurationItem.add_member(:configuration_item_md5_hash, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemMD5Hash, location_name: "configurationItemMD5Hash"))
-    ConfigurationItem.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
-    ConfigurationItem.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    ConfigurationItem.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
-    ConfigurationItem.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
-    ConfigurationItem.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
-    ConfigurationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
-    ConfigurationItem.add_member(:resource_creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCreationTime, location_name: "resourceCreationTime"))
-    ConfigurationItem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    ConfigurationItem.add_member(:related_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedEventList, location_name: "relatedEvents"))
-    ConfigurationItem.add_member(:relationships, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelationshipList, location_name: "relationships"))
-    ConfigurationItem.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
-    ConfigurationItem.add_member(:supplementary_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
-    ConfigurationItem.add_member(:recording_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingFrequency, location_name: "recordingFrequency"))
-    ConfigurationItem.add_member(:configuration_item_delivery_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemDeliveryTime, location_name: "configurationItemDeliveryTime"))
+    ConfigurationAggregatorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregator)
+    ConfigurationAggregatorNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName)
+    ConfigurationItem.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, location_name: "version"))
+    ConfigurationItem.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "accountId"))
+    ConfigurationItem.add_member(:configuration_item_capture_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemCaptureTime, location_name: "configurationItemCaptureTime"))
+    ConfigurationItem.add_member(:configuration_item_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemStatus, location_name: "configurationItemStatus"))
+    ConfigurationItem.add_member(:configuration_state_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStateId, location_name: "configurationStateId"))
+    ConfigurationItem.add_member(:configuration_item_md5_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemMD5Hash, location_name: "configurationItemMD5Hash"))
+    ConfigurationItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "arn"))
+    ConfigurationItem.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    ConfigurationItem.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId"))
+    ConfigurationItem.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "resourceName"))
+    ConfigurationItem.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "awsRegion"))
+    ConfigurationItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "availabilityZone"))
+    ConfigurationItem.add_member(:resource_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCreationTime, location_name: "resourceCreationTime"))
+    ConfigurationItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    ConfigurationItem.add_member(:related_events, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedEventList, location_name: "relatedEvents"))
+    ConfigurationItem.add_member(:relationships, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipList, location_name: "relationships"))
+    ConfigurationItem.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, location_name: "configuration"))
+    ConfigurationItem.add_member(:supplementary_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
+    ConfigurationItem.add_member(:recording_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingFrequency, location_name: "recordingFrequency"))
+    ConfigurationItem.add_member(:configuration_item_delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemDeliveryTime, location_name: "configurationItemDeliveryTime"))
     ConfigurationItem.type = Types::ConfigurationItem
-    ConfigurationItemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItem)
-    ConfigurationItemStatus.add_member(:ok, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OK", traits: {"smithy.api#enumValue" => "OK"}))
-    ConfigurationItemStatus.add_member(:resource_discovered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceDiscovered", traits: {"smithy.api#enumValue" => "ResourceDiscovered"}))
-    ConfigurationItemStatus.add_member(:resource_not_recorded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceNotRecorded", traits: {"smithy.api#enumValue" => "ResourceNotRecorded"}))
-    ConfigurationItemStatus.add_member(:resource_deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceDeleted", traits: {"smithy.api#enumValue" => "ResourceDeleted"}))
-    ConfigurationItemStatus.add_member(:resource_deleted_not_recorded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceDeletedNotRecorded", traits: {"smithy.api#enumValue" => "ResourceDeletedNotRecorded"}))
-    ConfigurationRecorder.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
-    ConfigurationRecorder.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName, location_name: "name"))
-    ConfigurationRecorder.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "roleARN"))
-    ConfigurationRecorder.add_member(:recording_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingGroup, location_name: "recordingGroup"))
-    ConfigurationRecorder.add_member(:recording_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingMode, location_name: "recordingMode"))
-    ConfigurationRecorder.add_member(:recording_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingScope, location_name: "recordingScope"))
-    ConfigurationRecorder.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "servicePrincipal"))
+    ConfigurationItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItem)
+    ConfigurationItemStatus.add_member(:ok, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OK", traits: {"smithy.api#enumValue" => "OK"}))
+    ConfigurationItemStatus.add_member(:resource_discovered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceDiscovered", traits: {"smithy.api#enumValue" => "ResourceDiscovered"}))
+    ConfigurationItemStatus.add_member(:resource_not_recorded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceNotRecorded", traits: {"smithy.api#enumValue" => "ResourceNotRecorded"}))
+    ConfigurationItemStatus.add_member(:resource_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceDeleted", traits: {"smithy.api#enumValue" => "ResourceDeleted"}))
+    ConfigurationItemStatus.add_member(:resource_deleted_not_recorded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceDeletedNotRecorded", traits: {"smithy.api#enumValue" => "ResourceDeletedNotRecorded"}))
+    ConfigurationRecorder.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "arn"))
+    ConfigurationRecorder.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName, location_name: "name"))
+    ConfigurationRecorder.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "roleARN"))
+    ConfigurationRecorder.add_member(:recording_group, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingGroup, location_name: "recordingGroup"))
+    ConfigurationRecorder.add_member(:recording_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingMode, location_name: "recordingMode"))
+    ConfigurationRecorder.add_member(:recording_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingScope, location_name: "recordingScope"))
+    ConfigurationRecorder.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, location_name: "servicePrincipal"))
     ConfigurationRecorder.type = Types::ConfigurationRecorder
-    ConfigurationRecorderFilter.add_member(:filter_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderFilterName, location_name: "filterName"))
-    ConfigurationRecorderFilter.add_member(:filter_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderFilterValues, location_name: "filterValue"))
+    ConfigurationRecorderFilter.add_member(:filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderFilterName, location_name: "filterName"))
+    ConfigurationRecorderFilter.add_member(:filter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderFilterValues, location_name: "filterValue"))
     ConfigurationRecorderFilter.type = Types::ConfigurationRecorderFilter
-    ConfigurationRecorderFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderFilter)
-    ConfigurationRecorderFilterName.add_member(:recording_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RecordingScope", traits: {"smithy.api#enumValue" => "recordingScope"}))
-    ConfigurationRecorderFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderFilterValue)
-    ConfigurationRecorderList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorder)
-    ConfigurationRecorderNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName)
-    ConfigurationRecorderStatus.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
-    ConfigurationRecorderStatus.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    ConfigurationRecorderStatus.add_member(:last_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "lastStartTime"))
-    ConfigurationRecorderStatus.add_member(:last_stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "lastStopTime"))
-    ConfigurationRecorderStatus.add_member(:recording, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "recording", traits: {"smithy.api#default" => false}))
-    ConfigurationRecorderStatus.add_member(:last_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderStatus, location_name: "lastStatus"))
-    ConfigurationRecorderStatus.add_member(:last_error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lastErrorCode"))
-    ConfigurationRecorderStatus.add_member(:last_error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "lastErrorMessage"))
-    ConfigurationRecorderStatus.add_member(:last_status_change_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "lastStatusChangeTime"))
-    ConfigurationRecorderStatus.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "servicePrincipal"))
+    ConfigurationRecorderFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderFilter)
+    ConfigurationRecorderFilterName.add_member(:recording_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RecordingScope", traits: {"smithy.api#enumValue" => "recordingScope"}))
+    ConfigurationRecorderFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderFilterValue)
+    ConfigurationRecorderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorder)
+    ConfigurationRecorderNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName)
+    ConfigurationRecorderStatus.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "arn"))
+    ConfigurationRecorderStatus.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    ConfigurationRecorderStatus.add_member(:last_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "lastStartTime"))
+    ConfigurationRecorderStatus.add_member(:last_stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "lastStopTime"))
+    ConfigurationRecorderStatus.add_member(:recording, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "recording", traits: {"smithy.api#default" => false}))
+    ConfigurationRecorderStatus.add_member(:last_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderStatus, location_name: "lastStatus"))
+    ConfigurationRecorderStatus.add_member(:last_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lastErrorCode"))
+    ConfigurationRecorderStatus.add_member(:last_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "lastErrorMessage"))
+    ConfigurationRecorderStatus.add_member(:last_status_change_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "lastStatusChangeTime"))
+    ConfigurationRecorderStatus.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, location_name: "servicePrincipal"))
     ConfigurationRecorderStatus.type = Types::ConfigurationRecorderStatus
-    ConfigurationRecorderStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderStatus)
-    ConfigurationRecorderSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderSummary)
-    ConfigurationRecorderSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    ConfigurationRecorderSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ConfigurationRecorderSummary.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "servicePrincipal"))
-    ConfigurationRecorderSummary.add_member(:recording_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingScope, location_name: "recordingScope", traits: {"smithy.api#required" => {}}))
+    ConfigurationRecorderStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderStatus)
+    ConfigurationRecorderSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderSummary)
+    ConfigurationRecorderSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    ConfigurationRecorderSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ConfigurationRecorderSummary.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, location_name: "servicePrincipal"))
+    ConfigurationRecorderSummary.add_member(:recording_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingScope, location_name: "recordingScope", traits: {"smithy.api#required" => {}}))
     ConfigurationRecorderSummary.type = Types::ConfigurationRecorderSummary
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    ConformancePackComplianceFilters.add_member(:config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackConfigRuleNames, location_name: "ConfigRuleNames"))
-    ConformancePackComplianceFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
+    ConformancePackComplianceFilters.add_member(:config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackConfigRuleNames, location_name: "ConfigRuleNames"))
+    ConformancePackComplianceFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceType, location_name: "ComplianceType"))
     ConformancePackComplianceFilters.type = Types::ConformancePackComplianceFilters
-    ConformancePackComplianceResourceIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256)
-    ConformancePackComplianceScore.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceScore, location_name: "Score"))
-    ConformancePackComplianceScore.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
-    ConformancePackComplianceScore.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))
+    ConformancePackComplianceResourceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256)
+    ConformancePackComplianceScore.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceScore, location_name: "Score"))
+    ConformancePackComplianceScore.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName"))
+    ConformancePackComplianceScore.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedTime, location_name: "LastUpdatedTime"))
     ConformancePackComplianceScore.type = Types::ConformancePackComplianceScore
-    ConformancePackComplianceScores.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceScore)
-    ConformancePackComplianceScoresFilters.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackNameFilter, location_name: "ConformancePackNames", traits: {"smithy.api#required" => {}}))
+    ConformancePackComplianceScores.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceScore)
+    ConformancePackComplianceScoresFilters.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackNameFilter, location_name: "ConformancePackNames", traits: {"smithy.api#required" => {}}))
     ConformancePackComplianceScoresFilters.type = Types::ConformancePackComplianceScoresFilters
-    ConformancePackComplianceSummary.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    ConformancePackComplianceSummary.add_member(:conformance_pack_compliance_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ConformancePackComplianceStatus", traits: {"smithy.api#required" => {}}))
+    ConformancePackComplianceSummary.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    ConformancePackComplianceSummary.add_member(:conformance_pack_compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceType, location_name: "ConformancePackComplianceStatus", traits: {"smithy.api#required" => {}}))
     ConformancePackComplianceSummary.type = Types::ConformancePackComplianceSummary
-    ConformancePackComplianceSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceSummary)
-    ConformancePackComplianceType.add_member(:compliant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANT", traits: {"smithy.api#enumValue" => "COMPLIANT"}))
-    ConformancePackComplianceType.add_member(:non_compliant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NON_COMPLIANT", traits: {"smithy.api#enumValue" => "NON_COMPLIANT"}))
-    ConformancePackComplianceType.add_member(:insufficient_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
-    ConformancePackConfigRuleNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit64)
-    ConformancePackDetail.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    ConformancePackDetail.add_member(:conformance_pack_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackArn, location_name: "ConformancePackArn", traits: {"smithy.api#required" => {}}))
-    ConformancePackDetail.add_member(:conformance_pack_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackId, location_name: "ConformancePackId", traits: {"smithy.api#required" => {}}))
-    ConformancePackDetail.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
-    ConformancePackDetail.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
-    ConformancePackDetail.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
-    ConformancePackDetail.add_member(:last_update_requested_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateRequestedTime"))
-    ConformancePackDetail.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
-    ConformancePackDetail.add_member(:template_ssm_document_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
+    ConformancePackComplianceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceSummary)
+    ConformancePackComplianceType.add_member(:compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANT", traits: {"smithy.api#enumValue" => "COMPLIANT"}))
+    ConformancePackComplianceType.add_member(:non_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NON_COMPLIANT", traits: {"smithy.api#enumValue" => "NON_COMPLIANT"}))
+    ConformancePackComplianceType.add_member(:insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
+    ConformancePackConfigRuleNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit64)
+    ConformancePackDetail.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    ConformancePackDetail.add_member(:conformance_pack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackArn, location_name: "ConformancePackArn", traits: {"smithy.api#required" => {}}))
+    ConformancePackDetail.add_member(:conformance_pack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackId, location_name: "ConformancePackId", traits: {"smithy.api#required" => {}}))
+    ConformancePackDetail.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
+    ConformancePackDetail.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
+    ConformancePackDetail.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
+    ConformancePackDetail.add_member(:last_update_requested_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateRequestedTime"))
+    ConformancePackDetail.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "CreatedBy"))
+    ConformancePackDetail.add_member(:template_ssm_document_details, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
     ConformancePackDetail.type = Types::ConformancePackDetail
-    ConformancePackDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackDetail)
-    ConformancePackEvaluationFilters.add_member(:config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackConfigRuleNames, location_name: "ConfigRuleNames"))
-    ConformancePackEvaluationFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
-    ConformancePackEvaluationFilters.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    ConformancePackEvaluationFilters.add_member(:resource_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceResourceIds, location_name: "ResourceIds"))
+    ConformancePackDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackDetail)
+    ConformancePackEvaluationFilters.add_member(:config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackConfigRuleNames, location_name: "ConfigRuleNames"))
+    ConformancePackEvaluationFilters.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceType, location_name: "ComplianceType"))
+    ConformancePackEvaluationFilters.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType"))
+    ConformancePackEvaluationFilters.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceResourceIds, location_name: "ResourceIds"))
     ConformancePackEvaluationFilters.type = Types::ConformancePackEvaluationFilters
-    ConformancePackEvaluationResult.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType", traits: {"smithy.api#required" => {}}))
-    ConformancePackEvaluationResult.add_member(:evaluation_result_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier", traits: {"smithy.api#required" => {}}))
-    ConformancePackEvaluationResult.add_member(:config_rule_invoked_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ConfigRuleInvokedTime", traits: {"smithy.api#required" => {}}))
-    ConformancePackEvaluationResult.add_member(:result_recorded_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ResultRecordedTime", traits: {"smithy.api#required" => {}}))
-    ConformancePackEvaluationResult.add_member(:annotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Annotation, location_name: "Annotation"))
+    ConformancePackEvaluationResult.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceType, location_name: "ComplianceType", traits: {"smithy.api#required" => {}}))
+    ConformancePackEvaluationResult.add_member(:evaluation_result_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier", traits: {"smithy.api#required" => {}}))
+    ConformancePackEvaluationResult.add_member(:config_rule_invoked_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ConfigRuleInvokedTime", traits: {"smithy.api#required" => {}}))
+    ConformancePackEvaluationResult.add_member(:result_recorded_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ResultRecordedTime", traits: {"smithy.api#required" => {}}))
+    ConformancePackEvaluationResult.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: Annotation, location_name: "Annotation"))
     ConformancePackEvaluationResult.type = Types::ConformancePackEvaluationResult
-    ConformancePackInputParameter.add_member(:parameter_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName", traits: {"smithy.api#required" => {}}))
-    ConformancePackInputParameter.add_member(:parameter_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterValue, location_name: "ParameterValue", traits: {"smithy.api#required" => {}}))
+    ConformancePackInputParameter.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, location_name: "ParameterName", traits: {"smithy.api#required" => {}}))
+    ConformancePackInputParameter.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, location_name: "ParameterValue", traits: {"smithy.api#required" => {}}))
     ConformancePackInputParameter.type = Types::ConformancePackInputParameter
-    ConformancePackInputParameters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackInputParameter)
-    ConformancePackNameFilter.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName)
-    ConformancePackNamesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName)
-    ConformancePackNamesToSummarizeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName)
-    ConformancePackRuleCompliance.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
-    ConformancePackRuleCompliance.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
-    ConformancePackRuleCompliance.add_member(:controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ControlsList, location_name: "Controls"))
+    ConformancePackInputParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackInputParameter)
+    ConformancePackNameFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName)
+    ConformancePackNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName)
+    ConformancePackNamesToSummarizeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName)
+    ConformancePackRuleCompliance.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName"))
+    ConformancePackRuleCompliance.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceType, location_name: "ComplianceType"))
+    ConformancePackRuleCompliance.add_member(:controls, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlsList, location_name: "Controls"))
     ConformancePackRuleCompliance.type = Types::ConformancePackRuleCompliance
-    ConformancePackRuleComplianceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackRuleCompliance)
-    ConformancePackRuleEvaluationResultsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackEvaluationResult)
-    ConformancePackState.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
-    ConformancePackState.add_member(:create_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_COMPLETE", traits: {"smithy.api#enumValue" => "CREATE_COMPLETE"}))
-    ConformancePackState.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    ConformancePackState.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
-    ConformancePackState.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    ConformancePackStatusDetail.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    ConformancePackStatusDetail.add_member(:conformance_pack_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackId, location_name: "ConformancePackId", traits: {"smithy.api#required" => {}}))
-    ConformancePackStatusDetail.add_member(:conformance_pack_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackArn, location_name: "ConformancePackArn", traits: {"smithy.api#required" => {}}))
-    ConformancePackStatusDetail.add_member(:conformance_pack_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackState, location_name: "ConformancePackState", traits: {"smithy.api#required" => {}}))
-    ConformancePackStatusDetail.add_member(:stack_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StackArn, location_name: "StackArn", traits: {"smithy.api#required" => {}}))
-    ConformancePackStatusDetail.add_member(:conformance_pack_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackStatusReason, location_name: "ConformancePackStatusReason"))
-    ConformancePackStatusDetail.add_member(:last_update_requested_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateRequestedTime", traits: {"smithy.api#required" => {}}))
-    ConformancePackStatusDetail.add_member(:last_update_completed_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateCompletedTime"))
+    ConformancePackRuleComplianceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackRuleCompliance)
+    ConformancePackRuleEvaluationResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackEvaluationResult)
+    ConformancePackState.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    ConformancePackState.add_member(:create_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_COMPLETE", traits: {"smithy.api#enumValue" => "CREATE_COMPLETE"}))
+    ConformancePackState.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    ConformancePackState.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    ConformancePackState.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    ConformancePackStatusDetail.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    ConformancePackStatusDetail.add_member(:conformance_pack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackId, location_name: "ConformancePackId", traits: {"smithy.api#required" => {}}))
+    ConformancePackStatusDetail.add_member(:conformance_pack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackArn, location_name: "ConformancePackArn", traits: {"smithy.api#required" => {}}))
+    ConformancePackStatusDetail.add_member(:conformance_pack_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackState, location_name: "ConformancePackState", traits: {"smithy.api#required" => {}}))
+    ConformancePackStatusDetail.add_member(:stack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StackArn, location_name: "StackArn", traits: {"smithy.api#required" => {}}))
+    ConformancePackStatusDetail.add_member(:conformance_pack_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackStatusReason, location_name: "ConformancePackStatusReason"))
+    ConformancePackStatusDetail.add_member(:last_update_requested_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateRequestedTime", traits: {"smithy.api#required" => {}}))
+    ConformancePackStatusDetail.add_member(:last_update_completed_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateCompletedTime"))
     ConformancePackStatusDetail.type = Types::ConformancePackStatusDetail
-    ConformancePackStatusDetailsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackStatusDetail)
-    ConformancePackTemplateValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConformancePackStatusDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackStatusDetail)
+    ConformancePackTemplateValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ConformancePackTemplateValidationException.type = Types::ConformancePackTemplateValidationException
-    ControlsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit128)
-    CustomPolicyDetails.add_member(:policy_runtime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyRuntime, location_name: "PolicyRuntime", traits: {"smithy.api#required" => {}}))
-    CustomPolicyDetails.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyText, location_name: "PolicyText", traits: {"smithy.api#required" => {}}))
-    CustomPolicyDetails.add_member(:enable_debug_log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableDebugLogDelivery", traits: {"smithy.api#default" => false}))
+    ControlsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit128)
+    CustomPolicyDetails.add_member(:policy_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRuntime, location_name: "PolicyRuntime", traits: {"smithy.api#required" => {}}))
+    CustomPolicyDetails.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyText, location_name: "PolicyText", traits: {"smithy.api#required" => {}}))
+    CustomPolicyDetails.add_member(:enable_debug_log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "EnableDebugLogDelivery", traits: {"smithy.api#default" => false}))
     CustomPolicyDetails.type = Types::CustomPolicyDetails
-    DebugLogDeliveryAccounts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId)
-    DeleteAggregationAuthorizationRequest.add_member(:authorized_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AuthorizedAccountId", traits: {"smithy.api#required" => {}}))
-    DeleteAggregationAuthorizationRequest.add_member(:authorized_aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AuthorizedAwsRegion", traits: {"smithy.api#required" => {}}))
+    DebugLogDeliveryAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId)
+    DeleteAggregationAuthorizationRequest.add_member(:authorized_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AuthorizedAccountId", traits: {"smithy.api#required" => {}}))
+    DeleteAggregationAuthorizationRequest.add_member(:authorized_aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AuthorizedAwsRegion", traits: {"smithy.api#required" => {}}))
     DeleteAggregationAuthorizationRequest.type = Types::DeleteAggregationAuthorizationRequest
-    DeleteConfigRuleRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    DeleteConfigRuleRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
     DeleteConfigRuleRequest.type = Types::DeleteConfigRuleRequest
-    DeleteConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    DeleteConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
     DeleteConfigurationAggregatorRequest.type = Types::DeleteConfigurationAggregatorRequest
-    DeleteConfigurationRecorderRequest.add_member(:configuration_recorder_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName, location_name: "ConfigurationRecorderName", traits: {"smithy.api#required" => {}}))
+    DeleteConfigurationRecorderRequest.add_member(:configuration_recorder_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName, location_name: "ConfigurationRecorderName", traits: {"smithy.api#required" => {}}))
     DeleteConfigurationRecorderRequest.type = Types::DeleteConfigurationRecorderRequest
-    DeleteConformancePackRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    DeleteConformancePackRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
     DeleteConformancePackRequest.type = Types::DeleteConformancePackRequest
-    DeleteDeliveryChannelRequest.add_member(:delivery_channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "DeliveryChannelName", traits: {"smithy.api#required" => {}}))
+    DeleteDeliveryChannelRequest.add_member(:delivery_channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "DeliveryChannelName", traits: {"smithy.api#required" => {}}))
     DeleteDeliveryChannelRequest.type = Types::DeleteDeliveryChannelRequest
-    DeleteEvaluationResultsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    DeleteEvaluationResultsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit64, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
     DeleteEvaluationResultsRequest.type = Types::DeleteEvaluationResultsRequest
     DeleteEvaluationResultsResponse.type = Types::DeleteEvaluationResultsResponse
-    DeleteOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
+    DeleteOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
     DeleteOrganizationConfigRuleRequest.type = Types::DeleteOrganizationConfigRuleRequest
-    DeleteOrganizationConformancePackRequest.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
+    DeleteOrganizationConformancePackRequest.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
     DeleteOrganizationConformancePackRequest.type = Types::DeleteOrganizationConformancePackRequest
-    DeletePendingAggregationRequestRequest.add_member(:requester_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "RequesterAccountId", traits: {"smithy.api#required" => {}}))
-    DeletePendingAggregationRequestRequest.add_member(:requester_aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "RequesterAwsRegion", traits: {"smithy.api#required" => {}}))
+    DeletePendingAggregationRequestRequest.add_member(:requester_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "RequesterAccountId", traits: {"smithy.api#required" => {}}))
+    DeletePendingAggregationRequestRequest.add_member(:requester_aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "RequesterAwsRegion", traits: {"smithy.api#required" => {}}))
     DeletePendingAggregationRequestRequest.type = Types::DeletePendingAggregationRequestRequest
-    DeleteRemediationConfigurationRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    DeleteRemediationConfigurationRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    DeleteRemediationConfigurationRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    DeleteRemediationConfigurationRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType"))
     DeleteRemediationConfigurationRequest.type = Types::DeleteRemediationConfigurationRequest
     DeleteRemediationConfigurationResponse.type = Types::DeleteRemediationConfigurationResponse
-    DeleteRemediationExceptionsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    DeleteRemediationExceptionsRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExceptionResourceKeys, location_name: "ResourceKeys", traits: {"smithy.api#required" => {}}))
+    DeleteRemediationExceptionsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    DeleteRemediationExceptionsRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExceptionResourceKeys, location_name: "ResourceKeys", traits: {"smithy.api#required" => {}}))
     DeleteRemediationExceptionsRequest.type = Types::DeleteRemediationExceptionsRequest
-    DeleteRemediationExceptionsResponse.add_member(:failed_batches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedDeleteRemediationExceptionsBatches, location_name: "FailedBatches"))
+    DeleteRemediationExceptionsResponse.add_member(:failed_batches, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDeleteRemediationExceptionsBatches, location_name: "FailedBatches"))
     DeleteRemediationExceptionsResponse.type = Types::DeleteRemediationExceptionsResponse
-    DeleteResourceConfigRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeString, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    DeleteResourceConfigRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    DeleteResourceConfigRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeString, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    DeleteResourceConfigRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
     DeleteResourceConfigRequest.type = Types::DeleteResourceConfigRequest
-    DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionConfigurationName, location_name: "RetentionConfigurationName", traits: {"smithy.api#required" => {}}))
+    DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionConfigurationName, location_name: "RetentionConfigurationName", traits: {"smithy.api#required" => {}}))
     DeleteRetentionConfigurationRequest.type = Types::DeleteRetentionConfigurationRequest
-    DeleteServiceLinkedConfigurationRecorderRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal", traits: {"smithy.api#required" => {}}))
+    DeleteServiceLinkedConfigurationRecorderRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, location_name: "ServicePrincipal", traits: {"smithy.api#required" => {}}))
     DeleteServiceLinkedConfigurationRecorderRequest.type = Types::DeleteServiceLinkedConfigurationRecorderRequest
-    DeleteServiceLinkedConfigurationRecorderResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Arn", traits: {"smithy.api#required" => {}}))
-    DeleteServiceLinkedConfigurationRecorderResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    DeleteServiceLinkedConfigurationRecorderResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "Arn", traits: {"smithy.api#required" => {}}))
+    DeleteServiceLinkedConfigurationRecorderResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName, location_name: "Name", traits: {"smithy.api#required" => {}}))
     DeleteServiceLinkedConfigurationRecorderResponse.type = Types::DeleteServiceLinkedConfigurationRecorderResponse
-    DeleteStoredQueryRequest.add_member(:query_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
+    DeleteStoredQueryRequest.add_member(:query_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
     DeleteStoredQueryRequest.type = Types::DeleteStoredQueryRequest
     DeleteStoredQueryResponse.type = Types::DeleteStoredQueryResponse
-    DeliverConfigSnapshotRequest.add_member(:delivery_channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "deliveryChannelName", traits: {"smithy.api#required" => {}}))
+    DeliverConfigSnapshotRequest.add_member(:delivery_channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "deliveryChannelName", traits: {"smithy.api#required" => {}}))
     DeliverConfigSnapshotRequest.type = Types::DeliverConfigSnapshotRequest
-    DeliverConfigSnapshotResponse.add_member(:config_snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "configSnapshotId"))
+    DeliverConfigSnapshotResponse.add_member(:config_snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "configSnapshotId"))
     DeliverConfigSnapshotResponse.type = Types::DeliverConfigSnapshotResponse
-    DeliveryChannel.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    DeliveryChannel.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "s3BucketName"))
-    DeliveryChannel.add_member(:s3_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "s3KeyPrefix"))
-    DeliveryChannel.add_member(:s3_kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "s3KmsKeyArn"))
-    DeliveryChannel.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "snsTopicARN"))
-    DeliveryChannel.add_member(:config_snapshot_delivery_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigSnapshotDeliveryProperties, location_name: "configSnapshotDeliveryProperties"))
+    DeliveryChannel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "name"))
+    DeliveryChannel.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "s3BucketName"))
+    DeliveryChannel.add_member(:s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "s3KeyPrefix"))
+    DeliveryChannel.add_member(:s3_kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "s3KmsKeyArn"))
+    DeliveryChannel.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "snsTopicARN"))
+    DeliveryChannel.add_member(:config_snapshot_delivery_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigSnapshotDeliveryProperties, location_name: "configSnapshotDeliveryProperties"))
     DeliveryChannel.type = Types::DeliveryChannel
-    DeliveryChannelList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryChannel)
-    DeliveryChannelNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelName)
-    DeliveryChannelStatus.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    DeliveryChannelStatus.add_member(:config_snapshot_delivery_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigExportDeliveryInfo, location_name: "configSnapshotDeliveryInfo"))
-    DeliveryChannelStatus.add_member(:config_history_delivery_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigExportDeliveryInfo, location_name: "configHistoryDeliveryInfo"))
-    DeliveryChannelStatus.add_member(:config_stream_delivery_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigStreamDeliveryInfo, location_name: "configStreamDeliveryInfo"))
+    DeliveryChannelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryChannel)
+    DeliveryChannelNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName)
+    DeliveryChannelStatus.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    DeliveryChannelStatus.add_member(:config_snapshot_delivery_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigExportDeliveryInfo, location_name: "configSnapshotDeliveryInfo"))
+    DeliveryChannelStatus.add_member(:config_history_delivery_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigExportDeliveryInfo, location_name: "configHistoryDeliveryInfo"))
+    DeliveryChannelStatus.add_member(:config_stream_delivery_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigStreamDeliveryInfo, location_name: "configStreamDeliveryInfo"))
     DeliveryChannelStatus.type = Types::DeliveryChannelStatus
-    DeliveryChannelStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryChannelStatus)
-    DeliveryStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
-    DeliveryStatus.add_member(:failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failure", traits: {"smithy.api#enumValue" => "Failure"}))
-    DeliveryStatus.add_member(:not_applicable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Not_Applicable", traits: {"smithy.api#enumValue" => "Not_Applicable"}))
-    DescribeAggregateComplianceByConfigRulesRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    DescribeAggregateComplianceByConfigRulesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleComplianceFilters, location_name: "Filters"))
-    DescribeAggregateComplianceByConfigRulesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupByAPILimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeAggregateComplianceByConfigRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DeliveryChannelStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryChannelStatus)
+    DeliveryStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
+    DeliveryStatus.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failure", traits: {"smithy.api#enumValue" => "Failure"}))
+    DeliveryStatus.add_member(:not_applicable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Not_Applicable", traits: {"smithy.api#enumValue" => "Not_Applicable"}))
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleComplianceFilters, location_name: "Filters"))
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAPILimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeAggregateComplianceByConfigRulesRequest.type = Types::DescribeAggregateComplianceByConfigRulesRequest
-    DescribeAggregateComplianceByConfigRulesResponse.add_member(:aggregate_compliance_by_config_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRuleList, location_name: "AggregateComplianceByConfigRules"))
-    DescribeAggregateComplianceByConfigRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConfigRulesResponse.add_member(:aggregate_compliance_by_config_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateComplianceByConfigRuleList, location_name: "AggregateComplianceByConfigRules"))
+    DescribeAggregateComplianceByConfigRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeAggregateComplianceByConfigRulesResponse.type = Types::DescribeAggregateComplianceByConfigRulesResponse
-    DescribeAggregateComplianceByConformancePacksRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    DescribeAggregateComplianceByConformancePacksRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceFilters, location_name: "Filters"))
-    DescribeAggregateComplianceByConformancePacksRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeAggregateComplianceByConformancePacksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConformancePackComplianceFilters, location_name: "Filters"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeAggregateComplianceByConformancePacksRequest.type = Types::DescribeAggregateComplianceByConformancePacksRequest
-    DescribeAggregateComplianceByConformancePacksResponse.add_member(:aggregate_compliance_by_conformance_packs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateComplianceByConformancePackList, location_name: "AggregateComplianceByConformancePacks"))
-    DescribeAggregateComplianceByConformancePacksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConformancePacksResponse.add_member(:aggregate_compliance_by_conformance_packs, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateComplianceByConformancePackList, location_name: "AggregateComplianceByConformancePacks"))
+    DescribeAggregateComplianceByConformancePacksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeAggregateComplianceByConformancePacksResponse.type = Types::DescribeAggregateComplianceByConformancePacksResponse
-    DescribeAggregationAuthorizationsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeAggregationAuthorizationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAggregationAuthorizationsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeAggregationAuthorizationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeAggregationAuthorizationsRequest.type = Types::DescribeAggregationAuthorizationsRequest
-    DescribeAggregationAuthorizationsResponse.add_member(:aggregation_authorizations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationAuthorizationList, location_name: "AggregationAuthorizations"))
-    DescribeAggregationAuthorizationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAggregationAuthorizationsResponse.add_member(:aggregation_authorizations, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationAuthorizationList, location_name: "AggregationAuthorizations"))
+    DescribeAggregationAuthorizationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeAggregationAuthorizationsResponse.type = Types::DescribeAggregationAuthorizationsResponse
-    DescribeComplianceByConfigRuleRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames"))
-    DescribeComplianceByConfigRuleRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
-    DescribeComplianceByConfigRuleRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeComplianceByConfigRuleRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleNames, location_name: "ConfigRuleNames"))
+    DescribeComplianceByConfigRuleRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceTypes, location_name: "ComplianceTypes"))
+    DescribeComplianceByConfigRuleRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeComplianceByConfigRuleRequest.type = Types::DescribeComplianceByConfigRuleRequest
-    DescribeComplianceByConfigRuleResponse.add_member(:compliance_by_config_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceByConfigRules, location_name: "ComplianceByConfigRules"))
-    DescribeComplianceByConfigRuleResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeComplianceByConfigRuleResponse.add_member(:compliance_by_config_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceByConfigRules, location_name: "ComplianceByConfigRules"))
+    DescribeComplianceByConfigRuleResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeComplianceByConfigRuleResponse.type = Types::DescribeComplianceByConfigRuleResponse
-    DescribeComplianceByResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    DescribeComplianceByResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
-    DescribeComplianceByResourceRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
-    DescribeComplianceByResourceRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeComplianceByResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeComplianceByResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType"))
+    DescribeComplianceByResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ResourceId"))
+    DescribeComplianceByResourceRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceTypes, location_name: "ComplianceTypes"))
+    DescribeComplianceByResourceRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeComplianceByResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeComplianceByResourceRequest.type = Types::DescribeComplianceByResourceRequest
-    DescribeComplianceByResourceResponse.add_member(:compliance_by_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceByResources, location_name: "ComplianceByResources"))
-    DescribeComplianceByResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeComplianceByResourceResponse.add_member(:compliance_by_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceByResources, location_name: "ComplianceByResources"))
+    DescribeComplianceByResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeComplianceByResourceResponse.type = Types::DescribeComplianceByResourceResponse
-    DescribeConfigRuleEvaluationStatusRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames"))
-    DescribeConfigRuleEvaluationStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeConfigRuleEvaluationStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeConfigRuleEvaluationStatusRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleNames, location_name: "ConfigRuleNames"))
+    DescribeConfigRuleEvaluationStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeConfigRuleEvaluationStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
     DescribeConfigRuleEvaluationStatusRequest.type = Types::DescribeConfigRuleEvaluationStatusRequest
-    DescribeConfigRuleEvaluationStatusResponse.add_member(:config_rules_evaluation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleEvaluationStatusList, location_name: "ConfigRulesEvaluationStatus"))
-    DescribeConfigRuleEvaluationStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigRuleEvaluationStatusResponse.add_member(:config_rules_evaluation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleEvaluationStatusList, location_name: "ConfigRulesEvaluationStatus"))
+    DescribeConfigRuleEvaluationStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeConfigRuleEvaluationStatusResponse.type = Types::DescribeConfigRuleEvaluationStatusResponse
-    DescribeConfigRulesFilters.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationMode, location_name: "EvaluationMode"))
+    DescribeConfigRulesFilters.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMode, location_name: "EvaluationMode"))
     DescribeConfigRulesFilters.type = Types::DescribeConfigRulesFilters
-    DescribeConfigRulesRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames"))
-    DescribeConfigRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeConfigRulesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigRulesFilters, location_name: "Filters"))
+    DescribeConfigRulesRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleNames, location_name: "ConfigRuleNames"))
+    DescribeConfigRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeConfigRulesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeConfigRulesFilters, location_name: "Filters"))
     DescribeConfigRulesRequest.type = Types::DescribeConfigRulesRequest
-    DescribeConfigRulesResponse.add_member(:config_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRules, location_name: "ConfigRules"))
-    DescribeConfigRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigRulesResponse.add_member(:config_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRules, location_name: "ConfigRules"))
+    DescribeConfigRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeConfigRulesResponse.type = Types::DescribeConfigRulesResponse
-    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:update_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedSourceStatusTypeList, location_name: "UpdateStatus"))
-    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedSourceStatusTypeList, location_name: "UpdateStatus"))
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
     DescribeConfigurationAggregatorSourcesStatusRequest.type = Types::DescribeConfigurationAggregatorSourcesStatusRequest
-    DescribeConfigurationAggregatorSourcesStatusResponse.add_member(:aggregated_source_status_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatedSourceStatusList, location_name: "AggregatedSourceStatusList"))
-    DescribeConfigurationAggregatorSourcesStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorSourcesStatusResponse.add_member(:aggregated_source_status_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedSourceStatusList, location_name: "AggregatedSourceStatusList"))
+    DescribeConfigurationAggregatorSourcesStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeConfigurationAggregatorSourcesStatusResponse.type = Types::DescribeConfigurationAggregatorSourcesStatusResponse
-    DescribeConfigurationAggregatorsRequest.add_member(:configuration_aggregator_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorNameList, location_name: "ConfigurationAggregatorNames"))
-    DescribeConfigurationAggregatorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeConfigurationAggregatorsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeConfigurationAggregatorsRequest.add_member(:configuration_aggregator_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorNameList, location_name: "ConfigurationAggregatorNames"))
+    DescribeConfigurationAggregatorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
     DescribeConfigurationAggregatorsRequest.type = Types::DescribeConfigurationAggregatorsRequest
-    DescribeConfigurationAggregatorsResponse.add_member(:configuration_aggregators, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorList, location_name: "ConfigurationAggregators"))
-    DescribeConfigurationAggregatorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorsResponse.add_member(:configuration_aggregators, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorList, location_name: "ConfigurationAggregators"))
+    DescribeConfigurationAggregatorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeConfigurationAggregatorsResponse.type = Types::DescribeConfigurationAggregatorsResponse
-    DescribeConfigurationRecorderStatusRequest.add_member(:configuration_recorder_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderNameList, location_name: "ConfigurationRecorderNames"))
-    DescribeConfigurationRecorderStatusRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
-    DescribeConfigurationRecorderStatusRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Arn"))
+    DescribeConfigurationRecorderStatusRequest.add_member(:configuration_recorder_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderNameList, location_name: "ConfigurationRecorderNames"))
+    DescribeConfigurationRecorderStatusRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, location_name: "ServicePrincipal"))
+    DescribeConfigurationRecorderStatusRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "Arn"))
     DescribeConfigurationRecorderStatusRequest.type = Types::DescribeConfigurationRecorderStatusRequest
-    DescribeConfigurationRecorderStatusResponse.add_member(:configuration_recorders_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderStatusList, location_name: "ConfigurationRecordersStatus"))
+    DescribeConfigurationRecorderStatusResponse.add_member(:configuration_recorders_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderStatusList, location_name: "ConfigurationRecordersStatus"))
     DescribeConfigurationRecorderStatusResponse.type = Types::DescribeConfigurationRecorderStatusResponse
-    DescribeConfigurationRecordersRequest.add_member(:configuration_recorder_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderNameList, location_name: "ConfigurationRecorderNames"))
-    DescribeConfigurationRecordersRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
-    DescribeConfigurationRecordersRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Arn"))
+    DescribeConfigurationRecordersRequest.add_member(:configuration_recorder_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderNameList, location_name: "ConfigurationRecorderNames"))
+    DescribeConfigurationRecordersRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, location_name: "ServicePrincipal"))
+    DescribeConfigurationRecordersRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "Arn"))
     DescribeConfigurationRecordersRequest.type = Types::DescribeConfigurationRecordersRequest
-    DescribeConfigurationRecordersResponse.add_member(:configuration_recorders, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderList, location_name: "ConfigurationRecorders"))
+    DescribeConfigurationRecordersResponse.add_member(:configuration_recorders, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderList, location_name: "ConfigurationRecorders"))
     DescribeConfigurationRecordersResponse.type = Types::DescribeConfigurationRecordersResponse
-    DescribeConformancePackComplianceRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    DescribeConformancePackComplianceRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceFilters, location_name: "Filters"))
-    DescribeConformancePackComplianceRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConformancePackComplianceLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeConformancePackComplianceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeConformancePackComplianceRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    DescribeConformancePackComplianceRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceFilters, location_name: "Filters"))
+    DescribeConformancePackComplianceRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeConformancePackComplianceLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeConformancePackComplianceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeConformancePackComplianceRequest.type = Types::DescribeConformancePackComplianceRequest
-    DescribeConformancePackComplianceResponse.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    DescribeConformancePackComplianceResponse.add_member(:conformance_pack_rule_compliance_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackRuleComplianceList, location_name: "ConformancePackRuleComplianceList", traits: {"smithy.api#required" => {}}))
-    DescribeConformancePackComplianceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeConformancePackComplianceResponse.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    DescribeConformancePackComplianceResponse.add_member(:conformance_pack_rule_compliance_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackRuleComplianceList, location_name: "ConformancePackRuleComplianceList", traits: {"smithy.api#required" => {}}))
+    DescribeConformancePackComplianceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeConformancePackComplianceResponse.type = Types::DescribeConformancePackComplianceResponse
-    DescribeConformancePackStatusRequest.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackNamesList, location_name: "ConformancePackNames"))
-    DescribeConformancePackStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeConformancePackStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeConformancePackStatusRequest.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackNamesList, location_name: "ConformancePackNames"))
+    DescribeConformancePackStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeConformancePackStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeConformancePackStatusRequest.type = Types::DescribeConformancePackStatusRequest
-    DescribeConformancePackStatusResponse.add_member(:conformance_pack_status_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackStatusDetailsList, location_name: "ConformancePackStatusDetails"))
-    DescribeConformancePackStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeConformancePackStatusResponse.add_member(:conformance_pack_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackStatusDetailsList, location_name: "ConformancePackStatusDetails"))
+    DescribeConformancePackStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeConformancePackStatusResponse.type = Types::DescribeConformancePackStatusResponse
-    DescribeConformancePacksRequest.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackNamesList, location_name: "ConformancePackNames"))
-    DescribeConformancePacksRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeConformancePacksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeConformancePacksRequest.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackNamesList, location_name: "ConformancePackNames"))
+    DescribeConformancePacksRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeConformancePacksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeConformancePacksRequest.type = Types::DescribeConformancePacksRequest
-    DescribeConformancePacksResponse.add_member(:conformance_pack_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackDetailList, location_name: "ConformancePackDetails"))
-    DescribeConformancePacksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeConformancePacksResponse.add_member(:conformance_pack_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackDetailList, location_name: "ConformancePackDetails"))
+    DescribeConformancePacksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeConformancePacksResponse.type = Types::DescribeConformancePacksResponse
-    DescribeDeliveryChannelStatusRequest.add_member(:delivery_channel_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryChannelNameList, location_name: "DeliveryChannelNames"))
+    DescribeDeliveryChannelStatusRequest.add_member(:delivery_channel_names, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryChannelNameList, location_name: "DeliveryChannelNames"))
     DescribeDeliveryChannelStatusRequest.type = Types::DescribeDeliveryChannelStatusRequest
-    DescribeDeliveryChannelStatusResponse.add_member(:delivery_channels_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryChannelStatusList, location_name: "DeliveryChannelsStatus"))
+    DescribeDeliveryChannelStatusResponse.add_member(:delivery_channels_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryChannelStatusList, location_name: "DeliveryChannelsStatus"))
     DescribeDeliveryChannelStatusResponse.type = Types::DescribeDeliveryChannelStatusResponse
-    DescribeDeliveryChannelsRequest.add_member(:delivery_channel_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryChannelNameList, location_name: "DeliveryChannelNames"))
+    DescribeDeliveryChannelsRequest.add_member(:delivery_channel_names, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryChannelNameList, location_name: "DeliveryChannelNames"))
     DescribeDeliveryChannelsRequest.type = Types::DescribeDeliveryChannelsRequest
-    DescribeDeliveryChannelsResponse.add_member(:delivery_channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryChannelList, location_name: "DeliveryChannels"))
+    DescribeDeliveryChannelsResponse.add_member(:delivery_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryChannelList, location_name: "DeliveryChannels"))
     DescribeDeliveryChannelsResponse.type = Types::DescribeDeliveryChannelsResponse
-    DescribeOrganizationConfigRuleStatusesRequest.add_member(:organization_config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleNames, location_name: "OrganizationConfigRuleNames"))
-    DescribeOrganizationConfigRuleStatusesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeOrganizationConfigRuleStatusesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRuleStatusesRequest.add_member(:organization_config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleNames, location_name: "OrganizationConfigRuleNames"))
+    DescribeOrganizationConfigRuleStatusesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeOrganizationConfigRuleStatusesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConfigRuleStatusesRequest.type = Types::DescribeOrganizationConfigRuleStatusesRequest
-    DescribeOrganizationConfigRuleStatusesResponse.add_member(:organization_config_rule_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleStatuses, location_name: "OrganizationConfigRuleStatuses"))
-    DescribeOrganizationConfigRuleStatusesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRuleStatusesResponse.add_member(:organization_config_rule_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleStatuses, location_name: "OrganizationConfigRuleStatuses"))
+    DescribeOrganizationConfigRuleStatusesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConfigRuleStatusesResponse.type = Types::DescribeOrganizationConfigRuleStatusesResponse
-    DescribeOrganizationConfigRulesRequest.add_member(:organization_config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleNames, location_name: "OrganizationConfigRuleNames"))
-    DescribeOrganizationConfigRulesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeOrganizationConfigRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRulesRequest.add_member(:organization_config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleNames, location_name: "OrganizationConfigRuleNames"))
+    DescribeOrganizationConfigRulesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeOrganizationConfigRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConfigRulesRequest.type = Types::DescribeOrganizationConfigRulesRequest
-    DescribeOrganizationConfigRulesResponse.add_member(:organization_config_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRules, location_name: "OrganizationConfigRules"))
-    DescribeOrganizationConfigRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRulesResponse.add_member(:organization_config_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRules, location_name: "OrganizationConfigRules"))
+    DescribeOrganizationConfigRulesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConfigRulesResponse.type = Types::DescribeOrganizationConfigRulesResponse
-    DescribeOrganizationConformancePackStatusesRequest.add_member(:organization_conformance_pack_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackNames, location_name: "OrganizationConformancePackNames"))
-    DescribeOrganizationConformancePackStatusesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeOrganizationConformancePackStatusesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConformancePackStatusesRequest.add_member(:organization_conformance_pack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackNames, location_name: "OrganizationConformancePackNames"))
+    DescribeOrganizationConformancePackStatusesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeOrganizationConformancePackStatusesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConformancePackStatusesRequest.type = Types::DescribeOrganizationConformancePackStatusesRequest
-    DescribeOrganizationConformancePackStatusesResponse.add_member(:organization_conformance_pack_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackStatuses, location_name: "OrganizationConformancePackStatuses"))
-    DescribeOrganizationConformancePackStatusesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConformancePackStatusesResponse.add_member(:organization_conformance_pack_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackStatuses, location_name: "OrganizationConformancePackStatuses"))
+    DescribeOrganizationConformancePackStatusesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConformancePackStatusesResponse.type = Types::DescribeOrganizationConformancePackStatusesResponse
-    DescribeOrganizationConformancePacksRequest.add_member(:organization_conformance_pack_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackNames, location_name: "OrganizationConformancePackNames"))
-    DescribeOrganizationConformancePacksRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeOrganizationConformancePacksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConformancePacksRequest.add_member(:organization_conformance_pack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackNames, location_name: "OrganizationConformancePackNames"))
+    DescribeOrganizationConformancePacksRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeOrganizationConformancePacksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConformancePacksRequest.type = Types::DescribeOrganizationConformancePacksRequest
-    DescribeOrganizationConformancePacksResponse.add_member(:organization_conformance_packs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePacks, location_name: "OrganizationConformancePacks"))
-    DescribeOrganizationConformancePacksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConformancePacksResponse.add_member(:organization_conformance_packs, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePacks, location_name: "OrganizationConformancePacks"))
+    DescribeOrganizationConformancePacksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeOrganizationConformancePacksResponse.type = Types::DescribeOrganizationConformancePacksResponse
-    DescribePendingAggregationRequestsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePendingAggregationRequestsLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribePendingAggregationRequestsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribePendingAggregationRequestsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePendingAggregationRequestsLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribePendingAggregationRequestsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribePendingAggregationRequestsRequest.type = Types::DescribePendingAggregationRequestsRequest
-    DescribePendingAggregationRequestsResponse.add_member(:pending_aggregation_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingAggregationRequestList, location_name: "PendingAggregationRequests"))
-    DescribePendingAggregationRequestsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribePendingAggregationRequestsResponse.add_member(:pending_aggregation_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingAggregationRequestList, location_name: "PendingAggregationRequests"))
+    DescribePendingAggregationRequestsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribePendingAggregationRequestsResponse.type = Types::DescribePendingAggregationRequestsResponse
-    DescribeRemediationConfigurationsRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames", traits: {"smithy.api#required" => {}}))
+    DescribeRemediationConfigurationsRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleNames, location_name: "ConfigRuleNames", traits: {"smithy.api#required" => {}}))
     DescribeRemediationConfigurationsRequest.type = Types::DescribeRemediationConfigurationsRequest
-    DescribeRemediationConfigurationsResponse.add_member(:remediation_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationConfigurations, location_name: "RemediationConfigurations"))
+    DescribeRemediationConfigurationsResponse.add_member(:remediation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationConfigurations, location_name: "RemediationConfigurations"))
     DescribeRemediationConfigurationsResponse.type = Types::DescribeRemediationConfigurationsResponse
-    DescribeRemediationExceptionsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    DescribeRemediationExceptionsRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExceptionResourceKeys, location_name: "ResourceKeys"))
-    DescribeRemediationExceptionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeRemediationExceptionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRemediationExceptionsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    DescribeRemediationExceptionsRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExceptionResourceKeys, location_name: "ResourceKeys"))
+    DescribeRemediationExceptionsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeRemediationExceptionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeRemediationExceptionsRequest.type = Types::DescribeRemediationExceptionsRequest
-    DescribeRemediationExceptionsResponse.add_member(:remediation_exceptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExceptions, location_name: "RemediationExceptions"))
-    DescribeRemediationExceptionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRemediationExceptionsResponse.add_member(:remediation_exceptions, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExceptions, location_name: "RemediationExceptions"))
+    DescribeRemediationExceptionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeRemediationExceptionsResponse.type = Types::DescribeRemediationExceptionsResponse
-    DescribeRemediationExecutionStatusRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    DescribeRemediationExecutionStatusRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "ResourceKeys"))
-    DescribeRemediationExecutionStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    DescribeRemediationExecutionStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRemediationExecutionStatusRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    DescribeRemediationExecutionStatusRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceKeys, location_name: "ResourceKeys"))
+    DescribeRemediationExecutionStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    DescribeRemediationExecutionStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeRemediationExecutionStatusRequest.type = Types::DescribeRemediationExecutionStatusRequest
-    DescribeRemediationExecutionStatusResponse.add_member(:remediation_execution_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionStatuses, location_name: "RemediationExecutionStatuses"))
-    DescribeRemediationExecutionStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeRemediationExecutionStatusResponse.add_member(:remediation_execution_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExecutionStatuses, location_name: "RemediationExecutionStatuses"))
+    DescribeRemediationExecutionStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     DescribeRemediationExecutionStatusResponse.type = Types::DescribeRemediationExecutionStatusResponse
-    DescribeRetentionConfigurationsRequest.add_member(:retention_configuration_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionConfigurationNameList, location_name: "RetentionConfigurationNames"))
-    DescribeRetentionConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRetentionConfigurationsRequest.add_member(:retention_configuration_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionConfigurationNameList, location_name: "RetentionConfigurationNames"))
+    DescribeRetentionConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRetentionConfigurationsRequest.type = Types::DescribeRetentionConfigurationsRequest
-    DescribeRetentionConfigurationsResponse.add_member(:retention_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionConfigurationList, location_name: "RetentionConfigurations"))
-    DescribeRetentionConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRetentionConfigurationsResponse.add_member(:retention_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionConfigurationList, location_name: "RetentionConfigurations"))
+    DescribeRetentionConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRetentionConfigurationsResponse.type = Types::DescribeRetentionConfigurationsResponse
-    DisassociateResourceTypesRequest.add_member(:configuration_recorder_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ConfigurationRecorderArn", traits: {"smithy.api#required" => {}}))
-    DisassociateResourceTypesRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
+    DisassociateResourceTypesRequest.add_member(:configuration_recorder_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ConfigurationRecorderArn", traits: {"smithy.api#required" => {}}))
+    DisassociateResourceTypesRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeList, location_name: "ResourceTypes", traits: {"smithy.api#required" => {}}))
     DisassociateResourceTypesRequest.type = Types::DisassociateResourceTypesRequest
-    DisassociateResourceTypesResponse.add_member(:configuration_recorder, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorder, location_name: "ConfigurationRecorder", traits: {"smithy.api#required" => {}}))
+    DisassociateResourceTypesResponse.add_member(:configuration_recorder, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorder, location_name: "ConfigurationRecorder", traits: {"smithy.api#required" => {}}))
     DisassociateResourceTypesResponse.type = Types::DisassociateResourceTypesResponse
-    DiscoveredResourceIdentifierList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateResourceIdentifier)
-    Evaluation.add_member(:compliance_resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ComplianceResourceType", traits: {"smithy.api#required" => {}}))
-    Evaluation.add_member(:compliance_resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ComplianceResourceId", traits: {"smithy.api#required" => {}}))
-    Evaluation.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType", traits: {"smithy.api#required" => {}}))
-    Evaluation.add_member(:annotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
-    Evaluation.add_member(:ordering_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrderingTimestamp, location_name: "OrderingTimestamp", traits: {"smithy.api#required" => {}}))
+    DiscoveredResourceIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateResourceIdentifier)
+    Evaluation.add_member(:compliance_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ComplianceResourceType", traits: {"smithy.api#required" => {}}))
+    Evaluation.add_member(:compliance_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ComplianceResourceId", traits: {"smithy.api#required" => {}}))
+    Evaluation.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "ComplianceType", traits: {"smithy.api#required" => {}}))
+    Evaluation.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "Annotation"))
+    Evaluation.add_member(:ordering_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderingTimestamp, location_name: "OrderingTimestamp", traits: {"smithy.api#required" => {}}))
     Evaluation.type = Types::Evaluation
-    EvaluationContext.add_member(:evaluation_context_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationContextIdentifier, location_name: "EvaluationContextIdentifier"))
+    EvaluationContext.add_member(:evaluation_context_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationContextIdentifier, location_name: "EvaluationContextIdentifier"))
     EvaluationContext.type = Types::EvaluationContext
-    EvaluationMode.add_member(:detective, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DETECTIVE", traits: {"smithy.api#enumValue" => "DETECTIVE"}))
-    EvaluationMode.add_member(:proactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROACTIVE", traits: {"smithy.api#enumValue" => "PROACTIVE"}))
-    EvaluationModeConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationMode, location_name: "Mode"))
+    EvaluationMode.add_member(:detective, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DETECTIVE", traits: {"smithy.api#enumValue" => "DETECTIVE"}))
+    EvaluationMode.add_member(:proactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PROACTIVE", traits: {"smithy.api#enumValue" => "PROACTIVE"}))
+    EvaluationModeConfiguration.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMode, location_name: "Mode"))
     EvaluationModeConfiguration.type = Types::EvaluationModeConfiguration
-    EvaluationModes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationModeConfiguration)
-    EvaluationResult.add_member(:evaluation_result_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier"))
-    EvaluationResult.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
-    EvaluationResult.add_member(:result_recorded_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ResultRecordedTime"))
-    EvaluationResult.add_member(:config_rule_invoked_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ConfigRuleInvokedTime"))
-    EvaluationResult.add_member(:annotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
-    EvaluationResult.add_member(:result_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResultToken"))
+    EvaluationModes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationModeConfiguration)
+    EvaluationResult.add_member(:evaluation_result_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier"))
+    EvaluationResult.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "ComplianceType"))
+    EvaluationResult.add_member(:result_recorded_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ResultRecordedTime"))
+    EvaluationResult.add_member(:config_rule_invoked_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ConfigRuleInvokedTime"))
+    EvaluationResult.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "Annotation"))
+    EvaluationResult.add_member(:result_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResultToken"))
     EvaluationResult.type = Types::EvaluationResult
-    EvaluationResultIdentifier.add_member(:evaluation_result_qualifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationResultQualifier, location_name: "EvaluationResultQualifier"))
-    EvaluationResultIdentifier.add_member(:ordering_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "OrderingTimestamp"))
-    EvaluationResultIdentifier.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
+    EvaluationResultIdentifier.add_member(:evaluation_result_qualifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResultQualifier, location_name: "EvaluationResultQualifier"))
+    EvaluationResultIdentifier.add_member(:ordering_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "OrderingTimestamp"))
+    EvaluationResultIdentifier.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
     EvaluationResultIdentifier.type = Types::EvaluationResultIdentifier
-    EvaluationResultQualifier.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
-    EvaluationResultQualifier.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    EvaluationResultQualifier.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
-    EvaluationResultQualifier.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationMode, location_name: "EvaluationMode"))
+    EvaluationResultQualifier.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName"))
+    EvaluationResultQualifier.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType"))
+    EvaluationResultQualifier.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ResourceId"))
+    EvaluationResultQualifier.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMode, location_name: "EvaluationMode"))
     EvaluationResultQualifier.type = Types::EvaluationResultQualifier
-    EvaluationResults.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationResult)
-    EvaluationStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    EvaluationStatus.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "FailureReason"))
+    EvaluationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult)
+    EvaluationStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    EvaluationStatus.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "FailureReason"))
     EvaluationStatus.type = Types::EvaluationStatus
-    Evaluations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Evaluation)
-    EventSource.add_member(:aws_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Aws_Config", traits: {"smithy.api#enumValue" => "aws.config"}))
-    ExcludedAccounts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId)
-    ExclusionByResourceTypes.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
+    Evaluations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Evaluation)
+    EventSource.add_member(:aws_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Aws_Config", traits: {"smithy.api#enumValue" => "aws.config"}))
+    ExcludedAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId)
+    ExclusionByResourceTypes.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeList, location_name: "resourceTypes"))
     ExclusionByResourceTypes.type = Types::ExclusionByResourceTypes
-    ExecutionControls.add_member(:ssm_controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmControls, location_name: "SsmControls"))
+    ExecutionControls.add_member(:ssm_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmControls, location_name: "SsmControls"))
     ExecutionControls.type = Types::ExecutionControls
-    ExternalEvaluation.add_member(:compliance_resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ComplianceResourceType", traits: {"smithy.api#required" => {}}))
-    ExternalEvaluation.add_member(:compliance_resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ComplianceResourceId", traits: {"smithy.api#required" => {}}))
-    ExternalEvaluation.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType", traits: {"smithy.api#required" => {}}))
-    ExternalEvaluation.add_member(:annotation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
-    ExternalEvaluation.add_member(:ordering_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrderingTimestamp, location_name: "OrderingTimestamp", traits: {"smithy.api#required" => {}}))
+    ExternalEvaluation.add_member(:compliance_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ComplianceResourceType", traits: {"smithy.api#required" => {}}))
+    ExternalEvaluation.add_member(:compliance_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ComplianceResourceId", traits: {"smithy.api#required" => {}}))
+    ExternalEvaluation.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "ComplianceType", traits: {"smithy.api#required" => {}}))
+    ExternalEvaluation.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "Annotation"))
+    ExternalEvaluation.add_member(:ordering_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderingTimestamp, location_name: "OrderingTimestamp", traits: {"smithy.api#required" => {}}))
     ExternalEvaluation.type = Types::ExternalEvaluation
-    FailedDeleteRemediationExceptionsBatch.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
-    FailedDeleteRemediationExceptionsBatch.add_member(:failed_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExceptionResourceKeys, location_name: "FailedItems"))
+    FailedDeleteRemediationExceptionsBatch.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FailureMessage"))
+    FailedDeleteRemediationExceptionsBatch.add_member(:failed_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExceptionResourceKeys, location_name: "FailedItems"))
     FailedDeleteRemediationExceptionsBatch.type = Types::FailedDeleteRemediationExceptionsBatch
-    FailedDeleteRemediationExceptionsBatches.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedDeleteRemediationExceptionsBatch)
-    FailedRemediationBatch.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
-    FailedRemediationBatch.add_member(:failed_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationConfigurations, location_name: "FailedItems"))
+    FailedDeleteRemediationExceptionsBatches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDeleteRemediationExceptionsBatch)
+    FailedRemediationBatch.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FailureMessage"))
+    FailedRemediationBatch.add_member(:failed_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationConfigurations, location_name: "FailedItems"))
     FailedRemediationBatch.type = Types::FailedRemediationBatch
-    FailedRemediationBatches.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedRemediationBatch)
-    FailedRemediationExceptionBatch.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
-    FailedRemediationExceptionBatch.add_member(:failed_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExceptions, location_name: "FailedItems"))
+    FailedRemediationBatches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRemediationBatch)
+    FailedRemediationExceptionBatch.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FailureMessage"))
+    FailedRemediationExceptionBatch.add_member(:failed_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExceptions, location_name: "FailedItems"))
     FailedRemediationExceptionBatch.type = Types::FailedRemediationExceptionBatch
-    FailedRemediationExceptionBatches.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedRemediationExceptionBatch)
-    FieldInfo.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldName, location_name: "Name"))
+    FailedRemediationExceptionBatches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRemediationExceptionBatch)
+    FieldInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, location_name: "Name"))
     FieldInfo.type = Types::FieldInfo
-    FieldInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldInfo)
-    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId", traits: {"smithy.api#required" => {}}))
-    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
-    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:compliance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
-    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    FieldInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldInfo)
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId", traits: {"smithy.api#required" => {}}))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AwsRegion", traits: {"smithy.api#required" => {}}))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "ComplianceType"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateComplianceDetailsByConfigRuleRequest.type = Types::GetAggregateComplianceDetailsByConfigRuleRequest
-    GetAggregateComplianceDetailsByConfigRuleResponse.add_member(:aggregate_evaluation_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateEvaluationResultList, location_name: "AggregateEvaluationResults"))
-    GetAggregateComplianceDetailsByConfigRuleResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateComplianceDetailsByConfigRuleResponse.add_member(:aggregate_evaluation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateEvaluationResultList, location_name: "AggregateEvaluationResults"))
+    GetAggregateComplianceDetailsByConfigRuleResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateComplianceDetailsByConfigRuleResponse.type = Types::GetAggregateComplianceDetailsByConfigRuleResponse
-    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleComplianceSummaryFilters, location_name: "Filters"))
-    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:group_by_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleComplianceSummaryGroupKey, location_name: "GroupByKey"))
-    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupByAPILimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleComplianceSummaryFilters, location_name: "Filters"))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:group_by_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleComplianceSummaryGroupKey, location_name: "GroupByKey"))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAPILimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateConfigRuleComplianceSummaryRequest.type = Types::GetAggregateConfigRuleComplianceSummaryRequest
-    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:group_by_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupByKey"))
-    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:aggregate_compliance_counts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateComplianceCountList, location_name: "AggregateComplianceCounts"))
-    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:group_by_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "GroupByKey"))
+    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:aggregate_compliance_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateComplianceCountList, location_name: "AggregateComplianceCounts"))
+    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateConfigRuleComplianceSummaryResponse.type = Types::GetAggregateConfigRuleComplianceSummaryResponse
-    GetAggregateConformancePackComplianceSummaryRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    GetAggregateConformancePackComplianceSummaryRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryFilters, location_name: "Filters"))
-    GetAggregateConformancePackComplianceSummaryRequest.add_member(:group_by_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryGroupKey, location_name: "GroupByKey"))
-    GetAggregateConformancePackComplianceSummaryRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetAggregateConformancePackComplianceSummaryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConformancePackComplianceSummaryFilters, location_name: "Filters"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:group_by_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConformancePackComplianceSummaryGroupKey, location_name: "GroupByKey"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateConformancePackComplianceSummaryRequest.type = Types::GetAggregateConformancePackComplianceSummaryRequest
-    GetAggregateConformancePackComplianceSummaryResponse.add_member(:aggregate_conformance_pack_compliance_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryList, location_name: "AggregateConformancePackComplianceSummaries"))
-    GetAggregateConformancePackComplianceSummaryResponse.add_member(:group_by_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupByKey"))
-    GetAggregateConformancePackComplianceSummaryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:aggregate_conformance_pack_compliance_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateConformancePackComplianceSummaryList, location_name: "AggregateConformancePackComplianceSummaries"))
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:group_by_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "GroupByKey"))
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateConformancePackComplianceSummaryResponse.type = Types::GetAggregateConformancePackComplianceSummaryResponse
-    GetAggregateDiscoveredResourceCountsRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    GetAggregateDiscoveredResourceCountsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCountFilters, location_name: "Filters"))
-    GetAggregateDiscoveredResourceCountsRequest.add_member(:group_by_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCountGroupKey, location_name: "GroupByKey"))
-    GetAggregateDiscoveredResourceCountsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupByAPILimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetAggregateDiscoveredResourceCountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCountFilters, location_name: "Filters"))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:group_by_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCountGroupKey, location_name: "GroupByKey"))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAPILimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateDiscoveredResourceCountsRequest.type = Types::GetAggregateDiscoveredResourceCountsRequest
-    GetAggregateDiscoveredResourceCountsResponse.add_member(:total_discovered_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "TotalDiscoveredResources", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    GetAggregateDiscoveredResourceCountsResponse.add_member(:group_by_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupByKey"))
-    GetAggregateDiscoveredResourceCountsResponse.add_member(:grouped_resource_counts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupedResourceCountList, location_name: "GroupedResourceCounts"))
-    GetAggregateDiscoveredResourceCountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:total_discovered_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "TotalDiscoveredResources", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:group_by_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "GroupByKey"))
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:grouped_resource_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupedResourceCountList, location_name: "GroupedResourceCounts"))
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetAggregateDiscoveredResourceCountsResponse.type = Types::GetAggregateDiscoveredResourceCountsResponse
-    GetAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    GetAggregateResourceConfigRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateResourceIdentifier, location_name: "ResourceIdentifier", traits: {"smithy.api#required" => {}}))
+    GetAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    GetAggregateResourceConfigRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateResourceIdentifier, location_name: "ResourceIdentifier", traits: {"smithy.api#required" => {}}))
     GetAggregateResourceConfigRequest.type = Types::GetAggregateResourceConfigRequest
-    GetAggregateResourceConfigResponse.add_member(:configuration_item, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItem, location_name: "ConfigurationItem"))
+    GetAggregateResourceConfigResponse.add_member(:configuration_item, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItem, location_name: "ConfigurationItem"))
     GetAggregateResourceConfigResponse.type = Types::GetAggregateResourceConfigResponse
-    GetComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    GetComplianceDetailsByConfigRuleRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
-    GetComplianceDetailsByConfigRuleRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetComplianceDetailsByConfigRuleRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit64, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    GetComplianceDetailsByConfigRuleRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceTypes, location_name: "ComplianceTypes"))
+    GetComplianceDetailsByConfigRuleRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetComplianceDetailsByConfigRuleRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetComplianceDetailsByConfigRuleRequest.type = Types::GetComplianceDetailsByConfigRuleRequest
-    GetComplianceDetailsByConfigRuleResponse.add_member(:evaluation_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationResults, location_name: "EvaluationResults"))
-    GetComplianceDetailsByConfigRuleResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetComplianceDetailsByConfigRuleResponse.add_member(:evaluation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResults, location_name: "EvaluationResults"))
+    GetComplianceDetailsByConfigRuleResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetComplianceDetailsByConfigRuleResponse.type = Types::GetComplianceDetailsByConfigRuleResponse
-    GetComplianceDetailsByResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    GetComplianceDetailsByResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
-    GetComplianceDetailsByResourceRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
-    GetComplianceDetailsByResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    GetComplianceDetailsByResourceRequest.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
+    GetComplianceDetailsByResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType"))
+    GetComplianceDetailsByResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ResourceId"))
+    GetComplianceDetailsByResourceRequest.add_member(:compliance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceTypes, location_name: "ComplianceTypes"))
+    GetComplianceDetailsByResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    GetComplianceDetailsByResourceRequest.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
     GetComplianceDetailsByResourceRequest.type = Types::GetComplianceDetailsByResourceRequest
-    GetComplianceDetailsByResourceResponse.add_member(:evaluation_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationResults, location_name: "EvaluationResults"))
-    GetComplianceDetailsByResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetComplianceDetailsByResourceResponse.add_member(:evaluation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResults, location_name: "EvaluationResults"))
+    GetComplianceDetailsByResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     GetComplianceDetailsByResourceResponse.type = Types::GetComplianceDetailsByResourceResponse
-    GetComplianceSummaryByConfigRuleResponse.add_member(:compliance_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceSummary, location_name: "ComplianceSummary"))
+    GetComplianceSummaryByConfigRuleResponse.add_member(:compliance_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceSummary, location_name: "ComplianceSummary"))
     GetComplianceSummaryByConfigRuleResponse.type = Types::GetComplianceSummaryByConfigRuleResponse
-    GetComplianceSummaryByResourceTypeRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
+    GetComplianceSummaryByResourceTypeRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypes, location_name: "ResourceTypes"))
     GetComplianceSummaryByResourceTypeRequest.type = Types::GetComplianceSummaryByResourceTypeRequest
-    GetComplianceSummaryByResourceTypeResponse.add_member(:compliance_summaries_by_resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceSummariesByResourceType, location_name: "ComplianceSummariesByResourceType"))
+    GetComplianceSummaryByResourceTypeResponse.add_member(:compliance_summaries_by_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceSummariesByResourceType, location_name: "ComplianceSummariesByResourceType"))
     GetComplianceSummaryByResourceTypeResponse.type = Types::GetComplianceSummaryByResourceTypeResponse
-    GetConformancePackComplianceDetailsRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    GetConformancePackComplianceDetailsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackEvaluationFilters, location_name: "Filters"))
-    GetConformancePackComplianceDetailsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConformancePackComplianceDetailsLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetConformancePackComplianceDetailsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetConformancePackComplianceDetailsRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    GetConformancePackComplianceDetailsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackEvaluationFilters, location_name: "Filters"))
+    GetConformancePackComplianceDetailsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: GetConformancePackComplianceDetailsLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetConformancePackComplianceDetailsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetConformancePackComplianceDetailsRequest.type = Types::GetConformancePackComplianceDetailsRequest
-    GetConformancePackComplianceDetailsResponse.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    GetConformancePackComplianceDetailsResponse.add_member(:conformance_pack_rule_evaluation_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackRuleEvaluationResultsList, location_name: "ConformancePackRuleEvaluationResults"))
-    GetConformancePackComplianceDetailsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetConformancePackComplianceDetailsResponse.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    GetConformancePackComplianceDetailsResponse.add_member(:conformance_pack_rule_evaluation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackRuleEvaluationResultsList, location_name: "ConformancePackRuleEvaluationResults"))
+    GetConformancePackComplianceDetailsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetConformancePackComplianceDetailsResponse.type = Types::GetConformancePackComplianceDetailsResponse
-    GetConformancePackComplianceSummaryRequest.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackNamesToSummarizeList, location_name: "ConformancePackNames", traits: {"smithy.api#required" => {}}))
-    GetConformancePackComplianceSummaryRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetConformancePackComplianceSummaryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetConformancePackComplianceSummaryRequest.add_member(:conformance_pack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackNamesToSummarizeList, location_name: "ConformancePackNames", traits: {"smithy.api#required" => {}}))
+    GetConformancePackComplianceSummaryRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetConformancePackComplianceSummaryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetConformancePackComplianceSummaryRequest.type = Types::GetConformancePackComplianceSummaryRequest
-    GetConformancePackComplianceSummaryResponse.add_member(:conformance_pack_compliance_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceSummaryList, location_name: "ConformancePackComplianceSummaryList"))
-    GetConformancePackComplianceSummaryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetConformancePackComplianceSummaryResponse.add_member(:conformance_pack_compliance_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceSummaryList, location_name: "ConformancePackComplianceSummaryList"))
+    GetConformancePackComplianceSummaryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     GetConformancePackComplianceSummaryResponse.type = Types::GetConformancePackComplianceSummaryResponse
-    GetCustomRulePolicyRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
+    GetCustomRulePolicyRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName"))
     GetCustomRulePolicyRequest.type = Types::GetCustomRulePolicyRequest
-    GetCustomRulePolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyText, location_name: "PolicyText"))
+    GetCustomRulePolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyText, location_name: "PolicyText"))
     GetCustomRulePolicyResponse.type = Types::GetCustomRulePolicyResponse
-    GetDiscoveredResourceCountsRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "resourceTypes"))
-    GetDiscoveredResourceCountsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "limit", traits: {"smithy.api#default" => 0}))
-    GetDiscoveredResourceCountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetDiscoveredResourceCountsRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypes, location_name: "resourceTypes"))
+    GetDiscoveredResourceCountsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "limit", traits: {"smithy.api#default" => 0}))
+    GetDiscoveredResourceCountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetDiscoveredResourceCountsRequest.type = Types::GetDiscoveredResourceCountsRequest
-    GetDiscoveredResourceCountsResponse.add_member(:total_discovered_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "totalDiscoveredResources", traits: {"smithy.api#default" => 0}))
-    GetDiscoveredResourceCountsResponse.add_member(:resource_counts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCounts, location_name: "resourceCounts"))
-    GetDiscoveredResourceCountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetDiscoveredResourceCountsResponse.add_member(:total_discovered_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "totalDiscoveredResources", traits: {"smithy.api#default" => 0}))
+    GetDiscoveredResourceCountsResponse.add_member(:resource_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCounts, location_name: "resourceCounts"))
+    GetDiscoveredResourceCountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetDiscoveredResourceCountsResponse.type = Types::GetDiscoveredResourceCountsResponse
-    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
-    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusDetailFilters, location_name: "Filters"))
-    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusDetailFilters, location_name: "Filters"))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     GetOrganizationConfigRuleDetailedStatusRequest.type = Types::GetOrganizationConfigRuleDetailedStatusRequest
-    GetOrganizationConfigRuleDetailedStatusResponse.add_member(:organization_config_rule_detailed_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleDetailedStatus, location_name: "OrganizationConfigRuleDetailedStatus"))
-    GetOrganizationConfigRuleDetailedStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetOrganizationConfigRuleDetailedStatusResponse.add_member(:organization_config_rule_detailed_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleDetailedStatus, location_name: "OrganizationConfigRuleDetailedStatus"))
+    GetOrganizationConfigRuleDetailedStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     GetOrganizationConfigRuleDetailedStatusResponse.type = Types::GetOrganizationConfigRuleDetailedStatusResponse
-    GetOrganizationConformancePackDetailedStatusRequest.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
-    GetOrganizationConformancePackDetailedStatusRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationResourceDetailedStatusFilters, location_name: "Filters"))
-    GetOrganizationConformancePackDetailedStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    GetOrganizationConformancePackDetailedStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetOrganizationConformancePackDetailedStatusRequest.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
+    GetOrganizationConformancePackDetailedStatusRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationResourceDetailedStatusFilters, location_name: "Filters"))
+    GetOrganizationConformancePackDetailedStatusRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: CosmosPageLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    GetOrganizationConformancePackDetailedStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     GetOrganizationConformancePackDetailedStatusRequest.type = Types::GetOrganizationConformancePackDetailedStatusRequest
-    GetOrganizationConformancePackDetailedStatusResponse.add_member(:organization_conformance_pack_detailed_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackDetailedStatuses, location_name: "OrganizationConformancePackDetailedStatuses"))
-    GetOrganizationConformancePackDetailedStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetOrganizationConformancePackDetailedStatusResponse.add_member(:organization_conformance_pack_detailed_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackDetailedStatuses, location_name: "OrganizationConformancePackDetailedStatuses"))
+    GetOrganizationConformancePackDetailedStatusResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     GetOrganizationConformancePackDetailedStatusResponse.type = Types::GetOrganizationConformancePackDetailedStatusResponse
-    GetOrganizationCustomRulePolicyRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
+    GetOrganizationCustomRulePolicyRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
     GetOrganizationCustomRulePolicyRequest.type = Types::GetOrganizationCustomRulePolicyRequest
-    GetOrganizationCustomRulePolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyText, location_name: "PolicyText"))
+    GetOrganizationCustomRulePolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyText, location_name: "PolicyText"))
     GetOrganizationCustomRulePolicyResponse.type = Types::GetOrganizationCustomRulePolicyResponse
-    GetResourceConfigHistoryRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    GetResourceConfigHistoryRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    GetResourceConfigHistoryRequest.add_member(:later_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaterTime, location_name: "laterTime"))
-    GetResourceConfigHistoryRequest.add_member(:earlier_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EarlierTime, location_name: "earlierTime"))
-    GetResourceConfigHistoryRequest.add_member(:chronological_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChronologicalOrder, location_name: "chronologicalOrder"))
-    GetResourceConfigHistoryRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "limit", traits: {"smithy.api#default" => 0}))
-    GetResourceConfigHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetResourceConfigHistoryRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    GetResourceConfigHistoryRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    GetResourceConfigHistoryRequest.add_member(:later_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LaterTime, location_name: "laterTime"))
+    GetResourceConfigHistoryRequest.add_member(:earlier_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EarlierTime, location_name: "earlierTime"))
+    GetResourceConfigHistoryRequest.add_member(:chronological_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ChronologicalOrder, location_name: "chronologicalOrder"))
+    GetResourceConfigHistoryRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "limit", traits: {"smithy.api#default" => 0}))
+    GetResourceConfigHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetResourceConfigHistoryRequest.type = Types::GetResourceConfigHistoryRequest
-    GetResourceConfigHistoryResponse.add_member(:configuration_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationItemList, location_name: "configurationItems"))
-    GetResourceConfigHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetResourceConfigHistoryResponse.add_member(:configuration_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationItemList, location_name: "configurationItems"))
+    GetResourceConfigHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     GetResourceConfigHistoryResponse.type = Types::GetResourceConfigHistoryResponse
-    GetResourceEvaluationSummaryRequest.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationId, location_name: "ResourceEvaluationId", traits: {"smithy.api#required" => {}}))
+    GetResourceEvaluationSummaryRequest.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationId, location_name: "ResourceEvaluationId", traits: {"smithy.api#required" => {}}))
     GetResourceEvaluationSummaryRequest.type = Types::GetResourceEvaluationSummaryRequest
-    GetResourceEvaluationSummaryResponse.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
-    GetResourceEvaluationSummaryResponse.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationMode, location_name: "EvaluationMode"))
-    GetResourceEvaluationSummaryResponse.add_member(:evaluation_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationStatus, location_name: "EvaluationStatus"))
-    GetResourceEvaluationSummaryResponse.add_member(:evaluation_start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "EvaluationStartTimestamp"))
-    GetResourceEvaluationSummaryResponse.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceType, location_name: "Compliance"))
-    GetResourceEvaluationSummaryResponse.add_member(:evaluation_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationContext, location_name: "EvaluationContext"))
-    GetResourceEvaluationSummaryResponse.add_member(:resource_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
+    GetResourceEvaluationSummaryResponse.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
+    GetResourceEvaluationSummaryResponse.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMode, location_name: "EvaluationMode"))
+    GetResourceEvaluationSummaryResponse.add_member(:evaluation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationStatus, location_name: "EvaluationStatus"))
+    GetResourceEvaluationSummaryResponse.add_member(:evaluation_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "EvaluationStartTimestamp"))
+    GetResourceEvaluationSummaryResponse.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, location_name: "Compliance"))
+    GetResourceEvaluationSummaryResponse.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationContext, location_name: "EvaluationContext"))
+    GetResourceEvaluationSummaryResponse.add_member(:resource_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDetails, location_name: "ResourceDetails"))
     GetResourceEvaluationSummaryResponse.type = Types::GetResourceEvaluationSummaryResponse
-    GetStoredQueryRequest.add_member(:query_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
+    GetStoredQueryRequest.add_member(:query_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
     GetStoredQueryRequest.type = Types::GetStoredQueryRequest
-    GetStoredQueryResponse.add_member(:stored_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoredQuery, location_name: "StoredQuery"))
+    GetStoredQueryResponse.add_member(:stored_query, ::Smithy::Schema::Shapes::MemberShape.new(target: StoredQuery, location_name: "StoredQuery"))
     GetStoredQueryResponse.type = Types::GetStoredQueryResponse
-    GroupedResourceCount.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
-    GroupedResourceCount.add_member(:resource_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "ResourceCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    GroupedResourceCount.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "GroupName", traits: {"smithy.api#required" => {}}))
+    GroupedResourceCount.add_member(:resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "ResourceCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     GroupedResourceCount.type = Types::GroupedResourceCount
-    GroupedResourceCountList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupedResourceCount)
-    IdempotentParameterMismatch.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    GroupedResourceCountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupedResourceCount)
+    IdempotentParameterMismatch.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     IdempotentParameterMismatch.type = Types::IdempotentParameterMismatch
-    InsufficientDeliveryPolicyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InsufficientDeliveryPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InsufficientDeliveryPolicyException.type = Types::InsufficientDeliveryPolicyException
-    InsufficientPermissionsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InsufficientPermissionsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InsufficientPermissionsException.type = Types::InsufficientPermissionsException
-    InvalidConfigurationRecorderNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidConfigurationRecorderNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidConfigurationRecorderNameException.type = Types::InvalidConfigurationRecorderNameException
-    InvalidDeliveryChannelNameException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidDeliveryChannelNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidDeliveryChannelNameException.type = Types::InvalidDeliveryChannelNameException
-    InvalidExpressionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidExpressionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidExpressionException.type = Types::InvalidExpressionException
-    InvalidLimitException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidLimitException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidLimitException.type = Types::InvalidLimitException
-    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
-    InvalidRecordingGroupException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidRecordingGroupException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidRecordingGroupException.type = Types::InvalidRecordingGroupException
-    InvalidResultTokenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidResultTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidResultTokenException.type = Types::InvalidResultTokenException
-    InvalidRoleException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidRoleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidRoleException.type = Types::InvalidRoleException
-    InvalidS3KeyPrefixException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidS3KeyPrefixException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidS3KeyPrefixException.type = Types::InvalidS3KeyPrefixException
-    InvalidS3KmsKeyArnException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidS3KmsKeyArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidS3KmsKeyArnException.type = Types::InvalidS3KmsKeyArnException
-    InvalidSNSTopicARNException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSNSTopicARNException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidSNSTopicARNException.type = Types::InvalidSNSTopicARNException
-    InvalidTimeRangeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidTimeRangeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidTimeRangeException.type = Types::InvalidTimeRangeException
-    LastDeliveryChannelDeleteFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LastDeliveryChannelDeleteFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     LastDeliveryChannelDeleteFailedException.type = Types::LastDeliveryChannelDeleteFailedException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListAggregateDiscoveredResourcesRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    ListAggregateDiscoveredResourcesRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    ListAggregateDiscoveredResourcesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceFilters, location_name: "Filters"))
-    ListAggregateDiscoveredResourcesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    ListAggregateDiscoveredResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAggregateDiscoveredResourcesRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    ListAggregateDiscoveredResourcesRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ListAggregateDiscoveredResourcesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilters, location_name: "Filters"))
+    ListAggregateDiscoveredResourcesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    ListAggregateDiscoveredResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAggregateDiscoveredResourcesRequest.type = Types::ListAggregateDiscoveredResourcesRequest
-    ListAggregateDiscoveredResourcesResponse.add_member(:resource_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoveredResourceIdentifierList, location_name: "ResourceIdentifiers"))
-    ListAggregateDiscoveredResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAggregateDiscoveredResourcesResponse.add_member(:resource_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResourceIdentifierList, location_name: "ResourceIdentifiers"))
+    ListAggregateDiscoveredResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAggregateDiscoveredResourcesResponse.type = Types::ListAggregateDiscoveredResourcesResponse
-    ListConfigurationRecordersRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderFilterList, location_name: "Filters"))
-    ListConfigurationRecordersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
-    ListConfigurationRecordersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationRecordersRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderFilterList, location_name: "Filters"))
+    ListConfigurationRecordersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ListConfigurationRecordersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListConfigurationRecordersRequest.type = Types::ListConfigurationRecordersRequest
-    ListConfigurationRecordersResponse.add_member(:configuration_recorder_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorderSummaries, location_name: "ConfigurationRecorderSummaries", traits: {"smithy.api#required" => {}}))
-    ListConfigurationRecordersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationRecordersResponse.add_member(:configuration_recorder_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorderSummaries, location_name: "ConfigurationRecorderSummaries", traits: {"smithy.api#required" => {}}))
+    ListConfigurationRecordersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListConfigurationRecordersResponse.type = Types::ListConfigurationRecordersResponse
-    ListConformancePackComplianceScoresRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceScoresFilters, location_name: "Filters"))
-    ListConformancePackComplianceScoresRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
-    ListConformancePackComplianceScoresRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
-    ListConformancePackComplianceScoresRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    ListConformancePackComplianceScoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConformancePackComplianceScoresRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceScoresFilters, location_name: "Filters"))
+    ListConformancePackComplianceScoresRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder"))
+    ListConformancePackComplianceScoresRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortBy, location_name: "SortBy"))
+    ListConformancePackComplianceScoresRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSizeLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    ListConformancePackComplianceScoresRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListConformancePackComplianceScoresRequest.type = Types::ListConformancePackComplianceScoresRequest
-    ListConformancePackComplianceScoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListConformancePackComplianceScoresResponse.add_member(:conformance_pack_compliance_scores, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackComplianceScores, location_name: "ConformancePackComplianceScores", traits: {"smithy.api#required" => {}}))
+    ListConformancePackComplianceScoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListConformancePackComplianceScoresResponse.add_member(:conformance_pack_compliance_scores, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackComplianceScores, location_name: "ConformancePackComplianceScores", traits: {"smithy.api#required" => {}}))
     ListConformancePackComplianceScoresResponse.type = Types::ListConformancePackComplianceScoresResponse
-    ListDiscoveredResourcesRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    ListDiscoveredResourcesRequest.add_member(:resource_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "resourceIds"))
-    ListDiscoveredResourcesRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
-    ListDiscoveredResourcesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "limit", traits: {"smithy.api#default" => 0}))
-    ListDiscoveredResourcesRequest.add_member(:include_deleted_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "includeDeletedResources", traits: {"smithy.api#default" => false}))
-    ListDiscoveredResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDiscoveredResourcesRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ListDiscoveredResourcesRequest.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdList, location_name: "resourceIds"))
+    ListDiscoveredResourcesRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "resourceName"))
+    ListDiscoveredResourcesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "limit", traits: {"smithy.api#default" => 0}))
+    ListDiscoveredResourcesRequest.add_member(:include_deleted_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "includeDeletedResources", traits: {"smithy.api#default" => false}))
+    ListDiscoveredResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListDiscoveredResourcesRequest.type = Types::ListDiscoveredResourcesRequest
-    ListDiscoveredResourcesResponse.add_member(:resource_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifierList, location_name: "resourceIdentifiers"))
-    ListDiscoveredResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDiscoveredResourcesResponse.add_member(:resource_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifierList, location_name: "resourceIdentifiers"))
+    ListDiscoveredResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListDiscoveredResourcesResponse.type = Types::ListDiscoveredResourcesResponse
-    ListResourceEvaluationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationFilters, location_name: "Filters"))
-    ListResourceEvaluationsRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceEvaluationsPageItemLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    ListResourceEvaluationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListResourceEvaluationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationFilters, location_name: "Filters"))
+    ListResourceEvaluationsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourceEvaluationsPageItemLimit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    ListResourceEvaluationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListResourceEvaluationsRequest.type = Types::ListResourceEvaluationsRequest
-    ListResourceEvaluationsResponse.add_member(:resource_evaluations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluations, location_name: "ResourceEvaluations"))
-    ListResourceEvaluationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListResourceEvaluationsResponse.add_member(:resource_evaluations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluations, location_name: "ResourceEvaluations"))
+    ListResourceEvaluationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListResourceEvaluationsResponse.type = Types::ListResourceEvaluationsResponse
-    ListStoredQueriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListStoredQueriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ListStoredQueriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListStoredQueriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "MaxResults", traits: {"smithy.api#default" => nil}))
     ListStoredQueriesRequest.type = Types::ListStoredQueriesRequest
-    ListStoredQueriesResponse.add_member(:stored_query_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoredQueryMetadataList, location_name: "StoredQueryMetadata"))
-    ListStoredQueriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListStoredQueriesResponse.add_member(:stored_query_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: StoredQueryMetadataList, location_name: "StoredQueryMetadata"))
+    ListStoredQueriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
     ListStoredQueriesResponse.type = Types::ListStoredQueriesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    ListTagsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MaxActiveResourcesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxActiveResourcesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxActiveResourcesExceededException.type = Types::MaxActiveResourcesExceededException
-    MaxNumberOfConfigRulesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxNumberOfConfigRulesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxNumberOfConfigRulesExceededException.type = Types::MaxNumberOfConfigRulesExceededException
-    MaxNumberOfConfigurationRecordersExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxNumberOfConfigurationRecordersExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxNumberOfConfigurationRecordersExceededException.type = Types::MaxNumberOfConfigurationRecordersExceededException
-    MaxNumberOfConformancePacksExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxNumberOfConformancePacksExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxNumberOfConformancePacksExceededException.type = Types::MaxNumberOfConformancePacksExceededException
-    MaxNumberOfDeliveryChannelsExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxNumberOfDeliveryChannelsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxNumberOfDeliveryChannelsExceededException.type = Types::MaxNumberOfDeliveryChannelsExceededException
-    MaxNumberOfOrganizationConfigRulesExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxNumberOfOrganizationConfigRulesExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxNumberOfOrganizationConfigRulesExceededException.type = Types::MaxNumberOfOrganizationConfigRulesExceededException
-    MaxNumberOfOrganizationConformancePacksExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxNumberOfOrganizationConformancePacksExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxNumberOfOrganizationConformancePacksExceededException.type = Types::MaxNumberOfOrganizationConformancePacksExceededException
-    MaxNumberOfRetentionConfigurationsExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxNumberOfRetentionConfigurationsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     MaxNumberOfRetentionConfigurationsExceededException.type = Types::MaxNumberOfRetentionConfigurationsExceededException
-    MaximumExecutionFrequency.add_member(:one_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "One_Hour", traits: {"smithy.api#enumValue" => "One_Hour"}))
-    MaximumExecutionFrequency.add_member(:three_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Three_Hours", traits: {"smithy.api#enumValue" => "Three_Hours"}))
-    MaximumExecutionFrequency.add_member(:six_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Six_Hours", traits: {"smithy.api#enumValue" => "Six_Hours"}))
-    MaximumExecutionFrequency.add_member(:twelve_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Twelve_Hours", traits: {"smithy.api#enumValue" => "Twelve_Hours"}))
-    MaximumExecutionFrequency.add_member(:twenty_four_hours, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TwentyFour_Hours", traits: {"smithy.api#enumValue" => "TwentyFour_Hours"}))
-    MemberAccountRuleStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
-    MemberAccountRuleStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
-    MemberAccountRuleStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    MemberAccountRuleStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
-    MemberAccountRuleStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    MemberAccountRuleStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
-    MemberAccountRuleStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
-    MemberAccountRuleStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
-    MemberAccountRuleStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    MemberAccountStatus.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId", traits: {"smithy.api#required" => {}}))
-    MemberAccountStatus.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    MemberAccountStatus.add_member(:member_account_rule_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAccountRuleStatus, location_name: "MemberAccountRuleStatus", traits: {"smithy.api#required" => {}}))
-    MemberAccountStatus.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    MemberAccountStatus.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    MemberAccountStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    MaximumExecutionFrequency.add_member(:one_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "One_Hour", traits: {"smithy.api#enumValue" => "One_Hour"}))
+    MaximumExecutionFrequency.add_member(:three_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Three_Hours", traits: {"smithy.api#enumValue" => "Three_Hours"}))
+    MaximumExecutionFrequency.add_member(:six_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Six_Hours", traits: {"smithy.api#enumValue" => "Six_Hours"}))
+    MaximumExecutionFrequency.add_member(:twelve_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Twelve_Hours", traits: {"smithy.api#enumValue" => "Twelve_Hours"}))
+    MaximumExecutionFrequency.add_member(:twenty_four_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TwentyFour_Hours", traits: {"smithy.api#enumValue" => "TwentyFour_Hours"}))
+    MemberAccountRuleStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
+    MemberAccountRuleStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    MemberAccountRuleStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    MemberAccountRuleStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
+    MemberAccountRuleStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    MemberAccountRuleStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    MemberAccountRuleStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
+    MemberAccountRuleStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
+    MemberAccountRuleStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    MemberAccountStatus.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId", traits: {"smithy.api#required" => {}}))
+    MemberAccountStatus.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit64, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    MemberAccountStatus.add_member(:member_account_rule_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountRuleStatus, location_name: "MemberAccountRuleStatus", traits: {"smithy.api#required" => {}}))
+    MemberAccountStatus.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    MemberAccountStatus.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    MemberAccountStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateTime"))
     MemberAccountStatus.type = Types::MemberAccountStatus
-    MessageType.add_member(:configuration_item_change_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConfigurationItemChangeNotification", traits: {"smithy.api#enumValue" => "ConfigurationItemChangeNotification"}))
-    MessageType.add_member(:configuration_snapshot_delivery_completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConfigurationSnapshotDeliveryCompleted", traits: {"smithy.api#enumValue" => "ConfigurationSnapshotDeliveryCompleted"}))
-    MessageType.add_member(:scheduled_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ScheduledNotification", traits: {"smithy.api#enumValue" => "ScheduledNotification"}))
-    MessageType.add_member(:oversized_configuration_item_change_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OversizedConfigurationItemChangeNotification", traits: {"smithy.api#enumValue" => "OversizedConfigurationItemChangeNotification"}))
-    NoAvailableConfigurationRecorderException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MessageType.add_member(:configuration_item_change_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConfigurationItemChangeNotification", traits: {"smithy.api#enumValue" => "ConfigurationItemChangeNotification"}))
+    MessageType.add_member(:configuration_snapshot_delivery_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConfigurationSnapshotDeliveryCompleted", traits: {"smithy.api#enumValue" => "ConfigurationSnapshotDeliveryCompleted"}))
+    MessageType.add_member(:scheduled_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ScheduledNotification", traits: {"smithy.api#enumValue" => "ScheduledNotification"}))
+    MessageType.add_member(:oversized_configuration_item_change_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OversizedConfigurationItemChangeNotification", traits: {"smithy.api#enumValue" => "OversizedConfigurationItemChangeNotification"}))
+    NoAvailableConfigurationRecorderException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoAvailableConfigurationRecorderException.type = Types::NoAvailableConfigurationRecorderException
-    NoAvailableDeliveryChannelException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoAvailableDeliveryChannelException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoAvailableDeliveryChannelException.type = Types::NoAvailableDeliveryChannelException
-    NoAvailableOrganizationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoAvailableOrganizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoAvailableOrganizationException.type = Types::NoAvailableOrganizationException
-    NoRunningConfigurationRecorderException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoRunningConfigurationRecorderException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoRunningConfigurationRecorderException.type = Types::NoRunningConfigurationRecorderException
-    NoSuchBucketException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchBucketException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchBucketException.type = Types::NoSuchBucketException
-    NoSuchConfigRuleException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchConfigRuleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchConfigRuleException.type = Types::NoSuchConfigRuleException
-    NoSuchConfigRuleInConformancePackException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchConfigRuleInConformancePackException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchConfigRuleInConformancePackException.type = Types::NoSuchConfigRuleInConformancePackException
-    NoSuchConfigurationAggregatorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchConfigurationAggregatorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchConfigurationAggregatorException.type = Types::NoSuchConfigurationAggregatorException
-    NoSuchConfigurationRecorderException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchConfigurationRecorderException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchConfigurationRecorderException.type = Types::NoSuchConfigurationRecorderException
-    NoSuchConformancePackException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchConformancePackException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchConformancePackException.type = Types::NoSuchConformancePackException
-    NoSuchDeliveryChannelException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchDeliveryChannelException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchDeliveryChannelException.type = Types::NoSuchDeliveryChannelException
-    NoSuchOrganizationConfigRuleException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchOrganizationConfigRuleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchOrganizationConfigRuleException.type = Types::NoSuchOrganizationConfigRuleException
-    NoSuchOrganizationConformancePackException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchOrganizationConformancePackException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchOrganizationConformancePackException.type = Types::NoSuchOrganizationConformancePackException
-    NoSuchRemediationConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchRemediationConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchRemediationConfigurationException.type = Types::NoSuchRemediationConfigurationException
-    NoSuchRemediationExceptionException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchRemediationExceptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchRemediationExceptionException.type = Types::NoSuchRemediationExceptionException
-    NoSuchRetentionConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchRetentionConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     NoSuchRetentionConfigurationException.type = Types::NoSuchRetentionConfigurationException
-    OrganizationAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OrganizationAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     OrganizationAccessDeniedException.type = Types::OrganizationAccessDeniedException
-    OrganizationAggregationSource.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
-    OrganizationAggregationSource.add_member(:aws_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorRegionList, location_name: "AwsRegions"))
-    OrganizationAggregationSource.add_member(:all_aws_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAwsRegions", traits: {"smithy.api#default" => false}))
+    OrganizationAggregationSource.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    OrganizationAggregationSource.add_member(:aws_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorRegionList, location_name: "AwsRegions"))
+    OrganizationAggregationSource.add_member(:all_aws_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "AllAwsRegions", traits: {"smithy.api#default" => false}))
     OrganizationAggregationSource.type = Types::OrganizationAggregationSource
-    OrganizationAllFeaturesNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OrganizationAllFeaturesNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     OrganizationAllFeaturesNotEnabledException.type = Types::OrganizationAllFeaturesNotEnabledException
-    OrganizationConfigRule.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
-    OrganizationConfigRule.add_member(:organization_config_rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConfigRuleArn", traits: {"smithy.api#required" => {}}))
-    OrganizationConfigRule.add_member(:organization_managed_rule_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
-    OrganizationConfigRule.add_member(:organization_custom_rule_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
-    OrganizationConfigRule.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
-    OrganizationConfigRule.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
-    OrganizationConfigRule.add_member(:organization_custom_policy_rule_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationCustomPolicyRuleMetadataNoPolicy, location_name: "OrganizationCustomPolicyRuleMetadata"))
+    OrganizationConfigRule.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
+    OrganizationConfigRule.add_member(:organization_config_rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "OrganizationConfigRuleArn", traits: {"smithy.api#required" => {}}))
+    OrganizationConfigRule.add_member(:organization_managed_rule_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
+    OrganizationConfigRule.add_member(:organization_custom_rule_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
+    OrganizationConfigRule.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    OrganizationConfigRule.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateTime"))
+    OrganizationConfigRule.add_member(:organization_custom_policy_rule_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationCustomPolicyRuleMetadataNoPolicy, location_name: "OrganizationCustomPolicyRuleMetadata"))
     OrganizationConfigRule.type = Types::OrganizationConfigRule
-    OrganizationConfigRuleDetailedStatus.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAccountStatus)
-    OrganizationConfigRuleNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit64)
-    OrganizationConfigRuleStatus.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
-    OrganizationConfigRuleStatus.add_member(:organization_rule_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationRuleStatus, location_name: "OrganizationRuleStatus", traits: {"smithy.api#required" => {}}))
-    OrganizationConfigRuleStatus.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    OrganizationConfigRuleStatus.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    OrganizationConfigRuleStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    OrganizationConfigRuleDetailedStatus.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountStatus)
+    OrganizationConfigRuleNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit64)
+    OrganizationConfigRuleStatus.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
+    OrganizationConfigRuleStatus.add_member(:organization_rule_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationRuleStatus, location_name: "OrganizationRuleStatus", traits: {"smithy.api#required" => {}}))
+    OrganizationConfigRuleStatus.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    OrganizationConfigRuleStatus.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    OrganizationConfigRuleStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateTime"))
     OrganizationConfigRuleStatus.type = Types::OrganizationConfigRuleStatus
-    OrganizationConfigRuleStatuses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleStatus)
-    OrganizationConfigRuleTriggerType.add_member(:configuration_item_change_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIGURATION_ITEM_CHANGE_NOTIFICATION", traits: {"smithy.api#enumValue" => "ConfigurationItemChangeNotification"}))
-    OrganizationConfigRuleTriggerType.add_member(:oversized_configuration_item_change_notifcation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION", traits: {"smithy.api#enumValue" => "OversizedConfigurationItemChangeNotification"}))
-    OrganizationConfigRuleTriggerType.add_member(:scheduled_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCHEDULED_NOTIFICATION", traits: {"smithy.api#enumValue" => "ScheduledNotification"}))
-    OrganizationConfigRuleTriggerTypeNoSN.add_member(:configuration_item_change_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIGURATION_ITEM_CHANGE_NOTIFICATION", traits: {"smithy.api#enumValue" => "ConfigurationItemChangeNotification"}))
-    OrganizationConfigRuleTriggerTypeNoSN.add_member(:oversized_configuration_item_change_notifcation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION", traits: {"smithy.api#enumValue" => "OversizedConfigurationItemChangeNotification"}))
-    OrganizationConfigRuleTriggerTypeNoSNs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSN)
-    OrganizationConfigRuleTriggerTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerType)
-    OrganizationConfigRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRule)
-    OrganizationConformancePack.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
-    OrganizationConformancePack.add_member(:organization_conformance_pack_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConformancePackArn", traits: {"smithy.api#required" => {}}))
-    OrganizationConformancePack.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
-    OrganizationConformancePack.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
-    OrganizationConformancePack.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
-    OrganizationConformancePack.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
-    OrganizationConformancePack.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
+    OrganizationConfigRuleStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleStatus)
+    OrganizationConfigRuleTriggerType.add_member(:configuration_item_change_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIGURATION_ITEM_CHANGE_NOTIFICATION", traits: {"smithy.api#enumValue" => "ConfigurationItemChangeNotification"}))
+    OrganizationConfigRuleTriggerType.add_member(:oversized_configuration_item_change_notifcation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION", traits: {"smithy.api#enumValue" => "OversizedConfigurationItemChangeNotification"}))
+    OrganizationConfigRuleTriggerType.add_member(:scheduled_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCHEDULED_NOTIFICATION", traits: {"smithy.api#enumValue" => "ScheduledNotification"}))
+    OrganizationConfigRuleTriggerTypeNoSN.add_member(:configuration_item_change_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONFIGURATION_ITEM_CHANGE_NOTIFICATION", traits: {"smithy.api#enumValue" => "ConfigurationItemChangeNotification"}))
+    OrganizationConfigRuleTriggerTypeNoSN.add_member(:oversized_configuration_item_change_notifcation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION", traits: {"smithy.api#enumValue" => "OversizedConfigurationItemChangeNotification"}))
+    OrganizationConfigRuleTriggerTypeNoSNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleTriggerTypeNoSN)
+    OrganizationConfigRuleTriggerTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleTriggerType)
+    OrganizationConfigRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRule)
+    OrganizationConformancePack.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
+    OrganizationConformancePack.add_member(:organization_conformance_pack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "OrganizationConformancePackArn", traits: {"smithy.api#required" => {}}))
+    OrganizationConformancePack.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
+    OrganizationConformancePack.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
+    OrganizationConformancePack.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
+    OrganizationConformancePack.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    OrganizationConformancePack.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
     OrganizationConformancePack.type = Types::OrganizationConformancePack
-    OrganizationConformancePackDetailedStatus.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId", traits: {"smithy.api#required" => {}}))
-    OrganizationConformancePackDetailedStatus.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    OrganizationConformancePackDetailedStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationResourceDetailedStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    OrganizationConformancePackDetailedStatus.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    OrganizationConformancePackDetailedStatus.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    OrganizationConformancePackDetailedStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    OrganizationConformancePackDetailedStatus.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId", traits: {"smithy.api#required" => {}}))
+    OrganizationConformancePackDetailedStatus.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    OrganizationConformancePackDetailedStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationResourceDetailedStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    OrganizationConformancePackDetailedStatus.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    OrganizationConformancePackDetailedStatus.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    OrganizationConformancePackDetailedStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateTime"))
     OrganizationConformancePackDetailedStatus.type = Types::OrganizationConformancePackDetailedStatus
-    OrganizationConformancePackDetailedStatuses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackDetailedStatus)
-    OrganizationConformancePackNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackName)
-    OrganizationConformancePackStatus.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
-    OrganizationConformancePackStatus.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationResourceStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    OrganizationConformancePackStatus.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-    OrganizationConformancePackStatus.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    OrganizationConformancePackStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    OrganizationConformancePackDetailedStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackDetailedStatus)
+    OrganizationConformancePackNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackName)
+    OrganizationConformancePackStatus.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
+    OrganizationConformancePackStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationResourceStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    OrganizationConformancePackStatus.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorCode"))
+    OrganizationConformancePackStatus.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    OrganizationConformancePackStatus.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdateTime"))
     OrganizationConformancePackStatus.type = Types::OrganizationConformancePackStatus
-    OrganizationConformancePackStatuses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackStatus)
-    OrganizationConformancePackTemplateValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OrganizationConformancePackStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackStatus)
+    OrganizationConformancePackTemplateValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     OrganizationConformancePackTemplateValidationException.type = Types::OrganizationConformancePackTemplateValidationException
-    OrganizationConformancePacks.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePack)
-    OrganizationCustomPolicyRuleMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:organization_config_rule_trigger_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:policy_runtime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyRuntime, location_name: "PolicyRuntime", traits: {"smithy.api#required" => {}}))
-    OrganizationCustomPolicyRuleMetadata.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyText, location_name: "PolicyText", traits: {"smithy.api#required" => {}}))
-    OrganizationCustomPolicyRuleMetadata.add_member(:debug_log_delivery_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DebugLogDeliveryAccounts, location_name: "DebugLogDeliveryAccounts"))
+    OrganizationConformancePacks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePack)
+    OrganizationCustomPolicyRuleMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:organization_config_rule_trigger_types, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:policy_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRuntime, location_name: "PolicyRuntime", traits: {"smithy.api#required" => {}}))
+    OrganizationCustomPolicyRuleMetadata.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyText, location_name: "PolicyText", traits: {"smithy.api#required" => {}}))
+    OrganizationCustomPolicyRuleMetadata.add_member(:debug_log_delivery_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: DebugLogDeliveryAccounts, location_name: "DebugLogDeliveryAccounts"))
     OrganizationCustomPolicyRuleMetadata.type = Types::OrganizationCustomPolicyRuleMetadata
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:organization_config_rule_trigger_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:policy_runtime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyRuntime, location_name: "PolicyRuntime"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:debug_log_delivery_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DebugLogDeliveryAccounts, location_name: "DebugLogDeliveryAccounts"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:organization_config_rule_trigger_types, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:policy_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRuntime, location_name: "PolicyRuntime"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:debug_log_delivery_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: DebugLogDeliveryAccounts, location_name: "DebugLogDeliveryAccounts"))
     OrganizationCustomPolicyRuleMetadataNoPolicy.type = Types::OrganizationCustomPolicyRuleMetadataNoPolicy
-    OrganizationCustomRuleMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
-    OrganizationCustomRuleMetadata.add_member(:lambda_function_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "LambdaFunctionArn", traits: {"smithy.api#required" => {}}))
-    OrganizationCustomRuleMetadata.add_member(:organization_config_rule_trigger_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypes, location_name: "OrganizationConfigRuleTriggerTypes", traits: {"smithy.api#required" => {}}))
-    OrganizationCustomRuleMetadata.add_member(:input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
-    OrganizationCustomRuleMetadata.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
-    OrganizationCustomRuleMetadata.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
-    OrganizationCustomRuleMetadata.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
-    OrganizationCustomRuleMetadata.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
-    OrganizationCustomRuleMetadata.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationCustomRuleMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationCustomRuleMetadata.add_member(:lambda_function_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "LambdaFunctionArn", traits: {"smithy.api#required" => {}}))
+    OrganizationCustomRuleMetadata.add_member(:organization_config_rule_trigger_types, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleTriggerTypes, location_name: "OrganizationConfigRuleTriggerTypes", traits: {"smithy.api#required" => {}}))
+    OrganizationCustomRuleMetadata.add_member(:input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomRuleMetadata.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationCustomRuleMetadata.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationCustomRuleMetadata.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationCustomRuleMetadata.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationCustomRuleMetadata.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "TagValueScope"))
     OrganizationCustomRuleMetadata.type = Types::OrganizationCustomRuleMetadata
-    OrganizationManagedRuleMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
-    OrganizationManagedRuleMetadata.add_member(:rule_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "RuleIdentifier", traits: {"smithy.api#required" => {}}))
-    OrganizationManagedRuleMetadata.add_member(:input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
-    OrganizationManagedRuleMetadata.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
-    OrganizationManagedRuleMetadata.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
-    OrganizationManagedRuleMetadata.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
-    OrganizationManagedRuleMetadata.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
-    OrganizationManagedRuleMetadata.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationManagedRuleMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationManagedRuleMetadata.add_member(:rule_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "RuleIdentifier", traits: {"smithy.api#required" => {}}))
+    OrganizationManagedRuleMetadata.add_member(:input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationManagedRuleMetadata.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationManagedRuleMetadata.add_member(:resource_types_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationManagedRuleMetadata.add_member(:resource_id_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationManagedRuleMetadata.add_member(:tag_key_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationManagedRuleMetadata.add_member(:tag_value_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "TagValueScope"))
     OrganizationManagedRuleMetadata.type = Types::OrganizationManagedRuleMetadata
-    OrganizationResourceDetailedStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
-    OrganizationResourceDetailedStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
-    OrganizationResourceDetailedStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    OrganizationResourceDetailedStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
-    OrganizationResourceDetailedStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    OrganizationResourceDetailedStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
-    OrganizationResourceDetailedStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
-    OrganizationResourceDetailedStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
-    OrganizationResourceDetailedStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    OrganizationResourceDetailedStatusFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    OrganizationResourceDetailedStatusFilters.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationResourceDetailedStatus, location_name: "Status"))
+    OrganizationResourceDetailedStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
+    OrganizationResourceDetailedStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    OrganizationResourceDetailedStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    OrganizationResourceDetailedStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
+    OrganizationResourceDetailedStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    OrganizationResourceDetailedStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    OrganizationResourceDetailedStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
+    OrganizationResourceDetailedStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
+    OrganizationResourceDetailedStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    OrganizationResourceDetailedStatusFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    OrganizationResourceDetailedStatusFilters.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationResourceDetailedStatus, location_name: "Status"))
     OrganizationResourceDetailedStatusFilters.type = Types::OrganizationResourceDetailedStatusFilters
-    OrganizationResourceStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
-    OrganizationResourceStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
-    OrganizationResourceStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    OrganizationResourceStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
-    OrganizationResourceStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    OrganizationResourceStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
-    OrganizationResourceStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
-    OrganizationResourceStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
-    OrganizationResourceStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    OrganizationRuleStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
-    OrganizationRuleStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
-    OrganizationRuleStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    OrganizationRuleStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
-    OrganizationRuleStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
-    OrganizationRuleStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
-    OrganizationRuleStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
-    OrganizationRuleStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
-    OrganizationRuleStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    OversizedConfigurationItemException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OrganizationResourceStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
+    OrganizationResourceStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    OrganizationResourceStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    OrganizationResourceStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
+    OrganizationResourceStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    OrganizationResourceStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    OrganizationResourceStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
+    OrganizationResourceStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
+    OrganizationResourceStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    OrganizationRuleStatus.add_member(:create_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATE_SUCCESSFUL"}))
+    OrganizationRuleStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    OrganizationRuleStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    OrganizationRuleStatus.add_member(:delete_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_SUCCESSFUL"}))
+    OrganizationRuleStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
+    OrganizationRuleStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    OrganizationRuleStatus.add_member(:update_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_SUCCESSFUL", traits: {"smithy.api#enumValue" => "UPDATE_SUCCESSFUL"}))
+    OrganizationRuleStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
+    OrganizationRuleStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    OversizedConfigurationItemException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     OversizedConfigurationItemException.type = Types::OversizedConfigurationItemException
-    Owner.add_member(:custom_lambda, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Custom_Lambda", traits: {"smithy.api#enumValue" => "CUSTOM_LAMBDA"}))
-    Owner.add_member(:aws, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Aws", traits: {"smithy.api#enumValue" => "AWS"}))
-    Owner.add_member(:custom_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Custom_Policy", traits: {"smithy.api#enumValue" => "CUSTOM_POLICY"}))
-    PendingAggregationRequest.add_member(:requester_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "RequesterAccountId"))
-    PendingAggregationRequest.add_member(:requester_aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "RequesterAwsRegion"))
+    Owner.add_member(:custom_lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Custom_Lambda", traits: {"smithy.api#enumValue" => "CUSTOM_LAMBDA"}))
+    Owner.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Aws", traits: {"smithy.api#enumValue" => "AWS"}))
+    Owner.add_member(:custom_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Custom_Policy", traits: {"smithy.api#enumValue" => "CUSTOM_POLICY"}))
+    PendingAggregationRequest.add_member(:requester_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "RequesterAccountId"))
+    PendingAggregationRequest.add_member(:requester_aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "RequesterAwsRegion"))
     PendingAggregationRequest.type = Types::PendingAggregationRequest
-    PendingAggregationRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingAggregationRequest)
-    PutAggregationAuthorizationRequest.add_member(:authorized_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AuthorizedAccountId", traits: {"smithy.api#required" => {}}))
-    PutAggregationAuthorizationRequest.add_member(:authorized_aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AuthorizedAwsRegion", traits: {"smithy.api#required" => {}}))
-    PutAggregationAuthorizationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PendingAggregationRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingAggregationRequest)
+    PutAggregationAuthorizationRequest.add_member(:authorized_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AuthorizedAccountId", traits: {"smithy.api#required" => {}}))
+    PutAggregationAuthorizationRequest.add_member(:authorized_aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "AuthorizedAwsRegion", traits: {"smithy.api#required" => {}}))
+    PutAggregationAuthorizationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
     PutAggregationAuthorizationRequest.type = Types::PutAggregationAuthorizationRequest
-    PutAggregationAuthorizationResponse.add_member(:aggregation_authorization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationAuthorization, location_name: "AggregationAuthorization"))
+    PutAggregationAuthorizationResponse.add_member(:aggregation_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationAuthorization, location_name: "AggregationAuthorization"))
     PutAggregationAuthorizationResponse.type = Types::PutAggregationAuthorizationResponse
-    PutConfigRuleRequest.add_member(:config_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRule, location_name: "ConfigRule", traits: {"smithy.api#required" => {}}))
-    PutConfigRuleRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutConfigRuleRequest.add_member(:config_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRule, location_name: "ConfigRule", traits: {"smithy.api#required" => {}}))
+    PutConfigRuleRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
     PutConfigRuleRequest.type = Types::PutConfigRuleRequest
-    PutConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    PutConfigurationAggregatorRequest.add_member(:account_aggregation_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountAggregationSourceList, location_name: "AccountAggregationSources"))
-    PutConfigurationAggregatorRequest.add_member(:organization_aggregation_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
-    PutConfigurationAggregatorRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
-    PutConfigurationAggregatorRequest.add_member(:aggregator_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregatorFilters, location_name: "AggregatorFilters"))
+    PutConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    PutConfigurationAggregatorRequest.add_member(:account_aggregation_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAggregationSourceList, location_name: "AccountAggregationSources"))
+    PutConfigurationAggregatorRequest.add_member(:organization_aggregation_source, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
+    PutConfigurationAggregatorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
+    PutConfigurationAggregatorRequest.add_member(:aggregator_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorFilters, location_name: "AggregatorFilters"))
     PutConfigurationAggregatorRequest.type = Types::PutConfigurationAggregatorRequest
-    PutConfigurationAggregatorResponse.add_member(:configuration_aggregator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregator, location_name: "ConfigurationAggregator"))
+    PutConfigurationAggregatorResponse.add_member(:configuration_aggregator, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregator, location_name: "ConfigurationAggregator"))
     PutConfigurationAggregatorResponse.type = Types::PutConfigurationAggregatorResponse
-    PutConfigurationRecorderRequest.add_member(:configuration_recorder, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationRecorder, location_name: "ConfigurationRecorder", traits: {"smithy.api#required" => {}}))
-    PutConfigurationRecorderRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutConfigurationRecorderRequest.add_member(:configuration_recorder, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRecorder, location_name: "ConfigurationRecorder", traits: {"smithy.api#required" => {}}))
+    PutConfigurationRecorderRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
     PutConfigurationRecorderRequest.type = Types::PutConfigurationRecorderRequest
-    PutConformancePackRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
-    PutConformancePackRequest.add_member(:template_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateS3Uri, location_name: "TemplateS3Uri"))
-    PutConformancePackRequest.add_member(:template_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
-    PutConformancePackRequest.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
-    PutConformancePackRequest.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
-    PutConformancePackRequest.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
-    PutConformancePackRequest.add_member(:template_ssm_document_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
+    PutConformancePackRequest.add_member(:conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackName, location_name: "ConformancePackName", traits: {"smithy.api#required" => {}}))
+    PutConformancePackRequest.add_member(:template_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateS3Uri, location_name: "TemplateS3Uri"))
+    PutConformancePackRequest.add_member(:template_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateBody, location_name: "TemplateBody"))
+    PutConformancePackRequest.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
+    PutConformancePackRequest.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
+    PutConformancePackRequest.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
+    PutConformancePackRequest.add_member(:template_ssm_document_details, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
     PutConformancePackRequest.type = Types::PutConformancePackRequest
-    PutConformancePackResponse.add_member(:conformance_pack_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackArn, location_name: "ConformancePackArn"))
+    PutConformancePackResponse.add_member(:conformance_pack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackArn, location_name: "ConformancePackArn"))
     PutConformancePackResponse.type = Types::PutConformancePackResponse
-    PutDeliveryChannelRequest.add_member(:delivery_channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryChannel, location_name: "DeliveryChannel", traits: {"smithy.api#required" => {}}))
+    PutDeliveryChannelRequest.add_member(:delivery_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryChannel, location_name: "DeliveryChannel", traits: {"smithy.api#required" => {}}))
     PutDeliveryChannelRequest.type = Types::PutDeliveryChannelRequest
-    PutEvaluationsRequest.add_member(:evaluations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Evaluations, location_name: "Evaluations"))
-    PutEvaluationsRequest.add_member(:result_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResultToken", traits: {"smithy.api#required" => {}}))
-    PutEvaluationsRequest.add_member(:test_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "TestMode", traits: {"smithy.api#default" => false}))
+    PutEvaluationsRequest.add_member(:evaluations, ::Smithy::Schema::Shapes::MemberShape.new(target: Evaluations, location_name: "Evaluations"))
+    PutEvaluationsRequest.add_member(:result_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResultToken", traits: {"smithy.api#required" => {}}))
+    PutEvaluationsRequest.add_member(:test_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "TestMode", traits: {"smithy.api#default" => false}))
     PutEvaluationsRequest.type = Types::PutEvaluationsRequest
-    PutEvaluationsResponse.add_member(:failed_evaluations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))
+    PutEvaluationsResponse.add_member(:failed_evaluations, ::Smithy::Schema::Shapes::MemberShape.new(target: Evaluations, location_name: "FailedEvaluations"))
     PutEvaluationsResponse.type = Types::PutEvaluationsResponse
-    PutExternalEvaluationRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    PutExternalEvaluationRequest.add_member(:external_evaluation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExternalEvaluation, location_name: "ExternalEvaluation", traits: {"smithy.api#required" => {}}))
+    PutExternalEvaluationRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    PutExternalEvaluationRequest.add_member(:external_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalEvaluation, location_name: "ExternalEvaluation", traits: {"smithy.api#required" => {}}))
     PutExternalEvaluationRequest.type = Types::PutExternalEvaluationRequest
     PutExternalEvaluationResponse.type = Types::PutExternalEvaluationResponse
-    PutOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
-    PutOrganizationConfigRuleRequest.add_member(:organization_managed_rule_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
-    PutOrganizationConfigRuleRequest.add_member(:organization_custom_rule_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
-    PutOrganizationConfigRuleRequest.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
-    PutOrganizationConfigRuleRequest.add_member(:organization_custom_policy_rule_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationCustomPolicyRuleMetadata, location_name: "OrganizationCustomPolicyRuleMetadata"))
+    PutOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigRuleName, location_name: "OrganizationConfigRuleName", traits: {"smithy.api#required" => {}}))
+    PutOrganizationConfigRuleRequest.add_member(:organization_managed_rule_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
+    PutOrganizationConfigRuleRequest.add_member(:organization_custom_rule_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
+    PutOrganizationConfigRuleRequest.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    PutOrganizationConfigRuleRequest.add_member(:organization_custom_policy_rule_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationCustomPolicyRuleMetadata, location_name: "OrganizationCustomPolicyRuleMetadata"))
     PutOrganizationConfigRuleRequest.type = Types::PutOrganizationConfigRuleRequest
-    PutOrganizationConfigRuleResponse.add_member(:organization_config_rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConfigRuleArn"))
+    PutOrganizationConfigRuleResponse.add_member(:organization_config_rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "OrganizationConfigRuleArn"))
     PutOrganizationConfigRuleResponse.type = Types::PutOrganizationConfigRuleResponse
-    PutOrganizationConformancePackRequest.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
-    PutOrganizationConformancePackRequest.add_member(:template_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateS3Uri, location_name: "TemplateS3Uri"))
-    PutOrganizationConformancePackRequest.add_member(:template_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
-    PutOrganizationConformancePackRequest.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
-    PutOrganizationConformancePackRequest.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
-    PutOrganizationConformancePackRequest.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
-    PutOrganizationConformancePackRequest.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    PutOrganizationConformancePackRequest.add_member(:organization_conformance_pack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConformancePackName, location_name: "OrganizationConformancePackName", traits: {"smithy.api#required" => {}}))
+    PutOrganizationConformancePackRequest.add_member(:template_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateS3Uri, location_name: "TemplateS3Uri"))
+    PutOrganizationConformancePackRequest.add_member(:template_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateBody, location_name: "TemplateBody"))
+    PutOrganizationConformancePackRequest.add_member(:delivery_s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
+    PutOrganizationConformancePackRequest.add_member(:delivery_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
+    PutOrganizationConformancePackRequest.add_member(:conformance_pack_input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
+    PutOrganizationConformancePackRequest.add_member(:excluded_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedAccounts, location_name: "ExcludedAccounts"))
     PutOrganizationConformancePackRequest.type = Types::PutOrganizationConformancePackRequest
-    PutOrganizationConformancePackResponse.add_member(:organization_conformance_pack_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConformancePackArn"))
+    PutOrganizationConformancePackResponse.add_member(:organization_conformance_pack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "OrganizationConformancePackArn"))
     PutOrganizationConformancePackResponse.type = Types::PutOrganizationConformancePackResponse
-    PutRemediationConfigurationsRequest.add_member(:remediation_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationConfigurations, location_name: "RemediationConfigurations", traits: {"smithy.api#required" => {}}))
+    PutRemediationConfigurationsRequest.add_member(:remediation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationConfigurations, location_name: "RemediationConfigurations", traits: {"smithy.api#required" => {}}))
     PutRemediationConfigurationsRequest.type = Types::PutRemediationConfigurationsRequest
-    PutRemediationConfigurationsResponse.add_member(:failed_batches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedRemediationBatches, location_name: "FailedBatches"))
+    PutRemediationConfigurationsResponse.add_member(:failed_batches, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRemediationBatches, location_name: "FailedBatches"))
     PutRemediationConfigurationsResponse.type = Types::PutRemediationConfigurationsResponse
-    PutRemediationExceptionsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    PutRemediationExceptionsRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExceptionResourceKeys, location_name: "ResourceKeys", traits: {"smithy.api#required" => {}}))
-    PutRemediationExceptionsRequest.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "Message"))
-    PutRemediationExceptionsRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ExpirationTime"))
+    PutRemediationExceptionsRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    PutRemediationExceptionsRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExceptionResourceKeys, location_name: "ResourceKeys", traits: {"smithy.api#required" => {}}))
+    PutRemediationExceptionsRequest.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "Message"))
+    PutRemediationExceptionsRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ExpirationTime"))
     PutRemediationExceptionsRequest.type = Types::PutRemediationExceptionsRequest
-    PutRemediationExceptionsResponse.add_member(:failed_batches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedRemediationExceptionBatches, location_name: "FailedBatches"))
+    PutRemediationExceptionsResponse.add_member(:failed_batches, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRemediationExceptionBatches, location_name: "FailedBatches"))
     PutRemediationExceptionsResponse.type = Types::PutRemediationExceptionsResponse
-    PutResourceConfigRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeString, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    PutResourceConfigRequest.add_member(:schema_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaVersionId, location_name: "SchemaVersionId", traits: {"smithy.api#required" => {}}))
-    PutResourceConfigRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    PutResourceConfigRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "ResourceName"))
-    PutResourceConfigRequest.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration, location_name: "Configuration", traits: {"smithy.api#required" => {}}))
-    PutResourceConfigRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    PutResourceConfigRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeString, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    PutResourceConfigRequest.add_member(:schema_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaVersionId, location_name: "SchemaVersionId", traits: {"smithy.api#required" => {}}))
+    PutResourceConfigRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    PutResourceConfigRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "ResourceName"))
+    PutResourceConfigRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, location_name: "Configuration", traits: {"smithy.api#required" => {}}))
+    PutResourceConfigRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     PutResourceConfigRequest.type = Types::PutResourceConfigRequest
-    PutRetentionConfigurationRequest.add_member(:retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodInDays, location_name: "RetentionPeriodInDays", traits: {"smithy.api#required" => {}}))
+    PutRetentionConfigurationRequest.add_member(:retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodInDays, location_name: "RetentionPeriodInDays", traits: {"smithy.api#required" => {}}))
     PutRetentionConfigurationRequest.type = Types::PutRetentionConfigurationRequest
-    PutRetentionConfigurationResponse.add_member(:retention_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionConfiguration, location_name: "RetentionConfiguration"))
+    PutRetentionConfigurationResponse.add_member(:retention_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionConfiguration, location_name: "RetentionConfiguration"))
     PutRetentionConfigurationResponse.type = Types::PutRetentionConfigurationResponse
-    PutServiceLinkedConfigurationRecorderRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal", traits: {"smithy.api#required" => {}}))
-    PutServiceLinkedConfigurationRecorderRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutServiceLinkedConfigurationRecorderRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, location_name: "ServicePrincipal", traits: {"smithy.api#required" => {}}))
+    PutServiceLinkedConfigurationRecorderRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
     PutServiceLinkedConfigurationRecorderRequest.type = Types::PutServiceLinkedConfigurationRecorderRequest
-    PutServiceLinkedConfigurationRecorderResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Arn"))
-    PutServiceLinkedConfigurationRecorderResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName, location_name: "Name"))
+    PutServiceLinkedConfigurationRecorderResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "Arn"))
+    PutServiceLinkedConfigurationRecorderResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName, location_name: "Name"))
     PutServiceLinkedConfigurationRecorderResponse.type = Types::PutServiceLinkedConfigurationRecorderResponse
-    PutStoredQueryRequest.add_member(:stored_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoredQuery, location_name: "StoredQuery", traits: {"smithy.api#required" => {}}))
-    PutStoredQueryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutStoredQueryRequest.add_member(:stored_query, ::Smithy::Schema::Shapes::MemberShape.new(target: StoredQuery, location_name: "StoredQuery", traits: {"smithy.api#required" => {}}))
+    PutStoredQueryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, location_name: "Tags"))
     PutStoredQueryRequest.type = Types::PutStoredQueryRequest
-    PutStoredQueryResponse.add_member(:query_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn"))
+    PutStoredQueryResponse.add_member(:query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryArn, location_name: "QueryArn"))
     PutStoredQueryResponse.type = Types::PutStoredQueryResponse
-    QueryInfo.add_member(:select_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldInfoList, location_name: "SelectFields"))
+    QueryInfo.add_member(:select_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldInfoList, location_name: "SelectFields"))
     QueryInfo.type = Types::QueryInfo
-    RecorderStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
-    RecorderStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
-    RecorderStatus.add_member(:failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failure", traits: {"smithy.api#enumValue" => "Failure"}))
-    RecorderStatus.add_member(:not_applicable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotApplicable", traits: {"smithy.api#enumValue" => "NotApplicable"}))
-    RecordingFrequency.add_member(:continuous, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTINUOUS", traits: {"smithy.api#enumValue" => "CONTINUOUS"}))
-    RecordingFrequency.add_member(:daily, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
-    RecordingGroup.add_member(:all_supported, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllSupported, location_name: "allSupported", traits: {"smithy.api#default" => false}))
-    RecordingGroup.add_member(:include_global_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncludeGlobalResourceTypes, location_name: "includeGlobalResourceTypes", traits: {"smithy.api#default" => false}))
-    RecordingGroup.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
-    RecordingGroup.add_member(:exclusion_by_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExclusionByResourceTypes, location_name: "exclusionByResourceTypes"))
-    RecordingGroup.add_member(:recording_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingStrategy, location_name: "recordingStrategy"))
+    RecorderStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
+    RecorderStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
+    RecorderStatus.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Failure", traits: {"smithy.api#enumValue" => "Failure"}))
+    RecorderStatus.add_member(:not_applicable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotApplicable", traits: {"smithy.api#enumValue" => "NotApplicable"}))
+    RecordingFrequency.add_member(:continuous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CONTINUOUS", traits: {"smithy.api#enumValue" => "CONTINUOUS"}))
+    RecordingFrequency.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
+    RecordingGroup.add_member(:all_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: AllSupported, location_name: "allSupported", traits: {"smithy.api#default" => false}))
+    RecordingGroup.add_member(:include_global_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeGlobalResourceTypes, location_name: "includeGlobalResourceTypes", traits: {"smithy.api#default" => false}))
+    RecordingGroup.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeList, location_name: "resourceTypes"))
+    RecordingGroup.add_member(:exclusion_by_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionByResourceTypes, location_name: "exclusionByResourceTypes"))
+    RecordingGroup.add_member(:recording_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingStrategy, location_name: "recordingStrategy"))
     RecordingGroup.type = Types::RecordingGroup
-    RecordingMode.add_member(:recording_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingFrequency, location_name: "recordingFrequency", traits: {"smithy.api#required" => {}}))
-    RecordingMode.add_member(:recording_mode_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingModeOverrides, location_name: "recordingModeOverrides"))
+    RecordingMode.add_member(:recording_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingFrequency, location_name: "recordingFrequency", traits: {"smithy.api#required" => {}}))
+    RecordingMode.add_member(:recording_mode_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingModeOverrides, location_name: "recordingModeOverrides"))
     RecordingMode.type = Types::RecordingMode
-    RecordingModeOverride.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    RecordingModeOverride.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingModeResourceTypesList, location_name: "resourceTypes", traits: {"smithy.api#required" => {}}))
-    RecordingModeOverride.add_member(:recording_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingFrequency, location_name: "recordingFrequency", traits: {"smithy.api#required" => {}}))
+    RecordingModeOverride.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "description"))
+    RecordingModeOverride.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingModeResourceTypesList, location_name: "resourceTypes", traits: {"smithy.api#required" => {}}))
+    RecordingModeOverride.add_member(:recording_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingFrequency, location_name: "recordingFrequency", traits: {"smithy.api#required" => {}}))
     RecordingModeOverride.type = Types::RecordingModeOverride
-    RecordingModeOverrides.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingModeOverride)
-    RecordingModeResourceTypesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType)
-    RecordingScope.add_member(:internal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL", traits: {"smithy.api#enumValue" => "INTERNAL"}))
-    RecordingScope.add_member(:paid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAID", traits: {"smithy.api#enumValue" => "PAID"}))
-    RecordingStrategy.add_member(:use_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingStrategyType, location_name: "useOnly"))
+    RecordingModeOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingModeOverride)
+    RecordingModeResourceTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType)
+    RecordingScope.add_member(:internal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTERNAL", traits: {"smithy.api#enumValue" => "INTERNAL"}))
+    RecordingScope.add_member(:paid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PAID", traits: {"smithy.api#enumValue" => "PAID"}))
+    RecordingStrategy.add_member(:use_only, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingStrategyType, location_name: "useOnly"))
     RecordingStrategy.type = Types::RecordingStrategy
-    RecordingStrategyType.add_member(:all_supported_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL_SUPPORTED_RESOURCE_TYPES", traits: {"smithy.api#enumValue" => "ALL_SUPPORTED_RESOURCE_TYPES"}))
-    RecordingStrategyType.add_member(:inclusion_by_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCLUSION_BY_RESOURCE_TYPES", traits: {"smithy.api#enumValue" => "INCLUSION_BY_RESOURCE_TYPES"}))
-    RecordingStrategyType.add_member(:exclusion_by_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXCLUSION_BY_RESOURCE_TYPES", traits: {"smithy.api#enumValue" => "EXCLUSION_BY_RESOURCE_TYPES"}))
-    ReevaluateConfigRuleNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName)
-    RelatedEventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedEvent)
-    Relationship.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    Relationship.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
-    Relationship.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
-    Relationship.add_member(:relationship_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelationshipName, location_name: "relationshipName"))
+    RecordingStrategyType.add_member(:all_supported_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL_SUPPORTED_RESOURCE_TYPES", traits: {"smithy.api#enumValue" => "ALL_SUPPORTED_RESOURCE_TYPES"}))
+    RecordingStrategyType.add_member(:inclusion_by_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INCLUSION_BY_RESOURCE_TYPES", traits: {"smithy.api#enumValue" => "INCLUSION_BY_RESOURCE_TYPES"}))
+    RecordingStrategyType.add_member(:exclusion_by_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXCLUSION_BY_RESOURCE_TYPES", traits: {"smithy.api#enumValue" => "EXCLUSION_BY_RESOURCE_TYPES"}))
+    ReevaluateConfigRuleNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName)
+    RelatedEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedEvent)
+    Relationship.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    Relationship.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId"))
+    Relationship.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "resourceName"))
+    Relationship.add_member(:relationship_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipName, location_name: "relationshipName"))
     Relationship.type = Types::Relationship
-    RelationshipList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Relationship)
-    RemediationConfiguration.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    RemediationConfiguration.add_member(:target_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationTargetType, location_name: "TargetType", traits: {"smithy.api#required" => {}}))
-    RemediationConfiguration.add_member(:target_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TargetId", traits: {"smithy.api#required" => {}}))
-    RemediationConfiguration.add_member(:target_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TargetVersion"))
-    RemediationConfiguration.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationParameters, location_name: "Parameters"))
-    RemediationConfiguration.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
-    RemediationConfiguration.add_member(:automatic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "Automatic", traits: {"smithy.api#default" => false}))
-    RemediationConfiguration.add_member(:execution_controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionControls, location_name: "ExecutionControls"))
-    RemediationConfiguration.add_member(:maximum_automatic_attempts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoRemediationAttempts, location_name: "MaximumAutomaticAttempts"))
-    RemediationConfiguration.add_member(:retry_attempt_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoRemediationAttemptSeconds, location_name: "RetryAttemptSeconds"))
-    RemediationConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "Arn"))
-    RemediationConfiguration.add_member(:created_by_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "CreatedByService"))
+    RelationshipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Relationship)
+    RemediationConfiguration.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    RemediationConfiguration.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationTargetType, location_name: "TargetType", traits: {"smithy.api#required" => {}}))
+    RemediationConfiguration.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "TargetId", traits: {"smithy.api#required" => {}}))
+    RemediationConfiguration.add_member(:target_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TargetVersion"))
+    RemediationConfiguration.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationParameters, location_name: "Parameters"))
+    RemediationConfiguration.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ResourceType"))
+    RemediationConfiguration.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "Automatic", traits: {"smithy.api#default" => false}))
+    RemediationConfiguration.add_member(:execution_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionControls, location_name: "ExecutionControls"))
+    RemediationConfiguration.add_member(:maximum_automatic_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRemediationAttempts, location_name: "MaximumAutomaticAttempts"))
+    RemediationConfiguration.add_member(:retry_attempt_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRemediationAttemptSeconds, location_name: "RetryAttemptSeconds"))
+    RemediationConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "Arn"))
+    RemediationConfiguration.add_member(:created_by_service, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "CreatedByService"))
     RemediationConfiguration.type = Types::RemediationConfiguration
-    RemediationConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationConfiguration)
-    RemediationException.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    RemediationException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    RemediationException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    RemediationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "Message"))
-    RemediationException.add_member(:expiration_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "ExpirationTime"))
+    RemediationConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationConfiguration)
+    RemediationException.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    RemediationException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    RemediationException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    RemediationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "Message"))
+    RemediationException.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "ExpirationTime"))
     RemediationException.type = Types::RemediationException
-    RemediationExceptionResourceKey.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    RemediationExceptionResourceKey.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "ResourceId"))
+    RemediationExceptionResourceKey.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType"))
+    RemediationExceptionResourceKey.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit1024, location_name: "ResourceId"))
     RemediationExceptionResourceKey.type = Types::RemediationExceptionResourceKey
-    RemediationExceptionResourceKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExceptionResourceKey)
-    RemediationExceptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationException)
-    RemediationExecutionState.add_member(:queued, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
-    RemediationExecutionState.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    RemediationExecutionState.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    RemediationExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    RemediationExecutionState.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    RemediationExecutionStatus.add_member(:resource_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKey, location_name: "ResourceKey"))
-    RemediationExecutionStatus.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionState, location_name: "State"))
-    RemediationExecutionStatus.add_member(:step_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionSteps, location_name: "StepDetails"))
-    RemediationExecutionStatus.add_member(:invocation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "InvocationTime"))
-    RemediationExecutionStatus.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
+    RemediationExceptionResourceKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExceptionResourceKey)
+    RemediationExceptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationException)
+    RemediationExecutionState.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
+    RemediationExecutionState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    RemediationExecutionState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    RemediationExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    RemediationExecutionState.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    RemediationExecutionStatus.add_member(:resource_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceKey, location_name: "ResourceKey"))
+    RemediationExecutionStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExecutionState, location_name: "State"))
+    RemediationExecutionStatus.add_member(:step_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExecutionSteps, location_name: "StepDetails"))
+    RemediationExecutionStatus.add_member(:invocation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "InvocationTime"))
+    RemediationExecutionStatus.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "LastUpdatedTime"))
     RemediationExecutionStatus.type = Types::RemediationExecutionStatus
-    RemediationExecutionStatuses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionStatus)
-    RemediationExecutionStep.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    RemediationExecutionStep.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionStepState, location_name: "State"))
-    RemediationExecutionStep.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
-    RemediationExecutionStep.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
-    RemediationExecutionStep.add_member(:stop_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "StopTime"))
+    RemediationExecutionStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExecutionStatus)
+    RemediationExecutionStep.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
+    RemediationExecutionStep.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExecutionStepState, location_name: "State"))
+    RemediationExecutionStep.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ErrorMessage"))
+    RemediationExecutionStep.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "StartTime"))
+    RemediationExecutionStep.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "StopTime"))
     RemediationExecutionStep.type = Types::RemediationExecutionStep
-    RemediationExecutionStepState.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    RemediationExecutionStepState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    RemediationExecutionStepState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    RemediationExecutionStepState.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    RemediationExecutionStepState.add_member(:exited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXITED", traits: {"smithy.api#enumValue" => "EXITED"}))
-    RemediationExecutionStepState.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    RemediationExecutionSteps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionStep)
-    RemediationInProgressException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    RemediationExecutionStepState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    RemediationExecutionStepState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    RemediationExecutionStepState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    RemediationExecutionStepState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    RemediationExecutionStepState.add_member(:exited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXITED", traits: {"smithy.api#enumValue" => "EXITED"}))
+    RemediationExecutionStepState.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    RemediationExecutionSteps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationExecutionStep)
+    RemediationInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     RemediationInProgressException.type = Types::RemediationInProgressException
-    RemediationParameterValue.add_member(:resource_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceValue, location_name: "ResourceValue"))
-    RemediationParameterValue.add_member(:static_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StaticValue, location_name: "StaticValue"))
+    RemediationParameterValue.add_member(:resource_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceValue, location_name: "ResourceValue"))
+    RemediationParameterValue.add_member(:static_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticValue, location_name: "StaticValue"))
     RemediationParameterValue.type = Types::RemediationParameterValue
-    RemediationParameters.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256)
-    RemediationParameters.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationParameterValue)
-    RemediationTargetType.add_member(:ssm_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSM_DOCUMENT", traits: {"smithy.api#enumValue" => "SSM_DOCUMENT"}))
-    ResourceConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    RemediationParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256)
+    RemediationParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationParameterValue)
+    RemediationTargetType.add_member(:ssm_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSM_DOCUMENT", traits: {"smithy.api#enumValue" => "SSM_DOCUMENT"}))
+    ResourceConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceConcurrentModificationException.type = Types::ResourceConcurrentModificationException
-    ResourceConfigurationSchemaType.add_member(:cfn_resource_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFN_RESOURCE_SCHEMA", traits: {"smithy.api#enumValue" => "CFN_RESOURCE_SCHEMA"}))
-    ResourceCount.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    ResourceCount.add_member(:count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "count", traits: {"smithy.api#default" => 0}))
+    ResourceConfigurationSchemaType.add_member(:cfn_resource_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CFN_RESOURCE_SCHEMA", traits: {"smithy.api#enumValue" => "CFN_RESOURCE_SCHEMA"}))
+    ResourceCount.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    ResourceCount.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "count", traits: {"smithy.api#default" => 0}))
     ResourceCount.type = Types::ResourceCount
-    ResourceCountFilters.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ResourceCountFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    ResourceCountFilters.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
+    ResourceCountFilters.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    ResourceCountFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    ResourceCountFilters.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "Region"))
     ResourceCountFilters.type = Types::ResourceCountFilters
-    ResourceCountGroupKey.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "RESOURCE_TYPE"}))
-    ResourceCountGroupKey.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ACCOUNT_ID"}))
-    ResourceCountGroupKey.add_member(:aws_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS_REGION"}))
-    ResourceCounts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceCount)
-    ResourceDetails.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    ResourceDetails.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    ResourceDetails.add_member(:resource_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConfiguration, location_name: "ResourceConfiguration", traits: {"smithy.api#required" => {}}))
-    ResourceDetails.add_member(:resource_configuration_schema_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConfigurationSchemaType, location_name: "ResourceConfigurationSchemaType"))
+    ResourceCountGroupKey.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "RESOURCE_TYPE"}))
+    ResourceCountGroupKey.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ACCOUNT_ID"}))
+    ResourceCountGroupKey.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS_REGION"}))
+    ResourceCounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount)
+    ResourceDetails.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    ResourceDetails.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ResourceDetails.add_member(:resource_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfiguration, location_name: "ResourceConfiguration", traits: {"smithy.api#required" => {}}))
+    ResourceDetails.add_member(:resource_configuration_schema_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationSchemaType, location_name: "ResourceConfigurationSchemaType"))
     ResourceDetails.type = Types::ResourceDetails
-    ResourceEvaluation.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
-    ResourceEvaluation.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationMode, location_name: "EvaluationMode"))
-    ResourceEvaluation.add_member(:evaluation_start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "EvaluationStartTimestamp"))
+    ResourceEvaluation.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
+    ResourceEvaluation.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMode, location_name: "EvaluationMode"))
+    ResourceEvaluation.add_member(:evaluation_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "EvaluationStartTimestamp"))
     ResourceEvaluation.type = Types::ResourceEvaluation
-    ResourceEvaluationFilters.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationMode, location_name: "EvaluationMode"))
-    ResourceEvaluationFilters.add_member(:time_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeWindow, location_name: "TimeWindow"))
-    ResourceEvaluationFilters.add_member(:evaluation_context_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationContextIdentifier, location_name: "EvaluationContextIdentifier"))
+    ResourceEvaluationFilters.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMode, location_name: "EvaluationMode"))
+    ResourceEvaluationFilters.add_member(:time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, location_name: "TimeWindow"))
+    ResourceEvaluationFilters.add_member(:evaluation_context_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationContextIdentifier, location_name: "EvaluationContextIdentifier"))
     ResourceEvaluationFilters.type = Types::ResourceEvaluationFilters
-    ResourceEvaluationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ResourceEvaluationStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ResourceEvaluationStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
-    ResourceEvaluations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluation)
-    ResourceFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    ResourceFilters.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
-    ResourceFilters.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "ResourceName"))
-    ResourceFilters.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
+    ResourceEvaluationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ResourceEvaluationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ResourceEvaluationStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    ResourceEvaluations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluation)
+    ResourceFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    ResourceFilters.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "ResourceId"))
+    ResourceFilters.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "ResourceName"))
+    ResourceFilters.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, location_name: "Region"))
     ResourceFilters.type = Types::ResourceFilters
-    ResourceIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId)
-    ResourceIdentifier.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
-    ResourceIdentifier.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
-    ResourceIdentifier.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
-    ResourceIdentifier.add_member(:resource_deletion_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDeletionTime, location_name: "resourceDeletionTime"))
+    ResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId)
+    ResourceIdentifier.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType"))
+    ResourceIdentifier.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId"))
+    ResourceIdentifier.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "resourceName"))
+    ResourceIdentifier.add_member(:resource_deletion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDeletionTime, location_name: "resourceDeletionTime"))
     ResourceIdentifier.type = Types::ResourceIdentifier
-    ResourceIdentifierList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifier)
-    ResourceIdentifiersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateResourceIdentifier)
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier)
+    ResourceIdentifiersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateResourceIdentifier)
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceKey.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    ResourceKey.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ResourceKey.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ResourceKey.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceKey.type = Types::ResourceKey
-    ResourceKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKey)
-    ResourceNotDiscoveredException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceKey)
+    ResourceNotDiscoveredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceNotDiscoveredException.type = Types::ResourceNotDiscoveredException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceType.add_member(:customer_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomerGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::CustomerGateway"}))
-    ResourceType.add_member(:eip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EIP", traits: {"smithy.api#enumValue" => "AWS::EC2::EIP"}))
-    ResourceType.add_member(:host, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Host", traits: {"smithy.api#enumValue" => "AWS::EC2::Host"}))
-    ResourceType.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Instance", traits: {"smithy.api#enumValue" => "AWS::EC2::Instance"}))
-    ResourceType.add_member(:internet_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InternetGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::InternetGateway"}))
-    ResourceType.add_member(:network_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkAcl", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkAcl"}))
-    ResourceType.add_member(:network_interface, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkInterface", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInterface"}))
-    ResourceType.add_member(:route_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RouteTable", traits: {"smithy.api#enumValue" => "AWS::EC2::RouteTable"}))
-    ResourceType.add_member(:security_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SecurityGroup", traits: {"smithy.api#enumValue" => "AWS::EC2::SecurityGroup"}))
-    ResourceType.add_member(:subnet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Subnet", traits: {"smithy.api#enumValue" => "AWS::EC2::Subnet"}))
-    ResourceType.add_member(:trail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Trail", traits: {"smithy.api#enumValue" => "AWS::CloudTrail::Trail"}))
-    ResourceType.add_member(:volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Volume", traits: {"smithy.api#enumValue" => "AWS::EC2::Volume"}))
-    ResourceType.add_member(:vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPC", traits: {"smithy.api#enumValue" => "AWS::EC2::VPC"}))
-    ResourceType.add_member(:vpn_connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPNConnection", traits: {"smithy.api#enumValue" => "AWS::EC2::VPNConnection"}))
-    ResourceType.add_member(:vpn_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPNGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::VPNGateway"}))
-    ResourceType.add_member(:registered_ha_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegisteredHAInstance", traits: {"smithy.api#enumValue" => "AWS::EC2::RegisteredHAInstance"}))
-    ResourceType.add_member(:nat_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NatGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::NatGateway"}))
-    ResourceType.add_member(:egress_only_internet_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EgressOnlyInternetGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::EgressOnlyInternetGateway"}))
-    ResourceType.add_member(:vpc_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPCEndpoint", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCEndpoint"}))
-    ResourceType.add_member(:vpc_endpoint_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPCEndpointService", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCEndpointService"}))
-    ResourceType.add_member(:flow_log, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FlowLog", traits: {"smithy.api#enumValue" => "AWS::EC2::FlowLog"}))
-    ResourceType.add_member(:vpc_peering_connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPCPeeringConnection", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCPeeringConnection"}))
-    ResourceType.add_member(:domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Domain", traits: {"smithy.api#enumValue" => "AWS::Elasticsearch::Domain"}))
-    ResourceType.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Group", traits: {"smithy.api#enumValue" => "AWS::IAM::Group"}))
-    ResourceType.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Policy", traits: {"smithy.api#enumValue" => "AWS::IAM::Policy"}))
-    ResourceType.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Role", traits: {"smithy.api#enumValue" => "AWS::IAM::Role"}))
-    ResourceType.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "User", traits: {"smithy.api#enumValue" => "AWS::IAM::User"}))
-    ResourceType.add_member(:load_balancer_v2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LoadBalancerV2", traits: {"smithy.api#enumValue" => "AWS::ElasticLoadBalancingV2::LoadBalancer"}))
-    ResourceType.add_member(:certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Certificate", traits: {"smithy.api#enumValue" => "AWS::ACM::Certificate"}))
-    ResourceType.add_member(:db_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBInstance", traits: {"smithy.api#enumValue" => "AWS::RDS::DBInstance"}))
-    ResourceType.add_member(:db_subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::RDS::DBSubnetGroup"}))
-    ResourceType.add_member(:db_security_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBSecurityGroup", traits: {"smithy.api#enumValue" => "AWS::RDS::DBSecurityGroup"}))
-    ResourceType.add_member(:db_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBSnapshot", traits: {"smithy.api#enumValue" => "AWS::RDS::DBSnapshot"}))
-    ResourceType.add_member(:db_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBCluster", traits: {"smithy.api#enumValue" => "AWS::RDS::DBCluster"}))
-    ResourceType.add_member(:db_cluster_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBClusterSnapshot", traits: {"smithy.api#enumValue" => "AWS::RDS::DBClusterSnapshot"}))
-    ResourceType.add_member(:event_subscription, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSubscription", traits: {"smithy.api#enumValue" => "AWS::RDS::EventSubscription"}))
-    ResourceType.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Bucket", traits: {"smithy.api#enumValue" => "AWS::S3::Bucket"}))
-    ResourceType.add_member(:account_public_access_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccountPublicAccessBlock", traits: {"smithy.api#enumValue" => "AWS::S3::AccountPublicAccessBlock"}))
-    ResourceType.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Cluster", traits: {"smithy.api#enumValue" => "AWS::Redshift::Cluster"}))
-    ResourceType.add_member(:cluster_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterSnapshot", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterSnapshot"}))
-    ResourceType.add_member(:cluster_parameter_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterParameterGroup", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterParameterGroup"}))
-    ResourceType.add_member(:cluster_security_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterSecurityGroup", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterSecurityGroup"}))
-    ResourceType.add_member(:cluster_subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterSubnetGroup"}))
-    ResourceType.add_member(:redshift_event_subscription, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftEventSubscription", traits: {"smithy.api#enumValue" => "AWS::Redshift::EventSubscription"}))
-    ResourceType.add_member(:managed_instance_inventory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManagedInstanceInventory", traits: {"smithy.api#enumValue" => "AWS::SSM::ManagedInstanceInventory"}))
-    ResourceType.add_member(:alarm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Alarm", traits: {"smithy.api#enumValue" => "AWS::CloudWatch::Alarm"}))
-    ResourceType.add_member(:stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stack", traits: {"smithy.api#enumValue" => "AWS::CloudFormation::Stack"}))
-    ResourceType.add_member(:load_balancer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LoadBalancer", traits: {"smithy.api#enumValue" => "AWS::ElasticLoadBalancing::LoadBalancer"}))
-    ResourceType.add_member(:auto_scaling_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AutoScalingGroup", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::AutoScalingGroup"}))
-    ResourceType.add_member(:launch_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LaunchConfiguration", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::LaunchConfiguration"}))
-    ResourceType.add_member(:scaling_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ScalingPolicy", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::ScalingPolicy"}))
-    ResourceType.add_member(:scheduled_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ScheduledAction", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::ScheduledAction"}))
-    ResourceType.add_member(:table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Table", traits: {"smithy.api#enumValue" => "AWS::DynamoDB::Table"}))
-    ResourceType.add_member(:project, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Project", traits: {"smithy.api#enumValue" => "AWS::CodeBuild::Project"}))
-    ResourceType.add_member(:rate_based_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RateBasedRule", traits: {"smithy.api#enumValue" => "AWS::WAF::RateBasedRule"}))
-    ResourceType.add_member(:rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Rule", traits: {"smithy.api#enumValue" => "AWS::WAF::Rule"}))
-    ResourceType.add_member(:rule_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RuleGroup", traits: {"smithy.api#enumValue" => "AWS::WAF::RuleGroup"}))
-    ResourceType.add_member(:web_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WebACL", traits: {"smithy.api#enumValue" => "AWS::WAF::WebACL"}))
-    ResourceType.add_member(:regional_rate_based_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalRateBasedRule", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::RateBasedRule"}))
-    ResourceType.add_member(:regional_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalRule", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::Rule"}))
-    ResourceType.add_member(:regional_rule_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalRuleGroup", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::RuleGroup"}))
-    ResourceType.add_member(:regional_web_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalWebACL", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::WebACL"}))
-    ResourceType.add_member(:distribution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Distribution", traits: {"smithy.api#enumValue" => "AWS::CloudFront::Distribution"}))
-    ResourceType.add_member(:streaming_distribution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StreamingDistribution", traits: {"smithy.api#enumValue" => "AWS::CloudFront::StreamingDistribution"}))
-    ResourceType.add_member(:function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Function", traits: {"smithy.api#enumValue" => "AWS::Lambda::Function"}))
-    ResourceType.add_member(:network_firewall_firewall, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkFirewallFirewall", traits: {"smithy.api#enumValue" => "AWS::NetworkFirewall::Firewall"}))
-    ResourceType.add_member(:network_firewall_firewall_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkFirewallFirewallPolicy", traits: {"smithy.api#enumValue" => "AWS::NetworkFirewall::FirewallPolicy"}))
-    ResourceType.add_member(:network_firewall_rule_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkFirewallRuleGroup", traits: {"smithy.api#enumValue" => "AWS::NetworkFirewall::RuleGroup"}))
-    ResourceType.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Application", traits: {"smithy.api#enumValue" => "AWS::ElasticBeanstalk::Application"}))
-    ResourceType.add_member(:application_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ApplicationVersion", traits: {"smithy.api#enumValue" => "AWS::ElasticBeanstalk::ApplicationVersion"}))
-    ResourceType.add_member(:environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Environment", traits: {"smithy.api#enumValue" => "AWS::ElasticBeanstalk::Environment"}))
-    ResourceType.add_member(:web_aclv2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WebACLV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::WebACL"}))
-    ResourceType.add_member(:rule_group_v2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RuleGroupV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::RuleGroup"}))
-    ResourceType.add_member(:ip_set_v2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPSetV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::IPSet"}))
-    ResourceType.add_member(:regex_pattern_set_v2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegexPatternSetV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::RegexPatternSet"}))
-    ResourceType.add_member(:managed_rule_set_v2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManagedRuleSetV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::ManagedRuleSet"}))
-    ResourceType.add_member(:encryption_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EncryptionConfig", traits: {"smithy.api#enumValue" => "AWS::XRay::EncryptionConfig"}))
-    ResourceType.add_member(:association_compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AssociationCompliance", traits: {"smithy.api#enumValue" => "AWS::SSM::AssociationCompliance"}))
-    ResourceType.add_member(:patch_compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PatchCompliance", traits: {"smithy.api#enumValue" => "AWS::SSM::PatchCompliance"}))
-    ResourceType.add_member(:protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Protection", traits: {"smithy.api#enumValue" => "AWS::Shield::Protection"}))
-    ResourceType.add_member(:regional_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalProtection", traits: {"smithy.api#enumValue" => "AWS::ShieldRegional::Protection"}))
-    ResourceType.add_member(:conformance_pack_compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConformancePackCompliance", traits: {"smithy.api#enumValue" => "AWS::Config::ConformancePackCompliance"}))
-    ResourceType.add_member(:resource_compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceCompliance", traits: {"smithy.api#enumValue" => "AWS::Config::ResourceCompliance"}))
-    ResourceType.add_member(:stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stage", traits: {"smithy.api#enumValue" => "AWS::ApiGateway::Stage"}))
-    ResourceType.add_member(:rest_api, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RestApi", traits: {"smithy.api#enumValue" => "AWS::ApiGateway::RestApi"}))
-    ResourceType.add_member(:stage_v2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StageV2", traits: {"smithy.api#enumValue" => "AWS::ApiGatewayV2::Stage"}))
-    ResourceType.add_member(:api, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Api", traits: {"smithy.api#enumValue" => "AWS::ApiGatewayV2::Api"}))
-    ResourceType.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pipeline", traits: {"smithy.api#enumValue" => "AWS::CodePipeline::Pipeline"}))
-    ResourceType.add_member(:cloud_formation_provisioned_product, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CloudFormationProvisionedProduct", traits: {"smithy.api#enumValue" => "AWS::ServiceCatalog::CloudFormationProvisionedProduct"}))
-    ResourceType.add_member(:cloud_formation_product, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CloudFormationProduct", traits: {"smithy.api#enumValue" => "AWS::ServiceCatalog::CloudFormationProduct"}))
-    ResourceType.add_member(:portfolio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Portfolio", traits: {"smithy.api#enumValue" => "AWS::ServiceCatalog::Portfolio"}))
-    ResourceType.add_member(:queue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Queue", traits: {"smithy.api#enumValue" => "AWS::SQS::Queue"}))
-    ResourceType.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Key", traits: {"smithy.api#enumValue" => "AWS::KMS::Key"}))
-    ResourceType.add_member(:qldb_ledger, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QLDBLedger", traits: {"smithy.api#enumValue" => "AWS::QLDB::Ledger"}))
-    ResourceType.add_member(:secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Secret", traits: {"smithy.api#enumValue" => "AWS::SecretsManager::Secret"}))
-    ResourceType.add_member(:topic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Topic", traits: {"smithy.api#enumValue" => "AWS::SNS::Topic"}))
-    ResourceType.add_member(:file_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FileData", traits: {"smithy.api#enumValue" => "AWS::SSM::FileData"}))
-    ResourceType.add_member(:backup_plan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupPlan", traits: {"smithy.api#enumValue" => "AWS::Backup::BackupPlan"}))
-    ResourceType.add_member(:backup_selection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupSelection", traits: {"smithy.api#enumValue" => "AWS::Backup::BackupSelection"}))
-    ResourceType.add_member(:backup_vault, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupVault", traits: {"smithy.api#enumValue" => "AWS::Backup::BackupVault"}))
-    ResourceType.add_member(:backup_recovery_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupRecoveryPoint", traits: {"smithy.api#enumValue" => "AWS::Backup::RecoveryPoint"}))
-    ResourceType.add_member(:ecr_repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRRepository", traits: {"smithy.api#enumValue" => "AWS::ECR::Repository"}))
-    ResourceType.add_member(:ecs_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSCluster", traits: {"smithy.api#enumValue" => "AWS::ECS::Cluster"}))
-    ResourceType.add_member(:ecs_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSService", traits: {"smithy.api#enumValue" => "AWS::ECS::Service"}))
-    ResourceType.add_member(:ecs_task_definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSTaskDefinition", traits: {"smithy.api#enumValue" => "AWS::ECS::TaskDefinition"}))
-    ResourceType.add_member(:efs_access_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EFSAccessPoint", traits: {"smithy.api#enumValue" => "AWS::EFS::AccessPoint"}))
-    ResourceType.add_member(:efs_file_system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EFSFileSystem", traits: {"smithy.api#enumValue" => "AWS::EFS::FileSystem"}))
-    ResourceType.add_member(:eks_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSCluster", traits: {"smithy.api#enumValue" => "AWS::EKS::Cluster"}))
-    ResourceType.add_member(:open_search_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenSearchDomain", traits: {"smithy.api#enumValue" => "AWS::OpenSearch::Domain"}))
-    ResourceType.add_member(:transit_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransitGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGateway"}))
-    ResourceType.add_member(:kinesis_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisStream", traits: {"smithy.api#enumValue" => "AWS::Kinesis::Stream"}))
-    ResourceType.add_member(:kinesis_stream_consumer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisStreamConsumer", traits: {"smithy.api#enumValue" => "AWS::Kinesis::StreamConsumer"}))
-    ResourceType.add_member(:code_deploy_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeDeployApplication", traits: {"smithy.api#enumValue" => "AWS::CodeDeploy::Application"}))
-    ResourceType.add_member(:code_deploy_deployment_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeDeployDeploymentConfig", traits: {"smithy.api#enumValue" => "AWS::CodeDeploy::DeploymentConfig"}))
-    ResourceType.add_member(:code_deploy_deployment_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeDeployDeploymentGroup", traits: {"smithy.api#enumValue" => "AWS::CodeDeploy::DeploymentGroup"}))
-    ResourceType.add_member(:launch_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LaunchTemplate", traits: {"smithy.api#enumValue" => "AWS::EC2::LaunchTemplate"}))
-    ResourceType.add_member(:ecr_public_repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRPublicRepository", traits: {"smithy.api#enumValue" => "AWS::ECR::PublicRepository"}))
-    ResourceType.add_member(:guard_duty_detector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyDetector", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::Detector"}))
-    ResourceType.add_member(:emr_security_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMRSecurityConfiguration", traits: {"smithy.api#enumValue" => "AWS::EMR::SecurityConfiguration"}))
-    ResourceType.add_member(:sage_maker_code_repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerCodeRepository", traits: {"smithy.api#enumValue" => "AWS::SageMaker::CodeRepository"}))
-    ResourceType.add_member(:route53_resolver_resolver_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverEndpoint", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverEndpoint"}))
-    ResourceType.add_member(:route53_resolver_resolver_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverRule", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverRule"}))
-    ResourceType.add_member(:route53_resolver_resolver_rule_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverRuleAssociation", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverRuleAssociation"}))
-    ResourceType.add_member(:dms_replication_subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSReplicationSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::DMS::ReplicationSubnetGroup"}))
-    ResourceType.add_member(:dms_event_subscription, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSEventSubscription", traits: {"smithy.api#enumValue" => "AWS::DMS::EventSubscription"}))
-    ResourceType.add_member(:msk_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKCluster", traits: {"smithy.api#enumValue" => "AWS::MSK::Cluster"}))
-    ResourceType.add_member(:step_functions_activity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StepFunctionsActivity", traits: {"smithy.api#enumValue" => "AWS::StepFunctions::Activity"}))
-    ResourceType.add_member(:work_spaces_workspace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesWorkspace", traits: {"smithy.api#enumValue" => "AWS::WorkSpaces::Workspace"}))
-    ResourceType.add_member(:work_spaces_connection_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesConnectionAlias", traits: {"smithy.api#enumValue" => "AWS::WorkSpaces::ConnectionAlias"}))
-    ResourceType.add_member(:sage_maker_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerModel", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Model"}))
-    ResourceType.add_member(:listener_v2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ListenerV2", traits: {"smithy.api#enumValue" => "AWS::ElasticLoadBalancingV2::Listener"}))
-    ResourceType.add_member(:step_functions_state_machine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StepFunctionsStateMachine", traits: {"smithy.api#enumValue" => "AWS::StepFunctions::StateMachine"}))
-    ResourceType.add_member(:batch_job_queue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BatchJobQueue", traits: {"smithy.api#enumValue" => "AWS::Batch::JobQueue"}))
-    ResourceType.add_member(:batch_compute_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BatchComputeEnvironment", traits: {"smithy.api#enumValue" => "AWS::Batch::ComputeEnvironment"}))
-    ResourceType.add_member(:access_analyzer_analyzer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccessAnalyzerAnalyzer", traits: {"smithy.api#enumValue" => "AWS::AccessAnalyzer::Analyzer"}))
-    ResourceType.add_member(:athena_work_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AthenaWorkGroup", traits: {"smithy.api#enumValue" => "AWS::Athena::WorkGroup"}))
-    ResourceType.add_member(:athena_data_catalog, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AthenaDataCatalog", traits: {"smithy.api#enumValue" => "AWS::Athena::DataCatalog"}))
-    ResourceType.add_member(:detective_graph, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DetectiveGraph", traits: {"smithy.api#enumValue" => "AWS::Detective::Graph"}))
-    ResourceType.add_member(:global_accelerator_accelerator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlobalAcceleratorAccelerator", traits: {"smithy.api#enumValue" => "AWS::GlobalAccelerator::Accelerator"}))
-    ResourceType.add_member(:global_accelerator_endpoint_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlobalAcceleratorEndpointGroup", traits: {"smithy.api#enumValue" => "AWS::GlobalAccelerator::EndpointGroup"}))
-    ResourceType.add_member(:global_accelerator_listener, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlobalAcceleratorListener", traits: {"smithy.api#enumValue" => "AWS::GlobalAccelerator::Listener"}))
-    ResourceType.add_member(:transit_gateway_attachment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransitGatewayAttachment", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayAttachment"}))
-    ResourceType.add_member(:transit_gateway_route_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransitGatewayRouteTable", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayRouteTable"}))
-    ResourceType.add_member(:dms_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSCertificate", traits: {"smithy.api#enumValue" => "AWS::DMS::Certificate"}))
-    ResourceType.add_member(:app_config_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigApplication", traits: {"smithy.api#enumValue" => "AWS::AppConfig::Application"}))
-    ResourceType.add_member(:app_sync_graph_ql_api, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppSyncGraphQLApi", traits: {"smithy.api#enumValue" => "AWS::AppSync::GraphQLApi"}))
-    ResourceType.add_member(:data_sync_location_smb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationSMB", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationSMB"}))
-    ResourceType.add_member(:data_sync_location_f_sx_lustre, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationFSxLustre", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationFSxLustre"}))
-    ResourceType.add_member(:data_sync_location_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationS3", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationS3"}))
-    ResourceType.add_member(:data_sync_location_efs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationEFS", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationEFS"}))
-    ResourceType.add_member(:data_sync_task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncTask", traits: {"smithy.api#enumValue" => "AWS::DataSync::Task"}))
-    ResourceType.add_member(:data_sync_location_nfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationNFS", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationNFS"}))
-    ResourceType.add_member(:network_insights_access_scope_analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkInsightsAccessScopeAnalysis", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsAccessScopeAnalysis"}))
-    ResourceType.add_member(:eks_fargate_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSFargateProfile", traits: {"smithy.api#enumValue" => "AWS::EKS::FargateProfile"}))
-    ResourceType.add_member(:glue_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlueJob", traits: {"smithy.api#enumValue" => "AWS::Glue::Job"}))
-    ResourceType.add_member(:guard_duty_threat_intel_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyThreatIntelSet", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::ThreatIntelSet"}))
-    ResourceType.add_member(:guard_duty_ip_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyIPSet", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::IPSet"}))
-    ResourceType.add_member(:sage_maker_workteam, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerWorkteam", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Workteam"}))
-    ResourceType.add_member(:sage_maker_notebook_instance_lifecycle_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerNotebookInstanceLifecycleConfig", traits: {"smithy.api#enumValue" => "AWS::SageMaker::NotebookInstanceLifecycleConfig"}))
-    ResourceType.add_member(:service_discovery_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryService", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::Service"}))
-    ResourceType.add_member(:service_discovery_public_dns_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryPublicDnsNamespace", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::PublicDnsNamespace"}))
-    ResourceType.add_member(:ses_contact_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESContactList", traits: {"smithy.api#enumValue" => "AWS::SES::ContactList"}))
-    ResourceType.add_member(:ses_configuration_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESConfigurationSet", traits: {"smithy.api#enumValue" => "AWS::SES::ConfigurationSet"}))
-    ResourceType.add_member(:route53_hosted_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53HostedZone", traits: {"smithy.api#enumValue" => "AWS::Route53::HostedZone"}))
-    ResourceType.add_member(:io_t_events_input, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTEventsInput", traits: {"smithy.api#enumValue" => "AWS::IoTEvents::Input"}))
-    ResourceType.add_member(:io_t_events_detector_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTEventsDetectorModel", traits: {"smithy.api#enumValue" => "AWS::IoTEvents::DetectorModel"}))
-    ResourceType.add_member(:io_t_events_alarm_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTEventsAlarmModel", traits: {"smithy.api#enumValue" => "AWS::IoTEvents::AlarmModel"}))
-    ResourceType.add_member(:service_discovery_http_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryHttpNamespace", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::HttpNamespace"}))
-    ResourceType.add_member(:events_event_bus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsEventBus", traits: {"smithy.api#enumValue" => "AWS::Events::EventBus"}))
-    ResourceType.add_member(:image_builder_container_recipe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderContainerRecipe", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::ContainerRecipe"}))
-    ResourceType.add_member(:image_builder_distribution_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderDistributionConfiguration", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::DistributionConfiguration"}))
-    ResourceType.add_member(:image_builder_infrastructure_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderInfrastructureConfiguration", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::InfrastructureConfiguration"}))
-    ResourceType.add_member(:data_sync_location_object_storage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationObjectStorage", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationObjectStorage"}))
-    ResourceType.add_member(:data_sync_location_hdfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationHDFS", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationHDFS"}))
-    ResourceType.add_member(:glue_classifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlueClassifier", traits: {"smithy.api#enumValue" => "AWS::Glue::Classifier"}))
-    ResourceType.add_member(:route53_recovery_readiness_cell, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessCell", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::Cell"}))
-    ResourceType.add_member(:route53_recovery_readiness_readiness_check, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessReadinessCheck", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::ReadinessCheck"}))
-    ResourceType.add_member(:ecr_registry_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRRegistryPolicy", traits: {"smithy.api#enumValue" => "AWS::ECR::RegistryPolicy"}))
-    ResourceType.add_member(:backup_report_plan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupReportPlan", traits: {"smithy.api#enumValue" => "AWS::Backup::ReportPlan"}))
-    ResourceType.add_member(:lightsail_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailCertificate", traits: {"smithy.api#enumValue" => "AWS::Lightsail::Certificate"}))
-    ResourceType.add_member(:rum_app_monitor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUMAppMonitor", traits: {"smithy.api#enumValue" => "AWS::RUM::AppMonitor"}))
-    ResourceType.add_member(:events_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsEndpoint", traits: {"smithy.api#enumValue" => "AWS::Events::Endpoint"}))
-    ResourceType.add_member(:ses_receipt_rule_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESReceiptRuleSet", traits: {"smithy.api#enumValue" => "AWS::SES::ReceiptRuleSet"}))
-    ResourceType.add_member(:events_archive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsArchive", traits: {"smithy.api#enumValue" => "AWS::Events::Archive"}))
-    ResourceType.add_member(:events_api_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsApiDestination", traits: {"smithy.api#enumValue" => "AWS::Events::ApiDestination"}))
-    ResourceType.add_member(:lightsail_disk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailDisk", traits: {"smithy.api#enumValue" => "AWS::Lightsail::Disk"}))
-    ResourceType.add_member(:fis_experiment_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FISExperimentTemplate", traits: {"smithy.api#enumValue" => "AWS::FIS::ExperimentTemplate"}))
-    ResourceType.add_member(:data_sync_location_f_sx_windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationFSxWindows", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationFSxWindows"}))
-    ResourceType.add_member(:ses_receipt_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESReceiptFilter", traits: {"smithy.api#enumValue" => "AWS::SES::ReceiptFilter"}))
-    ResourceType.add_member(:guard_duty_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyFilter", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::Filter"}))
-    ResourceType.add_member(:ses_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESTemplate", traits: {"smithy.api#enumValue" => "AWS::SES::Template"}))
-    ResourceType.add_member(:amazon_mq_broker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmazonMQBroker", traits: {"smithy.api#enumValue" => "AWS::AmazonMQ::Broker"}))
-    ResourceType.add_member(:app_config_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigEnvironment", traits: {"smithy.api#enumValue" => "AWS::AppConfig::Environment"}))
-    ResourceType.add_member(:app_config_configuration_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigConfigurationProfile", traits: {"smithy.api#enumValue" => "AWS::AppConfig::ConfigurationProfile"}))
-    ResourceType.add_member(:cloud9_environment_ec2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Cloud9EnvironmentEC2", traits: {"smithy.api#enumValue" => "AWS::Cloud9::EnvironmentEC2"}))
-    ResourceType.add_member(:event_schemas_registry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasRegistry", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::Registry"}))
-    ResourceType.add_member(:event_schemas_registry_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasRegistryPolicy", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::RegistryPolicy"}))
-    ResourceType.add_member(:event_schemas_discoverer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasDiscoverer", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::Discoverer"}))
-    ResourceType.add_member(:fraud_detector_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorLabel", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::Label"}))
-    ResourceType.add_member(:fraud_detector_entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorEntityType", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::EntityType"}))
-    ResourceType.add_member(:fraud_detector_variable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorVariable", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::Variable"}))
-    ResourceType.add_member(:fraud_detector_outcome, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorOutcome", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::Outcome"}))
-    ResourceType.add_member(:io_t_authorizer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAuthorizer", traits: {"smithy.api#enumValue" => "AWS::IoT::Authorizer"}))
-    ResourceType.add_member(:io_t_security_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSecurityProfile", traits: {"smithy.api#enumValue" => "AWS::IoT::SecurityProfile"}))
-    ResourceType.add_member(:io_t_role_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTRoleAlias", traits: {"smithy.api#enumValue" => "AWS::IoT::RoleAlias"}))
-    ResourceType.add_member(:io_t_dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTDimension", traits: {"smithy.api#enumValue" => "AWS::IoT::Dimension"}))
-    ResourceType.add_member(:io_t_analytics_datastore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsDatastore", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Datastore"}))
-    ResourceType.add_member(:lightsail_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailBucket", traits: {"smithy.api#enumValue" => "AWS::Lightsail::Bucket"}))
-    ResourceType.add_member(:lightsail_static_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailStaticIp", traits: {"smithy.api#enumValue" => "AWS::Lightsail::StaticIp"}))
-    ResourceType.add_member(:media_package_packaging_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaPackagePackagingGroup", traits: {"smithy.api#enumValue" => "AWS::MediaPackage::PackagingGroup"}))
-    ResourceType.add_member(:route53_recovery_readiness_recovery_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessRecoveryGroup", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::RecoveryGroup"}))
-    ResourceType.add_member(:resilience_hub_resiliency_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResilienceHubResiliencyPolicy", traits: {"smithy.api#enumValue" => "AWS::ResilienceHub::ResiliencyPolicy"}))
-    ResourceType.add_member(:transfer_workflow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferWorkflow", traits: {"smithy.api#enumValue" => "AWS::Transfer::Workflow"}))
-    ResourceType.add_member(:eks_identity_provider_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSIdentityProviderConfig", traits: {"smithy.api#enumValue" => "AWS::EKS::IdentityProviderConfig"}))
-    ResourceType.add_member(:eks_addon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSAddon", traits: {"smithy.api#enumValue" => "AWS::EKS::Addon"}))
-    ResourceType.add_member(:glue_ml_transform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlueMLTransform", traits: {"smithy.api#enumValue" => "AWS::Glue::MLTransform"}))
-    ResourceType.add_member(:io_t_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTPolicy", traits: {"smithy.api#enumValue" => "AWS::IoT::Policy"}))
-    ResourceType.add_member(:io_t_mitigation_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTMitigationAction", traits: {"smithy.api#enumValue" => "AWS::IoT::MitigationAction"}))
-    ResourceType.add_member(:io_t_twin_maker_workspace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerWorkspace", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::Workspace"}))
-    ResourceType.add_member(:io_t_twin_maker_entity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerEntity", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::Entity"}))
-    ResourceType.add_member(:io_t_analytics_dataset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsDataset", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Dataset"}))
-    ResourceType.add_member(:io_t_analytics_pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsPipeline", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Pipeline"}))
-    ResourceType.add_member(:io_t_analytics_channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsChannel", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Channel"}))
-    ResourceType.add_member(:io_t_site_wise_dashboard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseDashboard", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Dashboard"}))
-    ResourceType.add_member(:io_t_site_wise_project, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseProject", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Project"}))
-    ResourceType.add_member(:io_t_site_wise_portal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWisePortal", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Portal"}))
-    ResourceType.add_member(:io_t_site_wise_asset_model, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseAssetModel", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::AssetModel"}))
-    ResourceType.add_member(:ivs_channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IVSChannel", traits: {"smithy.api#enumValue" => "AWS::IVS::Channel"}))
-    ResourceType.add_member(:ivs_recording_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IVSRecordingConfiguration", traits: {"smithy.api#enumValue" => "AWS::IVS::RecordingConfiguration"}))
-    ResourceType.add_member(:ivs_playback_key_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IVSPlaybackKeyPair", traits: {"smithy.api#enumValue" => "AWS::IVS::PlaybackKeyPair"}))
-    ResourceType.add_member(:kinesis_analytics_v2_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisAnalyticsV2Application", traits: {"smithy.api#enumValue" => "AWS::KinesisAnalyticsV2::Application"}))
-    ResourceType.add_member(:rds_global_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSGlobalCluster", traits: {"smithy.api#enumValue" => "AWS::RDS::GlobalCluster"}))
-    ResourceType.add_member(:s3_multi_region_access_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3MultiRegionAccessPoint", traits: {"smithy.api#enumValue" => "AWS::S3::MultiRegionAccessPoint"}))
-    ResourceType.add_member(:device_farm_test_grid_project, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DeviceFarmTestGridProject", traits: {"smithy.api#enumValue" => "AWS::DeviceFarm::TestGridProject"}))
-    ResourceType.add_member(:budgets_budgets_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BudgetsBudgetsAction", traits: {"smithy.api#enumValue" => "AWS::Budgets::BudgetsAction"}))
-    ResourceType.add_member(:lex_bot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LexBot", traits: {"smithy.api#enumValue" => "AWS::Lex::Bot"}))
-    ResourceType.add_member(:code_guru_reviewer_repository_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeGuruReviewerRepositoryAssociation", traits: {"smithy.api#enumValue" => "AWS::CodeGuruReviewer::RepositoryAssociation"}))
-    ResourceType.add_member(:io_t_custom_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTCustomMetric", traits: {"smithy.api#enumValue" => "AWS::IoT::CustomMetric"}))
-    ResourceType.add_member(:route53_resolver_firewall_domain_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverFirewallDomainList", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::FirewallDomainList"}))
-    ResourceType.add_member(:robo_maker_robot_application_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RoboMakerRobotApplicationVersion", traits: {"smithy.api#enumValue" => "AWS::RoboMaker::RobotApplicationVersion"}))
-    ResourceType.add_member(:ec2_traffic_mirror_session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TrafficMirrorSession", traits: {"smithy.api#enumValue" => "AWS::EC2::TrafficMirrorSession"}))
-    ResourceType.add_member(:io_t_site_wise_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseGateway", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Gateway"}))
-    ResourceType.add_member(:lex_bot_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LexBotAlias", traits: {"smithy.api#enumValue" => "AWS::Lex::BotAlias"}))
-    ResourceType.add_member(:lookout_metrics_alert, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LookoutMetricsAlert", traits: {"smithy.api#enumValue" => "AWS::LookoutMetrics::Alert"}))
-    ResourceType.add_member(:io_t_account_audit_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAccountAuditConfiguration", traits: {"smithy.api#enumValue" => "AWS::IoT::AccountAuditConfiguration"}))
-    ResourceType.add_member(:ec2_traffic_mirror_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TrafficMirrorTarget", traits: {"smithy.api#enumValue" => "AWS::EC2::TrafficMirrorTarget"}))
-    ResourceType.add_member(:s3_storage_lens, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3StorageLens", traits: {"smithy.api#enumValue" => "AWS::S3::StorageLens"}))
-    ResourceType.add_member(:io_t_scheduled_audit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTScheduledAudit", traits: {"smithy.api#enumValue" => "AWS::IoT::ScheduledAudit"}))
-    ResourceType.add_member(:events_connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsConnection", traits: {"smithy.api#enumValue" => "AWS::Events::Connection"}))
-    ResourceType.add_member(:event_schemas_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasSchema", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::Schema"}))
-    ResourceType.add_member(:media_package_packaging_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaPackagePackagingConfiguration", traits: {"smithy.api#enumValue" => "AWS::MediaPackage::PackagingConfiguration"}))
-    ResourceType.add_member(:kinesis_video_signaling_channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisVideoSignalingChannel", traits: {"smithy.api#enumValue" => "AWS::KinesisVideo::SignalingChannel"}))
-    ResourceType.add_member(:app_stream_directory_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamDirectoryConfig", traits: {"smithy.api#enumValue" => "AWS::AppStream::DirectoryConfig"}))
-    ResourceType.add_member(:lookout_vision_project, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LookoutVisionProject", traits: {"smithy.api#enumValue" => "AWS::LookoutVision::Project"}))
-    ResourceType.add_member(:route53_recovery_control_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlCluster", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::Cluster"}))
-    ResourceType.add_member(:route53_recovery_control_safety_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlSafetyRule", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::SafetyRule"}))
-    ResourceType.add_member(:route53_recovery_control_control_panel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlControlPanel", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::ControlPanel"}))
-    ResourceType.add_member(:route53_recovery_control_routing_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlRoutingControl", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::RoutingControl"}))
-    ResourceType.add_member(:route53_recovery_readiness_resource_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessResourceSet", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::ResourceSet"}))
-    ResourceType.add_member(:robo_maker_simulation_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RoboMakerSimulationApplication", traits: {"smithy.api#enumValue" => "AWS::RoboMaker::SimulationApplication"}))
-    ResourceType.add_member(:robo_maker_robot_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RoboMakerRobotApplication", traits: {"smithy.api#enumValue" => "AWS::RoboMaker::RobotApplication"}))
-    ResourceType.add_member(:health_lake_fhir_datastore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HealthLakeFHIRDatastore", traits: {"smithy.api#enumValue" => "AWS::HealthLake::FHIRDatastore"}))
-    ResourceType.add_member(:pinpoint_segment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointSegment", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::Segment"}))
-    ResourceType.add_member(:pinpoint_application_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointApplicationSettings", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::ApplicationSettings"}))
-    ResourceType.add_member(:events_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsRule", traits: {"smithy.api#enumValue" => "AWS::Events::Rule"}))
-    ResourceType.add_member(:ec2_dhcp_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2DHCPOptions", traits: {"smithy.api#enumValue" => "AWS::EC2::DHCPOptions"}))
-    ResourceType.add_member(:ec2_network_insights_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2NetworkInsightsPath", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsPath"}))
-    ResourceType.add_member(:ec2_traffic_mirror_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TrafficMirrorFilter", traits: {"smithy.api#enumValue" => "AWS::EC2::TrafficMirrorFilter"}))
-    ResourceType.add_member(:ec2_ipam, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAM", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAM"}))
-    ResourceType.add_member(:io_t_twin_maker_scene, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerScene", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::Scene"}))
-    ResourceType.add_member(:network_manager_transit_gateway_registration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerTransitGatewayRegistration", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::TransitGatewayRegistration"}))
-    ResourceType.add_member(:customer_profiles_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomerProfilesDomain", traits: {"smithy.api#enumValue" => "AWS::CustomerProfiles::Domain"}))
-    ResourceType.add_member(:auto_scaling_warm_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AutoScalingWarmPool", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::WarmPool"}))
-    ResourceType.add_member(:connect_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectPhoneNumber", traits: {"smithy.api#enumValue" => "AWS::Connect::PhoneNumber"}))
-    ResourceType.add_member(:app_config_deployment_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigDeploymentStrategy", traits: {"smithy.api#enumValue" => "AWS::AppConfig::DeploymentStrategy"}))
-    ResourceType.add_member(:app_flow_flow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppFlowFlow", traits: {"smithy.api#enumValue" => "AWS::AppFlow::Flow"}))
-    ResourceType.add_member(:audit_manager_assessment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AuditManagerAssessment", traits: {"smithy.api#enumValue" => "AWS::AuditManager::Assessment"}))
-    ResourceType.add_member(:cloud_watch_metric_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CloudWatchMetricStream", traits: {"smithy.api#enumValue" => "AWS::CloudWatch::MetricStream"}))
-    ResourceType.add_member(:device_farm_instance_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DeviceFarmInstanceProfile", traits: {"smithy.api#enumValue" => "AWS::DeviceFarm::InstanceProfile"}))
-    ResourceType.add_member(:device_farm_project, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DeviceFarmProject", traits: {"smithy.api#enumValue" => "AWS::DeviceFarm::Project"}))
-    ResourceType.add_member(:ec2_ec2_fleet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2EC2Fleet", traits: {"smithy.api#enumValue" => "AWS::EC2::EC2Fleet"}))
-    ResourceType.add_member(:ec2_subnet_route_table_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SubnetRouteTableAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::SubnetRouteTableAssociation"}))
-    ResourceType.add_member(:ecr_pull_through_cache_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRPullThroughCacheRule", traits: {"smithy.api#enumValue" => "AWS::ECR::PullThroughCacheRule"}))
-    ResourceType.add_member(:ground_station_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GroundStationConfig", traits: {"smithy.api#enumValue" => "AWS::GroundStation::Config"}))
-    ResourceType.add_member(:image_builder_image_pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderImagePipeline", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::ImagePipeline"}))
-    ResourceType.add_member(:io_t_fleet_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTFleetMetric", traits: {"smithy.api#enumValue" => "AWS::IoT::FleetMetric"}))
-    ResourceType.add_member(:io_t_wireless_service_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTWirelessServiceProfile", traits: {"smithy.api#enumValue" => "AWS::IoTWireless::ServiceProfile"}))
-    ResourceType.add_member(:network_manager_device, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerDevice", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::Device"}))
-    ResourceType.add_member(:network_manager_global_network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerGlobalNetwork", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::GlobalNetwork"}))
-    ResourceType.add_member(:network_manager_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerLink", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::Link"}))
-    ResourceType.add_member(:network_manager_site, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerSite", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::Site"}))
-    ResourceType.add_member(:panorama_package, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PanoramaPackage", traits: {"smithy.api#enumValue" => "AWS::Panorama::Package"}))
-    ResourceType.add_member(:pinpoint_app, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointApp", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::App"}))
-    ResourceType.add_member(:redshift_scheduled_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftScheduledAction", traits: {"smithy.api#enumValue" => "AWS::Redshift::ScheduledAction"}))
-    ResourceType.add_member(:route53_resolver_firewall_rule_group_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverFirewallRuleGroupAssociation", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::FirewallRuleGroupAssociation"}))
-    ResourceType.add_member(:sage_maker_app_image_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerAppImageConfig", traits: {"smithy.api#enumValue" => "AWS::SageMaker::AppImageConfig"}))
-    ResourceType.add_member(:sage_maker_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerImage", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Image"}))
-    ResourceType.add_member(:ecs_task_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSTaskSet", traits: {"smithy.api#enumValue" => "AWS::ECS::TaskSet"}))
-    ResourceType.add_member(:cassandra_keyspace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraKeyspace", traits: {"smithy.api#enumValue" => "AWS::Cassandra::Keyspace"}))
-    ResourceType.add_member(:signer_signing_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignerSigningProfile", traits: {"smithy.api#enumValue" => "AWS::Signer::SigningProfile"}))
-    ResourceType.add_member(:amplify_app, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmplifyApp", traits: {"smithy.api#enumValue" => "AWS::Amplify::App"}))
-    ResourceType.add_member(:app_mesh_virtual_node, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualNode", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualNode"}))
-    ResourceType.add_member(:app_mesh_virtual_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualService", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualService"}))
-    ResourceType.add_member(:app_runner_vpc_connector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppRunnerVpcConnector", traits: {"smithy.api#enumValue" => "AWS::AppRunner::VpcConnector"}))
-    ResourceType.add_member(:app_stream_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamApplication", traits: {"smithy.api#enumValue" => "AWS::AppStream::Application"}))
-    ResourceType.add_member(:code_artifact_repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeArtifactRepository", traits: {"smithy.api#enumValue" => "AWS::CodeArtifact::Repository"}))
-    ResourceType.add_member(:ec2_prefix_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2PrefixList", traits: {"smithy.api#enumValue" => "AWS::EC2::PrefixList"}))
-    ResourceType.add_member(:ec2_spot_fleet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleet", traits: {"smithy.api#enumValue" => "AWS::EC2::SpotFleet"}))
-    ResourceType.add_member(:evidently_project, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EvidentlyProject", traits: {"smithy.api#enumValue" => "AWS::Evidently::Project"}))
-    ResourceType.add_member(:forecast_dataset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastDataset", traits: {"smithy.api#enumValue" => "AWS::Forecast::Dataset"}))
-    ResourceType.add_member(:iamsaml_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMSAMLProvider", traits: {"smithy.api#enumValue" => "AWS::IAM::SAMLProvider"}))
-    ResourceType.add_member(:iam_server_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMServerCertificate", traits: {"smithy.api#enumValue" => "AWS::IAM::ServerCertificate"}))
-    ResourceType.add_member(:pinpoint_campaign, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointCampaign", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::Campaign"}))
-    ResourceType.add_member(:pinpoint_in_app_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointInAppTemplate", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::InAppTemplate"}))
-    ResourceType.add_member(:sage_maker_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerDomain", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Domain"}))
-    ResourceType.add_member(:transfer_agreement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferAgreement", traits: {"smithy.api#enumValue" => "AWS::Transfer::Agreement"}))
-    ResourceType.add_member(:transfer_connector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferConnector", traits: {"smithy.api#enumValue" => "AWS::Transfer::Connector"}))
-    ResourceType.add_member(:kinesis_firehose_delivery_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisFirehoseDeliveryStream", traits: {"smithy.api#enumValue" => "AWS::KinesisFirehose::DeliveryStream"}))
-    ResourceType.add_member(:amplify_branch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmplifyBranch", traits: {"smithy.api#enumValue" => "AWS::Amplify::Branch"}))
-    ResourceType.add_member(:app_integrations_event_integration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppIntegrationsEventIntegration", traits: {"smithy.api#enumValue" => "AWS::AppIntegrations::EventIntegration"}))
-    ResourceType.add_member(:app_mesh_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshRoute", traits: {"smithy.api#enumValue" => "AWS::AppMesh::Route"}))
-    ResourceType.add_member(:athena_prepared_statement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AthenaPreparedStatement", traits: {"smithy.api#enumValue" => "AWS::Athena::PreparedStatement"}))
-    ResourceType.add_member(:ec2_ipam_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMScope", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMScope"}))
-    ResourceType.add_member(:evidently_launch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EvidentlyLaunch", traits: {"smithy.api#enumValue" => "AWS::Evidently::Launch"}))
-    ResourceType.add_member(:forecast_dataset_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastDatasetGroup", traits: {"smithy.api#enumValue" => "AWS::Forecast::DatasetGroup"}))
-    ResourceType.add_member(:greengrass_v2_component_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GreengrassV2ComponentVersion", traits: {"smithy.api#enumValue" => "AWS::GreengrassV2::ComponentVersion"}))
-    ResourceType.add_member(:ground_station_mission_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GroundStationMissionProfile", traits: {"smithy.api#enumValue" => "AWS::GroundStation::MissionProfile"}))
-    ResourceType.add_member(:media_connect_flow_entitlement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectFlowEntitlement", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::FlowEntitlement"}))
-    ResourceType.add_member(:media_connect_flow_vpc_interface, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectFlowVpcInterface", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::FlowVpcInterface"}))
-    ResourceType.add_member(:media_tailor_playback_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaTailorPlaybackConfiguration", traits: {"smithy.api#enumValue" => "AWS::MediaTailor::PlaybackConfiguration"}))
-    ResourceType.add_member(:msk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKConfiguration", traits: {"smithy.api#enumValue" => "AWS::MSK::Configuration"}))
-    ResourceType.add_member(:personalize_dataset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeDataset", traits: {"smithy.api#enumValue" => "AWS::Personalize::Dataset"}))
-    ResourceType.add_member(:personalize_schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeSchema", traits: {"smithy.api#enumValue" => "AWS::Personalize::Schema"}))
-    ResourceType.add_member(:personalize_solution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeSolution", traits: {"smithy.api#enumValue" => "AWS::Personalize::Solution"}))
-    ResourceType.add_member(:pinpoint_email_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointEmailTemplate", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::EmailTemplate"}))
-    ResourceType.add_member(:pinpoint_event_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointEventStream", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::EventStream"}))
-    ResourceType.add_member(:resilience_hub_app, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResilienceHubApp", traits: {"smithy.api#enumValue" => "AWS::ResilienceHub::App"}))
-    ResourceType.add_member(:acmpca_certificate_authority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACMPCACertificateAuthority", traits: {"smithy.api#enumValue" => "AWS::ACMPCA::CertificateAuthority"}))
-    ResourceType.add_member(:app_config_hosted_configuration_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigHostedConfigurationVersion", traits: {"smithy.api#enumValue" => "AWS::AppConfig::HostedConfigurationVersion"}))
-    ResourceType.add_member(:app_mesh_virtual_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualGateway", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualGateway"}))
-    ResourceType.add_member(:app_mesh_virtual_router, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualRouter", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualRouter"}))
-    ResourceType.add_member(:app_runner_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppRunnerService", traits: {"smithy.api#enumValue" => "AWS::AppRunner::Service"}))
-    ResourceType.add_member(:customer_profiles_object_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomerProfilesObjectType", traits: {"smithy.api#enumValue" => "AWS::CustomerProfiles::ObjectType"}))
-    ResourceType.add_member(:dms_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSEndpoint", traits: {"smithy.api#enumValue" => "AWS::DMS::Endpoint"}))
-    ResourceType.add_member(:ec2_capacity_reservation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2CapacityReservation", traits: {"smithy.api#enumValue" => "AWS::EC2::CapacityReservation"}))
-    ResourceType.add_member(:ec2_client_vpn_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2ClientVpnEndpoint", traits: {"smithy.api#enumValue" => "AWS::EC2::ClientVpnEndpoint"}))
-    ResourceType.add_member(:kendra_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KendraIndex", traits: {"smithy.api#enumValue" => "AWS::Kendra::Index"}))
-    ResourceType.add_member(:kinesis_video_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisVideoStream", traits: {"smithy.api#enumValue" => "AWS::KinesisVideo::Stream"}))
-    ResourceType.add_member(:logs_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LogsDestination", traits: {"smithy.api#enumValue" => "AWS::Logs::Destination"}))
-    ResourceType.add_member(:pinpoint_email_channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointEmailChannel", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::EmailChannel"}))
-    ResourceType.add_member(:s3_access_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3AccessPoint", traits: {"smithy.api#enumValue" => "AWS::S3::AccessPoint"}))
-    ResourceType.add_member(:network_manager_customer_gateway_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerCustomerGatewayAssociation", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::CustomerGatewayAssociation"}))
-    ResourceType.add_member(:network_manager_link_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerLinkAssociation", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::LinkAssociation"}))
-    ResourceType.add_member(:io_t_wireless_multicast_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTWirelessMulticastGroup", traits: {"smithy.api#enumValue" => "AWS::IoTWireless::MulticastGroup"}))
-    ResourceType.add_member(:personalize_dataset_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeDatasetGroup", traits: {"smithy.api#enumValue" => "AWS::Personalize::DatasetGroup"}))
-    ResourceType.add_member(:io_t_twin_maker_component_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerComponentType", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::ComponentType"}))
-    ResourceType.add_member(:code_build_report_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeBuildReportGroup", traits: {"smithy.api#enumValue" => "AWS::CodeBuild::ReportGroup"}))
-    ResourceType.add_member(:sage_maker_feature_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerFeatureGroup", traits: {"smithy.api#enumValue" => "AWS::SageMaker::FeatureGroup"}))
-    ResourceType.add_member(:msk_batch_scram_secret, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKBatchScramSecret", traits: {"smithy.api#enumValue" => "AWS::MSK::BatchScramSecret"}))
-    ResourceType.add_member(:app_stream_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamStack", traits: {"smithy.api#enumValue" => "AWS::AppStream::Stack"}))
-    ResourceType.add_member(:io_t_job_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTJobTemplate", traits: {"smithy.api#enumValue" => "AWS::IoT::JobTemplate"}))
-    ResourceType.add_member(:io_t_wireless_fuota_task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTWirelessFuotaTask", traits: {"smithy.api#enumValue" => "AWS::IoTWireless::FuotaTask"}))
-    ResourceType.add_member(:io_t_provisioning_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTProvisioningTemplate", traits: {"smithy.api#enumValue" => "AWS::IoT::ProvisioningTemplate"}))
-    ResourceType.add_member(:inspector_v2_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InspectorV2Filter", traits: {"smithy.api#enumValue" => "AWS::InspectorV2::Filter"}))
-    ResourceType.add_member(:route53_resolver_resolver_query_logging_config_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverQueryLoggingConfigAssociation", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation"}))
-    ResourceType.add_member(:service_discovery_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryInstance", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::Instance"}))
-    ResourceType.add_member(:transfer_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferCertificate", traits: {"smithy.api#enumValue" => "AWS::Transfer::Certificate"}))
-    ResourceType.add_member(:media_connect_flow_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectFlowSource", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::FlowSource"}))
-    ResourceType.add_member(:aps_rule_groups_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APSRuleGroupsNamespace", traits: {"smithy.api#enumValue" => "AWS::APS::RuleGroupsNamespace"}))
-    ResourceType.add_member(:code_guru_profiler_profiling_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeGuruProfilerProfilingGroup", traits: {"smithy.api#enumValue" => "AWS::CodeGuruProfiler::ProfilingGroup"}))
-    ResourceType.add_member(:route53_resolver_resolver_query_logging_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverQueryLoggingConfig", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverQueryLoggingConfig"}))
-    ResourceType.add_member(:batch_scheduling_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BatchSchedulingPolicy", traits: {"smithy.api#enumValue" => "AWS::Batch::SchedulingPolicy"}))
-    ResourceType.add_member(:acmpca_certificate_authority_activation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACMPCACertificateAuthorityActivation", traits: {"smithy.api#enumValue" => "AWS::ACMPCA::CertificateAuthorityActivation"}))
-    ResourceType.add_member(:app_mesh_gateway_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshGatewayRoute", traits: {"smithy.api#enumValue" => "AWS::AppMesh::GatewayRoute"}))
-    ResourceType.add_member(:app_mesh_mesh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshMesh", traits: {"smithy.api#enumValue" => "AWS::AppMesh::Mesh"}))
-    ResourceType.add_member(:connect_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectInstance", traits: {"smithy.api#enumValue" => "AWS::Connect::Instance"}))
-    ResourceType.add_member(:connect_quick_connect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectQuickConnect", traits: {"smithy.api#enumValue" => "AWS::Connect::QuickConnect"}))
-    ResourceType.add_member(:ec2_carrier_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2CarrierGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::CarrierGateway"}))
-    ResourceType.add_member(:ec2_ipam_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMPool", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMPool"}))
-    ResourceType.add_member(:ec2_transit_gateway_connect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TransitGatewayConnect", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayConnect"}))
-    ResourceType.add_member(:ec2_transit_gateway_multicast_domain, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TransitGatewayMulticastDomain", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayMulticastDomain"}))
-    ResourceType.add_member(:ecs_capacity_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSCapacityProvider", traits: {"smithy.api#enumValue" => "AWS::ECS::CapacityProvider"}))
-    ResourceType.add_member(:iam_instance_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMInstanceProfile", traits: {"smithy.api#enumValue" => "AWS::IAM::InstanceProfile"}))
-    ResourceType.add_member(:io_tca_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTCACertificate", traits: {"smithy.api#enumValue" => "AWS::IoT::CACertificate"}))
-    ResourceType.add_member(:io_t_twin_maker_sync_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerSyncJob", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::SyncJob"}))
-    ResourceType.add_member(:kafka_connect_connector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KafkaConnectConnector", traits: {"smithy.api#enumValue" => "AWS::KafkaConnect::Connector"}))
-    ResourceType.add_member(:lambda_code_signing_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaCodeSigningConfig", traits: {"smithy.api#enumValue" => "AWS::Lambda::CodeSigningConfig"}))
-    ResourceType.add_member(:network_manager_connect_peer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerConnectPeer", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::ConnectPeer"}))
-    ResourceType.add_member(:resource_explorer2_index, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceExplorer2Index", traits: {"smithy.api#enumValue" => "AWS::ResourceExplorer2::Index"}))
-    ResourceType.add_member(:app_stream_fleet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamFleet", traits: {"smithy.api#enumValue" => "AWS::AppStream::Fleet"}))
-    ResourceType.add_member(:cognito_user_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoUserPool", traits: {"smithy.api#enumValue" => "AWS::Cognito::UserPool"}))
-    ResourceType.add_member(:cognito_user_pool_client, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoUserPoolClient", traits: {"smithy.api#enumValue" => "AWS::Cognito::UserPoolClient"}))
-    ResourceType.add_member(:cognito_user_pool_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoUserPoolGroup", traits: {"smithy.api#enumValue" => "AWS::Cognito::UserPoolGroup"}))
-    ResourceType.add_member(:ec2_network_insights_access_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2NetworkInsightsAccessScope", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsAccessScope"}))
-    ResourceType.add_member(:ec2_network_insights_analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2NetworkInsightsAnalysis", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsAnalysis"}))
-    ResourceType.add_member(:grafana_workspace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GrafanaWorkspace", traits: {"smithy.api#enumValue" => "AWS::Grafana::Workspace"}))
-    ResourceType.add_member(:ground_station_dataflow_endpoint_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GroundStationDataflowEndpointGroup", traits: {"smithy.api#enumValue" => "AWS::GroundStation::DataflowEndpointGroup"}))
-    ResourceType.add_member(:image_builder_image_recipe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderImageRecipe", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::ImageRecipe"}))
-    ResourceType.add_member(:kms_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMSAlias", traits: {"smithy.api#enumValue" => "AWS::KMS::Alias"}))
-    ResourceType.add_member(:m2_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "M2Environment", traits: {"smithy.api#enumValue" => "AWS::M2::Environment"}))
-    ResourceType.add_member(:quick_sight_data_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QuickSightDataSource", traits: {"smithy.api#enumValue" => "AWS::QuickSight::DataSource"}))
-    ResourceType.add_member(:quick_sight_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QuickSightTemplate", traits: {"smithy.api#enumValue" => "AWS::QuickSight::Template"}))
-    ResourceType.add_member(:quick_sight_theme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QuickSightTheme", traits: {"smithy.api#enumValue" => "AWS::QuickSight::Theme"}))
-    ResourceType.add_member(:rds_option_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSOptionGroup", traits: {"smithy.api#enumValue" => "AWS::RDS::OptionGroup"}))
-    ResourceType.add_member(:redshift_endpoint_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftEndpointAccess", traits: {"smithy.api#enumValue" => "AWS::Redshift::EndpointAccess"}))
-    ResourceType.add_member(:route53_resolver_firewall_rule_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverFirewallRuleGroup", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::FirewallRuleGroup"}))
-    ResourceType.add_member(:ssm_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSMDocument", traits: {"smithy.api#enumValue" => "AWS::SSM::Document"}))
-    ResourceType.add_member(:app_config_extension_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigExtensionAssociation", traits: {"smithy.api#enumValue" => "AWS::AppConfig::ExtensionAssociation"}))
-    ResourceType.add_member(:app_integrations_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppIntegrationsApplication", traits: {"smithy.api#enumValue" => "AWS::AppIntegrations::Application"}))
-    ResourceType.add_member(:app_sync_api_cache, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppSyncApiCache", traits: {"smithy.api#enumValue" => "AWS::AppSync::ApiCache"}))
-    ResourceType.add_member(:bedrock_guardrail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BedrockGuardrail", traits: {"smithy.api#enumValue" => "AWS::Bedrock::Guardrail"}))
-    ResourceType.add_member(:bedrock_knowledge_base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BedrockKnowledgeBase", traits: {"smithy.api#enumValue" => "AWS::Bedrock::KnowledgeBase"}))
-    ResourceType.add_member(:cognito_identity_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoIdentityPool", traits: {"smithy.api#enumValue" => "AWS::Cognito::IdentityPool"}))
-    ResourceType.add_member(:connect_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectRule", traits: {"smithy.api#enumValue" => "AWS::Connect::Rule"}))
-    ResourceType.add_member(:connect_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectUser", traits: {"smithy.api#enumValue" => "AWS::Connect::User"}))
-    ResourceType.add_member(:ec2_client_vpn_target_network_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2ClientVpnTargetNetworkAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::ClientVpnTargetNetworkAssociation"}))
-    ResourceType.add_member(:ec2_eip_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2EIPAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::EIPAssociation"}))
-    ResourceType.add_member(:ec2_ipam_resource_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMResourceDiscovery", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMResourceDiscovery"}))
-    ResourceType.add_member(:ec2_ipam_resource_discovery_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMResourceDiscoveryAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMResourceDiscoveryAssociation"}))
-    ResourceType.add_member(:ec2_instance_connect_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2InstanceConnectEndpoint", traits: {"smithy.api#enumValue" => "AWS::EC2::InstanceConnectEndpoint"}))
-    ResourceType.add_member(:ec2_snapshot_block_public_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SnapshotBlockPublicAccess", traits: {"smithy.api#enumValue" => "AWS::EC2::SnapshotBlockPublicAccess"}))
-    ResourceType.add_member(:ec2_vpc_block_public_access_exclusion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPCBlockPublicAccessExclusion", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCBlockPublicAccessExclusion"}))
-    ResourceType.add_member(:ec2_vpc_block_public_access_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPCBlockPublicAccessOptions", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCBlockPublicAccessOptions"}))
-    ResourceType.add_member(:ec2_vpc_endpoint_connection_notification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPCEndpointConnectionNotification", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCEndpointConnectionNotification"}))
-    ResourceType.add_member(:ec2_vpn_connection_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPNConnectionRoute", traits: {"smithy.api#enumValue" => "AWS::EC2::VPNConnectionRoute"}))
-    ResourceType.add_member(:evidently_segment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EvidentlySegment", traits: {"smithy.api#enumValue" => "AWS::Evidently::Segment"}))
-    ResourceType.add_member(:iamoidc_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMOIDCProvider", traits: {"smithy.api#enumValue" => "AWS::IAM::OIDCProvider"}))
-    ResourceType.add_member(:inspector_v2_activation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InspectorV2Activation", traits: {"smithy.api#enumValue" => "AWS::InspectorV2::Activation"}))
-    ResourceType.add_member(:msk_cluster_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKClusterPolicy", traits: {"smithy.api#enumValue" => "AWS::MSK::ClusterPolicy"}))
-    ResourceType.add_member(:msk_vpc_connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKVpcConnection", traits: {"smithy.api#enumValue" => "AWS::MSK::VpcConnection"}))
-    ResourceType.add_member(:media_connect_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectGateway", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::Gateway"}))
-    ResourceType.add_member(:memory_db_subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MemoryDBSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::MemoryDB::SubnetGroup"}))
-    ResourceType.add_member(:open_search_serverless_collection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenSearchServerlessCollection", traits: {"smithy.api#enumValue" => "AWS::OpenSearchServerless::Collection"}))
-    ResourceType.add_member(:open_search_serverless_vpc_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenSearchServerlessVpcEndpoint", traits: {"smithy.api#enumValue" => "AWS::OpenSearchServerless::VpcEndpoint"}))
-    ResourceType.add_member(:redshift_endpoint_authorization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftEndpointAuthorization", traits: {"smithy.api#enumValue" => "AWS::Redshift::EndpointAuthorization"}))
-    ResourceType.add_member(:route53_profiles_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ProfilesProfile", traits: {"smithy.api#enumValue" => "AWS::Route53Profiles::Profile"}))
-    ResourceType.add_member(:s3_storage_lens_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3StorageLensGroup", traits: {"smithy.api#enumValue" => "AWS::S3::StorageLensGroup"}))
-    ResourceType.add_member(:s3_express_bucket_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3ExpressBucketPolicy", traits: {"smithy.api#enumValue" => "AWS::S3Express::BucketPolicy"}))
-    ResourceType.add_member(:s3_express_directory_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3ExpressDirectoryBucket", traits: {"smithy.api#enumValue" => "AWS::S3Express::DirectoryBucket"}))
-    ResourceType.add_member(:sage_maker_inference_experiment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceExperiment", traits: {"smithy.api#enumValue" => "AWS::SageMaker::InferenceExperiment"}))
-    ResourceType.add_member(:security_hub_standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SecurityHubStandard", traits: {"smithy.api#enumValue" => "AWS::SecurityHub::Standard"}))
-    ResourceType.add_member(:transfer_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferProfile", traits: {"smithy.api#enumValue" => "AWS::Transfer::Profile"}))
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType)
-    ResourceTypeValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeValue)
-    ResourceTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256)
-    ResourceTypesScope.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256)
-    ResourceValue.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceValueType, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    ResourceType.add_member(:customer_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomerGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::CustomerGateway"}))
+    ResourceType.add_member(:eip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EIP", traits: {"smithy.api#enumValue" => "AWS::EC2::EIP"}))
+    ResourceType.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Host", traits: {"smithy.api#enumValue" => "AWS::EC2::Host"}))
+    ResourceType.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Instance", traits: {"smithy.api#enumValue" => "AWS::EC2::Instance"}))
+    ResourceType.add_member(:internet_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InternetGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::InternetGateway"}))
+    ResourceType.add_member(:network_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkAcl", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkAcl"}))
+    ResourceType.add_member(:network_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkInterface", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInterface"}))
+    ResourceType.add_member(:route_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RouteTable", traits: {"smithy.api#enumValue" => "AWS::EC2::RouteTable"}))
+    ResourceType.add_member(:security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SecurityGroup", traits: {"smithy.api#enumValue" => "AWS::EC2::SecurityGroup"}))
+    ResourceType.add_member(:subnet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Subnet", traits: {"smithy.api#enumValue" => "AWS::EC2::Subnet"}))
+    ResourceType.add_member(:trail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Trail", traits: {"smithy.api#enumValue" => "AWS::CloudTrail::Trail"}))
+    ResourceType.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Volume", traits: {"smithy.api#enumValue" => "AWS::EC2::Volume"}))
+    ResourceType.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPC", traits: {"smithy.api#enumValue" => "AWS::EC2::VPC"}))
+    ResourceType.add_member(:vpn_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPNConnection", traits: {"smithy.api#enumValue" => "AWS::EC2::VPNConnection"}))
+    ResourceType.add_member(:vpn_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPNGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::VPNGateway"}))
+    ResourceType.add_member(:registered_ha_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegisteredHAInstance", traits: {"smithy.api#enumValue" => "AWS::EC2::RegisteredHAInstance"}))
+    ResourceType.add_member(:nat_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NatGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::NatGateway"}))
+    ResourceType.add_member(:egress_only_internet_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EgressOnlyInternetGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::EgressOnlyInternetGateway"}))
+    ResourceType.add_member(:vpc_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPCEndpoint", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCEndpoint"}))
+    ResourceType.add_member(:vpc_endpoint_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPCEndpointService", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCEndpointService"}))
+    ResourceType.add_member(:flow_log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FlowLog", traits: {"smithy.api#enumValue" => "AWS::EC2::FlowLog"}))
+    ResourceType.add_member(:vpc_peering_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VPCPeeringConnection", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCPeeringConnection"}))
+    ResourceType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Domain", traits: {"smithy.api#enumValue" => "AWS::Elasticsearch::Domain"}))
+    ResourceType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Group", traits: {"smithy.api#enumValue" => "AWS::IAM::Group"}))
+    ResourceType.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Policy", traits: {"smithy.api#enumValue" => "AWS::IAM::Policy"}))
+    ResourceType.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Role", traits: {"smithy.api#enumValue" => "AWS::IAM::Role"}))
+    ResourceType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "User", traits: {"smithy.api#enumValue" => "AWS::IAM::User"}))
+    ResourceType.add_member(:load_balancer_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LoadBalancerV2", traits: {"smithy.api#enumValue" => "AWS::ElasticLoadBalancingV2::LoadBalancer"}))
+    ResourceType.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Certificate", traits: {"smithy.api#enumValue" => "AWS::ACM::Certificate"}))
+    ResourceType.add_member(:db_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBInstance", traits: {"smithy.api#enumValue" => "AWS::RDS::DBInstance"}))
+    ResourceType.add_member(:db_subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::RDS::DBSubnetGroup"}))
+    ResourceType.add_member(:db_security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBSecurityGroup", traits: {"smithy.api#enumValue" => "AWS::RDS::DBSecurityGroup"}))
+    ResourceType.add_member(:db_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBSnapshot", traits: {"smithy.api#enumValue" => "AWS::RDS::DBSnapshot"}))
+    ResourceType.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBCluster", traits: {"smithy.api#enumValue" => "AWS::RDS::DBCluster"}))
+    ResourceType.add_member(:db_cluster_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DBClusterSnapshot", traits: {"smithy.api#enumValue" => "AWS::RDS::DBClusterSnapshot"}))
+    ResourceType.add_member(:event_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSubscription", traits: {"smithy.api#enumValue" => "AWS::RDS::EventSubscription"}))
+    ResourceType.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Bucket", traits: {"smithy.api#enumValue" => "AWS::S3::Bucket"}))
+    ResourceType.add_member(:account_public_access_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccountPublicAccessBlock", traits: {"smithy.api#enumValue" => "AWS::S3::AccountPublicAccessBlock"}))
+    ResourceType.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Cluster", traits: {"smithy.api#enumValue" => "AWS::Redshift::Cluster"}))
+    ResourceType.add_member(:cluster_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterSnapshot", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterSnapshot"}))
+    ResourceType.add_member(:cluster_parameter_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterParameterGroup", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterParameterGroup"}))
+    ResourceType.add_member(:cluster_security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterSecurityGroup", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterSecurityGroup"}))
+    ResourceType.add_member(:cluster_subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ClusterSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::Redshift::ClusterSubnetGroup"}))
+    ResourceType.add_member(:redshift_event_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftEventSubscription", traits: {"smithy.api#enumValue" => "AWS::Redshift::EventSubscription"}))
+    ResourceType.add_member(:managed_instance_inventory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManagedInstanceInventory", traits: {"smithy.api#enumValue" => "AWS::SSM::ManagedInstanceInventory"}))
+    ResourceType.add_member(:alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Alarm", traits: {"smithy.api#enumValue" => "AWS::CloudWatch::Alarm"}))
+    ResourceType.add_member(:stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stack", traits: {"smithy.api#enumValue" => "AWS::CloudFormation::Stack"}))
+    ResourceType.add_member(:load_balancer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LoadBalancer", traits: {"smithy.api#enumValue" => "AWS::ElasticLoadBalancing::LoadBalancer"}))
+    ResourceType.add_member(:auto_scaling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AutoScalingGroup", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::AutoScalingGroup"}))
+    ResourceType.add_member(:launch_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LaunchConfiguration", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::LaunchConfiguration"}))
+    ResourceType.add_member(:scaling_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ScalingPolicy", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::ScalingPolicy"}))
+    ResourceType.add_member(:scheduled_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ScheduledAction", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::ScheduledAction"}))
+    ResourceType.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Table", traits: {"smithy.api#enumValue" => "AWS::DynamoDB::Table"}))
+    ResourceType.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Project", traits: {"smithy.api#enumValue" => "AWS::CodeBuild::Project"}))
+    ResourceType.add_member(:rate_based_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RateBasedRule", traits: {"smithy.api#enumValue" => "AWS::WAF::RateBasedRule"}))
+    ResourceType.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Rule", traits: {"smithy.api#enumValue" => "AWS::WAF::Rule"}))
+    ResourceType.add_member(:rule_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RuleGroup", traits: {"smithy.api#enumValue" => "AWS::WAF::RuleGroup"}))
+    ResourceType.add_member(:web_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WebACL", traits: {"smithy.api#enumValue" => "AWS::WAF::WebACL"}))
+    ResourceType.add_member(:regional_rate_based_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalRateBasedRule", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::RateBasedRule"}))
+    ResourceType.add_member(:regional_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalRule", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::Rule"}))
+    ResourceType.add_member(:regional_rule_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalRuleGroup", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::RuleGroup"}))
+    ResourceType.add_member(:regional_web_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalWebACL", traits: {"smithy.api#enumValue" => "AWS::WAFRegional::WebACL"}))
+    ResourceType.add_member(:distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Distribution", traits: {"smithy.api#enumValue" => "AWS::CloudFront::Distribution"}))
+    ResourceType.add_member(:streaming_distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StreamingDistribution", traits: {"smithy.api#enumValue" => "AWS::CloudFront::StreamingDistribution"}))
+    ResourceType.add_member(:function, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Function", traits: {"smithy.api#enumValue" => "AWS::Lambda::Function"}))
+    ResourceType.add_member(:network_firewall_firewall, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkFirewallFirewall", traits: {"smithy.api#enumValue" => "AWS::NetworkFirewall::Firewall"}))
+    ResourceType.add_member(:network_firewall_firewall_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkFirewallFirewallPolicy", traits: {"smithy.api#enumValue" => "AWS::NetworkFirewall::FirewallPolicy"}))
+    ResourceType.add_member(:network_firewall_rule_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkFirewallRuleGroup", traits: {"smithy.api#enumValue" => "AWS::NetworkFirewall::RuleGroup"}))
+    ResourceType.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Application", traits: {"smithy.api#enumValue" => "AWS::ElasticBeanstalk::Application"}))
+    ResourceType.add_member(:application_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ApplicationVersion", traits: {"smithy.api#enumValue" => "AWS::ElasticBeanstalk::ApplicationVersion"}))
+    ResourceType.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Environment", traits: {"smithy.api#enumValue" => "AWS::ElasticBeanstalk::Environment"}))
+    ResourceType.add_member(:web_aclv2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WebACLV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::WebACL"}))
+    ResourceType.add_member(:rule_group_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RuleGroupV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::RuleGroup"}))
+    ResourceType.add_member(:ip_set_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPSetV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::IPSet"}))
+    ResourceType.add_member(:regex_pattern_set_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegexPatternSetV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::RegexPatternSet"}))
+    ResourceType.add_member(:managed_rule_set_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ManagedRuleSetV2", traits: {"smithy.api#enumValue" => "AWS::WAFv2::ManagedRuleSet"}))
+    ResourceType.add_member(:encryption_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EncryptionConfig", traits: {"smithy.api#enumValue" => "AWS::XRay::EncryptionConfig"}))
+    ResourceType.add_member(:association_compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AssociationCompliance", traits: {"smithy.api#enumValue" => "AWS::SSM::AssociationCompliance"}))
+    ResourceType.add_member(:patch_compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PatchCompliance", traits: {"smithy.api#enumValue" => "AWS::SSM::PatchCompliance"}))
+    ResourceType.add_member(:protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Protection", traits: {"smithy.api#enumValue" => "AWS::Shield::Protection"}))
+    ResourceType.add_member(:regional_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RegionalProtection", traits: {"smithy.api#enumValue" => "AWS::ShieldRegional::Protection"}))
+    ResourceType.add_member(:conformance_pack_compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConformancePackCompliance", traits: {"smithy.api#enumValue" => "AWS::Config::ConformancePackCompliance"}))
+    ResourceType.add_member(:resource_compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceCompliance", traits: {"smithy.api#enumValue" => "AWS::Config::ResourceCompliance"}))
+    ResourceType.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Stage", traits: {"smithy.api#enumValue" => "AWS::ApiGateway::Stage"}))
+    ResourceType.add_member(:rest_api, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RestApi", traits: {"smithy.api#enumValue" => "AWS::ApiGateway::RestApi"}))
+    ResourceType.add_member(:stage_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StageV2", traits: {"smithy.api#enumValue" => "AWS::ApiGatewayV2::Stage"}))
+    ResourceType.add_member(:api, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Api", traits: {"smithy.api#enumValue" => "AWS::ApiGatewayV2::Api"}))
+    ResourceType.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pipeline", traits: {"smithy.api#enumValue" => "AWS::CodePipeline::Pipeline"}))
+    ResourceType.add_member(:cloud_formation_provisioned_product, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CloudFormationProvisionedProduct", traits: {"smithy.api#enumValue" => "AWS::ServiceCatalog::CloudFormationProvisionedProduct"}))
+    ResourceType.add_member(:cloud_formation_product, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CloudFormationProduct", traits: {"smithy.api#enumValue" => "AWS::ServiceCatalog::CloudFormationProduct"}))
+    ResourceType.add_member(:portfolio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Portfolio", traits: {"smithy.api#enumValue" => "AWS::ServiceCatalog::Portfolio"}))
+    ResourceType.add_member(:queue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Queue", traits: {"smithy.api#enumValue" => "AWS::SQS::Queue"}))
+    ResourceType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Key", traits: {"smithy.api#enumValue" => "AWS::KMS::Key"}))
+    ResourceType.add_member(:qldb_ledger, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QLDBLedger", traits: {"smithy.api#enumValue" => "AWS::QLDB::Ledger"}))
+    ResourceType.add_member(:secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Secret", traits: {"smithy.api#enumValue" => "AWS::SecretsManager::Secret"}))
+    ResourceType.add_member(:topic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Topic", traits: {"smithy.api#enumValue" => "AWS::SNS::Topic"}))
+    ResourceType.add_member(:file_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FileData", traits: {"smithy.api#enumValue" => "AWS::SSM::FileData"}))
+    ResourceType.add_member(:backup_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupPlan", traits: {"smithy.api#enumValue" => "AWS::Backup::BackupPlan"}))
+    ResourceType.add_member(:backup_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupSelection", traits: {"smithy.api#enumValue" => "AWS::Backup::BackupSelection"}))
+    ResourceType.add_member(:backup_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupVault", traits: {"smithy.api#enumValue" => "AWS::Backup::BackupVault"}))
+    ResourceType.add_member(:backup_recovery_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupRecoveryPoint", traits: {"smithy.api#enumValue" => "AWS::Backup::RecoveryPoint"}))
+    ResourceType.add_member(:ecr_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRRepository", traits: {"smithy.api#enumValue" => "AWS::ECR::Repository"}))
+    ResourceType.add_member(:ecs_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSCluster", traits: {"smithy.api#enumValue" => "AWS::ECS::Cluster"}))
+    ResourceType.add_member(:ecs_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSService", traits: {"smithy.api#enumValue" => "AWS::ECS::Service"}))
+    ResourceType.add_member(:ecs_task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSTaskDefinition", traits: {"smithy.api#enumValue" => "AWS::ECS::TaskDefinition"}))
+    ResourceType.add_member(:efs_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EFSAccessPoint", traits: {"smithy.api#enumValue" => "AWS::EFS::AccessPoint"}))
+    ResourceType.add_member(:efs_file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EFSFileSystem", traits: {"smithy.api#enumValue" => "AWS::EFS::FileSystem"}))
+    ResourceType.add_member(:eks_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSCluster", traits: {"smithy.api#enumValue" => "AWS::EKS::Cluster"}))
+    ResourceType.add_member(:open_search_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenSearchDomain", traits: {"smithy.api#enumValue" => "AWS::OpenSearch::Domain"}))
+    ResourceType.add_member(:transit_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransitGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGateway"}))
+    ResourceType.add_member(:kinesis_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisStream", traits: {"smithy.api#enumValue" => "AWS::Kinesis::Stream"}))
+    ResourceType.add_member(:kinesis_stream_consumer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisStreamConsumer", traits: {"smithy.api#enumValue" => "AWS::Kinesis::StreamConsumer"}))
+    ResourceType.add_member(:code_deploy_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeDeployApplication", traits: {"smithy.api#enumValue" => "AWS::CodeDeploy::Application"}))
+    ResourceType.add_member(:code_deploy_deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeDeployDeploymentConfig", traits: {"smithy.api#enumValue" => "AWS::CodeDeploy::DeploymentConfig"}))
+    ResourceType.add_member(:code_deploy_deployment_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeDeployDeploymentGroup", traits: {"smithy.api#enumValue" => "AWS::CodeDeploy::DeploymentGroup"}))
+    ResourceType.add_member(:launch_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LaunchTemplate", traits: {"smithy.api#enumValue" => "AWS::EC2::LaunchTemplate"}))
+    ResourceType.add_member(:ecr_public_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRPublicRepository", traits: {"smithy.api#enumValue" => "AWS::ECR::PublicRepository"}))
+    ResourceType.add_member(:guard_duty_detector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyDetector", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::Detector"}))
+    ResourceType.add_member(:emr_security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EMRSecurityConfiguration", traits: {"smithy.api#enumValue" => "AWS::EMR::SecurityConfiguration"}))
+    ResourceType.add_member(:sage_maker_code_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerCodeRepository", traits: {"smithy.api#enumValue" => "AWS::SageMaker::CodeRepository"}))
+    ResourceType.add_member(:route53_resolver_resolver_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverEndpoint", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverEndpoint"}))
+    ResourceType.add_member(:route53_resolver_resolver_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverRule", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverRule"}))
+    ResourceType.add_member(:route53_resolver_resolver_rule_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverRuleAssociation", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverRuleAssociation"}))
+    ResourceType.add_member(:dms_replication_subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSReplicationSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::DMS::ReplicationSubnetGroup"}))
+    ResourceType.add_member(:dms_event_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSEventSubscription", traits: {"smithy.api#enumValue" => "AWS::DMS::EventSubscription"}))
+    ResourceType.add_member(:msk_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKCluster", traits: {"smithy.api#enumValue" => "AWS::MSK::Cluster"}))
+    ResourceType.add_member(:step_functions_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StepFunctionsActivity", traits: {"smithy.api#enumValue" => "AWS::StepFunctions::Activity"}))
+    ResourceType.add_member(:work_spaces_workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesWorkspace", traits: {"smithy.api#enumValue" => "AWS::WorkSpaces::Workspace"}))
+    ResourceType.add_member(:work_spaces_connection_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WorkSpacesConnectionAlias", traits: {"smithy.api#enumValue" => "AWS::WorkSpaces::ConnectionAlias"}))
+    ResourceType.add_member(:sage_maker_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerModel", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Model"}))
+    ResourceType.add_member(:listener_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ListenerV2", traits: {"smithy.api#enumValue" => "AWS::ElasticLoadBalancingV2::Listener"}))
+    ResourceType.add_member(:step_functions_state_machine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StepFunctionsStateMachine", traits: {"smithy.api#enumValue" => "AWS::StepFunctions::StateMachine"}))
+    ResourceType.add_member(:batch_job_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BatchJobQueue", traits: {"smithy.api#enumValue" => "AWS::Batch::JobQueue"}))
+    ResourceType.add_member(:batch_compute_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BatchComputeEnvironment", traits: {"smithy.api#enumValue" => "AWS::Batch::ComputeEnvironment"}))
+    ResourceType.add_member(:access_analyzer_analyzer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccessAnalyzerAnalyzer", traits: {"smithy.api#enumValue" => "AWS::AccessAnalyzer::Analyzer"}))
+    ResourceType.add_member(:athena_work_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AthenaWorkGroup", traits: {"smithy.api#enumValue" => "AWS::Athena::WorkGroup"}))
+    ResourceType.add_member(:athena_data_catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AthenaDataCatalog", traits: {"smithy.api#enumValue" => "AWS::Athena::DataCatalog"}))
+    ResourceType.add_member(:detective_graph, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DetectiveGraph", traits: {"smithy.api#enumValue" => "AWS::Detective::Graph"}))
+    ResourceType.add_member(:global_accelerator_accelerator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlobalAcceleratorAccelerator", traits: {"smithy.api#enumValue" => "AWS::GlobalAccelerator::Accelerator"}))
+    ResourceType.add_member(:global_accelerator_endpoint_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlobalAcceleratorEndpointGroup", traits: {"smithy.api#enumValue" => "AWS::GlobalAccelerator::EndpointGroup"}))
+    ResourceType.add_member(:global_accelerator_listener, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlobalAcceleratorListener", traits: {"smithy.api#enumValue" => "AWS::GlobalAccelerator::Listener"}))
+    ResourceType.add_member(:transit_gateway_attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransitGatewayAttachment", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayAttachment"}))
+    ResourceType.add_member(:transit_gateway_route_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransitGatewayRouteTable", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayRouteTable"}))
+    ResourceType.add_member(:dms_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSCertificate", traits: {"smithy.api#enumValue" => "AWS::DMS::Certificate"}))
+    ResourceType.add_member(:app_config_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigApplication", traits: {"smithy.api#enumValue" => "AWS::AppConfig::Application"}))
+    ResourceType.add_member(:app_sync_graph_ql_api, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppSyncGraphQLApi", traits: {"smithy.api#enumValue" => "AWS::AppSync::GraphQLApi"}))
+    ResourceType.add_member(:data_sync_location_smb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationSMB", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationSMB"}))
+    ResourceType.add_member(:data_sync_location_f_sx_lustre, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationFSxLustre", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationFSxLustre"}))
+    ResourceType.add_member(:data_sync_location_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationS3", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationS3"}))
+    ResourceType.add_member(:data_sync_location_efs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationEFS", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationEFS"}))
+    ResourceType.add_member(:data_sync_task, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncTask", traits: {"smithy.api#enumValue" => "AWS::DataSync::Task"}))
+    ResourceType.add_member(:data_sync_location_nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationNFS", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationNFS"}))
+    ResourceType.add_member(:network_insights_access_scope_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkInsightsAccessScopeAnalysis", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsAccessScopeAnalysis"}))
+    ResourceType.add_member(:eks_fargate_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSFargateProfile", traits: {"smithy.api#enumValue" => "AWS::EKS::FargateProfile"}))
+    ResourceType.add_member(:glue_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlueJob", traits: {"smithy.api#enumValue" => "AWS::Glue::Job"}))
+    ResourceType.add_member(:guard_duty_threat_intel_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyThreatIntelSet", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::ThreatIntelSet"}))
+    ResourceType.add_member(:guard_duty_ip_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyIPSet", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::IPSet"}))
+    ResourceType.add_member(:sage_maker_workteam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerWorkteam", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Workteam"}))
+    ResourceType.add_member(:sage_maker_notebook_instance_lifecycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerNotebookInstanceLifecycleConfig", traits: {"smithy.api#enumValue" => "AWS::SageMaker::NotebookInstanceLifecycleConfig"}))
+    ResourceType.add_member(:service_discovery_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryService", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::Service"}))
+    ResourceType.add_member(:service_discovery_public_dns_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryPublicDnsNamespace", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::PublicDnsNamespace"}))
+    ResourceType.add_member(:ses_contact_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESContactList", traits: {"smithy.api#enumValue" => "AWS::SES::ContactList"}))
+    ResourceType.add_member(:ses_configuration_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESConfigurationSet", traits: {"smithy.api#enumValue" => "AWS::SES::ConfigurationSet"}))
+    ResourceType.add_member(:route53_hosted_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53HostedZone", traits: {"smithy.api#enumValue" => "AWS::Route53::HostedZone"}))
+    ResourceType.add_member(:io_t_events_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTEventsInput", traits: {"smithy.api#enumValue" => "AWS::IoTEvents::Input"}))
+    ResourceType.add_member(:io_t_events_detector_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTEventsDetectorModel", traits: {"smithy.api#enumValue" => "AWS::IoTEvents::DetectorModel"}))
+    ResourceType.add_member(:io_t_events_alarm_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTEventsAlarmModel", traits: {"smithy.api#enumValue" => "AWS::IoTEvents::AlarmModel"}))
+    ResourceType.add_member(:service_discovery_http_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryHttpNamespace", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::HttpNamespace"}))
+    ResourceType.add_member(:events_event_bus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsEventBus", traits: {"smithy.api#enumValue" => "AWS::Events::EventBus"}))
+    ResourceType.add_member(:image_builder_container_recipe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderContainerRecipe", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::ContainerRecipe"}))
+    ResourceType.add_member(:image_builder_distribution_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderDistributionConfiguration", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::DistributionConfiguration"}))
+    ResourceType.add_member(:image_builder_infrastructure_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderInfrastructureConfiguration", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::InfrastructureConfiguration"}))
+    ResourceType.add_member(:data_sync_location_object_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationObjectStorage", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationObjectStorage"}))
+    ResourceType.add_member(:data_sync_location_hdfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationHDFS", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationHDFS"}))
+    ResourceType.add_member(:glue_classifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlueClassifier", traits: {"smithy.api#enumValue" => "AWS::Glue::Classifier"}))
+    ResourceType.add_member(:route53_recovery_readiness_cell, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessCell", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::Cell"}))
+    ResourceType.add_member(:route53_recovery_readiness_readiness_check, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessReadinessCheck", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::ReadinessCheck"}))
+    ResourceType.add_member(:ecr_registry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRRegistryPolicy", traits: {"smithy.api#enumValue" => "AWS::ECR::RegistryPolicy"}))
+    ResourceType.add_member(:backup_report_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BackupReportPlan", traits: {"smithy.api#enumValue" => "AWS::Backup::ReportPlan"}))
+    ResourceType.add_member(:lightsail_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailCertificate", traits: {"smithy.api#enumValue" => "AWS::Lightsail::Certificate"}))
+    ResourceType.add_member(:rum_app_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RUMAppMonitor", traits: {"smithy.api#enumValue" => "AWS::RUM::AppMonitor"}))
+    ResourceType.add_member(:events_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsEndpoint", traits: {"smithy.api#enumValue" => "AWS::Events::Endpoint"}))
+    ResourceType.add_member(:ses_receipt_rule_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESReceiptRuleSet", traits: {"smithy.api#enumValue" => "AWS::SES::ReceiptRuleSet"}))
+    ResourceType.add_member(:events_archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsArchive", traits: {"smithy.api#enumValue" => "AWS::Events::Archive"}))
+    ResourceType.add_member(:events_api_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsApiDestination", traits: {"smithy.api#enumValue" => "AWS::Events::ApiDestination"}))
+    ResourceType.add_member(:lightsail_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailDisk", traits: {"smithy.api#enumValue" => "AWS::Lightsail::Disk"}))
+    ResourceType.add_member(:fis_experiment_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FISExperimentTemplate", traits: {"smithy.api#enumValue" => "AWS::FIS::ExperimentTemplate"}))
+    ResourceType.add_member(:data_sync_location_f_sx_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DataSyncLocationFSxWindows", traits: {"smithy.api#enumValue" => "AWS::DataSync::LocationFSxWindows"}))
+    ResourceType.add_member(:ses_receipt_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESReceiptFilter", traits: {"smithy.api#enumValue" => "AWS::SES::ReceiptFilter"}))
+    ResourceType.add_member(:guard_duty_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GuardDutyFilter", traits: {"smithy.api#enumValue" => "AWS::GuardDuty::Filter"}))
+    ResourceType.add_member(:ses_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SESTemplate", traits: {"smithy.api#enumValue" => "AWS::SES::Template"}))
+    ResourceType.add_member(:amazon_mq_broker, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmazonMQBroker", traits: {"smithy.api#enumValue" => "AWS::AmazonMQ::Broker"}))
+    ResourceType.add_member(:app_config_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigEnvironment", traits: {"smithy.api#enumValue" => "AWS::AppConfig::Environment"}))
+    ResourceType.add_member(:app_config_configuration_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigConfigurationProfile", traits: {"smithy.api#enumValue" => "AWS::AppConfig::ConfigurationProfile"}))
+    ResourceType.add_member(:cloud9_environment_ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Cloud9EnvironmentEC2", traits: {"smithy.api#enumValue" => "AWS::Cloud9::EnvironmentEC2"}))
+    ResourceType.add_member(:event_schemas_registry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasRegistry", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::Registry"}))
+    ResourceType.add_member(:event_schemas_registry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasRegistryPolicy", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::RegistryPolicy"}))
+    ResourceType.add_member(:event_schemas_discoverer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasDiscoverer", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::Discoverer"}))
+    ResourceType.add_member(:fraud_detector_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorLabel", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::Label"}))
+    ResourceType.add_member(:fraud_detector_entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorEntityType", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::EntityType"}))
+    ResourceType.add_member(:fraud_detector_variable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorVariable", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::Variable"}))
+    ResourceType.add_member(:fraud_detector_outcome, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FraudDetectorOutcome", traits: {"smithy.api#enumValue" => "AWS::FraudDetector::Outcome"}))
+    ResourceType.add_member(:io_t_authorizer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAuthorizer", traits: {"smithy.api#enumValue" => "AWS::IoT::Authorizer"}))
+    ResourceType.add_member(:io_t_security_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSecurityProfile", traits: {"smithy.api#enumValue" => "AWS::IoT::SecurityProfile"}))
+    ResourceType.add_member(:io_t_role_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTRoleAlias", traits: {"smithy.api#enumValue" => "AWS::IoT::RoleAlias"}))
+    ResourceType.add_member(:io_t_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTDimension", traits: {"smithy.api#enumValue" => "AWS::IoT::Dimension"}))
+    ResourceType.add_member(:io_t_analytics_datastore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsDatastore", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Datastore"}))
+    ResourceType.add_member(:lightsail_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailBucket", traits: {"smithy.api#enumValue" => "AWS::Lightsail::Bucket"}))
+    ResourceType.add_member(:lightsail_static_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LightsailStaticIp", traits: {"smithy.api#enumValue" => "AWS::Lightsail::StaticIp"}))
+    ResourceType.add_member(:media_package_packaging_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaPackagePackagingGroup", traits: {"smithy.api#enumValue" => "AWS::MediaPackage::PackagingGroup"}))
+    ResourceType.add_member(:route53_recovery_readiness_recovery_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessRecoveryGroup", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::RecoveryGroup"}))
+    ResourceType.add_member(:resilience_hub_resiliency_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResilienceHubResiliencyPolicy", traits: {"smithy.api#enumValue" => "AWS::ResilienceHub::ResiliencyPolicy"}))
+    ResourceType.add_member(:transfer_workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferWorkflow", traits: {"smithy.api#enumValue" => "AWS::Transfer::Workflow"}))
+    ResourceType.add_member(:eks_identity_provider_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSIdentityProviderConfig", traits: {"smithy.api#enumValue" => "AWS::EKS::IdentityProviderConfig"}))
+    ResourceType.add_member(:eks_addon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EKSAddon", traits: {"smithy.api#enumValue" => "AWS::EKS::Addon"}))
+    ResourceType.add_member(:glue_ml_transform, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GlueMLTransform", traits: {"smithy.api#enumValue" => "AWS::Glue::MLTransform"}))
+    ResourceType.add_member(:io_t_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTPolicy", traits: {"smithy.api#enumValue" => "AWS::IoT::Policy"}))
+    ResourceType.add_member(:io_t_mitigation_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTMitigationAction", traits: {"smithy.api#enumValue" => "AWS::IoT::MitigationAction"}))
+    ResourceType.add_member(:io_t_twin_maker_workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerWorkspace", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::Workspace"}))
+    ResourceType.add_member(:io_t_twin_maker_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerEntity", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::Entity"}))
+    ResourceType.add_member(:io_t_analytics_dataset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsDataset", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Dataset"}))
+    ResourceType.add_member(:io_t_analytics_pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsPipeline", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Pipeline"}))
+    ResourceType.add_member(:io_t_analytics_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAnalyticsChannel", traits: {"smithy.api#enumValue" => "AWS::IoTAnalytics::Channel"}))
+    ResourceType.add_member(:io_t_site_wise_dashboard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseDashboard", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Dashboard"}))
+    ResourceType.add_member(:io_t_site_wise_project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseProject", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Project"}))
+    ResourceType.add_member(:io_t_site_wise_portal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWisePortal", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Portal"}))
+    ResourceType.add_member(:io_t_site_wise_asset_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseAssetModel", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::AssetModel"}))
+    ResourceType.add_member(:ivs_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IVSChannel", traits: {"smithy.api#enumValue" => "AWS::IVS::Channel"}))
+    ResourceType.add_member(:ivs_recording_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IVSRecordingConfiguration", traits: {"smithy.api#enumValue" => "AWS::IVS::RecordingConfiguration"}))
+    ResourceType.add_member(:ivs_playback_key_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IVSPlaybackKeyPair", traits: {"smithy.api#enumValue" => "AWS::IVS::PlaybackKeyPair"}))
+    ResourceType.add_member(:kinesis_analytics_v2_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisAnalyticsV2Application", traits: {"smithy.api#enumValue" => "AWS::KinesisAnalyticsV2::Application"}))
+    ResourceType.add_member(:rds_global_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSGlobalCluster", traits: {"smithy.api#enumValue" => "AWS::RDS::GlobalCluster"}))
+    ResourceType.add_member(:s3_multi_region_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3MultiRegionAccessPoint", traits: {"smithy.api#enumValue" => "AWS::S3::MultiRegionAccessPoint"}))
+    ResourceType.add_member(:device_farm_test_grid_project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DeviceFarmTestGridProject", traits: {"smithy.api#enumValue" => "AWS::DeviceFarm::TestGridProject"}))
+    ResourceType.add_member(:budgets_budgets_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BudgetsBudgetsAction", traits: {"smithy.api#enumValue" => "AWS::Budgets::BudgetsAction"}))
+    ResourceType.add_member(:lex_bot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LexBot", traits: {"smithy.api#enumValue" => "AWS::Lex::Bot"}))
+    ResourceType.add_member(:code_guru_reviewer_repository_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeGuruReviewerRepositoryAssociation", traits: {"smithy.api#enumValue" => "AWS::CodeGuruReviewer::RepositoryAssociation"}))
+    ResourceType.add_member(:io_t_custom_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTCustomMetric", traits: {"smithy.api#enumValue" => "AWS::IoT::CustomMetric"}))
+    ResourceType.add_member(:route53_resolver_firewall_domain_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverFirewallDomainList", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::FirewallDomainList"}))
+    ResourceType.add_member(:robo_maker_robot_application_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RoboMakerRobotApplicationVersion", traits: {"smithy.api#enumValue" => "AWS::RoboMaker::RobotApplicationVersion"}))
+    ResourceType.add_member(:ec2_traffic_mirror_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TrafficMirrorSession", traits: {"smithy.api#enumValue" => "AWS::EC2::TrafficMirrorSession"}))
+    ResourceType.add_member(:io_t_site_wise_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTSiteWiseGateway", traits: {"smithy.api#enumValue" => "AWS::IoTSiteWise::Gateway"}))
+    ResourceType.add_member(:lex_bot_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LexBotAlias", traits: {"smithy.api#enumValue" => "AWS::Lex::BotAlias"}))
+    ResourceType.add_member(:lookout_metrics_alert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LookoutMetricsAlert", traits: {"smithy.api#enumValue" => "AWS::LookoutMetrics::Alert"}))
+    ResourceType.add_member(:io_t_account_audit_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTAccountAuditConfiguration", traits: {"smithy.api#enumValue" => "AWS::IoT::AccountAuditConfiguration"}))
+    ResourceType.add_member(:ec2_traffic_mirror_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TrafficMirrorTarget", traits: {"smithy.api#enumValue" => "AWS::EC2::TrafficMirrorTarget"}))
+    ResourceType.add_member(:s3_storage_lens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3StorageLens", traits: {"smithy.api#enumValue" => "AWS::S3::StorageLens"}))
+    ResourceType.add_member(:io_t_scheduled_audit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTScheduledAudit", traits: {"smithy.api#enumValue" => "AWS::IoT::ScheduledAudit"}))
+    ResourceType.add_member(:events_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsConnection", traits: {"smithy.api#enumValue" => "AWS::Events::Connection"}))
+    ResourceType.add_member(:event_schemas_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventSchemasSchema", traits: {"smithy.api#enumValue" => "AWS::EventSchemas::Schema"}))
+    ResourceType.add_member(:media_package_packaging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaPackagePackagingConfiguration", traits: {"smithy.api#enumValue" => "AWS::MediaPackage::PackagingConfiguration"}))
+    ResourceType.add_member(:kinesis_video_signaling_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisVideoSignalingChannel", traits: {"smithy.api#enumValue" => "AWS::KinesisVideo::SignalingChannel"}))
+    ResourceType.add_member(:app_stream_directory_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamDirectoryConfig", traits: {"smithy.api#enumValue" => "AWS::AppStream::DirectoryConfig"}))
+    ResourceType.add_member(:lookout_vision_project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LookoutVisionProject", traits: {"smithy.api#enumValue" => "AWS::LookoutVision::Project"}))
+    ResourceType.add_member(:route53_recovery_control_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlCluster", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::Cluster"}))
+    ResourceType.add_member(:route53_recovery_control_safety_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlSafetyRule", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::SafetyRule"}))
+    ResourceType.add_member(:route53_recovery_control_control_panel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlControlPanel", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::ControlPanel"}))
+    ResourceType.add_member(:route53_recovery_control_routing_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryControlRoutingControl", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryControl::RoutingControl"}))
+    ResourceType.add_member(:route53_recovery_readiness_resource_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53RecoveryReadinessResourceSet", traits: {"smithy.api#enumValue" => "AWS::Route53RecoveryReadiness::ResourceSet"}))
+    ResourceType.add_member(:robo_maker_simulation_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RoboMakerSimulationApplication", traits: {"smithy.api#enumValue" => "AWS::RoboMaker::SimulationApplication"}))
+    ResourceType.add_member(:robo_maker_robot_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RoboMakerRobotApplication", traits: {"smithy.api#enumValue" => "AWS::RoboMaker::RobotApplication"}))
+    ResourceType.add_member(:health_lake_fhir_datastore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HealthLakeFHIRDatastore", traits: {"smithy.api#enumValue" => "AWS::HealthLake::FHIRDatastore"}))
+    ResourceType.add_member(:pinpoint_segment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointSegment", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::Segment"}))
+    ResourceType.add_member(:pinpoint_application_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointApplicationSettings", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::ApplicationSettings"}))
+    ResourceType.add_member(:events_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventsRule", traits: {"smithy.api#enumValue" => "AWS::Events::Rule"}))
+    ResourceType.add_member(:ec2_dhcp_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2DHCPOptions", traits: {"smithy.api#enumValue" => "AWS::EC2::DHCPOptions"}))
+    ResourceType.add_member(:ec2_network_insights_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2NetworkInsightsPath", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsPath"}))
+    ResourceType.add_member(:ec2_traffic_mirror_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TrafficMirrorFilter", traits: {"smithy.api#enumValue" => "AWS::EC2::TrafficMirrorFilter"}))
+    ResourceType.add_member(:ec2_ipam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAM", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAM"}))
+    ResourceType.add_member(:io_t_twin_maker_scene, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerScene", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::Scene"}))
+    ResourceType.add_member(:network_manager_transit_gateway_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerTransitGatewayRegistration", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::TransitGatewayRegistration"}))
+    ResourceType.add_member(:customer_profiles_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomerProfilesDomain", traits: {"smithy.api#enumValue" => "AWS::CustomerProfiles::Domain"}))
+    ResourceType.add_member(:auto_scaling_warm_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AutoScalingWarmPool", traits: {"smithy.api#enumValue" => "AWS::AutoScaling::WarmPool"}))
+    ResourceType.add_member(:connect_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectPhoneNumber", traits: {"smithy.api#enumValue" => "AWS::Connect::PhoneNumber"}))
+    ResourceType.add_member(:app_config_deployment_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigDeploymentStrategy", traits: {"smithy.api#enumValue" => "AWS::AppConfig::DeploymentStrategy"}))
+    ResourceType.add_member(:app_flow_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppFlowFlow", traits: {"smithy.api#enumValue" => "AWS::AppFlow::Flow"}))
+    ResourceType.add_member(:audit_manager_assessment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AuditManagerAssessment", traits: {"smithy.api#enumValue" => "AWS::AuditManager::Assessment"}))
+    ResourceType.add_member(:cloud_watch_metric_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CloudWatchMetricStream", traits: {"smithy.api#enumValue" => "AWS::CloudWatch::MetricStream"}))
+    ResourceType.add_member(:device_farm_instance_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DeviceFarmInstanceProfile", traits: {"smithy.api#enumValue" => "AWS::DeviceFarm::InstanceProfile"}))
+    ResourceType.add_member(:device_farm_project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DeviceFarmProject", traits: {"smithy.api#enumValue" => "AWS::DeviceFarm::Project"}))
+    ResourceType.add_member(:ec2_ec2_fleet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2EC2Fleet", traits: {"smithy.api#enumValue" => "AWS::EC2::EC2Fleet"}))
+    ResourceType.add_member(:ec2_subnet_route_table_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SubnetRouteTableAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::SubnetRouteTableAssociation"}))
+    ResourceType.add_member(:ecr_pull_through_cache_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECRPullThroughCacheRule", traits: {"smithy.api#enumValue" => "AWS::ECR::PullThroughCacheRule"}))
+    ResourceType.add_member(:ground_station_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GroundStationConfig", traits: {"smithy.api#enumValue" => "AWS::GroundStation::Config"}))
+    ResourceType.add_member(:image_builder_image_pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderImagePipeline", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::ImagePipeline"}))
+    ResourceType.add_member(:io_t_fleet_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTFleetMetric", traits: {"smithy.api#enumValue" => "AWS::IoT::FleetMetric"}))
+    ResourceType.add_member(:io_t_wireless_service_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTWirelessServiceProfile", traits: {"smithy.api#enumValue" => "AWS::IoTWireless::ServiceProfile"}))
+    ResourceType.add_member(:network_manager_device, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerDevice", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::Device"}))
+    ResourceType.add_member(:network_manager_global_network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerGlobalNetwork", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::GlobalNetwork"}))
+    ResourceType.add_member(:network_manager_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerLink", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::Link"}))
+    ResourceType.add_member(:network_manager_site, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerSite", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::Site"}))
+    ResourceType.add_member(:panorama_package, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PanoramaPackage", traits: {"smithy.api#enumValue" => "AWS::Panorama::Package"}))
+    ResourceType.add_member(:pinpoint_app, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointApp", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::App"}))
+    ResourceType.add_member(:redshift_scheduled_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftScheduledAction", traits: {"smithy.api#enumValue" => "AWS::Redshift::ScheduledAction"}))
+    ResourceType.add_member(:route53_resolver_firewall_rule_group_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverFirewallRuleGroupAssociation", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::FirewallRuleGroupAssociation"}))
+    ResourceType.add_member(:sage_maker_app_image_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerAppImageConfig", traits: {"smithy.api#enumValue" => "AWS::SageMaker::AppImageConfig"}))
+    ResourceType.add_member(:sage_maker_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerImage", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Image"}))
+    ResourceType.add_member(:ecs_task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSTaskSet", traits: {"smithy.api#enumValue" => "AWS::ECS::TaskSet"}))
+    ResourceType.add_member(:cassandra_keyspace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CassandraKeyspace", traits: {"smithy.api#enumValue" => "AWS::Cassandra::Keyspace"}))
+    ResourceType.add_member(:signer_signing_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SignerSigningProfile", traits: {"smithy.api#enumValue" => "AWS::Signer::SigningProfile"}))
+    ResourceType.add_member(:amplify_app, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmplifyApp", traits: {"smithy.api#enumValue" => "AWS::Amplify::App"}))
+    ResourceType.add_member(:app_mesh_virtual_node, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualNode", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualNode"}))
+    ResourceType.add_member(:app_mesh_virtual_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualService", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualService"}))
+    ResourceType.add_member(:app_runner_vpc_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppRunnerVpcConnector", traits: {"smithy.api#enumValue" => "AWS::AppRunner::VpcConnector"}))
+    ResourceType.add_member(:app_stream_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamApplication", traits: {"smithy.api#enumValue" => "AWS::AppStream::Application"}))
+    ResourceType.add_member(:code_artifact_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeArtifactRepository", traits: {"smithy.api#enumValue" => "AWS::CodeArtifact::Repository"}))
+    ResourceType.add_member(:ec2_prefix_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2PrefixList", traits: {"smithy.api#enumValue" => "AWS::EC2::PrefixList"}))
+    ResourceType.add_member(:ec2_spot_fleet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SpotFleet", traits: {"smithy.api#enumValue" => "AWS::EC2::SpotFleet"}))
+    ResourceType.add_member(:evidently_project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EvidentlyProject", traits: {"smithy.api#enumValue" => "AWS::Evidently::Project"}))
+    ResourceType.add_member(:forecast_dataset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastDataset", traits: {"smithy.api#enumValue" => "AWS::Forecast::Dataset"}))
+    ResourceType.add_member(:iamsaml_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMSAMLProvider", traits: {"smithy.api#enumValue" => "AWS::IAM::SAMLProvider"}))
+    ResourceType.add_member(:iam_server_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMServerCertificate", traits: {"smithy.api#enumValue" => "AWS::IAM::ServerCertificate"}))
+    ResourceType.add_member(:pinpoint_campaign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointCampaign", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::Campaign"}))
+    ResourceType.add_member(:pinpoint_in_app_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointInAppTemplate", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::InAppTemplate"}))
+    ResourceType.add_member(:sage_maker_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerDomain", traits: {"smithy.api#enumValue" => "AWS::SageMaker::Domain"}))
+    ResourceType.add_member(:transfer_agreement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferAgreement", traits: {"smithy.api#enumValue" => "AWS::Transfer::Agreement"}))
+    ResourceType.add_member(:transfer_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferConnector", traits: {"smithy.api#enumValue" => "AWS::Transfer::Connector"}))
+    ResourceType.add_member(:kinesis_firehose_delivery_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisFirehoseDeliveryStream", traits: {"smithy.api#enumValue" => "AWS::KinesisFirehose::DeliveryStream"}))
+    ResourceType.add_member(:amplify_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmplifyBranch", traits: {"smithy.api#enumValue" => "AWS::Amplify::Branch"}))
+    ResourceType.add_member(:app_integrations_event_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppIntegrationsEventIntegration", traits: {"smithy.api#enumValue" => "AWS::AppIntegrations::EventIntegration"}))
+    ResourceType.add_member(:app_mesh_route, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshRoute", traits: {"smithy.api#enumValue" => "AWS::AppMesh::Route"}))
+    ResourceType.add_member(:athena_prepared_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AthenaPreparedStatement", traits: {"smithy.api#enumValue" => "AWS::Athena::PreparedStatement"}))
+    ResourceType.add_member(:ec2_ipam_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMScope", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMScope"}))
+    ResourceType.add_member(:evidently_launch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EvidentlyLaunch", traits: {"smithy.api#enumValue" => "AWS::Evidently::Launch"}))
+    ResourceType.add_member(:forecast_dataset_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ForecastDatasetGroup", traits: {"smithy.api#enumValue" => "AWS::Forecast::DatasetGroup"}))
+    ResourceType.add_member(:greengrass_v2_component_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GreengrassV2ComponentVersion", traits: {"smithy.api#enumValue" => "AWS::GreengrassV2::ComponentVersion"}))
+    ResourceType.add_member(:ground_station_mission_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GroundStationMissionProfile", traits: {"smithy.api#enumValue" => "AWS::GroundStation::MissionProfile"}))
+    ResourceType.add_member(:media_connect_flow_entitlement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectFlowEntitlement", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::FlowEntitlement"}))
+    ResourceType.add_member(:media_connect_flow_vpc_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectFlowVpcInterface", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::FlowVpcInterface"}))
+    ResourceType.add_member(:media_tailor_playback_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaTailorPlaybackConfiguration", traits: {"smithy.api#enumValue" => "AWS::MediaTailor::PlaybackConfiguration"}))
+    ResourceType.add_member(:msk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKConfiguration", traits: {"smithy.api#enumValue" => "AWS::MSK::Configuration"}))
+    ResourceType.add_member(:personalize_dataset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeDataset", traits: {"smithy.api#enumValue" => "AWS::Personalize::Dataset"}))
+    ResourceType.add_member(:personalize_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeSchema", traits: {"smithy.api#enumValue" => "AWS::Personalize::Schema"}))
+    ResourceType.add_member(:personalize_solution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeSolution", traits: {"smithy.api#enumValue" => "AWS::Personalize::Solution"}))
+    ResourceType.add_member(:pinpoint_email_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointEmailTemplate", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::EmailTemplate"}))
+    ResourceType.add_member(:pinpoint_event_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointEventStream", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::EventStream"}))
+    ResourceType.add_member(:resilience_hub_app, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResilienceHubApp", traits: {"smithy.api#enumValue" => "AWS::ResilienceHub::App"}))
+    ResourceType.add_member(:acmpca_certificate_authority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACMPCACertificateAuthority", traits: {"smithy.api#enumValue" => "AWS::ACMPCA::CertificateAuthority"}))
+    ResourceType.add_member(:app_config_hosted_configuration_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigHostedConfigurationVersion", traits: {"smithy.api#enumValue" => "AWS::AppConfig::HostedConfigurationVersion"}))
+    ResourceType.add_member(:app_mesh_virtual_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualGateway", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualGateway"}))
+    ResourceType.add_member(:app_mesh_virtual_router, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshVirtualRouter", traits: {"smithy.api#enumValue" => "AWS::AppMesh::VirtualRouter"}))
+    ResourceType.add_member(:app_runner_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppRunnerService", traits: {"smithy.api#enumValue" => "AWS::AppRunner::Service"}))
+    ResourceType.add_member(:customer_profiles_object_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CustomerProfilesObjectType", traits: {"smithy.api#enumValue" => "AWS::CustomerProfiles::ObjectType"}))
+    ResourceType.add_member(:dms_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DMSEndpoint", traits: {"smithy.api#enumValue" => "AWS::DMS::Endpoint"}))
+    ResourceType.add_member(:ec2_capacity_reservation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2CapacityReservation", traits: {"smithy.api#enumValue" => "AWS::EC2::CapacityReservation"}))
+    ResourceType.add_member(:ec2_client_vpn_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2ClientVpnEndpoint", traits: {"smithy.api#enumValue" => "AWS::EC2::ClientVpnEndpoint"}))
+    ResourceType.add_member(:kendra_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KendraIndex", traits: {"smithy.api#enumValue" => "AWS::Kendra::Index"}))
+    ResourceType.add_member(:kinesis_video_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KinesisVideoStream", traits: {"smithy.api#enumValue" => "AWS::KinesisVideo::Stream"}))
+    ResourceType.add_member(:logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LogsDestination", traits: {"smithy.api#enumValue" => "AWS::Logs::Destination"}))
+    ResourceType.add_member(:pinpoint_email_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PinpointEmailChannel", traits: {"smithy.api#enumValue" => "AWS::Pinpoint::EmailChannel"}))
+    ResourceType.add_member(:s3_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3AccessPoint", traits: {"smithy.api#enumValue" => "AWS::S3::AccessPoint"}))
+    ResourceType.add_member(:network_manager_customer_gateway_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerCustomerGatewayAssociation", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::CustomerGatewayAssociation"}))
+    ResourceType.add_member(:network_manager_link_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerLinkAssociation", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::LinkAssociation"}))
+    ResourceType.add_member(:io_t_wireless_multicast_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTWirelessMulticastGroup", traits: {"smithy.api#enumValue" => "AWS::IoTWireless::MulticastGroup"}))
+    ResourceType.add_member(:personalize_dataset_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PersonalizeDatasetGroup", traits: {"smithy.api#enumValue" => "AWS::Personalize::DatasetGroup"}))
+    ResourceType.add_member(:io_t_twin_maker_component_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerComponentType", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::ComponentType"}))
+    ResourceType.add_member(:code_build_report_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeBuildReportGroup", traits: {"smithy.api#enumValue" => "AWS::CodeBuild::ReportGroup"}))
+    ResourceType.add_member(:sage_maker_feature_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerFeatureGroup", traits: {"smithy.api#enumValue" => "AWS::SageMaker::FeatureGroup"}))
+    ResourceType.add_member(:msk_batch_scram_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKBatchScramSecret", traits: {"smithy.api#enumValue" => "AWS::MSK::BatchScramSecret"}))
+    ResourceType.add_member(:app_stream_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamStack", traits: {"smithy.api#enumValue" => "AWS::AppStream::Stack"}))
+    ResourceType.add_member(:io_t_job_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTJobTemplate", traits: {"smithy.api#enumValue" => "AWS::IoT::JobTemplate"}))
+    ResourceType.add_member(:io_t_wireless_fuota_task, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTWirelessFuotaTask", traits: {"smithy.api#enumValue" => "AWS::IoTWireless::FuotaTask"}))
+    ResourceType.add_member(:io_t_provisioning_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTProvisioningTemplate", traits: {"smithy.api#enumValue" => "AWS::IoT::ProvisioningTemplate"}))
+    ResourceType.add_member(:inspector_v2_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InspectorV2Filter", traits: {"smithy.api#enumValue" => "AWS::InspectorV2::Filter"}))
+    ResourceType.add_member(:route53_resolver_resolver_query_logging_config_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverQueryLoggingConfigAssociation", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation"}))
+    ResourceType.add_member(:service_discovery_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceDiscoveryInstance", traits: {"smithy.api#enumValue" => "AWS::ServiceDiscovery::Instance"}))
+    ResourceType.add_member(:transfer_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferCertificate", traits: {"smithy.api#enumValue" => "AWS::Transfer::Certificate"}))
+    ResourceType.add_member(:media_connect_flow_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectFlowSource", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::FlowSource"}))
+    ResourceType.add_member(:aps_rule_groups_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APSRuleGroupsNamespace", traits: {"smithy.api#enumValue" => "AWS::APS::RuleGroupsNamespace"}))
+    ResourceType.add_member(:code_guru_profiler_profiling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CodeGuruProfilerProfilingGroup", traits: {"smithy.api#enumValue" => "AWS::CodeGuruProfiler::ProfilingGroup"}))
+    ResourceType.add_member(:route53_resolver_resolver_query_logging_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverResolverQueryLoggingConfig", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::ResolverQueryLoggingConfig"}))
+    ResourceType.add_member(:batch_scheduling_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BatchSchedulingPolicy", traits: {"smithy.api#enumValue" => "AWS::Batch::SchedulingPolicy"}))
+    ResourceType.add_member(:acmpca_certificate_authority_activation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACMPCACertificateAuthorityActivation", traits: {"smithy.api#enumValue" => "AWS::ACMPCA::CertificateAuthorityActivation"}))
+    ResourceType.add_member(:app_mesh_gateway_route, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshGatewayRoute", traits: {"smithy.api#enumValue" => "AWS::AppMesh::GatewayRoute"}))
+    ResourceType.add_member(:app_mesh_mesh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppMeshMesh", traits: {"smithy.api#enumValue" => "AWS::AppMesh::Mesh"}))
+    ResourceType.add_member(:connect_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectInstance", traits: {"smithy.api#enumValue" => "AWS::Connect::Instance"}))
+    ResourceType.add_member(:connect_quick_connect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectQuickConnect", traits: {"smithy.api#enumValue" => "AWS::Connect::QuickConnect"}))
+    ResourceType.add_member(:ec2_carrier_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2CarrierGateway", traits: {"smithy.api#enumValue" => "AWS::EC2::CarrierGateway"}))
+    ResourceType.add_member(:ec2_ipam_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMPool", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMPool"}))
+    ResourceType.add_member(:ec2_transit_gateway_connect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TransitGatewayConnect", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayConnect"}))
+    ResourceType.add_member(:ec2_transit_gateway_multicast_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2TransitGatewayMulticastDomain", traits: {"smithy.api#enumValue" => "AWS::EC2::TransitGatewayMulticastDomain"}))
+    ResourceType.add_member(:ecs_capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ECSCapacityProvider", traits: {"smithy.api#enumValue" => "AWS::ECS::CapacityProvider"}))
+    ResourceType.add_member(:iam_instance_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMInstanceProfile", traits: {"smithy.api#enumValue" => "AWS::IAM::InstanceProfile"}))
+    ResourceType.add_member(:io_tca_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTCACertificate", traits: {"smithy.api#enumValue" => "AWS::IoT::CACertificate"}))
+    ResourceType.add_member(:io_t_twin_maker_sync_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IoTTwinMakerSyncJob", traits: {"smithy.api#enumValue" => "AWS::IoTTwinMaker::SyncJob"}))
+    ResourceType.add_member(:kafka_connect_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KafkaConnectConnector", traits: {"smithy.api#enumValue" => "AWS::KafkaConnect::Connector"}))
+    ResourceType.add_member(:lambda_code_signing_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LambdaCodeSigningConfig", traits: {"smithy.api#enumValue" => "AWS::Lambda::CodeSigningConfig"}))
+    ResourceType.add_member(:network_manager_connect_peer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NetworkManagerConnectPeer", traits: {"smithy.api#enumValue" => "AWS::NetworkManager::ConnectPeer"}))
+    ResourceType.add_member(:resource_explorer2_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceExplorer2Index", traits: {"smithy.api#enumValue" => "AWS::ResourceExplorer2::Index"}))
+    ResourceType.add_member(:app_stream_fleet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppStreamFleet", traits: {"smithy.api#enumValue" => "AWS::AppStream::Fleet"}))
+    ResourceType.add_member(:cognito_user_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoUserPool", traits: {"smithy.api#enumValue" => "AWS::Cognito::UserPool"}))
+    ResourceType.add_member(:cognito_user_pool_client, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoUserPoolClient", traits: {"smithy.api#enumValue" => "AWS::Cognito::UserPoolClient"}))
+    ResourceType.add_member(:cognito_user_pool_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoUserPoolGroup", traits: {"smithy.api#enumValue" => "AWS::Cognito::UserPoolGroup"}))
+    ResourceType.add_member(:ec2_network_insights_access_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2NetworkInsightsAccessScope", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsAccessScope"}))
+    ResourceType.add_member(:ec2_network_insights_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2NetworkInsightsAnalysis", traits: {"smithy.api#enumValue" => "AWS::EC2::NetworkInsightsAnalysis"}))
+    ResourceType.add_member(:grafana_workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GrafanaWorkspace", traits: {"smithy.api#enumValue" => "AWS::Grafana::Workspace"}))
+    ResourceType.add_member(:ground_station_dataflow_endpoint_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GroundStationDataflowEndpointGroup", traits: {"smithy.api#enumValue" => "AWS::GroundStation::DataflowEndpointGroup"}))
+    ResourceType.add_member(:image_builder_image_recipe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageBuilderImageRecipe", traits: {"smithy.api#enumValue" => "AWS::ImageBuilder::ImageRecipe"}))
+    ResourceType.add_member(:kms_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMSAlias", traits: {"smithy.api#enumValue" => "AWS::KMS::Alias"}))
+    ResourceType.add_member(:m2_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "M2Environment", traits: {"smithy.api#enumValue" => "AWS::M2::Environment"}))
+    ResourceType.add_member(:quick_sight_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QuickSightDataSource", traits: {"smithy.api#enumValue" => "AWS::QuickSight::DataSource"}))
+    ResourceType.add_member(:quick_sight_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QuickSightTemplate", traits: {"smithy.api#enumValue" => "AWS::QuickSight::Template"}))
+    ResourceType.add_member(:quick_sight_theme, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "QuickSightTheme", traits: {"smithy.api#enumValue" => "AWS::QuickSight::Theme"}))
+    ResourceType.add_member(:rds_option_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RDSOptionGroup", traits: {"smithy.api#enumValue" => "AWS::RDS::OptionGroup"}))
+    ResourceType.add_member(:redshift_endpoint_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftEndpointAccess", traits: {"smithy.api#enumValue" => "AWS::Redshift::EndpointAccess"}))
+    ResourceType.add_member(:route53_resolver_firewall_rule_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ResolverFirewallRuleGroup", traits: {"smithy.api#enumValue" => "AWS::Route53Resolver::FirewallRuleGroup"}))
+    ResourceType.add_member(:ssm_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SSMDocument", traits: {"smithy.api#enumValue" => "AWS::SSM::Document"}))
+    ResourceType.add_member(:app_config_extension_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppConfigExtensionAssociation", traits: {"smithy.api#enumValue" => "AWS::AppConfig::ExtensionAssociation"}))
+    ResourceType.add_member(:app_integrations_application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppIntegrationsApplication", traits: {"smithy.api#enumValue" => "AWS::AppIntegrations::Application"}))
+    ResourceType.add_member(:app_sync_api_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AppSyncApiCache", traits: {"smithy.api#enumValue" => "AWS::AppSync::ApiCache"}))
+    ResourceType.add_member(:bedrock_guardrail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BedrockGuardrail", traits: {"smithy.api#enumValue" => "AWS::Bedrock::Guardrail"}))
+    ResourceType.add_member(:bedrock_knowledge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BedrockKnowledgeBase", traits: {"smithy.api#enumValue" => "AWS::Bedrock::KnowledgeBase"}))
+    ResourceType.add_member(:cognito_identity_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CognitoIdentityPool", traits: {"smithy.api#enumValue" => "AWS::Cognito::IdentityPool"}))
+    ResourceType.add_member(:connect_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectRule", traits: {"smithy.api#enumValue" => "AWS::Connect::Rule"}))
+    ResourceType.add_member(:connect_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ConnectUser", traits: {"smithy.api#enumValue" => "AWS::Connect::User"}))
+    ResourceType.add_member(:ec2_client_vpn_target_network_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2ClientVpnTargetNetworkAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::ClientVpnTargetNetworkAssociation"}))
+    ResourceType.add_member(:ec2_eip_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2EIPAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::EIPAssociation"}))
+    ResourceType.add_member(:ec2_ipam_resource_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMResourceDiscovery", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMResourceDiscovery"}))
+    ResourceType.add_member(:ec2_ipam_resource_discovery_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2IPAMResourceDiscoveryAssociation", traits: {"smithy.api#enumValue" => "AWS::EC2::IPAMResourceDiscoveryAssociation"}))
+    ResourceType.add_member(:ec2_instance_connect_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2InstanceConnectEndpoint", traits: {"smithy.api#enumValue" => "AWS::EC2::InstanceConnectEndpoint"}))
+    ResourceType.add_member(:ec2_snapshot_block_public_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2SnapshotBlockPublicAccess", traits: {"smithy.api#enumValue" => "AWS::EC2::SnapshotBlockPublicAccess"}))
+    ResourceType.add_member(:ec2_vpc_block_public_access_exclusion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPCBlockPublicAccessExclusion", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCBlockPublicAccessExclusion"}))
+    ResourceType.add_member(:ec2_vpc_block_public_access_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPCBlockPublicAccessOptions", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCBlockPublicAccessOptions"}))
+    ResourceType.add_member(:ec2_vpc_endpoint_connection_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPCEndpointConnectionNotification", traits: {"smithy.api#enumValue" => "AWS::EC2::VPCEndpointConnectionNotification"}))
+    ResourceType.add_member(:ec2_vpn_connection_route, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EC2VPNConnectionRoute", traits: {"smithy.api#enumValue" => "AWS::EC2::VPNConnectionRoute"}))
+    ResourceType.add_member(:evidently_segment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EvidentlySegment", traits: {"smithy.api#enumValue" => "AWS::Evidently::Segment"}))
+    ResourceType.add_member(:iamoidc_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IAMOIDCProvider", traits: {"smithy.api#enumValue" => "AWS::IAM::OIDCProvider"}))
+    ResourceType.add_member(:inspector_v2_activation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InspectorV2Activation", traits: {"smithy.api#enumValue" => "AWS::InspectorV2::Activation"}))
+    ResourceType.add_member(:msk_cluster_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKClusterPolicy", traits: {"smithy.api#enumValue" => "AWS::MSK::ClusterPolicy"}))
+    ResourceType.add_member(:msk_vpc_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MSKVpcConnection", traits: {"smithy.api#enumValue" => "AWS::MSK::VpcConnection"}))
+    ResourceType.add_member(:media_connect_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MediaConnectGateway", traits: {"smithy.api#enumValue" => "AWS::MediaConnect::Gateway"}))
+    ResourceType.add_member(:memory_db_subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MemoryDBSubnetGroup", traits: {"smithy.api#enumValue" => "AWS::MemoryDB::SubnetGroup"}))
+    ResourceType.add_member(:open_search_serverless_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenSearchServerlessCollection", traits: {"smithy.api#enumValue" => "AWS::OpenSearchServerless::Collection"}))
+    ResourceType.add_member(:open_search_serverless_vpc_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OpenSearchServerlessVpcEndpoint", traits: {"smithy.api#enumValue" => "AWS::OpenSearchServerless::VpcEndpoint"}))
+    ResourceType.add_member(:redshift_endpoint_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RedshiftEndpointAuthorization", traits: {"smithy.api#enumValue" => "AWS::Redshift::EndpointAuthorization"}))
+    ResourceType.add_member(:route53_profiles_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Route53ProfilesProfile", traits: {"smithy.api#enumValue" => "AWS::Route53Profiles::Profile"}))
+    ResourceType.add_member(:s3_storage_lens_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3StorageLensGroup", traits: {"smithy.api#enumValue" => "AWS::S3::StorageLensGroup"}))
+    ResourceType.add_member(:s3_express_bucket_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3ExpressBucketPolicy", traits: {"smithy.api#enumValue" => "AWS::S3Express::BucketPolicy"}))
+    ResourceType.add_member(:s3_express_directory_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "S3ExpressDirectoryBucket", traits: {"smithy.api#enumValue" => "AWS::S3Express::DirectoryBucket"}))
+    ResourceType.add_member(:sage_maker_inference_experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SageMakerInferenceExperiment", traits: {"smithy.api#enumValue" => "AWS::SageMaker::InferenceExperiment"}))
+    ResourceType.add_member(:security_hub_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SecurityHubStandard", traits: {"smithy.api#enumValue" => "AWS::SecurityHub::Standard"}))
+    ResourceType.add_member(:transfer_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TransferProfile", traits: {"smithy.api#enumValue" => "AWS::Transfer::Profile"}))
+    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType)
+    ResourceTypeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValue)
+    ResourceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256)
+    ResourceTypesScope.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256)
+    ResourceValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceValueType, location_name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceValue.type = Types::ResourceValue
-    ResourceValueType.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_ID", traits: {"smithy.api#enumValue" => "RESOURCE_ID"}))
-    Results.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    RetentionConfiguration.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionConfigurationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    RetentionConfiguration.add_member(:retention_period_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionPeriodInDays, location_name: "RetentionPeriodInDays", traits: {"smithy.api#required" => {}}))
+    ResourceValueType.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESOURCE_ID", traits: {"smithy.api#enumValue" => "RESOURCE_ID"}))
+    Results.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    RetentionConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionConfigurationName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    RetentionConfiguration.add_member(:retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodInDays, location_name: "RetentionPeriodInDays", traits: {"smithy.api#required" => {}}))
     RetentionConfiguration.type = Types::RetentionConfiguration
-    RetentionConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionConfiguration)
-    RetentionConfigurationNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionConfigurationName)
-    Scope.add_member(:compliance_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComplianceResourceTypes, location_name: "ComplianceResourceTypes"))
-    Scope.add_member(:tag_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKey"))
-    Scope.add_member(:tag_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValue"))
-    Scope.add_member(:compliance_resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ComplianceResourceId"))
+    RetentionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionConfiguration)
+    RetentionConfigurationNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionConfigurationName)
+    Scope.add_member(:compliance_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceResourceTypes, location_name: "ComplianceResourceTypes"))
+    Scope.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit128, location_name: "TagKey"))
+    Scope.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "TagValue"))
+    Scope.add_member(:compliance_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseResourceId, location_name: "ComplianceResourceId"))
     Scope.type = Types::Scope
-    SelectAggregateResourceConfigRequest.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "Expression", traits: {"smithy.api#required" => {}}))
-    SelectAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
-    SelectAggregateResourceConfigRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    SelectAggregateResourceConfigRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults", traits: {"smithy.api#default" => 0}))
-    SelectAggregateResourceConfigRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectAggregateResourceConfigRequest.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, location_name: "Expression", traits: {"smithy.api#required" => {}}))
+    SelectAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName", traits: {"smithy.api#required" => {}}))
+    SelectAggregateResourceConfigRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    SelectAggregateResourceConfigRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "MaxResults", traits: {"smithy.api#default" => 0}))
+    SelectAggregateResourceConfigRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     SelectAggregateResourceConfigRequest.type = Types::SelectAggregateResourceConfigRequest
-    SelectAggregateResourceConfigResponse.add_member(:results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Results, location_name: "Results"))
-    SelectAggregateResourceConfigResponse.add_member(:query_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryInfo, location_name: "QueryInfo"))
-    SelectAggregateResourceConfigResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectAggregateResourceConfigResponse.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: Results, location_name: "Results"))
+    SelectAggregateResourceConfigResponse.add_member(:query_info, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryInfo, location_name: "QueryInfo"))
+    SelectAggregateResourceConfigResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     SelectAggregateResourceConfigResponse.type = Types::SelectAggregateResourceConfigResponse
-    SelectResourceConfigRequest.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "Expression", traits: {"smithy.api#required" => {}}))
-    SelectResourceConfigRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
-    SelectResourceConfigRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectResourceConfigRequest.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, location_name: "Expression", traits: {"smithy.api#required" => {}}))
+    SelectResourceConfigRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, location_name: "Limit", traits: {"smithy.api#default" => 0}))
+    SelectResourceConfigRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     SelectResourceConfigRequest.type = Types::SelectResourceConfigRequest
-    SelectResourceConfigResponse.add_member(:results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Results, location_name: "Results"))
-    SelectResourceConfigResponse.add_member(:query_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryInfo, location_name: "QueryInfo"))
-    SelectResourceConfigResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectResourceConfigResponse.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: Results, location_name: "Results"))
+    SelectResourceConfigResponse.add_member(:query_info, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryInfo, location_name: "QueryInfo"))
+    SelectResourceConfigResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     SelectResourceConfigResponse.type = Types::SelectResourceConfigResponse
-    ServicePrincipalValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServicePrincipalValue)
-    SortBy.add_member(:score, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCORE", traits: {"smithy.api#enumValue" => "SCORE"}))
-    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
-    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
-    Source.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner", traits: {"smithy.api#required" => {}}))
-    Source.add_member(:source_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "SourceIdentifier"))
-    Source.add_member(:source_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceDetails, location_name: "SourceDetails"))
-    Source.add_member(:custom_policy_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPolicyDetails, location_name: "CustomPolicyDetails"))
+    ServicePrincipalValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalValue)
+    SortBy.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SCORE", traits: {"smithy.api#enumValue" => "SCORE"}))
+    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
+    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
+    Source.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner", traits: {"smithy.api#required" => {}}))
+    Source.add_member(:source_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256, location_name: "SourceIdentifier"))
+    Source.add_member(:source_details, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDetails, location_name: "SourceDetails"))
+    Source.add_member(:custom_policy_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPolicyDetails, location_name: "CustomPolicyDetails"))
     Source.type = Types::Source
-    SourceDetail.add_member(:event_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventSource, location_name: "EventSource"))
-    SourceDetail.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    SourceDetail.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    SourceDetail.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSource, location_name: "EventSource"))
+    SourceDetail.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    SourceDetail.add_member(:maximum_execution_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
     SourceDetail.type = Types::SourceDetail
-    SourceDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceDetail)
-    SsmControls.add_member(:concurrent_execution_rate_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "ConcurrentExecutionRatePercentage"))
-    SsmControls.add_member(:error_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Percentage, location_name: "ErrorPercentage"))
+    SourceDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDetail)
+    SsmControls.add_member(:concurrent_execution_rate_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "ConcurrentExecutionRatePercentage"))
+    SsmControls.add_member(:error_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, location_name: "ErrorPercentage"))
     SsmControls.type = Types::SsmControls
-    StartConfigRulesEvaluationRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReevaluateConfigRuleNames, location_name: "ConfigRuleNames"))
+    StartConfigRulesEvaluationRequest.add_member(:config_rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ReevaluateConfigRuleNames, location_name: "ConfigRuleNames"))
     StartConfigRulesEvaluationRequest.type = Types::StartConfigRulesEvaluationRequest
     StartConfigRulesEvaluationResponse.type = Types::StartConfigRulesEvaluationResponse
-    StartConfigurationRecorderRequest.add_member(:configuration_recorder_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName, location_name: "ConfigurationRecorderName", traits: {"smithy.api#required" => {}}))
+    StartConfigurationRecorderRequest.add_member(:configuration_recorder_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName, location_name: "ConfigurationRecorderName", traits: {"smithy.api#required" => {}}))
     StartConfigurationRecorderRequest.type = Types::StartConfigurationRecorderRequest
-    StartRemediationExecutionRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
-    StartRemediationExecutionRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "ResourceKeys", traits: {"smithy.api#required" => {}}))
+    StartRemediationExecutionRequest.add_member(:config_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRuleName, location_name: "ConfigRuleName", traits: {"smithy.api#required" => {}}))
+    StartRemediationExecutionRequest.add_member(:resource_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceKeys, location_name: "ResourceKeys", traits: {"smithy.api#required" => {}}))
     StartRemediationExecutionRequest.type = Types::StartRemediationExecutionRequest
-    StartRemediationExecutionResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
-    StartRemediationExecutionResponse.add_member(:failed_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "FailedItems"))
+    StartRemediationExecutionResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FailureMessage"))
+    StartRemediationExecutionResponse.add_member(:failed_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceKeys, location_name: "FailedItems"))
     StartRemediationExecutionResponse.type = Types::StartRemediationExecutionResponse
-    StartResourceEvaluationRequest.add_member(:resource_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails", traits: {"smithy.api#required" => {}}))
-    StartResourceEvaluationRequest.add_member(:evaluation_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationContext, location_name: "EvaluationContext"))
-    StartResourceEvaluationRequest.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationMode, location_name: "EvaluationMode", traits: {"smithy.api#required" => {}}))
-    StartResourceEvaluationRequest.add_member(:evaluation_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluationTimeout, location_name: "EvaluationTimeout", traits: {"smithy.api#default" => 0}))
-    StartResourceEvaluationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    StartResourceEvaluationRequest.add_member(:resource_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDetails, location_name: "ResourceDetails", traits: {"smithy.api#required" => {}}))
+    StartResourceEvaluationRequest.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationContext, location_name: "EvaluationContext"))
+    StartResourceEvaluationRequest.add_member(:evaluation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMode, location_name: "EvaluationMode", traits: {"smithy.api#required" => {}}))
+    StartResourceEvaluationRequest.add_member(:evaluation_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationTimeout, location_name: "EvaluationTimeout", traits: {"smithy.api#default" => 0}))
+    StartResourceEvaluationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken"))
     StartResourceEvaluationRequest.type = Types::StartResourceEvaluationRequest
-    StartResourceEvaluationResponse.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
+    StartResourceEvaluationResponse.add_member(:resource_evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEvaluationId, location_name: "ResourceEvaluationId"))
     StartResourceEvaluationResponse.type = Types::StartResourceEvaluationResponse
-    StaticParameterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringWithCharLimit256)
-    StaticValue.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StaticParameterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    StaticParameterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithCharLimit256)
+    StaticValue.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticParameterValues, location_name: "Values", traits: {"smithy.api#required" => {}}))
     StaticValue.type = Types::StaticValue
-    StatusDetailFilters.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    StatusDetailFilters.add_member(:member_account_rule_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAccountRuleStatus, location_name: "MemberAccountRuleStatus"))
+    StatusDetailFilters.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, location_name: "AccountId"))
+    StatusDetailFilters.add_member(:member_account_rule_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountRuleStatus, location_name: "MemberAccountRuleStatus"))
     StatusDetailFilters.type = Types::StatusDetailFilters
-    StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecorderName, location_name: "ConfigurationRecorderName", traits: {"smithy.api#required" => {}}))
+    StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecorderName, location_name: "ConfigurationRecorderName", traits: {"smithy.api#required" => {}}))
     StopConfigurationRecorderRequest.type = Types::StopConfigurationRecorderRequest
-    StoredQuery.add_member(:query_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
-    StoredQuery.add_member(:query_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn"))
-    StoredQuery.add_member(:query_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
-    StoredQuery.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description"))
-    StoredQuery.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryExpression, location_name: "Expression"))
+    StoredQuery.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, location_name: "QueryId"))
+    StoredQuery.add_member(:query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryArn, location_name: "QueryArn"))
+    StoredQuery.add_member(:query_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
+    StoredQuery.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDescription, location_name: "Description"))
+    StoredQuery.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExpression, location_name: "Expression"))
     StoredQuery.type = Types::StoredQuery
-    StoredQueryMetadata.add_member(:query_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId", traits: {"smithy.api#required" => {}}))
-    StoredQueryMetadata.add_member(:query_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn", traits: {"smithy.api#required" => {}}))
-    StoredQueryMetadata.add_member(:query_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
-    StoredQueryMetadata.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description"))
+    StoredQueryMetadata.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, location_name: "QueryId", traits: {"smithy.api#required" => {}}))
+    StoredQueryMetadata.add_member(:query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryArn, location_name: "QueryArn", traits: {"smithy.api#required" => {}}))
+    StoredQueryMetadata.add_member(:query_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryName, location_name: "QueryName", traits: {"smithy.api#required" => {}}))
+    StoredQueryMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDescription, location_name: "Description"))
     StoredQueryMetadata.type = Types::StoredQueryMetadata
-    StoredQueryMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StoredQueryMetadata)
-    SupplementaryConfiguration.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupplementaryConfigurationName)
-    SupplementaryConfiguration.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupplementaryConfigurationValue)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    StoredQueryMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StoredQueryMetadata)
+    SupplementaryConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementaryConfigurationName)
+    SupplementaryConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementaryConfigurationValue)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key"))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value)
-    TagsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TemplateSSMDocumentDetails.add_member(:document_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSMDocumentName, location_name: "DocumentName", traits: {"smithy.api#required" => {}}))
-    TemplateSSMDocumentDetails.add_member(:document_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSMDocumentVersion, location_name: "DocumentVersion"))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Value)
+    TagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TemplateSSMDocumentDetails.add_member(:document_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SSMDocumentName, location_name: "DocumentName", traits: {"smithy.api#required" => {}}))
+    TemplateSSMDocumentDetails.add_member(:document_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SSMDocumentVersion, location_name: "DocumentVersion"))
     TemplateSSMDocumentDetails.type = Types::TemplateSSMDocumentDetails
-    TimeWindow.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
-    TimeWindow.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "EndTime"))
+    TimeWindow.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "StartTime"))
+    TimeWindow.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "EndTime"))
     TimeWindow.type = Types::TimeWindow
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UnmodifiableEntityException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnmodifiableEntityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     UnmodifiableEntityException.type = Types::UnmodifiableEntityException
-    UnprocessedResourceIdentifierList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregateResourceIdentifier)
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UnprocessedResourceIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateResourceIdentifier)
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     StarlingDoveService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -2529,1014 +2529,1014 @@ module Aws::ConfigService
       service.add_operation(:associate_resource_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#AssociateResourceTypes"
         operation.name = "AssociateResourceTypes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateResourceTypesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateResourceTypesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateResourceTypesRequest
+        operation.output = AssociateResourceTypesResponse
+        operation.errors << ConflictException
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:batch_get_aggregate_resource_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#BatchGetAggregateResourceConfig"
         operation.name = "BatchGetAggregateResourceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetAggregateResourceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetAggregateResourceConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchGetAggregateResourceConfigRequest
+        operation.output = BatchGetAggregateResourceConfigResponse
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:batch_get_resource_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#BatchGetResourceConfig"
         operation.name = "BatchGetResourceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetResourceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchGetResourceConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = BatchGetResourceConfigRequest
+        operation.output = BatchGetResourceConfigResponse
+        operation.errors << NoAvailableConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_aggregation_authorization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteAggregationAuthorization"
         operation.name = "DeleteAggregationAuthorization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAggregationAuthorizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DeleteAggregationAuthorizationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:delete_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteConfigRule"
         operation.name = "DeleteConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteConfigRuleRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoSuchConfigRuleException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:delete_configuration_aggregator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteConfigurationAggregator"
         operation.name = "DeleteConfigurationAggregator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationAggregatorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        operation.input = DeleteConfigurationAggregatorRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoSuchConfigurationAggregatorException
         operation.traits = {}
       end)
       service.add_operation(:delete_configuration_recorder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteConfigurationRecorder"
         operation.name = "DeleteConfigurationRecorder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationRecorderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        operation.input = DeleteConfigurationRecorderRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << UnmodifiableEntityException
         operation.traits = {}
       end)
       service.add_operation(:delete_conformance_pack, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteConformancePack"
         operation.name = "DeleteConformancePack"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConformancePackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteConformancePackRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoSuchConformancePackException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:delete_delivery_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteDeliveryChannel"
         operation.name = "DeleteDeliveryChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDeliveryChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastDeliveryChannelDeleteFailedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
+        operation.input = DeleteDeliveryChannelRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << LastDeliveryChannelDeleteFailedException
+        operation.errors << NoSuchDeliveryChannelException
         operation.traits = {}
       end)
       service.add_operation(:delete_evaluation_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteEvaluationResults"
         operation.name = "DeleteEvaluationResults"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEvaluationResultsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEvaluationResultsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteEvaluationResultsRequest
+        operation.output = DeleteEvaluationResultsResponse
+        operation.errors << NoSuchConfigRuleException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:delete_organization_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteOrganizationConfigRule"
         operation.name = "DeleteOrganizationConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOrganizationConfigRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteOrganizationConfigRuleRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoSuchOrganizationConfigRuleException
+        operation.errors << OrganizationAccessDeniedException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:delete_organization_conformance_pack, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteOrganizationConformancePack"
         operation.name = "DeleteOrganizationConformancePack"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOrganizationConformancePackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConformancePackException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = DeleteOrganizationConformancePackRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoSuchOrganizationConformancePackException
+        operation.errors << OrganizationAccessDeniedException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:delete_pending_aggregation_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeletePendingAggregationRequest"
         operation.name = "DeletePendingAggregationRequest"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePendingAggregationRequestRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DeletePendingAggregationRequestRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:delete_remediation_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteRemediationConfiguration"
         operation.name = "DeleteRemediationConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRemediationConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRemediationConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationInProgressException)
+        operation.input = DeleteRemediationConfigurationRequest
+        operation.output = DeleteRemediationConfigurationResponse
+        operation.errors << InsufficientPermissionsException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchRemediationConfigurationException
+        operation.errors << RemediationInProgressException
         operation.traits = {}
       end)
       service.add_operation(:delete_remediation_exceptions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteRemediationExceptions"
         operation.name = "DeleteRemediationExceptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRemediationExceptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRemediationExceptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchRemediationExceptionException)
+        operation.input = DeleteRemediationExceptionsRequest
+        operation.output = DeleteRemediationExceptionsResponse
+        operation.errors << NoSuchRemediationExceptionException
         operation.traits = {}
       end)
       service.add_operation(:delete_resource_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteResourceConfig"
         operation.name = "DeleteResourceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoRunningConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteResourceConfigRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoRunningConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_retention_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteRetentionConfiguration"
         operation.name = "DeleteRetentionConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRetentionConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
+        operation.input = DeleteRetentionConfigurationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchRetentionConfigurationException
         operation.traits = {}
       end)
       service.add_operation(:delete_service_linked_configuration_recorder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteServiceLinkedConfigurationRecorder"
         operation.name = "DeleteServiceLinkedConfigurationRecorder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceLinkedConfigurationRecorderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteServiceLinkedConfigurationRecorderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteServiceLinkedConfigurationRecorderRequest
+        operation.output = DeleteServiceLinkedConfigurationRecorderResponse
+        operation.errors << ConflictException
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_stored_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeleteStoredQuery"
         operation.name = "DeleteStoredQuery"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteStoredQueryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteStoredQueryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteStoredQueryRequest
+        operation.output = DeleteStoredQueryResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:deliver_config_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DeliverConfigSnapshot"
         operation.name = "DeliverConfigSnapshot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverConfigSnapshotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliverConfigSnapshotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoRunningConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
+        operation.input = DeliverConfigSnapshotRequest
+        operation.output = DeliverConfigSnapshotResponse
+        operation.errors << NoAvailableConfigurationRecorderException
+        operation.errors << NoRunningConfigurationRecorderException
+        operation.errors << NoSuchDeliveryChannelException
         operation.traits = {}
       end)
       service.add_operation(:describe_aggregate_compliance_by_config_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeAggregateComplianceByConfigRules"
         operation.name = "DescribeAggregateComplianceByConfigRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConfigRulesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConfigRulesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeAggregateComplianceByConfigRulesRequest
+        operation.output = DescribeAggregateComplianceByConfigRulesResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeAggregateComplianceByConfigRules.new
       end)
       service.add_operation(:describe_aggregate_compliance_by_conformance_packs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacks"
         operation.name = "DescribeAggregateComplianceByConformancePacks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConformancePacksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConformancePacksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeAggregateComplianceByConformancePacksRequest
+        operation.output = DescribeAggregateComplianceByConformancePacksResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeAggregateComplianceByConformancePacks.new
       end)
       service.add_operation(:describe_aggregation_authorizations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeAggregationAuthorizations"
         operation.name = "DescribeAggregationAuthorizations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAggregationAuthorizationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAggregationAuthorizationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DescribeAggregationAuthorizationsRequest
+        operation.output = DescribeAggregationAuthorizationsResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeAggregationAuthorizations.new
       end)
       service.add_operation(:describe_compliance_by_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeComplianceByConfigRule"
         operation.name = "DescribeComplianceByConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeComplianceByConfigRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeComplianceByConfigRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        operation.input = DescribeComplianceByConfigRuleRequest
+        operation.output = DescribeComplianceByConfigRuleResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigRuleException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeComplianceByConfigRule.new
       end)
       service.add_operation(:describe_compliance_by_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeComplianceByResource"
         operation.name = "DescribeComplianceByResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeComplianceByResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeComplianceByResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DescribeComplianceByResourceRequest
+        operation.output = DescribeComplianceByResourceResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeComplianceByResource.new
       end)
       service.add_operation(:describe_config_rule_evaluation_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConfigRuleEvaluationStatus"
         operation.name = "DescribeConfigRuleEvaluationStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigRuleEvaluationStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigRuleEvaluationStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        operation.input = DescribeConfigRuleEvaluationStatusRequest
+        operation.output = DescribeConfigRuleEvaluationStatusResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigRuleException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConfigRuleEvaluationStatus.new
       end)
       service.add_operation(:describe_config_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConfigRules"
         operation.name = "DescribeConfigRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigRulesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigRulesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        operation.input = DescribeConfigRulesRequest
+        operation.output = DescribeConfigRulesResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigRuleException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConfigRules.new
       end)
       service.add_operation(:describe_configuration_aggregator_sources_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConfigurationAggregatorSourcesStatus"
         operation.name = "DescribeConfigurationAggregatorSourcesStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorSourcesStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorSourcesStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        operation.input = DescribeConfigurationAggregatorSourcesStatusRequest
+        operation.output = DescribeConfigurationAggregatorSourcesStatusResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigurationAggregatorException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConfigurationAggregatorSourcesStatus.new
       end)
       service.add_operation(:describe_configuration_aggregators, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConfigurationAggregators"
         operation.name = "DescribeConfigurationAggregators"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        operation.input = DescribeConfigurationAggregatorsRequest
+        operation.output = DescribeConfigurationAggregatorsResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigurationAggregatorException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConfigurationAggregators.new
       end)
       service.add_operation(:describe_configuration_recorder_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConfigurationRecorderStatus"
         operation.name = "DescribeConfigurationRecorderStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationRecorderStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationRecorderStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeConfigurationRecorderStatusRequest
+        operation.output = DescribeConfigurationRecorderStatusResponse
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_configuration_recorders, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConfigurationRecorders"
         operation.name = "DescribeConfigurationRecorders"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationRecordersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationRecordersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeConfigurationRecordersRequest
+        operation.output = DescribeConfigurationRecordersResponse
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "DescribeConfigurationRecordersSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
       end)
       service.add_operation(:describe_conformance_pack_compliance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConformancePackCompliance"
         operation.name = "DescribeConformancePackCompliance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConformancePackComplianceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConformancePackComplianceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleInConformancePackException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
+        operation.input = DescribeConformancePackComplianceRequest
+        operation.output = DescribeConformancePackComplianceResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigRuleInConformancePackException
+        operation.errors << NoSuchConformancePackException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConformancePackCompliance.new
       end)
       service.add_operation(:describe_conformance_pack_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConformancePackStatus"
         operation.name = "DescribeConformancePackStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConformancePackStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConformancePackStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DescribeConformancePackStatusRequest
+        operation.output = DescribeConformancePackStatusResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConformancePackStatus.new
       end)
       service.add_operation(:describe_conformance_packs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeConformancePacks"
         operation.name = "DescribeConformancePacks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConformancePacksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConformancePacksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
+        operation.input = DescribeConformancePacksRequest
+        operation.output = DescribeConformancePacksResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConformancePackException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConformancePacks.new
       end)
       service.add_operation(:describe_delivery_channel_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeDeliveryChannelStatus"
         operation.name = "DescribeDeliveryChannelStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDeliveryChannelStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDeliveryChannelStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
+        operation.input = DescribeDeliveryChannelStatusRequest
+        operation.output = DescribeDeliveryChannelStatusResponse
+        operation.errors << NoSuchDeliveryChannelException
         operation.traits = {}
       end)
       service.add_operation(:describe_delivery_channels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeDeliveryChannels"
         operation.name = "DescribeDeliveryChannels"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDeliveryChannelsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDeliveryChannelsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
+        operation.input = DescribeDeliveryChannelsRequest
+        operation.output = DescribeDeliveryChannelsResponse
+        operation.errors << NoSuchDeliveryChannelException
         operation.traits = {}
       end)
       service.add_operation(:describe_organization_config_rule_statuses, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeOrganizationConfigRuleStatuses"
         operation.name = "DescribeOrganizationConfigRuleStatuses"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRuleStatusesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRuleStatusesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        operation.input = DescribeOrganizationConfigRuleStatusesRequest
+        operation.output = DescribeOrganizationConfigRuleStatusesResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchOrganizationConfigRuleException
+        operation.errors << OrganizationAccessDeniedException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeOrganizationConfigRuleStatuses.new
       end)
       service.add_operation(:describe_organization_config_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeOrganizationConfigRules"
         operation.name = "DescribeOrganizationConfigRules"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRulesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRulesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        operation.input = DescribeOrganizationConfigRulesRequest
+        operation.output = DescribeOrganizationConfigRulesResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchOrganizationConfigRuleException
+        operation.errors << OrganizationAccessDeniedException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeOrganizationConfigRules.new
       end)
       service.add_operation(:describe_organization_conformance_pack_statuses, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeOrganizationConformancePackStatuses"
         operation.name = "DescribeOrganizationConformancePackStatuses"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConformancePackStatusesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConformancePackStatusesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConformancePackException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        operation.input = DescribeOrganizationConformancePackStatusesRequest
+        operation.output = DescribeOrganizationConformancePackStatusesResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchOrganizationConformancePackException
+        operation.errors << OrganizationAccessDeniedException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeOrganizationConformancePackStatuses.new
       end)
       service.add_operation(:describe_organization_conformance_packs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeOrganizationConformancePacks"
         operation.name = "DescribeOrganizationConformancePacks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConformancePacksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOrganizationConformancePacksResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConformancePackException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        operation.input = DescribeOrganizationConformancePacksRequest
+        operation.output = DescribeOrganizationConformancePacksResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchOrganizationConformancePackException
+        operation.errors << OrganizationAccessDeniedException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeOrganizationConformancePacks.new
       end)
       service.add_operation(:describe_pending_aggregation_requests, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribePendingAggregationRequests"
         operation.name = "DescribePendingAggregationRequests"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePendingAggregationRequestsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePendingAggregationRequestsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DescribePendingAggregationRequestsRequest
+        operation.output = DescribePendingAggregationRequestsResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribePendingAggregationRequests.new
       end)
       service.add_operation(:describe_remediation_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeRemediationConfigurations"
         operation.name = "DescribeRemediationConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRemediationConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRemediationConfigurationsResponse)
+        operation.input = DescribeRemediationConfigurationsRequest
+        operation.output = DescribeRemediationConfigurationsResponse
         operation.traits = {}
       end)
       service.add_operation(:describe_remediation_exceptions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeRemediationExceptions"
         operation.name = "DescribeRemediationExceptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRemediationExceptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRemediationExceptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = DescribeRemediationExceptionsRequest
+        operation.output = DescribeRemediationExceptionsResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRemediationExceptions.new
       end)
       service.add_operation(:describe_remediation_execution_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeRemediationExecutionStatus"
         operation.name = "DescribeRemediationExecutionStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRemediationExecutionStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRemediationExecutionStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
+        operation.input = DescribeRemediationExecutionStatusRequest
+        operation.output = DescribeRemediationExecutionStatusResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchRemediationConfigurationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRemediationExecutionStatus.new
       end)
       service.add_operation(:describe_retention_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DescribeRetentionConfigurations"
         operation.name = "DescribeRetentionConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRetentionConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRetentionConfigurationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
+        operation.input = DescribeRetentionConfigurationsRequest
+        operation.output = DescribeRetentionConfigurationsResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchRetentionConfigurationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRetentionConfigurations.new
       end)
       service.add_operation(:disassociate_resource_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#DisassociateResourceTypes"
         operation.name = "DisassociateResourceTypes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateResourceTypesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateResourceTypesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateResourceTypesRequest
+        operation.output = DisassociateResourceTypesResponse
+        operation.errors << ConflictException
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_aggregate_compliance_details_by_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetAggregateComplianceDetailsByConfigRule"
         operation.name = "GetAggregateComplianceDetailsByConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateComplianceDetailsByConfigRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateComplianceDetailsByConfigRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAggregateComplianceDetailsByConfigRuleRequest
+        operation.output = GetAggregateComplianceDetailsByConfigRuleResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::GetAggregateComplianceDetailsByConfigRule.new
       end)
       service.add_operation(:get_aggregate_config_rule_compliance_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetAggregateConfigRuleComplianceSummary"
         operation.name = "GetAggregateConfigRuleComplianceSummary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateConfigRuleComplianceSummaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateConfigRuleComplianceSummaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAggregateConfigRuleComplianceSummaryRequest
+        operation.output = GetAggregateConfigRuleComplianceSummaryResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::GetAggregateConfigRuleComplianceSummary.new
       end)
       service.add_operation(:get_aggregate_conformance_pack_compliance_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummary"
         operation.name = "GetAggregateConformancePackComplianceSummary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateConformancePackComplianceSummaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateConformancePackComplianceSummaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAggregateConformancePackComplianceSummaryRequest
+        operation.output = GetAggregateConformancePackComplianceSummaryResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::GetAggregateConformancePackComplianceSummary.new
       end)
       service.add_operation(:get_aggregate_discovered_resource_counts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetAggregateDiscoveredResourceCounts"
         operation.name = "GetAggregateDiscoveredResourceCounts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateDiscoveredResourceCountsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateDiscoveredResourceCountsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAggregateDiscoveredResourceCountsRequest
+        operation.output = GetAggregateDiscoveredResourceCountsResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::GetAggregateDiscoveredResourceCounts.new
       end)
       service.add_operation(:get_aggregate_resource_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetAggregateResourceConfig"
         operation.name = "GetAggregateResourceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateResourceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAggregateResourceConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OversizedConfigurationItemException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotDiscoveredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetAggregateResourceConfigRequest
+        operation.output = GetAggregateResourceConfigResponse
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << OversizedConfigurationItemException
+        operation.errors << ResourceNotDiscoveredException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_compliance_details_by_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetComplianceDetailsByConfigRule"
         operation.name = "GetComplianceDetailsByConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceDetailsByConfigRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceDetailsByConfigRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        operation.input = GetComplianceDetailsByConfigRuleRequest
+        operation.output = GetComplianceDetailsByConfigRuleResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigRuleException
         operation.traits = {}
         operation[:paginator] = Paginators::GetComplianceDetailsByConfigRule.new
       end)
       service.add_operation(:get_compliance_details_by_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetComplianceDetailsByResource"
         operation.name = "GetComplianceDetailsByResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceDetailsByResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceDetailsByResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = GetComplianceDetailsByResourceRequest
+        operation.output = GetComplianceDetailsByResourceResponse
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::GetComplianceDetailsByResource.new
       end)
       service.add_operation(:get_compliance_summary_by_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetComplianceSummaryByConfigRule"
         operation.name = "GetComplianceSummaryByConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceSummaryByConfigRuleResponse)
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = GetComplianceSummaryByConfigRuleResponse
         operation.traits = {}
       end)
       service.add_operation(:get_compliance_summary_by_resource_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetComplianceSummaryByResourceType"
         operation.name = "GetComplianceSummaryByResourceType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceSummaryByResourceTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetComplianceSummaryByResourceTypeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = GetComplianceSummaryByResourceTypeRequest
+        operation.output = GetComplianceSummaryByResourceTypeResponse
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:get_conformance_pack_compliance_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetConformancePackComplianceDetails"
         operation.name = "GetConformancePackComplianceDetails"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConformancePackComplianceDetailsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConformancePackComplianceDetailsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleInConformancePackException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
+        operation.input = GetConformancePackComplianceDetailsRequest
+        operation.output = GetConformancePackComplianceDetailsResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigRuleInConformancePackException
+        operation.errors << NoSuchConformancePackException
         operation.traits = {}
         operation[:paginator] = Paginators::GetConformancePackComplianceDetails.new
       end)
       service.add_operation(:get_conformance_pack_compliance_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetConformancePackComplianceSummary"
         operation.name = "GetConformancePackComplianceSummary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConformancePackComplianceSummaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConformancePackComplianceSummaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
+        operation.input = GetConformancePackComplianceSummaryRequest
+        operation.output = GetConformancePackComplianceSummaryResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConformancePackException
         operation.traits = {}
         operation[:paginator] = Paginators::GetConformancePackComplianceSummary.new
       end)
       service.add_operation(:get_custom_rule_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetCustomRulePolicy"
         operation.name = "GetCustomRulePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCustomRulePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCustomRulePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        operation.input = GetCustomRulePolicyRequest
+        operation.output = GetCustomRulePolicyResponse
+        operation.errors << NoSuchConfigRuleException
         operation.traits = {}
       end)
       service.add_operation(:get_discovered_resource_counts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetDiscoveredResourceCounts"
         operation.name = "GetDiscoveredResourceCounts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDiscoveredResourceCountsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDiscoveredResourceCountsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetDiscoveredResourceCountsRequest
+        operation.output = GetDiscoveredResourceCountsResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::GetDiscoveredResourceCounts.new
       end)
       service.add_operation(:get_organization_config_rule_detailed_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetOrganizationConfigRuleDetailedStatus"
         operation.name = "GetOrganizationConfigRuleDetailedStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOrganizationConfigRuleDetailedStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOrganizationConfigRuleDetailedStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        operation.input = GetOrganizationConfigRuleDetailedStatusRequest
+        operation.output = GetOrganizationConfigRuleDetailedStatusResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchOrganizationConfigRuleException
+        operation.errors << OrganizationAccessDeniedException
         operation.traits = {}
         operation[:paginator] = Paginators::GetOrganizationConfigRuleDetailedStatus.new
       end)
       service.add_operation(:get_organization_conformance_pack_detailed_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetOrganizationConformancePackDetailedStatus"
         operation.name = "GetOrganizationConformancePackDetailedStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOrganizationConformancePackDetailedStatusRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOrganizationConformancePackDetailedStatusResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConformancePackException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        operation.input = GetOrganizationConformancePackDetailedStatusRequest
+        operation.output = GetOrganizationConformancePackDetailedStatusResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchOrganizationConformancePackException
+        operation.errors << OrganizationAccessDeniedException
         operation.traits = {}
         operation[:paginator] = Paginators::GetOrganizationConformancePackDetailedStatus.new
       end)
       service.add_operation(:get_organization_custom_rule_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetOrganizationCustomRulePolicy"
         operation.name = "GetOrganizationCustomRulePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOrganizationCustomRulePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetOrganizationCustomRulePolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        operation.input = GetOrganizationCustomRulePolicyRequest
+        operation.output = GetOrganizationCustomRulePolicyResponse
+        operation.errors << NoSuchOrganizationConfigRuleException
+        operation.errors << OrganizationAccessDeniedException
         operation.traits = {}
       end)
       service.add_operation(:get_resource_config_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetResourceConfigHistory"
         operation.name = "GetResourceConfigHistory"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceConfigHistoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceConfigHistoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTimeRangeException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotDiscoveredException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetResourceConfigHistoryRequest
+        operation.output = GetResourceConfigHistoryResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidTimeRangeException
+        operation.errors << NoAvailableConfigurationRecorderException
+        operation.errors << ResourceNotDiscoveredException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::GetResourceConfigHistory.new
       end)
       service.add_operation(:get_resource_evaluation_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetResourceEvaluationSummary"
         operation.name = "GetResourceEvaluationSummary"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceEvaluationSummaryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourceEvaluationSummaryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = GetResourceEvaluationSummaryRequest
+        operation.output = GetResourceEvaluationSummaryResponse
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_stored_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#GetStoredQuery"
         operation.name = "GetStoredQuery"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStoredQueryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStoredQueryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetStoredQueryRequest
+        operation.output = GetStoredQueryResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_aggregate_discovered_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#ListAggregateDiscoveredResources"
         operation.name = "ListAggregateDiscoveredResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAggregateDiscoveredResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAggregateDiscoveredResourcesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListAggregateDiscoveredResourcesRequest
+        operation.output = ListAggregateDiscoveredResourcesResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAggregateDiscoveredResources.new
       end)
       service.add_operation(:list_configuration_recorders, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#ListConfigurationRecorders"
         operation.name = "ListConfigurationRecorders"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationRecordersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationRecordersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListConfigurationRecordersRequest
+        operation.output = ListConfigurationRecordersResponse
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListConfigurationRecorders.new
       end)
       service.add_operation(:list_conformance_pack_compliance_scores, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#ListConformancePackComplianceScores"
         operation.name = "ListConformancePackComplianceScores"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConformancePackComplianceScoresRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConformancePackComplianceScoresResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = ListConformancePackComplianceScoresRequest
+        operation.output = ListConformancePackComplianceScoresResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
         operation[:paginator] = Paginators::ListConformancePackComplianceScores.new
       end)
       service.add_operation(:list_discovered_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#ListDiscoveredResources"
         operation.name = "ListDiscoveredResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDiscoveredResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDiscoveredResourcesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListDiscoveredResourcesRequest
+        operation.output = ListDiscoveredResourcesResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoAvailableConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDiscoveredResources.new
       end)
       service.add_operation(:list_resource_evaluations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#ListResourceEvaluations"
         operation.name = "ListResourceEvaluations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceEvaluationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListResourceEvaluationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTimeRangeException)
+        operation.input = ListResourceEvaluationsRequest
+        operation.output = ListResourceEvaluationsResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidTimeRangeException
         operation.traits = {}
         operation[:paginator] = Paginators::ListResourceEvaluations.new
       end)
       service.add_operation(:list_stored_queries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#ListStoredQueries"
         operation.name = "ListStoredQueries"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStoredQueriesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStoredQueriesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStoredQueriesRequest
+        operation.output = ListStoredQueriesResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListStoredQueries.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:put_aggregation_authorization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutAggregationAuthorization"
         operation.name = "PutAggregationAuthorization"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAggregationAuthorizationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAggregationAuthorizationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = PutAggregationAuthorizationRequest
+        operation.output = PutAggregationAuthorizationResponse
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:put_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutConfigRule"
         operation.name = "PutConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxNumberOfConfigRulesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = PutConfigRuleRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InsufficientPermissionsException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MaxNumberOfConfigRulesExceededException
+        operation.errors << NoAvailableConfigurationRecorderException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:put_configuration_aggregator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutConfigurationAggregator"
         operation.name = "PutConfigurationAggregator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationAggregatorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationAggregatorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRoleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAllFeaturesNotEnabledException)
+        operation.input = PutConfigurationAggregatorRequest
+        operation.output = PutConfigurationAggregatorResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRoleException
+        operation.errors << LimitExceededException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << OrganizationAccessDeniedException
+        operation.errors << OrganizationAllFeaturesNotEnabledException
         operation.traits = {}
       end)
       service.add_operation(:put_configuration_recorder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutConfigurationRecorder"
         operation.name = "PutConfigurationRecorder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConfigurationRecorderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidConfigurationRecorderNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRecordingGroupException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRoleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxNumberOfConfigurationRecordersExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutConfigurationRecorderRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidConfigurationRecorderNameException
+        operation.errors << InvalidRecordingGroupException
+        operation.errors << InvalidRoleException
+        operation.errors << MaxNumberOfConfigurationRecordersExceededException
+        operation.errors << UnmodifiableEntityException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_conformance_pack, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutConformancePack"
         operation.name = "PutConformancePack"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConformancePackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutConformancePackResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConformancePackTemplateValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxNumberOfConformancePacksExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = PutConformancePackRequest
+        operation.output = PutConformancePackResponse
+        operation.errors << ConformancePackTemplateValidationException
+        operation.errors << InsufficientPermissionsException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MaxNumberOfConformancePacksExceededException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:put_delivery_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutDeliveryChannel"
         operation.name = "PutDeliveryChannel"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutDeliveryChannelRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientDeliveryPolicyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidDeliveryChannelNameException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidS3KeyPrefixException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidS3KmsKeyArnException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidSNSTopicARNException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxNumberOfDeliveryChannelsExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchBucketException)
+        operation.input = PutDeliveryChannelRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InsufficientDeliveryPolicyException
+        operation.errors << InvalidDeliveryChannelNameException
+        operation.errors << InvalidS3KeyPrefixException
+        operation.errors << InvalidS3KmsKeyArnException
+        operation.errors << InvalidSNSTopicARNException
+        operation.errors << MaxNumberOfDeliveryChannelsExceededException
+        operation.errors << NoAvailableConfigurationRecorderException
+        operation.errors << NoSuchBucketException
         operation.traits = {}
       end)
       service.add_operation(:put_evaluations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutEvaluations"
         operation.name = "PutEvaluations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEvaluationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutEvaluationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResultTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        operation.input = PutEvaluationsRequest
+        operation.output = PutEvaluationsResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidResultTokenException
+        operation.errors << NoSuchConfigRuleException
         operation.traits = {}
       end)
       service.add_operation(:put_external_evaluation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutExternalEvaluation"
         operation.name = "PutExternalEvaluation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutExternalEvaluationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutExternalEvaluationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        operation.input = PutExternalEvaluationRequest
+        operation.output = PutExternalEvaluationResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchConfigRuleException
         operation.traits = {}
       end)
       service.add_operation(:put_organization_config_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutOrganizationConfigRule"
         operation.name = "PutOrganizationConfigRule"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOrganizationConfigRuleRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOrganizationConfigRuleResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxNumberOfOrganizationConfigRulesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAllFeaturesNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutOrganizationConfigRuleRequest
+        operation.output = PutOrganizationConfigRuleResponse
+        operation.errors << InsufficientPermissionsException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MaxNumberOfOrganizationConfigRulesExceededException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << OrganizationAccessDeniedException
+        operation.errors << OrganizationAllFeaturesNotEnabledException
+        operation.errors << ResourceInUseException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_organization_conformance_pack, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutOrganizationConformancePack"
         operation.name = "PutOrganizationConformancePack"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOrganizationConformancePackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOrganizationConformancePackResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxNumberOfOrganizationConformancePacksExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationAllFeaturesNotEnabledException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationConformancePackTemplateValidationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutOrganizationConformancePackRequest
+        operation.output = PutOrganizationConformancePackResponse
+        operation.errors << InsufficientPermissionsException
+        operation.errors << MaxNumberOfOrganizationConformancePacksExceededException
+        operation.errors << NoAvailableOrganizationException
+        operation.errors << OrganizationAccessDeniedException
+        operation.errors << OrganizationAllFeaturesNotEnabledException
+        operation.errors << OrganizationConformancePackTemplateValidationException
+        operation.errors << ResourceInUseException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_remediation_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutRemediationConfigurations"
         operation.name = "PutRemediationConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRemediationConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRemediationConfigurationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = PutRemediationConfigurationsRequest
+        operation.output = PutRemediationConfigurationsResponse
+        operation.errors << InsufficientPermissionsException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:put_remediation_exceptions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutRemediationExceptions"
         operation.name = "PutRemediationExceptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRemediationExceptionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRemediationExceptionsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = PutRemediationExceptionsRequest
+        operation.output = PutRemediationExceptionsResponse
+        operation.errors << InsufficientPermissionsException
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:put_resource_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutResourceConfig"
         operation.name = "PutResourceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxActiveResourcesExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoRunningConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutResourceConfigRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InsufficientPermissionsException
+        operation.errors << MaxActiveResourcesExceededException
+        operation.errors << NoRunningConfigurationRecorderException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_retention_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutRetentionConfiguration"
         operation.name = "PutRetentionConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRetentionConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRetentionConfigurationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxNumberOfRetentionConfigurationsExceededException)
+        operation.input = PutRetentionConfigurationRequest
+        operation.output = PutRetentionConfigurationResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << MaxNumberOfRetentionConfigurationsExceededException
         operation.traits = {}
       end)
       service.add_operation(:put_service_linked_configuration_recorder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutServiceLinkedConfigurationRecorder"
         operation.name = "PutServiceLinkedConfigurationRecorder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutServiceLinkedConfigurationRecorderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutServiceLinkedConfigurationRecorderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutServiceLinkedConfigurationRecorderRequest
+        operation.output = PutServiceLinkedConfigurationRecorderResponse
+        operation.errors << ConflictException
+        operation.errors << InsufficientPermissionsException
+        operation.errors << LimitExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_stored_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#PutStoredQuery"
         operation.name = "PutStoredQuery"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutStoredQueryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutStoredQueryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutStoredQueryRequest
+        operation.output = PutStoredQueryResponse
+        operation.errors << ResourceConcurrentModificationException
+        operation.errors << TooManyTagsException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:select_aggregate_resource_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#SelectAggregateResourceConfig"
         operation.name = "SelectAggregateResourceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectAggregateResourceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectAggregateResourceConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidExpressionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        operation.input = SelectAggregateResourceConfigRequest
+        operation.output = SelectAggregateResourceConfigResponse
+        operation.errors << InvalidExpressionException
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
+        operation.errors << NoSuchConfigurationAggregatorException
         operation.traits = {}
         operation[:paginator] = Paginators::SelectAggregateResourceConfig.new
       end)
       service.add_operation(:select_resource_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#SelectResourceConfig"
         operation.name = "SelectResourceConfig"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectResourceConfigRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectResourceConfigResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidExpressionException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLimitException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        operation.input = SelectResourceConfigRequest
+        operation.output = SelectResourceConfigResponse
+        operation.errors << InvalidExpressionException
+        operation.errors << InvalidLimitException
+        operation.errors << InvalidNextTokenException
         operation.traits = {}
         operation[:paginator] = Paginators::SelectResourceConfig.new
       end)
       service.add_operation(:start_config_rules_evaluation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#StartConfigRulesEvaluation"
         operation.name = "StartConfigRulesEvaluation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartConfigRulesEvaluationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartConfigRulesEvaluationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceInUseException)
+        operation.input = StartConfigRulesEvaluationRequest
+        operation.output = StartConfigRulesEvaluationResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << LimitExceededException
+        operation.errors << NoSuchConfigRuleException
+        operation.errors << ResourceInUseException
         operation.traits = {}
       end)
       service.add_operation(:start_configuration_recorder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#StartConfigurationRecorder"
         operation.name = "StartConfigurationRecorder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartConfigurationRecorderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoAvailableDeliveryChannelException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        operation.input = StartConfigurationRecorderRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoAvailableDeliveryChannelException
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << UnmodifiableEntityException
         operation.traits = {}
       end)
       service.add_operation(:start_remediation_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#StartRemediationExecution"
         operation.name = "StartRemediationExecution"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartRemediationExecutionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartRemediationExecutionResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
+        operation.input = StartRemediationExecutionRequest
+        operation.output = StartRemediationExecutionResponse
+        operation.errors << InsufficientPermissionsException
+        operation.errors << InvalidParameterValueException
+        operation.errors << NoSuchRemediationConfigurationException
         operation.traits = {}
       end)
       service.add_operation(:start_resource_evaluation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#StartResourceEvaluation"
         operation.name = "StartResourceEvaluation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartResourceEvaluationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartResourceEvaluationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotentParameterMismatch)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.input = StartResourceEvaluationRequest
+        operation.output = StartResourceEvaluationResponse
+        operation.errors << IdempotentParameterMismatch
+        operation.errors << InvalidParameterValueException
         operation.traits = {}
       end)
       service.add_operation(:stop_configuration_recorder, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#StopConfigurationRecorder"
         operation.name = "StopConfigurationRecorder"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopConfigurationRecorderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        operation.input = StopConfigurationRecorderRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << NoSuchConfigurationRecorderException
+        operation.errors << UnmodifiableEntityException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.configservice#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

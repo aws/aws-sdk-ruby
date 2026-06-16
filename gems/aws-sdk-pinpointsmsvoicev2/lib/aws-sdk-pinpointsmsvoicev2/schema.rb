@@ -427,1251 +427,1251 @@ module Aws::PinpointSMSVoiceV2
     VoiceMessageBodyTextType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VoiceMessageBodyTextType", name: "VoiceMessageBodyTextType", traits: {"smithy.api#enum" => [{"value" => "TEXT", "name" => "TEXT"}, {"value" => "SSML", "name" => "SSML"}]})
     VoiceMessageOriginationIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VoiceMessageOriginationIdentity", name: "VoiceMessageOriginationIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/\\+-]+$"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: "Reason"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDeniedExceptionReason, location_name: "Reason"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountAttribute.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountAttributeName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    AccountAttribute.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    AccountAttribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAttributeName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    AccountAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
     AccountAttribute.type = Types::AccountAttribute
-    AccountAttributeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountAttribute)
-    AccountLimit.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountLimitName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    AccountLimit.add_member(:used, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "Used", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    AccountLimit.add_member(:max, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "Max", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AccountAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAttribute)
+    AccountLimit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLimitName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    AccountLimit.add_member(:used, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "Used", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AccountLimit.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "Max", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AccountLimit.type = Types::AccountLimit
-    AccountLimitList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountLimit)
-    AssociateOriginationIdentityRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
-    AssociateOriginationIdentityRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneOrSenderIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    AssociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    AssociateOriginationIdentityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    AccountLimitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLimit)
+    AssociateOriginationIdentityRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    AssociateOriginationIdentityRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrSenderIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    AssociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    AssociateOriginationIdentityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateOriginationIdentityRequest.type = Types::AssociateOriginationIdentityRequest
-    AssociateOriginationIdentityResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
-    AssociateOriginationIdentityResult.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    AssociateOriginationIdentityResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
-    AssociateOriginationIdentityResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
-    AssociateOriginationIdentityResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    AssociateOriginationIdentityResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
+    AssociateOriginationIdentityResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    AssociateOriginationIdentityResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
+    AssociateOriginationIdentityResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
+    AssociateOriginationIdentityResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
     AssociateOriginationIdentityResult.type = Types::AssociateOriginationIdentityResult
-    AssociateProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    AssociateProtectConfigurationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    AssociateProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    AssociateProtectConfigurationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
     AssociateProtectConfigurationRequest.type = Types::AssociateProtectConfigurationRequest
-    AssociateProtectConfigurationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn", traits: {"smithy.api#required" => {}}))
-    AssociateProtectConfigurationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    AssociateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    AssociateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    AssociateProtectConfigurationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn", traits: {"smithy.api#required" => {}}))
+    AssociateProtectConfigurationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    AssociateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    AssociateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
     AssociateProtectConfigurationResult.type = Types::AssociateProtectConfigurationResult
-    CloudWatchLogsDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    CloudWatchLogsDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn", traits: {"smithy.api#required" => {}}))
+    CloudWatchLogsDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    CloudWatchLogsDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, location_name: "LogGroupArn", traits: {"smithy.api#required" => {}}))
     CloudWatchLogsDestination.type = Types::CloudWatchLogsDestination
-    ConfigurationSetFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ConfigurationSetFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    ConfigurationSetFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ConfigurationSetFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     ConfigurationSetFilter.type = Types::ConfigurationSetFilter
-    ConfigurationSetFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetFilter)
-    ConfigurationSetInformation.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn", traits: {"smithy.api#required" => {}}))
-    ConfigurationSetInformation.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    ConfigurationSetInformation.add_member(:event_destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationList, location_name: "EventDestinations", traits: {"smithy.api#required" => {}}))
-    ConfigurationSetInformation.add_member(:default_message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "DefaultMessageType"))
-    ConfigurationSetInformation.add_member(:default_sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "DefaultSenderId"))
-    ConfigurationSetInformation.add_member(:default_message_feedback_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DefaultMessageFeedbackEnabled"))
-    ConfigurationSetInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    ConfigurationSetInformation.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    ConfigurationSetFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetFilter)
+    ConfigurationSetInformation.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn", traits: {"smithy.api#required" => {}}))
+    ConfigurationSetInformation.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    ConfigurationSetInformation.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationList, location_name: "EventDestinations", traits: {"smithy.api#required" => {}}))
+    ConfigurationSetInformation.add_member(:default_message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "DefaultMessageType"))
+    ConfigurationSetInformation.add_member(:default_sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "DefaultSenderId"))
+    ConfigurationSetInformation.add_member(:default_message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DefaultMessageFeedbackEnabled"))
+    ConfigurationSetInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    ConfigurationSetInformation.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
     ConfigurationSetInformation.type = Types::ConfigurationSetInformation
-    ConfigurationSetInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetInformation)
-    ConfigurationSetNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn)
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "Reason"))
-    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ConfigurationSetInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetInformation)
+    ConfigurationSetNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn)
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionReason, location_name: "Reason"))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ConflictException.type = Types::ConflictException
-    ContextMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextKey)
-    ContextMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextValue)
-    CreateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    CreateConfigurationSetRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateConfigurationSetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    ContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKey)
+    ContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContextValue)
+    CreateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    CreateConfigurationSetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateConfigurationSetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateConfigurationSetRequest.type = Types::CreateConfigurationSetRequest
-    CreateConfigurationSetResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    CreateConfigurationSetResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    CreateConfigurationSetResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateConfigurationSetResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    CreateConfigurationSetResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    CreateConfigurationSetResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    CreateConfigurationSetResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateConfigurationSetResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     CreateConfigurationSetResult.type = Types::CreateConfigurationSetResult
-    CreateEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    CreateEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
-    CreateEventDestinationRequest.add_member(:matching_event_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeList, location_name: "MatchingEventTypes", traits: {"smithy.api#required" => {}}))
-    CreateEventDestinationRequest.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
-    CreateEventDestinationRequest.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
-    CreateEventDestinationRequest.add_member(:sns_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
-    CreateEventDestinationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    CreateEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
+    CreateEventDestinationRequest.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeList, location_name: "MatchingEventTypes", traits: {"smithy.api#required" => {}}))
+    CreateEventDestinationRequest.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
+    CreateEventDestinationRequest.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
+    CreateEventDestinationRequest.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, location_name: "SnsDestination"))
+    CreateEventDestinationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateEventDestinationRequest.type = Types::CreateEventDestinationRequest
-    CreateEventDestinationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    CreateEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    CreateEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestination, location_name: "EventDestination"))
+    CreateEventDestinationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    CreateEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    CreateEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, location_name: "EventDestination"))
     CreateEventDestinationResult.type = Types::CreateEventDestinationResult
-    CreateOptOutListRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
-    CreateOptOutListRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateOptOutListRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateOptOutListRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    CreateOptOutListRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateOptOutListRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateOptOutListRequest.type = Types::CreateOptOutListRequest
-    CreateOptOutListResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
-    CreateOptOutListResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    CreateOptOutListResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateOptOutListResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    CreateOptOutListResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
+    CreateOptOutListResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    CreateOptOutListResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateOptOutListResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     CreateOptOutListResult.type = Types::CreateOptOutListResult
-    CreatePoolRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneOrSenderIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    CreatePoolRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    CreatePoolRequest.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
-    CreatePoolRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
-    CreatePoolRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreatePoolRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreatePoolRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrSenderIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    CreatePoolRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    CreatePoolRequest.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
+    CreatePoolRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    CreatePoolRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreatePoolRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreatePoolRequest.type = Types::CreatePoolRequest
-    CreatePoolResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
-    CreatePoolResult.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    CreatePoolResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolStatus, location_name: "Status"))
-    CreatePoolResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    CreatePoolResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
-    CreatePoolResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    CreatePoolResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    CreatePoolResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
-    CreatePoolResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    CreatePoolResult.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false}))
-    CreatePoolResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
-    CreatePoolResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreatePoolResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    CreatePoolResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
+    CreatePoolResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    CreatePoolResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolStatus, location_name: "Status"))
+    CreatePoolResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    CreatePoolResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
+    CreatePoolResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    CreatePoolResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    CreatePoolResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
+    CreatePoolResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    CreatePoolResult.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false}))
+    CreatePoolResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
+    CreatePoolResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreatePoolResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     CreatePoolResult.type = Types::CreatePoolResult
-    CreateProtectConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateProtectConfigurationRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
-    CreateProtectConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateProtectConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateProtectConfigurationRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    CreateProtectConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateProtectConfigurationRequest.type = Types::CreateProtectConfigurationRequest
-    CreateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    CreateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    CreateProtectConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    CreateProtectConfigurationResult.add_member(:account_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    CreateProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    CreateProtectConfigurationResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    CreateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    CreateProtectConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    CreateProtectConfigurationResult.add_member(:account_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CreateProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CreateProtectConfigurationResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateProtectConfigurationResult.type = Types::CreateProtectConfigurationResult
-    CreateRegistrationAssociationRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAssociationRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdOrArn, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
     CreateRegistrationAssociationRequest.type = Types::CreateRegistrationAssociationRequest
-    CreateRegistrationAssociationResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAssociationResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAssociationResult.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAssociationResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAssociationResult.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAssociationResult.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAssociationResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    CreateRegistrationAssociationResult.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    CreateRegistrationAssociationResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationResult.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationResult.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationResult.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAssociationResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    CreateRegistrationAssociationResult.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
     CreateRegistrationAssociationResult.type = Types::CreateRegistrationAssociationResult
-    CreateRegistrationAttachmentRequest.add_member(:attachment_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentBody, location_name: "AttachmentBody"))
-    CreateRegistrationAttachmentRequest.add_member(:attachment_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentUrl, location_name: "AttachmentUrl"))
-    CreateRegistrationAttachmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRegistrationAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateRegistrationAttachmentRequest.add_member(:attachment_body, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentBody, location_name: "AttachmentBody"))
+    CreateRegistrationAttachmentRequest.add_member(:attachment_url, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentUrl, location_name: "AttachmentUrl"))
+    CreateRegistrationAttachmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateRegistrationAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateRegistrationAttachmentRequest.type = Types::CreateRegistrationAttachmentRequest
-    CreateRegistrationAttachmentResult.add_member(:registration_attachment_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentArn", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAttachmentResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAttachmentResult.add_member(:attachment_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "AttachmentStatus", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationAttachmentResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRegistrationAttachmentResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAttachmentResult.add_member(:registration_attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentArn", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAttachmentResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAttachmentResult.add_member(:attachment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStatus, location_name: "AttachmentStatus", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationAttachmentResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateRegistrationAttachmentResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     CreateRegistrationAttachmentResult.type = Types::CreateRegistrationAttachmentResult
-    CreateRegistrationRequest.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRegistrationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateRegistrationRequest.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateRegistrationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateRegistrationRequest.type = Types::CreateRegistrationRequest
-    CreateRegistrationResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationResult.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationResult.add_member(:registration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationStatus, location_name: "RegistrationStatus", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationResult.add_member(:current_version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "CurrentVersionNumber", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationResult.add_member(:additional_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringMap, location_name: "AdditionalAttributes"))
-    CreateRegistrationResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRegistrationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationResult.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationResult.add_member(:registration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationStatus, location_name: "RegistrationStatus", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationResult.add_member(:current_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "CurrentVersionNumber", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationResult.add_member(:additional_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, location_name: "AdditionalAttributes"))
+    CreateRegistrationResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateRegistrationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     CreateRegistrationResult.type = Types::CreateRegistrationResult
-    CreateRegistrationVersionRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationVersionRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
     CreateRegistrationVersionRequest.type = Types::CreateRegistrationVersionRequest
-    CreateRegistrationVersionResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationVersionResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationVersionResult.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationVersionResult.add_member(:registration_version_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
-    CreateRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationVersionResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationVersionResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationVersionResult.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationVersionResult.add_member(:registration_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
+    CreateRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
     CreateRegistrationVersionResult.type = Types::CreateRegistrationVersionResult
-    CreateVerifiedDestinationNumberRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    CreateVerifiedDestinationNumberRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateVerifiedDestinationNumberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateVerifiedDestinationNumberRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateVerifiedDestinationNumberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateVerifiedDestinationNumberRequest.type = Types::CreateVerifiedDestinationNumberRequest
-    CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
-    CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
-    CreateVerifiedDestinationNumberResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    CreateVerifiedDestinationNumberResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    CreateVerifiedDestinationNumberResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateVerifiedDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateVerifiedDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     CreateVerifiedDestinationNumberResult.type = Types::CreateVerifiedDestinationNumberResult
     DeleteAccountDefaultProtectConfigurationRequest.type = Types::DeleteAccountDefaultProtectConfigurationRequest
-    DeleteAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "DefaultProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    DeleteAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "DefaultProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    DeleteAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "DefaultProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "DefaultProtectConfigurationId", traits: {"smithy.api#required" => {}}))
     DeleteAccountDefaultProtectConfigurationResult.type = Types::DeleteAccountDefaultProtectConfigurationResult
-    DeleteConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    DeleteConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
     DeleteConfigurationSetRequest.type = Types::DeleteConfigurationSetRequest
-    DeleteConfigurationSetResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    DeleteConfigurationSetResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    DeleteConfigurationSetResult.add_member(:event_destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationList, location_name: "EventDestinations"))
-    DeleteConfigurationSetResult.add_member(:default_message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "DefaultMessageType"))
-    DeleteConfigurationSetResult.add_member(:default_sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "DefaultSenderId"))
-    DeleteConfigurationSetResult.add_member(:default_message_feedback_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DefaultMessageFeedbackEnabled"))
-    DeleteConfigurationSetResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    DeleteConfigurationSetResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    DeleteConfigurationSetResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    DeleteConfigurationSetResult.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationList, location_name: "EventDestinations"))
+    DeleteConfigurationSetResult.add_member(:default_message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "DefaultMessageType"))
+    DeleteConfigurationSetResult.add_member(:default_sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "DefaultSenderId"))
+    DeleteConfigurationSetResult.add_member(:default_message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DefaultMessageFeedbackEnabled"))
+    DeleteConfigurationSetResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     DeleteConfigurationSetResult.type = Types::DeleteConfigurationSetResult
-    DeleteDefaultMessageTypeRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    DeleteDefaultMessageTypeRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
     DeleteDefaultMessageTypeRequest.type = Types::DeleteDefaultMessageTypeRequest
-    DeleteDefaultMessageTypeResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    DeleteDefaultMessageTypeResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    DeleteDefaultMessageTypeResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    DeleteDefaultMessageTypeResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    DeleteDefaultMessageTypeResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    DeleteDefaultMessageTypeResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
     DeleteDefaultMessageTypeResult.type = Types::DeleteDefaultMessageTypeResult
-    DeleteDefaultSenderIdRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    DeleteDefaultSenderIdRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
     DeleteDefaultSenderIdRequest.type = Types::DeleteDefaultSenderIdRequest
-    DeleteDefaultSenderIdResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    DeleteDefaultSenderIdResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    DeleteDefaultSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId"))
+    DeleteDefaultSenderIdResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    DeleteDefaultSenderIdResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    DeleteDefaultSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId"))
     DeleteDefaultSenderIdResult.type = Types::DeleteDefaultSenderIdResult
-    DeleteEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    DeleteEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
+    DeleteEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    DeleteEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
     DeleteEventDestinationRequest.type = Types::DeleteEventDestinationRequest
-    DeleteEventDestinationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    DeleteEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    DeleteEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestination, location_name: "EventDestination"))
+    DeleteEventDestinationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    DeleteEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    DeleteEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, location_name: "EventDestination"))
     DeleteEventDestinationResult.type = Types::DeleteEventDestinationResult
-    DeleteKeywordRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneOrPoolIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    DeleteKeywordRequest.add_member(:keyword, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Keyword, location_name: "Keyword", traits: {"smithy.api#required" => {}}))
+    DeleteKeywordRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrPoolIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    DeleteKeywordRequest.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, location_name: "Keyword", traits: {"smithy.api#required" => {}}))
     DeleteKeywordRequest.type = Types::DeleteKeywordRequest
-    DeleteKeywordResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
-    DeleteKeywordResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
-    DeleteKeywordResult.add_member(:keyword, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Keyword, location_name: "Keyword"))
-    DeleteKeywordResult.add_member(:keyword_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordMessage, location_name: "KeywordMessage"))
-    DeleteKeywordResult.add_member(:keyword_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordAction, location_name: "KeywordAction"))
+    DeleteKeywordResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
+    DeleteKeywordResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
+    DeleteKeywordResult.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, location_name: "Keyword"))
+    DeleteKeywordResult.add_member(:keyword_message, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordMessage, location_name: "KeywordMessage"))
+    DeleteKeywordResult.add_member(:keyword_action, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordAction, location_name: "KeywordAction"))
     DeleteKeywordResult.type = Types::DeleteKeywordResult
     DeleteMediaMessageSpendLimitOverrideRequest.type = Types::DeleteMediaMessageSpendLimitOverrideRequest
-    DeleteMediaMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    DeleteMediaMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit"))
     DeleteMediaMessageSpendLimitOverrideResult.type = Types::DeleteMediaMessageSpendLimitOverrideResult
-    DeleteOptOutListRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    DeleteOptOutListRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
     DeleteOptOutListRequest.type = Types::DeleteOptOutListRequest
-    DeleteOptOutListResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
-    DeleteOptOutListResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    DeleteOptOutListResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    DeleteOptOutListResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
+    DeleteOptOutListResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    DeleteOptOutListResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     DeleteOptOutListResult.type = Types::DeleteOptOutListResult
-    DeleteOptedOutNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
-    DeleteOptedOutNumberRequest.add_member(:opted_out_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "OptedOutNumber", traits: {"smithy.api#required" => {}}))
+    DeleteOptedOutNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    DeleteOptedOutNumberRequest.add_member(:opted_out_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "OptedOutNumber", traits: {"smithy.api#required" => {}}))
     DeleteOptedOutNumberRequest.type = Types::DeleteOptedOutNumberRequest
-    DeleteOptedOutNumberResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
-    DeleteOptedOutNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    DeleteOptedOutNumberResult.add_member(:opted_out_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "OptedOutNumber"))
-    DeleteOptedOutNumberResult.add_member(:opted_out_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "OptedOutTimestamp"))
-    DeleteOptedOutNumberResult.add_member(:end_user_opted_out, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "EndUserOptedOut", traits: {"smithy.api#default" => false}))
+    DeleteOptedOutNumberResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
+    DeleteOptedOutNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    DeleteOptedOutNumberResult.add_member(:opted_out_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "OptedOutNumber"))
+    DeleteOptedOutNumberResult.add_member(:opted_out_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "OptedOutTimestamp"))
+    DeleteOptedOutNumberResult.add_member(:end_user_opted_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "EndUserOptedOut", traits: {"smithy.api#default" => false}))
     DeleteOptedOutNumberResult.type = Types::DeleteOptedOutNumberResult
-    DeletePoolRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    DeletePoolRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
     DeletePoolRequest.type = Types::DeletePoolRequest
-    DeletePoolResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
-    DeletePoolResult.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    DeletePoolResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolStatus, location_name: "Status"))
-    DeletePoolResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    DeletePoolResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
-    DeletePoolResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    DeletePoolResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    DeletePoolResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
-    DeletePoolResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    DeletePoolResult.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false}))
-    DeletePoolResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    DeletePoolResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
+    DeletePoolResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    DeletePoolResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolStatus, location_name: "Status"))
+    DeletePoolResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    DeletePoolResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
+    DeletePoolResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    DeletePoolResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    DeletePoolResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
+    DeletePoolResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    DeletePoolResult.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false}))
+    DeletePoolResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     DeletePoolResult.type = Types::DeletePoolResult
-    DeleteProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
     DeleteProtectConfigurationRequest.type = Types::DeleteProtectConfigurationRequest
-    DeleteProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationResult.add_member(:account_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    DeleteProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeleteProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationResult.add_member(:account_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeleteProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     DeleteProtectConfigurationResult.type = Types::DeleteProtectConfigurationResult
-    DeleteProtectConfigurationRuleSetNumberOverrideRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationRuleSetNumberOverrideRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRuleSetNumberOverrideRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRuleSetNumberOverrideRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
     DeleteProtectConfigurationRuleSetNumberOverrideRequest.type = Types::DeleteProtectConfigurationRuleSetNumberOverrideRequest
-    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
-    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
     DeleteProtectConfigurationRuleSetNumberOverrideResult.type = Types::DeleteProtectConfigurationRuleSetNumberOverrideResult
-    DeleteRegistrationAttachmentRequest.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationAttachmentRequest.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
     DeleteRegistrationAttachmentRequest.type = Types::DeleteRegistrationAttachmentRequest
-    DeleteRegistrationAttachmentResult.add_member(:registration_attachment_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentArn", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationAttachmentResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationAttachmentResult.add_member(:attachment_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "AttachmentStatus", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationAttachmentResult.add_member(:attachment_upload_error_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentUploadErrorReason, location_name: "AttachmentUploadErrorReason"))
-    DeleteRegistrationAttachmentResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationAttachmentResult.add_member(:registration_attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentArn", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationAttachmentResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationAttachmentResult.add_member(:attachment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStatus, location_name: "AttachmentStatus", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationAttachmentResult.add_member(:attachment_upload_error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentUploadErrorReason, location_name: "AttachmentUploadErrorReason"))
+    DeleteRegistrationAttachmentResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     DeleteRegistrationAttachmentResult.type = Types::DeleteRegistrationAttachmentResult
-    DeleteRegistrationFieldValueRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationFieldValueRequest.add_member(:field_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationFieldValueRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationFieldValueRequest.add_member(:field_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
     DeleteRegistrationFieldValueRequest.type = Types::DeleteRegistrationFieldValueRequest
-    DeleteRegistrationFieldValueResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationFieldValueResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationFieldValueResult.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationFieldValueResult.add_member(:field_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationFieldValueResult.add_member(:select_choices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
-    DeleteRegistrationFieldValueResult.add_member(:text_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
-    DeleteRegistrationFieldValueResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId"))
+    DeleteRegistrationFieldValueResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationFieldValueResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationFieldValueResult.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationFieldValueResult.add_member(:field_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationFieldValueResult.add_member(:select_choices, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectChoiceList, location_name: "SelectChoices"))
+    DeleteRegistrationFieldValueResult.add_member(:text_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextValue, location_name: "TextValue"))
+    DeleteRegistrationFieldValueResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId"))
     DeleteRegistrationFieldValueResult.type = Types::DeleteRegistrationFieldValueResult
-    DeleteRegistrationRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
     DeleteRegistrationRequest.type = Types::DeleteRegistrationRequest
-    DeleteRegistrationResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationResult.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationResult.add_member(:registration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationStatus, location_name: "RegistrationStatus", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationResult.add_member(:current_version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "CurrentVersionNumber", traits: {"smithy.api#required" => {}}))
-    DeleteRegistrationResult.add_member(:approved_version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "ApprovedVersionNumber"))
-    DeleteRegistrationResult.add_member(:latest_denied_version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "LatestDeniedVersionNumber"))
-    DeleteRegistrationResult.add_member(:additional_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringMap, location_name: "AdditionalAttributes"))
-    DeleteRegistrationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationResult.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationResult.add_member(:registration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationStatus, location_name: "RegistrationStatus", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationResult.add_member(:current_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "CurrentVersionNumber", traits: {"smithy.api#required" => {}}))
+    DeleteRegistrationResult.add_member(:approved_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "ApprovedVersionNumber"))
+    DeleteRegistrationResult.add_member(:latest_denied_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "LatestDeniedVersionNumber"))
+    DeleteRegistrationResult.add_member(:additional_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, location_name: "AdditionalAttributes"))
+    DeleteRegistrationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     DeleteRegistrationResult.type = Types::DeleteRegistrationResult
-    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
-    DeleteResourcePolicyResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
-    DeleteResourcePolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
-    DeleteResourcePolicyResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    DeleteResourcePolicyResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn"))
+    DeleteResourcePolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, location_name: "Policy"))
+    DeleteResourcePolicyResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     DeleteResourcePolicyResult.type = Types::DeleteResourcePolicyResult
     DeleteTextMessageSpendLimitOverrideRequest.type = Types::DeleteTextMessageSpendLimitOverrideRequest
-    DeleteTextMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    DeleteTextMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit"))
     DeleteTextMessageSpendLimitOverrideResult.type = Types::DeleteTextMessageSpendLimitOverrideResult
-    DeleteVerifiedDestinationNumberRequest.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
+    DeleteVerifiedDestinationNumberRequest.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberIdOrArn, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
     DeleteVerifiedDestinationNumberRequest.type = Types::DeleteVerifiedDestinationNumberRequest
-    DeleteVerifiedDestinationNumberResult.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
-    DeleteVerifiedDestinationNumberResult.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
-    DeleteVerifiedDestinationNumberResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    DeleteVerifiedDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteVerifiedDestinationNumberResult.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
+    DeleteVerifiedDestinationNumberResult.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
+    DeleteVerifiedDestinationNumberResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    DeleteVerifiedDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     DeleteVerifiedDestinationNumberResult.type = Types::DeleteVerifiedDestinationNumberResult
     DeleteVoiceMessageSpendLimitOverrideRequest.type = Types::DeleteVoiceMessageSpendLimitOverrideRequest
-    DeleteVoiceMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    DeleteVoiceMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit"))
     DeleteVoiceMessageSpendLimitOverrideResult.type = Types::DeleteVoiceMessageSpendLimitOverrideResult
-    DescribeAccountAttributesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeAccountAttributesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeAccountAttributesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeAccountAttributesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeAccountAttributesRequest.type = Types::DescribeAccountAttributesRequest
-    DescribeAccountAttributesResult.add_member(:account_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountAttributeList, location_name: "AccountAttributes"))
-    DescribeAccountAttributesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAccountAttributesResult.add_member(:account_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAttributeList, location_name: "AccountAttributes"))
+    DescribeAccountAttributesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeAccountAttributesResult.type = Types::DescribeAccountAttributesResult
-    DescribeAccountLimitsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeAccountLimitsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeAccountLimitsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeAccountLimitsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeAccountLimitsRequest.type = Types::DescribeAccountLimitsRequest
-    DescribeAccountLimitsResult.add_member(:account_limits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountLimitList, location_name: "AccountLimits"))
-    DescribeAccountLimitsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAccountLimitsResult.add_member(:account_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLimitList, location_name: "AccountLimits"))
+    DescribeAccountLimitsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeAccountLimitsResult.type = Types::DescribeAccountLimitsResult
-    DescribeConfigurationSetsRequest.add_member(:configuration_set_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameList, location_name: "ConfigurationSetNames"))
-    DescribeConfigurationSetsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetFilterList, location_name: "Filters"))
-    DescribeConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeConfigurationSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeConfigurationSetsRequest.add_member(:configuration_set_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameList, location_name: "ConfigurationSetNames"))
+    DescribeConfigurationSetsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetFilterList, location_name: "Filters"))
+    DescribeConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeConfigurationSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeConfigurationSetsRequest.type = Types::DescribeConfigurationSetsRequest
-    DescribeConfigurationSetsResult.add_member(:configuration_sets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetInformationList, location_name: "ConfigurationSets"))
-    DescribeConfigurationSetsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeConfigurationSetsResult.add_member(:configuration_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetInformationList, location_name: "ConfigurationSets"))
+    DescribeConfigurationSetsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeConfigurationSetsResult.type = Types::DescribeConfigurationSetsResult
-    DescribeKeywordsRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneOrPoolIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    DescribeKeywordsRequest.add_member(:keywords, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordList, location_name: "Keywords"))
-    DescribeKeywordsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordFilterList, location_name: "Filters"))
-    DescribeKeywordsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeKeywordsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeKeywordsRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrPoolIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    DescribeKeywordsRequest.add_member(:keywords, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordList, location_name: "Keywords"))
+    DescribeKeywordsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordFilterList, location_name: "Filters"))
+    DescribeKeywordsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeKeywordsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeKeywordsRequest.type = Types::DescribeKeywordsRequest
-    DescribeKeywordsResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
-    DescribeKeywordsResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
-    DescribeKeywordsResult.add_member(:keywords, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordInformationList, location_name: "Keywords"))
-    DescribeKeywordsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeKeywordsResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
+    DescribeKeywordsResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
+    DescribeKeywordsResult.add_member(:keywords, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordInformationList, location_name: "Keywords"))
+    DescribeKeywordsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeKeywordsResult.type = Types::DescribeKeywordsResult
-    DescribeOptOutListsRequest.add_member(:opt_out_list_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameList, location_name: "OptOutListNames"))
-    DescribeOptOutListsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeOptOutListsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeOptOutListsRequest.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    DescribeOptOutListsRequest.add_member(:opt_out_list_names, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameList, location_name: "OptOutListNames"))
+    DescribeOptOutListsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeOptOutListsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeOptOutListsRequest.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
     DescribeOptOutListsRequest.type = Types::DescribeOptOutListsRequest
-    DescribeOptOutListsResult.add_member(:opt_out_lists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListInformationList, location_name: "OptOutLists"))
-    DescribeOptOutListsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeOptOutListsResult.add_member(:opt_out_lists, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListInformationList, location_name: "OptOutLists"))
+    DescribeOptOutListsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeOptOutListsResult.type = Types::DescribeOptOutListsResult
-    DescribeOptedOutNumbersRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
-    DescribeOptedOutNumbersRequest.add_member(:opted_out_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptedOutNumberList, location_name: "OptedOutNumbers"))
-    DescribeOptedOutNumbersRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptedOutFilterList, location_name: "Filters"))
-    DescribeOptedOutNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeOptedOutNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeOptedOutNumbersRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    DescribeOptedOutNumbersRequest.add_member(:opted_out_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: OptedOutNumberList, location_name: "OptedOutNumbers"))
+    DescribeOptedOutNumbersRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OptedOutFilterList, location_name: "Filters"))
+    DescribeOptedOutNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeOptedOutNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeOptedOutNumbersRequest.type = Types::DescribeOptedOutNumbersRequest
-    DescribeOptedOutNumbersResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
-    DescribeOptedOutNumbersResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    DescribeOptedOutNumbersResult.add_member(:opted_out_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptedOutNumberInformationList, location_name: "OptedOutNumbers"))
-    DescribeOptedOutNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeOptedOutNumbersResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
+    DescribeOptedOutNumbersResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    DescribeOptedOutNumbersResult.add_member(:opted_out_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: OptedOutNumberInformationList, location_name: "OptedOutNumbers"))
+    DescribeOptedOutNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeOptedOutNumbersResult.type = Types::DescribeOptedOutNumbersResult
-    DescribePhoneNumbersRequest.add_member(:phone_number_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberIdList, location_name: "PhoneNumberIds"))
-    DescribePhoneNumbersRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberFilterList, location_name: "Filters"))
-    DescribePhoneNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribePhoneNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribePhoneNumbersRequest.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    DescribePhoneNumbersRequest.add_member(:phone_number_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberIdList, location_name: "PhoneNumberIds"))
+    DescribePhoneNumbersRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberFilterList, location_name: "Filters"))
+    DescribePhoneNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribePhoneNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribePhoneNumbersRequest.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
     DescribePhoneNumbersRequest.type = Types::DescribePhoneNumbersRequest
-    DescribePhoneNumbersResult.add_member(:phone_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberInformationList, location_name: "PhoneNumbers"))
-    DescribePhoneNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePhoneNumbersResult.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformationList, location_name: "PhoneNumbers"))
+    DescribePhoneNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribePhoneNumbersResult.type = Types::DescribePhoneNumbersResult
-    DescribePoolsRequest.add_member(:pool_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdList, location_name: "PoolIds"))
-    DescribePoolsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolFilterList, location_name: "Filters"))
-    DescribePoolsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribePoolsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribePoolsRequest.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    DescribePoolsRequest.add_member(:pool_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdList, location_name: "PoolIds"))
+    DescribePoolsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolFilterList, location_name: "Filters"))
+    DescribePoolsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribePoolsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribePoolsRequest.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
     DescribePoolsRequest.type = Types::DescribePoolsRequest
-    DescribePoolsResult.add_member(:pools, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolInformationList, location_name: "Pools"))
-    DescribePoolsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePoolsResult.add_member(:pools, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolInformationList, location_name: "Pools"))
+    DescribePoolsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribePoolsResult.type = Types::DescribePoolsResult
-    DescribeProtectConfigurationsRequest.add_member(:protect_configuration_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdList, location_name: "ProtectConfigurationIds"))
-    DescribeProtectConfigurationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationFilterList, location_name: "Filters"))
-    DescribeProtectConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeProtectConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeProtectConfigurationsRequest.add_member(:protect_configuration_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdList, location_name: "ProtectConfigurationIds"))
+    DescribeProtectConfigurationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationFilterList, location_name: "Filters"))
+    DescribeProtectConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeProtectConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeProtectConfigurationsRequest.type = Types::DescribeProtectConfigurationsRequest
-    DescribeProtectConfigurationsResult.add_member(:protect_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationInformationList, location_name: "ProtectConfigurations"))
-    DescribeProtectConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeProtectConfigurationsResult.add_member(:protect_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationInformationList, location_name: "ProtectConfigurations"))
+    DescribeProtectConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeProtectConfigurationsResult.type = Types::DescribeProtectConfigurationsResult
-    DescribeRegistrationAttachmentsRequest.add_member(:registration_attachment_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentIdList, location_name: "RegistrationAttachmentIds"))
-    DescribeRegistrationAttachmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentFilterList, location_name: "Filters"))
-    DescribeRegistrationAttachmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeRegistrationAttachmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationAttachmentsRequest.add_member(:registration_attachment_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentIdList, location_name: "RegistrationAttachmentIds"))
+    DescribeRegistrationAttachmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentFilterList, location_name: "Filters"))
+    DescribeRegistrationAttachmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeRegistrationAttachmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeRegistrationAttachmentsRequest.type = Types::DescribeRegistrationAttachmentsRequest
-    DescribeRegistrationAttachmentsResult.add_member(:registration_attachments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentsInformationList, location_name: "RegistrationAttachments", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationAttachmentsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationAttachmentsResult.add_member(:registration_attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentsInformationList, location_name: "RegistrationAttachments", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationAttachmentsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegistrationAttachmentsResult.type = Types::DescribeRegistrationAttachmentsResult
-    DescribeRegistrationFieldDefinitionsRequest.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldDefinitionsRequest.add_member(:section_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SectionPath, location_name: "SectionPath"))
-    DescribeRegistrationFieldDefinitionsRequest.add_member(:field_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPathList, location_name: "FieldPaths"))
-    DescribeRegistrationFieldDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeRegistrationFieldDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:section_path, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionPath, location_name: "SectionPath"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:field_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPathList, location_name: "FieldPaths"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeRegistrationFieldDefinitionsRequest.type = Types::DescribeRegistrationFieldDefinitionsRequest
-    DescribeRegistrationFieldDefinitionsResult.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldDefinitionsResult.add_member(:registration_field_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFieldDefinitionList, location_name: "RegistrationFieldDefinitions", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldDefinitionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldDefinitionsResult.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldDefinitionsResult.add_member(:registration_field_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldDefinitionList, location_name: "RegistrationFieldDefinitions", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldDefinitionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegistrationFieldDefinitionsResult.type = Types::DescribeRegistrationFieldDefinitionsResult
-    DescribeRegistrationFieldValuesRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldValuesRequest.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber"))
-    DescribeRegistrationFieldValuesRequest.add_member(:section_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SectionPath, location_name: "SectionPath"))
-    DescribeRegistrationFieldValuesRequest.add_member(:field_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPathList, location_name: "FieldPaths"))
-    DescribeRegistrationFieldValuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeRegistrationFieldValuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationFieldValuesRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldValuesRequest.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber"))
+    DescribeRegistrationFieldValuesRequest.add_member(:section_path, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionPath, location_name: "SectionPath"))
+    DescribeRegistrationFieldValuesRequest.add_member(:field_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPathList, location_name: "FieldPaths"))
+    DescribeRegistrationFieldValuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldValuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeRegistrationFieldValuesRequest.type = Types::DescribeRegistrationFieldValuesRequest
-    DescribeRegistrationFieldValuesResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldValuesResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldValuesResult.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldValuesResult.add_member(:registration_field_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFieldValueInformationList, location_name: "RegistrationFieldValues", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationFieldValuesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldValuesResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldValuesResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldValuesResult.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldValuesResult.add_member(:registration_field_values, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldValueInformationList, location_name: "RegistrationFieldValues", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationFieldValuesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegistrationFieldValuesResult.type = Types::DescribeRegistrationFieldValuesResult
-    DescribeRegistrationSectionDefinitionsRequest.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationSectionDefinitionsRequest.add_member(:section_paths, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SectionPathList, location_name: "SectionPaths"))
-    DescribeRegistrationSectionDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeRegistrationSectionDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:section_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionPathList, location_name: "SectionPaths"))
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeRegistrationSectionDefinitionsRequest.type = Types::DescribeRegistrationSectionDefinitionsRequest
-    DescribeRegistrationSectionDefinitionsResult.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationSectionDefinitionsResult.add_member(:registration_section_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationSectionDefinitionList, location_name: "RegistrationSectionDefinitions", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationSectionDefinitionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationSectionDefinitionsResult.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationSectionDefinitionsResult.add_member(:registration_section_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationSectionDefinitionList, location_name: "RegistrationSectionDefinitions", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationSectionDefinitionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegistrationSectionDefinitionsResult.type = Types::DescribeRegistrationSectionDefinitionsResult
-    DescribeRegistrationTypeDefinitionsRequest.add_member(:registration_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationTypeList, location_name: "RegistrationTypes"))
-    DescribeRegistrationTypeDefinitionsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationTypeFilterList, location_name: "Filters"))
-    DescribeRegistrationTypeDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeRegistrationTypeDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:registration_types, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationTypeList, location_name: "RegistrationTypes"))
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationTypeFilterList, location_name: "Filters"))
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeRegistrationTypeDefinitionsRequest.type = Types::DescribeRegistrationTypeDefinitionsRequest
-    DescribeRegistrationTypeDefinitionsResult.add_member(:registration_type_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationTypeDefinitionList, location_name: "RegistrationTypeDefinitions", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationTypeDefinitionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationTypeDefinitionsResult.add_member(:registration_type_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationTypeDefinitionList, location_name: "RegistrationTypeDefinitions", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationTypeDefinitionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegistrationTypeDefinitionsResult.type = Types::DescribeRegistrationTypeDefinitionsResult
-    DescribeRegistrationVersionsRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationVersionsRequest.add_member(:version_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumberList, location_name: "VersionNumbers"))
-    DescribeRegistrationVersionsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionFilterList, location_name: "Filters"))
-    DescribeRegistrationVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeRegistrationVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationVersionsRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationVersionsRequest.add_member(:version_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumberList, location_name: "VersionNumbers"))
+    DescribeRegistrationVersionsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionFilterList, location_name: "Filters"))
+    DescribeRegistrationVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeRegistrationVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeRegistrationVersionsRequest.type = Types::DescribeRegistrationVersionsRequest
-    DescribeRegistrationVersionsResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationVersionsResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationVersionsResult.add_member(:registration_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionInformationList, location_name: "RegistrationVersions", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationVersionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationVersionsResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationVersionsResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationVersionsResult.add_member(:registration_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionInformationList, location_name: "RegistrationVersions", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationVersionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegistrationVersionsResult.type = Types::DescribeRegistrationVersionsResult
-    DescribeRegistrationsRequest.add_member(:registration_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdList, location_name: "RegistrationIds"))
-    DescribeRegistrationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFilterList, location_name: "Filters"))
-    DescribeRegistrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeRegistrationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationsRequest.add_member(:registration_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdList, location_name: "RegistrationIds"))
+    DescribeRegistrationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFilterList, location_name: "Filters"))
+    DescribeRegistrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeRegistrationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeRegistrationsRequest.type = Types::DescribeRegistrationsRequest
-    DescribeRegistrationsResult.add_member(:registrations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationInformationList, location_name: "Registrations", traits: {"smithy.api#required" => {}}))
-    DescribeRegistrationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationsResult.add_member(:registrations, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationInformationList, location_name: "Registrations", traits: {"smithy.api#required" => {}}))
+    DescribeRegistrationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeRegistrationsResult.type = Types::DescribeRegistrationsResult
-    DescribeSenderIdsRequest.add_member(:sender_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdList, location_name: "SenderIds"))
-    DescribeSenderIdsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdFilterList, location_name: "Filters"))
-    DescribeSenderIdsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeSenderIdsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeSenderIdsRequest.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    DescribeSenderIdsRequest.add_member(:sender_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdList, location_name: "SenderIds"))
+    DescribeSenderIdsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdFilterList, location_name: "Filters"))
+    DescribeSenderIdsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeSenderIdsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    DescribeSenderIdsRequest.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, location_name: "Owner"))
     DescribeSenderIdsRequest.type = Types::DescribeSenderIdsRequest
-    DescribeSenderIdsResult.add_member(:sender_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdInformationList, location_name: "SenderIds"))
-    DescribeSenderIdsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSenderIdsResult.add_member(:sender_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdInformationList, location_name: "SenderIds"))
+    DescribeSenderIdsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeSenderIdsResult.type = Types::DescribeSenderIdsResult
-    DescribeSpendLimitsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeSpendLimitsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSpendLimitsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeSpendLimitsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeSpendLimitsRequest.type = Types::DescribeSpendLimitsRequest
-    DescribeSpendLimitsResult.add_member(:spend_limits, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpendLimitList, location_name: "SpendLimits"))
-    DescribeSpendLimitsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSpendLimitsResult.add_member(:spend_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendLimitList, location_name: "SpendLimits"))
+    DescribeSpendLimitsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeSpendLimitsResult.type = Types::DescribeSpendLimitsResult
-    DescribeVerifiedDestinationNumbersRequest.add_member(:verified_destination_number_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdList, location_name: "VerifiedDestinationNumberIds"))
-    DescribeVerifiedDestinationNumbersRequest.add_member(:destination_phone_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationPhoneNumberList, location_name: "DestinationPhoneNumbers"))
-    DescribeVerifiedDestinationNumbersRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberFilterList, location_name: "Filters"))
-    DescribeVerifiedDestinationNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeVerifiedDestinationNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:verified_destination_number_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberIdList, location_name: "VerifiedDestinationNumberIds"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:destination_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationPhoneNumberList, location_name: "DestinationPhoneNumbers"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberFilterList, location_name: "Filters"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     DescribeVerifiedDestinationNumbersRequest.type = Types::DescribeVerifiedDestinationNumbersRequest
-    DescribeVerifiedDestinationNumbersResult.add_member(:verified_destination_numbers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberInformationList, location_name: "VerifiedDestinationNumbers", traits: {"smithy.api#required" => {}}))
-    DescribeVerifiedDestinationNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVerifiedDestinationNumbersResult.add_member(:verified_destination_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberInformationList, location_name: "VerifiedDestinationNumbers", traits: {"smithy.api#required" => {}}))
+    DescribeVerifiedDestinationNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     DescribeVerifiedDestinationNumbersResult.type = Types::DescribeVerifiedDestinationNumbersResult
-    DestinationCountryParameters.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationCountryParameterKey)
-    DestinationCountryParameters.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationCountryParameterValue)
-    DestinationPhoneNumberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber)
-    DisassociateOriginationIdentityRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
-    DisassociateOriginationIdentityRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneOrSenderIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    DisassociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    DisassociateOriginationIdentityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DestinationCountryParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationCountryParameterKey)
+    DestinationCountryParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationCountryParameterValue)
+    DestinationPhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber)
+    DisassociateOriginationIdentityRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    DisassociateOriginationIdentityRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrSenderIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    DisassociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    DisassociateOriginationIdentityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DisassociateOriginationIdentityRequest.type = Types::DisassociateOriginationIdentityRequest
-    DisassociateOriginationIdentityResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
-    DisassociateOriginationIdentityResult.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    DisassociateOriginationIdentityResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
-    DisassociateOriginationIdentityResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
-    DisassociateOriginationIdentityResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    DisassociateOriginationIdentityResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
+    DisassociateOriginationIdentityResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    DisassociateOriginationIdentityResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
+    DisassociateOriginationIdentityResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
+    DisassociateOriginationIdentityResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
     DisassociateOriginationIdentityResult.type = Types::DisassociateOriginationIdentityResult
-    DisassociateProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    DisassociateProtectConfigurationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    DisassociateProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    DisassociateProtectConfigurationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
     DisassociateProtectConfigurationRequest.type = Types::DisassociateProtectConfigurationRequest
-    DisassociateProtectConfigurationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn", traits: {"smithy.api#required" => {}}))
-    DisassociateProtectConfigurationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    DisassociateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    DisassociateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    DisassociateProtectConfigurationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn", traits: {"smithy.api#required" => {}}))
+    DisassociateProtectConfigurationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    DisassociateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DisassociateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
     DisassociateProtectConfigurationResult.type = Types::DisassociateProtectConfigurationResult
-    DiscardRegistrationVersionRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DiscardRegistrationVersionRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
     DiscardRegistrationVersionRequest.type = Types::DiscardRegistrationVersionRequest
-    DiscardRegistrationVersionResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    DiscardRegistrationVersionResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    DiscardRegistrationVersionResult.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
-    DiscardRegistrationVersionResult.add_member(:registration_version_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
-    DiscardRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
+    DiscardRegistrationVersionResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    DiscardRegistrationVersionResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    DiscardRegistrationVersionResult.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
+    DiscardRegistrationVersionResult.add_member(:registration_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
+    DiscardRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
     DiscardRegistrationVersionResult.type = Types::DiscardRegistrationVersionResult
-    EventDestination.add_member(:event_destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
-    EventDestination.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
-    EventDestination.add_member(:matching_event_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeList, location_name: "MatchingEventTypes", traits: {"smithy.api#required" => {}}))
-    EventDestination.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
-    EventDestination.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
-    EventDestination.add_member(:sns_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
+    EventDestination.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
+    EventDestination.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
+    EventDestination.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeList, location_name: "MatchingEventTypes", traits: {"smithy.api#required" => {}}))
+    EventDestination.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
+    EventDestination.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
+    EventDestination.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, location_name: "SnsDestination"))
     EventDestination.type = Types::EventDestination
-    EventDestinationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestination)
-    EventTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventType)
-    FieldPathList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPath)
-    FilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue)
-    GetProtectConfigurationCountryRuleSetRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    GetProtectConfigurationCountryRuleSetRequest.add_member(:number_capability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
+    EventDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination)
+    EventTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType)
+    FieldPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath)
+    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue)
+    GetProtectConfigurationCountryRuleSetRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    GetProtectConfigurationCountryRuleSetRequest.add_member(:number_capability, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
     GetProtectConfigurationCountryRuleSetRequest.type = Types::GetProtectConfigurationCountryRuleSetRequest
-    GetProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    GetProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    GetProtectConfigurationCountryRuleSetResult.add_member(:number_capability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
-    GetProtectConfigurationCountryRuleSetResult.add_member(:country_rule_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationCountryRuleSet, location_name: "CountryRuleSet", traits: {"smithy.api#required" => {}}))
+    GetProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    GetProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    GetProtectConfigurationCountryRuleSetResult.add_member(:number_capability, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
+    GetProtectConfigurationCountryRuleSetResult.add_member(:country_rule_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationCountryRuleSet, location_name: "CountryRuleSet", traits: {"smithy.api#required" => {}}))
     GetProtectConfigurationCountryRuleSetResult.type = Types::GetProtectConfigurationCountryRuleSetResult
-    GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
-    GetResourcePolicyResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
-    GetResourcePolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
-    GetResourcePolicyResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    GetResourcePolicyResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn"))
+    GetResourcePolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, location_name: "Policy"))
+    GetResourcePolicyResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     GetResourcePolicyResult.type = Types::GetResourcePolicyResult
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    InternalServerException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RequestId"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    InternalServerException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RequestId"))
     InternalServerException.type = Types::InternalServerException
-    KeywordFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    KeywordFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    KeywordFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    KeywordFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     KeywordFilter.type = Types::KeywordFilter
-    KeywordFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordFilter)
-    KeywordInformation.add_member(:keyword, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Keyword, location_name: "Keyword", traits: {"smithy.api#required" => {}}))
-    KeywordInformation.add_member(:keyword_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordMessage, location_name: "KeywordMessage", traits: {"smithy.api#required" => {}}))
-    KeywordInformation.add_member(:keyword_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordAction, location_name: "KeywordAction", traits: {"smithy.api#required" => {}}))
+    KeywordFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordFilter)
+    KeywordInformation.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, location_name: "Keyword", traits: {"smithy.api#required" => {}}))
+    KeywordInformation.add_member(:keyword_message, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordMessage, location_name: "KeywordMessage", traits: {"smithy.api#required" => {}}))
+    KeywordInformation.add_member(:keyword_action, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordAction, location_name: "KeywordAction", traits: {"smithy.api#required" => {}}))
     KeywordInformation.type = Types::KeywordInformation
-    KeywordInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordInformation)
-    KeywordList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Keyword)
-    KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
-    KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeliveryStreamArn, location_name: "DeliveryStreamArn", traits: {"smithy.api#required" => {}}))
+    KeywordInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordInformation)
+    KeywordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword)
+    KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamArn, location_name: "DeliveryStreamArn", traits: {"smithy.api#required" => {}}))
     KinesisFirehoseDestination.type = Types::KinesisFirehoseDestination
-    ListPoolOriginationIdentitiesRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
-    ListPoolOriginationIdentitiesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolOriginationIdentitiesFilterList, location_name: "Filters"))
-    ListPoolOriginationIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListPoolOriginationIdentitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPoolOriginationIdentitiesRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    ListPoolOriginationIdentitiesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolOriginationIdentitiesFilterList, location_name: "Filters"))
+    ListPoolOriginationIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListPoolOriginationIdentitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListPoolOriginationIdentitiesRequest.type = Types::ListPoolOriginationIdentitiesRequest
-    ListPoolOriginationIdentitiesResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
-    ListPoolOriginationIdentitiesResult.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    ListPoolOriginationIdentitiesResult.add_member(:origination_identities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OriginationIdentityMetadataList, location_name: "OriginationIdentities"))
-    ListPoolOriginationIdentitiesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPoolOriginationIdentitiesResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
+    ListPoolOriginationIdentitiesResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    ListPoolOriginationIdentitiesResult.add_member(:origination_identities, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginationIdentityMetadataList, location_name: "OriginationIdentities"))
+    ListPoolOriginationIdentitiesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListPoolOriginationIdentitiesResult.type = Types::ListPoolOriginationIdentitiesResult
-    ListProtectConfigurationRuleSetNumberOverrideFilter.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverrideFilterItem)
-    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProtectConfigurationRuleSetNumberOverrideFilter, location_name: "Filters"))
-    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListProtectConfigurationRuleSetNumberOverrideFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleSetNumberOverrideFilterItem)
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListProtectConfigurationRuleSetNumberOverrideFilter, location_name: "Filters"))
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListProtectConfigurationRuleSetNumberOverridesRequest.type = Types::ListProtectConfigurationRuleSetNumberOverridesRequest
-    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:rule_set_number_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverrideList, location_name: "RuleSetNumberOverrides"))
-    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:rule_set_number_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleSetNumberOverrideList, location_name: "RuleSetNumberOverrides"))
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListProtectConfigurationRuleSetNumberOverridesResult.type = Types::ListProtectConfigurationRuleSetNumberOverridesResult
-    ListRegistrationAssociationsRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    ListRegistrationAssociationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAssociationFilterList, location_name: "Filters"))
-    ListRegistrationAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListRegistrationAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRegistrationAssociationsRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    ListRegistrationAssociationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAssociationFilterList, location_name: "Filters"))
+    ListRegistrationAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListRegistrationAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListRegistrationAssociationsRequest.type = Types::ListRegistrationAssociationsRequest
-    ListRegistrationAssociationsResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    ListRegistrationAssociationsResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    ListRegistrationAssociationsResult.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    ListRegistrationAssociationsResult.add_member(:registration_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAssociationMetadataList, location_name: "RegistrationAssociations", traits: {"smithy.api#required" => {}}))
-    ListRegistrationAssociationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRegistrationAssociationsResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    ListRegistrationAssociationsResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    ListRegistrationAssociationsResult.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    ListRegistrationAssociationsResult.add_member(:registration_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAssociationMetadataList, location_name: "RegistrationAssociations", traits: {"smithy.api#required" => {}}))
+    ListRegistrationAssociationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListRegistrationAssociationsResult.type = Types::ListRegistrationAssociationsResult
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
-    ListTagsForResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn"))
+    ListTagsForResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResult.type = Types::ListTagsForResourceResult
-    MediaUrlList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaUrlValue)
-    MessageTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType)
-    NonEmptyTagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    NumberCapabilityList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapability)
-    OptOutListInformation.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn", traits: {"smithy.api#required" => {}}))
-    OptOutListInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
-    OptOutListInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    MediaUrlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaUrlValue)
+    MessageTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType)
+    NonEmptyTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    NumberCapabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability)
+    OptOutListInformation.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn", traits: {"smithy.api#required" => {}}))
+    OptOutListInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    OptOutListInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     OptOutListInformation.type = Types::OptOutListInformation
-    OptOutListInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListInformation)
-    OptOutListNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn)
-    OptedOutFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptedOutFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    OptedOutFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    OptOutListInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListInformation)
+    OptOutListNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn)
+    OptedOutFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptedOutFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    OptedOutFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     OptedOutFilter.type = Types::OptedOutFilter
-    OptedOutFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptedOutFilter)
-    OptedOutNumberInformation.add_member(:opted_out_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "OptedOutNumber", traits: {"smithy.api#required" => {}}))
-    OptedOutNumberInformation.add_member(:opted_out_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "OptedOutTimestamp", traits: {"smithy.api#required" => {}}))
-    OptedOutNumberInformation.add_member(:end_user_opted_out, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "EndUserOptedOut", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    OptedOutFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptedOutFilter)
+    OptedOutNumberInformation.add_member(:opted_out_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "OptedOutNumber", traits: {"smithy.api#required" => {}}))
+    OptedOutNumberInformation.add_member(:opted_out_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "OptedOutTimestamp", traits: {"smithy.api#required" => {}}))
+    OptedOutNumberInformation.add_member(:end_user_opted_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "EndUserOptedOut", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     OptedOutNumberInformation.type = Types::OptedOutNumberInformation
-    OptedOutNumberInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptedOutNumberInformation)
-    OptedOutNumberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber)
-    OriginationIdentityMetadata.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn", traits: {"smithy.api#required" => {}}))
-    OriginationIdentityMetadata.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    OriginationIdentityMetadata.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    OriginationIdentityMetadata.add_member(:number_capabilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapabilityList, location_name: "NumberCapabilities", traits: {"smithy.api#required" => {}}))
-    OriginationIdentityMetadata.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    OptedOutNumberInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptedOutNumberInformation)
+    OptedOutNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber)
+    OriginationIdentityMetadata.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn", traits: {"smithy.api#required" => {}}))
+    OriginationIdentityMetadata.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    OriginationIdentityMetadata.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    OriginationIdentityMetadata.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, location_name: "NumberCapabilities", traits: {"smithy.api#required" => {}}))
+    OriginationIdentityMetadata.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
     OriginationIdentityMetadata.type = Types::OriginationIdentityMetadata
-    OriginationIdentityMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OriginationIdentityMetadata)
-    PhoneNumberFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    PhoneNumberFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    OriginationIdentityMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OriginationIdentityMetadata)
+    PhoneNumberFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    PhoneNumberFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     PhoneNumberFilter.type = Types::PhoneNumberFilter
-    PhoneNumberFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberFilter)
-    PhoneNumberIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberIdOrArn)
-    PhoneNumberInformation.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:phone_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
-    PhoneNumberInformation.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:number_capabilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapabilityList, location_name: "NumberCapabilities", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:number_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberType, location_name: "NumberType", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    PhoneNumberInformation.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    PhoneNumberInformation.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "InternationalSendingEnabled", traits: {"smithy.api#default" => false}))
-    PhoneNumberInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PhoneNumberInformation.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    PhoneNumberInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
-    PhoneNumberInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    PhoneNumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberFilter)
+    PhoneNumberIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberIdOrArn)
+    PhoneNumberInformation.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
+    PhoneNumberInformation.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, location_name: "NumberCapabilities", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberType, location_name: "NumberType", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    PhoneNumberInformation.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    PhoneNumberInformation.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "InternationalSendingEnabled", traits: {"smithy.api#default" => false}))
+    PhoneNumberInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PhoneNumberInformation.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    PhoneNumberInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
+    PhoneNumberInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     PhoneNumberInformation.type = Types::PhoneNumberInformation
-    PhoneNumberInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberInformation)
-    PoolFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    PoolFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    PhoneNumberInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformation)
+    PoolFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    PoolFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     PoolFilter.type = Types::PoolFilter
-    PoolFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolFilter)
-    PoolIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdOrArn)
-    PoolInformation.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn", traits: {"smithy.api#required" => {}}))
-    PoolInformation.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
-    PoolInformation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    PoolInformation.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
-    PoolInformation.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PoolInformation.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    PoolInformation.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    PoolInformation.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PoolInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
-    PoolInformation.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PoolInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    PoolInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    PoolFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolFilter)
+    PoolIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn)
+    PoolInformation.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn", traits: {"smithy.api#required" => {}}))
+    PoolInformation.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    PoolInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    PoolInformation.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
+    PoolInformation.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PoolInformation.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    PoolInformation.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    PoolInformation.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PoolInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    PoolInformation.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PoolInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PoolInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     PoolInformation.type = Types::PoolInformation
-    PoolInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolInformation)
-    PoolOriginationIdentitiesFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolOriginationIdentitiesFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    PoolOriginationIdentitiesFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    PoolInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolInformation)
+    PoolOriginationIdentitiesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolOriginationIdentitiesFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    PoolOriginationIdentitiesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     PoolOriginationIdentitiesFilter.type = Types::PoolOriginationIdentitiesFilter
-    PoolOriginationIdentitiesFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolOriginationIdentitiesFilter)
-    ProtectConfigurationCountryRuleSet.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode)
-    ProtectConfigurationCountryRuleSet.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationCountryRuleSetInformation)
-    ProtectConfigurationCountryRuleSetInformation.add_member(:protect_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectStatus, location_name: "ProtectStatus", traits: {"smithy.api#required" => {}}))
+    PoolOriginationIdentitiesFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolOriginationIdentitiesFilter)
+    ProtectConfigurationCountryRuleSet.key = ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode)
+    ProtectConfigurationCountryRuleSet.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationCountryRuleSetInformation)
+    ProtectConfigurationCountryRuleSetInformation.add_member(:protect_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectStatus, location_name: "ProtectStatus", traits: {"smithy.api#required" => {}}))
     ProtectConfigurationCountryRuleSetInformation.type = Types::ProtectConfigurationCountryRuleSetInformation
-    ProtectConfigurationFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     ProtectConfigurationFilter.type = Types::ProtectConfigurationFilter
-    ProtectConfigurationFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationFilter)
-    ProtectConfigurationIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn)
-    ProtectConfigurationInformation.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationInformation.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationInformation.add_member(:account_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    ProtectConfigurationInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    ProtectConfigurationFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationFilter)
+    ProtectConfigurationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn)
+    ProtectConfigurationInformation.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationInformation.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationInformation.add_member(:account_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    ProtectConfigurationInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ProtectConfigurationInformation.type = Types::ProtectConfigurationInformation
-    ProtectConfigurationInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationInformation)
-    ProtectConfigurationRuleSetNumberOverride.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationRuleSetNumberOverride.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationRuleSetNumberOverride.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationRuleSetNumberOverride.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    ProtectConfigurationRuleSetNumberOverride.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
+    ProtectConfigurationInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationInformation)
+    ProtectConfigurationRuleSetNumberOverride.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
     ProtectConfigurationRuleSetNumberOverride.type = Types::ProtectConfigurationRuleSetNumberOverride
-    ProtectConfigurationRuleSetNumberOverrideFilterItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverrideFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ProtectConfigurationRuleSetNumberOverrideFilterItem.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationRuleSetNumberOverrideFilterItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleSetNumberOverrideFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ProtectConfigurationRuleSetNumberOverrideFilterItem.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     ProtectConfigurationRuleSetNumberOverrideFilterItem.type = Types::ProtectConfigurationRuleSetNumberOverrideFilterItem
-    ProtectConfigurationRuleSetNumberOverrideList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverride)
-    PutKeywordRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneOrPoolIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    PutKeywordRequest.add_member(:keyword, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Keyword, location_name: "Keyword", traits: {"smithy.api#required" => {}}))
-    PutKeywordRequest.add_member(:keyword_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordMessage, location_name: "KeywordMessage", traits: {"smithy.api#required" => {}}))
-    PutKeywordRequest.add_member(:keyword_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordAction, location_name: "KeywordAction"))
+    ProtectConfigurationRuleSetNumberOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleSetNumberOverride)
+    PutKeywordRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrPoolIdOrArn, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    PutKeywordRequest.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, location_name: "Keyword", traits: {"smithy.api#required" => {}}))
+    PutKeywordRequest.add_member(:keyword_message, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordMessage, location_name: "KeywordMessage", traits: {"smithy.api#required" => {}}))
+    PutKeywordRequest.add_member(:keyword_action, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordAction, location_name: "KeywordAction"))
     PutKeywordRequest.type = Types::PutKeywordRequest
-    PutKeywordResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
-    PutKeywordResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
-    PutKeywordResult.add_member(:keyword, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Keyword, location_name: "Keyword"))
-    PutKeywordResult.add_member(:keyword_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordMessage, location_name: "KeywordMessage"))
-    PutKeywordResult.add_member(:keyword_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeywordAction, location_name: "KeywordAction"))
+    PutKeywordResult.add_member(:origination_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentityArn"))
+    PutKeywordResult.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OriginationIdentity"))
+    PutKeywordResult.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, location_name: "Keyword"))
+    PutKeywordResult.add_member(:keyword_message, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordMessage, location_name: "KeywordMessage"))
+    PutKeywordResult.add_member(:keyword_action, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordAction, location_name: "KeywordAction"))
     PutKeywordResult.type = Types::PutKeywordResult
-    PutMessageFeedbackRequest.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId", traits: {"smithy.api#required" => {}}))
-    PutMessageFeedbackRequest.add_member(:message_feedback_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageFeedbackStatus, location_name: "MessageFeedbackStatus", traits: {"smithy.api#required" => {}}))
+    PutMessageFeedbackRequest.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "MessageId", traits: {"smithy.api#required" => {}}))
+    PutMessageFeedbackRequest.add_member(:message_feedback_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageFeedbackStatus, location_name: "MessageFeedbackStatus", traits: {"smithy.api#required" => {}}))
     PutMessageFeedbackRequest.type = Types::PutMessageFeedbackRequest
-    PutMessageFeedbackResult.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId", traits: {"smithy.api#required" => {}}))
-    PutMessageFeedbackResult.add_member(:message_feedback_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageFeedbackStatus, location_name: "MessageFeedbackStatus", traits: {"smithy.api#required" => {}}))
+    PutMessageFeedbackResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "MessageId", traits: {"smithy.api#required" => {}}))
+    PutMessageFeedbackResult.add_member(:message_feedback_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageFeedbackStatus, location_name: "MessageFeedbackStatus", traits: {"smithy.api#required" => {}}))
     PutMessageFeedbackResult.type = Types::PutMessageFeedbackResult
-    PutOptedOutNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
-    PutOptedOutNumberRequest.add_member(:opted_out_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "OptedOutNumber", traits: {"smithy.api#required" => {}}))
+    PutOptedOutNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, location_name: "OptOutListName", traits: {"smithy.api#required" => {}}))
+    PutOptedOutNumberRequest.add_member(:opted_out_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "OptedOutNumber", traits: {"smithy.api#required" => {}}))
     PutOptedOutNumberRequest.type = Types::PutOptedOutNumberRequest
-    PutOptedOutNumberResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
-    PutOptedOutNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    PutOptedOutNumberResult.add_member(:opted_out_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "OptedOutNumber"))
-    PutOptedOutNumberResult.add_member(:opted_out_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "OptedOutTimestamp"))
-    PutOptedOutNumberResult.add_member(:end_user_opted_out, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "EndUserOptedOut", traits: {"smithy.api#default" => false}))
+    PutOptedOutNumberResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OptOutListArn"))
+    PutOptedOutNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    PutOptedOutNumberResult.add_member(:opted_out_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "OptedOutNumber"))
+    PutOptedOutNumberResult.add_member(:opted_out_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "OptedOutTimestamp"))
+    PutOptedOutNumberResult.add_member(:end_user_opted_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "EndUserOptedOut", traits: {"smithy.api#default" => false}))
     PutOptedOutNumberResult.type = Types::PutOptedOutNumberResult
-    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
     PutProtectConfigurationRuleSetNumberOverrideRequest.type = Types::PutProtectConfigurationRuleSetNumberOverrideRequest
-    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
-    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationRuleOverrideAction, location_name: "Action", traits: {"smithy.api#required" => {}}))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ExpirationTimestamp"))
     PutProtectConfigurationRuleSetNumberOverrideResult.type = Types::PutProtectConfigurationRuleSetNumberOverrideResult
-    PutRegistrationFieldValueRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    PutRegistrationFieldValueRequest.add_member(:field_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
-    PutRegistrationFieldValueRequest.add_member(:select_choices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
-    PutRegistrationFieldValueRequest.add_member(:text_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
-    PutRegistrationFieldValueRequest.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId"))
+    PutRegistrationFieldValueRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    PutRegistrationFieldValueRequest.add_member(:field_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
+    PutRegistrationFieldValueRequest.add_member(:select_choices, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectChoiceList, location_name: "SelectChoices"))
+    PutRegistrationFieldValueRequest.add_member(:text_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextValue, location_name: "TextValue"))
+    PutRegistrationFieldValueRequest.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId"))
     PutRegistrationFieldValueRequest.type = Types::PutRegistrationFieldValueRequest
-    PutRegistrationFieldValueResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    PutRegistrationFieldValueResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    PutRegistrationFieldValueResult.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
-    PutRegistrationFieldValueResult.add_member(:field_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
-    PutRegistrationFieldValueResult.add_member(:select_choices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
-    PutRegistrationFieldValueResult.add_member(:text_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
-    PutRegistrationFieldValueResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId"))
+    PutRegistrationFieldValueResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    PutRegistrationFieldValueResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    PutRegistrationFieldValueResult.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
+    PutRegistrationFieldValueResult.add_member(:field_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
+    PutRegistrationFieldValueResult.add_member(:select_choices, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectChoiceList, location_name: "SelectChoices"))
+    PutRegistrationFieldValueResult.add_member(:text_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextValue, location_name: "TextValue"))
+    PutRegistrationFieldValueResult.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId"))
     PutRegistrationFieldValueResult.type = Types::PutRegistrationFieldValueResult
-    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
-    PutResourcePolicyResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
-    PutResourcePolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
-    PutResourcePolicyResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    PutResourcePolicyResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn"))
+    PutResourcePolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, location_name: "Policy"))
+    PutResourcePolicyResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     PutResourcePolicyResult.type = Types::PutResourcePolicyResult
-    RegistrationAssociationFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAssociationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    RegistrationAssociationFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    RegistrationAssociationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAssociationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    RegistrationAssociationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     RegistrationAssociationFilter.type = Types::RegistrationAssociationFilter
-    RegistrationAssociationFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAssociationFilter)
-    RegistrationAssociationMetadata.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    RegistrationAssociationMetadata.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
-    RegistrationAssociationMetadata.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    RegistrationAssociationMetadata.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    RegistrationAssociationMetadata.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    RegistrationAssociationFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAssociationFilter)
+    RegistrationAssociationMetadata.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    RegistrationAssociationMetadata.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    RegistrationAssociationMetadata.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    RegistrationAssociationMetadata.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    RegistrationAssociationMetadata.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
     RegistrationAssociationMetadata.type = Types::RegistrationAssociationMetadata
-    RegistrationAssociationMetadataList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAssociationMetadata)
-    RegistrationAttachmentFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    RegistrationAttachmentFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    RegistrationAssociationMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAssociationMetadata)
+    RegistrationAttachmentFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    RegistrationAttachmentFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     RegistrationAttachmentFilter.type = Types::RegistrationAttachmentFilter
-    RegistrationAttachmentFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentFilter)
-    RegistrationAttachmentIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn)
-    RegistrationAttachmentsInformation.add_member(:registration_attachment_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentArn", traits: {"smithy.api#required" => {}}))
-    RegistrationAttachmentsInformation.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
-    RegistrationAttachmentsInformation.add_member(:attachment_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "AttachmentStatus", traits: {"smithy.api#required" => {}}))
-    RegistrationAttachmentsInformation.add_member(:attachment_upload_error_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentUploadErrorReason, location_name: "AttachmentUploadErrorReason"))
-    RegistrationAttachmentsInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    RegistrationAttachmentFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentFilter)
+    RegistrationAttachmentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn)
+    RegistrationAttachmentsInformation.add_member(:registration_attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentArn", traits: {"smithy.api#required" => {}}))
+    RegistrationAttachmentsInformation.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
+    RegistrationAttachmentsInformation.add_member(:attachment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStatus, location_name: "AttachmentStatus", traits: {"smithy.api#required" => {}}))
+    RegistrationAttachmentsInformation.add_member(:attachment_upload_error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentUploadErrorReason, location_name: "AttachmentUploadErrorReason"))
+    RegistrationAttachmentsInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     RegistrationAttachmentsInformation.type = Types::RegistrationAttachmentsInformation
-    RegistrationAttachmentsInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentsInformation)
-    RegistrationDeniedReasonInformation.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Reason", traits: {"smithy.api#required" => {}}))
-    RegistrationDeniedReasonInformation.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription", traits: {"smithy.api#required" => {}}))
-    RegistrationDeniedReasonInformation.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
-    RegistrationDeniedReasonInformation.add_member(:documentation_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
-    RegistrationDeniedReasonInformation.add_member(:documentation_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
+    RegistrationAttachmentsInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentsInformation)
+    RegistrationDeniedReasonInformation.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Reason", traits: {"smithy.api#required" => {}}))
+    RegistrationDeniedReasonInformation.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription", traits: {"smithy.api#required" => {}}))
+    RegistrationDeniedReasonInformation.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
+    RegistrationDeniedReasonInformation.add_member(:documentation_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
+    RegistrationDeniedReasonInformation.add_member(:documentation_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
     RegistrationDeniedReasonInformation.type = Types::RegistrationDeniedReasonInformation
-    RegistrationDeniedReasonInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationDeniedReasonInformation)
-    RegistrationFieldDefinition.add_member(:section_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SectionPath, location_name: "SectionPath", traits: {"smithy.api#required" => {}}))
-    RegistrationFieldDefinition.add_member(:field_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
-    RegistrationFieldDefinition.add_member(:field_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldType, location_name: "FieldType", traits: {"smithy.api#required" => {}}))
-    RegistrationFieldDefinition.add_member(:field_requirement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldRequirement, location_name: "FieldRequirement", traits: {"smithy.api#required" => {}}))
-    RegistrationFieldDefinition.add_member(:select_validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectValidation, location_name: "SelectValidation"))
-    RegistrationFieldDefinition.add_member(:text_validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextValidation, location_name: "TextValidation"))
-    RegistrationFieldDefinition.add_member(:display_hints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFieldDisplayHints, location_name: "DisplayHints", traits: {"smithy.api#required" => {}}))
+    RegistrationDeniedReasonInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationDeniedReasonInformation)
+    RegistrationFieldDefinition.add_member(:section_path, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionPath, location_name: "SectionPath", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldDefinition.add_member(:field_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldDefinition.add_member(:field_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldType, location_name: "FieldType", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldDefinition.add_member(:field_requirement, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldRequirement, location_name: "FieldRequirement", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldDefinition.add_member(:select_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectValidation, location_name: "SelectValidation"))
+    RegistrationFieldDefinition.add_member(:text_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: TextValidation, location_name: "TextValidation"))
+    RegistrationFieldDefinition.add_member(:display_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldDisplayHints, location_name: "DisplayHints", traits: {"smithy.api#required" => {}}))
     RegistrationFieldDefinition.type = Types::RegistrationFieldDefinition
-    RegistrationFieldDefinitionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFieldDefinition)
-    RegistrationFieldDisplayHints.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title", traits: {"smithy.api#required" => {}}))
-    RegistrationFieldDisplayHints.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription", traits: {"smithy.api#required" => {}}))
-    RegistrationFieldDisplayHints.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
-    RegistrationFieldDisplayHints.add_member(:documentation_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
-    RegistrationFieldDisplayHints.add_member(:documentation_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
-    RegistrationFieldDisplayHints.add_member(:select_option_descriptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectOptionDescriptionsList, location_name: "SelectOptionDescriptions"))
-    RegistrationFieldDisplayHints.add_member(:text_validation_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TextValidationDescription"))
-    RegistrationFieldDisplayHints.add_member(:example_text_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ExampleTextValue"))
+    RegistrationFieldDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldDefinition)
+    RegistrationFieldDisplayHints.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldDisplayHints.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldDisplayHints.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
+    RegistrationFieldDisplayHints.add_member(:documentation_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
+    RegistrationFieldDisplayHints.add_member(:documentation_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
+    RegistrationFieldDisplayHints.add_member(:select_option_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectOptionDescriptionsList, location_name: "SelectOptionDescriptions"))
+    RegistrationFieldDisplayHints.add_member(:text_validation_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "TextValidationDescription"))
+    RegistrationFieldDisplayHints.add_member(:example_text_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ExampleTextValue"))
     RegistrationFieldDisplayHints.type = Types::RegistrationFieldDisplayHints
-    RegistrationFieldValueInformation.add_member(:field_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
-    RegistrationFieldValueInformation.add_member(:select_choices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
-    RegistrationFieldValueInformation.add_member(:text_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
-    RegistrationFieldValueInformation.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId"))
-    RegistrationFieldValueInformation.add_member(:denied_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DeniedReason"))
+    RegistrationFieldValueInformation.add_member(:field_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, location_name: "FieldPath", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldValueInformation.add_member(:select_choices, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectChoiceList, location_name: "SelectChoices"))
+    RegistrationFieldValueInformation.add_member(:text_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextValue, location_name: "TextValue"))
+    RegistrationFieldValueInformation.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId"))
+    RegistrationFieldValueInformation.add_member(:denied_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DeniedReason"))
     RegistrationFieldValueInformation.type = Types::RegistrationFieldValueInformation
-    RegistrationFieldValueInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFieldValueInformation)
-    RegistrationFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    RegistrationFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldValueInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldValueInformation)
+    RegistrationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    RegistrationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     RegistrationFilter.type = Types::RegistrationFilter
-    RegistrationFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationFilter)
-    RegistrationIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn)
-    RegistrationInformation.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    RegistrationInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    RegistrationInformation.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    RegistrationInformation.add_member(:registration_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationStatus, location_name: "RegistrationStatus", traits: {"smithy.api#required" => {}}))
-    RegistrationInformation.add_member(:current_version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "CurrentVersionNumber", traits: {"smithy.api#required" => {}}))
-    RegistrationInformation.add_member(:approved_version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "ApprovedVersionNumber"))
-    RegistrationInformation.add_member(:latest_denied_version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "LatestDeniedVersionNumber"))
-    RegistrationInformation.add_member(:additional_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringMap, location_name: "AdditionalAttributes"))
-    RegistrationInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    RegistrationFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFilter)
+    RegistrationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn)
+    RegistrationInformation.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    RegistrationInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    RegistrationInformation.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    RegistrationInformation.add_member(:registration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationStatus, location_name: "RegistrationStatus", traits: {"smithy.api#required" => {}}))
+    RegistrationInformation.add_member(:current_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "CurrentVersionNumber", traits: {"smithy.api#required" => {}}))
+    RegistrationInformation.add_member(:approved_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "ApprovedVersionNumber"))
+    RegistrationInformation.add_member(:latest_denied_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "LatestDeniedVersionNumber"))
+    RegistrationInformation.add_member(:additional_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, location_name: "AdditionalAttributes"))
+    RegistrationInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     RegistrationInformation.type = Types::RegistrationInformation
-    RegistrationInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationInformation)
-    RegistrationSectionDefinition.add_member(:section_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SectionPath, location_name: "SectionPath", traits: {"smithy.api#required" => {}}))
-    RegistrationSectionDefinition.add_member(:display_hints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationSectionDisplayHints, location_name: "DisplayHints", traits: {"smithy.api#required" => {}}))
+    RegistrationInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationInformation)
+    RegistrationSectionDefinition.add_member(:section_path, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionPath, location_name: "SectionPath", traits: {"smithy.api#required" => {}}))
+    RegistrationSectionDefinition.add_member(:display_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationSectionDisplayHints, location_name: "DisplayHints", traits: {"smithy.api#required" => {}}))
     RegistrationSectionDefinition.type = Types::RegistrationSectionDefinition
-    RegistrationSectionDefinitionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationSectionDefinition)
-    RegistrationSectionDisplayHints.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title", traits: {"smithy.api#required" => {}}))
-    RegistrationSectionDisplayHints.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription", traits: {"smithy.api#required" => {}}))
-    RegistrationSectionDisplayHints.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
-    RegistrationSectionDisplayHints.add_member(:documentation_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
-    RegistrationSectionDisplayHints.add_member(:documentation_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
+    RegistrationSectionDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationSectionDefinition)
+    RegistrationSectionDisplayHints.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title", traits: {"smithy.api#required" => {}}))
+    RegistrationSectionDisplayHints.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription", traits: {"smithy.api#required" => {}}))
+    RegistrationSectionDisplayHints.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
+    RegistrationSectionDisplayHints.add_member(:documentation_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
+    RegistrationSectionDisplayHints.add_member(:documentation_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
     RegistrationSectionDisplayHints.type = Types::RegistrationSectionDisplayHints
-    RegistrationTypeDefinition.add_member(:registration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
-    RegistrationTypeDefinition.add_member(:supported_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedAssociationList, location_name: "SupportedAssociations"))
-    RegistrationTypeDefinition.add_member(:display_hints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationTypeDisplayHints, location_name: "DisplayHints", traits: {"smithy.api#required" => {}}))
+    RegistrationTypeDefinition.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType, location_name: "RegistrationType", traits: {"smithy.api#required" => {}}))
+    RegistrationTypeDefinition.add_member(:supported_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedAssociationList, location_name: "SupportedAssociations"))
+    RegistrationTypeDefinition.add_member(:display_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationTypeDisplayHints, location_name: "DisplayHints", traits: {"smithy.api#required" => {}}))
     RegistrationTypeDefinition.type = Types::RegistrationTypeDefinition
-    RegistrationTypeDefinitionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationTypeDefinition)
-    RegistrationTypeDisplayHints.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title", traits: {"smithy.api#required" => {}}))
-    RegistrationTypeDisplayHints.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription"))
-    RegistrationTypeDisplayHints.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
-    RegistrationTypeDisplayHints.add_member(:documentation_title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
-    RegistrationTypeDisplayHints.add_member(:documentation_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
+    RegistrationTypeDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationTypeDefinition)
+    RegistrationTypeDisplayHints.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title", traits: {"smithy.api#required" => {}}))
+    RegistrationTypeDisplayHints.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ShortDescription"))
+    RegistrationTypeDisplayHints.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LongDescription"))
+    RegistrationTypeDisplayHints.add_member(:documentation_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationTitle"))
+    RegistrationTypeDisplayHints.add_member(:documentation_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DocumentationLink"))
     RegistrationTypeDisplayHints.type = Types::RegistrationTypeDisplayHints
-    RegistrationTypeFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationTypeFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    RegistrationTypeFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    RegistrationTypeFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationTypeFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    RegistrationTypeFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     RegistrationTypeFilter.type = Types::RegistrationTypeFilter
-    RegistrationTypeFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationTypeFilter)
-    RegistrationTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationType)
-    RegistrationVersionFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    RegistrationVersionFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    RegistrationTypeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationTypeFilter)
+    RegistrationTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationType)
+    RegistrationVersionFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    RegistrationVersionFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     RegistrationVersionFilter.type = Types::RegistrationVersionFilter
-    RegistrationVersionFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionFilter)
-    RegistrationVersionInformation.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
-    RegistrationVersionInformation.add_member(:registration_version_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
-    RegistrationVersionInformation.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
-    RegistrationVersionInformation.add_member(:denied_reasons, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationDeniedReasonInformationList, location_name: "DeniedReasons"))
+    RegistrationVersionFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionFilter)
+    RegistrationVersionInformation.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
+    RegistrationVersionInformation.add_member(:registration_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
+    RegistrationVersionInformation.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
+    RegistrationVersionInformation.add_member(:denied_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationDeniedReasonInformationList, location_name: "DeniedReasons"))
     RegistrationVersionInformation.type = Types::RegistrationVersionInformation
-    RegistrationVersionInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionInformation)
-    RegistrationVersionNumberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber)
-    RegistrationVersionStatusHistory.add_member(:draft_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DraftTimestamp", traits: {"smithy.api#required" => {}}))
-    RegistrationVersionStatusHistory.add_member(:submitted_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "SubmittedTimestamp"))
-    RegistrationVersionStatusHistory.add_member(:reviewing_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ReviewingTimestamp"))
-    RegistrationVersionStatusHistory.add_member(:requires_authentication_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "RequiresAuthenticationTimestamp"))
-    RegistrationVersionStatusHistory.add_member(:approved_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ApprovedTimestamp"))
-    RegistrationVersionStatusHistory.add_member(:discarded_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DiscardedTimestamp"))
-    RegistrationVersionStatusHistory.add_member(:denied_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DeniedTimestamp"))
-    RegistrationVersionStatusHistory.add_member(:revoked_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "RevokedTimestamp"))
-    RegistrationVersionStatusHistory.add_member(:archived_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ArchivedTimestamp"))
+    RegistrationVersionInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionInformation)
+    RegistrationVersionNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber)
+    RegistrationVersionStatusHistory.add_member(:draft_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DraftTimestamp", traits: {"smithy.api#required" => {}}))
+    RegistrationVersionStatusHistory.add_member(:submitted_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "SubmittedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:reviewing_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ReviewingTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:requires_authentication_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "RequiresAuthenticationTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:approved_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ApprovedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:discarded_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DiscardedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:denied_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "DeniedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:revoked_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "RevokedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:archived_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "ArchivedTimestamp"))
     RegistrationVersionStatusHistory.type = Types::RegistrationVersionStatusHistory
-    ReleasePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberIdOrArn, location_name: "PhoneNumberId", traits: {"smithy.api#required" => {}}))
+    ReleasePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberIdOrArn, location_name: "PhoneNumberId", traits: {"smithy.api#required" => {}}))
     ReleasePhoneNumberRequest.type = Types::ReleasePhoneNumberRequest
-    ReleasePhoneNumberResult.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn"))
-    ReleasePhoneNumberResult.add_member(:phone_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
-    ReleasePhoneNumberResult.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
-    ReleasePhoneNumberResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberStatus, location_name: "Status"))
-    ReleasePhoneNumberResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    ReleasePhoneNumberResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    ReleasePhoneNumberResult.add_member(:number_capabilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapabilityList, location_name: "NumberCapabilities"))
-    ReleasePhoneNumberResult.add_member(:number_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberType, location_name: "NumberType"))
-    ReleasePhoneNumberResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice"))
-    ReleasePhoneNumberResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
-    ReleasePhoneNumberResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    ReleasePhoneNumberResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    ReleasePhoneNumberResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
-    ReleasePhoneNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    ReleasePhoneNumberResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
-    ReleasePhoneNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    ReleasePhoneNumberResult.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn"))
+    ReleasePhoneNumberResult.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
+    ReleasePhoneNumberResult.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
+    ReleasePhoneNumberResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberStatus, location_name: "Status"))
+    ReleasePhoneNumberResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    ReleasePhoneNumberResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    ReleasePhoneNumberResult.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, location_name: "NumberCapabilities"))
+    ReleasePhoneNumberResult.add_member(:number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberType, location_name: "NumberType"))
+    ReleasePhoneNumberResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice"))
+    ReleasePhoneNumberResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
+    ReleasePhoneNumberResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    ReleasePhoneNumberResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    ReleasePhoneNumberResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
+    ReleasePhoneNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    ReleasePhoneNumberResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
+    ReleasePhoneNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     ReleasePhoneNumberResult.type = Types::ReleasePhoneNumberResult
-    ReleaseSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdOrArn, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    ReleaseSenderIdRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    ReleaseSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdOrArn, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    ReleaseSenderIdRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
     ReleaseSenderIdRequest.type = Types::ReleaseSenderIdRequest
-    ReleaseSenderIdResult.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
-    ReleaseSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    ReleaseSenderIdResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    ReleaseSenderIdResult.add_member(:message_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
-    ReleaseSenderIdResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
-    ReleaseSenderIdResult.add_member(:registered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    ReleaseSenderIdResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
+    ReleaseSenderIdResult.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
+    ReleaseSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    ReleaseSenderIdResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    ReleaseSenderIdResult.add_member(:message_types, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
+    ReleaseSenderIdResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
+    ReleaseSenderIdResult.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    ReleaseSenderIdResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
     ReleaseSenderIdResult.type = Types::ReleaseSenderIdResult
-    RequestPhoneNumberRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    RequestPhoneNumberRequest.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
-    RequestPhoneNumberRequest.add_member(:number_capabilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapabilityList, location_name: "NumberCapabilities", traits: {"smithy.api#required" => {}}))
-    RequestPhoneNumberRequest.add_member(:number_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestableNumberType, location_name: "NumberType", traits: {"smithy.api#required" => {}}))
-    RequestPhoneNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName"))
-    RequestPhoneNumberRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId"))
-    RequestPhoneNumberRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId"))
-    RequestPhoneNumberRequest.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "InternationalSendingEnabled"))
-    RequestPhoneNumberRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
-    RequestPhoneNumberRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    RequestPhoneNumberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    RequestPhoneNumberRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    RequestPhoneNumberRequest.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
+    RequestPhoneNumberRequest.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, location_name: "NumberCapabilities", traits: {"smithy.api#required" => {}}))
+    RequestPhoneNumberRequest.add_member(:number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestableNumberType, location_name: "NumberType", traits: {"smithy.api#required" => {}}))
+    RequestPhoneNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, location_name: "OptOutListName"))
+    RequestPhoneNumberRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, location_name: "PoolId"))
+    RequestPhoneNumberRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId"))
+    RequestPhoneNumberRequest.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "InternationalSendingEnabled"))
+    RequestPhoneNumberRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    RequestPhoneNumberRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    RequestPhoneNumberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     RequestPhoneNumberRequest.type = Types::RequestPhoneNumberRequest
-    RequestPhoneNumberResult.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn"))
-    RequestPhoneNumberResult.add_member(:phone_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
-    RequestPhoneNumberResult.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
-    RequestPhoneNumberResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberStatus, location_name: "Status"))
-    RequestPhoneNumberResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    RequestPhoneNumberResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    RequestPhoneNumberResult.add_member(:number_capabilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapabilityList, location_name: "NumberCapabilities"))
-    RequestPhoneNumberResult.add_member(:number_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestableNumberType, location_name: "NumberType"))
-    RequestPhoneNumberResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice"))
-    RequestPhoneNumberResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
-    RequestPhoneNumberResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    RequestPhoneNumberResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    RequestPhoneNumberResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
-    RequestPhoneNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    RequestPhoneNumberResult.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "InternationalSendingEnabled", traits: {"smithy.api#default" => false}))
-    RequestPhoneNumberResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
-    RequestPhoneNumberResult.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    RequestPhoneNumberResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
-    RequestPhoneNumberResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    RequestPhoneNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    RequestPhoneNumberResult.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn"))
+    RequestPhoneNumberResult.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
+    RequestPhoneNumberResult.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
+    RequestPhoneNumberResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberStatus, location_name: "Status"))
+    RequestPhoneNumberResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    RequestPhoneNumberResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    RequestPhoneNumberResult.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, location_name: "NumberCapabilities"))
+    RequestPhoneNumberResult.add_member(:number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestableNumberType, location_name: "NumberType"))
+    RequestPhoneNumberResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice"))
+    RequestPhoneNumberResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
+    RequestPhoneNumberResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    RequestPhoneNumberResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    RequestPhoneNumberResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
+    RequestPhoneNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    RequestPhoneNumberResult.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "InternationalSendingEnabled", traits: {"smithy.api#default" => false}))
+    RequestPhoneNumberResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
+    RequestPhoneNumberResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    RequestPhoneNumberResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
+    RequestPhoneNumberResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    RequestPhoneNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     RequestPhoneNumberResult.type = Types::RequestPhoneNumberResult
-    RequestSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    RequestSenderIdRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    RequestSenderIdRequest.add_member(:message_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTypeList, location_name: "MessageTypes"))
-    RequestSenderIdRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
-    RequestSenderIdRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    RequestSenderIdRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    RequestSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    RequestSenderIdRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    RequestSenderIdRequest.add_member(:message_types, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTypeList, location_name: "MessageTypes"))
+    RequestSenderIdRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    RequestSenderIdRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    RequestSenderIdRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     RequestSenderIdRequest.type = Types::RequestSenderIdRequest
-    RequestSenderIdResult.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
-    RequestSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    RequestSenderIdResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    RequestSenderIdResult.add_member(:message_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
-    RequestSenderIdResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
-    RequestSenderIdResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    RequestSenderIdResult.add_member(:registered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    RequestSenderIdResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RequestSenderIdResult.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
+    RequestSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    RequestSenderIdResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    RequestSenderIdResult.add_member(:message_types, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
+    RequestSenderIdResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
+    RequestSenderIdResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    RequestSenderIdResult.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    RequestSenderIdResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     RequestSenderIdResult.type = Types::RequestSenderIdResult
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceId"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SectionPathList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SectionPath)
-    SelectChoiceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectChoice)
-    SelectOptionDescription.add_member(:option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Option", traits: {"smithy.api#required" => {}}))
-    SelectOptionDescription.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title"))
-    SelectOptionDescription.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Description"))
+    SectionPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SectionPath)
+    SelectChoiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SelectChoice)
+    SelectOptionDescription.add_member(:option, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Option", traits: {"smithy.api#required" => {}}))
+    SelectOptionDescription.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Title"))
+    SelectOptionDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Description"))
     SelectOptionDescription.type = Types::SelectOptionDescription
-    SelectOptionDescriptionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectOptionDescription)
-    SelectValidation.add_member(:min_choices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MinChoices", traits: {"smithy.api#required" => {}}))
-    SelectValidation.add_member(:max_choices, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxChoices", traits: {"smithy.api#required" => {}}))
-    SelectValidation.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "Options", traits: {"smithy.api#required" => {}}))
+    SelectOptionDescriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SelectOptionDescription)
+    SelectValidation.add_member(:min_choices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MinChoices", traits: {"smithy.api#required" => {}}))
+    SelectValidation.add_member(:max_choices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxChoices", traits: {"smithy.api#required" => {}}))
+    SelectValidation.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "Options", traits: {"smithy.api#required" => {}}))
     SelectValidation.type = Types::SelectValidation
-    SendDestinationNumberVerificationCodeRequest.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
-    SendDestinationNumberVerificationCodeRequest.add_member(:verification_channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationChannel, location_name: "VerificationChannel", traits: {"smithy.api#required" => {}}))
-    SendDestinationNumberVerificationCodeRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    SendDestinationNumberVerificationCodeRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationMessageOriginationIdentity, location_name: "OriginationIdentity"))
-    SendDestinationNumberVerificationCodeRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
-    SendDestinationNumberVerificationCodeRequest.add_member(:context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
-    SendDestinationNumberVerificationCodeRequest.add_member(:destination_country_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationCountryParameters, location_name: "DestinationCountryParameters"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberIdOrArn, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
+    SendDestinationNumberVerificationCodeRequest.add_member(:verification_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationChannel, location_name: "VerificationChannel", traits: {"smithy.api#required" => {}}))
+    SendDestinationNumberVerificationCodeRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, location_name: "LanguageCode"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationMessageOriginationIdentity, location_name: "OriginationIdentity"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMap, location_name: "Context"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:destination_country_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationCountryParameters, location_name: "DestinationCountryParameters"))
     SendDestinationNumberVerificationCodeRequest.type = Types::SendDestinationNumberVerificationCodeRequest
-    SendDestinationNumberVerificationCodeResult.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId", traits: {"smithy.api#required" => {}}))
+    SendDestinationNumberVerificationCodeResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId", traits: {"smithy.api#required" => {}}))
     SendDestinationNumberVerificationCodeResult.type = Types::SendDestinationNumberVerificationCodeResult
-    SendMediaMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    SendMediaMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaMessageOriginationIdentity, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    SendMediaMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextMessageBody, location_name: "MessageBody"))
-    SendMediaMessageRequest.add_member(:media_urls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaUrlList, location_name: "MediaUrls"))
-    SendMediaMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
-    SendMediaMessageRequest.add_member(:max_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxPrice, location_name: "MaxPrice"))
-    SendMediaMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLive, location_name: "TimeToLive"))
-    SendMediaMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
-    SendMediaMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
-    SendMediaMessageRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
-    SendMediaMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
+    SendMediaMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    SendMediaMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaMessageOriginationIdentity, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    SendMediaMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TextMessageBody, location_name: "MessageBody"))
+    SendMediaMessageRequest.add_member(:media_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaUrlList, location_name: "MediaUrls"))
+    SendMediaMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
+    SendMediaMessageRequest.add_member(:max_price, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPrice, location_name: "MaxPrice"))
+    SendMediaMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, location_name: "TimeToLive"))
+    SendMediaMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMap, location_name: "Context"))
+    SendMediaMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    SendMediaMessageRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    SendMediaMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
     SendMediaMessageRequest.type = Types::SendMediaMessageRequest
-    SendMediaMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId"))
+    SendMediaMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId"))
     SendMediaMessageResult.type = Types::SendMediaMessageResult
-    SendTextMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    SendTextMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextMessageOriginationIdentity, location_name: "OriginationIdentity"))
-    SendTextMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextMessageBody, location_name: "MessageBody"))
-    SendTextMessageRequest.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    SendTextMessageRequest.add_member(:keyword, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Keyword, location_name: "Keyword"))
-    SendTextMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
-    SendTextMessageRequest.add_member(:max_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxPrice, location_name: "MaxPrice"))
-    SendTextMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLive, location_name: "TimeToLive"))
-    SendTextMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
-    SendTextMessageRequest.add_member(:destination_country_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationCountryParameters, location_name: "DestinationCountryParameters"))
-    SendTextMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
-    SendTextMessageRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
-    SendTextMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
+    SendTextMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    SendTextMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: TextMessageOriginationIdentity, location_name: "OriginationIdentity"))
+    SendTextMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TextMessageBody, location_name: "MessageBody"))
+    SendTextMessageRequest.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    SendTextMessageRequest.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, location_name: "Keyword"))
+    SendTextMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
+    SendTextMessageRequest.add_member(:max_price, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPrice, location_name: "MaxPrice"))
+    SendTextMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, location_name: "TimeToLive"))
+    SendTextMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMap, location_name: "Context"))
+    SendTextMessageRequest.add_member(:destination_country_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationCountryParameters, location_name: "DestinationCountryParameters"))
+    SendTextMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    SendTextMessageRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    SendTextMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
     SendTextMessageRequest.type = Types::SendTextMessageRequest
-    SendTextMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId"))
+    SendTextMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId"))
     SendTextMessageResult.type = Types::SendTextMessageResult
-    SendVoiceMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    SendVoiceMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceMessageOriginationIdentity, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    SendVoiceMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceMessageBody, location_name: "MessageBody"))
-    SendVoiceMessageRequest.add_member(:message_body_text_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceMessageBodyTextType, location_name: "MessageBodyTextType"))
-    SendVoiceMessageRequest.add_member(:voice_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceId, location_name: "VoiceId"))
-    SendVoiceMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
-    SendVoiceMessageRequest.add_member(:max_price_per_minute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxPrice, location_name: "MaxPricePerMinute"))
-    SendVoiceMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLive, location_name: "TimeToLive"))
-    SendVoiceMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
-    SendVoiceMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
-    SendVoiceMessageRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
-    SendVoiceMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
+    SendVoiceMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    SendVoiceMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceMessageOriginationIdentity, location_name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    SendVoiceMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceMessageBody, location_name: "MessageBody"))
+    SendVoiceMessageRequest.add_member(:message_body_text_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceMessageBodyTextType, location_name: "MessageBodyTextType"))
+    SendVoiceMessageRequest.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, location_name: "VoiceId"))
+    SendVoiceMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
+    SendVoiceMessageRequest.add_member(:max_price_per_minute, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPrice, location_name: "MaxPricePerMinute"))
+    SendVoiceMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, location_name: "TimeToLive"))
+    SendVoiceMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMap, location_name: "Context"))
+    SendVoiceMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    SendVoiceMessageRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    SendVoiceMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
     SendVoiceMessageRequest.type = Types::SendVoiceMessageRequest
-    SendVoiceMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId"))
+    SendVoiceMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MessageId"))
     SendVoiceMessageResult.type = Types::SendVoiceMessageResult
-    SenderIdAndCountry.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdOrArn, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    SenderIdAndCountry.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    SenderIdAndCountry.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdOrArn, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    SenderIdAndCountry.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
     SenderIdAndCountry.type = Types::SenderIdAndCountry
-    SenderIdFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    SenderIdFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    SenderIdFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    SenderIdFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     SenderIdFilter.type = Types::SenderIdFilter
-    SenderIdFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdFilter)
-    SenderIdInformation.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
-    SenderIdInformation.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    SenderIdInformation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    SenderIdInformation.add_member(:message_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
-    SenderIdInformation.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
-    SenderIdInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    SenderIdInformation.add_member(:registered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    SenderIdInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
+    SenderIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdFilter)
+    SenderIdInformation.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
+    SenderIdInformation.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    SenderIdInformation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    SenderIdInformation.add_member(:message_types, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
+    SenderIdInformation.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
+    SenderIdInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    SenderIdInformation.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    SenderIdInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
     SenderIdInformation.type = Types::SenderIdInformation
-    SenderIdInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdInformation)
-    SenderIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdAndCountry)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    ServiceQuotaExceededException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededExceptionReason, location_name: "Reason"))
+    SenderIdInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdInformation)
+    SenderIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdAndCountry)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaExceededExceptionReason, location_name: "Reason"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SetAccountDefaultProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    SetAccountDefaultProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
     SetAccountDefaultProtectConfigurationRequest.type = Types::SetAccountDefaultProtectConfigurationRequest
-    SetAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "DefaultProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    SetAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "DefaultProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    SetAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "DefaultProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    SetAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "DefaultProtectConfigurationId", traits: {"smithy.api#required" => {}}))
     SetAccountDefaultProtectConfigurationResult.type = Types::SetAccountDefaultProtectConfigurationResult
-    SetDefaultMessageFeedbackEnabledRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    SetDefaultMessageFeedbackEnabledRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled", traits: {"smithy.api#required" => {}}))
+    SetDefaultMessageFeedbackEnabledRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    SetDefaultMessageFeedbackEnabledRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled", traits: {"smithy.api#required" => {}}))
     SetDefaultMessageFeedbackEnabledRequest.type = Types::SetDefaultMessageFeedbackEnabledRequest
-    SetDefaultMessageFeedbackEnabledResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    SetDefaultMessageFeedbackEnabledResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    SetDefaultMessageFeedbackEnabledResult.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
+    SetDefaultMessageFeedbackEnabledResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    SetDefaultMessageFeedbackEnabledResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SetDefaultMessageFeedbackEnabledResult.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "MessageFeedbackEnabled"))
     SetDefaultMessageFeedbackEnabledResult.type = Types::SetDefaultMessageFeedbackEnabledResult
-    SetDefaultMessageTypeRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    SetDefaultMessageTypeRequest.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
+    SetDefaultMessageTypeRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    SetDefaultMessageTypeRequest.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType", traits: {"smithy.api#required" => {}}))
     SetDefaultMessageTypeRequest.type = Types::SetDefaultMessageTypeRequest
-    SetDefaultMessageTypeResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    SetDefaultMessageTypeResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    SetDefaultMessageTypeResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    SetDefaultMessageTypeResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    SetDefaultMessageTypeResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SetDefaultMessageTypeResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
     SetDefaultMessageTypeResult.type = Types::SetDefaultMessageTypeResult
-    SetDefaultSenderIdRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    SetDefaultSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    SetDefaultSenderIdRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    SetDefaultSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
     SetDefaultSenderIdRequest.type = Types::SetDefaultSenderIdRequest
-    SetDefaultSenderIdResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    SetDefaultSenderIdResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    SetDefaultSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId"))
+    SetDefaultSenderIdResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    SetDefaultSenderIdResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SetDefaultSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId"))
     SetDefaultSenderIdResult.type = Types::SetDefaultSenderIdResult
-    SetMediaMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
+    SetMediaMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
     SetMediaMessageSpendLimitOverrideRequest.type = Types::SetMediaMessageSpendLimitOverrideRequest
-    SetMediaMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    SetMediaMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit"))
     SetMediaMessageSpendLimitOverrideResult.type = Types::SetMediaMessageSpendLimitOverrideResult
-    SetTextMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
+    SetTextMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
     SetTextMessageSpendLimitOverrideRequest.type = Types::SetTextMessageSpendLimitOverrideRequest
-    SetTextMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    SetTextMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit"))
     SetTextMessageSpendLimitOverrideResult.type = Types::SetTextMessageSpendLimitOverrideResult
-    SetVoiceMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
+    SetVoiceMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
     SetVoiceMessageSpendLimitOverrideRequest.type = Types::SetVoiceMessageSpendLimitOverrideRequest
-    SetVoiceMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    SetVoiceMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, location_name: "MonthlyLimit"))
     SetVoiceMessageSpendLimitOverrideResult.type = Types::SetVoiceMessageSpendLimitOverrideResult
-    SnsDestination.add_member(:topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    SnsDestination.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArn, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
     SnsDestination.type = Types::SnsDestination
-    SpendLimit.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpendLimitName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    SpendLimit.add_member(:enforced_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "EnforcedLimit", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    SpendLimit.add_member(:max_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "MaxLimit", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    SpendLimit.add_member(:overridden, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Overridden", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    SpendLimit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendLimitName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    SpendLimit.add_member(:enforced_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "EnforcedLimit", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SpendLimit.add_member(:max_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, location_name: "MaxLimit", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SpendLimit.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Overridden", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     SpendLimit.type = Types::SpendLimit
-    SpendLimitList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpendLimit)
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    StringMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    StringMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    SubmitRegistrationVersionRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    SpendLimitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpendLimit)
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    SubmitRegistrationVersionRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
     SubmitRegistrationVersionRequest.type = Types::SubmitRegistrationVersionRequest
-    SubmitRegistrationVersionResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
-    SubmitRegistrationVersionResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
-    SubmitRegistrationVersionResult.add_member(:version_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
-    SubmitRegistrationVersionResult.add_member(:registration_version_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
-    SubmitRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
+    SubmitRegistrationVersionResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
+    SubmitRegistrationVersionResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    SubmitRegistrationVersionResult.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, location_name: "VersionNumber", traits: {"smithy.api#required" => {}}))
+    SubmitRegistrationVersionResult.add_member(:registration_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatus, location_name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
+    SubmitRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatusHistory, location_name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
     SubmitRegistrationVersionResult.type = Types::SubmitRegistrationVersionResult
-    SupportedAssociation.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
-    SupportedAssociation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    SupportedAssociation.add_member(:association_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationAssociationBehavior, location_name: "AssociationBehavior", traits: {"smithy.api#required" => {}}))
-    SupportedAssociation.add_member(:disassociation_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistrationDisassociationBehavior, location_name: "DisassociationBehavior", traits: {"smithy.api#required" => {}}))
+    SupportedAssociation.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    SupportedAssociation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    SupportedAssociation.add_member(:association_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAssociationBehavior, location_name: "AssociationBehavior", traits: {"smithy.api#required" => {}}))
+    SupportedAssociation.add_member(:disassociation_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationDisassociationBehavior, location_name: "DisassociationBehavior", traits: {"smithy.api#required" => {}}))
     SupportedAssociation.type = Types::SupportedAssociation
-    SupportedAssociationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedAssociation)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    SupportedAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedAssociation)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyTagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyTagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResult.type = Types::TagResourceResult
-    TextValidation.add_member(:min_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MinLength", traits: {"smithy.api#required" => {}}))
-    TextValidation.add_member(:max_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxLength", traits: {"smithy.api#required" => {}}))
-    TextValidation.add_member(:pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Pattern", traits: {"smithy.api#required" => {}}))
+    TextValidation.add_member(:min_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MinLength", traits: {"smithy.api#required" => {}}))
+    TextValidation.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxLength", traits: {"smithy.api#required" => {}}))
+    TextValidation.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Pattern", traits: {"smithy.api#required" => {}}))
     TextValidation.type = Types::TextValidation
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResult.type = Types::UntagResourceResult
-    UpdateEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
-    UpdateEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
-    UpdateEventDestinationRequest.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
-    UpdateEventDestinationRequest.add_member(:matching_event_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventTypeList, location_name: "MatchingEventTypes"))
-    UpdateEventDestinationRequest.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
-    UpdateEventDestinationRequest.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
-    UpdateEventDestinationRequest.add_member(:sns_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
+    UpdateEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    UpdateEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, location_name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
+    UpdateEventDestinationRequest.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "Enabled"))
+    UpdateEventDestinationRequest.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeList, location_name: "MatchingEventTypes"))
+    UpdateEventDestinationRequest.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
+    UpdateEventDestinationRequest.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
+    UpdateEventDestinationRequest.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, location_name: "SnsDestination"))
     UpdateEventDestinationRequest.type = Types::UpdateEventDestinationRequest
-    UpdateEventDestinationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
-    UpdateEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    UpdateEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventDestination, location_name: "EventDestination"))
+    UpdateEventDestinationResult.add_member(:configuration_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "ConfigurationSetArn"))
+    UpdateEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    UpdateEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, location_name: "EventDestination"))
     UpdateEventDestinationResult.type = Types::UpdateEventDestinationResult
-    UpdatePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumberIdOrArn, location_name: "PhoneNumberId", traits: {"smithy.api#required" => {}}))
-    UpdatePhoneNumberRequest.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "TwoWayEnabled"))
-    UpdatePhoneNumberRequest.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    UpdatePhoneNumberRequest.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    UpdatePhoneNumberRequest.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "SelfManagedOptOutsEnabled"))
-    UpdatePhoneNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName"))
-    UpdatePhoneNumberRequest.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "InternationalSendingEnabled"))
-    UpdatePhoneNumberRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    UpdatePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberIdOrArn, location_name: "PhoneNumberId", traits: {"smithy.api#required" => {}}))
+    UpdatePhoneNumberRequest.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "TwoWayEnabled"))
+    UpdatePhoneNumberRequest.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePhoneNumberRequest.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    UpdatePhoneNumberRequest.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "SelfManagedOptOutsEnabled"))
+    UpdatePhoneNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, location_name: "OptOutListName"))
+    UpdatePhoneNumberRequest.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "InternationalSendingEnabled"))
+    UpdatePhoneNumberRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
     UpdatePhoneNumberRequest.type = Types::UpdatePhoneNumberRequest
-    UpdatePhoneNumberResult.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn"))
-    UpdatePhoneNumberResult.add_member(:phone_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
-    UpdatePhoneNumberResult.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
-    UpdatePhoneNumberResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberStatus, location_name: "Status"))
-    UpdatePhoneNumberResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
-    UpdatePhoneNumberResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    UpdatePhoneNumberResult.add_member(:number_capabilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapabilityList, location_name: "NumberCapabilities"))
-    UpdatePhoneNumberResult.add_member(:number_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberType, location_name: "NumberType"))
-    UpdatePhoneNumberResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice"))
-    UpdatePhoneNumberResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePhoneNumberResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    UpdatePhoneNumberResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    UpdatePhoneNumberResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePhoneNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    UpdatePhoneNumberResult.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "InternationalSendingEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePhoneNumberResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePhoneNumberResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
-    UpdatePhoneNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    UpdatePhoneNumberResult.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberArn"))
+    UpdatePhoneNumberResult.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PhoneNumberId"))
+    UpdatePhoneNumberResult.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
+    UpdatePhoneNumberResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberStatus, location_name: "Status"))
+    UpdatePhoneNumberResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode"))
+    UpdatePhoneNumberResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    UpdatePhoneNumberResult.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, location_name: "NumberCapabilities"))
+    UpdatePhoneNumberResult.add_member(:number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberType, location_name: "NumberType"))
+    UpdatePhoneNumberResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice"))
+    UpdatePhoneNumberResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePhoneNumberResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePhoneNumberResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    UpdatePhoneNumberResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePhoneNumberResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    UpdatePhoneNumberResult.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "InternationalSendingEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePhoneNumberResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePhoneNumberResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
+    UpdatePhoneNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     UpdatePhoneNumberResult.type = Types::UpdatePhoneNumberResult
-    UpdatePoolRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
-    UpdatePoolRequest.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "TwoWayEnabled"))
-    UpdatePoolRequest.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    UpdatePoolRequest.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    UpdatePoolRequest.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "SelfManagedOptOutsEnabled"))
-    UpdatePoolRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName"))
-    UpdatePoolRequest.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "SharedRoutesEnabled"))
-    UpdatePoolRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    UpdatePoolRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, location_name: "PoolId", traits: {"smithy.api#required" => {}}))
+    UpdatePoolRequest.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "TwoWayEnabled"))
+    UpdatePoolRequest.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePoolRequest.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    UpdatePoolRequest.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "SelfManagedOptOutsEnabled"))
+    UpdatePoolRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, location_name: "OptOutListName"))
+    UpdatePoolRequest.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "SharedRoutesEnabled"))
+    UpdatePoolRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
     UpdatePoolRequest.type = Types::UpdatePoolRequest
-    UpdatePoolResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
-    UpdatePoolResult.add_member(:pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
-    UpdatePoolResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolStatus, location_name: "Status"))
-    UpdatePoolResult.add_member(:message_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    UpdatePoolResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePoolResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
-    UpdatePoolResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
-    UpdatePoolResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePoolResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
-    UpdatePoolResult.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePoolResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
-    UpdatePoolResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
+    UpdatePoolResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolArn"))
+    UpdatePoolResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "PoolId"))
+    UpdatePoolResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolStatus, location_name: "Status"))
+    UpdatePoolResult.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, location_name: "MessageType"))
+    UpdatePoolResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "TwoWayEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePoolResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePoolResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "TwoWayChannelRole"))
+    UpdatePoolResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePoolResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, location_name: "OptOutListName"))
+    UpdatePoolResult.add_member(:shared_routes_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "SharedRoutesEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePoolResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false}))
+    UpdatePoolResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp"))
     UpdatePoolResult.type = Types::UpdatePoolResult
-    UpdateProtectConfigurationCountryRuleSetRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationCountryRuleSetRequest.add_member(:number_capability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationCountryRuleSetRequest.add_member(:country_rule_set_updates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationCountryRuleSet, location_name: "CountryRuleSetUpdates", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationCountryRuleSetRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationCountryRuleSetRequest.add_member(:number_capability, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationCountryRuleSetRequest.add_member(:country_rule_set_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationCountryRuleSet, location_name: "CountryRuleSetUpdates", traits: {"smithy.api#required" => {}}))
     UpdateProtectConfigurationCountryRuleSetRequest.type = Types::UpdateProtectConfigurationCountryRuleSetRequest
-    UpdateProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationCountryRuleSetResult.add_member(:number_capability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationCountryRuleSetResult.add_member(:country_rule_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationCountryRuleSet, location_name: "CountryRuleSet", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationCountryRuleSetResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationCountryRuleSetResult.add_member(:number_capability, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, location_name: "NumberCapability", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationCountryRuleSetResult.add_member(:country_rule_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationCountryRuleSet, location_name: "CountryRuleSet", traits: {"smithy.api#required" => {}}))
     UpdateProtectConfigurationCountryRuleSetResult.type = Types::UpdateProtectConfigurationCountryRuleSetResult
-    UpdateProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    UpdateProtectConfigurationRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
     UpdateProtectConfigurationRequest.type = Types::UpdateProtectConfigurationRequest
-    UpdateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
-    UpdateProtectConfigurationResult.add_member(:account_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    UpdateProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, location_name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, location_name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    UpdateProtectConfigurationResult.add_member(:account_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     UpdateProtectConfigurationResult.type = Types::UpdateProtectConfigurationResult
-    UpdateSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderIdOrArn, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    UpdateSenderIdRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    UpdateSenderIdRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
+    UpdateSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdOrArn, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    UpdateSenderIdRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    UpdateSenderIdRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "DeletionProtectionEnabled"))
     UpdateSenderIdRequest.type = Types::UpdateSenderIdRequest
-    UpdateSenderIdResult.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
-    UpdateSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
-    UpdateSenderIdResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
-    UpdateSenderIdResult.add_member(:message_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
-    UpdateSenderIdResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
-    UpdateSenderIdResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    UpdateSenderIdResult.add_member(:registered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    UpdateSenderIdResult.add_member(:registration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
+    UpdateSenderIdResult.add_member(:sender_id_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SenderIdArn", traits: {"smithy.api#required" => {}}))
+    UpdateSenderIdResult.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderId, location_name: "SenderId", traits: {"smithy.api#required" => {}}))
+    UpdateSenderIdResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, location_name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    UpdateSenderIdResult.add_member(:message_types, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTypeList, location_name: "MessageTypes", traits: {"smithy.api#required" => {}}))
+    UpdateSenderIdResult.add_member(:monthly_leasing_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MonthlyLeasingPrice", traits: {"smithy.api#required" => {}}))
+    UpdateSenderIdResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateSenderIdResult.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, location_name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateSenderIdResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegistrationId"))
     UpdateSenderIdResult.type = Types::UpdateSenderIdResult
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
-    ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "Fields"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "Reason"))
+    ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "Fields"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
-    VerifiedDestinationNumberFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    VerifiedDestinationNumberFilter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
+    VerifiedDestinationNumberFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberFilterName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, location_name: "Values", traits: {"smithy.api#required" => {}}))
     VerifiedDestinationNumberFilter.type = Types::VerifiedDestinationNumberFilter
-    VerifiedDestinationNumberFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberFilter)
-    VerifiedDestinationNumberIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn)
-    VerifiedDestinationNumberInformation.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
-    VerifiedDestinationNumberInformation.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
-    VerifiedDestinationNumberInformation.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    VerifiedDestinationNumberInformation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    VerifiedDestinationNumberInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberFilter)
+    VerifiedDestinationNumberIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberIdOrArn)
+    VerifiedDestinationNumberInformation.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberInformation.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberInformation.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     VerifiedDestinationNumberInformation.type = Types::VerifiedDestinationNumberInformation
-    VerifiedDestinationNumberInformationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberInformation)
-    VerifyDestinationNumberRequest.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
-    VerifyDestinationNumberRequest.add_member(:verification_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationCode, location_name: "VerificationCode", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberInformation)
+    VerifyDestinationNumberRequest.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberIdOrArn, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
+    VerifyDestinationNumberRequest.add_member(:verification_code, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationCode, location_name: "VerificationCode", traits: {"smithy.api#required" => {}}))
     VerifyDestinationNumberRequest.type = Types::VerifyDestinationNumberRequest
-    VerifyDestinationNumberResult.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
-    VerifyDestinationNumberResult.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
-    VerifyDestinationNumberResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
-    VerifyDestinationNumberResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    VerifyDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    VerifyDestinationNumberResult.add_member(:verified_destination_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberArn", traits: {"smithy.api#required" => {}}))
+    VerifyDestinationNumberResult.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
+    VerifyDestinationNumberResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    VerifyDestinationNumberResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    VerifyDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     VerifyDestinationNumberResult.type = Types::VerifyDestinationNumberResult
 
     PinpointSMSVoiceV2 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -1682,1143 +1682,1143 @@ module Aws::PinpointSMSVoiceV2
       service.add_operation(:associate_origination_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#AssociateOriginationIdentity"
         operation.name = "AssociateOriginationIdentity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateOriginationIdentityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateOriginationIdentityResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateOriginationIdentityRequest
+        operation.output = AssociateOriginationIdentityResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:associate_protect_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfiguration"
         operation.name = "AssociateProtectConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateProtectConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateProtectConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = AssociateProtectConfigurationRequest
+        operation.output = AssociateProtectConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateConfigurationSet"
         operation.name = "CreateConfigurationSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConfigurationSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConfigurationSetResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateConfigurationSetRequest
+        operation.output = CreateConfigurationSetResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_event_destination, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateEventDestination"
         operation.name = "CreateEventDestination"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEventDestinationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEventDestinationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateEventDestinationRequest
+        operation.output = CreateEventDestinationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_opt_out_list, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateOptOutList"
         operation.name = "CreateOptOutList"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOptOutListRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOptOutListResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateOptOutListRequest
+        operation.output = CreateOptOutListResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreatePool"
         operation.name = "CreatePool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePoolResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreatePoolRequest
+        operation.output = CreatePoolResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_protect_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfiguration"
         operation.name = "CreateProtectConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProtectConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProtectConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateProtectConfigurationRequest
+        operation.output = CreateProtectConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_registration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateRegistration"
         operation.name = "CreateRegistration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRegistrationRequest
+        operation.output = CreateRegistrationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_registration_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateRegistrationAssociation"
         operation.name = "CreateRegistrationAssociation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationAssociationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationAssociationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRegistrationAssociationRequest
+        operation.output = CreateRegistrationAssociationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_registration_attachment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateRegistrationAttachment"
         operation.name = "CreateRegistrationAttachment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationAttachmentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationAttachmentResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRegistrationAttachmentRequest
+        operation.output = CreateRegistrationAttachmentResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_registration_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateRegistrationVersion"
         operation.name = "CreateRegistrationVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRegistrationVersionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateRegistrationVersionRequest
+        operation.output = CreateRegistrationVersionResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_verified_destination_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateVerifiedDestinationNumber"
         operation.name = "CreateVerifiedDestinationNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVerifiedDestinationNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateVerifiedDestinationNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateVerifiedDestinationNumberRequest
+        operation.output = CreateVerifiedDestinationNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_account_default_protect_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteAccountDefaultProtectConfiguration"
         operation.name = "DeleteAccountDefaultProtectConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAccountDefaultProtectConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAccountDefaultProtectConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteAccountDefaultProtectConfigurationRequest
+        operation.output = DeleteAccountDefaultProtectConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteConfigurationSet"
         operation.name = "DeleteConfigurationSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConfigurationSetResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteConfigurationSetRequest
+        operation.output = DeleteConfigurationSetResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_default_message_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteDefaultMessageType"
         operation.name = "DeleteDefaultMessageType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDefaultMessageTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDefaultMessageTypeResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteDefaultMessageTypeRequest
+        operation.output = DeleteDefaultMessageTypeResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_default_sender_id, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteDefaultSenderId"
         operation.name = "DeleteDefaultSenderId"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDefaultSenderIdRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDefaultSenderIdResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteDefaultSenderIdRequest
+        operation.output = DeleteDefaultSenderIdResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_event_destination, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteEventDestination"
         operation.name = "DeleteEventDestination"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEventDestinationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEventDestinationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteEventDestinationRequest
+        operation.output = DeleteEventDestinationResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_keyword, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteKeyword"
         operation.name = "DeleteKeyword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeywordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeywordResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteKeywordRequest
+        operation.output = DeleteKeywordResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_media_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverride"
         operation.name = "DeleteMediaMessageSpendLimitOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMediaMessageSpendLimitOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMediaMessageSpendLimitOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteMediaMessageSpendLimitOverrideRequest
+        operation.output = DeleteMediaMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_opt_out_list, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteOptOutList"
         operation.name = "DeleteOptOutList"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOptOutListRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOptOutListResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteOptOutListRequest
+        operation.output = DeleteOptOutListResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_opted_out_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteOptedOutNumber"
         operation.name = "DeleteOptedOutNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOptedOutNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteOptedOutNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteOptedOutNumberRequest
+        operation.output = DeleteOptedOutNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeletePool"
         operation.name = "DeletePool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePoolResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeletePoolRequest
+        operation.output = DeletePoolResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_protect_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfiguration"
         operation.name = "DeleteProtectConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProtectConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProtectConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteProtectConfigurationRequest
+        operation.output = DeleteProtectConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_protect_configuration_rule_set_number_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationRuleSetNumberOverride"
         operation.name = "DeleteProtectConfigurationRuleSetNumberOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProtectConfigurationRuleSetNumberOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProtectConfigurationRuleSetNumberOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteProtectConfigurationRuleSetNumberOverrideRequest
+        operation.output = DeleteProtectConfigurationRuleSetNumberOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_registration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteRegistration"
         operation.name = "DeleteRegistration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegistrationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegistrationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRegistrationRequest
+        operation.output = DeleteRegistrationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_registration_attachment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteRegistrationAttachment"
         operation.name = "DeleteRegistrationAttachment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegistrationAttachmentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegistrationAttachmentResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRegistrationAttachmentRequest
+        operation.output = DeleteRegistrationAttachmentResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_registration_field_value, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteRegistrationFieldValue"
         operation.name = "DeleteRegistrationFieldValue"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegistrationFieldValueRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRegistrationFieldValueResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteRegistrationFieldValueRequest
+        operation.output = DeleteRegistrationFieldValueResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteResourcePolicy"
         operation.name = "DeleteResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteResourcePolicyRequest
+        operation.output = DeleteResourcePolicyResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_text_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteTextMessageSpendLimitOverride"
         operation.name = "DeleteTextMessageSpendLimitOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTextMessageSpendLimitOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTextMessageSpendLimitOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteTextMessageSpendLimitOverrideRequest
+        operation.output = DeleteTextMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_verified_destination_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteVerifiedDestinationNumber"
         operation.name = "DeleteVerifiedDestinationNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVerifiedDestinationNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVerifiedDestinationNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteVerifiedDestinationNumberRequest
+        operation.output = DeleteVerifiedDestinationNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_voice_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteVoiceMessageSpendLimitOverride"
         operation.name = "DeleteVoiceMessageSpendLimitOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVoiceMessageSpendLimitOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteVoiceMessageSpendLimitOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteVoiceMessageSpendLimitOverrideRequest
+        operation.output = DeleteVoiceMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:describe_account_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeAccountAttributes"
         operation.name = "DescribeAccountAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAccountAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAccountAttributesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeAccountAttributesRequest
+        operation.output = DescribeAccountAttributesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeAccountAttributes.new
       end)
       service.add_operation(:describe_account_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeAccountLimits"
         operation.name = "DescribeAccountLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAccountLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAccountLimitsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeAccountLimitsRequest
+        operation.output = DescribeAccountLimitsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeAccountLimits.new
       end)
       service.add_operation(:describe_configuration_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeConfigurationSets"
         operation.name = "DescribeConfigurationSets"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationSetsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConfigurationSetsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeConfigurationSetsRequest
+        operation.output = DescribeConfigurationSetsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeConfigurationSets.new
       end)
       service.add_operation(:describe_keywords, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeKeywords"
         operation.name = "DescribeKeywords"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeKeywordsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeKeywordsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeKeywordsRequest
+        operation.output = DescribeKeywordsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeKeywords.new
       end)
       service.add_operation(:describe_opt_out_lists, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeOptOutLists"
         operation.name = "DescribeOptOutLists"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOptOutListsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOptOutListsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeOptOutListsRequest
+        operation.output = DescribeOptOutListsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeOptOutLists.new
       end)
       service.add_operation(:describe_opted_out_numbers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeOptedOutNumbers"
         operation.name = "DescribeOptedOutNumbers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOptedOutNumbersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeOptedOutNumbersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeOptedOutNumbersRequest
+        operation.output = DescribeOptedOutNumbersResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeOptedOutNumbers.new
       end)
       service.add_operation(:describe_phone_numbers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribePhoneNumbers"
         operation.name = "DescribePhoneNumbers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePhoneNumbersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePhoneNumbersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribePhoneNumbersRequest
+        operation.output = DescribePhoneNumbersResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribePhoneNumbers.new
       end)
       service.add_operation(:describe_pools, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribePools"
         operation.name = "DescribePools"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePoolsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePoolsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribePoolsRequest
+        operation.output = DescribePoolsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribePools.new
       end)
       service.add_operation(:describe_protect_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurations"
         operation.name = "DescribeProtectConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeProtectConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeProtectConfigurationsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeProtectConfigurationsRequest
+        operation.output = DescribeProtectConfigurationsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeProtectConfigurations.new
       end)
       service.add_operation(:describe_registration_attachments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationAttachments"
         operation.name = "DescribeRegistrationAttachments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationAttachmentsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationAttachmentsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRegistrationAttachmentsRequest
+        operation.output = DescribeRegistrationAttachmentsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistrationAttachments.new
       end)
       service.add_operation(:describe_registration_field_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationFieldDefinitions"
         operation.name = "DescribeRegistrationFieldDefinitions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationFieldDefinitionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationFieldDefinitionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRegistrationFieldDefinitionsRequest
+        operation.output = DescribeRegistrationFieldDefinitionsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistrationFieldDefinitions.new
       end)
       service.add_operation(:describe_registration_field_values, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationFieldValues"
         operation.name = "DescribeRegistrationFieldValues"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationFieldValuesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationFieldValuesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRegistrationFieldValuesRequest
+        operation.output = DescribeRegistrationFieldValuesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistrationFieldValues.new
       end)
       service.add_operation(:describe_registration_section_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationSectionDefinitions"
         operation.name = "DescribeRegistrationSectionDefinitions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationSectionDefinitionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationSectionDefinitionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRegistrationSectionDefinitionsRequest
+        operation.output = DescribeRegistrationSectionDefinitionsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistrationSectionDefinitions.new
       end)
       service.add_operation(:describe_registration_type_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationTypeDefinitions"
         operation.name = "DescribeRegistrationTypeDefinitions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationTypeDefinitionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationTypeDefinitionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRegistrationTypeDefinitionsRequest
+        operation.output = DescribeRegistrationTypeDefinitionsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistrationTypeDefinitions.new
       end)
       service.add_operation(:describe_registration_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationVersions"
         operation.name = "DescribeRegistrationVersions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationVersionsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationVersionsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRegistrationVersionsRequest
+        operation.output = DescribeRegistrationVersionsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistrationVersions.new
       end)
       service.add_operation(:describe_registrations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrations"
         operation.name = "DescribeRegistrations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistrationsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeRegistrationsRequest
+        operation.output = DescribeRegistrationsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistrations.new
       end)
       service.add_operation(:describe_sender_ids, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeSenderIds"
         operation.name = "DescribeSenderIds"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSenderIdsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSenderIdsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeSenderIdsRequest
+        operation.output = DescribeSenderIdsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeSenderIds.new
       end)
       service.add_operation(:describe_spend_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeSpendLimits"
         operation.name = "DescribeSpendLimits"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSpendLimitsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeSpendLimitsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeSpendLimitsRequest
+        operation.output = DescribeSpendLimitsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeSpendLimits.new
       end)
       service.add_operation(:describe_verified_destination_numbers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeVerifiedDestinationNumbers"
         operation.name = "DescribeVerifiedDestinationNumbers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVerifiedDestinationNumbersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeVerifiedDestinationNumbersResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DescribeVerifiedDestinationNumbersRequest
+        operation.output = DescribeVerifiedDestinationNumbersResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeVerifiedDestinationNumbers.new
       end)
       service.add_operation(:disassociate_origination_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DisassociateOriginationIdentity"
         operation.name = "DisassociateOriginationIdentity"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateOriginationIdentityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateOriginationIdentityResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateOriginationIdentityRequest
+        operation.output = DisassociateOriginationIdentityResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:disassociate_protect_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfiguration"
         operation.name = "DisassociateProtectConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateProtectConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateProtectConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DisassociateProtectConfigurationRequest
+        operation.output = DisassociateProtectConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:discard_registration_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DiscardRegistrationVersion"
         operation.name = "DiscardRegistrationVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscardRegistrationVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscardRegistrationVersionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DiscardRegistrationVersionRequest
+        operation.output = DiscardRegistrationVersionResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_protect_configuration_country_rule_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSet"
         operation.name = "GetProtectConfigurationCountryRuleSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProtectConfigurationCountryRuleSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProtectConfigurationCountryRuleSetResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetProtectConfigurationCountryRuleSetRequest
+        operation.output = GetProtectConfigurationCountryRuleSetResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicy"
         operation.name = "GetResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetResourcePolicyRequest
+        operation.output = GetResourcePolicyResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_pool_origination_identities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentities"
         operation.name = "ListPoolOriginationIdentities"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPoolOriginationIdentitiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPoolOriginationIdentitiesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListPoolOriginationIdentitiesRequest
+        operation.output = ListPoolOriginationIdentitiesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPoolOriginationIdentities.new
       end)
       service.add_operation(:list_protect_configuration_rule_set_number_overrides, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#ListProtectConfigurationRuleSetNumberOverrides"
         operation.name = "ListProtectConfigurationRuleSetNumberOverrides"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProtectConfigurationRuleSetNumberOverridesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProtectConfigurationRuleSetNumberOverridesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListProtectConfigurationRuleSetNumberOverridesRequest
+        operation.output = ListProtectConfigurationRuleSetNumberOverridesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListProtectConfigurationRuleSetNumberOverrides.new
       end)
       service.add_operation(:list_registration_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#ListRegistrationAssociations"
         operation.name = "ListRegistrationAssociations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegistrationAssociationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegistrationAssociationsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRegistrationAssociationsRequest
+        operation.output = ListRegistrationAssociationsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListRegistrationAssociations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_keyword, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#PutKeyword"
         operation.name = "PutKeyword"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutKeywordRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutKeywordResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutKeywordRequest
+        operation.output = PutKeywordResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_message_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#PutMessageFeedback"
         operation.name = "PutMessageFeedback"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMessageFeedbackRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMessageFeedbackResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutMessageFeedbackRequest
+        operation.output = PutMessageFeedbackResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_opted_out_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#PutOptedOutNumber"
         operation.name = "PutOptedOutNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOptedOutNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutOptedOutNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutOptedOutNumberRequest
+        operation.output = PutOptedOutNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_protect_configuration_rule_set_number_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#PutProtectConfigurationRuleSetNumberOverride"
         operation.name = "PutProtectConfigurationRuleSetNumberOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutProtectConfigurationRuleSetNumberOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutProtectConfigurationRuleSetNumberOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutProtectConfigurationRuleSetNumberOverrideRequest
+        operation.output = PutProtectConfigurationRuleSetNumberOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_registration_field_value, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#PutRegistrationFieldValue"
         operation.name = "PutRegistrationFieldValue"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRegistrationFieldValueRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRegistrationFieldValueResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutRegistrationFieldValueRequest
+        operation.output = PutRegistrationFieldValueResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicy"
         operation.name = "PutResourcePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PutResourcePolicyRequest
+        operation.output = PutResourcePolicyResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:release_phone_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#ReleasePhoneNumber"
         operation.name = "ReleasePhoneNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleasePhoneNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleasePhoneNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ReleasePhoneNumberRequest
+        operation.output = ReleasePhoneNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:release_sender_id, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#ReleaseSenderId"
         operation.name = "ReleaseSenderId"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseSenderIdRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseSenderIdResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ReleaseSenderIdRequest
+        operation.output = ReleaseSenderIdResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:request_phone_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#RequestPhoneNumber"
         operation.name = "RequestPhoneNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPhoneNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPhoneNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RequestPhoneNumberRequest
+        operation.output = RequestPhoneNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:request_sender_id, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#RequestSenderId"
         operation.name = "RequestSenderId"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestSenderIdRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestSenderIdResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RequestSenderIdRequest
+        operation.output = RequestSenderIdResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:send_destination_number_verification_code, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SendDestinationNumberVerificationCode"
         operation.name = "SendDestinationNumberVerificationCode"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendDestinationNumberVerificationCodeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendDestinationNumberVerificationCodeResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SendDestinationNumberVerificationCodeRequest
+        operation.output = SendDestinationNumberVerificationCodeResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:send_media_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SendMediaMessage"
         operation.name = "SendMediaMessage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendMediaMessageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendMediaMessageResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SendMediaMessageRequest
+        operation.output = SendMediaMessageResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:send_text_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SendTextMessage"
         operation.name = "SendTextMessage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendTextMessageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendTextMessageResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SendTextMessageRequest
+        operation.output = SendTextMessageResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:send_voice_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SendVoiceMessage"
         operation.name = "SendVoiceMessage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendVoiceMessageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SendVoiceMessageResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SendVoiceMessageRequest
+        operation.output = SendVoiceMessageResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:set_account_default_protect_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfiguration"
         operation.name = "SetAccountDefaultProtectConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetAccountDefaultProtectConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetAccountDefaultProtectConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SetAccountDefaultProtectConfigurationRequest
+        operation.output = SetAccountDefaultProtectConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:set_default_message_feedback_enabled, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetDefaultMessageFeedbackEnabled"
         operation.name = "SetDefaultMessageFeedbackEnabled"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetDefaultMessageFeedbackEnabledRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetDefaultMessageFeedbackEnabledResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SetDefaultMessageFeedbackEnabledRequest
+        operation.output = SetDefaultMessageFeedbackEnabledResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:set_default_message_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetDefaultMessageType"
         operation.name = "SetDefaultMessageType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetDefaultMessageTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetDefaultMessageTypeResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SetDefaultMessageTypeRequest
+        operation.output = SetDefaultMessageTypeResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:set_default_sender_id, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetDefaultSenderId"
         operation.name = "SetDefaultSenderId"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetDefaultSenderIdRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetDefaultSenderIdResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SetDefaultSenderIdRequest
+        operation.output = SetDefaultSenderIdResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:set_media_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverride"
         operation.name = "SetMediaMessageSpendLimitOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetMediaMessageSpendLimitOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetMediaMessageSpendLimitOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SetMediaMessageSpendLimitOverrideRequest
+        operation.output = SetMediaMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:set_text_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetTextMessageSpendLimitOverride"
         operation.name = "SetTextMessageSpendLimitOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetTextMessageSpendLimitOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetTextMessageSpendLimitOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SetTextMessageSpendLimitOverrideRequest
+        operation.output = SetTextMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:set_voice_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetVoiceMessageSpendLimitOverride"
         operation.name = "SetVoiceMessageSpendLimitOverride"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetVoiceMessageSpendLimitOverrideRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetVoiceMessageSpendLimitOverrideResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SetVoiceMessageSpendLimitOverrideRequest
+        operation.output = SetVoiceMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:submit_registration_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SubmitRegistrationVersion"
         operation.name = "SubmitRegistrationVersion"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubmitRegistrationVersionRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubmitRegistrationVersionResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = SubmitRegistrationVersionRequest
+        operation.output = SubmitRegistrationVersionResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_event_destination, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdateEventDestination"
         operation.name = "UpdateEventDestination"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEventDestinationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEventDestinationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateEventDestinationRequest
+        operation.output = UpdateEventDestinationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_phone_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdatePhoneNumber"
         operation.name = "UpdatePhoneNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePhoneNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePhoneNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdatePhoneNumberRequest
+        operation.output = UpdatePhoneNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdatePool"
         operation.name = "UpdatePool"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePoolRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatePoolResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdatePoolRequest
+        operation.output = UpdatePoolResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_protect_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfiguration"
         operation.name = "UpdateProtectConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProtectConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProtectConfigurationResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateProtectConfigurationRequest
+        operation.output = UpdateProtectConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_protect_configuration_country_rule_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSet"
         operation.name = "UpdateProtectConfigurationCountryRuleSet"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProtectConfigurationCountryRuleSetRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateProtectConfigurationCountryRuleSetResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateProtectConfigurationCountryRuleSetRequest
+        operation.output = UpdateProtectConfigurationCountryRuleSetResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_sender_id, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdateSenderId"
         operation.name = "UpdateSenderId"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSenderIdRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSenderIdResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateSenderIdRequest
+        operation.output = UpdateSenderIdResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:verify_destination_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#VerifyDestinationNumber"
         operation.name = "VerifyDestinationNumber"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyDestinationNumberRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyDestinationNumberResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = VerifyDestinationNumberRequest
+        operation.output = VerifyDestinationNumberResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

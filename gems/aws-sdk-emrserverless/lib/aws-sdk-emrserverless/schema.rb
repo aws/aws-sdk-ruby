@@ -149,358 +149,358 @@ module Aws::EMRServerless
     WorkerTypeSpecificationMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.emrserverless#WorkerTypeSpecificationMap", name: "WorkerTypeSpecificationMap")
     WorkerTypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#WorkerTypeString", name: "WorkerTypeString", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[a-zA-Z]+[-_]*[a-zA-Z]+$"})
 
-    Application.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    Application.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
-    Application.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    Application.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    Application.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    Application.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    Application.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails"))
-    Application.add_member(:initial_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitialCapacityConfigMap, location_name: "initialCapacity"))
-    Application.add_member(:maximum_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumAllowedResources, location_name: "maximumCapacity"))
-    Application.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    Application.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
-    Application.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    Application.add_member(:auto_start_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))
-    Application.add_member(:auto_stop_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
-    Application.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
-    Application.add_member(:architecture, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
-    Application.add_member(:image_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "imageConfiguration"))
-    Application.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeSpecificationMap, location_name: "workerTypeSpecifications"))
-    Application.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
-    Application.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
-    Application.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
-    Application.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
-    Application.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "identityCenterConfiguration"))
+    Application.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    Application.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, location_name: "name"))
+    Application.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    Application.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    Application.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    Application.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    Application.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "stateDetails"))
+    Application.add_member(:initial_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialCapacityConfigMap, location_name: "initialCapacity"))
+    Application.add_member(:maximum_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumAllowedResources, location_name: "maximumCapacity"))
+    Application.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    Application.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    Application.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    Application.add_member(:auto_start_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoStartConfig, location_name: "autoStartConfiguration"))
+    Application.add_member(:auto_stop_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoStopConfig, location_name: "autoStopConfiguration"))
+    Application.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, location_name: "networkConfiguration"))
+    Application.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, location_name: "architecture"))
+    Application.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfiguration, location_name: "imageConfiguration"))
+    Application.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationMap, location_name: "workerTypeSpecifications"))
+    Application.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "runtimeConfiguration"))
+    Application.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    Application.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InteractiveConfiguration, location_name: "interactiveConfiguration"))
+    Application.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, location_name: "schedulerConfiguration"))
+    Application.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfiguration, location_name: "identityCenterConfiguration"))
     Application.type = Types::Application
-    ApplicationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSummary)
-    ApplicationStateSet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationState)
-    ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
-    ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    ApplicationSummary.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    ApplicationSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    ApplicationSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    ApplicationSummary.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails"))
-    ApplicationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    ApplicationSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
-    ApplicationSummary.add_member(:architecture, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
+    ApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary)
+    ApplicationStateSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState)
+    ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, location_name: "name"))
+    ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "stateDetails"))
+    ApplicationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, location_name: "architecture"))
     ApplicationSummary.type = Types::ApplicationSummary
-    AutoStartConfig.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    AutoStartConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
     AutoStartConfig.type = Types::AutoStartConfig
-    AutoStopConfig.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    AutoStopConfig.add_member(:idle_timeout_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "idleTimeoutMinutes", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 10080}}))
+    AutoStopConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    AutoStopConfig.add_member(:idle_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "idleTimeoutMinutes", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 10080}}))
     AutoStopConfig.type = Types::AutoStopConfig
-    CancelJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    CancelJobRunInput.add_member(:job_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    CancelJobRunInput.add_member(:shutdown_grace_period_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShutdownGracePeriodInSeconds, location_name: "shutdownGracePeriodInSeconds", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "shutdownGracePeriodInSeconds"}))
+    CancelJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    CancelJobRunInput.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    CancelJobRunInput.add_member(:shutdown_grace_period_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ShutdownGracePeriodInSeconds, location_name: "shutdownGracePeriodInSeconds", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "shutdownGracePeriodInSeconds"}))
     CancelJobRunInput.type = Types::CancelJobRunInput
-    CancelJobRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    CancelJobRunOutput.add_member(:job_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    CancelJobRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    CancelJobRunOutput.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
     CancelJobRunOutput.type = Types::CancelJobRunOutput
-    CloudWatchLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled", traits: {"smithy.api#required" => {}}))
-    CloudWatchLoggingConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
-    CloudWatchLoggingConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogStreamNamePrefix, location_name: "logStreamNamePrefix"))
-    CloudWatchLoggingConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))
-    CloudWatchLoggingConfiguration.add_member(:log_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogTypeMap, location_name: "logTypes"))
+    CloudWatchLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled", traits: {"smithy.api#required" => {}}))
+    CloudWatchLoggingConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, location_name: "logGroupName"))
+    CloudWatchLoggingConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamNamePrefix, location_name: "logStreamNamePrefix"))
+    CloudWatchLoggingConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyArn, location_name: "encryptionKeyArn"))
+    CloudWatchLoggingConfiguration.add_member(:log_types, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeMap, location_name: "logTypes"))
     CloudWatchLoggingConfiguration.type = Types::CloudWatchLoggingConfiguration
-    Configuration.add_member(:classification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "classification", traits: {"smithy.api#required" => {}}))
-    Configuration.add_member(:properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitivePropertiesMap, location_name: "properties"))
-    Configuration.add_member(:configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "configurations"))
+    Configuration.add_member(:classification, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "classification", traits: {"smithy.api#required" => {}}))
+    Configuration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitivePropertiesMap, location_name: "properties"))
+    Configuration.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "configurations"))
     Configuration.type = Types::Configuration
-    ConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration)
-    ConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "applicationConfiguration"))
-    ConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    ConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration)
+    ConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "applicationConfiguration"))
+    ConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     ConfigurationOverrides.type = Types::ConfigurationOverrides
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateApplicationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
-    CreateApplicationInput.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    CreateApplicationInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    CreateApplicationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateApplicationInput.add_member(:initial_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitialCapacityConfigMap, location_name: "initialCapacity"))
-    CreateApplicationInput.add_member(:maximum_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumAllowedResources, location_name: "maximumCapacity"))
-    CreateApplicationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateApplicationInput.add_member(:auto_start_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))
-    CreateApplicationInput.add_member(:auto_stop_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
-    CreateApplicationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
-    CreateApplicationInput.add_member(:architecture, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
-    CreateApplicationInput.add_member(:image_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageConfigurationInput, location_name: "imageConfiguration"))
-    CreateApplicationInput.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
-    CreateApplicationInput.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
-    CreateApplicationInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
-    CreateApplicationInput.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
-    CreateApplicationInput.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
-    CreateApplicationInput.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
+    CreateApplicationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, location_name: "name"))
+    CreateApplicationInput.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    CreateApplicationInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    CreateApplicationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateApplicationInput.add_member(:initial_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialCapacityConfigMap, location_name: "initialCapacity"))
+    CreateApplicationInput.add_member(:maximum_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumAllowedResources, location_name: "maximumCapacity"))
+    CreateApplicationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateApplicationInput.add_member(:auto_start_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoStartConfig, location_name: "autoStartConfiguration"))
+    CreateApplicationInput.add_member(:auto_stop_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoStopConfig, location_name: "autoStopConfiguration"))
+    CreateApplicationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, location_name: "networkConfiguration"))
+    CreateApplicationInput.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, location_name: "architecture"))
+    CreateApplicationInput.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfigurationInput, location_name: "imageConfiguration"))
+    CreateApplicationInput.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
+    CreateApplicationInput.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "runtimeConfiguration"))
+    CreateApplicationInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    CreateApplicationInput.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InteractiveConfiguration, location_name: "interactiveConfiguration"))
+    CreateApplicationInput.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, location_name: "schedulerConfiguration"))
+    CreateApplicationInput.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
     CreateApplicationInput.type = Types::CreateApplicationInput
-    CreateApplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    CreateApplicationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
-    CreateApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    CreateApplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    CreateApplicationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, location_name: "name"))
+    CreateApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     CreateApplicationOutput.type = Types::CreateApplicationOutput
-    DeleteApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    DeleteApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     DeleteApplicationInput.type = Types::DeleteApplicationInput
     DeleteApplicationOutput.type = Types::DeleteApplicationOutput
-    EntryPointArguments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntryPointArgument)
-    GetApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    EntryPointArguments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArgument)
+    GetApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     GetApplicationInput.type = Types::GetApplicationInput
-    GetApplicationOutput.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Application, location_name: "application", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
+    GetApplicationOutput.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, location_name: "application", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
     GetApplicationOutput.type = Types::GetApplicationOutput
-    GetDashboardForJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    GetDashboardForJobRunInput.add_member(:job_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    GetDashboardForJobRunInput.add_member(:attempt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt", traits: {"smithy.api#httpQuery" => "attempt"}))
-    GetDashboardForJobRunInput.add_member(:access_system_profile_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "accessSystemProfileLogs", traits: {"smithy.api#httpQuery" => "accessSystemProfileLogs"}))
+    GetDashboardForJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    GetDashboardForJobRunInput.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    GetDashboardForJobRunInput.add_member(:attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptNumber, location_name: "attempt", traits: {"smithy.api#httpQuery" => "attempt"}))
+    GetDashboardForJobRunInput.add_member(:access_system_profile_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "accessSystemProfileLogs", traits: {"smithy.api#httpQuery" => "accessSystemProfileLogs"}))
     GetDashboardForJobRunInput.type = Types::GetDashboardForJobRunInput
-    GetDashboardForJobRunOutput.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "url"))
+    GetDashboardForJobRunOutput.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "url"))
     GetDashboardForJobRunOutput.type = Types::GetDashboardForJobRunOutput
-    GetJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    GetJobRunInput.add_member(:job_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    GetJobRunInput.add_member(:attempt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt", traits: {"smithy.api#httpQuery" => "attempt"}))
+    GetJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    GetJobRunInput.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    GetJobRunInput.add_member(:attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptNumber, location_name: "attempt", traits: {"smithy.api#httpQuery" => "attempt"}))
     GetJobRunInput.type = Types::GetJobRunInput
-    GetJobRunOutput.add_member(:job_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRun, location_name: "jobRun", traits: {"smithy.api#required" => {}}))
+    GetJobRunOutput.add_member(:job_run, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRun, location_name: "jobRun", traits: {"smithy.api#required" => {}}))
     GetJobRunOutput.type = Types::GetJobRunOutput
-    Hive.add_member(:query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Query, location_name: "query", traits: {"smithy.api#required" => {}}))
-    Hive.add_member(:init_query_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitScriptPath, location_name: "initQueryFile"))
-    Hive.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HiveCliParameters, location_name: "parameters"))
+    Hive.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, location_name: "query", traits: {"smithy.api#required" => {}}))
+    Hive.add_member(:init_query_file, ::Smithy::Schema::Shapes::MemberShape.new(target: InitScriptPath, location_name: "initQueryFile"))
+    Hive.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HiveCliParameters, location_name: "parameters"))
     Hive.type = Types::Hive
-    IdentityCenterConfiguration.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
-    IdentityCenterConfiguration.add_member(:identity_center_application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "identityCenterApplicationArn"))
+    IdentityCenterConfiguration.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
+    IdentityCenterConfiguration.add_member(:identity_center_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterApplicationArn, location_name: "identityCenterApplicationArn"))
     IdentityCenterConfiguration.type = Types::IdentityCenterConfiguration
-    IdentityCenterConfigurationInput.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
+    IdentityCenterConfigurationInput.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
     IdentityCenterConfigurationInput.type = Types::IdentityCenterConfigurationInput
-    ImageConfiguration.add_member(:image_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUri, location_name: "imageUri", traits: {"smithy.api#required" => {}}))
-    ImageConfiguration.add_member(:resolved_image_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDigest, location_name: "resolvedImageDigest"))
+    ImageConfiguration.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUri, location_name: "imageUri", traits: {"smithy.api#required" => {}}))
+    ImageConfiguration.add_member(:resolved_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, location_name: "resolvedImageDigest"))
     ImageConfiguration.type = Types::ImageConfiguration
-    ImageConfigurationInput.add_member(:image_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUri, location_name: "imageUri"))
+    ImageConfigurationInput.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUri, location_name: "imageUri"))
     ImageConfigurationInput.type = Types::ImageConfigurationInput
-    InitialCapacityConfig.add_member(:worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerCounts, location_name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    InitialCapacityConfig.add_member(:worker_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerResourceConfig, location_name: "workerConfiguration", traits: {"smithy.api#recommended" => {}}))
+    InitialCapacityConfig.add_member(:worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerCounts, location_name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    InitialCapacityConfig.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerResourceConfig, location_name: "workerConfiguration", traits: {"smithy.api#recommended" => {}}))
     InitialCapacityConfig.type = Types::InitialCapacityConfig
-    InitialCapacityConfigMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeString)
-    InitialCapacityConfigMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitialCapacityConfig)
-    InteractiveConfiguration.add_member(:studio_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "studioEnabled"))
-    InteractiveConfiguration.add_member(:livy_endpoint_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "livyEndpointEnabled"))
+    InitialCapacityConfigMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString)
+    InitialCapacityConfigMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: InitialCapacityConfig)
+    InteractiveConfiguration.add_member(:studio_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "studioEnabled"))
+    InteractiveConfiguration.add_member(:livy_endpoint_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "livyEndpointEnabled"))
     InteractiveConfiguration.type = Types::InteractiveConfiguration
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    JobDriver.add_member(:spark_submit, Types::JobDriver::SparkSubmit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SparkSubmit, location_name: "sparkSubmit"))
-    JobDriver.add_member(:hive, Types::JobDriver::Hive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hive, location_name: "hive"))
-    JobDriver.add_member(:unknown, Types::JobDriver::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    JobDriver.add_member(:spark_submit, Types::JobDriver::SparkSubmit, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSubmit, location_name: "sparkSubmit"))
+    JobDriver.add_member(:hive, Types::JobDriver::Hive, ::Smithy::Schema::Shapes::MemberShape.new(target: Hive, location_name: "hive"))
+    JobDriver.add_member(:unknown, Types::JobDriver::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     JobDriver.type = Types::JobDriver
-    JobRun.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    JobRun.add_member(:job_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    JobRun.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "name"))
-    JobRun.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:execution_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRole", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:execution_iam_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunExecutionIamPolicy, location_name: "executionIamPolicy"))
-    JobRun.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
-    JobRun.add_member(:job_driver, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver", traits: {"smithy.api#required" => {}}))
-    JobRun.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    JobRun.add_member(:total_resource_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TotalResourceUtilization, location_name: "totalResourceUtilization"))
-    JobRun.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
-    JobRun.add_member(:total_execution_duration_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "totalExecutionDurationSeconds"))
-    JobRun.add_member(:execution_timeout_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", traits: {"smithy.api#default" => nil}))
-    JobRun.add_member(:billed_resource_utilization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "billedResourceUtilization"))
-    JobRun.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
-    JobRun.add_member(:retry_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "retryPolicy"))
-    JobRun.add_member(:attempt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt"))
-    JobRun.add_member(:attempt_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "attemptCreatedAt"))
-    JobRun.add_member(:attempt_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "attemptUpdatedAt"))
-    JobRun.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "startedAt"))
-    JobRun.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "endedAt"))
-    JobRun.add_member(:queued_duration_milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "queuedDurationMilliseconds"))
+    JobRun.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    JobRun.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    JobRun.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "name"))
+    JobRun.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, location_name: "createdBy", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRole", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:execution_iam_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunExecutionIamPolicy, location_name: "executionIamPolicy"))
+    JobRun.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "stateDetails", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, location_name: "configurationOverrides"))
+    JobRun.add_member(:job_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDriver, location_name: "jobDriver", traits: {"smithy.api#required" => {}}))
+    JobRun.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    JobRun.add_member(:total_resource_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalResourceUtilization, location_name: "totalResourceUtilization"))
+    JobRun.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, location_name: "networkConfiguration"))
+    JobRun.add_member(:total_execution_duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "totalExecutionDurationSeconds"))
+    JobRun.add_member(:execution_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "executionTimeoutMinutes", traits: {"smithy.api#default" => nil}))
+    JobRun.add_member(:billed_resource_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceUtilization, location_name: "billedResourceUtilization"))
+    JobRun.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunMode, location_name: "mode"))
+    JobRun.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryPolicy, location_name: "retryPolicy"))
+    JobRun.add_member(:attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptNumber, location_name: "attempt"))
+    JobRun.add_member(:attempt_created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "attemptCreatedAt"))
+    JobRun.add_member(:attempt_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "attemptUpdatedAt"))
+    JobRun.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "startedAt"))
+    JobRun.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "endedAt"))
+    JobRun.add_member(:queued_duration_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, location_name: "queuedDurationMilliseconds"))
     JobRun.type = Types::JobRun
-    JobRunAttemptSummary.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    JobRunAttemptSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    JobRunAttemptSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "name"))
-    JobRunAttemptSummary.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
-    JobRunAttemptSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:job_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "jobCreatedAt", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:execution_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRole", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    JobRunAttemptSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunType, location_name: "type"))
-    JobRunAttemptSummary.add_member(:attempt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt"))
+    JobRunAttemptSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    JobRunAttemptSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    JobRunAttemptSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "name"))
+    JobRunAttemptSummary.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunMode, location_name: "mode"))
+    JobRunAttemptSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, location_name: "createdBy", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:job_created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "jobCreatedAt", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRole", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "stateDetails", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    JobRunAttemptSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunType, location_name: "type"))
+    JobRunAttemptSummary.add_member(:attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptNumber, location_name: "attempt"))
     JobRunAttemptSummary.type = Types::JobRunAttemptSummary
-    JobRunAttempts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunAttemptSummary)
-    JobRunExecutionIamPolicy.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
-    JobRunExecutionIamPolicy.add_member(:policy_arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyArnList, location_name: "policyArns"))
+    JobRunAttempts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunAttemptSummary)
+    JobRunExecutionIamPolicy.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, location_name: "policy"))
+    JobRunExecutionIamPolicy.add_member(:policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArnList, location_name: "policyArns"))
     JobRunExecutionIamPolicy.type = Types::JobRunExecutionIamPolicy
-    JobRunStateSet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunState)
-    JobRunSummary.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    JobRunSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    JobRunSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "name"))
-    JobRunSummary.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
-    JobRunSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:execution_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRole", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunState, location_name: "state", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
-    JobRunSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunType, location_name: "type"))
-    JobRunSummary.add_member(:attempt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt"))
-    JobRunSummary.add_member(:attempt_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "attemptCreatedAt"))
-    JobRunSummary.add_member(:attempt_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "attemptUpdatedAt"))
+    JobRunStateSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState)
+    JobRunSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    JobRunSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    JobRunSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "name"))
+    JobRunSummary.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunMode, location_name: "mode"))
+    JobRunSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, location_name: "createdBy", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRole", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, location_name: "state", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "stateDetails", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    JobRunSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunType, location_name: "type"))
+    JobRunSummary.add_member(:attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptNumber, location_name: "attempt"))
+    JobRunSummary.add_member(:attempt_created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "attemptCreatedAt"))
+    JobRunSummary.add_member(:attempt_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "attemptUpdatedAt"))
     JobRunSummary.type = Types::JobRunSummary
-    JobRuns.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunSummary)
-    ListApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListApplicationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
-    ListApplicationsInput.add_member(:states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStateSet, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
+    JobRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunSummary)
+    ListApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListApplicationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListApplicationsInput.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStateSet, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
     ListApplicationsInput.type = Types::ListApplicationsInput
-    ListApplicationsOutput.add_member(:applications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationList, location_name: "applications", traits: {"smithy.api#required" => {}}))
-    ListApplicationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListApplicationsOutput.add_member(:applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationList, location_name: "applications", traits: {"smithy.api#required" => {}}))
+    ListApplicationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListApplicationsOutput.type = Types::ListApplicationsOutput
-    ListJobRunAttemptsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    ListJobRunAttemptsRequest.add_member(:job_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    ListJobRunAttemptsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListJobRunAttemptsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListJobRunAttemptsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    ListJobRunAttemptsRequest.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "jobRunId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    ListJobRunAttemptsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListJobRunAttemptsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
     ListJobRunAttemptsRequest.type = Types::ListJobRunAttemptsRequest
-    ListJobRunAttemptsResponse.add_member(:job_run_attempts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunAttempts, location_name: "jobRunAttempts", traits: {"smithy.api#required" => {}}))
-    ListJobRunAttemptsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListJobRunAttemptsResponse.add_member(:job_run_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunAttempts, location_name: "jobRunAttempts", traits: {"smithy.api#required" => {}}))
+    ListJobRunAttemptsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListJobRunAttemptsResponse.type = Types::ListJobRunAttemptsResponse
-    ListJobRunsInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    ListJobRunsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListJobRunsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
-    ListJobRunsInput.add_member(:created_at_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAtAfter", traits: {"smithy.api#httpQuery" => "createdAtAfter"}))
-    ListJobRunsInput.add_member(:created_at_before, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAtBefore", traits: {"smithy.api#httpQuery" => "createdAtBefore"}))
-    ListJobRunsInput.add_member(:states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunStateSet, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
-    ListJobRunsInput.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode", traits: {"smithy.api#httpQuery" => "mode"}))
+    ListJobRunsInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    ListJobRunsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListJobRunsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListJobRunsInput.add_member(:created_at_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAtAfter", traits: {"smithy.api#httpQuery" => "createdAtAfter"}))
+    ListJobRunsInput.add_member(:created_at_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAtBefore", traits: {"smithy.api#httpQuery" => "createdAtBefore"}))
+    ListJobRunsInput.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunStateSet, location_name: "states", traits: {"smithy.api#httpQuery" => "states"}))
+    ListJobRunsInput.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunMode, location_name: "mode", traits: {"smithy.api#httpQuery" => "mode"}))
     ListJobRunsInput.type = Types::ListJobRunsInput
-    ListJobRunsOutput.add_member(:job_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRuns, location_name: "jobRuns", traits: {"smithy.api#required" => {}}))
-    ListJobRunsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListJobRunsOutput.add_member(:job_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRuns, location_name: "jobRuns", traits: {"smithy.api#required" => {}}))
+    ListJobRunsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListJobRunsOutput.type = Types::ListJobRunsOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    LogTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogTypeString)
-    LogTypeMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeString)
-    LogTypeMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogTypeList)
-    ManagedPersistenceMonitoringConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
-    ManagedPersistenceMonitoringConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))
+    LogTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeString)
+    LogTypeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString)
+    LogTypeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList)
+    ManagedPersistenceMonitoringConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "enabled"))
+    ManagedPersistenceMonitoringConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyArn, location_name: "encryptionKeyArn"))
     ManagedPersistenceMonitoringConfiguration.type = Types::ManagedPersistenceMonitoringConfiguration
-    MaximumAllowedResources.add_member(:cpu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CpuSize, location_name: "cpu", traits: {"smithy.api#required" => {}}))
-    MaximumAllowedResources.add_member(:memory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemorySize, location_name: "memory", traits: {"smithy.api#required" => {}}))
-    MaximumAllowedResources.add_member(:disk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskSize, location_name: "disk"))
+    MaximumAllowedResources.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: CpuSize, location_name: "cpu", traits: {"smithy.api#required" => {}}))
+    MaximumAllowedResources.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: MemorySize, location_name: "memory", traits: {"smithy.api#required" => {}}))
+    MaximumAllowedResources.add_member(:disk, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskSize, location_name: "disk"))
     MaximumAllowedResources.type = Types::MaximumAllowedResources
-    MonitoringConfiguration.add_member(:s3_monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
-    MonitoringConfiguration.add_member(:managed_persistence_monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedPersistenceMonitoringConfiguration, location_name: "managedPersistenceMonitoringConfiguration"))
-    MonitoringConfiguration.add_member(:cloud_watch_logging_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLoggingConfiguration, location_name: "cloudWatchLoggingConfiguration"))
-    MonitoringConfiguration.add_member(:prometheus_monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrometheusMonitoringConfiguration, location_name: "prometheusMonitoringConfiguration"))
+    MonitoringConfiguration.add_member(:s3_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
+    MonitoringConfiguration.add_member(:managed_persistence_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPersistenceMonitoringConfiguration, location_name: "managedPersistenceMonitoringConfiguration"))
+    MonitoringConfiguration.add_member(:cloud_watch_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingConfiguration, location_name: "cloudWatchLoggingConfiguration"))
+    MonitoringConfiguration.add_member(:prometheus_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusMonitoringConfiguration, location_name: "prometheusMonitoringConfiguration"))
     MonitoringConfiguration.type = Types::MonitoringConfiguration
-    NetworkConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))
-    NetworkConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
+    NetworkConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, location_name: "subnetIds"))
+    NetworkConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, location_name: "securityGroupIds"))
     NetworkConfiguration.type = Types::NetworkConfiguration
-    PolicyArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn)
-    PrometheusMonitoringConfiguration.add_member(:remote_write_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrometheusUrlString, location_name: "remoteWriteUrl"))
+    PolicyArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn)
+    PrometheusMonitoringConfiguration.add_member(:remote_write_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusUrlString, location_name: "remoteWriteUrl"))
     PrometheusMonitoringConfiguration.type = Types::PrometheusMonitoringConfiguration
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceUtilization.add_member(:v_cpu_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "vCPUHour"))
-    ResourceUtilization.add_member(:memory_gb_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "memoryGBHour"))
-    ResourceUtilization.add_member(:storage_gb_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "storageGBHour"))
+    ResourceUtilization.add_member(:v_cpu_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "vCPUHour"))
+    ResourceUtilization.add_member(:memory_gb_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "memoryGBHour"))
+    ResourceUtilization.add_member(:storage_gb_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "storageGBHour"))
     ResourceUtilization.type = Types::ResourceUtilization
-    RetryPolicy.add_member(:max_attempts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "maxAttempts"))
-    RetryPolicy.add_member(:max_failed_attempts_per_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxFailedAttemptsPerHour", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1}}))
+    RetryPolicy.add_member(:max_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptNumber, location_name: "maxAttempts"))
+    RetryPolicy.add_member(:max_failed_attempts_per_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxFailedAttemptsPerHour", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1}}))
     RetryPolicy.type = Types::RetryPolicy
-    S3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UriString, location_name: "logUri"))
-    S3MonitoringConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))
+    S3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, location_name: "logUri"))
+    S3MonitoringConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyArn, location_name: "encryptionKeyArn"))
     S3MonitoringConfiguration.type = Types::S3MonitoringConfiguration
-    SchedulerConfiguration.add_member(:queue_timeout_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "queueTimeoutMinutes"))
-    SchedulerConfiguration.add_member(:max_concurrent_runs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxConcurrentRuns"))
+    SchedulerConfiguration.add_member(:queue_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "queueTimeoutMinutes"))
+    SchedulerConfiguration.add_member(:max_concurrent_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxConcurrentRuns"))
     SchedulerConfiguration.type = Types::SchedulerConfiguration
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupString)
-    SensitivePropertiesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationPropertyKey)
-    SensitivePropertiesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationPropertyValue)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
+    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupString)
+    SensitivePropertiesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPropertyKey)
+    SensitivePropertiesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPropertyValue)
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SparkSubmit.add_member(:entry_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntryPointPath, location_name: "entryPoint", traits: {"smithy.api#required" => {}}))
-    SparkSubmit.add_member(:entry_point_arguments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntryPointArguments, location_name: "entryPointArguments"))
-    SparkSubmit.add_member(:spark_submit_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SparkSubmitParameters, location_name: "sparkSubmitParameters"))
+    SparkSubmit.add_member(:entry_point, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointPath, location_name: "entryPoint", traits: {"smithy.api#required" => {}}))
+    SparkSubmit.add_member(:entry_point_arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArguments, location_name: "entryPointArguments"))
+    SparkSubmit.add_member(:spark_submit_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSubmitParameters, location_name: "sparkSubmitParameters"))
     SparkSubmit.type = Types::SparkSubmit
-    StartApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    StartApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     StartApplicationInput.type = Types::StartApplicationInput
     StartApplicationOutput.type = Types::StartApplicationOutput
-    StartJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    StartJobRunInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    StartJobRunInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
-    StartJobRunInput.add_member(:execution_iam_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunExecutionIamPolicy, location_name: "executionIamPolicy"))
-    StartJobRunInput.add_member(:job_driver, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver"))
-    StartJobRunInput.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
-    StartJobRunInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    StartJobRunInput.add_member(:execution_timeout_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", traits: {"smithy.api#default" => nil}))
-    StartJobRunInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String256, location_name: "name"))
-    StartJobRunInput.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
-    StartJobRunInput.add_member(:retry_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "retryPolicy"))
+    StartJobRunInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    StartJobRunInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartJobRunInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, location_name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    StartJobRunInput.add_member(:execution_iam_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunExecutionIamPolicy, location_name: "executionIamPolicy"))
+    StartJobRunInput.add_member(:job_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDriver, location_name: "jobDriver"))
+    StartJobRunInput.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, location_name: "configurationOverrides"))
+    StartJobRunInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    StartJobRunInput.add_member(:execution_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, location_name: "executionTimeoutMinutes", traits: {"smithy.api#default" => nil}))
+    StartJobRunInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, location_name: "name"))
+    StartJobRunInput.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunMode, location_name: "mode"))
+    StartJobRunInput.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryPolicy, location_name: "retryPolicy"))
     StartJobRunInput.type = Types::StartJobRunInput
-    StartJobRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    StartJobRunOutput.add_member(:job_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobRunId, location_name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
-    StartJobRunOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    StartJobRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    StartJobRunOutput.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, location_name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
+    StartJobRunOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
     StartJobRunOutput.type = Types::StartJobRunOutput
-    StopApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    StopApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     StopApplicationInput.type = Types::StopApplicationInput
     StopApplicationOutput.type = Types::StopApplicationOutput
-    SubnetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetString)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetString)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TotalResourceUtilization.add_member(:v_cpu_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "vCPUHour"))
-    TotalResourceUtilization.add_member(:memory_gb_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "memoryGBHour"))
-    TotalResourceUtilization.add_member(:storage_gb_hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "storageGBHour"))
+    TotalResourceUtilization.add_member(:v_cpu_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "vCPUHour"))
+    TotalResourceUtilization.add_member(:memory_gb_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "memoryGBHour"))
+    TotalResourceUtilization.add_member(:storage_gb_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "storageGBHour"))
     TotalResourceUtilization.type = Types::TotalResourceUtilization
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
-    UpdateApplicationInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    UpdateApplicationInput.add_member(:initial_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitialCapacityConfigMap, location_name: "initialCapacity"))
-    UpdateApplicationInput.add_member(:maximum_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumAllowedResources, location_name: "maximumCapacity"))
-    UpdateApplicationInput.add_member(:auto_start_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))
-    UpdateApplicationInput.add_member(:auto_stop_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
-    UpdateApplicationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
-    UpdateApplicationInput.add_member(:architecture, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
-    UpdateApplicationInput.add_member(:image_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageConfigurationInput, location_name: "imageConfiguration"))
-    UpdateApplicationInput.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
-    UpdateApplicationInput.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
-    UpdateApplicationInput.add_member(:release_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
-    UpdateApplicationInput.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
-    UpdateApplicationInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
-    UpdateApplicationInput.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
-    UpdateApplicationInput.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
+    UpdateApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    UpdateApplicationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    UpdateApplicationInput.add_member(:initial_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialCapacityConfigMap, location_name: "initialCapacity"))
+    UpdateApplicationInput.add_member(:maximum_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumAllowedResources, location_name: "maximumCapacity"))
+    UpdateApplicationInput.add_member(:auto_start_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoStartConfig, location_name: "autoStartConfiguration"))
+    UpdateApplicationInput.add_member(:auto_stop_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoStopConfig, location_name: "autoStopConfiguration"))
+    UpdateApplicationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, location_name: "networkConfiguration"))
+    UpdateApplicationInput.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, location_name: "architecture"))
+    UpdateApplicationInput.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfigurationInput, location_name: "imageConfiguration"))
+    UpdateApplicationInput.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
+    UpdateApplicationInput.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InteractiveConfiguration, location_name: "interactiveConfiguration"))
+    UpdateApplicationInput.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, location_name: "releaseLabel"))
+    UpdateApplicationInput.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, location_name: "runtimeConfiguration"))
+    UpdateApplicationInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    UpdateApplicationInput.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, location_name: "schedulerConfiguration"))
+    UpdateApplicationInput.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
     UpdateApplicationInput.type = Types::UpdateApplicationInput
-    UpdateApplicationOutput.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Application, location_name: "application", traits: {"smithy.api#required" => {}}))
+    UpdateApplicationOutput.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, location_name: "application", traits: {"smithy.api#required" => {}}))
     UpdateApplicationOutput.type = Types::UpdateApplicationOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    WorkerResourceConfig.add_member(:cpu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CpuSize, location_name: "cpu", traits: {"smithy.api#required" => {}}))
-    WorkerResourceConfig.add_member(:memory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemorySize, location_name: "memory", traits: {"smithy.api#required" => {}}))
-    WorkerResourceConfig.add_member(:disk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskSize, location_name: "disk"))
-    WorkerResourceConfig.add_member(:disk_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskType, location_name: "diskType"))
+    WorkerResourceConfig.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: CpuSize, location_name: "cpu", traits: {"smithy.api#required" => {}}))
+    WorkerResourceConfig.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: MemorySize, location_name: "memory", traits: {"smithy.api#required" => {}}))
+    WorkerResourceConfig.add_member(:disk, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskSize, location_name: "disk"))
+    WorkerResourceConfig.add_member(:disk_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskType, location_name: "diskType"))
     WorkerResourceConfig.type = Types::WorkerResourceConfig
-    WorkerTypeSpecification.add_member(:image_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "imageConfiguration"))
+    WorkerTypeSpecification.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfiguration, location_name: "imageConfiguration"))
     WorkerTypeSpecification.type = Types::WorkerTypeSpecification
-    WorkerTypeSpecificationInput.add_member(:image_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageConfigurationInput, location_name: "imageConfiguration"))
+    WorkerTypeSpecificationInput.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfigurationInput, location_name: "imageConfiguration"))
     WorkerTypeSpecificationInput.type = Types::WorkerTypeSpecificationInput
-    WorkerTypeSpecificationInputMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeString)
-    WorkerTypeSpecificationInputMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInput)
-    WorkerTypeSpecificationMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeString)
-    WorkerTypeSpecificationMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerTypeSpecification)
+    WorkerTypeSpecificationInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString)
+    WorkerTypeSpecificationInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationInput)
+    WorkerTypeSpecificationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString)
+    WorkerTypeSpecificationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecification)
 
     AwsToledoWebService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.emrserverless#AwsToledoWebService"
@@ -510,165 +510,165 @@ module Aws::EMRServerless
       service.add_operation(:cancel_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#CancelJobRun"
         operation.name = "CancelJobRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelJobRunInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelJobRunOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CancelJobRunInput
+        operation.output = CancelJobRunOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{applicationId}/jobruns/{jobRunId}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#CreateApplication"
         operation.name = "CreateApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateApplicationInput
+        operation.output = CreateApplicationOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#DeleteApplication"
         operation.name = "DeleteApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteApplicationInput
+        operation.output = DeleteApplicationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{applicationId}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#GetApplication"
         operation.name = "GetApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetApplicationInput
+        operation.output = GetApplicationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_dashboard_for_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#GetDashboardForJobRun"
         operation.name = "GetDashboardForJobRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDashboardForJobRunInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDashboardForJobRunOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetDashboardForJobRunInput
+        operation.output = GetDashboardForJobRunOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/jobruns/{jobRunId}/dashboard"}}
       end)
       service.add_operation(:get_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#GetJobRun"
         operation.name = "GetJobRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetJobRunInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetJobRunOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetJobRunInput
+        operation.output = GetJobRunOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/jobruns/{jobRunId}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#ListApplications"
         operation.name = "ListApplications"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListApplicationsInput
+        operation.output = ListApplicationsOutput
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListApplications.new
       end)
       service.add_operation(:list_job_run_attempts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#ListJobRunAttempts"
         operation.name = "ListJobRunAttempts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobRunAttemptsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobRunAttemptsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListJobRunAttemptsRequest
+        operation.output = ListJobRunAttemptsResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/jobruns/{jobRunId}/attempts"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListJobRunAttempts.new
       end)
       service.add_operation(:list_job_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#ListJobRuns"
         operation.name = "ListJobRuns"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobRunsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListJobRunsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListJobRunsInput
+        operation.output = ListJobRunsOutput
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/jobruns"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListJobRuns.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:start_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#StartApplication"
         operation.name = "StartApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartApplicationInput
+        operation.output = StartApplicationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{applicationId}/start"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#StartJobRun"
         operation.name = "StartJobRun"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartJobRunInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartJobRunOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StartJobRunInput
+        operation.output = StartJobRunOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{applicationId}/jobruns"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:stop_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#StopApplication"
         operation.name = "StopApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = StopApplicationInput
+        operation.output = StopApplicationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{applicationId}/stop"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}"}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#UpdateApplication"
         operation.name = "UpdateApplication"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApplicationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateApplicationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateApplicationInput
+        operation.output = UpdateApplicationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/applications/{applicationId}"}}
       end)
     end

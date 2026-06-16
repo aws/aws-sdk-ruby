@@ -54,150 +54,150 @@ module Aws::KeyspacesStreams
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.keyspacesstreams#ValidationException", name: "ValidationException", traits: {"aws.protocols#awsQueryError" => {"code" => "ValidationException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.keyspacesstreams#ValidationExceptionType", name: "ValidationExceptionType")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    GetRecordsInput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIterator, location_name: "shardIterator", traits: {"smithy.api#required" => {}}))
-    GetRecordsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
+    GetRecordsInput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIterator, location_name: "shardIterator", traits: {"smithy.api#required" => {}}))
+    GetRecordsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
     GetRecordsInput.type = Types::GetRecordsInput
-    GetRecordsOutput.add_member(:change_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordList, location_name: "changeRecords"))
-    GetRecordsOutput.add_member(:next_shard_iterator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIterator, location_name: "nextShardIterator"))
+    GetRecordsOutput.add_member(:change_records, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordList, location_name: "changeRecords"))
+    GetRecordsOutput.add_member(:next_shard_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIterator, location_name: "nextShardIterator"))
     GetRecordsOutput.type = Types::GetRecordsOutput
-    GetShardIteratorInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
-    GetShardIteratorInput.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "shardId", traits: {"smithy.api#required" => {}}))
-    GetShardIteratorInput.add_member(:shard_iterator_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIteratorType, location_name: "shardIteratorType", traits: {"smithy.api#required" => {}}))
-    GetShardIteratorInput.add_member(:sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "sequenceNumber"))
+    GetShardIteratorInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
+    GetShardIteratorInput.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "shardId", traits: {"smithy.api#required" => {}}))
+    GetShardIteratorInput.add_member(:shard_iterator_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIteratorType, location_name: "shardIteratorType", traits: {"smithy.api#required" => {}}))
+    GetShardIteratorInput.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "sequenceNumber"))
     GetShardIteratorInput.type = Types::GetShardIteratorInput
-    GetShardIteratorOutput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIterator, location_name: "shardIterator"))
+    GetShardIteratorOutput.add_member(:shard_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIterator, location_name: "shardIterator"))
     GetShardIteratorOutput.type = Types::GetShardIteratorOutput
-    GetStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
-    GetStreamInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
-    GetStreamInput.add_member(:shard_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardFilter, location_name: "shardFilter"))
-    GetStreamInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIdToken, location_name: "nextToken"))
+    GetStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
+    GetStreamInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    GetStreamInput.add_member(:shard_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardFilter, location_name: "shardFilter"))
+    GetStreamInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIdToken, location_name: "nextToken"))
     GetStreamInput.type = Types::GetStreamInput
-    GetStreamOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
-    GetStreamOutput.add_member(:stream_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "streamLabel", traits: {"smithy.api#required" => {}}))
-    GetStreamOutput.add_member(:stream_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamStatus, location_name: "streamStatus", traits: {"smithy.api#required" => {}}))
-    GetStreamOutput.add_member(:stream_view_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamViewType, location_name: "streamViewType", traits: {"smithy.api#required" => {}}))
-    GetStreamOutput.add_member(:creation_request_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "creationRequestDateTime", traits: {"smithy.api#required" => {}}))
-    GetStreamOutput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetStreamOutput.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
-    GetStreamOutput.add_member(:shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardDescriptionList, location_name: "shards"))
-    GetStreamOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIdToken, location_name: "nextToken"))
+    GetStreamOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
+    GetStreamOutput.add_member(:stream_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "streamLabel", traits: {"smithy.api#required" => {}}))
+    GetStreamOutput.add_member(:stream_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStatus, location_name: "streamStatus", traits: {"smithy.api#required" => {}}))
+    GetStreamOutput.add_member(:stream_view_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamViewType, location_name: "streamViewType", traits: {"smithy.api#required" => {}}))
+    GetStreamOutput.add_member(:creation_request_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "creationRequestDateTime", traits: {"smithy.api#required" => {}}))
+    GetStreamOutput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetStreamOutput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    GetStreamOutput.add_member(:shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardDescriptionList, location_name: "shards"))
+    GetStreamOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIdToken, location_name: "nextToken"))
     GetStreamOutput.type = Types::GetStreamOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    KeyspacesCell.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellValue, location_name: "value"))
-    KeyspacesCell.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesMetadata, location_name: "metadata"))
+    KeyspacesCell.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, location_name: "value"))
+    KeyspacesCell.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesMetadata, location_name: "metadata"))
     KeyspacesCell.type = Types::KeyspacesCell
-    KeyspacesCellList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCell)
-    KeyspacesCellMap.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellMapDefinition)
-    KeyspacesCellMapDefinition.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellValue, location_name: "key"))
-    KeyspacesCellMapDefinition.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellValue, location_name: "value"))
-    KeyspacesCellMapDefinition.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesMetadata, location_name: "metadata"))
+    KeyspacesCellList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell)
+    KeyspacesCellMap.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellMapDefinition)
+    KeyspacesCellMapDefinition.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, location_name: "key"))
+    KeyspacesCellMapDefinition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, location_name: "value"))
+    KeyspacesCellMapDefinition.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesMetadata, location_name: "metadata"))
     KeyspacesCellMapDefinition.type = Types::KeyspacesCellMapDefinition
-    KeyspacesCellValue.add_member(:ascii_t, Types::KeyspacesCellValue::AsciiT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "asciiT"))
-    KeyspacesCellValue.add_member(:bigint_t, Types::KeyspacesCellValue::BigintT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "bigintT"))
-    KeyspacesCellValue.add_member(:blob_t, Types::KeyspacesCellValue::BlobT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "blobT"))
-    KeyspacesCellValue.add_member(:bool_t, Types::KeyspacesCellValue::BoolT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "boolT"))
-    KeyspacesCellValue.add_member(:counter_t, Types::KeyspacesCellValue::CounterT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "counterT"))
-    KeyspacesCellValue.add_member(:date_t, Types::KeyspacesCellValue::DateT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "dateT"))
-    KeyspacesCellValue.add_member(:decimal_t, Types::KeyspacesCellValue::DecimalT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "decimalT"))
-    KeyspacesCellValue.add_member(:double_t, Types::KeyspacesCellValue::DoubleT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "doubleT"))
-    KeyspacesCellValue.add_member(:float_t, Types::KeyspacesCellValue::FloatT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "floatT"))
-    KeyspacesCellValue.add_member(:inet_t, Types::KeyspacesCellValue::InetT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "inetT"))
-    KeyspacesCellValue.add_member(:int_t, Types::KeyspacesCellValue::IntT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "intT"))
-    KeyspacesCellValue.add_member(:list_t, Types::KeyspacesCellValue::ListT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellList, location_name: "listT"))
-    KeyspacesCellValue.add_member(:map_t, Types::KeyspacesCellValue::MapT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellMap, location_name: "mapT"))
-    KeyspacesCellValue.add_member(:set_t, Types::KeyspacesCellValue::SetT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellList, location_name: "setT"))
-    KeyspacesCellValue.add_member(:smallint_t, Types::KeyspacesCellValue::SmallintT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "smallintT"))
-    KeyspacesCellValue.add_member(:text_t, Types::KeyspacesCellValue::TextT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "textT"))
-    KeyspacesCellValue.add_member(:time_t, Types::KeyspacesCellValue::TimeT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "timeT"))
-    KeyspacesCellValue.add_member(:timestamp_t, Types::KeyspacesCellValue::TimestampT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "timestampT"))
-    KeyspacesCellValue.add_member(:timeuuid_t, Types::KeyspacesCellValue::TimeuuidT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "timeuuidT"))
-    KeyspacesCellValue.add_member(:tinyint_t, Types::KeyspacesCellValue::TinyintT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "tinyintT"))
-    KeyspacesCellValue.add_member(:tuple_t, Types::KeyspacesCellValue::TupleT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellList, location_name: "tupleT"))
-    KeyspacesCellValue.add_member(:uuid_t, Types::KeyspacesCellValue::UuidT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "uuidT"))
-    KeyspacesCellValue.add_member(:varchar_t, Types::KeyspacesCellValue::VarcharT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "varcharT"))
-    KeyspacesCellValue.add_member(:varint_t, Types::KeyspacesCellValue::VarintT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "varintT"))
-    KeyspacesCellValue.add_member(:udt_t, Types::KeyspacesCellValue::UdtT, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesUdtMap, location_name: "udtT"))
-    KeyspacesCellValue.add_member(:unknown, Types::KeyspacesCellValue::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    KeyspacesCellValue.add_member(:ascii_t, Types::KeyspacesCellValue::AsciiT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "asciiT"))
+    KeyspacesCellValue.add_member(:bigint_t, Types::KeyspacesCellValue::BigintT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "bigintT"))
+    KeyspacesCellValue.add_member(:blob_t, Types::KeyspacesCellValue::BlobT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: "blobT"))
+    KeyspacesCellValue.add_member(:bool_t, Types::KeyspacesCellValue::BoolT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "boolT"))
+    KeyspacesCellValue.add_member(:counter_t, Types::KeyspacesCellValue::CounterT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "counterT"))
+    KeyspacesCellValue.add_member(:date_t, Types::KeyspacesCellValue::DateT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "dateT"))
+    KeyspacesCellValue.add_member(:decimal_t, Types::KeyspacesCellValue::DecimalT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "decimalT"))
+    KeyspacesCellValue.add_member(:double_t, Types::KeyspacesCellValue::DoubleT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "doubleT"))
+    KeyspacesCellValue.add_member(:float_t, Types::KeyspacesCellValue::FloatT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "floatT"))
+    KeyspacesCellValue.add_member(:inet_t, Types::KeyspacesCellValue::InetT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "inetT"))
+    KeyspacesCellValue.add_member(:int_t, Types::KeyspacesCellValue::IntT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "intT"))
+    KeyspacesCellValue.add_member(:list_t, Types::KeyspacesCellValue::ListT, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellList, location_name: "listT"))
+    KeyspacesCellValue.add_member(:map_t, Types::KeyspacesCellValue::MapT, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellMap, location_name: "mapT"))
+    KeyspacesCellValue.add_member(:set_t, Types::KeyspacesCellValue::SetT, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellList, location_name: "setT"))
+    KeyspacesCellValue.add_member(:smallint_t, Types::KeyspacesCellValue::SmallintT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "smallintT"))
+    KeyspacesCellValue.add_member(:text_t, Types::KeyspacesCellValue::TextT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "textT"))
+    KeyspacesCellValue.add_member(:time_t, Types::KeyspacesCellValue::TimeT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "timeT"))
+    KeyspacesCellValue.add_member(:timestamp_t, Types::KeyspacesCellValue::TimestampT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "timestampT"))
+    KeyspacesCellValue.add_member(:timeuuid_t, Types::KeyspacesCellValue::TimeuuidT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "timeuuidT"))
+    KeyspacesCellValue.add_member(:tinyint_t, Types::KeyspacesCellValue::TinyintT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "tinyintT"))
+    KeyspacesCellValue.add_member(:tuple_t, Types::KeyspacesCellValue::TupleT, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellList, location_name: "tupleT"))
+    KeyspacesCellValue.add_member(:uuid_t, Types::KeyspacesCellValue::UuidT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "uuidT"))
+    KeyspacesCellValue.add_member(:varchar_t, Types::KeyspacesCellValue::VarcharT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "varcharT"))
+    KeyspacesCellValue.add_member(:varint_t, Types::KeyspacesCellValue::VarintT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "varintT"))
+    KeyspacesCellValue.add_member(:udt_t, Types::KeyspacesCellValue::UdtT, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesUdtMap, location_name: "udtT"))
+    KeyspacesCellValue.add_member(:unknown, Types::KeyspacesCellValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     KeyspacesCellValue.type = Types::KeyspacesCellValue
-    KeyspacesCells.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    KeyspacesCells.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCell)
-    KeyspacesKeysMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    KeyspacesKeysMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCellValue)
-    KeyspacesMetadata.add_member(:expiration_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "expirationTime"))
-    KeyspacesMetadata.add_member(:write_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "writeTime"))
+    KeyspacesCells.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    KeyspacesCells.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell)
+    KeyspacesKeysMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    KeyspacesKeysMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue)
+    KeyspacesMetadata.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "expirationTime"))
+    KeyspacesMetadata.add_member(:write_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "writeTime"))
     KeyspacesMetadata.type = Types::KeyspacesMetadata
-    KeyspacesRow.add_member(:value_cells, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCells, location_name: "valueCells"))
-    KeyspacesRow.add_member(:static_cells, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCells, location_name: "staticCells"))
-    KeyspacesRow.add_member(:row_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesMetadata, location_name: "rowMetadata"))
+    KeyspacesRow.add_member(:value_cells, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCells, location_name: "valueCells"))
+    KeyspacesRow.add_member(:static_cells, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCells, location_name: "staticCells"))
+    KeyspacesRow.add_member(:row_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesMetadata, location_name: "rowMetadata"))
     KeyspacesRow.type = Types::KeyspacesRow
-    KeyspacesUdtMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    KeyspacesUdtMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesCell)
-    ListStreamsInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName"))
-    ListStreamsInput.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName"))
-    ListStreamsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListStreamsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamArnToken, location_name: "nextToken"))
+    KeyspacesUdtMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    KeyspacesUdtMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell)
+    ListStreamsInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName"))
+    ListStreamsInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName"))
+    ListStreamsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListStreamsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArnToken, location_name: "nextToken"))
     ListStreamsInput.type = Types::ListStreamsInput
-    ListStreamsOutput.add_member(:streams, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamList, location_name: "streams"))
-    ListStreamsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamArnToken, location_name: "nextToken"))
+    ListStreamsOutput.add_member(:streams, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamList, location_name: "streams"))
+    ListStreamsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArnToken, location_name: "nextToken"))
     ListStreamsOutput.type = Types::ListStreamsOutput
-    OriginType.add_member(:user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    OriginType.add_member(:replication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLICATION", traits: {"smithy.api#enumValue" => "REPLICATION"}))
-    OriginType.add_member(:ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TTL", traits: {"smithy.api#enumValue" => "TTL"}))
-    Record.add_member(:event_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "eventVersion"))
-    Record.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
-    Record.add_member(:origin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OriginType, location_name: "origin"))
-    Record.add_member(:partition_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesKeysMap, location_name: "partitionKeys"))
-    Record.add_member(:clustering_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesKeysMap, location_name: "clusteringKeys"))
-    Record.add_member(:new_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesRow, location_name: "newImage"))
-    Record.add_member(:old_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspacesRow, location_name: "oldImage"))
-    Record.add_member(:sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "sequenceNumber"))
+    OriginType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    OriginType.add_member(:replication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLICATION", traits: {"smithy.api#enumValue" => "REPLICATION"}))
+    OriginType.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TTL", traits: {"smithy.api#enumValue" => "TTL"}))
+    Record.add_member(:event_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "eventVersion"))
+    Record.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, location_name: "createdAt"))
+    Record.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginType, location_name: "origin"))
+    Record.add_member(:partition_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesKeysMap, location_name: "partitionKeys"))
+    Record.add_member(:clustering_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesKeysMap, location_name: "clusteringKeys"))
+    Record.add_member(:new_image, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesRow, location_name: "newImage"))
+    Record.add_member(:old_image, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesRow, location_name: "oldImage"))
+    Record.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "sequenceNumber"))
     Record.type = Types::Record
-    RecordList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Record)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    RecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SequenceNumberRange.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "startingSequenceNumber"))
-    SequenceNumberRange.add_member(:ending_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "endingSequenceNumber"))
+    SequenceNumberRange.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "startingSequenceNumber"))
+    SequenceNumberRange.add_member(:ending_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, location_name: "endingSequenceNumber"))
     SequenceNumberRange.type = Types::SequenceNumberRange
-    Shard.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "shardId"))
-    Shard.add_member(:sequence_number_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SequenceNumberRange, location_name: "sequenceNumberRange"))
-    Shard.add_member(:parent_shard_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardIdList, location_name: "parentShardIds"))
+    Shard.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "shardId"))
+    Shard.add_member(:sequence_number_range, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumberRange, location_name: "sequenceNumberRange"))
+    Shard.add_member(:parent_shard_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIdList, location_name: "parentShardIds"))
     Shard.type = Types::Shard
-    ShardDescriptionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Shard)
-    ShardFilter.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardFilterType, location_name: "type"))
-    ShardFilter.add_member(:shard_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId, location_name: "shardId"))
+    ShardDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard)
+    ShardFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardFilterType, location_name: "type"))
+    ShardFilter.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, location_name: "shardId"))
     ShardFilter.type = Types::ShardFilter
-    ShardFilterType.add_member(:child_shards, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHILD_SHARDS", traits: {"smithy.api#enumValue" => "CHILD_SHARDS"}))
-    ShardIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShardId)
-    ShardIteratorType.add_member(:trim_horizon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRIM_HORIZON", traits: {"smithy.api#enumValue" => "TRIM_HORIZON"}))
-    ShardIteratorType.add_member(:latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LATEST", traits: {"smithy.api#enumValue" => "LATEST"}))
-    ShardIteratorType.add_member(:at_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AT_SEQUENCE_NUMBER"}))
-    ShardIteratorType.add_member(:after_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AFTER_SEQUENCE_NUMBER"}))
-    Stream.add_member(:stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
-    Stream.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    Stream.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
-    Stream.add_member(:stream_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "streamLabel", traits: {"smithy.api#required" => {}}))
+    ShardFilterType.add_member(:child_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHILD_SHARDS", traits: {"smithy.api#enumValue" => "CHILD_SHARDS"}))
+    ShardIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId)
+    ShardIteratorType.add_member(:trim_horizon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TRIM_HORIZON", traits: {"smithy.api#enumValue" => "TRIM_HORIZON"}))
+    ShardIteratorType.add_member(:latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LATEST", traits: {"smithy.api#enumValue" => "LATEST"}))
+    ShardIteratorType.add_member(:at_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AT_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AT_SEQUENCE_NUMBER"}))
+    ShardIteratorType.add_member(:after_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AFTER_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AFTER_SEQUENCE_NUMBER"}))
+    Stream.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, location_name: "streamArn", traits: {"smithy.api#required" => {}}))
+    Stream.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    Stream.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    Stream.add_member(:stream_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "streamLabel", traits: {"smithy.api#required" => {}}))
     Stream.type = Types::Stream
-    StreamList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stream)
-    StreamStatus.add_member(:enabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
-    StreamStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    StreamStatus.add_member(:disabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
-    StreamStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    StreamViewType.add_member(:new_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_IMAGE", traits: {"smithy.api#enumValue" => "NEW_IMAGE"}))
-    StreamViewType.add_member(:old_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OLD_IMAGE", traits: {"smithy.api#enumValue" => "OLD_IMAGE"}))
-    StreamViewType.add_member(:new_and_old_images, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_AND_OLD_IMAGES", traits: {"smithy.api#enumValue" => "NEW_AND_OLD_IMAGES"}))
-    StreamViewType.add_member(:keys_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEYS_ONLY", traits: {"smithy.api#enumValue" => "KEYS_ONLY"}))
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    StreamList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Stream)
+    StreamStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
+    StreamStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    StreamStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
+    StreamStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    StreamViewType.add_member(:new_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_IMAGE", traits: {"smithy.api#enumValue" => "NEW_IMAGE"}))
+    StreamViewType.add_member(:old_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OLD_IMAGE", traits: {"smithy.api#enumValue" => "OLD_IMAGE"}))
+    StreamViewType.add_member(:new_and_old_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NEW_AND_OLD_IMAGES", traits: {"smithy.api#enumValue" => "NEW_AND_OLD_IMAGES"}))
+    StreamViewType.add_member(:keys_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KEYS_ONLY", traits: {"smithy.api#enumValue" => "KEYS_ONLY"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
-    ValidationException.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionType, location_name: "errorCode"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ValidationException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionType, location_name: "errorCode"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionType.add_member(:invalid_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidFormat", traits: {"smithy.api#enumValue" => "InvalidFormat"}))
-    ValidationExceptionType.add_member(:trimmed_data_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TrimmedDataAccess", traits: {"smithy.api#enumValue" => "TrimmedDataAccess"}))
-    ValidationExceptionType.add_member(:expired_iterator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ExpiredIterator", traits: {"smithy.api#enumValue" => "ExpiredIterator"}))
-    ValidationExceptionType.add_member(:expired_next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ExpiredNextToken", traits: {"smithy.api#enumValue" => "ExpiredNextToken"}))
+    ValidationExceptionType.add_member(:invalid_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidFormat", traits: {"smithy.api#enumValue" => "InvalidFormat"}))
+    ValidationExceptionType.add_member(:trimmed_data_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TrimmedDataAccess", traits: {"smithy.api#enumValue" => "TrimmedDataAccess"}))
+    ValidationExceptionType.add_member(:expired_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ExpiredIterator", traits: {"smithy.api#enumValue" => "ExpiredIterator"}))
+    ValidationExceptionType.add_member(:expired_next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ExpiredNextToken", traits: {"smithy.api#enumValue" => "ExpiredNextToken"}))
 
     KeyspacesStreams = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.keyspacesstreams#KeyspacesStreams"
@@ -207,50 +207,50 @@ module Aws::KeyspacesStreams
       service.add_operation(:get_records, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspacesstreams#GetRecords"
         operation.name = "GetRecords"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecordsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRecordsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRecordsInput
+        operation.output = GetRecordsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_shard_iterator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspacesstreams#GetShardIterator"
         operation.name = "GetShardIterator"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetShardIteratorInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetShardIteratorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetShardIteratorInput
+        operation.output = GetShardIteratorOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspacesstreams#GetStream"
         operation.name = "GetStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetStreamOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetStreamInput
+        operation.output = GetStreamOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::GetStream.new
       end)
       service.add_operation(:list_streams, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspacesstreams#ListStreams"
         operation.name = "ListStreams"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListStreamsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListStreamsInput
+        operation.output = ListStreamsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListStreamsSuccess", "params" => {}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
         operation[:paginator] = Paginators::ListStreams.new
       end)

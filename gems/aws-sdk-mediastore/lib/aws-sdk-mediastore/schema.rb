@@ -89,136 +89,136 @@ module Aws::MediaStore
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediastore#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediastore#UntagResourceOutput", name: "UntagResourceOutput")
 
-    AllowedHeaders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Header)
-    AllowedMethods.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MethodName)
-    AllowedOrigins.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Origin)
-    Container.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
-    Container.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CreationTime"))
-    Container.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerARN, location_name: "ARN"))
-    Container.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "Name"))
-    Container.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerStatus, location_name: "Status"))
-    Container.add_member(:access_logging_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerAccessLoggingEnabled, location_name: "AccessLoggingEnabled"))
+    AllowedHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header)
+    AllowedMethods.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MethodName)
+    AllowedOrigins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Origin)
+    Container.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, location_name: "Endpoint"))
+    Container.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "CreationTime"))
+    Container.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "ARN"))
+    Container.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "Name"))
+    Container.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerStatus, location_name: "Status"))
+    Container.add_member(:access_logging_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerAccessLoggingEnabled, location_name: "AccessLoggingEnabled"))
     Container.type = Types::Container
-    ContainerInUseException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ContainerInUseException.type = Types::ContainerInUseException
-    ContainerLevelMetrics.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    ContainerLevelMetrics.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ContainerList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Container)
-    ContainerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerLevelMetrics.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ContainerLevelMetrics.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ContainerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Container)
+    ContainerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ContainerNotFoundException.type = Types::ContainerNotFoundException
-    ContainerStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ContainerStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    ContainerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    CorsPolicy.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CorsRule)
-    CorsPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ContainerStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ContainerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    CorsPolicy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CorsRule)
+    CorsPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     CorsPolicyNotFoundException.type = Types::CorsPolicyNotFoundException
-    CorsRule.add_member(:allowed_origins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOrigins, location_name: "AllowedOrigins", traits: {"smithy.api#required" => {}}))
-    CorsRule.add_member(:allowed_methods, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
-    CorsRule.add_member(:allowed_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedHeaders, location_name: "AllowedHeaders", traits: {"smithy.api#required" => {}}))
-    CorsRule.add_member(:max_age_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxAgeSeconds, location_name: "MaxAgeSeconds", traits: {"smithy.api#default" => 0}))
-    CorsRule.add_member(:expose_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExposeHeaders, location_name: "ExposeHeaders"))
+    CorsRule.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrigins, location_name: "AllowedOrigins", traits: {"smithy.api#required" => {}}))
+    CorsRule.add_member(:allowed_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedMethods, location_name: "AllowedMethods"))
+    CorsRule.add_member(:allowed_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedHeaders, location_name: "AllowedHeaders", traits: {"smithy.api#required" => {}}))
+    CorsRule.add_member(:max_age_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxAgeSeconds, location_name: "MaxAgeSeconds", traits: {"smithy.api#default" => 0}))
+    CorsRule.add_member(:expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposeHeaders, location_name: "ExposeHeaders"))
     CorsRule.type = Types::CorsRule
-    CreateContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    CreateContainerInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    CreateContainerInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateContainerInput.type = Types::CreateContainerInput
-    CreateContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Container, location_name: "Container", traits: {"smithy.api#required" => {}}))
+    CreateContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, location_name: "Container", traits: {"smithy.api#required" => {}}))
     CreateContainerOutput.type = Types::CreateContainerOutput
-    DeleteContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteContainerInput.type = Types::DeleteContainerInput
     DeleteContainerOutput.type = Types::DeleteContainerOutput
-    DeleteContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteContainerPolicyInput.type = Types::DeleteContainerPolicyInput
     DeleteContainerPolicyOutput.type = Types::DeleteContainerPolicyOutput
-    DeleteCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteCorsPolicyInput.type = Types::DeleteCorsPolicyInput
     DeleteCorsPolicyOutput.type = Types::DeleteCorsPolicyOutput
-    DeleteLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteLifecyclePolicyInput.type = Types::DeleteLifecyclePolicyInput
     DeleteLifecyclePolicyOutput.type = Types::DeleteLifecyclePolicyOutput
-    DeleteMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteMetricPolicyInput.type = Types::DeleteMetricPolicyInput
     DeleteMetricPolicyOutput.type = Types::DeleteMetricPolicyOutput
-    DescribeContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName"))
+    DescribeContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName"))
     DescribeContainerInput.type = Types::DescribeContainerInput
-    DescribeContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Container, location_name: "Container"))
+    DescribeContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, location_name: "Container"))
     DescribeContainerOutput.type = Types::DescribeContainerOutput
-    ExposeHeaders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Header)
-    GetContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    ExposeHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header)
+    GetContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetContainerPolicyInput.type = Types::GetContainerPolicyInput
-    GetContainerPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    GetContainerPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     GetContainerPolicyOutput.type = Types::GetContainerPolicyOutput
-    GetCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    GetCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetCorsPolicyInput.type = Types::GetCorsPolicyInput
-    GetCorsPolicyOutput.add_member(:cors_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CorsPolicy, location_name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
+    GetCorsPolicyOutput.add_member(:cors_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CorsPolicy, location_name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
     GetCorsPolicyOutput.type = Types::GetCorsPolicyOutput
-    GetLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    GetLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetLifecyclePolicyInput.type = Types::GetLifecyclePolicyInput
-    GetLifecyclePolicyOutput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecyclePolicy, location_name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
+    GetLifecyclePolicyOutput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, location_name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
     GetLifecyclePolicyOutput.type = Types::GetLifecyclePolicyOutput
-    GetMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    GetMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetMetricPolicyInput.type = Types::GetMetricPolicyInput
-    GetMetricPolicyOutput.add_member(:metric_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricPolicy, location_name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
+    GetMetricPolicyOutput.add_member(:metric_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicy, location_name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
     GetMetricPolicyOutput.type = Types::GetMetricPolicyOutput
-    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerError.type = Types::InternalServerError
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListContainersInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContainersInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerListLimit, location_name: "MaxResults"))
+    ListContainersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListContainersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerListLimit, location_name: "MaxResults"))
     ListContainersInput.type = Types::ListContainersInput
-    ListContainersOutput.add_member(:containers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerList, location_name: "Containers", traits: {"smithy.api#required" => {}}))
-    ListContainersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListContainersOutput.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerList, location_name: "Containers", traits: {"smithy.api#required" => {}}))
+    ListContainersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
     ListContainersOutput.type = Types::ListContainersOutput
-    ListTagsForResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    MethodName.add_member(:put, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
-    MethodName.add_member(:get, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GET", traits: {"smithy.api#enumValue" => "GET"}))
-    MethodName.add_member(:delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
-    MethodName.add_member(:head, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEAD", traits: {"smithy.api#enumValue" => "HEAD"}))
-    MetricPolicy.add_member(:container_level_metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerLevelMetrics, location_name: "ContainerLevelMetrics", traits: {"smithy.api#required" => {}}))
-    MetricPolicy.add_member(:metric_policy_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricPolicyRules, location_name: "MetricPolicyRules"))
+    MethodName.add_member(:put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
+    MethodName.add_member(:get, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GET", traits: {"smithy.api#enumValue" => "GET"}))
+    MethodName.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
+    MethodName.add_member(:head, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEAD", traits: {"smithy.api#enumValue" => "HEAD"}))
+    MetricPolicy.add_member(:container_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerLevelMetrics, location_name: "ContainerLevelMetrics", traits: {"smithy.api#required" => {}}))
+    MetricPolicy.add_member(:metric_policy_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRules, location_name: "MetricPolicyRules"))
     MetricPolicy.type = Types::MetricPolicy
-    MetricPolicyRule.add_member(:object_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectGroup, location_name: "ObjectGroup", traits: {"smithy.api#required" => {}}))
-    MetricPolicyRule.add_member(:object_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectGroupName, location_name: "ObjectGroupName", traits: {"smithy.api#required" => {}}))
+    MetricPolicyRule.add_member(:object_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroup, location_name: "ObjectGroup", traits: {"smithy.api#required" => {}}))
+    MetricPolicyRule.add_member(:object_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroupName, location_name: "ObjectGroupName", traits: {"smithy.api#required" => {}}))
     MetricPolicyRule.type = Types::MetricPolicyRule
-    MetricPolicyRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricPolicyRule)
-    PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MetricPolicyRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRule)
+    PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     PolicyNotFoundException.type = Types::PolicyNotFoundException
-    PutContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutContainerPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutContainerPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
     PutContainerPolicyInput.type = Types::PutContainerPolicyInput
     PutContainerPolicyOutput.type = Types::PutContainerPolicyOutput
-    PutCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutCorsPolicyInput.add_member(:cors_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CorsPolicy, location_name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
+    PutCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutCorsPolicyInput.add_member(:cors_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CorsPolicy, location_name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
     PutCorsPolicyInput.type = Types::PutCorsPolicyInput
     PutCorsPolicyOutput.type = Types::PutCorsPolicyOutput
-    PutLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutLifecyclePolicyInput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecyclePolicy, location_name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
+    PutLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutLifecyclePolicyInput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, location_name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
     PutLifecyclePolicyInput.type = Types::PutLifecyclePolicyInput
     PutLifecyclePolicyOutput.type = Types::PutLifecyclePolicyOutput
-    PutMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutMetricPolicyInput.add_member(:metric_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricPolicy, location_name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
+    PutMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutMetricPolicyInput.add_member(:metric_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicy, location_name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
     PutMetricPolicyInput.type = Types::PutMetricPolicyInput
     PutMetricPolicyOutput.type = Types::PutMetricPolicyOutput
-    StartAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    StartAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     StartAccessLoggingInput.type = Types::StartAccessLoggingInput
     StartAccessLoggingOutput.type = Types::StartAccessLoggingOutput
-    StopAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    StopAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
     StopAccessLoggingInput.type = Types::StopAccessLoggingInput
     StopAccessLoggingOutput.type = Types::StopAccessLoggingOutput
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    UntagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
 
@@ -230,217 +230,217 @@ module Aws::MediaStore
       service.add_operation(:create_container, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#CreateContainer"
         operation.name = "CreateContainer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateContainerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateContainerOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.input = CreateContainerInput
+        operation.output = CreateContainerOutput
+        operation.errors << ContainerInUseException
+        operation.errors << InternalServerError
+        operation.errors << LimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:delete_container, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#DeleteContainer"
         operation.name = "DeleteContainer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContainerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContainerOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DeleteContainerInput
+        operation.output = DeleteContainerOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:delete_container_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#DeleteContainerPolicy"
         operation.name = "DeleteContainerPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContainerPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteContainerPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        operation.input = DeleteContainerPolicyInput
+        operation.output = DeleteContainerPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
+        operation.errors << PolicyNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_cors_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#DeleteCorsPolicy"
         operation.name = "DeleteCorsPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCorsPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCorsPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CorsPolicyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DeleteCorsPolicyInput
+        operation.output = DeleteCorsPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << CorsPolicyNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:delete_lifecycle_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#DeleteLifecyclePolicy"
         operation.name = "DeleteLifecyclePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        operation.input = DeleteLifecyclePolicyInput
+        operation.output = DeleteLifecyclePolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
+        operation.errors << PolicyNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_metric_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#DeleteMetricPolicy"
         operation.name = "DeleteMetricPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMetricPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMetricPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        operation.input = DeleteMetricPolicyInput
+        operation.output = DeleteMetricPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
+        operation.errors << PolicyNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:describe_container, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#DescribeContainer"
         operation.name = "DescribeContainer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeContainerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeContainerOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = DescribeContainerInput
+        operation.output = DescribeContainerOutput
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:get_container_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#GetContainerPolicy"
         operation.name = "GetContainerPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContainerPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContainerPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        operation.input = GetContainerPolicyInput
+        operation.output = GetContainerPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
+        operation.errors << PolicyNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_cors_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#GetCorsPolicy"
         operation.name = "GetCorsPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCorsPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCorsPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CorsPolicyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = GetCorsPolicyInput
+        operation.output = GetCorsPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << CorsPolicyNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:get_lifecycle_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#GetLifecyclePolicy"
         operation.name = "GetLifecyclePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLifecyclePolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetLifecyclePolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        operation.input = GetLifecyclePolicyInput
+        operation.output = GetLifecyclePolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
+        operation.errors << PolicyNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_metric_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#GetMetricPolicy"
         operation.name = "GetMetricPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMetricPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetMetricPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        operation.input = GetMetricPolicyInput
+        operation.output = GetMetricPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
+        operation.errors << PolicyNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:list_containers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#ListContainers"
         operation.name = "ListContainers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListContainersInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListContainersOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = ListContainersInput
+        operation.output = ListContainersOutput
+        operation.errors << InternalServerError
         operation.traits = {}
         operation[:paginator] = Paginators::ListContainers.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:put_container_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#PutContainerPolicy"
         operation.name = "PutContainerPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutContainerPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutContainerPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = PutContainerPolicyInput
+        operation.output = PutContainerPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:put_cors_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#PutCorsPolicy"
         operation.name = "PutCorsPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutCorsPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutCorsPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = PutCorsPolicyInput
+        operation.output = PutCorsPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:put_lifecycle_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#PutLifecyclePolicy"
         operation.name = "PutLifecyclePolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutLifecyclePolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutLifecyclePolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = PutLifecyclePolicyInput
+        operation.output = PutLifecyclePolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:put_metric_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#PutMetricPolicy"
         operation.name = "PutMetricPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMetricPolicyInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutMetricPolicyOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = PutMetricPolicyInput
+        operation.output = PutMetricPolicyOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:start_access_logging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#StartAccessLogging"
         operation.name = "StartAccessLogging"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAccessLoggingInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAccessLoggingOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = StartAccessLoggingInput
+        operation.output = StartAccessLoggingOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:stop_access_logging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#StopAccessLogging"
         operation.name = "StopAccessLogging"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopAccessLoggingInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopAccessLoggingOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = StopAccessLoggingInput
+        operation.output = StopAccessLoggingOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediastore#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerInUseException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << ContainerInUseException
+        operation.errors << ContainerNotFoundException
+        operation.errors << InternalServerError
         operation.traits = {}
       end)
     end

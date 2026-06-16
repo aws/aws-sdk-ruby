@@ -127,325 +127,325 @@ module Aws::ChimeSDKIdentity
     UserId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.chimesdkidentity#UserId", name: "UserId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9]([A-Za-z0-9\\:\\-\\_\\.\\@]{0,62}[A-Za-z0-9])?$", "smithy.api#sensitive" => {}})
     UserName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.chimesdkidentity#UserName", name: "UserName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "\\S", "smithy.api#sensitive" => {}})
 
-    AllowMessages.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    AllowMessages.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    AppInstance.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
-    AppInstance.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
-    AppInstance.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
-    AppInstance.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
-    AppInstance.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AllowMessages.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    AllowMessages.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    AppInstance.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
+    AppInstance.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourceName, location_name: "Name"))
+    AppInstance.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstance.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstance.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
     AppInstance.type = Types::AppInstance
-    AppInstanceAdmin.add_member(:admin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "Admin"))
-    AppInstanceAdmin.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
-    AppInstanceAdmin.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstanceAdmin.add_member(:admin, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "Admin"))
+    AppInstanceAdmin.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
+    AppInstanceAdmin.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedTimestamp"))
     AppInstanceAdmin.type = Types::AppInstanceAdmin
-    AppInstanceAdminList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceAdminSummary)
-    AppInstanceAdminSummary.add_member(:admin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "Admin"))
+    AppInstanceAdminList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceAdminSummary)
+    AppInstanceAdminSummary.add_member(:admin, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "Admin"))
     AppInstanceAdminSummary.type = Types::AppInstanceAdminSummary
-    AppInstanceBot.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
-    AppInstanceBot.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    AppInstanceBot.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration, location_name: "Configuration"))
-    AppInstanceBot.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
-    AppInstanceBot.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
-    AppInstanceBot.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceBot.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceBotArn"))
+    AppInstanceBot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    AppInstanceBot.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, location_name: "Configuration"))
+    AppInstanceBot.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstanceBot.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstanceBot.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
     AppInstanceBot.type = Types::AppInstanceBot
-    AppInstanceBotList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceBotSummary)
-    AppInstanceBotSummary.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
-    AppInstanceBotSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    AppInstanceBotSummary.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceBotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceBotSummary)
+    AppInstanceBotSummary.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceBotArn"))
+    AppInstanceBotSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    AppInstanceBotSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
     AppInstanceBotSummary.type = Types::AppInstanceBotSummary
-    AppInstanceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceSummary)
-    AppInstanceRetentionSettings.add_member(:channel_retention_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelRetentionSettings, location_name: "ChannelRetentionSettings"))
+    AppInstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceSummary)
+    AppInstanceRetentionSettings.add_member(:channel_retention_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRetentionSettings, location_name: "ChannelRetentionSettings"))
     AppInstanceRetentionSettings.type = Types::AppInstanceRetentionSettings
-    AppInstanceSummary.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
-    AppInstanceSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
-    AppInstanceSummary.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceSummary.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
+    AppInstanceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourceName, location_name: "Name"))
+    AppInstanceSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
     AppInstanceSummary.type = Types::AppInstanceSummary
-    AppInstanceUser.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
-    AppInstanceUser.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "Name"))
-    AppInstanceUser.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    AppInstanceUser.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
-    AppInstanceUser.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
-    AppInstanceUser.add_member(:expiration_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    AppInstanceUser.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUser.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "Name"))
+    AppInstanceUser.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
+    AppInstanceUser.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstanceUser.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstanceUser.add_member(:expiration_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationSettings, location_name: "ExpirationSettings"))
     AppInstanceUser.type = Types::AppInstanceUser
-    AppInstanceUserEndpoint.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
-    AppInstanceUserEndpoint.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
-    AppInstanceUserEndpoint.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
-    AppInstanceUserEndpoint.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, location_name: "Type"))
-    AppInstanceUserEndpoint.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ResourceArn"))
-    AppInstanceUserEndpoint.add_member(:endpoint_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointAttributes, location_name: "EndpointAttributes"))
-    AppInstanceUserEndpoint.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
-    AppInstanceUserEndpoint.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
-    AppInstanceUserEndpoint.add_member(:allow_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
-    AppInstanceUserEndpoint.add_member(:endpoint_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointState, location_name: "EndpointState"))
+    AppInstanceUserEndpoint.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUserEndpoint.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, location_name: "EndpointId"))
+    AppInstanceUserEndpoint.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1600, location_name: "Name"))
+    AppInstanceUserEndpoint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpointType, location_name: "Type"))
+    AppInstanceUserEndpoint.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "ResourceArn"))
+    AppInstanceUserEndpoint.add_member(:endpoint_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAttributes, location_name: "EndpointAttributes"))
+    AppInstanceUserEndpoint.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstanceUserEndpoint.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstanceUserEndpoint.add_member(:allow_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowMessages, location_name: "AllowMessages"))
+    AppInstanceUserEndpoint.add_member(:endpoint_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointState, location_name: "EndpointState"))
     AppInstanceUserEndpoint.type = Types::AppInstanceUserEndpoint
-    AppInstanceUserEndpointSummary.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
-    AppInstanceUserEndpointSummary.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
-    AppInstanceUserEndpointSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
-    AppInstanceUserEndpointSummary.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, location_name: "Type"))
-    AppInstanceUserEndpointSummary.add_member(:allow_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
-    AppInstanceUserEndpointSummary.add_member(:endpoint_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointState, location_name: "EndpointState"))
+    AppInstanceUserEndpointSummary.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUserEndpointSummary.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, location_name: "EndpointId"))
+    AppInstanceUserEndpointSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1600, location_name: "Name"))
+    AppInstanceUserEndpointSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpointType, location_name: "Type"))
+    AppInstanceUserEndpointSummary.add_member(:allow_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowMessages, location_name: "AllowMessages"))
+    AppInstanceUserEndpointSummary.add_member(:endpoint_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointState, location_name: "EndpointState"))
     AppInstanceUserEndpointSummary.type = Types::AppInstanceUserEndpointSummary
-    AppInstanceUserEndpointSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserEndpointSummary)
-    AppInstanceUserEndpointType.add_member(:apns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APNS", traits: {"smithy.api#enumValue" => "APNS"}))
-    AppInstanceUserEndpointType.add_member(:apns_sandbox, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APNS_SANDBOX", traits: {"smithy.api#enumValue" => "APNS_SANDBOX"}))
-    AppInstanceUserEndpointType.add_member(:gcm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GCM", traits: {"smithy.api#enumValue" => "GCM"}))
-    AppInstanceUserList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserSummary)
-    AppInstanceUserSummary.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
-    AppInstanceUserSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "Name"))
-    AppInstanceUserSummary.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceUserEndpointSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpointSummary)
+    AppInstanceUserEndpointType.add_member(:apns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APNS", traits: {"smithy.api#enumValue" => "APNS"}))
+    AppInstanceUserEndpointType.add_member(:apns_sandbox, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "APNS_SANDBOX", traits: {"smithy.api#enumValue" => "APNS_SANDBOX"}))
+    AppInstanceUserEndpointType.add_member(:gcm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GCM", traits: {"smithy.api#enumValue" => "GCM"}))
+    AppInstanceUserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserSummary)
+    AppInstanceUserSummary.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUserSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "Name"))
+    AppInstanceUserSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
     AppInstanceUserSummary.type = Types::AppInstanceUserSummary
-    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     BadRequestException.type = Types::BadRequestException
-    ChannelRetentionSettings.add_member(:retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    ChannelRetentionSettings.add_member(:retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionDays, location_name: "RetentionDays"))
     ChannelRetentionSettings.type = Types::ChannelRetentionSettings
-    Configuration.add_member(:lex, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LexConfiguration, location_name: "Lex", traits: {"smithy.api#required" => {}}))
+    Configuration.add_member(:lex, ::Smithy::Schema::Shapes::MemberShape.new(target: LexConfiguration, location_name: "Lex", traits: {"smithy.api#required" => {}}))
     Configuration.type = Types::Configuration
-    ConflictException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateAppInstanceAdminRequest.add_member(:app_instance_admin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceAdminArn", traits: {"smithy.api#required" => {}}))
-    CreateAppInstanceAdminRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateAppInstanceAdminRequest.add_member(:app_instance_admin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceAdminArn", traits: {"smithy.api#required" => {}}))
+    CreateAppInstanceAdminRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateAppInstanceAdminRequest.type = Types::CreateAppInstanceAdminRequest
-    CreateAppInstanceAdminResponse.add_member(:app_instance_admin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identity, location_name: "AppInstanceAdmin"))
-    CreateAppInstanceAdminResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    CreateAppInstanceAdminResponse.add_member(:app_instance_admin, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "AppInstanceAdmin"))
+    CreateAppInstanceAdminResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
     CreateAppInstanceAdminResponse.type = Types::CreateAppInstanceAdminResponse
-    CreateAppInstanceBotRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#required" => {}}))
-    CreateAppInstanceBotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    CreateAppInstanceBotRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    CreateAppInstanceBotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateAppInstanceBotRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateAppInstanceBotRequest.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration, location_name: "Configuration", traits: {"smithy.api#required" => {}}))
+    CreateAppInstanceBotRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#required" => {}}))
+    CreateAppInstanceBotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    CreateAppInstanceBotRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
+    CreateAppInstanceBotRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateAppInstanceBotRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateAppInstanceBotRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, location_name: "Configuration", traits: {"smithy.api#required" => {}}))
     CreateAppInstanceBotRequest.type = Types::CreateAppInstanceBotRequest
-    CreateAppInstanceBotResponse.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
+    CreateAppInstanceBotResponse.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceBotArn"))
     CreateAppInstanceBotResponse.type = Types::CreateAppInstanceBotResponse
-    CreateAppInstanceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateAppInstanceRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    CreateAppInstanceRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateAppInstanceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAppInstanceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateAppInstanceRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
+    CreateAppInstanceRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateAppInstanceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateAppInstanceRequest.type = Types::CreateAppInstanceRequest
-    CreateAppInstanceResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    CreateAppInstanceResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
     CreateAppInstanceResponse.type = Types::CreateAppInstanceResponse
-    CreateAppInstanceUserRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#required" => {}}))
-    CreateAppInstanceUserRequest.add_member(:app_instance_user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId, location_name: "AppInstanceUserId", traits: {"smithy.api#required" => {}}))
-    CreateAppInstanceUserRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateAppInstanceUserRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    CreateAppInstanceUserRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateAppInstanceUserRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateAppInstanceUserRequest.add_member(:expiration_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    CreateAppInstanceUserRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#required" => {}}))
+    CreateAppInstanceUserRequest.add_member(:app_instance_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, location_name: "AppInstanceUserId", traits: {"smithy.api#required" => {}}))
+    CreateAppInstanceUserRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateAppInstanceUserRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata"))
+    CreateAppInstanceUserRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateAppInstanceUserRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateAppInstanceUserRequest.add_member(:expiration_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationSettings, location_name: "ExpirationSettings"))
     CreateAppInstanceUserRequest.type = Types::CreateAppInstanceUserRequest
-    CreateAppInstanceUserResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    CreateAppInstanceUserResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
     CreateAppInstanceUserResponse.type = Types::CreateAppInstanceUserResponse
-    DeleteAppInstanceAdminRequest.add_member(:app_instance_admin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceAdminArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteAppInstanceAdminRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAppInstanceAdminRequest.add_member(:app_instance_admin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceAdminArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAppInstanceAdminRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAppInstanceAdminRequest.type = Types::DeleteAppInstanceAdminRequest
-    DeleteAppInstanceBotRequest.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAppInstanceBotRequest.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceBotArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAppInstanceBotRequest.type = Types::DeleteAppInstanceBotRequest
-    DeleteAppInstanceRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAppInstanceRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAppInstanceRequest.type = Types::DeleteAppInstanceRequest
-    DeleteAppInstanceUserRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAppInstanceUserRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAppInstanceUserRequest.type = Types::DeleteAppInstanceUserRequest
-    DeregisterAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeregisterAppInstanceUserEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeregisterAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeregisterAppInstanceUserEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, location_name: "EndpointId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeregisterAppInstanceUserEndpointRequest.type = Types::DeregisterAppInstanceUserEndpointRequest
-    DescribeAppInstanceAdminRequest.add_member(:app_instance_admin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceAdminArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeAppInstanceAdminRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAppInstanceAdminRequest.add_member(:app_instance_admin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceAdminArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAppInstanceAdminRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAppInstanceAdminRequest.type = Types::DescribeAppInstanceAdminRequest
-    DescribeAppInstanceAdminResponse.add_member(:app_instance_admin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceAdmin, location_name: "AppInstanceAdmin"))
+    DescribeAppInstanceAdminResponse.add_member(:app_instance_admin, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceAdmin, location_name: "AppInstanceAdmin"))
     DescribeAppInstanceAdminResponse.type = Types::DescribeAppInstanceAdminResponse
-    DescribeAppInstanceBotRequest.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAppInstanceBotRequest.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceBotArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAppInstanceBotRequest.type = Types::DescribeAppInstanceBotRequest
-    DescribeAppInstanceBotResponse.add_member(:app_instance_bot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceBot, location_name: "AppInstanceBot"))
+    DescribeAppInstanceBotResponse.add_member(:app_instance_bot, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceBot, location_name: "AppInstanceBot"))
     DescribeAppInstanceBotResponse.type = Types::DescribeAppInstanceBotResponse
-    DescribeAppInstanceRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAppInstanceRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAppInstanceRequest.type = Types::DescribeAppInstanceRequest
-    DescribeAppInstanceResponse.add_member(:app_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstance, location_name: "AppInstance"))
+    DescribeAppInstanceResponse.add_member(:app_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstance, location_name: "AppInstance"))
     DescribeAppInstanceResponse.type = Types::DescribeAppInstanceResponse
-    DescribeAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1600, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeAppInstanceUserEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String1600, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAppInstanceUserEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, location_name: "EndpointId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAppInstanceUserEndpointRequest.type = Types::DescribeAppInstanceUserEndpointRequest
-    DescribeAppInstanceUserEndpointResponse.add_member(:app_instance_user_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserEndpoint, location_name: "AppInstanceUserEndpoint"))
+    DescribeAppInstanceUserEndpointResponse.add_member(:app_instance_user_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpoint, location_name: "AppInstanceUserEndpoint"))
     DescribeAppInstanceUserEndpointResponse.type = Types::DescribeAppInstanceUserEndpointResponse
-    DescribeAppInstanceUserRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAppInstanceUserRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAppInstanceUserRequest.type = Types::DescribeAppInstanceUserRequest
-    DescribeAppInstanceUserResponse.add_member(:app_instance_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUser, location_name: "AppInstanceUser"))
+    DescribeAppInstanceUserResponse.add_member(:app_instance_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUser, location_name: "AppInstanceUser"))
     DescribeAppInstanceUserResponse.type = Types::DescribeAppInstanceUserResponse
-    EndpointAttributes.add_member(:device_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptySensitiveString1600, location_name: "DeviceToken", traits: {"smithy.api#required" => {}}))
-    EndpointAttributes.add_member(:voip_device_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptySensitiveString1600, location_name: "VoipDeviceToken"))
+    EndpointAttributes.add_member(:device_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptySensitiveString1600, location_name: "DeviceToken", traits: {"smithy.api#required" => {}}))
+    EndpointAttributes.add_member(:voip_device_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptySensitiveString1600, location_name: "VoipDeviceToken"))
     EndpointAttributes.type = Types::EndpointAttributes
-    EndpointState.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    EndpointState.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointStatusReason, location_name: "StatusReason"))
+    EndpointState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    EndpointState.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStatusReason, location_name: "StatusReason"))
     EndpointState.type = Types::EndpointState
-    EndpointStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    EndpointStatus.add_member(:inactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    EndpointStatusReason.add_member(:invalid_device_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DEVICE_TOKEN", traits: {"smithy.api#enumValue" => "INVALID_DEVICE_TOKEN"}))
-    EndpointStatusReason.add_member(:invalid_pinpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PINPOINT_ARN", traits: {"smithy.api#enumValue" => "INVALID_PINPOINT_ARN"}))
-    ErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BadRequest", traits: {"smithy.api#enumValue" => "BadRequest"}))
-    ErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Conflict", traits: {"smithy.api#enumValue" => "Conflict"}))
-    ErrorCode.add_member(:forbidden, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Forbidden", traits: {"smithy.api#enumValue" => "Forbidden"}))
-    ErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotFound", traits: {"smithy.api#enumValue" => "NotFound"}))
-    ErrorCode.add_member(:precondition_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PreconditionFailed", traits: {"smithy.api#enumValue" => "PreconditionFailed"}))
-    ErrorCode.add_member(:resource_limit_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceLimitExceeded", traits: {"smithy.api#enumValue" => "ResourceLimitExceeded"}))
-    ErrorCode.add_member(:service_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceFailure", traits: {"smithy.api#enumValue" => "ServiceFailure"}))
-    ErrorCode.add_member(:access_denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccessDenied", traits: {"smithy.api#enumValue" => "AccessDenied"}))
-    ErrorCode.add_member(:service_unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceUnavailable", traits: {"smithy.api#enumValue" => "ServiceUnavailable"}))
-    ErrorCode.add_member(:throttled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Throttled", traits: {"smithy.api#enumValue" => "Throttled"}))
-    ErrorCode.add_member(:throttling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Throttling", traits: {"smithy.api#enumValue" => "Throttling"}))
-    ErrorCode.add_member(:unauthorized, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unauthorized", traits: {"smithy.api#enumValue" => "Unauthorized"}))
-    ErrorCode.add_member(:unprocessable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unprocessable", traits: {"smithy.api#enumValue" => "Unprocessable"}))
-    ErrorCode.add_member(:voice_connector_group_associations_exist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VoiceConnectorGroupAssociationsExist", traits: {"smithy.api#enumValue" => "VoiceConnectorGroupAssociationsExist"}))
-    ErrorCode.add_member(:phone_number_associations_exist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PhoneNumberAssociationsExist", traits: {"smithy.api#enumValue" => "PhoneNumberAssociationsExist"}))
-    ExpirationCriterion.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_TIMESTAMP", traits: {"smithy.api#enumValue" => "CREATED_TIMESTAMP"}))
-    ExpirationSettings.add_member(:expiration_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationDays, location_name: "ExpirationDays", traits: {"smithy.api#required" => {}}))
-    ExpirationSettings.add_member(:expiration_criterion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationCriterion, location_name: "ExpirationCriterion", traits: {"smithy.api#required" => {}}))
+    EndpointStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    EndpointStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    EndpointStatusReason.add_member(:invalid_device_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_DEVICE_TOKEN", traits: {"smithy.api#enumValue" => "INVALID_DEVICE_TOKEN"}))
+    EndpointStatusReason.add_member(:invalid_pinpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_PINPOINT_ARN", traits: {"smithy.api#enumValue" => "INVALID_PINPOINT_ARN"}))
+    ErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BadRequest", traits: {"smithy.api#enumValue" => "BadRequest"}))
+    ErrorCode.add_member(:conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Conflict", traits: {"smithy.api#enumValue" => "Conflict"}))
+    ErrorCode.add_member(:forbidden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Forbidden", traits: {"smithy.api#enumValue" => "Forbidden"}))
+    ErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NotFound", traits: {"smithy.api#enumValue" => "NotFound"}))
+    ErrorCode.add_member(:precondition_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PreconditionFailed", traits: {"smithy.api#enumValue" => "PreconditionFailed"}))
+    ErrorCode.add_member(:resource_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceLimitExceeded", traits: {"smithy.api#enumValue" => "ResourceLimitExceeded"}))
+    ErrorCode.add_member(:service_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceFailure", traits: {"smithy.api#enumValue" => "ServiceFailure"}))
+    ErrorCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AccessDenied", traits: {"smithy.api#enumValue" => "AccessDenied"}))
+    ErrorCode.add_member(:service_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceUnavailable", traits: {"smithy.api#enumValue" => "ServiceUnavailable"}))
+    ErrorCode.add_member(:throttled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Throttled", traits: {"smithy.api#enumValue" => "Throttled"}))
+    ErrorCode.add_member(:throttling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Throttling", traits: {"smithy.api#enumValue" => "Throttling"}))
+    ErrorCode.add_member(:unauthorized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unauthorized", traits: {"smithy.api#enumValue" => "Unauthorized"}))
+    ErrorCode.add_member(:unprocessable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Unprocessable", traits: {"smithy.api#enumValue" => "Unprocessable"}))
+    ErrorCode.add_member(:voice_connector_group_associations_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VoiceConnectorGroupAssociationsExist", traits: {"smithy.api#enumValue" => "VoiceConnectorGroupAssociationsExist"}))
+    ErrorCode.add_member(:phone_number_associations_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PhoneNumberAssociationsExist", traits: {"smithy.api#enumValue" => "PhoneNumberAssociationsExist"}))
+    ExpirationCriterion.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATED_TIMESTAMP", traits: {"smithy.api#enumValue" => "CREATED_TIMESTAMP"}))
+    ExpirationSettings.add_member(:expiration_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationDays, location_name: "ExpirationDays", traits: {"smithy.api#required" => {}}))
+    ExpirationSettings.add_member(:expiration_criterion, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationCriterion, location_name: "ExpirationCriterion", traits: {"smithy.api#required" => {}}))
     ExpirationSettings.type = Types::ExpirationSettings
-    ForbiddenException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ForbiddenException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ForbiddenException.type = Types::ForbiddenException
-    GetAppInstanceRetentionSettingsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAppInstanceRetentionSettingsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAppInstanceRetentionSettingsRequest.type = Types::GetAppInstanceRetentionSettingsRequest
-    GetAppInstanceRetentionSettingsResponse.add_member(:app_instance_retention_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings"))
-    GetAppInstanceRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "InitiateDeletionTimestamp"))
+    GetAppInstanceRetentionSettingsResponse.add_member(:app_instance_retention_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings"))
+    GetAppInstanceRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "InitiateDeletionTimestamp"))
     GetAppInstanceRetentionSettingsResponse.type = Types::GetAppInstanceRetentionSettingsResponse
-    Identity.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "Arn"))
-    Identity.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    Identity.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "Arn"))
+    Identity.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
     Identity.type = Types::Identity
-    InvokedBy.add_member(:standard_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StandardMessages, location_name: "StandardMessages", traits: {"smithy.api#required" => {}}))
-    InvokedBy.add_member(:targeted_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetedMessages, location_name: "TargetedMessages", traits: {"smithy.api#required" => {}}))
+    InvokedBy.add_member(:standard_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardMessages, location_name: "StandardMessages", traits: {"smithy.api#required" => {}}))
+    InvokedBy.add_member(:targeted_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetedMessages, location_name: "TargetedMessages", traits: {"smithy.api#required" => {}}))
     InvokedBy.type = Types::InvokedBy
-    LexConfiguration.add_member(:responds_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RespondsTo, location_name: "RespondsTo"))
-    LexConfiguration.add_member(:invoked_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvokedBy, location_name: "InvokedBy"))
-    LexConfiguration.add_member(:lex_bot_alias_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LexBotAliasArn, location_name: "LexBotAliasArn", traits: {"smithy.api#required" => {}}))
-    LexConfiguration.add_member(:locale_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "LocaleId", traits: {"smithy.api#required" => {}}))
-    LexConfiguration.add_member(:welcome_intent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LexIntentName, location_name: "WelcomeIntent"))
+    LexConfiguration.add_member(:responds_to, ::Smithy::Schema::Shapes::MemberShape.new(target: RespondsTo, location_name: "RespondsTo"))
+    LexConfiguration.add_member(:invoked_by, ::Smithy::Schema::Shapes::MemberShape.new(target: InvokedBy, location_name: "InvokedBy"))
+    LexConfiguration.add_member(:lex_bot_alias_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LexBotAliasArn, location_name: "LexBotAliasArn", traits: {"smithy.api#required" => {}}))
+    LexConfiguration.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LocaleId", traits: {"smithy.api#required" => {}}))
+    LexConfiguration.add_member(:welcome_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: LexIntentName, location_name: "WelcomeIntent"))
     LexConfiguration.type = Types::LexConfiguration
-    ListAppInstanceAdminsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListAppInstanceAdminsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
-    ListAppInstanceAdminsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListAppInstanceAdminsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAppInstanceAdminsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListAppInstanceAdminsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListAppInstanceAdminsRequest.type = Types::ListAppInstanceAdminsRequest
-    ListAppInstanceAdminsResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
-    ListAppInstanceAdminsResponse.add_member(:app_instance_admins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceAdminList, location_name: "AppInstanceAdmins"))
-    ListAppInstanceAdminsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstanceAdminsResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
+    ListAppInstanceAdminsResponse.add_member(:app_instance_admins, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceAdminList, location_name: "AppInstanceAdmins"))
+    ListAppInstanceAdminsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAppInstanceAdminsResponse.type = Types::ListAppInstanceAdminsResponse
-    ListAppInstanceBotsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpQuery" => "app-instance-arn", "smithy.api#required" => {}}))
-    ListAppInstanceBotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
-    ListAppInstanceBotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListAppInstanceBotsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpQuery" => "app-instance-arn", "smithy.api#required" => {}}))
+    ListAppInstanceBotsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListAppInstanceBotsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListAppInstanceBotsRequest.type = Types::ListAppInstanceBotsRequest
-    ListAppInstanceBotsResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
-    ListAppInstanceBotsResponse.add_member(:app_instance_bots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceBotList, location_name: "AppInstanceBots"))
-    ListAppInstanceBotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstanceBotsResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
+    ListAppInstanceBotsResponse.add_member(:app_instance_bots, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceBotList, location_name: "AppInstanceBots"))
+    ListAppInstanceBotsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAppInstanceBotsResponse.type = Types::ListAppInstanceBotsResponse
-    ListAppInstanceUserEndpointsRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListAppInstanceUserEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
-    ListAppInstanceUserEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListAppInstanceUserEndpointsRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAppInstanceUserEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListAppInstanceUserEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListAppInstanceUserEndpointsRequest.type = Types::ListAppInstanceUserEndpointsRequest
-    ListAppInstanceUserEndpointsResponse.add_member(:app_instance_user_endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserEndpointSummaryList, location_name: "AppInstanceUserEndpoints"))
-    ListAppInstanceUserEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstanceUserEndpointsResponse.add_member(:app_instance_user_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpointSummaryList, location_name: "AppInstanceUserEndpoints"))
+    ListAppInstanceUserEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAppInstanceUserEndpointsResponse.type = Types::ListAppInstanceUserEndpointsResponse
-    ListAppInstanceUsersRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpQuery" => "app-instance-arn", "smithy.api#required" => {}}))
-    ListAppInstanceUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
-    ListAppInstanceUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListAppInstanceUsersRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpQuery" => "app-instance-arn", "smithy.api#required" => {}}))
+    ListAppInstanceUsersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListAppInstanceUsersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListAppInstanceUsersRequest.type = Types::ListAppInstanceUsersRequest
-    ListAppInstanceUsersResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
-    ListAppInstanceUsersResponse.add_member(:app_instance_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserList, location_name: "AppInstanceUsers"))
-    ListAppInstanceUsersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstanceUsersResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
+    ListAppInstanceUsersResponse.add_member(:app_instance_users, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserList, location_name: "AppInstanceUsers"))
+    ListAppInstanceUsersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAppInstanceUsersResponse.type = Types::ListAppInstanceUsersResponse
-    ListAppInstancesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
-    ListAppInstancesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListAppInstancesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListAppInstancesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListAppInstancesRequest.type = Types::ListAppInstancesRequest
-    ListAppInstancesResponse.add_member(:app_instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceList, location_name: "AppInstances"))
-    ListAppInstancesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstancesResponse.add_member(:app_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceList, location_name: "AppInstances"))
+    ListAppInstancesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListAppInstancesResponse.type = Types::ListAppInstancesResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ResourceARN", traits: {"smithy.api#httpQuery" => "arn", "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "ResourceARN", traits: {"smithy.api#httpQuery" => "arn", "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     NotFoundException.type = Types::NotFoundException
-    PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_retention_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings", traits: {"smithy.api#required" => {}}))
+    PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_retention_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings", traits: {"smithy.api#required" => {}}))
     PutAppInstanceRetentionSettingsRequest.type = Types::PutAppInstanceRetentionSettingsRequest
-    PutAppInstanceRetentionSettingsResponse.add_member(:app_instance_retention_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings"))
-    PutAppInstanceRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "InitiateDeletionTimestamp"))
+    PutAppInstanceRetentionSettingsResponse.add_member(:app_instance_retention_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceRetentionSettings, location_name: "AppInstanceRetentionSettings"))
+    PutAppInstanceRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "InitiateDeletionTimestamp"))
     PutAppInstanceRetentionSettingsResponse.type = Types::PutAppInstanceRetentionSettingsResponse
-    PutAppInstanceUserExpirationSettingsRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutAppInstanceUserExpirationSettingsRequest.add_member(:expiration_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    PutAppInstanceUserExpirationSettingsRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutAppInstanceUserExpirationSettingsRequest.add_member(:expiration_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationSettings, location_name: "ExpirationSettings"))
     PutAppInstanceUserExpirationSettingsRequest.type = Types::PutAppInstanceUserExpirationSettingsRequest
-    PutAppInstanceUserExpirationSettingsResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
-    PutAppInstanceUserExpirationSettingsResponse.add_member(:expiration_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    PutAppInstanceUserExpirationSettingsResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
+    PutAppInstanceUserExpirationSettingsResponse.add_member(:expiration_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationSettings, location_name: "ExpirationSettings"))
     PutAppInstanceUserExpirationSettingsResponse.type = Types::PutAppInstanceUserExpirationSettingsResponse
-    RegisterAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    RegisterAppInstanceUserEndpointRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
-    RegisterAppInstanceUserEndpointRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    RegisterAppInstanceUserEndpointRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    RegisterAppInstanceUserEndpointRequest.add_member(:endpoint_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointAttributes, location_name: "EndpointAttributes", traits: {"smithy.api#required" => {}}))
-    RegisterAppInstanceUserEndpointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    RegisterAppInstanceUserEndpointRequest.add_member(:allow_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
+    RegisterAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RegisterAppInstanceUserEndpointRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1600, location_name: "Name"))
+    RegisterAppInstanceUserEndpointRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpointType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    RegisterAppInstanceUserEndpointRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    RegisterAppInstanceUserEndpointRequest.add_member(:endpoint_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAttributes, location_name: "EndpointAttributes", traits: {"smithy.api#required" => {}}))
+    RegisterAppInstanceUserEndpointRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, location_name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    RegisterAppInstanceUserEndpointRequest.add_member(:allow_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowMessages, location_name: "AllowMessages"))
     RegisterAppInstanceUserEndpointRequest.type = Types::RegisterAppInstanceUserEndpointRequest
-    RegisterAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
-    RegisterAppInstanceUserEndpointResponse.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
+    RegisterAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
+    RegisterAppInstanceUserEndpointResponse.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, location_name: "EndpointId"))
     RegisterAppInstanceUserEndpointResponse.type = Types::RegisterAppInstanceUserEndpointResponse
-    ResourceLimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceLimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ResourceLimitExceededException.type = Types::ResourceLimitExceededException
-    RespondsTo.add_member(:standard_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD_MESSAGES", traits: {"smithy.api#enumValue" => "STANDARD_MESSAGES"}))
-    ServiceFailureException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    ServiceFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    RespondsTo.add_member(:standard_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD_MESSAGES", traits: {"smithy.api#enumValue" => "STANDARD_MESSAGES"}))
+    ServiceFailureException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    ServiceFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ServiceFailureException.type = Types::ServiceFailureException
-    ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    StandardMessages.add_member(:auto, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
-    StandardMessages.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    StandardMessages.add_member(:mentions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MENTIONS", traits: {"smithy.api#enumValue" => "MENTIONS"}))
-    StandardMessages.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    StandardMessages.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
+    StandardMessages.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    StandardMessages.add_member(:mentions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MENTIONS", traits: {"smithy.api#enumValue" => "MENTIONS"}))
+    StandardMessages.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    TargetedMessages.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    TargetedMessages.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    ThrottledClientException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    ThrottledClientException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TargetedMessages.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    TargetedMessages.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    ThrottledClientException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    ThrottledClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ThrottledClientException.type = Types::ThrottledClientException
-    UnauthorizedClientException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
-    UnauthorizedClientException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnauthorizedClientException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    UnauthorizedClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     UnauthorizedClientException.type = Types::UnauthorizedClientException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    UpdateAppInstanceBotRequest.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAppInstanceBotRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateAppInstanceBotRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#required" => {}}))
-    UpdateAppInstanceBotRequest.add_member(:configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Configuration, location_name: "Configuration"))
+    UpdateAppInstanceBotRequest.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceBotArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAppInstanceBotRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateAppInstanceBotRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata", traits: {"smithy.api#required" => {}}))
+    UpdateAppInstanceBotRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, location_name: "Configuration"))
     UpdateAppInstanceBotRequest.type = Types::UpdateAppInstanceBotRequest
-    UpdateAppInstanceBotResponse.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
+    UpdateAppInstanceBotResponse.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceBotArn"))
     UpdateAppInstanceBotResponse.type = Types::UpdateAppInstanceBotResponse
-    UpdateAppInstanceRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAppInstanceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateAppInstanceRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#required" => {}}))
+    UpdateAppInstanceRequest.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAppInstanceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateAppInstanceRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata", traits: {"smithy.api#required" => {}}))
     UpdateAppInstanceRequest.type = Types::UpdateAppInstanceRequest
-    UpdateAppInstanceResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    UpdateAppInstanceResponse.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceArn"))
     UpdateAppInstanceResponse.type = Types::UpdateAppInstanceResponse
-    UpdateAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAppInstanceUserEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAppInstanceUserEndpointRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
-    UpdateAppInstanceUserEndpointRequest.add_member(:allow_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
+    UpdateAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAppInstanceUserEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, location_name: "EndpointId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAppInstanceUserEndpointRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1600, location_name: "Name"))
+    UpdateAppInstanceUserEndpointRequest.add_member(:allow_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowMessages, location_name: "AllowMessages"))
     UpdateAppInstanceUserEndpointRequest.type = Types::UpdateAppInstanceUserEndpointRequest
-    UpdateAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
-    UpdateAppInstanceUserEndpointResponse.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
+    UpdateAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
+    UpdateAppInstanceUserEndpointResponse.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, location_name: "EndpointId"))
     UpdateAppInstanceUserEndpointResponse.type = Types::UpdateAppInstanceUserEndpointResponse
-    UpdateAppInstanceUserRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateAppInstanceUserRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateAppInstanceUserRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#required" => {}}))
+    UpdateAppInstanceUserRequest.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAppInstanceUserRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateAppInstanceUserRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, location_name: "Metadata", traits: {"smithy.api#required" => {}}))
     UpdateAppInstanceUserRequest.type = Types::UpdateAppInstanceUserRequest
-    UpdateAppInstanceUserResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    UpdateAppInstanceUserResponse.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, location_name: "AppInstanceUserArn"))
     UpdateAppInstanceUserResponse.type = Types::UpdateAppInstanceUserResponse
 
     ChimeIdentityService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -456,424 +456,424 @@ module Aws::ChimeSDKIdentity
       service.add_operation(:create_app_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#CreateAppInstance"
         operation.name = "CreateAppInstance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = CreateAppInstanceRequest
+        operation.output = CreateAppInstanceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/app-instances", "code" => 201}}
       end)
       service.add_operation(:create_app_instance_admin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#CreateAppInstanceAdmin"
         operation.name = "CreateAppInstanceAdmin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceAdminRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceAdminResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = CreateAppInstanceAdminRequest
+        operation.output = CreateAppInstanceAdminResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/app-instances/{AppInstanceArn}/admins", "code" => 201}}
       end)
       service.add_operation(:create_app_instance_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#CreateAppInstanceBot"
         operation.name = "CreateAppInstanceBot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceBotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceBotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = CreateAppInstanceBotRequest
+        operation.output = CreateAppInstanceBotResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/app-instance-bots", "code" => 201}}
       end)
       service.add_operation(:create_app_instance_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#CreateAppInstanceUser"
         operation.name = "CreateAppInstanceUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAppInstanceUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = CreateAppInstanceUserRequest
+        operation.output = CreateAppInstanceUserResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/app-instance-users", "code" => 201}}
       end)
       service.add_operation(:delete_app_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DeleteAppInstance"
         operation.name = "DeleteAppInstance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAppInstanceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DeleteAppInstanceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/app-instances/{AppInstanceArn}", "code" => 204}}
       end)
       service.add_operation(:delete_app_instance_admin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DeleteAppInstanceAdmin"
         operation.name = "DeleteAppInstanceAdmin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAppInstanceAdminRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DeleteAppInstanceAdminRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/app-instances/{AppInstanceArn}/admins/{AppInstanceAdminArn}", "code" => 204}}
       end)
       service.add_operation(:delete_app_instance_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DeleteAppInstanceBot"
         operation.name = "DeleteAppInstanceBot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAppInstanceBotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DeleteAppInstanceBotRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/app-instance-bots/{AppInstanceBotArn}", "code" => 204}}
       end)
       service.add_operation(:delete_app_instance_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DeleteAppInstanceUser"
         operation.name = "DeleteAppInstanceUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAppInstanceUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DeleteAppInstanceUserRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/app-instance-users/{AppInstanceUserArn}", "code" => 204}}
       end)
       service.add_operation(:deregister_app_instance_user_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DeregisterAppInstanceUserEndpoint"
         operation.name = "DeregisterAppInstanceUserEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterAppInstanceUserEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DeregisterAppInstanceUserEndpointRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/app-instance-users/{AppInstanceUserArn}/endpoints/{EndpointId}", "code" => 204}}
       end)
       service.add_operation(:describe_app_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DescribeAppInstance"
         operation.name = "DescribeAppInstance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DescribeAppInstanceRequest
+        operation.output = DescribeAppInstanceResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instances/{AppInstanceArn}", "code" => 200}}
       end)
       service.add_operation(:describe_app_instance_admin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DescribeAppInstanceAdmin"
         operation.name = "DescribeAppInstanceAdmin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceAdminRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceAdminResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DescribeAppInstanceAdminRequest
+        operation.output = DescribeAppInstanceAdminResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instances/{AppInstanceArn}/admins/{AppInstanceAdminArn}", "code" => 200}}
       end)
       service.add_operation(:describe_app_instance_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DescribeAppInstanceBot"
         operation.name = "DescribeAppInstanceBot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceBotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceBotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DescribeAppInstanceBotRequest
+        operation.output = DescribeAppInstanceBotResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << NotFoundException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instance-bots/{AppInstanceBotArn}", "code" => 200}}
       end)
       service.add_operation(:describe_app_instance_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DescribeAppInstanceUser"
         operation.name = "DescribeAppInstanceUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DescribeAppInstanceUserRequest
+        operation.output = DescribeAppInstanceUserResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instance-users/{AppInstanceUserArn}", "code" => 200}}
       end)
       service.add_operation(:describe_app_instance_user_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#DescribeAppInstanceUserEndpoint"
         operation.name = "DescribeAppInstanceUserEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceUserEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAppInstanceUserEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = DescribeAppInstanceUserEndpointRequest
+        operation.output = DescribeAppInstanceUserEndpointResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instance-users/{AppInstanceUserArn}/endpoints/{EndpointId}", "code" => 200}}
       end)
       service.add_operation(:get_app_instance_retention_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#GetAppInstanceRetentionSettings"
         operation.name = "GetAppInstanceRetentionSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAppInstanceRetentionSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAppInstanceRetentionSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = GetAppInstanceRetentionSettingsRequest
+        operation.output = GetAppInstanceRetentionSettingsResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instances/{AppInstanceArn}/retention-settings", "code" => 200}}
       end)
       service.add_operation(:list_app_instance_admins, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#ListAppInstanceAdmins"
         operation.name = "ListAppInstanceAdmins"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceAdminsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceAdminsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = ListAppInstanceAdminsRequest
+        operation.output = ListAppInstanceAdminsResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instances/{AppInstanceArn}/admins", "code" => 200}}
         operation[:paginator] = Paginators::ListAppInstanceAdmins.new
       end)
       service.add_operation(:list_app_instance_bots, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#ListAppInstanceBots"
         operation.name = "ListAppInstanceBots"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceBotsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceBotsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = ListAppInstanceBotsRequest
+        operation.output = ListAppInstanceBotsResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instance-bots", "code" => 200}}
         operation[:paginator] = Paginators::ListAppInstanceBots.new
       end)
       service.add_operation(:list_app_instance_user_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#ListAppInstanceUserEndpoints"
         operation.name = "ListAppInstanceUserEndpoints"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceUserEndpointsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceUserEndpointsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = ListAppInstanceUserEndpointsRequest
+        operation.output = ListAppInstanceUserEndpointsResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instance-users/{AppInstanceUserArn}/endpoints", "code" => 200}}
         operation[:paginator] = Paginators::ListAppInstanceUserEndpoints.new
       end)
       service.add_operation(:list_app_instance_users, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#ListAppInstanceUsers"
         operation.name = "ListAppInstanceUsers"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceUsersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstanceUsersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = ListAppInstanceUsersRequest
+        operation.output = ListAppInstanceUsersResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instance-users", "code" => 200}}
         operation[:paginator] = Paginators::ListAppInstanceUsers.new
       end)
       service.add_operation(:list_app_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#ListAppInstances"
         operation.name = "ListAppInstances"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstancesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAppInstancesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = ListAppInstancesRequest
+        operation.output = ListAppInstancesResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/app-instances", "code" => 200}}
         operation[:paginator] = Paginators::ListAppInstances.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags", "code" => 200}}
       end)
       service.add_operation(:put_app_instance_retention_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#PutAppInstanceRetentionSettings"
         operation.name = "PutAppInstanceRetentionSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAppInstanceRetentionSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAppInstanceRetentionSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = PutAppInstanceRetentionSettingsRequest
+        operation.output = PutAppInstanceRetentionSettingsResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/app-instances/{AppInstanceArn}/retention-settings", "code" => 200}}
       end)
       service.add_operation(:put_app_instance_user_expiration_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#PutAppInstanceUserExpirationSettings"
         operation.name = "PutAppInstanceUserExpirationSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAppInstanceUserExpirationSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAppInstanceUserExpirationSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = PutAppInstanceUserExpirationSettingsRequest
+        operation.output = PutAppInstanceUserExpirationSettingsResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/app-instance-users/{AppInstanceUserArn}/expiration-settings", "code" => 200}}
       end)
       service.add_operation(:register_app_instance_user_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#RegisterAppInstanceUserEndpoint"
         operation.name = "RegisterAppInstanceUserEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterAppInstanceUserEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterAppInstanceUserEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = RegisterAppInstanceUserEndpointRequest
+        operation.output = RegisterAppInstanceUserEndpointResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/app-instance-users/{AppInstanceUserArn}/endpoints", "code" => 201}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = TagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags?operation=tag-resource", "code" => 204}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = UntagResourceRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags?operation=untag-resource", "code" => 204}}
       end)
       service.add_operation(:update_app_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#UpdateAppInstance"
         operation.name = "UpdateAppInstance"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = UpdateAppInstanceRequest
+        operation.output = UpdateAppInstanceResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/app-instances/{AppInstanceArn}", "code" => 200}}
       end)
       service.add_operation(:update_app_instance_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#UpdateAppInstanceBot"
         operation.name = "UpdateAppInstanceBot"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceBotRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceBotResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = UpdateAppInstanceBotRequest
+        operation.output = UpdateAppInstanceBotResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/app-instance-bots/{AppInstanceBotArn}", "code" => 200}}
       end)
       service.add_operation(:update_app_instance_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#UpdateAppInstanceUser"
         operation.name = "UpdateAppInstanceUser"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceUserRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceUserResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = UpdateAppInstanceUserRequest
+        operation.output = UpdateAppInstanceUserResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ResourceLimitExceededException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/app-instance-users/{AppInstanceUserArn}", "code" => 200}}
       end)
       service.add_operation(:update_app_instance_user_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkidentity#UpdateAppInstanceUserEndpoint"
         operation.name = "UpdateAppInstanceUserEndpoint"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceUserEndpointRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAppInstanceUserEndpointResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        operation.input = UpdateAppInstanceUserEndpointRequest
+        operation.output = UpdateAppInstanceUserEndpointResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottledClientException
+        operation.errors << UnauthorizedClientException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/app-instance-users/{AppInstanceUserArn}/endpoints/{EndpointId}", "code" => 200}}
       end)
     end

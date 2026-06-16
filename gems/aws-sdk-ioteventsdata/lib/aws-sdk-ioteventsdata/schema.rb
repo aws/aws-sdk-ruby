@@ -119,258 +119,258 @@ module Aws::IoTEventsData
     VariableValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ioteventsdata#VariableValue", name: "VariableValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     Variables = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ioteventsdata#Variables", name: "Variables")
 
-    AcknowledgeActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    AcknowledgeActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     AcknowledgeActionConfiguration.type = Types::AcknowledgeActionConfiguration
-    AcknowledgeAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
-    AcknowledgeAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
-    AcknowledgeAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    AcknowledgeAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    AcknowledgeAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
+    AcknowledgeAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
+    AcknowledgeAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    AcknowledgeAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     AcknowledgeAlarmActionRequest.type = Types::AcknowledgeAlarmActionRequest
-    AcknowledgeAlarmActionRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcknowledgeAlarmActionRequest)
-    Alarm.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName"))
-    Alarm.add_member(:alarm_model_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelVersion, location_name: "alarmModelVersion"))
-    Alarm.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    Alarm.add_member(:alarm_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmState, location_name: "alarmState"))
-    Alarm.add_member(:severity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
-    Alarm.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    Alarm.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    AcknowledgeAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcknowledgeAlarmActionRequest)
+    Alarm.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName"))
+    Alarm.add_member(:alarm_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelVersion, location_name: "alarmModelVersion"))
+    Alarm.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    Alarm.add_member(:alarm_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmState, location_name: "alarmState"))
+    Alarm.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, location_name: "severity"))
+    Alarm.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    Alarm.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
     Alarm.type = Types::Alarm
-    AlarmState.add_member(:state_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmStateName, location_name: "stateName"))
-    AlarmState.add_member(:rule_evaluation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleEvaluation, location_name: "ruleEvaluation"))
-    AlarmState.add_member(:customer_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerAction, location_name: "customerAction"))
-    AlarmState.add_member(:system_event, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SystemEvent, location_name: "systemEvent"))
+    AlarmState.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmStateName, location_name: "stateName"))
+    AlarmState.add_member(:rule_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleEvaluation, location_name: "ruleEvaluation"))
+    AlarmState.add_member(:customer_action, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAction, location_name: "customerAction"))
+    AlarmState.add_member(:system_event, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemEvent, location_name: "systemEvent"))
     AlarmState.type = Types::AlarmState
-    AlarmStateName.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    AlarmStateName.add_member(:normal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NORMAL", traits: {"smithy.api#enumValue" => "NORMAL"}))
-    AlarmStateName.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    AlarmStateName.add_member(:acknowledged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACKNOWLEDGED", traits: {"smithy.api#enumValue" => "ACKNOWLEDGED"}))
-    AlarmStateName.add_member(:snooze_disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOOZE_DISABLED", traits: {"smithy.api#enumValue" => "SNOOZE_DISABLED"}))
-    AlarmStateName.add_member(:latched, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LATCHED", traits: {"smithy.api#enumValue" => "LATCHED"}))
-    AlarmSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmSummary)
-    AlarmSummary.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName"))
-    AlarmSummary.add_member(:alarm_model_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelVersion, location_name: "alarmModelVersion"))
-    AlarmSummary.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    AlarmSummary.add_member(:state_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmStateName, location_name: "stateName"))
-    AlarmSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    AlarmSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    AlarmStateName.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    AlarmStateName.add_member(:normal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NORMAL", traits: {"smithy.api#enumValue" => "NORMAL"}))
+    AlarmStateName.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    AlarmStateName.add_member(:acknowledged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACKNOWLEDGED", traits: {"smithy.api#enumValue" => "ACKNOWLEDGED"}))
+    AlarmStateName.add_member(:snooze_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOOZE_DISABLED", traits: {"smithy.api#enumValue" => "SNOOZE_DISABLED"}))
+    AlarmStateName.add_member(:latched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LATCHED", traits: {"smithy.api#enumValue" => "LATCHED"}))
+    AlarmSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmSummary)
+    AlarmSummary.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName"))
+    AlarmSummary.add_member(:alarm_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelVersion, location_name: "alarmModelVersion"))
+    AlarmSummary.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    AlarmSummary.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmStateName, location_name: "stateName"))
+    AlarmSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    AlarmSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
     AlarmSummary.type = Types::AlarmSummary
-    BatchAcknowledgeAlarmRequest.add_member(:acknowledge_action_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcknowledgeAlarmActionRequests, location_name: "acknowledgeActionRequests", traits: {"smithy.api#required" => {}}))
+    BatchAcknowledgeAlarmRequest.add_member(:acknowledge_action_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: AcknowledgeAlarmActionRequests, location_name: "acknowledgeActionRequests", traits: {"smithy.api#required" => {}}))
     BatchAcknowledgeAlarmRequest.type = Types::BatchAcknowledgeAlarmRequest
-    BatchAcknowledgeAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
+    BatchAcknowledgeAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
     BatchAcknowledgeAlarmResponse.type = Types::BatchAcknowledgeAlarmResponse
-    BatchAlarmActionErrorEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAlarmActionErrorEntry)
-    BatchAlarmActionErrorEntry.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
-    BatchAlarmActionErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    BatchAlarmActionErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchAlarmActionErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntry)
+    BatchAlarmActionErrorEntry.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "requestId"))
+    BatchAlarmActionErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    BatchAlarmActionErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchAlarmActionErrorEntry.type = Types::BatchAlarmActionErrorEntry
-    BatchDeleteDetectorErrorEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteDetectorErrorEntry)
-    BatchDeleteDetectorErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId"))
-    BatchDeleteDetectorErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    BatchDeleteDetectorErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchDeleteDetectorErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDetectorErrorEntry)
+    BatchDeleteDetectorErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "messageId"))
+    BatchDeleteDetectorErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    BatchDeleteDetectorErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchDeleteDetectorErrorEntry.type = Types::BatchDeleteDetectorErrorEntry
-    BatchDeleteDetectorRequest.add_member(:detectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDetectorRequests, location_name: "detectors", traits: {"smithy.api#required" => {}}))
+    BatchDeleteDetectorRequest.add_member(:detectors, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDetectorRequests, location_name: "detectors", traits: {"smithy.api#required" => {}}))
     BatchDeleteDetectorRequest.type = Types::BatchDeleteDetectorRequest
-    BatchDeleteDetectorResponse.add_member(:batch_delete_detector_error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteDetectorErrorEntries, location_name: "batchDeleteDetectorErrorEntries"))
+    BatchDeleteDetectorResponse.add_member(:batch_delete_detector_error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDetectorErrorEntries, location_name: "batchDeleteDetectorErrorEntries"))
     BatchDeleteDetectorResponse.type = Types::BatchDeleteDetectorResponse
-    BatchDisableAlarmRequest.add_member(:disable_action_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableAlarmActionRequests, location_name: "disableActionRequests", traits: {"smithy.api#required" => {}}))
+    BatchDisableAlarmRequest.add_member(:disable_action_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableAlarmActionRequests, location_name: "disableActionRequests", traits: {"smithy.api#required" => {}}))
     BatchDisableAlarmRequest.type = Types::BatchDisableAlarmRequest
-    BatchDisableAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
+    BatchDisableAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
     BatchDisableAlarmResponse.type = Types::BatchDisableAlarmResponse
-    BatchEnableAlarmRequest.add_member(:enable_action_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableAlarmActionRequests, location_name: "enableActionRequests", traits: {"smithy.api#required" => {}}))
+    BatchEnableAlarmRequest.add_member(:enable_action_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableAlarmActionRequests, location_name: "enableActionRequests", traits: {"smithy.api#required" => {}}))
     BatchEnableAlarmRequest.type = Types::BatchEnableAlarmRequest
-    BatchEnableAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
+    BatchEnableAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
     BatchEnableAlarmResponse.type = Types::BatchEnableAlarmResponse
-    BatchPutMessageErrorEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPutMessageErrorEntry)
-    BatchPutMessageErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId"))
-    BatchPutMessageErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    BatchPutMessageErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchPutMessageErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMessageErrorEntry)
+    BatchPutMessageErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "messageId"))
+    BatchPutMessageErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    BatchPutMessageErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchPutMessageErrorEntry.type = Types::BatchPutMessageErrorEntry
-    BatchPutMessageRequest.add_member(:messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Messages, location_name: "messages", traits: {"smithy.api#required" => {}}))
+    BatchPutMessageRequest.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: Messages, location_name: "messages", traits: {"smithy.api#required" => {}}))
     BatchPutMessageRequest.type = Types::BatchPutMessageRequest
-    BatchPutMessageResponse.add_member(:batch_put_message_error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPutMessageErrorEntries, location_name: "BatchPutMessageErrorEntries"))
+    BatchPutMessageResponse.add_member(:batch_put_message_error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMessageErrorEntries, location_name: "BatchPutMessageErrorEntries"))
     BatchPutMessageResponse.type = Types::BatchPutMessageResponse
-    BatchResetAlarmRequest.add_member(:reset_action_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetAlarmActionRequests, location_name: "resetActionRequests", traits: {"smithy.api#required" => {}}))
+    BatchResetAlarmRequest.add_member(:reset_action_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: ResetAlarmActionRequests, location_name: "resetActionRequests", traits: {"smithy.api#required" => {}}))
     BatchResetAlarmRequest.type = Types::BatchResetAlarmRequest
-    BatchResetAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
+    BatchResetAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
     BatchResetAlarmResponse.type = Types::BatchResetAlarmResponse
-    BatchSnoozeAlarmRequest.add_member(:snooze_action_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnoozeAlarmActionRequests, location_name: "snoozeActionRequests", traits: {"smithy.api#required" => {}}))
+    BatchSnoozeAlarmRequest.add_member(:snooze_action_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeAlarmActionRequests, location_name: "snoozeActionRequests", traits: {"smithy.api#required" => {}}))
     BatchSnoozeAlarmRequest.type = Types::BatchSnoozeAlarmRequest
-    BatchSnoozeAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
+    BatchSnoozeAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, location_name: "errorEntries"))
     BatchSnoozeAlarmResponse.type = Types::BatchSnoozeAlarmResponse
-    BatchUpdateDetectorErrorEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateDetectorErrorEntry)
-    BatchUpdateDetectorErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId"))
-    BatchUpdateDetectorErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
-    BatchUpdateDetectorErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchUpdateDetectorErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDetectorErrorEntry)
+    BatchUpdateDetectorErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "messageId"))
+    BatchUpdateDetectorErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "errorCode"))
+    BatchUpdateDetectorErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
     BatchUpdateDetectorErrorEntry.type = Types::BatchUpdateDetectorErrorEntry
-    BatchUpdateDetectorRequest.add_member(:detectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDetectorRequests, location_name: "detectors", traits: {"smithy.api#required" => {}}))
+    BatchUpdateDetectorRequest.add_member(:detectors, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDetectorRequests, location_name: "detectors", traits: {"smithy.api#required" => {}}))
     BatchUpdateDetectorRequest.type = Types::BatchUpdateDetectorRequest
-    BatchUpdateDetectorResponse.add_member(:batch_update_detector_error_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateDetectorErrorEntries, location_name: "batchUpdateDetectorErrorEntries"))
+    BatchUpdateDetectorResponse.add_member(:batch_update_detector_error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDetectorErrorEntries, location_name: "batchUpdateDetectorErrorEntries"))
     BatchUpdateDetectorResponse.type = Types::BatchUpdateDetectorResponse
-    ComparisonOperator.add_member(:greater, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GREATER", traits: {"smithy.api#enumValue" => "GREATER"}))
-    ComparisonOperator.add_member(:greater_or_equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GREATER_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_OR_EQUAL"}))
-    ComparisonOperator.add_member(:less, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LESS", traits: {"smithy.api#enumValue" => "LESS"}))
-    ComparisonOperator.add_member(:less_or_equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LESS_OR_EQUAL", traits: {"smithy.api#enumValue" => "LESS_OR_EQUAL"}))
-    ComparisonOperator.add_member(:equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUAL", traits: {"smithy.api#enumValue" => "EQUAL"}))
-    ComparisonOperator.add_member(:not_equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_EQUAL", traits: {"smithy.api#enumValue" => "NOT_EQUAL"}))
-    CustomerAction.add_member(:action_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerActionName, location_name: "actionName"))
-    CustomerAction.add_member(:snooze_action_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnoozeActionConfiguration, location_name: "snoozeActionConfiguration"))
-    CustomerAction.add_member(:enable_action_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableActionConfiguration, location_name: "enableActionConfiguration"))
-    CustomerAction.add_member(:disable_action_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableActionConfiguration, location_name: "disableActionConfiguration"))
-    CustomerAction.add_member(:acknowledge_action_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcknowledgeActionConfiguration, location_name: "acknowledgeActionConfiguration"))
-    CustomerAction.add_member(:reset_action_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetActionConfiguration, location_name: "resetActionConfiguration"))
+    ComparisonOperator.add_member(:greater, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GREATER", traits: {"smithy.api#enumValue" => "GREATER"}))
+    ComparisonOperator.add_member(:greater_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GREATER_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_OR_EQUAL"}))
+    ComparisonOperator.add_member(:less, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LESS", traits: {"smithy.api#enumValue" => "LESS"}))
+    ComparisonOperator.add_member(:less_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LESS_OR_EQUAL", traits: {"smithy.api#enumValue" => "LESS_OR_EQUAL"}))
+    ComparisonOperator.add_member(:equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EQUAL", traits: {"smithy.api#enumValue" => "EQUAL"}))
+    ComparisonOperator.add_member(:not_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_EQUAL", traits: {"smithy.api#enumValue" => "NOT_EQUAL"}))
+    CustomerAction.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerActionName, location_name: "actionName"))
+    CustomerAction.add_member(:snooze_action_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeActionConfiguration, location_name: "snoozeActionConfiguration"))
+    CustomerAction.add_member(:enable_action_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableActionConfiguration, location_name: "enableActionConfiguration"))
+    CustomerAction.add_member(:disable_action_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableActionConfiguration, location_name: "disableActionConfiguration"))
+    CustomerAction.add_member(:acknowledge_action_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AcknowledgeActionConfiguration, location_name: "acknowledgeActionConfiguration"))
+    CustomerAction.add_member(:reset_action_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResetActionConfiguration, location_name: "resetActionConfiguration"))
     CustomerAction.type = Types::CustomerAction
-    CustomerActionName.add_member(:snooze, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOOZE", traits: {"smithy.api#enumValue" => "SNOOZE"}))
-    CustomerActionName.add_member(:enable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLE", traits: {"smithy.api#enumValue" => "ENABLE"}))
-    CustomerActionName.add_member(:disable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
-    CustomerActionName.add_member(:acknowledge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACKNOWLEDGE", traits: {"smithy.api#enumValue" => "ACKNOWLEDGE"}))
-    CustomerActionName.add_member(:reset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESET", traits: {"smithy.api#enumValue" => "RESET"}))
-    DeleteDetectorRequest.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId", traits: {"smithy.api#required" => {}}))
-    DeleteDetectorRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#required" => {}}))
-    DeleteDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
+    CustomerActionName.add_member(:snooze, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOOZE", traits: {"smithy.api#enumValue" => "SNOOZE"}))
+    CustomerActionName.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLE", traits: {"smithy.api#enumValue" => "ENABLE"}))
+    CustomerActionName.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
+    CustomerActionName.add_member(:acknowledge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACKNOWLEDGE", traits: {"smithy.api#enumValue" => "ACKNOWLEDGE"}))
+    CustomerActionName.add_member(:reset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESET", traits: {"smithy.api#enumValue" => "RESET"}))
+    DeleteDetectorRequest.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "messageId", traits: {"smithy.api#required" => {}}))
+    DeleteDetectorRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#required" => {}}))
+    DeleteDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
     DeleteDetectorRequest.type = Types::DeleteDetectorRequest
-    DeleteDetectorRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDetectorRequest)
-    DescribeAlarmRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeAlarmRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue", traits: {"smithy.api#httpQuery" => "keyValue"}))
+    DeleteDetectorRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDetectorRequest)
+    DescribeAlarmRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAlarmRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue", traits: {"smithy.api#httpQuery" => "keyValue"}))
     DescribeAlarmRequest.type = Types::DescribeAlarmRequest
-    DescribeAlarmResponse.add_member(:alarm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Alarm, location_name: "alarm"))
+    DescribeAlarmResponse.add_member(:alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, location_name: "alarm"))
     DescribeAlarmResponse.type = Types::DescribeAlarmResponse
-    DescribeDetectorRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue", traits: {"smithy.api#httpQuery" => "keyValue"}))
+    DescribeDetectorRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue", traits: {"smithy.api#httpQuery" => "keyValue"}))
     DescribeDetectorRequest.type = Types::DescribeDetectorRequest
-    DescribeDetectorResponse.add_member(:detector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Detector, location_name: "detector"))
+    DescribeDetectorResponse.add_member(:detector, ::Smithy::Schema::Shapes::MemberShape.new(target: Detector, location_name: "detector"))
     DescribeDetectorResponse.type = Types::DescribeDetectorResponse
-    Detector.add_member(:detector_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelName, location_name: "detectorModelName"))
-    Detector.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    Detector.add_member(:detector_model_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelVersion, location_name: "detectorModelVersion"))
-    Detector.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorState, location_name: "state"))
-    Detector.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    Detector.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    Detector.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, location_name: "detectorModelName"))
+    Detector.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    Detector.add_member(:detector_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelVersion, location_name: "detectorModelVersion"))
+    Detector.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorState, location_name: "state"))
+    Detector.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    Detector.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
     Detector.type = Types::Detector
-    DetectorState.add_member(:state_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateName, location_name: "stateName", traits: {"smithy.api#required" => {}}))
-    DetectorState.add_member(:variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Variables, location_name: "variables", traits: {"smithy.api#required" => {}}))
-    DetectorState.add_member(:timers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timers, location_name: "timers", traits: {"smithy.api#required" => {}}))
+    DetectorState.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StateName, location_name: "stateName", traits: {"smithy.api#required" => {}}))
+    DetectorState.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: Variables, location_name: "variables", traits: {"smithy.api#required" => {}}))
+    DetectorState.add_member(:timers, ::Smithy::Schema::Shapes::MemberShape.new(target: Timers, location_name: "timers", traits: {"smithy.api#required" => {}}))
     DetectorState.type = Types::DetectorState
-    DetectorStateDefinition.add_member(:state_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateName, location_name: "stateName", traits: {"smithy.api#required" => {}}))
-    DetectorStateDefinition.add_member(:variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableDefinitions, location_name: "variables", traits: {"smithy.api#required" => {}}))
-    DetectorStateDefinition.add_member(:timers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimerDefinitions, location_name: "timers", traits: {"smithy.api#required" => {}}))
+    DetectorStateDefinition.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StateName, location_name: "stateName", traits: {"smithy.api#required" => {}}))
+    DetectorStateDefinition.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableDefinitions, location_name: "variables", traits: {"smithy.api#required" => {}}))
+    DetectorStateDefinition.add_member(:timers, ::Smithy::Schema::Shapes::MemberShape.new(target: TimerDefinitions, location_name: "timers", traits: {"smithy.api#required" => {}}))
     DetectorStateDefinition.type = Types::DetectorStateDefinition
-    DetectorStateSummary.add_member(:state_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateName, location_name: "stateName"))
+    DetectorStateSummary.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StateName, location_name: "stateName"))
     DetectorStateSummary.type = Types::DetectorStateSummary
-    DetectorSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorSummary)
-    DetectorSummary.add_member(:detector_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelName, location_name: "detectorModelName"))
-    DetectorSummary.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    DetectorSummary.add_member(:detector_model_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelVersion, location_name: "detectorModelVersion"))
-    DetectorSummary.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorStateSummary, location_name: "state"))
-    DetectorSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    DetectorSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    DetectorSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorSummary)
+    DetectorSummary.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, location_name: "detectorModelName"))
+    DetectorSummary.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    DetectorSummary.add_member(:detector_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelVersion, location_name: "detectorModelVersion"))
+    DetectorSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorStateSummary, location_name: "state"))
+    DetectorSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTime"))
+    DetectorSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateTime"))
     DetectorSummary.type = Types::DetectorSummary
-    DisableActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    DisableActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     DisableActionConfiguration.type = Types::DisableActionConfiguration
-    DisableAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
-    DisableAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
-    DisableAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    DisableAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    DisableAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
+    DisableAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
+    DisableAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    DisableAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     DisableAlarmActionRequest.type = Types::DisableAlarmActionRequest
-    DisableAlarmActionRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableAlarmActionRequest)
-    EnableActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    DisableAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DisableAlarmActionRequest)
+    EnableActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     EnableActionConfiguration.type = Types::EnableActionConfiguration
-    EnableAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
-    EnableAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
-    EnableAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    EnableAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    EnableAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
+    EnableAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
+    EnableAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    EnableAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     EnableAlarmActionRequest.type = Types::EnableAlarmActionRequest
-    EnableAlarmActionRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableAlarmActionRequest)
-    ErrorCode.add_member(:resource_not_found_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceNotFoundException", traits: {"smithy.api#enumValue" => "ResourceNotFoundException"}))
-    ErrorCode.add_member(:invalid_request_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidRequestException", traits: {"smithy.api#enumValue" => "InvalidRequestException"}))
-    ErrorCode.add_member(:internal_failure_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InternalFailureException", traits: {"smithy.api#enumValue" => "InternalFailureException"}))
-    ErrorCode.add_member(:service_unavailable_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceUnavailableException", traits: {"smithy.api#enumValue" => "ServiceUnavailableException"}))
-    ErrorCode.add_member(:throttling_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ThrottlingException", traits: {"smithy.api#enumValue" => "ThrottlingException"}))
-    EventType.add_member(:state_change, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATE_CHANGE", traits: {"smithy.api#enumValue" => "STATE_CHANGE"}))
-    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    EnableAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnableAlarmActionRequest)
+    ErrorCode.add_member(:resource_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ResourceNotFoundException", traits: {"smithy.api#enumValue" => "ResourceNotFoundException"}))
+    ErrorCode.add_member(:invalid_request_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidRequestException", traits: {"smithy.api#enumValue" => "InvalidRequestException"}))
+    ErrorCode.add_member(:internal_failure_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InternalFailureException", traits: {"smithy.api#enumValue" => "InternalFailureException"}))
+    ErrorCode.add_member(:service_unavailable_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ServiceUnavailableException", traits: {"smithy.api#enumValue" => "ServiceUnavailableException"}))
+    ErrorCode.add_member(:throttling_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ThrottlingException", traits: {"smithy.api#enumValue" => "ThrottlingException"}))
+    EventType.add_member(:state_change, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STATE_CHANGE", traits: {"smithy.api#enumValue" => "STATE_CHANGE"}))
+    InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InternalFailureException.type = Types::InternalFailureException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    ListAlarmsRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListAlarmsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListAlarmsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAlarmsRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAlarmsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAlarmsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAlarmsRequest.type = Types::ListAlarmsRequest
-    ListAlarmsResponse.add_member(:alarm_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmSummaries, location_name: "alarmSummaries"))
-    ListAlarmsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAlarmsResponse.add_member(:alarm_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmSummaries, location_name: "alarmSummaries"))
+    ListAlarmsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListAlarmsResponse.type = Types::ListAlarmsResponse
-    ListDetectorsRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListDetectorsRequest.add_member(:state_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateName, location_name: "stateName", traits: {"smithy.api#httpQuery" => "stateName"}))
-    ListDetectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListDetectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListDetectorsRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDetectorsRequest.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StateName, location_name: "stateName", traits: {"smithy.api#httpQuery" => "stateName"}))
+    ListDetectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListDetectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListDetectorsRequest.type = Types::ListDetectorsRequest
-    ListDetectorsResponse.add_member(:detector_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorSummaries, location_name: "detectorSummaries"))
-    ListDetectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDetectorsResponse.add_member(:detector_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorSummaries, location_name: "detectorSummaries"))
+    ListDetectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     ListDetectorsResponse.type = Types::ListDetectorsResponse
-    Message.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId", traits: {"smithy.api#required" => {}}))
-    Message.add_member(:input_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EphemeralInputName, location_name: "inputName", traits: {"smithy.api#required" => {}}))
-    Message.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Payload, location_name: "payload", traits: {"smithy.api#required" => {}}))
-    Message.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampValue, location_name: "timestamp"))
+    Message.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "messageId", traits: {"smithy.api#required" => {}}))
+    Message.add_member(:input_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralInputName, location_name: "inputName", traits: {"smithy.api#required" => {}}))
+    Message.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Payload, location_name: "payload", traits: {"smithy.api#required" => {}}))
+    Message.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampValue, location_name: "timestamp"))
     Message.type = Types::Message
-    Messages.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message)
-    ResetActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    Messages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message)
+    ResetActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     ResetActionConfiguration.type = Types::ResetActionConfiguration
-    ResetAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
-    ResetAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
-    ResetAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    ResetAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    ResetAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
+    ResetAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
+    ResetAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    ResetAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     ResetAlarmActionRequest.type = Types::ResetAlarmActionRequest
-    ResetAlarmActionRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResetAlarmActionRequest)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResetAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResetAlarmActionRequest)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RuleEvaluation.add_member(:simple_rule_evaluation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimpleRuleEvaluation, location_name: "simpleRuleEvaluation"))
+    RuleEvaluation.add_member(:simple_rule_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimpleRuleEvaluation, location_name: "simpleRuleEvaluation"))
     RuleEvaluation.type = Types::RuleEvaluation
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    SimpleRuleEvaluation.add_member(:input_property_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputPropertyValue, location_name: "inputPropertyValue"))
-    SimpleRuleEvaluation.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "operator"))
-    SimpleRuleEvaluation.add_member(:threshold_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThresholdValue, location_name: "thresholdValue"))
+    SimpleRuleEvaluation.add_member(:input_property_value, ::Smithy::Schema::Shapes::MemberShape.new(target: InputPropertyValue, location_name: "inputPropertyValue"))
+    SimpleRuleEvaluation.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, location_name: "operator"))
+    SimpleRuleEvaluation.add_member(:threshold_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdValue, location_name: "thresholdValue"))
     SimpleRuleEvaluation.type = Types::SimpleRuleEvaluation
-    SnoozeActionConfiguration.add_member(:snooze_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnoozeDuration, location_name: "snoozeDuration"))
-    SnoozeActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
+    SnoozeActionConfiguration.add_member(:snooze_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeDuration, location_name: "snoozeDuration"))
+    SnoozeActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
     SnoozeActionConfiguration.type = Types::SnoozeActionConfiguration
-    SnoozeAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
-    SnoozeAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
-    SnoozeAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    SnoozeAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Note, location_name: "note"))
-    SnoozeAlarmActionRequest.add_member(:snooze_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnoozeDuration, location_name: "snoozeDuration", traits: {"smithy.api#required" => {}}))
+    SnoozeAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "requestId", traits: {"smithy.api#required" => {}}))
+    SnoozeAlarmActionRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, location_name: "alarmModelName", traits: {"smithy.api#required" => {}}))
+    SnoozeAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    SnoozeAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, location_name: "note"))
+    SnoozeAlarmActionRequest.add_member(:snooze_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeDuration, location_name: "snoozeDuration", traits: {"smithy.api#required" => {}}))
     SnoozeAlarmActionRequest.type = Types::SnoozeAlarmActionRequest
-    SnoozeAlarmActionRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnoozeAlarmActionRequest)
-    StateChangeConfiguration.add_member(:trigger_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TriggerType, location_name: "triggerType"))
+    SnoozeAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeAlarmActionRequest)
+    StateChangeConfiguration.add_member(:trigger_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerType, location_name: "triggerType"))
     StateChangeConfiguration.type = Types::StateChangeConfiguration
-    SystemEvent.add_member(:event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventType, location_name: "eventType"))
-    SystemEvent.add_member(:state_change_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateChangeConfiguration, location_name: "stateChangeConfiguration"))
+    SystemEvent.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, location_name: "eventType"))
+    SystemEvent.add_member(:state_change_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StateChangeConfiguration, location_name: "stateChangeConfiguration"))
     SystemEvent.type = Types::SystemEvent
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    Timer.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimerName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    Timer.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp", traits: {"smithy.api#required" => {}}))
+    Timer.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TimerName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    Timer.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "timestamp", traits: {"smithy.api#required" => {}}))
     Timer.type = Types::Timer
-    TimerDefinition.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimerName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    TimerDefinition.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Seconds, location_name: "seconds", traits: {"smithy.api#required" => {}}))
+    TimerDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TimerName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    TimerDefinition.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Seconds, location_name: "seconds", traits: {"smithy.api#required" => {}}))
     TimerDefinition.type = Types::TimerDefinition
-    TimerDefinitions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimerDefinition)
-    Timers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timer)
-    TimestampValue.add_member(:time_in_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EpochMilliTimestamp, location_name: "timeInMillis"))
+    TimerDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimerDefinition)
+    Timers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Timer)
+    TimestampValue.add_member(:time_in_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochMilliTimestamp, location_name: "timeInMillis"))
     TimestampValue.type = Types::TimestampValue
-    TriggerType.add_member(:snooze_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOOZE_TIMEOUT", traits: {"smithy.api#enumValue" => "SNOOZE_TIMEOUT"}))
-    UpdateDetectorRequest.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId", traits: {"smithy.api#required" => {}}))
-    UpdateDetectorRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#required" => {}}))
-    UpdateDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
-    UpdateDetectorRequest.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorStateDefinition, location_name: "state", traits: {"smithy.api#required" => {}}))
+    TriggerType.add_member(:snooze_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOOZE_TIMEOUT", traits: {"smithy.api#enumValue" => "SNOOZE_TIMEOUT"}))
+    UpdateDetectorRequest.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "messageId", traits: {"smithy.api#required" => {}}))
+    UpdateDetectorRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, location_name: "detectorModelName", traits: {"smithy.api#required" => {}}))
+    UpdateDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, location_name: "keyValue"))
+    UpdateDetectorRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorStateDefinition, location_name: "state", traits: {"smithy.api#required" => {}}))
     UpdateDetectorRequest.type = Types::UpdateDetectorRequest
-    UpdateDetectorRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDetectorRequest)
-    Variable.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    Variable.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    UpdateDetectorRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDetectorRequest)
+    Variable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    Variable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     Variable.type = Types::Variable
-    VariableDefinition.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    VariableDefinition.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    VariableDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    VariableDefinition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     VariableDefinition.type = Types::VariableDefinition
-    VariableDefinitions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VariableDefinition)
-    Variables.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Variable)
+    VariableDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableDefinition)
+    Variables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Variable)
 
     IotColumboDataService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ioteventsdata#IotColumboDataService"
@@ -380,137 +380,137 @@ module Aws::IoTEventsData
       service.add_operation(:batch_acknowledge_alarm, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchAcknowledgeAlarm"
         operation.name = "BatchAcknowledgeAlarm"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAcknowledgeAlarmRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchAcknowledgeAlarmResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchAcknowledgeAlarmRequest
+        operation.output = BatchAcknowledgeAlarmResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/alarms/acknowledge", "code" => 202}}
       end)
       service.add_operation(:batch_delete_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchDeleteDetector"
         operation.name = "BatchDeleteDetector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteDetectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteDetectorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchDeleteDetectorRequest
+        operation.output = BatchDeleteDetectorResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detectors/delete", "code" => 200}}
       end)
       service.add_operation(:batch_disable_alarm, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchDisableAlarm"
         operation.name = "BatchDisableAlarm"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDisableAlarmRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDisableAlarmResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchDisableAlarmRequest
+        operation.output = BatchDisableAlarmResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/alarms/disable", "code" => 202}}
       end)
       service.add_operation(:batch_enable_alarm, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchEnableAlarm"
         operation.name = "BatchEnableAlarm"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchEnableAlarmRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchEnableAlarmResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchEnableAlarmRequest
+        operation.output = BatchEnableAlarmResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/alarms/enable", "code" => 202}}
       end)
       service.add_operation(:batch_put_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchPutMessage"
         operation.name = "BatchPutMessage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPutMessageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchPutMessageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchPutMessageRequest
+        operation.output = BatchPutMessageResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/inputs/messages", "code" => 200}}
       end)
       service.add_operation(:batch_reset_alarm, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchResetAlarm"
         operation.name = "BatchResetAlarm"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchResetAlarmRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchResetAlarmResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchResetAlarmRequest
+        operation.output = BatchResetAlarmResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/alarms/reset", "code" => 202}}
       end)
       service.add_operation(:batch_snooze_alarm, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchSnoozeAlarm"
         operation.name = "BatchSnoozeAlarm"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSnoozeAlarmRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchSnoozeAlarmResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchSnoozeAlarmRequest
+        operation.output = BatchSnoozeAlarmResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/alarms/snooze", "code" => 202}}
       end)
       service.add_operation(:batch_update_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#BatchUpdateDetector"
         operation.name = "BatchUpdateDetector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateDetectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchUpdateDetectorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = BatchUpdateDetectorRequest
+        operation.output = BatchUpdateDetectorResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detectors", "code" => 200}}
       end)
       service.add_operation(:describe_alarm, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#DescribeAlarm"
         operation.name = "DescribeAlarm"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAlarmRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAlarmResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DescribeAlarmRequest
+        operation.output = DescribeAlarmResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/alarms/{alarmModelName}/keyValues", "code" => 200}}
       end)
       service.add_operation(:describe_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#DescribeDetector"
         operation.name = "DescribeDetector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDetectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeDetectorResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DescribeDetectorRequest
+        operation.output = DescribeDetectorResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detectors/{detectorModelName}/keyValues", "code" => 200}}
       end)
       service.add_operation(:list_alarms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#ListAlarms"
         operation.name = "ListAlarms"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAlarmsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAlarmsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListAlarmsRequest
+        operation.output = ListAlarmsResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/alarms/{alarmModelName}", "code" => 200}}
       end)
       service.add_operation(:list_detectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ioteventsdata#ListDetectors"
         operation.name = "ListDetectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDetectorsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDetectorsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListDetectorsRequest
+        operation.output = ListDetectorsResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detectors/{detectorModelName}", "code" => 200}}
       end)
     end

@@ -143,391 +143,391 @@ module Aws::KafkaConnect
     Stringmin1max128 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#__stringMin1Max128", name: "Stringmin1max128", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     Timestampiso8601 = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.kafkaconnect#__timestampIso8601", name: "Timestampiso8601", traits: {"smithy.api#timestampFormat" => "date-time"})
 
-    ApacheKafkaCluster.add_member(:bootstrap_servers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "bootstrapServers", traits: {"smithy.api#required" => {}}))
-    ApacheKafkaCluster.add_member(:vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Vpc, location_name: "vpc", traits: {"smithy.api#required" => {}}))
+    ApacheKafkaCluster.add_member(:bootstrap_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "bootstrapServers", traits: {"smithy.api#required" => {}}))
+    ApacheKafkaCluster.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: Vpc, location_name: "vpc", traits: {"smithy.api#required" => {}}))
     ApacheKafkaCluster.type = Types::ApacheKafkaCluster
-    ApacheKafkaClusterDescription.add_member(:bootstrap_servers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "bootstrapServers"))
-    ApacheKafkaClusterDescription.add_member(:vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcDescription, location_name: "vpc"))
+    ApacheKafkaClusterDescription.add_member(:bootstrap_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "bootstrapServers"))
+    ApacheKafkaClusterDescription.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcDescription, location_name: "vpc"))
     ApacheKafkaClusterDescription.type = Types::ApacheKafkaClusterDescription
-    AutoScaling.add_member(:max_worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "maxWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    AutoScaling.add_member(:mcu_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    AutoScaling.add_member(:min_worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "minWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    AutoScaling.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScaleInPolicy, location_name: "scaleInPolicy"))
-    AutoScaling.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScaleOutPolicy, location_name: "scaleOutPolicy"))
+    AutoScaling.add_member(:max_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "maxWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AutoScaling.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AutoScaling.add_member(:min_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "minWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AutoScaling.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleInPolicy, location_name: "scaleInPolicy"))
+    AutoScaling.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleOutPolicy, location_name: "scaleOutPolicy"))
     AutoScaling.type = Types::AutoScaling
-    AutoScalingDescription.add_member(:max_worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "maxWorkerCount", traits: {"smithy.api#default" => 0}))
-    AutoScalingDescription.add_member(:mcu_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "mcuCount", traits: {"smithy.api#default" => 0}))
-    AutoScalingDescription.add_member(:min_worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "minWorkerCount", traits: {"smithy.api#default" => 0}))
-    AutoScalingDescription.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScaleInPolicyDescription, location_name: "scaleInPolicy"))
-    AutoScalingDescription.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScaleOutPolicyDescription, location_name: "scaleOutPolicy"))
+    AutoScalingDescription.add_member(:max_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "maxWorkerCount", traits: {"smithy.api#default" => 0}))
+    AutoScalingDescription.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "mcuCount", traits: {"smithy.api#default" => 0}))
+    AutoScalingDescription.add_member(:min_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "minWorkerCount", traits: {"smithy.api#default" => 0}))
+    AutoScalingDescription.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleInPolicyDescription, location_name: "scaleInPolicy"))
+    AutoScalingDescription.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleOutPolicyDescription, location_name: "scaleOutPolicy"))
     AutoScalingDescription.type = Types::AutoScalingDescription
-    AutoScalingUpdate.add_member(:max_worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "maxWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    AutoScalingUpdate.add_member(:mcu_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    AutoScalingUpdate.add_member(:min_worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "minWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    AutoScalingUpdate.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScaleInPolicyUpdate, location_name: "scaleInPolicy", traits: {"smithy.api#required" => {}}))
-    AutoScalingUpdate.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScaleOutPolicyUpdate, location_name: "scaleOutPolicy", traits: {"smithy.api#required" => {}}))
+    AutoScalingUpdate.add_member(:max_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "maxWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AutoScalingUpdate.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AutoScalingUpdate.add_member(:min_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "minWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    AutoScalingUpdate.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleInPolicyUpdate, location_name: "scaleInPolicy", traits: {"smithy.api#required" => {}}))
+    AutoScalingUpdate.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleOutPolicyUpdate, location_name: "scaleOutPolicy", traits: {"smithy.api#required" => {}}))
     AutoScalingUpdate.type = Types::AutoScalingUpdate
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     BadRequestException.type = Types::BadRequestException
-    Capacity.add_member(:auto_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScaling, location_name: "autoScaling"))
-    Capacity.add_member(:provisioned_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedCapacity, location_name: "provisionedCapacity"))
+    Capacity.add_member(:auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScaling, location_name: "autoScaling"))
+    Capacity.add_member(:provisioned_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedCapacity, location_name: "provisionedCapacity"))
     Capacity.type = Types::Capacity
-    CapacityDescription.add_member(:auto_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingDescription, location_name: "autoScaling"))
-    CapacityDescription.add_member(:provisioned_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedCapacityDescription, location_name: "provisionedCapacity"))
+    CapacityDescription.add_member(:auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingDescription, location_name: "autoScaling"))
+    CapacityDescription.add_member(:provisioned_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedCapacityDescription, location_name: "provisionedCapacity"))
     CapacityDescription.type = Types::CapacityDescription
-    CapacityUpdate.add_member(:auto_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingUpdate, location_name: "autoScaling"))
-    CapacityUpdate.add_member(:provisioned_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedCapacityUpdate, location_name: "provisionedCapacity"))
+    CapacityUpdate.add_member(:auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingUpdate, location_name: "autoScaling"))
+    CapacityUpdate.add_member(:provisioned_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedCapacityUpdate, location_name: "provisionedCapacity"))
     CapacityUpdate.type = Types::CapacityUpdate
-    CloudWatchLogsLogDelivery.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    CloudWatchLogsLogDelivery.add_member(:log_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "logGroup"))
+    CloudWatchLogsLogDelivery.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CloudWatchLogsLogDelivery.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "logGroup"))
     CloudWatchLogsLogDelivery.type = Types::CloudWatchLogsLogDelivery
-    CloudWatchLogsLogDeliveryDescription.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false}))
-    CloudWatchLogsLogDeliveryDescription.add_member(:log_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "logGroup"))
+    CloudWatchLogsLogDeliveryDescription.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false}))
+    CloudWatchLogsLogDeliveryDescription.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "logGroup"))
     CloudWatchLogsLogDeliveryDescription.type = Types::CloudWatchLogsLogDeliveryDescription
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    ConnectorConfiguration.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ConnectorConfiguration.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ConnectorConfigurationUpdate.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ConnectorConfigurationUpdate.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    ConnectorOperationStep.add_member(:step_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationStepType, location_name: "stepType"))
-    ConnectorOperationStep.add_member(:step_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationStepState, location_name: "stepState"))
+    ConnectorConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ConnectorConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ConnectorConfigurationUpdate.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ConnectorConfigurationUpdate.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    ConnectorOperationStep.add_member(:step_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationStepType, location_name: "stepType"))
+    ConnectorOperationStep.add_member(:step_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationStepState, location_name: "stepState"))
     ConnectorOperationStep.type = Types::ConnectorOperationStep
-    ConnectorOperationSummary.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorOperationArn"))
-    ConnectorOperationSummary.add_member(:connector_operation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationType, location_name: "connectorOperationType"))
-    ConnectorOperationSummary.add_member(:connector_operation_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationState, location_name: "connectorOperationState"))
-    ConnectorOperationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    ConnectorOperationSummary.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "endTime"))
+    ConnectorOperationSummary.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorOperationArn"))
+    ConnectorOperationSummary.add_member(:connector_operation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationType, location_name: "connectorOperationType"))
+    ConnectorOperationSummary.add_member(:connector_operation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationState, location_name: "connectorOperationState"))
+    ConnectorOperationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    ConnectorOperationSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "endTime"))
     ConnectorOperationSummary.type = Types::ConnectorOperationSummary
-    ConnectorSummary.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityDescription, location_name: "capacity"))
-    ConnectorSummary.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn"))
-    ConnectorSummary.add_member(:connector_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorDescription"))
-    ConnectorSummary.add_member(:connector_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorName"))
-    ConnectorSummary.add_member(:connector_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
-    ConnectorSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    ConnectorSummary.add_member(:current_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "currentVersion"))
-    ConnectorSummary.add_member(:kafka_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterDescription, location_name: "kafkaCluster"))
-    ConnectorSummary.add_member(:kafka_cluster_client_authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterClientAuthenticationDescription, location_name: "kafkaClusterClientAuthentication"))
-    ConnectorSummary.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterEncryptionInTransitDescription, location_name: "kafkaClusterEncryptionInTransit"))
-    ConnectorSummary.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "kafkaConnectVersion"))
-    ConnectorSummary.add_member(:log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDeliveryDescription, location_name: "logDelivery"))
-    ConnectorSummary.add_member(:plugins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofplugindescription, location_name: "plugins"))
-    ConnectorSummary.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "serviceExecutionRoleArn"))
-    ConnectorSummary.add_member(:worker_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationDescription, location_name: "workerConfiguration"))
+    ConnectorSummary.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityDescription, location_name: "capacity"))
+    ConnectorSummary.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn"))
+    ConnectorSummary.add_member(:connector_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorDescription"))
+    ConnectorSummary.add_member(:connector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorName"))
+    ConnectorSummary.add_member(:connector_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorState, location_name: "connectorState"))
+    ConnectorSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    ConnectorSummary.add_member(:current_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "currentVersion"))
+    ConnectorSummary.add_member(:kafka_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterDescription, location_name: "kafkaCluster"))
+    ConnectorSummary.add_member(:kafka_cluster_client_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterClientAuthenticationDescription, location_name: "kafkaClusterClientAuthentication"))
+    ConnectorSummary.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransitDescription, location_name: "kafkaClusterEncryptionInTransit"))
+    ConnectorSummary.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "kafkaConnectVersion"))
+    ConnectorSummary.add_member(:log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryDescription, location_name: "logDelivery"))
+    ConnectorSummary.add_member(:plugins, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofplugindescription, location_name: "plugins"))
+    ConnectorSummary.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "serviceExecutionRoleArn"))
+    ConnectorSummary.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationDescription, location_name: "workerConfiguration"))
     ConnectorSummary.type = Types::ConnectorSummary
-    CreateConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn"))
-    CreateConnectorOutput.add_member(:connector_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorName"))
-    CreateConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
+    CreateConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn"))
+    CreateConnectorOutput.add_member(:connector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorName"))
+    CreateConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorState, location_name: "connectorState"))
     CreateConnectorOutput.type = Types::CreateConnectorOutput
-    CreateConnectorRequest.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Capacity, location_name: "capacity", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:connector_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorConfiguration, location_name: "connectorConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:connector_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmax1024, location_name: "connectorDescription"))
-    CreateConnectorRequest.add_member(:connector_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin1max128, location_name: "connectorName", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:kafka_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaCluster, location_name: "kafkaCluster", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:kafka_cluster_client_authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterClientAuthentication, location_name: "kafkaClusterClientAuthentication", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterEncryptionInTransit, location_name: "kafkaClusterEncryptionInTransit", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "kafkaConnectVersion", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDelivery, location_name: "logDelivery"))
-    CreateConnectorRequest.add_member(:plugins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofplugin, location_name: "plugins", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "serviceExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateConnectorRequest.add_member(:worker_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfiguration, location_name: "workerConfiguration"))
-    CreateConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateConnectorRequest.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, location_name: "capacity", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:connector_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorConfiguration, location_name: "connectorConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:connector_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmax1024, location_name: "connectorDescription"))
+    CreateConnectorRequest.add_member(:connector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max128, location_name: "connectorName", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:kafka_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaCluster, location_name: "kafkaCluster", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:kafka_cluster_client_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterClientAuthentication, location_name: "kafkaClusterClientAuthentication", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransit, location_name: "kafkaClusterEncryptionInTransit", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "kafkaConnectVersion", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDelivery, location_name: "logDelivery"))
+    CreateConnectorRequest.add_member(:plugins, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofplugin, location_name: "plugins", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "serviceExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfiguration, location_name: "workerConfiguration"))
+    CreateConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     CreateConnectorRequest.type = Types::CreateConnectorRequest
-    CreateCustomPluginOutput.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn"))
-    CreateCustomPluginOutput.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginState, location_name: "customPluginState"))
-    CreateCustomPluginOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    CreateCustomPluginOutput.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
+    CreateCustomPluginOutput.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn"))
+    CreateCustomPluginOutput.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginState, location_name: "customPluginState"))
+    CreateCustomPluginOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    CreateCustomPluginOutput.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
     CreateCustomPluginOutput.type = Types::CreateCustomPluginOutput
-    CreateCustomPluginRequest.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginContentType, location_name: "contentType", traits: {"smithy.api#required" => {}}))
-    CreateCustomPluginRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmax1024, location_name: "description"))
-    CreateCustomPluginRequest.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginLocation, location_name: "location", traits: {"smithy.api#required" => {}}))
-    CreateCustomPluginRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin1max128, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateCustomPluginRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateCustomPluginRequest.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginContentType, location_name: "contentType", traits: {"smithy.api#required" => {}}))
+    CreateCustomPluginRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmax1024, location_name: "description"))
+    CreateCustomPluginRequest.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginLocation, location_name: "location", traits: {"smithy.api#required" => {}}))
+    CreateCustomPluginRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max128, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateCustomPluginRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     CreateCustomPluginRequest.type = Types::CreateCustomPluginRequest
-    CreateWorkerConfigurationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    CreateWorkerConfigurationOutput.add_member(:latest_revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationRevisionSummary, location_name: "latestRevision"))
-    CreateWorkerConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    CreateWorkerConfigurationOutput.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn"))
-    CreateWorkerConfigurationOutput.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationState, location_name: "workerConfigurationState"))
+    CreateWorkerConfigurationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    CreateWorkerConfigurationOutput.add_member(:latest_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationRevisionSummary, location_name: "latestRevision"))
+    CreateWorkerConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    CreateWorkerConfigurationOutput.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn"))
+    CreateWorkerConfigurationOutput.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationState, location_name: "workerConfigurationState"))
     CreateWorkerConfigurationOutput.type = Types::CreateWorkerConfigurationOutput
-    CreateWorkerConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmax1024, location_name: "description"))
-    CreateWorkerConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin1max128, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateWorkerConfigurationRequest.add_member(:properties_file_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sensitivestring, location_name: "propertiesFileContent", traits: {"smithy.api#required" => {}}))
-    CreateWorkerConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateWorkerConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmax1024, location_name: "description"))
+    CreateWorkerConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max128, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreateWorkerConfigurationRequest.add_member(:properties_file_content, ::Smithy::Schema::Shapes::MemberShape.new(target: Sensitivestring, location_name: "propertiesFileContent", traits: {"smithy.api#required" => {}}))
+    CreateWorkerConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     CreateWorkerConfigurationRequest.type = Types::CreateWorkerConfigurationRequest
-    CustomPlugin.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn", traits: {"smithy.api#required" => {}}))
-    CustomPlugin.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Longmin1, location_name: "revision", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    CustomPlugin.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn", traits: {"smithy.api#required" => {}}))
+    CustomPlugin.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Longmin1, location_name: "revision", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     CustomPlugin.type = Types::CustomPlugin
-    CustomPluginDescription.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn"))
-    CustomPluginDescription.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
+    CustomPluginDescription.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn"))
+    CustomPluginDescription.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
     CustomPluginDescription.type = Types::CustomPluginDescription
-    CustomPluginFileDescription.add_member(:file_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "fileMd5"))
-    CustomPluginFileDescription.add_member(:file_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "fileSize", traits: {"smithy.api#default" => 0}))
+    CustomPluginFileDescription.add_member(:file_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "fileMd5"))
+    CustomPluginFileDescription.add_member(:file_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "fileSize", traits: {"smithy.api#default" => 0}))
     CustomPluginFileDescription.type = Types::CustomPluginFileDescription
-    CustomPluginLocation.add_member(:s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location", traits: {"smithy.api#required" => {}}))
+    CustomPluginLocation.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, location_name: "s3Location", traits: {"smithy.api#required" => {}}))
     CustomPluginLocation.type = Types::CustomPluginLocation
-    CustomPluginLocationDescription.add_member(:s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3LocationDescription, location_name: "s3Location"))
+    CustomPluginLocationDescription.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LocationDescription, location_name: "s3Location"))
     CustomPluginLocationDescription.type = Types::CustomPluginLocationDescription
-    CustomPluginRevisionSummary.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginContentType, location_name: "contentType"))
-    CustomPluginRevisionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    CustomPluginRevisionSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    CustomPluginRevisionSummary.add_member(:file_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginFileDescription, location_name: "fileDescription"))
-    CustomPluginRevisionSummary.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginLocationDescription, location_name: "location"))
-    CustomPluginRevisionSummary.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
+    CustomPluginRevisionSummary.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginContentType, location_name: "contentType"))
+    CustomPluginRevisionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    CustomPluginRevisionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    CustomPluginRevisionSummary.add_member(:file_description, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginFileDescription, location_name: "fileDescription"))
+    CustomPluginRevisionSummary.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginLocationDescription, location_name: "location"))
+    CustomPluginRevisionSummary.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
     CustomPluginRevisionSummary.type = Types::CustomPluginRevisionSummary
-    CustomPluginSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    CustomPluginSummary.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn"))
-    CustomPluginSummary.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginState, location_name: "customPluginState"))
-    CustomPluginSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    CustomPluginSummary.add_member(:latest_revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginRevisionSummary, location_name: "latestRevision"))
-    CustomPluginSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    CustomPluginSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    CustomPluginSummary.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn"))
+    CustomPluginSummary.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginState, location_name: "customPluginState"))
+    CustomPluginSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    CustomPluginSummary.add_member(:latest_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginRevisionSummary, location_name: "latestRevision"))
+    CustomPluginSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
     CustomPluginSummary.type = Types::CustomPluginSummary
-    DeleteConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn"))
-    DeleteConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
+    DeleteConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn"))
+    DeleteConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorState, location_name: "connectorState"))
     DeleteConnectorOutput.type = Types::DeleteConnectorOutput
-    DeleteConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteConnectorRequest.add_member(:current_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "currentVersion", traits: {"smithy.api#httpQuery" => "currentVersion"}))
+    DeleteConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConnectorRequest.add_member(:current_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "currentVersion", traits: {"smithy.api#httpQuery" => "currentVersion"}))
     DeleteConnectorRequest.type = Types::DeleteConnectorRequest
-    DeleteCustomPluginOutput.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn"))
-    DeleteCustomPluginOutput.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginState, location_name: "customPluginState"))
+    DeleteCustomPluginOutput.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn"))
+    DeleteCustomPluginOutput.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginState, location_name: "customPluginState"))
     DeleteCustomPluginOutput.type = Types::DeleteCustomPluginOutput
-    DeleteCustomPluginRequest.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCustomPluginRequest.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCustomPluginRequest.type = Types::DeleteCustomPluginRequest
-    DeleteWorkerConfigurationOutput.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn"))
-    DeleteWorkerConfigurationOutput.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationState, location_name: "workerConfigurationState"))
+    DeleteWorkerConfigurationOutput.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn"))
+    DeleteWorkerConfigurationOutput.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationState, location_name: "workerConfigurationState"))
     DeleteWorkerConfigurationOutput.type = Types::DeleteWorkerConfigurationOutput
-    DeleteWorkerConfigurationRequest.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteWorkerConfigurationRequest.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteWorkerConfigurationRequest.type = Types::DeleteWorkerConfigurationRequest
-    DescribeConnectorOperationRequest.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorOperationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeConnectorOperationRequest.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorOperationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeConnectorOperationRequest.type = Types::DescribeConnectorOperationRequest
-    DescribeConnectorOperationResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn"))
-    DescribeConnectorOperationResponse.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorOperationArn"))
-    DescribeConnectorOperationResponse.add_member(:connector_operation_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationState, location_name: "connectorOperationState"))
-    DescribeConnectorOperationResponse.add_member(:connector_operation_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationType, location_name: "connectorOperationType"))
-    DescribeConnectorOperationResponse.add_member(:operation_steps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofconnectoroperationstep, location_name: "operationSteps"))
-    DescribeConnectorOperationResponse.add_member(:origin_worker_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerSetting, location_name: "originWorkerSetting"))
-    DescribeConnectorOperationResponse.add_member(:origin_connector_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorConfiguration, location_name: "originConnectorConfiguration"))
-    DescribeConnectorOperationResponse.add_member(:target_worker_setting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerSetting, location_name: "targetWorkerSetting"))
-    DescribeConnectorOperationResponse.add_member(:target_connector_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorConfiguration, location_name: "targetConnectorConfiguration"))
-    DescribeConnectorOperationResponse.add_member(:error_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateDescription, location_name: "errorInfo"))
-    DescribeConnectorOperationResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    DescribeConnectorOperationResponse.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "endTime"))
+    DescribeConnectorOperationResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn"))
+    DescribeConnectorOperationResponse.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorOperationArn"))
+    DescribeConnectorOperationResponse.add_member(:connector_operation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationState, location_name: "connectorOperationState"))
+    DescribeConnectorOperationResponse.add_member(:connector_operation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationType, location_name: "connectorOperationType"))
+    DescribeConnectorOperationResponse.add_member(:operation_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofconnectoroperationstep, location_name: "operationSteps"))
+    DescribeConnectorOperationResponse.add_member(:origin_worker_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerSetting, location_name: "originWorkerSetting"))
+    DescribeConnectorOperationResponse.add_member(:origin_connector_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorConfiguration, location_name: "originConnectorConfiguration"))
+    DescribeConnectorOperationResponse.add_member(:target_worker_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerSetting, location_name: "targetWorkerSetting"))
+    DescribeConnectorOperationResponse.add_member(:target_connector_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorConfiguration, location_name: "targetConnectorConfiguration"))
+    DescribeConnectorOperationResponse.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: StateDescription, location_name: "errorInfo"))
+    DescribeConnectorOperationResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    DescribeConnectorOperationResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "endTime"))
     DescribeConnectorOperationResponse.type = Types::DescribeConnectorOperationResponse
-    DescribeConnectorOutput.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityDescription, location_name: "capacity"))
-    DescribeConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn"))
-    DescribeConnectorOutput.add_member(:connector_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorConfiguration, location_name: "connectorConfiguration"))
-    DescribeConnectorOutput.add_member(:connector_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorDescription"))
-    DescribeConnectorOutput.add_member(:connector_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorName"))
-    DescribeConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
-    DescribeConnectorOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    DescribeConnectorOutput.add_member(:current_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "currentVersion"))
-    DescribeConnectorOutput.add_member(:kafka_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterDescription, location_name: "kafkaCluster"))
-    DescribeConnectorOutput.add_member(:kafka_cluster_client_authentication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterClientAuthenticationDescription, location_name: "kafkaClusterClientAuthentication"))
-    DescribeConnectorOutput.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterEncryptionInTransitDescription, location_name: "kafkaClusterEncryptionInTransit"))
-    DescribeConnectorOutput.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "kafkaConnectVersion"))
-    DescribeConnectorOutput.add_member(:log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogDeliveryDescription, location_name: "logDelivery"))
-    DescribeConnectorOutput.add_member(:plugins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofplugindescription, location_name: "plugins"))
-    DescribeConnectorOutput.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "serviceExecutionRoleArn"))
-    DescribeConnectorOutput.add_member(:worker_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationDescription, location_name: "workerConfiguration"))
-    DescribeConnectorOutput.add_member(:state_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateDescription, location_name: "stateDescription"))
+    DescribeConnectorOutput.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityDescription, location_name: "capacity"))
+    DescribeConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn"))
+    DescribeConnectorOutput.add_member(:connector_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorConfiguration, location_name: "connectorConfiguration"))
+    DescribeConnectorOutput.add_member(:connector_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorDescription"))
+    DescribeConnectorOutput.add_member(:connector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorName"))
+    DescribeConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorState, location_name: "connectorState"))
+    DescribeConnectorOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    DescribeConnectorOutput.add_member(:current_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "currentVersion"))
+    DescribeConnectorOutput.add_member(:kafka_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterDescription, location_name: "kafkaCluster"))
+    DescribeConnectorOutput.add_member(:kafka_cluster_client_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterClientAuthenticationDescription, location_name: "kafkaClusterClientAuthentication"))
+    DescribeConnectorOutput.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransitDescription, location_name: "kafkaClusterEncryptionInTransit"))
+    DescribeConnectorOutput.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "kafkaConnectVersion"))
+    DescribeConnectorOutput.add_member(:log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryDescription, location_name: "logDelivery"))
+    DescribeConnectorOutput.add_member(:plugins, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofplugindescription, location_name: "plugins"))
+    DescribeConnectorOutput.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "serviceExecutionRoleArn"))
+    DescribeConnectorOutput.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationDescription, location_name: "workerConfiguration"))
+    DescribeConnectorOutput.add_member(:state_description, ::Smithy::Schema::Shapes::MemberShape.new(target: StateDescription, location_name: "stateDescription"))
     DescribeConnectorOutput.type = Types::DescribeConnectorOutput
-    DescribeConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeConnectorRequest.type = Types::DescribeConnectorRequest
-    DescribeCustomPluginOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    DescribeCustomPluginOutput.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn"))
-    DescribeCustomPluginOutput.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginState, location_name: "customPluginState"))
-    DescribeCustomPluginOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    DescribeCustomPluginOutput.add_member(:latest_revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginRevisionSummary, location_name: "latestRevision"))
-    DescribeCustomPluginOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    DescribeCustomPluginOutput.add_member(:state_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateDescription, location_name: "stateDescription"))
+    DescribeCustomPluginOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    DescribeCustomPluginOutput.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn"))
+    DescribeCustomPluginOutput.add_member(:custom_plugin_state, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginState, location_name: "customPluginState"))
+    DescribeCustomPluginOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    DescribeCustomPluginOutput.add_member(:latest_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginRevisionSummary, location_name: "latestRevision"))
+    DescribeCustomPluginOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    DescribeCustomPluginOutput.add_member(:state_description, ::Smithy::Schema::Shapes::MemberShape.new(target: StateDescription, location_name: "stateDescription"))
     DescribeCustomPluginOutput.type = Types::DescribeCustomPluginOutput
-    DescribeCustomPluginRequest.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "customPluginArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeCustomPluginRequest.add_member(:custom_plugin_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "customPluginArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeCustomPluginRequest.type = Types::DescribeCustomPluginRequest
-    DescribeWorkerConfigurationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    DescribeWorkerConfigurationOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    DescribeWorkerConfigurationOutput.add_member(:latest_revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationRevisionDescription, location_name: "latestRevision"))
-    DescribeWorkerConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    DescribeWorkerConfigurationOutput.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn"))
-    DescribeWorkerConfigurationOutput.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationState, location_name: "workerConfigurationState"))
+    DescribeWorkerConfigurationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    DescribeWorkerConfigurationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    DescribeWorkerConfigurationOutput.add_member(:latest_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationRevisionDescription, location_name: "latestRevision"))
+    DescribeWorkerConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    DescribeWorkerConfigurationOutput.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn"))
+    DescribeWorkerConfigurationOutput.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationState, location_name: "workerConfigurationState"))
     DescribeWorkerConfigurationOutput.type = Types::DescribeWorkerConfigurationOutput
-    DescribeWorkerConfigurationRequest.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeWorkerConfigurationRequest.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeWorkerConfigurationRequest.type = Types::DescribeWorkerConfigurationRequest
-    FirehoseLogDelivery.add_member(:delivery_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "deliveryStream"))
-    FirehoseLogDelivery.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    FirehoseLogDelivery.add_member(:delivery_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "deliveryStream"))
+    FirehoseLogDelivery.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     FirehoseLogDelivery.type = Types::FirehoseLogDelivery
-    FirehoseLogDeliveryDescription.add_member(:delivery_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "deliveryStream"))
-    FirehoseLogDeliveryDescription.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false}))
+    FirehoseLogDeliveryDescription.add_member(:delivery_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "deliveryStream"))
+    FirehoseLogDeliveryDescription.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false}))
     FirehoseLogDeliveryDescription.type = Types::FirehoseLogDeliveryDescription
-    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ForbiddenException.type = Types::ForbiddenException
-    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     InternalServerErrorException.type = Types::InternalServerErrorException
-    KafkaCluster.add_member(:apache_kafka_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApacheKafkaCluster, location_name: "apacheKafkaCluster", traits: {"smithy.api#required" => {}}))
+    KafkaCluster.add_member(:apache_kafka_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ApacheKafkaCluster, location_name: "apacheKafkaCluster", traits: {"smithy.api#required" => {}}))
     KafkaCluster.type = Types::KafkaCluster
-    KafkaClusterClientAuthentication.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterClientAuthenticationType, location_name: "authenticationType", traits: {"smithy.api#required" => {}}))
+    KafkaClusterClientAuthentication.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterClientAuthenticationType, location_name: "authenticationType", traits: {"smithy.api#required" => {}}))
     KafkaClusterClientAuthentication.type = Types::KafkaClusterClientAuthentication
-    KafkaClusterClientAuthenticationDescription.add_member(:authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterClientAuthenticationType, location_name: "authenticationType"))
+    KafkaClusterClientAuthenticationDescription.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterClientAuthenticationType, location_name: "authenticationType"))
     KafkaClusterClientAuthenticationDescription.type = Types::KafkaClusterClientAuthenticationDescription
-    KafkaClusterDescription.add_member(:apache_kafka_cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApacheKafkaClusterDescription, location_name: "apacheKafkaCluster"))
+    KafkaClusterDescription.add_member(:apache_kafka_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ApacheKafkaClusterDescription, location_name: "apacheKafkaCluster"))
     KafkaClusterDescription.type = Types::KafkaClusterDescription
-    KafkaClusterEncryptionInTransit.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterEncryptionInTransitType, location_name: "encryptionType", traits: {"smithy.api#required" => {}}))
+    KafkaClusterEncryptionInTransit.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransitType, location_name: "encryptionType", traits: {"smithy.api#required" => {}}))
     KafkaClusterEncryptionInTransit.type = Types::KafkaClusterEncryptionInTransit
-    KafkaClusterEncryptionInTransitDescription.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KafkaClusterEncryptionInTransitType, location_name: "encryptionType"))
+    KafkaClusterEncryptionInTransitDescription.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransitType, location_name: "encryptionType"))
     KafkaClusterEncryptionInTransitDescription.type = Types::KafkaClusterEncryptionInTransitDescription
-    ListConnectorOperationsRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListConnectorOperationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListConnectorOperationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListConnectorOperationsRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListConnectorOperationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListConnectorOperationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListConnectorOperationsRequest.type = Types::ListConnectorOperationsRequest
-    ListConnectorOperationsResponse.add_member(:connector_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofconnectoroperationsummary, location_name: "connectorOperations"))
-    ListConnectorOperationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListConnectorOperationsResponse.add_member(:connector_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofconnectoroperationsummary, location_name: "connectorOperations"))
+    ListConnectorOperationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
     ListConnectorOperationsResponse.type = Types::ListConnectorOperationsResponse
-    ListConnectorsOutput.add_member(:connectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofconnectorsummary, location_name: "connectors"))
-    ListConnectorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListConnectorsOutput.add_member(:connectors, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofconnectorsummary, location_name: "connectors"))
+    ListConnectorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
     ListConnectorsOutput.type = Types::ListConnectorsOutput
-    ListConnectorsRequest.add_member(:connector_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorNamePrefix", traits: {"smithy.api#httpQuery" => "connectorNamePrefix"}))
-    ListConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListConnectorsRequest.add_member(:connector_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorNamePrefix", traits: {"smithy.api#httpQuery" => "connectorNamePrefix"}))
+    ListConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListConnectorsRequest.type = Types::ListConnectorsRequest
-    ListCustomPluginsOutput.add_member(:custom_plugins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofcustompluginsummary, location_name: "customPlugins"))
-    ListCustomPluginsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCustomPluginsOutput.add_member(:custom_plugins, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofcustompluginsummary, location_name: "customPlugins"))
+    ListCustomPluginsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
     ListCustomPluginsOutput.type = Types::ListCustomPluginsOutput
-    ListCustomPluginsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListCustomPluginsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListCustomPluginsRequest.add_member(:name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "namePrefix", traits: {"smithy.api#httpQuery" => "namePrefix"}))
+    ListCustomPluginsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListCustomPluginsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListCustomPluginsRequest.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "namePrefix", traits: {"smithy.api#httpQuery" => "namePrefix"}))
     ListCustomPluginsRequest.type = Types::ListCustomPluginsRequest
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListWorkerConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListWorkerConfigurationsOutput.add_member(:worker_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofworkerconfigurationsummary, location_name: "workerConfigurations"))
+    ListWorkerConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
+    ListWorkerConfigurationsOutput.add_member(:worker_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofworkerconfigurationsummary, location_name: "workerConfigurations"))
     ListWorkerConfigurationsOutput.type = Types::ListWorkerConfigurationsOutput
-    ListWorkerConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
-    ListWorkerConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
-    ListWorkerConfigurationsRequest.add_member(:name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "namePrefix", traits: {"smithy.api#httpQuery" => "namePrefix"}))
+    ListWorkerConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListWorkerConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListWorkerConfigurationsRequest.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "namePrefix", traits: {"smithy.api#httpQuery" => "namePrefix"}))
     ListWorkerConfigurationsRequest.type = Types::ListWorkerConfigurationsRequest
-    LogDelivery.add_member(:worker_log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerLogDelivery, location_name: "workerLogDelivery", traits: {"smithy.api#required" => {}}))
+    LogDelivery.add_member(:worker_log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerLogDelivery, location_name: "workerLogDelivery", traits: {"smithy.api#required" => {}}))
     LogDelivery.type = Types::LogDelivery
-    LogDeliveryDescription.add_member(:worker_log_delivery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerLogDeliveryDescription, location_name: "workerLogDelivery"))
+    LogDeliveryDescription.add_member(:worker_log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerLogDeliveryDescription, location_name: "workerLogDelivery"))
     LogDeliveryDescription.type = Types::LogDeliveryDescription
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     NotFoundException.type = Types::NotFoundException
-    Plugin.add_member(:custom_plugin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPlugin, location_name: "customPlugin", traits: {"smithy.api#required" => {}}))
+    Plugin.add_member(:custom_plugin, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPlugin, location_name: "customPlugin", traits: {"smithy.api#required" => {}}))
     Plugin.type = Types::Plugin
-    PluginDescription.add_member(:custom_plugin, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginDescription, location_name: "customPlugin"))
+    PluginDescription.add_member(:custom_plugin, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginDescription, location_name: "customPlugin"))
     PluginDescription.type = Types::PluginDescription
-    ProvisionedCapacity.add_member(:mcu_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    ProvisionedCapacity.add_member(:worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ProvisionedCapacity.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ProvisionedCapacity.add_member(:worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ProvisionedCapacity.type = Types::ProvisionedCapacity
-    ProvisionedCapacityDescription.add_member(:mcu_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "mcuCount", traits: {"smithy.api#default" => 0}))
-    ProvisionedCapacityDescription.add_member(:worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "workerCount", traits: {"smithy.api#default" => 0}))
+    ProvisionedCapacityDescription.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "mcuCount", traits: {"smithy.api#default" => 0}))
+    ProvisionedCapacityDescription.add_member(:worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "workerCount", traits: {"smithy.api#default" => 0}))
     ProvisionedCapacityDescription.type = Types::ProvisionedCapacityDescription
-    ProvisionedCapacityUpdate.add_member(:mcu_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    ProvisionedCapacityUpdate.add_member(:worker_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ProvisionedCapacityUpdate.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max8, location_name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ProvisionedCapacityUpdate.add_member(:worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ProvisionedCapacityUpdate.type = Types::ProvisionedCapacityUpdate
-    S3Location.add_member(:bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "bucketArn", traits: {"smithy.api#required" => {}}))
-    S3Location.add_member(:file_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "fileKey", traits: {"smithy.api#required" => {}}))
-    S3Location.add_member(:object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "objectVersion"))
+    S3Location.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "bucketArn", traits: {"smithy.api#required" => {}}))
+    S3Location.add_member(:file_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "fileKey", traits: {"smithy.api#required" => {}}))
+    S3Location.add_member(:object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "objectVersion"))
     S3Location.type = Types::S3Location
-    S3LocationDescription.add_member(:bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "bucketArn"))
-    S3LocationDescription.add_member(:file_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "fileKey"))
-    S3LocationDescription.add_member(:object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "objectVersion"))
+    S3LocationDescription.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "bucketArn"))
+    S3LocationDescription.add_member(:file_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "fileKey"))
+    S3LocationDescription.add_member(:object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "objectVersion"))
     S3LocationDescription.type = Types::S3LocationDescription
-    S3LogDelivery.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
-    S3LogDelivery.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    S3LogDelivery.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
+    S3LogDelivery.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "bucket"))
+    S3LogDelivery.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    S3LogDelivery.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "prefix"))
     S3LogDelivery.type = Types::S3LogDelivery
-    S3LogDeliveryDescription.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
-    S3LogDeliveryDescription.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false}))
-    S3LogDeliveryDescription.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
+    S3LogDeliveryDescription.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "bucket"))
+    S3LogDeliveryDescription.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "enabled", traits: {"smithy.api#default" => false}))
+    S3LogDeliveryDescription.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "prefix"))
     S3LogDeliveryDescription.type = Types::S3LogDeliveryDescription
-    ScaleInPolicy.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ScaleInPolicy.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ScaleInPolicy.type = Types::ScaleInPolicy
-    ScaleInPolicyDescription.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0}))
+    ScaleInPolicyDescription.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0}))
     ScaleInPolicyDescription.type = Types::ScaleInPolicyDescription
-    ScaleInPolicyUpdate.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ScaleInPolicyUpdate.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ScaleInPolicyUpdate.type = Types::ScaleInPolicyUpdate
-    ScaleOutPolicy.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ScaleOutPolicy.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ScaleOutPolicy.type = Types::ScaleOutPolicy
-    ScaleOutPolicyDescription.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0}))
+    ScaleOutPolicyDescription.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0}))
     ScaleOutPolicyDescription.type = Types::ScaleOutPolicyDescription
-    ScaleOutPolicyUpdate.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ScaleOutPolicyUpdate.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max100, location_name: "cpuUtilizationPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ScaleOutPolicyUpdate.type = Types::ScaleOutPolicyUpdate
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    StateDescription.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    StateDescription.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    StateDescription.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "code"))
+    StateDescription.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     StateDescription.type = Types::StateDescription
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
     TagResourceOutput.type = Types::TagResourceOutput
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
     UnauthorizedException.type = Types::UnauthorizedException
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    UpdateConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn"))
-    UpdateConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
-    UpdateConnectorOutput.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorOperationArn"))
+    UpdateConnectorOutput.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn"))
+    UpdateConnectorOutput.add_member(:connector_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorState, location_name: "connectorState"))
+    UpdateConnectorOutput.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorOperationArn"))
     UpdateConnectorOutput.type = Types::UpdateConnectorOutput
-    UpdateConnectorRequest.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUpdate, location_name: "capacity"))
-    UpdateConnectorRequest.add_member(:connector_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorConfigurationUpdate, location_name: "connectorConfiguration"))
-    UpdateConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateConnectorRequest.add_member(:current_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "currentVersion", traits: {"smithy.api#httpQuery" => "currentVersion", "smithy.api#required" => {}}))
+    UpdateConnectorRequest.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUpdate, location_name: "capacity"))
+    UpdateConnectorRequest.add_member(:connector_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorConfigurationUpdate, location_name: "connectorConfiguration"))
+    UpdateConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConnectorRequest.add_member(:current_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "currentVersion", traits: {"smithy.api#httpQuery" => "currentVersion", "smithy.api#required" => {}}))
     UpdateConnectorRequest.type = Types::UpdateConnectorRequest
-    Vpc.add_member(:security_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofString, location_name: "securityGroups"))
-    Vpc.add_member(:subnets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofString, location_name: "subnets", traits: {"smithy.api#required" => {}}))
+    Vpc.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, location_name: "securityGroups"))
+    Vpc.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, location_name: "subnets", traits: {"smithy.api#required" => {}}))
     Vpc.type = Types::Vpc
-    VpcDescription.add_member(:security_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofString, location_name: "securityGroups"))
-    VpcDescription.add_member(:subnets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofString, location_name: "subnets"))
+    VpcDescription.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, location_name: "securityGroups"))
+    VpcDescription.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, location_name: "subnets"))
     VpcDescription.type = Types::VpcDescription
-    WorkerConfiguration.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Longmin1, location_name: "revision", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    WorkerConfiguration.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn", traits: {"smithy.api#required" => {}}))
+    WorkerConfiguration.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Longmin1, location_name: "revision", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    WorkerConfiguration.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn", traits: {"smithy.api#required" => {}}))
     WorkerConfiguration.type = Types::WorkerConfiguration
-    WorkerConfigurationDescription.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
-    WorkerConfigurationDescription.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn"))
+    WorkerConfigurationDescription.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
+    WorkerConfigurationDescription.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn"))
     WorkerConfigurationDescription.type = Types::WorkerConfigurationDescription
-    WorkerConfigurationRevisionDescription.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    WorkerConfigurationRevisionDescription.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    WorkerConfigurationRevisionDescription.add_member(:properties_file_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Sensitivestring, location_name: "propertiesFileContent"))
-    WorkerConfigurationRevisionDescription.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
+    WorkerConfigurationRevisionDescription.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    WorkerConfigurationRevisionDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    WorkerConfigurationRevisionDescription.add_member(:properties_file_content, ::Smithy::Schema::Shapes::MemberShape.new(target: Sensitivestring, location_name: "propertiesFileContent"))
+    WorkerConfigurationRevisionDescription.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
     WorkerConfigurationRevisionDescription.type = Types::WorkerConfigurationRevisionDescription
-    WorkerConfigurationRevisionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    WorkerConfigurationRevisionSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    WorkerConfigurationRevisionSummary.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
+    WorkerConfigurationRevisionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    WorkerConfigurationRevisionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    WorkerConfigurationRevisionSummary.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "revision", traits: {"smithy.api#default" => 0}))
     WorkerConfigurationRevisionSummary.type = Types::WorkerConfigurationRevisionSummary
-    WorkerConfigurationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampiso8601, location_name: "creationTime"))
-    WorkerConfigurationSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    WorkerConfigurationSummary.add_member(:latest_revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationRevisionSummary, location_name: "latestRevision"))
-    WorkerConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    WorkerConfigurationSummary.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerConfigurationArn"))
-    WorkerConfigurationSummary.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationState, location_name: "workerConfigurationState"))
+    WorkerConfigurationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "creationTime"))
+    WorkerConfigurationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    WorkerConfigurationSummary.add_member(:latest_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationRevisionSummary, location_name: "latestRevision"))
+    WorkerConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "name"))
+    WorkerConfigurationSummary.add_member(:worker_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerConfigurationArn"))
+    WorkerConfigurationSummary.add_member(:worker_configuration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationState, location_name: "workerConfigurationState"))
     WorkerConfigurationSummary.type = Types::WorkerConfigurationSummary
-    WorkerLogDelivery.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogsLogDelivery, location_name: "cloudWatchLogs"))
-    WorkerLogDelivery.add_member(:firehose, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FirehoseLogDelivery, location_name: "firehose"))
-    WorkerLogDelivery.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3LogDelivery, location_name: "s3"))
+    WorkerLogDelivery.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsLogDelivery, location_name: "cloudWatchLogs"))
+    WorkerLogDelivery.add_member(:firehose, ::Smithy::Schema::Shapes::MemberShape.new(target: FirehoseLogDelivery, location_name: "firehose"))
+    WorkerLogDelivery.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LogDelivery, location_name: "s3"))
     WorkerLogDelivery.type = Types::WorkerLogDelivery
-    WorkerLogDeliveryDescription.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogsLogDeliveryDescription, location_name: "cloudWatchLogs"))
-    WorkerLogDeliveryDescription.add_member(:firehose, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FirehoseLogDeliveryDescription, location_name: "firehose"))
-    WorkerLogDeliveryDescription.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3LogDeliveryDescription, location_name: "s3"))
+    WorkerLogDeliveryDescription.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsLogDeliveryDescription, location_name: "cloudWatchLogs"))
+    WorkerLogDeliveryDescription.add_member(:firehose, ::Smithy::Schema::Shapes::MemberShape.new(target: FirehoseLogDeliveryDescription, location_name: "firehose"))
+    WorkerLogDeliveryDescription.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LogDeliveryDescription, location_name: "s3"))
     WorkerLogDeliveryDescription.type = Types::WorkerLogDeliveryDescription
-    WorkerSetting.add_member(:capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityDescription, location_name: "capacity"))
+    WorkerSetting.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityDescription, location_name: "capacity"))
     WorkerSetting.type = Types::WorkerSetting
-    Listofconnectoroperationstep.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationStep)
-    Listofconnectoroperationsummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorOperationSummary)
-    Listofconnectorsummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectorSummary)
-    Listofcustompluginsummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPluginSummary)
-    Listofplugin.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Plugin)
-    Listofplugindescription.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PluginDescription)
-    Listofworkerconfigurationsummary.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerConfigurationSummary)
-    ListofString.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
+    Listofconnectoroperationstep.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationStep)
+    Listofconnectoroperationsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationSummary)
+    Listofconnectorsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary)
+    Listofcustompluginsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginSummary)
+    Listofplugin.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Plugin)
+    Listofplugindescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PluginDescription)
+    Listofworkerconfigurationsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationSummary)
+    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
 
     KafkaConnect = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.kafkaconnect#KafkaConnect"
@@ -537,261 +537,261 @@ module Aws::KafkaConnect
       service.add_operation(:create_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#CreateConnector"
         operation.name = "CreateConnector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConnectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateConnectorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = CreateConnectorRequest
+        operation.output = CreateConnectorOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/connectors", "code" => 200}}
       end)
       service.add_operation(:create_custom_plugin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#CreateCustomPlugin"
         operation.name = "CreateCustomPlugin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCustomPluginRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCustomPluginOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = CreateCustomPluginRequest
+        operation.output = CreateCustomPluginOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/custom-plugins", "code" => 200}}
       end)
       service.add_operation(:create_worker_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#CreateWorkerConfiguration"
         operation.name = "CreateWorkerConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkerConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWorkerConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = CreateWorkerConfigurationRequest
+        operation.output = CreateWorkerConfigurationOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/worker-configurations", "code" => 200}}
       end)
       service.add_operation(:delete_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#DeleteConnector"
         operation.name = "DeleteConnector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConnectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteConnectorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteConnectorRequest
+        operation.output = DeleteConnectorOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/connectors/{connectorArn}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_custom_plugin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#DeleteCustomPlugin"
         operation.name = "DeleteCustomPlugin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCustomPluginRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCustomPluginOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteCustomPluginRequest
+        operation.output = DeleteCustomPluginOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/custom-plugins/{customPluginArn}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_worker_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#DeleteWorkerConfiguration"
         operation.name = "DeleteWorkerConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWorkerConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteWorkerConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DeleteWorkerConfigurationRequest
+        operation.output = DeleteWorkerConfigurationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v1/worker-configurations/{workerConfigurationArn}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#DescribeConnector"
         operation.name = "DescribeConnector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConnectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConnectorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeConnectorRequest
+        operation.output = DescribeConnectorOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/connectors/{connectorArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_connector_operation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#DescribeConnectorOperation"
         operation.name = "DescribeConnectorOperation"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConnectorOperationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeConnectorOperationResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeConnectorOperationRequest
+        operation.output = DescribeConnectorOperationResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/connectorOperations/{connectorOperationArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_custom_plugin, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#DescribeCustomPlugin"
         operation.name = "DescribeCustomPlugin"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCustomPluginRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCustomPluginOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeCustomPluginRequest
+        operation.output = DescribeCustomPluginOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/custom-plugins/{customPluginArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_worker_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#DescribeWorkerConfiguration"
         operation.name = "DescribeWorkerConfiguration"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeWorkerConfigurationRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeWorkerConfigurationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = DescribeWorkerConfigurationRequest
+        operation.output = DescribeWorkerConfigurationOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/worker-configurations/{workerConfigurationArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_connector_operations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#ListConnectorOperations"
         operation.name = "ListConnectorOperations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectorOperationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectorOperationsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListConnectorOperationsRequest
+        operation.output = ListConnectorOperationsResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/connectors/{connectorArn}/operations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListConnectorOperations.new
       end)
       service.add_operation(:list_connectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#ListConnectors"
         operation.name = "ListConnectors"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectorsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConnectorsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListConnectorsRequest
+        operation.output = ListConnectorsOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/connectors", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListConnectors.new
       end)
       service.add_operation(:list_custom_plugins, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#ListCustomPlugins"
         operation.name = "ListCustomPlugins"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCustomPluginsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCustomPluginsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListCustomPluginsRequest
+        operation.output = ListCustomPluginsOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/custom-plugins", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListCustomPlugins.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"uri" => "/v1/tags/{resourceArn}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_worker_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#ListWorkerConfigurations"
         operation.name = "ListWorkerConfigurations"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkerConfigurationsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListWorkerConfigurationsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = ListWorkerConfigurationsRequest
+        operation.output = ListWorkerConfigurationsOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/worker-configurations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListWorkerConfigurations.new
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"uri" => "/v1/tags/{resourceArn}", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"uri" => "/v1/tags/{resourceArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#UpdateConnector"
         operation.name = "UpdateConnector"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateConnectorRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateConnectorOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.input = UpdateConnectorRequest
+        operation.output = UpdateConnectorOutput
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/connectors/{connectorArn}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end

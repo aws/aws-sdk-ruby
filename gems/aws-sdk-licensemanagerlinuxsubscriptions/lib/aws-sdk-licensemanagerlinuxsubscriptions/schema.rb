@@ -58,129 +58,129 @@ module Aws::LicenseManagerLinuxSubscriptions
     UpdateServiceSettingsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettingsOutput", name: "UpdateServiceSettingsOutput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client"})
 
-    DeregisterSubscriptionProviderRequest.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderArn, location_name: "SubscriptionProviderArn", traits: {"smithy.api#required" => {}}))
+    DeregisterSubscriptionProviderRequest.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, location_name: "SubscriptionProviderArn", traits: {"smithy.api#required" => {}}))
     DeregisterSubscriptionProviderRequest.type = Types::DeregisterSubscriptionProviderRequest
     DeregisterSubscriptionProviderResponse.type = Types::DeregisterSubscriptionProviderResponse
-    Filter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
-    Filter.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "Values"))
-    Filter.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operator, location_name: "Operator"))
+    Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
+    Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "Values"))
+    Filter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, location_name: "Operator"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Filter)
-    GetRegisteredSubscriptionProviderRequest.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderArn, location_name: "SubscriptionProviderArn", traits: {"smithy.api#required" => {}}))
+    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter)
+    GetRegisteredSubscriptionProviderRequest.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, location_name: "SubscriptionProviderArn", traits: {"smithy.api#required" => {}}))
     GetRegisteredSubscriptionProviderRequest.type = Types::GetRegisteredSubscriptionProviderRequest
-    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderArn, location_name: "SubscriptionProviderArn"))
-    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderSource, location_name: "SubscriptionProviderSource"))
-    GetRegisteredSubscriptionProviderResponse.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
-    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderStatus, location_name: "SubscriptionProviderStatus"))
-    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderStatusMessage"))
-    GetRegisteredSubscriptionProviderResponse.add_member(:last_successful_data_retrieval_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LastSuccessfulDataRetrievalTime"))
+    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, location_name: "SubscriptionProviderArn"))
+    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource, location_name: "SubscriptionProviderSource"))
+    GetRegisteredSubscriptionProviderResponse.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn"))
+    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderStatus, location_name: "SubscriptionProviderStatus"))
+    GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderStatusMessage"))
+    GetRegisteredSubscriptionProviderResponse.add_member(:last_successful_data_retrieval_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LastSuccessfulDataRetrievalTime"))
     GetRegisteredSubscriptionProviderResponse.type = Types::GetRegisteredSubscriptionProviderResponse
     GetServiceSettingsInput.type = Types::GetServiceSettingsInput
-    GetServiceSettingsOutput.add_member(:linux_subscriptions_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinuxSubscriptionsDiscovery, location_name: "LinuxSubscriptionsDiscovery"))
-    GetServiceSettingsOutput.add_member(:linux_subscriptions_discovery_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinuxSubscriptionsDiscoverySettings, location_name: "LinuxSubscriptionsDiscoverySettings"))
-    GetServiceSettingsOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
-    GetServiceSettingsOutput.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringMap, location_name: "StatusMessage"))
-    GetServiceSettingsOutput.add_member(:home_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "HomeRegions"))
+    GetServiceSettingsOutput.add_member(:linux_subscriptions_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxSubscriptionsDiscovery, location_name: "LinuxSubscriptionsDiscovery"))
+    GetServiceSettingsOutput.add_member(:linux_subscriptions_discovery_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxSubscriptionsDiscoverySettings, location_name: "LinuxSubscriptionsDiscoverySettings"))
+    GetServiceSettingsOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "Status"))
+    GetServiceSettingsOutput.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, location_name: "StatusMessage"))
+    GetServiceSettingsOutput.add_member(:home_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "HomeRegions"))
     GetServiceSettingsOutput.type = Types::GetServiceSettingsOutput
-    Instance.add_member(:ami_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "AmiId"))
-    Instance.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "InstanceID"))
-    Instance.add_member(:instance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "InstanceType"))
-    Instance.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "AccountID"))
-    Instance.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Status"))
-    Instance.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
-    Instance.add_member(:usage_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "UsageOperation"))
-    Instance.add_member(:product_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "ProductCode"))
-    Instance.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LastUpdatedTime"))
-    Instance.add_member(:subscription_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionName"))
-    Instance.add_member(:os_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OsVersion"))
-    Instance.add_member(:subscription_provider_create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderCreateTime"))
-    Instance.add_member(:subscription_provider_update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderUpdateTime"))
-    Instance.add_member(:dual_subscription, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DualSubscription"))
-    Instance.add_member(:registered_with_subscription_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegisteredWithSubscriptionProvider"))
+    Instance.add_member(:ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "AmiId"))
+    Instance.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "InstanceID"))
+    Instance.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "InstanceType"))
+    Instance.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "AccountID"))
+    Instance.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Status"))
+    Instance.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Region"))
+    Instance.add_member(:usage_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "UsageOperation"))
+    Instance.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeList, location_name: "ProductCode"))
+    Instance.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LastUpdatedTime"))
+    Instance.add_member(:subscription_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionName"))
+    Instance.add_member(:os_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "OsVersion"))
+    Instance.add_member(:subscription_provider_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderCreateTime"))
+    Instance.add_member(:subscription_provider_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderUpdateTime"))
+    Instance.add_member(:dual_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "DualSubscription"))
+    Instance.add_member(:registered_with_subscription_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "RegisteredWithSubscriptionProvider"))
     Instance.type = Types::Instance
-    InstanceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Instance)
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance)
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    LinuxSubscriptionsDiscoverySettings.add_member(:source_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "SourceRegions", traits: {"smithy.api#required" => {}}))
-    LinuxSubscriptionsDiscoverySettings.add_member(:organization_integration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationIntegration, location_name: "OrganizationIntegration", traits: {"smithy.api#required" => {}}))
+    LinuxSubscriptionsDiscoverySettings.add_member(:source_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "SourceRegions", traits: {"smithy.api#required" => {}}))
+    LinuxSubscriptionsDiscoverySettings.add_member(:organization_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationIntegration, location_name: "OrganizationIntegration", traits: {"smithy.api#required" => {}}))
     LinuxSubscriptionsDiscoverySettings.type = Types::LinuxSubscriptionsDiscoverySettings
-    ListLinuxSubscriptionInstancesInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListLinuxSubscriptionInstancesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListLinuxSubscriptionInstancesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}}))
+    ListLinuxSubscriptionInstancesInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListLinuxSubscriptionInstancesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListLinuxSubscriptionInstancesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}}))
     ListLinuxSubscriptionInstancesInput.type = Types::ListLinuxSubscriptionInstancesInput
-    ListLinuxSubscriptionInstancesOutput.add_member(:instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceList, location_name: "Instances"))
-    ListLinuxSubscriptionInstancesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListLinuxSubscriptionInstancesOutput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceList, location_name: "Instances"))
+    ListLinuxSubscriptionInstancesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListLinuxSubscriptionInstancesOutput.type = Types::ListLinuxSubscriptionInstancesOutput
-    ListLinuxSubscriptionsInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListLinuxSubscriptionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
-    ListLinuxSubscriptionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}}))
+    ListLinuxSubscriptionsInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, location_name: "Filters"))
+    ListLinuxSubscriptionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults"))
+    ListLinuxSubscriptionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}}))
     ListLinuxSubscriptionsInput.type = Types::ListLinuxSubscriptionsInput
-    ListLinuxSubscriptionsOutput.add_member(:subscriptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionList, location_name: "Subscriptions"))
-    ListLinuxSubscriptionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListLinuxSubscriptionsOutput.add_member(:subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionList, location_name: "Subscriptions"))
+    ListLinuxSubscriptionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListLinuxSubscriptionsOutput.type = Types::ListLinuxSubscriptionsOutput
-    ListRegisteredSubscriptionProvidersRequest.add_member(:subscription_provider_sources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderSourceList, location_name: "SubscriptionProviderSources"))
-    ListRegisteredSubscriptionProvidersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListRegisteredSubscriptionProvidersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListRegisteredSubscriptionProvidersRequest.add_member(:subscription_provider_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSourceList, location_name: "SubscriptionProviderSources"))
+    ListRegisteredSubscriptionProvidersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, location_name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListRegisteredSubscriptionProvidersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListRegisteredSubscriptionProvidersRequest.type = Types::ListRegisteredSubscriptionProvidersRequest
-    ListRegisteredSubscriptionProvidersResponse.add_member(:registered_subscription_providers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisteredSubscriptionProviderList, location_name: "RegisteredSubscriptionProviders"))
-    ListRegisteredSubscriptionProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
+    ListRegisteredSubscriptionProvidersResponse.add_member(:registered_subscription_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: RegisteredSubscriptionProviderList, location_name: "RegisteredSubscriptionProviders"))
+    ListRegisteredSubscriptionProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "NextToken"))
     ListRegisteredSubscriptionProvidersResponse.type = Types::ListRegisteredSubscriptionProvidersResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ProductCodeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    RegisterSubscriptionProviderRequest.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderSource, location_name: "SubscriptionProviderSource", traits: {"smithy.api#required" => {}}))
-    RegisterSubscriptionProviderRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn", traits: {"smithy.api#required" => {}}))
-    RegisterSubscriptionProviderRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ProductCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    RegisterSubscriptionProviderRequest.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource, location_name: "SubscriptionProviderSource", traits: {"smithy.api#required" => {}}))
+    RegisterSubscriptionProviderRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn", traits: {"smithy.api#required" => {}}))
+    RegisterSubscriptionProviderRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "Tags"))
     RegisterSubscriptionProviderRequest.type = Types::RegisterSubscriptionProviderRequest
-    RegisterSubscriptionProviderResponse.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderSource, location_name: "SubscriptionProviderSource"))
-    RegisterSubscriptionProviderResponse.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderArn"))
-    RegisterSubscriptionProviderResponse.add_member(:subscription_provider_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderStatus, location_name: "SubscriptionProviderStatus"))
+    RegisterSubscriptionProviderResponse.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource, location_name: "SubscriptionProviderSource"))
+    RegisterSubscriptionProviderResponse.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderArn"))
+    RegisterSubscriptionProviderResponse.add_member(:subscription_provider_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderStatus, location_name: "SubscriptionProviderStatus"))
     RegisterSubscriptionProviderResponse.type = Types::RegisterSubscriptionProviderResponse
-    RegisteredSubscriptionProvider.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderArn, location_name: "SubscriptionProviderArn"))
-    RegisteredSubscriptionProvider.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderSource, location_name: "SubscriptionProviderSource"))
-    RegisteredSubscriptionProvider.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
-    RegisteredSubscriptionProvider.add_member(:subscription_provider_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderStatus, location_name: "SubscriptionProviderStatus"))
-    RegisteredSubscriptionProvider.add_member(:subscription_provider_status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderStatusMessage"))
-    RegisteredSubscriptionProvider.add_member(:last_successful_data_retrieval_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LastSuccessfulDataRetrievalTime"))
+    RegisteredSubscriptionProvider.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, location_name: "SubscriptionProviderArn"))
+    RegisteredSubscriptionProvider.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource, location_name: "SubscriptionProviderSource"))
+    RegisteredSubscriptionProvider.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, location_name: "SecretArn"))
+    RegisteredSubscriptionProvider.add_member(:subscription_provider_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderStatus, location_name: "SubscriptionProviderStatus"))
+    RegisteredSubscriptionProvider.add_member(:subscription_provider_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "SubscriptionProviderStatusMessage"))
+    RegisteredSubscriptionProvider.add_member(:last_successful_data_retrieval_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "LastSuccessfulDataRetrievalTime"))
     RegisteredSubscriptionProvider.type = Types::RegisteredSubscriptionProvider
-    RegisteredSubscriptionProviderList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisteredSubscriptionProvider)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    RegisteredSubscriptionProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegisteredSubscriptionProvider)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    StringMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    StringMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    Subscription.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
-    Subscription.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type"))
-    Subscription.add_member(:instance_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoxLong, location_name: "InstanceCount"))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    Subscription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name"))
+    Subscription.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Type"))
+    Subscription.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, location_name: "InstanceCount"))
     Subscription.type = Types::Subscription
-    SubscriptionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subscription)
-    SubscriptionProviderSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderSource)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    SubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription)
+    SubscriptionProviderSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    Tags.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionProviderArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateServiceSettingsInput.add_member(:linux_subscriptions_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinuxSubscriptionsDiscovery, location_name: "LinuxSubscriptionsDiscovery", traits: {"smithy.api#required" => {}}))
-    UpdateServiceSettingsInput.add_member(:linux_subscriptions_discovery_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinuxSubscriptionsDiscoverySettings, location_name: "LinuxSubscriptionsDiscoverySettings", traits: {"smithy.api#required" => {}}))
-    UpdateServiceSettingsInput.add_member(:allow_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "AllowUpdate"))
+    UpdateServiceSettingsInput.add_member(:linux_subscriptions_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxSubscriptionsDiscovery, location_name: "LinuxSubscriptionsDiscovery", traits: {"smithy.api#required" => {}}))
+    UpdateServiceSettingsInput.add_member(:linux_subscriptions_discovery_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxSubscriptionsDiscoverySettings, location_name: "LinuxSubscriptionsDiscoverySettings", traits: {"smithy.api#required" => {}}))
+    UpdateServiceSettingsInput.add_member(:allow_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: "AllowUpdate"))
     UpdateServiceSettingsInput.type = Types::UpdateServiceSettingsInput
-    UpdateServiceSettingsOutput.add_member(:linux_subscriptions_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinuxSubscriptionsDiscovery, location_name: "LinuxSubscriptionsDiscovery"))
-    UpdateServiceSettingsOutput.add_member(:linux_subscriptions_discovery_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinuxSubscriptionsDiscoverySettings, location_name: "LinuxSubscriptionsDiscoverySettings"))
-    UpdateServiceSettingsOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
-    UpdateServiceSettingsOutput.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringMap, location_name: "StatusMessage"))
-    UpdateServiceSettingsOutput.add_member(:home_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "HomeRegions"))
+    UpdateServiceSettingsOutput.add_member(:linux_subscriptions_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxSubscriptionsDiscovery, location_name: "LinuxSubscriptionsDiscovery"))
+    UpdateServiceSettingsOutput.add_member(:linux_subscriptions_discovery_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxSubscriptionsDiscoverySettings, location_name: "LinuxSubscriptionsDiscoverySettings"))
+    UpdateServiceSettingsOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "Status"))
+    UpdateServiceSettingsOutput.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, location_name: "StatusMessage"))
+    UpdateServiceSettingsOutput.add_member(:home_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "HomeRegions"))
     UpdateServiceSettingsOutput.type = Types::UpdateServiceSettingsOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     LicenseManagerLinuxSubscriptions = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -191,115 +191,115 @@ module Aws::LicenseManagerLinuxSubscriptions
       service.add_operation(:deregister_subscription_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#DeregisterSubscriptionProvider"
         operation.name = "DeregisterSubscriptionProvider"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterSubscriptionProviderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeregisterSubscriptionProviderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeregisterSubscriptionProviderRequest
+        operation.output = DeregisterSubscriptionProviderResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/DeregisterSubscriptionProvider"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_registered_subscription_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#GetRegisteredSubscriptionProvider"
         operation.name = "GetRegisteredSubscriptionProvider"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegisteredSubscriptionProviderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegisteredSubscriptionProviderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetRegisteredSubscriptionProviderRequest
+        operation.output = GetRegisteredSubscriptionProviderResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/GetRegisteredSubscriptionProvider"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_service_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettings"
         operation.name = "GetServiceSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceSettingsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetServiceSettingsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetServiceSettingsInput
+        operation.output = GetServiceSettingsOutput
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/GetServiceSettings"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:list_linux_subscription_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionInstances"
         operation.name = "ListLinuxSubscriptionInstances"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinuxSubscriptionInstancesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinuxSubscriptionInstancesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListLinuxSubscriptionInstancesInput
+        operation.output = ListLinuxSubscriptionInstancesOutput
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/ListLinuxSubscriptionInstances"}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListLinuxSubscriptionInstances.new
       end)
       service.add_operation(:list_linux_subscriptions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptions"
         operation.name = "ListLinuxSubscriptions"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinuxSubscriptionsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLinuxSubscriptionsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListLinuxSubscriptionsInput
+        operation.output = ListLinuxSubscriptionsOutput
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/ListLinuxSubscriptions"}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListLinuxSubscriptions.new
       end)
       service.add_operation(:list_registered_subscription_providers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#ListRegisteredSubscriptionProviders"
         operation.name = "ListRegisteredSubscriptionProviders"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegisteredSubscriptionProvidersRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegisteredSubscriptionProvidersResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListRegisteredSubscriptionProvidersRequest
+        operation.output = ListRegisteredSubscriptionProvidersResponse
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/ListRegisteredSubscriptionProviders"}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListRegisteredSubscriptionProviders.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:register_subscription_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#RegisterSubscriptionProvider"
         operation.name = "RegisterSubscriptionProvider"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterSubscriptionProviderRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegisterSubscriptionProviderResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RegisterSubscriptionProviderRequest
+        operation.output = RegisterSubscriptionProviderResponse
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/RegisterSubscriptionProvider"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_service_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettings"
         operation.name = "UpdateServiceSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceSettingsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateServiceSettingsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateServiceSettingsInput
+        operation.output = UpdateServiceSettingsOutput
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/subscription/UpdateServiceSettings"}, "smithy.api#idempotent" => {}}
       end)
     end

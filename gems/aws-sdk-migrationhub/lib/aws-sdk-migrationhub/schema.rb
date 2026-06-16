@@ -106,226 +106,226 @@ module Aws::MigrationHub
     UpdateDateTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.migrationhub#UpdateDateTime", name: "UpdateDateTime")
     UpdateType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.migrationhub#UpdateType", name: "UpdateType")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ApplicationIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId)
-    ApplicationState.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
-    ApplicationState.add_member(:application_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "ApplicationStatus"))
-    ApplicationState.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "LastUpdatedTime"))
+    ApplicationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId)
+    ApplicationState.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "ApplicationId"))
+    ApplicationState.add_member(:application_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, location_name: "ApplicationStatus"))
+    ApplicationState.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, location_name: "LastUpdatedTime"))
     ApplicationState.type = Types::ApplicationState
-    ApplicationStateList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationState)
-    ApplicationStatus.add_member(:not_started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
-    ApplicationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ApplicationStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    AssociateCreatedArtifactRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    AssociateCreatedArtifactRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    AssociateCreatedArtifactRequest.add_member(:created_artifact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedArtifact, location_name: "CreatedArtifact", traits: {"smithy.api#required" => {}}))
-    AssociateCreatedArtifactRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    ApplicationStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState)
+    ApplicationStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
+    ApplicationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ApplicationStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    AssociateCreatedArtifactRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    AssociateCreatedArtifactRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    AssociateCreatedArtifactRequest.add_member(:created_artifact, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifact, location_name: "CreatedArtifact", traits: {"smithy.api#required" => {}}))
+    AssociateCreatedArtifactRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     AssociateCreatedArtifactRequest.type = Types::AssociateCreatedArtifactRequest
     AssociateCreatedArtifactResult.type = Types::AssociateCreatedArtifactResult
-    AssociateDiscoveredResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    AssociateDiscoveredResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    AssociateDiscoveredResourceRequest.add_member(:discovered_resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoveredResource, location_name: "DiscoveredResource", traits: {"smithy.api#required" => {}}))
-    AssociateDiscoveredResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    AssociateDiscoveredResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    AssociateDiscoveredResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    AssociateDiscoveredResourceRequest.add_member(:discovered_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResource, location_name: "DiscoveredResource", traits: {"smithy.api#required" => {}}))
+    AssociateDiscoveredResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     AssociateDiscoveredResourceRequest.type = Types::AssociateDiscoveredResourceRequest
     AssociateDiscoveredResourceResult.type = Types::AssociateDiscoveredResourceResult
-    AssociateSourceResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    AssociateSourceResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    AssociateSourceResourceRequest.add_member(:source_resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceResource, location_name: "SourceResource", traits: {"smithy.api#required" => {}}))
-    AssociateSourceResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    AssociateSourceResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    AssociateSourceResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    AssociateSourceResourceRequest.add_member(:source_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResource, location_name: "SourceResource", traits: {"smithy.api#required" => {}}))
+    AssociateSourceResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     AssociateSourceResourceRequest.type = Types::AssociateSourceResourceRequest
     AssociateSourceResourceResult.type = Types::AssociateSourceResourceResult
-    CreateProgressUpdateStreamRequest.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStreamName", traits: {"smithy.api#required" => {}}))
-    CreateProgressUpdateStreamRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    CreateProgressUpdateStreamRequest.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStreamName", traits: {"smithy.api#required" => {}}))
+    CreateProgressUpdateStreamRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     CreateProgressUpdateStreamRequest.type = Types::CreateProgressUpdateStreamRequest
     CreateProgressUpdateStreamResult.type = Types::CreateProgressUpdateStreamResult
-    CreatedArtifact.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedArtifactName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreatedArtifact.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedArtifactDescription, location_name: "Description"))
+    CreatedArtifact.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifactName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreatedArtifact.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifactDescription, location_name: "Description"))
     CreatedArtifact.type = Types::CreatedArtifact
-    CreatedArtifactList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedArtifact)
-    DeleteProgressUpdateStreamRequest.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStreamName", traits: {"smithy.api#required" => {}}))
-    DeleteProgressUpdateStreamRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    CreatedArtifactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifact)
+    DeleteProgressUpdateStreamRequest.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStreamName", traits: {"smithy.api#required" => {}}))
+    DeleteProgressUpdateStreamRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     DeleteProgressUpdateStreamRequest.type = Types::DeleteProgressUpdateStreamRequest
     DeleteProgressUpdateStreamResult.type = Types::DeleteProgressUpdateStreamResult
-    DescribeApplicationStateRequest.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationStateRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "ApplicationId", traits: {"smithy.api#required" => {}}))
     DescribeApplicationStateRequest.type = Types::DescribeApplicationStateRequest
-    DescribeApplicationStateResult.add_member(:application_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "ApplicationStatus"))
-    DescribeApplicationStateResult.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "LastUpdatedTime"))
+    DescribeApplicationStateResult.add_member(:application_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, location_name: "ApplicationStatus"))
+    DescribeApplicationStateResult.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, location_name: "LastUpdatedTime"))
     DescribeApplicationStateResult.type = Types::DescribeApplicationStateResult
-    DescribeMigrationTaskRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    DescribeMigrationTaskRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    DescribeMigrationTaskRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    DescribeMigrationTaskRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
     DescribeMigrationTaskRequest.type = Types::DescribeMigrationTaskRequest
-    DescribeMigrationTaskResult.add_member(:migration_task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTask, location_name: "MigrationTask"))
+    DescribeMigrationTaskResult.add_member(:migration_task, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTask, location_name: "MigrationTask"))
     DescribeMigrationTaskResult.type = Types::DescribeMigrationTaskResult
-    DisassociateCreatedArtifactRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    DisassociateCreatedArtifactRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    DisassociateCreatedArtifactRequest.add_member(:created_artifact_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedArtifactName, location_name: "CreatedArtifactName", traits: {"smithy.api#required" => {}}))
-    DisassociateCreatedArtifactRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    DisassociateCreatedArtifactRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    DisassociateCreatedArtifactRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    DisassociateCreatedArtifactRequest.add_member(:created_artifact_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifactName, location_name: "CreatedArtifactName", traits: {"smithy.api#required" => {}}))
+    DisassociateCreatedArtifactRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     DisassociateCreatedArtifactRequest.type = Types::DisassociateCreatedArtifactRequest
     DisassociateCreatedArtifactResult.type = Types::DisassociateCreatedArtifactResult
-    DisassociateDiscoveredResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    DisassociateDiscoveredResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    DisassociateDiscoveredResourceRequest.add_member(:configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "ConfigurationId", traits: {"smithy.api#required" => {}}))
-    DisassociateDiscoveredResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    DisassociateDiscoveredResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    DisassociateDiscoveredResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    DisassociateDiscoveredResourceRequest.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationId, location_name: "ConfigurationId", traits: {"smithy.api#required" => {}}))
+    DisassociateDiscoveredResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     DisassociateDiscoveredResourceRequest.type = Types::DisassociateDiscoveredResourceRequest
     DisassociateDiscoveredResourceResult.type = Types::DisassociateDiscoveredResourceResult
-    DisassociateSourceResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    DisassociateSourceResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    DisassociateSourceResourceRequest.add_member(:source_resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceResourceName, location_name: "SourceResourceName", traits: {"smithy.api#required" => {}}))
-    DisassociateSourceResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    DisassociateSourceResourceRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    DisassociateSourceResourceRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    DisassociateSourceResourceRequest.add_member(:source_resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResourceName, location_name: "SourceResourceName", traits: {"smithy.api#required" => {}}))
+    DisassociateSourceResourceRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     DisassociateSourceResourceRequest.type = Types::DisassociateSourceResourceRequest
     DisassociateSourceResourceResult.type = Types::DisassociateSourceResourceResult
-    DiscoveredResource.add_member(:configuration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "ConfigurationId", traits: {"smithy.api#required" => {}}))
-    DiscoveredResource.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoveredResourceDescription, location_name: "Description"))
+    DiscoveredResource.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationId, location_name: "ConfigurationId", traits: {"smithy.api#required" => {}}))
+    DiscoveredResource.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResourceDescription, location_name: "Description"))
     DiscoveredResource.type = Types::DiscoveredResource
-    DiscoveredResourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoveredResource)
-    DryRunOperation.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DiscoveredResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResource)
+    DryRunOperation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     DryRunOperation.type = Types::DryRunOperation
-    HomeRegionNotSetException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    HomeRegionNotSetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     HomeRegionNotSetException.type = Types::HomeRegionNotSetException
-    ImportMigrationTaskRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    ImportMigrationTaskRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    ImportMigrationTaskRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    ImportMigrationTaskRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    ImportMigrationTaskRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    ImportMigrationTaskRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     ImportMigrationTaskRequest.type = Types::ImportMigrationTaskRequest
     ImportMigrationTaskResult.type = Types::ImportMigrationTaskResult
-    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InternalServerError.type = Types::InternalServerError
-    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     InvalidInputException.type = Types::InvalidInputException
-    LatestResourceAttributeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAttribute)
-    ListApplicationStatesRequest.add_member(:application_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationIds, location_name: "ApplicationIds"))
-    ListApplicationStatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListApplicationStatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    LatestResourceAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttribute)
+    ListApplicationStatesRequest.add_member(:application_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationIds, location_name: "ApplicationIds"))
+    ListApplicationStatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListApplicationStatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListApplicationStatesRequest.type = Types::ListApplicationStatesRequest
-    ListApplicationStatesResult.add_member(:application_state_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStateList, location_name: "ApplicationStateList"))
-    ListApplicationStatesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListApplicationStatesResult.add_member(:application_state_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStateList, location_name: "ApplicationStateList"))
+    ListApplicationStatesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     ListApplicationStatesResult.type = Types::ListApplicationStatesResult
-    ListCreatedArtifactsRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    ListCreatedArtifactsRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    ListCreatedArtifactsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListCreatedArtifactsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsCreatedArtifacts, location_name: "MaxResults"))
+    ListCreatedArtifactsRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    ListCreatedArtifactsRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    ListCreatedArtifactsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListCreatedArtifactsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsCreatedArtifacts, location_name: "MaxResults"))
     ListCreatedArtifactsRequest.type = Types::ListCreatedArtifactsRequest
-    ListCreatedArtifactsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListCreatedArtifactsResult.add_member(:created_artifact_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedArtifactList, location_name: "CreatedArtifactList"))
+    ListCreatedArtifactsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListCreatedArtifactsResult.add_member(:created_artifact_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifactList, location_name: "CreatedArtifactList"))
     ListCreatedArtifactsResult.type = Types::ListCreatedArtifactsResult
-    ListDiscoveredResourcesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    ListDiscoveredResourcesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    ListDiscoveredResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListDiscoveredResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsResources, location_name: "MaxResults"))
+    ListDiscoveredResourcesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    ListDiscoveredResourcesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    ListDiscoveredResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListDiscoveredResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsResources, location_name: "MaxResults"))
     ListDiscoveredResourcesRequest.type = Types::ListDiscoveredResourcesRequest
-    ListDiscoveredResourcesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListDiscoveredResourcesResult.add_member(:discovered_resource_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiscoveredResourceList, location_name: "DiscoveredResourceList"))
+    ListDiscoveredResourcesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListDiscoveredResourcesResult.add_member(:discovered_resource_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResourceList, location_name: "DiscoveredResourceList"))
     ListDiscoveredResourcesResult.type = Types::ListDiscoveredResourcesResult
-    ListMigrationTaskUpdatesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    ListMigrationTaskUpdatesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    ListMigrationTaskUpdatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListMigrationTaskUpdatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMigrationTaskUpdatesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    ListMigrationTaskUpdatesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    ListMigrationTaskUpdatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListMigrationTaskUpdatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListMigrationTaskUpdatesRequest.type = Types::ListMigrationTaskUpdatesRequest
-    ListMigrationTaskUpdatesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListMigrationTaskUpdatesResult.add_member(:migration_task_update_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskUpdateList, location_name: "MigrationTaskUpdateList"))
+    ListMigrationTaskUpdatesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListMigrationTaskUpdatesResult.add_member(:migration_task_update_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskUpdateList, location_name: "MigrationTaskUpdateList"))
     ListMigrationTaskUpdatesResult.type = Types::ListMigrationTaskUpdatesResult
-    ListMigrationTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListMigrationTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListMigrationTasksRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "ResourceName"))
+    ListMigrationTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListMigrationTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
+    ListMigrationTasksRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "ResourceName"))
     ListMigrationTasksRequest.type = Types::ListMigrationTasksRequest
-    ListMigrationTasksResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListMigrationTasksResult.add_member(:migration_task_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskSummaryList, location_name: "MigrationTaskSummaryList"))
+    ListMigrationTasksResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListMigrationTasksResult.add_member(:migration_task_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskSummaryList, location_name: "MigrationTaskSummaryList"))
     ListMigrationTasksResult.type = Types::ListMigrationTasksResult
-    ListProgressUpdateStreamsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListProgressUpdateStreamsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListProgressUpdateStreamsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListProgressUpdateStreamsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults"))
     ListProgressUpdateStreamsRequest.type = Types::ListProgressUpdateStreamsRequest
-    ListProgressUpdateStreamsResult.add_member(:progress_update_stream_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStreamSummaryList, location_name: "ProgressUpdateStreamSummaryList"))
-    ListProgressUpdateStreamsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListProgressUpdateStreamsResult.add_member(:progress_update_stream_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStreamSummaryList, location_name: "ProgressUpdateStreamSummaryList"))
+    ListProgressUpdateStreamsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
     ListProgressUpdateStreamsResult.type = Types::ListProgressUpdateStreamsResult
-    ListSourceResourcesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    ListSourceResourcesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    ListSourceResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListSourceResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsSourceResources, location_name: "MaxResults"))
+    ListSourceResourcesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    ListSourceResourcesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    ListSourceResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListSourceResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsSourceResources, location_name: "MaxResults"))
     ListSourceResourcesRequest.type = Types::ListSourceResourcesRequest
-    ListSourceResourcesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListSourceResourcesResult.add_member(:source_resource_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceResourceList, location_name: "SourceResourceList"))
+    ListSourceResourcesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "NextToken"))
+    ListSourceResourcesResult.add_member(:source_resource_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResourceList, location_name: "SourceResourceList"))
     ListSourceResourcesResult.type = Types::ListSourceResourcesResult
-    MigrationTask.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream"))
-    MigrationTask.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName"))
-    MigrationTask.add_member(:task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Task, location_name: "Task"))
-    MigrationTask.add_member(:update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "UpdateDateTime"))
-    MigrationTask.add_member(:resource_attribute_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LatestResourceAttributeList, location_name: "ResourceAttributeList"))
+    MigrationTask.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream"))
+    MigrationTask.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName"))
+    MigrationTask.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, location_name: "Task"))
+    MigrationTask.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, location_name: "UpdateDateTime"))
+    MigrationTask.add_member(:resource_attribute_list, ::Smithy::Schema::Shapes::MemberShape.new(target: LatestResourceAttributeList, location_name: "ResourceAttributeList"))
     MigrationTask.type = Types::MigrationTask
-    MigrationTaskSummary.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream"))
-    MigrationTaskSummary.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName"))
-    MigrationTaskSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
-    MigrationTaskSummary.add_member(:progress_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressPercent, location_name: "ProgressPercent"))
-    MigrationTaskSummary.add_member(:status_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusDetail, location_name: "StatusDetail"))
-    MigrationTaskSummary.add_member(:update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "UpdateDateTime"))
+    MigrationTaskSummary.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream"))
+    MigrationTaskSummary.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName"))
+    MigrationTaskSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "Status"))
+    MigrationTaskSummary.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressPercent, location_name: "ProgressPercent"))
+    MigrationTaskSummary.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusDetail, location_name: "StatusDetail"))
+    MigrationTaskSummary.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, location_name: "UpdateDateTime"))
     MigrationTaskSummary.type = Types::MigrationTaskSummary
-    MigrationTaskSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskSummary)
-    MigrationTaskUpdate.add_member(:update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "UpdateDateTime"))
-    MigrationTaskUpdate.add_member(:update_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateType, location_name: "UpdateType"))
-    MigrationTaskUpdate.add_member(:migration_task_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Task, location_name: "MigrationTaskState"))
+    MigrationTaskSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskSummary)
+    MigrationTaskUpdate.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, location_name: "UpdateDateTime"))
+    MigrationTaskUpdate.add_member(:update_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateType, location_name: "UpdateType"))
+    MigrationTaskUpdate.add_member(:migration_task_state, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, location_name: "MigrationTaskState"))
     MigrationTaskUpdate.type = Types::MigrationTaskUpdate
-    MigrationTaskUpdateList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskUpdate)
-    NotifyApplicationStateRequest.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId", traits: {"smithy.api#required" => {}}))
-    NotifyApplicationStateRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    NotifyApplicationStateRequest.add_member(:update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "UpdateDateTime"))
-    NotifyApplicationStateRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    MigrationTaskUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskUpdate)
+    NotifyApplicationStateRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, location_name: "ApplicationId", traits: {"smithy.api#required" => {}}))
+    NotifyApplicationStateRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    NotifyApplicationStateRequest.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, location_name: "UpdateDateTime"))
+    NotifyApplicationStateRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     NotifyApplicationStateRequest.type = Types::NotifyApplicationStateRequest
     NotifyApplicationStateResult.type = Types::NotifyApplicationStateResult
-    NotifyMigrationTaskStateRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    NotifyMigrationTaskStateRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    NotifyMigrationTaskStateRequest.add_member(:task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Task, location_name: "Task", traits: {"smithy.api#required" => {}}))
-    NotifyMigrationTaskStateRequest.add_member(:update_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "UpdateDateTime", traits: {"smithy.api#required" => {}}))
-    NotifyMigrationTaskStateRequest.add_member(:next_update_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextUpdateSeconds, location_name: "NextUpdateSeconds", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    NotifyMigrationTaskStateRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    NotifyMigrationTaskStateRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    NotifyMigrationTaskStateRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    NotifyMigrationTaskStateRequest.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, location_name: "Task", traits: {"smithy.api#required" => {}}))
+    NotifyMigrationTaskStateRequest.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, location_name: "UpdateDateTime", traits: {"smithy.api#required" => {}}))
+    NotifyMigrationTaskStateRequest.add_member(:next_update_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: NextUpdateSeconds, location_name: "NextUpdateSeconds", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    NotifyMigrationTaskStateRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     NotifyMigrationTaskStateRequest.type = Types::NotifyMigrationTaskStateRequest
     NotifyMigrationTaskStateResult.type = Types::NotifyMigrationTaskStateResult
-    PolicyErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicyErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     PolicyErrorException.type = Types::PolicyErrorException
-    ProgressUpdateStreamSummary.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStreamName"))
+    ProgressUpdateStreamSummary.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStreamName"))
     ProgressUpdateStreamSummary.type = Types::ProgressUpdateStreamSummary
-    ProgressUpdateStreamSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStreamSummary)
-    PutResourceAttributesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
-    PutResourceAttributesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
-    PutResourceAttributesRequest.add_member(:resource_attribute_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAttributeList, location_name: "ResourceAttributeList", traits: {"smithy.api#required" => {}}))
-    PutResourceAttributesRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
+    ProgressUpdateStreamSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStreamSummary)
+    PutResourceAttributesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, location_name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
+    PutResourceAttributesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, location_name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
+    PutResourceAttributesRequest.add_member(:resource_attribute_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeList, location_name: "ResourceAttributeList", traits: {"smithy.api#required" => {}}))
+    PutResourceAttributesRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, location_name: "DryRun", traits: {"smithy.api#default" => false}))
     PutResourceAttributesRequest.type = Types::PutResourceAttributesRequest
     PutResourceAttributesResult.type = Types::PutResourceAttributesResult
-    ResourceAttribute.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAttributeType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    ResourceAttribute.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAttributeValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    ResourceAttribute.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    ResourceAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceAttribute.type = Types::ResourceAttribute
-    ResourceAttributeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAttribute)
-    ResourceAttributeType.add_member(:ipv4_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4_ADDRESS", traits: {"smithy.api#enumValue" => "IPV4_ADDRESS"}))
-    ResourceAttributeType.add_member(:ipv6_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6_ADDRESS", traits: {"smithy.api#enumValue" => "IPV6_ADDRESS"}))
-    ResourceAttributeType.add_member(:mac_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MAC_ADDRESS", traits: {"smithy.api#enumValue" => "MAC_ADDRESS"}))
-    ResourceAttributeType.add_member(:fqdn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FQDN", traits: {"smithy.api#enumValue" => "FQDN"}))
-    ResourceAttributeType.add_member(:vm_manager_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_MANAGER_ID", traits: {"smithy.api#enumValue" => "VM_MANAGER_ID"}))
-    ResourceAttributeType.add_member(:vm_managed_object_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_MANAGED_OBJECT_REFERENCE", traits: {"smithy.api#enumValue" => "VM_MANAGED_OBJECT_REFERENCE"}))
-    ResourceAttributeType.add_member(:vm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_NAME", traits: {"smithy.api#enumValue" => "VM_NAME"}))
-    ResourceAttributeType.add_member(:vm_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_PATH", traits: {"smithy.api#enumValue" => "VM_PATH"}))
-    ResourceAttributeType.add_member(:bios_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIOS_ID", traits: {"smithy.api#enumValue" => "BIOS_ID"}))
-    ResourceAttributeType.add_member(:motherboard_serial_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MOTHERBOARD_SERIAL_NUMBER", traits: {"smithy.api#enumValue" => "MOTHERBOARD_SERIAL_NUMBER"}))
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttribute)
+    ResourceAttributeType.add_member(:ipv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV4_ADDRESS", traits: {"smithy.api#enumValue" => "IPV4_ADDRESS"}))
+    ResourceAttributeType.add_member(:ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IPV6_ADDRESS", traits: {"smithy.api#enumValue" => "IPV6_ADDRESS"}))
+    ResourceAttributeType.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MAC_ADDRESS", traits: {"smithy.api#enumValue" => "MAC_ADDRESS"}))
+    ResourceAttributeType.add_member(:fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FQDN", traits: {"smithy.api#enumValue" => "FQDN"}))
+    ResourceAttributeType.add_member(:vm_manager_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_MANAGER_ID", traits: {"smithy.api#enumValue" => "VM_MANAGER_ID"}))
+    ResourceAttributeType.add_member(:vm_managed_object_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_MANAGED_OBJECT_REFERENCE", traits: {"smithy.api#enumValue" => "VM_MANAGED_OBJECT_REFERENCE"}))
+    ResourceAttributeType.add_member(:vm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_NAME", traits: {"smithy.api#enumValue" => "VM_NAME"}))
+    ResourceAttributeType.add_member(:vm_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VM_PATH", traits: {"smithy.api#enumValue" => "VM_PATH"}))
+    ResourceAttributeType.add_member(:bios_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BIOS_ID", traits: {"smithy.api#enumValue" => "BIOS_ID"}))
+    ResourceAttributeType.add_member(:motherboard_serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MOTHERBOARD_SERIAL_NUMBER", traits: {"smithy.api#enumValue" => "MOTHERBOARD_SERIAL_NUMBER"}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    SourceResource.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    SourceResource.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceResourceDescription, location_name: "Description"))
-    SourceResource.add_member(:status_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusDetail, location_name: "StatusDetail"))
+    SourceResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    SourceResource.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResourceDescription, location_name: "Description"))
+    SourceResource.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusDetail, location_name: "StatusDetail"))
     SourceResource.type = Types::SourceResource
-    SourceResourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceResource)
-    Status.add_member(:not_started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
-    Status.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    Status.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    Status.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    Task.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: "Status", traits: {"smithy.api#required" => {}}))
-    Task.add_member(:status_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusDetail, location_name: "StatusDetail"))
-    Task.add_member(:progress_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressPercent, location_name: "ProgressPercent"))
+    SourceResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResource)
+    Status.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
+    Status.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    Status.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    Status.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    Task.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    Task.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusDetail, location_name: "StatusDetail"))
+    Task.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressPercent, location_name: "ProgressPercent"))
     Task.type = Types::Task
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, location_name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    UnauthorizedOperation.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnauthorizedOperation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
     UnauthorizedOperation.type = Types::UnauthorizedOperation
-    UpdateType.add_member(:migration_task_state_updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MigrationTaskStateUpdated", traits: {"smithy.api#enumValue" => "MIGRATION_TASK_STATE_UPDATED"}))
+    UpdateType.add_member(:migration_task_state_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MigrationTaskStateUpdated", traits: {"smithy.api#enumValue" => "MIGRATION_TASK_STATE_UPDATED"}))
 
     AWSMigrationHub = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.migrationhub#AWSMigrationHub"
@@ -335,323 +335,323 @@ module Aws::MigrationHub
       service.add_operation(:associate_created_artifact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#AssociateCreatedArtifact"
         operation.name = "AssociateCreatedArtifact"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateCreatedArtifactRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateCreatedArtifactResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = AssociateCreatedArtifactRequest
+        operation.output = AssociateCreatedArtifactResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:associate_discovered_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#AssociateDiscoveredResource"
         operation.name = "AssociateDiscoveredResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateDiscoveredResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateDiscoveredResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = AssociateDiscoveredResourceRequest
+        operation.output = AssociateDiscoveredResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << PolicyErrorException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:associate_source_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#AssociateSourceResource"
         operation.name = "AssociateSourceResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateSourceResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateSourceResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = AssociateSourceResourceRequest
+        operation.output = AssociateSourceResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:create_progress_update_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#CreateProgressUpdateStream"
         operation.name = "CreateProgressUpdateStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProgressUpdateStreamRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateProgressUpdateStreamResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = CreateProgressUpdateStreamRequest
+        operation.output = CreateProgressUpdateStreamResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:delete_progress_update_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#DeleteProgressUpdateStream"
         operation.name = "DeleteProgressUpdateStream"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProgressUpdateStreamRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteProgressUpdateStreamResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = DeleteProgressUpdateStreamRequest
+        operation.output = DeleteProgressUpdateStreamResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:describe_application_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#DescribeApplicationState"
         operation.name = "DescribeApplicationState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeApplicationStateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeApplicationStateResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DescribeApplicationStateRequest
+        operation.output = DescribeApplicationStateResult
+        operation.errors << AccessDeniedException
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << PolicyErrorException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:describe_migration_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#DescribeMigrationTask"
         operation.name = "DescribeMigrationTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMigrationTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeMigrationTaskResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = DescribeMigrationTaskRequest
+        operation.output = DescribeMigrationTaskResult
+        operation.errors << AccessDeniedException
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:disassociate_created_artifact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#DisassociateCreatedArtifact"
         operation.name = "DisassociateCreatedArtifact"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateCreatedArtifactRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateCreatedArtifactResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = DisassociateCreatedArtifactRequest
+        operation.output = DisassociateCreatedArtifactResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:disassociate_discovered_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#DisassociateDiscoveredResource"
         operation.name = "DisassociateDiscoveredResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateDiscoveredResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateDiscoveredResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = DisassociateDiscoveredResourceRequest
+        operation.output = DisassociateDiscoveredResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:disassociate_source_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#DisassociateSourceResource"
         operation.name = "DisassociateSourceResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateSourceResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateSourceResourceResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = DisassociateSourceResourceRequest
+        operation.output = DisassociateSourceResourceResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:import_migration_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ImportMigrationTask"
         operation.name = "ImportMigrationTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportMigrationTaskRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportMigrationTaskResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = ImportMigrationTaskRequest
+        operation.output = ImportMigrationTaskResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:list_application_states, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ListApplicationStates"
         operation.name = "ListApplicationStates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationStatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListApplicationStatesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListApplicationStatesRequest
+        operation.output = ListApplicationStatesResult
+        operation.errors << AccessDeniedException
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListApplicationStates.new
       end)
       service.add_operation(:list_created_artifacts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ListCreatedArtifacts"
         operation.name = "ListCreatedArtifacts"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCreatedArtifactsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCreatedArtifactsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListCreatedArtifactsRequest
+        operation.output = ListCreatedArtifactsResult
+        operation.errors << AccessDeniedException
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListCreatedArtifacts.new
       end)
       service.add_operation(:list_discovered_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ListDiscoveredResources"
         operation.name = "ListDiscoveredResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDiscoveredResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDiscoveredResourcesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListDiscoveredResourcesRequest
+        operation.output = ListDiscoveredResourcesResult
+        operation.errors << AccessDeniedException
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDiscoveredResources.new
       end)
       service.add_operation(:list_migration_task_updates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ListMigrationTaskUpdates"
         operation.name = "ListMigrationTaskUpdates"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMigrationTaskUpdatesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMigrationTaskUpdatesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListMigrationTaskUpdatesRequest
+        operation.output = ListMigrationTaskUpdatesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListMigrationTaskUpdates.new
       end)
       service.add_operation(:list_migration_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ListMigrationTasks"
         operation.name = "ListMigrationTasks"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMigrationTasksRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMigrationTasksResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListMigrationTasksRequest
+        operation.output = ListMigrationTasksResult
+        operation.errors << AccessDeniedException
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << PolicyErrorException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListMigrationTasks.new
       end)
       service.add_operation(:list_progress_update_streams, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ListProgressUpdateStreams"
         operation.name = "ListProgressUpdateStreams"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProgressUpdateStreamsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProgressUpdateStreamsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListProgressUpdateStreamsRequest
+        operation.output = ListProgressUpdateStreamsResult
+        operation.errors << AccessDeniedException
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListProgressUpdateStreams.new
       end)
       service.add_operation(:list_source_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#ListSourceResources"
         operation.name = "ListSourceResources"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSourceResourcesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSourceResourcesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = ListSourceResourcesRequest
+        operation.output = ListSourceResourcesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::ListSourceResources.new
       end)
       service.add_operation(:notify_application_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#NotifyApplicationState"
         operation.name = "NotifyApplicationState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyApplicationStateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyApplicationStateResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = NotifyApplicationStateRequest
+        operation.output = NotifyApplicationStateResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << PolicyErrorException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:notify_migration_task_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#NotifyMigrationTaskState"
         operation.name = "NotifyMigrationTaskState"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyMigrationTaskStateRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotifyMigrationTaskStateResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = NotifyMigrationTaskStateRequest
+        operation.output = NotifyMigrationTaskStateResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
       service.add_operation(:put_resource_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.migrationhub#PutResourceAttributes"
         operation.name = "PutResourceAttributes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourceAttributesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourceAttributesResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunOperation)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        operation.input = PutResourceAttributesRequest
+        operation.output = PutResourceAttributesResult
+        operation.errors << AccessDeniedException
+        operation.errors << DryRunOperation
+        operation.errors << HomeRegionNotSetException
+        operation.errors << InternalServerError
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedOperation
         operation.traits = {}
       end)
     end

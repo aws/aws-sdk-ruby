@@ -28,38 +28,38 @@ module Aws::MarketplaceEntitlementService
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplaceentitlementservice#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client"})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.marketplaceentitlementservice#Timestamp", name: "Timestamp")
 
-    Entitlement.add_member(:product_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode"))
-    Entitlement.add_member(:dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Dimension"))
-    Entitlement.add_member(:customer_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CustomerIdentifier"))
-    Entitlement.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CustomerAWSAccountId"))
-    Entitlement.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementValue, location_name: "Value"))
-    Entitlement.add_member(:expiration_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
+    Entitlement.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, location_name: "ProductCode"))
+    Entitlement.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Dimension"))
+    Entitlement.add_member(:customer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "CustomerIdentifier"))
+    Entitlement.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "CustomerAWSAccountId"))
+    Entitlement.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementValue, location_name: "Value"))
+    Entitlement.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "ExpirationDate"))
     Entitlement.type = Types::Entitlement
-    EntitlementList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Entitlement)
-    EntitlementValue.add_member(:integer_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "IntegerValue"))
-    EntitlementValue.add_member(:double_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: "DoubleValue"))
-    EntitlementValue.add_member(:boolean_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "BooleanValue"))
-    EntitlementValue.add_member(:string_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "StringValue"))
+    EntitlementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entitlement)
+    EntitlementValue.add_member(:integer_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "IntegerValue"))
+    EntitlementValue.add_member(:double_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "DoubleValue"))
+    EntitlementValue.add_member(:boolean_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "BooleanValue"))
+    EntitlementValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StringValue"))
     EntitlementValue.type = Types::EntitlementValue
-    FilterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue)
-    GetEntitlementFilterName.add_member(:customer_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOMER_IDENTIFIER", traits: {"smithy.api#enumValue" => "CUSTOMER_IDENTIFIER"}))
-    GetEntitlementFilterName.add_member(:dimension, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
-    GetEntitlementFilterName.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOMER_AWS_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "CUSTOMER_AWS_ACCOUNT_ID"}))
-    GetEntitlementFilters.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEntitlementFilterName)
-    GetEntitlementFilters.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValueList)
-    GetEntitlementsRequest.add_member(:product_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode", traits: {"smithy.api#required" => {}}))
-    GetEntitlementsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEntitlementFilters, location_name: "Filter"))
-    GetEntitlementsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
-    GetEntitlementsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageSizeInteger, location_name: "MaxResults"))
+    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue)
+    GetEntitlementFilterName.add_member(:customer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOMER_IDENTIFIER", traits: {"smithy.api#enumValue" => "CUSTOMER_IDENTIFIER"}))
+    GetEntitlementFilterName.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
+    GetEntitlementFilterName.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOMER_AWS_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "CUSTOMER_AWS_ACCOUNT_ID"}))
+    GetEntitlementFilters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: GetEntitlementFilterName)
+    GetEntitlementFilters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList)
+    GetEntitlementsRequest.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, location_name: "ProductCode", traits: {"smithy.api#required" => {}}))
+    GetEntitlementsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: GetEntitlementFilters, location_name: "Filter"))
+    GetEntitlementsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "NextToken"))
+    GetEntitlementsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSizeInteger, location_name: "MaxResults"))
     GetEntitlementsRequest.type = Types::GetEntitlementsRequest
-    GetEntitlementsResult.add_member(:entitlements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements"))
-    GetEntitlementsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
+    GetEntitlementsResult.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementList, location_name: "Entitlements"))
+    GetEntitlementsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "NextToken"))
     GetEntitlementsResult.type = Types::GetEntitlementsResult
-    InternalServiceErrorException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServiceErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InternalServiceErrorException.type = Types::InternalServiceErrorException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     ThrottlingException.type = Types::ThrottlingException
 
     AWSMPEntitlementService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -70,11 +70,11 @@ module Aws::MarketplaceEntitlementService
       service.add_operation(:get_entitlements, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplaceentitlementservice#GetEntitlements"
         operation.name = "GetEntitlements"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEntitlementsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEntitlementsResult)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceErrorException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.input = GetEntitlementsRequest
+        operation.output = GetEntitlementsResult
+        operation.errors << InternalServiceErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << ThrottlingException
         operation.traits = {}
         operation[:paginator] = Paginators::GetEntitlements.new
       end)

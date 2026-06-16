@@ -128,325 +128,325 @@ module Aws::Translate
     UpdateParallelDataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.translate#UpdateParallelDataRequest", name: "UpdateParallelDataRequest")
     UpdateParallelDataResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.translate#UpdateParallelDataResponse", name: "UpdateParallelDataResponse")
 
-    AppliedTerminology.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    AppliedTerminology.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermList, location_name: "Terms"))
+    AppliedTerminology.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    AppliedTerminology.add_member(:terms, ::Smithy::Schema::Shapes::MemberShape.new(target: TermList, location_name: "Terms"))
     AppliedTerminology.type = Types::AppliedTerminology
-    AppliedTerminologyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedTerminology)
-    Brevity.add_member(:on, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
-    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    AppliedTerminologyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedTerminology)
+    Brevity.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
+    ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ConflictException.type = Types::ConflictException
-    CreateParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateParallelDataRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateParallelDataRequest.add_member(:parallel_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataConfig, location_name: "ParallelDataConfig", traits: {"smithy.api#required" => {}}))
-    CreateParallelDataRequest.add_member(:encryption_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
-    CreateParallelDataRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    CreateParallelDataRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateParallelDataRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    CreateParallelDataRequest.add_member(:parallel_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataConfig, location_name: "ParallelDataConfig", traits: {"smithy.api#required" => {}}))
+    CreateParallelDataRequest.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, location_name: "EncryptionKey"))
+    CreateParallelDataRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateParallelDataRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     CreateParallelDataRequest.type = Types::CreateParallelDataRequest
-    CreateParallelDataResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    CreateParallelDataResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
+    CreateParallelDataResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    CreateParallelDataResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataStatus, location_name: "Status"))
     CreateParallelDataResponse.type = Types::CreateParallelDataResponse
-    DeleteParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    DeleteParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
     DeleteParallelDataRequest.type = Types::DeleteParallelDataRequest
-    DeleteParallelDataResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    DeleteParallelDataResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
+    DeleteParallelDataResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    DeleteParallelDataResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataStatus, location_name: "Status"))
     DeleteParallelDataResponse.type = Types::DeleteParallelDataResponse
-    DeleteTerminologyRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    DeleteTerminologyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
     DeleteTerminologyRequest.type = Types::DeleteTerminologyRequest
-    DescribeTextTranslationJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    DescribeTextTranslationJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeTextTranslationJobRequest.type = Types::DescribeTextTranslationJobRequest
-    DescribeTextTranslationJobResponse.add_member(:text_translation_job_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextTranslationJobProperties, location_name: "TextTranslationJobProperties"))
+    DescribeTextTranslationJobResponse.add_member(:text_translation_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTranslationJobProperties, location_name: "TextTranslationJobProperties"))
     DescribeTextTranslationJobResponse.type = Types::DescribeTextTranslationJobResponse
-    DetectedLanguageLowConfidenceException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    DetectedLanguageLowConfidenceException.add_member(:detected_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "DetectedLanguageCode"))
+    DetectedLanguageLowConfidenceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    DetectedLanguageLowConfidenceException.add_member(:detected_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "DetectedLanguageCode"))
     DetectedLanguageLowConfidenceException.type = Types::DetectedLanguageLowConfidenceException
-    Directionality.add_member(:uni, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNI", traits: {"smithy.api#enumValue" => "UNI"}))
-    Directionality.add_member(:multi, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI", traits: {"smithy.api#enumValue" => "MULTI"}))
-    DisplayLanguageCode.add_member(:de, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE", traits: {"smithy.api#enumValue" => "de"}))
-    DisplayLanguageCode.add_member(:en, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN", traits: {"smithy.api#enumValue" => "en"}))
-    DisplayLanguageCode.add_member(:es, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES", traits: {"smithy.api#enumValue" => "es"}))
-    DisplayLanguageCode.add_member(:fr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR", traits: {"smithy.api#enumValue" => "fr"}))
-    DisplayLanguageCode.add_member(:it, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT", traits: {"smithy.api#enumValue" => "it"}))
-    DisplayLanguageCode.add_member(:ja, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JA", traits: {"smithy.api#enumValue" => "ja"}))
-    DisplayLanguageCode.add_member(:ko, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KO", traits: {"smithy.api#enumValue" => "ko"}))
-    DisplayLanguageCode.add_member(:pt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PT", traits: {"smithy.api#enumValue" => "pt"}))
-    DisplayLanguageCode.add_member(:zh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH", traits: {"smithy.api#enumValue" => "zh"}))
-    DisplayLanguageCode.add_member(:zh_tw, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH_TW", traits: {"smithy.api#enumValue" => "zh-TW"}))
-    Document.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
-    Document.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#required" => {}}))
+    Directionality.add_member(:uni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNI", traits: {"smithy.api#enumValue" => "UNI"}))
+    Directionality.add_member(:multi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MULTI", traits: {"smithy.api#enumValue" => "MULTI"}))
+    DisplayLanguageCode.add_member(:de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DE", traits: {"smithy.api#enumValue" => "de"}))
+    DisplayLanguageCode.add_member(:en, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EN", traits: {"smithy.api#enumValue" => "en"}))
+    DisplayLanguageCode.add_member(:es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ES", traits: {"smithy.api#enumValue" => "es"}))
+    DisplayLanguageCode.add_member(:fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FR", traits: {"smithy.api#enumValue" => "fr"}))
+    DisplayLanguageCode.add_member(:it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IT", traits: {"smithy.api#enumValue" => "it"}))
+    DisplayLanguageCode.add_member(:ja, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "JA", traits: {"smithy.api#enumValue" => "ja"}))
+    DisplayLanguageCode.add_member(:ko, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KO", traits: {"smithy.api#enumValue" => "ko"}))
+    DisplayLanguageCode.add_member(:pt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PT", traits: {"smithy.api#enumValue" => "pt"}))
+    DisplayLanguageCode.add_member(:zh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH", traits: {"smithy.api#enumValue" => "zh"}))
+    DisplayLanguageCode.add_member(:zh_tw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ZH_TW", traits: {"smithy.api#enumValue" => "zh-TW"}))
+    Document.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
+    Document.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, location_name: "ContentType", traits: {"smithy.api#required" => {}}))
     Document.type = Types::Document
-    EncryptionKey.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyType, location_name: "Type", traits: {"smithy.api#required" => {}}))
-    EncryptionKey.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKeyID, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    EncryptionKey.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyType, location_name: "Type", traits: {"smithy.api#required" => {}}))
+    EncryptionKey.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyID, location_name: "Id", traits: {"smithy.api#required" => {}}))
     EncryptionKey.type = Types::EncryptionKey
-    EncryptionKeyType.add_member(:kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMS", traits: {"smithy.api#enumValue" => "KMS"}))
-    Formality.add_member(:formal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORMAL", traits: {"smithy.api#enumValue" => "FORMAL"}))
-    Formality.add_member(:informal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFORMAL", traits: {"smithy.api#enumValue" => "INFORMAL"}))
-    GetParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    EncryptionKeyType.add_member(:kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KMS", traits: {"smithy.api#enumValue" => "KMS"}))
+    Formality.add_member(:formal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FORMAL", traits: {"smithy.api#enumValue" => "FORMAL"}))
+    Formality.add_member(:informal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INFORMAL", traits: {"smithy.api#enumValue" => "INFORMAL"}))
+    GetParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
     GetParallelDataRequest.type = Types::GetParallelDataRequest
-    GetParallelDataResponse.add_member(:parallel_data_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataProperties, location_name: "ParallelDataProperties"))
-    GetParallelDataResponse.add_member(:data_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataDataLocation, location_name: "DataLocation"))
-    GetParallelDataResponse.add_member(:auxiliary_data_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataDataLocation, location_name: "AuxiliaryDataLocation"))
-    GetParallelDataResponse.add_member(:latest_update_attempt_auxiliary_data_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataDataLocation, location_name: "LatestUpdateAttemptAuxiliaryDataLocation"))
+    GetParallelDataResponse.add_member(:parallel_data_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataProperties, location_name: "ParallelDataProperties"))
+    GetParallelDataResponse.add_member(:data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataDataLocation, location_name: "DataLocation"))
+    GetParallelDataResponse.add_member(:auxiliary_data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataDataLocation, location_name: "AuxiliaryDataLocation"))
+    GetParallelDataResponse.add_member(:latest_update_attempt_auxiliary_data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataDataLocation, location_name: "LatestUpdateAttemptAuxiliaryDataLocation"))
     GetParallelDataResponse.type = Types::GetParallelDataResponse
-    GetTerminologyRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    GetTerminologyRequest.add_member(:terminology_data_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyDataFormat, location_name: "TerminologyDataFormat"))
+    GetTerminologyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    GetTerminologyRequest.add_member(:terminology_data_format, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataFormat, location_name: "TerminologyDataFormat"))
     GetTerminologyRequest.type = Types::GetTerminologyRequest
-    GetTerminologyResponse.add_member(:terminology_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyProperties, location_name: "TerminologyProperties"))
-    GetTerminologyResponse.add_member(:terminology_data_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyDataLocation, location_name: "TerminologyDataLocation"))
-    GetTerminologyResponse.add_member(:auxiliary_data_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyDataLocation, location_name: "AuxiliaryDataLocation"))
+    GetTerminologyResponse.add_member(:terminology_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyProperties, location_name: "TerminologyProperties"))
+    GetTerminologyResponse.add_member(:terminology_data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataLocation, location_name: "TerminologyDataLocation"))
+    GetTerminologyResponse.add_member(:auxiliary_data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataLocation, location_name: "AuxiliaryDataLocation"))
     GetTerminologyResponse.type = Types::GetTerminologyResponse
-    ImportTerminologyRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    ImportTerminologyRequest.add_member(:merge_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "MergeStrategy", traits: {"smithy.api#required" => {}}))
-    ImportTerminologyRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    ImportTerminologyRequest.add_member(:terminology_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyData, location_name: "TerminologyData", traits: {"smithy.api#required" => {}}))
-    ImportTerminologyRequest.add_member(:encryption_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
-    ImportTerminologyRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportTerminologyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    ImportTerminologyRequest.add_member(:merge_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeStrategy, location_name: "MergeStrategy", traits: {"smithy.api#required" => {}}))
+    ImportTerminologyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    ImportTerminologyRequest.add_member(:terminology_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyData, location_name: "TerminologyData", traits: {"smithy.api#required" => {}}))
+    ImportTerminologyRequest.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, location_name: "EncryptionKey"))
+    ImportTerminologyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ImportTerminologyRequest.type = Types::ImportTerminologyRequest
-    ImportTerminologyResponse.add_member(:terminology_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyProperties, location_name: "TerminologyProperties"))
-    ImportTerminologyResponse.add_member(:auxiliary_data_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyDataLocation, location_name: "AuxiliaryDataLocation"))
+    ImportTerminologyResponse.add_member(:terminology_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyProperties, location_name: "TerminologyProperties"))
+    ImportTerminologyResponse.add_member(:auxiliary_data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataLocation, location_name: "AuxiliaryDataLocation"))
     ImportTerminologyResponse.type = Types::ImportTerminologyResponse
-    InputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    InputDataConfig.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#required" => {}}))
+    InputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    InputDataConfig.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, location_name: "ContentType", traits: {"smithy.api#required" => {}}))
     InputDataConfig.type = Types::InputDataConfig
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    InvalidFilterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidFilterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidFilterException.type = Types::InvalidFilterException
-    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    JobDetails.add_member(:translated_documents_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "TranslatedDocumentsCount"))
-    JobDetails.add_member(:documents_with_errors_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "DocumentsWithErrorsCount"))
-    JobDetails.add_member(:input_documents_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "InputDocumentsCount"))
+    JobDetails.add_member(:translated_documents_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "TranslatedDocumentsCount"))
+    JobDetails.add_member(:documents_with_errors_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "DocumentsWithErrorsCount"))
+    JobDetails.add_member(:input_documents_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "InputDocumentsCount"))
     JobDetails.type = Types::JobDetails
-    JobStatus.add_member(:submitted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
-    JobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    JobStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    JobStatus.add_member(:completed_with_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED_WITH_ERROR", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ERROR"}))
-    JobStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    JobStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
-    JobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    Language.add_member(:language_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocalizedNameString, location_name: "LanguageName", traits: {"smithy.api#required" => {}}))
-    Language.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
+    JobStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    JobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    JobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    JobStatus.add_member(:completed_with_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED_WITH_ERROR", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ERROR"}))
+    JobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    JobStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
+    JobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    Language.add_member(:language_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedNameString, location_name: "LanguageName", traits: {"smithy.api#required" => {}}))
+    Language.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     Language.type = Types::Language
-    LanguageCodeStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString)
-    LanguagesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Language)
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LanguageCodeStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString)
+    LanguagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Language)
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListLanguagesRequest.add_member(:display_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisplayLanguageCode, location_name: "DisplayLanguageCode"))
-    ListLanguagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListLanguagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListLanguagesRequest.add_member(:display_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayLanguageCode, location_name: "DisplayLanguageCode"))
+    ListLanguagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListLanguagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListLanguagesRequest.type = Types::ListLanguagesRequest
-    ListLanguagesResponse.add_member(:languages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguagesList, location_name: "Languages"))
-    ListLanguagesResponse.add_member(:display_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisplayLanguageCode, location_name: "DisplayLanguageCode"))
-    ListLanguagesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLanguagesResponse.add_member(:languages, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguagesList, location_name: "Languages"))
+    ListLanguagesResponse.add_member(:display_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayLanguageCode, location_name: "DisplayLanguageCode"))
+    ListLanguagesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListLanguagesResponse.type = Types::ListLanguagesResponse
-    ListParallelDataRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListParallelDataRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListParallelDataRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListParallelDataRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListParallelDataRequest.type = Types::ListParallelDataRequest
-    ListParallelDataResponse.add_member(:parallel_data_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataPropertiesList, location_name: "ParallelDataPropertiesList"))
-    ListParallelDataResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListParallelDataResponse.add_member(:parallel_data_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataPropertiesList, location_name: "ParallelDataPropertiesList"))
+    ListParallelDataResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListParallelDataResponse.type = Types::ListParallelDataResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTerminologiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListTerminologiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListTerminologiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListTerminologiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListTerminologiesRequest.type = Types::ListTerminologiesRequest
-    ListTerminologiesResponse.add_member(:terminology_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyPropertiesList, location_name: "TerminologyPropertiesList"))
-    ListTerminologiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTerminologiesResponse.add_member(:terminology_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyPropertiesList, location_name: "TerminologyPropertiesList"))
+    ListTerminologiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTerminologiesResponse.type = Types::ListTerminologiesResponse
-    ListTextTranslationJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextTranslationJobFilter, location_name: "Filter"))
-    ListTextTranslationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListTextTranslationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListTextTranslationJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTranslationJobFilter, location_name: "Filter"))
+    ListTextTranslationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListTextTranslationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsInteger, location_name: "MaxResults"))
     ListTextTranslationJobsRequest.type = Types::ListTextTranslationJobsRequest
-    ListTextTranslationJobsResponse.add_member(:text_translation_job_properties_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextTranslationJobPropertiesList, location_name: "TextTranslationJobPropertiesList"))
-    ListTextTranslationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTextTranslationJobsResponse.add_member(:text_translation_job_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTranslationJobPropertiesList, location_name: "TextTranslationJobPropertiesList"))
+    ListTextTranslationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListTextTranslationJobsResponse.type = Types::ListTextTranslationJobsResponse
-    MergeStrategy.add_member(:overwrite, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERWRITE", traits: {"smithy.api#enumValue" => "OVERWRITE"}))
-    OutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
-    OutputDataConfig.add_member(:encryption_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
+    MergeStrategy.add_member(:overwrite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OVERWRITE", traits: {"smithy.api#enumValue" => "OVERWRITE"}))
+    OutputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri", traits: {"smithy.api#required" => {}}))
+    OutputDataConfig.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, location_name: "EncryptionKey"))
     OutputDataConfig.type = Types::OutputDataConfig
-    ParallelDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
-    ParallelDataConfig.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataFormat, location_name: "Format"))
+    ParallelDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, location_name: "S3Uri"))
+    ParallelDataConfig.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataFormat, location_name: "Format"))
     ParallelDataConfig.type = Types::ParallelDataConfig
-    ParallelDataDataLocation.add_member(:repository_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RepositoryType", traits: {"smithy.api#required" => {}}))
-    ParallelDataDataLocation.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Location", traits: {"smithy.api#required" => {}}))
+    ParallelDataDataLocation.add_member(:repository_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RepositoryType", traits: {"smithy.api#required" => {}}))
+    ParallelDataDataLocation.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Location", traits: {"smithy.api#required" => {}}))
     ParallelDataDataLocation.type = Types::ParallelDataDataLocation
-    ParallelDataFormat.add_member(:tsv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TSV", traits: {"smithy.api#enumValue" => "TSV"}))
-    ParallelDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
-    ParallelDataFormat.add_member(:tmx, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TMX", traits: {"smithy.api#enumValue" => "TMX"}))
-    ParallelDataProperties.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    ParallelDataProperties.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataArn, location_name: "Arn"))
-    ParallelDataProperties.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    ParallelDataProperties.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
-    ParallelDataProperties.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
-    ParallelDataProperties.add_member(:target_language_codes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeStringList, location_name: "TargetLanguageCodes"))
-    ParallelDataProperties.add_member(:parallel_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataConfig, location_name: "ParallelDataConfig"))
-    ParallelDataProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnboundedLengthString, location_name: "Message"))
-    ParallelDataProperties.add_member(:imported_data_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "ImportedDataSize"))
-    ParallelDataProperties.add_member(:imported_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "ImportedRecordCount"))
-    ParallelDataProperties.add_member(:failed_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "FailedRecordCount"))
-    ParallelDataProperties.add_member(:skipped_record_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: "SkippedRecordCount"))
-    ParallelDataProperties.add_member(:encryption_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
-    ParallelDataProperties.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    ParallelDataProperties.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
-    ParallelDataProperties.add_member(:latest_update_attempt_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "LatestUpdateAttemptStatus"))
-    ParallelDataProperties.add_member(:latest_update_attempt_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestUpdateAttemptAt"))
+    ParallelDataFormat.add_member(:tsv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TSV", traits: {"smithy.api#enumValue" => "TSV"}))
+    ParallelDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    ParallelDataFormat.add_member(:tmx, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TMX", traits: {"smithy.api#enumValue" => "TMX"}))
+    ParallelDataProperties.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    ParallelDataProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataArn, location_name: "Arn"))
+    ParallelDataProperties.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    ParallelDataProperties.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataStatus, location_name: "Status"))
+    ParallelDataProperties.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode"))
+    ParallelDataProperties.add_member(:target_language_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeStringList, location_name: "TargetLanguageCodes"))
+    ParallelDataProperties.add_member(:parallel_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataConfig, location_name: "ParallelDataConfig"))
+    ParallelDataProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: UnboundedLengthString, location_name: "Message"))
+    ParallelDataProperties.add_member(:imported_data_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "ImportedDataSize"))
+    ParallelDataProperties.add_member(:imported_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "ImportedRecordCount"))
+    ParallelDataProperties.add_member(:failed_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "FailedRecordCount"))
+    ParallelDataProperties.add_member(:skipped_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, location_name: "SkippedRecordCount"))
+    ParallelDataProperties.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, location_name: "EncryptionKey"))
+    ParallelDataProperties.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    ParallelDataProperties.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastUpdatedAt"))
+    ParallelDataProperties.add_member(:latest_update_attempt_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataStatus, location_name: "LatestUpdateAttemptStatus"))
+    ParallelDataProperties.add_member(:latest_update_attempt_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LatestUpdateAttemptAt"))
     ParallelDataProperties.type = Types::ParallelDataProperties
-    ParallelDataPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataProperties)
-    ParallelDataStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    ParallelDataStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    ParallelDataStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ParallelDataStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    ParallelDataStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    Profanity.add_member(:mask, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MASK", traits: {"smithy.api#enumValue" => "MASK"}))
-    ResourceNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName)
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ParallelDataPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataProperties)
+    ParallelDataStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ParallelDataStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    ParallelDataStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ParallelDataStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ParallelDataStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    Profanity.add_member(:mask, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MASK", traits: {"smithy.api#enumValue" => "MASK"}))
+    ResourceNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    StartTextTranslationJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    StartTextTranslationJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartTextTranslationJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
-    StartTextTranslationJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
-    StartTextTranslationJobRequest.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
-    StartTextTranslationJobRequest.add_member(:target_language_codes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetLanguageCodeStringList, location_name: "TargetLanguageCodes", traits: {"smithy.api#required" => {}}))
-    StartTextTranslationJobRequest.add_member(:terminology_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
-    StartTextTranslationJobRequest.add_member(:parallel_data_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "ParallelDataNames"))
-    StartTextTranslationJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
-    StartTextTranslationJobRequest.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
+    StartTextTranslationJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    StartTextTranslationJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartTextTranslationJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig", traits: {"smithy.api#required" => {}}))
+    StartTextTranslationJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn", traits: {"smithy.api#required" => {}}))
+    StartTextTranslationJobRequest.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
+    StartTextTranslationJobRequest.add_member(:target_language_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetLanguageCodeStringList, location_name: "TargetLanguageCodes", traits: {"smithy.api#required" => {}}))
+    StartTextTranslationJobRequest.add_member(:terminology_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameList, location_name: "TerminologyNames"))
+    StartTextTranslationJobRequest.add_member(:parallel_data_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameList, location_name: "ParallelDataNames"))
+    StartTextTranslationJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartTextTranslationJobRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationSettings, location_name: "Settings"))
     StartTextTranslationJobRequest.type = Types::StartTextTranslationJobRequest
-    StartTextTranslationJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StartTextTranslationJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StartTextTranslationJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StartTextTranslationJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StartTextTranslationJobResponse.type = Types::StartTextTranslationJobResponse
-    StopTextTranslationJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
+    StopTextTranslationJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId", traits: {"smithy.api#required" => {}}))
     StopTextTranslationJobRequest.type = Types::StopTextTranslationJobRequest
-    StopTextTranslationJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    StopTextTranslationJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    StopTextTranslationJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    StopTextTranslationJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
     StopTextTranslationJobResponse.type = Types::StopTextTranslationJobResponse
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetLanguageCodeStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString)
-    Term.add_member(:source_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "SourceText"))
-    Term.add_member(:target_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "TargetText"))
+    TargetLanguageCodeStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString)
+    Term.add_member(:source_text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceText"))
+    Term.add_member(:target_text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TargetText"))
     Term.type = Types::Term
-    TermList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Term)
-    TerminologyData.add_member(:file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyFile, location_name: "File", traits: {"smithy.api#required" => {}}))
-    TerminologyData.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyDataFormat, location_name: "Format", traits: {"smithy.api#required" => {}}))
-    TerminologyData.add_member(:directionality, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Directionality, location_name: "Directionality"))
+    TermList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Term)
+    TerminologyData.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyFile, location_name: "File", traits: {"smithy.api#required" => {}}))
+    TerminologyData.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataFormat, location_name: "Format", traits: {"smithy.api#required" => {}}))
+    TerminologyData.add_member(:directionality, ::Smithy::Schema::Shapes::MemberShape.new(target: Directionality, location_name: "Directionality"))
     TerminologyData.type = Types::TerminologyData
-    TerminologyDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
-    TerminologyDataFormat.add_member(:tmx, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TMX", traits: {"smithy.api#enumValue" => "TMX"}))
-    TerminologyDataFormat.add_member(:tsv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TSV", traits: {"smithy.api#enumValue" => "TSV"}))
-    TerminologyDataLocation.add_member(:repository_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "RepositoryType", traits: {"smithy.api#required" => {}}))
-    TerminologyDataLocation.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Location", traits: {"smithy.api#required" => {}}))
+    TerminologyDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    TerminologyDataFormat.add_member(:tmx, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TMX", traits: {"smithy.api#enumValue" => "TMX"}))
+    TerminologyDataFormat.add_member(:tsv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TSV", traits: {"smithy.api#enumValue" => "TSV"}))
+    TerminologyDataLocation.add_member(:repository_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "RepositoryType", traits: {"smithy.api#required" => {}}))
+    TerminologyDataLocation.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Location", traits: {"smithy.api#required" => {}}))
     TerminologyDataLocation.type = Types::TerminologyDataLocation
-    TerminologyProperties.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    TerminologyProperties.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    TerminologyProperties.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyArn, location_name: "Arn"))
-    TerminologyProperties.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
-    TerminologyProperties.add_member(:target_language_codes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeStringList, location_name: "TargetLanguageCodes"))
-    TerminologyProperties.add_member(:encryption_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
-    TerminologyProperties.add_member(:size_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "SizeBytes"))
-    TerminologyProperties.add_member(:term_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "TermCount"))
-    TerminologyProperties.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    TerminologyProperties.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
-    TerminologyProperties.add_member(:directionality, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Directionality, location_name: "Directionality"))
-    TerminologyProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnboundedLengthString, location_name: "Message"))
-    TerminologyProperties.add_member(:skipped_term_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: "SkippedTermCount"))
-    TerminologyProperties.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyDataFormat, location_name: "Format"))
+    TerminologyProperties.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    TerminologyProperties.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    TerminologyProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyArn, location_name: "Arn"))
+    TerminologyProperties.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode"))
+    TerminologyProperties.add_member(:target_language_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeStringList, location_name: "TargetLanguageCodes"))
+    TerminologyProperties.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, location_name: "EncryptionKey"))
+    TerminologyProperties.add_member(:size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "SizeBytes"))
+    TerminologyProperties.add_member(:term_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "TermCount"))
+    TerminologyProperties.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
+    TerminologyProperties.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LastUpdatedAt"))
+    TerminologyProperties.add_member(:directionality, ::Smithy::Schema::Shapes::MemberShape.new(target: Directionality, location_name: "Directionality"))
+    TerminologyProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: UnboundedLengthString, location_name: "Message"))
+    TerminologyProperties.add_member(:skipped_term_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, location_name: "SkippedTermCount"))
+    TerminologyProperties.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataFormat, location_name: "Format"))
     TerminologyProperties.type = Types::TerminologyProperties
-    TerminologyPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TerminologyProperties)
-    TextSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TerminologyPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyProperties)
+    TextSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     TextSizeLimitExceededException.type = Types::TextSizeLimitExceededException
-    TextTranslationJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    TextTranslationJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    TextTranslationJobFilter.add_member(:submitted_before_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedBeforeTime"))
-    TextTranslationJobFilter.add_member(:submitted_after_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedAfterTime"))
+    TextTranslationJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    TextTranslationJobFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    TextTranslationJobFilter.add_member(:submitted_before_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmittedBeforeTime"))
+    TextTranslationJobFilter.add_member(:submitted_after_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmittedAfterTime"))
     TextTranslationJobFilter.type = Types::TextTranslationJobFilter
-    TextTranslationJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
-    TextTranslationJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
-    TextTranslationJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
-    TextTranslationJobProperties.add_member(:job_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobDetails, location_name: "JobDetails"))
-    TextTranslationJobProperties.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
-    TextTranslationJobProperties.add_member(:target_language_codes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetLanguageCodeStringList, location_name: "TargetLanguageCodes"))
-    TextTranslationJobProperties.add_member(:terminology_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
-    TextTranslationJobProperties.add_member(:parallel_data_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "ParallelDataNames"))
-    TextTranslationJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnboundedLengthString, location_name: "Message"))
-    TextTranslationJobProperties.add_member(:submitted_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedTime"))
-    TextTranslationJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
-    TextTranslationJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
-    TextTranslationJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
-    TextTranslationJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
-    TextTranslationJobProperties.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
+    TextTranslationJobProperties.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, location_name: "JobId"))
+    TextTranslationJobProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, location_name: "JobName"))
+    TextTranslationJobProperties.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, location_name: "JobStatus"))
+    TextTranslationJobProperties.add_member(:job_details, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDetails, location_name: "JobDetails"))
+    TextTranslationJobProperties.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode"))
+    TextTranslationJobProperties.add_member(:target_language_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetLanguageCodeStringList, location_name: "TargetLanguageCodes"))
+    TextTranslationJobProperties.add_member(:terminology_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameList, location_name: "TerminologyNames"))
+    TextTranslationJobProperties.add_member(:parallel_data_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameList, location_name: "ParallelDataNames"))
+    TextTranslationJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: UnboundedLengthString, location_name: "Message"))
+    TextTranslationJobProperties.add_member(:submitted_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "SubmittedTime"))
+    TextTranslationJobProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "EndTime"))
+    TextTranslationJobProperties.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, location_name: "InputDataConfig"))
+    TextTranslationJobProperties.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, location_name: "OutputDataConfig"))
+    TextTranslationJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "DataAccessRoleArn"))
+    TextTranslationJobProperties.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationSettings, location_name: "Settings"))
     TextTranslationJobProperties.type = Types::TextTranslationJobProperties
-    TextTranslationJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextTranslationJobProperties)
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TextTranslationJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextTranslationJobProperties)
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    TooManyTagsException.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    TooManyTagsException.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn"))
     TooManyTagsException.type = Types::TooManyTagsException
-    TranslateDocumentRequest.add_member(:document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Document, location_name: "Document", traits: {"smithy.api#required" => {}}))
-    TranslateDocumentRequest.add_member(:terminology_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
-    TranslateDocumentRequest.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateDocumentRequest.add_member(:target_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateDocumentRequest.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
+    TranslateDocumentRequest.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, location_name: "Document", traits: {"smithy.api#required" => {}}))
+    TranslateDocumentRequest.add_member(:terminology_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameList, location_name: "TerminologyNames"))
+    TranslateDocumentRequest.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateDocumentRequest.add_member(:target_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateDocumentRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationSettings, location_name: "Settings"))
     TranslateDocumentRequest.type = Types::TranslateDocumentRequest
-    TranslateDocumentResponse.add_member(:translated_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslatedDocument, location_name: "TranslatedDocument", traits: {"smithy.api#required" => {}}))
-    TranslateDocumentResponse.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateDocumentResponse.add_member(:target_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateDocumentResponse.add_member(:applied_terminologies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedTerminologyList, location_name: "AppliedTerminologies"))
-    TranslateDocumentResponse.add_member(:applied_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "AppliedSettings"))
+    TranslateDocumentResponse.add_member(:translated_document, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslatedDocument, location_name: "TranslatedDocument", traits: {"smithy.api#required" => {}}))
+    TranslateDocumentResponse.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateDocumentResponse.add_member(:target_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateDocumentResponse.add_member(:applied_terminologies, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedTerminologyList, location_name: "AppliedTerminologies"))
+    TranslateDocumentResponse.add_member(:applied_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationSettings, location_name: "AppliedSettings"))
     TranslateDocumentResponse.type = Types::TranslateDocumentResponse
-    TranslateTextRequest.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "Text", traits: {"smithy.api#required" => {}}))
-    TranslateTextRequest.add_member(:terminology_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
-    TranslateTextRequest.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateTextRequest.add_member(:target_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateTextRequest.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
+    TranslateTextRequest.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedLengthString, location_name: "Text", traits: {"smithy.api#required" => {}}))
+    TranslateTextRequest.add_member(:terminology_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameList, location_name: "TerminologyNames"))
+    TranslateTextRequest.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateTextRequest.add_member(:target_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateTextRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationSettings, location_name: "Settings"))
     TranslateTextRequest.type = Types::TranslateTextRequest
-    TranslateTextResponse.add_member(:translated_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslatedTextString, location_name: "TranslatedText", traits: {"smithy.api#required" => {}}))
-    TranslateTextResponse.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateTextResponse.add_member(:target_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
-    TranslateTextResponse.add_member(:applied_terminologies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AppliedTerminologyList, location_name: "AppliedTerminologies"))
-    TranslateTextResponse.add_member(:applied_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "AppliedSettings"))
+    TranslateTextResponse.add_member(:translated_text, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslatedTextString, location_name: "TranslatedText", traits: {"smithy.api#required" => {}}))
+    TranslateTextResponse.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateTextResponse.add_member(:target_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "TargetLanguageCode", traits: {"smithy.api#required" => {}}))
+    TranslateTextResponse.add_member(:applied_terminologies, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedTerminologyList, location_name: "AppliedTerminologies"))
+    TranslateTextResponse.add_member(:applied_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationSettings, location_name: "AppliedSettings"))
     TranslateTextResponse.type = Types::TranslateTextResponse
-    TranslatedDocument.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslatedDocumentContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
+    TranslatedDocument.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslatedDocumentContent, location_name: "Content", traits: {"smithy.api#required" => {}}))
     TranslatedDocument.type = Types::TranslatedDocument
-    TranslationSettings.add_member(:formality, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Formality, location_name: "Formality"))
-    TranslationSettings.add_member(:profanity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Profanity, location_name: "Profanity"))
-    TranslationSettings.add_member(:brevity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Brevity, location_name: "Brevity"))
+    TranslationSettings.add_member(:formality, ::Smithy::Schema::Shapes::MemberShape.new(target: Formality, location_name: "Formality"))
+    TranslationSettings.add_member(:profanity, ::Smithy::Schema::Shapes::MemberShape.new(target: Profanity, location_name: "Profanity"))
+    TranslationSettings.add_member(:brevity, ::Smithy::Schema::Shapes::MemberShape.new(target: Brevity, location_name: "Brevity"))
     TranslationSettings.type = Types::TranslationSettings
-    UnsupportedDisplayLanguageCodeException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    UnsupportedDisplayLanguageCodeException.add_member(:display_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "DisplayLanguageCode"))
+    UnsupportedDisplayLanguageCodeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    UnsupportedDisplayLanguageCodeException.add_member(:display_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "DisplayLanguageCode"))
     UnsupportedDisplayLanguageCodeException.type = Types::UnsupportedDisplayLanguageCodeException
-    UnsupportedLanguagePairException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    UnsupportedLanguagePairException.add_member(:source_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
-    UnsupportedLanguagePairException.add_member(:target_language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode"))
+    UnsupportedLanguagePairException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    UnsupportedLanguagePairException.add_member(:source_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "SourceLanguageCode"))
+    UnsupportedLanguagePairException.add_member(:target_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "TargetLanguageCode"))
     UnsupportedLanguagePairException.type = Types::UnsupportedLanguagePairException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    UpdateParallelDataRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateParallelDataRequest.add_member(:parallel_data_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataConfig, location_name: "ParallelDataConfig", traits: {"smithy.api#required" => {}}))
-    UpdateParallelDataRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    UpdateParallelDataRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateParallelDataRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    UpdateParallelDataRequest.add_member(:parallel_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataConfig, location_name: "ParallelDataConfig", traits: {"smithy.api#required" => {}}))
+    UpdateParallelDataRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     UpdateParallelDataRequest.type = Types::UpdateParallelDataRequest
-    UpdateParallelDataResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
-    UpdateParallelDataResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "Status"))
-    UpdateParallelDataResponse.add_member(:latest_update_attempt_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParallelDataStatus, location_name: "LatestUpdateAttemptStatus"))
-    UpdateParallelDataResponse.add_member(:latest_update_attempt_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestUpdateAttemptAt"))
+    UpdateParallelDataResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, location_name: "Name"))
+    UpdateParallelDataResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataStatus, location_name: "Status"))
+    UpdateParallelDataResponse.add_member(:latest_update_attempt_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataStatus, location_name: "LatestUpdateAttemptStatus"))
+    UpdateParallelDataResponse.add_member(:latest_update_attempt_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "LatestUpdateAttemptAt"))
     UpdateParallelDataResponse.type = Types::UpdateParallelDataResponse
 
     AWSShineFrontendService20170701 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -457,229 +457,229 @@ module Aws::Translate
       service.add_operation(:create_parallel_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#CreateParallelData"
         operation.name = "CreateParallelData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateParallelDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateParallelDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = CreateParallelDataRequest
+        operation.output = CreateParallelDataResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:delete_parallel_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#DeleteParallelData"
         operation.name = "DeleteParallelData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteParallelDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteParallelDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteParallelDataRequest
+        operation.output = DeleteParallelDataResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_terminology, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#DeleteTerminology"
         operation.name = "DeleteTerminology"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTerminologyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DeleteTerminologyRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:describe_text_translation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#DescribeTextTranslationJob"
         operation.name = "DescribeTextTranslationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTextTranslationJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTextTranslationJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = DescribeTextTranslationJobRequest
+        operation.output = DescribeTextTranslationJobResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_parallel_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#GetParallelData"
         operation.name = "GetParallelData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetParallelDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetParallelDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetParallelDataRequest
+        operation.output = GetParallelDataResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:get_terminology, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#GetTerminology"
         operation.name = "GetTerminology"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTerminologyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTerminologyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = GetTerminologyRequest
+        operation.output = GetTerminologyResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:import_terminology, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#ImportTerminology"
         operation.name = "ImportTerminology"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTerminologyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTerminologyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = ImportTerminologyRequest
+        operation.output = ImportTerminologyResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << LimitExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:list_languages, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#ListLanguages"
         operation.name = "ListLanguages"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLanguagesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListLanguagesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedDisplayLanguageCodeException)
+        operation.input = ListLanguagesRequest
+        operation.output = ListLanguagesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedDisplayLanguageCodeException
         operation.traits = {}
         operation[:paginator] = Paginators::ListLanguages.new
       end)
       service.add_operation(:list_parallel_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#ListParallelData"
         operation.name = "ListParallelData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListParallelDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListParallelDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListParallelDataRequest
+        operation.output = ListParallelDataResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListParallelData.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:list_terminologies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#ListTerminologies"
         operation.name = "ListTerminologies"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTerminologiesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTerminologiesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTerminologiesRequest
+        operation.output = ListTerminologiesResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTerminologies.new
       end)
       service.add_operation(:list_text_translation_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#ListTextTranslationJobs"
         operation.name = "ListTextTranslationJobs"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTextTranslationJobsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTextTranslationJobsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidFilterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = ListTextTranslationJobsRequest
+        operation.output = ListTextTranslationJobsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidFilterException
+        operation.errors << InvalidRequestException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTextTranslationJobs.new
       end)
       service.add_operation(:start_text_translation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#StartTextTranslationJob"
         operation.name = "StartTextTranslationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTextTranslationJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartTextTranslationJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguagePairException)
+        operation.input = StartTextTranslationJobRequest
+        operation.output = StartTextTranslationJobResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedLanguagePairException
         operation.traits = {}
       end)
       service.add_operation(:stop_text_translation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#StopTextTranslationJob"
         operation.name = "StopTextTranslationJob"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTextTranslationJobRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopTextTranslationJobResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = StopTextTranslationJobRequest
+        operation.output = StopTextTranslationJobResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyTagsException
         operation.traits = {}
       end)
       service.add_operation(:translate_document, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#TranslateDocument"
         operation.name = "TranslateDocument"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateDocumentRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateDocumentResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguagePairException)
+        operation.input = TranslateDocumentRequest
+        operation.output = TranslateDocumentResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedLanguagePairException
         operation.traits = {}
       end)
       service.add_operation(:translate_text, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#TranslateText"
         operation.name = "TranslateText"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateTextRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateTextResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectedLanguageLowConfidenceException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedLanguagePairException)
+        operation.input = TranslateTextRequest
+        operation.output = TranslateTextResponse
+        operation.errors << DetectedLanguageLowConfidenceException
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TextSizeLimitExceededException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedLanguagePairException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_parallel_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.translate#UpdateParallelData"
         operation.name = "UpdateParallelData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateParallelDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateParallelDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.input = UpdateParallelDataRequest
+        operation.output = UpdateParallelDataResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
     end

@@ -96,205 +96,205 @@ module Aws::DataPipeline
     ValidationMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datapipeline#validationMessage", name: "ValidationMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 10000}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"})
     ValidationMessages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datapipeline#validationMessages", name: "ValidationMessages")
 
-    ActivatePipelineInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    ActivatePipelineInput.add_member(:parameter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterValueList, location_name: "parameterValues"))
-    ActivatePipelineInput.add_member(:start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTimestamp"))
+    ActivatePipelineInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    ActivatePipelineInput.add_member(:parameter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValueList, location_name: "parameterValues"))
+    ActivatePipelineInput.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "startTimestamp"))
     ActivatePipelineInput.type = Types::ActivatePipelineInput
     ActivatePipelineOutput.type = Types::ActivatePipelineOutput
-    AddTagsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    AddTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    AddTagsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    AddTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     AddTagsInput.type = Types::AddTagsInput
     AddTagsOutput.type = Types::AddTagsOutput
-    CreatePipelineInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreatePipelineInput.add_member(:unique_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "uniqueId", traits: {"smithy.api#required" => {}}))
-    CreatePipelineInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    CreatePipelineInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreatePipelineInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "name", traits: {"smithy.api#required" => {}}))
+    CreatePipelineInput.add_member(:unique_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "uniqueId", traits: {"smithy.api#required" => {}}))
+    CreatePipelineInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    CreatePipelineInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     CreatePipelineInput.type = Types::CreatePipelineInput
-    CreatePipelineOutput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    CreatePipelineOutput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
     CreatePipelineOutput.type = Types::CreatePipelineOutput
-    DeactivatePipelineInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    DeactivatePipelineInput.add_member(:cancel_active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CancelActive, location_name: "cancelActive"))
+    DeactivatePipelineInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    DeactivatePipelineInput.add_member(:cancel_active, ::Smithy::Schema::Shapes::MemberShape.new(target: CancelActive, location_name: "cancelActive"))
     DeactivatePipelineInput.type = Types::DeactivatePipelineInput
     DeactivatePipelineOutput.type = Types::DeactivatePipelineOutput
-    DeletePipelineInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    DeletePipelineInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
     DeletePipelineInput.type = Types::DeletePipelineInput
-    DescribeObjectsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    DescribeObjectsInput.add_member(:object_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "objectIds", traits: {"smithy.api#required" => {}}))
-    DescribeObjectsInput.add_member(:evaluate_expressions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "evaluateExpressions", traits: {"smithy.api#default" => false}))
-    DescribeObjectsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker"))
+    DescribeObjectsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    DescribeObjectsInput.add_member(:object_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "objectIds", traits: {"smithy.api#required" => {}}))
+    DescribeObjectsInput.add_member(:evaluate_expressions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "evaluateExpressions", traits: {"smithy.api#default" => false}))
+    DescribeObjectsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker"))
     DescribeObjectsInput.type = Types::DescribeObjectsInput
-    DescribeObjectsOutput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineObjectList, location_name: "pipelineObjects", traits: {"smithy.api#required" => {}}))
-    DescribeObjectsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker"))
-    DescribeObjectsOutput.add_member(:has_more_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "hasMoreResults", traits: {"smithy.api#default" => false}))
+    DescribeObjectsOutput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObjectList, location_name: "pipelineObjects", traits: {"smithy.api#required" => {}}))
+    DescribeObjectsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker"))
+    DescribeObjectsOutput.add_member(:has_more_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "hasMoreResults", traits: {"smithy.api#default" => false}))
     DescribeObjectsOutput.type = Types::DescribeObjectsOutput
-    DescribePipelinesInput.add_member(:pipeline_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "pipelineIds", traits: {"smithy.api#required" => {}}))
+    DescribePipelinesInput.add_member(:pipeline_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "pipelineIds", traits: {"smithy.api#required" => {}}))
     DescribePipelinesInput.type = Types::DescribePipelinesInput
-    DescribePipelinesOutput.add_member(:pipeline_description_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDescriptionList, location_name: "pipelineDescriptionList", traits: {"smithy.api#required" => {}}))
+    DescribePipelinesOutput.add_member(:pipeline_description_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDescriptionList, location_name: "pipelineDescriptionList", traits: {"smithy.api#required" => {}}))
     DescribePipelinesOutput.type = Types::DescribePipelinesOutput
-    EvaluateExpressionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    EvaluateExpressionInput.add_member(:object_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "objectId", traits: {"smithy.api#required" => {}}))
-    EvaluateExpressionInput.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongString, location_name: "expression", traits: {"smithy.api#required" => {}}))
+    EvaluateExpressionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    EvaluateExpressionInput.add_member(:object_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "objectId", traits: {"smithy.api#required" => {}}))
+    EvaluateExpressionInput.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: LongString, location_name: "expression", traits: {"smithy.api#required" => {}}))
     EvaluateExpressionInput.type = Types::EvaluateExpressionInput
-    EvaluateExpressionOutput.add_member(:evaluated_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongString, location_name: "evaluatedExpression", traits: {"smithy.api#required" => {}}))
+    EvaluateExpressionOutput.add_member(:evaluated_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: LongString, location_name: "evaluatedExpression", traits: {"smithy.api#required" => {}}))
     EvaluateExpressionOutput.type = Types::EvaluateExpressionOutput
-    Field.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldNameString, location_name: "key", traits: {"smithy.api#required" => {}}))
-    Field.add_member(:string_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldStringValue, location_name: "stringValue"))
-    Field.add_member(:ref_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldNameString, location_name: "refValue"))
+    Field.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameString, location_name: "key", traits: {"smithy.api#required" => {}}))
+    Field.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldStringValue, location_name: "stringValue"))
+    Field.add_member(:ref_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameString, location_name: "refValue"))
     Field.type = Types::Field
-    GetPipelineDefinitionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    GetPipelineDefinitionInput.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    GetPipelineDefinitionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    GetPipelineDefinitionInput.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "version"))
     GetPipelineDefinitionInput.type = Types::GetPipelineDefinitionInput
-    GetPipelineDefinitionOutput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineObjectList, location_name: "pipelineObjects"))
-    GetPipelineDefinitionOutput.add_member(:parameter_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterObjectList, location_name: "parameterObjects"))
-    GetPipelineDefinitionOutput.add_member(:parameter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterValueList, location_name: "parameterValues"))
+    GetPipelineDefinitionOutput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObjectList, location_name: "pipelineObjects"))
+    GetPipelineDefinitionOutput.add_member(:parameter_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterObjectList, location_name: "parameterObjects"))
+    GetPipelineDefinitionOutput.add_member(:parameter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValueList, location_name: "parameterValues"))
     GetPipelineDefinitionOutput.type = Types::GetPipelineDefinitionOutput
-    InstanceIdentity.add_member(:document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "document"))
-    InstanceIdentity.add_member(:signature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "signature"))
+    InstanceIdentity.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "document"))
+    InstanceIdentity.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "signature"))
     InstanceIdentity.type = Types::InstanceIdentity
-    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InternalServiceError.type = Types::InternalServiceError
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    ListPipelinesInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker"))
+    ListPipelinesInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker"))
     ListPipelinesInput.type = Types::ListPipelinesInput
-    ListPipelinesOutput.add_member(:pipeline_id_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineList, location_name: "pipelineIdList", traits: {"smithy.api#required" => {}}))
-    ListPipelinesOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker"))
-    ListPipelinesOutput.add_member(:has_more_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "hasMoreResults", traits: {"smithy.api#default" => false}))
+    ListPipelinesOutput.add_member(:pipeline_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineList, location_name: "pipelineIdList", traits: {"smithy.api#required" => {}}))
+    ListPipelinesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker"))
+    ListPipelinesOutput.add_member(:has_more_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "hasMoreResults", traits: {"smithy.api#default" => false}))
     ListPipelinesOutput.type = Types::ListPipelinesOutput
-    Operator.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperatorType, location_name: "type"))
-    Operator.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "values"))
+    Operator.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorType, location_name: "type"))
+    Operator.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "values"))
     Operator.type = Types::Operator
-    OperatorType.add_member(:equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Equal", traits: {"smithy.api#enumValue" => "EQ"}))
-    OperatorType.add_member(:reference_equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReferenceEqual", traits: {"smithy.api#enumValue" => "REF_EQ"}))
-    OperatorType.add_member(:less_than_or_equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LessThanOrEqual", traits: {"smithy.api#enumValue" => "LE"}))
-    OperatorType.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GreaterThanOrEqual", traits: {"smithy.api#enumValue" => "GE"}))
-    OperatorType.add_member(:between, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Between", traits: {"smithy.api#enumValue" => "BETWEEN"}))
-    ParameterAttribute.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameString, location_name: "key", traits: {"smithy.api#required" => {}}))
-    ParameterAttribute.add_member(:string_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValueString, location_name: "stringValue", traits: {"smithy.api#required" => {}}))
+    OperatorType.add_member(:equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Equal", traits: {"smithy.api#enumValue" => "EQ"}))
+    OperatorType.add_member(:reference_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReferenceEqual", traits: {"smithy.api#enumValue" => "REF_EQ"}))
+    OperatorType.add_member(:less_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LessThanOrEqual", traits: {"smithy.api#enumValue" => "LE"}))
+    OperatorType.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GreaterThanOrEqual", traits: {"smithy.api#enumValue" => "GE"}))
+    OperatorType.add_member(:between, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Between", traits: {"smithy.api#enumValue" => "BETWEEN"}))
+    ParameterAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameString, location_name: "key", traits: {"smithy.api#required" => {}}))
+    ParameterAttribute.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueString, location_name: "stringValue", traits: {"smithy.api#required" => {}}))
     ParameterAttribute.type = Types::ParameterAttribute
-    ParameterAttributeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterAttribute)
-    ParameterObject.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldNameString, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ParameterObject.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterAttributeList, location_name: "attributes", traits: {"smithy.api#required" => {}}))
+    ParameterAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterAttribute)
+    ParameterObject.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameString, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ParameterObject.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterAttributeList, location_name: "attributes", traits: {"smithy.api#required" => {}}))
     ParameterObject.type = Types::ParameterObject
-    ParameterObjectList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterObject)
-    ParameterValue.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldNameString, location_name: "id", traits: {"smithy.api#required" => {}}))
-    ParameterValue.add_member(:string_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldStringValue, location_name: "stringValue", traits: {"smithy.api#required" => {}}))
+    ParameterObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterObject)
+    ParameterValue.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameString, location_name: "id", traits: {"smithy.api#required" => {}}))
+    ParameterValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldStringValue, location_name: "stringValue", traits: {"smithy.api#required" => {}}))
     ParameterValue.type = Types::ParameterValue
-    ParameterValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterValue)
-    PipelineDeletedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue)
+    PipelineDeletedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     PipelineDeletedException.type = Types::PipelineDeletedException
-    PipelineDescription.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    PipelineDescription.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "name", traits: {"smithy.api#required" => {}}))
-    PipelineDescription.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList, location_name: "fields", traits: {"smithy.api#required" => {}}))
-    PipelineDescription.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    PipelineDescription.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    PipelineDescription.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    PipelineDescription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "name", traits: {"smithy.api#required" => {}}))
+    PipelineDescription.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, location_name: "fields", traits: {"smithy.api#required" => {}}))
+    PipelineDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "description"))
+    PipelineDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     PipelineDescription.type = Types::PipelineDescription
-    PipelineDescriptionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDescription)
-    PipelineIdName.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "id"))
-    PipelineIdName.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "name"))
+    PipelineDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDescription)
+    PipelineIdName.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "id"))
+    PipelineIdName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "name"))
     PipelineIdName.type = Types::PipelineIdName
-    PipelineNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    PipelineNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     PipelineNotFoundException.type = Types::PipelineNotFoundException
-    PipelineObject.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "id", traits: {"smithy.api#required" => {}}))
-    PipelineObject.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "name", traits: {"smithy.api#required" => {}}))
-    PipelineObject.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList, location_name: "fields", traits: {"smithy.api#required" => {}}))
+    PipelineObject.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "id", traits: {"smithy.api#required" => {}}))
+    PipelineObject.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "name", traits: {"smithy.api#required" => {}}))
+    PipelineObject.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, location_name: "fields", traits: {"smithy.api#required" => {}}))
     PipelineObject.type = Types::PipelineObject
-    PipelineObjectList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineObject)
-    PipelineObjectMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id)
-    PipelineObjectMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineObject)
-    PollForTaskInput.add_member(:worker_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerGroup", traits: {"smithy.api#required" => {}}))
-    PollForTaskInput.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "hostname"))
-    PollForTaskInput.add_member(:instance_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceIdentity, location_name: "instanceIdentity"))
+    PipelineObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObject)
+    PipelineObjectMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Id)
+    PipelineObjectMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObject)
+    PollForTaskInput.add_member(:worker_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerGroup", traits: {"smithy.api#required" => {}}))
+    PollForTaskInput.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "hostname"))
+    PollForTaskInput.add_member(:instance_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdentity, location_name: "instanceIdentity"))
     PollForTaskInput.type = Types::PollForTaskInput
-    PollForTaskOutput.add_member(:task_object, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskObject, location_name: "taskObject"))
+    PollForTaskOutput.add_member(:task_object, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskObject, location_name: "taskObject"))
     PollForTaskOutput.type = Types::PollForTaskOutput
-    PutPipelineDefinitionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    PutPipelineDefinitionInput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineObjectList, location_name: "pipelineObjects", traits: {"smithy.api#required" => {}}))
-    PutPipelineDefinitionInput.add_member(:parameter_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterObjectList, location_name: "parameterObjects"))
-    PutPipelineDefinitionInput.add_member(:parameter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterValueList, location_name: "parameterValues"))
+    PutPipelineDefinitionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    PutPipelineDefinitionInput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObjectList, location_name: "pipelineObjects", traits: {"smithy.api#required" => {}}))
+    PutPipelineDefinitionInput.add_member(:parameter_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterObjectList, location_name: "parameterObjects"))
+    PutPipelineDefinitionInput.add_member(:parameter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValueList, location_name: "parameterValues"))
     PutPipelineDefinitionInput.type = Types::PutPipelineDefinitionInput
-    PutPipelineDefinitionOutput.add_member(:validation_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationErrors, location_name: "validationErrors"))
-    PutPipelineDefinitionOutput.add_member(:validation_warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationWarnings, location_name: "validationWarnings"))
-    PutPipelineDefinitionOutput.add_member(:errored, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "errored", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PutPipelineDefinitionOutput.add_member(:validation_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationErrors, location_name: "validationErrors"))
+    PutPipelineDefinitionOutput.add_member(:validation_warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationWarnings, location_name: "validationWarnings"))
+    PutPipelineDefinitionOutput.add_member(:errored, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "errored", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     PutPipelineDefinitionOutput.type = Types::PutPipelineDefinitionOutput
-    Query.add_member(:selectors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectorList, location_name: "selectors"))
+    Query.add_member(:selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectorList, location_name: "selectors"))
     Query.type = Types::Query
-    QueryObjectsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    QueryObjectsInput.add_member(:query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Query, location_name: "query"))
-    QueryObjectsInput.add_member(:sphere, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "sphere", traits: {"smithy.api#required" => {}}))
-    QueryObjectsInput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker"))
-    QueryObjectsInput.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Int, location_name: "limit"))
+    QueryObjectsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    QueryObjectsInput.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, location_name: "query"))
+    QueryObjectsInput.add_member(:sphere, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "sphere", traits: {"smithy.api#required" => {}}))
+    QueryObjectsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker"))
+    QueryObjectsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Int, location_name: "limit"))
     QueryObjectsInput.type = Types::QueryObjectsInput
-    QueryObjectsOutput.add_member(:ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "ids"))
-    QueryObjectsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "marker"))
-    QueryObjectsOutput.add_member(:has_more_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "hasMoreResults", traits: {"smithy.api#default" => false}))
+    QueryObjectsOutput.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "ids"))
+    QueryObjectsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "marker"))
+    QueryObjectsOutput.add_member(:has_more_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "hasMoreResults", traits: {"smithy.api#default" => false}))
     QueryObjectsOutput.type = Types::QueryObjectsOutput
-    RemoveTagsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    RemoveTagsInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
+    RemoveTagsInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    RemoveTagsInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
     RemoveTagsInput.type = Types::RemoveTagsInput
     RemoveTagsOutput.type = Types::RemoveTagsOutput
-    ReportTaskProgressInput.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId", traits: {"smithy.api#required" => {}}))
-    ReportTaskProgressInput.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList, location_name: "fields"))
+    ReportTaskProgressInput.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "taskId", traits: {"smithy.api#required" => {}}))
+    ReportTaskProgressInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, location_name: "fields"))
     ReportTaskProgressInput.type = Types::ReportTaskProgressInput
-    ReportTaskProgressOutput.add_member(:canceled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "canceled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    ReportTaskProgressOutput.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "canceled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ReportTaskProgressOutput.type = Types::ReportTaskProgressOutput
-    ReportTaskRunnerHeartbeatInput.add_member(:taskrunner_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "taskrunnerId", traits: {"smithy.api#required" => {}}))
-    ReportTaskRunnerHeartbeatInput.add_member(:worker_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "workerGroup"))
-    ReportTaskRunnerHeartbeatInput.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "hostname"))
+    ReportTaskRunnerHeartbeatInput.add_member(:taskrunner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "taskrunnerId", traits: {"smithy.api#required" => {}}))
+    ReportTaskRunnerHeartbeatInput.add_member(:worker_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "workerGroup"))
+    ReportTaskRunnerHeartbeatInput.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "hostname"))
     ReportTaskRunnerHeartbeatInput.type = Types::ReportTaskRunnerHeartbeatInput
-    ReportTaskRunnerHeartbeatOutput.add_member(:terminate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "terminate", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    ReportTaskRunnerHeartbeatOutput.add_member(:terminate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "terminate", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ReportTaskRunnerHeartbeatOutput.type = Types::ReportTaskRunnerHeartbeatOutput
-    Selector.add_member(:field_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "fieldName"))
-    Selector.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Operator, location_name: "operator"))
+    Selector.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "fieldName"))
+    Selector.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, location_name: "operator"))
     Selector.type = Types::Selector
-    SelectorList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Selector)
-    SetStatusInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    SetStatusInput.add_member(:object_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdList, location_name: "objectIds", traits: {"smithy.api#required" => {}}))
-    SetStatusInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "status", traits: {"smithy.api#required" => {}}))
+    SelectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Selector)
+    SetStatusInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    SetStatusInput.add_member(:object_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, location_name: "objectIds", traits: {"smithy.api#required" => {}}))
+    SetStatusInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "status", traits: {"smithy.api#required" => {}}))
     SetStatusInput.type = Types::SetStatusInput
-    SetTaskStatusInput.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId", traits: {"smithy.api#required" => {}}))
-    SetTaskStatusInput.add_member(:task_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskStatus, location_name: "taskStatus", traits: {"smithy.api#required" => {}}))
-    SetTaskStatusInput.add_member(:error_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "errorId"))
-    SetTaskStatusInput.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
-    SetTaskStatusInput.add_member(:error_stack_trace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: "errorStackTrace"))
+    SetTaskStatusInput.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "taskId", traits: {"smithy.api#required" => {}}))
+    SetTaskStatusInput.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, location_name: "taskStatus", traits: {"smithy.api#required" => {}}))
+    SetTaskStatusInput.add_member(:error_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "errorId"))
+    SetTaskStatusInput.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "errorMessage"))
+    SetTaskStatusInput.add_member(:error_stack_trace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "errorStackTrace"))
     SetTaskStatusInput.type = Types::SetTaskStatusInput
     SetTaskStatusOutput.type = Types::SetTaskStatusOutput
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TaskNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TaskNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
     TaskNotFoundException.type = Types::TaskNotFoundException
-    TaskObject.add_member(:task_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId"))
-    TaskObject.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId"))
-    TaskObject.add_member(:attempt_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "attemptId"))
-    TaskObject.add_member(:objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineObjectMap, location_name: "objects"))
+    TaskObject.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, location_name: "taskId"))
+    TaskObject.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId"))
+    TaskObject.add_member(:attempt_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "attemptId"))
+    TaskObject.add_member(:objects, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObjectMap, location_name: "objects"))
     TaskObject.type = Types::TaskObject
-    TaskStatus.add_member(:finished, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FINISHED", traits: {"smithy.api#enumValue" => "FINISHED"}))
-    TaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    TaskStatus.add_member(:false, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FALSE", traits: {"smithy.api#enumValue" => "FALSE"}))
-    ValidatePipelineDefinitionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
-    ValidatePipelineDefinitionInput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineObjectList, location_name: "pipelineObjects", traits: {"smithy.api#required" => {}}))
-    ValidatePipelineDefinitionInput.add_member(:parameter_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterObjectList, location_name: "parameterObjects"))
-    ValidatePipelineDefinitionInput.add_member(:parameter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterValueList, location_name: "parameterValues"))
+    TaskStatus.add_member(:finished, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FINISHED", traits: {"smithy.api#enumValue" => "FINISHED"}))
+    TaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    TaskStatus.add_member(:false, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FALSE", traits: {"smithy.api#enumValue" => "FALSE"}))
+    ValidatePipelineDefinitionInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "pipelineId", traits: {"smithy.api#required" => {}}))
+    ValidatePipelineDefinitionInput.add_member(:pipeline_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObjectList, location_name: "pipelineObjects", traits: {"smithy.api#required" => {}}))
+    ValidatePipelineDefinitionInput.add_member(:parameter_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterObjectList, location_name: "parameterObjects"))
+    ValidatePipelineDefinitionInput.add_member(:parameter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValueList, location_name: "parameterValues"))
     ValidatePipelineDefinitionInput.type = Types::ValidatePipelineDefinitionInput
-    ValidatePipelineDefinitionOutput.add_member(:validation_errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationErrors, location_name: "validationErrors"))
-    ValidatePipelineDefinitionOutput.add_member(:validation_warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationWarnings, location_name: "validationWarnings"))
-    ValidatePipelineDefinitionOutput.add_member(:errored, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: "errored", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    ValidatePipelineDefinitionOutput.add_member(:validation_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationErrors, location_name: "validationErrors"))
+    ValidatePipelineDefinitionOutput.add_member(:validation_warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationWarnings, location_name: "validationWarnings"))
+    ValidatePipelineDefinitionOutput.add_member(:errored, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "errored", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ValidatePipelineDefinitionOutput.type = Types::ValidatePipelineDefinitionOutput
-    ValidationError.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "id"))
-    ValidationError.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationMessages, location_name: "errors"))
+    ValidationError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "id"))
+    ValidationError.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessages, location_name: "errors"))
     ValidationError.type = Types::ValidationError
-    ValidationErrors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationError)
-    ValidationWarning.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: "id"))
-    ValidationWarning.add_member(:warnings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationMessages, location_name: "warnings"))
+    ValidationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationError)
+    ValidationWarning.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, location_name: "id"))
+    ValidationWarning.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessages, location_name: "warnings"))
     ValidationWarning.type = Types::ValidationWarning
-    ValidationWarnings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationWarning)
-    FieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Field)
-    IdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id)
-    PipelineList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineIdName)
-    StringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    ValidationMessages.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationMessage)
+    ValidationWarnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationWarning)
+    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Field)
+    IdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Id)
+    PipelineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineIdName)
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    ValidationMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessage)
 
     DataPipeline = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.datapipeline#DataPipeline"
@@ -304,208 +304,208 @@ module Aws::DataPipeline
       service.add_operation(:activate_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#ActivatePipeline"
         operation.name = "ActivatePipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivatePipelineInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActivatePipelineOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = ActivatePipelineInput
+        operation.output = ActivatePipelineOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:add_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#AddTags"
         operation.name = "AddTags"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddTagsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = AddTagsInput
+        operation.output = AddTagsOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:create_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#CreatePipeline"
         operation.name = "CreatePipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePipelineInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePipelineOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = CreatePipelineInput
+        operation.output = CreatePipelineOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:deactivate_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#DeactivatePipeline"
         operation.name = "DeactivatePipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeactivatePipelineInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeactivatePipelineOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = DeactivatePipelineInput
+        operation.output = DeactivatePipelineOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#DeletePipeline"
         operation.name = "DeletePipeline"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePipelineInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = DeletePipelineInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:describe_objects, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#DescribeObjects"
         operation.name = "DescribeObjects"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeObjectsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeObjectsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = DescribeObjectsInput
+        operation.output = DescribeObjectsOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeObjects.new
       end)
       service.add_operation(:describe_pipelines, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#DescribePipelines"
         operation.name = "DescribePipelines"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePipelinesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribePipelinesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = DescribePipelinesInput
+        operation.output = DescribePipelinesOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:evaluate_expression, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#EvaluateExpression"
         operation.name = "EvaluateExpression"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluateExpressionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EvaluateExpressionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskNotFoundException)
+        operation.input = EvaluateExpressionInput
+        operation.output = EvaluateExpressionOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
+        operation.errors << TaskNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_pipeline_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#GetPipelineDefinition"
         operation.name = "GetPipelineDefinition"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPipelineDefinitionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPipelineDefinitionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = GetPipelineDefinitionInput
+        operation.output = GetPipelineDefinitionOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:list_pipelines, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#ListPipelines"
         operation.name = "ListPipelines"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelinesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelinesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ListPipelinesInput
+        operation.output = ListPipelinesOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListPipelines.new
       end)
       service.add_operation(:poll_for_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#PollForTask"
         operation.name = "PollForTask"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PollForTaskInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PollForTaskOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskNotFoundException)
+        operation.input = PollForTaskInput
+        operation.output = PollForTaskOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << TaskNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:put_pipeline_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#PutPipelineDefinition"
         operation.name = "PutPipelineDefinition"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutPipelineDefinitionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutPipelineDefinitionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = PutPipelineDefinitionInput
+        operation.output = PutPipelineDefinitionOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:query_objects, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#QueryObjects"
         operation.name = "QueryObjects"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryObjectsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryObjectsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = QueryObjectsInput
+        operation.output = QueryObjectsOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
         operation[:paginator] = Paginators::QueryObjects.new
       end)
       service.add_operation(:remove_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#RemoveTags"
         operation.name = "RemoveTags"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoveTagsOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = RemoveTagsInput
+        operation.output = RemoveTagsOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:report_task_progress, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#ReportTaskProgress"
         operation.name = "ReportTaskProgress"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportTaskProgressInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportTaskProgressOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskNotFoundException)
+        operation.input = ReportTaskProgressInput
+        operation.output = ReportTaskProgressOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
+        operation.errors << TaskNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:report_task_runner_heartbeat, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#ReportTaskRunnerHeartbeat"
         operation.name = "ReportTaskRunnerHeartbeat"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportTaskRunnerHeartbeatInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReportTaskRunnerHeartbeatOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.input = ReportTaskRunnerHeartbeatInput
+        operation.output = ReportTaskRunnerHeartbeatOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:set_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#SetStatus"
         operation.name = "SetStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetStatusInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = SetStatusInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:set_task_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#SetTaskStatus"
         operation.name = "SetTaskStatus"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetTaskStatusInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetTaskStatusOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaskNotFoundException)
+        operation.input = SetTaskStatusInput
+        operation.output = SetTaskStatusOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
+        operation.errors << TaskNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:validate_pipeline_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datapipeline#ValidatePipelineDefinition"
         operation.name = "ValidatePipelineDefinition"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidatePipelineDefinitionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidatePipelineDefinitionOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDeletedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        operation.input = ValidatePipelineDefinitionInput
+        operation.output = ValidatePipelineDefinitionOutput
+        operation.errors << InternalServiceError
+        operation.errors << InvalidRequestException
+        operation.errors << PipelineDeletedException
+        operation.errors << PipelineNotFoundException
         operation.traits = {}
       end)
     end

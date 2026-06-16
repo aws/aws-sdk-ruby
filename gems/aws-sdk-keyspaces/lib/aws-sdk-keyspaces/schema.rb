@@ -127,290 +127,290 @@ module Aws::Keyspaces
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.keyspaces#region", name: "Region", traits: {"smithy.api#length" => {"min" => 2, "max" => 25}})
     Rs = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.keyspaces#rs", name: "Rs", traits: {"smithy.api#enum" => [{"value" => "SINGLE_REGION", "name" => "SINGLE_REGION"}, {"value" => "MULTI_REGION", "name" => "MULTI_REGION"}], "smithy.api#length" => {"min" => 1, "max" => 20}})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AutoScalingPolicy.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetTrackingScalingPolicyConfiguration, location_name: "targetTrackingScalingPolicyConfiguration"))
+    AutoScalingPolicy.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingScalingPolicyConfiguration, location_name: "targetTrackingScalingPolicyConfiguration"))
     AutoScalingPolicy.type = Types::AutoScalingPolicy
-    AutoScalingSettings.add_member(:auto_scaling_disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "autoScalingDisabled", traits: {"smithy.api#default" => false}))
-    AutoScalingSettings.add_member(:minimum_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "minimumUnits"))
-    AutoScalingSettings.add_member(:maximum_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "maximumUnits"))
-    AutoScalingSettings.add_member(:scaling_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingPolicy, location_name: "scalingPolicy"))
+    AutoScalingSettings.add_member(:auto_scaling_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "autoScalingDisabled", traits: {"smithy.api#default" => false}))
+    AutoScalingSettings.add_member(:minimum_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, location_name: "minimumUnits"))
+    AutoScalingSettings.add_member(:maximum_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, location_name: "maximumUnits"))
+    AutoScalingSettings.add_member(:scaling_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingPolicy, location_name: "scalingPolicy"))
     AutoScalingSettings.type = Types::AutoScalingSettings
-    AutoScalingSpecification.add_member(:write_capacity_auto_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSettings, location_name: "writeCapacityAutoScaling"))
-    AutoScalingSpecification.add_member(:read_capacity_auto_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSettings, location_name: "readCapacityAutoScaling"))
+    AutoScalingSpecification.add_member(:write_capacity_auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettings, location_name: "writeCapacityAutoScaling"))
+    AutoScalingSpecification.add_member(:read_capacity_auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettings, location_name: "readCapacityAutoScaling"))
     AutoScalingSpecification.type = Types::AutoScalingSpecification
-    CapacitySpecification.add_member(:throughput_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "throughputMode", traits: {"smithy.api#required" => {}}))
-    CapacitySpecification.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "readCapacityUnits"))
-    CapacitySpecification.add_member(:write_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "writeCapacityUnits"))
+    CapacitySpecification.add_member(:throughput_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputMode, location_name: "throughputMode", traits: {"smithy.api#required" => {}}))
+    CapacitySpecification.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, location_name: "readCapacityUnits"))
+    CapacitySpecification.add_member(:write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, location_name: "writeCapacityUnits"))
     CapacitySpecification.type = Types::CapacitySpecification
-    CapacitySpecificationSummary.add_member(:throughput_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "throughputMode", traits: {"smithy.api#required" => {}}))
-    CapacitySpecificationSummary.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "readCapacityUnits"))
-    CapacitySpecificationSummary.add_member(:write_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "writeCapacityUnits"))
-    CapacitySpecificationSummary.add_member(:last_update_to_pay_per_request_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateToPayPerRequestTimestamp"))
+    CapacitySpecificationSummary.add_member(:throughput_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputMode, location_name: "throughputMode", traits: {"smithy.api#required" => {}}))
+    CapacitySpecificationSummary.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, location_name: "readCapacityUnits"))
+    CapacitySpecificationSummary.add_member(:write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, location_name: "writeCapacityUnits"))
+    CapacitySpecificationSummary.add_member(:last_update_to_pay_per_request_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastUpdateToPayPerRequestTimestamp"))
     CapacitySpecificationSummary.type = Types::CapacitySpecificationSummary
-    CdcSpecification.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CdcStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    CdcSpecification.add_member(:view_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewType, location_name: "viewType"))
-    CdcSpecification.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CdcSpecification.add_member(:propagate_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CdcPropagateTags, location_name: "propagateTags"))
+    CdcSpecification.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CdcStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    CdcSpecification.add_member(:view_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewType, location_name: "viewType"))
+    CdcSpecification.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CdcSpecification.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CdcPropagateTags, location_name: "propagateTags"))
     CdcSpecification.type = Types::CdcSpecification
-    CdcSpecificationSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CdcStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    CdcSpecificationSummary.add_member(:view_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewType, location_name: "viewType"))
+    CdcSpecificationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CdcStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    CdcSpecificationSummary.add_member(:view_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewType, location_name: "viewType"))
     CdcSpecificationSummary.type = Types::CdcSpecificationSummary
-    ClientSideTimestamps.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSideTimestampsStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    ClientSideTimestamps.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSideTimestampsStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     ClientSideTimestamps.type = Types::ClientSideTimestamps
-    ClusteringKey.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ClusteringKey.add_member(:order_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SortOrder, location_name: "orderBy", traits: {"smithy.api#required" => {}}))
+    ClusteringKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ClusteringKey.add_member(:order_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "orderBy", traits: {"smithy.api#required" => {}}))
     ClusteringKey.type = Types::ClusteringKey
-    ClusteringKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusteringKey)
-    ColumnDefinition.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ColumnDefinition.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: "type", traits: {"smithy.api#required" => {}}))
+    ClusteringKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusteringKey)
+    ColumnDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    ColumnDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, location_name: "type", traits: {"smithy.api#required" => {}}))
     ColumnDefinition.type = Types::ColumnDefinition
-    ColumnDefinitionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnDefinition)
-    Comment.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ColumnDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDefinition)
+    Comment.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     Comment.type = Types::Comment
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateKeyspaceInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    CreateKeyspaceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateKeyspaceInput.add_member(:replication_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationSpecification, location_name: "replicationSpecification"))
+    CreateKeyspaceInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    CreateKeyspaceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CreateKeyspaceInput.add_member(:replication_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationSpecification, location_name: "replicationSpecification"))
     CreateKeyspaceInput.type = Types::CreateKeyspaceInput
-    CreateKeyspaceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    CreateKeyspaceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
     CreateKeyspaceOutput.type = Types::CreateKeyspaceOutput
-    CreateTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    CreateTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
-    CreateTableInput.add_member(:schema_definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaDefinition, location_name: "schemaDefinition", traits: {"smithy.api#required" => {}}))
-    CreateTableInput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
-    CreateTableInput.add_member(:capacity_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacitySpecification, location_name: "capacitySpecification"))
-    CreateTableInput.add_member(:encryption_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionSpecification, location_name: "encryptionSpecification"))
-    CreateTableInput.add_member(:point_in_time_recovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointInTimeRecovery, location_name: "pointInTimeRecovery"))
-    CreateTableInput.add_member(:ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLive, location_name: "ttl"))
-    CreateTableInput.add_member(:default_time_to_live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
-    CreateTableInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateTableInput.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
-    CreateTableInput.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
-    CreateTableInput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaSpecificationList, location_name: "replicaSpecifications"))
-    CreateTableInput.add_member(:cdc_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CdcSpecification, location_name: "cdcSpecification"))
+    CreateTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    CreateTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    CreateTableInput.add_member(:schema_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, location_name: "schemaDefinition", traits: {"smithy.api#required" => {}}))
+    CreateTableInput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
+    CreateTableInput.add_member(:capacity_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySpecification, location_name: "capacitySpecification"))
+    CreateTableInput.add_member(:encryption_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionSpecification, location_name: "encryptionSpecification"))
+    CreateTableInput.add_member(:point_in_time_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecovery, location_name: "pointInTimeRecovery"))
+    CreateTableInput.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, location_name: "ttl"))
+    CreateTableInput.add_member(:default_time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultTimeToLive, location_name: "defaultTimeToLive"))
+    CreateTableInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
+    CreateTableInput.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSideTimestamps, location_name: "clientSideTimestamps"))
+    CreateTableInput.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    CreateTableInput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecificationList, location_name: "replicaSpecifications"))
+    CreateTableInput.add_member(:cdc_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CdcSpecification, location_name: "cdcSpecification"))
     CreateTableInput.type = Types::CreateTableInput
-    CreateTableOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    CreateTableOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
     CreateTableOutput.type = Types::CreateTableOutput
-    CreateTypeRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    CreateTypeRequest.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
-    CreateTypeRequest.add_member(:field_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList, location_name: "fieldDefinitions", traits: {"smithy.api#required" => {}}))
+    CreateTypeRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    CreateTypeRequest.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
+    CreateTypeRequest.add_member(:field_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, location_name: "fieldDefinitions", traits: {"smithy.api#required" => {}}))
     CreateTypeRequest.type = Types::CreateTypeRequest
-    CreateTypeResponse.add_member(:keyspace_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "keyspaceArn", traits: {"smithy.api#required" => {}}))
-    CreateTypeResponse.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
+    CreateTypeResponse.add_member(:keyspace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "keyspaceArn", traits: {"smithy.api#required" => {}}))
+    CreateTypeResponse.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
     CreateTypeResponse.type = Types::CreateTypeResponse
-    DeleteKeyspaceInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    DeleteKeyspaceInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
     DeleteKeyspaceInput.type = Types::DeleteKeyspaceInput
     DeleteKeyspaceOutput.type = Types::DeleteKeyspaceOutput
-    DeleteTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    DeleteTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    DeleteTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    DeleteTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
     DeleteTableInput.type = Types::DeleteTableInput
     DeleteTableOutput.type = Types::DeleteTableOutput
-    DeleteTypeRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    DeleteTypeRequest.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
+    DeleteTypeRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    DeleteTypeRequest.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
     DeleteTypeRequest.type = Types::DeleteTypeRequest
-    DeleteTypeResponse.add_member(:keyspace_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "keyspaceArn", traits: {"smithy.api#required" => {}}))
-    DeleteTypeResponse.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
+    DeleteTypeResponse.add_member(:keyspace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "keyspaceArn", traits: {"smithy.api#required" => {}}))
+    DeleteTypeResponse.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
     DeleteTypeResponse.type = Types::DeleteTypeResponse
-    EncryptionSpecification.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionType, location_name: "type", traits: {"smithy.api#required" => {}}))
-    EncryptionSpecification.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyARN, location_name: "kmsKeyIdentifier"))
+    EncryptionSpecification.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, location_name: "type", traits: {"smithy.api#required" => {}}))
+    EncryptionSpecification.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyARN, location_name: "kmsKeyIdentifier"))
     EncryptionSpecification.type = Types::EncryptionSpecification
-    FieldDefinition.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#required" => {}}))
-    FieldDefinition.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: "type", traits: {"smithy.api#required" => {}}))
+    FieldDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, location_name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#required" => {}}))
+    FieldDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, location_name: "type", traits: {"smithy.api#required" => {}}))
     FieldDefinition.type = Types::FieldDefinition
-    FieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldDefinition)
-    GetKeyspaceInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDefinition)
+    GetKeyspaceInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
     GetKeyspaceInput.type = Types::GetKeyspaceInput
-    GetKeyspaceOutput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetKeyspaceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    GetKeyspaceOutput.add_member(:replication_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Rs, location_name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
-    GetKeyspaceOutput.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: "replicationRegions"))
-    GetKeyspaceOutput.add_member(:replication_group_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationGroupStatusList, location_name: "replicationGroupStatuses"))
+    GetKeyspaceOutput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetKeyspaceOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    GetKeyspaceOutput.add_member(:replication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: Rs, location_name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
+    GetKeyspaceOutput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, location_name: "replicationRegions"))
+    GetKeyspaceOutput.add_member(:replication_group_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupStatusList, location_name: "replicationGroupStatuses"))
     GetKeyspaceOutput.type = Types::GetKeyspaceOutput
-    GetTableAutoScalingSettingsRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetTableAutoScalingSettingsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    GetTableAutoScalingSettingsRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetTableAutoScalingSettingsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
     GetTableAutoScalingSettingsRequest.type = Types::GetTableAutoScalingSettingsRequest
-    GetTableAutoScalingSettingsResponse.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetTableAutoScalingSettingsResponse.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
-    GetTableAutoScalingSettingsResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    GetTableAutoScalingSettingsResponse.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
-    GetTableAutoScalingSettingsResponse.add_member(:replica_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaAutoScalingSpecificationList, location_name: "replicaSpecifications"))
+    GetTableAutoScalingSettingsResponse.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetTableAutoScalingSettingsResponse.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    GetTableAutoScalingSettingsResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    GetTableAutoScalingSettingsResponse.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    GetTableAutoScalingSettingsResponse.add_member(:replica_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingSpecificationList, location_name: "replicaSpecifications"))
     GetTableAutoScalingSettingsResponse.type = Types::GetTableAutoScalingSettingsResponse
-    GetTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    GetTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
     GetTableInput.type = Types::GetTableInput
-    GetTableOutput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetTableOutput.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
-    GetTableOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    GetTableOutput.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTimestamp"))
-    GetTableOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableStatus, location_name: "status"))
-    GetTableOutput.add_member(:schema_definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaDefinition, location_name: "schemaDefinition"))
-    GetTableOutput.add_member(:capacity_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacitySpecificationSummary, location_name: "capacitySpecification"))
-    GetTableOutput.add_member(:encryption_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionSpecification, location_name: "encryptionSpecification"))
-    GetTableOutput.add_member(:point_in_time_recovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointInTimeRecoverySummary, location_name: "pointInTimeRecovery"))
-    GetTableOutput.add_member(:ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLive, location_name: "ttl"))
-    GetTableOutput.add_member(:default_time_to_live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
-    GetTableOutput.add_member(:comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
-    GetTableOutput.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
-    GetTableOutput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaSpecificationSummaryList, location_name: "replicaSpecifications"))
-    GetTableOutput.add_member(:latest_stream_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamArn, location_name: "latestStreamArn"))
-    GetTableOutput.add_member(:cdc_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CdcSpecificationSummary, location_name: "cdcSpecification"))
+    GetTableOutput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetTableOutput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    GetTableOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    GetTableOutput.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "creationTimestamp"))
+    GetTableOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatus, location_name: "status"))
+    GetTableOutput.add_member(:schema_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, location_name: "schemaDefinition"))
+    GetTableOutput.add_member(:capacity_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySpecificationSummary, location_name: "capacitySpecification"))
+    GetTableOutput.add_member(:encryption_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionSpecification, location_name: "encryptionSpecification"))
+    GetTableOutput.add_member(:point_in_time_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecoverySummary, location_name: "pointInTimeRecovery"))
+    GetTableOutput.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, location_name: "ttl"))
+    GetTableOutput.add_member(:default_time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultTimeToLive, location_name: "defaultTimeToLive"))
+    GetTableOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, location_name: "comment"))
+    GetTableOutput.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSideTimestamps, location_name: "clientSideTimestamps"))
+    GetTableOutput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecificationSummaryList, location_name: "replicaSpecifications"))
+    GetTableOutput.add_member(:latest_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, location_name: "latestStreamArn"))
+    GetTableOutput.add_member(:cdc_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CdcSpecificationSummary, location_name: "cdcSpecification"))
     GetTableOutput.type = Types::GetTableOutput
-    GetTypeRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetTypeRequest.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
+    GetTypeRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetTypeRequest.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
     GetTypeRequest.type = Types::GetTypeRequest
-    GetTypeResponse.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    GetTypeResponse.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
-    GetTypeResponse.add_member(:field_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldList, location_name: "fieldDefinitions"))
-    GetTypeResponse.add_member(:last_modified_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
-    GetTypeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeStatus, location_name: "status"))
-    GetTypeResponse.add_member(:direct_referring_tables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableNameList, location_name: "directReferringTables"))
-    GetTypeResponse.add_member(:direct_parent_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeNameList, location_name: "directParentTypes"))
-    GetTypeResponse.add_member(:max_nesting_depth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Depth, location_name: "maxNestingDepth", traits: {"smithy.api#default" => 0}))
-    GetTypeResponse.add_member(:keyspace_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "keyspaceArn", traits: {"smithy.api#required" => {}}))
+    GetTypeResponse.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    GetTypeResponse.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, location_name: "typeName", traits: {"smithy.api#required" => {}}))
+    GetTypeResponse.add_member(:field_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, location_name: "fieldDefinitions"))
+    GetTypeResponse.add_member(:last_modified_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "lastModifiedTimestamp"))
+    GetTypeResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeStatus, location_name: "status"))
+    GetTypeResponse.add_member(:direct_referring_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: TableNameList, location_name: "directReferringTables"))
+    GetTypeResponse.add_member(:direct_parent_types, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeNameList, location_name: "directParentTypes"))
+    GetTypeResponse.add_member(:max_nesting_depth, ::Smithy::Schema::Shapes::MemberShape.new(target: Depth, location_name: "maxNestingDepth", traits: {"smithy.api#default" => 0}))
+    GetTypeResponse.add_member(:keyspace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "keyspaceArn", traits: {"smithy.api#required" => {}}))
     GetTypeResponse.type = Types::GetTypeResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    KeyspaceSummary.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    KeyspaceSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    KeyspaceSummary.add_member(:replication_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Rs, location_name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
-    KeyspaceSummary.add_member(:replication_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: "replicationRegions"))
+    KeyspaceSummary.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    KeyspaceSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    KeyspaceSummary.add_member(:replication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: Rs, location_name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
+    KeyspaceSummary.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, location_name: "replicationRegions"))
     KeyspaceSummary.type = Types::KeyspaceSummary
-    KeyspaceSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceSummary)
-    ListKeyspacesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListKeyspacesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    KeyspaceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceSummary)
+    ListKeyspacesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListKeyspacesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListKeyspacesInput.type = Types::ListKeyspacesInput
-    ListKeyspacesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListKeyspacesOutput.add_member(:keyspaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceSummaryList, location_name: "keyspaces", traits: {"smithy.api#required" => {}}))
+    ListKeyspacesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListKeyspacesOutput.add_member(:keyspaces, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceSummaryList, location_name: "keyspaces", traits: {"smithy.api#required" => {}}))
     ListKeyspacesOutput.type = Types::ListKeyspacesOutput
-    ListTablesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTablesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    ListTablesInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    ListTablesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTablesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
+    ListTablesInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
     ListTablesInput.type = Types::ListTablesInput
-    ListTablesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTablesOutput.add_member(:tables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableSummaryList, location_name: "tables"))
+    ListTablesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTablesOutput.add_member(:tables, ::Smithy::Schema::Shapes::MemberShape.new(target: TableSummaryList, location_name: "tables"))
     ListTablesOutput.type = Types::ListTablesOutput
-    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    ListTagsForResourceInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTagsForResourceInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTagsForResourceInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    ListTypesRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    ListTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
+    ListTypesRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
     ListTypesRequest.type = Types::ListTypesRequest
-    ListTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTypesResponse.add_member(:types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeNameList, location_name: "types", traits: {"smithy.api#required" => {}}))
+    ListTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    ListTypesResponse.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeNameList, location_name: "types", traits: {"smithy.api#required" => {}}))
     ListTypesResponse.type = Types::ListTypesResponse
-    PartitionKey.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    PartitionKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
     PartitionKey.type = Types::PartitionKey
-    PartitionKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKey)
-    PointInTimeRecovery.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointInTimeRecoveryStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    PartitionKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey)
+    PointInTimeRecovery.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecoveryStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     PointInTimeRecovery.type = Types::PointInTimeRecovery
-    PointInTimeRecoverySummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointInTimeRecoveryStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    PointInTimeRecoverySummary.add_member(:earliest_restorable_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "earliestRestorableTimestamp"))
+    PointInTimeRecoverySummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecoveryStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    PointInTimeRecoverySummary.add_member(:earliest_restorable_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "earliestRestorableTimestamp"))
     PointInTimeRecoverySummary.type = Types::PointInTimeRecoverySummary
-    RegionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
-    ReplicaAutoScalingSpecification.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "region"))
-    ReplicaAutoScalingSpecification.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region)
+    ReplicaAutoScalingSpecification.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "region"))
+    ReplicaAutoScalingSpecification.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSpecification, location_name: "autoScalingSpecification"))
     ReplicaAutoScalingSpecification.type = Types::ReplicaAutoScalingSpecification
-    ReplicaAutoScalingSpecificationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaAutoScalingSpecification)
-    ReplicaSpecification.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "region", traits: {"smithy.api#required" => {}}))
-    ReplicaSpecification.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "readCapacityUnits"))
-    ReplicaSpecification.add_member(:read_capacity_auto_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSettings, location_name: "readCapacityAutoScaling"))
+    ReplicaAutoScalingSpecificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingSpecification)
+    ReplicaSpecification.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "region", traits: {"smithy.api#required" => {}}))
+    ReplicaSpecification.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, location_name: "readCapacityUnits"))
+    ReplicaSpecification.add_member(:read_capacity_auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettings, location_name: "readCapacityAutoScaling"))
     ReplicaSpecification.type = Types::ReplicaSpecification
-    ReplicaSpecificationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaSpecification)
-    ReplicaSpecificationSummary.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "region"))
-    ReplicaSpecificationSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableStatus, location_name: "status"))
-    ReplicaSpecificationSummary.add_member(:capacity_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacitySpecificationSummary, location_name: "capacitySpecification"))
+    ReplicaSpecificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecification)
+    ReplicaSpecificationSummary.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "region"))
+    ReplicaSpecificationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatus, location_name: "status"))
+    ReplicaSpecificationSummary.add_member(:capacity_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySpecificationSummary, location_name: "capacitySpecification"))
     ReplicaSpecificationSummary.type = Types::ReplicaSpecificationSummary
-    ReplicaSpecificationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaSpecificationSummary)
-    ReplicationGroupStatus.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "region", traits: {"smithy.api#required" => {}}))
-    ReplicationGroupStatus.add_member(:keyspace_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceStatus, location_name: "keyspaceStatus", traits: {"smithy.api#required" => {}}))
-    ReplicationGroupStatus.add_member(:tables_replication_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TablesReplicationProgress, location_name: "tablesReplicationProgress"))
+    ReplicaSpecificationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecificationSummary)
+    ReplicationGroupStatus.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, location_name: "region", traits: {"smithy.api#required" => {}}))
+    ReplicationGroupStatus.add_member(:keyspace_status, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceStatus, location_name: "keyspaceStatus", traits: {"smithy.api#required" => {}}))
+    ReplicationGroupStatus.add_member(:tables_replication_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: TablesReplicationProgress, location_name: "tablesReplicationProgress"))
     ReplicationGroupStatus.type = Types::ReplicationGroupStatus
-    ReplicationGroupStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationGroupStatus)
-    ReplicationSpecification.add_member(:replication_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Rs, location_name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
-    ReplicationSpecification.add_member(:region_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionList, location_name: "regionList"))
+    ReplicationGroupStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupStatus)
+    ReplicationSpecification.add_member(:replication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: Rs, location_name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
+    ReplicationSpecification.add_member(:region_list, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, location_name: "regionList"))
     ReplicationSpecification.type = Types::ReplicationSpecification
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
-    ResourceNotFoundException.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ResourceNotFoundException.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RestoreTableInput.add_member(:source_keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "sourceKeyspaceName", traits: {"smithy.api#required" => {}}))
-    RestoreTableInput.add_member(:source_table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "sourceTableName", traits: {"smithy.api#required" => {}}))
-    RestoreTableInput.add_member(:target_keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "targetKeyspaceName", traits: {"smithy.api#required" => {}}))
-    RestoreTableInput.add_member(:target_table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "targetTableName", traits: {"smithy.api#required" => {}}))
-    RestoreTableInput.add_member(:restore_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: "restoreTimestamp"))
-    RestoreTableInput.add_member(:capacity_specification_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacitySpecification, location_name: "capacitySpecificationOverride"))
-    RestoreTableInput.add_member(:encryption_specification_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionSpecification, location_name: "encryptionSpecificationOverride"))
-    RestoreTableInput.add_member(:point_in_time_recovery_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointInTimeRecovery, location_name: "pointInTimeRecoveryOverride"))
-    RestoreTableInput.add_member(:tags_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tagsOverride"))
-    RestoreTableInput.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
-    RestoreTableInput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaSpecificationList, location_name: "replicaSpecifications"))
+    RestoreTableInput.add_member(:source_keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "sourceKeyspaceName", traits: {"smithy.api#required" => {}}))
+    RestoreTableInput.add_member(:source_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "sourceTableName", traits: {"smithy.api#required" => {}}))
+    RestoreTableInput.add_member(:target_keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "targetKeyspaceName", traits: {"smithy.api#required" => {}}))
+    RestoreTableInput.add_member(:target_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "targetTableName", traits: {"smithy.api#required" => {}}))
+    RestoreTableInput.add_member(:restore_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "restoreTimestamp"))
+    RestoreTableInput.add_member(:capacity_specification_override, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySpecification, location_name: "capacitySpecificationOverride"))
+    RestoreTableInput.add_member(:encryption_specification_override, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionSpecification, location_name: "encryptionSpecificationOverride"))
+    RestoreTableInput.add_member(:point_in_time_recovery_override, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecovery, location_name: "pointInTimeRecoveryOverride"))
+    RestoreTableInput.add_member(:tags_override, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tagsOverride"))
+    RestoreTableInput.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    RestoreTableInput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecificationList, location_name: "replicaSpecifications"))
     RestoreTableInput.type = Types::RestoreTableInput
-    RestoreTableOutput.add_member(:restored_table_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "restoredTableARN", traits: {"smithy.api#required" => {}}))
+    RestoreTableOutput.add_member(:restored_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "restoredTableARN", traits: {"smithy.api#required" => {}}))
     RestoreTableOutput.type = Types::RestoreTableOutput
-    SchemaDefinition.add_member(:all_columns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnDefinitionList, location_name: "allColumns", traits: {"smithy.api#required" => {}}))
-    SchemaDefinition.add_member(:partition_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionKeyList, location_name: "partitionKeys", traits: {"smithy.api#required" => {}}))
-    SchemaDefinition.add_member(:clustering_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusteringKeyList, location_name: "clusteringKeys"))
-    SchemaDefinition.add_member(:static_columns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StaticColumnList, location_name: "staticColumns"))
+    SchemaDefinition.add_member(:all_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDefinitionList, location_name: "allColumns", traits: {"smithy.api#required" => {}}))
+    SchemaDefinition.add_member(:partition_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKeyList, location_name: "partitionKeys", traits: {"smithy.api#required" => {}}))
+    SchemaDefinition.add_member(:clustering_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusteringKeyList, location_name: "clusteringKeys"))
+    SchemaDefinition.add_member(:static_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticColumnList, location_name: "staticColumns"))
     SchemaDefinition.type = Types::SchemaDefinition
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StaticColumn.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
+    StaticColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, location_name: "name", traits: {"smithy.api#required" => {}}))
     StaticColumn.type = Types::StaticColumn
-    StaticColumnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StaticColumn)
-    TableNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName)
-    TableSummary.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    TableSummary.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
-    TableSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    StaticColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StaticColumn)
+    TableNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableName)
+    TableSummary.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    TableSummary.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    TableSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TableSummary.type = Types::TableSummary
-    TableSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableSummary)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
+    TableSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableSummary)
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanObject, location_name: "disableScaleIn", traits: {"smithy.api#default" => false}))
-    TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerObject, location_name: "scaleInCooldown", traits: {"smithy.api#default" => 0}))
-    TargetTrackingScalingPolicyConfiguration.add_member(:scale_out_cooldown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerObject, location_name: "scaleOutCooldown", traits: {"smithy.api#default" => 0}))
-    TargetTrackingScalingPolicyConfiguration.add_member(:target_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DoubleObject, location_name: "targetValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, location_name: "disableScaleIn", traits: {"smithy.api#default" => false}))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerObject, location_name: "scaleInCooldown", traits: {"smithy.api#default" => 0}))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_out_cooldown, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerObject, location_name: "scaleOutCooldown", traits: {"smithy.api#default" => 0}))
+    TargetTrackingScalingPolicyConfiguration.add_member(:target_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleObject, location_name: "targetValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     TargetTrackingScalingPolicyConfiguration.type = Types::TargetTrackingScalingPolicyConfiguration
-    TimeToLive.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLiveStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    TimeToLive.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
     TimeToLive.type = Types::TimeToLive
-    TypeNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName)
-    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TypeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName)
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateKeyspaceRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    UpdateKeyspaceRequest.add_member(:replication_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationSpecification, location_name: "replicationSpecification", traits: {"smithy.api#required" => {}}))
-    UpdateKeyspaceRequest.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
+    UpdateKeyspaceRequest.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    UpdateKeyspaceRequest.add_member(:replication_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationSpecification, location_name: "replicationSpecification", traits: {"smithy.api#required" => {}}))
+    UpdateKeyspaceRequest.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSideTimestamps, location_name: "clientSideTimestamps"))
     UpdateKeyspaceRequest.type = Types::UpdateKeyspaceRequest
-    UpdateKeyspaceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    UpdateKeyspaceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UpdateKeyspaceResponse.type = Types::UpdateKeyspaceResponse
-    UpdateTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
-    UpdateTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
-    UpdateTableInput.add_member(:add_columns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ColumnDefinitionList, location_name: "addColumns"))
-    UpdateTableInput.add_member(:capacity_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapacitySpecification, location_name: "capacitySpecification"))
-    UpdateTableInput.add_member(:encryption_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionSpecification, location_name: "encryptionSpecification"))
-    UpdateTableInput.add_member(:point_in_time_recovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PointInTimeRecovery, location_name: "pointInTimeRecovery"))
-    UpdateTableInput.add_member(:ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeToLive, location_name: "ttl"))
-    UpdateTableInput.add_member(:default_time_to_live, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
-    UpdateTableInput.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
-    UpdateTableInput.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
-    UpdateTableInput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaSpecificationList, location_name: "replicaSpecifications"))
-    UpdateTableInput.add_member(:cdc_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CdcSpecification, location_name: "cdcSpecification"))
+    UpdateTableInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, location_name: "keyspaceName", traits: {"smithy.api#required" => {}}))
+    UpdateTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, location_name: "tableName", traits: {"smithy.api#required" => {}}))
+    UpdateTableInput.add_member(:add_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDefinitionList, location_name: "addColumns"))
+    UpdateTableInput.add_member(:capacity_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySpecification, location_name: "capacitySpecification"))
+    UpdateTableInput.add_member(:encryption_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionSpecification, location_name: "encryptionSpecification"))
+    UpdateTableInput.add_member(:point_in_time_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecovery, location_name: "pointInTimeRecovery"))
+    UpdateTableInput.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, location_name: "ttl"))
+    UpdateTableInput.add_member(:default_time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultTimeToLive, location_name: "defaultTimeToLive"))
+    UpdateTableInput.add_member(:client_side_timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSideTimestamps, location_name: "clientSideTimestamps"))
+    UpdateTableInput.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    UpdateTableInput.add_member(:replica_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecificationList, location_name: "replicaSpecifications"))
+    UpdateTableInput.add_member(:cdc_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CdcSpecification, location_name: "cdcSpecification"))
     UpdateTableInput.type = Types::UpdateTableInput
-    UpdateTableOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    UpdateTableOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UpdateTableOutput.type = Types::UpdateTableOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     KeyspacesService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -421,243 +421,243 @@ module Aws::Keyspaces
       service.add_operation(:create_keyspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#CreateKeyspace"
         operation.name = "CreateKeyspace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateKeyspaceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateKeyspaceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateKeyspaceInput
+        operation.output = CreateKeyspaceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#CreateTable"
         operation.name = "CreateTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTableInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTableOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateTableInput
+        operation.output = CreateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#CreateType"
         operation.name = "CreateType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTypeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateTypeRequest
+        operation.output = CreateTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_keyspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#DeleteKeyspace"
         operation.name = "DeleteKeyspace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyspaceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteKeyspaceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteKeyspaceInput
+        operation.output = DeleteKeyspaceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#DeleteTable"
         operation.name = "DeleteTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTableInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTableOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteTableInput
+        operation.output = DeleteTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#DeleteType"
         operation.name = "DeleteType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTypeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteTypeRequest
+        operation.output = DeleteTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_keyspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#GetKeyspace"
         operation.name = "GetKeyspace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetKeyspaceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetKeyspaceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetKeyspaceInput
+        operation.output = GetKeyspaceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#GetTable"
         operation.name = "GetTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTableInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTableOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTableInput
+        operation.output = GetTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_table_auto_scaling_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#GetTableAutoScalingSettings"
         operation.name = "GetTableAutoScalingSettings"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTableAutoScalingSettingsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTableAutoScalingSettingsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTableAutoScalingSettingsRequest
+        operation.output = GetTableAutoScalingSettingsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:get_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#GetType"
         operation.name = "GetType"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTypeRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTypeResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetTypeRequest
+        operation.output = GetTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_keyspaces, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#ListKeyspaces"
         operation.name = "ListKeyspaces"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeyspacesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListKeyspacesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListKeyspacesInput
+        operation.output = ListKeyspacesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListKeyspaces.new
       end)
       service.add_operation(:list_tables, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#ListTables"
         operation.name = "ListTables"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTablesInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTablesOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTablesInput
+        operation.output = ListTablesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTables.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:list_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#ListTypes"
         operation.name = "ListTypes"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTypesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTypesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTypesRequest
+        operation.output = ListTypesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListTypes.new
       end)
       service.add_operation(:restore_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#RestoreTable"
         operation.name = "RestoreTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreTableInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreTableOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = RestoreTableInput
+        operation.output = RestoreTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_keyspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#UpdateKeyspace"
         operation.name = "UpdateKeyspace"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateKeyspaceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateKeyspaceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateKeyspaceRequest
+        operation.output = UpdateKeyspaceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspaces#UpdateTable"
         operation.name = "UpdateTable"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTableInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTableOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateTableInput
+        operation.output = UpdateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

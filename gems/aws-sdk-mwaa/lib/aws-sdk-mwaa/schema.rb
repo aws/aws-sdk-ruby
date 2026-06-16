@@ -104,216 +104,216 @@ module Aws::MWAA
     WeeklyMaintenanceWindowStart = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#WeeklyMaintenanceWindowStart", name: "WeeklyMaintenanceWindowStart", traits: {"smithy.api#length" => {"min" => 1, "max" => 9}, "smithy.api#pattern" => "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)"})
     WorkerReplacementStrategy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#WorkerReplacementStrategy", name: "WorkerReplacementStrategy", traits: {"smithy.api#enum" => [{"value" => "FORCED", "name" => "FORCED"}, {"value" => "GRACEFUL", "name" => "GRACEFUL"}]})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AirflowConfigurationOptions.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigKey)
-    AirflowConfigurationOptions.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigValue)
-    CreateCliTokenInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AirflowConfigurationOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigKey)
+    AirflowConfigurationOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigValue)
+    CreateCliTokenInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateCliTokenInput.type = Types::CreateCliTokenInput
-    CreateCliTokenOutput.add_member(:cli_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "CliToken"))
-    CreateCliTokenOutput.add_member(:web_server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
+    CreateCliTokenOutput.add_member(:cli_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "CliToken"))
+    CreateCliTokenOutput.add_member(:web_server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: Hostname, location_name: "WebServerHostname"))
     CreateCliTokenOutput.type = Types::CreateCliTokenOutput
-    CreateEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateEnvironmentOperationInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentOperationInput.add_member(:source_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "SourceBucketArn", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentOperationInput.add_member(:dag_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentOperationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentOperationInput.add_member(:plugins_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
-    CreateEnvironmentOperationInput.add_member(:plugins_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
-    CreateEnvironmentOperationInput.add_member(:requirements_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
-    CreateEnvironmentOperationInput.add_member(:requirements_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
-    CreateEnvironmentOperationInput.add_member(:startup_script_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "StartupScriptS3Path"))
-    CreateEnvironmentOperationInput.add_member(:startup_script_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
-    CreateEnvironmentOperationInput.add_member(:airflow_configuration_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
-    CreateEnvironmentOperationInput.add_member(:environment_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
-    CreateEnvironmentOperationInput.add_member(:max_workers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
-    CreateEnvironmentOperationInput.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
-    CreateEnvironmentOperationInput.add_member(:airflow_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
-    CreateEnvironmentOperationInput.add_member(:logging_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
-    CreateEnvironmentOperationInput.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
-    CreateEnvironmentOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    CreateEnvironmentOperationInput.add_member(:webserver_access_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
-    CreateEnvironmentOperationInput.add_member(:min_workers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
-    CreateEnvironmentOperationInput.add_member(:schedulers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
-    CreateEnvironmentOperationInput.add_member(:endpoint_management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
-    CreateEnvironmentOperationInput.add_member(:min_webservers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
-    CreateEnvironmentOperationInput.add_member(:max_webservers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
+    CreateEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateEnvironmentOperationInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentOperationInput.add_member(:source_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketArn, location_name: "SourceBucketArn", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentOperationInput.add_member(:dag_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "DagS3Path", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentOperationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, location_name: "NetworkConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentOperationInput.add_member(:plugins_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "PluginsS3Path"))
+    CreateEnvironmentOperationInput.add_member(:plugins_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
+    CreateEnvironmentOperationInput.add_member(:requirements_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "RequirementsS3Path"))
+    CreateEnvironmentOperationInput.add_member(:requirements_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
+    CreateEnvironmentOperationInput.add_member(:startup_script_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "StartupScriptS3Path"))
+    CreateEnvironmentOperationInput.add_member(:startup_script_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
+    CreateEnvironmentOperationInput.add_member(:airflow_configuration_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    CreateEnvironmentOperationInput.add_member(:environment_class, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentClass, location_name: "EnvironmentClass"))
+    CreateEnvironmentOperationInput.add_member(:max_workers, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxWorkers, location_name: "MaxWorkers"))
+    CreateEnvironmentOperationInput.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKey"))
+    CreateEnvironmentOperationInput.add_member(:airflow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AirflowVersion, location_name: "AirflowVersion"))
+    CreateEnvironmentOperationInput.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
+    CreateEnvironmentOperationInput.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
+    CreateEnvironmentOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    CreateEnvironmentOperationInput.add_member(:webserver_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: WebserverAccessMode, location_name: "WebserverAccessMode"))
+    CreateEnvironmentOperationInput.add_member(:min_workers, ::Smithy::Schema::Shapes::MemberShape.new(target: MinWorkers, location_name: "MinWorkers"))
+    CreateEnvironmentOperationInput.add_member(:schedulers, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedulers, location_name: "Schedulers"))
+    CreateEnvironmentOperationInput.add_member(:endpoint_management, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointManagement, location_name: "EndpointManagement"))
+    CreateEnvironmentOperationInput.add_member(:min_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MinWebservers, location_name: "MinWebservers"))
+    CreateEnvironmentOperationInput.add_member(:max_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxWebservers, location_name: "MaxWebservers"))
     CreateEnvironmentOperationInput.type = Types::CreateEnvironmentOperationInput
-    CreateEnvironmentOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
+    CreateEnvironmentOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "Arn"))
     CreateEnvironmentOperationOutput.type = Types::CreateEnvironmentOperationOutput
-    CreateWebLoginTokenInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateWebLoginTokenInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateWebLoginTokenInput.type = Types::CreateWebLoginTokenInput
-    CreateWebLoginTokenOutput.add_member(:web_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "WebToken"))
-    CreateWebLoginTokenOutput.add_member(:web_server_hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
-    CreateWebLoginTokenOutput.add_member(:iam_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamIdentity, location_name: "IamIdentity"))
-    CreateWebLoginTokenOutput.add_member(:airflow_identity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AirflowIdentity, location_name: "AirflowIdentity"))
+    CreateWebLoginTokenOutput.add_member(:web_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "WebToken"))
+    CreateWebLoginTokenOutput.add_member(:web_server_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: Hostname, location_name: "WebServerHostname"))
+    CreateWebLoginTokenOutput.add_member(:iam_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: IamIdentity, location_name: "IamIdentity"))
+    CreateWebLoginTokenOutput.add_member(:airflow_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: AirflowIdentity, location_name: "AirflowIdentity"))
     CreateWebLoginTokenOutput.type = Types::CreateWebLoginTokenOutput
-    DeleteEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEnvironmentOperationInput.type = Types::DeleteEnvironmentOperationInput
     DeleteEnvironmentOperationOutput.type = Types::DeleteEnvironmentOperationOutput
-    Dimension.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    Dimension.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Dimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Name", traits: {"smithy.api#required" => {}}))
+    Dimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "Value", traits: {"smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
-    Dimensions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimension)
-    Environment.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name"))
-    Environment.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentStatus, location_name: "Status"))
-    Environment.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
-    Environment.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
-    Environment.add_member(:webserver_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebserverUrl, location_name: "WebserverUrl"))
-    Environment.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ExecutionRoleArn"))
-    Environment.add_member(:service_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ServiceRoleArn"))
-    Environment.add_member(:kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
-    Environment.add_member(:airflow_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
-    Environment.add_member(:source_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "SourceBucketArn"))
-    Environment.add_member(:dag_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
-    Environment.add_member(:plugins_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
-    Environment.add_member(:plugins_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
-    Environment.add_member(:requirements_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
-    Environment.add_member(:requirements_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
-    Environment.add_member(:startup_script_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StartupScriptS3Path"))
-    Environment.add_member(:startup_script_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StartupScriptS3ObjectVersion"))
-    Environment.add_member(:airflow_configuration_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
-    Environment.add_member(:environment_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
-    Environment.add_member(:max_workers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
-    Environment.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
-    Environment.add_member(:logging_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
-    Environment.add_member(:last_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdate, location_name: "LastUpdate"))
-    Environment.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
-    Environment.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    Environment.add_member(:webserver_access_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
-    Environment.add_member(:min_workers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
-    Environment.add_member(:schedulers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
-    Environment.add_member(:webserver_vpc_endpoint_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "WebserverVpcEndpointService"))
-    Environment.add_member(:database_vpc_endpoint_service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "DatabaseVpcEndpointService"))
-    Environment.add_member(:celery_executor_queue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CeleryExecutorQueue, location_name: "CeleryExecutorQueue"))
-    Environment.add_member(:endpoint_management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
-    Environment.add_member(:min_webservers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
-    Environment.add_member(:max_webservers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
+    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension)
+    Environment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name"))
+    Environment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentStatus, location_name: "Status"))
+    Environment.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "Arn"))
+    Environment.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, location_name: "CreatedAt"))
+    Environment.add_member(:webserver_url, ::Smithy::Schema::Shapes::MemberShape.new(target: WebserverUrl, location_name: "WebserverUrl"))
+    Environment.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "ExecutionRoleArn"))
+    Environment.add_member(:service_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "ServiceRoleArn"))
+    Environment.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, location_name: "KmsKey"))
+    Environment.add_member(:airflow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AirflowVersion, location_name: "AirflowVersion"))
+    Environment.add_member(:source_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketArn, location_name: "SourceBucketArn"))
+    Environment.add_member(:dag_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "DagS3Path"))
+    Environment.add_member(:plugins_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "PluginsS3Path"))
+    Environment.add_member(:plugins_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
+    Environment.add_member(:requirements_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "RequirementsS3Path"))
+    Environment.add_member(:requirements_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
+    Environment.add_member(:startup_script_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StartupScriptS3Path"))
+    Environment.add_member(:startup_script_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "StartupScriptS3ObjectVersion"))
+    Environment.add_member(:airflow_configuration_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    Environment.add_member(:environment_class, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentClass, location_name: "EnvironmentClass"))
+    Environment.add_member(:max_workers, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxWorkers, location_name: "MaxWorkers"))
+    Environment.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    Environment.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    Environment.add_member(:last_update, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdate, location_name: "LastUpdate"))
+    Environment.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
+    Environment.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
+    Environment.add_member(:webserver_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: WebserverAccessMode, location_name: "WebserverAccessMode"))
+    Environment.add_member(:min_workers, ::Smithy::Schema::Shapes::MemberShape.new(target: MinWorkers, location_name: "MinWorkers"))
+    Environment.add_member(:schedulers, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedulers, location_name: "Schedulers"))
+    Environment.add_member(:webserver_vpc_endpoint_service, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointServiceName, location_name: "WebserverVpcEndpointService"))
+    Environment.add_member(:database_vpc_endpoint_service, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointServiceName, location_name: "DatabaseVpcEndpointService"))
+    Environment.add_member(:celery_executor_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: CeleryExecutorQueue, location_name: "CeleryExecutorQueue"))
+    Environment.add_member(:endpoint_management, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointManagement, location_name: "EndpointManagement"))
+    Environment.add_member(:min_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MinWebservers, location_name: "MinWebservers"))
+    Environment.add_member(:max_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxWebservers, location_name: "MaxWebservers"))
     Environment.type = Types::Environment
-    EnvironmentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName)
-    GetEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName)
+    GetEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEnvironmentOperationInput.type = Types::GetEnvironmentOperationInput
-    GetEnvironmentOperationOutput.add_member(:environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
+    GetEnvironmentOperationOutput.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, location_name: "Environment"))
     GetEnvironmentOperationOutput.type = Types::GetEnvironmentOperationOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    InvokeRestApiRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    InvokeRestApiRequest.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiPath, location_name: "Path", traits: {"smithy.api#required" => {}}))
-    InvokeRestApiRequest.add_member(:method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiMethod, location_name: "Method", traits: {"smithy.api#required" => {}}))
-    InvokeRestApiRequest.add_member(:query_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Document, location_name: "QueryParameters"))
-    InvokeRestApiRequest.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiRequestBody, location_name: "Body"))
+    InvokeRestApiRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    InvokeRestApiRequest.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiPath, location_name: "Path", traits: {"smithy.api#required" => {}}))
+    InvokeRestApiRequest.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiMethod, location_name: "Method", traits: {"smithy.api#required" => {}}))
+    InvokeRestApiRequest.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, location_name: "QueryParameters"))
+    InvokeRestApiRequest.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiRequestBody, location_name: "Body"))
     InvokeRestApiRequest.type = Types::InvokeRestApiRequest
-    InvokeRestApiResponse.add_member(:rest_api_status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RestApiStatusCode"))
-    InvokeRestApiResponse.add_member(:rest_api_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiResponse, location_name: "RestApiResponse"))
+    InvokeRestApiResponse.add_member(:rest_api_status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RestApiStatusCode"))
+    InvokeRestApiResponse.add_member(:rest_api_response, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiResponse, location_name: "RestApiResponse"))
     InvokeRestApiResponse.type = Types::InvokeRestApiResponse
-    LastUpdate.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
-    LastUpdate.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCreatedAt, location_name: "CreatedAt"))
-    LastUpdate.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateError, location_name: "Error"))
-    LastUpdate.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSource, location_name: "Source"))
-    LastUpdate.add_member(:worker_replacement_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerReplacementStrategy, location_name: "WorkerReplacementStrategy"))
+    LastUpdate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatus, location_name: "Status"))
+    LastUpdate.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCreatedAt, location_name: "CreatedAt"))
+    LastUpdate.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateError, location_name: "Error"))
+    LastUpdate.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateSource, location_name: "Source"))
+    LastUpdate.add_member(:worker_replacement_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerReplacementStrategy, location_name: "WorkerReplacementStrategy"))
     LastUpdate.type = Types::LastUpdate
-    ListEnvironmentsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListEnvironmentsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults", "smithy.api#range" => {"min" => 1, "max" => 25}}))
+    ListEnvironmentsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListEnvironmentsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults", "smithy.api#range" => {"min" => 1, "max" => 25}}))
     ListEnvironmentsOperationInput.type = Types::ListEnvironmentsOperationInput
-    ListEnvironmentsOperationOutput.add_member(:environments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentList, location_name: "Environments", traits: {"smithy.api#required" => {}}))
-    ListEnvironmentsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEnvironmentsOperationOutput.add_member(:environments, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentList, location_name: "Environments", traits: {"smithy.api#required" => {}}))
+    ListEnvironmentsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
     ListEnvironmentsOperationOutput.type = Types::ListEnvironmentsOperationOutput
-    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceOperationInput.type = Types::ListTagsForResourceOperationInput
-    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags"))
     ListTagsForResourceOperationOutput.type = Types::ListTagsForResourceOperationOutput
-    LoggingConfiguration.add_member(:dag_processing_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "DagProcessingLogs"))
-    LoggingConfiguration.add_member(:scheduler_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "SchedulerLogs"))
-    LoggingConfiguration.add_member(:webserver_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "WebserverLogs"))
-    LoggingConfiguration.add_member(:worker_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "WorkerLogs"))
-    LoggingConfiguration.add_member(:task_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "TaskLogs"))
+    LoggingConfiguration.add_member(:dag_processing_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfiguration, location_name: "DagProcessingLogs"))
+    LoggingConfiguration.add_member(:scheduler_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfiguration, location_name: "SchedulerLogs"))
+    LoggingConfiguration.add_member(:webserver_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfiguration, location_name: "WebserverLogs"))
+    LoggingConfiguration.add_member(:worker_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfiguration, location_name: "WorkerLogs"))
+    LoggingConfiguration.add_member(:task_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfiguration, location_name: "TaskLogs"))
     LoggingConfiguration.type = Types::LoggingConfiguration
-    LoggingConfigurationInput.add_member(:dag_processing_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "DagProcessingLogs"))
-    LoggingConfigurationInput.add_member(:scheduler_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "SchedulerLogs"))
-    LoggingConfigurationInput.add_member(:webserver_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "WebserverLogs"))
-    LoggingConfigurationInput.add_member(:worker_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "WorkerLogs"))
-    LoggingConfigurationInput.add_member(:task_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "TaskLogs"))
+    LoggingConfigurationInput.add_member(:dag_processing_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfigurationInput, location_name: "DagProcessingLogs"))
+    LoggingConfigurationInput.add_member(:scheduler_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfigurationInput, location_name: "SchedulerLogs"))
+    LoggingConfigurationInput.add_member(:webserver_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfigurationInput, location_name: "WebserverLogs"))
+    LoggingConfigurationInput.add_member(:worker_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfigurationInput, location_name: "WorkerLogs"))
+    LoggingConfigurationInput.add_member(:task_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfigurationInput, location_name: "TaskLogs"))
     LoggingConfigurationInput.type = Types::LoggingConfigurationInput
-    MetricData.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDatum)
-    MetricDatum.add_member(:metric_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MetricName", traits: {"smithy.api#required" => {}}))
-    MetricDatum.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "Timestamp", traits: {"smithy.api#required" => {}}))
-    MetricDatum.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    MetricDatum.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Value"))
-    MetricDatum.add_member(:unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
-    MetricDatum.add_member(:statistic_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatisticSet, location_name: "StatisticValues"))
+    MetricData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatum)
+    MetricDatum.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "MetricName", traits: {"smithy.api#required" => {}}))
+    MetricDatum.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "Timestamp", traits: {"smithy.api#required" => {}}))
+    MetricDatum.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, location_name: "Dimensions"))
+    MetricDatum.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Value"))
+    MetricDatum.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: Unit, location_name: "Unit"))
+    MetricDatum.add_member(:statistic_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StatisticSet, location_name: "StatisticValues"))
     MetricDatum.type = Types::MetricDatum
-    ModuleLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingEnabled, location_name: "Enabled"))
-    ModuleLoggingConfiguration.add_member(:log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingLevel, location_name: "LogLevel"))
-    ModuleLoggingConfiguration.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "CloudWatchLogGroupArn"))
+    ModuleLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingEnabled, location_name: "Enabled"))
+    ModuleLoggingConfiguration.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingLevel, location_name: "LogLevel"))
+    ModuleLoggingConfiguration.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupArn, location_name: "CloudWatchLogGroupArn"))
     ModuleLoggingConfiguration.type = Types::ModuleLoggingConfiguration
-    ModuleLoggingConfigurationInput.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingEnabled, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
-    ModuleLoggingConfigurationInput.add_member(:log_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingLevel, location_name: "LogLevel", traits: {"smithy.api#required" => {}}))
+    ModuleLoggingConfigurationInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingEnabled, location_name: "Enabled", traits: {"smithy.api#required" => {}}))
+    ModuleLoggingConfigurationInput.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingLevel, location_name: "LogLevel", traits: {"smithy.api#required" => {}}))
     ModuleLoggingConfigurationInput.type = Types::ModuleLoggingConfigurationInput
-    NetworkConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetList, location_name: "SubnetIds"))
-    NetworkConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "SecurityGroupIds"))
+    NetworkConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetList, location_name: "SubnetIds"))
+    NetworkConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, location_name: "SecurityGroupIds"))
     NetworkConfiguration.type = Types::NetworkConfiguration
-    PublishMetricsOperationInput.add_member(:environment_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PublishMetricsOperationInput.add_member(:metric_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricData, location_name: "MetricData", traits: {"smithy.api#required" => {}}))
+    PublishMetricsOperationInput.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "EnvironmentName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PublishMetricsOperationInput.add_member(:metric_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricData, location_name: "MetricData", traits: {"smithy.api#required" => {}}))
     PublishMetricsOperationInput.type = Types::PublishMetricsOperationInput
     PublishMetricsOperationOutput.type = Types::PublishMetricsOperationOutput
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RestApiClientException.add_member(:rest_api_status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RestApiStatusCode"))
-    RestApiClientException.add_member(:rest_api_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiResponse, location_name: "RestApiResponse"))
+    RestApiClientException.add_member(:rest_api_status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RestApiStatusCode"))
+    RestApiClientException.add_member(:rest_api_response, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiResponse, location_name: "RestApiResponse"))
     RestApiClientException.type = Types::RestApiClientException
-    RestApiServerException.add_member(:rest_api_status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RestApiStatusCode"))
-    RestApiServerException.add_member(:rest_api_response, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiResponse, location_name: "RestApiResponse"))
+    RestApiServerException.add_member(:rest_api_status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "RestApiStatusCode"))
+    RestApiServerException.add_member(:rest_api_response, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiResponse, location_name: "RestApiResponse"))
     RestApiServerException.type = Types::RestApiServerException
-    SecurityGroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId)
-    StatisticSet.add_member(:sample_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "SampleCount"))
-    StatisticSet.add_member(:sum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Sum"))
-    StatisticSet.add_member(:minimum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Minimum"))
-    StatisticSet.add_member(:maximum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Maximum"))
+    SecurityGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId)
+    StatisticSet.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "SampleCount"))
+    StatisticSet.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Sum"))
+    StatisticSet.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Minimum"))
+    StatisticSet.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, location_name: "Maximum"))
     StatisticSet.type = Types::StatisticSet
-    SubnetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
-    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId)
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
+    TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceOperationInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceOperationInput.type = Types::UntagResourceOperationInput
     UntagResourceOperationOutput.type = Types::UntagResourceOperationOutput
-    UpdateEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateEnvironmentOperationInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ExecutionRoleArn"))
-    UpdateEnvironmentOperationInput.add_member(:airflow_configuration_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
-    UpdateEnvironmentOperationInput.add_member(:airflow_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
-    UpdateEnvironmentOperationInput.add_member(:dag_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
-    UpdateEnvironmentOperationInput.add_member(:environment_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
-    UpdateEnvironmentOperationInput.add_member(:logging_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
-    UpdateEnvironmentOperationInput.add_member(:max_workers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
-    UpdateEnvironmentOperationInput.add_member(:min_workers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
-    UpdateEnvironmentOperationInput.add_member(:max_webservers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
-    UpdateEnvironmentOperationInput.add_member(:min_webservers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
-    UpdateEnvironmentOperationInput.add_member(:worker_replacement_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkerReplacementStrategy, location_name: "WorkerReplacementStrategy"))
-    UpdateEnvironmentOperationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateNetworkConfigurationInput, location_name: "NetworkConfiguration"))
-    UpdateEnvironmentOperationInput.add_member(:plugins_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
-    UpdateEnvironmentOperationInput.add_member(:plugins_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
-    UpdateEnvironmentOperationInput.add_member(:requirements_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
-    UpdateEnvironmentOperationInput.add_member(:requirements_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
-    UpdateEnvironmentOperationInput.add_member(:schedulers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
-    UpdateEnvironmentOperationInput.add_member(:source_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "SourceBucketArn"))
-    UpdateEnvironmentOperationInput.add_member(:startup_script_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePath, location_name: "StartupScriptS3Path"))
-    UpdateEnvironmentOperationInput.add_member(:startup_script_s3_object_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
-    UpdateEnvironmentOperationInput.add_member(:webserver_access_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
-    UpdateEnvironmentOperationInput.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
+    UpdateEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, location_name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateEnvironmentOperationInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, location_name: "ExecutionRoleArn"))
+    UpdateEnvironmentOperationInput.add_member(:airflow_configuration_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    UpdateEnvironmentOperationInput.add_member(:airflow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AirflowVersion, location_name: "AirflowVersion"))
+    UpdateEnvironmentOperationInput.add_member(:dag_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "DagS3Path"))
+    UpdateEnvironmentOperationInput.add_member(:environment_class, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentClass, location_name: "EnvironmentClass"))
+    UpdateEnvironmentOperationInput.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
+    UpdateEnvironmentOperationInput.add_member(:max_workers, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxWorkers, location_name: "MaxWorkers"))
+    UpdateEnvironmentOperationInput.add_member(:min_workers, ::Smithy::Schema::Shapes::MemberShape.new(target: MinWorkers, location_name: "MinWorkers"))
+    UpdateEnvironmentOperationInput.add_member(:max_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxWebservers, location_name: "MaxWebservers"))
+    UpdateEnvironmentOperationInput.add_member(:min_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MinWebservers, location_name: "MinWebservers"))
+    UpdateEnvironmentOperationInput.add_member(:worker_replacement_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerReplacementStrategy, location_name: "WorkerReplacementStrategy"))
+    UpdateEnvironmentOperationInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateNetworkConfigurationInput, location_name: "NetworkConfiguration"))
+    UpdateEnvironmentOperationInput.add_member(:plugins_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "PluginsS3Path"))
+    UpdateEnvironmentOperationInput.add_member(:plugins_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
+    UpdateEnvironmentOperationInput.add_member(:requirements_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "RequirementsS3Path"))
+    UpdateEnvironmentOperationInput.add_member(:requirements_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
+    UpdateEnvironmentOperationInput.add_member(:schedulers, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedulers, location_name: "Schedulers"))
+    UpdateEnvironmentOperationInput.add_member(:source_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketArn, location_name: "SourceBucketArn"))
+    UpdateEnvironmentOperationInput.add_member(:startup_script_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativePath, location_name: "StartupScriptS3Path"))
+    UpdateEnvironmentOperationInput.add_member(:startup_script_s3_object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
+    UpdateEnvironmentOperationInput.add_member(:webserver_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: WebserverAccessMode, location_name: "WebserverAccessMode"))
+    UpdateEnvironmentOperationInput.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
     UpdateEnvironmentOperationInput.type = Types::UpdateEnvironmentOperationInput
-    UpdateEnvironmentOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
+    UpdateEnvironmentOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, location_name: "Arn"))
     UpdateEnvironmentOperationOutput.type = Types::UpdateEnvironmentOperationOutput
-    UpdateError.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
-    UpdateError.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    UpdateError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "ErrorCode"))
+    UpdateError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "ErrorMessage"))
     UpdateError.type = Types::UpdateError
-    UpdateNetworkConfigurationInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "SecurityGroupIds", traits: {"smithy.api#required" => {}}))
+    UpdateNetworkConfigurationInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, location_name: "SecurityGroupIds", traits: {"smithy.api#required" => {}}))
     UpdateNetworkConfigurationInput.type = Types::UpdateNetworkConfigurationInput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ValidationException.type = Types::ValidationException
 
     AmazonMWAA = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -324,121 +324,121 @@ module Aws::MWAA
       service.add_operation(:create_cli_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#CreateCliToken"
         operation.name = "CreateCliToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCliTokenInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCliTokenOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = CreateCliTokenInput
+        operation.output = CreateCliTokenOutput
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "env."}, "smithy.api#http" => {"uri" => "/clitoken/{Name}", "method" => "POST", "code" => 200}}
       end)
       service.add_operation(:create_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#CreateEnvironment"
         operation.name = "CreateEnvironment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateEnvironmentOperationInput
+        operation.output = CreateEnvironmentOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/environments/{Name}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_web_login_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#CreateWebLoginToken"
         operation.name = "CreateWebLoginToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWebLoginTokenInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateWebLoginTokenOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = CreateWebLoginTokenInput
+        operation.output = CreateWebLoginTokenOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "env."}, "smithy.api#http" => {"uri" => "/webtoken/{Name}", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#DeleteEnvironment"
         operation.name = "DeleteEnvironment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = DeleteEnvironmentOperationInput
+        operation.output = DeleteEnvironmentOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/environments/{Name}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#GetEnvironment"
         operation.name = "GetEnvironment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEnvironmentOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetEnvironmentOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = GetEnvironmentOperationInput
+        operation.output = GetEnvironmentOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/environments/{Name}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:invoke_rest_api, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#InvokeRestApi"
         operation.name = "InvokeRestApi"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvokeRestApiRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvokeRestApiResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiClientException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestApiServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = InvokeRestApiRequest
+        operation.output = InvokeRestApiResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << RestApiClientException
+        operation.errors << RestApiServerException
+        operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#endpoint" => {"hostPrefix" => "env."}, "smithy.api#http" => {"uri" => "/restapi/{Name}", "method" => "POST", "code" => 200}}
       end)
       service.add_operation(:list_environments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#ListEnvironments"
         operation.name = "ListEnvironments"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEnvironmentsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListEnvironmentsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListEnvironmentsOperationInput
+        operation.output = ListEnvironmentsOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/environments"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEnvironments.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ListTagsForResourceOperationInput
+        operation.output = ListTagsForResourceOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/tags/{ResourceArn}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:publish_metrics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#PublishMetrics"
         operation.name = "PublishMetrics"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublishMetricsOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublishMetricsOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = PublishMetricsOperationInput
+        operation.output = PublishMetricsOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#deprecated" => {"message" => "This API is for internal use and not meant for public use, and is no longer available."}, "smithy.api#endpoint" => {"hostPrefix" => "ops."}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/metrics/environments/{EnvironmentName}"}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = TagResourceOperationInput
+        operation.output = TagResourceOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/tags/{ResourceArn}"}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UntagResourceOperationInput
+        operation.output = UntagResourceOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/tags/{ResourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#UpdateEnvironment"
         operation.name = "UpdateEnvironment"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentOperationInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentOperationOutput)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = UpdateEnvironmentOperationInput
+        operation.output = UpdateEnvironmentOperationOutput
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/environments/{Name}"}}
       end)
     end

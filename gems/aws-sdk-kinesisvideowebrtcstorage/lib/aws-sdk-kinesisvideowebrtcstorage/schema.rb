@@ -15,18 +15,18 @@ module Aws::KinesisVideoWebRTCStorage
     JoinStorageSessionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSessionInput", name: "JoinStorageSessionInput")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideowebrtcstorage#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ClientLimitExceededException.type = Types::ClientLimitExceededException
-    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
-    JoinStorageSessionAsViewerInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
-    JoinStorageSessionAsViewerInput.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId", traits: {"smithy.api#required" => {}}))
+    JoinStorageSessionAsViewerInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    JoinStorageSessionAsViewerInput.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, location_name: "clientId", traits: {"smithy.api#required" => {}}))
     JoinStorageSessionAsViewerInput.type = Types::JoinStorageSessionAsViewerInput
-    JoinStorageSessionInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
+    JoinStorageSessionInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, location_name: "channelArn", traits: {"smithy.api#required" => {}}))
     JoinStorageSessionInput.type = Types::JoinStorageSessionInput
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
 
     AWSAcuityRoutingServiceLambda = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -37,23 +37,23 @@ module Aws::KinesisVideoWebRTCStorage
       service.add_operation(:join_storage_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSession"
         operation.name = "JoinStorageSession"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JoinStorageSessionInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = JoinStorageSessionInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/joinStorageSession"}}
       end)
       service.add_operation(:join_storage_session_as_viewer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSessionAsViewer"
         operation.name = "JoinStorageSessionAsViewer"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JoinStorageSessionAsViewerInput)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.input = JoinStorageSessionAsViewerInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/joinStorageSessionAsViewer"}}
       end)
     end

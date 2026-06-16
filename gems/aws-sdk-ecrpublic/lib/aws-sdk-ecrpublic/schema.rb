@@ -156,320 +156,320 @@ module Aws::ECRPUBLIC
     Url = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecrpublic#Url", name: "Url")
     UsageText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecrpublic#UsageText", name: "UsageText", traits: {"smithy.api#length" => {"min" => 0, "max" => 25600}})
 
-    ArchitectureList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Architecture)
-    AuthorizationData.add_member(:authorization_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Base64, location_name: "authorizationToken"))
-    AuthorizationData.add_member(:expires_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "expiresAt"))
+    ArchitectureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture)
+    AuthorizationData.add_member(:authorization_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64, location_name: "authorizationToken"))
+    AuthorizationData.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationTimestamp, location_name: "expiresAt"))
     AuthorizationData.type = Types::AuthorizationData
-    BatchCheckLayerAvailabilityRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
-    BatchCheckLayerAvailabilityRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    BatchCheckLayerAvailabilityRequest.add_member(:layer_digests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchedOperationLayerDigestList, location_name: "layerDigests", traits: {"smithy.api#required" => {}}))
+    BatchCheckLayerAvailabilityRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, location_name: "registryId"))
+    BatchCheckLayerAvailabilityRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    BatchCheckLayerAvailabilityRequest.add_member(:layer_digests, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigestList, location_name: "layerDigests", traits: {"smithy.api#required" => {}}))
     BatchCheckLayerAvailabilityRequest.type = Types::BatchCheckLayerAvailabilityRequest
-    BatchCheckLayerAvailabilityResponse.add_member(:layers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerList, location_name: "layers"))
-    BatchCheckLayerAvailabilityResponse.add_member(:failures, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerFailureList, location_name: "failures"))
+    BatchCheckLayerAvailabilityResponse.add_member(:layers, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerList, location_name: "layers"))
+    BatchCheckLayerAvailabilityResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureList, location_name: "failures"))
     BatchCheckLayerAvailabilityResponse.type = Types::BatchCheckLayerAvailabilityResponse
-    BatchDeleteImageRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
-    BatchDeleteImageRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    BatchDeleteImageRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds", traits: {"smithy.api#required" => {}}))
+    BatchDeleteImageRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, location_name: "registryId"))
+    BatchDeleteImageRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    BatchDeleteImageRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifierList, location_name: "imageIds", traits: {"smithy.api#required" => {}}))
     BatchDeleteImageRequest.type = Types::BatchDeleteImageRequest
-    BatchDeleteImageResponse.add_member(:image_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds"))
-    BatchDeleteImageResponse.add_member(:failures, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageFailureList, location_name: "failures"))
+    BatchDeleteImageResponse.add_member(:image_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifierList, location_name: "imageIds"))
+    BatchDeleteImageResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailureList, location_name: "failures"))
     BatchDeleteImageResponse.type = Types::BatchDeleteImageResponse
-    BatchedOperationLayerDigestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchedOperationLayerDigest)
-    CompleteLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
-    CompleteLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    CompleteLayerUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
-    CompleteLayerUploadRequest.add_member(:layer_digests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerDigestList, location_name: "layerDigests", traits: {"smithy.api#required" => {}}))
+    BatchedOperationLayerDigestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest)
+    CompleteLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, location_name: "registryId"))
+    CompleteLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    CompleteLayerUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
+    CompleteLayerUploadRequest.add_member(:layer_digests, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigestList, location_name: "layerDigests", traits: {"smithy.api#required" => {}}))
     CompleteLayerUploadRequest.type = Types::CompleteLayerUploadRequest
-    CompleteLayerUploadResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    CompleteLayerUploadResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    CompleteLayerUploadResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
-    CompleteLayerUploadResponse.add_member(:layer_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
+    CompleteLayerUploadResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    CompleteLayerUploadResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    CompleteLayerUploadResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId"))
+    CompleteLayerUploadResponse.add_member(:layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest, location_name: "layerDigest"))
     CompleteLayerUploadResponse.type = Types::CompleteLayerUploadResponse
-    CreateRepositoryRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    CreateRepositoryRequest.add_member(:catalog_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryCatalogDataInput, location_name: "catalogData"))
-    CreateRepositoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateRepositoryRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    CreateRepositoryRequest.add_member(:catalog_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCatalogDataInput, location_name: "catalogData"))
+    CreateRepositoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     CreateRepositoryRequest.type = Types::CreateRepositoryRequest
-    CreateRepositoryResponse.add_member(:repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
-    CreateRepositoryResponse.add_member(:catalog_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryCatalogData, location_name: "catalogData"))
+    CreateRepositoryResponse.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, location_name: "repository"))
+    CreateRepositoryResponse.add_member(:catalog_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCatalogData, location_name: "catalogData"))
     CreateRepositoryResponse.type = Types::CreateRepositoryResponse
-    DeleteRepositoryPolicyRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    DeleteRepositoryPolicyRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DeleteRepositoryPolicyRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    DeleteRepositoryPolicyRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     DeleteRepositoryPolicyRequest.type = Types::DeleteRepositoryPolicyRequest
-    DeleteRepositoryPolicyResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    DeleteRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    DeleteRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
+    DeleteRepositoryPolicyResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    DeleteRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    DeleteRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryPolicyText, location_name: "policyText"))
     DeleteRepositoryPolicyResponse.type = Types::DeleteRepositoryPolicyResponse
-    DeleteRepositoryRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    DeleteRepositoryRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    DeleteRepositoryRequest.add_member(:force, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForceFlag, location_name: "force", traits: {"smithy.api#default" => false}))
+    DeleteRepositoryRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    DeleteRepositoryRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DeleteRepositoryRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ForceFlag, location_name: "force", traits: {"smithy.api#default" => false}))
     DeleteRepositoryRequest.type = Types::DeleteRepositoryRequest
-    DeleteRepositoryResponse.add_member(:repository, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
+    DeleteRepositoryResponse.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, location_name: "repository"))
     DeleteRepositoryResponse.type = Types::DeleteRepositoryResponse
-    DescribeImageTagsRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    DescribeImageTagsRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    DescribeImageTagsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    DescribeImageTagsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeImageTagsRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    DescribeImageTagsRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DescribeImageTagsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    DescribeImageTagsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     DescribeImageTagsRequest.type = Types::DescribeImageTagsRequest
-    DescribeImageTagsResponse.add_member(:image_tag_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTagDetailList, location_name: "imageTagDetails"))
-    DescribeImageTagsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImageTagsResponse.add_member(:image_tag_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagDetailList, location_name: "imageTagDetails"))
+    DescribeImageTagsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     DescribeImageTagsResponse.type = Types::DescribeImageTagsResponse
-    DescribeImagesRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    DescribeImagesRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    DescribeImagesRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds"))
-    DescribeImagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    DescribeImagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeImagesRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    DescribeImagesRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DescribeImagesRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifierList, location_name: "imageIds"))
+    DescribeImagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    DescribeImagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     DescribeImagesRequest.type = Types::DescribeImagesRequest
-    DescribeImagesResponse.add_member(:image_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDetailList, location_name: "imageDetails"))
-    DescribeImagesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImagesResponse.add_member(:image_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetailList, location_name: "imageDetails"))
+    DescribeImagesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     DescribeImagesResponse.type = Types::DescribeImagesResponse
-    DescribeRegistriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    DescribeRegistriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeRegistriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    DescribeRegistriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     DescribeRegistriesRequest.type = Types::DescribeRegistriesRequest
-    DescribeRegistriesResponse.add_member(:registries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryList, location_name: "registries", traits: {"smithy.api#required" => {}}))
-    DescribeRegistriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeRegistriesResponse.add_member(:registries, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryList, location_name: "registries", traits: {"smithy.api#required" => {}}))
+    DescribeRegistriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     DescribeRegistriesResponse.type = Types::DescribeRegistriesResponse
-    DescribeRepositoriesRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    DescribeRepositoriesRequest.add_member(:repository_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames"))
-    DescribeRepositoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    DescribeRepositoriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeRepositoriesRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    DescribeRepositoriesRequest.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, location_name: "repositoryNames"))
+    DescribeRepositoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
+    DescribeRepositoriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "maxResults"))
     DescribeRepositoriesRequest.type = Types::DescribeRepositoriesRequest
-    DescribeRepositoriesResponse.add_member(:repositories, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryList, location_name: "repositories"))
-    DescribeRepositoriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeRepositoriesResponse.add_member(:repositories, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryList, location_name: "repositories"))
+    DescribeRepositoriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "nextToken"))
     DescribeRepositoriesResponse.type = Types::DescribeRepositoriesResponse
-    EmptyUploadException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    EmptyUploadException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     EmptyUploadException.type = Types::EmptyUploadException
     GetAuthorizationTokenRequest.type = Types::GetAuthorizationTokenRequest
-    GetAuthorizationTokenResponse.add_member(:authorization_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
+    GetAuthorizationTokenResponse.add_member(:authorization_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationData, location_name: "authorizationData"))
     GetAuthorizationTokenResponse.type = Types::GetAuthorizationTokenResponse
     GetRegistryCatalogDataRequest.type = Types::GetRegistryCatalogDataRequest
-    GetRegistryCatalogDataResponse.add_member(:registry_catalog_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryCatalogData, location_name: "registryCatalogData", traits: {"smithy.api#required" => {}}))
+    GetRegistryCatalogDataResponse.add_member(:registry_catalog_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryCatalogData, location_name: "registryCatalogData", traits: {"smithy.api#required" => {}}))
     GetRegistryCatalogDataResponse.type = Types::GetRegistryCatalogDataResponse
-    GetRepositoryCatalogDataRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    GetRepositoryCatalogDataRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetRepositoryCatalogDataRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    GetRepositoryCatalogDataRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     GetRepositoryCatalogDataRequest.type = Types::GetRepositoryCatalogDataRequest
-    GetRepositoryCatalogDataResponse.add_member(:catalog_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryCatalogData, location_name: "catalogData"))
+    GetRepositoryCatalogDataResponse.add_member(:catalog_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCatalogData, location_name: "catalogData"))
     GetRepositoryCatalogDataResponse.type = Types::GetRepositoryCatalogDataResponse
-    GetRepositoryPolicyRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    GetRepositoryPolicyRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetRepositoryPolicyRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    GetRepositoryPolicyRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     GetRepositoryPolicyRequest.type = Types::GetRepositoryPolicyRequest
-    GetRepositoryPolicyResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    GetRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    GetRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
+    GetRepositoryPolicyResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    GetRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    GetRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryPolicyText, location_name: "policyText"))
     GetRepositoryPolicyResponse.type = Types::GetRepositoryPolicyResponse
-    Image.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
-    Image.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    Image.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
-    Image.add_member(:image_manifest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageManifest, location_name: "imageManifest"))
-    Image.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
+    Image.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, location_name: "registryId"))
+    Image.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    Image.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, location_name: "imageId"))
+    Image.add_member(:image_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageManifest, location_name: "imageManifest"))
+    Image.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, location_name: "imageManifestMediaType"))
     Image.type = Types::Image
-    ImageAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ImageAlreadyExistsException.type = Types::ImageAlreadyExistsException
-    ImageDetail.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    ImageDetail.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    ImageDetail.add_member(:image_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
-    ImageDetail.add_member(:image_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTagList, location_name: "imageTags"))
-    ImageDetail.add_member(:image_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageSizeInBytes, location_name: "imageSizeInBytes"))
-    ImageDetail.add_member(:image_pushed_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
-    ImageDetail.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
-    ImageDetail.add_member(:artifact_media_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaType, location_name: "artifactMediaType"))
+    ImageDetail.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    ImageDetail.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    ImageDetail.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, location_name: "imageDigest"))
+    ImageDetail.add_member(:image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagList, location_name: "imageTags"))
+    ImageDetail.add_member(:image_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSizeInBytes, location_name: "imageSizeInBytes"))
+    ImageDetail.add_member(:image_pushed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: PushTimestamp, location_name: "imagePushedAt"))
+    ImageDetail.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, location_name: "imageManifestMediaType"))
+    ImageDetail.add_member(:artifact_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, location_name: "artifactMediaType"))
     ImageDetail.type = Types::ImageDetail
-    ImageDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDetail)
-    ImageDigestDoesNotMatchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetail)
+    ImageDigestDoesNotMatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ImageDigestDoesNotMatchException.type = Types::ImageDigestDoesNotMatchException
-    ImageFailure.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
-    ImageFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageFailureCode, location_name: "failureCode"))
-    ImageFailure.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageFailureReason, location_name: "failureReason"))
+    ImageFailure.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, location_name: "imageId"))
+    ImageFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailureCode, location_name: "failureCode"))
+    ImageFailure.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailureReason, location_name: "failureReason"))
     ImageFailure.type = Types::ImageFailure
-    ImageFailureCode.add_member(:invalid_image_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidImageDigest", traits: {"smithy.api#enumValue" => "InvalidImageDigest"}))
-    ImageFailureCode.add_member(:invalid_image_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidImageTag", traits: {"smithy.api#enumValue" => "InvalidImageTag"}))
-    ImageFailureCode.add_member(:image_tag_does_not_match_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageTagDoesNotMatchDigest", traits: {"smithy.api#enumValue" => "ImageTagDoesNotMatchDigest"}))
-    ImageFailureCode.add_member(:image_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageNotFound", traits: {"smithy.api#enumValue" => "ImageNotFound"}))
-    ImageFailureCode.add_member(:missing_digest_and_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MissingDigestAndTag", traits: {"smithy.api#enumValue" => "MissingDigestAndTag"}))
-    ImageFailureCode.add_member(:image_referenced_by_manifest_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageReferencedByManifestList", traits: {"smithy.api#enumValue" => "ImageReferencedByManifestList"}))
-    ImageFailureCode.add_member(:kms_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KmsError", traits: {"smithy.api#enumValue" => "KmsError"}))
-    ImageFailureList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageFailure)
-    ImageIdentifier.add_member(:image_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
-    ImageIdentifier.add_member(:image_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTag, location_name: "imageTag"))
+    ImageFailureCode.add_member(:invalid_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidImageDigest", traits: {"smithy.api#enumValue" => "InvalidImageDigest"}))
+    ImageFailureCode.add_member(:invalid_image_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidImageTag", traits: {"smithy.api#enumValue" => "InvalidImageTag"}))
+    ImageFailureCode.add_member(:image_tag_does_not_match_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageTagDoesNotMatchDigest", traits: {"smithy.api#enumValue" => "ImageTagDoesNotMatchDigest"}))
+    ImageFailureCode.add_member(:image_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageNotFound", traits: {"smithy.api#enumValue" => "ImageNotFound"}))
+    ImageFailureCode.add_member(:missing_digest_and_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MissingDigestAndTag", traits: {"smithy.api#enumValue" => "MissingDigestAndTag"}))
+    ImageFailureCode.add_member(:image_referenced_by_manifest_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ImageReferencedByManifestList", traits: {"smithy.api#enumValue" => "ImageReferencedByManifestList"}))
+    ImageFailureCode.add_member(:kms_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "KmsError", traits: {"smithy.api#enumValue" => "KmsError"}))
+    ImageFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailure)
+    ImageIdentifier.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, location_name: "imageDigest"))
+    ImageIdentifier.add_member(:image_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, location_name: "imageTag"))
     ImageIdentifier.type = Types::ImageIdentifier
-    ImageIdentifierList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageIdentifier)
-    ImageNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier)
+    ImageNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ImageNotFoundException.type = Types::ImageNotFoundException
-    ImageTagAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageTagAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ImageTagAlreadyExistsException.type = Types::ImageTagAlreadyExistsException
-    ImageTagDetail.add_member(:image_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTag, location_name: "imageTag"))
-    ImageTagDetail.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
-    ImageTagDetail.add_member(:image_detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferencedImageDetail, location_name: "imageDetail"))
+    ImageTagDetail.add_member(:image_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, location_name: "imageTag"))
+    ImageTagDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTimestamp, location_name: "createdAt"))
+    ImageTagDetail.add_member(:image_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferencedImageDetail, location_name: "imageDetail"))
     ImageTagDetail.type = Types::ImageTagDetail
-    ImageTagDetailList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTagDetail)
-    ImageTagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTag)
-    InitiateLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
-    InitiateLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    ImageTagDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagDetail)
+    ImageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag)
+    InitiateLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, location_name: "registryId"))
+    InitiateLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
     InitiateLayerUploadRequest.type = Types::InitiateLayerUploadRequest
-    InitiateLayerUploadResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
-    InitiateLayerUploadResponse.add_member(:part_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartSize, location_name: "partSize"))
+    InitiateLayerUploadResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId"))
+    InitiateLayerUploadResponse.add_member(:part_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PartSize, location_name: "partSize"))
     InitiateLayerUploadResponse.type = Types::InitiateLayerUploadResponse
-    InvalidLayerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidLayerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidLayerException.type = Types::InvalidLayerException
-    InvalidLayerPartException.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    InvalidLayerPartException.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    InvalidLayerPartException.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
-    InvalidLayerPartException.add_member(:last_valid_byte_received, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartSize, location_name: "lastValidByteReceived"))
-    InvalidLayerPartException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidLayerPartException.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    InvalidLayerPartException.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    InvalidLayerPartException.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId"))
+    InvalidLayerPartException.add_member(:last_valid_byte_received, ::Smithy::Schema::Shapes::MemberShape.new(target: PartSize, location_name: "lastValidByteReceived"))
+    InvalidLayerPartException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidLayerPartException.type = Types::InvalidLayerPartException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidTagParameterException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidTagParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     InvalidTagParameterException.type = Types::InvalidTagParameterException
-    Layer.add_member(:layer_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
-    Layer.add_member(:layer_availability, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerAvailability, location_name: "layerAvailability"))
-    Layer.add_member(:layer_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerSizeInBytes, location_name: "layerSize"))
-    Layer.add_member(:media_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaType, location_name: "mediaType"))
+    Layer.add_member(:layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest, location_name: "layerDigest"))
+    Layer.add_member(:layer_availability, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerAvailability, location_name: "layerAvailability"))
+    Layer.add_member(:layer_size, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerSizeInBytes, location_name: "layerSize"))
+    Layer.add_member(:media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, location_name: "mediaType"))
     Layer.type = Types::Layer
-    LayerAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LayerAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     LayerAlreadyExistsException.type = Types::LayerAlreadyExistsException
-    LayerAvailability.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    LayerAvailability.add_member(:unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
-    LayerDigestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerDigest)
-    LayerFailure.add_member(:layer_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchedOperationLayerDigest, location_name: "layerDigest"))
-    LayerFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerFailureCode, location_name: "failureCode"))
-    LayerFailure.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerFailureReason, location_name: "failureReason"))
+    LayerAvailability.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    LayerAvailability.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
+    LayerDigestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest)
+    LayerFailure.add_member(:layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, location_name: "layerDigest"))
+    LayerFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureCode, location_name: "failureCode"))
+    LayerFailure.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureReason, location_name: "failureReason"))
     LayerFailure.type = Types::LayerFailure
-    LayerFailureCode.add_member(:invalid_layer_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidLayerDigest", traits: {"smithy.api#enumValue" => "InvalidLayerDigest"}))
-    LayerFailureCode.add_member(:missing_layer_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MissingLayerDigest", traits: {"smithy.api#enumValue" => "MissingLayerDigest"}))
-    LayerFailureList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerFailure)
-    LayerList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Layer)
-    LayerPartTooSmallException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LayerFailureCode.add_member(:invalid_layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "InvalidLayerDigest", traits: {"smithy.api#enumValue" => "InvalidLayerDigest"}))
+    LayerFailureCode.add_member(:missing_layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MissingLayerDigest", traits: {"smithy.api#enumValue" => "MissingLayerDigest"}))
+    LayerFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailure)
+    LayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Layer)
+    LayerPartTooSmallException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     LayerPartTooSmallException.type = Types::LayerPartTooSmallException
-    LayersNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LayersNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     LayersNotFoundException.type = Types::LayersNotFoundException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    OperatingSystemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperatingSystem)
-    PutImageRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
-    PutImageRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    PutImageRequest.add_member(:image_manifest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageManifest, location_name: "imageManifest", traits: {"smithy.api#required" => {}}))
-    PutImageRequest.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
-    PutImageRequest.add_member(:image_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTag, location_name: "imageTag"))
-    PutImageRequest.add_member(:image_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
+    OperatingSystemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystem)
+    PutImageRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, location_name: "registryId"))
+    PutImageRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    PutImageRequest.add_member(:image_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageManifest, location_name: "imageManifest", traits: {"smithy.api#required" => {}}))
+    PutImageRequest.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, location_name: "imageManifestMediaType"))
+    PutImageRequest.add_member(:image_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, location_name: "imageTag"))
+    PutImageRequest.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, location_name: "imageDigest"))
     PutImageRequest.type = Types::PutImageRequest
-    PutImageResponse.add_member(:image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Image, location_name: "image"))
+    PutImageResponse.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, location_name: "image"))
     PutImageResponse.type = Types::PutImageResponse
-    PutRegistryCatalogDataRequest.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryDisplayName, location_name: "displayName"))
+    PutRegistryCatalogDataRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryDisplayName, location_name: "displayName"))
     PutRegistryCatalogDataRequest.type = Types::PutRegistryCatalogDataRequest
-    PutRegistryCatalogDataResponse.add_member(:registry_catalog_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryCatalogData, location_name: "registryCatalogData", traits: {"smithy.api#required" => {}}))
+    PutRegistryCatalogDataResponse.add_member(:registry_catalog_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryCatalogData, location_name: "registryCatalogData", traits: {"smithy.api#required" => {}}))
     PutRegistryCatalogDataResponse.type = Types::PutRegistryCatalogDataResponse
-    PutRepositoryCatalogDataRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    PutRepositoryCatalogDataRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    PutRepositoryCatalogDataRequest.add_member(:catalog_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryCatalogDataInput, location_name: "catalogData", traits: {"smithy.api#required" => {}}))
+    PutRepositoryCatalogDataRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    PutRepositoryCatalogDataRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    PutRepositoryCatalogDataRequest.add_member(:catalog_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCatalogDataInput, location_name: "catalogData", traits: {"smithy.api#required" => {}}))
     PutRepositoryCatalogDataRequest.type = Types::PutRepositoryCatalogDataRequest
-    PutRepositoryCatalogDataResponse.add_member(:catalog_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryCatalogData, location_name: "catalogData"))
+    PutRepositoryCatalogDataResponse.add_member(:catalog_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCatalogData, location_name: "catalogData"))
     PutRepositoryCatalogDataResponse.type = Types::PutRepositoryCatalogDataResponse
-    ReferencedImageDetail.add_member(:image_digest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
-    ReferencedImageDetail.add_member(:image_size_in_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageSizeInBytes, location_name: "imageSizeInBytes"))
-    ReferencedImageDetail.add_member(:image_pushed_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
-    ReferencedImageDetail.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
-    ReferencedImageDetail.add_member(:artifact_media_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaType, location_name: "artifactMediaType"))
+    ReferencedImageDetail.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, location_name: "imageDigest"))
+    ReferencedImageDetail.add_member(:image_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSizeInBytes, location_name: "imageSizeInBytes"))
+    ReferencedImageDetail.add_member(:image_pushed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: PushTimestamp, location_name: "imagePushedAt"))
+    ReferencedImageDetail.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, location_name: "imageManifestMediaType"))
+    ReferencedImageDetail.add_member(:artifact_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, location_name: "artifactMediaType"))
     ReferencedImageDetail.type = Types::ReferencedImageDetail
-    ReferencedImagesNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReferencedImagesNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ReferencedImagesNotFoundException.type = Types::ReferencedImagesNotFoundException
-    Registry.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId", traits: {"smithy.api#required" => {}}))
-    Registry.add_member(:registry_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "registryArn", traits: {"smithy.api#required" => {}}))
-    Registry.add_member(:registry_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "registryUri", traits: {"smithy.api#required" => {}}))
-    Registry.add_member(:verified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryVerified, location_name: "verified", traits: {"smithy.api#required" => {}}))
-    Registry.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryAliasList, location_name: "aliases", traits: {"smithy.api#required" => {}}))
+    Registry.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId", traits: {"smithy.api#required" => {}}))
+    Registry.add_member(:registry_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "registryArn", traits: {"smithy.api#required" => {}}))
+    Registry.add_member(:registry_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "registryUri", traits: {"smithy.api#required" => {}}))
+    Registry.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryVerified, location_name: "verified", traits: {"smithy.api#required" => {}}))
+    Registry.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryAliasList, location_name: "aliases", traits: {"smithy.api#required" => {}}))
     Registry.type = Types::Registry
-    RegistryAlias.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryAliasName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    RegistryAlias.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryAliasStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    RegistryAlias.add_member(:primary_registry_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryRegistryAliasFlag, location_name: "primaryRegistryAlias", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    RegistryAlias.add_member(:default_registry_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultRegistryAliasFlag, location_name: "defaultRegistryAlias", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    RegistryAlias.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryAliasName, location_name: "name", traits: {"smithy.api#required" => {}}))
+    RegistryAlias.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryAliasStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
+    RegistryAlias.add_member(:primary_registry_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryRegistryAliasFlag, location_name: "primaryRegistryAlias", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    RegistryAlias.add_member(:default_registry_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultRegistryAliasFlag, location_name: "defaultRegistryAlias", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     RegistryAlias.type = Types::RegistryAlias
-    RegistryAliasList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryAlias)
-    RegistryAliasStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    RegistryAliasStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    RegistryAliasStatus.add_member(:rejected, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
-    RegistryCatalogData.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryDisplayName, location_name: "displayName"))
+    RegistryAliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryAlias)
+    RegistryAliasStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    RegistryAliasStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    RegistryAliasStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
+    RegistryCatalogData.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryDisplayName, location_name: "displayName"))
     RegistryCatalogData.type = Types::RegistryCatalogData
-    RegistryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Registry)
-    RegistryNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RegistryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Registry)
+    RegistryNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     RegistryNotFoundException.type = Types::RegistryNotFoundException
-    Repository.add_member(:repository_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "repositoryArn"))
-    Repository.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    Repository.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    Repository.add_member(:repository_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: "repositoryUri"))
-    Repository.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
+    Repository.add_member(:repository_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "repositoryArn"))
+    Repository.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    Repository.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    Repository.add_member(:repository_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, location_name: "repositoryUri"))
+    Repository.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTimestamp, location_name: "createdAt"))
     Repository.type = Types::Repository
-    RepositoryAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     RepositoryAlreadyExistsException.type = Types::RepositoryAlreadyExistsException
-    RepositoryCatalogData.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "description"))
-    RepositoryCatalogData.add_member(:architectures, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchitectureList, location_name: "architectures"))
-    RepositoryCatalogData.add_member(:operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperatingSystemList, location_name: "operatingSystems"))
-    RepositoryCatalogData.add_member(:logo_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceUrl, location_name: "logoUrl"))
-    RepositoryCatalogData.add_member(:about_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AboutText, location_name: "aboutText"))
-    RepositoryCatalogData.add_member(:usage_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageText, location_name: "usageText"))
-    RepositoryCatalogData.add_member(:marketplace_certified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MarketplaceCertified, location_name: "marketplaceCertified"))
+    RepositoryCatalogData.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryDescription, location_name: "description"))
+    RepositoryCatalogData.add_member(:architectures, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchitectureList, location_name: "architectures"))
+    RepositoryCatalogData.add_member(:operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystemList, location_name: "operatingSystems"))
+    RepositoryCatalogData.add_member(:logo_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceUrl, location_name: "logoUrl"))
+    RepositoryCatalogData.add_member(:about_text, ::Smithy::Schema::Shapes::MemberShape.new(target: AboutText, location_name: "aboutText"))
+    RepositoryCatalogData.add_member(:usage_text, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageText, location_name: "usageText"))
+    RepositoryCatalogData.add_member(:marketplace_certified, ::Smithy::Schema::Shapes::MemberShape.new(target: MarketplaceCertified, location_name: "marketplaceCertified"))
     RepositoryCatalogData.type = Types::RepositoryCatalogData
-    RepositoryCatalogDataInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "description"))
-    RepositoryCatalogDataInput.add_member(:architectures, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchitectureList, location_name: "architectures"))
-    RepositoryCatalogDataInput.add_member(:operating_systems, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperatingSystemList, location_name: "operatingSystems"))
-    RepositoryCatalogDataInput.add_member(:logo_image_blob, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogoImageBlob, location_name: "logoImageBlob"))
-    RepositoryCatalogDataInput.add_member(:about_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AboutText, location_name: "aboutText"))
-    RepositoryCatalogDataInput.add_member(:usage_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageText, location_name: "usageText"))
+    RepositoryCatalogDataInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryDescription, location_name: "description"))
+    RepositoryCatalogDataInput.add_member(:architectures, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchitectureList, location_name: "architectures"))
+    RepositoryCatalogDataInput.add_member(:operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystemList, location_name: "operatingSystems"))
+    RepositoryCatalogDataInput.add_member(:logo_image_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: LogoImageBlob, location_name: "logoImageBlob"))
+    RepositoryCatalogDataInput.add_member(:about_text, ::Smithy::Schema::Shapes::MemberShape.new(target: AboutText, location_name: "aboutText"))
+    RepositoryCatalogDataInput.add_member(:usage_text, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageText, location_name: "usageText"))
     RepositoryCatalogDataInput.type = Types::RepositoryCatalogDataInput
-    RepositoryCatalogDataNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryCatalogDataNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     RepositoryCatalogDataNotFoundException.type = Types::RepositoryCatalogDataNotFoundException
-    RepositoryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Repository)
-    RepositoryNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName)
-    RepositoryNotEmptyException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Repository)
+    RepositoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName)
+    RepositoryNotEmptyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     RepositoryNotEmptyException.type = Types::RepositoryNotEmptyException
-    RepositoryNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     RepositoryNotFoundException.type = Types::RepositoryNotFoundException
-    RepositoryPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     RepositoryPolicyNotFoundException.type = Types::RepositoryPolicyNotFoundException
-    ServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     ServerException.type = Types::ServerException
-    SetRepositoryPolicyRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    SetRepositoryPolicyRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    SetRepositoryPolicyRequest.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText", traits: {"smithy.api#required" => {}}))
-    SetRepositoryPolicyRequest.add_member(:force, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForceFlag, location_name: "force", traits: {"smithy.api#default" => false}))
+    SetRepositoryPolicyRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    SetRepositoryPolicyRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    SetRepositoryPolicyRequest.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryPolicyText, location_name: "policyText", traits: {"smithy.api#required" => {}}))
+    SetRepositoryPolicyRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ForceFlag, location_name: "force", traits: {"smithy.api#default" => false}))
     SetRepositoryPolicyRequest.type = Types::SetRepositoryPolicyRequest
-    SetRepositoryPolicyResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    SetRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    SetRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
+    SetRepositoryPolicyResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    SetRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    SetRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryPolicyText, location_name: "policyText"))
     SetRepositoryPolicyResponse.type = Types::SetRepositoryPolicyResponse
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key"))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UnsupportedCommandException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnsupportedCommandException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     UnsupportedCommandException.type = Types::UnsupportedCommandException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UploadLayerPartRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
-    UploadLayerPartRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
-    UploadLayerPartRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
-    UploadLayerPartRequest.add_member(:part_first_byte, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartSize, location_name: "partFirstByte", traits: {"smithy.api#required" => {}}))
-    UploadLayerPartRequest.add_member(:part_last_byte, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartSize, location_name: "partLastByte", traits: {"smithy.api#required" => {}}))
-    UploadLayerPartRequest.add_member(:layer_part_blob, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerPartBlob, location_name: "layerPartBlob", traits: {"smithy.api#required" => {}}))
+    UploadLayerPartRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, location_name: "registryId"))
+    UploadLayerPartRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    UploadLayerPartRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId", traits: {"smithy.api#required" => {}}))
+    UploadLayerPartRequest.add_member(:part_first_byte, ::Smithy::Schema::Shapes::MemberShape.new(target: PartSize, location_name: "partFirstByte", traits: {"smithy.api#required" => {}}))
+    UploadLayerPartRequest.add_member(:part_last_byte, ::Smithy::Schema::Shapes::MemberShape.new(target: PartSize, location_name: "partLastByte", traits: {"smithy.api#required" => {}}))
+    UploadLayerPartRequest.add_member(:layer_part_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerPartBlob, location_name: "layerPartBlob", traits: {"smithy.api#required" => {}}))
     UploadLayerPartRequest.type = Types::UploadLayerPartRequest
-    UploadLayerPartResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
-    UploadLayerPartResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    UploadLayerPartResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
-    UploadLayerPartResponse.add_member(:last_byte_received, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartSize, location_name: "lastByteReceived"))
+    UploadLayerPartResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, location_name: "registryId"))
+    UploadLayerPartResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, location_name: "repositoryName"))
+    UploadLayerPartResponse.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, location_name: "uploadId"))
+    UploadLayerPartResponse.add_member(:last_byte_received, ::Smithy::Schema::Shapes::MemberShape.new(target: PartSize, location_name: "lastByteReceived"))
     UploadLayerPartResponse.type = Types::UploadLayerPartResponse
-    UploadNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UploadNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, location_name: "message"))
     UploadNotFoundException.type = Types::UploadNotFoundException
 
     SpencerFrontendService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
@@ -480,284 +480,284 @@ module Aws::ECRPUBLIC
       service.add_operation(:batch_check_layer_availability, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#BatchCheckLayerAvailability"
         operation.name = "BatchCheckLayerAvailability"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCheckLayerAvailabilityRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchCheckLayerAvailabilityResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = BatchCheckLayerAvailabilityRequest
+        operation.output = BatchCheckLayerAvailabilityResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RegistryNotFoundException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:batch_delete_image, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#BatchDeleteImage"
         operation.name = "BatchDeleteImage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteImageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BatchDeleteImageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = BatchDeleteImageRequest
+        operation.output = BatchDeleteImageResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:complete_layer_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#CompleteLayerUpload"
         operation.name = "CompleteLayerUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteLayerUploadRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteLayerUploadResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmptyUploadException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLayerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayerPartTooSmallException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadNotFoundException)
+        operation.input = CompleteLayerUploadRequest
+        operation.output = CompleteLayerUploadResponse
+        operation.errors << EmptyUploadException
+        operation.errors << InvalidLayerException
+        operation.errors << InvalidParameterException
+        operation.errors << LayerAlreadyExistsException
+        operation.errors << LayerPartTooSmallException
+        operation.errors << RegistryNotFoundException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
+        operation.errors << UploadNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:create_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#CreateRepository"
         operation.name = "CreateRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRepositoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRepositoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = CreateRepositoryRequest
+        operation.output = CreateRepositoryResponse
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidTagParameterException
+        operation.errors << LimitExceededException
+        operation.errors << RepositoryAlreadyExistsException
+        operation.errors << ServerException
+        operation.errors << TooManyTagsException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:delete_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#DeleteRepository"
         operation.name = "DeleteRepository"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRepositoryRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRepositoryResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotEmptyException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = DeleteRepositoryRequest
+        operation.output = DeleteRepositoryResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotEmptyException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:delete_repository_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#DeleteRepositoryPolicy"
         operation.name = "DeleteRepositoryPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRepositoryPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteRepositoryPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = DeleteRepositoryPolicyRequest
+        operation.output = DeleteRepositoryPolicyResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << RepositoryPolicyNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:describe_image_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#DescribeImageTags"
         operation.name = "DescribeImageTags"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageTagsRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageTagsResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = DescribeImageTagsRequest
+        operation.output = DescribeImageTagsResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeImageTags.new
       end)
       service.add_operation(:describe_images, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#DescribeImages"
         operation.name = "DescribeImages"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImagesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImagesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = DescribeImagesRequest
+        operation.output = DescribeImagesResponse
+        operation.errors << ImageNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeImages.new
       end)
       service.add_operation(:describe_registries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#DescribeRegistries"
         operation.name = "DescribeRegistries"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistriesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRegistriesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = DescribeRegistriesRequest
+        operation.output = DescribeRegistriesResponse
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRegistries.new
       end)
       service.add_operation(:describe_repositories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#DescribeRepositories"
         operation.name = "DescribeRepositories"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRepositoriesRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeRepositoriesResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = DescribeRepositoriesRequest
+        operation.output = DescribeRepositoriesResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeRepositories.new
       end)
       service.add_operation(:get_authorization_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#GetAuthorizationToken"
         operation.name = "GetAuthorizationToken"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAuthorizationTokenRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAuthorizationTokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = GetAuthorizationTokenRequest
+        operation.output = GetAuthorizationTokenResponse
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:get_registry_catalog_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#GetRegistryCatalogData"
         operation.name = "GetRegistryCatalogData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegistryCatalogDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegistryCatalogDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = GetRegistryCatalogDataRequest
+        operation.output = GetRegistryCatalogDataResponse
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:get_repository_catalog_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#GetRepositoryCatalogData"
         operation.name = "GetRepositoryCatalogData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryCatalogDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryCatalogDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryCatalogDataNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = GetRepositoryCatalogDataRequest
+        operation.output = GetRepositoryCatalogDataResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryCatalogDataNotFoundException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:get_repository_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#GetRepositoryPolicy"
         operation.name = "GetRepositoryPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRepositoryPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = GetRepositoryPolicyRequest
+        operation.output = GetRepositoryPolicyResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << RepositoryPolicyNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:initiate_layer_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#InitiateLayerUpload"
         operation.name = "InitiateLayerUpload"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateLayerUploadRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiateLayerUploadResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = InitiateLayerUploadRequest
+        operation.output = InitiateLayerUploadResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RegistryNotFoundException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#ListTagsForResource"
         operation.name = "ListTagsForResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = ListTagsForResourceRequest
+        operation.output = ListTagsForResourceResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:put_image, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#PutImage"
         operation.name = "PutImage"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutImageRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutImageResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageDigestDoesNotMatchException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageTagAlreadyExistsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LayersNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReferencedImagesNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = PutImageRequest
+        operation.output = PutImageResponse
+        operation.errors << ImageAlreadyExistsException
+        operation.errors << ImageDigestDoesNotMatchException
+        operation.errors << ImageTagAlreadyExistsException
+        operation.errors << InvalidParameterException
+        operation.errors << LayersNotFoundException
+        operation.errors << LimitExceededException
+        operation.errors << ReferencedImagesNotFoundException
+        operation.errors << RegistryNotFoundException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:put_registry_catalog_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#PutRegistryCatalogData"
         operation.name = "PutRegistryCatalogData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRegistryCatalogDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRegistryCatalogDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = PutRegistryCatalogDataRequest
+        operation.output = PutRegistryCatalogDataResponse
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:put_repository_catalog_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#PutRepositoryCatalogData"
         operation.name = "PutRepositoryCatalogData"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRepositoryCatalogDataRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutRepositoryCatalogDataResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = PutRepositoryCatalogDataRequest
+        operation.output = PutRepositoryCatalogDataResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:set_repository_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#SetRepositoryPolicy"
         operation.name = "SetRepositoryPolicy"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetRepositoryPolicyRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SetRepositoryPolicyResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = SetRepositoryPolicyRequest
+        operation.output = SetRepositoryPolicyResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#TagResource"
         operation.name = "TagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = TagResourceRequest
+        operation.output = TagResourceResponse
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidTagParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << TooManyTagsException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#UntagResource"
         operation.name = "UntagResource"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyTagsException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
+        operation.input = UntagResourceRequest
+        operation.output = UntagResourceResponse
+        operation.errors << InvalidParameterException
+        operation.errors << InvalidTagParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << TooManyTagsException
+        operation.errors << UnsupportedCommandException
         operation.traits = {}
       end)
       service.add_operation(:upload_layer_part, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecrpublic#UploadLayerPart"
         operation.name = "UploadLayerPart"
-        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadLayerPartRequest)
-        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadLayerPartResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidLayerPartException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegistryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedCommandException)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadNotFoundException)
+        operation.input = UploadLayerPartRequest
+        operation.output = UploadLayerPartResponse
+        operation.errors << InvalidLayerPartException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << RegistryNotFoundException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedCommandException
+        operation.errors << UploadNotFoundException
         operation.traits = {}
       end)
     end
